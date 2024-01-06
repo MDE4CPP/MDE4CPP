@@ -39,8 +39,8 @@
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateValueSpecification /]
-[comment PSSM/]
 [import UML4CPP::generator::main::pssm::generateStateMachine /]
+[import UML4CPP::generator::main::pssm::generateRegion /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
@@ -106,7 +106,6 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
 [if (aPackage.isPSSMExecutable())]
-//PSSM
 #include "uml/PseudostateKind.hpp"
 [/if]
 //meta meta model factory
@@ -221,7 +220,6 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackageSignals([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
 [if (aPackage.isPSSMExecutable())]
-	//PSSM
 	createPackageStateMachines([aPackage.memberName()/], factory);
 [/if]
 }
@@ -407,7 +405,6 @@ void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 
 [comment Create all State Machines in Package/]
 [if (aPackage.isPSSMExecutable())]
-//PSSM
 void [packageName/]::createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
 [for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
@@ -422,51 +419,8 @@ void [packageName/]::createStateMachine_[aStateMachine.memberName()/](std::share
 	[aStateMachine.generateStateMachineCreation()/]
 
 	// create Regions
-	[for (aRegion : Region | (aStateMachine.region->sortedBy(myQualifiedName())))]
-	// create Region [aRegion.name/]
-	[aRegion.memberName()/] = factory->create[aRegion.eClass().name/]_as_region_in_StateMachine([aStateMachine.memberName()/]);
-		// create States
-			[for (aState : State | (aRegion.allOwnedElements()->filter(State)->sortedBy(myQualifiedName())))]
-			// create State [aState.name/] in Region [aRegion.name/]
-			[aState.memberName()/] = factory->create[aState.eClass().name/]_as_subvertex_in_Region([aRegion.memberName()/]);
-			[if (not aState.oclIsKindOf(FinalState))]
-				[if (not aState.entry.oclIsUndefined())]
-				// create Entry Behavior of State [aState.name/]
-				[aState.entry.memberName()/] = factory->create[aState.entry.eClass().name/]_as_entry_in_State([aState.memberName()/]);
-				[/if]
-				[if (not aState.doActivity.oclIsUndefined())]
-				// create doActivity Behavior of State [aState.name/]
-				[aState.doActivity.memberName()/] = factory->create[aState.doActivity.eClass().name/]_as_doActivity_in_State([aState.memberName()/]);
-				[/if]
-				[if (not aState.exit.oclIsUndefined())]
-				// create Exit Behavior of State [aState.name/]
-				[aState.exit.memberName()/] = factory->create[aState.exit.eClass().name/]_as_exit_in_State([aState.memberName()/]);
-				[/if]
-			[/if]
+	[aStateMachine.generateRegionsCreation()/]
 	
-			[/for]
-		
-		// create Pseudostates
-			[for (aPseudostate : Pseudostate | (aRegion.allOwnedElements()->filter(Pseudostate)->sortedBy(myQualifiedName())))]
-			// create Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
-			[comment if (aPseudostate.kind = PseudostateKind::initial)/]
-			[aPseudostate.memberName()/] = factory->createPseudostate_as_subvertex_in_Region([aRegion.memberName()/]);
-				
-			[/for]
-
-		// create Transitions
-			[for (aTransition : Transition | (aRegion.allOwnedElements()->filter(Transition)->sortedBy(myQualifiedName())))]
-			// create Transition [aTransition.name/]
-			[aTransition.memberName()/] = factory->createTransition_as_transition_in_Region([aRegion.memberName()/]);
-				[if (not aTransition.effect.oclIsUndefined())]
-				// create Effect Behavior of Transition [aTransition.memberName()/]
-				[aTransition.effect.memberName()/] = factory->create[aTransition.effect.eClass().name/]_as_effect_in_Transition([aTransition.memberName()/]);
-				[/if]
-	
-			[/for]
-		
-
-	[/for]
 }
 
 [/for]
@@ -503,7 +457,6 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageValueSpecifications();
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
 [if (aPackage.isPSSMExecutable())]
-	//PSSM
 	initializePackageStateMachines();
 [/if]
 }
@@ -716,7 +669,6 @@ void [packageName/]::initializePackageValueSpecifications()
 
 [comment Initialize all State Machines in aPackage/]
 [if (aPackage.isPSSMExecutable())]
-// PSSM
 void [packageName/]::initializePackageStateMachines()
 {
 [for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
@@ -725,72 +677,15 @@ void [packageName/]::initializePackageStateMachines()
 }
 
 [for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
-[let stateMachineContext : String = if (aStateMachine._context.oclIsUndefined()) or (not aStateMachine.owner.oclIsKindOf(BehavioredClassifier)) then aStateMachine.memberName() else aStateMachine._context.memberName() endif]
 [comment Initialize a single StateMachine/]
 void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 {
 	[aStateMachine.generateStateMachineInitialization()/]
 
-	// initialize Regions
-	[for (aRegion : Region | (aStateMachine.region->sortedBy(myQualifiedName())))]
-	// initialize Region [aRegion.name/]
-	[aRegion.memberName()/]->setName("[aRegion.name/]");
-		// initialize States
-			[for (aState : State | (aRegion.allOwnedElements()->filter(State)->sortedBy(myQualifiedName())))]
-			// initialize [aState.name/] in Region [aRegion.name/]
-			[aState.memberName()/]->setName("[aState.name/]");
-			[if (not aState.oclIsKindOf(FinalState))]
-				[if (not aState.entry.oclIsUndefined())]
-				// initialize Entry Behavior of State [aState.name/]
-				[aState.entry.memberName()/]->setName("[aState.entry.name/]");
-				[aState.entry.memberName()/]->_setID([aState.entry.getMemberName().toUpperCase()/]);
-				[aState.entry.memberName()/]->setContext([stateMachineContext/]);
-				[/if]
-				[if (not aState.doActivity.oclIsUndefined())]
-				// initialize doActivity Behavior of State [aState.name/]
-				[aState.doActivity.memberName()/]->setName("[aState.doActivity.name/]");
-				[aState.doActivity.memberName()/]->_setID([aState.doActivity.getMemberName().toUpperCase()/]);
-				[aState.doActivity.memberName()/]->setContext([stateMachineContext/]);
-				[/if]
-				[if (not aState.exit.oclIsUndefined())]
-				// initialize Exit Behavior of State [aState.name/]
-				[aState.exit.memberName()/]->setName("[aState.exit.name/]");
-				[aState.exit.memberName()/]->_setID([aState.exit.getMemberName().toUpperCase()/]);
-				[aState.exit.memberName()/]->setContext([stateMachineContext/]);
-				[/if]
-			[/if]
-	
-			[/for]
-		
-		// initialize Pseudostates
-			[for (aPseudostate : Pseudostate | (aRegion.allOwnedElements()->filter(Pseudostate)->sortedBy(myQualifiedName())))]
-			// initialize Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
-			[comment if (aPseudostate.kind = PseudostateKind::initial)/]
-			[aPseudostate.memberName()/]->setName("[aPseudostate.memberName()/]");
-			[aPseudostate.memberName()/]->setKind(uml::PseudostateKind::[aPseudostate.kind.toString().toUpper()/]);
-	
-			[/for]
-
-		// initialize Transitions
-			[for (aTransition : Transition | (aRegion.allOwnedElements()->filter(Transition)->sortedBy(myQualifiedName())))]
-			// initialize Transition [aTransition.name/]
-			[aTransition.memberName()/]->setName("[aTransition.memberName()/]");
-			[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
-			[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
-				[if (not aTransition.effect.oclIsUndefined())]
-				// initialize Effect Behavior of Transition [aTransition.name/]
-				[aTransition.effect.memberName()/]->setName("[aTransition.effect.name/]");
-				[aTransition.effect.memberName()/]->_setID([aTransition.effect.getMemberName().toUpperCase()/]);
-				[aTransition.effect.memberName()/]->setContext([stateMachineContext/]);
-				[/if]
-	
-			[/for]
-		
-
-	[/for]
+	// create Regions
+	[aStateMachine.generateRegionsInitialization()/]
 }
 
-[/let]
 [/for]
 [/if]
 [/file]

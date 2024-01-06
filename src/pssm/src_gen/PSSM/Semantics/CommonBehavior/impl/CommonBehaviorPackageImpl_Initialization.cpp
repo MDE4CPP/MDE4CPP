@@ -344,7 +344,7 @@ void CommonBehaviorPackageImpl::initializeEventTriggeredExecutionContent()
 		m_eventTriggeredExecution_Operation_finalize->setEType(unknownClass);
 	}
 	m_eventTriggeredExecution_Operation_finalize->setLowerBound(0);
-	m_eventTriggeredExecution_Operation_finalize->setUpperBound(-1);
+	m_eventTriggeredExecution_Operation_finalize->setUpperBound(1);
 	m_eventTriggeredExecution_Operation_finalize->setUnique(true);
 	m_eventTriggeredExecution_Operation_finalize->setOrdered(false);
 	

@@ -17,14 +17,12 @@
 #include "../DoActivityExecutionEventAccepter.hpp"
 
 #include "PSSM/Semantics/StateMachines/impl/StateMachinesFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/EventAccepterImpl.hpp"
 
 //*********************************
 namespace PSSM::Semantics::StateMachines 
 {
-	class PSSM_API DoActivityExecutionEventAccepterImpl : virtual public ecore::EModelElementImpl,
-virtual public DoActivityExecutionEventAccepter 
+	class PSSM_API DoActivityExecutionEventAccepterImpl : virtual public fUML::Semantics::CommonBehavior::EventAccepterImpl, virtual public DoActivityExecutionEventAccepter 
 	{
 		public: 
 			DoActivityExecutionEventAccepterImpl(const DoActivityExecutionEventAccepterImpl & obj);
@@ -45,8 +43,8 @@ virtual public DoActivityExecutionEventAccepter
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual void accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
+			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

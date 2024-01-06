@@ -40,10 +40,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "PSSM/Semantics/StateMachines/CompletionEventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/DeferredEventOccurrence.hpp"
@@ -172,10 +172,6 @@ void SM_ObjectActivationImpl::registerCompletionEvent(const std::shared_ptr<PSSM
 
 	DEBUG_INFO("StateActivation " << stateActivation << " registered an CompletionEventOccurrence!")
 	this->m_conditionVariable->notify_one();
-
-	// As there is currently no dispatch loop running asynchronously, try dispatching this Event immediateley
-	//DEBUG_INFO("Dispatching Event immediateley:");
-	//this->dispatchNextEvent();
 	//end of body
 }
 

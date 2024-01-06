@@ -34,7 +34,6 @@ namespace PSSM
 //Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventAccepter;
 	class EventOccurrence;
 }
 namespace PSSM::Semantics::StateMachines 
@@ -45,16 +44,17 @@ namespace PSSM::Semantics::StateMachines
 // namespace macro header include
 #include "PSSM/PSSM.hpp"
 
+// base class includes
+#include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace PSSM::Semantics::StateMachines 
 {
 	
-	class PSSM_API DoActivityExecutionEventAccepter : virtual public ecore::EModelElement
+	class PSSM_API DoActivityExecutionEventAccepter : virtual public fUML::Semantics::CommonBehavior::EventAccepter
 	{
 		public:
  			DoActivityExecutionEventAccepter(const DoActivityExecutionEventAccepter &) {}
@@ -71,8 +71,8 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual void accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
+			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

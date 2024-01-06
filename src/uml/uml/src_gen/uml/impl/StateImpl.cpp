@@ -320,27 +320,27 @@ std::shared_ptr<ecore::EObject> StateImpl::copy() const
 //*********************************
 bool StateImpl::isComposite()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	return !this->getRegion()->empty();
 }
 
 bool StateImpl::isOrthogonal()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	return this->getRegion()->size() > 1;
 }
 
 bool StateImpl::isSimple()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	return this->getRegion()->empty();
 }
 
 bool StateImpl::isSubmachineState()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	return this->getSubmachine() != nullptr;
 }
 
 std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	return nullptr;
 }
 
 //*********************************

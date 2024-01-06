@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 
 
 //*********************************
@@ -72,6 +73,7 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
+			virtual bool _match(const std::shared_ptr<Bag<uml::Trigger>>& triggers) = 0;
 			virtual void _register(const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>& stateActivation) = 0;
 			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
 

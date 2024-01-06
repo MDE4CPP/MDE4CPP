@@ -21,6 +21,7 @@
 
 [import UML4CPP::generator::main::components::generateParameter /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [**
  * generate creation of meta model instance for an StateMachine element

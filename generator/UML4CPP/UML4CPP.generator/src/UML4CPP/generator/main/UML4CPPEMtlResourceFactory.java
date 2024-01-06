@@ -265,7 +265,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
     
     private void initializePssmEmtls(String resourcePathPrefix)
     {
-    	String[] moduleNames = {"generateStateMachine"
+    	String[] moduleNames = {"generateStateMachine",
+    							"generateRegion"
     							};
     	generateFilePathMapData(moduleNames, "pssm", resourcePathPrefix);
     }

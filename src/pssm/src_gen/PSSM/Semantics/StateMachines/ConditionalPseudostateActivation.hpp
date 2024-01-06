@@ -73,7 +73,7 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
-			
+			virtual bool isElseTransition(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& transitionActivation) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

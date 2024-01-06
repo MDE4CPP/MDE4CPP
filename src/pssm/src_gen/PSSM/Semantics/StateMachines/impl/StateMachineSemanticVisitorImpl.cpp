@@ -199,7 +199,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> StateMachineSemanticVisit
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> StateMachineSemanticVisitorImpl::getExecutionFor(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> StateMachineSemanticVisitorImpl::getExecutionFor(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -210,7 +210,8 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> StateMachineSemantic
 	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
 	if(behavior != nullptr) 
 	{
-		auto originalExecution = this->getExecutionLocus()->getFactory()->createExecution(behavior, this->getExecutionContext());
+		auto originalExecution = this->getExecutionLocus()->getFactory()->createExecution(behavior, context);
+
 		if(eventOccurrence != nullptr) 
 		{
 			auto containerExecution = PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createEventTriggeredExecution();
@@ -225,20 +226,6 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> StateMachineSemantic
 		}
 	}
 	return execution;
-	//Execution execution = null;
-	//if(behavior != null){
-	//	Execution originalExecution = this.getExecutionLocus().factory.createExecution(behavior, this.getExecutionContext());
-	//	if(eventOccurrence != null){
-	//		EventTriggeredExecution containerExecution = new EventTriggeredExecution();
-	//		containerExecution.triggeringEventOccurrence = eventOccurrence;
-	//		containerExecution.wrappedExecution = originalExecution;
-	//		containerExecution.context = originalExecution.context;
-	//		execution = containerExecution;
-	//	}else{
-	//		execution = originalExecution;
-	//	}
-	//}
-	// return execution;
 	//end of body
 }
 
@@ -669,8 +656,8 @@ std::shared_ptr<Any> StateMachineSemanticVisitorImpl::eInvoke(int operationID, c
 			result = eEcoreAny(this->getExecutionContext(), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
-		// PSSM::Semantics::StateMachines::StateMachineSemanticVisitor::getExecutionFor(uml::Behavior, fUML::Semantics::CommonBehavior::EventOccurrence) : fUML::Semantics::CommonBehavior::Execution: 4224022080
-		case StateMachinesPackage::STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_EVENTOCCURRENCE:
+		// PSSM::Semantics::StateMachines::StateMachineSemanticVisitor::getExecutionFor(uml::Behavior, fUML::Semantics::CommonBehavior::EventOccurrence, fUML::MDE4CPP_Extensions::FUML_Object) : fUML::Semantics::CommonBehavior::Execution: 3510213574
+		case StateMachinesPackage::STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_FUML_OBJECT:
 		{
 			//Retrieve input parameter 'behavior'
 			//parameter 0
@@ -724,7 +711,33 @@ std::shared_ptr<Any> StateMachineSemanticVisitorImpl::eInvoke(int operationID, c
 				}
 			}
 		
-			result = eEcoreAny(this->getExecutionFor(incoming_param_behavior,incoming_param_eventOccurrence), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
+			//Retrieve input parameter 'context'
+			//parameter 2
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 2);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'getExecutionFor'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'getExecutionFor'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getExecutionFor(incoming_param_behavior,incoming_param_eventOccurrence,incoming_param_context), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateMachineSemanticVisitor::getExecutionLocus() : fUML::Semantics::Loci::Locus: 922061674

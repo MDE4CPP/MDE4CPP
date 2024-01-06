@@ -46,6 +46,10 @@ namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
+namespace fUML::MDE4CPP_Extensions
+{
+	class FUML_Object;
+}
 
 
 

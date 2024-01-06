@@ -44,8 +44,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -72,6 +72,9 @@ VertexActivationImpl::VertexActivationImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
+	//generated from codegen annotation
+	this->m_incomingTransitionActivations = std::make_shared<Bag<PSSM::Semantics::StateMachines::TransitionActivation>>();
+	this->m_outgoingTransitionActivations = std::make_shared<Bag<PSSM::Semantics::StateMachines::TransitionActivation>>();
 }
 
 VertexActivationImpl::~VertexActivationImpl()
@@ -336,21 +339,16 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> VertexActivati
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// The parent state of a vertex is either a StateMachineExecution or a StateActivation
-//RegionActivation regionActivation = (RegionActivation)this.getParent();
-//if(regionActivation!=null){
-//	if(regionActivation.getParent() instanceof StateMachineExecution){
-//		return null;
-//	}else{
-//		return (VertexActivation) regionActivation.getParent();
-//	}
-//}
-//return null;
+	// The parent state of a vertex is either a StateMachineExecution or a StateActivation
 	std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> regionActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(this->m_parent);
-	if(regionActivation != nullptr) {
-		if(std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(regionActivation->getParent()) != nullptr) {
+	if (regionActivation != nullptr) 
+	{
+		if (std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(regionActivation->getParent()) != nullptr) 
+		{
 			return nullptr;
-		} else {
+		} 
+		else 
+		{
 			return std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(regionActivation->getParent());
 		}
 	}
@@ -399,11 +397,10 @@ bool VertexActivationImpl::isActive()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// By default is is possible to assess if a vertex is active by checking
-// if its status is ACTIVE. Note this operation is overriden in the context
-// of state activations which require a presence within the state-machine
-// configuration.
-return this->getStatus() == PSSM::Semantics::StateMachines::StateMetadata::ACTIVE;
-
+	// if its status is ACTIVE. Note this operation is overriden in the context
+	// of state activations which require a presence within the state-machine
+	// configuration.
+	return this->getStatus() == PSSM::Semantics::StateMachines::StateMetadata::ACTIVE;
 	//end of body
 }
 
@@ -472,7 +469,7 @@ void VertexActivationImpl::tagOutgoingTransition(PSSM::Semantics::StateMachines:
 		}
 		else
 		{
-			for (const auto& outgoingTransitionActivation : *m_incomingTransitionActivations)
+			for (const auto& outgoingTransitionActivation : *m_outgoingTransitionActivations)
 			{
 				outgoingTransitionActivation->setStatus(status);
 			}

@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Bag.hpp"
 
 
@@ -33,14 +33,17 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "uml/Transition.hpp"
+#include "uml/Constraint.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/PseudostateActivation.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -106,7 +109,34 @@ ConditionalPseudostateActivationImpl& ConditionalPseudostateActivationImpl::oper
 //*********************************
 // Operations
 //*********************************
-
+bool ConditionalPseudostateActivationImpl::isElseTransition(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& transitionActivation)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Determine if the given Transition materializes the 'else' branch of a ConditionalPseudoState.
+	// This is the case if it has a guard whose specification is
+	// an Expression that has no operand(s) and whose symbol is 'else'
+	/*if (transitionActivation)
+	{
+		auto transition = std::dynamic_pointer_cast<uml::Transition>(transitionActivation->getNode());
+		if (transition->getGuard() != nullptr && std::dynamic_pointer_cast<uml::Expression>(transition->getGuard()->getSpecification()))
+		{
+			auto guardExpression = std::dynamic_pointer_cast<uml::Expression>(transition->getGuard()->getSpecification());
+			return guardExpression->getOperand()->empty() && !guardExpression->getSymbol().empty() && guardExpression->getSymbol()->equals(ELSE_OPERATOR);
+		}
+	}*/
+	return false;
+	/*boolean isElse = false;
+	if(transitionActivation!=null){
+		Transition transition = (Transition)transitionActivation.getNode();
+		if(transition.getGuard()!=null && transition.getGuard().getSpecification() instanceof Expression){
+			Expression expression = (Expression) transition.getGuard().getSpecification();
+			isElse = expression.getOperands().isEmpty() && expression.getSymbol() !=null && expression.getSymbol().equals(ELSE_OPERATOR);
+		}
+	}
+	return isElse;*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -234,6 +264,38 @@ std::shared_ptr<Any> ConditionalPseudostateActivationImpl::eInvoke(int operation
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::ConditionalPseudostateActivation::isElseTransition(PSSM::Semantics::StateMachines::TransitionActivation) : bool: 186795089
+		case StateMachinesPackage::CONDITIONALPSEUDOSTATEACTIVATION_OPERATION_ISELSETRANSITION_TRANSITIONACTIVATION:
+		{
+			//Retrieve input parameter 'transitionActivation'
+			//parameter 0
+			std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation> incoming_param_transitionActivation;
+			Bag<Any>::const_iterator incoming_param_transitionActivation_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_transitionActivation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_transitionActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::TransitionActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'transitionActivation'. Failed to invoke operation 'isElseTransition'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'transitionActivation'. Failed to invoke operation 'isElseTransition'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isElseTransition(incoming_param_transitionActivation), 0, false);
+			break;
+		}
 
 		default:
 		{

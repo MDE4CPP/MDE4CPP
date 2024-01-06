@@ -47,7 +47,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual void activateTransitions() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticVisitor>> getContextChain() ;
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> getExecutionContext() ;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecutionFor(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecutionFor(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context) ;
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() ;
 			
 			

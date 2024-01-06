@@ -50,12 +50,12 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -268,22 +268,7 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> StateMachineEx
 
 
 
-std::shared_ptr<Any> StateMachineExecutionImpl::new_()
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	/*if(this.context!=null){
-		return new StateMachineExecution(this.context);
-	}
-	return new StateMachineExecution();
 
-	if (this->m_context != nullptr)
-	{
-		return std::shared_ptr<Any>(new StateMachineExecutionImpl());
-	}*/
-	return nullptr;
-	//end of body
-}
 
 void StateMachineExecutionImpl::startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
@@ -291,12 +276,6 @@ void StateMachineExecutionImpl::startBehavior(const std::shared_ptr<uml::Class>&
 	//generated from body annotation
 	// The behavior captured here is almost identical to the one provide by Object_.
 	// If not already done, a SM_ObjectActivation which allows the registering of an StateMachineEventAccepter is instantiated here and its Event Dispatch Loop is started.
-	/*if (this.objectActivation == null) {
-		this.objectActivation = new SM_ObjectActivation();
-		this.objectActivation.object = this;
-	}
-	this.objectActivation.startBehavior(classifier, inputs);*/
-
 	if (this->m_objectActivation == nullptr)
 	{
 		auto objectActivation(PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createSM_ObjectActivation_as_objectActivation_in_FUML_Object(this->getThisFUML_ObjectPtr()));
@@ -723,12 +702,6 @@ std::shared_ptr<Any> StateMachineExecutionImpl::eInvoke(int operationID, const s
 			}
 		
 			result = eEcoreAny(this->getVertexActivation(incoming_param_vertex), PSSM::Semantics::StateMachines::StateMachinesPackage::VERTEXACTIVATION_CLASS);
-			break;
-		}
-		// PSSM::Semantics::StateMachines::StateMachineExecution::new_() : Any: 2802468829
-		case StateMachinesPackage::STATEMACHINEEXECUTION_OPERATION_NEW_:
-		{
-			result = eAny(this->new_(), 0, false);
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateMachineExecution::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 114402900

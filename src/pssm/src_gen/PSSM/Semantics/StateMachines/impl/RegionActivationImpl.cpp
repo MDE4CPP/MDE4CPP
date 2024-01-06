@@ -42,8 +42,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/InitialPseudostateActivation.hpp"
@@ -273,9 +273,9 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> RegionActivati
 		{
 			return vertexActivation;
 		}
-		else
+		else if (const auto& compositeStateVertexActivation = vertexActivation->getVertexActivation(vertex))
 		{
-			return vertexActivation->getVertexActivation(vertex);
+			return compositeStateVertexActivation;
 		}
 	}
 	return nullptr;

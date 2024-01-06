@@ -1,0 +1,221 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Element StateMachine artefacts
+ * 
+ */]
+[module generateRegion('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+
+
+[template public generateRegionsCreation(aStateMachine : StateMachine) post(trim())]
+	[for (aRegion : Region | (aStateMachine.region->sortedBy(myQualifiedName())))]
+	// create Region [aRegion.name/]
+	[aRegion.memberName()/] = factory->create[aRegion.eClass().name/]_as_region_in_StateMachine([aStateMachine.memberName()/]);
+	[aRegion.generateRegionContentsCreation()/]
+
+	[/for]
+[/template]
+
+[template public generateRegionsCreation(aState : State) post(trim())]
+	[for (aRegion : Region | (aState.region->sortedBy(myQualifiedName())))]
+	// create Region [aRegion.name/]
+	[aRegion.memberName()/] = factory->create[aRegion.eClass().name/]_as_region_in_State([aState.memberName()/]);
+	[aRegion.generateRegionContentsCreation()/]
+
+	[/for]
+[/template]
+
+[template public generateRegionsInitialization(aStateMachine : StateMachine) post(trim())]
+	[let stateMachineContext : String = if (aStateMachine._context.oclIsUndefined()) or (not aStateMachine.owner.oclIsKindOf(BehavioredClassifier)) then aStateMachine.memberName() else aStateMachine._context.memberName() endif]
+	[for (aRegion : Region | (aStateMachine.region->sortedBy(myQualifiedName())))]
+	// intialize Region [aRegion.name/]
+	[aRegion.memberName()/]->setName("[aRegion.name/]");
+	[aRegion.generateRegionContentsInitialization(stateMachineContext)/]	
+
+	[/for]
+	[/let]
+[/template]
+
+[template public generateRegionsInitialization(aState : State, stateMachineContext : String) post(trim())]
+	[for (aRegion : Region | (aState.region->sortedBy(myQualifiedName())))]
+	// intialize Region [aRegion.name/]
+	[aRegion.memberName()/]->setName("[aRegion.name/]");
+	[aRegion.generateRegionContentsInitialization(stateMachineContext)/]	
+
+	[/for]
+[/template]
+
+
+[template public generateRegionContentsCreation(aRegion : Region) post(trim())]
+	// create Pseudostates
+	[aRegion.generatePseudostatesCreation()/]
+
+	// create States
+	[aRegion.generateStatesCreation()/]
+	
+	// create Transitions
+		[for (aTransition : Transition | (aRegion.transition->sortedBy(myQualifiedName())))]
+		// create Transition [aTransition.name/]
+		[aTransition.memberName()/] = factory->createTransition_as_transition_in_Region([aRegion.memberName()/]);
+		[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
+		[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
+		[for (aTrigger : Trigger | (aTransition.trigger)) before('create Triggers for this Transition')]
+		[aTrigger.memberName()/] = factory->createTrigger_as_trigger_in_Transition();
+		[aTrigger.memberName()/]->setEvent([aTrigger.event/]);
+		[/for]
+			[if (not aTransition.effect.oclIsUndefined())]
+			// create Effect Behavior of Transition [aTransition.memberName()/]
+			[aTransition.effect.memberName()/] = factory->create[aTransition.effect.eClass().name/]_as_effect_in_Transition([aTransition.memberName()/]);
+			[/if]
+
+		[/for]
+[/template]
+
+[template public generateRegionContentsInitialization(aRegion : Region, stateMachineContext : String) post(trim())]
+	// initialize Pseudostates
+	[aRegion.generatePseudostatesInitialization()/]
+
+	// initialize States
+	[aRegion.generateStatesInitialization(stateMachineContext)/]
+
+	// initialize Transitions
+		[for (aTransition : Transition | (aRegion.transition->sortedBy(myQualifiedName())))]
+		// initialize Transition [aTransition.name/]
+		[aTransition.memberName()/]->setName("[aTransition.memberName()/]");
+		[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
+		[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
+			[if (not aTransition.effect.oclIsUndefined())]
+			// initialize Effect Behavior of Transition [aTransition.name/]
+			[aTransition.effect.memberName()/]->setName("[aTransition.effect.name/]");
+			[aTransition.effect.memberName()/]->_setID([aTransition.effect.getMemberName().toUpperCase()/]);
+			[aTransition.effect.memberName()/]->setContext([stateMachineContext/]);
+			[/if]
+		
+		[/for]
+[/template]
+
+
+
+[template public generateStatesCreation(aRegion : Region) post(trim())]
+	[for (aState : State | (aRegion.subvertex->filter(State)->sortedBy(myQualifiedName())))]
+	// create State [aState.name/] in Region [aRegion.name/]
+	[aState.memberName()/] = factory->create[aState.eClass().name/]_as_subvertex_in_Region([aRegion.memberName()/]);
+	[if (not aState.oclIsKindOf(FinalState))]
+		[comment falls komplexer wird, über getStateBehaviorMemberName vereinheitlichen und auslagern/]
+		[if (not aState.entry.oclIsUndefined())]
+		[if (aState.entry.oclIsKindOf(OpaqueBehavior))]
+		// create Entry Behavior of State [aState.name/]
+		[aState.entry.memberName()/] = factory->create[aState.entry.eClass().name/]_as_entry_in_State([aState.memberName()/]);
+		[else]
+		// the Entry Behavior of this State is complex (not an OpaqueBehavior),  therefore the reference is created after all these Behaviors have been created
+		[/if]
+		[/if]
+		[if (not aState.doActivity.oclIsUndefined())]
+		[if (aState.doActivity.oclIsKindOf(OpaqueBehavior))]
+		// create doActivity Behavior of State [aState.name/]
+		[aState.doActivity.memberName()/] = factory->create[aState.doActivity.eClass().name/]_as_doActivity_in_State([aState.memberName()/]);
+		[else]
+		// the DoActivity Behavior of this State is complex (not an OpaqueBehavior), therefore the reference is created after all these Behaviors have been created
+		[/if]
+		[/if]
+		[if (not aState.exit.oclIsUndefined())]
+		[if (aState.exit.oclIsKindOf(OpaqueBehavior))]
+		// create Exit Behavior of State [aState.name/]
+		[aState.exit.memberName()/] = factory->create[aState.exit.eClass().name/]_as_exit_in_State([aState.memberName()/]);
+		[else]
+		// the Exit Behavior of this State is complex (not an OpaqueBehavior), therefore the reference is created after all these Behaviors have been created
+		[/if]
+		[/if]
+
+		[if (aState.isComposite)]
+		// this State is composite, therefore create all of its Regions
+		[aState.generateRegionsCreation()/]
+		[/if]
+	[/if]
+
+	[/for]
+[/template]
+
+[template public generateStatesInitialization(aRegion : Region, stateMachineContext : String) post(trim())]
+	[for (aState : State | (aRegion.subvertex->filter(State)->sortedBy(myQualifiedName())))]
+	// initialize [aState.name/] in Region [aRegion.name/]
+	[aState.memberName()/]->setName("[aState.name/]");
+	[if (not aState.oclIsKindOf(FinalState))]
+		[if (not aState.entry.oclIsUndefined())]
+		[if (not aState.entry.oclIsKindOf(OpaqueBehavior))]
+		// reference complex Behavior as this State's Entry Behavior
+		[aState.entry.memberName()/] = this->[aState.entry.generatePackageGetterCall()/];
+		[aState.memberName()/]->setEntry([aState.entry.memberName()/]);
+		[/if]
+		// initialize Entry Behavior of State [aState.name/]
+		[aState.entry.memberName()/]->setName("[aState.entry.name/]");
+		[aState.entry.memberName()/]->_setID([aState.entry.getMemberName().toUpperCase()/]);
+		[aState.entry.memberName()/]->setContext([stateMachineContext/]);
+		[/if]
+		[if (not aState.doActivity.oclIsUndefined())]
+		[if (not aState.doActivity.oclIsKindOf(OpaqueBehavior))]
+		// reference complex Behavior as this State's DoActivity Behavior
+		[aState.doActivity.memberName()/] = this->[aState.doActivity.generatePackageGetterCall()/];
+		[aState.memberName()/]->setDoActivity([aState.doActivity.memberName()/]);
+		[/if]
+		// initialize doActivity Behavior of State [aState.name/]
+		[aState.doActivity.memberName()/]->setName("[aState.doActivity.name/]");
+		[aState.doActivity.memberName()/]->_setID([aState.doActivity.getMemberName().toUpperCase()/]);
+		[aState.doActivity.memberName()/]->setContext([stateMachineContext/]);
+		[/if]
+		[if (not aState.exit.oclIsUndefined())]
+		[if (not aState.exit.oclIsKindOf(OpaqueBehavior))]
+		// reference complex Behavior as this State's Exit Behavior
+		[aState.exit.memberName()/] = this->[aState.exit.generatePackageGetterCall()/];
+		[aState.memberName()/]->setExit([aState.exit.memberName()/]);
+		[/if]
+		// initialize Exit Behavior of State [aState.name/]
+		[aState.exit.memberName()/]->setName("[aState.exit.name/]");
+		[aState.exit.memberName()/]->_setID([aState.exit.getMemberName().toUpperCase()/]);
+		[aState.exit.memberName()/]->setContext([stateMachineContext/]);
+		[/if]
+
+		[if (aState.isComposite)]
+		// this State is composite, therefore initialize all of its Regions
+		[aState.generateRegionsInitialization(stateMachineContext)/]
+		[/if]
+	[/if]
+	
+	[/for]
+[/template]
+
+
+[template public generatePseudostatesCreation(aRegion : Region) post(trim())]
+	[for (aPseudostate : Pseudostate | (aRegion.subvertex->filter(Pseudostate)->sortedBy(myQualifiedName())))]
+	// create Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
+	[comment if (aPseudostate.kind = PseudostateKind::initial)/]
+	[aPseudostate.memberName()/] = factory->createPseudostate_as_subvertex_in_Region([aRegion.memberName()/]);
+	
+	[/for]
+[/template]
+
+[template public generatePseudostatesInitialization(aRegion : Region) post(trim())]
+	[for (aPseudostate : Pseudostate | (aRegion.subvertex->filter(Pseudostate)->sortedBy(myQualifiedName())))]
+	// initialize Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
+	[comment if (aPseudostate.kind = PseudostateKind::initial)/]
+	[aPseudostate.memberName()/]->setName("[aPseudostate.name/]");
+	[aPseudostate.memberName()/]->setKind(uml::PseudostateKind::[aPseudostate.kind.toString().toUpper()/]);
+	
+	[/for]
+[/template]

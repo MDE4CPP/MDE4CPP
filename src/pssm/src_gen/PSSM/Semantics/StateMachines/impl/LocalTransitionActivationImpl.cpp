@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Bag.hpp"
 
 
@@ -35,6 +35,8 @@
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/StateMachines/impl/EntryPointPseudostateActivationImpl.hpp"
+#include "uml/Vertex.hpp"
+#include "PSSM/Semantics/StateMachines/EntryPointPseudostateActivation.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -42,8 +44,8 @@
 #include <exception> // used in Persistence
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -121,7 +123,34 @@ std::shared_ptr<ecore::EObject> LocalTransitionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-
+std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation> LocalTransitionActivationImpl::getContainingState()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// The container of a LocalTransition is determined in the following manner:
+	// 1 - If the source Vertex is an EntryPoint, then the containing State is the
+	//     the State that has this EntryPoint on its edge
+	// 2 - Else if the source contains the target, then the containing
+	//	   State is the source itself. Otherwise the source is the target
+	auto containingState = std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>();
+	if (auto PSActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation>(this->getSourceActivation()))
+	{
+		containingState = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateActivation>(this->getSourceActivation()->getParentVertexActivation());
+	}
+	else
+	{
+		if (this->getSourceActivation()->getVertexActivation(std::dynamic_pointer_cast<uml::Vertex>(this->getTargetActivation()->getNode())))
+		{
+			containingState = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateActivation>(this->getSourceActivation());
+		}
+		else
+		{
+			containingState = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateActivation>(this->getTargetActivation());
+		}
+	}
+	return containingState;
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -247,6 +276,12 @@ std::shared_ptr<Any> LocalTransitionActivationImpl::eInvoke(int operationID, con
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::LocalTransitionActivation::getContainingState() : PSSM::Semantics::StateMachines::StateActivation: 790684891
+		case StateMachinesPackage::LOCALTRANSITIONACTIVATION_OPERATION_GETCONTAININGSTATE:
+		{
+			result = eEcoreAny(this->getContainingState(), PSSM::Semantics::StateMachines::StateMachinesPackage::STATEACTIVATION_CLASS);
+			break;
+		}
 
 		default:
 		{

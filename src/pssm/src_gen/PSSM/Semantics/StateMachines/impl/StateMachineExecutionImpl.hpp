@@ -47,7 +47,7 @@ namespace PSSM::Semantics::StateMachines
 			
 			virtual std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> getVertexActivation(const std::shared_ptr<uml::Vertex>& vertex) ;
 			
-			virtual std::shared_ptr<Any> new_() ;
+			
 			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			virtual void terminate() ;
 			

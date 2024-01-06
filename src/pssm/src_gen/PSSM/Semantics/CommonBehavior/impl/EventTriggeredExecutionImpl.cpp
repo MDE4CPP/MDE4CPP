@@ -45,10 +45,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -208,13 +208,13 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> EventTrigg
 	// 1. If the triggering EventOccurrence is for a SignalEvent, then all
 	//    executed Behaviors will have either one parameter or no parameters.
 	//    If the Behavior has one Parameter, the SignalInstance corresponding to
-	//    the SignalEventOccurrence is passed into the Behavior Execution as
+	//    the SignalEventOccurrence is returned to be passed into the Behavior Execution as
 	//    the value of its parameter.
 	// 2. If the triggering EventOccurrence is for a CallEvent, then all executed
 	//    Behaviors will have either no Parameters or signatures that conform or
 	//    input conform to the Operation being called.
 	//    If a Behavior has parameters, then the values of the input parameters
-	//    for the call are passed into the Behavior Execution as the values
+	//    for the call are returned to be passed into the Behavior Execution as the values
 	//    of the corresponding input parameters of the Behavior.
 	this->_beginIsolation();
 	auto parameterValues = std::make_shared<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>();

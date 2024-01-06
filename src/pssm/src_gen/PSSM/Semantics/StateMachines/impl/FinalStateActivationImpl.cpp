@@ -33,13 +33,15 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "PSSM/Semantics/StateMachines/impl/VertexActivationImpl.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
 #include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
@@ -127,7 +129,7 @@ void FinalStateActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::Stat
 	// If this RegionActivation is owned by a StateActivation, then remove this RegionActivation from its set of owned RegionActivations to complete.
 	// If all RegionActivations owned by that StateActivation have completed, then a CompletionEventOccurrence is generated for that StateActivation.
 	// As for a regular StateActivation, all parent Vertices must be entered beforehand until the least common ancestor of this StateActivation and the source StateActivation of the entering Transition is reached.
-	// CALL STACK this->getThisVertexActivationPtr()->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
+	PSSM::Semantics::StateMachines::VertexActivationImpl::enter(enteringTransition, eventOccurrence, leastCommonAncestor);
 	if (std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(this->m_parent) != leastCommonAncestor) {
 		if (auto parentVertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(this->m_parent)) {
 			parentVertexActivation->enter(enteringTransition, eventOccurrence, leastCommonAncestor);

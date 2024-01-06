@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/PseudostateActivation.hpp"
@@ -118,6 +118,32 @@ std::shared_ptr<ecore::EObject> JoinPseudostateActivationImpl::copy() const
 // Operations
 //*********************************
 
+
+bool JoinPseudostateActivationImpl::canPropagateExecution(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& enteringTransition, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation>& leastCommonAncestor)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// If the join PseudoState cannot be entered the propagation stops and returns true. 
+	// To return true otherwise, it is required that at least one outgoing transition of the Pseudostate 
+	// accepts the propagation. 
+	enteringTransition->setAnalyticalStatus(TransitionMetadata::TRAVERSED);
+	bool propagate = PSSM::Semantics::StateMachines::VertexActivationImpl::canPropagateExecution(enteringTransition, eventOccurrence, leastCommonAncestor);
+	if (propagate && this->isEnterable(enteringTransition, true))
+	{
+		this->evaluateAllGuards(eventOccurrence);
+		propagate = false;
+		if (this->getFireableTransitions()->size() > 0)
+		{
+			propagate = this->getFireableTransitions()->at(0)->canPropagateExecution(eventOccurrence);
+		}
+		if (propagate) 
+		{
+			this->tagIncomingTransition(TransitionMetadata::NONE, true);
+		}
+	}
+	return propagate;
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -245,6 +271,90 @@ std::shared_ptr<Any> JoinPseudostateActivationImpl::eInvoke(int operationID, con
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::JoinPseudostateActivation::canPropagateExecution(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation) : bool: 2944344382
+		case StateMachinesPackage::JOINPSEUDOSTATEACTIVATION_OPERATION_CANPROPAGATEEXECUTION_TRANSITIONACTIVATION_REGIONACTIVATION:
+		{
+			//Retrieve input parameter 'enteringTransition'
+			//parameter 0
+			std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation> incoming_param_enteringTransition;
+			Bag<Any>::const_iterator incoming_param_enteringTransition_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_enteringTransition_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_enteringTransition = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::TransitionActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'enteringTransition'. Failed to invoke operation 'canPropagateExecution'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'enteringTransition'. Failed to invoke operation 'canPropagateExecution'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'canPropagateExecution'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'canPropagateExecution'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'leastCommonAncestor'
+			//parameter 2
+			std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> incoming_param_leastCommonAncestor;
+			Bag<Any>::const_iterator incoming_param_leastCommonAncestor_arguments_citer = std::next(arguments->begin(), 2);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_leastCommonAncestor_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_leastCommonAncestor = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'leastCommonAncestor'. Failed to invoke operation 'canPropagateExecution'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'leastCommonAncestor'. Failed to invoke operation 'canPropagateExecution'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->canPropagateExecution(incoming_param_enteringTransition,incoming_param_eventOccurrence,incoming_param_leastCommonAncestor), 0, false);
+			break;
+		}
 
 		default:
 		{

@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Bag.hpp"
 
 
@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
@@ -117,7 +117,21 @@ std::shared_ptr<ecore::EObject> EntryPointPseudostateActivationImpl::copy() cons
 //*********************************
 // Operations
 //*********************************
-
+void EntryPointPseudostateActivationImpl::_enter(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& enteringTransition, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation>& leastCommonAncestor)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// When an exit point is entered its owning state is entered. That state maybe located
+	// in a nested hierarchy which is not already active. Hence if the hierarchy is not
+	// already active then it is entered.
+	PSSM::Semantics::StateMachines::VertexActivationImpl::enter(enteringTransition, eventOccurrence, leastCommonAncestor);
+	const auto& vertexActivation = this->getParentVertexActivation();
+	if (vertexActivation != nullptr)
+	{
+		vertexActivation->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
+	}
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -247,6 +261,90 @@ std::shared_ptr<Any> EntryPointPseudostateActivationImpl::eInvoke(int operationI
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::EntryPointPseudostateActivation::_enter(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation): 461561048
+		case StateMachinesPackage::ENTRYPOINTPSEUDOSTATEACTIVATION_OPERATION__ENTER_TRANSITIONACTIVATION_REGIONACTIVATION:
+		{
+			//Retrieve input parameter 'enteringTransition'
+			//parameter 0
+			std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation> incoming_param_enteringTransition;
+			Bag<Any>::const_iterator incoming_param_enteringTransition_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_enteringTransition_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_enteringTransition = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::TransitionActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'enteringTransition'. Failed to invoke operation '_enter'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'enteringTransition'. Failed to invoke operation '_enter'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation '_enter'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation '_enter'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'leastCommonAncestor'
+			//parameter 2
+			std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> incoming_param_leastCommonAncestor;
+			Bag<Any>::const_iterator incoming_param_leastCommonAncestor_arguments_citer = std::next(arguments->begin(), 2);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_leastCommonAncestor_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_leastCommonAncestor = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'leastCommonAncestor'. Failed to invoke operation '_enter'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'leastCommonAncestor'. Failed to invoke operation '_enter'!")
+					return nullptr;
+				}
+			}
+		
+			this->_enter(incoming_param_enteringTransition,incoming_param_eventOccurrence,incoming_param_leastCommonAncestor);
+			break;
+		}
 
 		default:
 		{

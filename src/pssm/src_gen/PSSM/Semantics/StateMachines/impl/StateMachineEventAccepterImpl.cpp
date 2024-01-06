@@ -127,27 +127,15 @@ bool StateMachineEventAccepterImpl::_defer(const std::shared_ptr<fUML::Semantics
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Defers the given event occurrence in the context of the given state configuration.
-	/*int i = 0;
-	boolean deferred = false;
-	while(!deferred && i < stateConfiguration.children.size()){
-		deferred = this._defer(eventOccurrence, stateConfiguration.children.get(i));
-		i++;
-	}
-	if(!deferred &&
-			stateConfiguration.vertexActivation != null &&
-			((StateActivation)stateConfiguration.vertexActivation).canDefer(eventOccurrence)){
-		((StateActivation)stateConfiguration.vertexActivation).defer(eventOccurrence);
-		deferred = true;
-	}
-	return deferred;*/
-
+	// Defers the given EventOccurrence in the context of the given StateConfiguration.
 	bool deferred = false;
 	for (const auto& child : *(stateConfiguration->getChildren()))
 	{
 		deferred = this->_defer(eventOccurrence, child);
+		if (deferred) break;
 	}
-	if (!deferred && stateConfiguration->getVertexActivation() != nullptr)
+
+	if (!deferred)
 	{
 		if (const auto& stateActivation = std::dynamic_pointer_cast<StateActivation>(stateConfiguration->getVertexActivation()))
 		{
@@ -166,33 +154,17 @@ bool StateMachineEventAccepterImpl::_isDeferred(const std::shared_ptr<fUML::Sema
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Determine if the given state configuration is capable of deferring the given event occurrence.
-	/*int i = 0;
-	boolean deferred = false;
-	while(!deferred && i < stateConfiguration.children.size()){
-		deferred = this._isDeferred(eventOccurrence, stateConfiguration.children.get(i));
-		i++;
-	}
-	if(!deferred && 
-			stateConfiguration.vertexActivation != null &&
-			((StateActivation)stateConfiguration.vertexActivation).canDefer(eventOccurrence)){
-		if(this._select(eventOccurrence, stateConfiguration).isEmpty()){
-			deferred = true;
-		}
-	}
-	return deferred;*/
-
+	// Determine if the given StateConfiguration is capable of deferring the given EvenOccurrence.
 	bool deferred = false;
-	int i = 0;
-	while (!deferred && i < int(stateConfiguration->getChildren()->size()))
+	for (const auto& child : *stateConfiguration->getChildren())
 	{
-		deferred = this->_isDeferred(eventOccurrence, stateConfiguration->getChildren()->at(i));
-		i++;
+		deferred = this->_isDeferred(eventOccurrence, child);
+		if (deferred) break;
 	}
 
 	if (!deferred)
 	{
-		if (auto stateActivation = std::dynamic_pointer_cast<StateActivation>(stateConfiguration->getVertexActivation()))
+		if (auto stateActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateActivation>(stateConfiguration->getVertexActivation()))
 		{
 			if (stateActivation->canDefer(eventOccurrence) && this->_select(eventOccurrence, stateConfiguration)->empty())
 			{
@@ -209,28 +181,9 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> State
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Find all TransitionActivations that can fire on the given EventOccurrence.
-	// The set of TransitionActivations only contains those with the highest priority. In addition,
-	// no conflicting TransitionActivations are added to the set.
-	/*List<TransitionActivation> selectedTransitions = new ArrayList<TransitionActivation>();
-	for(int i = 0; i < stateConfiguration.children.size(); i++){
-		selectedTransitions.addAll(this._select(eventOccurrence, stateConfiguration.children.get(i)));
-	}
-	if(selectedTransitions.isEmpty() && stateConfiguration.vertexActivation != null){
-		for(int i = 0; i < stateConfiguration.vertexActivation.getOutgoingTransitions().size(); i++){
-			TransitionActivation transitionActivation = stateConfiguration.vertexActivation.getOutgoingTransitions().get(i);
-			if(transitionActivation.canFireOn(eventOccurrence)){
-				selectedTransitions.add(transitionActivation);
-			}
-		}
-		if(selectedTransitions.size() > 1){
-			ChoiceStrategy choiceStrategy = (ChoiceStrategy) this.registrationContext.locus.factory.getStrategy("choice");
-			TransitionActivation electedTransition = selectedTransitions.get(choiceStrategy.choose(selectedTransitions.size()) - 1);
-			selectedTransitions.clear();
-			selectedTransitions.add(electedTransition);
-		}
-	}
-	return selectedTransitions;*/
-
+	// The set of TransitionActivations only contains those with the highest priority. 
+	// In addition, no conflicting TransitionActivations are added to the set.
+	
 	std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> selectedTransitionActivations(new Bag<PSSM::Semantics::StateMachines::TransitionActivation>());
 	for (const auto& child : *(stateConfiguration->getChildren()))
 	{
@@ -266,35 +219,17 @@ void StateMachineEventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics
 	//generated from body annotation
 	// When an event occurrence is accepted this marks the beginning of a new RTC step for
 	// the executed state-machine. The following set of actions takes place:
-	// 1 - The list of transition that can be fired using the given event occurrence is computed
-	// 2 - This list is organized as a different sub-set of transitions that can be fired. One of the
-	//     subset is chosen to be fired. Each transition fires **Concurrently**
-	// 3 - When the RTC step is about to complete a new event accepter for the state-machine
-	//     is registered at the waiting event accepter list handled by the object activation
-	// Note that there always is a single event accepter for a state-machine (this works differently
-	// than for activities).
-	/*if(this.isDeferred(eventOccurrence)){
-		this.defer(eventOccurrence);
-	}else{
-		List<TransitionActivation> fireableTransitionActivations = this.select(eventOccurrence);
-		if(!fireableTransitionActivations.isEmpty()){
-			for(Iterator<TransitionActivation> fireableTransitionsIterator = fireableTransitionActivations.iterator(); fireableTransitionsIterator.hasNext();){
-				fireableTransitionsIterator.next().fire(eventOccurrence);
-			}
-		}
-	}
-	// If the dispatched event was an CallEventOccurrence then check
-	// if the caller need to be released.
-	// FIXME: This moved on further updates to common behavior semantics
-	if(eventOccurrence instanceof CallEventOccurrence){
-		CallEventOccurrence callEventOccurrence = (CallEventOccurrence) eventOccurrence;
-		callEventOccurrence.execution.releaseCaller();
-	}
-	Object_ context = this.registrationContext.context;
-	if(context!=null && context.objectActivation!=null){
-		context.register(new StateMachineEventAccepter(this.registrationContext));
-	}*/
-
+	// 1 - The event can be deferred if required
+	// 2 - The event can trigger one or more transitions if it is not deferred
+	//  2.1 - The list of transitions that can be fired using the given event
+	//        occurrence is computed.
+	//  2.2 - Transitions in the set of fireable transitions are fired **concurrently**
+	//  2.3 - If the accepted event occurrence is a call event occurrence then there is an explicit
+	//	  "return from call" which enables the caller to continue its execution. 
+	// 3 - When the RTC step is about to complete, a new event accepter for the state-machine
+	//     is registered in the waiting event accepter list handled by the object activation
+	// Note that there is always just a single event accepter for a state-machine. This accepter
+	// analyzes the overall state machine configuration each time an event occurrence is accepted.
 	if (this->isDeferred(eventOccurrence))
 	{
 		this->defer(eventOccurrence);
@@ -309,12 +244,31 @@ void StateMachineEventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics
 			}
 		}
 	}
-
-
-	// If dispatched Event was an CallEventOccurrence, then check if caller needs to be released.
-	if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
+	
+	// If dispatched Event was a CallEventOccurrence or a CS_EventOccurrence which wraps a CallEventOccurrence,
+	// then check if caller needs to be released.
+	/*
+	// CS_EventOccurrence has not yet been implemented
+	if (auto csEventOccurrence = std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence))
 	{
-		callEventOccurrence->getExecution()->releaseCaller();
+		if (auto callEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence)->getWrappedEventOccurrence())
+		{
+			callEventOccurrence->releaseCaller();
+		}
+	}
+	// CallEventOccurrence has not yet been implemented
+	else if (auto callEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
+	{
+		callEventOccurrence->releaseCaller();
+	}
+	*/
+
+	const auto& context = this->getRegistrationContext()->getContext();
+	if (context != nullptr && context->getObjectActivation() != nullptr)
+	{
+		const auto& smEventAccepter = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineEventAccepter();
+		smEventAccepter->setRegistrationContext(this->getRegistrationContext());
+		context->_register(smEventAccepter);
 	}
 	//end of body
 }

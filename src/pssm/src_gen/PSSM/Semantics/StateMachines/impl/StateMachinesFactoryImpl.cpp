@@ -37,6 +37,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 
 
 using namespace PSSM::Semantics::StateMachines;
@@ -148,14 +150,30 @@ std::shared_ptr<ecore::EObject> StateMachinesFactoryImpl::create(const int metaE
 		}
 		case StateMachinesPackage::DOACTIVITYCONTEXTOBJECTACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createDoActivityContextObjectActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> castedContainer = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityContextObjectActivation>(this->createDoActivityContextObjectActivation_as_objectActivation_in_FUML_Object(castedContainer,metaElementID));
+			}
 			break;
 		}
 		case StateMachinesPackage::DOACTIVITYEXECUTIONEVENTACCEPTER_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createDoActivityExecutionEventAccepter(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter> castedContainer = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter>(this->createDoActivityExecutionEventAccepter_as_encapsulatedAccepter_in_DoActivityExecutionEventAccepter(castedContainer,metaElementID));
+			}
 			break;
 		}
 		case StateMachinesPackage::ENTRYPOINTPSEUDOSTATEACTIVATION_CLASS:
@@ -512,12 +530,38 @@ std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityContextObjectActivatio
 	element->setThisDoActivityContextObjectActivationPtr(element);
 	return element;
 }
+std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityContextObjectActivation> StateMachinesFactoryImpl::createDoActivityContextObjectActivation_as_objectActivation_in_FUML_Object(std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> par_FUML_Object, const int metaElementID) const
+{
+	std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityContextObjectActivationImpl> element(new PSSM::Semantics::StateMachines::DoActivityContextObjectActivationImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FUML_Object)
+	{
+		par_FUML_Object->setObjectActivation(element);
+	}
+	
+	element->setThisDoActivityContextObjectActivationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter> StateMachinesFactoryImpl::createDoActivityExecutionEventAccepter(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepterImpl> element(new PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepterImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisDoActivityExecutionEventAccepterPtr(element);
 	return element;
+}
+std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter> StateMachinesFactoryImpl::createDoActivityExecutionEventAccepter_as_encapsulatedAccepter_in_DoActivityExecutionEventAccepter(std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter> par_DoActivityExecutionEventAccepter, const int metaElementID) const
+{
+	std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepterImpl> element(new PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepterImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_DoActivityExecutionEventAccepter)
+	{
+		par_DoActivityExecutionEventAccepter->setEncapsulatedAccepter(element);
+	}
+	
+	element->setThisDoActivityExecutionEventAccepterPtr(element);
+	return element;
+	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation> StateMachinesFactoryImpl::createEntryPointPseudostateActivation(const int metaElementID/*=-1*/) const
 {

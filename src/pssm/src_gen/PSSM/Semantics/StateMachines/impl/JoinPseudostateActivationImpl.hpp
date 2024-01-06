@@ -44,6 +44,7 @@ namespace PSSM::Semantics::StateMachines
 			// Operations
 			//*********************************
 			
+			virtual bool canPropagateExecution(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& enteringTransition, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation>& leastCommonAncestor) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

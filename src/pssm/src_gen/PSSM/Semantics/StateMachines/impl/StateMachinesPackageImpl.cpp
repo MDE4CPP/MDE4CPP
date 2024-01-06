@@ -91,6 +91,10 @@ const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateM
 	return m_completionEventOccurrence_Attribute_stateActivation;
 }
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getCompletionEventOccurrence_Operation__match_Trigger() const
+{
+	return m_completionEventOccurrence_Operation__match_Trigger;
+}
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getCompletionEventOccurrence_Operation__register_StateActivation() const
 {
 	return m_completionEventOccurrence_Operation__register_StateActivation;
@@ -110,6 +114,10 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getConditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation() const
+{
+	return m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation;
+}
 
 // End Class ConditionalPseudostateActivation
 
@@ -165,14 +173,34 @@ const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_doActivityContextObject_Attribute_context;
 }
-const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Attribute_owner() const
-{
-	return m_doActivityContextObject_Attribute_owner;
-}
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Operation__register_EventAccepter() const
+{
+	return m_doActivityContextObject_Operation__register_EventAccepter;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Operation_destroy() const
+{
+	return m_doActivityContextObject_Operation_destroy;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Operation_initialize_FUML_Object() const
+{
+	return m_doActivityContextObject_Operation_initialize_FUML_Object;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Operation_send_EventOccurrence() const
+{
+	return m_doActivityContextObject_Operation_send_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Operation_startBehavior_Class_ParameterValue() const
+{
+	return m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue;
+}
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Operation_unregister_EventAccepter() const
 {
 	return m_doActivityContextObject_Operation_unregister_EventAccepter;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObject_Operation_unregisterFromContext_EventAccepter() const
+{
+	return m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter;
 }
 
 // End Class DoActivityContextObject
@@ -185,6 +213,14 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObjectActivation_Operation_dispatchNextEvent() const
+{
+	return m_doActivityContextObjectActivation_Operation_dispatchNextEvent;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue() const
+{
+	return m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue;
+}
 
 // End Class DoActivityContextObjectActivation
 
@@ -204,6 +240,14 @@ const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateM
 	return m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter;
 }
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityExecutionEventAccepter_Operation_accept_EventOccurrence() const
+{
+	return m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getDoActivityExecutionEventAccepter_Operation_match_EventOccurrence() const
+{
+	return m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence;
+}
 
 // End Class DoActivityExecutionEventAccepter
 
@@ -215,6 +259,10 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getEntryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation() const
+{
+	return m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation;
+}
 
 // End Class EntryPointPseudostateActivation
 
@@ -263,6 +311,10 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getForkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation() const
+{
+	return m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation;
+}
 
 // End Class ForkPseudostateActivation
 
@@ -311,6 +363,10 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getJoinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation() const
+{
+	return m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation;
+}
 
 // End Class JoinPseudostateActivation
 
@@ -322,6 +378,10 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getLocalTransitionActivation_Operation_getContainingState() const
+{
+	return m_localTransitionActivation_Operation_getContainingState;
+}
 
 // End Class LocalTransitionActivation
 
@@ -455,10 +515,6 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_stateActivation_Operation_exit_TransitionActivation_RegionActivation;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_getConnectionPointActivation() const
-{
-	return m_stateActivation_Operation_getConnectionPointActivation;
-}
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_getConnectionPointActivation_Vertex() const
 {
 	return m_stateActivation_Operation_getConnectionPointActivation_Vertex;
@@ -482,6 +538,10 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_getRegionActivation() const
 {
 	return m_stateActivation_Operation_getRegionActivation;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_getVertexActivation_Vertex() const
+{
+	return m_stateActivation_Operation_getVertexActivation_Vertex;
 }
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_hasCompleted() const
 {
@@ -695,10 +755,6 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_stateMachineExecution_Operation_getVertexActivation_Vertex;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineExecution_Operation_new_() const
-{
-	return m_stateMachineExecution_Operation_new_;
-}
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineExecution_Operation_startBehavior_Class_ParameterValue() const
 {
 	return m_stateMachineExecution_Operation_startBehavior_Class_ParameterValue;
@@ -742,9 +798,9 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_stateMachineSemanticVisitor_Operation_getExecutionContext;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object() const
 {
-	return m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence;
+	return m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object;
 }
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineSemanticVisitor_Operation_getExecutionLocus() const
 {

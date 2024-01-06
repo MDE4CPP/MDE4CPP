@@ -24,6 +24,7 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSSM/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
@@ -53,6 +54,9 @@ void StateMachinesPackageImpl::initializePackageContents()
 	m_connectionPointActivation_Class->getESuperTypes()->push_back(getPseudostateActivation_Class());
 	m_deepHistoryPseudostateActivation_Class->getESuperTypes()->push_back(getHistoryPseudostateActivation_Class());
 	m_deferredEventOccurrence_Class->getESuperTypes()->push_back(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class());
+	m_doActivityContextObject_Class->getESuperTypes()->push_back(PSSM::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getPSSM_Object_Class());
+	m_doActivityContextObjectActivation_Class->getESuperTypes()->push_back(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class());
+	m_doActivityExecutionEventAccepter_Class->getESuperTypes()->push_back(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventAccepter_Class());
 	m_entryPointPseudostateActivation_Class->getESuperTypes()->push_back(getConnectionPointActivation_Class());
 	m_exitPointPseudostateActivation_Class->getESuperTypes()->push_back(getConnectionPointActivation_Class());
 	m_externalTransitionActivation_Class->getESuperTypes()->push_back(getTransitionActivation_Class());
@@ -142,6 +146,25 @@ void StateMachinesPackageImpl::initializeCompletionEventOccurrenceContent()
 	/*
 	 * EOperations
 	 */
+	m_completionEventOccurrence_Operation__match_Trigger->setName("_match");
+	m_completionEventOccurrence_Operation__match_Trigger->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	m_completionEventOccurrence_Operation__match_Trigger->setLowerBound(0);
+	m_completionEventOccurrence_Operation__match_Trigger->setUpperBound(1);
+	m_completionEventOccurrence_Operation__match_Trigger->setUnique(true);
+	m_completionEventOccurrence_Operation__match_Trigger->setOrdered(true);
+	
+	m_completionEventOccurrence_Operation__match_Trigger->_setID(COMPLETIONEVENTOCCURRENCE_OPERATION__MATCH_TRIGGER);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_completionEventOccurrence_Operation__match_Trigger);
+		parameter->setName("triggers");
+		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_completionEventOccurrence_Operation__register_StateActivation->setName("_register");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -208,6 +231,25 @@ void StateMachinesPackageImpl::initializeConditionalPseudostateActivationContent
 	/*
 	 * EOperations
 	 */
+	m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation->setName("isElseTransition");
+	m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation->setLowerBound(1);
+	m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation->setUpperBound(1);
+	m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation->setUnique(true);
+	m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation->setOrdered(false);
+	
+	m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation->_setID(CONDITIONALPSEUDOSTATEACTIVATION_OPERATION_ISELSETRANSITION_TRANSITIONACTIVATION);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_conditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation);
+		parameter->setName("transitionActivation");
+		parameter->setEType(getTransitionActivation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -340,27 +382,136 @@ void StateMachinesPackageImpl::initializeDoActivityContextObjectContent()
 	m_doActivityContextObject_Attribute_context->setDefaultValueLiteral("");	
 	
 	m_doActivityContextObject_Attribute_context->_setID(DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT);
-	m_doActivityContextObject_Attribute_owner->setName("owner");
-	m_doActivityContextObject_Attribute_owner->setEType(getStateActivation_Class());
-	m_doActivityContextObject_Attribute_owner->setLowerBound(1);
-	m_doActivityContextObject_Attribute_owner->setUpperBound(1);
-	m_doActivityContextObject_Attribute_owner->setTransient(false);
-	m_doActivityContextObject_Attribute_owner->setVolatile(false);
-	m_doActivityContextObject_Attribute_owner->setChangeable(true);
-	m_doActivityContextObject_Attribute_owner->setUnsettable(false);
-	m_doActivityContextObject_Attribute_owner->setUnique(true);
-	m_doActivityContextObject_Attribute_owner->setDerived(false);
-	m_doActivityContextObject_Attribute_owner->setOrdered(false);
-	m_doActivityContextObject_Attribute_owner->setContainment(false);
-	m_doActivityContextObject_Attribute_owner->setResolveProxies(true);
-	m_doActivityContextObject_Attribute_owner->setDefaultValueLiteral("");	
-	m_doActivityContextObject_Attribute_owner->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateActivation_Attribute_doActivityContextObject());
-	
-	m_doActivityContextObject_Attribute_owner->_setID(DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_OWNER);
 	
 	/*
 	 * EOperations
 	 */
+	m_doActivityContextObject_Operation__register_EventAccepter->setName("_register");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObject_Operation__register_EventAccepter->setEType(unknownClass);
+	}
+	m_doActivityContextObject_Operation__register_EventAccepter->setLowerBound(1);
+	m_doActivityContextObject_Operation__register_EventAccepter->setUpperBound(1);
+	m_doActivityContextObject_Operation__register_EventAccepter->setUnique(true);
+	m_doActivityContextObject_Operation__register_EventAccepter->setOrdered(false);
+	
+	m_doActivityContextObject_Operation__register_EventAccepter->_setID(DOACTIVITYCONTEXTOBJECT_OPERATION__REGISTER_EVENTACCEPTER);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObject_Operation__register_EventAccepter);
+		parameter->setName("accepter");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_doActivityContextObject_Operation_destroy->setName("destroy");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObject_Operation_destroy->setEType(unknownClass);
+	}
+	m_doActivityContextObject_Operation_destroy->setLowerBound(1);
+	m_doActivityContextObject_Operation_destroy->setUpperBound(1);
+	m_doActivityContextObject_Operation_destroy->setUnique(true);
+	m_doActivityContextObject_Operation_destroy->setOrdered(false);
+	
+	m_doActivityContextObject_Operation_destroy->_setID(DOACTIVITYCONTEXTOBJECT_OPERATION_DESTROY);
+	
+	
+	m_doActivityContextObject_Operation_initialize_FUML_Object->setName("initialize");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObject_Operation_initialize_FUML_Object->setEType(unknownClass);
+	}
+	m_doActivityContextObject_Operation_initialize_FUML_Object->setLowerBound(1);
+	m_doActivityContextObject_Operation_initialize_FUML_Object->setUpperBound(1);
+	m_doActivityContextObject_Operation_initialize_FUML_Object->setUnique(true);
+	m_doActivityContextObject_Operation_initialize_FUML_Object->setOrdered(false);
+	
+	m_doActivityContextObject_Operation_initialize_FUML_Object->_setID(DOACTIVITYCONTEXTOBJECT_OPERATION_INITIALIZE_FUML_OBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObject_Operation_initialize_FUML_Object);
+		parameter->setName("context");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_doActivityContextObject_Operation_send_EventOccurrence->setName("send");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObject_Operation_send_EventOccurrence->setEType(unknownClass);
+	}
+	m_doActivityContextObject_Operation_send_EventOccurrence->setLowerBound(1);
+	m_doActivityContextObject_Operation_send_EventOccurrence->setUpperBound(1);
+	m_doActivityContextObject_Operation_send_EventOccurrence->setUnique(true);
+	m_doActivityContextObject_Operation_send_EventOccurrence->setOrdered(false);
+	
+	m_doActivityContextObject_Operation_send_EventOccurrence->_setID(DOACTIVITYCONTEXTOBJECT_OPERATION_SEND_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObject_Operation_send_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue->setName("startBehavior");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue->setEType(unknownClass);
+	}
+	m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue->setLowerBound(1);
+	m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue->setUpperBound(1);
+	m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue->setUnique(true);
+	m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue->setOrdered(false);
+	
+	m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue->_setID(DOACTIVITYCONTEXTOBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue);
+		parameter->setName("classifier");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObject_Operation_startBehavior_Class_ParameterValue);
+		parameter->setName("inputs");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_doActivityContextObject_Operation_unregister_EventAccepter->setName("unregister");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -379,6 +530,31 @@ void StateMachinesPackageImpl::initializeDoActivityContextObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObject_Operation_unregister_EventAccepter);
 		parameter->setName("accepter");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter->setName("unregisterFromContext");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter->setEType(unknownClass);
+	}
+	m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter->setLowerBound(1);
+	m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter->setUpperBound(1);
+	m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter->setUnique(true);
+	m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter->setOrdered(false);
+	
+	m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter->_setID(DOACTIVITYCONTEXTOBJECT_OPERATION_UNREGISTERFROMCONTEXT_EVENTACCEPTER);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObject_Operation_unregisterFromContext_EventAccepter);
+		parameter->setName("encapsulatedAccepter");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -408,6 +584,57 @@ void StateMachinesPackageImpl::initializeDoActivityContextObjectActivationConten
 	/*
 	 * EOperations
 	 */
+	m_doActivityContextObjectActivation_Operation_dispatchNextEvent->setName("dispatchNextEvent");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObjectActivation_Operation_dispatchNextEvent->setEType(unknownClass);
+	}
+	m_doActivityContextObjectActivation_Operation_dispatchNextEvent->setLowerBound(1);
+	m_doActivityContextObjectActivation_Operation_dispatchNextEvent->setUpperBound(1);
+	m_doActivityContextObjectActivation_Operation_dispatchNextEvent->setUnique(true);
+	m_doActivityContextObjectActivation_Operation_dispatchNextEvent->setOrdered(false);
+	
+	m_doActivityContextObjectActivation_Operation_dispatchNextEvent->_setID(DOACTIVITYCONTEXTOBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT);
+	
+	
+	m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue->setName("startBehavior");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue->setEType(unknownClass);
+	}
+	m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue->setLowerBound(1);
+	m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue->setUpperBound(1);
+	m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue->setUnique(true);
+	m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue->setOrdered(false);
+	
+	m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue->_setID(DOACTIVITYCONTEXTOBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue);
+		parameter->setName("classifier");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue);
+		parameter->setName("inputs");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -462,6 +689,50 @@ void StateMachinesPackageImpl::initializeDoActivityExecutionEventAccepterContent
 	/*
 	 * EOperations
 	 */
+	m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence->setName("accept");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence->setEType(unknownClass);
+	}
+	m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence->setLowerBound(1);
+	m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence->setUpperBound(1);
+	m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence->setUnique(true);
+	m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence->setOrdered(false);
+	
+	m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence->_setID(DOACTIVITYEXECUTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityExecutionEventAccepter_Operation_accept_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence->setName("match");
+	m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence->setLowerBound(1);
+	m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence->setUpperBound(1);
+	m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence->setUnique(true);
+	m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence->setOrdered(false);
+	
+	m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence->_setID(DOACTIVITYEXECUTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_doActivityExecutionEventAccepter_Operation_match_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -484,6 +755,51 @@ void StateMachinesPackageImpl::initializeEntryPointPseudostateActivationContent(
 	/*
 	 * EOperations
 	 */
+	m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation->setName("_enter");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation->setEType(unknownClass);
+	}
+	m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation->setLowerBound(1);
+	m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation->setUpperBound(1);
+	m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation->setUnique(true);
+	m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation->setOrdered(false);
+	
+	m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation->_setID(ENTRYPOINTPSEUDOSTATEACTIVATION_OPERATION__ENTER_TRANSITIONACTIVATION_REGIONACTIVATION);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation);
+		parameter->setName("enteringTransition");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation);
+		parameter->setName("leastCommonAncestor");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -617,6 +933,45 @@ void StateMachinesPackageImpl::initializeForkPseudostateActivationContent()
 	/*
 	 * EOperations
 	 */
+	m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setName("canPropagateExecution");
+	m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setLowerBound(1);
+	m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setUpperBound(1);
+	m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setUnique(true);
+	m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setOrdered(false);
+	
+	m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->_setID(FORKPSEUDOSTATEACTIVATION_OPERATION_CANPROPAGATEEXECUTION_TRANSITIONACTIVATION_REGIONACTIVATION);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation);
+		parameter->setName("enteringTransition");
+		parameter->setEType(getTransitionActivation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation);
+		parameter->setName("leastCommonAncestor");
+		parameter->setEType(getRegionActivation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -750,6 +1105,45 @@ void StateMachinesPackageImpl::initializeJoinPseudostateActivationContent()
 	/*
 	 * EOperations
 	 */
+	m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setName("canPropagateExecution");
+	m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setLowerBound(1);
+	m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setUpperBound(1);
+	m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setUnique(true);
+	m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->setOrdered(false);
+	
+	m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation->_setID(JOINPSEUDOSTATEACTIVATION_OPERATION_CANPROPAGATEEXECUTION_TRANSITIONACTIVATION_REGIONACTIVATION);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation);
+		parameter->setName("enteringTransition");
+		parameter->setEType(getTransitionActivation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation);
+		parameter->setName("leastCommonAncestor");
+		parameter->setEType(getRegionActivation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -772,6 +1166,16 @@ void StateMachinesPackageImpl::initializeLocalTransitionActivationContent()
 	/*
 	 * EOperations
 	 */
+	m_localTransitionActivation_Operation_getContainingState->setName("getContainingState");
+	m_localTransitionActivation_Operation_getContainingState->setEType(getStateActivation_Class());
+	m_localTransitionActivation_Operation_getContainingState->setLowerBound(1);
+	m_localTransitionActivation_Operation_getContainingState->setUpperBound(1);
+	m_localTransitionActivation_Operation_getContainingState->setUnique(true);
+	m_localTransitionActivation_Operation_getContainingState->setOrdered(false);
+	
+	m_localTransitionActivation_Operation_getContainingState->_setID(LOCALTRANSITIONACTIVATION_OPERATION_GETCONTAININGSTATE);
+	
+	
 	
 }
 
@@ -1219,7 +1623,6 @@ void StateMachinesPackageImpl::initializeStateActivationContent()
 	m_stateActivation_Attribute_doActivityContextObject->setContainment(false);
 	m_stateActivation_Attribute_doActivityContextObject->setResolveProxies(true);
 	m_stateActivation_Attribute_doActivityContextObject->setDefaultValueLiteral("");	
-	m_stateActivation_Attribute_doActivityContextObject->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getDoActivityContextObject_Attribute_owner());
 	
 	m_stateActivation_Attribute_doActivityContextObject->_setID(STATEACTIVATION_ATTRIBUTE_DOACTIVITYCONTEXTOBJECT);
 	m_stateActivation_Attribute_regionActivations->setName("regionActivations");
@@ -1411,16 +1814,6 @@ void StateMachinesPackageImpl::initializeStateActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateActivation_Operation_getConnectionPointActivation->setName("getConnectionPointActivation");
-	m_stateActivation_Operation_getConnectionPointActivation->setEType(getConnectionPointActivation_Class());
-	m_stateActivation_Operation_getConnectionPointActivation->setLowerBound(0);
-	m_stateActivation_Operation_getConnectionPointActivation->setUpperBound(-1);
-	m_stateActivation_Operation_getConnectionPointActivation->setUnique(true);
-	m_stateActivation_Operation_getConnectionPointActivation->setOrdered(false);
-	
-	m_stateActivation_Operation_getConnectionPointActivation->_setID(STATEACTIVATION_OPERATION_GETCONNECTIONPOINTACTIVATION);
-	
-	
 	m_stateActivation_Operation_getConnectionPointActivation_Vertex->setName("getConnectionPointActivation");
 	m_stateActivation_Operation_getConnectionPointActivation_Vertex->setEType(getConnectionPointActivation_Class());
 	m_stateActivation_Operation_getConnectionPointActivation_Vertex->setLowerBound(0);
@@ -1498,6 +1891,25 @@ void StateMachinesPackageImpl::initializeStateActivationContent()
 	
 	m_stateActivation_Operation_getRegionActivation->_setID(STATEACTIVATION_OPERATION_GETREGIONACTIVATION);
 	
+	
+	m_stateActivation_Operation_getVertexActivation_Vertex->setName("getVertexActivation");
+	m_stateActivation_Operation_getVertexActivation_Vertex->setEType(getVertexActivation_Class());
+	m_stateActivation_Operation_getVertexActivation_Vertex->setLowerBound(0);
+	m_stateActivation_Operation_getVertexActivation_Vertex->setUpperBound(1);
+	m_stateActivation_Operation_getVertexActivation_Vertex->setUnique(true);
+	m_stateActivation_Operation_getVertexActivation_Vertex->setOrdered(false);
+	
+	m_stateActivation_Operation_getVertexActivation_Vertex->_setID(STATEACTIVATION_OPERATION_GETVERTEXACTIVATION_VERTEX);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stateActivation_Operation_getVertexActivation_Vertex);
+		parameter->setName("vertex");
+		parameter->setEType(uml::umlPackage::eInstance()->getVertex_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_stateActivation_Operation_hasCompleted->setName("hasCompleted");
 	m_stateActivation_Operation_hasCompleted->setEType(types::typesPackage::eInstance()->getBoolean_Class());
@@ -2412,16 +2824,6 @@ void StateMachinesPackageImpl::initializeStateMachineExecutionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateMachineExecution_Operation_new_->setName("new_");
-	m_stateMachineExecution_Operation_new_->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
-	m_stateMachineExecution_Operation_new_->setLowerBound(1);
-	m_stateMachineExecution_Operation_new_->setUpperBound(1);
-	m_stateMachineExecution_Operation_new_->setUnique(true);
-	m_stateMachineExecution_Operation_new_->setOrdered(false);
-	
-	m_stateMachineExecution_Operation_new_->_setID(STATEMACHINEEXECUTION_OPERATION_NEW_);
-	
-	
 	m_stateMachineExecution_Operation_startBehavior_Class_ParameterValue->setName("startBehavior");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -2579,17 +2981,17 @@ void StateMachinesPackageImpl::initializeStateMachineSemanticVisitorContent()
 	m_stateMachineSemanticVisitor_Operation_getExecutionContext->_setID(STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONCONTEXT);
 	
 	
-	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence->setName("getExecutionFor");
-	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
-	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence->setLowerBound(1);
-	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence->setUpperBound(1);
-	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence->setUnique(true);
-	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence->setOrdered(false);
+	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object->setName("getExecutionFor");
+	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
+	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object->setLowerBound(1);
+	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object->setUpperBound(1);
+	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object->setUnique(true);
+	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object->setOrdered(false);
 	
-	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence->_setID(STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_EVENTOCCURRENCE);
+	m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object->_setID(STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_FUML_OBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object);
 		parameter->setName("behavior");
 		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 		parameter->setLowerBound(0);
@@ -2599,9 +3001,19 @@ void StateMachinesPackageImpl::initializeStateMachineSemanticVisitorContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object);
 		parameter->setName("eventOccurrence");
 		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object);
+		parameter->setName("context");
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

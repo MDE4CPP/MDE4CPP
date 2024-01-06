@@ -51,13 +51,15 @@
 #include "PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp"
 #include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "PSSM/Semantics/CommonBehavior/CallEventExecution.hpp"
+#include "PSSM/Semantics/StateMachines/impl/VertexActivationImpl.hpp"
+#include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
@@ -271,31 +273,20 @@ void StateActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMach
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Enter this State by executing its entry Behavior if one is specified, invoke its doActivity Behavior if one is specified and, if composite, all owned RegionActivations are entered.
-	// As the State is now active, it registers itself in the StateMachineConfiguration of the owning StateMachine and sets itself as the history of its owning RegionActivation.
+	// As the State is now active, its Activation registers itself in the StateMachineConfiguration of the owning StateMachine and sets itself as the history of its owning RegionActivation.
 	// All parent Vertices must be entered beforehand until the least common ancestor of this StateActivation and the source StateActivation of the entering Transition is reached.
-	// NOTE: Due to the unability of MDE4CPP to invoke behaviors asynchronously, the sequence order has been altered compared to the specification.
-	if (this->getStatus() == StateMetadata::IDLE) {
-		// STACKOVERFLOW this->getThisVertexActivationPtr()->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
-		if (std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(this->m_parent) != leastCommonAncestor) {
-			if (auto parentVertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(this->m_parent)) {
-				parentVertexActivation->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
-			}		
-		}
+	if (this->getStatus() == StateMetadata::IDLE)
+	{
+		PSSM::Semantics::StateMachines::VertexActivationImpl::enter(enteringTransition, eventOccurrence, leastCommonAncestor);
+
+		std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConfiguration()->_register(this->getThisStateActivationPtr());
 		
 		this->tryExecuteEntry(eventOccurrence);
-		//this->tryInvokeDoActivity(eventOccurrence);
-		/*if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
-		{
-			this->enterRegions(nullptr, eventOccurrence);
-		}*/
-		
-		std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConfiguration()->_register(this->getThisStateActivationPtr());
-		this->getOwningRegionActivation()->setHistory(this->getThisStateActivationPtr());
+		this->tryInvokeDoActivity(eventOccurrence);	
 
-		this->tryInvokeDoActivity(eventOccurrence);
 		if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
 		{
-			this->enterRegions(nullptr, eventOccurrence);
+			this->enterRegions(enteringTransition, eventOccurrence);
 		}
 	}
 	//end of body
@@ -383,7 +374,7 @@ void StateActivationImpl::exit(const std::shared_ptr<PSSM::Semantics::StateMachi
 	//generated from body annotation
 	// Exit this StateActivation by exiting all owned RegionActivations if the State is composite, abort its doActivtiy Behavior if one is specified and running
 	// and execute its exit Behavior synchonously if one is specified.
-	// As the State is now idle, it unregisters itself in the StateMachineConfiguration of the owning StateMachine.
+	// As the State is now idle, its Activation unregisters itself in the StateMachineConfiguration of the owning StateMachine.
 	if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
 	{
 		for (const auto& ownedRegionActivation : *(this->m_regionActivations))
@@ -391,33 +382,45 @@ void StateActivationImpl::exit(const std::shared_ptr<PSSM::Semantics::StateMachi
 			ownedRegionActivation->exit(nullptr, eventOccurrence);
 		}
 	}
-	//this->setIsDoActivityCompleted(true); tbd
-	this->tryExecuteExit(eventOccurrence);
-	this->setStatus(PSSM::Semantics::StateMachines::StateMetadata::IDLE);
-	std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConfiguration()->unregister(this->getThisStateActivationPtr());
-	//end of body
-}
 
-std::shared_ptr<Bag<PSSM::Semantics::StateMachines::ConnectionPointActivation>> StateActivationImpl::getConnectionPointActivation()
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	// Return the activation for the exit point or the entry point.
-//ConnectionPointActivation activation = null;
-//int i = 0;
-//while(i < this.connectionPointActivation.size() && activation==null){
-//	if(this.connectionPointActivation.get(i).getNode()==vertex){
-//		activation = this.connectionPointActivation.get(i);
-//	}
-//	i++;
-//}
-	return nullptr;
+	// If there is a doActivity currently executing, then it is aborted.
+	if(!this->m_isDoActivityCompleted){
+		this->m_doActivityContextObject->destroy();
+		this->setDoActivityContextObject(nullptr);
+	}
+	this->tryExecuteExit(eventOccurrence);
+
+	// Unregister this StateActivation
+	std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConfiguration()->unregister(this->getThisStateActivationPtr());
+
+	// Re-initialize the State Behavior boolean flags
+	this->m_isEntryCompleted = false;
+	this->m_isDoActivityCompleted = false;
+	this->m_isExitCompleted = false;
+
+	// Change containing Region history to this StateActivation
+	this->getOwningRegionActivation()->setHistory(this->getThisStateActivationPtr());
+
+	// The State is exited by a Transition that targets a State which is located within 
+	// another Region. This means that the parent State must also be exited.  
+	PSSM::Semantics::StateMachines::VertexActivationImpl::exit(exitingTransition, eventOccurrence, leastCommonAncestor);
 	//end of body
 }
 
 std::shared_ptr<PSSM::Semantics::StateMachines::ConnectionPointActivation> StateActivationImpl::getConnectionPointActivation(const std::shared_ptr<uml::Vertex>& vertex)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return the activation for the exit point or the entry point.
+	for (const auto& connectionPointActivation : *this->getConnectionPointActivations())
+	{
+		if (connectionPointActivation->getNode() == vertex)
+		{
+			return connectionPointActivation;
+		}
+	}
+	return nullptr;
+	//end of body
 }
 
 std::shared_ptr<uml::Behavior> StateActivationImpl::getDoActivity()
@@ -499,6 +502,34 @@ return nullptr;
 	//end of body
 }
 
+std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> StateActivationImpl::getVertexActivation(const std::shared_ptr<uml::Vertex>& vertex)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return the Activation corresponding to the Vertex. Search
+	// is propagated through the owned RegionActivation of the
+	// StateActivation if this latter is composite. If no Activation
+	// is found, null is returned.
+	auto vertexActivation = std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>();
+	if (auto state = std::dynamic_pointer_cast<uml::State>(this->getNode()))
+	{
+		if (state->isComposite())
+		{
+			vertexActivation = this->getConnectionPointActivation(vertex);
+			if (vertexActivation == nullptr)
+			{
+				for (const auto& regionActivation : *this->getRegionActivations())
+				{
+					vertexActivation = regionActivation->getVertexActivation(vertex);
+					break;
+				}
+			}
+		}
+	}
+	return vertexActivation;
+	//end of body
+}
+
 bool StateActivationImpl::hasCompleted()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -577,10 +608,10 @@ void StateActivationImpl::tryExecuteEntry(const std::shared_ptr<fUML::Semantics:
 			}
 			else
 			{
-				/// create an Execution for the Behavior and wrap it in an EventTriggeredExecution which, when executed, 
+				/// Create an Execution for the Behavior and wrap it in an EventTriggeredExecution which, when executed, 
 				// extracts any parameters from the given EventOccurrence, executes its wrapped Behavior Execution
 				// and passes any output ParameterValues to its triggering EventOccurrence in case it's a CallEventOccurrence.
-				if (const auto& entryBehaviorExecution = this->getExecutionFor(entryBehavior, eventOccurrence)) // != nullptr
+				if (const auto& entryBehaviorExecution = this->getExecutionFor(entryBehavior, eventOccurrence, nullptr)) // != nullptr
 				{
 					entryBehaviorExecution->execute();
 				}
@@ -628,10 +659,10 @@ void StateActivationImpl::tryExecuteExit(const std::shared_ptr<fUML::Semantics::
 			}
 			else
 			{
-				// create an Execution for the Behavior and wrap it in an EventTriggeredExecution which, when executed, 
+				// Create an Execution for the Behavior and wrap it in an EventTriggeredExecution which, when executed, 
 				// extracts any parameters from the given EventOccurrence, executes its wrapped Behavior Execution
 				// and passes any output ParameterValues to its triggering EventOccurrence in case it's a CallEventOccurrence.
-				if (const auto& exitBehaviorExecution = this->getExecutionFor(exitBehavior, eventOccurrence)) // != nullptr
+				if (const auto& exitBehaviorExecution = this->getExecutionFor(exitBehavior, eventOccurrence, nullptr)) // != nullptr
 				{
 					exitBehaviorExecution->execute();
 				}
@@ -639,7 +670,6 @@ void StateActivationImpl::tryExecuteExit(const std::shared_ptr<fUML::Semantics::
 		}
 		this->setIsExitCompleted(true);
 	}
-	// SEGMENTATION FAULT, CALL STACK this->getThisVertexActivationPtr()->exit(nullptr, eventOccurrence, nullptr);
 	//end of body
 }
 
@@ -647,41 +677,68 @@ void StateActivationImpl::tryInvokeDoActivity(const std::shared_ptr<fUML::Semant
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// If an doActivity behavior is specified for that state then it is executed.
-	// If no doActivity is specified but the state redefines another state which
-	// provides a doActivity then this latter is executed instead. The rule applies
+	// If an doActivity Behavior is specified for that state, then it is executed asynchronously.
+	// If no doActivity is specified but the State redefines another State which
+	// provides a doActivity, then this latter is executed instead. The rule applies
 	// recursively.
-	//if(!this.isDoActivityCompleted){
-	//	Behavior doActivity = this.getDoActivity();
-	//	if(doActivity!=null){
-	//		// Create, initialize and register to the locus the doActivityContextObject.
-	//		this.doActivityContextObject = new DoActivityContextObject();
-	//		this.getExecutionLocus().add(this.doActivityContextObject);
-	//		this.doActivityContextObject.initialize(this.getExecutionContext());
-	//		this.doActivityContextObject.owner = this;
-	//		// Extract data from triggering event occurrence if possible. Reuse event occurrence
-	//		// embedded data extraction logic provided by EventTriggeredExecution.
-	//		List<ParameterValue> inputs = null;
-	//		Execution doActivityExecution = this.getExecutionFor(doActivity, eventOccurrence);
-	//		if(doActivityExecution instanceof EventTriggeredExecution){
-	//			((EventTriggeredExecution)doActivityExecution).initialize();
-	//			inputs = new ArrayList<ParameterValue>(((EventTriggeredExecution)doActivityExecution).wrappedExecution.parameterValues);
-	//		}
-	//		// Start doActivity execution on its own thread of execution (i.e., this
-	//		// a different thread of execution than the one used for the state machine).
-	//		this.doActivityContextObject.startBehavior(doActivity, inputs);
-	//	}
-	//}
 	if (!this->m_isDoActivityCompleted)
 	{
-		if (auto doActivityBehavior = this->getDoActivity()) // != nullptr
+		if (const auto& doActivityBehavior = this->getDoActivity()) // != nullptr
 		{
-			// tbd
+			if (std::dynamic_pointer_cast<uml::OpaqueBehavior>(doActivityBehavior))
+			{
+				// Extract any Parameters from the given EventOccurrence (replaces EventTriggeredExecution::initialize()),
+				// invoke the OpaqueBehavior directly via ModelExecutor::execute()
+				// and pass any output ParameterValues to the eventOccurrence in case its a CallEventOccurrence.
+				// CURRENTLY, OPAQUEBEHAVIORS ARE EXECUTED SYNCHRONOUSLY REGARDLESS OF DOACTIVITY SEMANTICS DUE TO 
+				// MDE4CPP INVOKING THESE OPAQUEBEHAVIORS DIRECTLY AS C++ METHOD
+				auto eventTriggeredExecution = PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createEventTriggeredExecution();
+				eventTriggeredExecution->setTriggeringEventOccurrence(eventOccurrence);
+				eventTriggeredExecution->setContext(this->getExecutionContext());
+				auto inputParameterValues = eventTriggeredExecution->initialize(doActivityBehavior);
+				
+				auto outputParameterValues = this->getExecutionLocus()->getExecutor()->execute(doActivityBehavior, this->getExecutionContext(), inputParameterValues);
+				
+				if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
+				{
+					for (const auto& outputParameterValue : *outputParameterValues)
+					{
+						callEventOccurrence->getExecution()->setParameterValue(outputParameterValue);
+					}
+				}
+				this->setIsDoActivityCompleted(true);
+				if (this->hasCompleted())
+					this->notifyCompletion();
+			}
+			else
+			{
+				// Create an doActivityContextObject for the doActivity so it can run asynchronously.
+				this->setDoActivityContextObject(PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createDoActivityContextObject());
+				this->getExecutionLocus()->add(this->getDoActivityContextObject());
+				this->m_doActivityContextObject->initialize(this->getExecutionContext());
+				this->m_doActivityContextObject->getOwner() = std::dynamic_pointer_cast<uml::Element>(this->getThisStateActivationPtr());
+				// Create an temporary Execution for the Behavior and try to wrap it in an EventTriggeredExecution 
+				// and extract any parameters from the given EventOccurrence which then can be passed to the doActivityContextObject.
+				const auto& doActivityExecution = this->getExecutionFor(doActivityBehavior, eventOccurrence, nullptr);//this->getExecutionContext());
+				auto inputParameterValues = std::make_shared<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>();
+				if (const auto& doActivityEventTriggeredExecution = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::EventTriggeredExecution>(doActivityExecution))
+				{
+					inputParameterValues = doActivityEventTriggeredExecution->initialize(doActivityBehavior);
+					// Start doActivityExecution on its own thread with the extracted parameters if given
+					this->m_doActivityContextObject->startBehavior(doActivityBehavior, inputParameterValues);
+				}
+				else {
+					this->setIsDoActivityCompleted(true);
+					if (this->hasCompleted())
+						this->notifyCompletion();
+				}
+			}
 		}
-		this->setIsDoActivityCompleted(true);
-		if (this->hasCompleted())
+		else
 		{
-			this->notifyCompletion();
+			this->setIsDoActivityCompleted(true);
+			if (this->hasCompleted())
+				this->notifyCompletion();
 		}
 	}
 	//end of body
@@ -1477,13 +1534,6 @@ std::shared_ptr<Any> StateActivationImpl::eInvoke(int operationID, const std::sh
 			this->exit(incoming_param_exitingTransition,incoming_param_eventOccurrence,incoming_param_leastCommonAncestor);
 			break;
 		}
-		// PSSM::Semantics::StateMachines::StateActivation::getConnectionPointActivation() : PSSM::Semantics::StateMachines::ConnectionPointActivation[*]: 2311985214
-		case StateMachinesPackage::STATEACTIVATION_OPERATION_GETCONNECTIONPOINTACTIVATION:
-		{
-			std::shared_ptr<Bag<PSSM::Semantics::StateMachines::ConnectionPointActivation>> resultList = this->getConnectionPointActivation();
-			return eEcoreContainerAny(resultList,PSSM::Semantics::StateMachines::StateMachinesPackage::CONNECTIONPOINTACTIVATION_CLASS);
-			break;
-		}
 		// PSSM::Semantics::StateMachines::StateActivation::getConnectionPointActivation(uml::Vertex) : PSSM::Semantics::StateMachines::ConnectionPointActivation: 547341700
 		case StateMachinesPackage::STATEACTIVATION_OPERATION_GETCONNECTIONPOINTACTIVATION_VERTEX:
 		{
@@ -1572,6 +1622,38 @@ std::shared_ptr<Any> StateActivationImpl::eInvoke(int operationID, const std::sh
 		{
 			std::shared_ptr<Bag<PSSM::Semantics::StateMachines::RegionActivation>> resultList = this->getRegionActivation();
 			return eEcoreContainerAny(resultList,PSSM::Semantics::StateMachines::StateMachinesPackage::REGIONACTIVATION_CLASS);
+			break;
+		}
+		// PSSM::Semantics::StateMachines::StateActivation::getVertexActivation(uml::Vertex) : PSSM::Semantics::StateMachines::VertexActivation: 1615824524
+		case StateMachinesPackage::STATEACTIVATION_OPERATION_GETVERTEXACTIVATION_VERTEX:
+		{
+			//Retrieve input parameter 'vertex'
+			//parameter 0
+			std::shared_ptr<uml::Vertex> incoming_param_vertex;
+			Bag<Any>::const_iterator incoming_param_vertex_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_vertex_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_vertex = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'vertex'. Failed to invoke operation 'getVertexActivation'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'vertex'. Failed to invoke operation 'getVertexActivation'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getVertexActivation(incoming_param_vertex), PSSM::Semantics::StateMachines::StateMachinesPackage::VERTEXACTIVATION_CLASS);
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateActivation::hasCompleted() : bool: 2755482

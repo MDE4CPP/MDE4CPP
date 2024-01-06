@@ -39,19 +39,21 @@ namespace fUML::Semantics::CommonBehavior
 	class EventAccepter;
 	class EventOccurrence;
 	class Execution;
+	class ObjectActivation;
 	class ParameterValue;
 }
-namespace fUML::MDE4CPP_Extensions 
+namespace fUML::Semantics::Loci 
 {
-	class FUML_Object;
+	class Locus;
 }
-namespace PSSM::Semantics::StateMachines 
+namespace ecore 
 {
-	class StateActivation;
+	class EAnnotation;
 }
 namespace uml 
 {
 	class Class;
+	class Comment;
 	class Operation;
 	class StructuralFeature;
 }
@@ -59,16 +61,17 @@ namespace uml
 // namespace macro header include
 #include "PSSM/PSSM.hpp"
 
+// base class includes
+#include "PSSM/MDE4CPP_Extensions/PSSM_Object.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace PSSM::Semantics::StateMachines 
 {
 	
-	class PSSM_API DoActivityContextObject : virtual public ecore::EModelElement
+	class PSSM_API DoActivityContextObject : virtual public PSSM::MDE4CPP_Extensions::PSSM_Object
 	{
 		public:
  			DoActivityContextObject(const DoActivityContextObject &) {}
@@ -85,16 +88,16 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
+			virtual void destroy() = 0;
 			
 			
+			virtual void initialize(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context) = 0;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			
-			
-			
-			
-			
-			
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;
 			virtual void unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
-			
+			virtual void unregisterFromContext(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& encapsulatedAccepter) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -105,8 +108,6 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getContext() const = 0;
 			virtual void setContext(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) = 0;
-			virtual const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>& getOwner() const = 0;
-			virtual void setOwner(const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -133,7 +134,6 @@ namespace PSSM::Semantics::StateMachines
 			// Reference Members
 			//*********************************
 			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> m_context;
-			std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation> m_owner;
 	};
 }
 #endif /* end of include guard: PSSM_SEMANTICS_STATEMACHINES_DOACTIVITYCONTEXTOBJECT_HPP */

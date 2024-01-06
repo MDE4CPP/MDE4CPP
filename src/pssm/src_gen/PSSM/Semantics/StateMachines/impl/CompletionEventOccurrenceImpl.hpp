@@ -43,6 +43,7 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
+			virtual bool _match(const std::shared_ptr<Bag<uml::Trigger>>& triggers) ;
 			virtual void _register(const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>& stateActivation) ;
 			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) ;
 			

@@ -85,10 +85,11 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long COMPLETIONEVENTOCCURRENCE_CLASS = 679924673;
 			static const unsigned int COMPLETIONEVENTOCCURRENCE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int COMPLETIONEVENTOCCURRENCE_CLASS_OPERATION_COUNT = 7;
+			static const unsigned int COMPLETIONEVENTOCCURRENCE_CLASS_OPERATION_COUNT = 8;
 			
 			static const unsigned long COMPLETIONEVENTOCCURRENCE_ATTRIBUTE_STATEACTIVATION = 540551478;
 			
+			static const unsigned long COMPLETIONEVENTOCCURRENCE_OPERATION__MATCH_TRIGGER = 301723783;
 			static const unsigned long COMPLETIONEVENTOCCURRENCE_OPERATION__REGISTER_STATEACTIVATION = 3594435511;
 			static const unsigned long COMPLETIONEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER = 2944087030;
 			
@@ -98,6 +99,7 @@ namespace PSSM::Semantics::StateMachines
 			
 			virtual const std::shared_ptr<ecore::EReference>& getCompletionEventOccurrence_Attribute_stateActivation() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCompletionEventOccurrence_Operation__match_Trigger() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCompletionEventOccurrence_Operation__register_StateActivation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCompletionEventOccurrence_Operation_match_Trigger() const = 0;
 			
@@ -108,15 +110,17 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long CONDITIONALPSEUDOSTATEACTIVATION_CLASS = 1395677797;
 			static const unsigned int CONDITIONALPSEUDOSTATEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int CONDITIONALPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 31;
+			static const unsigned int CONDITIONALPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 32;
 			
 			
+			static const unsigned long CONDITIONALPSEUDOSTATEACTIVATION_OPERATION_ISELSETRANSITION_TRANSITIONACTIVATION = 186795089;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getConditionalPseudostateActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getConditionalPseudostateActivation_Operation_isElseTransition_TransitionActivation() const = 0;
 			
 			// End Class ConditionalPseudostateActivation
 
@@ -179,22 +183,32 @@ namespace PSSM::Semantics::StateMachines
 			// Begin Class DoActivityContextObject
 			//Class and Feature IDs 
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_CLASS = 324637086;
-			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 1;
+			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 56;
 			
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT = 1627726340;
-			static const unsigned long DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_OWNER = 1692664602;
 			
+			static const unsigned long DOACTIVITYCONTEXTOBJECT_OPERATION__REGISTER_EVENTACCEPTER = 3248234953;
+			static const unsigned long DOACTIVITYCONTEXTOBJECT_OPERATION_DESTROY = 2307655086;
+			static const unsigned long DOACTIVITYCONTEXTOBJECT_OPERATION_INITIALIZE_FUML_OBJECT = 9524128;
+			static const unsigned long DOACTIVITYCONTEXTOBJECT_OPERATION_SEND_EVENTOCCURRENCE = 1377676493;
+			static const unsigned long DOACTIVITYCONTEXTOBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 2559364222;
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 3687530305;
+			static const unsigned long DOACTIVITYCONTEXTOBJECT_OPERATION_UNREGISTERFROMCONTEXT_EVENTACCEPTER = 3626524662;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getDoActivityContextObject_Class() const = 0;
 			
 			
 			virtual const std::shared_ptr<ecore::EReference>& getDoActivityContextObject_Attribute_context() const = 0;
-			virtual const std::shared_ptr<ecore::EReference>& getDoActivityContextObject_Attribute_owner() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObject_Operation__register_EventAccepter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObject_Operation_destroy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObject_Operation_initialize_FUML_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObject_Operation_send_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObject_Operation_startBehavior_Class_ParameterValue() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObject_Operation_unregister_EventAccepter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObject_Operation_unregisterFromContext_EventAccepter() const = 0;
 			
 			// End Class DoActivityContextObject
 
@@ -202,16 +216,20 @@ namespace PSSM::Semantics::StateMachines
 			// Begin Class DoActivityContextObjectActivation
 			//Class and Feature IDs 
 			static const unsigned long DOACTIVITYCONTEXTOBJECTACTIVATION_CLASS = 1005978798;
-			static const unsigned int DOACTIVITYCONTEXTOBJECTACTIVATION_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int DOACTIVITYCONTEXTOBJECTACTIVATION_CLASS_OPERATION_COUNT = 0;
+			static const unsigned int DOACTIVITYCONTEXTOBJECTACTIVATION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int DOACTIVITYCONTEXTOBJECTACTIVATION_CLASS_OPERATION_COUNT = 10;
 			
 			
+			static const unsigned long DOACTIVITYCONTEXTOBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT = 1995144659;
+			static const unsigned long DOACTIVITYCONTEXTOBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 1489741616;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getDoActivityContextObjectActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObjectActivation_Operation_dispatchNextEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityContextObjectActivation_Operation_startBehavior_Class_ParameterValue() const = 0;
 			
 			// End Class DoActivityContextObjectActivation
 
@@ -220,11 +238,13 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long DOACTIVITYEXECUTIONEVENTACCEPTER_CLASS = 1446962687;
 			static const unsigned int DOACTIVITYEXECUTIONEVENTACCEPTER_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int DOACTIVITYEXECUTIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 0;
+			static const unsigned int DOACTIVITYEXECUTIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 4;
 			
 			static const unsigned long DOACTIVITYEXECUTIONEVENTACCEPTER_ATTRIBUTE_CONTEXT = 1419719632;
 			static const unsigned long DOACTIVITYEXECUTIONEVENTACCEPTER_ATTRIBUTE_ENCAPSULATEDACCEPTER = 953559915;
 			
+			static const unsigned long DOACTIVITYEXECUTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE = 2344912028;
+			static const unsigned long DOACTIVITYEXECUTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE = 3771787187;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getDoActivityExecutionEventAccepter_Class() const = 0;
@@ -233,6 +253,8 @@ namespace PSSM::Semantics::StateMachines
 			virtual const std::shared_ptr<ecore::EReference>& getDoActivityExecutionEventAccepter_Attribute_context() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getDoActivityExecutionEventAccepter_Attribute_encapsulatedAccepter() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityExecutionEventAccepter_Operation_accept_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDoActivityExecutionEventAccepter_Operation_match_EventOccurrence() const = 0;
 			
 			// End Class DoActivityExecutionEventAccepter
 
@@ -241,15 +263,17 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long ENTRYPOINTPSEUDOSTATEACTIVATION_CLASS = 1508382145;
 			static const unsigned int ENTRYPOINTPSEUDOSTATEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int ENTRYPOINTPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 31;
+			static const unsigned int ENTRYPOINTPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 32;
 			
 			
+			static const unsigned long ENTRYPOINTPSEUDOSTATEACTIVATION_OPERATION__ENTER_TRANSITIONACTIVATION_REGIONACTIVATION = 461561048;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getEntryPointPseudostateActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getEntryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation() const = 0;
 			
 			// End Class EntryPointPseudostateActivation
 
@@ -311,15 +335,17 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long FORKPSEUDOSTATEACTIVATION_CLASS = 47905;
 			static const unsigned int FORKPSEUDOSTATEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int FORKPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 31;
+			static const unsigned int FORKPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 32;
 			
 			
+			static const unsigned long FORKPSEUDOSTATEACTIVATION_OPERATION_CANPROPAGATEEXECUTION_TRANSITIONACTIVATION_REGIONACTIVATION = 494181460;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getForkPseudostateActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getForkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation() const = 0;
 			
 			// End Class ForkPseudostateActivation
 
@@ -381,15 +407,17 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long JOINPSEUDOSTATEACTIVATION_CLASS = 1529280526;
 			static const unsigned int JOINPSEUDOSTATEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int JOINPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 31;
+			static const unsigned int JOINPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 32;
 			
 			
+			static const unsigned long JOINPSEUDOSTATEACTIVATION_OPERATION_CANPROPAGATEEXECUTION_TRANSITIONACTIVATION_REGIONACTIVATION = 2944344382;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getJoinPseudostateActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getJoinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation() const = 0;
 			
 			// End Class JoinPseudostateActivation
 
@@ -398,15 +426,17 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long LOCALTRANSITIONACTIVATION_CLASS = 1185957953;
 			static const unsigned int LOCALTRANSITIONACTIVATION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int LOCALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 27;
+			static const unsigned int LOCALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 28;
 			
 			
+			static const unsigned long LOCALTRANSITIONACTIVATION_OPERATION_GETCONTAININGSTATE = 790684891;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getLocalTransitionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getLocalTransitionActivation_Operation_getContainingState() const = 0;
 			
 			// End Class LocalTransitionActivation
 
@@ -491,13 +521,13 @@ namespace PSSM::Semantics::StateMachines
 			static const unsigned long STATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_REGIONACTIVATION = 2281369893;
 			static const unsigned long STATEACTIVATION_OPERATION_ENTERREGIONS_TRANSITIONACTIVATION_EVENTOCCURRENCE = 1250090279;
 			static const unsigned long STATEACTIVATION_OPERATION_EXIT_TRANSITIONACTIVATION_REGIONACTIVATION = 2035618913;
-			static const unsigned long STATEACTIVATION_OPERATION_GETCONNECTIONPOINTACTIVATION = 2311985214;
 			static const unsigned long STATEACTIVATION_OPERATION_GETCONNECTIONPOINTACTIVATION_VERTEX = 547341700;
 			static const unsigned long STATEACTIVATION_OPERATION_GETDOACTIVITY = 4226202519;
 			static const unsigned long STATEACTIVATION_OPERATION_GETENTRY = 3191084329;
 			static const unsigned long STATEACTIVATION_OPERATION_GETEXIT = 3548364997;
 			static const unsigned long STATEACTIVATION_OPERATION_GETFIREABLETRANSITIONS_EVENTOCCURRENCE = 3980114190;
 			static const unsigned long STATEACTIVATION_OPERATION_GETREGIONACTIVATION = 2594219842;
+			static const unsigned long STATEACTIVATION_OPERATION_GETVERTEXACTIVATION_VERTEX = 1615824524;
 			static const unsigned long STATEACTIVATION_OPERATION_HASCOMPLETED = 2755482;
 			static const unsigned long STATEACTIVATION_OPERATION_NOTIFYCOMPLETION = 766766718;
 			static const unsigned long STATEACTIVATION_OPERATION_RELEASEDEFERREDEVENTS = 172993166;
@@ -521,13 +551,13 @@ namespace PSSM::Semantics::StateMachines
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_enter_TransitionActivation_RegionActivation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_enterRegions_TransitionActivation_EventOccurrence() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_exit_TransitionActivation_RegionActivation() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getConnectionPointActivation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getConnectionPointActivation_Vertex() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getDoActivity() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getEntry() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getExit() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getFireableTransitions_EventOccurrence() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getRegionActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_getVertexActivation_Vertex() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_hasCompleted() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_notifyCompletion() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_releaseDeferredEvents() const = 0;
@@ -653,7 +683,7 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long STATEMACHINEEXECUTION_CLASS = 1411054300;
 			static const unsigned int STATEMACHINEEXECUTION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int STATEMACHINEEXECUTION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int STATEMACHINEEXECUTION_CLASS_OPERATION_COUNT = 61;
 			
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE = 1048116379;
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION = 1936731267;
@@ -662,7 +692,6 @@ namespace PSSM::Semantics::StateMachines
 			
 			static const unsigned long STATEMACHINEEXECUTION_OPERATION_EXECUTE = 868578077;
 			static const unsigned long STATEMACHINEEXECUTION_OPERATION_GETVERTEXACTIVATION_VERTEX = 543224035;
-			static const unsigned long STATEMACHINEEXECUTION_OPERATION_NEW_ = 2802468829;
 			static const unsigned long STATEMACHINEEXECUTION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 114402900;
 			static const unsigned long STATEMACHINEEXECUTION_OPERATION_TERMINATE = 907221263;
 			
@@ -677,7 +706,6 @@ namespace PSSM::Semantics::StateMachines
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineExecution_Operation_execute() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineExecution_Operation_getVertexActivation_Vertex() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineExecution_Operation_new_() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineExecution_Operation_startBehavior_Class_ParameterValue() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineExecution_Operation_terminate() const = 0;
 			
@@ -697,7 +725,7 @@ namespace PSSM::Semantics::StateMachines
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_ACTIVATETRANSITIONS = 2630233541;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETCONTEXTCHAIN = 3914474132;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONCONTEXT = 1147369343;
-			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_EVENTOCCURRENCE = 4224022080;
+			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_FUML_OBJECT = 3510213574;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONLOCUS = 922061674;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETSTATEMACHINEEXECUTION = 2893368114;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_ISVISITORFOR_NAMEDELEMENT = 3953933016;
@@ -714,7 +742,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_activateTransitions() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_getContextChain() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_getExecutionContext() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_getExecutionLocus() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_getStateMachineExecution() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_isVisitorFor_NamedElement() const = 0;

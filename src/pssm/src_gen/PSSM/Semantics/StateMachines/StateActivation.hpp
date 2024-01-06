@@ -90,13 +90,13 @@ namespace PSSM::Semantics::StateMachines
 			virtual void enter(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& enteringTransition, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation>& leastCommonAncestor) = 0;
 			virtual void enterRegions(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& enteringTransition, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual void exit(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& exitingTransition, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation>& leastCommonAncestor) = 0;
-			virtual std::shared_ptr<Bag<PSSM::Semantics::StateMachines::ConnectionPointActivation>> getConnectionPointActivation() = 0;
 			virtual std::shared_ptr<PSSM::Semantics::StateMachines::ConnectionPointActivation> getConnectionPointActivation(const std::shared_ptr<uml::Vertex>& vertex) = 0;
 			virtual std::shared_ptr<uml::Behavior> getDoActivity() = 0;
 			virtual std::shared_ptr<uml::Behavior> getEntry() = 0;
 			virtual std::shared_ptr<uml::Behavior> getExit() = 0;
 			virtual std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> getFireableTransitions(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual std::shared_ptr<Bag<PSSM::Semantics::StateMachines::RegionActivation>> getRegionActivation() = 0;
+			virtual std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> getVertexActivation(const std::shared_ptr<uml::Vertex>& vertex) = 0;
 			virtual bool hasCompleted() = 0;
 			virtual void notifyCompletion() = 0;
 			virtual void releaseDeferredEvents() = 0;

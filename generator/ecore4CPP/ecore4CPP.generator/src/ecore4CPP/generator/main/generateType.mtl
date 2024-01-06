@@ -20,8 +20,8 @@
 [import ecore4CPP::generator::main::validation::validation /]
 
 
-[template public generateParameterList(aOperation:EOperation) post(trim())]
-[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (', ')][if(sParameter.isSharedPtr())]const [/if][sParameter.generateParameterType()/][if(sParameter.isSharedPtr())]&[/if] [sParameter.name/][/for]
+[template public generateParameterList(aOperation:EOperation, impl : Boolean) post(trim())]
+[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (', ')][if(sParameter.isSharedPtr())]const [/if][sParameter.generateParameterType()/][if(sParameter.isSharedPtr())]&[/if] [sParameter.name/][if(impl and (sParameter.hasKey(keyDefaultParameterValue())))] = [sParameter.valueKey(keyDefaultParameterValue())/][/if][/for]
 [/template]
 
 [comment

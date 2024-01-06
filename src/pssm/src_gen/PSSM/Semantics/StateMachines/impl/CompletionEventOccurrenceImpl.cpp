@@ -114,11 +114,25 @@ std::shared_ptr<ecore::EObject> CompletionEventOccurrenceImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+bool CompletionEventOccurrenceImpl::_match(const std::shared_ptr<Bag<uml::Trigger>>& triggers)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// A CompletionEvent can only trigger a Transition with no
+	// Trigger. Hence, only if the passed list of Triggers is empty,
+	// the CompletionEventOccurrence matches
+	if(triggers->size() == 0){
+		return true;
+	}
+	return false;
+	//end of body
+}
+
 void CompletionEventOccurrenceImpl::_register(const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>& stateActivation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		this->setStateActivation(stateActivation);
+	this->setStateActivation(stateActivation);
 	//end of body
 }
 
@@ -126,7 +140,9 @@ bool CompletionEventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& t
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	
+	// A CompletionEvent can only trigger a Transition with no
+	// Trigger. Hence it cannot match any Trigger
+	return false;
 	//end of body
 }
 
@@ -330,6 +346,47 @@ std::shared_ptr<Any> CompletionEventOccurrenceImpl::eInvoke(int operationID, con
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::CompletionEventOccurrence::_match(uml::Trigger[*]) : bool: 301723783
+		case StateMachinesPackage::COMPLETIONEVENTOCCURRENCE_OPERATION__MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'triggers'
+			//parameter 0
+			std::shared_ptr<Bag<uml::Trigger>> incoming_param_triggers;
+			Bag<Any>::const_iterator incoming_param_triggers_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_triggers_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_triggers.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<uml::Trigger> _temp = std::dynamic_pointer_cast<uml::Trigger>(anEObject);
+								incoming_param_triggers->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'triggers'. Failed to invoke operation '_match'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'triggers'. Failed to invoke operation '_match'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->_match(incoming_param_triggers), 0, false);
+			break;
+		}
 		// PSSM::Semantics::StateMachines::CompletionEventOccurrence::_register(PSSM::Semantics::StateMachines::StateActivation): 3594435511
 		case StateMachinesPackage::COMPLETIONEVENTOCCURRENCE_OPERATION__REGISTER_STATEACTIVATION:
 		{

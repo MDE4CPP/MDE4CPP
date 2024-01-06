@@ -35,7 +35,14 @@ namespace PSSM
 //Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
+	class ClassifierBehaviorExecution;
+	class EventAccepter;
+	class EventOccurrence;
 	class ParameterValue;
+}
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
 }
 namespace uml 
 {
@@ -45,16 +52,17 @@ namespace uml
 // namespace macro header include
 #include "PSSM/PSSM.hpp"
 
+// base class includes
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace PSSM::Semantics::StateMachines 
 {
 	
-	class PSSM_API DoActivityContextObjectActivation : virtual public ecore::EModelElement
+	class PSSM_API DoActivityContextObjectActivation : virtual public fUML::Semantics::CommonBehavior::ObjectActivation
 	{
 		public:
  			DoActivityContextObjectActivation(const DoActivityContextObjectActivation &) {}
@@ -71,8 +79,8 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual void dispatchNextEvent() = 0;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

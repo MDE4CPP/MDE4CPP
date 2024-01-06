@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 
 
 #include "ecore/EcoreAny.hpp"
@@ -105,13 +105,17 @@ std::string GetNextEventStrategyImpl::getName()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Get next event strategies are always named "getNextEvent".
-return "getNextEvent";
+	return "getNextEvent";
 	//end of body
 }
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> GetNextEventStrategyImpl::retrieveNextEvent(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& objectActivation)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Must be overridden by derived Strategies.
+	return nullptr;
+	//end of body
 }
 
 //*********************************

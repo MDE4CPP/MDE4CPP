@@ -17,14 +17,12 @@
 #include "../DoActivityContextObject.hpp"
 
 #include "PSSM/Semantics/StateMachines/impl/StateMachinesFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "PSSM/MDE4CPP_Extensions/impl/PSSM_ObjectImpl.hpp"
 
 //*********************************
 namespace PSSM::Semantics::StateMachines 
 {
-	class PSSM_API DoActivityContextObjectImpl : virtual public ecore::EModelElementImpl,
-virtual public DoActivityContextObject 
+	class PSSM_API DoActivityContextObjectImpl : virtual public PSSM::MDE4CPP_Extensions::PSSM_ObjectImpl, virtual public DoActivityContextObject 
 	{
 		public: 
 			DoActivityContextObjectImpl(const DoActivityContextObjectImpl & obj);
@@ -45,16 +43,16 @@ virtual public DoActivityContextObject
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
+			virtual void destroy() ;
 			
 			
+			virtual void initialize(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context) ;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
 			
-			
-			
-			
-			
-			
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			virtual void unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
-			
+			virtual void unregisterFromContext(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& encapsulatedAccepter) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -65,8 +63,6 @@ virtual public DoActivityContextObject
 			//*********************************
 			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getContext() const ;
 			virtual void setContext(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) ;
-			virtual const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>& getOwner() const ;
-			virtual void setOwner(const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>&) ;
 			
 			//*********************************
 			// Union Reference Getters

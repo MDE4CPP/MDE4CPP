@@ -165,6 +165,7 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::VertexActivation>> StateMach
 			vertexActivationsAtLevel->add(child->getVertexActivation());
 		}
 	}
+	return vertexActivationsAtLevel;
 	//end of body
 }
 

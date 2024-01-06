@@ -17,14 +17,12 @@
 #include "../DoActivityContextObjectActivation.hpp"
 
 #include "PSSM/Semantics/StateMachines/impl/StateMachinesFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/ObjectActivationImpl.hpp"
 
 //*********************************
 namespace PSSM::Semantics::StateMachines 
 {
-	class PSSM_API DoActivityContextObjectActivationImpl : virtual public ecore::EModelElementImpl,
-virtual public DoActivityContextObjectActivation 
+	class PSSM_API DoActivityContextObjectActivationImpl : virtual public fUML::Semantics::CommonBehavior::ObjectActivationImpl, virtual public DoActivityContextObjectActivation 
 	{
 		public: 
 			DoActivityContextObjectActivationImpl(const DoActivityContextObjectActivationImpl & obj);
@@ -45,8 +43,8 @@ virtual public DoActivityContextObjectActivation
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual void dispatchNextEvent() ;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -113,20 +113,20 @@ void PseudostateActivationImpl::evaluateAllGuards(const std::shared_ptr<fUML::Se
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Evaluate all guards of outgoing transitions of the pseudo-state.
-	// Guard evaluation populate the set of fireable transitions with
-	// transitions whith guard evaluating to true. Not that this evaluation
-	// is not done at the time the where this pseudo-state is entered. Instead
+	// Evaluate all guards of the outgoing transitions of the Pseudostate.
+	// The guard evaluation process populates the set of fireable Transitions
+	// with guards evaluating to 'true'. Not that this evaluation
+	// is not done at the time the where this Pseudostate is entered. Instead
 	// it is done statically when the compound transition leading to this
-	// pseudo-state is evaluated.
+	// Pseudostate is evaluated.
 	this->m_fireableTransitions->clear();
-	for(int i=0; i < int(this->getOutgoingTransitions()->size()); ++i){
-		auto transitionActivation = this->getOutgoingTransitions()->at(i);
-		if(transitionActivation->evaluateGuard(eventOccurrence)){
-			this->m_fireableTransitions->add(transitionActivation);
+	for (const auto& outgoingTransitionActivation : *this->getOutgoingTransitions())
+	{
+		if (outgoingTransitionActivation->evaluateGuard(eventOccurrence))
+		{
+			this->m_fireableTransitions->add(outgoingTransitionActivation);
 		}
 	}
-
 	//end of body
 }
 

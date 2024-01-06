@@ -79,7 +79,7 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
-			
+			virtual std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation> getContainingState() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
