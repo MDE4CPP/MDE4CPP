@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Model xmi:id="_-DxqIJ6nEe6R884eeposdg" name="PSSM_ComplexBehavior">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_B3IKgJ6pEe6R884eeposdg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_JW2g4J6oEe6R884eeposdg" name="C1">
+      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_MaeC4J6oEe6R884eeposdg" name="SM_ComplexBehavior">
+        <region xmi:type="uml:Region" xmi:id="_eExdQJ6vEe6R884eeposdg" name="R1">
+          <transition xmi:type="uml:Transition" xmi:id="_vnPU0J63Ee6R884eeposdg" name="T1" source="_CqYrEJ63Ee6R884eeposdg" target="_Dy5LQJ63Ee6R884eeposdg"/>
+          <transition xmi:type="uml:Transition" xmi:id="_zQn2UJ63Ee6R884eeposdg" name="T2" source="_Dy5LQJ63Ee6R884eeposdg" target="_HG4rkJ63Ee6R884eeposdg"/>
+          <transition xmi:type="uml:Transition" xmi:id="_25dlQJ63Ee6R884eeposdg" name="T3" source="_HG4rkJ63Ee6R884eeposdg" target="_KvWnEJ63Ee6R884eeposdg"/>
+          <transition xmi:type="uml:Transition" xmi:id="_4Ei4UJ63Ee6R884eeposdg" name="T4" source="_KvWnEJ63Ee6R884eeposdg" target="_N4ZboJ63Ee6R884eeposdg"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_CqYrEJ63Ee6R884eeposdg" name="Initial_Complex"/>
+          <subvertex xmi:type="uml:State" xmi:id="_Dy5LQJ63Ee6R884eeposdg" name="S1_Complex">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_W6P2oJ63Ee6R884eeposdg" name="printHelloWorld">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Hello World&quot; &lt;&lt; std::endl;</body>
+            </doActivity>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_HG4rkJ63Ee6R884eeposdg" name="S2_Complex">
+            <doActivity xmi:type="uml:StateMachine" xmi:id="_cI2pgJ63Ee6R884eeposdg" name="SM_doActivity_Direct">
+              <region xmi:type="uml:Region" xmi:id="_CL_pcJ64Ee6R884eeposdg" name="Region1">
+                <transition xmi:type="uml:Transition" xmi:id="_fzJUgJ64Ee6R884eeposdg" name="T1_doAct_Direct" source="_dQfxkJ64Ee6R884eeposdg" target="_eVN98J64Ee6R884eeposdg">
+                  <effect xmi:type="uml:OpaqueBehavior" xmi:id="_r5Z7sJ64Ee6R884eeposdg" name="printHelloWorld">
+                    <language>CPP</language>
+                    <body>std::cout &lt;&lt; &quot;Hello from SM_doAct_Direct&quot; &lt;&lt; std::endl;</body>
+                  </effect>
+                </transition>
+                <subvertex xmi:type="uml:Pseudostate" xmi:id="_dQfxkJ64Ee6R884eeposdg" name="Initial_doAct_Direct"/>
+                <subvertex xmi:type="uml:FinalState" xmi:id="_eVN98J64Ee6R884eeposdg" name="FinalState_doAct_Direct"/>
+              </region>
+            </doActivity>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_KvWnEJ63Ee6R884eeposdg" name="S3_Complex">
+            <doActivity xmi:type="uml:StateMachine" xmi:id="_nzrR4J63Ee6R884eeposdg" name="SM_doActivity">
+              <region xmi:type="uml:Region" xmi:id="_ra02YJ7FEe6R884eeposdg" name="Region1">
+                <transition xmi:type="uml:Transition" xmi:id="_IkpFMJ7GEe6R884eeposdg" name="T1" source="_1Vhk8J7FEe6R884eeposdg" target="_3Wc64J7FEe6R884eeposdg"/>
+                <transition xmi:type="uml:Transition" xmi:id="_JHwZUJ7GEe6R884eeposdg" name="T2" source="_3Wc64J7FEe6R884eeposdg" target="_5hzYIJ7FEe6R884eeposdg"/>
+                <subvertex xmi:type="uml:Pseudostate" xmi:id="_1Vhk8J7FEe6R884eeposdg" name="Initial"/>
+                <subvertex xmi:type="uml:State" xmi:id="_3Wc64J7FEe6R884eeposdg" name="S1_doActivity">
+                  <entry xmi:type="uml:OpaqueBehavior" xmi:id="_HyrcwJ7GEe6R884eeposdg" name="printHelloWorld">
+                    <language>CPP</language>
+                    <body>std::cout &lt;&lt; &quot;Hello from SM_doActivity&quot; &lt;&lt; std::endl;</body>
+                  </entry>
+                </subvertex>
+                <subvertex xmi:type="uml:FinalState" xmi:id="_5hzYIJ7FEe6R884eeposdg" name="FinalState"/>
+              </region>
+            </doActivity>
+            <entry xmi:type="uml:StateMachine" xmi:id="_l4pIkJ63Ee6R884eeposdg" name="SM_entry">
+              <region xmi:type="uml:Region" xmi:id="_hRDAcJ65Ee6R884eeposdg" name="Region1">
+                <transition xmi:type="uml:Transition" xmi:id="_PNv8oJ7FEe6R884eeposdg" name="T1" source="_jTsNoJ65Ee6R884eeposdg" target="_kf7-UJ65Ee6R884eeposdg"/>
+                <transition xmi:type="uml:Transition" xmi:id="_SGMwcJ7FEe6R884eeposdg" name="T2" source="_kf7-UJ65Ee6R884eeposdg" target="_liluIJ65Ee6R884eeposdg"/>
+                <subvertex xmi:type="uml:Pseudostate" xmi:id="_jTsNoJ65Ee6R884eeposdg" name="Initial_entry"/>
+                <subvertex xmi:type="uml:State" xmi:id="_kf7-UJ65Ee6R884eeposdg" name="S1_entry">
+                  <entry xmi:type="uml:OpaqueBehavior" xmi:id="_sFQJ4J65Ee6R884eeposdg" name="printHelloWorld">
+                    <language>CPP</language>
+                    <body>std::cout &lt;&lt; &quot;Hello from SM_entry&quot; &lt;&lt; std::endl;</body>
+                  </entry>
+                </subvertex>
+                <subvertex xmi:type="uml:FinalState" xmi:id="_liluIJ65Ee6R884eeposdg" name="FinalState_entry"/>
+              </region>
+            </entry>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_N4ZboJ63Ee6R884eeposdg" name="FinalState_Complex"/>
+        </region>
+      </ownedBehavior>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_GTk9IJ6oEe6R884eeposdg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_GTlkMJ6oEe6R884eeposdg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_zo7_8J7IEe6R884eeposdg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_zpARYJ7IEe6R884eeposdg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_PxBvAJ6oEe6R884eeposdg" base_Behavior="_MaeC4J6oEe6R884eeposdg"/>
+</xmi:XMI>

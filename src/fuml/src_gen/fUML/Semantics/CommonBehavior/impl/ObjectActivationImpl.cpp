@@ -185,7 +185,7 @@ void ObjectActivationImpl::_register(const std::shared_ptr<fUML::Semantics::Comm
     DEBUG_INFO("accepter = " << accepter)
 	std::unique_lock lock(*this->m_mutex);
 
-    this->m_waitingEventAccepters->push_back(accepter);
+    this->getWaitingEventAccepters()->push_back(accepter);
 
 	lock.unlock();
 	this->m_conditionVariable->notify_one();

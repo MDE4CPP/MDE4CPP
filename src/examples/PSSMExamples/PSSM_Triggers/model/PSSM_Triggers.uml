@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Model xmi:id="_mQCqIJ-iEe6R884eeposdg" name="PSSM_Triggers">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_OJiuwJ-jEe6R884eeposdg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_s1X_YJ-iEe6R884eeposdg" name="C1">
+      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_zE4OkJ-iEe6R884eeposdg" name="SM_Triggers">
+        <region xmi:type="uml:Region" xmi:id="_ZvgFQJ-jEe6R884eeposdg" name="R1">
+          <transition xmi:type="uml:Transition" xmi:id="_zh3QEJ-jEe6R884eeposdg" name="T1" source="_cXsPgJ-jEe6R884eeposdg" target="_dIh2kJ-jEe6R884eeposdg"/>
+          <transition xmi:type="uml:Transition" xmi:id="_Ip2nEK-2Ee6lWP9vaoPwEQ" name="T2" source="_dIh2kJ-jEe6R884eeposdg" target="_GpaZUK-2Ee6lWP9vaoPwEQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_bkynEK-2Ee6lWP9vaoPwEQ" name="SignalTrigger" event="_bDpB0K-2Ee6lWP9vaoPwEQ"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_cXsPgJ-jEe6R884eeposdg" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_dIh2kJ-jEe6R884eeposdg" name="S1">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_j9N2cJ-jEe6R884eeposdg" name="start">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Trigger Test Started&quot; &lt;&lt; std::endl;</body>
+            </entry>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_GpaZUK-2Ee6lWP9vaoPwEQ" name="FinalState"/>
+        </region>
+      </ownedBehavior>
+      <nestedClassifier xmi:type="uml:Signal" xmi:id="_a79sgK-2Ee6lWP9vaoPwEQ" name="Signal"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_bDpB0K-2Ee6lWP9vaoPwEQ" name="SignalEvent" signal="_a79sgK-2Ee6lWP9vaoPwEQ"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_JyJ3wJ-jEe6R884eeposdg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_JyKe0J-jEe6R884eeposdg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_LItbAJ-jEe6R884eeposdg" base_Behavior="_zE4OkJ-iEe6R884eeposdg"/>
+</xmi:XMI>
