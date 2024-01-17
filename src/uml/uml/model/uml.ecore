@@ -2883,7 +2883,7 @@
         <details key="documentation" value="If Property has multiplicity upper bound >1, add() will automatically add the value to the collection."/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="this->add(_property, value, -1);"/>
+        <details key="body" value="return this->add(_property, value, -1);"/>
       </eAnnotations>
       <eParameters name="_property" eType="#//Property"/>
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
