@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -18111,70 +18111,6 @@ void umlPackageImpl::initializeStateContent()
 	/*
 	 * EAttributes
 	 */
-	m_state_Attribute_isComposite = getState_Attribute_isComposite();
-	m_state_Attribute_isComposite->setName("isComposite");
-	m_state_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
-	m_state_Attribute_isComposite->setLowerBound(1);
-	m_state_Attribute_isComposite->setUpperBound(1);
-	m_state_Attribute_isComposite->setTransient(true);
-	m_state_Attribute_isComposite->setVolatile(true);
-	m_state_Attribute_isComposite->setChangeable(false);
-	m_state_Attribute_isComposite->setUnsettable(false);
-	m_state_Attribute_isComposite->setUnique(true);
-	m_state_Attribute_isComposite->setDerived(true);
-	m_state_Attribute_isComposite->setOrdered(false);
-	m_state_Attribute_isComposite->setID(false);
-	m_state_Attribute_isComposite->setDefaultValueLiteral("");
-	
-	m_state_Attribute_isComposite->_setID(STATE_ATTRIBUTE_ISCOMPOSITE);
-	m_state_Attribute_isOrthogonal = getState_Attribute_isOrthogonal();
-	m_state_Attribute_isOrthogonal->setName("isOrthogonal");
-	m_state_Attribute_isOrthogonal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
-	m_state_Attribute_isOrthogonal->setLowerBound(1);
-	m_state_Attribute_isOrthogonal->setUpperBound(1);
-	m_state_Attribute_isOrthogonal->setTransient(true);
-	m_state_Attribute_isOrthogonal->setVolatile(true);
-	m_state_Attribute_isOrthogonal->setChangeable(false);
-	m_state_Attribute_isOrthogonal->setUnsettable(false);
-	m_state_Attribute_isOrthogonal->setUnique(true);
-	m_state_Attribute_isOrthogonal->setDerived(true);
-	m_state_Attribute_isOrthogonal->setOrdered(false);
-	m_state_Attribute_isOrthogonal->setID(false);
-	m_state_Attribute_isOrthogonal->setDefaultValueLiteral("");
-	
-	m_state_Attribute_isOrthogonal->_setID(STATE_ATTRIBUTE_ISORTHOGONAL);
-	m_state_Attribute_isSimple = getState_Attribute_isSimple();
-	m_state_Attribute_isSimple->setName("isSimple");
-	m_state_Attribute_isSimple->setEType(types::typesPackage::eInstance()->getBoolean_Class());
-	m_state_Attribute_isSimple->setLowerBound(1);
-	m_state_Attribute_isSimple->setUpperBound(1);
-	m_state_Attribute_isSimple->setTransient(true);
-	m_state_Attribute_isSimple->setVolatile(true);
-	m_state_Attribute_isSimple->setChangeable(false);
-	m_state_Attribute_isSimple->setUnsettable(false);
-	m_state_Attribute_isSimple->setUnique(true);
-	m_state_Attribute_isSimple->setDerived(true);
-	m_state_Attribute_isSimple->setOrdered(false);
-	m_state_Attribute_isSimple->setID(false);
-	m_state_Attribute_isSimple->setDefaultValueLiteral("true");
-	
-	m_state_Attribute_isSimple->_setID(STATE_ATTRIBUTE_ISSIMPLE);
-	m_state_Attribute_isSubmachineState = getState_Attribute_isSubmachineState();
-	m_state_Attribute_isSubmachineState->setName("isSubmachineState");
-	m_state_Attribute_isSubmachineState->setEType(types::typesPackage::eInstance()->getBoolean_Class());
-	m_state_Attribute_isSubmachineState->setLowerBound(1);
-	m_state_Attribute_isSubmachineState->setUpperBound(1);
-	m_state_Attribute_isSubmachineState->setTransient(true);
-	m_state_Attribute_isSubmachineState->setVolatile(true);
-	m_state_Attribute_isSubmachineState->setChangeable(false);
-	m_state_Attribute_isSubmachineState->setUnsettable(false);
-	m_state_Attribute_isSubmachineState->setUnique(true);
-	m_state_Attribute_isSubmachineState->setDerived(true);
-	m_state_Attribute_isSubmachineState->setOrdered(false);
-	m_state_Attribute_isSubmachineState->setID(false);
-	m_state_Attribute_isSubmachineState->setDefaultValueLiteral("");
-	
-	m_state_Attribute_isSubmachineState->_setID(STATE_ATTRIBUTE_ISSUBMACHINESTATE);
 	
 	/*
 	 * EReferences

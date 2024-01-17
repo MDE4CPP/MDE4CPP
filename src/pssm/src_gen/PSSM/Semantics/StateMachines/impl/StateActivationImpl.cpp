@@ -284,7 +284,7 @@ void StateActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMach
 		this->tryExecuteEntry(eventOccurrence);
 		this->tryInvokeDoActivity(eventOccurrence);	
 
-		if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
+		if (std::dynamic_pointer_cast<uml::State>(this->getNode())->isComposite())
 		{
 			this->enterRegions(enteringTransition, eventOccurrence);
 		}
@@ -351,7 +351,7 @@ void StateActivationImpl::enterRegions(const std::shared_ptr<PSSM::Semantics::St
 		}
 	} // else history
 
-	for (const auto& regionActivation : *m_regionActivations)
+	for (const auto& regionActivation : *this->getRegionActivations())
 	{
 		int j=0;
 		bool found = false;
@@ -375,7 +375,7 @@ void StateActivationImpl::exit(const std::shared_ptr<PSSM::Semantics::StateMachi
 	// Exit this StateActivation by exiting all owned RegionActivations if the State is composite, abort its doActivtiy Behavior if one is specified and running
 	// and execute its exit Behavior synchonously if one is specified.
 	// As the State is now idle, its Activation unregisters itself in the StateMachineConfiguration of the owning StateMachine.
-	if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
+	if (std::dynamic_pointer_cast<uml::State>(this->getNode())->isComposite())
 	{
 		for (const auto& ownedRegionActivation : *(this->m_regionActivations))
 		{
@@ -521,7 +521,7 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> StateActivatio
 				for (const auto& regionActivation : *this->getRegionActivations())
 				{
 					vertexActivation = regionActivation->getVertexActivation(vertex);
-					break;
+					if (vertexActivation != nullptr) break;
 				}
 			}
 		}
@@ -539,11 +539,12 @@ bool StateActivationImpl::hasCompleted()
 	// 2 - If the State is composite, all its owned Regions must have completed (by reaching their FinalStates) additionally
 	// When this operation returns 'true', then the generation of a CompletionEventOccurrence is allowed for this particular State
 	bool stateHasCompleted = this->m_isEntryCompleted && this->m_isDoActivityCompleted;
-	if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
+	if (std::dynamic_pointer_cast<uml::State>(this->getNode())->isComposite())
 	{
 		for (const auto& ownedRegionActivation : *(this->getRegionActivations()))
 		{
 			stateHasCompleted = stateHasCompleted && ownedRegionActivation->getIsCompleted();
+			if (!stateHasCompleted) break;
 		}
 	}
 	return stateHasCompleted;

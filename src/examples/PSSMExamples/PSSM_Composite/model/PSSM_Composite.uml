@@ -10,33 +10,9 @@
           <transition xmi:type="uml:Transition" xmi:id="_r2Z64Jg9Ee6fF9OPxvbzbg" name="T1_1" source="_oFlUoJg9Ee6fF9OPxvbzbg" target="_IRZxUJg9Ee6fF9OPxvbzbg"/>
           <transition xmi:type="uml:Transition" xmi:id="_BWhNYJg-Ee6fF9OPxvbzbg" name="T1_2" source="_IRZxUJg9Ee6fF9OPxvbzbg" target="_-VH48Jg9Ee6fF9OPxvbzbg"/>
           <subvertex xmi:type="uml:State" xmi:id="_IRZxUJg9Ee6fF9OPxvbzbg" name="S1">
-            <doActivity xmi:type="uml:StateMachine" xmi:id="_xoA9EJhREe6fF9OPxvbzbg" name="SM_HelloWorld">
-              <region xmi:type="uml:Region" xmi:id="_1pkuAJhREe6fF9OPxvbzbg" name="Region1">
-                <transition xmi:type="uml:Transition" xmi:id="_A_QM0JhSEe6fF9OPxvbzbg" name="T1" source="_3FDNgJhREe6fF9OPxvbzbg" target="_3o46YJhREe6fF9OPxvbzbg"/>
-                <transition xmi:type="uml:Transition" xmi:id="_BZXV8JhSEe6fF9OPxvbzbg" name="T2" source="_3o46YJhREe6fF9OPxvbzbg" target="_ADa2sJhSEe6fF9OPxvbzbg"/>
-                <subvertex xmi:type="uml:Pseudostate" xmi:id="_3FDNgJhREe6fF9OPxvbzbg" name="Initial"/>
-                <subvertex xmi:type="uml:State" xmi:id="_3o46YJhREe6fF9OPxvbzbg" name="S1">
-                  <entry xmi:type="uml:OpaqueBehavior" xmi:id="_-zff4JhREe6fF9OPxvbzbg" name="printHelloWorld">
-                    <language>CPP</language>
-                    <body>std::cout &lt;&lt; &quot;HelloWorld doActivity&quot; &lt;&lt; std::endl;</body>
-                  </entry>
-                </subvertex>
-                <subvertex xmi:type="uml:FinalState" xmi:id="_ADa2sJhSEe6fF9OPxvbzbg" name="FinalState"/>
-              </region>
-            </doActivity>
-            <entry xmi:type="uml:StateMachine" xmi:id="_OSSB4Jk-Ee6fF9OPxvbzbg" name="SM_HelloWorldEntry">
-              <region xmi:type="uml:Region" xmi:id="_SHKowJk-Ee6fF9OPxvbzbg" name="Region1">
-                <transition xmi:type="uml:Transition" xmi:id="_whZWkJk-Ee6fF9OPxvbzbg" name="T1" source="_dllM0Jk-Ee6fF9OPxvbzbg" target="_htIRAJk-Ee6fF9OPxvbzbg"/>
-                <transition xmi:type="uml:Transition" xmi:id="_w6oV8Jk-Ee6fF9OPxvbzbg" name="T2" source="_htIRAJk-Ee6fF9OPxvbzbg" target="_eGjL4Jk-Ee6fF9OPxvbzbg"/>
-                <subvertex xmi:type="uml:Pseudostate" xmi:id="_dllM0Jk-Ee6fF9OPxvbzbg" name="Initial"/>
-                <subvertex xmi:type="uml:FinalState" xmi:id="_eGjL4Jk-Ee6fF9OPxvbzbg" name="FinalState"/>
-                <subvertex xmi:type="uml:State" xmi:id="_htIRAJk-Ee6fF9OPxvbzbg" name="S1">
-                  <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Aw314Jk_Ee6fF9OPxvbzbg" name="printHelloWorld">
-                    <language>CPP</language>
-                    <body>std::cout &lt;&lt; &quot;Hello World Entry&quot; &lt;&lt; std::endl;</body>
-                  </entry>
-                </subvertex>
-              </region>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_df4lULSZEe6FI9im6A6_NA" name="printHelloWorld">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Hello from S1&quot; &lt;&lt; std::endl;</body>
             </entry>
             <region xmi:type="uml:Region" xmi:id="_PzC90Jg9Ee6fF9OPxvbzbg" name="R1_1">
               <transition xmi:type="uml:Transition" xmi:id="_yJFkcJg-Ee6fF9OPxvbzbg" name="T1_1_1" source="_nB_7QJg-Ee6fF9OPxvbzbg" target="_sWWJwJg-Ee6fF9OPxvbzbg"/>

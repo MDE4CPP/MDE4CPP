@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EEnum;
-	class EStringToStringMapEntry;
-	class EAnnotation;
-	class EClass;
-	class EOperation;
-	class EReference;
 	class EEnumLiteral;
-	class EAttribute;
+	class EAnnotation;
+	class EStringToStringMapEntry;
 	class EGenericType;
-	class EDataType;
+	class EOperation;
+	class EAttribute;
 	class EParameter;
+	class EEnum;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace uml 
@@ -2637,7 +2637,7 @@ namespace uml
 			// Begin Class FinalState
 			//Class and Feature IDs 
 			static const unsigned long FINALSTATE_CLASS = 332666230;
-			static const unsigned int FINALSTATE_CLASS_FEATURE_COUNT = 35;
+			static const unsigned int FINALSTATE_CLASS_FEATURE_COUNT = 31;
 			static const unsigned int FINALSTATE_CLASS_OPERATION_COUNT = 78;
 			
 			
@@ -5419,12 +5419,8 @@ namespace uml
 			// Begin Class State
 			//Class and Feature IDs 
 			static const unsigned long STATE_CLASS = 765749889;
-			static const unsigned int STATE_CLASS_FEATURE_COUNT = 35;
+			static const unsigned int STATE_CLASS_FEATURE_COUNT = 31;
 			static const unsigned int STATE_CLASS_OPERATION_COUNT = 78;
-			static const unsigned long STATE_ATTRIBUTE_ISCOMPOSITE = 442816740;
-			static const unsigned long STATE_ATTRIBUTE_ISORTHOGONAL = 462126548;
-			static const unsigned long STATE_ATTRIBUTE_ISSIMPLE = 660863504;
-			static const unsigned long STATE_ATTRIBUTE_ISSUBMACHINESTATE = 2095021862;
 			
 			static const unsigned long STATE_ATTRIBUTE_CONNECTION = 687449443;
 			static const unsigned long STATE_ATTRIBUTE_CONNECTIONPOINT = 559253588;
@@ -5446,10 +5442,6 @@ namespace uml
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getState_Class() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isComposite() const = 0;
-			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isOrthogonal() const = 0;
-			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isSimple() const = 0;
-			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isSubmachineState() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_connection() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_connectionPoint() const = 0;

@@ -6647,8 +6647,7 @@
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="noGetter"/>
-        <details key="noSetter"/>
+        <details key="doNotGenerate"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A state with isComposite=true is said to be a composite State. A composite State is a State that contains at least one Region.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
@@ -6658,8 +6657,7 @@
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="noGetter"/>
-        <details key="noSetter"/>
+        <details key="doNotGenerate"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
@@ -6670,8 +6668,7 @@
         changeable="false" volatile="true" transient="true" defaultValueLiteral="true"
         derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="noGetter"/>
-        <details key="noSetter"/>
+        <details key="doNotGenerate"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
@@ -6680,6 +6677,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSubmachineState" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"
         changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="doNotGenerate"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
       </eAnnotations>

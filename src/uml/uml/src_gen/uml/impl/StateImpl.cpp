@@ -132,10 +132,6 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy State "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	m_isComposite = obj.getIsComposite();
-	m_isOrthogonal = obj.getIsOrthogonal();
-	m_isSimple = obj.getIsSimple();
-	m_isSubmachineState = obj.getIsSubmachineState();
 
 	//copy references with no containment (soft copy)
 	m_submachine  = obj.getSubmachine();
@@ -320,55 +316,51 @@ std::shared_ptr<ecore::EObject> StateImpl::copy() const
 //*********************************
 bool StateImpl::isComposite()
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	return !this->getRegion()->empty();
+	//end of body
 }
 
 bool StateImpl::isOrthogonal()
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	return this->getRegion()->size() > 1;
+	//end of body
 }
 
 bool StateImpl::isSimple()
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	return this->getRegion()->empty();
+	//end of body
 }
 
 bool StateImpl::isSubmachineState()
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	return this->getSubmachine() != nullptr;
+	//end of body
 }
 
 std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext()
 {
-	return nullptr;
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************
 // Attribute Getters & Setters
 //*********************************
-/* Getter & Setter for attribute isComposite */
-bool StateImpl::getIsComposite() const 
-{
-	return m_isComposite;
-}
 
-/* Getter & Setter for attribute isOrthogonal */
-bool StateImpl::getIsOrthogonal() const 
-{
-	return m_isOrthogonal;
-}
 
-/* Getter & Setter for attribute isSimple */
-bool StateImpl::getIsSimple() const 
-{
-	return m_isSimple;
-}
 
-/* Getter & Setter for attribute isSubmachineState */
-bool StateImpl::getIsSubmachineState() const 
-{
-	return m_isSubmachineState;
-}
+
+
+
+
 
 //*********************************
 // Reference Getters & Setters
@@ -861,14 +853,6 @@ std::shared_ptr<Any> StateImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(getEntry(),uml::umlPackage::BEHAVIOR_CLASS,false); //22025
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
 			return eAny(getExit(),uml::umlPackage::BEHAVIOR_CLASS,false); //22026
-		case uml::umlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
-			return eAny(getIsComposite(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22027
-		case uml::umlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
-			return eAny(getIsOrthogonal(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22028
-		case uml::umlPackage::STATE_ATTRIBUTE_ISSIMPLE:
-			return eAny(getIsSimple(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22029
-		case uml::umlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
-			return eAny(getIsSubmachineState(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22030
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 			return eAny(getRedefinedState(),uml::umlPackage::STATE_CLASS,false); //22031
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
@@ -909,14 +893,6 @@ bool StateImpl::internalEIsSet(int featureID) const
 			return getEntry() != nullptr; //22025
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
 			return getExit() != nullptr; //22026
-		case uml::umlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
-			return getIsComposite() != false; //22027
-		case uml::umlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
-			return getIsOrthogonal() != false; //22028
-		case uml::umlPackage::STATE_ATTRIBUTE_ISSIMPLE:
-			return getIsSimple() != true; //22029
-		case uml::umlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
-			return getIsSubmachineState() != false; //22030
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 			return getRedefinedState() != nullptr; //22031
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:

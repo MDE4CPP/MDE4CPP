@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
 #include "uml/umlFactory.hpp"
@@ -5534,22 +5534,6 @@ const std::shared_ptr<ecore::EClass>& uml::umlPackageImpl::getState_Class() cons
 	return m_state_Class;
 }
 
-const std::shared_ptr<ecore::EAttribute>& uml::umlPackageImpl::getState_Attribute_isComposite() const
-{
-	return m_state_Attribute_isComposite;
-}
-const std::shared_ptr<ecore::EAttribute>& uml::umlPackageImpl::getState_Attribute_isOrthogonal() const
-{
-	return m_state_Attribute_isOrthogonal;
-}
-const std::shared_ptr<ecore::EAttribute>& uml::umlPackageImpl::getState_Attribute_isSimple() const
-{
-	return m_state_Attribute_isSimple;
-}
-const std::shared_ptr<ecore::EAttribute>& uml::umlPackageImpl::getState_Attribute_isSubmachineState() const
-{
-	return m_state_Attribute_isSubmachineState;
-}
 
 const std::shared_ptr<ecore::EReference>& uml::umlPackageImpl::getState_Attribute_connection() const
 {

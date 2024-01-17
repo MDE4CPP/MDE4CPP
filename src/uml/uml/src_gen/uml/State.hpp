@@ -134,30 +134,10 @@ namespace uml
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			/*!
-			A state with isComposite=true is said to be a composite State. A composite State is a State that contains at least one Region.
-			<p>From package UML::StateMachines.</p>
-			*/
-			 
-			virtual bool getIsComposite() const = 0;
-			/*!
-			A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.
-			<p>From package UML::StateMachines.</p>
-			*/
-			 
-			virtual bool getIsOrthogonal() const = 0;
-			/*!
-			A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.
-			<p>From package UML::StateMachines.</p>
-			*/
-			 
-			virtual bool getIsSimple() const = 0;
-			/*!
-			A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).
-			<p>From package UML::StateMachines.</p>
-			*/
-			 
-			virtual bool getIsSubmachineState() const = 0;
+			
+			
+			
+			
 
 			//*********************************
 			// Reference Getters & Setters
@@ -279,30 +259,10 @@ namespace uml
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			A state with isComposite=true is said to be a composite State. A composite State is a State that contains at least one Region.
-			<p>From package UML::StateMachines.</p>
-			*/
 			
-			bool m_isComposite= false;
-			/*!
-			A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.
-			<p>From package UML::StateMachines.</p>
-			*/
 			
-			bool m_isOrthogonal= false;
-			/*!
-			A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.
-			<p>From package UML::StateMachines.</p>
-			*/
 			
-			bool m_isSimple= true;
-			/*!
-			A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).
-			<p>From package UML::StateMachines.</p>
-			*/
 			
-			bool m_isSubmachineState= false;
 			
 			//*********************************
 			// Reference Members

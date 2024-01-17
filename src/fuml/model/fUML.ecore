@@ -2192,7 +2192,7 @@
           eSuperTypes="#//Semantics/Loci/SemanticStrategy">
         <eOperations name="retrieveNextEvent" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Must be overridden by derived Strategies.&#xD;&#xA;&#x9;return nullptr;"/>
+            <details key="doNotGenerate" value="// Must be overridden by derived Strategies."/>
           </eAnnotations>
           <eParameters name="objectActivation" ordered="false" eType="#//Semantics/CommonBehavior/ObjectActivation"/>
         </eOperations>

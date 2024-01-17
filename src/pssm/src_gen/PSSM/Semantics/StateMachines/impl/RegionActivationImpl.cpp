@@ -260,14 +260,14 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> RegionActivati
 	// Matching rules (or):
 	//  1 - The node for which this Activation is an interpreter is the Vertex.
 	//  2 - The node for which this Activation is an interpreter redefines the Vertex 
-	for (const auto& vertexActivation : *this->m_vertexActivations)
+	for (const auto& vertexActivation : *this->getVertexActivations())
 	{
 		if(vertexActivation->isVisitorFor(vertex))
 		{
 			return vertexActivation;
 		}
 	}
-	for (const auto& vertexActivation : *this->m_vertexActivations)
+	for (const auto& vertexActivation : *this->getVertexActivations())
 	{
 		if(vertexActivation->isVisitorFor(vertex))
 		{

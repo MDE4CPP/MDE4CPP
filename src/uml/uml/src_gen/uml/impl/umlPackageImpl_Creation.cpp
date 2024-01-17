@@ -7,17 +7,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -2744,10 +2744,6 @@ void umlPackageImpl::createStartObjectBehaviorActionContent(std::shared_ptr<ecor
 void umlPackageImpl::createStateContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_state_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, STATE_CLASS);
-	m_state_Attribute_isComposite = factory->createEAttribute_as_eAttributes_in_EClass(m_state_Class, STATE_ATTRIBUTE_ISCOMPOSITE);
-	m_state_Attribute_isOrthogonal = factory->createEAttribute_as_eAttributes_in_EClass(m_state_Class, STATE_ATTRIBUTE_ISORTHOGONAL);
-	m_state_Attribute_isSimple = factory->createEAttribute_as_eAttributes_in_EClass(m_state_Class, STATE_ATTRIBUTE_ISSIMPLE);
-	m_state_Attribute_isSubmachineState = factory->createEAttribute_as_eAttributes_in_EClass(m_state_Class, STATE_ATTRIBUTE_ISSUBMACHINESTATE);
 	
 	m_state_Attribute_connection = factory->createEReference_as_eReferences_in_EClass(m_state_Class, STATE_ATTRIBUTE_CONNECTION);
 	m_state_Attribute_connectionPoint = factory->createEReference_as_eReferences_in_EClass(m_state_Class, STATE_ATTRIBUTE_CONNECTIONPOINT);

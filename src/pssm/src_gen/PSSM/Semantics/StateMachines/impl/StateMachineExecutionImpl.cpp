@@ -221,7 +221,7 @@ void StateMachineExecutionImpl::execute()
 	// Block this thread until the StateMachine Execution is complete to prevent this StateMachineExecution
 	// from being destroyed after this initial RTC Step returns.
 	std::unique_lock lock(*m_mutex);
-	auto& regionActivations = this->m_regionActivations;
+	auto& regionActivations = this->getRegionActivations();
 	this->m_conditionVariable->wait(lock, [&regionActivations]
 	{
 		bool allCompleted = true;
@@ -258,7 +258,7 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> StateMachineEx
 	return vertexActivation;*/
 
 	std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> vertexActivation = nullptr;
-	for (auto regionActivation : *(this->m_regionActivations))
+	for (auto regionActivation : *(this->getRegionActivations()))
 	{
 		if (vertexActivation = regionActivation->getVertexActivation(vertex)) break;
 	}

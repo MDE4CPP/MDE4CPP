@@ -166,8 +166,9 @@ std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticVisitor>> StateMachineSemanti
 	//		}
 	//	}
 	//	return contextChain;
-	auto bag = new Bag<fUML::Semantics::Loci::SemanticVisitor>();
-	auto contextChain = std::make_shared<Bag<fUML::Semantics::Loci::SemanticVisitor>>(*(bag));
+	//auto bag = new Bag<fUML::Semantics::Loci::SemanticVisitor>();
+	//auto contextChain = std::make_shared<Bag<fUML::Semantics::Loci::SemanticVisitor>>(*(bag));
+	std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticVisitor>> contextChain(new Bag<fUML::Semantics::Loci::SemanticVisitor>());
 
 	std::shared_ptr<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation> entryPointActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation>(this->getThisStateMachineSemanticVisitorPtr());
 	std::shared_ptr<PSSM::Semantics::StateMachines::ExitPointPseudostateActivation> exitPointActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::ExitPointPseudostateActivation>(this->getThisStateMachineSemanticVisitorPtr());
