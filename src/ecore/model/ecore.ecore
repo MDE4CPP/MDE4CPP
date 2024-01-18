@@ -523,7 +523,9 @@
       <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eSubpackages" upperBound="-1"
-        eType="#//EPackage" containment="true" eOpposite="#//EPackage/eSuperPackage"/>
+        eType="#//EPackage" containment="true" eOpposite="#//EPackage/eSuperPackage">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eSuperPackage" eType="#//EPackage"
         changeable="false" transient="true" eOpposite="#//EPackage/eSubpackages">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">

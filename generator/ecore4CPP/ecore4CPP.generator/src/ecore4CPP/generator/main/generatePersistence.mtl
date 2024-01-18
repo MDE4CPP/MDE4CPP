@@ -448,12 +448,12 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 [if (attrList->size() > 0)]
 		// Add attributes
 [for (aAttribute : EAttribute | attrList) separator ('\n')]
-  [if (aAttribute.eType.oclIsKindOf(EDataType) and not(aAttribute.eType.name = 'EJavaClass'))]
+  [if (aAttribute.eType.oclIsKindOf(EDataType) and not(aAttribute.eType.name = 'EJavaClass') and not(aAttribute.name = 'metaElementID'))]
 [comment]
 // Attributes of type EJavaClass (resulting in void*) are not exported to xml. 
 [/comment]
-		if ( this->eIsSet(package->get[aAttribute.getMemberNameUpperFirst()/]()) )
-		{
+          if ( this->eIsSet(package->get[aAttribute.getMemberNameUpperFirst()/]()) )
+          {
 	[if (aAttribute.eType.oclIsKindOf(EEnum))]
 			[aAttribute.generateStructuralFeatureType(true)/] value = this->[aAttribute.GetterName()/]();
 			std::string literal = "";
@@ -472,7 +472,7 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 	[else]
 			saveHandler->addAttribute("[aAttribute.name/]", this->[aAttribute.GetterName()/]());
 	[/if]
-		}
+          }
   [else]
 		// TODO '[aAttribute.eType/]' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
   [/if]
@@ -481,9 +481,11 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 [if (refList->size() > 0)]
 	// Add references
 [for (aReference : EReference | refList)]
-	[if (not (aReference.hasKey(keyCPPType())))]
+	[if (not (aReference.hasKey(keyCPPType())) and not(aReference.name = 'eContentUnion') )]
+	if ( this->eIsSet(package->get[aReference.getMemberNameUpperFirst()/]()) )
+	{
 	[if (aReference.upperBound = 1)] 
-		[if (not (aReference.eType.oclIsUndefined()))] 
+		[if (not (aReference.eType.oclIsUndefined()))]
 			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 			[elseif (aReference.eType.name ='EMap')]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/], [aReference.eGenericType.eTypeArguments->last().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 			[elseif (aReference.isOfAnyType())][printInfo('Can not save Any types right now', 'ecore4CPP::generator::main::generatePersistence', 2)/] 		[comment ToDo handle save Any/]
@@ -504,7 +506,9 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 		[else]		// Unknown EClass to save "[aReference.name/]"
 		[/if]
 	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType(false)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
-	[/if][/if]
+	[/if]
+	}
+	[/if]
 [/for][/if][/let]
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true and not (eRef.hasSubset() and not eRef.isSubsetUnion())))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
@@ -513,8 +517,10 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 		//
 		std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> metaClass = this->eClass();
 [for (aReference : EReference | refList) separator ('\n')]
+	[if (not (aReference.hasKey(keyCPPType())) and not(aReference.name = 'eContentUnion') )]
 		// Save '[aReference.name/]'
-
+	    if ( this->eIsSet(package->get[aReference.getMemberNameUpperFirst()/]()) )
+	    {
 	[if (aReference.upperBound = 1)] 
 		[if (not (aReference.eType.oclIsUndefined()))] 
 			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
@@ -539,7 +545,8 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 		[/if]										
 	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType(false)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 	[/if] 
-[/for][/if][/let]
+	    }
+	[/if][/for][/if][/let]
 	}
 	catch (std::exception& e)
 	{
