@@ -59,7 +59,7 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 		}
 
 		// Create root object of model
-		std::shared_ptr<ecore::EObject> rootElement = plugin->create(rootName);
+		std::shared_ptr<ecore::EObject> rootElement = plugin->create(prefix+"::"+rootName);
 		m_handler->handleRoot(rootElement);
 
 		// Resolve unresolved references that are stored during loading

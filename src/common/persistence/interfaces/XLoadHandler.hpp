@@ -37,35 +37,6 @@ namespace persistence
 				virtual void addToMap(std::shared_ptr<ecore::EObject> object) = 0;
 				virtual void handleChild(std::shared_ptr<ecore::EObject> object) = 0;
 
-				template<typename T> void handleChildContainer(std::shared_ptr<Bag<T>> objects)
-				{
-					for (auto _object : *objects)
-					{
-						handleChild(_object);
-					}
-				}
-				template<typename T> void handleChildContainer(std::shared_ptr<std::list<T> > objects)
-				{
-					for (auto _object : *objects)
-					{
-						handleChild(_object);
-					}
-				}
-				template<typename T> void handleChildContainer(std::shared_ptr<std::vector<T> > objects)
-				{
-					for (auto _object : *objects)
-					{
-						handleChild(_object);
-					}
-				}
-				template<typename K, typename V> void handleChildContainer(std::shared_ptr<std::map<K,V> > objects)
-				{
-					for (auto _object : *objects)
-					{
-						handleChild(_object.second);
-					}
-				}
-
 				virtual std::shared_ptr<ecore::EObject> getCurrentObject() = 0;
 
 				virtual void release() = 0;

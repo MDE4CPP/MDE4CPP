@@ -266,13 +266,31 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 	[let aEClass : EClass = aReference.eType.oclAsType(EClass)]
 		[let ref : OrderedSet(EReference) = aEClass.getAllContainers()->select(eType = aClass)]
 			[if (not aReference.hasAbstractType())]
-				typeName = "[aEClass.name/]";
+				typeName = "[aEClass.generateTypeClass()/]";
 			[else]
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			[/if]		
 			}
-[comment]
+			else
+			{
+				if (std::string::npos == typeName.find("[aReference.eType.generateNamespaceDefinition()/]/]"))
+				{
+					typeName = "[aReference.eType.generateNamespaceDefinition()/]::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			[if (aReference.upperBound = 1)] [comment List or single Object / Pointer/] 
+			loadHandler->handleChild(this->[aReference.GetterName()/]()); 
+			[else]		
+			std::shared_ptr<[aEClass.generateTypeClass()/]> new_[aReference.name/] = std::dynamic_pointer_cast<[aEClass.generateTypeClass()/]>([if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/]::[aEClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/]));
+			if(new_[aReference.name/])
+			{
+				loadHandler->handleChild(new_[aReference.name/]);
+				[aReference.GetterName()/]()->push_back(new_[aReference.name/]);
+			} 
+			[/if]
+[comment]  
 			old is this really necessary???
 			[if (ref->size() = 1)]
 			std::shared_ptr<ecore::EObject> [aReference.name/] = [if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/]::[aEClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [ref->first().metamodelPackageNameForEstructuralFeture(aClass)/]::[ref->first().getStaticAttributeIDName()/]);
@@ -291,28 +309,6 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 			if ([aReference.name/] != nullptr)
 			{
 				this->[aReference.SetterName()/]([aReference.name/]);
-[/comment]
-				[if (aReference.upperBound = 1)] [comment List or single Object / Pointer/] 
-					[if (not (aReference.eType.oclIsUndefined()))]	[comment Pointer to EList, map or Pointer to EcoreType/]
-						[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		loadHandler->handleChildContainer<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>(this->[aReference.GetterName()/]());
-						[elseif (aReference.eType.name ='EMap')]			loadHandler->handleChildContainer<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/], [aReference.eGenericType.eTypeArguments->last().generateCppType(true)/]>(this->[aReference.GetterName()/]());
-						[elseif (aReference.eType.ePackage.name = 'ecore')]			loadHandler->handleChild(this->[aReference.GetterName()/]());
-						[elseif (aReference.eType.oclIsKindOf(ecore::EClass))]
-							[let referenceTypeClass:EClass =aReference.eType.oclAsType(ecore::EClass)]
-							[if (referenceTypeClass.eSuperTypes.eTypeParameters->size()>0)] [comment Pointer to TemplateClass (std:: map,list,vector...) or Pointer to UserClass.../]
-								[if ((referenceTypeClass.eSuperTypes->first().name = 'map') or (referenceTypeClass.eSuperTypes->first().name = 'unordered_map'))]			loadHandler->handleChildContainer<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>(this->[aReference.GetterName()/]());
-								[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]			loadHandler->handleChildContainer<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>(this->[aReference.GetterName()/]());
-								[else] // Unknown Template-Type to load "[referenceTypeClass.eGenericSuperTypes->toString()/]"
-								[/if]
-							[else]			loadHandler->handleChild(this->[aReference.GetterName()/]()); 
-							[/if][/let]
-						[else]			// No Type to load "[aReference.name/]"
-						[/if]
-					[else]			// Unknown EClass to load "[aReference.name/]"
-					[/if]										
-				[else]			loadHandler->handleChildContainer<[aReference.eGenericType.generateCppType(false)/]>(this->[aReference.GetterName()/]()); [comment usual Bags/] 
-				[/if]
-[comment]
  			ToDo check whate happend by ref !=0 
 			[if (ref->size() = 0)}		this->[aReference.SetterName()/}([aReference.name/});
 			[else}
