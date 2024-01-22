@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -511,8 +512,14 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 			saveHandler->addReference(returnValue, "returnValue", returnValue->eClass() != package->getValueSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getInteractionUse_Attribute_refersTo()) )
+	{
 		saveHandler->addReference(this->getRefersTo(), "refersTo", getRefersTo()->eClass() != uml::umlPackage::eInstance()->getInteraction_Class()); 
+	}
+	if ( this->eIsSet(package->getInteractionUse_Attribute_returnValueRecipient()) )
+	{
 		saveHandler->addReference(this->getReturnValueRecipient(), "returnValueRecipient", getReturnValueRecipient()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

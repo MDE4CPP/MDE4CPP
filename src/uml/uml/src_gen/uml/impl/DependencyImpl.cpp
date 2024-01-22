@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -399,8 +400,14 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getDependency_Attribute_client()) )
+	{
 		saveHandler->addReferences<uml::NamedElement>("client", this->getClient());
+	}
+	if ( this->eIsSet(package->getDependency_Attribute_supplier()) )
+	{
 		saveHandler->addReferences<uml::NamedElement>("supplier", this->getSupplier());
+	}
 	}
 	catch (std::exception& e)
 	{

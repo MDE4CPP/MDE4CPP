@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -805,16 +806,31 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getBehavior_Attribute_isReentrant()) )
-		{
+          if ( this->eIsSet(package->getBehavior_Attribute_isReentrant()) )
+          {
 			saveHandler->addAttribute("isReentrant", this->getIsReentrant());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getBehavior_Attribute_context()) )
+	{
 		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != uml::umlPackage::eInstance()->getBehavioredClassifier_Class()); 
+	}
+	if ( this->eIsSet(package->getBehavior_Attribute_postcondition()) )
+	{
 		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());
+	}
+	if ( this->eIsSet(package->getBehavior_Attribute_precondition()) )
+	{
 		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());
+	}
+	if ( this->eIsSet(package->getBehavior_Attribute_redefinedBehavior()) )
+	{
 		saveHandler->addReferences<uml::Behavior>("redefinedBehavior", this->getRedefinedBehavior());
+	}
+	if ( this->eIsSet(package->getBehavior_Attribute_specification()) )
+	{
 		saveHandler->addReference(this->getSpecification(), "specification", getSpecification()->eClass() != uml::umlPackage::eInstance()->getBehavioralFeature_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

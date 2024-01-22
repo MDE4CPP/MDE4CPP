@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -375,8 +376,8 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPseudostate_Attribute_kind()) )
-		{
+          if ( this->eIsSet(package->getPseudostate_Attribute_kind()) )
+          {
 			uml::PseudostateKind value = this->getKind();
 			std::string literal = "";
 			if (value == uml::PseudostateKind::INITIAL)
@@ -420,7 +421,7 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 				literal = "terminate";
 			}
 			saveHandler->addAttribute("kind", literal);
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

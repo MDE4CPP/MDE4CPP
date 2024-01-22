@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -43,9 +44,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -57,8 +58,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "uml/ValueSpecificationAction.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -306,7 +307,10 @@ void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persist
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getValueSpecificationActionActivation_Attribute_valueSpecificationAction()) )
+	{
 		saveHandler->addReference(this->getValueSpecificationAction(), "valueSpecificationAction", getValueSpecificationAction()->eClass() != uml::umlPackage::eInstance()->getValueSpecificationAction_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

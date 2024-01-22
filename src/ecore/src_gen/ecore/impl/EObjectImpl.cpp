@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -389,9 +390,22 @@ void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EObject";
+				typeName = "ecore::EObject";
 			}
-			loadHandler->handleChildContainer<ecore::EObject>(this->getEContentUnion());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EObject> new_eContentUnion = std::dynamic_pointer_cast<ecore::EObject>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION));
+			if(new_eContentUnion)
+			{
+				loadHandler->handleChild(new_eContentUnion);
+				getEContentUnion()->push_back(new_eContentUnion);
+			} 
 
 			return; 
 		}
@@ -438,17 +452,11 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEObject_Attribute_metaElementID()) )
-		{
-			saveHandler->addAttribute("metaElementID", this->getMetaElementID());
-		}
+		// TODO 'org.eclipse.emf.ecore.impl.EDataTypeImpl@2032e725 (name: EInt) (instanceClassName: int) (serializable: true)' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
-		// Save 'eContentUnion'
-
-		saveHandler->addReferences<ecore::EObject>("eContentUnion", this->getEContentUnion());
 	}
 	catch (std::exception& e)
 	{

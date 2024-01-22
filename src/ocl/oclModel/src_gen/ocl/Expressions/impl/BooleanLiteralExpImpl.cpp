@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -367,10 +368,10 @@ void BooleanLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getBooleanLiteralExp_Attribute_booleanSymbol()) )
-		{
+          if ( this->eIsSet(package->getBooleanLiteralExp_Attribute_booleanSymbol()) )
+          {
 			saveHandler->addAttribute("booleanSymbol", this->isBooleanSymbol());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

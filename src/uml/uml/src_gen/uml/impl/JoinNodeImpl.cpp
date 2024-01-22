@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -329,10 +330,10 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getJoinNode_Attribute_isCombineDuplicate()) )
-		{
+          if ( this->eIsSet(package->getJoinNode_Attribute_isCombineDuplicate()) )
+          {
 			saveHandler->addAttribute("isCombineDuplicate", this->getIsCombineDuplicate());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

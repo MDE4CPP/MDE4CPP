@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -290,13 +291,19 @@ void LetExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getLetExpEval_Attribute_variable()) )
-		{
+          if ( this->eIsSet(package->getLetExpEval_Attribute_variable()) )
+          {
 			saveHandler->addAttribute("variable", this->getVariable());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getLetExpEval_Attribute_in()) )
+	{
 		saveHandler->addReference(this->getIn(), "in", getIn()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class()); 
+	}
+	if ( this->eIsSet(package->getLetExpEval_Attribute_initExpression()) )
+	{
 		saveHandler->addReference(this->getInitExpression(), "initExpression", getInitExpression()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

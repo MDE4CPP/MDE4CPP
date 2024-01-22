@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -366,8 +367,10 @@ void CallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'source'
-
+	    if ( this->eIsSet(package->getCallExp_Attribute_source()) )
+	    {
 		saveHandler->addReference(this->getSource(), "source", getSource()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

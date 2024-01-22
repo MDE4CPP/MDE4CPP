@@ -62,7 +62,7 @@ namespace ecore
 			virtual const std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>>& getEClassifiers() const ;
 			virtual const std::shared_ptr<ecore::EFactory>& getEFactoryInstance() const ;
 			virtual void setEFactoryInstance(const std::shared_ptr<ecore::EFactory>&) ;
-			virtual const std::shared_ptr<Bag<ecore::EPackage>>& getESubpackages() const ;
+			virtual const std::shared_ptr<Subset<ecore::EPackage, ecore::EObject>>& getESubpackages() const ;
 			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const ;
 			
 			//*********************************

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -367,7 +368,10 @@ void DurationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getDuration_Attribute_observation()) )
+	{
 		saveHandler->addReferences<uml::Observation>("observation", this->getObservation());
+	}
 	}
 	catch (std::exception& e)
 	{

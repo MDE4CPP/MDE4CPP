@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -409,7 +410,10 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getRedefinableTemplateSignature_Attribute_extendedSignature()) )
+	{
 		saveHandler->addReferences<uml::RedefinableTemplateSignature>("extendedSignature", this->getExtendedSignature());
+	}
 	}
 	catch (std::exception& e)
 	{

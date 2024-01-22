@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -329,8 +330,14 @@ void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getOccurrenceSpecification_Attribute_toAfter()) )
+	{
 		saveHandler->addReferences<uml::GeneralOrdering>("toAfter", this->getToAfter());
+	}
+	if ( this->eIsSet(package->getOccurrenceSpecification_Attribute_toBefore()) )
+	{
 		saveHandler->addReferences<uml::GeneralOrdering>("toBefore", this->getToBefore());
+	}
 	}
 	catch (std::exception& e)
 	{

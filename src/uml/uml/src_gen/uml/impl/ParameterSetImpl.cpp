@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -339,7 +340,10 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getParameterSet_Attribute_parameter()) )
+	{
 		saveHandler->addReferences<uml::Parameter>("parameter", this->getParameter());
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -317,8 +318,14 @@ void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getConnectorEnd_Attribute_partWithPort()) )
+	{
 		saveHandler->addReference(this->getPartWithPort(), "partWithPort", getPartWithPort()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
+	if ( this->eIsSet(package->getConnectorEnd_Attribute_role()) )
+	{
 		saveHandler->addReference(this->getRole(), "role", getRole()->eClass() != uml::umlPackage::eInstance()->getConnectableElement_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

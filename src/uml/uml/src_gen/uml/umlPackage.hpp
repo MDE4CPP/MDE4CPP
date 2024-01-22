@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EEnumLiteral;
-	class EAnnotation;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EOperation;
-	class EAttribute;
-	class EParameter;
-	class EEnum;
-	class EClass;
-	class EDataType;
 	class EReference;
+	class EStringToStringMapEntry;
+	class EClass;
+	class EOperation;
+	class EEnumLiteral;
+	class EEnum;
+	class EDataType;
+	class EAttribute;
+	class EAnnotation;
+	class EGenericType;
+	class EParameter;
 }
 
 namespace uml 

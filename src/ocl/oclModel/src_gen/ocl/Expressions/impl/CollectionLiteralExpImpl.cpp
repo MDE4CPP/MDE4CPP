@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -437,8 +438,8 @@ void CollectionLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getCollectionLiteralExp_Attribute_kind()) )
-		{
+          if ( this->eIsSet(package->getCollectionLiteralExp_Attribute_kind()) )
+          {
 			ocl::Expressions::CollectionKind value = this->getKind();
 			std::string literal = "";
 			if (value == ocl::Expressions::CollectionKind::COLLECTION)
@@ -462,14 +463,16 @@ void CollectionLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfac
 				literal = "sequence";
 			}
 			saveHandler->addAttribute("kind", literal);
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'part'
-
+	    if ( this->eIsSet(package->getCollectionLiteralExp_Attribute_part()) )
+	    {
 		saveHandler->addReferences<ocl::Expressions::CollectionLiteralPart>("part", this->getPart());
+	    }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -261,12 +262,15 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getLinkEndCreationData_Attribute_isReplaceAll()) )
-		{
+          if ( this->eIsSet(package->getLinkEndCreationData_Attribute_isReplaceAll()) )
+          {
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getLinkEndCreationData_Attribute_insertAt()) )
+	{
 		saveHandler->addReference(this->getInsertAt(), "insertAt", getInsertAt()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

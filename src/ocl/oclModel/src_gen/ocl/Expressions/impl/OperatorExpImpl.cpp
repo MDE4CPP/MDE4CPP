@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -426,13 +427,19 @@ void OperatorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getOperatorExp_Attribute_operator()) )
-		{
+          if ( this->eIsSet(package->getOperatorExp_Attribute_operator()) )
+          {
 			saveHandler->addAttribute("operator", this->getOperator());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getOperatorExp_Attribute_leftHandOperand()) )
+	{
 		saveHandler->addReference(this->getLeftHandOperand(), "leftHandOperand", getLeftHandOperand()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
+	if ( this->eIsSet(package->getOperatorExp_Attribute_rightHandOperand()) )
+	{
 		saveHandler->addReference(this->getRightHandOperand(), "rightHandOperand", getRightHandOperand()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

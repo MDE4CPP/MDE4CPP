@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -591,20 +592,28 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getAssociation_Attribute_isDerived()) )
-		{
+          if ( this->eIsSet(package->getAssociation_Attribute_isDerived()) )
+          {
 			saveHandler->addAttribute("isDerived", this->getIsDerived());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getAssociation_Attribute_memberEnd()) )
+	{
 		saveHandler->addReferences<uml::Property>("memberEnd", this->getMemberEnd());
+	}
+	if ( this->eIsSet(package->getAssociation_Attribute_navigableOwnedEnd()) )
+	{
 		saveHandler->addReferences<uml::Property>("navigableOwnedEnd", this->getNavigableOwnedEnd());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'ownedEnd'
-
+	    if ( this->eIsSet(package->getAssociation_Attribute_ownedEnd()) )
+	    {
 		saveHandler->addReferences<uml::Property>("ownedEnd", this->getOwnedEnd());
+	    }
 	}
 	catch (std::exception& e)
 	{

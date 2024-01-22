@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -338,10 +339,10 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getAddStructuralFeatureValueAction_Attribute_isReplaceAll()) )
-		{
+          if ( this->eIsSet(package->getAddStructuralFeatureValueAction_Attribute_isReplaceAll()) )
+          {
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

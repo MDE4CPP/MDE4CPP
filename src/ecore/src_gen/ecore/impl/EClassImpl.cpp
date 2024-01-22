@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -755,9 +756,22 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EGenericType";
+				typeName = "ecore::EGenericType";
 			}
-			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericSuperTypes());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EGenericType> new_eGenericSuperTypes = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES));
+			if(new_eGenericSuperTypes)
+			{
+				loadHandler->handleChild(new_eGenericSuperTypes);
+				getEGenericSuperTypes()->push_back(new_eGenericSuperTypes);
+			} 
 
 			return; 
 		}
@@ -767,9 +781,22 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EOperation";
+				typeName = "ecore::EOperation";
 			}
-			loadHandler->handleChildContainer<ecore::EOperation>(this->getEOperations());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EOperation> new_eOperations = std::dynamic_pointer_cast<ecore::EOperation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS));
+			if(new_eOperations)
+			{
+				loadHandler->handleChild(new_eOperations);
+				getEOperations()->push_back(new_eOperations);
+			} 
 
 			return; 
 		}
@@ -782,7 +809,20 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<ecore::EStructuralFeature>(this->getEStructuralFeatures());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EStructuralFeature> new_eStructuralFeatures = std::dynamic_pointer_cast<ecore::EStructuralFeature>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES));
+			if(new_eStructuralFeatures)
+			{
+				loadHandler->handleChild(new_eStructuralFeatures);
+				getEStructuralFeatures()->push_back(new_eStructuralFeatures);
+			} 
 
 			return; 
 		}
@@ -886,31 +926,47 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 			saveHandler->addReference(eOperations, "eOperations", eOperations->eClass() != package->getEOperation_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getEClass_Attribute_abstract()) )
-		{
+          if ( this->eIsSet(package->getEClass_Attribute_abstract()) )
+          {
 			saveHandler->addAttribute("abstract", this->isAbstract());
-		}
+          }
 
-		if ( this->eIsSet(package->getEClass_Attribute_interface()) )
-		{
+          if ( this->eIsSet(package->getEClass_Attribute_interface()) )
+          {
 			saveHandler->addAttribute("interface", this->isInterface());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getEClass_Attribute_eAttributes()) )
+	{
 		saveHandler->addReferences<ecore::EAttribute>("eAttributes", this->getEAttributes());
+	}
+	if ( this->eIsSet(package->getEClass_Attribute_eIDAttribute()) )
+	{
 		saveHandler->addReference(this->getEIDAttribute(),"eIDAttribute", getEIDAttribute()->eClass() != ecore::ecorePackage::eInstance()->getEAttribute_Class());
+	}
+	if ( this->eIsSet(package->getEClass_Attribute_eReferences()) )
+	{
 		saveHandler->addReferences<ecore::EReference>("eReferences", this->getEReferences());
+	}
+	if ( this->eIsSet(package->getEClass_Attribute_eSuperTypes()) )
+	{
 		saveHandler->addReferences<ecore::EClass>("eSuperTypes", this->getESuperTypes());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eGenericSuperTypes'
-
+	    if ( this->eIsSet(package->getEClass_Attribute_eGenericSuperTypes()) )
+	    {
 		saveHandler->addReferences<ecore::EGenericType>("eGenericSuperTypes", this->getEGenericSuperTypes());
+	    }
 
 		// Save 'eStructuralFeatures'
-
+	    if ( this->eIsSet(package->getEClass_Attribute_eStructuralFeatures()) )
+	    {
 		saveHandler->addReferences<ecore::EStructuralFeature>("eStructuralFeatures", this->getEStructuralFeatures());
+	    }
 	}
 	catch (std::exception& e)
 	{

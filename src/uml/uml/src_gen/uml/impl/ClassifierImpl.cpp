@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -1208,28 +1209,45 @@ void ClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(substitution, "substitution", substitution->eClass() != package->getSubstitution_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getClassifier_Attribute_isAbstract()) )
-		{
+          if ( this->eIsSet(package->getClassifier_Attribute_isAbstract()) )
+          {
 			saveHandler->addAttribute("isAbstract", this->getIsAbstract());
-		}
+          }
 
-		if ( this->eIsSet(package->getClassifier_Attribute_isFinalSpecialization()) )
-		{
+          if ( this->eIsSet(package->getClassifier_Attribute_isFinalSpecialization()) )
+          {
 			saveHandler->addAttribute("isFinalSpecialization", this->getIsFinalSpecialization());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getClassifier_Attribute_general()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("general", this->getGeneral());
+	}
+	if ( this->eIsSet(package->getClassifier_Attribute_powertypeExtent()) )
+	{
 		saveHandler->addReferences<uml::GeneralizationSet>("powertypeExtent", this->getPowertypeExtent());
+	}
+	if ( this->eIsSet(package->getClassifier_Attribute_redefinedClassifier()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("redefinedClassifier", this->getRedefinedClassifier());
+	}
+	if ( this->eIsSet(package->getClassifier_Attribute_representation()) )
+	{
 		saveHandler->addReference(this->getRepresentation(), "representation", getRepresentation()->eClass() != uml::umlPackage::eInstance()->getCollaborationUse_Class()); 
+	}
+	if ( this->eIsSet(package->getClassifier_Attribute_useCase()) )
+	{
 		saveHandler->addReferences<uml::UseCase>("useCase", this->getUseCase());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'collaborationUse'
-
+	    if ( this->eIsSet(package->getClassifier_Attribute_collaborationUse()) )
+	    {
 		saveHandler->addReferences<uml::CollaborationUse>("collaborationUse", this->getCollaborationUse());
+	    }
 	}
 	catch (std::exception& e)
 	{

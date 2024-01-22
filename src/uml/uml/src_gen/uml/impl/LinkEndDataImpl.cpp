@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -353,8 +354,14 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getQualifierValue_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getLinkEndData_Attribute_end()) )
+	{
 		saveHandler->addReference(this->getEnd(), "end", getEnd()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
+	if ( this->eIsSet(package->getLinkEndData_Attribute_value()) )
+	{
 		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

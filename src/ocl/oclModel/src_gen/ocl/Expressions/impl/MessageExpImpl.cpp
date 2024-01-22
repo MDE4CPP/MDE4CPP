@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -450,18 +451,24 @@ void MessageExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getMessageExp_Attribute_calledOperation()) )
-		{
+          if ( this->eIsSet(package->getMessageExp_Attribute_calledOperation()) )
+          {
 			saveHandler->addAttribute("calledOperation", this->getCalledOperation());
-		}
+          }
 
-		if ( this->eIsSet(package->getMessageExp_Attribute_sentSignal()) )
-		{
+          if ( this->eIsSet(package->getMessageExp_Attribute_sentSignal()) )
+          {
 			saveHandler->addAttribute("sentSignal", this->getSentSignal());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getMessageExp_Attribute_argument()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::OclExpression>("argument", this->getArgument());
+	}
+	if ( this->eIsSet(package->getMessageExp_Attribute_target()) )
+	{
 		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

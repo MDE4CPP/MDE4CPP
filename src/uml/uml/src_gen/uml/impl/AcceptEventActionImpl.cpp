@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -441,10 +442,10 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getAcceptEventAction_Attribute_isUnmarshall()) )
-		{
+          if ( this->eIsSet(package->getAcceptEventAction_Attribute_isUnmarshall()) )
+          {
 			saveHandler->addAttribute("isUnmarshall", this->getIsUnmarshall());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

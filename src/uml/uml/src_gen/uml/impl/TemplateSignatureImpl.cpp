@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -361,7 +362,10 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getTemplateParameter_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getTemplateSignature_Attribute_parameter()) )
+	{
 		saveHandler->addReferences<uml::TemplateParameter>("parameter", this->getParameter());
+	}
 	}
 	catch (std::exception& e)
 	{

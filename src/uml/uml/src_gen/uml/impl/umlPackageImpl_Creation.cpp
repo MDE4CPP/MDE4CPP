@@ -7,17 +7,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EParameter.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"

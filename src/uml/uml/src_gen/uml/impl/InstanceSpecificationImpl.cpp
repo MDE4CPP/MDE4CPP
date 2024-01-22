@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -422,7 +423,10 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getInstanceSpecification_Attribute_classifier()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("classifier", this->getClassifier());
+	}
 	}
 	catch (std::exception& e)
 	{

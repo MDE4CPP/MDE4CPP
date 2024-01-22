@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -370,35 +371,35 @@ void EStructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEStructuralFeature_Attribute_changeable()) )
-		{
+          if ( this->eIsSet(package->getEStructuralFeature_Attribute_changeable()) )
+          {
 			saveHandler->addAttribute("changeable", this->isChangeable());
-		}
+          }
 
-		if ( this->eIsSet(package->getEStructuralFeature_Attribute_defaultValueLiteral()) )
-		{
+          if ( this->eIsSet(package->getEStructuralFeature_Attribute_defaultValueLiteral()) )
+          {
 			saveHandler->addAttribute("defaultValueLiteral", this->getDefaultValueLiteral());
-		}
+          }
 
-		if ( this->eIsSet(package->getEStructuralFeature_Attribute_derived()) )
-		{
+          if ( this->eIsSet(package->getEStructuralFeature_Attribute_derived()) )
+          {
 			saveHandler->addAttribute("derived", this->isDerived());
-		}
+          }
 
-		if ( this->eIsSet(package->getEStructuralFeature_Attribute_transient()) )
-		{
+          if ( this->eIsSet(package->getEStructuralFeature_Attribute_transient()) )
+          {
 			saveHandler->addAttribute("transient", this->isTransient());
-		}
+          }
 
-		if ( this->eIsSet(package->getEStructuralFeature_Attribute_unsettable()) )
-		{
+          if ( this->eIsSet(package->getEStructuralFeature_Attribute_unsettable()) )
+          {
 			saveHandler->addAttribute("unsettable", this->isUnsettable());
-		}
+          }
 
-		if ( this->eIsSet(package->getEStructuralFeature_Attribute_volatile()) )
-		{
+          if ( this->eIsSet(package->getEStructuralFeature_Attribute_volatile()) )
+          {
 			saveHandler->addAttribute("volatile", this->isVolatile());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -555,8 +556,8 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 			saveHandler->addReference(defaultValue, "defaultValue", defaultValue->eClass() != package->getValueSpecification_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getParameter_Attribute_direction()) )
-		{
+          if ( this->eIsSet(package->getParameter_Attribute_direction()) )
+          {
 			uml::ParameterDirectionKind value = this->getDirection();
 			std::string literal = "";
 			if (value == uml::ParameterDirectionKind::IN)
@@ -576,10 +577,10 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 				literal = "return";
 			}
 			saveHandler->addAttribute("direction", literal);
-		}
+          }
 
-		if ( this->eIsSet(package->getParameter_Attribute_effect()) )
-		{
+          if ( this->eIsSet(package->getParameter_Attribute_effect()) )
+          {
 			uml::ParameterEffectKind value = this->getEffect();
 			std::string literal = "";
 			if (value == uml::ParameterEffectKind::CREATE)
@@ -599,19 +600,22 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 				literal = "delete";
 			}
 			saveHandler->addAttribute("effect", literal);
-		}
+          }
 
-		if ( this->eIsSet(package->getParameter_Attribute_isException()) )
-		{
+          if ( this->eIsSet(package->getParameter_Attribute_isException()) )
+          {
 			saveHandler->addAttribute("isException", this->getIsException());
-		}
+          }
 
-		if ( this->eIsSet(package->getParameter_Attribute_isStream()) )
-		{
+          if ( this->eIsSet(package->getParameter_Attribute_isStream()) )
+          {
 			saveHandler->addAttribute("isStream", this->getIsStream());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getParameter_Attribute_parameterSet()) )
+	{
 		saveHandler->addReferences<uml::ParameterSet>("parameterSet", this->getParameterSet());
+	}
 	}
 	catch (std::exception& e)
 	{

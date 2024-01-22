@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -352,7 +353,10 @@ void CallOperationActionImpl::saveContent(std::shared_ptr<persistence::interface
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getCallOperationAction_Attribute_operation()) )
+	{
 		saveHandler->addReference(this->getOperation(), "operation", getOperation()->eClass() != uml::umlPackage::eInstance()->getOperation_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

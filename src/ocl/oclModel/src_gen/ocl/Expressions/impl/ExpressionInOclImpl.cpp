@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -338,20 +339,28 @@ void ExpressionInOclImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'bodyExpression'
-
+	    if ( this->eIsSet(package->getExpressionInOcl_Attribute_bodyExpression()) )
+	    {
 		saveHandler->addReference(this->getBodyExpression(), "bodyExpression", getBodyExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 
 		// Save 'contextVariable'
-
+	    if ( this->eIsSet(package->getExpressionInOcl_Attribute_contextVariable()) )
+	    {
 		saveHandler->addReference(this->getContextVariable(), "contextVariable", getContextVariable()->eClass() != ecore::ecorePackage::eInstance()->getETypedElement_Class());
+	    }
 
 		// Save 'parameterVariable'
-
+	    if ( this->eIsSet(package->getExpressionInOcl_Attribute_parameterVariable()) )
+	    {
 		saveHandler->addReferences<ecore::ETypedElement>("parameterVariable", this->getParameterVariable());
+	    }
 
 		// Save 'resultVariable'
-
+	    if ( this->eIsSet(package->getExpressionInOcl_Attribute_resultVariable()) )
+	    {
 		saveHandler->addReference(this->getResultVariable(), "resultVariable", getResultVariable()->eClass() != ecore::ecorePackage::eInstance()->getETypedElement_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

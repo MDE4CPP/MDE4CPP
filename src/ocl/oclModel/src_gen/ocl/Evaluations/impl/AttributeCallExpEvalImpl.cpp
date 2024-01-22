@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -232,10 +233,10 @@ void AttributeCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getAttributeCallExpEval_Attribute_referredAttribute()) )
-		{
+          if ( this->eIsSet(package->getAttributeCallExpEval_Attribute_referredAttribute()) )
+          {
 			saveHandler->addAttribute("referredAttribute", this->getReferredAttribute());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

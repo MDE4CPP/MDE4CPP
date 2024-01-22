@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -582,19 +583,28 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addReference(subpartition, "subpartition", subpartition->eClass() != package->getActivityPartition_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getActivityPartition_Attribute_isDimension()) )
-		{
+          if ( this->eIsSet(package->getActivityPartition_Attribute_isDimension()) )
+          {
 			saveHandler->addAttribute("isDimension", this->getIsDimension());
-		}
+          }
 
-		if ( this->eIsSet(package->getActivityPartition_Attribute_isExternal()) )
-		{
+          if ( this->eIsSet(package->getActivityPartition_Attribute_isExternal()) )
+          {
 			saveHandler->addAttribute("isExternal", this->getIsExternal());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getActivityPartition_Attribute_edge()) )
+	{
 		saveHandler->addReferences<uml::ActivityEdge>("edge", this->getEdge());
+	}
+	if ( this->eIsSet(package->getActivityPartition_Attribute_node()) )
+	{
 		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
+	}
+	if ( this->eIsSet(package->getActivityPartition_Attribute_represents()) )
+	{
 		saveHandler->addReference(this->getRepresents(), "represents", getRepresents()->eClass() != uml::umlPackage::eInstance()->getElement_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

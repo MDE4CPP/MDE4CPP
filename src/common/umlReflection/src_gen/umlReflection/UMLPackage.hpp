@@ -19,7 +19,6 @@ namespace uml
 	class Parameter;
 	class PrimitiveType;
 	class Property;
-	class ConnectorEnd;
 }
 
 

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -44,8 +45,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/ActivityNode.hpp"
@@ -56,8 +57,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -763,21 +764,32 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getActivityNodeActivation_Attribute_running()) )
-		{
+          if ( this->eIsSet(package->getActivityNodeActivation_Attribute_running()) )
+          {
 			saveHandler->addAttribute("running", this->isRunning());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getActivityNodeActivation_Attribute_incomingEdges()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("incomingEdges", this->getIncomingEdges());
+	}
+	if ( this->eIsSet(package->getActivityNodeActivation_Attribute_node()) )
+	{
 		saveHandler->addReference(this->getNode(), "node", getNode()->eClass() != uml::umlPackage::eInstance()->getActivityNode_Class()); 
+	}
+	if ( this->eIsSet(package->getActivityNodeActivation_Attribute_outgoingEdges()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("outgoingEdges", this->getOutgoingEdges());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'heldTokens'
-
+	    if ( this->eIsSet(package->getActivityNodeActivation_Attribute_heldTokens()) )
+	    {
 		saveHandler->addReferences<fUML::Semantics::Activities::Token>("heldTokens", this->getHeldTokens());
+	    }
 	}
 	catch (std::exception& e)
 	{

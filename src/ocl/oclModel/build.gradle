@@ -12,5 +12,4 @@ task buildOcl() {
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
-
 tasks.getByPath('src_gen:compileOcl').mustRunAfter tasks.getByPath('model:generateOcl')

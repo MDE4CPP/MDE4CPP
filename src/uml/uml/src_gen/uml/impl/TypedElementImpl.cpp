@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -255,7 +256,10 @@ void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getTypedElement_Attribute_type()) )
+	{
 		saveHandler->addReference(this->getType(), "type", getType()->eClass() != uml::umlPackage::eInstance()->getType_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

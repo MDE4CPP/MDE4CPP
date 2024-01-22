@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -354,15 +355,15 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyLinks()) )
-		{
+          if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyLinks()) )
+          {
 			saveHandler->addAttribute("isDestroyLinks", this->getIsDestroyLinks());
-		}
+          }
 
-		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyOwnedObjects()) )
-		{
+          if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyOwnedObjects()) )
+          {
 			saveHandler->addAttribute("isDestroyOwnedObjects", this->getIsDestroyOwnedObjects());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

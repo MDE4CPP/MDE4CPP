@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -408,12 +409,30 @@ void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getClause_Attribute_body()) )
+	{
 		saveHandler->addReferences<uml::ExecutableNode>("body", this->getBody());
+	}
+	if ( this->eIsSet(package->getClause_Attribute_bodyOutput()) )
+	{
 		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());
+	}
+	if ( this->eIsSet(package->getClause_Attribute_decider()) )
+	{
 		saveHandler->addReference(this->getDecider(), "decider", getDecider()->eClass() != uml::umlPackage::eInstance()->getOutputPin_Class()); 
+	}
+	if ( this->eIsSet(package->getClause_Attribute_predecessorClause()) )
+	{
 		saveHandler->addReferences<uml::Clause>("predecessorClause", this->getPredecessorClause());
+	}
+	if ( this->eIsSet(package->getClause_Attribute_successorClause()) )
+	{
 		saveHandler->addReferences<uml::Clause>("successorClause", this->getSuccessorClause());
+	}
+	if ( this->eIsSet(package->getClause_Attribute_test()) )
+	{
 		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());
+	}
 	}
 	catch (std::exception& e)
 	{

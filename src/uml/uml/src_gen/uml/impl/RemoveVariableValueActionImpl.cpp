@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -338,10 +339,10 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getRemoveVariableValueAction_Attribute_isRemoveDuplicates()) )
-		{
+          if ( this->eIsSet(package->getRemoveVariableValueAction_Attribute_isRemoveDuplicates()) )
+          {
 			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

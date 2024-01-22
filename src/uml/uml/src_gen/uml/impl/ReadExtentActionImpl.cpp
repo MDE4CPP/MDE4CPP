@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -346,7 +347,10 @@ void ReadExtentActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getReadExtentAction_Attribute_classifier()) )
+	{
 		saveHandler->addReference(this->getClassifier(), "classifier", getClassifier()->eClass() != uml::umlPackage::eInstance()->getClassifier_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

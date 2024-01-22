@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -274,17 +275,20 @@ void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getTupleLiteralPart_Attribute_tuplePartName()) )
-		{
+          if ( this->eIsSet(package->getTupleLiteralPart_Attribute_tuplePartName()) )
+          {
 			saveHandler->addAttribute("tuplePartName", this->getTuplePartName());
-		}
+          }
 
-		if ( this->eIsSet(package->getTupleLiteralPart_Attribute_tuplePartType()) )
-		{
+          if ( this->eIsSet(package->getTupleLiteralPart_Attribute_tuplePartType()) )
+          {
 			saveHandler->addAttribute("tuplePartType", this->getTuplePartType());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getTupleLiteralPart_Attribute_assignedOclExpression()) )
+	{
 		saveHandler->addReference(this->getAssignedOclExpression(), "assignedOclExpression", getAssignedOclExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

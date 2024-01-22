@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -627,10 +628,10 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getArtifact_Attribute_fileName()) )
-		{
+          if ( this->eIsSet(package->getArtifact_Attribute_fileName()) )
+          {
 			saveHandler->addAttribute("fileName", this->getFileName());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

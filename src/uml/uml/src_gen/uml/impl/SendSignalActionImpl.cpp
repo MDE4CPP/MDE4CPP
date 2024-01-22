@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -350,7 +351,10 @@ void SendSignalActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getSendSignalAction_Attribute_signal()) )
+	{
 		saveHandler->addReference(this->getSignal(), "signal", getSignal()->eClass() != uml::umlPackage::eInstance()->getSignal_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -356,8 +357,14 @@ void InterruptibleActivityRegionImpl::saveContent(std::shared_ptr<persistence::i
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getInterruptibleActivityRegion_Attribute_interruptingEdge()) )
+	{
 		saveHandler->addReferences<uml::ActivityEdge>("interruptingEdge", this->getInterruptingEdge());
+	}
+	if ( this->eIsSet(package->getInterruptibleActivityRegion_Attribute_node()) )
+	{
 		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
+	}
 	}
 	catch (std::exception& e)
 	{

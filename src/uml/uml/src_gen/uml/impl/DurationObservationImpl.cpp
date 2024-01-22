@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -329,15 +330,18 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getDurationObservation_Attribute_firstEvent()) )
-		{
+          if ( this->eIsSet(package->getDurationObservation_Attribute_firstEvent()) )
+          {
 			for (const std::shared_ptr<bool>& value : *m_firstEvent)
 			{
 				saveHandler->addAttributeAsNode("firstEvent", std::to_string(*value));
 			}
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getDurationObservation_Attribute_event()) )
+	{
 		saveHandler->addReferences<uml::NamedElement>("event", this->getEvent());
+	}
 	}
 	catch (std::exception& e)
 	{

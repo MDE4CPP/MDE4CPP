@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -286,10 +287,10 @@ void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPin_Attribute_isControl()) )
-		{
+          if ( this->eIsSet(package->getPin_Attribute_isControl()) )
+          {
 			saveHandler->addAttribute("isControl", this->getIsControl());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

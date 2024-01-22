@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -39,9 +40,9 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -381,14 +382,19 @@ void FUML_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> package = fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getFUML_Object_Attribute_locus()) )
+	{
 		saveHandler->addReference(this->getLocus(), "locus", getLocus()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'objectActivation'
-
+	    if ( this->eIsSet(package->getFUML_Object_Attribute_objectActivation()) )
+	    {
 		saveHandler->addReference(this->getObjectActivation(), "objectActivation", getObjectActivation()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

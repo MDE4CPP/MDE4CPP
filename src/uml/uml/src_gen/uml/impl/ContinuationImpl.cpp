@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -274,10 +275,10 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getContinuation_Attribute_setting()) )
-		{
+          if ( this->eIsSet(package->getContinuation_Attribute_setting()) )
+          {
 			saveHandler->addAttribute("setting", this->getSetting());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

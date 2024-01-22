@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -377,7 +378,10 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getConstraint_Attribute_constrainedElement()) )
+	{
 		saveHandler->addReferences<uml::Element>("constrainedElement", this->getConstrainedElement());
+	}
 	}
 	catch (std::exception& e)
 	{

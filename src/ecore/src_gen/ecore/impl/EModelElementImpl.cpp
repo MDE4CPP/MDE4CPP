@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -230,9 +231,22 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EAnnotation";
+				typeName = "ecore::EAnnotation";
 			}
-			loadHandler->handleChildContainer<ecore::EAnnotation>(this->getEAnnotations());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EAnnotation> new_eAnnotations = std::dynamic_pointer_cast<ecore::EAnnotation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS));
+			if(new_eAnnotations)
+			{
+				loadHandler->handleChild(new_eAnnotations);
+				getEAnnotations()->push_back(new_eAnnotations);
+			} 
 
 			return; 
 		}

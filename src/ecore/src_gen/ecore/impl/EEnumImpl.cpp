@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -285,9 +286,22 @@ void EEnumImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EEnumLiteral";
+				typeName = "ecore::EEnumLiteral";
 			}
-			loadHandler->handleChildContainer<ecore::EEnumLiteral>(this->getELiterals());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EEnumLiteral> new_eLiterals = std::dynamic_pointer_cast<ecore::EEnumLiteral>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS));
+			if(new_eLiterals)
+			{
+				loadHandler->handleChild(new_eLiterals);
+				getELiterals()->push_back(new_eLiterals);
+			} 
 
 			return; 
 		}

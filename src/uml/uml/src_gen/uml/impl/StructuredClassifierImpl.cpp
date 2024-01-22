@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -483,8 +484,10 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'ownedAttribute'
-
+	    if ( this->eIsSet(package->getStructuredClassifier_Attribute_ownedAttribute()) )
+	    {
 		saveHandler->addReferences<uml::Property>("ownedAttribute", this->getOwnedAttribute());
+	    }
 	}
 	catch (std::exception& e)
 	{

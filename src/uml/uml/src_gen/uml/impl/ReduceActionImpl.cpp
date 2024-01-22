@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -404,12 +405,15 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getReduceAction_Attribute_isOrdered()) )
-		{
+          if ( this->eIsSet(package->getReduceAction_Attribute_isOrdered()) )
+          {
 			saveHandler->addAttribute("isOrdered", this->getIsOrdered());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getReduceAction_Attribute_reducer()) )
+	{
 		saveHandler->addReference(this->getReducer(), "reducer", getReducer()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

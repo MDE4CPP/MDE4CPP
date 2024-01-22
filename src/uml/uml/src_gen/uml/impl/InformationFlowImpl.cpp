@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -574,13 +575,34 @@ void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getInformationFlow_Attribute_conveyed()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("conveyed", this->getConveyed());
+	}
+	if ( this->eIsSet(package->getInformationFlow_Attribute_informationSource()) )
+	{
 		saveHandler->addReferences<uml::NamedElement>("informationSource", this->getInformationSource());
+	}
+	if ( this->eIsSet(package->getInformationFlow_Attribute_informationTarget()) )
+	{
 		saveHandler->addReferences<uml::NamedElement>("informationTarget", this->getInformationTarget());
+	}
+	if ( this->eIsSet(package->getInformationFlow_Attribute_realization()) )
+	{
 		saveHandler->addReferences<uml::Relationship>("realization", this->getRealization());
+	}
+	if ( this->eIsSet(package->getInformationFlow_Attribute_realizingActivityEdge()) )
+	{
 		saveHandler->addReferences<uml::ActivityEdge>("realizingActivityEdge", this->getRealizingActivityEdge());
+	}
+	if ( this->eIsSet(package->getInformationFlow_Attribute_realizingConnector()) )
+	{
 		saveHandler->addReferences<uml::Connector>("realizingConnector", this->getRealizingConnector());
+	}
+	if ( this->eIsSet(package->getInformationFlow_Attribute_realizingMessage()) )
+	{
 		saveHandler->addReferences<uml::Message>("realizingMessage", this->getRealizingMessage());
+	}
 	}
 	catch (std::exception& e)
 	{

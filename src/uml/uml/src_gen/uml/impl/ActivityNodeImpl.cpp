@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -594,11 +595,26 @@ void ActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getActivityNode_Attribute_inInterruptibleRegion()) )
+	{
 		saveHandler->addReferences<uml::InterruptibleActivityRegion>("inInterruptibleRegion", this->getInInterruptibleRegion());
+	}
+	if ( this->eIsSet(package->getActivityNode_Attribute_inPartition()) )
+	{
 		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());
+	}
+	if ( this->eIsSet(package->getActivityNode_Attribute_incoming()) )
+	{
 		saveHandler->addReferences<uml::ActivityEdge>("incoming", this->getIncoming());
+	}
+	if ( this->eIsSet(package->getActivityNode_Attribute_outgoing()) )
+	{
 		saveHandler->addReferences<uml::ActivityEdge>("outgoing", this->getOutgoing());
+	}
+	if ( this->eIsSet(package->getActivityNode_Attribute_redefinedNode()) )
+	{
 		saveHandler->addReferences<uml::ActivityNode>("redefinedNode", this->getRedefinedNode());
+	}
 	}
 	catch (std::exception& e)
 	{

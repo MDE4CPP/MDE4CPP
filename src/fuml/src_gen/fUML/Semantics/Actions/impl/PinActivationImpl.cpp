@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -52,8 +53,8 @@
 #include "uml/Pin.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -339,7 +340,10 @@ void PinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getPinActivation_Attribute_pin()) )
+	{
 		saveHandler->addReference(this->getPin(), "pin", getPin()->eClass() != uml::umlPackage::eInstance()->getPin_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

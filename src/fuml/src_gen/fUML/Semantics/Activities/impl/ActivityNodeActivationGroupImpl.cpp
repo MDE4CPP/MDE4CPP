@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -56,8 +57,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -66,8 +67,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -824,18 +825,25 @@ void ActivityNodeActivationGroupImpl::saveContent(std::shared_ptr<persistence::i
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getActivityNodeActivationGroup_Attribute_suspendedActivations()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Activities::ActivityNodeActivation>("suspendedActivations", this->getSuspendedActivations());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'edgeInstances'
-
+	    if ( this->eIsSet(package->getActivityNodeActivationGroup_Attribute_edgeInstances()) )
+	    {
 		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("edgeInstances", this->getEdgeInstances());
+	    }
 
 		// Save 'nodeActivations'
-
+	    if ( this->eIsSet(package->getActivityNodeActivationGroup_Attribute_nodeActivations()) )
+	    {
 		saveHandler->addReferences<fUML::Semantics::Activities::ActivityNodeActivation>("nodeActivations", this->getNodeActivations());
+	    }
 	}
 	catch (std::exception& e)
 	{

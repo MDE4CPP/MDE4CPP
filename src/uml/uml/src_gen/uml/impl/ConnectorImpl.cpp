@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -495,9 +496,18 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 			saveHandler->addReference(end, "end", end->eClass() != package->getConnectorEnd_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getConnector_Attribute_contract()) )
+	{
 		saveHandler->addReferences<uml::Behavior>("contract", this->getContract());
+	}
+	if ( this->eIsSet(package->getConnector_Attribute_redefinedConnector()) )
+	{
 		saveHandler->addReferences<uml::Connector>("redefinedConnector", this->getRedefinedConnector());
+	}
+	if ( this->eIsSet(package->getConnector_Attribute_type()) )
+	{
 		saveHandler->addReference(this->getType(), "type", getType()->eClass() != uml::umlPackage::eInstance()->getAssociation_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

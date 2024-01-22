@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -330,10 +331,22 @@ void OclExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getOclExpEval_Attribute_beforeEnvironment()) )
+	{
 		saveHandler->addReference(this->getBeforeEnvironment(), "beforeEnvironment", getBeforeEnvironment()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalEnvironment_Class()); 
+	}
+	if ( this->eIsSet(package->getOclExpEval_Attribute_environment()) )
+	{
 		saveHandler->addReference(this->getEnvironment(), "environment", getEnvironment()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalEnvironment_Class()); 
+	}
+	if ( this->eIsSet(package->getOclExpEval_Attribute_model()) )
+	{
 		saveHandler->addReference(this->getModel(), "model", getModel()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
+	if ( this->eIsSet(package->getOclExpEval_Attribute_resultValue()) )
+	{
 		saveHandler->addReference(this->getResultValue(),"resultValue", getResultValue()->eClass() != ecore::ecorePackage::eInstance()->getEObject_Class());
+	}
 	}
 	catch (std::exception& e)
 	{

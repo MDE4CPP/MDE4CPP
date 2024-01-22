@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -379,8 +380,10 @@ void IterateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'result'
-
+	    if ( this->eIsSet(package->getIterateExp_Attribute_result()) )
+	    {
 		saveHandler->addReference(this->getResult(), "result", getResult()->eClass() != ecore::ecorePackage::eInstance()->getETypedElement_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

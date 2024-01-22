@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -293,7 +294,10 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getConsiderIgnoreFragment_Attribute_message()) )
+	{
 		saveHandler->addReferences<uml::NamedElement>("message", this->getMessage());
+	}
 	}
 	catch (std::exception& e)
 	{

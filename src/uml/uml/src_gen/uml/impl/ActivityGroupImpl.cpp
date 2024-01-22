@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -353,8 +354,10 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'subgroup'
-
+	    if ( this->eIsSet(package->getActivityGroup_Attribute_subgroup()) )
+	    {
 		saveHandler->addReferences<uml::ActivityGroup>("subgroup", this->getSubgroup());
+	    }
 	}
 	catch (std::exception& e)
 	{

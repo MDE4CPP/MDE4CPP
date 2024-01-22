@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -47,9 +48,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -61,8 +62,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -468,7 +469,10 @@ void AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getAddStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction()) )
+	{
 		saveHandler->addReference(this->getAddStructuralFeatureValueAction(), "addStructuralFeatureValueAction", getAddStructuralFeatureValueAction()->eClass() != uml::umlPackage::eInstance()->getAddStructuralFeatureValueAction_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

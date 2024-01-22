@@ -30,6 +30,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -42,8 +43,8 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -255,7 +256,10 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getAcceptEventActionEventAccepter_Attribute_actionActivation()) )
+	{
 		saveHandler->addReference(this->getActionActivation(), "actionActivation", getActionActivation()->eClass() != fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionActivation_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

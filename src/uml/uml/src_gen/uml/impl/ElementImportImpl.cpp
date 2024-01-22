@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -343,13 +344,13 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getElementImport_Attribute_alias()) )
-		{
+          if ( this->eIsSet(package->getElementImport_Attribute_alias()) )
+          {
 			saveHandler->addAttribute("alias", this->getAlias());
-		}
+          }
 
-		if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
-		{
+          if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
+          {
 			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == uml::VisibilityKind::PUBLIC)
@@ -369,9 +370,12 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 				literal = "package";
 			}
 			saveHandler->addAttribute("visibility", literal);
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getElementImport_Attribute_importedElement()) )
+	{
 		saveHandler->addReference(this->getImportedElement(), "importedElement", getImportedElement()->eClass() != uml::umlPackage::eInstance()->getPackageableElement_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

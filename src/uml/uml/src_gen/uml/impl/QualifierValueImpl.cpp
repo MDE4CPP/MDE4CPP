@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -268,8 +269,14 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getQualifierValue_Attribute_qualifier()) )
+	{
 		saveHandler->addReference(this->getQualifier(), "qualifier", getQualifier()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
+	if ( this->eIsSet(package->getQualifierValue_Attribute_value()) )
+	{
 		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

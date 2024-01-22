@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -482,31 +483,35 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getLoopExp_Attribute_isCollectionOperation()) )
-		{
+          if ( this->eIsSet(package->getLoopExp_Attribute_isCollectionOperation()) )
+          {
 			saveHandler->addAttribute("isCollectionOperation", this->isIsCollectionOperation());
-		}
+          }
 
-		if ( this->eIsSet(package->getLoopExp_Attribute_isImplCollectIterator()) )
-		{
+          if ( this->eIsSet(package->getLoopExp_Attribute_isImplCollectIterator()) )
+          {
 			saveHandler->addAttribute("isImplCollectIterator", this->isIsImplCollectIterator());
-		}
+          }
 
-		if ( this->eIsSet(package->getLoopExp_Attribute_iterName()) )
-		{
+          if ( this->eIsSet(package->getLoopExp_Attribute_iterName()) )
+          {
 			saveHandler->addAttribute("iterName", this->getIterName());
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'body'
-
+	    if ( this->eIsSet(package->getLoopExp_Attribute_body()) )
+	    {
 		saveHandler->addReference(this->getBody(), "body", getBody()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 
 		// Save 'iterator'
-
+	    if ( this->eIsSet(package->getLoopExp_Attribute_iterator()) )
+	    {
 		saveHandler->addReferences<ocl::Expressions::OclExpression>("iterator", this->getIterator());
+	    }
 	}
 	catch (std::exception& e)
 	{

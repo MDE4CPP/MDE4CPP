@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -234,8 +235,10 @@ void CollectionItemImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'item'
-
+	    if ( this->eIsSet(package->getCollectionItem_Attribute_item()) )
+	    {
 		saveHandler->addReference(this->getItem(), "item", getItem()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

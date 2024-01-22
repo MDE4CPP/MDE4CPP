@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -347,8 +348,14 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getConnectionPointReference_Attribute_entry()) )
+	{
 		saveHandler->addReferences<uml::Pseudostate>("entry", this->getEntry());
+	}
+	if ( this->eIsSet(package->getConnectionPointReference_Attribute_exit()) )
+	{
 		saveHandler->addReferences<uml::Pseudostate>("exit", this->getExit());
+	}
 	}
 	catch (std::exception& e)
 	{

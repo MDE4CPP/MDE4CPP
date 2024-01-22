@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -253,10 +254,10 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getFeature_Attribute_isStatic()) )
-		{
+          if ( this->eIsSet(package->getFeature_Attribute_isStatic()) )
+          {
 			saveHandler->addAttribute("isStatic", this->getIsStatic());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

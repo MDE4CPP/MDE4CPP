@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -54,11 +55,11 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Behavior.hpp"
@@ -72,8 +73,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -425,14 +426,19 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getActivityExecution_Attribute_activity()) )
+	{
 		saveHandler->addReference(this->getActivity(), "activity", getActivity()->eClass() != uml::umlPackage::eInstance()->getActivity_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'activationGroup'
-
+	    if ( this->eIsSet(package->getActivityExecution_Attribute_activationGroup()) )
+	    {
 		saveHandler->addReference(this->getActivationGroup(), "activationGroup", getActivationGroup()->eClass() != fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

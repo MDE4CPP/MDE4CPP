@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -662,7 +663,10 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getEFactory_Attribute_ePackage()) )
+	{
 		saveHandler->addReference(this->getEPackage(),"ePackage", getEPackage()->eClass() != ecore::ecorePackage::eInstance()->getEPackage_Class());
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -436,16 +437,22 @@ void IfExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'condition'
-
+	    if ( this->eIsSet(package->getIfExp_Attribute_condition()) )
+	    {
 		saveHandler->addReference(this->getCondition(), "condition", getCondition()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 
 		// Save 'elseExpression'
-
+	    if ( this->eIsSet(package->getIfExp_Attribute_elseExpression()) )
+	    {
 		saveHandler->addReference(this->getElseExpression(), "elseExpression", getElseExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 
 		// Save 'thenExpression'
-
+	    if ( this->eIsSet(package->getIfExp_Attribute_thenExpression()) )
+	    {
 		saveHandler->addReference(this->getThenExpression(), "thenExpression", getThenExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

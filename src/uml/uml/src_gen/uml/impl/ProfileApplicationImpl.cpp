@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -316,12 +317,15 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getProfileApplication_Attribute_isStrict()) )
-		{
+          if ( this->eIsSet(package->getProfileApplication_Attribute_isStrict()) )
+          {
 			saveHandler->addAttribute("isStrict", this->getIsStrict());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getProfileApplication_Attribute_appliedProfile()) )
+	{
 		saveHandler->addReference(this->getAppliedProfile(), "appliedProfile", getAppliedProfile()->eClass() != uml::umlPackage::eInstance()->getProfile_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

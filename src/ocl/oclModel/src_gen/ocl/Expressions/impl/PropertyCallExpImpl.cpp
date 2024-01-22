@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -369,10 +370,10 @@ void PropertyCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPropertyCallExp_Attribute_referredProperty()) )
-		{
+          if ( this->eIsSet(package->getPropertyCallExp_Attribute_referredProperty()) )
+          {
 			saveHandler->addAttribute("referredProperty", this->getReferredProperty());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

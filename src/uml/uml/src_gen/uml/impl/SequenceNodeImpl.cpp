@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -346,8 +347,10 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'executableNode'
-
+	    if ( this->eIsSet(package->getSequenceNode_Attribute_executableNode()) )
+	    {
 		saveHandler->addReferences<uml::ExecutableNode>("executableNode", this->getExecutableNode());
+	    }
 	}
 	catch (std::exception& e)
 	{

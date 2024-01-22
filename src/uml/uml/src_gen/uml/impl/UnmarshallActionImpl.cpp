@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -418,7 +419,10 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getUnmarshallAction_Attribute_unmarshallType()) )
+	{
 		saveHandler->addReference(this->getUnmarshallType(), "unmarshallType", getUnmarshallType()->eClass() != uml::umlPackage::eInstance()->getClassifier_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

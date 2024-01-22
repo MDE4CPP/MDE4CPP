@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -63,9 +64,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -80,8 +81,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -961,15 +962,27 @@ void ActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getActionActivation_Attribute_firing()) )
-		{
+          if ( this->eIsSet(package->getActionActivation_Attribute_firing()) )
+          {
 			saveHandler->addAttribute("firing", this->isFiring());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getActionActivation_Attribute_action()) )
+	{
 		saveHandler->addReference(this->getAction(), "action", getAction()->eClass() != uml::umlPackage::eInstance()->getAction_Class()); 
+	}
+	if ( this->eIsSet(package->getActionActivation_Attribute_inputPinActivation()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Actions::InputPinActivation>("inputPinActivation", this->getInputPinActivation());
+	}
+	if ( this->eIsSet(package->getActionActivation_Attribute_outputPinActivation()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Actions::OutputPinActivation>("outputPinActivation", this->getOutputPinActivation());
+	}
+	if ( this->eIsSet(package->getActionActivation_Attribute_pinActivation()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Actions::PinActivation>("pinActivation", this->getPinActivation());
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -61,8 +62,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -449,16 +450,22 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'executor'
-
+	    if ( this->eIsSet(package->getLocus_Attribute_executor()) )
+	    {
 		saveHandler->addReference(this->getExecutor(), "executor", getExecutor()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Class());
+	    }
 
 		// Save 'extensionalValues'
-
+	    if ( this->eIsSet(package->getLocus_Attribute_extensionalValues()) )
+	    {
 		saveHandler->addReferences<fUML::MDE4CPP_Extensions::FUML_Object>("extensionalValues", this->getExtensionalValues());
+	    }
 
 		// Save 'factory'
-
+	    if ( this->eIsSet(package->getLocus_Attribute_factory()) )
+	    {
 		saveHandler->addReference(this->getFactory(), "factory", getFactory()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

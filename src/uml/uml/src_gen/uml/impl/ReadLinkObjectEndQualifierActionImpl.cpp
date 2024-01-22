@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -384,7 +385,10 @@ void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persisten
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getReadLinkObjectEndQualifierAction_Attribute_qualifier()) )
+	{
 		saveHandler->addReference(this->getQualifier(), "qualifier", getQualifier()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

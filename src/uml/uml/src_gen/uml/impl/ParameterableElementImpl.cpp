@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -275,7 +276,10 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getParameterableElement_Attribute_templateParameter()) )
+	{
 		saveHandler->addReference(this->getTemplateParameter(), "templateParameter", getTemplateParameter()->eClass() != uml::umlPackage::eInstance()->getTemplateParameter_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

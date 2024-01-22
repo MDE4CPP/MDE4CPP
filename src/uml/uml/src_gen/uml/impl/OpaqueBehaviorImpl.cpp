@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -387,21 +388,21 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_body()) )
-		{
+          if ( this->eIsSet(package->getOpaqueBehavior_Attribute_body()) )
+          {
 			for (const std::shared_ptr<std::string>& value : *m_body)
 			{
 				saveHandler->addAttributeAsNode("body", *value);
 			}
-		}
+          }
 
-		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_language()) )
-		{
+          if ( this->eIsSet(package->getOpaqueBehavior_Attribute_language()) )
+          {
 			for (const std::shared_ptr<std::string>& value : *m_language)
 			{
 				saveHandler->addAttributeAsNode("language", *value);
 			}
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

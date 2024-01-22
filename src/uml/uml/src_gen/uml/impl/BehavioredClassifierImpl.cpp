@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -481,14 +482,19 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 			saveHandler->addReference(interfaceRealization, "interfaceRealization", interfaceRealization->eClass() != package->getInterfaceRealization_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getBehavioredClassifier_Attribute_classifierBehavior()) )
+	{
 		saveHandler->addReference(this->getClassifierBehavior(), "classifierBehavior", getClassifierBehavior()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'ownedBehavior'
-
+	    if ( this->eIsSet(package->getBehavioredClassifier_Attribute_ownedBehavior()) )
+	    {
 		saveHandler->addReferences<uml::Behavior>("ownedBehavior", this->getOwnedBehavior());
+	    }
 	}
 	catch (std::exception& e)
 	{

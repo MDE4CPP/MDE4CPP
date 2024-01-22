@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -254,10 +255,10 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getStructuralFeature_Attribute_isReadOnly()) )
-		{
+          if ( this->eIsSet(package->getStructuralFeature_Attribute_isReadOnly()) )
+          {
 			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -413,8 +414,14 @@ void InitOrDerValueListExpImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getInitOrDerValueListExp_Attribute_derExpressionList()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::InitOrDerValueExp>("derExpressionList", this->getDerExpressionList());
+	}
+	if ( this->eIsSet(package->getInitOrDerValueListExp_Attribute_initExpressionList()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::InitOrDerValueExp>("initExpressionList", this->getInitExpressionList());
+	}
 	}
 	catch (std::exception& e)
 	{

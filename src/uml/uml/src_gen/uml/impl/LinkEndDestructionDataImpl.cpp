@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -261,12 +262,15 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getLinkEndDestructionData_Attribute_isDestroyDuplicates()) )
-		{
+          if ( this->eIsSet(package->getLinkEndDestructionData_Attribute_isDestroyDuplicates()) )
+          {
 			saveHandler->addAttribute("isDestroyDuplicates", this->getIsDestroyDuplicates());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getLinkEndDestructionData_Attribute_destroyAt()) )
+	{
 		saveHandler->addReference(this->getDestroyAt(), "destroyAt", getDestroyAt()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

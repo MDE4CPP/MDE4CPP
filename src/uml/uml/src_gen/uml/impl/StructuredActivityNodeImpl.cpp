@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -713,10 +714,10 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getStructuredActivityNode_Attribute_mustIsolate()) )
-		{
+          if ( this->eIsSet(package->getStructuredActivityNode_Attribute_mustIsolate()) )
+          {
 			saveHandler->addAttribute("mustIsolate", this->getMustIsolate());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

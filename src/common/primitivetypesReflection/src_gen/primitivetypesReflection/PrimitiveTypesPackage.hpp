@@ -11,7 +11,6 @@
 namespace uml 
 {
 	class PrimitiveType;
-	class ConnectorEnd;
 }
 
 

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -341,8 +342,14 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getProtocolTransition_Attribute_postCondition()) )
+	{
 		saveHandler->addReference(this->getPostCondition(), "postCondition", getPostCondition()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+	}
+	if ( this->eIsSet(package->getProtocolTransition_Attribute_preCondition()) )
+	{
 		saveHandler->addReference(this->getPreCondition(), "preCondition", getPreCondition()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

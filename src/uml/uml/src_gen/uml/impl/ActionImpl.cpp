@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -522,21 +523,25 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 			saveHandler->addReference(localPrecondition, "localPrecondition", localPrecondition->eClass() != package->getConstraint_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getAction_Attribute_isLocallyReentrant()) )
-		{
+          if ( this->eIsSet(package->getAction_Attribute_isLocallyReentrant()) )
+          {
 			saveHandler->addAttribute("isLocallyReentrant", this->getIsLocallyReentrant());
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'input'
-
+	    if ( this->eIsSet(package->getAction_Attribute_input()) )
+	    {
 		saveHandler->addReferences<uml::InputPin>("input", this->getInput());
+	    }
 
 		// Save 'output'
-
+	    if ( this->eIsSet(package->getAction_Attribute_output()) )
+	    {
 		saveHandler->addReferences<uml::OutputPin>("output", this->getOutput());
+	    }
 	}
 	catch (std::exception& e)
 	{

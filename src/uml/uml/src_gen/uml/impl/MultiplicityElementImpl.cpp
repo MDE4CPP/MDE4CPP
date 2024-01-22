@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -374,15 +375,15 @@ void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interface
 			saveHandler->addReference(upperValue, "upperValue", upperValue->eClass() != package->getValueSpecification_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isOrdered()) )
-		{
+          if ( this->eIsSet(package->getMultiplicityElement_Attribute_isOrdered()) )
+          {
 			saveHandler->addAttribute("isOrdered", this->getIsOrdered());
-		}
+          }
 
-		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isUnique()) )
-		{
+          if ( this->eIsSet(package->getMultiplicityElement_Attribute_isUnique()) )
+          {
 			saveHandler->addAttribute("isUnique", this->getIsUnique());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

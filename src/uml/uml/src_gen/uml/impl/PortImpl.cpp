@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -566,23 +567,29 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPort_Attribute_isBehavior()) )
-		{
+          if ( this->eIsSet(package->getPort_Attribute_isBehavior()) )
+          {
 			saveHandler->addAttribute("isBehavior", this->getIsBehavior());
-		}
+          }
 
-		if ( this->eIsSet(package->getPort_Attribute_isConjugated()) )
-		{
+          if ( this->eIsSet(package->getPort_Attribute_isConjugated()) )
+          {
 			saveHandler->addAttribute("isConjugated", this->getIsConjugated());
-		}
+          }
 
-		if ( this->eIsSet(package->getPort_Attribute_isService()) )
-		{
+          if ( this->eIsSet(package->getPort_Attribute_isService()) )
+          {
 			saveHandler->addAttribute("isService", this->getIsService());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getPort_Attribute_protocol()) )
+	{
 		saveHandler->addReference(this->getProtocol(), "protocol", getProtocol()->eClass() != uml::umlPackage::eInstance()->getProtocolStateMachine_Class()); 
+	}
+	if ( this->eIsSet(package->getPort_Attribute_redefinedPort()) )
+	{
 		saveHandler->addReferences<uml::Port>("redefinedPort", this->getRedefinedPort());
+	}
 	}
 	catch (std::exception& e)
 	{

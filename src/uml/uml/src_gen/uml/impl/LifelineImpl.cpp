@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -407,9 +408,18 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(selector, "selector", selector->eClass() != package->getValueSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getLifeline_Attribute_coveredBy()) )
+	{
 		saveHandler->addReferences<uml::InteractionFragment>("coveredBy", this->getCoveredBy());
+	}
+	if ( this->eIsSet(package->getLifeline_Attribute_decomposedAs()) )
+	{
 		saveHandler->addReference(this->getDecomposedAs(), "decomposedAs", getDecomposedAs()->eClass() != uml::umlPackage::eInstance()->getPartDecomposition_Class()); 
+	}
+	if ( this->eIsSet(package->getLifeline_Attribute_represents()) )
+	{
 		saveHandler->addReference(this->getRepresents(), "represents", getRepresents()->eClass() != uml::umlPackage::eInstance()->getConnectableElement_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

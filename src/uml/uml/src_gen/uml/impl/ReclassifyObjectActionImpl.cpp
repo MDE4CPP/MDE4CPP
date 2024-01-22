@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -403,13 +404,19 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getReclassifyObjectAction_Attribute_isReplaceAll()) )
-		{
+          if ( this->eIsSet(package->getReclassifyObjectAction_Attribute_isReplaceAll()) )
+          {
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getReclassifyObjectAction_Attribute_newClassifier()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("newClassifier", this->getNewClassifier());
+	}
+	if ( this->eIsSet(package->getReclassifyObjectAction_Attribute_oldClassifier()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("oldClassifier", this->getOldClassifier());
+	}
 	}
 	catch (std::exception& e)
 	{

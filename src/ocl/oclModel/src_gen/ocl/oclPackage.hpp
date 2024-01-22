@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EEnum;
-	class EPackage;
+	class EReference;
 	class EClass;
 	class EOperation;
-	class EReference;
 	class EEnumLiteral;
+	class EEnum;
+	class EPackage;
+	class EDataType;
 	class EAttribute;
 	class EGenericType;
-	class EDataType;
 	class EParameter;
 }
 

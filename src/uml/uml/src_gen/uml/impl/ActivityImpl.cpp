@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -294,19 +295,19 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'partition'
-	const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>>& partitionList = obj.getPartition();
+	const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& partitionList = obj.getPartition();
 	if(partitionList)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getGroup(), getOwnedGroup());
+		getPartition()->initSubset(getOwnedGroup(), getGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::ActivityPartition>& partitionindexElem: *partitionList) 
@@ -539,20 +540,20 @@ const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does 
 }
 
 /* Getter & Setter for reference partition */
-const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>>& ActivityImpl::getPartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& ActivityImpl::getPartition() const
 {
 	if(m_partition == nullptr)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getGroup(), getOwnedGroup());
+		getPartition()->initSubset(getOwnedGroup(), getGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
 		#endif
 		
 	}
@@ -835,7 +836,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
-			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>>& _partition = getPartition();
+			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& _partition = getPartition();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -911,34 +912,49 @@ void ActivityImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getActivity_Attribute_isReadOnly()) )
-		{
+          if ( this->eIsSet(package->getActivity_Attribute_isReadOnly()) )
+          {
 			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
-		}
+          }
 
-		if ( this->eIsSet(package->getActivity_Attribute_isSingleExecution()) )
-		{
+          if ( this->eIsSet(package->getActivity_Attribute_isSingleExecution()) )
+          {
 			saveHandler->addAttribute("isSingleExecution", this->getIsSingleExecution());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getActivity_Attribute_group()) )
+	{
 		saveHandler->addReferences<uml::ActivityGroup>("group", this->getGroup());
+	}
+	if ( this->eIsSet(package->getActivity_Attribute_node()) )
+	{
 		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
+	}
+	if ( this->eIsSet(package->getActivity_Attribute_partition()) )
+	{
 		saveHandler->addReferences<uml::ActivityPartition>("partition", this->getPartition());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'group'
-
+	    if ( this->eIsSet(package->getActivity_Attribute_group()) )
+	    {
 		saveHandler->addReferences<uml::ActivityGroup>("group", this->getGroup());
+	    }
 
 		// Save 'node'
-
+	    if ( this->eIsSet(package->getActivity_Attribute_node()) )
+	    {
 		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
+	    }
 
 		// Save 'ownedGroup'
-
+	    if ( this->eIsSet(package->getActivity_Attribute_ownedGroup()) )
+	    {
 		saveHandler->addReferences<uml::ActivityGroup>("ownedGroup", this->getOwnedGroup());
+	    }
 	}
 	catch (std::exception& e)
 	{

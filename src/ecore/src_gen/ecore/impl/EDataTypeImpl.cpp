@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -242,10 +243,10 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEDataType_Attribute_serializable()) )
-		{
+          if ( this->eIsSet(package->getEDataType_Attribute_serializable()) )
+          {
 			saveHandler->addAttribute("serializable", this->isSerializable());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

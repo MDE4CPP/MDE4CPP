@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -409,8 +410,8 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getExpansionRegion_Attribute_mode()) )
-		{
+          if ( this->eIsSet(package->getExpansionRegion_Attribute_mode()) )
+          {
 			uml::ExpansionKind value = this->getMode();
 			std::string literal = "";
 			if (value == uml::ExpansionKind::PARALLEL)
@@ -426,10 +427,16 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 				literal = "stream";
 			}
 			saveHandler->addAttribute("mode", literal);
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getExpansionRegion_Attribute_inputElement()) )
+	{
 		saveHandler->addReferences<uml::ExpansionNode>("inputElement", this->getInputElement());
+	}
+	if ( this->eIsSet(package->getExpansionRegion_Attribute_outputElement()) )
+	{
 		saveHandler->addReferences<uml::ExpansionNode>("outputElement", this->getOutputElement());
+	}
 	}
 	catch (std::exception& e)
 	{

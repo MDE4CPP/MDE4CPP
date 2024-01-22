@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -380,7 +381,10 @@ void TupleTypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getTupleTypeExp_Attribute_part()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::VarDeclarationExp>("part", this->getPart());
+	}
 	}
 	catch (std::exception& e)
 	{

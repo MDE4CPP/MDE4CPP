@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -298,7 +299,10 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getManifestation_Attribute_utilizedElement()) )
+	{
 		saveHandler->addReference(this->getUtilizedElement(), "utilizedElement", getUtilizedElement()->eClass() != uml::umlPackage::eInstance()->getPackageableElement_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

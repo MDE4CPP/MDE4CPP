@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -441,22 +442,24 @@ void OperationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getOperationCallExp_Attribute_isRArrow()) )
-		{
+          if ( this->eIsSet(package->getOperationCallExp_Attribute_isRArrow()) )
+          {
 			saveHandler->addAttribute("isRArrow", this->isIsRArrow());
-		}
+          }
 
-		if ( this->eIsSet(package->getOperationCallExp_Attribute_referredOperation()) )
-		{
+          if ( this->eIsSet(package->getOperationCallExp_Attribute_referredOperation()) )
+          {
 			saveHandler->addAttribute("referredOperation", this->getReferredOperation());
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'argument'
-
+	    if ( this->eIsSet(package->getOperationCallExp_Attribute_argument()) )
+	    {
 		saveHandler->addReferences<ocl::Expressions::OclExpression>("argument", this->getArgument());
+	    }
 	}
 	catch (std::exception& e)
 	{

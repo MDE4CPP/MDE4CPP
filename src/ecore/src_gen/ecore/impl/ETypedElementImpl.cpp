@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -316,9 +317,17 @@ void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EGenericType";
+				typeName = "ecore::EGenericType";
 			}
-			loadHandler->handleChild(this->getEGenericType());
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			loadHandler->handleChild(this->getEGenericType()); 
 
 			return; 
 		}
@@ -373,34 +382,39 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getETypedElement_Attribute_lowerBound()) )
-		{
+          if ( this->eIsSet(package->getETypedElement_Attribute_lowerBound()) )
+          {
 			saveHandler->addAttribute("lowerBound", this->getLowerBound());
-		}
+          }
 
-		if ( this->eIsSet(package->getETypedElement_Attribute_ordered()) )
-		{
+          if ( this->eIsSet(package->getETypedElement_Attribute_ordered()) )
+          {
 			saveHandler->addAttribute("ordered", this->isOrdered());
-		}
+          }
 
-		if ( this->eIsSet(package->getETypedElement_Attribute_unique()) )
-		{
+          if ( this->eIsSet(package->getETypedElement_Attribute_unique()) )
+          {
 			saveHandler->addAttribute("unique", this->isUnique());
-		}
+          }
 
-		if ( this->eIsSet(package->getETypedElement_Attribute_upperBound()) )
-		{
+          if ( this->eIsSet(package->getETypedElement_Attribute_upperBound()) )
+          {
 			saveHandler->addAttribute("upperBound", this->getUpperBound());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getETypedElement_Attribute_eType()) )
+	{
 		saveHandler->addReference(this->getEType(),"eType", getEType()->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eGenericType'
-
+	    if ( this->eIsSet(package->getETypedElement_Attribute_eGenericType()) )
+	    {
 		saveHandler->addReference(this->getEGenericType(), "eGenericType", getEGenericType()->eClass() != ecore::ecorePackage::eInstance()->getEGenericType_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

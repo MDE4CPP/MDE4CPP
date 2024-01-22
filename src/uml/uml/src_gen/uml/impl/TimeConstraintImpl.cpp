@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -296,10 +297,10 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getTimeConstraint_Attribute_firstEvent()) )
-		{
+          if ( this->eIsSet(package->getTimeConstraint_Attribute_firstEvent()) )
+          {
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

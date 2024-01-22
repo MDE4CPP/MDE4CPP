@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -328,8 +329,14 @@ void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getDecisionNode_Attribute_decisionInput()) )
+	{
 		saveHandler->addReference(this->getDecisionInput(), "decisionInput", getDecisionInput()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
+	if ( this->eIsSet(package->getDecisionNode_Attribute_decisionInputFlow()) )
+	{
 		saveHandler->addReference(this->getDecisionInputFlow(), "decisionInputFlow", getDecisionInputFlow()->eClass() != uml::umlPackage::eInstance()->getObjectFlow_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

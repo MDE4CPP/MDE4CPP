@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,9 +39,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -245,7 +246,10 @@ void TupleLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getTupleLiteralExpEval_Attribute_tuplePart()) )
+	{
 		saveHandler->addReferences<ocl::Evaluations::VariableDeclEval>("tuplePart", this->getTuplePart());
+	}
 	}
 	catch (std::exception& e)
 	{

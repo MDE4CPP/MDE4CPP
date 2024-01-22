@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -340,9 +341,18 @@ void ExceptionHandlerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getExceptionHandler_Attribute_exceptionInput()) )
+	{
 		saveHandler->addReference(this->getExceptionInput(), "exceptionInput", getExceptionInput()->eClass() != uml::umlPackage::eInstance()->getObjectNode_Class()); 
+	}
+	if ( this->eIsSet(package->getExceptionHandler_Attribute_exceptionType()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("exceptionType", this->getExceptionType());
+	}
+	if ( this->eIsSet(package->getExceptionHandler_Attribute_handlerBody()) )
+	{
 		saveHandler->addReference(this->getHandlerBody(), "handlerBody", getHandlerBody()->eClass() != uml::umlPackage::eInstance()->getExecutableNode_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

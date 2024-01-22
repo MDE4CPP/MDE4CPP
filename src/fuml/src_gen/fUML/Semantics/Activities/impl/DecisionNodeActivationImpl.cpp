@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -57,9 +58,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -69,8 +70,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -660,7 +661,10 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getDecisionNodeActivation_Attribute_decisionNode()) )
+	{
 		saveHandler->addReference(this->getDecisionNode(), "decisionNode", getDecisionNode()->eClass() != uml::umlPackage::eInstance()->getDecisionNode_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -299,9 +300,22 @@ void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ETypeParameter";
+				typeName = "ecore::ETypeParameter";
 			}
-			loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ETypeParameter> new_eTypeParameters = std::dynamic_pointer_cast<ecore::ETypeParameter>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS));
+			if(new_eTypeParameters)
+			{
+				loadHandler->handleChild(new_eTypeParameters);
+				getETypeParameters()->push_back(new_eTypeParameters);
+			} 
 
 			return; 
 		}
@@ -342,22 +356,24 @@ void EClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEClassifier_Attribute_instanceClassName()) )
-		{
+          if ( this->eIsSet(package->getEClassifier_Attribute_instanceClassName()) )
+          {
 			saveHandler->addAttribute("instanceClassName", this->getInstanceClassName());
-		}
+          }
 
-		if ( this->eIsSet(package->getEClassifier_Attribute_instanceTypeName()) )
-		{
+          if ( this->eIsSet(package->getEClassifier_Attribute_instanceTypeName()) )
+          {
 			saveHandler->addAttribute("instanceTypeName", this->getInstanceTypeName());
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eTypeParameters'
-
+	    if ( this->eIsSet(package->getEClassifier_Attribute_eTypeParameters()) )
+	    {
 		saveHandler->addReferences<ecore::ETypeParameter>("eTypeParameters", this->getETypeParameters());
+	    }
 	}
 	catch (std::exception& e)
 	{

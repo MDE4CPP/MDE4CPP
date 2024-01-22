@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -449,22 +450,24 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getConditionalNode_Attribute_isAssured()) )
-		{
+          if ( this->eIsSet(package->getConditionalNode_Attribute_isAssured()) )
+          {
 			saveHandler->addAttribute("isAssured", this->getIsAssured());
-		}
+          }
 
-		if ( this->eIsSet(package->getConditionalNode_Attribute_isDeterminate()) )
-		{
+          if ( this->eIsSet(package->getConditionalNode_Attribute_isDeterminate()) )
+          {
 			saveHandler->addAttribute("isDeterminate", this->getIsDeterminate());
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'result'
-
+	    if ( this->eIsSet(package->getConditionalNode_Attribute_result()) )
+	    {
 		saveHandler->addReferences<uml::OutputPin>("result", this->getResult());
+	    }
 	}
 	catch (std::exception& e)
 	{

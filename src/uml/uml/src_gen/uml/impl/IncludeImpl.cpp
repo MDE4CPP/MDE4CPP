@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -304,7 +305,10 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getInclude_Attribute_addition()) )
+	{
 		saveHandler->addReference(this->getAddition(), "addition", getAddition()->eClass() != uml::umlPackage::eInstance()->getUseCase_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

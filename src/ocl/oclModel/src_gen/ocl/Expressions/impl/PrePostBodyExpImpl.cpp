@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -285,8 +286,8 @@ void PrePostBodyExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPrePostBodyExp_Attribute_kind()) )
-		{
+          if ( this->eIsSet(package->getPrePostBodyExp_Attribute_kind()) )
+          {
 			ocl::Expressions::PrePostBody value = this->getKind();
 			std::string literal = "";
 			if (value == ocl::Expressions::PrePostBody::PRE)
@@ -302,14 +303,17 @@ void PrePostBodyExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 				literal = "BODY";
 			}
 			saveHandler->addAttribute("kind", literal);
-		}
+          }
 
-		if ( this->eIsSet(package->getPrePostBodyExp_Attribute_name()) )
-		{
+          if ( this->eIsSet(package->getPrePostBodyExp_Attribute_name()) )
+          {
 			saveHandler->addAttribute("name", this->getName());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getPrePostBodyExp_Attribute_bodyExpression()) )
+	{
 		saveHandler->addReference(this->getBodyExpression(), "bodyExpression", getBodyExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

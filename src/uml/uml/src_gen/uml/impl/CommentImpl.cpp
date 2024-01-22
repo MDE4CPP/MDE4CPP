@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -258,12 +259,15 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getComment_Attribute_body()) )
-		{
+          if ( this->eIsSet(package->getComment_Attribute_body()) )
+          {
 			saveHandler->addAttribute("body", this->getBody());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getComment_Attribute_annotatedElement()) )
+	{
 		saveHandler->addReferences<uml::Element>("annotatedElement", this->getAnnotatedElement());
+	}
 	}
 	catch (std::exception& e)
 	{

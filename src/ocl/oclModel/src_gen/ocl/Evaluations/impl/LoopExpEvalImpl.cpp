@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -283,15 +284,18 @@ void LoopExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getLoopExpEval_Attribute_iterators()) )
-		{
+          if ( this->eIsSet(package->getLoopExpEval_Attribute_iterators()) )
+          {
 			for (const std::shared_ptr<std::string>& value : *m_iterators)
 			{
 				saveHandler->addAttributeAsNode("iterators", *value);
 			}
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getLoopExpEval_Attribute_bodyEvals()) )
+	{
 		saveHandler->addReferences<ocl::Evaluations::OclExpEval>("bodyEvals", this->getBodyEvals());
+	}
 	}
 	catch (std::exception& e)
 	{

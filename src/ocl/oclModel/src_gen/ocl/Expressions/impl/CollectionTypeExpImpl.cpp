@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -377,7 +378,10 @@ void CollectionTypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getCollectionTypeExp_Attribute_innerType()) )
+	{
 		saveHandler->addReference(this->getInnerType(), "innerType", getInnerType()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

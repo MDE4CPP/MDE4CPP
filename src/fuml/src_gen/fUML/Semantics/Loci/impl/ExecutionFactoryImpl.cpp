@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -153,8 +154,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
@@ -167,8 +168,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -808,8 +809,14 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getExecutionFactory_Attribute_builtInTypes()) )
+	{
 		saveHandler->addReferences<uml::PrimitiveType>("builtInTypes", this->getBuiltInTypes());
+	}
+	if ( this->eIsSet(package->getExecutionFactory_Attribute_strategies()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Loci::SemanticStrategy>("strategies", this->getStrategies());
+	}
 	}
 	catch (std::exception& e)
 	{

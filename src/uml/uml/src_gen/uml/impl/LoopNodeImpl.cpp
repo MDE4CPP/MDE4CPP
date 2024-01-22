@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -617,27 +618,46 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(loopVariable, "loopVariable", loopVariable->eClass() != package->getOutputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getLoopNode_Attribute_isTestedFirst()) )
-		{
+          if ( this->eIsSet(package->getLoopNode_Attribute_isTestedFirst()) )
+          {
 			saveHandler->addAttribute("isTestedFirst", this->getIsTestedFirst());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getLoopNode_Attribute_bodyOutput()) )
+	{
 		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());
+	}
+	if ( this->eIsSet(package->getLoopNode_Attribute_bodyPart()) )
+	{
 		saveHandler->addReferences<uml::ExecutableNode>("bodyPart", this->getBodyPart());
+	}
+	if ( this->eIsSet(package->getLoopNode_Attribute_decider()) )
+	{
 		saveHandler->addReference(this->getDecider(), "decider", getDecider()->eClass() != uml::umlPackage::eInstance()->getOutputPin_Class()); 
+	}
+	if ( this->eIsSet(package->getLoopNode_Attribute_setupPart()) )
+	{
 		saveHandler->addReferences<uml::ExecutableNode>("setupPart", this->getSetupPart());
+	}
+	if ( this->eIsSet(package->getLoopNode_Attribute_test()) )
+	{
 		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'loopVariableInput'
-
+	    if ( this->eIsSet(package->getLoopNode_Attribute_loopVariableInput()) )
+	    {
 		saveHandler->addReferences<uml::InputPin>("loopVariableInput", this->getLoopVariableInput());
+	    }
 
 		// Save 'result'
-
+	    if ( this->eIsSet(package->getLoopNode_Attribute_result()) )
+	    {
 		saveHandler->addReferences<uml::OutputPin>("result", this->getResult());
+	    }
 	}
 	catch (std::exception& e)
 	{

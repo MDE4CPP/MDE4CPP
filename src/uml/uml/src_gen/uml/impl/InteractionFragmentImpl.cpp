@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -407,7 +408,10 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 			saveHandler->addReference(generalOrdering, "generalOrdering", generalOrdering->eClass() != package->getGeneralOrdering_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getInteractionFragment_Attribute_covered()) )
+	{
 		saveHandler->addReferences<uml::Lifeline>("covered", this->getCovered());
+	}
 	}
 	catch (std::exception& e)
 	{

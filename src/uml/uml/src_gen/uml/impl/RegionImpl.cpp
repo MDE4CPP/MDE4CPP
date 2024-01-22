@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -518,7 +519,10 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 			saveHandler->addReference(transition, "transition", transition->eClass() != package->getTransition_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getRegion_Attribute_extendedRegion()) )
+	{
 		saveHandler->addReference(this->getExtendedRegion(), "extendedRegion", getExtendedRegion()->eClass() != uml::umlPackage::eInstance()->getRegion_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

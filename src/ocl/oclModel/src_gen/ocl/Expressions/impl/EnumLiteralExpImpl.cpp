@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -398,12 +399,15 @@ void EnumLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEnumLiteralExp_Attribute_referredEnumLiteralStr()) )
-		{
+          if ( this->eIsSet(package->getEnumLiteralExp_Attribute_referredEnumLiteralStr()) )
+          {
 			saveHandler->addAttribute("referredEnumLiteralStr", this->getReferredEnumLiteralStr());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getEnumLiteralExp_Attribute_referredEnumLiteral()) )
+	{
 		saveHandler->addReference(this->getReferredEnumLiteral(),"referredEnumLiteral", getReferredEnumLiteral()->eClass() != ecore::ecorePackage::eInstance()->getEEnumLiteral_Class());
+	}
 	}
 	catch (std::exception& e)
 	{

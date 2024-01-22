@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -369,14 +370,19 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getInvocationAction_Attribute_onPort()) )
+	{
 		saveHandler->addReference(this->getOnPort(), "onPort", getOnPort()->eClass() != uml::umlPackage::eInstance()->getPort_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'argument'
-
+	    if ( this->eIsSet(package->getInvocationAction_Attribute_argument()) )
+	    {
 		saveHandler->addReferences<uml::InputPin>("argument", this->getArgument());
+	    }
 	}
 	catch (std::exception& e)
 	{

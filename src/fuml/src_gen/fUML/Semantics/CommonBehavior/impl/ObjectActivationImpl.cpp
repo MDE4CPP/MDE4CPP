@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -52,9 +53,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
@@ -62,8 +63,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -185,7 +186,7 @@ void ObjectActivationImpl::_register(const std::shared_ptr<fUML::Semantics::Comm
     DEBUG_INFO("accepter = " << accepter)
 	std::unique_lock lock(*this->m_mutex);
 
-    this->getWaitingEventAccepters()->push_back(accepter);
+    this->m_waitingEventAccepters->push_back(accepter);
 
 	lock.unlock();
 	this->m_conditionVariable->notify_one();
@@ -679,19 +680,29 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getObjectActivation_Attribute_object()) )
+	{
 		saveHandler->addReference(this->getObject(), "object", getObject()->eClass() != fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class()); 
+	}
+	if ( this->eIsSet(package->getObjectActivation_Attribute_waitingEventAccepters()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::CommonBehavior::EventAccepter>("waitingEventAccepters", this->getWaitingEventAccepters());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'classifierBehaviorExecutions'
-
+	    if ( this->eIsSet(package->getObjectActivation_Attribute_classifierBehaviorExecutions()) )
+	    {
 		saveHandler->addReferences<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>("classifierBehaviorExecutions", this->getClassifierBehaviorExecutions());
+	    }
 
 		// Save 'eventPool'
-
+	    if ( this->eIsSet(package->getObjectActivation_Attribute_eventPool()) )
+	    {
 		saveHandler->addReferences<fUML::Semantics::CommonBehavior::EventOccurrence>("eventPool", this->getEventPool());
+	    }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -282,7 +283,10 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getProtocolConformance_Attribute_generalMachine()) )
+	{
 		saveHandler->addReference(this->getGeneralMachine(), "generalMachine", getGeneralMachine()->eClass() != uml::umlPackage::eInstance()->getProtocolStateMachine_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

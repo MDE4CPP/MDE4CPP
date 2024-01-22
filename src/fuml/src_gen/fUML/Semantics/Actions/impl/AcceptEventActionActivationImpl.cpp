@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -49,9 +50,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/AcceptEventAction.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 #include "uml/Action.hpp"
@@ -65,8 +66,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -527,13 +528,19 @@ void AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getAcceptEventActionActivation_Attribute_waiting()) )
-		{
+          if ( this->eIsSet(package->getAcceptEventActionActivation_Attribute_waiting()) )
+          {
 			saveHandler->addAttribute("waiting", this->isWaiting());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getAcceptEventActionActivation_Attribute_acceptEventAction()) )
+	{
 		saveHandler->addReference(this->getAcceptEventAction(), "acceptEventAction", getAcceptEventAction()->eClass() != uml::umlPackage::eInstance()->getAcceptEventAction_Class()); 
+	}
+	if ( this->eIsSet(package->getAcceptEventActionActivation_Attribute_eventAccepter()) )
+	{
 		saveHandler->addReference(this->getEventAccepter(), "eventAccepter", getEventAccepter()->eClass() != fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

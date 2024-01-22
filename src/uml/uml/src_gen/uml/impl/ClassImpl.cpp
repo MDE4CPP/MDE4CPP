@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -695,12 +696,15 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getClass_Attribute_isActive()) )
-		{
+          if ( this->eIsSet(package->getClass_Attribute_isActive()) )
+          {
 			saveHandler->addAttribute("isActive", this->getIsActive());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getClass_Attribute_superClass()) )
+	{
 		saveHandler->addReferences<uml::Class>("superClass", this->getSuperClass());
+	}
 	}
 	catch (std::exception& e)
 	{

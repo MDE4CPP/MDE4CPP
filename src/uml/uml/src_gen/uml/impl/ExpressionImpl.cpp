@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -385,10 +386,10 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getExpression_Attribute_symbol()) )
-		{
+          if ( this->eIsSet(package->getExpression_Attribute_symbol()) )
+          {
 			saveHandler->addAttribute("symbol", this->getSymbol());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

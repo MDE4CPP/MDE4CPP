@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -261,7 +262,10 @@ void EvalEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getEvalEnvironment_Attribute_bindings()) )
+	{
 		saveHandler->addReferences<ocl::Evaluations::NameValueBinding>("bindings", this->getBindings());
+	}
 	}
 	catch (std::exception& e)
 	{

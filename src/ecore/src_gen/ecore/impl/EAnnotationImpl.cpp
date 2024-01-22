@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -317,9 +318,22 @@ void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EObject";
+				typeName = "ecore::EObject";
 			}
-			loadHandler->handleChildContainer<ecore::EObject>(this->getContents());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EObject> new_contents = std::dynamic_pointer_cast<ecore::EObject>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS));
+			if(new_contents)
+			{
+				loadHandler->handleChild(new_contents);
+				getContents()->push_back(new_contents);
+			} 
 
 			return; 
 		}
@@ -391,12 +405,15 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 			saveHandler->addReference(contents, "contents", contents->eClass() != package->getEObject_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getEAnnotation_Attribute_source()) )
-		{
+          if ( this->eIsSet(package->getEAnnotation_Attribute_source()) )
+          {
 			saveHandler->addAttribute("source", this->getSource());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getEAnnotation_Attribute_references()) )
+	{
 		saveHandler->addReferences<ecore::EObject>("references", this->getReferences());
+	}
 	}
 	catch (std::exception& e)
 	{

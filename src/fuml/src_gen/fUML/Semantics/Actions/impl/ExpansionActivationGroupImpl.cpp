@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -52,8 +53,8 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -453,15 +454,27 @@ void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::inte
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getExpansionActivationGroup_Attribute_index()) )
-		{
+          if ( this->eIsSet(package->getExpansionActivationGroup_Attribute_index()) )
+          {
 			saveHandler->addAttribute("index", this->getIndex());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getExpansionActivationGroup_Attribute_groupInputs()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Actions::ExpansionNodeActivation>("groupInputs", this->getGroupInputs());
+	}
+	if ( this->eIsSet(package->getExpansionActivationGroup_Attribute_groupOutputs()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Actions::ExpansionNodeActivation>("groupOutputs", this->getGroupOutputs());
+	}
+	if ( this->eIsSet(package->getExpansionActivationGroup_Attribute_regionActivation()) )
+	{
 		saveHandler->addReference(this->getRegionActivation(), "regionActivation", getRegionActivation()->eClass() != fUML::Semantics::Actions::ActionsPackage::eInstance()->getExpansionRegionActivation_Class()); 
+	}
+	if ( this->eIsSet(package->getExpansionActivationGroup_Attribute_regionInputs()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::Actions::OutputPinActivation>("regionInputs", this->getRegionInputs());
+	}
 	}
 	catch (std::exception& e)
 	{

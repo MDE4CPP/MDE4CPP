@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -367,10 +368,10 @@ void StringLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getStringLiteralExp_Attribute_stringSymbol()) )
-		{
+          if ( this->eIsSet(package->getStringLiteralExp_Attribute_stringSymbol()) )
+          {
 			saveHandler->addAttribute("stringSymbol", this->getStringSymbol());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

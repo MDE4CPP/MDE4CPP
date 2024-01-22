@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -932,8 +933,8 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getProperty_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getProperty_Attribute_aggregation()) )
-		{
+          if ( this->eIsSet(package->getProperty_Attribute_aggregation()) )
+          {
 			uml::AggregationKind value = this->getAggregation();
 			std::string literal = "";
 			if (value == uml::AggregationKind::NONE)
@@ -949,27 +950,39 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 				literal = "composite";
 			}
 			saveHandler->addAttribute("aggregation", literal);
-		}
+          }
 
-		if ( this->eIsSet(package->getProperty_Attribute_isDerived()) )
-		{
+          if ( this->eIsSet(package->getProperty_Attribute_isDerived()) )
+          {
 			saveHandler->addAttribute("isDerived", this->getIsDerived());
-		}
+          }
 
-		if ( this->eIsSet(package->getProperty_Attribute_isDerivedUnion()) )
-		{
+          if ( this->eIsSet(package->getProperty_Attribute_isDerivedUnion()) )
+          {
 			saveHandler->addAttribute("isDerivedUnion", this->getIsDerivedUnion());
-		}
+          }
 
-		if ( this->eIsSet(package->getProperty_Attribute_isID()) )
-		{
+          if ( this->eIsSet(package->getProperty_Attribute_isID()) )
+          {
 			saveHandler->addAttribute("isID", this->getIsID());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getProperty_Attribute_association()) )
+	{
 		saveHandler->addReference(this->getAssociation(), "association", getAssociation()->eClass() != uml::umlPackage::eInstance()->getAssociation_Class()); 
+	}
+	if ( this->eIsSet(package->getProperty_Attribute_opposite()) )
+	{
 		saveHandler->addReference(this->getOpposite(), "opposite", getOpposite()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
+	if ( this->eIsSet(package->getProperty_Attribute_redefinedProperty()) )
+	{
 		saveHandler->addReferences<uml::Property>("redefinedProperty", this->getRedefinedProperty());
+	}
+	if ( this->eIsSet(package->getProperty_Attribute_subsettedProperty()) )
+	{
 		saveHandler->addReferences<uml::Property>("subsettedProperty", this->getSubsettedProperty());
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -289,7 +290,10 @@ void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persisten
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getExecutionOccurrenceSpecification_Attribute_execution()) )
+	{
 		saveHandler->addReference(this->getExecution(), "execution", getExecution()->eClass() != uml::umlPackage::eInstance()->getExecutionSpecification_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

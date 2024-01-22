@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -379,15 +380,15 @@ void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getDeploymentSpecification_Attribute_deploymentLocation()) )
-		{
+          if ( this->eIsSet(package->getDeploymentSpecification_Attribute_deploymentLocation()) )
+          {
 			saveHandler->addAttribute("deploymentLocation", this->getDeploymentLocation());
-		}
+          }
 
-		if ( this->eIsSet(package->getDeploymentSpecification_Attribute_executionLocation()) )
-		{
+          if ( this->eIsSet(package->getDeploymentSpecification_Attribute_executionLocation()) )
+          {
 			saveHandler->addAttribute("executionLocation", this->getExecutionLocation());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

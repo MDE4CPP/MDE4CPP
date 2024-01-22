@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -540,10 +541,10 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 			saveHandler->addReference(realization, "realization", realization->eClass() != package->getComponentRealization_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getComponent_Attribute_isIndirectlyInstantiated()) )
-		{
+          if ( this->eIsSet(package->getComponent_Attribute_isIndirectlyInstantiated()) )
+          {
 			saveHandler->addAttribute("isIndirectlyInstantiated", this->getIsIndirectlyInstantiated());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

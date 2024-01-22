@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -447,7 +448,10 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(configuration, "configuration", configuration->eClass() != package->getDeploymentSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getDeployment_Attribute_deployedArtifact()) )
+	{
 		saveHandler->addReferences<uml::DeployedArtifact>("deployedArtifact", this->getDeployedArtifact());
+	}
 	}
 	catch (std::exception& e)
 	{

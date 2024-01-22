@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -430,13 +431,13 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(upperBound, "upperBound", upperBound->eClass() != package->getValueSpecification_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getObjectNode_Attribute_isControlType()) )
-		{
+          if ( this->eIsSet(package->getObjectNode_Attribute_isControlType()) )
+          {
 			saveHandler->addAttribute("isControlType", this->getIsControlType());
-		}
+          }
 
-		if ( this->eIsSet(package->getObjectNode_Attribute_ordering()) )
-		{
+          if ( this->eIsSet(package->getObjectNode_Attribute_ordering()) )
+          {
 			uml::ObjectNodeOrderingKind value = this->getOrdering();
 			std::string literal = "";
 			if (value == uml::ObjectNodeOrderingKind::UNORDERED)
@@ -456,10 +457,16 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 				literal = "FIFO";
 			}
 			saveHandler->addAttribute("ordering", literal);
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getObjectNode_Attribute_inState()) )
+	{
 		saveHandler->addReferences<uml::State>("inState", this->getInState());
+	}
+	if ( this->eIsSet(package->getObjectNode_Attribute_selection()) )
+	{
 		saveHandler->addReference(this->getSelection(), "selection", getSelection()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

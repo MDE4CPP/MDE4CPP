@@ -30,6 +30,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -238,12 +239,15 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getArgument_Attribute_name()) )
-		{
+          if ( this->eIsSet(package->getArgument_Attribute_name()) )
+          {
 			saveHandler->addAttribute("name", this->getName());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getArgument_Attribute_value()) )
+	{
 		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != uml::umlPackage::eInstance()->getObject_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -399,9 +400,22 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EGenericType";
+				typeName = "ecore::EGenericType";
 			}
-			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericExceptions());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EGenericType> new_eGenericExceptions = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS));
+			if(new_eGenericExceptions)
+			{
+				loadHandler->handleChild(new_eGenericExceptions);
+				getEGenericExceptions()->push_back(new_eGenericExceptions);
+			} 
 
 			return; 
 		}
@@ -411,9 +425,22 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EParameter";
+				typeName = "ecore::EParameter";
 			}
-			loadHandler->handleChildContainer<ecore::EParameter>(this->getEParameters());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EParameter> new_eParameters = std::dynamic_pointer_cast<ecore::EParameter>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS));
+			if(new_eParameters)
+			{
+				loadHandler->handleChild(new_eParameters);
+				getEParameters()->push_back(new_eParameters);
+			} 
 
 			return; 
 		}
@@ -423,9 +450,22 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ETypeParameter";
+				typeName = "ecore::ETypeParameter";
 			}
-			loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ETypeParameter> new_eTypeParameters = std::dynamic_pointer_cast<ecore::ETypeParameter>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS));
+			if(new_eTypeParameters)
+			{
+				loadHandler->handleChild(new_eTypeParameters);
+				getETypeParameters()->push_back(new_eTypeParameters);
+			} 
 
 			return; 
 		}
@@ -489,18 +529,25 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getEOperation_Attribute_eExceptions()) )
+	{
 		saveHandler->addReferences<ecore::EClassifier>("eExceptions", this->getEExceptions());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eGenericExceptions'
-
+	    if ( this->eIsSet(package->getEOperation_Attribute_eGenericExceptions()) )
+	    {
 		saveHandler->addReferences<ecore::EGenericType>("eGenericExceptions", this->getEGenericExceptions());
+	    }
 
 		// Save 'eTypeParameters'
-
+	    if ( this->eIsSet(package->getEOperation_Attribute_eTypeParameters()) )
+	    {
 		saveHandler->addReferences<ecore::ETypeParameter>("eTypeParameters", this->getETypeParameters());
+	    }
 	}
 	catch (std::exception& e)
 	{

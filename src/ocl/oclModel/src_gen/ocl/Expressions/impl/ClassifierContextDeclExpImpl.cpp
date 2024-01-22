@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -398,12 +399,15 @@ void ClassifierContextDeclExpImpl::saveContent(std::shared_ptr<persistence::inte
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getClassifierContextDeclExp_Attribute_classifierName()) )
-		{
+          if ( this->eIsSet(package->getClassifierContextDeclExp_Attribute_classifierName()) )
+          {
 			saveHandler->addAttribute("classifierName", this->getClassifierName());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getClassifierContextDeclExp_Attribute_invOrDevExp()) )
+	{
 		saveHandler->addReference(this->getInvOrDevExp(), "invOrDevExp", getInvOrDevExp()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getInvOrDefExp_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

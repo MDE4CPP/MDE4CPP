@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -282,7 +283,10 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getPackageMerge_Attribute_mergedPackage()) )
+	{
 		saveHandler->addReference(this->getMergedPackage(), "mergedPackage", getMergedPackage()->eClass() != uml::umlPackage::eInstance()->getPackage_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

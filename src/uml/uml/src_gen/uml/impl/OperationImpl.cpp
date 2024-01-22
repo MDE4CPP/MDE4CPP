@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -826,22 +827,36 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getOperation_Attribute_isQuery()) )
-		{
+          if ( this->eIsSet(package->getOperation_Attribute_isQuery()) )
+          {
 			saveHandler->addAttribute("isQuery", this->getIsQuery());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getOperation_Attribute_bodyCondition()) )
+	{
 		saveHandler->addReference(this->getBodyCondition(), "bodyCondition", getBodyCondition()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+	}
+	if ( this->eIsSet(package->getOperation_Attribute_postcondition()) )
+	{
 		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());
+	}
+	if ( this->eIsSet(package->getOperation_Attribute_precondition()) )
+	{
 		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());
+	}
+	if ( this->eIsSet(package->getOperation_Attribute_redefinedOperation()) )
+	{
 		saveHandler->addReferences<uml::Operation>("redefinedOperation", this->getRedefinedOperation());
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'ownedParameter'
-
+	    if ( this->eIsSet(package->getOperation_Attribute_ownedParameter()) )
+	    {
 		saveHandler->addReferences<uml::Parameter>("ownedParameter", this->getProperty_OwnedParameter());
+	    }
 	}
 	catch (std::exception& e)
 	{

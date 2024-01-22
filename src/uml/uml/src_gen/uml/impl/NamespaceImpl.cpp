@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -566,20 +567,28 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'elementImport'
-
+	    if ( this->eIsSet(package->getNamespace_Attribute_elementImport()) )
+	    {
 		saveHandler->addReferences<uml::ElementImport>("elementImport", this->getElementImport());
+	    }
 
 		// Save 'ownedMember'
-
+	    if ( this->eIsSet(package->getNamespace_Attribute_ownedMember()) )
+	    {
 		saveHandler->addReferences<uml::NamedElement>("ownedMember", this->getOwnedMember());
+	    }
 
 		// Save 'ownedRule'
-
+	    if ( this->eIsSet(package->getNamespace_Attribute_ownedRule()) )
+	    {
 		saveHandler->addReferences<uml::Constraint>("ownedRule", this->getOwnedRule());
+	    }
 
 		// Save 'packageImport'
-
+	    if ( this->eIsSet(package->getNamespace_Attribute_packageImport()) )
+	    {
 		saveHandler->addReferences<uml::PackageImport>("packageImport", this->getPackageImport());
+	    }
 	}
 	catch (std::exception& e)
 	{

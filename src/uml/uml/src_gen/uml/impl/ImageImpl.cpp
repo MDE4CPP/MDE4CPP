@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -265,20 +266,20 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getImage_Attribute_content()) )
-		{
+          if ( this->eIsSet(package->getImage_Attribute_content()) )
+          {
 			saveHandler->addAttribute("content", this->getContent());
-		}
+          }
 
-		if ( this->eIsSet(package->getImage_Attribute_format()) )
-		{
+          if ( this->eIsSet(package->getImage_Attribute_format()) )
+          {
 			saveHandler->addAttribute("format", this->getFormat());
-		}
+          }
 
-		if ( this->eIsSet(package->getImage_Attribute_location()) )
-		{
+          if ( this->eIsSet(package->getImage_Attribute_location()) )
+          {
 			saveHandler->addAttribute("location", this->getLocation());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -265,8 +266,14 @@ void ExpressionInOclEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getExpressionInOclEval_Attribute_context()) )
+	{
 		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class()); 
+	}
+	if ( this->eIsSet(package->getExpressionInOclEval_Attribute_environment()) )
+	{
 		saveHandler->addReference(this->getEnvironment(), "environment", getEnvironment()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalEnvironment_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

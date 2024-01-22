@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -294,13 +295,19 @@ void OclMessageExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getOclMessageExpEval_Attribute_name()) )
-		{
+          if ( this->eIsSet(package->getOclMessageExpEval_Attribute_name()) )
+          {
 			saveHandler->addAttribute("name", this->getName());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getOclMessageExpEval_Attribute_arguments()) )
+	{
 		saveHandler->addReferences<ocl::Evaluations::OclMessageArgEval>("arguments", this->getArguments());
+	}
+	if ( this->eIsSet(package->getOclMessageExpEval_Attribute_target()) )
+	{
 		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

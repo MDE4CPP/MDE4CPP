@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -412,17 +413,19 @@ void NavigationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getNavigationCallExp_Attribute_navigationSource()) )
-		{
+          if ( this->eIsSet(package->getNavigationCallExp_Attribute_navigationSource()) )
+          {
 			saveHandler->addAttribute("navigationSource", this->getNavigationSource());
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'qualifier'
-
+	    if ( this->eIsSet(package->getNavigationCallExp_Attribute_qualifier()) )
+	    {
 		saveHandler->addReferences<ocl::Expressions::OclExpression>("qualifier", this->getQualifier());
+	    }
 	}
 	catch (std::exception& e)
 	{

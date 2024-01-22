@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -366,18 +367,24 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
-		{
+          if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
+          {
 			saveHandler->addAttribute("isMulticast", this->getIsMulticast());
-		}
+          }
 
-		if ( this->eIsSet(package->getObjectFlow_Attribute_isMultireceive()) )
-		{
+          if ( this->eIsSet(package->getObjectFlow_Attribute_isMultireceive()) )
+          {
 			saveHandler->addAttribute("isMultireceive", this->getIsMultireceive());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getObjectFlow_Attribute_selection()) )
+	{
 		saveHandler->addReference(this->getSelection(), "selection", getSelection()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
+	if ( this->eIsSet(package->getObjectFlow_Attribute_transformation()) )
+	{
 		saveHandler->addReference(this->getTransformation(), "transformation", getTransformation()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

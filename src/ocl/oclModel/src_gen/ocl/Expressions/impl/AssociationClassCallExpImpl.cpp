@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -369,10 +370,10 @@ void AssociationClassCallExpImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getAssociationClassCallExp_Attribute_referredAssociationClass()) )
-		{
+          if ( this->eIsSet(package->getAssociationClassCallExp_Attribute_referredAssociationClass()) )
+          {
 			saveHandler->addAttribute("referredAssociationClass", this->getReferredAssociationClass());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -711,7 +712,10 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 			saveHandler->addReference(protocol, "protocol", protocol->eClass() != package->getProtocolStateMachine_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getInterface_Attribute_redefinedInterface()) )
+	{
 		saveHandler->addReferences<uml::Interface>("redefinedInterface", this->getRedefinedInterface());
+	}
 	}
 	catch (std::exception& e)
 	{

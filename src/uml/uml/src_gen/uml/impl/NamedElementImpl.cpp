@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -431,13 +432,13 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getNamedElement_Attribute_name()) )
-		{
+          if ( this->eIsSet(package->getNamedElement_Attribute_name()) )
+          {
 			saveHandler->addAttribute("name", this->getName());
-		}
+          }
 
-		if ( this->eIsSet(package->getNamedElement_Attribute_visibility()) )
-		{
+          if ( this->eIsSet(package->getNamedElement_Attribute_visibility()) )
+          {
 			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == uml::VisibilityKind::PUBLIC)
@@ -457,7 +458,7 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 				literal = "package";
 			}
 			saveHandler->addAttribute("visibility", literal);
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

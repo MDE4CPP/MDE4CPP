@@ -11,7 +11,6 @@
 #include <memory>
 #include <string>
 // forward declarations
-template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
@@ -92,7 +91,7 @@ namespace ecore
 			virtual const std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>>& getEClassifiers() const = 0;
 			virtual const std::shared_ptr<ecore::EFactory>& getEFactoryInstance() const = 0;
 			virtual void setEFactoryInstance(const std::shared_ptr<ecore::EFactory>&) = 0;
-			virtual const std::shared_ptr<Bag<ecore::EPackage>>& getESubpackages() const = 0;
+			virtual const std::shared_ptr<Subset<ecore::EPackage, ecore::EObject>>& getESubpackages() const = 0;
 			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const = 0;
 
 			//*********************************
@@ -123,7 +122,7 @@ namespace ecore
 			//*********************************
 			mutable std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> m_eClassifiers;
 			std::shared_ptr<ecore::EFactory> m_eFactoryInstance;
-			mutable std::shared_ptr<Bag<ecore::EPackage>> m_eSubpackages;
+			mutable std::shared_ptr<Subset<ecore::EPackage, ecore::EObject>> m_eSubpackages;
 			std::weak_ptr<ecore::EPackage> m_eSuperPackage;
 	};
 }

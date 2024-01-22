@@ -7,6 +7,8 @@ description 'Generate task for project: ocl'
 task generateOcl(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'ocl'
 	description 'generate C++ code of ocl.ecore model'
+
+	generateAPI = false;
 	
 	modelFilePath = file('.' + File.separator + 'ocl.ecore')
 

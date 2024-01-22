@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -564,7 +565,10 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 			saveHandler->addReference(include, "include", include->eClass() != package->getInclude_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getUseCase_Attribute_subject()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("subject", this->getSubject());
+	}
 	}
 	catch (std::exception& e)
 	{

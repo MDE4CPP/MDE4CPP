@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -419,7 +420,10 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getInputPin_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getReplyAction_Attribute_replyToCall()) )
+	{
 		saveHandler->addReference(this->getReplyToCall(), "replyToCall", getReplyToCall()->eClass() != uml::umlPackage::eInstance()->getTrigger_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -372,19 +373,28 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEReference_Attribute_containment()) )
-		{
+          if ( this->eIsSet(package->getEReference_Attribute_containment()) )
+          {
 			saveHandler->addAttribute("containment", this->isContainment());
-		}
+          }
 
-		if ( this->eIsSet(package->getEReference_Attribute_resolveProxies()) )
-		{
+          if ( this->eIsSet(package->getEReference_Attribute_resolveProxies()) )
+          {
 			saveHandler->addAttribute("resolveProxies", this->isResolveProxies());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getEReference_Attribute_eKeys()) )
+	{
 		saveHandler->addReferences<ecore::EAttribute>("eKeys", this->getEKeys());
+	}
+	if ( this->eIsSet(package->getEReference_Attribute_eOpposite()) )
+	{
 		saveHandler->addReference(this->getEOpposite(),"eOpposite", getEOpposite()->eClass() != ecore::ecorePackage::eInstance()->getEReference_Class());
+	}
+	if ( this->eIsSet(package->getEReference_Attribute_eReferenceType()) )
+	{
 		saveHandler->addReference(this->getEReferenceType(),"eReferenceType", getEReferenceType()->eClass() != ecore::ecorePackage::eInstance()->getEClass_Class());
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -688,15 +689,23 @@ void OclExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getOclExpression_Attribute_appliedElement()) )
+	{
 		saveHandler->addReference(this->getAppliedElement(), "appliedElement", getAppliedElement()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getCallExp_Class()); 
+	}
+	if ( this->eIsSet(package->getOclExpression_Attribute_instance()) )
+	{
 		saveHandler->addReference(this->getInstance(), "instance", getInstance()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'initializedElement'
-
+	    if ( this->eIsSet(package->getOclExpression_Attribute_initializedElement()) )
+	    {
 		saveHandler->addReferences<ocl::Expressions::VarDeclarationExp>("initializedElement", this->getInitializedElement());
+	    }
 	}
 	catch (std::exception& e)
 	{

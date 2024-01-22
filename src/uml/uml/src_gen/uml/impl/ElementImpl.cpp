@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -542,8 +543,10 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'ownedElement'
-
+	    if ( this->eIsSet(package->getElement_Attribute_ownedElement()) )
+	    {
 		saveHandler->addReferences<uml::Element>("ownedElement", this->getOwnedElement());
+	    }
 	}
 	catch (std::exception& e)
 	{

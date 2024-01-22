@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -386,8 +387,14 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getExtend_Attribute_extendedCase()) )
+	{
 		saveHandler->addReference(this->getExtendedCase(), "extendedCase", getExtendedCase()->eClass() != uml::umlPackage::eInstance()->getUseCase_Class()); 
+	}
+	if ( this->eIsSet(package->getExtend_Attribute_extensionLocation()) )
+	{
 		saveHandler->addReferences<uml::ExtensionPoint>("extensionLocation", this->getExtensionLocation());
+	}
 	}
 	catch (std::exception& e)
 	{

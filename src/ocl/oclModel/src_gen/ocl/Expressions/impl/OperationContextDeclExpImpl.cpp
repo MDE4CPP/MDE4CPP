@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -410,8 +411,14 @@ void OperationContextDeclExpImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getOperationContextDeclExp_Attribute_operationContext()) )
+	{
 		saveHandler->addReference(this->getOperationContext(), "operationContext", getOperationContext()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOperationContextExp_Class()); 
+	}
+	if ( this->eIsSet(package->getOperationContextDeclExp_Attribute_prePostBodyExpressions()) )
+	{
 		saveHandler->addReference(this->getPrePostBodyExpressions(), "prePostBodyExpressions", getPrePostBodyExpressions()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getPrePostBodyListExp_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

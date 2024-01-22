@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -277,12 +278,15 @@ void ClassifierTemplateParameterImpl::saveContent(std::shared_ptr<persistence::i
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getClassifierTemplateParameter_Attribute_allowSubstitutable()) )
-		{
+          if ( this->eIsSet(package->getClassifierTemplateParameter_Attribute_allowSubstitutable()) )
+          {
 			saveHandler->addAttribute("allowSubstitutable", this->getAllowSubstitutable());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getClassifierTemplateParameter_Attribute_constrainingClassifier()) )
+	{
 		saveHandler->addReferences<uml::Classifier>("constrainingClassifier", this->getConstrainingClassifier());
+	}
 	}
 	catch (std::exception& e)
 	{

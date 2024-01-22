@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -110,7 +111,7 @@ bool ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->add(_property, value, -1);
+	return this->add(_property, value, -1);
 	//end of body
 }
 

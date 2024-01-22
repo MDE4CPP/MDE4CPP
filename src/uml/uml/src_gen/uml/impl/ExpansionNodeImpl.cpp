@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -332,8 +333,14 @@ void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getExpansionNode_Attribute_regionAsInput()) )
+	{
 		saveHandler->addReference(this->getRegionAsInput(), "regionAsInput", getRegionAsInput()->eClass() != uml::umlPackage::eInstance()->getExpansionRegion_Class()); 
+	}
+	if ( this->eIsSet(package->getExpansionNode_Attribute_regionAsOutput()) )
+	{
 		saveHandler->addReference(this->getRegionAsOutput(), "regionAsOutput", getRegionAsOutput()->eClass() != uml::umlPackage::eInstance()->getExpansionRegion_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

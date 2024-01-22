@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -399,12 +400,15 @@ void PackageDeclarationExpImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPackageDeclarationExp_Attribute_path()) )
-		{
+          if ( this->eIsSet(package->getPackageDeclarationExp_Attribute_path()) )
+          {
 			saveHandler->addAttribute("path", this->getPath());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getPackageDeclarationExp_Attribute_contextDeclarations()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::ContextDeclarationExp>("contextDeclarations", this->getContextDeclarations());
+	}
 	}
 	catch (std::exception& e)
 	{

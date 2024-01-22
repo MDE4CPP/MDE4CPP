@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -348,8 +349,14 @@ void IntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getInterval_Attribute_max()) )
+	{
 		saveHandler->addReference(this->getMax(), "max", getMax()->eClass() != uml::umlPackage::eInstance()->getValueSpecification_Class()); 
+	}
+	if ( this->eIsSet(package->getInterval_Attribute_min()) )
+	{
 		saveHandler->addReference(this->getMin(), "min", getMin()->eClass() != uml::umlPackage::eInstance()->getValueSpecification_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

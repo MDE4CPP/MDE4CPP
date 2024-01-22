@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -357,10 +358,10 @@ void PrimitiveLiteralExpImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPrimitiveLiteralExp_Attribute_symbol()) )
-		{
+          if ( this->eIsSet(package->getPrimitiveLiteralExp_Attribute_symbol()) )
+          {
 			saveHandler->addAttribute("symbol", this->getSymbol());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

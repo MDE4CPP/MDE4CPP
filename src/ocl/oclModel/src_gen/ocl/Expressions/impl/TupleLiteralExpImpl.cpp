@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -388,8 +389,10 @@ void TupleLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'part'
-
+	    if ( this->eIsSet(package->getTupleLiteralExp_Attribute_part()) )
+	    {
 		saveHandler->addReferences<ocl::Expressions::VarDeclarationExp>("part", this->getPart());
+	    }
 	}
 	catch (std::exception& e)
 	{

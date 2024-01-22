@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -337,13 +338,19 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getGeneralization_Attribute_isSubstitutable()) )
-		{
+          if ( this->eIsSet(package->getGeneralization_Attribute_isSubstitutable()) )
+          {
 			saveHandler->addAttribute("isSubstitutable", this->getIsSubstitutable());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getGeneralization_Attribute_general()) )
+	{
 		saveHandler->addReference(this->getGeneral(), "general", getGeneral()->eClass() != uml::umlPackage::eInstance()->getClassifier_Class()); 
+	}
+	if ( this->eIsSet(package->getGeneralization_Attribute_generalizationSet()) )
+	{
 		saveHandler->addReferences<uml::GeneralizationSet>("generalizationSet", this->getGeneralizationSet());
+	}
 	}
 	catch (std::exception& e)
 	{

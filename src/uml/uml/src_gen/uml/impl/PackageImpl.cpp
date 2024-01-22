@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -894,17 +895,19 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 			saveHandler->addReference(profileApplication, "profileApplication", profileApplication->eClass() != package->getProfileApplication_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getPackage_Attribute_uRI()) )
-		{
+          if ( this->eIsSet(package->getPackage_Attribute_uRI()) )
+          {
 			saveHandler->addAttribute("URI", this->getURI());
-		}
+          }
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'packagedElement'
-
+	    if ( this->eIsSet(package->getPackage_Attribute_packagedElement()) )
+	    {
 		saveHandler->addReferences<uml::PackageableElement>("packagedElement", this->getPackagedElement());
+	    }
 	}
 	catch (std::exception& e)
 	{

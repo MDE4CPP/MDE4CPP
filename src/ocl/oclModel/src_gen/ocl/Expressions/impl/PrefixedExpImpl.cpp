@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -395,12 +396,15 @@ void PrefixedExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPrefixedExp_Attribute_unarySymbol()) )
-		{
+          if ( this->eIsSet(package->getPrefixedExp_Attribute_unarySymbol()) )
+          {
 			saveHandler->addAttribute("unarySymbol", this->getUnarySymbol());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getPrefixedExp_Attribute_referredExpression()) )
+	{
 		saveHandler->addReference(this->getReferredExpression(), "referredExpression", getReferredExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

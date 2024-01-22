@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -290,8 +291,14 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getTrigger_Attribute_event()) )
+	{
 		saveHandler->addReference(this->getEvent(), "event", getEvent()->eClass() != uml::umlPackage::eInstance()->getEvent_Class()); 
+	}
+	if ( this->eIsSet(package->getTrigger_Attribute_port()) )
+	{
 		saveHandler->addReferences<uml::Port>("port", this->getPort());
+	}
 	}
 	catch (std::exception& e)
 	{

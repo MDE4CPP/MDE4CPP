@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EOperation;
-	class EAttribute;
-	class EParameter;
-	class EClass;
-	class EDataType;
 	class EReference;
+	class EStringToStringMapEntry;
+	class EClass;
+	class EOperation;
+	class EDataType;
+	class EAttribute;
+	class EAnnotation;
+	class EGenericType;
+	class EParameter;
 }
 
 namespace fUML::Semantics::Actions 

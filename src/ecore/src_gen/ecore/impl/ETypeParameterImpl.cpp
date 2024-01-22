@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -203,9 +204,22 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EGenericType";
+				typeName = "ecore::EGenericType";
 			}
-			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEBounds());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EGenericType> new_eBounds = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS));
+			if(new_eBounds)
+			{
+				loadHandler->handleChild(new_eBounds);
+				getEBounds()->push_back(new_eBounds);
+			} 
 
 			return; 
 		}
@@ -250,8 +264,10 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eBounds'
-
+	    if ( this->eIsSet(package->getETypeParameter_Attribute_eBounds()) )
+	    {
 		saveHandler->addReferences<ecore::EGenericType>("eBounds", this->getEBounds());
+	    }
 	}
 	catch (std::exception& e)
 	{

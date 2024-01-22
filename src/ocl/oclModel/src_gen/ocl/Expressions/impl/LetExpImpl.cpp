@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -417,12 +418,16 @@ void LetExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'in'
-
+	    if ( this->eIsSet(package->getLetExp_Attribute_in()) )
+	    {
 		saveHandler->addReference(this->getIn(), "in", getIn()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 
 		// Save 'variables'
-
+	    if ( this->eIsSet(package->getLetExp_Attribute_variables()) )
+	    {
 		saveHandler->addReferences<ocl::Expressions::VarDeclarationExp>("variables", this->getVariables());
+	    }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -38,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -495,21 +496,47 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getVariable_Attribute_baseExp()) )
+	{
 		saveHandler->addReference(this->getBaseExp(), "baseExp", getBaseExp()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getIterateExp_Class()); 
+	}
+	if ( this->eIsSet(package->getVariable_Attribute_loopExp()) )
+	{
 		saveHandler->addReference(this->getLoopExp(), "loopExp", getLoopExp()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Class()); 
+	}
+	if ( this->eIsSet(package->getVariable_Attribute_referringExp()) )
+	{
 		saveHandler->addReference(this->getReferringExp(), "referringExp", getReferringExp()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getVariableExp_Class()); 
+	}
+	if ( this->eIsSet(package->getVariable_Attribute_representedParameter()) )
+	{
 		saveHandler->addReference(this->getRepresentedParameter(),"representedParameter", getRepresentedParameter()->eClass() != ecore::ecorePackage::eInstance()->getEParameter_Class());
+	}
+	if ( this->eIsSet(package->getVariable_Attribute_resultOwner()) )
+	{
 		saveHandler->addReference(this->getResultOwner(), "resultOwner", getResultOwner()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Class()); 
+	}
+	if ( this->eIsSet(package->getVariable_Attribute_selfOwner()) )
+	{
 		saveHandler->addReference(this->getSelfOwner(), "selfOwner", getSelfOwner()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Class()); 
+	}
+	if ( this->eIsSet(package->getVariable_Attribute_value()) )
+	{
 		saveHandler->addReference(this->getValue(),"value", getValue()->eClass() != ecore::ecorePackage::eInstance()->getETypedElement_Class());
+	}
+	if ( this->eIsSet(package->getVariable_Attribute_varOwner()) )
+	{
 		saveHandler->addReference(this->getVarOwner(), "varOwner", getVarOwner()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'initExpression'
-
+	    if ( this->eIsSet(package->getVariable_Attribute_initExpression()) )
+	    {
 		saveHandler->addReference(this->getInitExpression(), "initExpression", getInitExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

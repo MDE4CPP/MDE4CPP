@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -577,8 +578,14 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getStateMachine_Attribute_extendedStateMachine()) )
+	{
 		saveHandler->addReferences<uml::StateMachine>("extendedStateMachine", this->getExtendedStateMachine());
+	}
+	if ( this->eIsSet(package->getStateMachine_Attribute_submachineState()) )
+	{
 		saveHandler->addReferences<uml::State>("submachineState", this->getSubmachineState());
+	}
 	}
 	catch (std::exception& e)
 	{

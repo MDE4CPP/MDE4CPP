@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -632,11 +633,26 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(weight, "weight", weight->eClass() != package->getValueSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getActivityEdge_Attribute_inPartition()) )
+	{
 		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());
+	}
+	if ( this->eIsSet(package->getActivityEdge_Attribute_interrupts()) )
+	{
 		saveHandler->addReference(this->getInterrupts(), "interrupts", getInterrupts()->eClass() != uml::umlPackage::eInstance()->getInterruptibleActivityRegion_Class()); 
+	}
+	if ( this->eIsSet(package->getActivityEdge_Attribute_redefinedEdge()) )
+	{
 		saveHandler->addReferences<uml::ActivityEdge>("redefinedEdge", this->getRedefinedEdge());
+	}
+	if ( this->eIsSet(package->getActivityEdge_Attribute_source()) )
+	{
 		saveHandler->addReference(this->getSource(), "source", getSource()->eClass() != uml::umlPackage::eInstance()->getActivityNode_Class()); 
+	}
+	if ( this->eIsSet(package->getActivityEdge_Attribute_target()) )
+	{
 		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != uml::umlPackage::eInstance()->getActivityNode_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

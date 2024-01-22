@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -382,8 +383,8 @@ void IteratorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getIteratorExp_Attribute_sourrundedBy()) )
-		{
+          if ( this->eIsSet(package->getIteratorExp_Attribute_sourrundedBy()) )
+          {
 			ocl::Expressions::SurroundingType value = this->getSourrundedBy();
 			std::string literal = "";
 			if (value == ocl::Expressions::SurroundingType::PAREN)
@@ -403,7 +404,7 @@ void IteratorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 				literal = "NONE";
 			}
 			saveHandler->addAttribute("sourrundedBy", literal);
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

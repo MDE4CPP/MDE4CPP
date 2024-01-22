@@ -10,8 +10,7 @@ task buildUml() {
 	dependsOn 'model:generateUml'
 	dependsOn 'src_gen:compileUml'
 
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }
-
 tasks.getByPath('src_gen:compileUml').mustRunAfter tasks.getByPath('model:generateUml')

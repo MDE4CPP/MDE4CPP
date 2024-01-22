@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -286,8 +287,14 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getGeneralOrdering_Attribute_after()) )
+	{
 		saveHandler->addReference(this->getAfter(), "after", getAfter()->eClass() != uml::umlPackage::eInstance()->getOccurrenceSpecification_Class()); 
+	}
+	if ( this->eIsSet(package->getGeneralOrdering_Attribute_before()) )
+	{
 		saveHandler->addReference(this->getBefore(), "before", getBefore()->eClass() != uml::umlPackage::eInstance()->getOccurrenceSpecification_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

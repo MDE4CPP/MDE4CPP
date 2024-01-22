@@ -7,12 +7,12 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EParameter.hpp"
 
 //depending model packages

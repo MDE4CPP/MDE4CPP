@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -357,10 +358,10 @@ void FeatureCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getFeatureCallExp_Attribute_isPre()) )
-		{
+          if ( this->eIsSet(package->getFeatureCallExp_Attribute_isPre()) )
+          {
 			saveHandler->addAttribute("isPre", this->isIsPre());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -430,13 +431,19 @@ void PropertyContextDeclExpImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getPropertyContextDeclExp_Attribute_propName()) )
-		{
+          if ( this->eIsSet(package->getPropertyContextDeclExp_Attribute_propName()) )
+          {
 			saveHandler->addAttribute("propName", this->getPropName());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getPropertyContextDeclExp_Attribute_initOrDerValues()) )
+	{
 		saveHandler->addReference(this->getInitOrDerValues(), "initOrDerValues", getInitOrDerValues()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getInitOrDerValueListExp_Class()); 
+	}
+	if ( this->eIsSet(package->getPropertyContextDeclExp_Attribute_propType()) )
+	{
 		saveHandler->addReference(this->getPropType(), "propType", getPropType()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

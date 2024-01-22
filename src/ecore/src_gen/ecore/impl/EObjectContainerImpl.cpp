@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -242,7 +243,10 @@ void EObjectContainerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getEObjectContainer_Attribute_container()) )
+	{
 		saveHandler->addReferences<ecore::EObject>("container", this->getContainer());
+	}
 	}
 	catch (std::exception& e)
 	{

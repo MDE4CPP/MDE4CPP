@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -463,13 +464,19 @@ void VarDeclarationExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getVarDeclarationExp_Attribute_varName()) )
-		{
+          if ( this->eIsSet(package->getVarDeclarationExp_Attribute_varName()) )
+          {
 			saveHandler->addAttribute("varName", this->getVarName());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getVarDeclarationExp_Attribute_assignedOclExp()) )
+	{
 		saveHandler->addReference(this->getAssignedOclExp(), "assignedOclExp", getAssignedOclExp()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
+	}
+	if ( this->eIsSet(package->getVarDeclarationExp_Attribute_varType()) )
+	{
 		saveHandler->addReference(this->getVarType(), "varType", getVarType()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

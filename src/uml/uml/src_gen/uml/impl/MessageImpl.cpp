@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -523,8 +524,8 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getMessage_Attribute_messageSort()) )
-		{
+          if ( this->eIsSet(package->getMessage_Attribute_messageSort()) )
+          {
 			uml::MessageSort value = this->getMessageSort();
 			std::string literal = "";
 			if (value == uml::MessageSort::SYNCHCALL)
@@ -552,12 +553,24 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 				literal = "reply";
 			}
 			saveHandler->addAttribute("messageSort", literal);
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getMessage_Attribute_connector()) )
+	{
 		saveHandler->addReference(this->getConnector(), "connector", getConnector()->eClass() != uml::umlPackage::eInstance()->getConnector_Class()); 
+	}
+	if ( this->eIsSet(package->getMessage_Attribute_receiveEvent()) )
+	{
 		saveHandler->addReference(this->getReceiveEvent(), "receiveEvent", getReceiveEvent()->eClass() != uml::umlPackage::eInstance()->getMessageEnd_Class()); 
+	}
+	if ( this->eIsSet(package->getMessage_Attribute_sendEvent()) )
+	{
 		saveHandler->addReference(this->getSendEvent(), "sendEvent", getSendEvent()->eClass() != uml::umlPackage::eInstance()->getMessageEnd_Class()); 
+	}
+	if ( this->eIsSet(package->getMessage_Attribute_signature()) )
+	{
 		saveHandler->addReference(this->getSignature(), "signature", getSignature()->eClass() != uml::umlPackage::eInstance()->getNamedElement_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

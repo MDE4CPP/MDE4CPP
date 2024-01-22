@@ -30,6 +30,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -47,8 +48,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -308,10 +309,10 @@ void TokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getToken_Attribute_withdrawn()) )
-		{
+          if ( this->eIsSet(package->getToken_Attribute_withdrawn()) )
+          {
 			saveHandler->addAttribute("withdrawn", this->isWithdrawn());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

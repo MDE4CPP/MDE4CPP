@@ -17,7 +17,6 @@ namespace uml
 	class PrimitiveType;
 	class Property;
 	class RedefinableTemplateSignature;
-	class ConnectorEnd;
 }
 
 

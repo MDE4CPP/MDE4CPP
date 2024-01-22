@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -365,7 +366,10 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 			saveHandler->addReference(parameterSubstitution, "parameterSubstitution", parameterSubstitution->eClass() != package->getTemplateParameterSubstitution_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getTemplateBinding_Attribute_signature()) )
+	{
 		saveHandler->addReference(this->getSignature(), "signature", getSignature()->eClass() != uml::umlPackage::eInstance()->getTemplateSignature_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

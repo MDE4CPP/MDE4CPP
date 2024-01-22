@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -571,8 +572,8 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getTransition_Attribute_kind()) )
-		{
+          if ( this->eIsSet(package->getTransition_Attribute_kind()) )
+          {
 			uml::TransitionKind value = this->getKind();
 			std::string literal = "";
 			if (value == uml::TransitionKind::INTERNAL)
@@ -588,12 +589,24 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 				literal = "external";
 			}
 			saveHandler->addAttribute("kind", literal);
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getTransition_Attribute_guard()) )
+	{
 		saveHandler->addReference(this->getGuard(), "guard", getGuard()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+	}
+	if ( this->eIsSet(package->getTransition_Attribute_redefinedTransition()) )
+	{
 		saveHandler->addReference(this->getRedefinedTransition(), "redefinedTransition", getRedefinedTransition()->eClass() != uml::umlPackage::eInstance()->getTransition_Class()); 
+	}
+	if ( this->eIsSet(package->getTransition_Attribute_source()) )
+	{
 		saveHandler->addReference(this->getSource(), "source", getSource()->eClass() != uml::umlPackage::eInstance()->getVertex_Class()); 
+	}
+	if ( this->eIsSet(package->getTransition_Attribute_target()) )
+	{
 		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != uml::umlPackage::eInstance()->getVertex_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

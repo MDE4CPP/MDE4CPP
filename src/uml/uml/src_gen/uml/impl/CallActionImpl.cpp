@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -373,10 +374,10 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getCallAction_Attribute_isSynchronous()) )
-		{
+          if ( this->eIsSet(package->getCallAction_Attribute_isSynchronous()) )
+          {
 			saveHandler->addAttribute("isSynchronous", this->getIsSynchronous());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

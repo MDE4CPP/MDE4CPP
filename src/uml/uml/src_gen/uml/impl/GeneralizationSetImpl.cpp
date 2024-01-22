@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -362,18 +363,24 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getGeneralizationSet_Attribute_isCovering()) )
-		{
+          if ( this->eIsSet(package->getGeneralizationSet_Attribute_isCovering()) )
+          {
 			saveHandler->addAttribute("isCovering", this->getIsCovering());
-		}
+          }
 
-		if ( this->eIsSet(package->getGeneralizationSet_Attribute_isDisjoint()) )
-		{
+          if ( this->eIsSet(package->getGeneralizationSet_Attribute_isDisjoint()) )
+          {
 			saveHandler->addAttribute("isDisjoint", this->getIsDisjoint());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getGeneralizationSet_Attribute_generalization()) )
+	{
 		saveHandler->addReferences<uml::Generalization>("generalization", this->getGeneralization());
+	}
+	if ( this->eIsSet(package->getGeneralizationSet_Attribute_powertype()) )
+	{
 		saveHandler->addReference(this->getPowertype(), "powertype", getPowertype()->eClass() != uml::umlPackage::eInstance()->getClassifier_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

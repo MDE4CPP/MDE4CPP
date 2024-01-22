@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -356,7 +357,10 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getSlot_Attribute_definingFeature()) )
+	{
 		saveHandler->addReference(this->getDefiningFeature(), "definingFeature", getDefiningFeature()->eClass() != uml::umlPackage::eInstance()->getStructuralFeature_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

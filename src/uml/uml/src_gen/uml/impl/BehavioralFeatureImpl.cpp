@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -521,8 +522,8 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getBehavioralFeature_Attribute_concurrency()) )
-		{
+          if ( this->eIsSet(package->getBehavioralFeature_Attribute_concurrency()) )
+          {
 			uml::CallConcurrencyKind value = this->getConcurrency();
 			std::string literal = "";
 			if (value == uml::CallConcurrencyKind::SEQUENTIAL)
@@ -538,15 +539,21 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 				literal = "concurrent";
 			}
 			saveHandler->addAttribute("concurrency", literal);
-		}
+          }
 
-		if ( this->eIsSet(package->getBehavioralFeature_Attribute_isAbstract()) )
-		{
+          if ( this->eIsSet(package->getBehavioralFeature_Attribute_isAbstract()) )
+          {
 			saveHandler->addAttribute("isAbstract", this->getIsAbstract());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getBehavioralFeature_Attribute_method()) )
+	{
 		saveHandler->addReferences<uml::Behavior>("method", this->getMethod());
+	}
+	if ( this->eIsSet(package->getBehavioralFeature_Attribute_raisedException()) )
+	{
 		saveHandler->addReferences<uml::Type>("raisedException", this->getRaisedException());
+	}
 	}
 	catch (std::exception& e)
 	{

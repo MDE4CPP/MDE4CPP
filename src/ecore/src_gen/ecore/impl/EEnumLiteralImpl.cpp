@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -278,15 +279,15 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEEnumLiteral_Attribute_literal()) )
-		{
+          if ( this->eIsSet(package->getEEnumLiteral_Attribute_literal()) )
+          {
 			saveHandler->addAttribute("literal", this->getLiteral());
-		}
+          }
 
-		if ( this->eIsSet(package->getEEnumLiteral_Attribute_value()) )
-		{
+          if ( this->eIsSet(package->getEEnumLiteral_Attribute_value()) )
+          {
 			saveHandler->addAttribute("value", this->getValue());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

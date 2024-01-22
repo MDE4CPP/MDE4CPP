@@ -7,6 +7,8 @@ description 'Generate task for project: uml'
 task generateUml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'uml'
 	description 'generate C++ code of uml.ecore model'
+
+	generateAPI = false;
 	
 	modelFilePath = file('.' + File.separator + 'uml.ecore')
 

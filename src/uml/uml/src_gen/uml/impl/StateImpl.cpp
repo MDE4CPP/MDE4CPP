@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -819,9 +820,18 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getState_Attribute_redefinedState()) )
+	{
 		saveHandler->addReference(this->getRedefinedState(), "redefinedState", getRedefinedState()->eClass() != uml::umlPackage::eInstance()->getState_Class()); 
+	}
+	if ( this->eIsSet(package->getState_Attribute_stateInvariant()) )
+	{
 		saveHandler->addReference(this->getStateInvariant(), "stateInvariant", getStateInvariant()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+	}
+	if ( this->eIsSet(package->getState_Attribute_submachine()) )
+	{
 		saveHandler->addReference(this->getSubmachine(), "submachine", getSubmachine()->eClass() != uml::umlPackage::eInstance()->getStateMachine_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

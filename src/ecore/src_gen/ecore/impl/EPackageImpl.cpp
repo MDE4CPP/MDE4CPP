@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -141,11 +142,20 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 	}
 
 	//clone reference 'eSubpackages'
-	const std::shared_ptr<Bag<ecore::EPackage>>& eSubpackagesList = obj.getESubpackages();
+	const std::shared_ptr<Subset<ecore::EPackage, ecore::EObject>>& eSubpackagesList = obj.getESubpackages();
 	if(eSubpackagesList)
 	{
-		m_eSubpackages.reset(new Bag<ecore::EPackage>());
+		/*Subset*/
+		m_eSubpackages.reset(new Subset<ecore::EPackage, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eSubpackages - Subset<ecore::EPackage, ecore::EObject >()" << std::endl;
+		#endif
 		
+		/*Subset*/
+		getESubpackages()->initSubset(getEContentUnion());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eSubpackages - Subset<ecore::EPackage, ecore::EObject >(getEContentUnion())" << std::endl;
+		#endif
 		
 		for(const std::shared_ptr<ecore::EPackage>& eSubpackagesindexElem: *eSubpackagesList) 
 		{
@@ -163,6 +173,11 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 		std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContentUnion())" << std::endl;
 	#endif
 	
+	/*Subset*/
+	getESubpackages()->initSubset(getEContentUnion());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_eSubpackages - Subset<ecore::EPackage, ecore::EObject >(getEContentUnion())" << std::endl;
+	#endif
 	
 	return *this;
 }
@@ -255,12 +270,21 @@ void EPackageImpl::setEFactoryInstance(const std::shared_ptr<ecore::EFactory>& _
 }
 
 /* Getter & Setter for reference eSubpackages */
-const std::shared_ptr<Bag<ecore::EPackage>>& EPackageImpl::getESubpackages() const
+const std::shared_ptr<Subset<ecore::EPackage, ecore::EObject>>& EPackageImpl::getESubpackages() const
 {
 	if(m_eSubpackages == nullptr)
 	{
-		m_eSubpackages.reset(new Bag<ecore::EPackage>());
+		/*Subset*/
+		m_eSubpackages.reset(new Subset<ecore::EPackage, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eSubpackages - Subset<ecore::EPackage, ecore::EObject >()" << std::endl;
+		#endif
 		
+		/*Subset*/
+		getESubpackages()->initSubset(getEContentUnion());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eSubpackages - Subset<ecore::EPackage, ecore::EObject >(getEContentUnion())" << std::endl;
+		#endif
 		
 	}
     return m_eSubpackages;
@@ -368,7 +392,20 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<ecore::EClassifier>(this->getEClassifiers());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EClassifier> new_eClassifiers = std::dynamic_pointer_cast<ecore::EClassifier>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS));
+			if(new_eClassifiers)
+			{
+				loadHandler->handleChild(new_eClassifiers);
+				getEClassifiers()->push_back(new_eClassifiers);
+			} 
 
 			return; 
 		}
@@ -378,9 +415,22 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EPackage";
+				typeName = "ecore::EPackage";
 			}
-			loadHandler->handleChildContainer<ecore::EPackage>(this->getESubpackages());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::EPackage> new_eSubpackages = std::dynamic_pointer_cast<ecore::EPackage>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES));
+			if(new_eSubpackages)
+			{
+				loadHandler->handleChild(new_eSubpackages);
+				getESubpackages()->push_back(new_eSubpackages);
+			} 
 
 			return; 
 		}
@@ -439,25 +489,27 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			saveHandler->addReference(eClassifiers, "eClassifiers", eClassifiers->eClass() != package->getEClassifier_Class());
 		}
-		// Add attributes
-		if ( this->eIsSet(package->getEPackage_Attribute_nsPrefix()) )
-		{
-			saveHandler->addAttribute("nsPrefix", this->getNsPrefix());
-		}
 
-		if ( this->eIsSet(package->getEPackage_Attribute_nsURI()) )
-		{
-			saveHandler->addAttribute("nsURI", this->getNsURI());
-		}
-	// Add references
-		saveHandler->addReference(this->getEFactoryInstance(),"eFactoryInstance", getEFactoryInstance()->eClass() != ecore::ecorePackage::eInstance()->getEFactory_Class());
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eSubpackages'
+		for (const std::shared_ptr<ecore::EPackage>& eSubpackages : *this->getESubpackages()) 
+		{
+			saveHandler->addReference(eSubpackages, "eSubpackages", eSubpackages->eClass() != package->getEPackage_Class());
+		}
+		// Add attributes
+          if ( this->eIsSet(package->getEPackage_Attribute_nsPrefix()) )
+          {
+			saveHandler->addAttribute("nsPrefix", this->getNsPrefix());
+          }
 
-		saveHandler->addReferences<ecore::EPackage>("eSubpackages", this->getESubpackages());
+          if ( this->eIsSet(package->getEPackage_Attribute_nsURI()) )
+          {
+			saveHandler->addAttribute("nsURI", this->getNsURI());
+          }
+	// Add references
+	if ( this->eIsSet(package->getEPackage_Attribute_eFactoryInstance()) )
+	{
+		saveHandler->addReference(this->getEFactoryInstance(),"eFactoryInstance", getEFactoryInstance()->eClass() != ecore::ecorePackage::eInstance()->getEFactory_Class());
+	}
 	}
 	catch (std::exception& e)
 	{

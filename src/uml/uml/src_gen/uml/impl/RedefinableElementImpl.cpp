@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -279,10 +280,10 @@ void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
-		{
+          if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
+          {
 			saveHandler->addAttribute("isLeaf", this->getIsLeaf());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

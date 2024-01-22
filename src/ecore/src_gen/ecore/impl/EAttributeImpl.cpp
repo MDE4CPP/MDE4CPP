@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -252,10 +253,10 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getEAttribute_Attribute_iD()) )
-		{
+          if ( this->eIsSet(package->getEAttribute_Attribute_iD()) )
+          {
 			saveHandler->addAttribute("iD", this->isID());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -473,8 +474,8 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 			saveHandler->addReference(operand, "operand", operand->eClass() != package->getInteractionOperand_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getCombinedFragment_Attribute_interactionOperator()) )
-		{
+          if ( this->eIsSet(package->getCombinedFragment_Attribute_interactionOperator()) )
+          {
 			uml::InteractionOperatorKind value = this->getInteractionOperator();
 			std::string literal = "";
 			if (value == uml::InteractionOperatorKind::SEQ)
@@ -526,7 +527,7 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 				literal = "consider";
 			}
 			saveHandler->addAttribute("interactionOperator", literal);
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -447,9 +448,18 @@ void PrePostBodyListExpImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getPrePostBodyListExp_Attribute_bodyExpressionList()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::PrePostBodyExp>("bodyExpressionList", this->getBodyExpressionList());
+	}
+	if ( this->eIsSet(package->getPrePostBodyListExp_Attribute_postExpressionList()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::PrePostBodyExp>("postExpressionList", this->getPostExpressionList());
+	}
+	if ( this->eIsSet(package->getPrePostBodyListExp_Attribute_preExpressionList()) )
+	{
 		saveHandler->addReferences<ocl::Expressions::PrePostBodyExp>("preExpressionList", this->getPreExpressionList());
+	}
 	}
 	catch (std::exception& e)
 	{

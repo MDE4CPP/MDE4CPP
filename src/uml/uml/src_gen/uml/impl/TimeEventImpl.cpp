@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -320,10 +321,10 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 			saveHandler->addReference(when, "when", when->eClass() != package->getTimeExpression_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getTimeEvent_Attribute_isRelative()) )
-		{
+          if ( this->eIsSet(package->getTimeEvent_Attribute_isRelative()) )
+          {
 			saveHandler->addAttribute("isRelative", this->getIsRelative());
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

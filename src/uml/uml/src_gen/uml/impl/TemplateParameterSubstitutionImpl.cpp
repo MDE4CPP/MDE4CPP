@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -352,8 +353,14 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 			saveHandler->addReference(ownedActual, "ownedActual", ownedActual->eClass() != package->getParameterableElement_Class());
 		}
 	// Add references
+	if ( this->eIsSet(package->getTemplateParameterSubstitution_Attribute_actual()) )
+	{
 		saveHandler->addReference(this->getActual(), "actual", getActual()->eClass() != uml::umlPackage::eInstance()->getParameterableElement_Class()); 
+	}
+	if ( this->eIsSet(package->getTemplateParameterSubstitution_Attribute_formal()) )
+	{
 		saveHandler->addReference(this->getFormal(), "formal", getFormal()->eClass() != uml::umlPackage::eInstance()->getTemplateParameter_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

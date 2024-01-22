@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
+#include <stdexcept>
 
 
 #include "ecore/EcoreAny.hpp"
@@ -30,6 +30,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -41,8 +42,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
@@ -109,14 +110,7 @@ std::string GetNextEventStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> GetNextEventStrategyImpl::retrieveNextEvent(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& objectActivation)
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	// Must be overridden by derived Strategies.
-	return nullptr;
-	//end of body
-}
+
 
 //*********************************
 // Attribute Getters & Setters
@@ -242,38 +236,6 @@ std::shared_ptr<Any> GetNextEventStrategyImpl::eInvoke(int operationID, const st
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(), 0, false);
-			break;
-		}
-		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::CommonBehavior::EventOccurrence: 3970005938
-		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION:
-		{
-			//Retrieve input parameter 'objectActivation'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> incoming_param_objectActivation;
-			Bag<Any>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
-			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_objectActivation_arguments_citer));
-				if(ecoreAny)
-				{
-					try
-					{
-						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(_temp);
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'objectActivation'. Failed to invoke operation 'retrieveNextEvent'!")
-						return nullptr;
-					}
-				}
-				else
-				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'objectActivation'. Failed to invoke operation 'retrieveNextEvent'!")
-					return nullptr;
-				}
-			}
-		
-			result = eEcoreAny(this->retrieveNextEvent(incoming_param_objectActivation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS);
 			break;
 		}
 

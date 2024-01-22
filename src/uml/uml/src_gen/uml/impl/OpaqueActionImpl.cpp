@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Forward declaration includes
@@ -479,21 +480,21 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_Class());
 		}
 		// Add attributes
-		if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
-		{
+          if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
+          {
 			for (const std::shared_ptr<std::string>& value : *m_body)
 			{
 				saveHandler->addAttributeAsNode("body", *value);
 			}
-		}
+          }
 
-		if ( this->eIsSet(package->getOpaqueAction_Attribute_language()) )
-		{
+          if ( this->eIsSet(package->getOpaqueAction_Attribute_language()) )
+          {
 			for (const std::shared_ptr<std::string>& value : *m_language)
 			{
 				saveHandler->addAttributeAsNode("language", *value);
 			}
-		}
+          }
 	}
 	catch (std::exception& e)
 	{

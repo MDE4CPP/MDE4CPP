@@ -31,6 +31,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
@@ -81,9 +82,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -411,7 +412,10 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getCS_ExecutionFactory_Attribute_appliedProfiles()) )
+	{
 		saveHandler->addReferences<uml::Package>("appliedProfiles", this->getAppliedProfiles());
+	}
 	}
 	catch (std::exception& e)
 	{
