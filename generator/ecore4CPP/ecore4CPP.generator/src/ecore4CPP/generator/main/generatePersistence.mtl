@@ -279,10 +279,10 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 					typeName = "[aReference.eType.generateNamespaceDefinition()/]::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
 			[if (aReference.upperBound = 1)] [comment List or single Object / Pointer/] 
 			loadHandler->handleChild(this->[aReference.GetterName()/]()); 
-			[else]		
+			[else]
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<[aEClass.generateTypeClass()/]> new_[aReference.name/] = std::dynamic_pointer_cast<[aEClass.generateTypeClass()/]>([if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/]::[aEClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/]));
 			if(new_[aReference.name/])
 			{

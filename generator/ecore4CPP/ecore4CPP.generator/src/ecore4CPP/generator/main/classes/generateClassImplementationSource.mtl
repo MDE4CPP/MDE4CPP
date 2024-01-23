@@ -57,6 +57,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 [if (anEClass.hasKey(keyImplIncludes()))]
 //Includes from codegen annotation
 [anEClass.valueKey(keyImplIncludes())/]
