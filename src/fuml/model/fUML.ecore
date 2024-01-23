@@ -2191,9 +2191,6 @@
       <eClassifiers xsi:type="ecore:EClass" name="GetNextEventStrategy" abstract="true"
           eSuperTypes="#//Semantics/Loci/SemanticStrategy">
         <eOperations name="retrieveNextEvent" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="doNotGenerate" value="// Must be overridden by derived Strategies."/>
-          </eAnnotations>
           <eParameters name="objectActivation" ordered="false" eType="#//Semantics/CommonBehavior/ObjectActivation"/>
         </eOperations>
         <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
