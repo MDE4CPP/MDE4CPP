@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
@@ -48,8 +49,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -65,8 +66,8 @@
 #include "uml/StructuredActivityNode.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -500,7 +501,14 @@ void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::s
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ActivityNodeActivationGroup";
+				typeName = "fUML::Semantics::Activities::ActivityNodeActivationGroup";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
+				{
+					typeName = "fUML::Semantics::Activities::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getActivationGroup()); 
 

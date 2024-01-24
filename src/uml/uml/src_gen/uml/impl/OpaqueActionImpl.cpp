@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -406,9 +407,22 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
 			}
-			loadHandler->handleChildContainer<uml::InputPin>(this->getInputValue());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InputPin> new_inputValue = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE));
+			if(new_inputValue)
+			{
+				loadHandler->handleChild(new_inputValue);
+				getInputValue()->push_back(new_inputValue);
+			} 
 
 			return; 
 		}
@@ -418,9 +432,22 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getOutputValue());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_outputValue = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE));
+			if(new_outputValue)
+			{
+				loadHandler->handleChild(new_outputValue);
+				getOutputValue()->push_back(new_outputValue);
+			} 
 
 			return; 
 		}

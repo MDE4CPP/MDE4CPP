@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
@@ -59,8 +60,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -70,8 +71,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"

@@ -34,13 +34,14 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -252,8 +253,15 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getBodyExpression()); 
 
@@ -265,10 +273,17 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChild(this->getContextVariable());
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			loadHandler->handleChild(this->getContextVariable()); 
 
 			return; 
 		}
@@ -278,10 +293,23 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<ecore::ETypedElement>(this->getParameterVariable());  
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<ecore::ETypedElement> new_parameterVariable = std::dynamic_pointer_cast<ecore::ETypedElement>(ecore::ecoreFactory::eInstance()->create(typeName, loadHandler->getCurrentObject(), ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE));
+			if(new_parameterVariable)
+			{
+				loadHandler->handleChild(new_parameterVariable);
+				getParameterVariable()->push_back(new_parameterVariable);
+			} 
 
 			return; 
 		}
@@ -291,10 +319,17 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChild(this->getResultVariable());
+			else
+			{
+				if (std::string::npos == typeName.find("ecore/]"))
+				{
+					typeName = "ecore::"+typeName;
+				}
+			}
+			loadHandler->handleChild(this->getResultVariable()); 
 
 			return; 
 		}

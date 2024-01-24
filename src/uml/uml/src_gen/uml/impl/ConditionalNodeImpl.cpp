@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -378,9 +379,22 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Clause";
+				typeName = "uml::Clause";
 			}
-			loadHandler->handleChildContainer<uml::Clause>(this->getClause());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Clause> new_clause = std::dynamic_pointer_cast<uml::Clause>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE));
+			if(new_clause)
+			{
+				loadHandler->handleChild(new_clause);
+				getClause()->push_back(new_clause);
+			} 
 
 			return; 
 		}
@@ -390,9 +404,22 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getResult());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT));
+			if(new_result)
+			{
+				loadHandler->handleChild(new_result);
+				getResult()->push_back(new_result);
+			} 
 
 			return; 
 		}

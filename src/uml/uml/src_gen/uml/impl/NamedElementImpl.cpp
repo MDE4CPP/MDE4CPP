@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include <algorithm>
 //Forward declaration includes
@@ -385,7 +386,14 @@ void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "StringExpression";
+				typeName = "uml::StringExpression";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getNameExpression()); 
 

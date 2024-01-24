@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -409,7 +410,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EGenericType> new_eGenericExceptions = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS));
 			if(new_eGenericExceptions)
 			{
@@ -434,7 +435,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EParameter> new_eParameters = std::dynamic_pointer_cast<ecore::EParameter>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS));
 			if(new_eParameters)
 			{
@@ -459,7 +460,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::ETypeParameter> new_eTypeParameters = std::dynamic_pointer_cast<ecore::ETypeParameter>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS));
 			if(new_eTypeParameters)
 			{

@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/Transition.hpp"
 #include "uml/Constraint.hpp"
@@ -41,9 +43,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/PseudostateActivation.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"

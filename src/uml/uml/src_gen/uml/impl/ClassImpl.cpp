@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -560,10 +561,23 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::Classifier>(this->getNestedClassifier());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Classifier> new_nestedClassifier = std::dynamic_pointer_cast<uml::Classifier>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER));
+			if(new_nestedClassifier)
+			{
+				loadHandler->handleChild(new_nestedClassifier);
+				getNestedClassifier()->push_back(new_nestedClassifier);
+			} 
 
 			return; 
 		}
@@ -573,9 +587,22 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Property";
+				typeName = "uml::Property";
 			}
-			loadHandler->handleChildContainer<uml::Property>(this->getClass_OwnedAttribute());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Property> new_ownedAttribute = std::dynamic_pointer_cast<uml::Property>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE));
+			if(new_ownedAttribute)
+			{
+				loadHandler->handleChild(new_ownedAttribute);
+				getClass_OwnedAttribute()->push_back(new_ownedAttribute);
+			} 
 
 			return; 
 		}
@@ -585,9 +612,22 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Operation";
+				typeName = "uml::Operation";
 			}
-			loadHandler->handleChildContainer<uml::Operation>(this->getOwnedOperation());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Operation> new_ownedOperation = std::dynamic_pointer_cast<uml::Operation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION));
+			if(new_ownedOperation)
+			{
+				loadHandler->handleChild(new_ownedOperation);
+				getOwnedOperation()->push_back(new_ownedOperation);
+			} 
 
 			return; 
 		}
@@ -597,9 +637,22 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Reception";
+				typeName = "uml::Reception";
 			}
-			loadHandler->handleChildContainer<uml::Reception>(this->getOwnedReception());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Reception> new_ownedReception = std::dynamic_pointer_cast<uml::Reception>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION));
+			if(new_ownedReception)
+			{
+				loadHandler->handleChild(new_ownedReception);
+				getOwnedReception()->push_back(new_ownedReception);
+			} 
 
 			return; 
 		}

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include <algorithm>
 #include <uml/Parameter.hpp>
@@ -51,10 +52,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -67,8 +68,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -443,9 +444,22 @@ void ExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ParameterValue";
+				typeName = "fUML::Semantics::CommonBehavior::ParameterValue";
 			}
-			loadHandler->handleChildContainer<fUML::Semantics::CommonBehavior::ParameterValue>(this->getParameterValues());  
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
+				{
+					typeName = "fUML::Semantics::CommonBehavior::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> new_parameterValues = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES));
+			if(new_parameterValues)
+			{
+				loadHandler->handleChild(new_parameterValues);
+				getParameterValues()->push_back(new_parameterValues);
+			} 
 
 			return; 
 		}

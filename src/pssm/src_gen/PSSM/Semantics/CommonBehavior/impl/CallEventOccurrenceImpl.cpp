@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 //Forward declaration includes
@@ -48,8 +50,8 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSSM::Semantics::CommonBehavior;
@@ -231,7 +233,10 @@ void CallEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<PSSM::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getCallEventOccurrence_Attribute_execution()) )
+	{
 		saveHandler->addReference(this->getExecution(), "execution", getExecution()->eClass() != PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventExecution_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

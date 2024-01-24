@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
 #include "PSSM/Semantics/CommonBehavior/SM_ObjectActivation.hpp"
@@ -49,8 +51,8 @@
 #include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -404,7 +406,10 @@ void DoActivityContextObjectImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getDoActivityContextObject_Attribute_context()) )
+	{
 		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

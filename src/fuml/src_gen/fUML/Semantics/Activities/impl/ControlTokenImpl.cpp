@@ -33,6 +33,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
 //Forward declaration includes
@@ -44,8 +45,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;

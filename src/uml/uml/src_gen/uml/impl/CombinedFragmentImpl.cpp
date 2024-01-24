@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -406,9 +407,22 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Gate";
+				typeName = "uml::Gate";
 			}
-			loadHandler->handleChildContainer<uml::Gate>(this->getCfragmentGate());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Gate> new_cfragmentGate = std::dynamic_pointer_cast<uml::Gate>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE));
+			if(new_cfragmentGate)
+			{
+				loadHandler->handleChild(new_cfragmentGate);
+				getCfragmentGate()->push_back(new_cfragmentGate);
+			} 
 
 			return; 
 		}
@@ -418,9 +432,22 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InteractionOperand";
+				typeName = "uml::InteractionOperand";
 			}
-			loadHandler->handleChildContainer<uml::InteractionOperand>(this->getOperand());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InteractionOperand> new_operand = std::dynamic_pointer_cast<uml::InteractionOperand>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND));
+			if(new_operand)
+			{
+				loadHandler->handleChild(new_operand);
+				getOperand()->push_back(new_operand);
+			} 
 
 			return; 
 		}

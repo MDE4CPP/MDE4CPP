@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/BehavioredClassifier.hpp"
 #include "uml/InterfaceRealization.hpp"
@@ -1029,9 +1030,22 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "CollaborationUse";
+				typeName = "uml::CollaborationUse";
 			}
-			loadHandler->handleChildContainer<uml::CollaborationUse>(this->getCollaborationUse());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::CollaborationUse> new_collaborationUse = std::dynamic_pointer_cast<uml::CollaborationUse>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE));
+			if(new_collaborationUse)
+			{
+				loadHandler->handleChild(new_collaborationUse);
+				getCollaborationUse()->push_back(new_collaborationUse);
+			} 
 
 			return; 
 		}
@@ -1041,9 +1055,22 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Generalization";
+				typeName = "uml::Generalization";
 			}
-			loadHandler->handleChildContainer<uml::Generalization>(this->getGeneralization());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Generalization> new_generalization = std::dynamic_pointer_cast<uml::Generalization>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION));
+			if(new_generalization)
+			{
+				loadHandler->handleChild(new_generalization);
+				getGeneralization()->push_back(new_generalization);
+			} 
 
 			return; 
 		}
@@ -1053,9 +1080,22 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "UseCase";
+				typeName = "uml::UseCase";
 			}
-			loadHandler->handleChildContainer<uml::UseCase>(this->getOwnedUseCase());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::UseCase> new_ownedUseCase = std::dynamic_pointer_cast<uml::UseCase>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE));
+			if(new_ownedUseCase)
+			{
+				loadHandler->handleChild(new_ownedUseCase);
+				getOwnedUseCase()->push_back(new_ownedUseCase);
+			} 
 
 			return; 
 		}
@@ -1065,9 +1105,22 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Substitution";
+				typeName = "uml::Substitution";
 			}
-			loadHandler->handleChildContainer<uml::Substitution>(this->getSubstitution());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Substitution> new_substitution = std::dynamic_pointer_cast<uml::Substitution>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION));
+			if(new_substitution)
+			{
+				loadHandler->handleChild(new_substitution);
+				getSubstitution()->push_back(new_substitution);
+			} 
 
 			return; 
 		}

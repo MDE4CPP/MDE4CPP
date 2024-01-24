@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/Trigger.hpp"
 #include "uml/State.hpp"
@@ -58,9 +60,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
 #include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
@@ -544,7 +546,6 @@ bool StateActivationImpl::hasCompleted()
 		for (const auto& ownedRegionActivation : *(this->getRegionActivations()))
 		{
 			stateHasCompleted = stateHasCompleted && ownedRegionActivation->getIsCompleted();
-			if (!stateHasCompleted) break;
 		}
 	}
 	return stateHasCompleted;
@@ -912,10 +913,23 @@ void StateActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<PSSM::Semantics::StateMachines::ConnectionPointActivation>(this->getConnectionPointActivations());  
+			else
+			{
+				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
+				{
+					typeName = "PSSM::Semantics::StateMachines::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<PSSM::Semantics::StateMachines::ConnectionPointActivation> new_connectionPointActivations = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::ConnectionPointActivation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), PSSM::Semantics::StateMachines::StateMachinesPackage::STATEACTIVATION_ATTRIBUTE_CONNECTIONPOINTACTIVATIONS));
+			if(new_connectionPointActivations)
+			{
+				loadHandler->handleChild(new_connectionPointActivations);
+				getConnectionPointActivations()->push_back(new_connectionPointActivations);
+			} 
 
 			return; 
 		}
@@ -925,9 +939,22 @@ void StateActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "RegionActivation";
+				typeName = "PSSM::Semantics::StateMachines::RegionActivation";
 			}
-			loadHandler->handleChildContainer<PSSM::Semantics::StateMachines::RegionActivation>(this->getRegionActivations());  
+			else
+			{
+				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
+				{
+					typeName = "PSSM::Semantics::StateMachines::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> new_regionActivations = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), PSSM::Semantics::StateMachines::StateMachinesPackage::STATEACTIVATION_ATTRIBUTE_REGIONACTIVATIONS));
+			if(new_regionActivations)
+			{
+				loadHandler->handleChild(new_regionActivations);
+				getRegionActivations()->push_back(new_regionActivations);
+			} 
 
 			return; 
 		}
@@ -982,33 +1009,40 @@ void StateActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getStateActivation_Attribute_isDoActivityCompleted()) )
-		{
+          if ( this->eIsSet(package->getStateActivation_Attribute_isDoActivityCompleted()) )
+          {
 			saveHandler->addAttribute("isDoActivityCompleted", this->getIsDoActivityCompleted());
-		}
+          }
 
-		if ( this->eIsSet(package->getStateActivation_Attribute_isEntryCompleted()) )
-		{
+          if ( this->eIsSet(package->getStateActivation_Attribute_isEntryCompleted()) )
+          {
 			saveHandler->addAttribute("isEntryCompleted", this->getIsEntryCompleted());
-		}
+          }
 
-		if ( this->eIsSet(package->getStateActivation_Attribute_isExitCompleted()) )
-		{
+          if ( this->eIsSet(package->getStateActivation_Attribute_isExitCompleted()) )
+          {
 			saveHandler->addAttribute("isExitCompleted", this->getIsExitCompleted());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getStateActivation_Attribute_doActivityContextObject()) )
+	{
 		saveHandler->addReference(this->getDoActivityContextObject(), "doActivityContextObject", getDoActivityContextObject()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getDoActivityContextObject_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'connectionPointActivations'
-
+	    if ( this->eIsSet(package->getStateActivation_Attribute_connectionPointActivations()) )
+	    {
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::ConnectionPointActivation>("connectionPointActivations", this->getConnectionPointActivations());
+	    }
 
 		// Save 'regionActivations'
-
+	    if ( this->eIsSet(package->getStateActivation_Attribute_regionActivations()) )
+	    {
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::RegionActivation>("regionActivations", this->getRegionActivations());
+	    }
 	}
 	catch (std::exception& e)
 	{

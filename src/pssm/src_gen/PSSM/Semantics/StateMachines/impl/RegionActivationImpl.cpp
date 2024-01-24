@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/State.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
@@ -43,8 +45,8 @@
 
 #include <exception> // used in Persistence
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/InitialPseudostateActivation.hpp"
 #include "uml/NamedElement.hpp"
@@ -471,10 +473,23 @@ void RegionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<PSSM::Semantics::StateMachines::TransitionActivation>(this->getTransitionActivations());  
+			else
+			{
+				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
+				{
+					typeName = "PSSM::Semantics::StateMachines::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation> new_transitionActivations = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::TransitionActivation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), PSSM::Semantics::StateMachines::StateMachinesPackage::REGIONACTIVATION_ATTRIBUTE_TRANSITIONACTIVATIONS));
+			if(new_transitionActivations)
+			{
+				loadHandler->handleChild(new_transitionActivations);
+				getTransitionActivations()->push_back(new_transitionActivations);
+			} 
 
 			return; 
 		}
@@ -484,10 +499,23 @@ void RegionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<PSSM::Semantics::StateMachines::VertexActivation>(this->getVertexActivations());  
+			else
+			{
+				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
+				{
+					typeName = "PSSM::Semantics::StateMachines::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> new_vertexActivations = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), PSSM::Semantics::StateMachines::StateMachinesPackage::REGIONACTIVATION_ATTRIBUTE_VERTEXACTIVATIONS));
+			if(new_vertexActivations)
+			{
+				loadHandler->handleChild(new_vertexActivations);
+				getVertexActivations()->push_back(new_vertexActivations);
+			} 
 
 			return; 
 		}
@@ -540,23 +568,30 @@ void RegionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getRegionActivation_Attribute_isCompleted()) )
-		{
+          if ( this->eIsSet(package->getRegionActivation_Attribute_isCompleted()) )
+          {
 			saveHandler->addAttribute("isCompleted", this->getIsCompleted());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getRegionActivation_Attribute_history()) )
+	{
 		saveHandler->addReference(this->getHistory(), "history", getHistory()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateActivation_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'transitionActivations'
-
+	    if ( this->eIsSet(package->getRegionActivation_Attribute_transitionActivations()) )
+	    {
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::TransitionActivation>("transitionActivations", this->getTransitionActivations());
+	    }
 
 		// Save 'vertexActivations'
-
+	    if ( this->eIsSet(package->getRegionActivation_Attribute_vertexActivations()) )
+	    {
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::VertexActivation>("vertexActivations", this->getVertexActivations());
+	    }
 	}
 	catch (std::exception& e)
 	{

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -365,9 +366,22 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "DeploymentSpecification";
+				typeName = "uml::DeploymentSpecification";
 			}
-			loadHandler->handleChildContainer<uml::DeploymentSpecification>(this->getConfiguration());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::DeploymentSpecification> new_configuration = std::dynamic_pointer_cast<uml::DeploymentSpecification>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION));
+			if(new_configuration)
+			{
+				loadHandler->handleChild(new_configuration);
+				getConfiguration()->push_back(new_configuration);
+			} 
 
 			return; 
 		}

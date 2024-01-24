@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -361,8 +362,15 @@ void IfExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getCondition()); 
 
@@ -374,8 +382,15 @@ void IfExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getElseExpression()); 
 
@@ -387,8 +402,15 @@ void IfExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getThenExpression()); 
 

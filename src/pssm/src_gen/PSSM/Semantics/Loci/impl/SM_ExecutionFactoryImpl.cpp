@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "uml/StateMachine.hpp"
@@ -50,8 +52,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"

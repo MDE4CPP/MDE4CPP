@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -389,7 +390,7 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
 			else
@@ -399,7 +400,7 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EClassifier> new_eClassifiers = std::dynamic_pointer_cast<ecore::EClassifier>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS));
 			if(new_eClassifiers)
 			{
@@ -424,7 +425,7 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EPackage> new_eSubpackages = std::dynamic_pointer_cast<ecore::EPackage>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES));
 			if(new_eSubpackages)
 			{

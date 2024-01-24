@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -261,7 +263,10 @@ void CompletionEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::int
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getCompletionEventOccurrence_Attribute_stateActivation()) )
+	{
 		saveHandler->addReference(this->getStateActivation(), "stateActivation", getStateActivation()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateActivation_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -269,9 +270,22 @@ void ExecutableNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ExceptionHandler";
+				typeName = "uml::ExceptionHandler";
 			}
-			loadHandler->handleChildContainer<uml::ExceptionHandler>(this->getHandler());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ExceptionHandler> new_handler = std::dynamic_pointer_cast<uml::ExceptionHandler>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER));
+			if(new_handler)
+			{
+				loadHandler->handleChild(new_handler);
+				getHandler()->push_back(new_handler);
+			} 
 
 			return; 
 		}

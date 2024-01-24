@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -308,9 +309,22 @@ void SignalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Property";
+				typeName = "uml::Property";
 			}
-			loadHandler->handleChildContainer<uml::Property>(this->getOwnedAttribute());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Property> new_ownedAttribute = std::dynamic_pointer_cast<uml::Property>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE));
+			if(new_ownedAttribute)
+			{
+				loadHandler->handleChild(new_ownedAttribute);
+				getOwnedAttribute()->push_back(new_ownedAttribute);
+			} 
 
 			return; 
 		}

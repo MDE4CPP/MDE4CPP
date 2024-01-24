@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -643,9 +644,22 @@ void BehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Parameter";
+				typeName = "uml::Parameter";
 			}
-			loadHandler->handleChildContainer<uml::Parameter>(this->getOwnedParameter());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Parameter> new_ownedParameter = std::dynamic_pointer_cast<uml::Parameter>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER));
+			if(new_ownedParameter)
+			{
+				loadHandler->handleChild(new_ownedParameter);
+				getOwnedParameter()->push_back(new_ownedParameter);
+			} 
 
 			return; 
 		}
@@ -655,9 +669,22 @@ void BehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ParameterSet";
+				typeName = "uml::ParameterSet";
 			}
-			loadHandler->handleChildContainer<uml::ParameterSet>(this->getOwnedParameterSet());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ParameterSet> new_ownedParameterSet = std::dynamic_pointer_cast<uml::ParameterSet>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET));
+			if(new_ownedParameterSet)
+			{
+				loadHandler->handleChild(new_ownedParameterSet);
+				getOwnedParameterSet()->push_back(new_ownedParameterSet);
+			} 
 
 			return; 
 		}

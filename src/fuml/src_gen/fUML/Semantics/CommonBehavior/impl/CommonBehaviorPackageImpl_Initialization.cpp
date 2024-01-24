@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EGenericType.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -769,6 +769,25 @@ void CommonBehaviorPackageImpl::initializeGetNextEventStrategyContent()
 	
 	m_getNextEventStrategy_Operation_getName->_setID(GETNEXTEVENTSTRATEGY_OPERATION_GETNAME);
 	
+	
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setName("retrieveNextEvent");
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setEType(getEventOccurrence_Class());
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setLowerBound(1);
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setUpperBound(1);
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setUnique(true);
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setOrdered(false);
+	
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->_setID(GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation);
+		parameter->setName("objectActivation");
+		parameter->setEType(getObjectActivation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	
 }

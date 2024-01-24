@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
@@ -55,11 +56,11 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Behavior.hpp"
@@ -73,8 +74,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -366,7 +367,14 @@ void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ActivityNodeActivationGroup";
+				typeName = "fUML::Semantics::Activities::ActivityNodeActivationGroup";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
+				{
+					typeName = "fUML::Semantics::Activities::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getActivationGroup()); 
 

@@ -34,15 +34,16 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -327,7 +328,14 @@ void FUML_ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ObjectActivation";
+				typeName = "fUML::Semantics::CommonBehavior::ObjectActivation";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
+				{
+					typeName = "fUML::Semantics::CommonBehavior::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getObjectActivation()); 
 

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -53,9 +54,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
@@ -63,8 +64,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -574,9 +575,22 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ClassifierBehaviorExecution";
+				typeName = "fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution";
 			}
-			loadHandler->handleChildContainer<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>(this->getClassifierBehaviorExecutions());  
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
+				{
+					typeName = "fUML::Semantics::CommonBehavior::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> new_classifierBehaviorExecutions = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>(modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS));
+			if(new_classifierBehaviorExecutions)
+			{
+				loadHandler->handleChild(new_classifierBehaviorExecutions);
+				getClassifierBehaviorExecutions()->push_back(new_classifierBehaviorExecutions);
+			} 
 
 			return; 
 		}
@@ -586,9 +600,22 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "EventOccurrence";
+				typeName = "fUML::Semantics::CommonBehavior::EventOccurrence";
 			}
-			loadHandler->handleChildContainer<fUML::Semantics::CommonBehavior::EventOccurrence>(this->getEventPool());  
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
+				{
+					typeName = "fUML::Semantics::CommonBehavior::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> new_eventPool = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL));
+			if(new_eventPool)
+			{
+				loadHandler->handleChild(new_eventPool);
+				getEventPool()->push_back(new_eventPool);
+			} 
 
 			return; 
 		}

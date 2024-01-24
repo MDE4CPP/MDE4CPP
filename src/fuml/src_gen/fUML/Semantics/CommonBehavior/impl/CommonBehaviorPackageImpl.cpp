@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EGenericType.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -273,6 +273,10 @@ const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBeh
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getGetNextEventStrategy_Operation_getName() const
 {
 	return m_getNextEventStrategy_Operation_getName;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const
+{
+	return m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation;
 }
 
 // End Class GetNextEventStrategy

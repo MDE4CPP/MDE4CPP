@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -247,7 +248,14 @@ void TemplateableElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "TemplateSignature";
+				typeName = "uml::TemplateSignature";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getOwnedTemplateSignature()); 
 
@@ -259,9 +267,22 @@ void TemplateableElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "TemplateBinding";
+				typeName = "uml::TemplateBinding";
 			}
-			loadHandler->handleChildContainer<uml::TemplateBinding>(this->getTemplateBinding());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::TemplateBinding> new_templateBinding = std::dynamic_pointer_cast<uml::TemplateBinding>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING));
+			if(new_templateBinding)
+			{
+				loadHandler->handleChild(new_templateBinding);
+				getTemplateBinding()->push_back(new_templateBinding);
+			} 
 
 			return; 
 		}

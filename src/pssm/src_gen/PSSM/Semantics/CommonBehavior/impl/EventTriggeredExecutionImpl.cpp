@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
@@ -45,10 +47,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -63,8 +65,8 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
@@ -405,8 +407,14 @@ void EventTriggeredExecutionImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<PSSM::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getEventTriggeredExecution_Attribute_triggeringEventOccurrence()) )
+	{
 		saveHandler->addReference(this->getTriggeringEventOccurrence(), "triggeringEventOccurrence", getTriggeringEventOccurrence()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class()); 
+	}
+	if ( this->eIsSet(package->getEventTriggeredExecution_Attribute_wrappedExecution()) )
+	{
 		saveHandler->addReference(this->getWrappedExecution(), "wrappedExecution", getWrappedExecution()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

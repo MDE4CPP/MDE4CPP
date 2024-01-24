@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -397,9 +398,22 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InterfaceRealization";
+				typeName = "uml::InterfaceRealization";
 			}
-			loadHandler->handleChildContainer<uml::InterfaceRealization>(this->getInterfaceRealization());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InterfaceRealization> new_interfaceRealization = std::dynamic_pointer_cast<uml::InterfaceRealization>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION));
+			if(new_interfaceRealization)
+			{
+				loadHandler->handleChild(new_interfaceRealization);
+				getInterfaceRealization()->push_back(new_interfaceRealization);
+			} 
 
 			return; 
 		}
@@ -409,10 +423,23 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::Behavior>(this->getOwnedBehavior());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Behavior> new_ownedBehavior = std::dynamic_pointer_cast<uml::Behavior>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR));
+			if(new_ownedBehavior)
+			{
+				loadHandler->handleChild(new_ownedBehavior);
+				getOwnedBehavior()->push_back(new_ownedBehavior);
+			} 
 
 			return; 
 		}

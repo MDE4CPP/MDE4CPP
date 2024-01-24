@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -457,10 +458,23 @@ void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::PackageableElement>(this->getPackagedElement());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::PackageableElement> new_packagedElement = std::dynamic_pointer_cast<uml::PackageableElement>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT));
+			if(new_packagedElement)
+			{
+				loadHandler->handleChild(new_packagedElement);
+				getPackagedElement()->push_back(new_packagedElement);
+			} 
 
 			return; 
 		}
@@ -470,9 +484,22 @@ void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ComponentRealization";
+				typeName = "uml::ComponentRealization";
 			}
-			loadHandler->handleChildContainer<uml::ComponentRealization>(this->getRealization());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ComponentRealization> new_realization = std::dynamic_pointer_cast<uml::ComponentRealization>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION));
+			if(new_realization)
+			{
+				loadHandler->handleChild(new_realization);
+				getRealization()->push_back(new_realization);
+			} 
 
 			return; 
 		}

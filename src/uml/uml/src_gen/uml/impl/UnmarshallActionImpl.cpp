@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -330,7 +331,14 @@ void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getObject()); 
 
@@ -342,9 +350,22 @@ void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getResult());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT));
+			if(new_result)
+			{
+				loadHandler->handleChild(new_result);
+				getResult()->push_back(new_result);
+			} 
 
 			return; 
 		}

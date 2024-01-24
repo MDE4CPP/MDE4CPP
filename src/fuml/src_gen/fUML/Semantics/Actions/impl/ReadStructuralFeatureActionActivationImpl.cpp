@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 //#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 //#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
@@ -50,8 +51,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -64,8 +65,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"

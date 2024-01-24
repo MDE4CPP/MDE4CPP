@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -422,8 +423,15 @@ void LoopExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getBody()); 
 
@@ -435,10 +443,23 @@ void LoopExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<ocl::Expressions::OclExpression>(this->getIterator());  
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<ocl::Expressions::OclExpression> new_iterator = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR));
+			if(new_iterator)
+			{
+				loadHandler->handleChild(new_iterator);
+				getIterator()->push_back(new_iterator);
+			} 
 
 			return; 
 		}

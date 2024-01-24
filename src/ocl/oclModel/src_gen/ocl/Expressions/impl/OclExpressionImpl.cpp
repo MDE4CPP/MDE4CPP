@@ -34,13 +34,14 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -500,9 +501,22 @@ void OclExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "VarDeclarationExp";
+				typeName = "ocl::Expressions::VarDeclarationExp";
 			}
-			loadHandler->handleChildContainer<ocl::Expressions::VarDeclarationExp>(this->getInitializedElement());  
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<ocl::Expressions::VarDeclarationExp> new_initializedElement = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT));
+			if(new_initializedElement)
+			{
+				loadHandler->handleChild(new_initializedElement);
+				getInitializedElement()->push_back(new_initializedElement);
+			} 
 
 			return; 
 		}

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -427,9 +428,22 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
 			}
-			loadHandler->handleChildContainer<uml::InputPin>(this->getInput());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InputPin> new_input = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTION_ATTRIBUTE_INPUT));
+			if(new_input)
+			{
+				loadHandler->handleChild(new_input);
+				getInput()->push_back(new_input);
+			} 
 
 			return; 
 		}
@@ -439,9 +453,22 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Constraint";
+				typeName = "uml::Constraint";
 			}
-			loadHandler->handleChildContainer<uml::Constraint>(this->getLocalPostcondition());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Constraint> new_localPostcondition = std::dynamic_pointer_cast<uml::Constraint>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION));
+			if(new_localPostcondition)
+			{
+				loadHandler->handleChild(new_localPostcondition);
+				getLocalPostcondition()->push_back(new_localPostcondition);
+			} 
 
 			return; 
 		}
@@ -451,9 +478,22 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Constraint";
+				typeName = "uml::Constraint";
 			}
-			loadHandler->handleChildContainer<uml::Constraint>(this->getLocalPrecondition());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Constraint> new_localPrecondition = std::dynamic_pointer_cast<uml::Constraint>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION));
+			if(new_localPrecondition)
+			{
+				loadHandler->handleChild(new_localPrecondition);
+				getLocalPrecondition()->push_back(new_localPrecondition);
+			} 
 
 			return; 
 		}
@@ -463,9 +503,22 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getOutput());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_output = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT));
+			if(new_output)
+			{
+				loadHandler->handleChild(new_output);
+				getOutput()->push_back(new_output);
+			} 
 
 			return; 
 		}

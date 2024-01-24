@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -417,9 +419,22 @@ void StateConfigurationImpl::loadNode(std::string nodeName, std::shared_ptr<pers
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "StateConfiguration";
+				typeName = "PSSM::Semantics::StateMachines::StateConfiguration";
 			}
-			loadHandler->handleChildContainer<PSSM::Semantics::StateMachines::StateConfiguration>(this->getChildren());  
+			else
+			{
+				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
+				{
+					typeName = "PSSM::Semantics::StateMachines::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<PSSM::Semantics::StateMachines::StateConfiguration> new_children = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateConfiguration>(modelFactory->create(typeName, loadHandler->getCurrentObject(), PSSM::Semantics::StateMachines::StateMachinesPackage::STATECONFIGURATION_ATTRIBUTE_CHILDREN));
+			if(new_children)
+			{
+				loadHandler->handleChild(new_children);
+				getChildren()->push_back(new_children);
+			} 
 
 			return; 
 		}
@@ -491,21 +506,32 @@ void StateConfigurationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getStateConfiguration_Attribute_level()) )
-		{
+          if ( this->eIsSet(package->getStateConfiguration_Attribute_level()) )
+          {
 			saveHandler->addAttribute("level", this->getLevel());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getStateConfiguration_Attribute_completeConfiguration()) )
+	{
 		saveHandler->addReference(this->getCompleteConfiguration(), "completeConfiguration", getCompleteConfiguration()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateMachineConfiguration_Class()); 
+	}
+	if ( this->eIsSet(package->getStateConfiguration_Attribute_parent()) )
+	{
 		saveHandler->addReference(this->getParent(), "parent", getParent()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateConfiguration_Class()); 
+	}
+	if ( this->eIsSet(package->getStateConfiguration_Attribute_vertexActivation()) )
+	{
 		saveHandler->addReference(this->getVertexActivation(), "vertexActivation", getVertexActivation()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getVertexActivation_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'children'
-
+	    if ( this->eIsSet(package->getStateConfiguration_Attribute_children()) )
+	    {
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::StateConfiguration>("children", this->getChildren());
+	    }
 	}
 	catch (std::exception& e)
 	{

@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
+	class EGenericType;
 	class EReference;
-	class EStringToStringMapEntry;
-	class EClass;
-	class EOperation;
 	class EDataType;
+	class EParameter;
 	class EAttribute;
 	class EAnnotation;
-	class EGenericType;
-	class EParameter;
+	class EClass;
+	class EOperation;
+	class EStringToStringMapEntry;
 }
 
 namespace fUML::Semantics::CommonBehavior 
@@ -208,7 +208,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long FIFOGETNEXTEVENTSTRATEGY_CLASS = 860953508;
 			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 3;
+			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
 			static const unsigned long FIFOGETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 2695220542;
@@ -227,10 +227,11 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long GETNEXTEVENTSTRATEGY_CLASS = 2103787987;
 			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 2;
+			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
 			
 			static const unsigned long GETNEXTEVENTSTRATEGY_OPERATION_GETNAME = 1005896878;
+			static const unsigned long GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 3970005938;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getGetNextEventStrategy_Class() const = 0;
@@ -238,6 +239,7 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getGetNextEventStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const = 0;
 			
 			// End Class GetNextEventStrategy
 

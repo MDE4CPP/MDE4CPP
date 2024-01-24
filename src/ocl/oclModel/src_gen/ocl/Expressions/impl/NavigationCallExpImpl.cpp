@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -363,10 +364,23 @@ void NavigationCallExpImpl::loadNode(std::string nodeName, std::shared_ptr<persi
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<ocl::Expressions::OclExpression>(this->getQualifier());  
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<ocl::Expressions::OclExpression> new_qualifier = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER));
+			if(new_qualifier)
+			{
+				loadHandler->handleChild(new_qualifier);
+				getQualifier()->push_back(new_qualifier);
+			} 
 
 			return; 
 		}

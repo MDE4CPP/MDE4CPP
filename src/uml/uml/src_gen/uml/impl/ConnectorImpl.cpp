@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -390,9 +391,22 @@ void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ConnectorEnd";
+				typeName = "uml::ConnectorEnd";
 			}
-			loadHandler->handleChildContainer<uml::ConnectorEnd>(this->getEnd());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ConnectorEnd> new_end = std::dynamic_pointer_cast<uml::ConnectorEnd>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONNECTOR_ATTRIBUTE_END));
+			if(new_end)
+			{
+				loadHandler->handleChild(new_end);
+				getEnd()->push_back(new_end);
+			} 
 
 			return; 
 		}

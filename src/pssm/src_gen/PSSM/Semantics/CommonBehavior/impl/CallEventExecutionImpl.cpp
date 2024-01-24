@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -45,10 +47,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "uml/Classifier.hpp"
@@ -64,8 +66,8 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
@@ -425,14 +427,23 @@ void CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<PSSM::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getCallEventExecution_Attribute_callerSuspended()) )
-		{
+          if ( this->eIsSet(package->getCallEventExecution_Attribute_callerSuspended()) )
+          {
 			saveHandler->addAttribute("callerSuspended", this->getCallerSuspended());
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getCallEventExecution_Attribute_behavior()) )
+	{
 		saveHandler->addReference(this->getBehavior(), "behavior", getBehavior()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
+	if ( this->eIsSet(package->getCallEventExecution_Attribute_callerContext()) )
+	{
 		saveHandler->addReference(this->getCallerContext(), "callerContext", getCallerContext()->eClass() != fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class()); 
+	}
+	if ( this->eIsSet(package->getCallEventExecution_Attribute_operation()) )
+	{
 		saveHandler->addReference(this->getOperation(), "operation", getOperation()->eClass() != uml::umlPackage::eInstance()->getOperation_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

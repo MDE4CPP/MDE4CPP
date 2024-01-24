@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -397,9 +398,22 @@ void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Gate";
+				typeName = "uml::Gate";
 			}
-			loadHandler->handleChildContainer<uml::Gate>(this->getActualGate());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Gate> new_actualGate = std::dynamic_pointer_cast<uml::Gate>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE));
+			if(new_actualGate)
+			{
+				loadHandler->handleChild(new_actualGate);
+				getActualGate()->push_back(new_actualGate);
+			} 
 
 			return; 
 		}
@@ -409,10 +423,23 @@ void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::ValueSpecification>(this->getArgument());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ValueSpecification> new_argument = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT));
+			if(new_argument)
+			{
+				loadHandler->handleChild(new_argument);
+				getArgument()->push_back(new_argument);
+			} 
 
 			return; 
 		}
@@ -422,8 +449,15 @@ void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getReturnValue()); 
 

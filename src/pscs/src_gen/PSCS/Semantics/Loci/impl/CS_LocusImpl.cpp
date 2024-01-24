@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/Behavior.hpp"
 //#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
@@ -51,8 +52,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -290,9 +291,22 @@ void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "TemplateParameterSubstitution";
+				typeName = "uml::TemplateParameterSubstitution";
 			}
-			loadHandler->handleChildContainer<uml::TemplateParameterSubstitution>(this->getParameterSubstitution());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::TemplateParameterSubstitution> new_parameterSubstitution = std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION));
+			if(new_parameterSubstitution)
+			{
+				loadHandler->handleChild(new_parameterSubstitution);
+				getParameterSubstitution()->push_back(new_parameterSubstitution);
+			} 
 
 			return; 
 		}

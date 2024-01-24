@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 //#include "fUML::EventOccurrence.hpp"
 //#include "fUML::FUMLFactory.hpp"
@@ -265,8 +267,14 @@ void DeferredEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getDeferredEventOccurrence_Attribute_constrainingStateActivation()) )
+	{
 		saveHandler->addReference(this->getConstrainingStateActivation(), "constrainingStateActivation", getConstrainingStateActivation()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateActivation_Class()); 
+	}
+	if ( this->eIsSet(package->getDeferredEventOccurrence_Attribute_deferredEventOccurrence()) )
+	{
 		saveHandler->addReference(this->getDeferredEventOccurrence(), "deferredEventOccurrence", getDeferredEventOccurrence()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

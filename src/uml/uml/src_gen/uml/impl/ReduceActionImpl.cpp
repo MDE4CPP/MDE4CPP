@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -315,7 +316,14 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getCollection()); 
 
@@ -327,7 +335,14 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getResult()); 
 

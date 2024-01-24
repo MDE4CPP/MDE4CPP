@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -334,9 +335,22 @@ void ProtocolStateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<pe
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ProtocolConformance";
+				typeName = "uml::ProtocolConformance";
 			}
-			loadHandler->handleChildContainer<uml::ProtocolConformance>(this->getConformance());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ProtocolConformance> new_conformance = std::dynamic_pointer_cast<uml::ProtocolConformance>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE));
+			if(new_conformance)
+			{
+				loadHandler->handleChild(new_conformance);
+				getConformance()->push_back(new_conformance);
+			} 
 
 			return; 
 		}

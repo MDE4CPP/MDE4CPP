@@ -30,8 +30,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 //Forward declaration includes
@@ -39,8 +41,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
@@ -236,8 +238,15 @@ void DoActivityExecutionEventAccepterImpl::loadNode(std::string nodeName, std::s
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
+				{
+					typeName = "fUML::Semantics::CommonBehavior::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getEncapsulatedAccepter()); 
 
@@ -290,14 +299,19 @@ void DoActivityExecutionEventAccepterImpl::saveContent(std::shared_ptr<persisten
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getDoActivityExecutionEventAccepter_Attribute_context()) )
+	{
 		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getDoActivityContextObject_Class()); 
+	}
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'encapsulatedAccepter'
-
+	    if ( this->eIsSet(package->getDoActivityExecutionEventAccepter_Attribute_encapsulatedAccepter()) )
+	    {
 		saveHandler->addReference(this->getEncapsulatedAccepter(), "encapsulatedAccepter", getEncapsulatedAccepter()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventAccepter_Class());
+	    }
 	}
 	catch (std::exception& e)
 	{

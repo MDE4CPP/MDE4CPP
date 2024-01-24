@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -506,9 +507,22 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Property";
+				typeName = "uml::Property";
 			}
-			loadHandler->handleChildContainer<uml::Property>(this->getOwnedEnd());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Property> new_ownedEnd = std::dynamic_pointer_cast<uml::Property>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND));
+			if(new_ownedEnd)
+			{
+				loadHandler->handleChild(new_ownedEnd);
+				getOwnedEnd()->push_back(new_ownedEnd);
+			} 
 
 			return; 
 		}

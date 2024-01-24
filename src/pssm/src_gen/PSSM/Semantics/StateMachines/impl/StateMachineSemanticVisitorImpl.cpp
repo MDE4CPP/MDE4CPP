@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp"
 #include "fUML/FUMLFactory.hpp"
@@ -50,8 +52,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -166,8 +168,6 @@ std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticVisitor>> StateMachineSemanti
 	//		}
 	//	}
 	//	return contextChain;
-	//auto bag = new Bag<fUML::Semantics::Loci::SemanticVisitor>();
-	//auto contextChain = std::make_shared<Bag<fUML::Semantics::Loci::SemanticVisitor>>(*(bag));
 	std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticVisitor>> contextChain(new Bag<fUML::Semantics::Loci::SemanticVisitor>());
 
 	std::shared_ptr<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation> entryPointActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation>(this->getThisStateMachineSemanticVisitorPtr());
@@ -511,8 +511,14 @@ void StateMachineSemanticVisitorImpl::saveContent(std::shared_ptr<persistence::i
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getStateMachineSemanticVisitor_Attribute_node()) )
+	{
 		saveHandler->addReference(this->getNode(), "node", getNode()->eClass() != uml::umlPackage::eInstance()->getNamedElement_Class()); 
+	}
+	if ( this->eIsSet(package->getStateMachineSemanticVisitor_Attribute_parent()) )
+	{
 		saveHandler->addReference(this->getParent(), "parent", getParent()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

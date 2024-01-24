@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -331,9 +332,22 @@ void ReplyActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
 			}
-			loadHandler->handleChildContainer<uml::InputPin>(this->getReplyValue());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InputPin> new_replyValue = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE));
+			if(new_replyValue)
+			{
+				loadHandler->handleChild(new_replyValue);
+				getReplyValue()->push_back(new_replyValue);
+			} 
 
 			return; 
 		}
@@ -343,7 +357,14 @@ void ReplyActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getReturnInformation()); 
 

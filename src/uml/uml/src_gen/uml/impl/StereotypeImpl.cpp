@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -369,9 +370,22 @@ void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Image";
+				typeName = "uml::Image";
 			}
-			loadHandler->handleChildContainer<uml::Image>(this->getIcon());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Image> new_icon = std::dynamic_pointer_cast<uml::Image>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON));
+			if(new_icon)
+			{
+				loadHandler->handleChild(new_icon);
+				getIcon()->push_back(new_icon);
+			} 
 
 			return; 
 		}

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -368,9 +369,22 @@ void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getResult());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT));
+			if(new_result)
+			{
+				loadHandler->handleChild(new_result);
+				getResult()->push_back(new_result);
+			} 
 
 			return; 
 		}
@@ -380,9 +394,22 @@ void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Trigger";
+				typeName = "uml::Trigger";
 			}
-			loadHandler->handleChildContainer<uml::Trigger>(this->getTrigger());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Trigger> new_trigger = std::dynamic_pointer_cast<uml::Trigger>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER));
+			if(new_trigger)
+			{
+				loadHandler->handleChild(new_trigger);
+				getTrigger()->push_back(new_trigger);
+			} 
 
 			return; 
 		}

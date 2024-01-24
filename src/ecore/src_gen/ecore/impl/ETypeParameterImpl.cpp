@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -213,7 +214,7 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EGenericType> new_eBounds = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS));
 			if(new_eBounds)
 			{

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -513,9 +514,22 @@ void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Manifestation";
+				typeName = "uml::Manifestation";
 			}
-			loadHandler->handleChildContainer<uml::Manifestation>(this->getManifestation());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Manifestation> new_manifestation = std::dynamic_pointer_cast<uml::Manifestation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION));
+			if(new_manifestation)
+			{
+				loadHandler->handleChild(new_manifestation);
+				getManifestation()->push_back(new_manifestation);
+			} 
 
 			return; 
 		}
@@ -525,9 +539,22 @@ void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Artifact";
+				typeName = "uml::Artifact";
 			}
-			loadHandler->handleChildContainer<uml::Artifact>(this->getNestedArtifact());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Artifact> new_nestedArtifact = std::dynamic_pointer_cast<uml::Artifact>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT));
+			if(new_nestedArtifact)
+			{
+				loadHandler->handleChild(new_nestedArtifact);
+				getNestedArtifact()->push_back(new_nestedArtifact);
+			} 
 
 			return; 
 		}
@@ -537,9 +564,22 @@ void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Property";
+				typeName = "uml::Property";
 			}
-			loadHandler->handleChildContainer<uml::Property>(this->getOwnedAttribute());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Property> new_ownedAttribute = std::dynamic_pointer_cast<uml::Property>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE));
+			if(new_ownedAttribute)
+			{
+				loadHandler->handleChild(new_ownedAttribute);
+				getOwnedAttribute()->push_back(new_ownedAttribute);
+			} 
 
 			return; 
 		}
@@ -549,9 +589,22 @@ void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Operation";
+				typeName = "uml::Operation";
 			}
-			loadHandler->handleChildContainer<uml::Operation>(this->getOwnedOperation());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Operation> new_ownedOperation = std::dynamic_pointer_cast<uml::Operation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION));
+			if(new_ownedOperation)
+			{
+				loadHandler->handleChild(new_ownedOperation);
+				getOwnedOperation()->push_back(new_ownedOperation);
+			} 
 
 			return; 
 		}

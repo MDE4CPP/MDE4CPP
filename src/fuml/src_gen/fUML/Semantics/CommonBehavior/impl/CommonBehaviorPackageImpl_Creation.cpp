@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EGenericType.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -135,6 +135,7 @@ void CommonBehaviorPackageImpl::createGetNextEventStrategyContent(std::shared_pt
 	
 	
 	m_getNextEventStrategy_Operation_getName = factory->createEOperation_as_eOperations_in_EClass(m_getNextEventStrategy_Class, GETNEXTEVENTSTRATEGY_OPERATION_GETNAME);
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation = factory->createEOperation_as_eOperations_in_EClass(m_getNextEventStrategy_Class, GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION);
 	
 }
 

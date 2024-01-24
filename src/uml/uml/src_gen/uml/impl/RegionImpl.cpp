@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -409,10 +410,23 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::Vertex>(this->getSubvertex());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Vertex> new_subvertex = std::dynamic_pointer_cast<uml::Vertex>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX));
+			if(new_subvertex)
+			{
+				loadHandler->handleChild(new_subvertex);
+				getSubvertex()->push_back(new_subvertex);
+			} 
 
 			return; 
 		}
@@ -422,9 +436,22 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Transition";
+				typeName = "uml::Transition";
 			}
-			loadHandler->handleChildContainer<uml::Transition>(this->getTransition());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Transition> new_transition = std::dynamic_pointer_cast<uml::Transition>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::REGION_ATTRIBUTE_TRANSITION));
+			if(new_transition)
+			{
+				loadHandler->handleChild(new_transition);
+				getTransition()->push_back(new_transition);
+			} 
 
 			return; 
 		}

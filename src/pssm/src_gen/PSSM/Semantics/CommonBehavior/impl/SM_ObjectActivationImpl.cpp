@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 //Forward declaration includes
@@ -40,10 +42,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "PSSM/Semantics/StateMachines/CompletionEventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/DeferredEventOccurrence.hpp"
@@ -55,8 +57,8 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 
@@ -344,7 +346,10 @@ void SM_ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<PSSM::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getSM_ObjectActivation_Attribute_deferredEventPool()) )
+	{
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::DeferredEventOccurrence>("deferredEventPool", this->getDeferredEventPool());
+	}
 	}
 	catch (std::exception& e)
 	{

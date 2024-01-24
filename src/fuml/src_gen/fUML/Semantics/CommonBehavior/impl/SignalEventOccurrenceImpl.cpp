@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/Class.hpp"
 #include "uml/Signal.hpp"
@@ -43,8 +44,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Element.hpp"
 #include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
@@ -52,8 +53,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"

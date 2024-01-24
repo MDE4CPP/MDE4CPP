@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -578,10 +579,23 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::ActivityEdge>(this->getEdge());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ActivityEdge> new_edge = std::dynamic_pointer_cast<uml::ActivityEdge>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE));
+			if(new_edge)
+			{
+				loadHandler->handleChild(new_edge);
+				getEdge()->push_back(new_edge);
+			} 
 
 			return; 
 		}
@@ -591,10 +605,23 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::ActivityNode>(this->getNode());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ActivityNode> new_node = std::dynamic_pointer_cast<uml::ActivityNode>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE));
+			if(new_node)
+			{
+				loadHandler->handleChild(new_node);
+				getNode()->push_back(new_node);
+			} 
 
 			return; 
 		}
@@ -604,9 +631,22 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
 			}
-			loadHandler->handleChildContainer<uml::InputPin>(this->getStructuredNodeInput());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InputPin> new_structuredNodeInput = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT));
+			if(new_structuredNodeInput)
+			{
+				loadHandler->handleChild(new_structuredNodeInput);
+				getStructuredNodeInput()->push_back(new_structuredNodeInput);
+			} 
 
 			return; 
 		}
@@ -616,9 +656,22 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getStructuredNodeOutput());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_structuredNodeOutput = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT));
+			if(new_structuredNodeOutput)
+			{
+				loadHandler->handleChild(new_structuredNodeOutput);
+				getStructuredNodeOutput()->push_back(new_structuredNodeOutput);
+			} 
 
 			return; 
 		}
@@ -628,9 +681,22 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Variable";
+				typeName = "uml::Variable";
 			}
-			loadHandler->handleChildContainer<uml::Variable>(this->getVariable());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Variable> new_variable = std::dynamic_pointer_cast<uml::Variable>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE));
+			if(new_variable)
+			{
+				loadHandler->handleChild(new_variable);
+				getVariable()->push_back(new_variable);
+			} 
 
 			return; 
 		}

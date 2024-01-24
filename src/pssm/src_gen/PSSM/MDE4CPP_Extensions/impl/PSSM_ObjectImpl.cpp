@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -58,8 +60,8 @@
 #include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 

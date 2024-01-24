@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -330,9 +331,22 @@ void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "StringExpression";
+				typeName = "uml::StringExpression";
 			}
-			loadHandler->handleChildContainer<uml::StringExpression>(this->getSubExpression());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::StringExpression> new_subExpression = std::dynamic_pointer_cast<uml::StringExpression>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION));
+			if(new_subExpression)
+			{
+				loadHandler->handleChild(new_subExpression);
+				getSubExpression()->push_back(new_subExpression);
+			} 
 
 			return; 
 		}

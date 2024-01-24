@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include <algorithm>
 #include "uml/Classifier.hpp"
@@ -62,8 +63,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -385,7 +386,14 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Executor";
+				typeName = "fUML::Semantics::Loci::Executor";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::Loci/]"))
+				{
+					typeName = "fUML::Semantics::Loci::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getExecutor()); 
 
@@ -397,10 +405,23 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<fUML::MDE4CPP_Extensions::FUML_Object>(this->getExtensionalValues());  
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::MDE4CPP_Extensions/]"))
+				{
+					typeName = "fUML::MDE4CPP_Extensions::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> new_extensionalValues = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES));
+			if(new_extensionalValues)
+			{
+				loadHandler->handleChild(new_extensionalValues);
+				getExtensionalValues()->push_back(new_extensionalValues);
+			} 
 
 			return; 
 		}
@@ -410,7 +431,14 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ExecutionFactory";
+				typeName = "fUML::Semantics::Loci::ExecutionFactory";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::Loci/]"))
+				{
+					typeName = "fUML::Semantics::Loci::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getFactory()); 
 

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "ecore/EClass.hpp"
 #include "fUML/Semantics/Activities/ForkedToken.hpp"
@@ -57,8 +58,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -670,10 +671,23 @@ void ActivityNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<fUML::Semantics::Activities::Token>(this->getHeldTokens());  
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
+				{
+					typeName = "fUML::Semantics::Activities::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<fUML::Semantics::Activities::Token> new_heldTokens = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS));
+			if(new_heldTokens)
+			{
+				loadHandler->handleChild(new_heldTokens);
+				getHeldTokens()->push_back(new_heldTokens);
+			} 
 
 			return; 
 		}

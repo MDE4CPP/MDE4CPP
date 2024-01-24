@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -331,10 +332,23 @@ void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::ValueSpecification>(this->getOperand());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ValueSpecification> new_operand = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND));
+			if(new_operand)
+			{
+				loadHandler->handleChild(new_operand);
+				getOperand()->push_back(new_operand);
+			} 
 
 			return; 
 		}

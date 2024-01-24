@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -57,8 +58,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -67,8 +68,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -736,9 +737,22 @@ void ActivityNodeActivationGroupImpl::loadNode(std::string nodeName, std::shared
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ActivityEdgeInstance";
+				typeName = "fUML::Semantics::Activities::ActivityEdgeInstance";
 			}
-			loadHandler->handleChildContainer<fUML::Semantics::Activities::ActivityEdgeInstance>(this->getEdgeInstances());  
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
+				{
+					typeName = "fUML::Semantics::Activities::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> new_edgeInstances = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES));
+			if(new_edgeInstances)
+			{
+				loadHandler->handleChild(new_edgeInstances);
+				getEdgeInstances()->push_back(new_edgeInstances);
+			} 
 
 			return; 
 		}
@@ -748,10 +762,23 @@ void ActivityNodeActivationGroupImpl::loadNode(std::string nodeName, std::shared
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<fUML::Semantics::Activities::ActivityNodeActivation>(this->getNodeActivations());  
+			else
+			{
+				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
+				{
+					typeName = "fUML::Semantics::Activities::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> new_nodeActivations = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS));
+			if(new_nodeActivations)
+			{
+				loadHandler->handleChild(new_nodeActivations);
+				getNodeActivations()->push_back(new_nodeActivations);
+			} 
 
 			return; 
 		}

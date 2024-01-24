@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -765,7 +766,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EGenericType> new_eGenericSuperTypes = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES));
 			if(new_eGenericSuperTypes)
 			{
@@ -790,7 +791,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EOperation> new_eOperations = std::dynamic_pointer_cast<ecore::EOperation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS));
 			if(new_eOperations)
 			{
@@ -806,7 +807,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
 			else
@@ -816,7 +817,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EStructuralFeature> new_eStructuralFeatures = std::dynamic_pointer_cast<ecore::EStructuralFeature>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES));
 			if(new_eStructuralFeatures)
 			{

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -288,9 +289,22 @@ void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "TemplateParameter";
+				typeName = "uml::TemplateParameter";
 			}
-			loadHandler->handleChildContainer<uml::TemplateParameter>(this->getOwnedParameter());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::TemplateParameter> new_ownedParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER));
+			if(new_ownedParameter)
+			{
+				loadHandler->handleChild(new_ownedParameter);
+				getOwnedParameter()->push_back(new_ownedParameter);
+			} 
 
 			return; 
 		}

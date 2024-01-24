@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/Transition.hpp"
 #include "PSSM/Semantics/StateMachines/CompletionEventOccurrence.hpp"
@@ -59,9 +61,9 @@
 
 #include <exception> // used in Persistence
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -830,8 +832,8 @@ void TransitionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getTransitionActivation_Attribute_analyticalStatus()) )
-		{
+          if ( this->eIsSet(package->getTransitionActivation_Attribute_analyticalStatus()) )
+          {
 			PSSM::Semantics::StateMachines::TransitionMetadata value = this->getAnalyticalStatus();
 			std::string literal = "";
 			if (value == PSSM::Semantics::StateMachines::TransitionMetadata::NONE)
@@ -851,15 +853,15 @@ void TransitionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 				literal = "completed";
 			}
 			saveHandler->addAttribute("analyticalStatus", literal);
-		}
+          }
 
-		if ( this->eIsSet(package->getTransitionActivation_Attribute_lastPropagation()) )
-		{
+          if ( this->eIsSet(package->getTransitionActivation_Attribute_lastPropagation()) )
+          {
 			saveHandler->addAttribute("lastPropagation", this->getLastPropagation());
-		}
+          }
 
-		if ( this->eIsSet(package->getTransitionActivation_Attribute_status()) )
-		{
+          if ( this->eIsSet(package->getTransitionActivation_Attribute_status()) )
+          {
 			PSSM::Semantics::StateMachines::TransitionMetadata value = this->getStatus();
 			std::string literal = "";
 			if (value == PSSM::Semantics::StateMachines::TransitionMetadata::NONE)
@@ -879,12 +881,24 @@ void TransitionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 				literal = "completed";
 			}
 			saveHandler->addAttribute("status", literal);
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getTransitionActivation_Attribute_lastTriggeringEventOccurrence()) )
+	{
 		saveHandler->addReference(this->getLastTriggeringEventOccurrence(), "lastTriggeringEventOccurrence", getLastTriggeringEventOccurrence()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class()); 
+	}
+	if ( this->eIsSet(package->getTransitionActivation_Attribute_leastCommonAncestor()) )
+	{
 		saveHandler->addReference(this->getLeastCommonAncestor(), "leastCommonAncestor", getLeastCommonAncestor()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getRegionActivation_Class()); 
+	}
+	if ( this->eIsSet(package->getTransitionActivation_Attribute_sourceVertexActivation()) )
+	{
 		saveHandler->addReference(this->getSourceVertexActivation(), "sourceVertexActivation", getSourceVertexActivation()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getVertexActivation_Class()); 
+	}
+	if ( this->eIsSet(package->getTransitionActivation_Attribute_targetVertexActivation()) )
+	{
 		saveHandler->addReference(this->getTargetVertexActivation(), "targetVertexActivation", getTargetVertexActivation()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getVertexActivation_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -327,9 +328,22 @@ void NodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Node";
+				typeName = "uml::Node";
 			}
-			loadHandler->handleChildContainer<uml::Node>(this->getNestedNode());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Node> new_nestedNode = std::dynamic_pointer_cast<uml::Node>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE));
+			if(new_nestedNode)
+			{
+				loadHandler->handleChild(new_nestedNode);
+				getNestedNode()->push_back(new_nestedNode);
+			} 
 
 			return; 
 		}

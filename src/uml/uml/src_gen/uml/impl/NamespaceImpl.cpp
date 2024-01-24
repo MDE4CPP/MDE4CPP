@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -483,9 +484,22 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ElementImport";
+				typeName = "uml::ElementImport";
 			}
-			loadHandler->handleChildContainer<uml::ElementImport>(this->getElementImport());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ElementImport> new_elementImport = std::dynamic_pointer_cast<uml::ElementImport>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT));
+			if(new_elementImport)
+			{
+				loadHandler->handleChild(new_elementImport);
+				getElementImport()->push_back(new_elementImport);
+			} 
 
 			return; 
 		}
@@ -495,10 +509,23 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::NamedElement>(this->getOwnedMember());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::NamedElement> new_ownedMember = std::dynamic_pointer_cast<uml::NamedElement>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER));
+			if(new_ownedMember)
+			{
+				loadHandler->handleChild(new_ownedMember);
+				getOwnedMember()->push_back(new_ownedMember);
+			} 
 
 			return; 
 		}
@@ -508,9 +535,22 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Constraint";
+				typeName = "uml::Constraint";
 			}
-			loadHandler->handleChildContainer<uml::Constraint>(this->getOwnedRule());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Constraint> new_ownedRule = std::dynamic_pointer_cast<uml::Constraint>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE));
+			if(new_ownedRule)
+			{
+				loadHandler->handleChild(new_ownedRule);
+				getOwnedRule()->push_back(new_ownedRule);
+			} 
 
 			return; 
 		}
@@ -520,9 +560,22 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "PackageImport";
+				typeName = "uml::PackageImport";
 			}
-			loadHandler->handleChildContainer<uml::PackageImport>(this->getPackageImport());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::PackageImport> new_packageImport = std::dynamic_pointer_cast<uml::PackageImport>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT));
+			if(new_packageImport)
+			{
+				loadHandler->handleChild(new_packageImport);
+				getPackageImport()->push_back(new_packageImport);
+			} 
 
 			return; 
 		}

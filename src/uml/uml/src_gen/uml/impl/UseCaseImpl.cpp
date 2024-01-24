@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -453,9 +454,22 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Extend";
+				typeName = "uml::Extend";
 			}
-			loadHandler->handleChildContainer<uml::Extend>(this->getExtend());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Extend> new_extend = std::dynamic_pointer_cast<uml::Extend>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::USECASE_ATTRIBUTE_EXTEND));
+			if(new_extend)
+			{
+				loadHandler->handleChild(new_extend);
+				getExtend()->push_back(new_extend);
+			} 
 
 			return; 
 		}
@@ -465,9 +479,22 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ExtensionPoint";
+				typeName = "uml::ExtensionPoint";
 			}
-			loadHandler->handleChildContainer<uml::ExtensionPoint>(this->getExtensionPoint());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ExtensionPoint> new_extensionPoint = std::dynamic_pointer_cast<uml::ExtensionPoint>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT));
+			if(new_extensionPoint)
+			{
+				loadHandler->handleChild(new_extensionPoint);
+				getExtensionPoint()->push_back(new_extensionPoint);
+			} 
 
 			return; 
 		}
@@ -477,9 +504,22 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Include";
+				typeName = "uml::Include";
 			}
-			loadHandler->handleChildContainer<uml::Include>(this->getInclude());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Include> new_include = std::dynamic_pointer_cast<uml::Include>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE));
+			if(new_include)
+			{
+				loadHandler->handleChild(new_include);
+				getInclude()->push_back(new_include);
+			} 
 
 			return; 
 		}

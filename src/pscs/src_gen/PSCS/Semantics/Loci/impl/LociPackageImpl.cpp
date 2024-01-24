@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EGenericType.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Loci/LociFactory.hpp"

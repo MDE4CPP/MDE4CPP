@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/StateMachines/TransitionMetadata.hpp"
 #include "PSSM/Semantics/StateMachines/StateMetadata.hpp"
@@ -43,9 +45,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -666,8 +668,8 @@ void VertexActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 		// Add attributes
-		if ( this->eIsSet(package->getVertexActivation_Attribute_status()) )
-		{
+          if ( this->eIsSet(package->getVertexActivation_Attribute_status()) )
+          {
 			PSSM::Semantics::StateMachines::StateMetadata value = this->getStatus();
 			std::string literal = "";
 			if (value == PSSM::Semantics::StateMachines::StateMetadata::IDLE)
@@ -679,10 +681,16 @@ void VertexActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 				literal = "active";
 			}
 			saveHandler->addAttribute("status", literal);
-		}
+          }
 	// Add references
+	if ( this->eIsSet(package->getVertexActivation_Attribute_incomingTransitionActivations()) )
+	{
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::TransitionActivation>("incomingTransitionActivations", this->getIncomingTransitionActivations());
+	}
+	if ( this->eIsSet(package->getVertexActivation_Attribute_outgoingTransitionActivations()) )
+	{
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::TransitionActivation>("outgoingTransitionActivations", this->getOutgoingTransitionActivations());
+	}
 	}
 	catch (std::exception& e)
 	{

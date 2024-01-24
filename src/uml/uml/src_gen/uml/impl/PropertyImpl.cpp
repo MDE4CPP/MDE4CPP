@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "uml/AggregationKind.hpp"
 //Forward declaration includes
@@ -736,8 +737,15 @@ void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getDefaultValue()); 
 
@@ -749,9 +757,22 @@ void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Property";
+				typeName = "uml::Property";
 			}
-			loadHandler->handleChildContainer<uml::Property>(this->getQualifier());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Property> new_qualifier = std::dynamic_pointer_cast<uml::Property>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER));
+			if(new_qualifier)
+			{
+				loadHandler->handleChild(new_qualifier);
+				getQualifier()->push_back(new_qualifier);
+			} 
 
 			return; 
 		}

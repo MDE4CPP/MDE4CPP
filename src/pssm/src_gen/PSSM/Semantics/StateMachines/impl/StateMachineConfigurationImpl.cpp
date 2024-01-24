@@ -30,8 +30,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -363,7 +365,10 @@ void StateMachineConfigurationImpl::saveContent(std::shared_ptr<persistence::int
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getStateMachineConfiguration_Attribute_rootConfiguration()) )
+	{
 		saveHandler->addReference(this->getRootConfiguration(), "rootConfiguration", getRootConfiguration()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateConfiguration_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

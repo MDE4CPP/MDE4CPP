@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -306,9 +307,22 @@ void EncapsulatedClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Port";
+				typeName = "uml::Port";
 			}
-			loadHandler->handleChildContainer<uml::Port>(this->getOwnedPort());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Port> new_ownedPort = std::dynamic_pointer_cast<uml::Port>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT));
+			if(new_ownedPort)
+			{
+				loadHandler->handleChild(new_ownedPort);
+				getOwnedPort()->push_back(new_ownedPort);
+			} 
 
 			return; 
 		}

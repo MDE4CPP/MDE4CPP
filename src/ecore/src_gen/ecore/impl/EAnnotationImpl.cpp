@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -327,7 +328,7 @@ void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EObject> new_contents = std::dynamic_pointer_cast<ecore::EObject>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS));
 			if(new_contents)
 			{

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "util/stereotypestorage.hpp"
 //Forward declaration includes
@@ -482,9 +483,22 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Comment";
+				typeName = "uml::Comment";
 			}
-			loadHandler->handleChildContainer<uml::Comment>(this->getOwnedComment());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Comment> new_ownedComment = std::dynamic_pointer_cast<uml::Comment>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT));
+			if(new_ownedComment)
+			{
+				loadHandler->handleChild(new_ownedComment);
+				getOwnedComment()->push_back(new_ownedComment);
+			} 
 
 			return; 
 		}
@@ -494,10 +508,23 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::Element>(this->getOwnedElement());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Element> new_ownedElement = std::dynamic_pointer_cast<uml::Element>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT));
+			if(new_ownedElement)
+			{
+				loadHandler->handleChild(new_ownedElement);
+				getOwnedElement()->push_back(new_ownedElement);
+			} 
 
 			return; 
 		}

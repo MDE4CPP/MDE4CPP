@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -463,9 +464,22 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Pseudostate";
+				typeName = "uml::Pseudostate";
 			}
-			loadHandler->handleChildContainer<uml::Pseudostate>(this->getConnectionPoint());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Pseudostate> new_connectionPoint = std::dynamic_pointer_cast<uml::Pseudostate>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT));
+			if(new_connectionPoint)
+			{
+				loadHandler->handleChild(new_connectionPoint);
+				getConnectionPoint()->push_back(new_connectionPoint);
+			} 
 
 			return; 
 		}
@@ -475,9 +489,22 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Region";
+				typeName = "uml::Region";
 			}
-			loadHandler->handleChildContainer<uml::Region>(this->getRegion());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Region> new_region = std::dynamic_pointer_cast<uml::Region>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION));
+			if(new_region)
+			{
+				loadHandler->handleChild(new_region);
+				getRegion()->push_back(new_region);
+			} 
 
 			return; 
 		}

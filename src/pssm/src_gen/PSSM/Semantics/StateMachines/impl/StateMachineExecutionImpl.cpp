@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/CommonBehavior/SM_ObjectActivation.hpp"
 #include "PSSM/Semantics/Loci/SM_ExecutionFactory.hpp"
@@ -49,13 +51,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -426,7 +428,14 @@ void StateMachineExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<p
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "StateMachineConfiguration";
+				typeName = "PSSM::Semantics::StateMachines::StateMachineConfiguration";
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
+				{
+					typeName = "PSSM::Semantics::StateMachines::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getConfiguration()); 
 
@@ -438,9 +447,22 @@ void StateMachineExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<p
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "RegionActivation";
+				typeName = "PSSM::Semantics::StateMachines::RegionActivation";
 			}
-			loadHandler->handleChildContainer<PSSM::Semantics::StateMachines::RegionActivation>(this->getRegionActivations());  
+			else
+			{
+				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
+				{
+					typeName = "PSSM::Semantics::StateMachines::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> new_regionActivations = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(modelFactory->create(typeName, loadHandler->getCurrentObject(), PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS));
+			if(new_regionActivations)
+			{
+				loadHandler->handleChild(new_regionActivations);
+				getRegionActivations()->push_back(new_regionActivations);
+			} 
 
 			return; 
 		}
@@ -511,12 +533,16 @@ void StateMachineExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'configuration'
-
+	    if ( this->eIsSet(package->getStateMachineExecution_Attribute_configuration()) )
+	    {
 		saveHandler->addReference(this->getConfiguration(), "configuration", getConfiguration()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateMachineConfiguration_Class());
+	    }
 
 		// Save 'regionActivations'
-
+	    if ( this->eIsSet(package->getStateMachineExecution_Attribute_regionActivations()) )
+	    {
 		saveHandler->addReferences<PSSM::Semantics::StateMachines::RegionActivation>("regionActivations", this->getRegionActivations());
+	    }
 	}
 	catch (std::exception& e)
 	{

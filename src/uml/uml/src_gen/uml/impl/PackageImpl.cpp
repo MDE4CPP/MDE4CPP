@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -738,9 +739,22 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Package";
+				typeName = "uml::Package";
 			}
-			loadHandler->handleChildContainer<uml::Package>(this->getNestedPackage());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Package> new_nestedPackage = std::dynamic_pointer_cast<uml::Package>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE));
+			if(new_nestedPackage)
+			{
+				loadHandler->handleChild(new_nestedPackage);
+				getNestedPackage()->push_back(new_nestedPackage);
+			} 
 
 			return; 
 		}
@@ -750,9 +764,22 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Stereotype";
+				typeName = "uml::Stereotype";
 			}
-			loadHandler->handleChildContainer<uml::Stereotype>(this->getOwnedStereotype());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Stereotype> new_ownedStereotype = std::dynamic_pointer_cast<uml::Stereotype>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE));
+			if(new_ownedStereotype)
+			{
+				loadHandler->handleChild(new_ownedStereotype);
+				getOwnedStereotype()->push_back(new_ownedStereotype);
+			} 
 
 			return; 
 		}
@@ -762,10 +789,23 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::Type>(this->getOwnedType());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Type> new_ownedType = std::dynamic_pointer_cast<uml::Type>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE));
+			if(new_ownedType)
+			{
+				loadHandler->handleChild(new_ownedType);
+				getOwnedType()->push_back(new_ownedType);
+			} 
 
 			return; 
 		}
@@ -775,9 +815,22 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "PackageMerge";
+				typeName = "uml::PackageMerge";
 			}
-			loadHandler->handleChildContainer<uml::PackageMerge>(this->getPackageMerge());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::PackageMerge> new_packageMerge = std::dynamic_pointer_cast<uml::PackageMerge>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE));
+			if(new_packageMerge)
+			{
+				loadHandler->handleChild(new_packageMerge);
+				getPackageMerge()->push_back(new_packageMerge);
+			} 
 
 			return; 
 		}
@@ -787,10 +840,23 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::PackageableElement>(this->getPackagedElement());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::PackageableElement> new_packagedElement = std::dynamic_pointer_cast<uml::PackageableElement>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT));
+			if(new_packagedElement)
+			{
+				loadHandler->handleChild(new_packagedElement);
+				getPackagedElement()->push_back(new_packagedElement);
+			} 
 
 			return; 
 		}
@@ -800,9 +866,22 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ProfileApplication";
+				typeName = "uml::ProfileApplication";
 			}
-			loadHandler->handleChildContainer<uml::ProfileApplication>(this->getProfileApplication());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ProfileApplication> new_profileApplication = std::dynamic_pointer_cast<uml::ProfileApplication>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION));
+			if(new_profileApplication)
+			{
+				loadHandler->handleChild(new_profileApplication);
+				getProfileApplication()->push_back(new_profileApplication);
+			} 
 
 			return; 
 		}

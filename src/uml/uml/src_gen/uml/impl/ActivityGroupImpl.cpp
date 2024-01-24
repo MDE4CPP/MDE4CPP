@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -292,10 +293,23 @@ void ActivityGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::ActivityGroup>(this->getSubgroup());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ActivityGroup> new_subgroup = std::dynamic_pointer_cast<uml::ActivityGroup>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP));
+			if(new_subgroup)
+			{
+				loadHandler->handleChild(new_subgroup);
+				getSubgroup()->push_back(new_subgroup);
+			} 
 
 			return; 
 		}

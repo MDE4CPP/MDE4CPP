@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -464,9 +465,22 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getLoopVariable());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_loopVariable = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE));
+			if(new_loopVariable)
+			{
+				loadHandler->handleChild(new_loopVariable);
+				getLoopVariable()->push_back(new_loopVariable);
+			} 
 
 			return; 
 		}
@@ -476,9 +490,22 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
 			}
-			loadHandler->handleChildContainer<uml::InputPin>(this->getLoopVariableInput());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InputPin> new_loopVariableInput = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT));
+			if(new_loopVariableInput)
+			{
+				loadHandler->handleChild(new_loopVariableInput);
+				getLoopVariableInput()->push_back(new_loopVariableInput);
+			} 
 
 			return; 
 		}
@@ -488,9 +515,22 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "OutputPin";
+				typeName = "uml::OutputPin";
 			}
-			loadHandler->handleChildContainer<uml::OutputPin>(this->getResult());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::OutputPin> new_result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT));
+			if(new_result)
+			{
+				loadHandler->handleChild(new_result);
+				getResult()->push_back(new_result);
+			} 
 
 			return; 
 		}

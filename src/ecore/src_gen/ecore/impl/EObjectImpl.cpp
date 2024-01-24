@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "ecore/ecoreFactory.hpp"
 #include "ecore/EObjectContainer.hpp"
@@ -399,7 +400,7 @@ void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 					typeName = "ecore::"+typeName;
 				}
 			}
-			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
 			std::shared_ptr<ecore::EObject> new_eContentUnion = std::dynamic_pointer_cast<ecore::EObject>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION));
 			if(new_eContentUnion)
 			{
@@ -452,7 +453,7 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		// TODO 'org.eclipse.emf.ecore.impl.EDataTypeImpl@2032e725 (name: EInt) (instanceClassName: int) (serializable: true)' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
+		// TODO 'org.eclipse.emf.ecore.impl.EDataTypeImpl@7ca0863b (name: EInt) (instanceClassName: int) (serializable: true)' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
 		//
 		// Add new tags (from references)
 		//

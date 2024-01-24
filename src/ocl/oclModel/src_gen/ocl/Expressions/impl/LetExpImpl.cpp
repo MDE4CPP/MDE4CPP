@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -356,8 +357,15 @@ void LetExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getIn()); 
 
@@ -369,9 +377,22 @@ void LetExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "VarDeclarationExp";
+				typeName = "ocl::Expressions::VarDeclarationExp";
 			}
-			loadHandler->handleChildContainer<ocl::Expressions::VarDeclarationExp>(this->getVariables());  
+			else
+			{
+				if (std::string::npos == typeName.find("ocl::Expressions/]"))
+				{
+					typeName = "ocl::Expressions::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<ocl::Expressions::VarDeclarationExp> new_variables = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(modelFactory->create(typeName, loadHandler->getCurrentObject(), ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLES));
+			if(new_variables)
+			{
+				loadHandler->handleChild(new_variables);
+				getVariables()->push_back(new_variables);
+			} 
 
 			return; 
 		}

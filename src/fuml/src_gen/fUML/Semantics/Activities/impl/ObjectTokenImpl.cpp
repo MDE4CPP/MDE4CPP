@@ -33,6 +33,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
  #include "fUML/Semantics/Values/ValuesPackage.hpp"
 //Forward declaration includes
@@ -44,8 +45,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -210,7 +211,7 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@3901f6af (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@3e17a0a1 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}

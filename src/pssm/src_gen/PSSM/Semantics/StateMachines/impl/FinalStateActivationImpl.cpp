@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/StateMachines/impl/VertexActivationImpl.hpp"
 //Forward declaration includes
@@ -40,9 +42,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
 #include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"

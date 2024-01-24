@@ -31,8 +31,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -362,8 +364,14 @@ void SM_OpaqueExpressionEvaluationImpl::saveContent(std::shared_ptr<persistence:
 	{
 		std::shared_ptr<PSSM::Semantics::Values::ValuesPackage> package = PSSM::Semantics::Values::ValuesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getSM_OpaqueExpressionEvaluation_Attribute_context()) )
+	{
 		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class()); 
+	}
+	if ( this->eIsSet(package->getSM_OpaqueExpressionEvaluation_Attribute_parameterValues()) )
+	{
 		saveHandler->addReferences<fUML::Semantics::CommonBehavior::ParameterValue>("parameterValues", this->getParameterValues());
+	}
 	}
 	catch (std::exception& e)
 	{

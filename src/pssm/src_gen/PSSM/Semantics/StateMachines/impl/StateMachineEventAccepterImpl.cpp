@@ -30,8 +30,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/StateMachines/StateActivation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -481,7 +483,10 @@ void StateMachineEventAccepterImpl::saveContent(std::shared_ptr<persistence::int
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getStateMachineEventAccepter_Attribute_registrationContext()) )
+	{
 		saveHandler->addReference(this->getRegistrationContext(), "registrationContext", getRegistrationContext()->eClass() != PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateMachineExecution_Class()); 
+	}
 	}
 	catch (std::exception& e)
 	{

@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -333,9 +334,22 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "LinkEndData";
+				typeName = "uml::LinkEndData";
 			}
-			loadHandler->handleChildContainer<uml::LinkEndData>(this->getEndData());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::LinkEndData> new_endData = std::dynamic_pointer_cast<uml::LinkEndData>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA));
+			if(new_endData)
+			{
+				loadHandler->handleChild(new_endData);
+				getEndData()->push_back(new_endData);
+			} 
 
 			return; 
 		}
@@ -345,9 +359,22 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "InputPin";
+				typeName = "uml::InputPin";
 			}
-			loadHandler->handleChildContainer<uml::InputPin>(this->getInputValue());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::InputPin> new_inputValue = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE));
+			if(new_inputValue)
+			{
+				loadHandler->handleChild(new_inputValue);
+				getInputValue()->push_back(new_inputValue);
+			} 
 
 			return; 
 		}

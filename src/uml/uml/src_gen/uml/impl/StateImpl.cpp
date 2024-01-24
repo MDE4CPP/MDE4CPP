@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -612,9 +613,22 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "ConnectionPointReference";
+				typeName = "uml::ConnectionPointReference";
 			}
-			loadHandler->handleChildContainer<uml::ConnectionPointReference>(this->getConnection());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::ConnectionPointReference> new_connection = std::dynamic_pointer_cast<uml::ConnectionPointReference>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STATE_ATTRIBUTE_CONNECTION));
+			if(new_connection)
+			{
+				loadHandler->handleChild(new_connection);
+				getConnection()->push_back(new_connection);
+			} 
 
 			return; 
 		}
@@ -624,9 +638,22 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Pseudostate";
+				typeName = "uml::Pseudostate";
 			}
-			loadHandler->handleChildContainer<uml::Pseudostate>(this->getConnectionPoint());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Pseudostate> new_connectionPoint = std::dynamic_pointer_cast<uml::Pseudostate>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT));
+			if(new_connectionPoint)
+			{
+				loadHandler->handleChild(new_connectionPoint);
+				getConnectionPoint()->push_back(new_connectionPoint);
+			} 
 
 			return; 
 		}
@@ -636,9 +663,22 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Trigger";
+				typeName = "uml::Trigger";
 			}
-			loadHandler->handleChildContainer<uml::Trigger>(this->getDeferrableTrigger());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Trigger> new_deferrableTrigger = std::dynamic_pointer_cast<uml::Trigger>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER));
+			if(new_deferrableTrigger)
+			{
+				loadHandler->handleChild(new_deferrableTrigger);
+				getDeferrableTrigger()->push_back(new_deferrableTrigger);
+			} 
 
 			return; 
 		}
@@ -648,8 +688,15 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getDoActivity()); 
 
@@ -661,8 +708,15 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getEntry()); 
 
@@ -674,8 +728,15 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
+			}
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
 			}
 			loadHandler->handleChild(this->getExit()); 
 
@@ -687,9 +748,22 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Region";
+				typeName = "uml::Region";
 			}
-			loadHandler->handleChildContainer<uml::Region>(this->getRegion());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Region> new_region = std::dynamic_pointer_cast<uml::Region>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::STATE_ATTRIBUTE_REGION));
+			if(new_region)
+			{
+				loadHandler->handleChild(new_region);
+				getRegion()->push_back(new_region);
+			} 
 
 			return; 
 		}

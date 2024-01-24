@@ -34,6 +34,7 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -274,9 +275,22 @@ void CollaborationUseImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Dependency";
+				typeName = "uml::Dependency";
 			}
-			loadHandler->handleChildContainer<uml::Dependency>(this->getRoleBinding());  
+			else
+			{
+				if (std::string::npos == typeName.find("uml/]"))
+				{
+					typeName = "uml::"+typeName;
+				}
+			}
+			std::shared_ptr<ecore::ecoreFactory> modelFactory = ecore::ecoreFactory::eInstance();		
+			std::shared_ptr<uml::Dependency> new_roleBinding = std::dynamic_pointer_cast<uml::Dependency>(modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING));
+			if(new_roleBinding)
+			{
+				loadHandler->handleChild(new_roleBinding);
+				getRoleBinding()->push_back(new_roleBinding);
+			} 
 
 			return; 
 		}
