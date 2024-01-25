@@ -109,7 +109,7 @@ task deliverUML4CPP(dependsOn: jar) {
 	doLast {	
     	copy {
     		from([buildDir,'libs'].join(File.separator)){
-    	   		include jar.archiveName
+    	   		include jar.archiveFileName.get()
     	   	}
     	   	
     	   	into([rootDir,'application','generator'].join(File.separator))
@@ -117,7 +117,7 @@ task deliverUML4CPP(dependsOn: jar) {
     }
 
 	outputs.upToDateWhen{false}
-    outputs.file([rootDir,'application','generator',jar.archiveName].join(File.separator))
+    outputs.file([rootDir,'application','generator',jar.archiveFileName].join(File.separator))
 }
 
 //EOF

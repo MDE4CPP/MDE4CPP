@@ -106,11 +106,11 @@ executableJar {
 
 task deliverfUML4CPP(dependsOn: jar) {
 	description 'deliver fUML4CPP.jar to application/generator'
-
+ 
 	doLast {
     	copy {
     		from([buildDir,'libs'].join(File.separator)){
-    	   		include jar.archiveName
+    	   		include jar.archiveFileName.get()
     	   	}
     	   	
     	   	into([rootDir,'application','generator'].join(File.separator))
@@ -118,7 +118,6 @@ task deliverfUML4CPP(dependsOn: jar) {
     }
     
     outputs.upToDateWhen{false}
-    outputs.file([rootDir,'application','generator',jar.archiveName].join(File.separator))
 }
 
 //EOF
