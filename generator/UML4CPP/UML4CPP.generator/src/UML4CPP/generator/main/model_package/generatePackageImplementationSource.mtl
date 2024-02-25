@@ -105,7 +105,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
-[if (aPackage.isPSSMExecutable())]
+[if (aPackage.includesPSSM())]
 #include "uml/PseudostateKind.hpp"
 [/if]
 //meta meta model factory
@@ -219,7 +219,7 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
 	createPackageSignals([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
-[if (aPackage.isPSSMExecutable())]
+[if (aPackage.includesPSSM())]
 	createPackageStateMachines([aPackage.memberName()/], factory);
 [/if]
 }
@@ -404,7 +404,7 @@ void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 }
 
 [comment Create all State Machines in Package/]
-[if (aPackage.isPSSMExecutable())]
+[if (aPackage.includesPSSM())]
 void [packageName/]::createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
 [for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
@@ -456,7 +456,7 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
-[if (aPackage.isPSSMExecutable())]
+[if (aPackage.includesPSSM())]
 	initializePackageStateMachines();
 [/if]
 }
@@ -668,7 +668,7 @@ void [packageName/]::initializePackageValueSpecifications()
 [/for]
 
 [comment Initialize all State Machines in aPackage/]
-[if (aPackage.isPSSMExecutable())]
+[if (aPackage.includesPSSM())]
 void [packageName/]::initializePackageStateMachines()
 {
 [for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
@@ -682,7 +682,7 @@ void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 {
 	[aStateMachine.generateStateMachineInitialization()/]
 
-	// create Regions
+	// initialize Regions
 	[aStateMachine.generateRegionsInitialization()/]
 }
 

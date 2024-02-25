@@ -58,7 +58,7 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 [else]
 [aStateMachine.getVisitorVariableName()/]->getContext()->startBehavior(nullptr, nullptr);
 [/if]
-[for (aSmRegion : Region | aStateMachine.region) before ('\t\n// Create Regions\n')]
+[for (aSmRegion : Region | aStateMachine.region) before ('\t\n// Create RegionActivations\n')]
 [aSmRegion.generateSmRegionActivationCreation()/]
 [/for]
 [/template]
@@ -75,10 +75,10 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 	auto [aSmRegion.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createRegionActivation_as_regionActivations_in_StateMachineExecution([owningStateMachine.getVisitorVariableName()/]);
 	[aSmRegion.getVisitorVariableName()/]->setParent([owningStateMachine.getVisitorVariableName()/]);
 	[aSmRegion.getVisitorVariableName()/]->setNode([aSmRegion.generatePackageGetterCall()/]);
-	[for (aVertex : Vertex | aSmRegion.subvertex) before ('\t\n// Create Vertices of Region\n')]
+	[for (aVertex : Vertex | aSmRegion.subvertex) before ('\t\n// Create VertexActivations of RegionActivation\n')]
 	[aVertex.generateVertexActivationCreation()/]
 	[/for]
-	[for (aTransition : Transition | aSmRegion.transition) before ('\t\n// Create Transitions of Region\n')]
+	[for (aTransition : Transition | aSmRegion.transition) before ('\t\n// Create TransitionActivations of RegionActivation\n')]
 	[aTransition.generateTransitionActivationCreation()/]
 	[/for]
 [/template]
@@ -90,14 +90,13 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 	auto [aStateRegion.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createRegionActivation_as_regionActivations_in_StateActivation([aState.getVisitorVariableName()/]);
 	[aStateRegion.getVisitorVariableName()/]->setParent([aState.getVisitorVariableName()/]);
 	[aStateRegion.getVisitorVariableName()/]->setNode([aStateRegion.generatePackageGetterCall()/]);
-	[for (aVertex : Vertex | aStateRegion.subvertex) before ('\t\n// Create Vertices of Region\n')]
+	[for (aVertex : Vertex | aStateRegion.subvertex) before ('\t\n// Create VertexActivations of RegionActivation\n')]
 	[aVertex.generateVertexActivationCreation()/]
 	[/for]
-	[for (aTransition : Transition | aStateRegion.transition) before ('\t\n// Create Transitions of Region\n')]
+	[for (aTransition : Transition | aStateRegion.transition) before ('\t\n// Create TransitionActivations of RegionActivation\n')]
 	[aTransition.generateTransitionActivationCreation()/]
 	[/for]
 [/template]
-[comment TODO: maybe vereinheitlichen und StateMachineExecution bzw, StateActivation fuer Funktionsaufruf uebergeben?/]
 
 
 

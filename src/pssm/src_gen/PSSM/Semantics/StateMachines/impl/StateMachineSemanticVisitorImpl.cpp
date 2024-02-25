@@ -52,8 +52,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -61,6 +61,7 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/NamedElement.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
@@ -242,16 +243,16 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> StateMachineSemanticVisitorImpl::g
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> StateMachineSemanticVisitorImpl::getStateMachineExecution()
+std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> StateMachineSemanticVisitorImpl::getStateMachineExecution()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Return the state-machine execution from which the caller of this operation belongs
-	auto execution = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->m_parent);
+	auto smExecution = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->m_parent);
 
-	if(this->m_parent != nullptr && execution != nullptr)
+	if(this->m_parent != nullptr && smExecution != nullptr)
 	{
-		return std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(this->m_parent);
+		return smExecution;
 	} 
 	else
 	{
@@ -753,10 +754,10 @@ std::shared_ptr<Any> StateMachineSemanticVisitorImpl::eInvoke(int operationID, c
 			result = eEcoreAny(this->getExecutionLocus(), fUML::Semantics::Loci::LociPackage::LOCUS_CLASS);
 			break;
 		}
-		// PSSM::Semantics::StateMachines::StateMachineSemanticVisitor::getStateMachineExecution() : fUML::Semantics::CommonBehavior::Execution: 2893368114
+		// PSSM::Semantics::StateMachines::StateMachineSemanticVisitor::getStateMachineExecution() : PSSM::Semantics::StateMachines::StateMachineExecution: 3895513111
 		case StateMachinesPackage::STATEMACHINESEMANTICVISITOR_OPERATION_GETSTATEMACHINEEXECUTION:
 		{
-			result = eEcoreAny(this->getStateMachineExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
+			result = eEcoreAny(this->getStateMachineExecution(), PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_CLASS);
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateMachineSemanticVisitor::isVisitorFor(uml::NamedElement) : bool: 3953933016

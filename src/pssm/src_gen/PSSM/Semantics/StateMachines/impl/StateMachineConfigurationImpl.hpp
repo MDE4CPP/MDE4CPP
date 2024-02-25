@@ -56,6 +56,7 @@ virtual public StateMachineConfiguration
 			virtual bool isStable() ;
 			virtual bool remove(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& vertexActivation) ;
 			virtual bool unregister(const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>& stateActivation) ;
+			virtual void unregisterAll() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

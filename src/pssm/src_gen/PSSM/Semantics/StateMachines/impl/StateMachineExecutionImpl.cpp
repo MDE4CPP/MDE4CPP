@@ -37,6 +37,7 @@
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/CommonBehavior/SM_ObjectActivation.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachineEventAccepter.hpp"
 #include "PSSM/Semantics/Loci/SM_ExecutionFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachineEventAccepter.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -51,13 +52,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -179,32 +180,20 @@ void StateMachineExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// The execution of state-machine is realized as described below
-	// 1 - An event accepter is placed in the list of waiting event accepters for this state-machine
-	// 2 - All visitors required to interpret the state-machine are instantiated and link together
-	// 3 - All top level regions (i.e. those directly owned by the executed state-machine) are entered
-	//     concurrently. Since they are top regions then there is no transition used to enter them
-	// Note: a state-machine always has at runtime a single event accepter
-	/*if(this.context!=null && this.context.objectActivation!=null){
-		this.context.register(new StateMachineEventAccepter(this));
-	}
-	this.initRegions();
-	for(RegionActivation activation: this.regionActivation){
-		activation.activate();
-	}
-	for(RegionActivation activation: this.regionActivation){
-		activation.activateTransitions();
-	}
-	for(RegionActivation regionActivation: this.regionActivation){
-		regionActivation.enter(null, null);
-	}*/
-
+	// The Execution of a StateMachine is realized as follows:
+	// 1 - An StateMachineEventAccepter is placed in the list of waiting EventAccepters for this SMExe's context Object.
+	// 2 - All top level Regions (i.e. those directly owned by the executed StateMachine) are entered.
+	//     concurrently. Since they are top regions, there is no transition used to enter them.
+	// 3 - Block this thread until the StateMachine Execution is complete to prevent this StateMachineExecution
+	//     from being destroyed after this initial RTC Step returns.
+	// Note: A StateMachineExecution always has one single StateMachineEventAccepter registered at runtime
 	if (this->m_context != nullptr && this->m_context->getObjectActivation() != nullptr)
 	{
 		const auto& smEventAccepter = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineEventAccepter();
 		smEventAccepter->setRegistrationContext(this->getThisStateMachineExecutionPtr());
 		this->m_context->_register(smEventAccepter);
 	}
+	
 	/* Region have been initialized in the model's ExecutionFactory already
 	this->initRegions();
 	for (auto regionActivation : *(this->m_regionActivations))
@@ -215,29 +204,29 @@ void StateMachineExecutionImpl::execute()
 	{
 		regionActivation->activateTransitions();
 	}*/
-	for (const auto& regionActivation : *(this->m_regionActivations))
+	for (const auto& regionActivation : *this->getRegionActivations())
 	{
 		regionActivation->enter(nullptr, nullptr);
 	}
 	
-	// Block this thread until the StateMachine Execution is complete to prevent this StateMachineExecution
-	// from being destroyed after this initial RTC Step returns.
 	std::unique_lock lock(*m_mutex);
 	auto& regionActivations = this->getRegionActivations();
 	this->m_conditionVariable->wait(lock, [&regionActivations]
 	{
-		bool allCompleted = true;
+		// Check all RegionActivations for completion
 		for (const auto& regionActivation : *regionActivations)
 		{
 			if (!regionActivation->getIsCompleted()) 
 			{
-				allCompleted = false;
-				break;
+				return false;
 			}
 		}
-		return allCompleted;
+		return true;
 	});
 	lock.unlock();
+	
+	// Run the Termination sequence to reset the StateMachine to its initial state
+	this->terminate();
 	//end of body
 }
 
@@ -293,13 +282,31 @@ void StateMachineExecutionImpl::terminate()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// The termination of a State Machine consists in aborting all "ongoing" DoActivity Behaviors
-	// started by States owned by this State Machine. States that are currently active (i.e. registered
-	// in the State Machine configuration) are not exited (i.e. their Exit Behaviors  are not executed).
+	//     started by States owned by this State Machine. 
+	// States that are currently active (i.e. registered in the State Machine configuration) 
+	//     are not exited (i.e. their Exit Behaviors are not executed).
+	// The clearing of any references has been removed to keep the structure for a rerun of the StateMachine.
+	//     Instead, all members and structures are resetted to initial values.
+
+	// Terminate all RegionActivations and set them as not completed
 	for (const auto& regionActivation : *(this->m_regionActivations))
 	{
 		regionActivation->terminate();
 	}
-	this->m_regionActivations->clear();
+
+	// Unregister this StateMachineExecution's Event Accepter
+	for (const auto& eventAccepter : *this->getContext()->getObjectActivation()->getWaitingEventAccepters())
+	{
+		if (auto smEventAccepter = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineEventAccepter>(eventAccepter))
+		{
+			if (smEventAccepter->getRegistrationContext() == this->getThisStateMachineExecutionPtr()) {
+				this->getContext()->getObjectActivation()->unregister(smEventAccepter);
+			}
+		}
+	}
+
+	// Clear this StateMachineExcution's StateMachineConfiguration
+	this->getConfiguration()->unregisterAll();
 	//end of body
 }
 

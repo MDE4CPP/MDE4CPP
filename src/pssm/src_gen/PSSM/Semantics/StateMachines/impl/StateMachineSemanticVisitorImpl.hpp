@@ -51,7 +51,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() ;
 			
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getStateMachineExecution() ;
+			virtual std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> getStateMachineExecution() ;
 			virtual bool isVisitorFor(const std::shared_ptr<uml::NamedElement>& node) ;
 			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<Bag<uml::Trigger>>& triggers) ;
 			

@@ -45,9 +45,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -168,6 +168,11 @@ void VertexActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMac
 	// occurs when the parent is not active while there is an attempt to enter the current
 	// vertex activation. What is important here is that entry rule is applied recursively
 	// until the least common ancestor is reached.
+	if (enteringTransition != nullptr)
+	{
+		enteringTransition->setStatus(PSSM::Semantics::StateMachines::TransitionMetadata::COMPLETED);
+	}
+
 	const auto& owningRegionActivation = this->getOwningRegionActivation();
 	if(leastCommonAncestor != nullptr && owningRegionActivation != nullptr && leastCommonAncestor != owningRegionActivation)
 	{
@@ -177,6 +182,7 @@ void VertexActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMac
 			vertexActivation->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
 		}
 	}
+
 	this->setStatus(PSSM::Semantics::StateMachines::StateMetadata::ACTIVE);
 	DEBUG_INFO(this->getNode()->getName() << " is now ACTIVE");
 	this->tagOutgoingTransition(PSSM::Semantics::StateMachines::TransitionMetadata::REACHED, false);

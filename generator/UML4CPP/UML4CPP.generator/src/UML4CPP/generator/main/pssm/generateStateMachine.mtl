@@ -28,23 +28,23 @@
  * 
  * this includes:
  * - creation of StateMachine
- * - creation of StateMachine parameter
+ * // - creation of StateMachine parameter
 */]
 [template public generateStateMachineCreation(aStateMachine : StateMachine) post(trim())]
 // StateMachine [aStateMachine.name/]
 [aStateMachine.memberName()/] = factory->createStateMachine_as_ownedType_in_Package([aStateMachine.ancestors(Package)->first().memberName()/]);
-[aStateMachine.ownedParameter.generateParameterCreation()/]
+[comment aStateMachine.ownedParameter.generateParameterCreation() /]
 [/template]
 
 [**
- * generate initialization of meta model instance for an StateMachine element
+ * generate initialization of meta model instance for a StateMachine model Element
  * 
  * this includes:
  * - set StateMachine name
- * - initialization of created StateMachine parameter
+ * - set StateMachine Context Object
 */]
 [template public generateStateMachineInitialization(aStateMachine : StateMachine) post(trim())]
-// create StateMachine [aStateMachine.name/]
+// initialize StateMachine [aStateMachine.name/]
 [if (not isReflectionModel(aStateMachine.getRootPackage()))]
 [aStateMachine.memberName()/]->_setID([aStateMachine.getMemberName().toUpperCase()/]);
 [/if]
@@ -54,5 +54,5 @@
 [else]
 [aStateMachine.memberName()/]->setContext([aStateMachine._context.memberName()/]);
 [/if]
-[aStateMachine.ownedParameter.generateParameterInitialization()/]
+[comment aStateMachine.ownedParameter.generateParameterInitialization()/]
 [/template]

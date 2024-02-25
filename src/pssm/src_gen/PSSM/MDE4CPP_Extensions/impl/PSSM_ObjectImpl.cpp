@@ -60,8 +60,8 @@
 #include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSSM/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSSM/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 

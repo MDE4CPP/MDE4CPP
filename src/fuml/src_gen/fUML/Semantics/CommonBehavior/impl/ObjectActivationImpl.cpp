@@ -354,7 +354,7 @@ void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& clas
         	}
         	if (notYetStarted)
         	{	
-        		/* fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl::execute() MUST BE IMPLEMENTED
+        		/* Not supported because MDE4CPP currently executes all Executions directly instead of using InvokationEventOccurrences and ClassifierBehaviorExecutions
         		auto newExecution(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createClassifierBehaviorExecution());
         		newExecution->setObjectActivation(getThisObjectActivationPtr());
         		this->getClassifierBehaviorExecutions()->push_back(newExecution);

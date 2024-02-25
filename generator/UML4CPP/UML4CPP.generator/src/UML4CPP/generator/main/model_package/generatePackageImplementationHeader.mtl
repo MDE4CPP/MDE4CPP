@@ -106,7 +106,7 @@ namespace [subPackage.generateNamespace(false)/]
 			void createPackageSignals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
-[if (aPackage.isPSSMExecutable())]
+[if (aPackage.includesPSSM())]
 			//PSSM
 			void createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 	[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
@@ -130,7 +130,7 @@ namespace [subPackage.generateNamespace(false)/]
 			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
-[if (aPackage.isPSSMExecutable())]
+[if (aPackage.includesPSSM())]
 			//PSSM
 			void initializePackageStateMachines();
 	[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]

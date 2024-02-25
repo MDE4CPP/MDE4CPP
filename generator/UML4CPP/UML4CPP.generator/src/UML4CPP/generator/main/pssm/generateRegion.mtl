@@ -44,7 +44,7 @@
 [template public generateRegionsInitialization(aStateMachine : StateMachine) post(trim())]
 	[let stateMachineContext : String = if (aStateMachine._context.oclIsUndefined()) or (not aStateMachine.owner.oclIsKindOf(BehavioredClassifier)) then aStateMachine.memberName() else aStateMachine._context.memberName() endif]
 	[for (aRegion : Region | (aStateMachine.region->sortedBy(myQualifiedName())))]
-	// intialize Region [aRegion.name/]
+	// initialize Region [aRegion.name/]
 	[aRegion.memberName()/]->setName("[aRegion.name/]");
 	[aRegion.generateRegionContentsInitialization(stateMachineContext)/]	
 
@@ -54,7 +54,7 @@
 
 [template public generateRegionsInitialization(aState : State, stateMachineContext : String) post(trim())]
 	[for (aRegion : Region | (aState.region->sortedBy(myQualifiedName())))]
-	// intialize Region [aRegion.name/]
+	// initialize Region [aRegion.name/]
 	[aRegion.memberName()/]->setName("[aRegion.name/]");
 	[aRegion.generateRegionContentsInitialization(stateMachineContext)/]	
 
@@ -64,7 +64,12 @@
 
 [template public generateRegionContentsCreation(aRegion : Region) post(trim())]
 	// create Pseudostates
-	[aRegion.generatePseudostatesCreation()/]
+		[for (aPseudostate : Pseudostate | (aRegion.subvertex->filter(Pseudostate)->sortedBy(myQualifiedName())))]
+		// create Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
+		[comment if (aPseudostate.kind = PseudostateKind::initial)/]
+		[aPseudostate.memberName()/] = factory->createPseudostate_as_subvertex_in_Region([aRegion.memberName()/]);
+		
+		[/for]
 
 	// create States
 	[aRegion.generateStatesCreation()/]
@@ -73,15 +78,21 @@
 		[for (aTransition : Transition | (aRegion.transition->sortedBy(myQualifiedName())))]
 		// create Transition [aTransition.name/]
 		[aTransition.memberName()/] = factory->createTransition_as_transition_in_Region([aRegion.memberName()/]);
+		[comment]
 		[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
 		[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
+		[/comment]
 		[for (aTrigger : Trigger | (aTransition.trigger)) before('create Triggers for this Transition')]
 		[aTrigger.memberName()/] = factory->createTrigger_as_trigger_in_Transition();
 		[aTrigger.memberName()/]->setEvent([aTrigger.event/]);
 		[/for]
 			[if (not aTransition.effect.oclIsUndefined())]
-			// create Effect Behavior of Transition [aTransition.memberName()/]
+			[if (aTransition.effect.oclIsKindOf(OpaqueBehavior))]
+			// create Effect Behavior of Transition [aTransition.name/]
 			[aTransition.effect.memberName()/] = factory->create[aTransition.effect.eClass().name/]_as_effect_in_Transition([aTransition.memberName()/]);
+			[else]
+			// the Effect Behavior of this Transition is complex (not an OpaqueBehavior), therefore the reference is created after all these Behaviors have been created
+			[/if]
 			[/if]
 
 		[/for]
@@ -89,7 +100,13 @@
 
 [template public generateRegionContentsInitialization(aRegion : Region, stateMachineContext : String) post(trim())]
 	// initialize Pseudostates
-	[aRegion.generatePseudostatesInitialization()/]
+		[for (aPseudostate : Pseudostate | (aRegion.subvertex->filter(Pseudostate)->sortedBy(myQualifiedName())))]
+		// initialize Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
+		[comment if (aPseudostate.kind = PseudostateKind::initial)/]
+		[aPseudostate.memberName()/]->setName("[aPseudostate.name/]");
+		[aPseudostate.memberName()/]->setKind(uml::PseudostateKind::[aPseudostate.kind.toString().toUpper()/]);
+		
+		[/for]
 
 	// initialize States
 	[aRegion.generateStatesInitialization(stateMachineContext)/]
@@ -101,6 +118,11 @@
 		[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
 		[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
 			[if (not aTransition.effect.oclIsUndefined())]
+			[if (not aTransition.effect.oclIsKindOf(OpaqueBehavior))]
+			// reference complex Behavior as this State's Exit Behavior
+			[aTransition.effect.memberName()/] = this->[aTransition.effect.generatePackageGetterCall()/];
+			[aTransition.memberName()/]->setEffect([aTransition.effect.memberName()/]);
+			[/if]
 			// initialize Effect Behavior of Transition [aTransition.name/]
 			[aTransition.effect.memberName()/]->setName("[aTransition.effect.name/]");
 			[aTransition.effect.memberName()/]->_setID([aTransition.effect.getMemberName().toUpperCase()/]);
@@ -123,7 +145,7 @@
 		// create Entry Behavior of State [aState.name/]
 		[aState.entry.memberName()/] = factory->create[aState.entry.eClass().name/]_as_entry_in_State([aState.memberName()/]);
 		[else]
-		// the Entry Behavior of this State is complex (not an OpaqueBehavior),  therefore the reference is created after all these Behaviors have been created
+		// the Entry Behavior of this State is complex (not an OpaqueBehavior), therefore the reference is created after all these Behaviors have been created
 		[/if]
 		[/if]
 		[if (not aState.doActivity.oclIsUndefined())]
@@ -196,26 +218,6 @@
 		[aState.generateRegionsInitialization(stateMachineContext)/]
 		[/if]
 	[/if]
-	
-	[/for]
-[/template]
-
-
-[template public generatePseudostatesCreation(aRegion : Region) post(trim())]
-	[for (aPseudostate : Pseudostate | (aRegion.subvertex->filter(Pseudostate)->sortedBy(myQualifiedName())))]
-	// create Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
-	[comment if (aPseudostate.kind = PseudostateKind::initial)/]
-	[aPseudostate.memberName()/] = factory->createPseudostate_as_subvertex_in_Region([aRegion.memberName()/]);
-	
-	[/for]
-[/template]
-
-[template public generatePseudostatesInitialization(aRegion : Region) post(trim())]
-	[for (aPseudostate : Pseudostate | (aRegion.subvertex->filter(Pseudostate)->sortedBy(myQualifiedName())))]
-	// initialize Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
-	[comment if (aPseudostate.kind = PseudostateKind::initial)/]
-	[aPseudostate.memberName()/]->setName("[aPseudostate.name/]");
-	[aPseudostate.memberName()/]->setKind(uml::PseudostateKind::[aPseudostate.kind.toString().toUpper()/]);
 	
 	[/for]
 [/template]

@@ -174,12 +174,14 @@ void [packageName/]ExecutionFactoryImpl::create[anActivity.memberName().toUpperF
 [/for]
 
 [comment PSSM: add functions to create ExecutionPrototypes for each StateMachine/]
+[if (aPackage.includesPSSM())]
 [for (aStateMachine : StateMachine | aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement()))]
 void [packageName/]ExecutionFactoryImpl::create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context)
 {
 	[aStateMachine.generateStateMachineExecutionPrototypeCreatorBody()/]
 }
 [/for]
+[/if]
 
 [if (aPackage.includesPSSM())]
 void [packageName/]ExecutionFactoryImpl::setThisExecutionFactoryPtr(std::weak_ptr<PSSM::Semantics::Loci::SM_ExecutionFactory> thisExecutionFactoryPtr)

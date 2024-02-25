@@ -4,33 +4,33 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_xYfjcDvEEe6uL7LvBTcCMg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Class" xmi:id="_5ZIZEDvEEe6uL7LvBTcCMg" name="class_SM_HelloWorld" classifierBehavior="_xWfYUDvEEe6uL7LvBTcCMg">
+    <packagedElement xmi:type="uml:Class" xmi:id="_5ZIZEDvEEe6uL7LvBTcCMg" name="C1" classifierBehavior="_xWfYUDvEEe6uL7LvBTcCMg">
       <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_xWfYUDvEEe6uL7LvBTcCMg" name="SM_HelloWorld">
-        <region xmi:type="uml:Region" xmi:id="_xXoAwDvEEe6uL7LvBTcCMg" name="region_SM_HelloWorld">
+        <region xmi:type="uml:Region" xmi:id="_xXoAwDvEEe6uL7LvBTcCMg" name="R1">
           <transition xmi:type="uml:Transition" xmi:id="_silH8DvFEe6uL7LvBTcCMg" name="T1" source="_p5LcwDvFEe6uL7LvBTcCMg" target="_Hd57YDvFEe6uL7LvBTcCMg">
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_sBac0JKyEe6t66kB6N9Vyg" name="printHelloWorld">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_sBac0JKyEe6t66kB6N9Vyg" name="printT1">
               <language>CPP</language>
-              <body>std::cout &lt;&lt; &quot;Transition T1&quot; &lt;&lt; std::endl;</body>
+              <body>std::cout &lt;&lt; &quot;Hello from T1&quot; &lt;&lt; std::endl;</body>
             </effect>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_uHSb8DvFEe6uL7LvBTcCMg" name="T2" source="_Hd57YDvFEe6uL7LvBTcCMg" target="_q9s00DvFEe6uL7LvBTcCMg">
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_24FrcJKyEe6t66kB6N9Vyg" name="printHelloWorld">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_24FrcJKyEe6t66kB6N9Vyg" name="printT2">
               <language>CPP</language>
-              <body>std::cout &lt;&lt; &quot;Transition T2&quot; &lt;&lt; std::endl;</body>
+              <body>std::cout &lt;&lt; &quot;Hello from T2&quot; &lt;&lt; std::endl;</body>
             </effect>
           </transition>
           <subvertex xmi:type="uml:State" xmi:id="_Hd57YDvFEe6uL7LvBTcCMg" name="S1">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_W8LvgJKyEe6t66kB6N9Vyg" name="printHelloWorld">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_W8LvgJKyEe6t66kB6N9Vyg" name="printDoAct">
               <language>CPP</language>
-              <body>std::cout &lt;&lt; &quot;Hello World DoActivity&quot; &lt;&lt; std::endl;</body>
+              <body>std::cout &lt;&lt; &quot;Hello from DoActivity&quot; &lt;&lt; std::endl;</body>
             </doActivity>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_PmHYoDvFEe6uL7LvBTcCMg" name="printHelloWorld">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_PmHYoDvFEe6uL7LvBTcCMg" name="printEntry">
               <language>CPP</language>
-              <body>std::cout &lt;&lt; &quot;Hello World Entry&quot; &lt;&lt; std::endl;</body>
+              <body>std::cout &lt;&lt; &quot;Hello from Entry&quot; &lt;&lt; std::endl;</body>
             </entry>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_kXANoDvFEe6uL7LvBTcCMg" name="printHelloWorld">
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_kXANoDvFEe6uL7LvBTcCMg" name="printExit">
               <language>CPP</language>
-              <body>std::cout &lt;&lt; &quot;Hello World Exit&quot; &lt;&lt; std::endl;</body>
+              <body>std::cout &lt;&lt; &quot;Hello from Exit&quot; &lt;&lt; std::endl;</body>
             </exit>
           </subvertex>
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_p5LcwDvFEe6uL7LvBTcCMg" name="Initial"/>

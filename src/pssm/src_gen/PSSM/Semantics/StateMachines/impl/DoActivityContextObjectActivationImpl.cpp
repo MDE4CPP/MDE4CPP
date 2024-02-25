@@ -47,9 +47,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
@@ -168,7 +168,8 @@ void DoActivityContextObjectActivationImpl::startBehavior(const std::shared_ptr<
 		auto doActivityExecution = this->getObject()->getLocus()->getExecutor()->execute(doActivityBehavior, this->getObject(), inputs);
 	}
 
-	/*if(classifier != null 
+	/* Not supported because MDE4CPP currently executes all Executions directly instead of using InvokationEventOccurrences and ClassifierBehaviorExecutions
+	if(classifier != null 
 		&& classifier instanceof Behavior
 		&& this.classifierBehaviorInvocations.isEmpty()){
 		ClassifierBehaviorInvocationEventAccepter newInvocation = new ClassifierBehaviorInvocationEventAccepter();

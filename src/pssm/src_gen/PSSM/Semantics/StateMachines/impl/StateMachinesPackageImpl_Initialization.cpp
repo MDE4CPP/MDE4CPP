@@ -73,6 +73,7 @@ void StateMachinesPackageImpl::initializePackageContents()
 	m_stateMachineEventAccepter_Class->getESuperTypes()->push_back(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventAccepter_Class());
 	m_stateMachineExecution_Class->getESuperTypes()->push_back(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_stateMachineSemanticVisitor_Class->getESuperTypes()->push_back(fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class());
+	m_terminatePseudostateActivation_Class->getESuperTypes()->push_back(getPseudostateActivation_Class());
 	m_transitionActivation_Class->getESuperTypes()->push_back(getStateMachineSemanticVisitor_Class());
 	m_vertexActivation_Class->getESuperTypes()->push_back(getStateMachineSemanticVisitor_Class());
 	
@@ -104,6 +105,7 @@ void StateMachinesPackageImpl::initializePackageContents()
 	initializeStateMachineEventAccepterContent();
 	initializeStateMachineExecutionContent();
 	initializeStateMachineSemanticVisitorContent();
+	initializeTerminatePseudostateActivationContent();
 	initializeTransitionActivationContent();
 	initializeVertexActivationContent();
 
@@ -1953,6 +1955,22 @@ void StateMachinesPackageImpl::initializeStateActivationContent()
 	m_stateActivation_Operation_releaseDeferredEvents->_setID(STATEACTIVATION_OPERATION_RELEASEDEFERREDEVENTS);
 	
 	
+	m_stateActivation_Operation_terminate->setName("terminate");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_stateActivation_Operation_terminate->setEType(unknownClass);
+	}
+	m_stateActivation_Operation_terminate->setLowerBound(1);
+	m_stateActivation_Operation_terminate->setUpperBound(1);
+	m_stateActivation_Operation_terminate->setUnique(true);
+	m_stateActivation_Operation_terminate->setOrdered(true);
+	
+	m_stateActivation_Operation_terminate->_setID(STATEACTIVATION_OPERATION_TERMINATE);
+	
+	
 	m_stateActivation_Operation_tryExecuteEntry_EventOccurrence->setName("tryExecuteEntry");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -2442,6 +2460,22 @@ void StateMachinesPackageImpl::initializeStateMachineConfigurationContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	m_stateMachineConfiguration_Operation_unregisterAll->setName("unregisterAll");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_stateMachineConfiguration_Operation_unregisterAll->setEType(unknownClass);
+	}
+	m_stateMachineConfiguration_Operation_unregisterAll->setLowerBound(1);
+	m_stateMachineConfiguration_Operation_unregisterAll->setUpperBound(1);
+	m_stateMachineConfiguration_Operation_unregisterAll->setUnique(true);
+	m_stateMachineConfiguration_Operation_unregisterAll->setOrdered(false);
+	
+	m_stateMachineConfiguration_Operation_unregisterAll->_setID(STATEMACHINECONFIGURATION_OPERATION_UNREGISTERALL);
+	
 	
 	
 }
@@ -3031,7 +3065,7 @@ void StateMachinesPackageImpl::initializeStateMachineSemanticVisitorContent()
 	
 	
 	m_stateMachineSemanticVisitor_Operation_getStateMachineExecution->setName("getStateMachineExecution");
-	m_stateMachineSemanticVisitor_Operation_getStateMachineExecution->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
+	m_stateMachineSemanticVisitor_Operation_getStateMachineExecution->setEType(getStateMachineExecution_Class());
 	m_stateMachineSemanticVisitor_Operation_getStateMachineExecution->setLowerBound(1);
 	m_stateMachineSemanticVisitor_Operation_getStateMachineExecution->setUpperBound(1);
 	m_stateMachineSemanticVisitor_Operation_getStateMachineExecution->setUnique(true);
@@ -3082,6 +3116,73 @@ void StateMachinesPackageImpl::initializeStateMachineSemanticVisitorContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stateMachineSemanticVisitor_Operation_match_EventOccurrence_Trigger);
 		parameter->setName("triggers");
 		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	
+}
+
+void StateMachinesPackageImpl::initializeTerminatePseudostateActivationContent()
+{
+	m_terminatePseudostateActivation_Class->setName("TerminatePseudostateActivation");
+	m_terminatePseudostateActivation_Class->setAbstract(false);
+	m_terminatePseudostateActivation_Class->setInterface(false);
+	
+	m_terminatePseudostateActivation_Class->_setID(TERMINATEPSEUDOSTATEACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
+	m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation->setName("enter");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation->setEType(unknownClass);
+	}
+	m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation->setLowerBound(0);
+	m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation->setUpperBound(1);
+	m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation->setUnique(true);
+	m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation->setOrdered(true);
+	
+	m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation->_setID(TERMINATEPSEUDOSTATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_REGIONACTIVATION);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation);
+		parameter->setName("enteringTransition");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation);
+		parameter->setName("leastCommonAncestor");
+		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

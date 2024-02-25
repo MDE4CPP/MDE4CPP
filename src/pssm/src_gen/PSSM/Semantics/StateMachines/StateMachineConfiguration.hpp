@@ -80,6 +80,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual bool isStable() = 0;
 			virtual bool remove(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& vertexActivation) = 0;
 			virtual bool unregister(const std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation>& stateActivation) = 0;
+			virtual void unregisterAll() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

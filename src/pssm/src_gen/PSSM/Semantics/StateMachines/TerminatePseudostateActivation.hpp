@@ -32,8 +32,13 @@ namespace PSSM
 }
 
 //Forward Declaration for used types 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class EventOccurrence;
+}
 namespace PSSM::Semantics::StateMachines 
 {
+	class RegionActivation;
 	class TransitionActivation;
 }
 namespace uml 
@@ -73,6 +78,7 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void enter(const std::shared_ptr<PSSM::Semantics::StateMachines::TransitionActivation>& enteringTransition, const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation>& leastCommonAncestor) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

@@ -47,6 +47,10 @@ namespace fUML::MDE4CPP_Extensions
 {
 	class FUML_Object;
 }
+namespace PSSM::Semantics::StateMachines 
+{
+	class StateMachineExecution;
+}
 namespace uml 
 {
 	class Behavior;
@@ -92,7 +96,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() = 0;
 			
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getStateMachineExecution() = 0;
+			virtual std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> getStateMachineExecution() = 0;
 			virtual bool isVisitorFor(const std::shared_ptr<uml::NamedElement>& node) = 0;
 			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<Bag<uml::Trigger>>& triggers) = 0;
 			

@@ -30,6 +30,7 @@
 #include "PSSM/Semantics/StateMachines/impl/StateMachineEventAccepterImpl.hpp"
 #include "PSSM/Semantics/StateMachines/impl/StateMachineExecutionImpl.hpp"
 #include "PSSM/Semantics/StateMachines/impl/StateMachineSemanticVisitorImpl.hpp"
+#include "PSSM/Semantics/StateMachines/impl/TerminatePseudostateActivationImpl.hpp"
 #include "PSSM/Semantics/StateMachines/impl/TransitionActivationImpl.hpp"
 #include "PSSM/Semantics/StateMachines/impl/VertexActivationImpl.hpp"
 
@@ -81,6 +82,7 @@ StateMachinesFactoryImpl::StateMachinesFactoryImpl()
 	m_idMap.insert(std::make_pair("PSSM::Semantics::StateMachines::StateMachineConfiguration", StateMachinesPackage::STATEMACHINECONFIGURATION_CLASS));
 	m_idMap.insert(std::make_pair("PSSM::Semantics::StateMachines::StateMachineEventAccepter", StateMachinesPackage::STATEMACHINEEVENTACCEPTER_CLASS));
 	m_idMap.insert(std::make_pair("PSSM::Semantics::StateMachines::StateMachineExecution", StateMachinesPackage::STATEMACHINEEXECUTION_CLASS));
+	m_idMap.insert(std::make_pair("PSSM::Semantics::StateMachines::TerminatePseudostateActivation", StateMachinesPackage::TERMINATEPSEUDOSTATEACTIVATION_CLASS));
 }
 
 StateMachinesFactoryImpl::~StateMachinesFactoryImpl()
@@ -425,6 +427,20 @@ std::shared_ptr<ecore::EObject> StateMachinesFactoryImpl::create(const int metaE
 				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
 				assert(castedContainer);
 				return std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution>(this->createStateMachineExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case StateMachinesPackage::TERMINATEPSEUDOSTATEACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createTerminatePseudostateActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> castedContainer = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivation>(this->createTerminatePseudostateActivation_as_vertexActivations_in_RegionActivation(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -899,6 +915,26 @@ std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> StateMach
 	}
 	
 	element->setThisStateMachineExecutionPtr(element);
+	return element;
+	
+}
+std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivation> StateMachinesFactoryImpl::createTerminatePseudostateActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivationImpl> element(new PSSM::Semantics::StateMachines::TerminatePseudostateActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisTerminatePseudostateActivationPtr(element);
+	return element;
+}
+std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivation> StateMachinesFactoryImpl::createTerminatePseudostateActivation_as_vertexActivations_in_RegionActivation(std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> par_RegionActivation, const int metaElementID) const
+{
+	std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivationImpl> element(new PSSM::Semantics::StateMachines::TerminatePseudostateActivationImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_RegionActivation)
+	{
+		par_RegionActivation->getVertexActivations()->push_back(element);
+	}
+	
+	element->setThisTerminatePseudostateActivationPtr(element);
 	return element;
 	
 }

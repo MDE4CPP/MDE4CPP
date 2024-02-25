@@ -8,7 +8,12 @@
       <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_qmOPMJeqEe6fF9OPxvbzbg" name="SM1">
         <region xmi:type="uml:Region" xmi:id="_5XdukJetEe6fF9OPxvbzbg" name="R1">
           <transition xmi:type="uml:Transition" xmi:id="_r2Z64Jg9Ee6fF9OPxvbzbg" name="T1_1" source="_oFlUoJg9Ee6fF9OPxvbzbg" target="_IRZxUJg9Ee6fF9OPxvbzbg"/>
-          <transition xmi:type="uml:Transition" xmi:id="_BWhNYJg-Ee6fF9OPxvbzbg" name="T1_2" source="_IRZxUJg9Ee6fF9OPxvbzbg" target="_-VH48Jg9Ee6fF9OPxvbzbg"/>
+          <transition xmi:type="uml:Transition" xmi:id="_BWhNYJg-Ee6fF9OPxvbzbg" name="T1_2" source="_IRZxUJg9Ee6fF9OPxvbzbg" target="_-VH48Jg9Ee6fF9OPxvbzbg">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_7P_fUM6IEe6Pct_3Csc3rw" name="exit">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;SM1-R1 finishing&quot; &lt;&lt; std::endl;</body>
+            </effect>
+          </transition>
           <subvertex xmi:type="uml:State" xmi:id="_IRZxUJg9Ee6fF9OPxvbzbg" name="S1">
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_df4lULSZEe6FI9im6A6_NA" name="printHelloWorld">
               <language>CPP</language>

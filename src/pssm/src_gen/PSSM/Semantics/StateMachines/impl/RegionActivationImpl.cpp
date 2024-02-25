@@ -45,8 +45,8 @@
 
 #include <exception> // used in Persistence
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/InitialPseudostateActivation.hpp"
 #include "uml/NamedElement.hpp"
@@ -335,12 +335,11 @@ void RegionActivationImpl::terminate()
 	//generated from body annotation
 	// Capture the semantics related to the termination of a Region. Regions typically
 	// get terminated when the owning StateMachine terminates.
+	this->setIsCompleted(false);
 	for (const auto& vertexActivation : *m_vertexActivations) 
 	{
 		vertexActivation->terminate();
 	}
-	m_vertexActivations->clear();
-	m_transitionActivations->clear();
 	//end of body
 }
 
@@ -356,7 +355,7 @@ void RegionActivationImpl::setIsCompleted(bool _isCompleted)
 {
 	//generated from setterBody annotation
 	m_isCompleted = _isCompleted;
-	std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConditionVariable()->notify_one(); 
+	if (_isCompleted) this->getStateMachineExecution()->getConditionVariable()->notify_one();  
 	//end of body
 }
 

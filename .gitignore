@@ -4,18 +4,25 @@
 /.metadata/
 /.settings/
 /.ssh/
+/.project
 
 /application/
 /userProjects/
 
 /gradle.properties
 /setenv*
+/start*
 
 # Directories/Files (all-levels) ----------------------------------------------
 **/.cmake/
 **/bin/
 **/build/
 **/.gradle/
+**/META-INF/
+**/.project
+**.gradle
+**.classpath
+**/.vscode/
 
 # 3rd-Party Libraries ---------------------------------------------------------
 /src/common/parser/antlr4/*
@@ -24,3 +31,7 @@
 /src/util/boost
 !/src/util/boost/build.gradle
 *.bak
+
+# Refresh: 
+#git rm --cached -r .
+#git add .

@@ -60,9 +60,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
 #include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
@@ -281,7 +281,7 @@ void StateActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMach
 	{
 		PSSM::Semantics::StateMachines::VertexActivationImpl::enter(enteringTransition, eventOccurrence, leastCommonAncestor);
 
-		std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConfiguration()->_register(this->getThisStateActivationPtr());
+		this->getStateMachineExecution()->getConfiguration()->_register(this->getThisStateActivationPtr());
 		
 		this->tryExecuteEntry(eventOccurrence);
 		this->tryInvokeDoActivity(eventOccurrence);	
@@ -393,7 +393,7 @@ void StateActivationImpl::exit(const std::shared_ptr<PSSM::Semantics::StateMachi
 	this->tryExecuteExit(eventOccurrence);
 
 	// Unregister this StateActivation
-	std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConfiguration()->unregister(this->getThisStateActivationPtr());
+	this->getStateMachineExecution()->getConfiguration()->unregister(this->getThisStateActivationPtr());
 
 	// Re-initialize the State Behavior boolean flags
 	this->m_isEntryCompleted = false;
@@ -498,8 +498,7 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::RegionActivation>> StateActi
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//return this.regionActivation;
-return nullptr;
+	return this->getRegionActivations();
 
 	//end of body
 }
@@ -574,6 +573,32 @@ void StateActivationImpl::releaseDeferredEvents()
 //	((SM_ObjectActivation)context.objectActivation).releaseDeferredEvents(this); 
 //}
 
+	//end of body
+}
+
+void StateActivationImpl::terminate()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// A StateActivation gets terminated if the containing StateMachine gets terminated.
+	// The termination of the Activation to a composite State includes the termination of all its sub-RegionActivations.
+	// If the StateActivation has an ongoing doActivity Execution, then it is aborted.
+	for (const auto& regionActivation : *this->getRegionActivations())
+	{
+		regionActivation->terminate();
+	}
+
+	if (this->isActive())
+	{
+		if (!this->getIsDoActivityCompleted()){
+			this->getDoActivityContextObject()->destroy();
+		}
+		this->setStatus(PSSM::Semantics::StateMachines::StateMetadata::IDLE);
+	}
+	// reset members to initial values
+	this->setIsEntryCompleted(false);
+	this->setIsDoActivityCompleted(false);
+	this->setIsExitCompleted(false);
 	//end of body
 }
 
@@ -729,11 +754,10 @@ void StateActivationImpl::tryInvokeDoActivity(const std::shared_ptr<fUML::Semant
 					// Start doActivityExecution on its own thread with the extracted parameters if given
 					this->m_doActivityContextObject->startBehavior(doActivityBehavior, inputParameterValues);
 				}
-				else {
-					this->setIsDoActivityCompleted(true);
-					if (this->hasCompleted())
-						this->notifyCompletion();
-				}
+
+				this->setIsDoActivityCompleted(true);
+				if (this->hasCompleted())
+					this->notifyCompletion();
 			}
 		}
 		else
@@ -1707,6 +1731,12 @@ std::shared_ptr<Any> StateActivationImpl::eInvoke(int operationID, const std::sh
 		case StateMachinesPackage::STATEACTIVATION_OPERATION_RELEASEDEFERREDEVENTS:
 		{
 			this->releaseDeferredEvents();
+			break;
+		}
+		// PSSM::Semantics::StateMachines::StateActivation::terminate(): 1302542552
+		case StateMachinesPackage::STATEACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateActivation::tryExecuteEntry(fUML::Semantics::CommonBehavior::EventOccurrence): 1254837562

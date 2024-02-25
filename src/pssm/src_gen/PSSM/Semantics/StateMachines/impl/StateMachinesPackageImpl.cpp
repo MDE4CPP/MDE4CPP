@@ -555,6 +555,10 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_stateActivation_Operation_releaseDeferredEvents;
 }
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_terminate() const
+{
+	return m_stateActivation_Operation_terminate;
+}
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_tryExecuteEntry_EventOccurrence() const
 {
 	return m_stateActivation_Operation_tryExecuteEntry_EventOccurrence;
@@ -668,6 +672,10 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineConfiguration_Operation_unregister_StateActivation() const
 {
 	return m_stateMachineConfiguration_Operation_unregister_StateActivation;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineConfiguration_Operation_unregisterAll() const
+{
+	return m_stateMachineConfiguration_Operation_unregisterAll;
 }
 
 // End Class StateMachineConfiguration
@@ -820,6 +828,21 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 }
 
 // End Class StateMachineSemanticVisitor
+
+// Begin Class TerminatePseudostateActivation
+const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getTerminatePseudostateActivation_Class() const
+{
+	return m_terminatePseudostateActivation_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getTerminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation() const
+{
+	return m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation;
+}
+
+// End Class TerminatePseudostateActivation
 
 // Begin Class TransitionActivation
 const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getTransitionActivation_Class() const

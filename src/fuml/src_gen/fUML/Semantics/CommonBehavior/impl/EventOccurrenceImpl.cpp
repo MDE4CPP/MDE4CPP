@@ -175,14 +175,11 @@ void EventOccurrenceImpl::sendTo(const std::shared_ptr<uml::Element>& target)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Set the target reference and start the SendingBehavior, which will send this event occurrence to the target.
-
+	// Set the target reference and send this directly to it
+	// instead of invoking an extra SendingBehavior for efficiency reasons
 	this->setTarget(target);
-	// Should also be _startObjectBehavior() to start it async. Just doSend for now	
-	DEBUG_INFO("Starting Sending..")
-
-	this->doSend();
-	//_startObjectBehavior();
+	DEBUG_INFO("Sending an EventOccurrence...")
+	this->doSend(); //this->_startObjectBehavior();
 	//end of body
 }
 

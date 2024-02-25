@@ -41,6 +41,7 @@ namespace StateMachines
 	class StateMachineEventAccepter;
 	class StateMachineExecution;
 	class StateMachineSemanticVisitor;
+	class TerminatePseudostateActivation;
 	class TransitionActivation;
 	class VertexActivation;
 }
@@ -129,6 +130,9 @@ namespace PSSM::Semantics::StateMachines
 			 virtual std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> createStateMachineExecution(const int metaElementID = StateMachinesPackage::STATEMACHINEEXECUTION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> createStateMachineExecution_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = StateMachinesPackage::STATEMACHINEEXECUTION_CLASS) const ;
+			 virtual std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivation> createTerminatePseudostateActivation(const int metaElementID = StateMachinesPackage::TERMINATEPSEUDOSTATEACTIVATION_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivation> createTerminatePseudostateActivation_as_vertexActivations_in_RegionActivation(std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> par_RegionActivation, const int metaElementID = StateMachinesPackage::TERMINATEPSEUDOSTATEACTIVATION_CLASS) const ;
 			 
 
 		private:

@@ -100,6 +100,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual bool hasCompleted() = 0;
 			virtual void notifyCompletion() = 0;
 			virtual void releaseDeferredEvents() = 0;
+			virtual void terminate() = 0;
 			virtual void tryExecuteEntry(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual void tryExecuteExit(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual void tryInvokeDoActivity(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;

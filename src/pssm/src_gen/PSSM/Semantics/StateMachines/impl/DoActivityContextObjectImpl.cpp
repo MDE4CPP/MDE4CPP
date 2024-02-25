@@ -50,9 +50,9 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"

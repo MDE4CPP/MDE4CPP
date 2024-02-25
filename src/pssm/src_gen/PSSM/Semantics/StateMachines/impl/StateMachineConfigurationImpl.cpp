@@ -226,6 +226,19 @@ bool StateMachineConfigurationImpl::unregister(const std::shared_ptr<PSSM::Seman
 	//end of body
 }
 
+void StateMachineConfigurationImpl::unregisterAll()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Custom MDE4CPP Method.
+	// Unregister all StateConfigurations from this StateMachineConfiguration, including the root.
+	if (this->m_rootConfiguration != nullptr) {
+		this->getRootConfiguration()->getChildren()->clear();
+	}
+	this->m_rootConfiguration = nullptr;
+	//end of body
+}
+
 //*********************************
 // Attribute Getters & Setters
 //*********************************
@@ -676,6 +689,12 @@ std::shared_ptr<Any> StateMachineConfigurationImpl::eInvoke(int operationID, con
 			}
 		
 			result = eAny(this->unregister(incoming_param_stateActivation), 0, false);
+			break;
+		}
+		// PSSM::Semantics::StateMachines::StateMachineConfiguration::unregisterAll(): 3925134591
+		case StateMachinesPackage::STATEMACHINECONFIGURATION_OPERATION_UNREGISTERALL:
+		{
+			this->unregisterAll();
 			break;
 		}
 

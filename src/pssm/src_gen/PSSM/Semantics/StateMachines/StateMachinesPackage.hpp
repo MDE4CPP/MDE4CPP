@@ -55,6 +55,7 @@ namespace PSSM::Semantics::StateMachines
 	class StateMachineEventAccepter;
 	class StateMachineExecution;
 	class StateMachineSemanticVisitor;
+	class TerminatePseudostateActivation;
 	class TransitionActivation;
 	class VertexActivation;
 }
@@ -316,7 +317,7 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long FINALSTATEACTIVATION_CLASS = 1530233511;
 			static const unsigned int FINALSTATEACTIVATION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int FINALSTATEACTIVATION_CLASS_OPERATION_COUNT = 49;
+			static const unsigned int FINALSTATEACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
 			
 			static const unsigned long FINALSTATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_REGIONACTIVATION = 1278826391;
@@ -507,7 +508,7 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long STATEACTIVATION_CLASS = 1534511903;
 			static const unsigned int STATEACTIVATION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int STATEACTIVATION_CLASS_OPERATION_COUNT = 48;
+			static const unsigned int STATEACTIVATION_CLASS_OPERATION_COUNT = 49;
 			static const unsigned long STATEACTIVATION_ATTRIBUTE_ISDOACTIVITYCOMPLETED = 1439200607;
 			static const unsigned long STATEACTIVATION_ATTRIBUTE_ISENTRYCOMPLETED = 523081360;
 			static const unsigned long STATEACTIVATION_ATTRIBUTE_ISEXITCOMPLETED = 1954301868;
@@ -531,6 +532,7 @@ namespace PSSM::Semantics::StateMachines
 			static const unsigned long STATEACTIVATION_OPERATION_HASCOMPLETED = 2755482;
 			static const unsigned long STATEACTIVATION_OPERATION_NOTIFYCOMPLETION = 766766718;
 			static const unsigned long STATEACTIVATION_OPERATION_RELEASEDEFERREDEVENTS = 172993166;
+			static const unsigned long STATEACTIVATION_OPERATION_TERMINATE = 1302542552;
 			static const unsigned long STATEACTIVATION_OPERATION_TRYEXECUTEENTRY_EVENTOCCURRENCE = 1254837562;
 			static const unsigned long STATEACTIVATION_OPERATION_TRYEXECUTEEXIT_EVENTOCCURRENCE = 4200303626;
 			static const unsigned long STATEACTIVATION_OPERATION_TRYINVOKEDOACTIVITY_EVENTOCCURRENCE = 2571062497;
@@ -561,6 +563,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_hasCompleted() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_notifyCompletion() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_releaseDeferredEvents() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_terminate() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_tryExecuteEntry_EventOccurrence() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_tryExecuteExit_EventOccurrence() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateActivation_Operation_tryInvokeDoActivity_EventOccurrence() const = 0;
@@ -611,7 +614,7 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long STATEMACHINECONFIGURATION_CLASS = 1779831842;
 			static const unsigned int STATEMACHINECONFIGURATION_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int STATEMACHINECONFIGURATION_CLASS_OPERATION_COUNT = 7;
+			static const unsigned int STATEMACHINECONFIGURATION_CLASS_OPERATION_COUNT = 8;
 			
 			static const unsigned long STATEMACHINECONFIGURATION_ATTRIBUTE_EXECUTION = 1420526754;
 			static const unsigned long STATEMACHINECONFIGURATION_ATTRIBUTE_ROOTCONFIGURATION = 2074266777;
@@ -623,6 +626,7 @@ namespace PSSM::Semantics::StateMachines
 			static const unsigned long STATEMACHINECONFIGURATION_OPERATION_ISSTABLE = 3154968571;
 			static const unsigned long STATEMACHINECONFIGURATION_OPERATION_REMOVE_VERTEXACTIVATION = 3971456309;
 			static const unsigned long STATEMACHINECONFIGURATION_OPERATION_UNREGISTER_STATEACTIVATION = 1784249558;
+			static const unsigned long STATEMACHINECONFIGURATION_OPERATION_UNREGISTERALL = 3925134591;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getStateMachineConfiguration_Class() const = 0;
@@ -638,6 +642,7 @@ namespace PSSM::Semantics::StateMachines
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineConfiguration_Operation_isStable() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineConfiguration_Operation_remove_VertexActivation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineConfiguration_Operation_unregister_StateActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineConfiguration_Operation_unregisterAll() const = 0;
 			
 			// End Class StateMachineConfiguration
 
@@ -727,7 +732,7 @@ namespace PSSM::Semantics::StateMachines
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONCONTEXT = 1147369343;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_FUML_OBJECT = 3510213574;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONLOCUS = 922061674;
-			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETSTATEMACHINEEXECUTION = 2893368114;
+			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_GETSTATEMACHINEEXECUTION = 3895513111;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_ISVISITORFOR_NAMEDELEMENT = 3953933016;
 			static const unsigned long STATEMACHINESEMANTICVISITOR_OPERATION_MATCH_EVENTOCCURRENCE_TRIGGER = 2315510148;
 			
@@ -749,6 +754,25 @@ namespace PSSM::Semantics::StateMachines
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineSemanticVisitor_Operation_match_EventOccurrence_Trigger() const = 0;
 			
 			// End Class StateMachineSemanticVisitor
+
+
+			// Begin Class TerminatePseudostateActivation
+			//Class and Feature IDs 
+			static const unsigned long TERMINATEPSEUDOSTATEACTIVATION_CLASS = 2100278828;
+			static const unsigned int TERMINATEPSEUDOSTATEACTIVATION_CLASS_FEATURE_COUNT = 6;
+			static const unsigned int TERMINATEPSEUDOSTATEACTIVATION_CLASS_OPERATION_COUNT = 32;
+			
+			
+			static const unsigned long TERMINATEPSEUDOSTATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_REGIONACTIVATION = 2763603378;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getTerminatePseudostateActivation_Class() const = 0;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getTerminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation() const = 0;
+			
+			// End Class TerminatePseudostateActivation
 
 
 			// Begin Class TransitionActivation

@@ -50,8 +50,8 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
-#include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSSM::Semantics::CommonBehavior;
