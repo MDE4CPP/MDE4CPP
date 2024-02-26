@@ -285,6 +285,14 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getExternalTransitionActivation_Operation_enterTarget_EventOccurrence() const
+{
+	return m_externalTransitionActivation_Operation_enterTarget_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getExternalTransitionActivation_Operation_exitSource_EventOccurrence() const
+{
+	return m_externalTransitionActivation_Operation_exitSource_EventOccurrence;
+}
 
 // End Class ExternalTransitionActivation
 
@@ -352,6 +360,14 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getInternalTransitionActivation_Operation_enterTarget_EventOccurrence() const
+{
+	return m_internalTransitionActivation_Operation_enterTarget_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getInternalTransitionActivation_Operation_exitSource_EventOccurrence() const
+{
+	return m_internalTransitionActivation_Operation_exitSource_EventOccurrence;
+}
 
 // End Class InternalTransitionActivation
 
@@ -378,6 +394,14 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getLocalTransitionActivation_Operation_enterTarget_EventOccurrence() const
+{
+	return m_localTransitionActivation_Operation_enterTarget_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getLocalTransitionActivation_Operation_exitSource_EventOccurrence() const
+{
+	return m_localTransitionActivation_Operation_exitSource_EventOccurrence;
+}
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getLocalTransitionActivation_Operation_getContainingState() const
 {
 	return m_localTransitionActivation_Operation_getContainingState;

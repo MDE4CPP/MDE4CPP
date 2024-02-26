@@ -43,6 +43,8 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void enterTarget(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
+			virtual void exitSource(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
 			virtual std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation> getContainingState() ;
 			
 			//*********************************

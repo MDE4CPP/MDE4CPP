@@ -39,6 +39,8 @@
 #include "PSSM/Semantics/StateMachines/impl/EntryPointPseudostateActivationImpl.hpp"
 #include "uml/Vertex.hpp"
 #include "PSSM/Semantics/StateMachines/EntryPointPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachineConfiguration.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -125,6 +127,63 @@ std::shared_ptr<ecore::EObject> LocalTransitionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void LocalTransitionActivationImpl::enterTarget(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Entering the target of LocalTransition consists in checking if the target can be entered. If
+	// this is the case then only when the target is not also the containing State it is entered
+	if (this->getTargetVertexActivation()->isEnterable(this->getThisTransitionActivationPtr(), false))
+	{	
+		if (this->getTargetVertexActivation() != this->getContainingState()){
+			this->getTargetVertexActivation()->enter(this->getThisTransitionActivationPtr(), eventOccurrence, this->getLeastCommonAncestor());
+		}
+	}
+	//end of body
+}
+
+void LocalTransitionActivationImpl::exitSource(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Exiting the source State of a LocalTransition consists in the following set of actions:
+	// 1 - Check if the source State can be exited (if it cannot then do nothing)
+	// 2 - If the source can be exited and this latter is an entry point then the exit
+	//     of the source is trivial (i.e., it only consists in exiting the entry point)
+	//   - If the source can be exited and this latter is a composite State then the top
+	//     vertex that is located in the top Region which contains (maybe in deep nesting)
+	//     the target is exited. At this point, if the source is not the containing State
+	//     then it is also exited
+	const auto& containingStateActivation = this->getContainingState();
+	if (this->getSourceVertexActivation()->isExitable(this->getThisTransitionActivationPtr(), false)){
+		if(std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation>(this->getSourceVertexActivation()))
+		{
+			this->getSourceVertexActivation()->exit(this->getThisTransitionActivationPtr(), eventOccurrence, nullptr);
+		}
+		else
+		{
+			for (const auto& containingStateRegionActivation : *containingStateActivation->getRegionActivation())
+			{
+				if (containingStateRegionActivation->getVertexActivation(std::dynamic_pointer_cast<uml::Vertex>(this->getSourceVertexActivation()->getNode())))
+				{
+					for (const auto& containingStateRegionVertexActivation : *containingStateRegionActivation->getVertexActivations())
+					{
+						if (this->getStateMachineExecution()->getConfiguration()->isActive(containingStateRegionVertexActivation))
+						{
+							containingStateRegionVertexActivation->exit(this->getThisTransitionActivationPtr(), eventOccurrence, nullptr);
+						}
+					}
+				}
+			}
+			if (this->getSourceVertexActivation() != containingStateActivation)
+			{
+				this->getSourceVertexActivation()->exit(this->getThisTransitionActivationPtr(), eventOccurrence, this->getLeastCommonAncestor());
+			}
+		}
+	}
+	//end of body
+}
+
 std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation> LocalTransitionActivationImpl::getContainingState()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -278,6 +337,70 @@ std::shared_ptr<Any> LocalTransitionActivationImpl::eInvoke(int operationID, con
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::LocalTransitionActivation::enterTarget(fUML::Semantics::CommonBehavior::EventOccurrence): 3208005632
+		case StateMachinesPackage::LOCALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'enterTarget'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'enterTarget'!")
+					return nullptr;
+				}
+			}
+		
+			this->enterTarget(incoming_param_eventOccurrence);
+			break;
+		}
+		// PSSM::Semantics::StateMachines::LocalTransitionActivation::exitSource(fUML::Semantics::CommonBehavior::EventOccurrence): 1127739646
+		case StateMachinesPackage::LOCALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'exitSource'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'exitSource'!")
+					return nullptr;
+				}
+			}
+		
+			this->exitSource(incoming_param_eventOccurrence);
+			break;
+		}
 		// PSSM::Semantics::StateMachines::LocalTransitionActivation::getContainingState() : PSSM::Semantics::StateMachines::StateActivation: 790684891
 		case StateMachinesPackage::LOCALTRANSITIONACTIVATION_OPERATION_GETCONTAININGSTATE:
 		{

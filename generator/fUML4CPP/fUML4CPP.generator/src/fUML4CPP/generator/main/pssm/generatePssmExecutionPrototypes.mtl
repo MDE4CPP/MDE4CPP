@@ -138,7 +138,7 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 }]
 	// Create [aTransition.eClass().name/]Activation for [aTransition.eClass().name/] '[aTransition.metamodelElementName()/]'
 	DEBUG_INFO("// Create [aTransition.eClass().name/]Activation for [aTransition.eClass().name/] '[aTransition.metamodelElementName()/]'");
-	auto [aTransition.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createExternalTransitionActivation();
+	auto [aTransition.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->create[aTransition.kind.toString().toUpperFirst()/]TransitionActivation();
 	[aTransition.getVisitorVariableName()/]->setParent([aTransition.container.getVisitorVariableName()/]);
 	[aTransition.getVisitorVariableName()/]->setNode([aTransition.generatePackageGetterCall()/]);
 	auto sourceVertexActivation_[aTransition.myQualifiedName()/] = [owningStateMachine.getVisitorVariableName()/]->getVertexActivation([aTransition.source.generatePackageGetterCall()/]);

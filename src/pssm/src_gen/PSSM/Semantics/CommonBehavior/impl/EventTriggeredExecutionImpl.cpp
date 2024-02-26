@@ -180,7 +180,11 @@ void EventTriggeredExecutionImpl::finalize()
 	//    output values and is the last to complete in any execution trace for the RTC
 	//    step consistent with the specified StateMachine semantics.
 	this->_beginIsolation();
-	if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(this->getTriggeringEventOccurrence()))
+	const auto& currentEventOccurrence = this->getTriggeringEventOccurrence();
+	//if(this.triggeringEventOccurrence instanceof CS_EventOccurrence){
+	//	currentEventOccurrence = ((CS_EventOccurrence)this.triggeringEventOccurrence).wrappedEventOccurrence;
+	//}
+	if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(currentEventOccurrence))
 	{
 		const auto& outputParameterValues = this->getWrappedExecution()->getOutputParameterValues();
 		if(this->getWrappedExecution()->getBehavior()->outputParameters()->size() == outputParameterValues->size())

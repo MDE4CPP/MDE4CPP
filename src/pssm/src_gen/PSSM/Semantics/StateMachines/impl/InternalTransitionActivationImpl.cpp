@@ -120,6 +120,23 @@ std::shared_ptr<ecore::EObject> InternalTransitionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void InternalTransitionActivationImpl::enterTarget(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// An internal Transition does not cause the entry of the target State
+	return;
+	//end of body
+}
+
+void InternalTransitionActivationImpl::exitSource(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// An internal Transition does not cause exit of the source State
+	return;
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -245,6 +262,70 @@ std::shared_ptr<Any> InternalTransitionActivationImpl::eInvoke(int operationID, 
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::InternalTransitionActivation::enterTarget(fUML::Semantics::CommonBehavior::EventOccurrence): 2161399134
+		case StateMachinesPackage::INTERNALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'enterTarget'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'enterTarget'!")
+					return nullptr;
+				}
+			}
+		
+			this->enterTarget(incoming_param_eventOccurrence);
+			break;
+		}
+		// PSSM::Semantics::StateMachines::InternalTransitionActivation::exitSource(fUML::Semantics::CommonBehavior::EventOccurrence): 4198948676
+		case StateMachinesPackage::INTERNALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'exitSource'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'exitSource'!")
+					return nullptr;
+				}
+			}
+		
+			this->exitSource(incoming_param_eventOccurrence);
+			break;
+		}
 
 		default:
 		{

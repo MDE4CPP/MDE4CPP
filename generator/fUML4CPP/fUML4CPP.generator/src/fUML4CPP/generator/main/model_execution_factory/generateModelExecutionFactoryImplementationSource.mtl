@@ -65,6 +65,8 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "PSSM/Semantics/StateMachines/StateActivation.hpp"
 #include "PSSM/Semantics/StateMachines/FinalStateActivation.hpp"
 #include "PSSM/Semantics/StateMachines/ExternalTransitionActivation.hpp"
+#include "PSSM/Semantics/StateMachines/LocalTransitionActivation.hpp"
+#include "PSSM/Semantics/StateMachines/InternalTransitionActivation.hpp"
 [for (pseudostateKind : String | PseudostateKind.allInstances().toString())]
 #include "PSSM/Semantics/StateMachines/[pseudostateKind.toUpperFirst()/]PseudostateActivation.hpp"
 [/for]

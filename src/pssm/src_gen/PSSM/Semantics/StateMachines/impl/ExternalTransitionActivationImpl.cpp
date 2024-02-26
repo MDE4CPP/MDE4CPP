@@ -35,6 +35,9 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
+//Includes from codegen annotation
+#include "uml/Vertex.hpp"
+#include "PSSM/Semantics/StateMachines/StateActivation.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -120,6 +123,64 @@ std::shared_ptr<ecore::EObject> ExternalTransitionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void ExternalTransitionActivationImpl::enterTarget(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// If the target VertexActivation can be entered (i.e., its possible prerequisites
+	// are satisfied) then the entering process begins. Note that this process may lead
+	// to enter other States based on what is the common ancestor exiting between the
+	// the source and the target. Besides the prerequisites imposed by the target VertexActivation,
+	// there are no other constraints to enter the target State
+	if (this->getTargetVertexActivation()->isEnterable(this->getThisTransitionActivationPtr(), false))
+	{
+		this->getTargetVertexActivation()->enter(this->getThisTransitionActivationPtr(), eventOccurrence, this->getLeastCommonAncestor());
+	}
+	else
+	{
+		if (auto targetStateActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateActivation>(this->getTargetVertexActivation()))
+		{
+			for (const auto& targetStateRegionActivation : *targetStateActivation->getRegionActivation())
+			{
+				if (targetStateRegionActivation->getVertexActivation(std::dynamic_pointer_cast<uml::Vertex>(this->getSourceVertexActivation()->getNode())))
+				{
+					targetStateRegionActivation->setIsCompleted(true);
+					if (targetStateActivation->hasCompleted())
+					{
+						targetStateActivation->notifyCompletion();
+					}
+				}
+			}
+		}
+	}
+	//end of body
+}
+
+void ExternalTransitionActivationImpl::exitSource(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// The exiting phase of the source VertexActivation is conditioned both by
+	// the prerequisites that apply to leave the source and the prerequisites that
+	// apply to enter the target. 
+	// 1 - The source can be exited and its target can be entered
+	//	 	-> The source is exited using the common ancestor
+	// 2 - The source can be exited but is target is not ready to be entered
+	//		-> The source is exited but the common ancestor is used. This implies
+	//         the exiting phase is not propagated to parent State (if required)
+	if (this->getSourceVertexActivation()->isExitable(this->getThisTransitionActivationPtr(), false))
+	{
+		if (this->getTargetVertexActivation()->isEnterable(this->getThisTransitionActivationPtr(), false))
+		{
+			this->getSourceVertexActivation()->exit(this->getThisTransitionActivationPtr(), eventOccurrence, this->getLeastCommonAncestor());
+		}
+		else
+		{
+			this->getSourceVertexActivation()->exit(this->getThisTransitionActivationPtr(), eventOccurrence, nullptr);
+		}
+	}
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -245,6 +306,70 @@ std::shared_ptr<Any> ExternalTransitionActivationImpl::eInvoke(int operationID, 
  
   	switch(operationID)
 	{
+		// PSSM::Semantics::StateMachines::ExternalTransitionActivation::enterTarget(fUML::Semantics::CommonBehavior::EventOccurrence): 2835010668
+		case StateMachinesPackage::EXTERNALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'enterTarget'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'enterTarget'!")
+					return nullptr;
+				}
+			}
+		
+			this->enterTarget(incoming_param_eventOccurrence);
+			break;
+		}
+		// PSSM::Semantics::StateMachines::ExternalTransitionActivation::exitSource(fUML::Semantics::CommonBehavior::EventOccurrence): 577592914
+		case StateMachinesPackage::EXTERNALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'exitSource'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'exitSource'!")
+					return nullptr;
+				}
+			}
+		
+			this->exitSource(incoming_param_eventOccurrence);
+			break;
+		}
 
 		default:
 		{

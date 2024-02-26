@@ -300,15 +300,19 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long EXTERNALTRANSITIONACTIVATION_CLASS = 397396880;
 			static const unsigned int EXTERNALTRANSITIONACTIVATION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int EXTERNALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 27;
+			static const unsigned int EXTERNALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
+			static const unsigned long EXTERNALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE = 2835010668;
+			static const unsigned long EXTERNALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE = 577592914;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getExternalTransitionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getExternalTransitionActivation_Operation_enterTarget_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExternalTransitionActivation_Operation_exitSource_EventOccurrence() const = 0;
 			
 			// End Class ExternalTransitionActivation
 
@@ -391,15 +395,19 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long INTERNALTRANSITIONACTIVATION_CLASS = 298641770;
 			static const unsigned int INTERNALTRANSITIONACTIVATION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int INTERNALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 27;
+			static const unsigned int INTERNALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
+			static const unsigned long INTERNALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE = 2161399134;
+			static const unsigned long INTERNALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE = 4198948676;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getInternalTransitionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getInternalTransitionActivation_Operation_enterTarget_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInternalTransitionActivation_Operation_exitSource_EventOccurrence() const = 0;
 			
 			// End Class InternalTransitionActivation
 
@@ -427,9 +435,11 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long LOCALTRANSITIONACTIVATION_CLASS = 1185957953;
 			static const unsigned int LOCALTRANSITIONACTIVATION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int LOCALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int LOCALTRANSITIONACTIVATION_CLASS_OPERATION_COUNT = 30;
 			
 			
+			static const unsigned long LOCALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE = 3208005632;
+			static const unsigned long LOCALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE = 1127739646;
 			static const unsigned long LOCALTRANSITIONACTIVATION_OPERATION_GETCONTAININGSTATE = 790684891;
 			
 			//Class and Feature Getter
@@ -437,6 +447,8 @@ namespace PSSM::Semantics::StateMachines
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getLocalTransitionActivation_Operation_enterTarget_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocalTransitionActivation_Operation_exitSource_EventOccurrence() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocalTransitionActivation_Operation_getContainingState() const = 0;
 			
 			// End Class LocalTransitionActivation

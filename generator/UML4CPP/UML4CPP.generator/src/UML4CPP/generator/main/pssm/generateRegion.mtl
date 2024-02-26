@@ -115,6 +115,7 @@
 		[for (aTransition : Transition | (aRegion.transition->sortedBy(myQualifiedName())))]
 		// initialize Transition [aTransition.name/]
 		[aTransition.memberName()/]->setName("[aTransition.memberName()/]");
+		[aTransition.memberName()/]->setKind(uml::TransitionKind::[aTransition.kind.toString().toUpper()/]);
 		[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
 		[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
 			[if (not aTransition.effect.oclIsUndefined())]

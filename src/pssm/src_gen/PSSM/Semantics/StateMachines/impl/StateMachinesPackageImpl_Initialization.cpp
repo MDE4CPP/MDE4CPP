@@ -846,6 +846,56 @@ void StateMachinesPackageImpl::initializeExternalTransitionActivationContent()
 	/*
 	 * EOperations
 	 */
+	m_externalTransitionActivation_Operation_enterTarget_EventOccurrence->setName("enterTarget");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_externalTransitionActivation_Operation_enterTarget_EventOccurrence->setEType(unknownClass);
+	}
+	m_externalTransitionActivation_Operation_enterTarget_EventOccurrence->setLowerBound(1);
+	m_externalTransitionActivation_Operation_enterTarget_EventOccurrence->setUpperBound(1);
+	m_externalTransitionActivation_Operation_enterTarget_EventOccurrence->setUnique(true);
+	m_externalTransitionActivation_Operation_enterTarget_EventOccurrence->setOrdered(false);
+	
+	m_externalTransitionActivation_Operation_enterTarget_EventOccurrence->_setID(EXTERNALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_externalTransitionActivation_Operation_enterTarget_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_externalTransitionActivation_Operation_exitSource_EventOccurrence->setName("exitSource");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_externalTransitionActivation_Operation_exitSource_EventOccurrence->setEType(unknownClass);
+	}
+	m_externalTransitionActivation_Operation_exitSource_EventOccurrence->setLowerBound(1);
+	m_externalTransitionActivation_Operation_exitSource_EventOccurrence->setUpperBound(1);
+	m_externalTransitionActivation_Operation_exitSource_EventOccurrence->setUnique(true);
+	m_externalTransitionActivation_Operation_exitSource_EventOccurrence->setOrdered(false);
+	
+	m_externalTransitionActivation_Operation_exitSource_EventOccurrence->_setID(EXTERNALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_externalTransitionActivation_Operation_exitSource_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -1085,6 +1135,56 @@ void StateMachinesPackageImpl::initializeInternalTransitionActivationContent()
 	/*
 	 * EOperations
 	 */
+	m_internalTransitionActivation_Operation_enterTarget_EventOccurrence->setName("enterTarget");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_internalTransitionActivation_Operation_enterTarget_EventOccurrence->setEType(unknownClass);
+	}
+	m_internalTransitionActivation_Operation_enterTarget_EventOccurrence->setLowerBound(1);
+	m_internalTransitionActivation_Operation_enterTarget_EventOccurrence->setUpperBound(1);
+	m_internalTransitionActivation_Operation_enterTarget_EventOccurrence->setUnique(true);
+	m_internalTransitionActivation_Operation_enterTarget_EventOccurrence->setOrdered(false);
+	
+	m_internalTransitionActivation_Operation_enterTarget_EventOccurrence->_setID(INTERNALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_internalTransitionActivation_Operation_enterTarget_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_internalTransitionActivation_Operation_exitSource_EventOccurrence->setName("exitSource");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_internalTransitionActivation_Operation_exitSource_EventOccurrence->setEType(unknownClass);
+	}
+	m_internalTransitionActivation_Operation_exitSource_EventOccurrence->setLowerBound(1);
+	m_internalTransitionActivation_Operation_exitSource_EventOccurrence->setUpperBound(1);
+	m_internalTransitionActivation_Operation_exitSource_EventOccurrence->setUnique(true);
+	m_internalTransitionActivation_Operation_exitSource_EventOccurrence->setOrdered(false);
+	
+	m_internalTransitionActivation_Operation_exitSource_EventOccurrence->_setID(INTERNALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_internalTransitionActivation_Operation_exitSource_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -1168,6 +1268,56 @@ void StateMachinesPackageImpl::initializeLocalTransitionActivationContent()
 	/*
 	 * EOperations
 	 */
+	m_localTransitionActivation_Operation_enterTarget_EventOccurrence->setName("enterTarget");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_localTransitionActivation_Operation_enterTarget_EventOccurrence->setEType(unknownClass);
+	}
+	m_localTransitionActivation_Operation_enterTarget_EventOccurrence->setLowerBound(1);
+	m_localTransitionActivation_Operation_enterTarget_EventOccurrence->setUpperBound(1);
+	m_localTransitionActivation_Operation_enterTarget_EventOccurrence->setUnique(true);
+	m_localTransitionActivation_Operation_enterTarget_EventOccurrence->setOrdered(false);
+	
+	m_localTransitionActivation_Operation_enterTarget_EventOccurrence->_setID(LOCALTRANSITIONACTIVATION_OPERATION_ENTERTARGET_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_localTransitionActivation_Operation_enterTarget_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_localTransitionActivation_Operation_exitSource_EventOccurrence->setName("exitSource");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_localTransitionActivation_Operation_exitSource_EventOccurrence->setEType(unknownClass);
+	}
+	m_localTransitionActivation_Operation_exitSource_EventOccurrence->setLowerBound(1);
+	m_localTransitionActivation_Operation_exitSource_EventOccurrence->setUpperBound(1);
+	m_localTransitionActivation_Operation_exitSource_EventOccurrence->setUnique(true);
+	m_localTransitionActivation_Operation_exitSource_EventOccurrence->setOrdered(false);
+	
+	m_localTransitionActivation_Operation_exitSource_EventOccurrence->_setID(LOCALTRANSITIONACTIVATION_OPERATION_EXITSOURCE_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_localTransitionActivation_Operation_exitSource_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_localTransitionActivation_Operation_getContainingState->setName("getContainingState");
 	m_localTransitionActivation_Operation_getContainingState->setEType(getStateActivation_Class());
 	m_localTransitionActivation_Operation_getContainingState->setLowerBound(1);

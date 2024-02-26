@@ -78,6 +78,8 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void enterTarget(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
+			virtual void exitSource(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
