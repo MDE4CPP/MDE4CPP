@@ -39,19 +39,19 @@
                 <path d="M49 89 L81 89 L81 132 L49 132 L49 89 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath6">
-                <path d="M29 129 L112 129 L112 151 L29 151 L29 129 Z"/>
+                <path d="M49 129 L132 129 L132 151 L49 151 L49 129 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath7">
-                <path d="M424 70 C424 70 424 70 424 70 L180 70 C174.477 70 170 74.477 170 80 L170 80 L170 128 C170 133.523 174.477 138 180 138 L424 138 C429.523 138 434 133.523 434 128 L434 128 L434 80 C434 74.477 429.523 70 424 70 Z"/>
+                <path d="M420 70 C420 70 420 70 420 70 L180 70 C174.477 70 170 74.477 170 80 L170 80 L170 128 C170 133.523 174.477 138 180 138 L420 138 C425.523 138 430 133.523 430 128 L430 128 L430 80 C430 74.477 425.523 70 420 70 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath8">
-                <path d="M274 72 L332 72 L332 94 L274 94 L274 72 Z"/>
+                <path d="M272 72 L330 72 L330 94 L272 94 L272 72 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath9">
-                <path d="M170 103 L436 103 L436 125 L170 125 L170 103 Z"/>
+                <path d="M178 103 L424 103 L424 125 L178 125 L178 103 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath10">
-                <path d="M169 69 L436 69 L436 140 L169 140 L169 69 Z"/>
+                <path d="M169 69 L432 69 L432 140 L169 140 L169 69 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath11">
                 <path d="M530 90 L530 129 L549 129 L549 90 Z"/>
@@ -60,7 +60,7 @@
                 <path d="M529 89 L561 89 L561 131 L529 131 L529 89 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath13">
-                <path d="M469 129 L580 129 L580 151 L469 151 L469 129 Z"/>
+                <path d="M449 129 L560 129 L560 151 L449 151 L449 129 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath14">
                 <path d="M10 33 L592 33 L592 172 L10 172 L10 33 Z"/>
@@ -72,10 +72,10 @@
                 <path d="M-1 -1 L602 -1 L602 182 L-1 182 L-1 -1 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath17">
-                <path d="M479 79 L498 79 L498 101 L479 101 L479 79 Z"/>
+                <path d="M477 79 L496 79 L496 101 L477 101 L477 79 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath18">
-                <path d="M480 79 L487 79 L487 101 L480 101 L480 79 Z"/>
+                <path d="M478 79 L485 79 L485 101 L478 101 L478 79 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath19">
                 <path d="M515 104 L533 104 L533 117 L515 117 L515 104 Z"/>
@@ -96,21 +96,21 @@
             <rect x="11" y="35" clip-path="url(#clipPath3)" fill="url(#linearGradient2)" width="581" height="136" stroke="none"/>
             <rect x="50" y="90" clip-path="url(#clipPath4)" fill="url(#linearGradient3)" width="20" opacity="0" height="41" stroke="none"/>
             <image stroke="black" width="20" xlink:show="embed" xlink:type="simple" fill="black" clip-path="url(#clipPath5)" preserveAspectRatio="none" height="20" x="50" y="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXklEQVR4Xu3SMQ4A&#13;&#10;IAgDQP7/aHEykQJBQRMHhw4CvUlq3Ohk1EAsidgK3oUgAl6wZ4JYiqL6FcxCy9jI&#13;&#10;XRCX2XywnrdB8W1OoAqsoMKYHxlU9XGwg2LPBSMY75bBTDpRoqpTkIOjZwAAAABJ&#13;&#10;RU5ErkJggg==" xlink:actuate="onLoad"/>
-            <text fill="black" x="30" xml:space="preserve" y="147" clip-path="url(#clipPath6)" stroke="none"> Initial_entry</text>
-            <rect x="170" y="70" clip-path="url(#clipPath7)" fill="url(#linearGradient4)" width="265" height="69" stroke="none"/>
-            <text fill="black" x="275" xml:space="preserve" y="90" clip-path="url(#clipPath8)" stroke="none">S1_entry</text>
-            <text fill="black" x="171" xml:space="preserve" y="121" clip-path="url(#clipPath9)" stroke="none">/entry OpaqueBehavior printHelloWorld</text>
+            <text fill="black" x="50" xml:space="preserve" y="147" clip-path="url(#clipPath6)" stroke="none"> Initial_entry</text>
+            <rect x="170" y="70" clip-path="url(#clipPath7)" fill="url(#linearGradient4)" width="261" height="69" stroke="none"/>
+            <text fill="black" x="273" xml:space="preserve" y="90" clip-path="url(#clipPath8)" stroke="none">S1_entry</text>
+            <text fill="black" x="179" xml:space="preserve" y="121" clip-path="url(#clipPath9)" stroke="none">/entry OpaqueBehavior printSMEntry</text>
         </g>
         <g font-size="15px" stroke-width="1.1" font-family="'Segoe UI'" stroke-linecap="butt">
-            <rect x="170" y="70" clip-path="url(#clipPath10)" fill="none" width="264" rx="10" ry="10" height="68"/>
+            <rect x="170" y="70" clip-path="url(#clipPath10)" fill="none" width="260" rx="10" ry="10" height="68"/>
             <rect x="530" y="90" clip-path="url(#clipPath11)" fill="url(#linearGradient5)" width="20" opacity="0" height="40" stroke="none"/>
             <image x="530" y="100" clip-path="url(#clipPath12)" width="20" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAhUlEQVR4XtXSSwrA&#13;&#10;IAwE0Nz/0NoPROJkEoPYRQdmY+KjQqX1JifrDmz7HRFxxb0laCGWDPYHCYRhsMN2&#13;&#10;YlH3zJ1QkGH6JCyLouHXIYLFTGC0kJXlnTEQL0fF/Bgcw6QsA2QoAljMc/bdf5ih&#13;&#10;lSh2BNR7FNRhFdbd6T6CFZhBSxBhW9yxvQByTEj/+nZwewAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="20" preserveAspectRatio="none" xlink:show="embed"/>
-            <text x="470" xml:space="preserve" y="147" clip-path="url(#clipPath13)" stroke="none"> FinalState_entry</text>
+            <text x="450" xml:space="preserve" y="147" clip-path="url(#clipPath13)" stroke="none"> FinalState_entry</text>
             <line y2="34" fill="none" x1="11" clip-path="url(#clipPath14)" x2="592" y1="34"/>
             <rect x="10" y="10" clip-path="url(#clipPath15)" fill="none" width="580" rx="10" ry="10" height="160"/>
-            <line clip-path="url(#clipPath16)" fill="none" text-rendering="optimizeLegibility" x1="435" x2="531" y1="110" y2="110"/>
-            <text text-rendering="optimizeLegibility" x="480" xml:space="preserve" y="97" clip-path="url(#clipPath17)" stroke="none">T2</text>
-            <text text-rendering="optimizeLegibility" x="481" xml:space="preserve" y="97" clip-path="url(#clipPath18)" stroke="none"> </text>
+            <line clip-path="url(#clipPath16)" fill="none" text-rendering="optimizeLegibility" x1="431" x2="531" y1="110" y2="110"/>
+            <text text-rendering="optimizeLegibility" x="478" xml:space="preserve" y="97" clip-path="url(#clipPath17)" stroke="none">T2</text>
+            <text text-rendering="optimizeLegibility" x="479" xml:space="preserve" y="97" clip-path="url(#clipPath18)" stroke="none"> </text>
             <line clip-path="url(#clipPath19)" fill="none" text-rendering="optimizeLegibility" x1="516" x2="531" y1="115" y2="110"/>
             <line clip-path="url(#clipPath19)" fill="none" text-rendering="optimizeLegibility" x1="531" x2="516" y1="110" y2="105"/>
             <line clip-path="url(#clipPath16)" fill="none" text-rendering="optimizeLegibility" x1="68" x2="170" y1="110" y2="110"/>
@@ -123,9 +123,9 @@
             <text text-rendering="optimizeLegibility" x="117" xml:space="preserve" y="97" clip-path="url(#clipPath21)" stroke="none"> </text>
             <line clip-path="url(#clipPath22)" fill="none" text-rendering="optimizeLegibility" x1="155" x2="170" y1="115" y2="110"/>
             <line clip-path="url(#clipPath22)" fill="none" text-rendering="optimizeLegibility" x1="170" x2="155" y1="110" y2="105"/>
-            <line clip-path="url(#clipPath16)" fill="none" text-rendering="optimizeLegibility" x1="435" x2="531" y1="110" y2="110"/>
-            <text text-rendering="optimizeLegibility" x="480" xml:space="preserve" y="97" clip-path="url(#clipPath17)" stroke="none">T2</text>
-            <text text-rendering="optimizeLegibility" x="481" xml:space="preserve" y="97" clip-path="url(#clipPath18)" stroke="none"> </text>
+            <line clip-path="url(#clipPath16)" fill="none" text-rendering="optimizeLegibility" x1="431" x2="531" y1="110" y2="110"/>
+            <text text-rendering="optimizeLegibility" x="478" xml:space="preserve" y="97" clip-path="url(#clipPath17)" stroke="none">T2</text>
+            <text text-rendering="optimizeLegibility" x="479" xml:space="preserve" y="97" clip-path="url(#clipPath18)" stroke="none"> </text>
             <line clip-path="url(#clipPath19)" fill="none" text-rendering="optimizeLegibility" x1="516" x2="531" y1="115" y2="110"/>
             <line clip-path="url(#clipPath19)" fill="none" text-rendering="optimizeLegibility" x1="531" x2="516" y1="110" y2="105"/>
         </g>
