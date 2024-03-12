@@ -118,6 +118,7 @@
 		[aTransition.memberName()/]->setKind(uml::TransitionKind::[aTransition.kind.toString().toUpper()/]);
 		[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
 		[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
+		[comment TBD: Triggers, Guards/]
 			[if (not aTransition.effect.oclIsUndefined())]
 			[if (not aTransition.effect.oclIsKindOf(OpaqueBehavior))]
 			// reference complex Behavior as this State's Exit Behavior
