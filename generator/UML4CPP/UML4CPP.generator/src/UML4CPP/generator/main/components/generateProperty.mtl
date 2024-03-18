@@ -232,6 +232,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [/if]
 [aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
 [if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([aProperty.association.generatePackageGetterCall(aProperty)/]);[/if]
+[if (not aProperty.opposite.oclIsUndefined())][aProperty.memberName()/]->setOpposite([aProperty.opposite.generatePackageGetterCall(aProperty)/]);[/if]
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [if (not isReflectionModel(aProperty.getRootPackage()))]
 [aProperty.memberName()/]->_setID([aProperty.getMemberName().toUpperCase()/]);
