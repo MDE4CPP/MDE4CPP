@@ -14,22 +14,21 @@
 
 namespace ecore 
 {
-	class EGenericType;
+	class EAnnotation;
+	class EClass;
 	class EReference;
 	class EDataType;
 	class EParameter;
 	class EAttribute;
-	class EAnnotation;
-	class EClass;
-	class EOperation;
+	class EGenericType;
 	class EStringToStringMapEntry;
+	class EOperation;
 }
 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ClassifierBehaviorExecution;
 	class EventAccepter;
-	class EventDispatchLoop;
 	class EventOccurrence;
 	class Execution;
 	class FIFOGetNextEventStrategy;
@@ -109,27 +108,6 @@ namespace fUML::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_match_EventOccurrence() const = 0;
 			
 			// End Class EventAccepter
-
-
-			// Begin Class EventDispatchLoop
-			//Class and Feature IDs 
-			static const unsigned long EVENTDISPATCHLOOP_CLASS = 1354650361;
-			static const unsigned int EVENTDISPATCHLOOP_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int EVENTDISPATCHLOOP_CLASS_OPERATION_COUNT = 1;
-			
-			static const unsigned long EVENTDISPATCHLOOP_ATTRIBUTE_MEMBERTHREAD = 1756598410;
-			
-			static const unsigned long EVENTDISPATCHLOOP_OPERATION_STARTDISPATCHLOOP_OBJECTACTIVATION = 135163438;
-			
-			//Class and Feature Getter
-			virtual const std::shared_ptr<ecore::EClass>& getEventDispatchLoop_Class() const = 0;
-			
-			
-			virtual const std::shared_ptr<ecore::EReference>& getEventDispatchLoop_Attribute_memberThread() const = 0;
-			
-			virtual const std::shared_ptr<ecore::EOperation>& getEventDispatchLoop_Operation_startDispatchLoop_ObjectActivation() const = 0;
-			
-			// End Class EventDispatchLoop
 
 
 			// Begin Class EventOccurrence

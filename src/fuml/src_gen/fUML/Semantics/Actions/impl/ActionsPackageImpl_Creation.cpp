@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -43,6 +43,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createCallActionActivationContent(package, factory);
 	createCallBehaviorActionActivationContent(package, factory);
 	createCallOperationActionActivationContent(package, factory);
+	createClearAssociationActionActivationContent(package, factory);
 	createClearStructuralFeatureActionActivationContent(package, factory);
 	createCreateObjectActionActivationContent(package, factory);
 	createDestroyObjectActionActivationContent(package, factory);
@@ -175,6 +176,16 @@ void ActionsPackageImpl::createCallOperationActionActivationContent(std::shared_
 	m_callOperationActionActivation_Operation_doCall_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE);
 	m_callOperationActionActivation_Operation_retrieveBehavior = factory->createEOperation_as_eOperations_in_EClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVEBEHAVIOR);
 	m_callOperationActionActivation_Operation_retrieveCallParameters = factory->createEOperation_as_eOperations_in_EClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVECALLPARAMETERS);
+	
+}
+
+void ActionsPackageImpl::createClearAssociationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_clearAssociationActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CLEARASSOCIATIONACTIONACTIVATION_CLASS);
+	
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction = factory->createEReference_as_eReferences_in_EClass(m_clearAssociationActionActivation_Class, CLEARASSOCIATIONACTIONACTIVATION_ATTRIBUTE_CLEARASSOCIATIONACTION);
+	
+	m_clearAssociationActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_clearAssociationActionActivation_Class, CLEARASSOCIATIONACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

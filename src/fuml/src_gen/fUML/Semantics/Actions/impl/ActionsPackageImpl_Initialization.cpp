@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -51,6 +51,7 @@ void ActionsPackageImpl::initializePackageContents()
 	m_callActionActivation_Class->getESuperTypes()->push_back(getInvocationActionActivation_Class());
 	m_callBehaviorActionActivation_Class->getESuperTypes()->push_back(getCallActionActivation_Class());
 	m_callOperationActionActivation_Class->getESuperTypes()->push_back(getCallActionActivation_Class());
+	m_clearAssociationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_clearStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	m_createObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_destroyObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
@@ -81,6 +82,7 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeCallActionActivationContent();
 	initializeCallBehaviorActionActivationContent();
 	initializeCallOperationActionActivationContent();
+	initializeClearAssociationActionActivationContent();
 	initializeClearStructuralFeatureActionActivationContent();
 	initializeCreateObjectActionActivationContent();
 	initializeDestroyObjectActionActivationContent();
@@ -1196,6 +1198,60 @@ void ActionsPackageImpl::initializeCallOperationActionActivationContent()
 	m_callOperationActionActivation_Operation_retrieveCallParameters->setOrdered(true);
 	
 	m_callOperationActionActivation_Operation_retrieveCallParameters->_setID(CALLOPERATIONACTIONACTIVATION_OPERATION_RETRIEVECALLPARAMETERS);
+	
+	
+	
+}
+
+void ActionsPackageImpl::initializeClearAssociationActionActivationContent()
+{
+	m_clearAssociationActionActivation_Class->setName("ClearAssociationActionActivation");
+	m_clearAssociationActionActivation_Class->setAbstract(false);
+	m_clearAssociationActionActivation_Class->setInterface(false);
+	
+	m_clearAssociationActionActivation_Class->_setID(CLEARASSOCIATIONACTIONACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setName("clearAssociationAction");
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setEType(uml::umlPackage::eInstance()->getClearAssociationAction_Class());
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setLowerBound(1);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setUpperBound(1);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setTransient(false);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setVolatile(false);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setChangeable(true);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setUnsettable(false);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setUnique(true);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setDerived(false);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setOrdered(true);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setContainment(false);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setResolveProxies(true);
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setDefaultValueLiteral("");	
+	
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->_setID(CLEARASSOCIATIONACTIONACTIVATION_ATTRIBUTE_CLEARASSOCIATIONACTION);
+	
+	/*
+	 * EOperations
+	 */
+	m_clearAssociationActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_clearAssociationActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_clearAssociationActionActivation_Operation_doAction->setLowerBound(1);
+	m_clearAssociationActionActivation_Operation_doAction->setUpperBound(1);
+	m_clearAssociationActionActivation_Operation_doAction->setUnique(true);
+	m_clearAssociationActionActivation_Operation_doAction->setOrdered(true);
+	
+	m_clearAssociationActionActivation_Operation_doAction->_setID(CLEARASSOCIATIONACTIONACTIVATION_OPERATION_DOACTION);
 	
 	
 	

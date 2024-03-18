@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EStringToStringMapEntry;
-	class EClass;
-	class EOperation;
-	class EDataType;
-	class EAttribute;
 	class EAnnotation;
-	class EGenericType;
+	class EClass;
+	class EReference;
+	class EDataType;
 	class EParameter;
+	class EAttribute;
+	class EGenericType;
+	class EStringToStringMapEntry;
+	class EOperation;
 }
 
 namespace fUML::Semantics::Actions 
@@ -34,6 +34,7 @@ namespace fUML::Semantics::Actions
 	class CallActionActivation;
 	class CallBehaviorActionActivation;
 	class CallOperationActionActivation;
+	class ClearAssociationActionActivation;
 	class ClearStructuralFeatureActionActivation;
 	class CreateObjectActionActivation;
 	class DestroyObjectActionActivation;
@@ -302,6 +303,27 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EOperation>& getCallOperationActionActivation_Operation_retrieveCallParameters() const = 0;
 			
 			// End Class CallOperationActionActivation
+
+
+			// Begin Class ClearAssociationActionActivation
+			//Class and Feature IDs 
+			static const unsigned long CLEARASSOCIATIONACTIONACTIVATION_CLASS = 1101563840;
+			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
+			
+			static const unsigned long CLEARASSOCIATIONACTIONACTIVATION_ATTRIBUTE_CLEARASSOCIATIONACTION = 1301512596;
+			
+			static const unsigned long CLEARASSOCIATIONACTIONACTIVATION_OPERATION_DOACTION = 4226151198;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getClearAssociationActionActivation_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getClearAssociationActionActivation_Attribute_clearAssociationAction() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getClearAssociationActionActivation_Operation_doAction() const = 0;
+			
+			// End Class ClearAssociationActionActivation
 
 
 			// Begin Class ClearStructuralFeatureActionActivation

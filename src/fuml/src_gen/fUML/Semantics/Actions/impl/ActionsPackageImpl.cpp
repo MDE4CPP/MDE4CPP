@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
@@ -364,6 +364,25 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 }
 
 // End Class CallOperationActionActivation
+
+// Begin Class ClearAssociationActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getClearAssociationActionActivation_Class() const
+{
+	return m_clearAssociationActionActivation_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getClearAssociationActionActivation_Attribute_clearAssociationAction() const
+{
+	return m_clearAssociationActionActivation_Attribute_clearAssociationAction;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getClearAssociationActionActivation_Operation_doAction() const
+{
+	return m_clearAssociationActionActivation_Operation_doAction;
+}
+
+// End Class ClearAssociationActionActivation
 
 // Begin Class ClearStructuralFeatureActionActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getClearStructuralFeatureActionActivation_Class() const

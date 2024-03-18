@@ -11,6 +11,7 @@
 #include "fUML/Semantics/Actions/impl/CallActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CallBehaviorActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CallOperationActionActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ClearAssociationActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ClearStructuralFeatureActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CreateObjectActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/DestroyObjectActionActivationImpl.hpp"
@@ -62,6 +63,7 @@ ActionsFactoryImpl::ActionsFactoryImpl()
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation", ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::CallBehaviorActionActivation", ActionsPackage::CALLBEHAVIORACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::CallOperationActionActivation", ActionsPackage::CALLOPERATIONACTIONACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ClearAssociationActionActivation", ActionsPackage::CLEARASSOCIATIONACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ClearStructuralFeatureActionActivation", ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::CreateObjectActionActivation", ActionsPackage::CREATEOBJECTACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::DestroyObjectActionActivation", ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS));
@@ -157,6 +159,20 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
 				return std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivation>(this->createCallOperationActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case ActionsPackage::CLEARASSOCIATIONACTIONACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createClearAssociationActionActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation>(this->createClearAssociationActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -544,6 +560,26 @@ std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivation> Actions
 	}
 	
 	element->setThisCallOperationActionActivationPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> ActionsFactoryImpl::createClearAssociationActionActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivationImpl> element(new fUML::Semantics::Actions::ClearAssociationActionActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisClearAssociationActionActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> ActionsFactoryImpl::createClearAssociationActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivationImpl> element(new fUML::Semantics::Actions::ClearAssociationActionActivationImpl(par_ActivityNodeActivationGroup));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityNodeActivationGroup.lock())
+	{
+		wp->getNodeActivations()->push_back(element);
+	}
+	
+	element->setThisClearAssociationActionActivationPtr(element);
 	return element;
 	
 }

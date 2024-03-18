@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -54,7 +54,6 @@ void CommonBehaviorPackageImpl::initializePackageContents()
  	// Initialize classes and features; add operations and parameters
 	initializeClassifierBehaviorExecutionContent();
 	initializeEventAccepterContent();
-	initializeEventDispatchLoopContent();
 	initializeEventOccurrenceContent();
 	initializeExecutionContent();
 	initializeFIFOGetNextEventStrategyContent();
@@ -261,76 +260,6 @@ void CommonBehaviorPackageImpl::initializeEventAccepterContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventAccepter_Operation_match_EventOccurrence);
 		parameter->setName("eventOccurrence");
 		parameter->setEType(getEventOccurrence_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
-void CommonBehaviorPackageImpl::initializeEventDispatchLoopContent()
-{
-	m_eventDispatchLoop_Class->setName("EventDispatchLoop");
-	m_eventDispatchLoop_Class->setAbstract(false);
-	m_eventDispatchLoop_Class->setInterface(false);
-	
-	m_eventDispatchLoop_Class->_setID(EVENTDISPATCHLOOP_CLASS);
-	
-	/*
-	 * EAttributes
-	 */
-	
-	/*
-	 * EReferences
-	 */
-	m_eventDispatchLoop_Attribute_memberThread->setName("memberThread");
-	{
-		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_eventDispatchLoop_Attribute_memberThread->setEType(unknownClass);
-	}
-	m_eventDispatchLoop_Attribute_memberThread->setLowerBound(0);
-	m_eventDispatchLoop_Attribute_memberThread->setUpperBound(1);
-	m_eventDispatchLoop_Attribute_memberThread->setTransient(false);
-	m_eventDispatchLoop_Attribute_memberThread->setVolatile(false);
-	m_eventDispatchLoop_Attribute_memberThread->setChangeable(true);
-	m_eventDispatchLoop_Attribute_memberThread->setUnsettable(false);
-	m_eventDispatchLoop_Attribute_memberThread->setUnique(true);
-	m_eventDispatchLoop_Attribute_memberThread->setDerived(false);
-	m_eventDispatchLoop_Attribute_memberThread->setOrdered(true);
-	m_eventDispatchLoop_Attribute_memberThread->setContainment(false);
-	m_eventDispatchLoop_Attribute_memberThread->setResolveProxies(true);
-	m_eventDispatchLoop_Attribute_memberThread->setDefaultValueLiteral("");	
-	
-	m_eventDispatchLoop_Attribute_memberThread->_setID(EVENTDISPATCHLOOP_ATTRIBUTE_MEMBERTHREAD);
-	
-	/*
-	 * EOperations
-	 */
-	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setName("startDispatchLoop");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setEType(unknownClass);
-	}
-	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setLowerBound(1);
-	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setUpperBound(1);
-	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setUnique(true);
-	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setOrdered(false);
-	
-	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->_setID(EVENTDISPATCHLOOP_OPERATION_STARTDISPATCHLOOP_OBJECTACTIVATION);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation);
-		parameter->setName("objectActivation");
-		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
