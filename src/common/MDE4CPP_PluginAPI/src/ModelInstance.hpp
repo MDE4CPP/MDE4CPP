@@ -9,12 +9,12 @@
 
 using namespace ecore;
 
-class Model{
+class ModelInstance{
     public: 
-        Model(std::shared_ptr<EObject> root_Object, std::string modelName = "untitled Model"); //rootobj is set during creation of a model
+        ModelInstance(std::shared_ptr<EObject> root_Object, std::string modelName = "untitled modelInstance"); //rootobj is set during creation of a model instance
         
         /**
-         * allows to retrieve a pointer to the root_object of the model
+         * allows to retrieve a pointer to the root_object of the model instance
          * @return shared pointer from m_rootObject
         */
         std::shared_ptr<EObject> getRootObject();
@@ -41,8 +41,8 @@ class Model{
         */
         const std::shared_ptr<EObject>& navigateToObject(std::deque<std::string>& path); 
 
-        void renameModel(std::string new_name);
-        std::string getModelName();
+        void renameModelInstance(std::string new_name);
+        std::string getModelInstanceName();
 
     private : 
         /**
@@ -55,7 +55,7 @@ class Model{
 
         std::shared_ptr<EObject> m_rootObject; //pointer to the root object
         std::map<std::string, std::weak_ptr<EObject>> m_aliases; //allows to access certain object directly via their aliases; aliases have to be assigned by the user
-        std::string m_modelName;
+        std::string m_modelInstanceName;
 
 };
 

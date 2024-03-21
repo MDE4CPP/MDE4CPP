@@ -1,5 +1,5 @@
 #include "util/crow_all.h"
-#include "Model.hpp"
+#include "ModelInstance.hpp"
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
 #include "ecore/EObject.hpp"
@@ -94,27 +94,11 @@ private:
      *  -json needs to atleast include one object (root object)
      * @return : shared pointer to the Model instance that was created 
     */
-    std::shared_ptr<Model> createModel(const crow::json::rvalue& content);
-
-    /**
-     * navigate to the EObject specified in the path and returns a shared_ptr to it
-     * @param start_object = shared_ptr to object from which to start 
-     * @param path = deque containg names of StructualFeature as strings; If empty returns start_object
-     */
-    const std::shared_ptr<EObject>& navigateToObject(const std::shared_ptr<Model>& model, std::deque<std::string> path); 
-
-    /**
-     * splits the string s at every occurence of split_char and writes every segment into the buffer
-     * does not ever insert an empty string into buffer
-     * @param buffer : pointer to the vector where the string segments are supposed to be stored (empty segments are not inserted)
-     * @param s : string that is supposed to be split
-     * @param split_char : char denoting the boundery between to segments 
-    */
-    void split_string(const std::deque<std::string>& buffer, std::string s, char split_char);
+    std::shared_ptr<ModelInstance> createModelInst(const crow::json::rvalue& content);
     
     std::shared_ptr<PluginFramework> m_pluginFramework;
 
-    std::map<std::string,std::shared_ptr<Model>> m_models{}; //map of all root-artifacts 
+    std::map<std::string,std::shared_ptr<ModelInstance>> m_modelInsts{}; //map of all root-artifacts 
 	std::map<std::string,std::shared_ptr<MDE4CPPPlugin>> m_plugins{}; //map of all plugins currently detected
 
 };

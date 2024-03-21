@@ -21,66 +21,66 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
     /**
      * Create model function : creates a new model with the json provided
      * Signature: POST /modelName/
-     * @param modelName : name the model will have afterwards; must be unique
+     * @param modelInstName : name the model will have afterwards; must be unique
      * 
     */
-    CROW_ROUTE(app, "/<string>/").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& modelName){
-        if(m_models.find(modelName) != m_models.end()){
+    CROW_ROUTE(app, "/<string>/").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& modelInstName){
+        if(m_modelInsts.find(modelInstName) != m_modelInsts.end()){
             return crow::response(400, "Model already exists!");
         }
         auto root_object = readValue(crow::json::load(request.body)); //TODO repair readValue
         
-        Model* m = new Model(root_object, modelName); //create a new model
+        ModelInstance* m = new ModelInstance(root_object, modelInstName); //create a new model instance
 
-        m_models[modelName] = std::make_shared<Model>(m); //insert model into modelMap
+        m_modelInsts[modelInstName] = std::make_shared<ModelInstance>(m); //insert model instance into modelInsts map
         return crow::response(201);
     });
 
     /**
      * Return the value of the EObject specified in the path as a json; if path is empty return the whole model
-     * Signature: GET /modelName/path/
-     * @param modelName : name the model will have afterwards
-     * @param path : path to the StructuralFeature in the model where the update shall be made
+     * Signature: GET /modelInstName/path/
+     * @param modelInstName : name the model instance will have afterwards
+     * @param path : path to the StructuralFeature in the model instance where the update shall be made
      *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :StructuralFeatureContaingTheTargetEObject
      *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
      *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: #auhors@0 for first element in authors container; '#' indicates that it is a container; '@' indicates the index in the container)
      *                                      -for normal StructFeatures = NameOfStructFeat
      *                                      
     */
-    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& modelName, const std::string& path){
-        if(m_models.find(modelName) == m_models.end()){
+    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& modelInstName, const std::string& path){
+        if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
             return crow::response(404, "Model not found!");
         }
 
         std::deque<std::string> segmented_path;
         split_string(segmented_path, path, ':');
-;		auto obj = m_models[modelName]->navigateToObject(segmented_path);
+;		auto obj = m_modelInsts[modelInstName]->navigateToObject(segmented_path);
         
         auto result = writeValue(obj);
         return crow::response(200, result);
     });
 
     /**
-     * Initiates an Update on a Model with the attached json
-     * Signature: PUT /modelName/path/
-     * @param modelName : name the model will have afterwards
-     * @param path : path to the StructuralFeature in the model where the update shall be made
+     * Initiates an Update on a model instance with the attached json
+     * Signature: PUT /modelInstName/path/
+     * @param modelInstName : name the model instance will have afterwards
+     * @param path : path to the StructuralFeature in the model instance where the update shall be made
      *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :targetStructuralFeature 
      *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
      *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container)
      *                                      -for normal StructFeatures = NameOfStructFeat
      *                                      
     */
-    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& modelName, const std::string path){
-        if(m_models.find(modelName) == m_models.end()){
+    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& modelInstName, const std::string path){
+        if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
             return crow::response(404, "Model not found!");
         }
 		
         std::deque<std::string> segmented_path;
         split_string(segmented_path, path, ':');
-;		auto obj = navigateToObject(m_models[modelName]->getRootObject(), segmented_path);
+;		auto obj = m_modelInsts[modelInstName]->navigateToObject(segmented_path);
 
-        m_models.erase(m_models.find(objectName)); //TODO smarter update function
+        m_modelInsts.erase(m_modelInsts.find(objectName)); //TODO smarter update function
         auto object = readValue(crow::json::load(request.body), className, plugin);
         m_models[objectName] = object;
         return crow::response(200);
@@ -89,7 +89,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
     //Delete function
     //Signature: /pluginName/objects/className/objectIdentifier
     CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Delete)([this](const std::string& plugin_name, const std::string& className, const std::string& objectName){
-        if(m_models.find(objectName) == m_models.end()){
+        if(m_modelInsts.find(objectName) == m_modelInsts.end()){
             return crow::response(404);
         }
 		
@@ -98,7 +98,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 			return crow::response(404, "Plugin not found!");
 		}
 		
-        m_models.erase(m_models.find(objectName));
+        m_modelInsts.erase(m_modelInsts.find(objectName));
         return crow::response(204);
     });
 
@@ -113,7 +113,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 		
         for(const auto & entry : crow::json::load(request.body)){
             auto object = readValue(entry, entry["ecore_type"].s(), plugin);
-            m_models[entry["ecore_identifier"].s()] = object;
+            m_modelInsts[entry["ecore_identifier"].s()] = object;
         }
         return crow::response(201);
     });
@@ -128,7 +128,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 		
         crow::json::wvalue result;
         int i = 0;
-        for(const auto & object : m_models){
+        for(const auto & object : m_modelInsts){
             auto wvalue = writeValue(object.second);
             wvalue["ecore_identifier"] = object.first;
             wvalue["ecore_type"] = object.second->eClass()->getName();

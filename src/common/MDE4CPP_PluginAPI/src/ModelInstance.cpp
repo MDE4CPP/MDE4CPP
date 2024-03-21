@@ -1,20 +1,20 @@
-#include "Model.hpp"
+#include "ModelInstance.hpp"
 #include "abstractDataTypes/Any.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/Bag.hpp"
 #include <string>
 
-Model::Model(std::shared_ptr<EObject> root_obj, std::string modelName){
+ModelInstance::ModelInstance(std::shared_ptr<EObject> root_obj, std::string modelInstName){
     m_rootObject = root_obj;
-    m_modelName = modelName;
+    m_modelInstanceName = modelInstName;
 }
 
-std::shared_ptr<EObject> Model::getRootObject(){
+std::shared_ptr<EObject> ModelInstance::getRootObject(){
     return m_rootObject;
 }
 
-void Model::setAlias(std::string alias, std::shared_ptr<EObject> obj){
+void ModelInstance::setAlias(std::string alias, std::shared_ptr<EObject> obj){
     if(m_aliases.find(alias) != m_aliases.end()){ //check if alias is already used
         throw std::runtime_error("alias: "+ alias +" already in map");
         return;
@@ -23,7 +23,7 @@ void Model::setAlias(std::string alias, std::shared_ptr<EObject> obj){
     m_aliases[alias] =  wptr;
 }
 
-std::shared_ptr<EObject> Model::lookUpAlias(std::string alias){
+std::shared_ptr<EObject> ModelInstance::lookUpAlias(std::string alias){
     auto f = m_aliases.find(alias);
     if(f == m_aliases.end()){ //alias is not present in m_aliases
         return nullptr;
@@ -32,7 +32,7 @@ std::shared_ptr<EObject> Model::lookUpAlias(std::string alias){
     } 
 }
 
-const std::shared_ptr<EObject>& Model::navigateToObject(std::deque<std::string>& path){
+const std::shared_ptr<EObject>& ModelInstance::navigateToObject(std::deque<std::string>& path){
     std::shared_ptr<EObject> current_object = this->m_rootObject;
     
     while(!path.empty()){
@@ -98,7 +98,7 @@ const std::shared_ptr<EObject>& Model::navigateToObject(std::deque<std::string>&
     return current_object;
 }
 
-std::shared_ptr<Any> Model::getValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureName){
+std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureName){
     std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(sFeatureName); //gets sFeature by name from eClass of obj
     if(sFeature == nullptr){ //no strucural Feature with sFeatureName found
         throw std::runtime_error("structuralFeature: \""+sFeatureName+"\" not found in " + obj->eClass()->getName() + "!");
