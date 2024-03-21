@@ -3,6 +3,7 @@
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "abstractDataTypes/Bag.hpp"
+#include "helpersFunc.hpp"
 
 #include <sstream>
 #include <string>
@@ -12,79 +13,83 @@ std::shared_ptr<GenericApi> GenericApi::eInstance(std::shared_ptr<PluginFramewor
     return instance;
 }
 
-/*
-Json example: 
-{
-    "ObjectId": "pluginName::ClassNamespace::ClassName::ObjectIdentifierName"
-    "ObjectData" : {
-        StrucuralFeatureName : Value    //StrucuralFeatureName needs to be the name of an EAttribute or EReference of the Class specified in the ObjectId
-                                        //Value can be: -a primitive Value for an Attribute
-                                                        -a json of an EObject (in the same syntax as this json) for References that are containments 
-                                                        -an ObjectIdentifiert of an EObject for References that arent containments
-    }
-}
-*/
-
 GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
     m_pluginFramework = pluginFramework;
 	mapPlugins(); //makes an inital map of all plugins 
     crow::SimpleApp app;
 
-    //Create function
-    //Signature: /pluginName/objects/className/objectIdentifier
-    CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& plugin_name, const std::string& className, const std::string& objectName){
-        if(m_objects.find(objectName) != m_objects.end()){
-            return crow::response(400, "Object already exists!");
+    /**
+     * Create model function : creates a new model with the json provided
+     * Signature: POST /modelName/
+     * @param modelName : name the model will have afterwards; must be unique
+     * 
+    */
+    CROW_ROUTE(app, "/<string>/").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& modelName){
+        if(m_models.find(modelName) != m_models.end()){
+            return crow::response(400, "Model already exists!");
         }
-		
-		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
-		if(plugin == nullptr){
-			return crow::response(404, "Plugin not found!");
-		}
-		
-        auto object = readValue(crow::json::load(request.body), className, plugin);
-        m_objects[objectName] = object;
+        auto root_object = readValue(crow::json::load(request.body)); //TODO repair readValue
+        
+        Model* m = new Model(root_object, modelName); //create a new model
+
+        m_models[modelName] = std::make_shared<Model>(m); //insert model into modelMap
         return crow::response(201);
     });
 
-    //Read function 
-    //Signature: /pluginName/objects/className/objectIdentifier
-    CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name, const std::string& className, const std::string& objectName){
-        if(m_objects.find(objectName) == m_objects.end()){
-            return crow::response(404);
+    /**
+     * Return the value of the EObject specified in the path as a json; if path is empty return the whole model
+     * Signature: GET /modelName/path/
+     * @param modelName : name the model will have afterwards
+     * @param path : path to the StructuralFeature in the model where the update shall be made
+     *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :StructuralFeatureContaingTheTargetEObject
+     *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
+     *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: #auhors@0 for first element in authors container; '#' indicates that it is a container; '@' indicates the index in the container)
+     *                                      -for normal StructFeatures = NameOfStructFeat
+     *                                      
+    */
+    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& modelName, const std::string& path){
+        if(m_models.find(modelName) == m_models.end()){
+            return crow::response(404, "Model not found!");
         }
-		
-		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
-		if(plugin == nullptr){
-			return crow::response(404, "Plugin not found!");
-		}
-		
-        auto result = writeValue(m_objects[objectName]);
+
+        std::deque<std::string> segmented_path;
+        split_string(segmented_path, path, ':');
+;		auto obj = m_models[modelName]->navigateToObject(segmented_path);
+        
+        auto result = writeValue(obj);
         return crow::response(200, result);
     });
 
-    //Update function 
-    //Signature: /pluginName/objects/className/objectIdentifier
-    CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& plugin_name, const std::string& className, const std::string& objectName){
-        if(m_objects.find(objectName) == m_objects.end()){
-            return crow::response(404);
+    /**
+     * Initiates an Update on a Model with the attached json
+     * Signature: PUT /modelName/path/
+     * @param modelName : name the model will have afterwards
+     * @param path : path to the StructuralFeature in the model where the update shall be made
+     *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :targetStructuralFeature 
+     *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
+     *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container)
+     *                                      -for normal StructFeatures = NameOfStructFeat
+     *                                      
+    */
+    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& modelName, const std::string path){
+        if(m_models.find(modelName) == m_models.end()){
+            return crow::response(404, "Model not found!");
         }
 		
-		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
-		if(plugin == nullptr){
-			return crow::response(404, "Plugin not found!");
-		}
-		
-        m_objects.erase(m_objects.find(objectName)); //TODO smarter update function
+        std::deque<std::string> segmented_path;
+        split_string(segmented_path, path, ':');
+;		auto obj = navigateToObject(m_models[modelName]->getRootObject(), segmented_path);
+
+        m_models.erase(m_models.find(objectName)); //TODO smarter update function
         auto object = readValue(crow::json::load(request.body), className, plugin);
-        m_objects[objectName] = object;
+        m_models[objectName] = object;
         return crow::response(200);
     });
 
     //Delete function
     //Signature: /pluginName/objects/className/objectIdentifier
     CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Delete)([this](const std::string& plugin_name, const std::string& className, const std::string& objectName){
-        if(m_objects.find(objectName) == m_objects.end()){
+        if(m_models.find(objectName) == m_models.end()){
             return crow::response(404);
         }
 		
@@ -93,7 +98,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 			return crow::response(404, "Plugin not found!");
 		}
 		
-        m_objects.erase(m_objects.find(objectName));
+        m_models.erase(m_models.find(objectName));
         return crow::response(204);
     });
 
@@ -108,7 +113,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 		
         for(const auto & entry : crow::json::load(request.body)){
             auto object = readValue(entry, entry["ecore_type"].s(), plugin);
-            m_objects[entry["ecore_identifier"].s()] = object;
+            m_models[entry["ecore_identifier"].s()] = object;
         }
         return crow::response(201);
     });
@@ -123,7 +128,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 		
         crow::json::wvalue result;
         int i = 0;
-        for(const auto & object : m_objects){
+        for(const auto & object : m_models){
             auto wvalue = writeValue(object.second);
             wvalue["ecore_identifier"] = object.first;
             wvalue["ecore_type"] = object.second->eClass()->getName();
@@ -255,7 +260,13 @@ crow::json::wvalue GenericApi::writeFeature(const std::shared_ptr<EObject> &obje
 }
 
 //creates an object encoded in a json 
-std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& content, const std::string& eClass, const std::shared_ptr<MDE4CPPPlugin>& plugin){
+std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& content){
+    		
+    const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+    if(plugin == nullptr){
+        return crow::response(404, "Plugin not found!");
+    }
+
     auto result = plugin->create(eClass); //TODO check for unexpected behavior (e.g unknown ClassName)
     auto features = result->eClass()->getEAllStructuralFeatures();
     for(const auto & feature : *features){
@@ -271,6 +282,7 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
         auto reference = std::dynamic_pointer_cast<EReference>(feature);
         if(reference != nullptr && reference->getEOpposite() != nullptr && !reference->isContainment()){ //ignores all references, that aren't containments
             continue; //TODO add all References that arnt containments to a stack and resolve them after parsing the whole json
+                    //TODO are backreferences set automaticly
         }
         switch (attributeTypeId) {
             case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
@@ -392,48 +404,9 @@ const std::shared_ptr<Any>& setStructuralFeature(const std::shared_ptr<EObject>&
     }
 
     std::deque<std::string> split_path;
-    split_string(split_path, path, '/'); //split path into segments that were seperated by "/" -> last will be name of target StructuralFeature; everything before will be path-segments to get there from the start_object
+    helperFunctions::split_string(split_path, path, '/'); //split path into segments that were seperated by "/" -> last will be name of target StructuralFeature; everything before will be path-segments to get there from the start_object
     std::string strucFeature = split_path.back();
     split_path.pop_back();
     auto obj = navigateToObject(start_object, split_path);
     obj->eSet(obj->eClass()->getEStructuralFeature(strucFeature),value);
-}
-
-std::shared_ptr<EObject> navigateToObject(const std::shared_ptr<EObject>& start_object, std::deque<std::string> path){
-    std::shared_ptr<EObject> current_object = start_object;
-    
-    while(!path.empty()){
-        std::string next_path_segment = path.front();
-        path.pop_front();
-        switch(next_path_segment[0]){
-            case '$':
-                //TODO alias handling
-                break;
-            
-            case '@':
-                //TODO container handling 
-                break;
-            
-            default :   //handling for next Object
-                try {
-                    current_object = current_object->eGet(current_object->eClass()->getEStructuralFeature(next_path_segment))->get<std::shared_ptr<EObject>>(); //sets current_object to the Value of the StructualFeature with the same name as next_segment
-                } catch (std::runtime_error& error){    //Type cast to EObject failed
-                    CROW_LOG_ERROR << "malformed path error: "<< next_path_segment <<" could not be cast to correct type or is primitive";
-                    return nullptr;
-                }
-                break;
-        }
-    }
-
-    return current_object;
-}
-
-void split_string(std::deque<std::string>& buffer, std::string s, char split_char){
-    std::stringstream ss;
-    ss << s; //initilize stringstream with sting 
-    std::string segment; 
-    while(std::getline(ss, segment, split_char)) //reads ss into segment until split_char is reached or ss is empty
-    {
-        buffer.push_back(segment); 
-    }
 }

@@ -48,11 +48,10 @@ public:
 
     /**
      * creates an EObject of the EClass and sets the StructuralFeatures of it according to the values specified in the json
-     * @param content : json with StructuralFeatures and their Values; has to follow the form outlined above
-     * @param eClass : pointer to the eClass of the Object that should be created
+     * @param content : json with StructuralFeatures of the Object and their Values; has to follow the form outlined above
      * @return shared_ptr to created EObject
      */
-    std::shared_ptr<ecore::EObject> readValue(const crow::json::rvalue& content, const std::string& eClass, const std::shared_ptr<MDE4CPPPlugin>& plugin);
+    std::shared_ptr<ecore::EObject> readValue(const crow::json::rvalue& content);
 
 private:
     explicit GenericApi(std::shared_ptr<PluginFramework>& pluginFramework);
@@ -90,11 +89,19 @@ private:
 	void mapPlugins();
 
     /**
-     * navigate to a StructuralFeature and return a shared_ptr to it
+     * creates a Model Instance from a json
+     * @param content : json representing the model that should be created in the form defined above 
+     *  -json needs to atleast include one object (root object)
+     * @return : shared pointer to the Model instance that was created 
+    */
+    std::shared_ptr<Model> createModel(const crow::json::rvalue& content);
+
+    /**
+     * navigate to the EObject specified in the path and returns a shared_ptr to it
      * @param start_object = shared_ptr to object from which to start 
-     * @param path = sting of StructualFeature; MUST NOT be empty; e.g: books@9/authors@1/Name would first navigate to the 9th object of the "books" StrukturalFeature which must be a container. Then to the 1st object of the "authors" container that is in the previously selected book. And finaly navigate to the name of the auhor
+     * @param path = deque containg names of StructualFeature as strings; If empty returns start_object
      */
-    const std::shared_ptr<EStructuralFeature>& navigateToStructuralFeature(const std::shared_ptr<EObject>& start_object, std::string path); 
+    const std::shared_ptr<EObject>& navigateToObject(const std::shared_ptr<Model>& model, std::deque<std::string> path); 
 
     /**
      * splits the string s at every occurence of split_char and writes every segment into the buffer
@@ -103,11 +110,11 @@ private:
      * @param s : string that is supposed to be split
      * @param split_char : char denoting the boundery between to segments 
     */
-    void split_string(const std::shared_ptr<std::deque<std::string>>& buffer, std::string s, char split_char);
+    void split_string(const std::deque<std::string>& buffer, std::string s, char split_char);
     
     std::shared_ptr<PluginFramework> m_pluginFramework;
 
     std::map<std::string,std::shared_ptr<Model>> m_models{}; //map of all root-artifacts 
 	std::map<std::string,std::shared_ptr<MDE4CPPPlugin>> m_plugins{}; //map of all plugins currently detected
-    
+
 };
