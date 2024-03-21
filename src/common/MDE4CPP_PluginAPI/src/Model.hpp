@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include "ecore/EObject.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include <map>
 #include <deque>
 #include "helpersFunc.hpp"
@@ -38,15 +39,22 @@ class Model{
          * navigate to the EObject specified in the path and returns a shared_ptr to it; starts at m_rootObject 
          * @param path = deque containg names of StructualFeature as strings; If empty returns start_object
         */
-        const std::shared_ptr<EObject>& navigateToObject(std::deque<std::string> path); 
+        const std::shared_ptr<EObject>& navigateToObject(std::deque<std::string>& path); 
 
         void renameModel(std::string new_name);
         std::string getModelName();
 
     private : 
+        /**
+         * helper function to get the Value of the StructuralFeature with a specific name from an object
+         * @param obj :  pinter to an EObject
+         * @param sFeatureName : name of StructuralFeature that should be retrieved as a string
+         * @return : shared_ptr to Value of StructFeature; OR nullptr if no StructFeature with the given name exists in the object -> throws runtime_exeption
+         */
+        std::shared_ptr<Any> getValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureName);
+
         std::shared_ptr<EObject> m_rootObject; //pointer to the root object
-        std::map<std::string, std::shared_ptr<EObject>> m_aliases; //allows to access certain object directly via their aliases; aliases have to be assigned by the user
-        //TODO change shared_ptr to weak_ptr as to not hinder deletion
+        std::map<std::string, std::weak_ptr<EObject>> m_aliases; //allows to access certain object directly via their aliases; aliases have to be assigned by the user
         std::string m_modelName;
 
 };
