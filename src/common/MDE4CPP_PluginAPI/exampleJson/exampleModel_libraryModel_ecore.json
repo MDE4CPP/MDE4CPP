@@ -34,13 +34,13 @@
 		{
 			"ObjectClass" : "libraryModel_ecore::Book",
 			"Name" : "Metro 2034",
-			"authors" : ["authors@1"],
+			"authors" : ["#authors@1"],
 			"pictures" : []
 		},
 		{
 			"ObjectClass" : "libraryModel_ecore::Book",
 			"Name" : "Artemis",
-			"authors" : ["authors@3"],
+			"authors" : ["#authors@3"],
 			"pictures" : []
 		},
 		{
@@ -52,13 +52,13 @@
 		{
 			"ObjectClass" : "libraryModel_ecore::Book",
 			"Name" : "Der letzte Wunsch",
-			"authors" : ["authors@0"],
+			"authors" : ["#authors@0"],
 			"pictures" : []
 		},
 		{
 			"ObjectClass" : "libraryModel_ecore::Book",
-			"Name" : "Dune der Wüstenplanet",
-			"authors" : ["authors@2"],
+			"Name" : "Dune, der Wüstenplanet",
+			"authors" : ["#authors@2"],
 			"pictures" : [
 				{
 					"ObjectClass" : "libraryModel_ecore::Picture",

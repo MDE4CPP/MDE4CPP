@@ -32,7 +32,9 @@ std::shared_ptr<EObject> ModelInstance::lookUpAlias(std::string alias){
     } 
 }
 
-const std::shared_ptr<EObject>& ModelInstance::navigateToObject(std::deque<std::string>& path){
+
+
+const std::shared_ptr<EObject>& ModelInstance::getObjectAtPath(std::deque<std::string>& path){
     std::shared_ptr<EObject> current_object = this->m_rootObject;
     
     while(!path.empty()){

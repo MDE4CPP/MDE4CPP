@@ -25,7 +25,7 @@ class ModelInstance{
          *      -will throw a runtime error if alias already exists
          * @param obj : value of the map; shared pointer to the object
         */
-        void setAlias(std::string alias, std::shared_ptr<EObject> obj); //TODO should fail if alias is already in the map
+        void setAlias(std::string alias, std::shared_ptr<EObject> obj); 
 
         /**
          * allows to retrieve a pointer to the object associated with an aliases
@@ -36,10 +36,23 @@ class ModelInstance{
 
         
         /**
-         * navigate to the EObject specified in the path and returns a shared_ptr to it; starts at m_rootObject 
-         * @param path = deque containg names of StructualFeature as strings; If empty returns start_object
+         * navigates through modelInstance starting from m_rootObject along specified path the an target EObject and return shared pointer to it.
+         * mainly used for resolving references
+         * @param path = deque containg names of StructualFeature as strings; If empty returns m_rootObject
+         *  elements must be in the form:   - "#StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "#authors@9")
+         *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
+         *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
         */
-        const std::shared_ptr<EObject>& navigateToObject(std::deque<std::string>& path); 
+        const std::shared_ptr<EObject>& getObjectAtPath(std::deque<std::string>& path); 
+
+        /**
+         * navigate to the EObject specified in the path and returns a shared_ptr to it; starts at m_rootObject 
+         * @param path = deque containg names of StructualFeature as strings; If empty returns m_rootObject
+         *  elements must be in the form:   - "#StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "#authors@9")
+         *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
+         *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
+        */
+        std::shared_ptr<Any> getValueOfStructFeatureAtPath(std::deque<std::string>& path);
 
         void renameModelInstance(std::string new_name);
         std::string getModelInstanceName();
