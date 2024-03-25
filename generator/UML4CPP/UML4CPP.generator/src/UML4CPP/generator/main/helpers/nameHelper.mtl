@@ -51,6 +51,7 @@
 [query private myDependencyName(anElement : NamedElement) : String = if (oclIsKindOf(Dependency)) then 'Dependency_'.concat(oclAsType(Dependency).client->asOrderedSet()->first().myQualifiedName()).concat('_').concat(oclAsType(Dependency).supplier->asOrderedSet()->first().myQualifiedName()) else myGeneralName() endif /]
 [query private myGeneralName(anElement : NamedElement) : String = if (oclIsUndefined()) then ('Undefined Element found: ' + anElement.toString()) else if (anElement.qualifiedName.oclIsUndefined() or anElement.qualifiedName='' ) then owner.myOwnerName().concat('_').concat(anElement.eClass().name).concat(anElement.owner.allOwnedElements()->asOrderedSet()->indexOf(anElement).toString()) else anElement.qualifiedName endif endif /]
 [query public myQualifiedName (aConnectorEnd : ConnectorEnd) : String = if oclIsUndefined() then ('Undefined Element found: ' + aConnectorEnd.toString()) else (aConnectorEnd.owner.oclAsType(NamedElement).qualifiedName.concat('_ConnectorEnd_').concat(aConnectorEnd.definingEnd.memberName())).sanitize() endif /]
+[query public myQualifiedName(aLinkEndData : LinkEndData) : String = if oclIsUndefined() then ('Undefined Element found: ' + aLinkEndData.toString()) else (aLinkEndData.owner.oclAsType(NamedElement).qualifiedName.concat('_' + aLinkEndData.eClass().name + '_').concat(aLinkEndData.end.memberName())).sanitize() endif /]
 
 
 [query public getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner.oclAsType(Package) else null endif /]
@@ -376,6 +377,8 @@ endif
 */]
 [query public memberName(anElement : NamedElement) : String = anElement.myQualifiedName().sanitize().substituteAll('.', '_').toLowerFirst()/]
 [query public memberName(aConnectorEnd : ConnectorEnd) : String = aConnectorEnd.myQualifiedName().sanitize().substituteAll('.', '_').toLowerFirst()/]
+[query public memberName(aLinkEndData : LinkEndData) : String = aLinkEndData.myQualifiedName().sanitize().substituteAll('.', '_'.toLowerFirst()) /]
+
 
 [**
  * Generate name for metamodel element in package (for NamedElement::name)

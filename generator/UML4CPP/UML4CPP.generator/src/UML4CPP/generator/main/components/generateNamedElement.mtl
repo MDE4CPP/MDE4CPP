@@ -32,6 +32,8 @@
 virtual const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.oclAsType(NamedElement).generatePackageGetterCall(anElement.oclAsType(NamedElement))/][abstractSuffix(impl)/];  
 [elseif (anElement.oclIsTypeOf(ConnectorEnd))]
 virtual const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/][abstractSuffix(impl)/];
+[elseif (anElement.oclIsKindOf(LinkEndData))]
+virtual const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.oclAsType(LinkEndData).generatePackageGetterCall(anElement.oclAsType(LinkEndData))/][abstractSuffix(impl)/];
 [else]
 [printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]
@@ -84,6 +86,8 @@ const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.getNearestPac
 std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(NamedElement).memberName()/] = nullptr;
 [elseif (anElement.oclIsTypeOf(ConnectorEnd))]
 std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(ConnectorEnd).memberName()/] = nullptr;
+[elseif (anElement.oclIsKindOf(LinkEndData))]
+std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(LinkEndData).memberName()/] = nullptr;
 [else]
 [printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]

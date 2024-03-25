@@ -43,7 +43,7 @@
 [/template]
 
 [**
- * generate elements for AddStructuralFeatureValueAction
+ * generate elements for AcceptEventAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AcceptEventAction))]
 [let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
@@ -103,6 +103,20 @@
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ClearStructuralFeatureAction([action.memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
+[/let]
+[/template]
+
+[**
+ * generate elements for CreateLinkAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CreateLinkAction))]
+[let action : CreateLinkAction = self.oclAsType(CreateLinkAction)]
+[for (inputValue : InputPin | action.input)]
+	[inputValue.memberName()/] = factory->create[inputValue.eClass().name/]_as_inputValue_in_LinkAction([action.memberName()/]);
+[/for]
+[for (linkEndCreationData : LinkEndData | action.endData)]
+	[linkEndCreationData.memberName()/] = factory->create[linkEndCreationData.eClass().name/]_as_endData_in_LinkAction([action.memberName()/]);
+[/for]
 [/let]
 [/template]
 
@@ -337,6 +351,21 @@
 	[action.memberName()/]->setStructuralFeature([action.structuralFeature.generatePackageGetterCall()/]);
 [/let]
 [/template]
+
+[**
+ * generate initialization of meta model instance for an CreateLinkAction element
+ * 
+ * this includes:
+ * - initialize pins
+ * - initialize endData
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CreateLinkAction))]
+[let action : CreateLinkAction = self.oclAsType(CreateLinkAction)]
+[action.inputValue.initializePin()/]
+[action.endData.initializeLinkEndData()/]
+[/let]
+[/template]
+
 [**
  * generate initialization of meta model instance for an CreateObjectAction element
  * 
@@ -525,4 +554,37 @@
 [pin.memberName()/]->setUpper([pin.upper/]);
 [pin.generateStereotypeApplication()/]
 
+[/template]
+
+[**
+ * generate initialization of meta model instance for a LinkEndData element
+ * 
+ * this includes:
+ * - set end
+ * - set value
+ *	if kind of LinkEndCreationData:
+ *	- insertAt
+ *	- isReplaceAll
+ * 	if kind of LinkEndDestructionData:
+ *	- destroyAt
+ *	- isDestroyDuplicates
+*/]
+[template private initializeLinkEndData(aLinkEndData : LinkEndData) post(trim())]
+[aLinkEndData.memberName()/]->setEnd([aLinkEndData.end.memberName()/]);
+[aLinkEndData.memberName()/]->setValue([aLinkEndData.value.memberName()/]);
+[if (aLinkEndData.oclIsTypeOf(LinkEndCreationData))]
+[let aLinkEndCreationData : LinkEndCreationData = aLinkEndData.oclAsType(LinkEndCreationData)]
+[aLinkEndCreationData.memberName()/]->setIsReplaceAll([aLinkEndCreationData.isReplaceAll/]);
+[if (not aLinkEndCreationData.insertAt.oclIsUndefined())]
+[aLinkEndCreationData.memberName()/]->setInsertAt([aLinkEndCreationData.insertAt.memberName()/]);
+[/if]
+[/let]
+[elseif (aLinkEndData.oclIsTypeOf(LinkEndDestructionData))]
+[let aLinkEndDestructionData : LinkEndDestructionData = aLinkEndData.oclAsType(LinkEndDestructionData)]
+[aLinkEndDestructionData.memberName()/]->setIsDestroyDuplicates([aLinkEndDestructionData.isDestroyDuplicates/]);
+[if (not aLinkEndDestructionData.destroyAt.oclIsUndefined())]
+[aLinkEndDestructionData.memberName()/]->setDestroyAt([aLinkEndDestructionData.destroyAt.memberName()/]);
+[/if]
+[/let]
+[/if]
 [/template]

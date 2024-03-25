@@ -73,6 +73,7 @@ namespace [subPackage.generateNamespace(false)/]
 			//getter for the ownedMember
 			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)->reject(oclIsKindOf(ValueSpecification)))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(LinkEndData))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 
 			//getter for subPackages
 			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]

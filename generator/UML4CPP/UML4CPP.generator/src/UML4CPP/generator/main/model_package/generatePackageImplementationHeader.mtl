@@ -65,6 +65,7 @@ namespace [subPackage.generateNamespace(false)/]
 			//getter for the ownedMember
 			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)->reject(oclIsKindOf(ValueSpecification)))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(LinkEndData))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
 
 			//getter for subPackages
 			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
@@ -75,6 +76,7 @@ namespace [subPackage.generateNamespace(false)/]
 			//private variables for ownedMember of the metamodel package
 			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName()).generatePackageMember()/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.getElementsBelongingToPackage()->filter(LinkEndData))->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName()).generatePackageMember()/]
 
 			static [aPackage.name.concat('Package')/]* create();
 			static bool isInited;
