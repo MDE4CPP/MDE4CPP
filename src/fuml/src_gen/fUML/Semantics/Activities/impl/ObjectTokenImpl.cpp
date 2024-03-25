@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -211,7 +211,7 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@3e17a0a1 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@7173ae5b (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}
@@ -273,7 +273,7 @@ std::shared_ptr<Any> ObjectTokenImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return eAny(getValue(),ecore::ecorePackage::EJAVAOBJECT_CLASS,false); //842
+			return eAny(getValue(),ecore::ecorePackage::EJAVAOBJECT_CLASS,false); //862
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -283,7 +283,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //842
+			return getValue() != nullptr; //862
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
@@ -297,7 +297,7 @@ bool ObjectTokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 			try
 			{
 				std::shared_ptr<Any> _value = newValue->get<std::shared_ptr<Any>>();
-				setValue(_value); //842
+				setValue(_value); //862
 			}
 			catch(...)
 			{

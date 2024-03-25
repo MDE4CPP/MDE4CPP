@@ -40,9 +40,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -51,9 +52,11 @@
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "uml/Property.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -109,6 +112,7 @@ FUML_ObjectImpl& FUML_ObjectImpl::operator=(const FUML_ObjectImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_links  = obj.getLinks();
 	m_locus  = obj.getLocus();
 	//Clone references with containment (deep copy)
 	//clone reference 'objectActivation'
@@ -131,6 +135,14 @@ void FUML_ObjectImpl::_register(const std::shared_ptr<fUML::Semantics::CommonBeh
     {
         this->getObjectActivation()->_register(accepter);
     }
+	//end of body
+}
+
+void FUML_ObjectImpl::addTo(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link, const std::shared_ptr<uml::Property>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	link->add(this->getThisFUML_ObjectPtr(), end);
 	//end of body
 }
 
@@ -240,6 +252,18 @@ void FUML_ObjectImpl::unregister(const std::shared_ptr<fUML::Semantics::CommonBe
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference links */
+const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& FUML_ObjectImpl::getLinks() const
+{
+	if(m_links == nullptr)
+	{
+		m_links.reset(new Bag<fUML::MDE4CPP_Extensions::FUML_Link>());
+		
+		
+	}
+    return m_links;
+}
+
 /* Getter & Setter for reference locus */
 const std::shared_ptr<fUML::Semantics::Loci::Locus>& FUML_ObjectImpl::getLocus() const
 {
@@ -299,6 +323,13 @@ void FUML_ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	{
 		std::map<std::string, std::string>::const_iterator iter;
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("links");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("links")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("locus");
 		if ( iter != attr_list.end() )
 		{
@@ -358,6 +389,20 @@ void FUML_ObjectImpl::resolveReferences(const int featureID, std::vector<std::sh
 {
 	switch(featureID)
 	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LINKS:
+		{
+			const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& _links = getLinks();
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
+			{
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>  _r = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Link>(ref);
+				if (_r != nullptr)
+				{
+					_links->push_back(_r);
+				}
+			}
+			return;
+		}
+
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
@@ -390,6 +435,10 @@ void FUML_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> package = fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getFUML_Object_Attribute_links()) )
+	{
+		saveHandler->addReferences<fUML::MDE4CPP_Extensions::FUML_Link>("links", this->getLinks());
+	}
 	if ( this->eIsSet(package->getFUML_Object_Attribute_locus()) )
 	{
 		saveHandler->addReference(this->getLocus(), "locus", getLocus()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class()); 
@@ -422,10 +471,12 @@ std::shared_ptr<Any> FUML_ObjectImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LINKS:
+			return eEcoreContainerAny(getLinks(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINK_CLASS); //566
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
-			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //544
+			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //564
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(getObjectActivation(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //545
+			return eAny(getObjectActivation(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //565
 	}
 	return uml::ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -434,10 +485,12 @@ bool FUML_ObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LINKS:
+			return getLinks() != nullptr; //566
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
-			return getLocus() != nullptr; //544
+			return getLocus() != nullptr; //564
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return getObjectActivation() != nullptr; //545
+			return getObjectActivation() != nullptr; //565
 	}
 	return uml::ElementImpl::internalEIsSet(featureID);
 }
@@ -446,6 +499,51 @@ bool FUML_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LINKS:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& _links = getLinks();
+	
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
+						{
+							std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> valueToAdd = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Link>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(!(_links->includes(valueToAdd)))
+								{
+									_links->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'links'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'links'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
@@ -457,7 +555,7 @@ bool FUML_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(eObject);
 					if(_locus)
 					{
-						setLocus(_locus); //544
+						setLocus(_locus); //564
 					}
 					else
 					{
@@ -488,7 +586,7 @@ bool FUML_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(eObject);
 					if(_objectActivation)
 					{
-						setObjectActivation(_objectActivation); //545
+						setObjectActivation(_objectActivation); //565
 					}
 					else
 					{
@@ -552,6 +650,64 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			}
 		
 			this->_register(incoming_param_accepter);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::addTo(fUML::MDE4CPP_Extensions::FUML_Link, uml::Property): 3737882179
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_ADDTO_FUML_LINK_PROPERTY:
+		{
+			//Retrieve input parameter 'link'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> incoming_param_link;
+			Bag<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_link_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_link = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Link>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'addTo'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'addTo'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'addTo'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'addTo'!")
+					return nullptr;
+				}
+			}
+		
+			this->addTo(incoming_param_link,incoming_param_end);
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::destroy(): 4089641697

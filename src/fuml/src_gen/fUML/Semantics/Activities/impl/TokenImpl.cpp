@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -336,10 +336,10 @@ std::shared_ptr<Any> TokenImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getHolder().lock();
-			return eEcoreAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //1160
+			return eEcoreAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //1180
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return eAny(isWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1161
+			return eAny(isWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1181
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -349,9 +349,9 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return getHolder().lock() != nullptr; //1160
+			return getHolder().lock() != nullptr; //1180
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return isWithdrawn() != true; //1161
+			return isWithdrawn() != true; //1181
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -371,7 +371,7 @@ bool TokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(eObject);
 					if(_holder)
 					{
-						setHolder(_holder); //1160
+						setHolder(_holder); //1180
 					}
 					else
 					{
@@ -396,7 +396,7 @@ bool TokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 			try
 			{
 				bool _withdrawn = newValue->get<bool>();
-				setWithdrawn(_withdrawn); //1161
+				setWithdrawn(_withdrawn); //1181
 			}
 			catch(...)
 			{

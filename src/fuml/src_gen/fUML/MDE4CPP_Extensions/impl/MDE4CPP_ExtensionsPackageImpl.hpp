@@ -18,6 +18,8 @@
 
 namespace fUML::MDE4CPP_Extensions 
 {
+	class FUML_Link;
+	class FUML_LinkEnd;
 	class FUML_Object;
 	class FUML_SignalInstance;}
 
@@ -40,15 +42,41 @@ namespace fUML::MDE4CPP_Extensions
 		public:
 			virtual ~MDE4CPP_ExtensionsPackageImpl();
 
+			// Begin Class FUML_Link
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getFUML_Link_Class() const ;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_Link_Attribute_linkEnds() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_Link_Attribute_type() const ;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_add_FUML_Object_Property() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_destroy() const ;
+			
+			// End Class FUML_Link
+
+			// Begin Class FUML_LinkEnd
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getFUML_LinkEnd_Class() const ;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_LinkEnd_Attribute_end() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_LinkEnd_Attribute_endValue() const ;
+			
+			
+			// End Class FUML_LinkEnd
+
 			// Begin Class FUML_Object
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getFUML_Object_Class() const ;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_links() const ;
 			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_locus() const ;
 			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_objectActivation() const ;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation__register_EventAccepter() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_addTo_FUML_Link_Property() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_getTypes() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject() const ;
@@ -76,11 +104,11 @@ namespace fUML::MDE4CPP_Extensions
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_fUML_Object_Class = nullptr;std::shared_ptr<ecore::EClass> m_fUML_SignalInstance_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_fUML_Link_Class = nullptr;std::shared_ptr<ecore::EClass> m_fUML_LinkEnd_Class = nullptr;std::shared_ptr<ecore::EClass> m_fUML_Object_Class = nullptr;std::shared_ptr<ecore::EClass> m_fUML_SignalInstance_Class = nullptr;
 			
 			
-			std::shared_ptr<ecore::EReference> m_fUML_Object_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_fUML_Object_Attribute_objectActivation = nullptr;
-			std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation__register_EventAccepter = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_SignalInstance_Operation_getType = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOperation_EString_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_send_EventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_startBehavior_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_unregister_EventAccepter = nullptr;
+			std::shared_ptr<ecore::EReference> m_fUML_LinkEnd_Attribute_end = nullptr;std::shared_ptr<ecore::EReference> m_fUML_LinkEnd_Attribute_endValue = nullptr;std::shared_ptr<ecore::EReference> m_fUML_Link_Attribute_linkEnds = nullptr;std::shared_ptr<ecore::EReference> m_fUML_Object_Attribute_links = nullptr;std::shared_ptr<ecore::EReference> m_fUML_Object_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_fUML_Object_Attribute_objectActivation = nullptr;std::shared_ptr<ecore::EReference> m_fUML_Link_Attribute_type = nullptr;
+			std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation__register_EventAccepter = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Link_Operation_add_FUML_Object_Property = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_addTo_FUML_Link_Property = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Link_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_SignalInstance_Operation_getType = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOperation_EString_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_send_EventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_startBehavior_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_unregister_EventAccepter = nullptr;
 
 			friend class MDE4CPP_ExtensionsPackage;
 
@@ -96,10 +124,14 @@ namespace fUML::MDE4CPP_Extensions
 			void initializePackageContents();
 
 		private:
+			void createFUML_LinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createFUML_LinkEndContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createFUML_ObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createFUML_SignalInstanceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
+			void initializeFUML_LinkContent();
+			void initializeFUML_LinkEndContent();
 			void initializeFUML_ObjectContent();
 			void initializeFUML_SignalInstanceContent();
 			void initializePackageEDataTypes();

@@ -44,6 +44,7 @@ namespace fUML::MDE4CPP_Extensions
 			// Operations
 			//*********************************
 			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
+			virtual void addTo(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link, const std::shared_ptr<uml::Property>& end) ;
 			virtual void destroy() ;
 			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const ;
 			virtual std::shared_ptr<Any> invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) ;
@@ -61,6 +62,7 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& getLinks() const ;
 			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const ;
 			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) ;
 			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const ;

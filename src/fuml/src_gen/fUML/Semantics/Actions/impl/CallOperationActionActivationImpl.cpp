@@ -55,8 +55,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
@@ -75,8 +75,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -155,7 +155,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
+		const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
 	if(action != nullptr)
 	{
 		const std::shared_ptr<uml::Operation>& operation = action->getOperation();
@@ -233,13 +233,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 							if(elements->size() > 0)
 							{
 								context = elements->front();
-								/*DEBUG_INFO
-								(
-									if (context != nullptr)
-									{
-										std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
-									} //getTypes currently not supported
-								)*/
 							}
 						}
 						catch(...)
@@ -253,14 +246,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 						{
 							std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(attributeValue);
 							context = umlAny->getAsElement();
-
-							/*DEBUG_INFO
-							(
-								if (context != nullptr)
-								{
-									std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
-								}//getTypes currently not supported
-							)*/
 						}
 						catch(...)
 						{

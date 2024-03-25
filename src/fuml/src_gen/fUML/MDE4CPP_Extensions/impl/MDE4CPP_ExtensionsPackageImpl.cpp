@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
 
 //metamodel factory
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
@@ -74,6 +74,52 @@ void MDE4CPP_ExtensionsPackageImpl::init(std::shared_ptr<ecore::EPackage> packag
 
 
 
+// Begin Class FUML_Link
+const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Class() const
+{
+	return m_fUML_Link_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Attribute_linkEnds() const
+{
+	return m_fUML_Link_Attribute_linkEnds;
+}
+const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Attribute_type() const
+{
+	return m_fUML_Link_Attribute_type;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_add_FUML_Object_Property() const
+{
+	return m_fUML_Link_Operation_add_FUML_Object_Property;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_destroy() const
+{
+	return m_fUML_Link_Operation_destroy;
+}
+
+// End Class FUML_Link
+
+// Begin Class FUML_LinkEnd
+const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_LinkEnd_Class() const
+{
+	return m_fUML_LinkEnd_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_LinkEnd_Attribute_end() const
+{
+	return m_fUML_LinkEnd_Attribute_end;
+}
+const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_LinkEnd_Attribute_endValue() const
+{
+	return m_fUML_LinkEnd_Attribute_endValue;
+}
+
+
+// End Class FUML_LinkEnd
+
 // Begin Class FUML_Object
 const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Class() const
 {
@@ -81,6 +127,10 @@ const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_Extensio
 }
 
 
+const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Attribute_links() const
+{
+	return m_fUML_Object_Attribute_links;
+}
 const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Attribute_locus() const
 {
 	return m_fUML_Object_Attribute_locus;
@@ -93,6 +143,10 @@ const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation__register_EventAccepter() const
 {
 	return m_fUML_Object_Operation__register_EventAccepter;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_addTo_FUML_Link_Property() const
+{
+	return m_fUML_Object_Operation_addTo_FUML_Link_Property;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_destroy() const
 {

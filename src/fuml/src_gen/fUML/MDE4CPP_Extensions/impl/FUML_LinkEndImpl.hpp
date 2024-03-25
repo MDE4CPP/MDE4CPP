@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCEFUML_SIGNALINSTANCEIMPL_HPP
-#define FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCEFUML_SIGNALINSTANCEIMPL_HPP
+#ifndef FUML_MDE4CPP_EXTENSIONS_FUML_LINKENDFUML_LINKENDIMPL_HPP
+#define FUML_MDE4CPP_EXTENSIONS_FUML_LINKENDFUML_LINKENDIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,36 +14,37 @@
 #include "fUML/fUML.hpp" 
 
 // model includes
-#include "../FUML_SignalInstance.hpp"
+#include "../FUML_LinkEnd.hpp"
 
 #include "fUML/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
-#include "uml/impl/ElementImpl.hpp"
+
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::MDE4CPP_Extensions 
 {
-	class FUML_API FUML_SignalInstanceImpl : virtual public uml::ElementImpl, virtual public FUML_SignalInstance 
+	class FUML_API FUML_LinkEndImpl : virtual public ecore::EModelElementImpl,
+virtual public FUML_LinkEnd 
 	{
 		public: 
-			FUML_SignalInstanceImpl(const FUML_SignalInstanceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
-			FUML_SignalInstanceImpl& operator=(FUML_SignalInstanceImpl const&); 
+			FUML_LinkEndImpl(const FUML_LinkEndImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			FUML_LinkEndImpl& operator=(FUML_LinkEndImpl const&); 
 
 		protected:
 			friend class fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactoryImpl;
-			FUML_SignalInstanceImpl();
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> getThisFUML_SignalInstancePtr() const;
-			virtual void setThisFUML_SignalInstancePtr(std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> thisFUML_SignalInstancePtr);
+			FUML_LinkEndImpl();
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> getThisFUML_LinkEndPtr() const;
+			virtual void setThisFUML_LinkEndPtr(std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> thisFUML_LinkEndPtr);
 
 
 		public:
 			//destructor
-			virtual ~FUML_SignalInstanceImpl() = 0;
+			virtual ~FUML_LinkEndImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual const std::shared_ptr<uml::Signal>& getType() const ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -52,6 +53,10 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::Property>& getEnd() const ;
+			virtual void setEnd(const std::shared_ptr<uml::Property>&) ;
+			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getEndValue() const ;
+			virtual void setEndValue(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -88,7 +93,7 @@ namespace fUML::MDE4CPP_Extensions
 			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
-			std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> m_thisFUML_SignalInstancePtr;
+			std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> m_thisFUML_LinkEndPtr;
 	};
 }
-#endif /* end of include guard: FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCEFUML_SIGNALINSTANCEIMPL_HPP */
+#endif /* end of include guard: FUML_MDE4CPP_EXTENSIONS_FUML_LINKENDFUML_LINKENDIMPL_HPP */

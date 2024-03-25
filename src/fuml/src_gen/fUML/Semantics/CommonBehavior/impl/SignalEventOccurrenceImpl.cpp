@@ -44,8 +44,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Element.hpp"
 #include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
@@ -53,8 +53,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -311,7 +311,7 @@ std::shared_ptr<Any> SignalEventOccurrenceImpl::eGet(int featureID, bool resolve
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return eAny(getSignalInstance(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_CLASS,false); //1071
+			return eAny(getSignalInstance(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_CLASS,false); //1091
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -321,7 +321,7 @@ bool SignalEventOccurrenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return getSignalInstance() != nullptr; //1071
+			return getSignalInstance() != nullptr; //1091
 	}
 	return EventOccurrenceImpl::internalEIsSet(featureID);
 }
@@ -341,7 +341,7 @@ bool SignalEventOccurrenceImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_SignalInstance>(eObject);
 					if(_signalInstance)
 					{
-						setSignalInstance(_signalInstance); //1071
+						setSignalInstance(_signalInstance); //1091
 					}
 					else
 					{

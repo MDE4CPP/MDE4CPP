@@ -51,9 +51,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -65,8 +65,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -144,7 +144,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& action = this->getRemoveStructuralFeatureValueAction();
+		const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& action = this->getRemoveStructuralFeatureValueAction();
 	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
@@ -155,21 +155,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 
 	bool isRemoveDuplicates = action->getIsRemoveDuplicates();
 
-	std::shared_ptr<Any> objectValue = nullptr;
-	
-	/* MDE4CPP specific implementation for handling "self"-Pin */
-	std::string objectPinName = action->getObject()->getName();
-	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
-		//objectValue is set to the context of the current activity execution
-		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
-			
-		objectValue = eUMLAny(context, context->getMetaElementID());
-	}
-	else{
-		objectValue = this->takeTokens(action->getObject())->at(0);
-	}
-	/*--------------------------------------------------------*/
-
+	std::shared_ptr<Any> objectValue = this->takeTokens(action->getObject())->at(0);
 	std::shared_ptr<Any> inputValue = takeTokens(action->getValue())->at(0);
 
 	int removeAt = -1;
@@ -190,7 +176,6 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	try
 	{
 		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(objectValue);
-
 		std::shared_ptr<uml::Element> structuredValue = umlAny->getAsElement();
 
 		if(structuredValue)
@@ -398,7 +383,7 @@ std::shared_ptr<Any> RemoveStructuralFeatureValueActionActivationImpl::eGet(int 
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return eAny(getRemoveStructuralFeatureValueAction(),uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //10111
+			return eAny(getRemoveStructuralFeatureValueAction(),uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //10311
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,7 +393,7 @@ bool RemoveStructuralFeatureValueActionActivationImpl::internalEIsSet(int featur
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return getRemoveStructuralFeatureValueAction() != nullptr; //10111
+			return getRemoveStructuralFeatureValueAction() != nullptr; //10311
 	}
 	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
@@ -428,7 +413,7 @@ bool RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID,  cons
 					std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(eObject);
 					if(_removeStructuralFeatureValueAction)
 					{
-						setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10111
+						setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10311
 					}
 					else
 					{

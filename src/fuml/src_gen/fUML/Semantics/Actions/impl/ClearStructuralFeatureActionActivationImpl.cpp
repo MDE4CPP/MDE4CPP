@@ -46,8 +46,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -139,7 +139,7 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	const std::shared_ptr<uml::ClearStructuralFeatureAction>& action = this->getClearStructuralFeatureAction();
+		const std::shared_ptr<uml::ClearStructuralFeatureAction>& action = this->getClearStructuralFeatureAction();
 	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
@@ -148,28 +148,12 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 		return;
 	}
 
-	std::shared_ptr<Any> objectValue = nullptr;
-	
-	/* MDE4CPP specific implementation for handling "self"-Pin */
-	std::string objectPinName = action->getObject()->getName();
-	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
-		//objectValue is set to the context of the current activity execution
-		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
-			
-		objectValue = eUMLAny(context, context->getMetaElementID());
-	}
-	else{
-		objectValue = this->takeTokens(action->getObject())->at(0);
-	}
-	/*--------------------------------------------------------*/
-
-	std::shared_ptr<uml::Element> structuredValue = nullptr;
+	std::shared_ptr<Any> objectValue = this->takeTokens(action->getObject())->at(0);
 
 	try
 	{
 		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(objectValue);
-
-		structuredValue = umlAny->getAsElement();
+		std::shared_ptr<uml::Element> structuredValue = umlAny->getAsElement();
 
 		if (structuredValue)
 		{

@@ -51,9 +51,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -65,8 +65,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -144,7 +144,7 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	const std::shared_ptr<uml::ReadStructuralFeatureAction>& action = this->getReadStructuralFeatureAction();
+		const std::shared_ptr<uml::ReadStructuralFeatureAction>& action = this->getReadStructuralFeatureAction();
 	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
@@ -153,28 +153,12 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 		return;
 	}
 
-	std::shared_ptr<Any> value = nullptr;
-	
-	/* MDE4CPP specific implementation for handling "self"-Pin */
-	std::string objectPinName = action->getObject()->getName();
-	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
-		//value is set to the context of the current activity execution
-		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
-	
-		value = eUMLAny(context, context->getMetaElementID());
-	}
-	else{
-		value = this->takeTokens(action->getObject())->at(0);
-	}
-	/*--------------------------------------------------------*/
-
-	std::shared_ptr<uml::Element> structuredValue = nullptr;
+	std::shared_ptr<Any> value = this->takeTokens(action->getObject())->at(0);
 
 	try
 	{
 		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-
-		structuredValue = umlAny->getAsElement();
+		std::shared_ptr<uml::Element> structuredValue = umlAny->getAsElement();
 
 		if (structuredValue)
 		{
@@ -184,9 +168,7 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 		else
 			
 		{
-	
 			DEBUG_ERROR("Context is nullptr! Failed to read feature!")
-			
 		}
 	}
 	catch(...)
@@ -378,7 +360,7 @@ std::shared_ptr<Any> ReadStructuralFeatureActionActivationImpl::eGet(int feature
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return eAny(getReadStructuralFeatureAction(),uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9511
+			return eAny(getReadStructuralFeatureAction(),uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9711
 	}
 	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -388,7 +370,7 @@ bool ReadStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) co
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return getReadStructuralFeatureAction() != nullptr; //9511
+			return getReadStructuralFeatureAction() != nullptr; //9711
 	}
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
@@ -408,7 +390,7 @@ bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID,  const std::
 					std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(eObject);
 					if(_readStructuralFeatureAction)
 					{
-						setReadStructuralFeatureAction(_readStructuralFeatureAction); //9511
+						setReadStructuralFeatureAction(_readStructuralFeatureAction); //9711
 					}
 					else
 					{

@@ -49,9 +49,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -66,8 +66,8 @@
 #include "uml/StructuredActivityNode.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -598,9 +598,9 @@ std::shared_ptr<Any> StructuredActivityNodeActivationImpl::eGet(int featureID, b
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(getActivationGroup(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //11311
+			return eAny(getActivationGroup(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //11511
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE:
-			return eAny(getStructuredActivityNode(),uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //11312
+			return eAny(getStructuredActivityNode(),uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //11512
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -610,9 +610,9 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return getActivationGroup() != nullptr; //11311
+			return getActivationGroup() != nullptr; //11511
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE:
-			return getStructuredActivityNode() != nullptr; //11312
+			return getStructuredActivityNode() != nullptr; //11512
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -632,7 +632,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID,  const std::share
 					std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(eObject);
 					if(_activationGroup)
 					{
-						setActivationGroup(_activationGroup); //11311
+						setActivationGroup(_activationGroup); //11511
 					}
 					else
 					{
@@ -663,7 +663,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID,  const std::share
 					std::shared_ptr<uml::StructuredActivityNode> _structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(eObject);
 					if(_structuredActivityNode)
 					{
-						setStructuredActivityNode(_structuredActivityNode); //11312
+						setStructuredActivityNode(_structuredActivityNode); //11512
 					}
 					else
 					{

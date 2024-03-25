@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_ACTIVITIES_ACTIVITYEXECUTION_HPP
-#define FUML_SEMANTICS_ACTIVITIES_ACTIVITYEXECUTION_HPP
+#ifndef FUML_MDE4CPP_EXTENSIONS_FUML_LINKEND_HPP
+#define FUML_MDE4CPP_EXTENSIONS_FUML_LINKEND_HPP
 
 
 #include <memory>
@@ -32,69 +32,44 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ObjectActivation;
-	class ParameterValue;
-}
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 namespace fUML::MDE4CPP_Extensions 
 {
-	class FUML_Link;
-}
-namespace ecore 
-{
-	class EAnnotation;
+	class FUML_Object;
 }
 namespace uml 
 {
-	class Activity;
-	class Behavior;
-	class Classifier;
-	class Comment;
+	class Property;
 }
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
-// base class includes
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
 
 
+#include "ecore/EModelElement.hpp"
 
 
 //*********************************
-namespace fUML::Semantics::Activities 
+namespace fUML::MDE4CPP_Extensions 
 {
 	
-	class FUML_API ActivityExecution : virtual public fUML::Semantics::CommonBehavior::Execution
+	class FUML_API FUML_LinkEnd : virtual public ecore::EModelElement
 	{
 		public:
- 			ActivityExecution(const ActivityExecution &) {}
+ 			FUML_LinkEnd(const FUML_LinkEnd &) {}
 
 		protected:
-			ActivityExecution(){}
+			FUML_LinkEnd(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~ActivityExecution() {}
+			virtual ~FUML_LinkEnd() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Any> _copy() = 0;
-			virtual void execute() = 0;
-			virtual std::shared_ptr<Any> new_() = 0;
-			virtual void terminate() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -103,12 +78,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& getActivationGroup() const = 0;
-			virtual void setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>&) = 0;
-			virtual const std::shared_ptr<uml::Activity>& getActivity() const = 0;
-			virtual void setActivity(const std::shared_ptr<uml::Activity>&) = 0;
-			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
-			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
+			virtual const std::shared_ptr<uml::Property>& getEnd() const = 0;
+			virtual void setEnd(const std::shared_ptr<uml::Property>&) = 0;
+			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getEndValue() const = 0;
+			virtual void setEndValue(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -134,8 +107,8 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> m_activationGroup;
-			mutable std::shared_ptr<uml::Activity> m_activity;
+			std::shared_ptr<uml::Property> m_end;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> m_endValue;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_ACTIVITYEXECUTION_HPP */
+#endif /* end of include guard: FUML_MDE4CPP_EXTENSIONS_FUML_LINKEND_HPP */

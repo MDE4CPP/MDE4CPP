@@ -51,16 +51,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
@@ -68,8 +69,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -600,15 +601,15 @@ std::shared_ptr<Any> ExecutionImpl::eGet(int featureID, bool resolve, bool coreT
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //468
+			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //469
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return eAny(getContext(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //466
+			return eAny(getContext(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //467
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_LOCUS:
-			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //469
+			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //4610
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-			return eEcoreContainerAny(getParameterValues(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS); //467
+			return eEcoreContainerAny(getParameterValues(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS); //468
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_TYPES:
-			return eEcoreContainerAny(getTypes(),uml::umlPackage::CLASSIFIER_CLASS); //4610
+			return eEcoreContainerAny(getTypes(),uml::umlPackage::CLASSIFIER_CLASS); //4611
 	}
 	std::shared_ptr<Any> result;
 	result = fUML::MDE4CPP_Extensions::FUML_ObjectImpl::eGet(featureID, resolve, coreType);
@@ -625,15 +626,15 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //468
+			return getBehavior() != nullptr; //469
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return getContext() != nullptr; //466
+			return getContext() != nullptr; //467
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_LOCUS:
-			return getLocus() != nullptr; //469
+			return getLocus() != nullptr; //4610
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-			return getParameterValues() != nullptr; //467
+			return getParameterValues() != nullptr; //468
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_TYPES:
-			return getTypes() != nullptr; //4610
+			return getTypes() != nullptr; //4611
 	}
 	bool result = false;
 	result = fUML::MDE4CPP_Extensions::FUML_ObjectImpl::internalEIsSet(featureID);
@@ -660,7 +661,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(eObject);
 					if(_behavior)
 					{
-						setBehavior(_behavior); //468
+						setBehavior(_behavior); //469
 					}
 					else
 					{
@@ -691,7 +692,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(eObject);
 					if(_context)
 					{
-						setContext(_context); //466
+						setContext(_context); //467
 					}
 					else
 					{
@@ -722,7 +723,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(eObject);
 					if(_locus)
 					{
-						setLocus(_locus); //469
+						setLocus(_locus); //4610
 					}
 					else
 					{

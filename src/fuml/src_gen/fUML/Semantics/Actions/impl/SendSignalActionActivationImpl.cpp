@@ -52,8 +52,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -66,8 +66,8 @@
 #include "uml/SendSignalAction.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -401,7 +401,7 @@ std::shared_ptr<Any> SendSignalActionActivationImpl::eGet(int featureID, bool re
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION:
-			return eAny(getSendSignalAction(),uml::umlPackage::SENDSIGNALACTION_CLASS,false); //10611
+			return eAny(getSendSignalAction(),uml::umlPackage::SENDSIGNALACTION_CLASS,false); //10811
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -411,7 +411,7 @@ bool SendSignalActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION:
-			return getSendSignalAction() != nullptr; //10611
+			return getSendSignalAction() != nullptr; //10811
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
@@ -431,7 +431,7 @@ bool SendSignalActionActivationImpl::eSet(int featureID,  const std::shared_ptr<
 					std::shared_ptr<uml::SendSignalAction> _sendSignalAction = std::dynamic_pointer_cast<uml::SendSignalAction>(eObject);
 					if(_sendSignalAction)
 					{
-						setSendSignalAction(_sendSignalAction); //10611
+						setSendSignalAction(_sendSignalAction); //10811
 					}
 					else
 					{

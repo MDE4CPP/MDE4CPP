@@ -54,9 +54,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
@@ -64,8 +64,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -750,19 +750,19 @@ std::shared_ptr<Any> ObjectActivationImpl::eGet(int featureID, bool resolve, boo
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
-			return eEcoreContainerAny(getClassifierBehaviorExecutions(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS); //823
+			return eEcoreContainerAny(getClassifierBehaviorExecutions(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS); //843
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE:
-			return eAny(getConditionVariable(),-1,false); //824
+			return eAny(getConditionVariable(),-1,false); //844
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
-			return eEcoreContainerAny(getEventPool(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS); //821
+			return eEcoreContainerAny(getEventPool(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS); //841
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD:
-			return eAny(getMemberThread(),-1,false); //825
+			return eAny(getMemberThread(),-1,false); //845
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MUTEX:
-			return eAny(getMutex(),-1,false); //826
+			return eAny(getMutex(),-1,false); //846
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return eAny(getObject(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //822
+			return eAny(getObject(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //842
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
-			return eEcoreContainerAny(getWaitingEventAccepters(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTACCEPTER_CLASS); //820
+			return eEcoreContainerAny(getWaitingEventAccepters(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTACCEPTER_CLASS); //840
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -772,19 +772,19 @@ bool ObjectActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
-			return getClassifierBehaviorExecutions() != nullptr; //823
+			return getClassifierBehaviorExecutions() != nullptr; //843
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE:
-			return getConditionVariable() != nullptr; //824
+			return getConditionVariable() != nullptr; //844
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
-			return getEventPool() != nullptr; //821
+			return getEventPool() != nullptr; //841
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD:
-			return getMemberThread() != nullptr; //825
+			return getMemberThread() != nullptr; //845
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MUTEX:
-			return getMutex() != nullptr; //826
+			return getMutex() != nullptr; //846
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //822
+			return getObject() != nullptr; //842
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
-			return getWaitingEventAccepters() != nullptr; //820
+			return getWaitingEventAccepters() != nullptr; //840
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -906,7 +906,7 @@ bool ObjectActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(eObject);
 					if(_object)
 					{
-						setObject(_object); //822
+						setObject(_object); //842
 					}
 					else
 					{

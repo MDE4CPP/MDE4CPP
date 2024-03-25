@@ -103,14 +103,6 @@ FUML_SignalInstanceImpl& FUML_SignalInstanceImpl::operator=(const FUML_SignalIns
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> FUML_SignalInstanceImpl::copy() const
-{
-	std::shared_ptr<FUML_SignalInstanceImpl> element(new FUML_SignalInstanceImpl());
-	*element =(*this);
-	element->setThisFUML_SignalInstancePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************

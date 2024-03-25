@@ -45,9 +45,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -59,8 +59,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "uml/ValueSpecificationAction.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -332,7 +332,7 @@ std::shared_ptr<Any> ValueSpecificationActionActivationImpl::eGet(int featureID,
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return eAny(getValueSpecificationAction(),uml::umlPackage::VALUESPECIFICATIONACTION_CLASS,false); //12011
+			return eAny(getValueSpecificationAction(),uml::umlPackage::VALUESPECIFICATIONACTION_CLASS,false); //12211
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -342,7 +342,7 @@ bool ValueSpecificationActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return getValueSpecificationAction() != nullptr; //12011
+			return getValueSpecificationAction() != nullptr; //12211
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -362,7 +362,7 @@ bool ValueSpecificationActionActivationImpl::eSet(int featureID,  const std::sha
 					std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(eObject);
 					if(_valueSpecificationAction)
 					{
-						setValueSpecificationAction(_valueSpecificationAction); //12011
+						setValueSpecificationAction(_valueSpecificationAction); //12211
 					}
 					else
 					{

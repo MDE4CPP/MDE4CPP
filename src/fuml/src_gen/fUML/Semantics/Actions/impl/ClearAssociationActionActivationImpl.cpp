@@ -36,10 +36,10 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-// #include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/UMLAny.hpp"
-#include "uml/UMLContainerAny.hpp"
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
 #include "uml/ClearAssociationAction.hpp"
@@ -50,9 +50,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -64,8 +64,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -146,127 +146,32 @@ void ClearAssociationActionActivationImpl::doAction()
 		const std::shared_ptr<uml::ClearAssociationAction>& action = this->getClearAssociationAction();
 	const std::shared_ptr<uml::Association>& association = action->getAssociation();
 
-	std::shared_ptr<Any> objectValue = nullptr;
-
-	/* MDE4CPP specific implementation for handling "self"-Pin */
-	std::string objectPinName = action->getObject()->getName();
-	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
-		//objectValue is set to the context of the current activity execution
-		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
-			
-		objectValue = eUMLAny(context, context->getMetaElementID());
-	}
-	else{
-		objectValue = this->takeTokens(action->getObject())->at(0);
-	}
-	/*--------------------------------------------------------*/
-
-	std::shared_ptr<uml::Element> structuredValue = nullptr;
-
-	std::shared_ptr<uml::UMLAny> umlValue = std::dynamic_pointer_cast<uml::UMLAny>(objectValue);
+	std::shared_ptr<Any> objectValue = this->takeTokens(action->getObject())->at(0);
 
 	try
 	{
-		structuredValue = umlValue->getAsElement();
+		std::shared_ptr<uml::UMLAny> umlValue = std::dynamic_pointer_cast<uml::UMLAny>(objectValue);
+		std::shared_ptr<uml::Element> structuredValue = umlValue->getAsElement();
 		
 		if (structuredValue)
 		{
-			const std::shared_ptr<Bag<uml::Property>>& associationMemberEnds = association->getMemberEnd();
-			std::shared_ptr<Bag<uml::Property>> structuredValueProperties = structuredValue->getMetaClass()->getAllAttributes();
-			std::shared_ptr<uml::Property> matchingEnd = nullptr;
-
-			for(const std::shared_ptr<uml::Property>& associationMemberEnd : *associationMemberEnds)
-			{
-				for(const std::shared_ptr<uml::Property>& structuredValueProperty : *structuredValueProperties)
-				{
-					if(associationMemberEnd == structuredValueProperty)
-					{
-						matchingEnd = associationMemberEnd;
-						break;
-					}
-					
-					if(matchingEnd != nullptr)
-					{
-						break;
-					}
-				}
-			}
-
-			if(matchingEnd != nullptr)
-			{
-				const std::shared_ptr<uml::Property> opposite = matchingEnd->getOpposite();
-				
-				// First, remove occurrences of structuredValue from the opposite end 
-				std::shared_ptr<Any> matchingEndValue = structuredValue->get(matchingEnd);
-				
-				if(matchingEnd->getUpper() == 1)
-				{
-					try
-					{
-						std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(matchingEndValue);
-
-						std::shared_ptr<uml::Element> endValue = umlAny->getAsElement();
-					
-						if(endValue)
-						{
-							if(opposite != nullptr)
-							{
-								endValue->remove(opposite, eUMLAny(structuredValue, structuredValue->getMetaElementID()), -1, false);
-							}
-							else
-							{
-								DEBUG_ERROR("Opposite end not set for association end! Failed to clear association!")
-							}
-						}
-						else
-						{
-							// Nothing to clear
-						}
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Value of association end is not an instance of uml::Element! Failed to clear association!")
-					}
-				}
-				else
-				{
-					try
-					{
-						std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(matchingEndValue);
-
-						std::shared_ptr<Bag<uml::Element>> endValues = umlContainerAny->getAsElementContainer();
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> fUMLObject = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(structuredValue);
 			
-						if(endValues)
-						{
-							if(opposite != nullptr)
-							{
-								for(const std::shared_ptr<uml::Element>& endValue : *endValues)
-								{
-									endValue->remove(opposite, eUMLAny(structuredValue, structuredValue->getMetaElementID()), -1, false);
-								}
-							}
-							else
-							{
-								DEBUG_ERROR("Opposite end not set for association end! Failed to clear association!")
-							}
-						}
-						else
-						{
-							// Should never be reached, but in case: nothing to clear
-						}
-					}
-					catch(...)
+			if(fUMLObject)
+			{
+				const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& links = fUMLObject->getLinks();
+		
+				for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *links)
+				{
+					if(link->getType() == association)
 					{
-						DEBUG_ERROR("Value of association end is not an instance of Bag<uml::Element>! Failed to clear association!")
+						link->destroy();
 					}
 				}
-				
-				// Clear matching end
-				structuredValue->unset(matchingEnd);
 			}
 			else
 			{
-				DEBUG_ERROR("No property of context matches any member end of association! Failed to clear association!")
+				DEBUG_ERROR("Provided context is not an instance of fUML::MDE4CPP_Extensions::FUML_Object! Failed to clear association!")
 			}
 		}
 		else

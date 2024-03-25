@@ -43,10 +43,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
-//#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Activities/ForkNodeActivation.hpp"
 #include "fUML/fUMLFactory.hpp"
-//#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
@@ -60,14 +58,15 @@
 #include "uml/umlFactory.hpp"
 #include "uml/ForkNode.hpp"
 #include "uml/Activity.hpp"
+#include "uml/UMLAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -82,8 +81,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -622,25 +621,40 @@ std::shared_ptr<Bag<Any>> ActionActivationImpl::takeTokens(const std::shared_ptr
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+		std::shared_ptr<Bag<Any>> values(new Bag<Any>());
+
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string pinName = pin->getName();
+	if((pinName.empty()) || (pinName.find("self") == 0))
+	{
+		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
+		values->add(eUMLAny(context, context->getMetaElementID()));
+	}
+	/*--------------------------------------------------------*/
+	else
+	{
 		std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = this->retrievePinActivation(pin);
-	std::shared_ptr<Bag<Any>> values(new Bag<Any>());
+		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = pinActivation->takeUnofferedTokens();
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = pinActivation->takeUnofferedTokens();
+		DEBUG_INFO("Action '" << this->getNode()->getName() << "' retrieved "<< tokenList->size() << " tokens from pin '" << pinName<< "'.")
 
-	DEBUG_INFO("Action '" << this->getNode()->getName() << "' retrieved "<< tokenList->size() << " tokens from pin '" << pin->getName() << "'.")
-
-	for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
+		for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
     	{
 #ifndef NDEBUG
-		unsigned int tokenNumber = 0;
+			unsigned int tokenNumber = 0;
 #endif
-    	const std::shared_ptr<Any>& value = token->getValue();
+    		const std::shared_ptr<Any>& value = token->getValue();
         	if(value != nullptr)
         	{
         		DEBUG_INFO("Value in token[" << tokenNumber <<"] : " << value->toString() << ".")
-            		values->push_back(value);
+            	values->push_back(value);
         	}
+#ifndef NDEBUG
+			tokenNumber++;
+#endif
     	}
+	}
+		
     return values;
 	//end of body
 }

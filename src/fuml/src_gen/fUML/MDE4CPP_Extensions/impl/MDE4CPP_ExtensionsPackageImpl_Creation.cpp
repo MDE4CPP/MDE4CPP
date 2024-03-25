@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -34,6 +34,8 @@ void MDE4CPP_ExtensionsPackageImpl::createPackageContents(std::shared_ptr<ecore:
 
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
+	createFUML_LinkContent(package, factory);
+	createFUML_LinkEndContent(package, factory);
 	createFUML_ObjectContent(package, factory);
 	createFUML_SignalInstanceContent(package, factory);
 
@@ -41,14 +43,38 @@ void MDE4CPP_ExtensionsPackageImpl::createPackageContents(std::shared_ptr<ecore:
 
 }
 
+void MDE4CPP_ExtensionsPackageImpl::createFUML_LinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_fUML_Link_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FUML_LINK_CLASS);
+	
+	m_fUML_Link_Attribute_linkEnds = factory->createEReference_as_eReferences_in_EClass(m_fUML_Link_Class, FUML_LINK_ATTRIBUTE_LINKENDS);
+	m_fUML_Link_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_fUML_Link_Class, FUML_LINK_ATTRIBUTE_TYPE);
+	
+	m_fUML_Link_Operation_add_FUML_Object_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY);
+	m_fUML_Link_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_DESTROY);
+	
+}
+
+void MDE4CPP_ExtensionsPackageImpl::createFUML_LinkEndContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_fUML_LinkEnd_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FUML_LINKEND_CLASS);
+	
+	m_fUML_LinkEnd_Attribute_end = factory->createEReference_as_eReferences_in_EClass(m_fUML_LinkEnd_Class, FUML_LINKEND_ATTRIBUTE_END);
+	m_fUML_LinkEnd_Attribute_endValue = factory->createEReference_as_eReferences_in_EClass(m_fUML_LinkEnd_Class, FUML_LINKEND_ATTRIBUTE_ENDVALUE);
+	
+	
+}
+
 void MDE4CPP_ExtensionsPackageImpl::createFUML_ObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_fUML_Object_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FUML_OBJECT_CLASS);
 	
+	m_fUML_Object_Attribute_links = factory->createEReference_as_eReferences_in_EClass(m_fUML_Object_Class, FUML_OBJECT_ATTRIBUTE_LINKS);
 	m_fUML_Object_Attribute_locus = factory->createEReference_as_eReferences_in_EClass(m_fUML_Object_Class, FUML_OBJECT_ATTRIBUTE_LOCUS);
 	m_fUML_Object_Attribute_objectActivation = factory->createEReference_as_eReferences_in_EClass(m_fUML_Object_Class, FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION);
 	
 	m_fUML_Object_Operation__register_EventAccepter = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER);
+	m_fUML_Object_Operation_addTo_FUML_Link_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_ADDTO_FUML_LINK_PROPERTY);
 	m_fUML_Object_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_DESTROY);
 	m_fUML_Object_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_GETTYPES);
 	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT);

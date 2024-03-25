@@ -43,9 +43,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -54,8 +54,8 @@
 #include "uml/Pin.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -367,10 +367,10 @@ std::shared_ptr<Any> PinActivationImpl::eGet(int featureID, bool resolve, bool c
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActionActivation().lock();
-			return eEcoreAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //897
+			return eEcoreAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //917
 		}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //898
+			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //918
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -380,9 +380,9 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
-			return getActionActivation().lock() != nullptr; //897
+			return getActionActivation().lock() != nullptr; //917
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-			return getPin() != nullptr; //898
+			return getPin() != nullptr; //918
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -402,7 +402,7 @@ bool PinActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 					std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(eObject);
 					if(_actionActivation)
 					{
-						setActionActivation(_actionActivation); //897
+						setActionActivation(_actionActivation); //917
 					}
 					else
 					{
@@ -433,7 +433,7 @@ bool PinActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 					std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(eObject);
 					if(_pin)
 					{
-						setPin(_pin); //898
+						setPin(_pin); //918
 					}
 					else
 					{

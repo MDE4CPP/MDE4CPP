@@ -14,18 +14,20 @@
 
 namespace ecore 
 {
-	class EReference;
 	class EStringToStringMapEntry;
-	class EClass;
-	class EOperation;
 	class EDataType;
+	class EParameter;
+	class EClass;
+	class EReference;
+	class EOperation;
 	class EAnnotation;
 	class EGenericType;
-	class EParameter;
 }
 
 namespace fUML::MDE4CPP_Extensions 
 {
+	class FUML_Link;
+	class FUML_LinkEnd;
 	class FUML_Object;
 	class FUML_SignalInstance;
 }
@@ -52,16 +54,64 @@ namespace fUML::MDE4CPP_Extensions
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
+			// Begin Class FUML_Link
+			//Class and Feature IDs 
+			static const unsigned long FUML_LINK_CLASS = 1317507267;
+			static const unsigned int FUML_LINK_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int FUML_LINK_CLASS_OPERATION_COUNT = 2;
+			
+			static const unsigned long FUML_LINK_ATTRIBUTE_LINKENDS = 487915139;
+			static const unsigned long FUML_LINK_ATTRIBUTE_TYPE = 894190498;
+			
+			static const unsigned long FUML_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY = 2782434456;
+			static const unsigned long FUML_LINK_OPERATION_DESTROY = 1266427544;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getFUML_Link_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_Link_Attribute_linkEnds() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_Link_Attribute_type() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_add_FUML_Object_Property() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_destroy() const = 0;
+			
+			// End Class FUML_Link
+
+
+			// Begin Class FUML_LinkEnd
+			//Class and Feature IDs 
+			static const unsigned long FUML_LINKEND_CLASS = 1635365763;
+			static const unsigned int FUML_LINKEND_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int FUML_LINKEND_CLASS_OPERATION_COUNT = 0;
+			
+			static const unsigned long FUML_LINKEND_ATTRIBUTE_END = 1861057324;
+			static const unsigned long FUML_LINKEND_ATTRIBUTE_ENDVALUE = 1305940166;
+			
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getFUML_LinkEnd_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_LinkEnd_Attribute_end() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_LinkEnd_Attribute_endValue() const = 0;
+			
+			
+			// End Class FUML_LinkEnd
+
+
 			// Begin Class FUML_Object
 			//Class and Feature IDs 
 			static const unsigned long FUML_OBJECT_CLASS = 1012292556;
-			static const unsigned int FUML_OBJECT_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 47;
+			static const unsigned int FUML_OBJECT_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 48;
 			
+			static const unsigned long FUML_OBJECT_ATTRIBUTE_LINKS = 376392934;
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_LOCUS = 121078438;
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION = 1242096493;
 			
 			static const unsigned long FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 2307607380;
+			static const unsigned long FUML_OBJECT_OPERATION_ADDTO_FUML_LINK_PROPERTY = 3737882179;
 			static const unsigned long FUML_OBJECT_OPERATION_DESTROY = 4089641697;
 			static const unsigned long FUML_OBJECT_OPERATION_GETTYPES = 1742598842;
 			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT = 738288422;
@@ -76,10 +126,12 @@ namespace fUML::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EClass>& getFUML_Object_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_links() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_locus() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_objectActivation() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation__register_EventAccepter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_addTo_FUML_Link_Property() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_getTypes() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject() const = 0;

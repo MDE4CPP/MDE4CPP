@@ -49,8 +49,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -63,8 +63,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -142,7 +142,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Get the values of the object and value input pins.
+		// Get the values of the object and value input pins.
 	// If the given feature is an association end, then create a link between the object and value inputs.
 	// Otherwise, if the object input is a structural value, then add a value to the values for the feature.
 	// If isReplaceAll is true, first remove all current matching links or feature values.
@@ -160,21 +160,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	
 	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
 
-	std::shared_ptr<Any> value = nullptr;
-
-	/* MDE4CPP specific implementation for handling "self"-Pin */
-	std::string objectPinName = action->getObject()->getName();
-	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
-		//value is set to the context of the current activity execution
-		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
-			
-		value = eUMLAny(context, context->getMetaElementID());
-	}
-	else{
-		value = this->takeTokens(action->getObject())->at(0);
-	}
-	/*--------------------------------------------------------*/
-
+	std::shared_ptr<Any> value = this->takeTokens(action->getObject())->at(0);
 	std::shared_ptr<Bag<Any>> inputValues = takeTokens(action->getValue());
 
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.
