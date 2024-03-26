@@ -736,9 +736,16 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReadLinkActionActivation" eSuperTypes="#//Semantics/Actions/LinkActionActivation">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'ReadLinkActionActivation' is excluded from generation because actions concering Links are currently not supported."/>
-        </eAnnotations>
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen"/>
+        <eOperations name="doAction" lowerBound="1">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="&#x9;const std::shared_ptr&lt;uml::ClearAssociationAction>&amp; action = this->getClearAssociationAction();&#xA;&#x9;const std::shared_ptr&lt;uml::Association>&amp; association = action->getAssociation();&#xA;&#xA;&#x9;std::shared_ptr&lt;Any> objectValue = this->takeTokens(action->getObject())->at(0);&#xA;&#xA;&#x9;try&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::UMLAny> umlValue = std::dynamic_pointer_cast&lt;uml::UMLAny>(objectValue);&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Element> structuredValue = umlValue->getAsElement();&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if (structuredValue)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object> fUMLObject = std::dynamic_pointer_cast&lt;fUML::MDE4CPP_Extensions::FUML_Object>(structuredValue);&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(fUMLObject)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; links = fUMLObject->getLinks();&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link>&amp; link : *links)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(link->getType() == association)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;link->destroy();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;DEBUG_ERROR(&quot;Provided context is not an instance of fUML::MDE4CPP_Extensions::FUML_Object! Failed to clear association!&quot;)&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_ERROR(&quot;Context is nullptr! Failed to clear association!&quot;)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;catch(...)&#xA;&#x9;{&#xA;&#x9;&#x9;DEBUG_ERROR(&quot;Provided context is not an instance of uml::Element! Failed to clear association!&quot;)&#xA;&#x9;}"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="readLinkAction" lowerBound="1"
+            eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ReadLinkAction">
+          <eAnnotations source="redefines" references="#//Semantics/Actions/ActionActivation/action"/>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
