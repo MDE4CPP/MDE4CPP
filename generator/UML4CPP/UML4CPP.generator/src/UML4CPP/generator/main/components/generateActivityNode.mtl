@@ -95,6 +95,15 @@
 [/template]
 
 [**
+ * generate elements for ClearAssociationAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ClearAssociationAction))]
+[let action : ClearAssociationAction = self.oclAsType(ClearAssociationAction)]
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_ClearAssociationAction([action.memberName()/]);
+[/let]
+[/template]
+
+[**
  * generate elements for ClearStructuralFeatureAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ClearStructuralFeatureAction))]
@@ -131,6 +140,20 @@
 [/template]
 
 [**
+ * generate elements for DestroyLinkAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyLinkAction))]
+[let action : DestroyLinkAction = self.oclAsType(DestroyLinkAction)]
+[for (inputValue : InputPin | action.input)]
+	[inputValue.memberName()/] = factory->create[inputValue.eClass().name/]_as_inputValue_in_LinkAction([action.memberName()/]);
+[/for]
+[for (linkEndCreationData : LinkEndData | action.endData)]
+	[linkEndCreationData.memberName()/] = factory->create[linkEndCreationData.eClass().name/]_as_endData_in_LinkAction([action.memberName()/]);
+[/for]
+[/let]
+[/template]
+
+[**
  * generate elements for DestroyObjectAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyObjectAction))]
@@ -157,6 +180,21 @@
 [let action : ReadExtentAction = self.oclAsType(ReadExtentAction)]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ReadExtentAction([action.memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
+[/let]
+[/template]
+
+[**
+ * generate elements for ReadLinkAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadLinkAction))]
+[let action : ReadLinkAction = self.oclAsType(ReadLinkAction)]
+[for (inputValue : InputPin | action.input)]
+	[inputValue.memberName()/] = factory->create[inputValue.eClass().name/]_as_inputValue_in_LinkAction([action.memberName()/]);
+[/for]
+	 [action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ReadLinkAction([action.memberName()/]);
+[for (linkEndCreationData : LinkEndData | action.endData)]
+	[linkEndCreationData.memberName()/] = factory->create[linkEndCreationData.eClass().name/]_as_endData_in_LinkAction([action.memberName()/]);
+[/for]
 [/let]
 [/template]
 
@@ -338,6 +376,20 @@
 [/template]
 
 [**
+ * generate initialization of meta model instance for an ClearAssociationAction element
+ * 
+ * this includes:
+ * - initialize pins
+ * - initialize association
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ClearAssociationAction))]
+[let action : ClearAssociationAction = self.oclAsType(ClearAssociationAction)]
+[action.object.initializePin()/]
+[action.memberName()/]->setAssociation([action.association.generatePackageGetterCall()/]);
+[/let]
+[/template]
+
+[**
  * generate initialization of meta model instance for an ClearStructuralFeatureAction element
  * 
  * this includes:
@@ -393,6 +445,20 @@
 [if (not decisionNode.decisionInputFlow.oclIsUndefined())]
 [anActivityNode.memberName()/]->setDecisionInputFlow([memberName(decisionNode.decisionInputFlow)/]);
 [/if]
+[/let]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an DestroyLinkAction element
+ * 
+ * this includes:
+ * - initialize pins
+ * - initialize endData
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyLinkAction))]
+[let action : DestroyLinkAction = self.oclAsType(DestroyLinkAction)]
+[action.inputValue.initializePin()/]
+[action.endData.initializeLinkEndData()/]
 [/let]
 [/template]
 
@@ -460,6 +526,21 @@
 [let action : ReadExtentAction = self.oclAsType(ReadExtentAction)]
 [action.output.initializePin()/]
 [action.memberName()/]->setClassifier([action.classifier.generatePackageGetterCall()/]);
+[/let]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an ReadLinkAction element
+ * 
+ * this includes:
+ * - initialize pins
+ * - initialize endData
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadLinkAction))]
+[let action : ReadLinkAction = self.oclAsType(ReadLinkAction)]
+[action.inputValue.initializePin()/]
+[action.result.initializePin()/]
+[action.endData.initializeLinkEndData()/]
 [/let]
 [/template]
 
