@@ -28,7 +28,7 @@
 
 [query private getClassifierElementTypes(attributes : Sequence(EAttribute) ) : Sequence(EPackage) = attributes->select(a : EAttribute | not a.eType.oclIsUndefined() and a.eType.oclIsKindOf(EClassifier)).eType.ePackage/]
 [query private getClassifierElementTypes(reference : Sequence(EReference) ) : Sequence(EPackage) = reference->select(r : EReference | not r.eType.oclIsUndefined() and r.eType.oclIsKindOf(EClassifier)).eType.ePackage/]
-[query private getClassifierElementTypes(operations : Sequence(EOperation) ) : Sequence(EPackage) = (operations->select(op : EOperation | not op.eType.oclIsUndefined() and op.eType.oclIsKindOf(EClassifier)).eType.ePackage)->union(operations->select(op : EOperation | not op.eType.oclIsUndefined() and op.eType.oclIsKindOf(EClass)).eParameters.eType.ePackage)/]
+[query private getClassifierElementTypes(operations : Sequence(EOperation) ) : Sequence(EPackage) = (operations->select(op : EOperation | not op.eType.oclIsUndefined() and op.eType.oclIsKindOf(EClassifier)).eType.ePackage)->union(operations.eParameters->select(p : EParameter | not p.eType.oclIsUndefined() and p.eType.oclIsKindOf(EClassifier)).eType.ePackage)/]
 
 
 [template public generatePackageImplSource(anEPackage : EPackage) { 
