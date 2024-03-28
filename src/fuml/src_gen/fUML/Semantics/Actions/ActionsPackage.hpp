@@ -36,17 +36,21 @@ namespace fUML::Semantics::Actions
 	class CallOperationActionActivation;
 	class ClearAssociationActionActivation;
 	class ClearStructuralFeatureActionActivation;
+	class CreateLinkActionActivation;
 	class CreateObjectActionActivation;
+	class DestroyLinkActionActivation;
 	class DestroyObjectActionActivation;
 	class ExpansionActivationGroup;
 	class ExpansionNodeActivation;
 	class ExpansionRegionActivation;
 	class InputPinActivation;
 	class InvocationActionActivation;
+	class LinkActionActivation;
 	class OutputPinActivation;
 	class PinActivation;
 	class ReadExtentActionActivation;
 	class ReadIsClassifiedObjectActionActivation;
+	class ReadLinkActionActivation;
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
 	class RemoveStructuralFeatureValueActionActivation;
@@ -55,6 +59,7 @@ namespace fUML::Semantics::Actions
 	class StructuredActivityNodeActivation;
 	class ValueSpecificationActionActivation;
 	class Values;
+	class WriteLinkActionActivation;
 	class WriteStructuralFeatureActionActivation;
 }
  
@@ -347,6 +352,27 @@ namespace fUML::Semantics::Actions
 			// End Class ClearStructuralFeatureActionActivation
 
 
+			// Begin Class CreateLinkActionActivation
+			//Class and Feature IDs 
+			static const unsigned long CREATELINKACTIONACTIVATION_CLASS = 1739762966;
+			static const unsigned int CREATELINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int CREATELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
+			
+			static const unsigned long CREATELINKACTIONACTIVATION_ATTRIBUTE_CREATELINKACTION = 692076939;
+			
+			static const unsigned long CREATELINKACTIONACTIVATION_OPERATION_DOACTION = 2331637964;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getCreateLinkActionActivation_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getCreateLinkActionActivation_Attribute_createLinkAction() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateLinkActionActivation_Operation_doAction() const = 0;
+			
+			// End Class CreateLinkActionActivation
+
+
 			// Begin Class CreateObjectActionActivation
 			//Class and Feature IDs 
 			static const unsigned long CREATEOBJECTACTIONACTIVATION_CLASS = 1800625725;
@@ -366,6 +392,27 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EOperation>& getCreateObjectActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CreateObjectActionActivation
+
+
+			// Begin Class DestroyLinkActionActivation
+			//Class and Feature IDs 
+			static const unsigned long DESTROYLINKACTIONACTIVATION_CLASS = 1694236360;
+			static const unsigned int DESTROYLINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int DESTROYLINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
+			
+			static const unsigned long DESTROYLINKACTIONACTIVATION_ATTRIBUTE_DESTROYLINKACTION = 47465646;
+			
+			static const unsigned long DESTROYLINKACTIONACTIVATION_OPERATION_DOACTION = 471631170;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getDestroyLinkActionActivation_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getDestroyLinkActionActivation_Attribute_destroyLinkAction() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getDestroyLinkActionActivation_Operation_doAction() const = 0;
+			
+			// End Class DestroyLinkActionActivation
 
 
 			// Begin Class DestroyObjectActionActivation
@@ -548,6 +595,31 @@ namespace fUML::Semantics::Actions
 			// End Class InvocationActionActivation
 
 
+			// Begin Class LinkActionActivation
+			//Class and Feature IDs 
+			static const unsigned long LINKACTIONACTIVATION_CLASS = 1360043460;
+			static const unsigned int LINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int LINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 49;
+			
+			static const unsigned long LINKACTIONACTIVATION_ATTRIBUTE_LINKACTION = 9722136;
+			
+			static const unsigned long LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_FUML_LINK_LINKENDDATA = 2574439912;
+			static const unsigned long LINKACTIONACTIVATION_OPERATION_GETASSOCIATION = 3068227173;
+			static const unsigned long LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_FUML_LINK_LINKENDDATA = 3181328209;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getLinkActionActivation_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getLinkActionActivation_Attribute_linkAction() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkActionActivation_Operation_getAssociation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData() const = 0;
+			
+			// End Class LinkActionActivation
+
+
 			// Begin Class OutputPinActivation
 			//Class and Feature IDs 
 			static const unsigned long OUTPUTPINACTIVATION_CLASS = 1393072800;
@@ -630,6 +702,27 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EOperation>& getReadIsClassifiedObjectActionActivation_Operation_doAction() const = 0;
 			
 			// End Class ReadIsClassifiedObjectActionActivation
+
+
+			// Begin Class ReadLinkActionActivation
+			//Class and Feature IDs 
+			static const unsigned long READLINKACTIONACTIVATION_CLASS = 1707850812;
+			static const unsigned int READLINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int READLINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
+			
+			static const unsigned long READLINKACTIONACTIVATION_ATTRIBUTE_READLINKACTION = 1059186306;
+			
+			static const unsigned long READLINKACTIONACTIVATION_OPERATION_DOACTION = 1156472736;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getReadLinkActionActivation_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkActionActivation_Attribute_readLinkAction() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkActionActivation_Operation_doAction() const = 0;
+			
+			// End Class ReadLinkActionActivation
 
 
 			// Begin Class ReadSelfActionActivation
@@ -828,6 +921,23 @@ namespace fUML::Semantics::Actions
 			
 			
 			// End Class Values
+
+
+			// Begin Class WriteLinkActionActivation
+			//Class and Feature IDs 
+			static const unsigned long WRITELINKACTIONACTIVATION_CLASS = 1364819783;
+			static const unsigned int WRITELINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int WRITELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 49;
+			
+			
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getWriteLinkActionActivation_Class() const = 0;
+			
+			
+			
+			
+			// End Class WriteLinkActionActivation
 
 
 			// Begin Class WriteStructuralFeatureActionActivation

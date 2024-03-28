@@ -93,6 +93,7 @@ FUML_LinkEndImpl& FUML_LinkEndImpl::operator=(const FUML_LinkEndImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FUML_LinkEnd "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_position = obj.getPosition();
 
 	//copy references with no containment (soft copy)
 	m_end  = obj.getEnd();
@@ -116,6 +117,16 @@ std::shared_ptr<ecore::EObject> FUML_LinkEndImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute position */
+int FUML_LinkEndImpl::getPosition() const 
+{
+	return m_position;
+}
+void FUML_LinkEndImpl::setPosition(int _position)
+{
+	m_position = _position;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
@@ -178,6 +189,15 @@ void FUML_LinkEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("position");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream(iter->second) >> value;
+			this->setPosition(value);
+		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
 		iter = attr_list.find("end");
 		if ( iter != attr_list.end() )
@@ -254,6 +274,11 @@ void FUML_LinkEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> package = fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance();
+		// Add attributes
+          if ( this->eIsSet(package->getFUML_LinkEnd_Attribute_position()) )
+          {
+			saveHandler->addAttribute("position", this->getPosition());
+          }
 	// Add references
 	if ( this->eIsSet(package->getFUML_LinkEnd_Attribute_end()) )
 	{
@@ -286,6 +311,8 @@ std::shared_ptr<Any> FUML_LinkEndImpl::eGet(int featureID, bool resolve, bool co
 			return eAny(getEnd(),uml::umlPackage::PROPERTY_CLASS,false); //551
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINKEND_ATTRIBUTE_ENDVALUE:
 			return eAny(getEndValue(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //550
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINKEND_ATTRIBUTE_POSITION:
+			return eAny(getPosition(),ecore::ecorePackage::EINT_CLASS,false); //552
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -298,6 +325,8 @@ bool FUML_LinkEndImpl::internalEIsSet(int featureID) const
 			return getEnd() != nullptr; //551
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINKEND_ATTRIBUTE_ENDVALUE:
 			return getEndValue() != nullptr; //550
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINKEND_ATTRIBUTE_POSITION:
+			return getPosition() != 0; //552
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -364,6 +393,20 @@ bool FUML_LinkEndImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'endValue'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINKEND_ATTRIBUTE_POSITION:
+		{
+			try
+			{
+				int _position = newValue->get<int>();
+				setPosition(_position); //552
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'position'. Failed to set feature!")
 				return false;
 			}
 		return true;

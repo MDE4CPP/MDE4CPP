@@ -45,17 +45,21 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createCallOperationActionActivationContent(package, factory);
 	createClearAssociationActionActivationContent(package, factory);
 	createClearStructuralFeatureActionActivationContent(package, factory);
+	createCreateLinkActionActivationContent(package, factory);
 	createCreateObjectActionActivationContent(package, factory);
+	createDestroyLinkActionActivationContent(package, factory);
 	createDestroyObjectActionActivationContent(package, factory);
 	createExpansionActivationGroupContent(package, factory);
 	createExpansionNodeActivationContent(package, factory);
 	createExpansionRegionActivationContent(package, factory);
 	createInputPinActivationContent(package, factory);
 	createInvocationActionActivationContent(package, factory);
+	createLinkActionActivationContent(package, factory);
 	createOutputPinActivationContent(package, factory);
 	createPinActivationContent(package, factory);
 	createReadExtentActionActivationContent(package, factory);
 	createReadIsClassifiedObjectActionActivationContent(package, factory);
+	createReadLinkActionActivationContent(package, factory);
 	createReadSelfActionActivationContent(package, factory);
 	createReadStructuralFeatureActionActivationContent(package, factory);
 	createRemoveStructuralFeatureValueActionActivationContent(package, factory);
@@ -64,6 +68,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createStructuredActivityNodeActivationContent(package, factory);
 	createValueSpecificationActionActivationContent(package, factory);
 	createValuesContent(package, factory);
+	createWriteLinkActionActivationContent(package, factory);
 	createWriteStructuralFeatureActionActivationContent(package, factory);
 
 	createPackageEDataTypes(package, factory);
@@ -199,6 +204,16 @@ void ActionsPackageImpl::createClearStructuralFeatureActionActivationContent(std
 	
 }
 
+void ActionsPackageImpl::createCreateLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_createLinkActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CREATELINKACTIONACTIVATION_CLASS);
+	
+	m_createLinkActionActivation_Attribute_createLinkAction = factory->createEReference_as_eReferences_in_EClass(m_createLinkActionActivation_Class, CREATELINKACTIONACTIVATION_ATTRIBUTE_CREATELINKACTION);
+	
+	m_createLinkActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_createLinkActionActivation_Class, CREATELINKACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
 void ActionsPackageImpl::createCreateObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_createObjectActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CREATEOBJECTACTIONACTIVATION_CLASS);
@@ -206,6 +221,16 @@ void ActionsPackageImpl::createCreateObjectActionActivationContent(std::shared_p
 	m_createObjectActionActivation_Attribute_createObjectAction = factory->createEReference_as_eReferences_in_EClass(m_createObjectActionActivation_Class, CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION);
 	
 	m_createObjectActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_createObjectActionActivation_Class, CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createDestroyLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_destroyLinkActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, DESTROYLINKACTIONACTIVATION_CLASS);
+	
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction = factory->createEReference_as_eReferences_in_EClass(m_destroyLinkActionActivation_Class, DESTROYLINKACTIONACTIVATION_ATTRIBUTE_DESTROYLINKACTION);
+	
+	m_destroyLinkActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_destroyLinkActionActivation_Class, DESTROYLINKACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 
@@ -296,6 +321,18 @@ void ActionsPackageImpl::createInvocationActionActivationContent(std::shared_ptr
 	
 }
 
+void ActionsPackageImpl::createLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_linkActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, LINKACTIONACTIVATION_CLASS);
+	
+	m_linkActionActivation_Attribute_linkAction = factory->createEReference_as_eReferences_in_EClass(m_linkActionActivation_Class, LINKACTIONACTIVATION_ATTRIBUTE_LINKACTION);
+	
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData = factory->createEOperation_as_eOperations_in_EClass(m_linkActionActivation_Class, LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_FUML_LINK_LINKENDDATA);
+	m_linkActionActivation_Operation_getAssociation = factory->createEOperation_as_eOperations_in_EClass(m_linkActionActivation_Class, LINKACTIONACTIVATION_OPERATION_GETASSOCIATION);
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData = factory->createEOperation_as_eOperations_in_EClass(m_linkActionActivation_Class, LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_FUML_LINK_LINKENDDATA);
+	
+}
+
 void ActionsPackageImpl::createOutputPinActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_outputPinActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OUTPUTPINACTIVATION_CLASS);
@@ -333,6 +370,16 @@ void ActionsPackageImpl::createReadIsClassifiedObjectActionActivationContent(std
 	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction = factory->createEReference_as_eReferences_in_EClass(m_readIsClassifiedObjectActionActivation_Class, READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION);
 	
 	m_readIsClassifiedObjectActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_readIsClassifiedObjectActionActivation_Class, READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createReadLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_readLinkActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, READLINKACTIONACTIVATION_CLASS);
+	
+	m_readLinkActionActivation_Attribute_readLinkAction = factory->createEReference_as_eReferences_in_EClass(m_readLinkActionActivation_Class, READLINKACTIONACTIVATION_ATTRIBUTE_READLINKACTION);
+	
+	m_readLinkActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_readLinkActionActivation_Class, READLINKACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 
@@ -426,6 +473,14 @@ void ActionsPackageImpl::createValuesContent(std::shared_ptr<ecore::EPackage> pa
 {
 	m_values_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, VALUES_CLASS);
 	m_values_Attribute_values = factory->createEAttribute_as_eAttributes_in_EClass(m_values_Class, VALUES_ATTRIBUTE_VALUES);
+	
+	
+	
+}
+
+void ActionsPackageImpl::createWriteLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_writeLinkActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, WRITELINKACTIONACTIVATION_CLASS);
 	
 	
 	

@@ -53,11 +53,11 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -66,6 +66,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
@@ -75,8 +76,8 @@
 #include "uml/Vertex.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -570,13 +571,13 @@ std::shared_ptr<Any> StateMachineExecutionImpl::eGet(int featureID, bool resolve
 	switch(featureID)
 	{
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE:
-			return eAny(getConditionVariable(),-1,false); //3914
+			return eAny(getConditionVariable(),-1,false); //3915
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION:
-			return eAny(getConfiguration(),PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINECONFIGURATION_CLASS,false); //3913
+			return eAny(getConfiguration(),PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINECONFIGURATION_CLASS,false); //3914
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX:
-			return eAny(getMutex(),-1,false); //3915
+			return eAny(getMutex(),-1,false); //3916
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS:
-			return eEcoreContainerAny(getRegionActivations(),PSSM::Semantics::StateMachines::StateMachinesPackage::REGIONACTIVATION_CLASS); //3912
+			return eEcoreContainerAny(getRegionActivations(),PSSM::Semantics::StateMachines::StateMachinesPackage::REGIONACTIVATION_CLASS); //3913
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -586,13 +587,13 @@ bool StateMachineExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE:
-			return getConditionVariable() != nullptr; //3914
+			return getConditionVariable() != nullptr; //3915
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION:
-			return getConfiguration() != nullptr; //3913
+			return getConfiguration() != nullptr; //3914
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX:
-			return getMutex() != nullptr; //3915
+			return getMutex() != nullptr; //3916
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS:
-			return getRegionActivations() != nullptr; //3912
+			return getRegionActivations() != nullptr; //3913
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::internalEIsSet(featureID);
 }
@@ -616,7 +617,7 @@ bool StateMachineExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 					std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration> _configuration = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineConfiguration>(eObject);
 					if(_configuration)
 					{
-						setConfiguration(_configuration); //3913
+						setConfiguration(_configuration); //3914
 					}
 					else
 					{

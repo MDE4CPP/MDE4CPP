@@ -46,9 +46,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
@@ -58,14 +58,15 @@
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -464,13 +465,13 @@ std::shared_ptr<Any> CallEventExecutionImpl::eGet(int featureID, bool resolve, b
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //115
+			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //116
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERCONTEXT:
-			return eAny(getCallerContext(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //113
+			return eAny(getCallerContext(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //114
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
-			return eAny(getCallerSuspended(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //112
+			return eAny(getCallerSuspended(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //113
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_OPERATION:
-			return eAny(getOperation(),uml::umlPackage::OPERATION_CLASS,false); //114
+			return eAny(getOperation(),uml::umlPackage::OPERATION_CLASS,false); //115
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -480,13 +481,13 @@ bool CallEventExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //115
+			return getBehavior() != nullptr; //116
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERCONTEXT:
-			return getCallerContext() != nullptr; //113
+			return getCallerContext() != nullptr; //114
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
-			return getCallerSuspended() != false; //112
+			return getCallerSuspended() != false; //113
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_OPERATION:
-			return getOperation() != nullptr; //114
+			return getOperation() != nullptr; //115
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::internalEIsSet(featureID);
 }
@@ -506,7 +507,7 @@ bool CallEventExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 					std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(eObject);
 					if(_behavior)
 					{
-						setBehavior(_behavior); //115
+						setBehavior(_behavior); //116
 					}
 					else
 					{
@@ -537,7 +538,7 @@ bool CallEventExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _callerContext = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(eObject);
 					if(_callerContext)
 					{
-						setCallerContext(_callerContext); //113
+						setCallerContext(_callerContext); //114
 					}
 					else
 					{
@@ -562,7 +563,7 @@ bool CallEventExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 			try
 			{
 				bool _callerSuspended = newValue->get<bool>();
-				setCallerSuspended(_callerSuspended); //112
+				setCallerSuspended(_callerSuspended); //113
 			}
 			catch(...)
 			{
@@ -582,7 +583,7 @@ bool CallEventExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 					std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(eObject);
 					if(_operation)
 					{
-						setOperation(_operation); //114
+						setOperation(_operation); //115
 					}
 					else
 					{

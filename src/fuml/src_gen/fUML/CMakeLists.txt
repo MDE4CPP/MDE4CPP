@@ -102,9 +102,11 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/ClearStructuralFeatureActionActivationImpl.cpp
 	Semantics/Activities/impl/ControlNodeActivationImpl.cpp
 	Semantics/Activities/impl/ControlTokenImpl.cpp
+	Semantics/Actions/impl/CreateLinkActionActivationImpl.cpp
 	Semantics/Actions/impl/CreateObjectActionActivationImpl.cpp
 	Semantics/Activities/impl/DataStoreNodeActivationImpl.cpp
 	Semantics/Activities/impl/DecisionNodeActivationImpl.cpp
+	Semantics/Actions/impl/DestroyLinkActionActivationImpl.cpp
 	Semantics/Actions/impl/DestroyObjectActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.cpp
 	Semantics/CommonBehavior/impl/EventAccepterImpl.cpp
@@ -129,6 +131,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/InputPinActivationImpl.cpp
 	Semantics/Actions/impl/InvocationActionActivationImpl.cpp
 	Semantics/Activities/impl/JoinNodeActivationImpl.cpp
+	Semantics/Actions/impl/LinkActionActivationImpl.cpp
 	Semantics/Loci/impl/LocusImpl.cpp
 	Semantics/Activities/impl/MergeNodeActivationImpl.cpp
 	Semantics/CommonBehavior/impl/ObjectActivationImpl.cpp
@@ -140,6 +143,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/PinActivationImpl.cpp
 	Semantics/Actions/impl/ReadExtentActionActivationImpl.cpp
 	Semantics/Actions/impl/ReadIsClassifiedObjectActionActivationImpl.cpp
+	Semantics/Actions/impl/ReadLinkActionActivationImpl.cpp
 	Semantics/Actions/impl/ReadSelfActionActivationImpl.cpp
 	Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.cpp
@@ -154,6 +158,7 @@ SET(SOURCE_FILES
 	Semantics/Activities/impl/TokenSetImpl.cpp
 	Semantics/Actions/impl/ValueSpecificationActionActivationImpl.cpp
 	Semantics/Actions/impl/ValuesImpl.cpp
+	Semantics/Actions/impl/WriteLinkActionActivationImpl.cpp
 	Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )

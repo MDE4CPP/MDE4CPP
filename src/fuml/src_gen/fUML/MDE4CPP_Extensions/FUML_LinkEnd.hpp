@@ -74,6 +74,8 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual int getPosition() const = 0;
+			virtual void setPosition (int _position)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -103,6 +105,7 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			int m_position= 0;
 			
 			//*********************************
 			// Reference Members

@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EEnumLiteral;
-	class EAnnotation;
+	class EEnum;
 	class EStringToStringMapEntry;
-	class EGenericType;
-	class EOperation;
+	class EDataType;
 	class EAttribute;
 	class EParameter;
-	class EEnum;
 	class EClass;
-	class EDataType;
 	class EReference;
+	class EOperation;
+	class EAnnotation;
+	class EEnumLiteral;
+	class EGenericType;
 }
 
 namespace PSSM::Semantics::StateMachines 
@@ -184,8 +184,8 @@ namespace PSSM::Semantics::StateMachines
 			// Begin Class DoActivityContextObject
 			//Class and Feature IDs 
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_CLASS = 324637086;
-			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_FEATURE_COUNT = 8;
+			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 57;
 			
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT = 1627726340;
 			
@@ -699,8 +699,8 @@ namespace PSSM::Semantics::StateMachines
 			// Begin Class StateMachineExecution
 			//Class and Feature IDs 
 			static const unsigned long STATEMACHINEEXECUTION_CLASS = 1411054300;
-			static const unsigned int STATEMACHINEEXECUTION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int STATEMACHINEEXECUTION_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int STATEMACHINEEXECUTION_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int STATEMACHINEEXECUTION_CLASS_OPERATION_COUNT = 62;
 			
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE = 1048116379;
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION = 1936731267;

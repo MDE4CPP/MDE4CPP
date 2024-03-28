@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EAnnotation;
 	class EStringToStringMapEntry;
-	class EGenericType;
-	class EOperation;
+	class EDataType;
 	class EAttribute;
 	class EParameter;
 	class EClass;
-	class EDataType;
 	class EReference;
+	class EOperation;
+	class EAnnotation;
+	class EGenericType;
 }
 
 namespace PSSM::Semantics::CommonBehavior 
@@ -58,8 +58,8 @@ namespace PSSM::Semantics::CommonBehavior
 			// Begin Class CallEventExecution
 			//Class and Feature IDs 
 			static const unsigned long CALLEVENTEXECUTION_CLASS = 1816164655;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 63;
 			static const unsigned long CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 680148591;
 			
 			static const unsigned long CALLEVENTEXECUTION_ATTRIBUTE_BEHAVIOR = 68529846;
@@ -112,8 +112,8 @@ namespace PSSM::Semantics::CommonBehavior
 			// Begin Class EventTriggeredExecution
 			//Class and Feature IDs 
 			static const unsigned long EVENTTRIGGEREDEXECUTION_CLASS = 1450499413;
-			static const unsigned int EVENTTRIGGEREDEXECUTION_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int EVENTTRIGGEREDEXECUTION_CLASS_OPERATION_COUNT = 60;
+			static const unsigned int EVENTTRIGGEREDEXECUTION_CLASS_FEATURE_COUNT = 14;
+			static const unsigned int EVENTTRIGGEREDEXECUTION_CLASS_OPERATION_COUNT = 61;
 			
 			static const unsigned long EVENTTRIGGEREDEXECUTION_ATTRIBUTE_TRIGGERINGEVENTOCCURRENCE = 1973312478;
 			static const unsigned long EVENTTRIGGEREDEXECUTION_ATTRIBUTE_WRAPPEDEXECUTION = 1069891488;

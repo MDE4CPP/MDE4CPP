@@ -6,6 +6,7 @@
 //metametamodel classes
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EReference.hpp"
@@ -94,9 +95,21 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Link_Operation_add_FUML_Object_Property;
 }
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_add_FUML_Object_EInt() const
+{
+	return m_fUML_Link_Operation_add_FUML_Object_EInt;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_destroy() const
 {
 	return m_fUML_Link_Operation_destroy;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_retrieveLinkEnd_Property() const
+{
+	return m_fUML_Link_Operation_retrieveLinkEnd_Property;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_retrieveLinkEndValue_Property() const
+{
+	return m_fUML_Link_Operation_retrieveLinkEndValue_Property;
 }
 
 // End Class FUML_Link
@@ -107,6 +120,10 @@ const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_Extensio
 	return m_fUML_LinkEnd_Class;
 }
 
+const std::shared_ptr<ecore::EAttribute>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_LinkEnd_Attribute_position() const
+{
+	return m_fUML_LinkEnd_Attribute_position;
+}
 
 const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_LinkEnd_Attribute_end() const
 {

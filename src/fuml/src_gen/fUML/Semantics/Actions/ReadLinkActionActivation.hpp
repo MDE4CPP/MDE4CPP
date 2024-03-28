@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef PSSM_SEMANTICS_COMMONBEHAVIOR_EVENTTRIGGEREDEXECUTION_HPP
-#define PSSM_SEMANTICS_COMMONBEHAVIOR_EVENTTRIGGEREDEXECUTION_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_READLINKACTIONACTIVATION_HPP
+#define FUML_SEMANTICS_ACTIONS_READLINKACTIONACTIVATION_HPP
 
 
 #include <memory>
@@ -26,72 +26,63 @@ namespace persistence
 	}
 }
 
-namespace PSSM
+namespace fUML
 {
-	class PSSMFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::CommonBehavior 
+namespace fUML::Semantics::Actions 
 {
-	class EventOccurrence;
-	class ObjectActivation;
-	class ParameterValue;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-namespace fUML::Semantics::Loci 
+namespace fUML::Semantics::Activities 
 {
-	class Locus;
-}
-namespace fUML::MDE4CPP_Extensions 
-{
-	class FUML_Link;
-}
-namespace ecore 
-{
-	class EAnnotation;
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
 namespace uml 
 {
-	class Behavior;
-	class Classifier;
-	class Comment;
+	class Action;
+	class ActivityNode;
+	class LinkAction;
+	class ReadLinkAction;
 }
 
 // namespace macro header include
-#include "PSSM/PSSM.hpp"
+#include "fUML/fUML.hpp"
 
 // base class includes
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/Actions/LinkActionActivation.hpp"
 
 
 
 
 //*********************************
-namespace PSSM::Semantics::CommonBehavior 
+namespace fUML::Semantics::Actions 
 {
 	
-	class PSSM_API EventTriggeredExecution : virtual public fUML::Semantics::CommonBehavior::Execution
+	class FUML_API ReadLinkActionActivation : virtual public LinkActionActivation
 	{
 		public:
- 			EventTriggeredExecution(const EventTriggeredExecution &) {}
+ 			ReadLinkActionActivation(const ReadLinkActionActivation &) {}
 
 		protected:
-			EventTriggeredExecution(){}
+			ReadLinkActionActivation(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~EventTriggeredExecution() {}
+			virtual ~ReadLinkActionActivation() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			
-			virtual void execute() = 0;
-			virtual void finalize() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> initialize(const std::shared_ptr<uml::Behavior>& behavior) = 0;
-			
+			virtual void doAction() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -100,10 +91,14 @@ namespace PSSM::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& getTriggeringEventOccurrence() const = 0;
-			virtual void setTriggeringEventOccurrence(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>&) = 0;
-			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& getWrappedExecution() const = 0;
-			virtual void setWrappedExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>&) = 0;
+			virtual const std::shared_ptr<uml::ReadLinkAction>& getReadLinkAction() const = 0;
+			virtual void setReadLinkAction(const std::shared_ptr<uml::ReadLinkAction>&) = 0;
+			/*Additional Setter for 'LinkActionActivation::linkAction' redefined by reference 'readLinkAction'*/
+			virtual void setLinkAction(const std::shared_ptr<uml::LinkAction>&) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readLinkAction'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readLinkAction'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -129,8 +124,7 @@ namespace PSSM::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> m_triggeringEventOccurrence;
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> m_wrappedExecution;
+			std::shared_ptr<uml::ReadLinkAction> m_readLinkAction;
 	};
 }
-#endif /* end of include guard: PSSM_SEMANTICS_COMMONBEHAVIOR_EVENTTRIGGEREDEXECUTION_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_READLINKACTIONACTIVATION_HPP */

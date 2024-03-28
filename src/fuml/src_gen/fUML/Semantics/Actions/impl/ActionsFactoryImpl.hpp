@@ -24,17 +24,21 @@ namespace Actions
 	class CallOperationActionActivation;
 	class ClearAssociationActionActivation;
 	class ClearStructuralFeatureActionActivation;
+	class CreateLinkActionActivation;
 	class CreateObjectActionActivation;
+	class DestroyLinkActionActivation;
 	class DestroyObjectActionActivation;
 	class ExpansionActivationGroup;
 	class ExpansionNodeActivation;
 	class ExpansionRegionActivation;
 	class InputPinActivation;
 	class InvocationActionActivation;
+	class LinkActionActivation;
 	class OutputPinActivation;
 	class PinActivation;
 	class ReadExtentActionActivation;
 	class ReadIsClassifiedObjectActionActivation;
+	class ReadLinkActionActivation;
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
 	class RemoveStructuralFeatureValueActionActivation;
@@ -43,6 +47,7 @@ namespace Actions
 	class StructuredActivityNodeActivation;
 	class ValueSpecificationActionActivation;
 	class Values;
+	class WriteLinkActionActivation;
 	class WriteStructuralFeatureActionActivation;
 }
 
@@ -85,9 +90,15 @@ namespace fUML::Semantics::Actions
 			 virtual std::shared_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation> createClearStructuralFeatureActionActivation(const int metaElementID = ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation> createClearStructuralFeatureActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> createCreateLinkActionActivation(const int metaElementID = ActionsPackage::CREATELINKACTIONACTIVATION_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> createCreateLinkActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::CREATELINKACTIONACTIVATION_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> createCreateObjectActionActivation(const int metaElementID = ActionsPackage::CREATEOBJECTACTIONACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> createCreateObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::CREATEOBJECTACTIONACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> createDestroyLinkActionActivation(const int metaElementID = ActionsPackage::DESTROYLINKACTIONACTIVATION_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> createDestroyLinkActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::DESTROYLINKACTIONACTIVATION_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> createDestroyObjectActionActivation(const int metaElementID = ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> createDestroyObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::DESTROYOBJECTACTIONACTIVATION_CLASS) const ;
@@ -115,6 +126,9 @@ namespace fUML::Semantics::Actions
 			 virtual std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> createReadIsClassifiedObjectActionActivation(const int metaElementID = ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> createReadIsClassifiedObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> createReadLinkActionActivation(const int metaElementID = ActionsPackage::READLINKACTIONACTIVATION_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> createReadLinkActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::READLINKACTIONACTIVATION_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> createReadSelfActionActivation(const int metaElementID = ActionsPackage::READSELFACTIONACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> createReadSelfActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::READSELFACTIONACTIVATION_CLASS) const ;

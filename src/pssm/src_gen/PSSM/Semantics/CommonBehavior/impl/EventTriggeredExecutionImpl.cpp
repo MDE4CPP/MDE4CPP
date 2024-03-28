@@ -46,9 +46,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
@@ -58,13 +58,14 @@
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -439,9 +440,9 @@ std::shared_ptr<Any> EventTriggeredExecutionImpl::eGet(int featureID, bool resol
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_ATTRIBUTE_TRIGGERINGEVENTOCCURRENCE:
-			return eAny(getTriggeringEventOccurrence(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS,false); //1313
+			return eAny(getTriggeringEventOccurrence(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS,false); //1314
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_ATTRIBUTE_WRAPPEDEXECUTION:
-			return eAny(getWrappedExecution(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //1312
+			return eAny(getWrappedExecution(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //1313
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -451,9 +452,9 @@ bool EventTriggeredExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_ATTRIBUTE_TRIGGERINGEVENTOCCURRENCE:
-			return getTriggeringEventOccurrence() != nullptr; //1313
+			return getTriggeringEventOccurrence() != nullptr; //1314
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_ATTRIBUTE_WRAPPEDEXECUTION:
-			return getWrappedExecution() != nullptr; //1312
+			return getWrappedExecution() != nullptr; //1313
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::internalEIsSet(featureID);
 }
@@ -473,7 +474,7 @@ bool EventTriggeredExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any
 					std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _triggeringEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(eObject);
 					if(_triggeringEventOccurrence)
 					{
-						setTriggeringEventOccurrence(_triggeringEventOccurrence); //1313
+						setTriggeringEventOccurrence(_triggeringEventOccurrence); //1314
 					}
 					else
 					{
@@ -504,7 +505,7 @@ bool EventTriggeredExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any
 					std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _wrappedExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(eObject);
 					if(_wrappedExecution)
 					{
-						setWrappedExecution(_wrappedExecution); //1312
+						setWrappedExecution(_wrappedExecution); //1313
 					}
 					else
 					{

@@ -9,6 +9,7 @@
 //metametamodel classes
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EReference.hpp"
@@ -51,13 +52,17 @@ void MDE4CPP_ExtensionsPackageImpl::createFUML_LinkContent(std::shared_ptr<ecore
 	m_fUML_Link_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_fUML_Link_Class, FUML_LINK_ATTRIBUTE_TYPE);
 	
 	m_fUML_Link_Operation_add_FUML_Object_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY);
+	m_fUML_Link_Operation_add_FUML_Object_EInt = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_ADD_FUML_OBJECT_EINT);
 	m_fUML_Link_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_DESTROY);
+	m_fUML_Link_Operation_retrieveLinkEnd_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_RETRIEVELINKEND_PROPERTY);
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_RETRIEVELINKENDVALUE_PROPERTY);
 	
 }
 
 void MDE4CPP_ExtensionsPackageImpl::createFUML_LinkEndContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_fUML_LinkEnd_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FUML_LINKEND_CLASS);
+	m_fUML_LinkEnd_Attribute_position = factory->createEAttribute_as_eAttributes_in_EClass(m_fUML_LinkEnd_Class, FUML_LINKEND_ATTRIBUTE_POSITION);
 	
 	m_fUML_LinkEnd_Attribute_end = factory->createEReference_as_eReferences_in_EClass(m_fUML_LinkEnd_Class, FUML_LINKEND_ATTRIBUTE_END);
 	m_fUML_LinkEnd_Attribute_endValue = factory->createEReference_as_eReferences_in_EClass(m_fUML_LinkEnd_Class, FUML_LINKEND_ATTRIBUTE_ENDVALUE);

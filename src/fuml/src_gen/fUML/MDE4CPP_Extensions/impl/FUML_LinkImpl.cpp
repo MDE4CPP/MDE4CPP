@@ -136,6 +136,14 @@ void FUML_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Obj
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+		this->add(object, end, 0);
+	//end of body
+}
+
+void FUML_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 		// If a link end already exists for the given end property, remove this link from the links of the current link end value
 	// and replace it with the given object.
 	// If no link end exists for the given end property, create a new one and add it to this link's link ends.
@@ -160,12 +168,14 @@ void FUML_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Obj
 		oldEndValueLinks->erase(this->getThisFUML_LinkPtr());
 
 		matchingLinkEnd->setEndValue(object);
+		matchingLinkEnd->setPosition(position);
 	}
 	else
 	{
 		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> newLinkEnd = fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createFUML_LinkEnd();
 		newLinkEnd->setEnd(end);
 		newLinkEnd->setEndValue(object);
+		newLinkEnd->setPosition(position);
 		this->getLinkEnds()->add(newLinkEnd);
 	}
 
@@ -185,6 +195,41 @@ void FUML_LinkImpl::destroy()
 		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& endValueLinks = endValue->getLinks();
 		endValueLinks->erase(this->getThisFUML_LinkPtr());
 	}
+	//end of body
+}
+
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> FUML_LinkImpl::retrieveLinkEnd(const std::shared_ptr<uml::Property>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();
+
+for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd : *linkEnds)
+{
+	if(linkEnd->getEnd() == end)
+	{
+		return linkEnd;
+	}
+}
+
+return nullptr;
+	//end of body
+}
+
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FUML_LinkImpl::retrieveLinkEndValue(const std::shared_ptr<uml::Property>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd = this->retrieveLinkEnd(end);
+
+if(linkEnd)
+{
+	return linkEnd->getEndValue();
+}
+else
+{
+	return nullptr;
+}
 	//end of body
 }
 
@@ -551,10 +596,146 @@ std::shared_ptr<Any> FUML_LinkImpl::eInvoke(int operationID, const std::shared_p
 			this->add(incoming_param_object,incoming_param_end);
 			break;
 		}
+		// fUML::MDE4CPP_Extensions::FUML_Link::add(fUML::MDE4CPP_Extensions::FUML_Object, uml::Property, int): 1930469695
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_ADD_FUML_OBJECT_EINT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'position'
+			//parameter 2
+			int incoming_param_position;
+			Bag<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_position = (*incoming_param_position_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'position'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			this->add(incoming_param_object,incoming_param_end,incoming_param_position);
+			break;
+		}
 		// fUML::MDE4CPP_Extensions::FUML_Link::destroy(): 1266427544
 		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_DESTROY:
 		{
 			this->destroy();
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Link::retrieveLinkEnd(uml::Property) : fUML::MDE4CPP_Extensions::FUML_LinkEnd: 2164603078
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_RETRIEVELINKEND_PROPERTY:
+		{
+			//Retrieve input parameter 'end'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveLinkEnd'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveLinkEnd'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->retrieveLinkEnd(incoming_param_end), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINKEND_CLASS);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Link::retrieveLinkEndValue(uml::Property) : fUML::MDE4CPP_Extensions::FUML_Object: 2560483969
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_RETRIEVELINKENDVALUE_PROPERTY:
+		{
+			//Retrieve input parameter 'end'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveLinkEndValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveLinkEndValue'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->retrieveLinkEndValue(incoming_param_end), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
 

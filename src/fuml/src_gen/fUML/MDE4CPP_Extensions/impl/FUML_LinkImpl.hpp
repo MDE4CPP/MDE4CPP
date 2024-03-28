@@ -46,7 +46,10 @@ virtual public FUML_Link
 			// Operations
 			//*********************************
 			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end) ;
+			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position) ;
 			virtual void destroy() ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> retrieveLinkEnd(const std::shared_ptr<uml::Property>& end) ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> retrieveLinkEndValue(const std::shared_ptr<uml::Property>& end) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

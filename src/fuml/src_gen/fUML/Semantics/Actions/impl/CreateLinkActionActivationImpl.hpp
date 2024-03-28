@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_MDE4CPP_EXTENSIONS_FUML_LINKENDFUML_LINKENDIMPL_HPP
-#define FUML_MDE4CPP_EXTENSIONS_FUML_LINKENDFUML_LINKENDIMPL_HPP
+#ifndef FUML_SEMANTICS_ACTIONS_CREATELINKACTIONACTIVATIONCREATELINKACTIONACTIVATIONIMPL_HPP
+#define FUML_SEMANTICS_ACTIONS_CREATELINKACTIONACTIVATIONCREATELINKACTIONACTIVATIONIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,51 +14,54 @@
 #include "fUML/fUML.hpp" 
 
 // model includes
-#include "../FUML_LinkEnd.hpp"
+#include "../CreateLinkActionActivation.hpp"
 
-#include "fUML/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/WriteLinkActionActivationImpl.hpp"
 
 //*********************************
-namespace fUML::MDE4CPP_Extensions 
+namespace fUML::Semantics::Actions 
 {
-	class FUML_API FUML_LinkEndImpl : virtual public ecore::EModelElementImpl,
-virtual public FUML_LinkEnd 
+	class FUML_API CreateLinkActionActivationImpl : virtual public WriteLinkActionActivationImpl, virtual public CreateLinkActionActivation 
 	{
 		public: 
-			FUML_LinkEndImpl(const FUML_LinkEndImpl & obj);
+			CreateLinkActionActivationImpl(const CreateLinkActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			FUML_LinkEndImpl& operator=(FUML_LinkEndImpl const&); 
+			CreateLinkActionActivationImpl& operator=(CreateLinkActionActivationImpl const&); 
 
 		protected:
-			friend class fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactoryImpl;
-			FUML_LinkEndImpl();
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> getThisFUML_LinkEndPtr() const;
-			virtual void setThisFUML_LinkEndPtr(std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> thisFUML_LinkEndPtr);
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
+			CreateLinkActionActivationImpl();
+			virtual std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> getThisCreateLinkActionActivationPtr() const;
+			virtual void setThisCreateLinkActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> thisCreateLinkActionActivationPtr);
 
+			//Additional constructors for the containments back reference
+			CreateLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~FUML_LinkEndImpl();
+			virtual ~CreateLinkActionActivationImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void doAction() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual int getPosition() const ;
-			virtual void setPosition (int _position);
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<uml::Property>& getEnd() const ;
-			virtual void setEnd(const std::shared_ptr<uml::Property>&) ;
-			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getEndValue() const ;
-			virtual void setEndValue(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) ;
+			virtual const std::shared_ptr<uml::CreateLinkAction>& getCreateLinkAction() const ;
+			virtual void setCreateLinkAction(const std::shared_ptr<uml::CreateLinkAction>&) ;
+			/*Additional Setter for 'LinkActionActivation::linkAction' redefined by reference 'createLinkAction'*/
+			virtual void setLinkAction(const std::shared_ptr<uml::LinkAction>&) ;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'createLinkAction'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createLinkAction'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -95,7 +98,7 @@ virtual public FUML_LinkEnd
 			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
-			std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> m_thisFUML_LinkEndPtr;
+			std::weak_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> m_thisCreateLinkActionActivationPtr;
 	};
 }
-#endif /* end of include guard: FUML_MDE4CPP_EXTENSIONS_FUML_LINKENDFUML_LINKENDIMPL_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CREATELINKACTIONACTIVATIONCREATELINKACTIONACTIVATIONIMPL_HPP */

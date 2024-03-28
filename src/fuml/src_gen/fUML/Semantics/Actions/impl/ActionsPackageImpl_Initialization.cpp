@@ -21,6 +21,7 @@
 
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
@@ -53,17 +54,21 @@ void ActionsPackageImpl::initializePackageContents()
 	m_callOperationActionActivation_Class->getESuperTypes()->push_back(getCallActionActivation_Class());
 	m_clearAssociationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_clearStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
+	m_createLinkActionActivation_Class->getESuperTypes()->push_back(getWriteLinkActionActivation_Class());
 	m_createObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_destroyLinkActionActivation_Class->getESuperTypes()->push_back(getWriteLinkActionActivation_Class());
 	m_destroyObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_expansionActivationGroup_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Class());
 	m_expansionNodeActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
 	m_expansionRegionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_inputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_invocationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_linkActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_outputPinActivation_Class->getESuperTypes()->push_back(getPinActivation_Class());
 	m_pinActivation_Class->getESuperTypes()->push_back(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class());
 	m_readExtentActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readIsClassifiedObjectActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_readLinkActionActivation_Class->getESuperTypes()->push_back(getLinkActionActivation_Class());
 	m_readSelfActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_readStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	m_removeStructuralFeatureValueActionActivation_Class->getESuperTypes()->push_back(getWriteStructuralFeatureActionActivation_Class());
@@ -71,6 +76,7 @@ void ActionsPackageImpl::initializePackageContents()
 	m_structuralFeatureActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_structuredActivityNodeActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_valueSpecificationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_writeLinkActionActivation_Class->getESuperTypes()->push_back(getLinkActionActivation_Class());
 	m_writeStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	
 
@@ -84,17 +90,21 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeCallOperationActionActivationContent();
 	initializeClearAssociationActionActivationContent();
 	initializeClearStructuralFeatureActionActivationContent();
+	initializeCreateLinkActionActivationContent();
 	initializeCreateObjectActionActivationContent();
+	initializeDestroyLinkActionActivationContent();
 	initializeDestroyObjectActionActivationContent();
 	initializeExpansionActivationGroupContent();
 	initializeExpansionNodeActivationContent();
 	initializeExpansionRegionActivationContent();
 	initializeInputPinActivationContent();
 	initializeInvocationActionActivationContent();
+	initializeLinkActionActivationContent();
 	initializeOutputPinActivationContent();
 	initializePinActivationContent();
 	initializeReadExtentActionActivationContent();
 	initializeReadIsClassifiedObjectActionActivationContent();
+	initializeReadLinkActionActivationContent();
 	initializeReadSelfActionActivationContent();
 	initializeReadStructuralFeatureActionActivationContent();
 	initializeRemoveStructuralFeatureValueActionActivationContent();
@@ -103,6 +113,7 @@ void ActionsPackageImpl::initializePackageContents()
 	initializeStructuredActivityNodeActivationContent();
 	initializeValueSpecificationActionActivationContent();
 	initializeValuesContent();
+	initializeWriteLinkActionActivationContent();
 	initializeWriteStructuralFeatureActionActivationContent();
 
 	initializePackageEDataTypes();
@@ -1311,6 +1322,60 @@ void ActionsPackageImpl::initializeClearStructuralFeatureActionActivationContent
 	
 }
 
+void ActionsPackageImpl::initializeCreateLinkActionActivationContent()
+{
+	m_createLinkActionActivation_Class->setName("CreateLinkActionActivation");
+	m_createLinkActionActivation_Class->setAbstract(false);
+	m_createLinkActionActivation_Class->setInterface(false);
+	
+	m_createLinkActionActivation_Class->_setID(CREATELINKACTIONACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_createLinkActionActivation_Attribute_createLinkAction->setName("createLinkAction");
+	m_createLinkActionActivation_Attribute_createLinkAction->setEType(uml::umlPackage::eInstance()->getCreateLinkAction_Class());
+	m_createLinkActionActivation_Attribute_createLinkAction->setLowerBound(1);
+	m_createLinkActionActivation_Attribute_createLinkAction->setUpperBound(1);
+	m_createLinkActionActivation_Attribute_createLinkAction->setTransient(false);
+	m_createLinkActionActivation_Attribute_createLinkAction->setVolatile(false);
+	m_createLinkActionActivation_Attribute_createLinkAction->setChangeable(true);
+	m_createLinkActionActivation_Attribute_createLinkAction->setUnsettable(false);
+	m_createLinkActionActivation_Attribute_createLinkAction->setUnique(true);
+	m_createLinkActionActivation_Attribute_createLinkAction->setDerived(false);
+	m_createLinkActionActivation_Attribute_createLinkAction->setOrdered(true);
+	m_createLinkActionActivation_Attribute_createLinkAction->setContainment(false);
+	m_createLinkActionActivation_Attribute_createLinkAction->setResolveProxies(true);
+	m_createLinkActionActivation_Attribute_createLinkAction->setDefaultValueLiteral("");	
+	
+	m_createLinkActionActivation_Attribute_createLinkAction->_setID(CREATELINKACTIONACTIVATION_ATTRIBUTE_CREATELINKACTION);
+	
+	/*
+	 * EOperations
+	 */
+	m_createLinkActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_createLinkActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_createLinkActionActivation_Operation_doAction->setLowerBound(0);
+	m_createLinkActionActivation_Operation_doAction->setUpperBound(1);
+	m_createLinkActionActivation_Operation_doAction->setUnique(true);
+	m_createLinkActionActivation_Operation_doAction->setOrdered(true);
+	
+	m_createLinkActionActivation_Operation_doAction->_setID(CREATELINKACTIONACTIVATION_OPERATION_DOACTION);
+	
+	
+	
+}
+
 void ActionsPackageImpl::initializeCreateObjectActionActivationContent()
 {
 	m_createObjectActionActivation_Class->setName("CreateObjectActionActivation");
@@ -1360,6 +1425,60 @@ void ActionsPackageImpl::initializeCreateObjectActionActivationContent()
 	m_createObjectActionActivation_Operation_doAction->setOrdered(true);
 	
 	m_createObjectActionActivation_Operation_doAction->_setID(CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION);
+	
+	
+	
+}
+
+void ActionsPackageImpl::initializeDestroyLinkActionActivationContent()
+{
+	m_destroyLinkActionActivation_Class->setName("DestroyLinkActionActivation");
+	m_destroyLinkActionActivation_Class->setAbstract(false);
+	m_destroyLinkActionActivation_Class->setInterface(false);
+	
+	m_destroyLinkActionActivation_Class->_setID(DESTROYLINKACTIONACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setName("destroyLinkAction");
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setEType(uml::umlPackage::eInstance()->getDestroyLinkAction_Class());
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setLowerBound(1);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setUpperBound(1);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setTransient(false);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setVolatile(false);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setChangeable(true);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setUnsettable(false);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setUnique(true);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setDerived(false);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setOrdered(true);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setContainment(false);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setResolveProxies(true);
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setDefaultValueLiteral("");	
+	
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->_setID(DESTROYLINKACTIONACTIVATION_ATTRIBUTE_DESTROYLINKACTION);
+	
+	/*
+	 * EOperations
+	 */
+	m_destroyLinkActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_destroyLinkActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_destroyLinkActionActivation_Operation_doAction->setLowerBound(0);
+	m_destroyLinkActionActivation_Operation_doAction->setUpperBound(1);
+	m_destroyLinkActionActivation_Operation_doAction->setUnique(true);
+	m_destroyLinkActionActivation_Operation_doAction->setOrdered(true);
+	
+	m_destroyLinkActionActivation_Operation_doAction->_setID(DESTROYLINKACTIONACTIVATION_OPERATION_DOACTION);
 	
 	
 	
@@ -2181,6 +2300,112 @@ void ActionsPackageImpl::initializeInvocationActionActivationContent()
 	
 }
 
+void ActionsPackageImpl::initializeLinkActionActivationContent()
+{
+	m_linkActionActivation_Class->setName("LinkActionActivation");
+	m_linkActionActivation_Class->setAbstract(true);
+	m_linkActionActivation_Class->setInterface(false);
+	
+	m_linkActionActivation_Class->_setID(LINKACTIONACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_linkActionActivation_Attribute_linkAction->setName("linkAction");
+	m_linkActionActivation_Attribute_linkAction->setEType(uml::umlPackage::eInstance()->getLinkAction_Class());
+	m_linkActionActivation_Attribute_linkAction->setLowerBound(1);
+	m_linkActionActivation_Attribute_linkAction->setUpperBound(1);
+	m_linkActionActivation_Attribute_linkAction->setTransient(false);
+	m_linkActionActivation_Attribute_linkAction->setVolatile(false);
+	m_linkActionActivation_Attribute_linkAction->setChangeable(true);
+	m_linkActionActivation_Attribute_linkAction->setUnsettable(false);
+	m_linkActionActivation_Attribute_linkAction->setUnique(true);
+	m_linkActionActivation_Attribute_linkAction->setDerived(false);
+	m_linkActionActivation_Attribute_linkAction->setOrdered(true);
+	m_linkActionActivation_Attribute_linkAction->setContainment(false);
+	m_linkActionActivation_Attribute_linkAction->setResolveProxies(true);
+	m_linkActionActivation_Attribute_linkAction->setDefaultValueLiteral("");	
+	
+	m_linkActionActivation_Attribute_linkAction->_setID(LINKACTIONACTIVATION_ATTRIBUTE_LINKACTION);
+	
+	/*
+	 * EOperations
+	 */
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData->setName("endMatchesEndData");
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData->setLowerBound(1);
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData->setUpperBound(1);
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData->setUnique(true);
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData->setOrdered(false);
+	
+	m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData->_setID(LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_FUML_LINK_LINKENDDATA);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData);
+		parameter->setName("link");
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData);
+		parameter->setName("endData");
+		parameter->setEType(uml::umlPackage::eInstance()->getLinkEndData_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_linkActionActivation_Operation_getAssociation->setName("getAssociation");
+	m_linkActionActivation_Operation_getAssociation->setEType(uml::umlPackage::eInstance()->getAssociation_Class());
+	m_linkActionActivation_Operation_getAssociation->setLowerBound(1);
+	m_linkActionActivation_Operation_getAssociation->setUpperBound(1);
+	m_linkActionActivation_Operation_getAssociation->setUnique(true);
+	m_linkActionActivation_Operation_getAssociation->setOrdered(false);
+	
+	m_linkActionActivation_Operation_getAssociation->_setID(LINKACTIONACTIVATION_OPERATION_GETASSOCIATION);
+	
+	
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData->setName("linkMatchesEndData");
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData->setLowerBound(1);
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData->setUpperBound(1);
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData->setUnique(true);
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData->setOrdered(false);
+	
+	m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData->_setID(LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_FUML_LINK_LINKENDDATA);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData);
+		parameter->setName("link");
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData);
+		parameter->setName("endDataList");
+		parameter->setEType(uml::umlPackage::eInstance()->getLinkEndData_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	
+}
+
 void ActionsPackageImpl::initializeOutputPinActivationContent()
 {
 	m_outputPinActivation_Class->setName("OutputPinActivation");
@@ -2396,6 +2621,60 @@ void ActionsPackageImpl::initializeReadIsClassifiedObjectActionActivationContent
 	m_readIsClassifiedObjectActionActivation_Operation_doAction->setOrdered(true);
 	
 	m_readIsClassifiedObjectActionActivation_Operation_doAction->_setID(READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_DOACTION);
+	
+	
+	
+}
+
+void ActionsPackageImpl::initializeReadLinkActionActivationContent()
+{
+	m_readLinkActionActivation_Class->setName("ReadLinkActionActivation");
+	m_readLinkActionActivation_Class->setAbstract(false);
+	m_readLinkActionActivation_Class->setInterface(false);
+	
+	m_readLinkActionActivation_Class->_setID(READLINKACTIONACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_readLinkActionActivation_Attribute_readLinkAction->setName("readLinkAction");
+	m_readLinkActionActivation_Attribute_readLinkAction->setEType(uml::umlPackage::eInstance()->getReadLinkAction_Class());
+	m_readLinkActionActivation_Attribute_readLinkAction->setLowerBound(1);
+	m_readLinkActionActivation_Attribute_readLinkAction->setUpperBound(1);
+	m_readLinkActionActivation_Attribute_readLinkAction->setTransient(false);
+	m_readLinkActionActivation_Attribute_readLinkAction->setVolatile(false);
+	m_readLinkActionActivation_Attribute_readLinkAction->setChangeable(true);
+	m_readLinkActionActivation_Attribute_readLinkAction->setUnsettable(false);
+	m_readLinkActionActivation_Attribute_readLinkAction->setUnique(true);
+	m_readLinkActionActivation_Attribute_readLinkAction->setDerived(false);
+	m_readLinkActionActivation_Attribute_readLinkAction->setOrdered(true);
+	m_readLinkActionActivation_Attribute_readLinkAction->setContainment(false);
+	m_readLinkActionActivation_Attribute_readLinkAction->setResolveProxies(true);
+	m_readLinkActionActivation_Attribute_readLinkAction->setDefaultValueLiteral("");	
+	
+	m_readLinkActionActivation_Attribute_readLinkAction->_setID(READLINKACTIONACTIVATION_ATTRIBUTE_READLINKACTION);
+	
+	/*
+	 * EOperations
+	 */
+	m_readLinkActionActivation_Operation_doAction->setName("doAction");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_readLinkActionActivation_Operation_doAction->setEType(unknownClass);
+	}
+	m_readLinkActionActivation_Operation_doAction->setLowerBound(1);
+	m_readLinkActionActivation_Operation_doAction->setUpperBound(1);
+	m_readLinkActionActivation_Operation_doAction->setUnique(true);
+	m_readLinkActionActivation_Operation_doAction->setOrdered(true);
+	
+	m_readLinkActionActivation_Operation_doAction->_setID(READLINKACTIONACTIVATION_OPERATION_DOACTION);
 	
 	
 	
@@ -3154,6 +3433,28 @@ void ActionsPackageImpl::initializeValuesContent()
 	m_values_Attribute_values->setDefaultValueLiteral("");
 	
 	m_values_Attribute_values->_setID(VALUES_ATTRIBUTE_VALUES);
+	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
+	
+}
+
+void ActionsPackageImpl::initializeWriteLinkActionActivationContent()
+{
+	m_writeLinkActionActivation_Class->setName("WriteLinkActionActivation");
+	m_writeLinkActionActivation_Class->setAbstract(true);
+	m_writeLinkActionActivation_Class->setInterface(false);
+	
+	m_writeLinkActionActivation_Class->_setID(WRITELINKACTIONACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
 	
 	/*
 	 * EReferences

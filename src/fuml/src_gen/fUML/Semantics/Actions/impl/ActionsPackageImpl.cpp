@@ -403,6 +403,25 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 
 // End Class ClearStructuralFeatureActionActivation
 
+// Begin Class CreateLinkActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getCreateLinkActionActivation_Class() const
+{
+	return m_createLinkActionActivation_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getCreateLinkActionActivation_Attribute_createLinkAction() const
+{
+	return m_createLinkActionActivation_Attribute_createLinkAction;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getCreateLinkActionActivation_Operation_doAction() const
+{
+	return m_createLinkActionActivation_Operation_doAction;
+}
+
+// End Class CreateLinkActionActivation
+
 // Begin Class CreateObjectActionActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getCreateObjectActionActivation_Class() const
 {
@@ -421,6 +440,25 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 }
 
 // End Class CreateObjectActionActivation
+
+// Begin Class DestroyLinkActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getDestroyLinkActionActivation_Class() const
+{
+	return m_destroyLinkActionActivation_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getDestroyLinkActionActivation_Attribute_destroyLinkAction() const
+{
+	return m_destroyLinkActionActivation_Attribute_destroyLinkAction;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getDestroyLinkActionActivation_Operation_doAction() const
+{
+	return m_destroyLinkActionActivation_Operation_doAction;
+}
+
+// End Class DestroyLinkActionActivation
 
 // Begin Class DestroyObjectActionActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Class() const
@@ -644,6 +682,33 @@ const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageIm
 
 // End Class InvocationActionActivation
 
+// Begin Class LinkActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Class() const
+{
+	return m_linkActionActivation_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Attribute_linkAction() const
+{
+	return m_linkActionActivation_Attribute_linkAction;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData() const
+{
+	return m_linkActionActivation_Operation_endMatchesEndData_FUML_Link_LinkEndData;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_getAssociation() const
+{
+	return m_linkActionActivation_Operation_getAssociation;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getLinkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData() const
+{
+	return m_linkActionActivation_Operation_linkMatchesEndData_FUML_Link_LinkEndData;
+}
+
+// End Class LinkActionActivation
+
 // Begin Class OutputPinActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getOutputPinActivation_Class() const
 {
@@ -719,6 +784,25 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 }
 
 // End Class ReadIsClassifiedObjectActionActivation
+
+// Begin Class ReadLinkActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getReadLinkActionActivation_Class() const
+{
+	return m_readLinkActionActivation_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getReadLinkActionActivation_Attribute_readLinkAction() const
+{
+	return m_readLinkActionActivation_Attribute_readLinkAction;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getReadLinkActionActivation_Operation_doAction() const
+{
+	return m_readLinkActionActivation_Operation_doAction;
+}
+
+// End Class ReadLinkActionActivation
 
 // Begin Class ReadSelfActionActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getReadSelfActionActivation_Class() const
@@ -931,6 +1015,17 @@ const std::shared_ptr<ecore::EAttribute>& fUML::Semantics::Actions::ActionsPacka
 
 
 // End Class Values
+
+// Begin Class WriteLinkActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getWriteLinkActionActivation_Class() const
+{
+	return m_writeLinkActionActivation_Class;
+}
+
+
+
+
+// End Class WriteLinkActionActivation
 
 // Begin Class WriteStructuralFeatureActionActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getWriteStructuralFeatureActionActivation_Class() const

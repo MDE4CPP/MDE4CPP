@@ -74,7 +74,10 @@ namespace fUML::MDE4CPP_Extensions
 			// Operations
 			//*********************************
 			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end) = 0;
+			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position) = 0;
 			virtual void destroy() = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> retrieveLinkEnd(const std::shared_ptr<uml::Property>& end) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> retrieveLinkEndValue(const std::shared_ptr<uml::Property>& end) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

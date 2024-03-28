@@ -6,6 +6,7 @@
 //metametamodel classes
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EReference.hpp"
@@ -141,6 +142,51 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_fUML_Link_Operation_add_FUML_Object_EInt->setName("add");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_fUML_Link_Operation_add_FUML_Object_EInt->setEType(unknownClass);
+	}
+	m_fUML_Link_Operation_add_FUML_Object_EInt->setLowerBound(1);
+	m_fUML_Link_Operation_add_FUML_Object_EInt->setUpperBound(1);
+	m_fUML_Link_Operation_add_FUML_Object_EInt->setUnique(true);
+	m_fUML_Link_Operation_add_FUML_Object_EInt->setOrdered(true);
+	
+	m_fUML_Link_Operation_add_FUML_Object_EInt->_setID(FUML_LINK_OPERATION_ADD_FUML_OBJECT_EINT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_add_FUML_Object_EInt);
+		parameter->setName("object");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_add_FUML_Object_EInt);
+		parameter->setName("end");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_add_FUML_Object_EInt);
+		parameter->setName("position");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_fUML_Link_Operation_destroy->setName("destroy");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -157,6 +203,44 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 	m_fUML_Link_Operation_destroy->_setID(FUML_LINK_OPERATION_DESTROY);
 	
 	
+	m_fUML_Link_Operation_retrieveLinkEnd_Property->setName("retrieveLinkEnd");
+	m_fUML_Link_Operation_retrieveLinkEnd_Property->setEType(getFUML_LinkEnd_Class());
+	m_fUML_Link_Operation_retrieveLinkEnd_Property->setLowerBound(1);
+	m_fUML_Link_Operation_retrieveLinkEnd_Property->setUpperBound(1);
+	m_fUML_Link_Operation_retrieveLinkEnd_Property->setUnique(true);
+	m_fUML_Link_Operation_retrieveLinkEnd_Property->setOrdered(true);
+	
+	m_fUML_Link_Operation_retrieveLinkEnd_Property->_setID(FUML_LINK_OPERATION_RETRIEVELINKEND_PROPERTY);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_retrieveLinkEnd_Property);
+		parameter->setName("end");
+		parameter->setEType(uml::umlPackage::eInstance()->getProperty_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property->setName("retrieveLinkEndValue");
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property->setEType(getFUML_Object_Class());
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property->setLowerBound(1);
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property->setUpperBound(1);
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property->setUnique(true);
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property->setOrdered(true);
+	
+	m_fUML_Link_Operation_retrieveLinkEndValue_Property->_setID(FUML_LINK_OPERATION_RETRIEVELINKENDVALUE_PROPERTY);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_retrieveLinkEndValue_Property);
+		parameter->setName("end");
+		parameter->setEType(uml::umlPackage::eInstance()->getProperty_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -171,6 +255,22 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkEndContent()
 	/*
 	 * EAttributes
 	 */
+	m_fUML_LinkEnd_Attribute_position = getFUML_LinkEnd_Attribute_position();
+	m_fUML_LinkEnd_Attribute_position->setName("position");
+	m_fUML_LinkEnd_Attribute_position->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	m_fUML_LinkEnd_Attribute_position->setLowerBound(0);
+	m_fUML_LinkEnd_Attribute_position->setUpperBound(1);
+	m_fUML_LinkEnd_Attribute_position->setTransient(false);
+	m_fUML_LinkEnd_Attribute_position->setVolatile(false);
+	m_fUML_LinkEnd_Attribute_position->setChangeable(true);
+	m_fUML_LinkEnd_Attribute_position->setUnsettable(false);
+	m_fUML_LinkEnd_Attribute_position->setUnique(true);
+	m_fUML_LinkEnd_Attribute_position->setDerived(false);
+	m_fUML_LinkEnd_Attribute_position->setOrdered(true);
+	m_fUML_LinkEnd_Attribute_position->setID(false);
+	m_fUML_LinkEnd_Attribute_position->setDefaultValueLiteral("");
+	
+	m_fUML_LinkEnd_Attribute_position->_setID(FUML_LINKEND_ATTRIBUTE_POSITION);
 	
 	/*
 	 * EReferences
