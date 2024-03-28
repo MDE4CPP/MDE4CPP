@@ -46,8 +46,8 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<uml::Association> getAssociation(const std::shared_ptr<uml::StructuralFeature>& feature) ;
-			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<Any>& oppositeValue) ;
-			virtual std::shared_ptr<Bag<uml::Element>> getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<Any>& oppositeValue, const std::shared_ptr<Any>& endValue) ;
+			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& oppositeValue) ;
+			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& oppositeValue, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& endValue) ;
 			virtual std::shared_ptr<uml::Property> getOppositeEnd(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end) ;
 			
 			//*********************************

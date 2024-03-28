@@ -38,11 +38,6 @@ namespace fUML::Semantics
 		class ActivitiesPackage;
 	}
 
-	namespace Classification 
-	{
-		class ClassificationPackage;
-	}
-
 	namespace CommonBehavior 
 	{
 		class CommonBehaviorPackage;
@@ -53,19 +48,9 @@ namespace fUML::Semantics
 		class LociPackage;
 	}
 
-	namespace SimpleClassifiers 
-	{
-		class SimpleClassifiersPackage;
-	}
-
 	namespace StructuredClassifiers 
 	{
 		class StructuredClassifiersPackage;
-	}
-
-	namespace Values 
-	{
-		class ValuesPackage;
 	}
 
 }
@@ -97,12 +82,9 @@ namespace fUML::Semantics
 
 			virtual std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> getActions_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> getActivities_Package() const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> getClassification_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Loci::LociPackage> getLoci_Package() const = 0;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> getSimpleClassifiers_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::ValuesPackage> getValues_Package() const = 0;
 			
 
 			//Singleton Getter

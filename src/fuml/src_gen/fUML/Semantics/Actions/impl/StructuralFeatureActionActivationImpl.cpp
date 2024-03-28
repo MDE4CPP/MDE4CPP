@@ -45,15 +45,16 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Association.hpp"
-#include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
@@ -65,6 +66,7 @@
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -146,7 +148,7 @@ return association;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<Any>& oppositeValue)
+std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> StructuralFeatureActionActivationImpl::getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& oppositeValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -157,7 +159,7 @@ return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element>> StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<Any>& oppositeValue, const std::shared_ptr<Any>& endValue)
+std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& oppositeValue, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& endValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -385,8 +387,8 @@ std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operatio
 			result = eEcoreAny(this->getAssociation(incoming_param_feature), uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, Any) : uml::Element[*]: 2765304632
-		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_EJAVAOBJECT:
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinks(uml::Association, uml::StructuralFeature, fUML::MDE4CPP_Extensions::FUML_Object) : fUML::MDE4CPP_Extensions::FUML_Link[*]: 288310019
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_FUML_OBJECT:
 		{
 			//Retrieve input parameter 'association'
 			//parameter 0
@@ -442,24 +444,36 @@ std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operatio
 		
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
-			std::shared_ptr<Any> incoming_param_oppositeValue;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_oppositeValue;
 			Bag<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			try
 			{
-				incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinks'!")
-				return nullptr;
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_oppositeValue_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_oppositeValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinks'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinks'!")
+					return nullptr;
+				}
 			}
 		
-			std::shared_ptr<Bag<uml::Element>> resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
-			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
+			return eEcoreContainerAny(resultList,fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINK_CLASS);
 			break;
 		}
-		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, Any, Any) : uml::Element[*]: 2298435547
-		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_EJAVAOBJECT:
+		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getMatchingLinksForEndValue(uml::Association, uml::StructuralFeature, fUML::MDE4CPP_Extensions::FUML_Object, fUML::MDE4CPP_Extensions::FUML_Object) : fUML::MDE4CPP_Extensions::FUML_Link[*]: 3367747900
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_FUML_OBJECT:
 		{
 			//Retrieve input parameter 'association'
 			//parameter 0
@@ -515,34 +529,58 @@ std::shared_ptr<Any> StructuralFeatureActionActivationImpl::eInvoke(int operatio
 		
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
-			std::shared_ptr<Any> incoming_param_oppositeValue;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_oppositeValue;
 			Bag<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			try
 			{
-				incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!")
-				return nullptr;
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_oppositeValue_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_oppositeValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'oppositeValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!")
+					return nullptr;
+				}
 			}
 		
 			//Retrieve input parameter 'endValue'
 			//parameter 3
-			std::shared_ptr<Any> incoming_param_endValue;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_endValue;
 			Bag<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
-			try
 			{
-				incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'endValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!")
-				return nullptr;
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_endValue_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_endValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'endValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'endValue'. Failed to invoke operation 'getMatchingLinksForEndValue'!")
+					return nullptr;
+				}
 			}
 		
-			std::shared_ptr<Bag<uml::Element>> resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
-			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
+			return eEcoreContainerAny(resultList,fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINK_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::StructuralFeatureActionActivation::getOppositeEnd(uml::Association, uml::StructuralFeature) : uml::Property: 1289289959

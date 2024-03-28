@@ -419,13 +419,12 @@ namespace fUML::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long DESTROYOBJECTACTIONACTIVATION_CLASS = 624995293;
 			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 49;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			static const unsigned long DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION = 445795804;
 			
 			static const unsigned long DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_EJAVAOBJECT_EBOOLEAN = 3697661383;
 			static const unsigned long DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION = 393014891;
-			static const unsigned long DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_ELEMENT_ELEMENT = 4059157106;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getDestroyObjectActionActivation_Class() const = 0;
@@ -435,7 +434,6 @@ namespace fUML::Semantics::Actions
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_doAction() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const = 0;
 			
 			// End Class DestroyObjectActionActivation
 
@@ -817,8 +815,8 @@ namespace fUML::Semantics::Actions
 			
 			
 			static const unsigned long STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETASSOCIATION_STRUCTURALFEATURE = 4112546735;
-			static const unsigned long STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_EJAVAOBJECT = 2765304632;
-			static const unsigned long STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_EJAVAOBJECT = 2298435547;
+			static const unsigned long STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_FUML_OBJECT = 288310019;
+			static const unsigned long STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_FUML_OBJECT = 3367747900;
 			static const unsigned long STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE = 1289289959;
 			
 			//Class and Feature Getter
@@ -827,8 +825,8 @@ namespace fUML::Semantics::Actions
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getAssociation_StructuralFeature() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const = 0;
 			
 			// End Class StructuralFeatureActionActivation

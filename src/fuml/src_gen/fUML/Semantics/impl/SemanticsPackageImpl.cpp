@@ -27,17 +27,11 @@
 
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
-
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
 #include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
 
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
 using namespace fUML::Semantics;
 
@@ -98,10 +92,6 @@ std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> fUML::Semantics:
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 } 
-std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> fUML::Semantics::SemanticsPackageImpl::getClassification_Package() const
-{
-	return fUML::Semantics::Classification::ClassificationPackage::eInstance();
-} 
 std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> fUML::Semantics::SemanticsPackageImpl::getCommonBehavior_Package() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
@@ -110,17 +100,9 @@ std::shared_ptr<fUML::Semantics::Loci::LociPackage> fUML::Semantics::SemanticsPa
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance();
 } 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> fUML::Semantics::SemanticsPackageImpl::getSimpleClassifiers_Package() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-} 
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> fUML::Semantics::SemanticsPackageImpl::getStructuredClassifiers_Package() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-} 
-std::shared_ptr<fUML::Semantics::Values::ValuesPackage> fUML::Semantics::SemanticsPackageImpl::getValues_Package() const
-{
-	return fUML::Semantics::Values::ValuesPackage::eInstance();
 } 
 
 

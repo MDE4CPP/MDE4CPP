@@ -50,10 +50,6 @@ SET(SOURCE_FILES
 	Semantics/Activities/impl/ActivitiesPackageImpl.cpp
 	Semantics/Activities/impl/ActivitiesPackageImpl_Creation.cpp
 	Semantics/Activities/impl/ActivitiesPackageImpl_Initialization.cpp
-	Semantics/Classification/impl/ClassificationFactoryImpl.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Creation.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Initialization.cpp
 	Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.cpp
 	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.cpp
 	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Creation.cpp
@@ -62,18 +58,10 @@ SET(SOURCE_FILES
 	Semantics/Loci/impl/LociPackageImpl.cpp
 	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
 	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl_Creation.cpp
-	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl_Initialization.cpp
 	Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.cpp
 	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.cpp
 	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Creation.cpp
 	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Initialization.cpp
-	Semantics/Values/impl/ValuesFactoryImpl.cpp
-	Semantics/Values/impl/ValuesPackageImpl.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Creation.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Initialization.cpp
 	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.cpp
 	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl.cpp
 	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl_Creation.cpp

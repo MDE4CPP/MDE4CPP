@@ -36,19 +36,16 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-#include "uml/Property.hpp"
-#include "uml/DestroyObjectAction.hpp"
-//#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-//#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "uml/UMLAny.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -56,7 +53,8 @@
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/DestroyObjectAction.hpp"
-#include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
@@ -66,6 +64,7 @@
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -141,59 +140,20 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// If the given value contains an uml::Element, then destroy the contained object, per the given destroy action attribute values.
+	// If the given value contains an FUML_Object, then destroy the contained object, per the given destroy action attribute values.
+
+	std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 
 	try
 	{
-		std::shared_ptr<uml::Element> object = value->get<std::shared_ptr<uml::Element>>();
-
-		if (isDestroyLinks || isDestroyOwnedObjects)
-		{	
-			/*Currently not supported
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValues = this->getExecutionLocus()->getExtensionalValues();
-			for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& extensionalValue : *extensionalValues)
-			{
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link> (extensionalValue);
-				if (link)
-				{
-					if (this->valueParticipatesInLink(reference, link))
-					{
-						if (isDestroyLinks | this->objectIsComposite(reference, link))
-						{
-							link->destroy();
-						}
-					}
-				}
-			}
-			*/
-		}
-		if (isDestroyOwnedObjects)
-		{	
-			/*Currently not supported
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> objectFeatureValues = reference->retrieveFeatureValues();
-			for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *objectFeatureValues)
-			{
-				std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property> (featureValue->getFeature());
-				if(property)
-				{
-					if (property->getAggregation() == uml::AggregationKind::COMPOSITE)
-					{
-						std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
-						for(const std::shared_ptr<fUML::Semantics::Values::Value>& ownedValue : *values)
-						{
-							this->destroyObject(ownedValue, isDestroyLinks, isDestroyOwnedObjects);
-
-						}
-					}
-				}
-			}
-			*/
-		}
-		object->destroy();
+		std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
+	
+		object->destroy(isDestroyLinks, isDestroyOwnedObjects);
 	}
 	catch(...)
 	{
-		DEBUG_ERROR("Provided object is not an instance of uml::Element! Failed to destroy object!")
+		DEBUG_ERROR("Provided context is not an instance of uml::Element! Failed to add feature value!")
 	}
 	//end of body
 }
@@ -228,38 +188,7 @@ void DestroyObjectActionActivationImpl::doAction()
 	//end of body
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(const std::shared_ptr<uml::Element>& reference, const std::shared_ptr<uml::Element>& link)
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-		// Test whether the given reference participates in the given link as a composite.
-	/*Currently not supported
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> linkFeatureValues = link->getFeatureValues();
-	for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *linkFeatureValues)
-	{
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values= featureValue->getValues();
-		for(&std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
-		{
-			value->equals(reference);
 
-			if(!(value->equals(reference)))
-			{
-
-				std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property> (featureValue->getFeature());
-				if(property)
-				{
-					if (property->getAggregation() == uml::AggregationKind::COMPOSITE)
-					{
-						return true;
-					}
-				}
-			}
-		}
-	}
-	*/
-	return false;
-	//end of body
-}
 
 //*********************************
 // Attribute Getters & Setters
@@ -557,64 +486,6 @@ std::shared_ptr<Any> DestroyObjectActionActivationImpl::eInvoke(int operationID,
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
-		}
-		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(uml::Element, uml::Element) : bool: 4059157106
-		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_ELEMENT_ELEMENT:
-		{
-			//Retrieve input parameter 'reference'
-			//parameter 0
-			std::shared_ptr<uml::Element> incoming_param_reference;
-			Bag<Any>::const_iterator incoming_param_reference_arguments_citer = std::next(arguments->begin(), 0);
-			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_reference_arguments_citer));
-				if(ecoreAny)
-				{
-					try
-					{
-						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_reference = std::dynamic_pointer_cast<uml::Element>(_temp);
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!")
-						return nullptr;
-					}
-				}
-				else
-				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'reference'. Failed to invoke operation 'objectIsComposite'!")
-					return nullptr;
-				}
-			}
-		
-			//Retrieve input parameter 'link'
-			//parameter 1
-			std::shared_ptr<uml::Element> incoming_param_link;
-			Bag<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
-			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_link_arguments_citer));
-				if(ecoreAny)
-				{
-					try
-					{
-						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_link = std::dynamic_pointer_cast<uml::Element>(_temp);
-					}
-					catch(...)
-					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!")
-						return nullptr;
-					}
-				}
-				else
-				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'objectIsComposite'!")
-					return nullptr;
-				}
-			}
-		
-			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link), 0, false);
 			break;
 		}
 

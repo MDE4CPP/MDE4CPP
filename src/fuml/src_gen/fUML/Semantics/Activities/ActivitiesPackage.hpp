@@ -116,7 +116,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYEXECUTION_CLASS = 750496334;
 			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 63;
 			
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP = 11280750;
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY = 1195953016;

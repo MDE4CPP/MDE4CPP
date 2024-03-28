@@ -45,12 +45,16 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Link;
+	class FUML_Object;
+}
 namespace uml 
 {
 	class Action;
 	class ActivityNode;
 	class DestroyObjectAction;
-	class Element;
 }
 
 // namespace macro header include
@@ -85,7 +89,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void destroyObject(const std::shared_ptr<Any>& value, bool isDestroyLinks, bool isDestroyOwnedObjects) = 0;
 			virtual void doAction() = 0;
-			virtual bool objectIsComposite(const std::shared_ptr<uml::Element>& reference, const std::shared_ptr<uml::Element>& link) = 0;
+			
 
 			//*********************************
 			// Attribute Getters & Setters

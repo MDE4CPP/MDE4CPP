@@ -94,6 +94,7 @@ namespace fUML::MDE4CPP_Extensions
 			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
 			virtual void addTo(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link, const std::shared_ptr<uml::Property>& end) = 0;
 			virtual void destroy() = 0;
+			virtual void destroy(bool isDestroyLinks, bool isDestroyOwnedObjects) = 0;
 			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
 			virtual std::shared_ptr<Any> invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;
 			virtual std::shared_ptr<Any> invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;

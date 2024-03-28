@@ -113,7 +113,7 @@ namespace fUML::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long FUML_OBJECT_CLASS = 1012292556;
 			static const unsigned int FUML_OBJECT_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 48;
+			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 49;
 			
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_LINKS = 376392934;
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_LOCUS = 121078438;
@@ -122,6 +122,7 @@ namespace fUML::MDE4CPP_Extensions
 			static const unsigned long FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 2307607380;
 			static const unsigned long FUML_OBJECT_OPERATION_ADDTO_FUML_LINK_PROPERTY = 3737882179;
 			static const unsigned long FUML_OBJECT_OPERATION_DESTROY = 4089641697;
+			static const unsigned long FUML_OBJECT_OPERATION_DESTROY_EBOOLEAN_EBOOLEAN = 709810581;
 			static const unsigned long FUML_OBJECT_OPERATION_GETTYPES = 1742598842;
 			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT = 738288422;
 			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT = 960883863;
@@ -142,6 +143,7 @@ namespace fUML::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation__register_EventAccepter() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_addTo_FUML_Link_Property() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy_EBoolean_EBoolean() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_getTypes() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject() const = 0;

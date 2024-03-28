@@ -169,6 +169,10 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Object_Operation_destroy;
 }
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_destroy_EBoolean_EBoolean() const
+{
+	return m_fUML_Object_Operation_destroy_EBoolean_EBoolean;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_getTypes() const
 {
 	return m_fUML_Object_Operation_getTypes;

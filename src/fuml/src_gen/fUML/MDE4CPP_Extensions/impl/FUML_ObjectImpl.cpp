@@ -35,6 +35,8 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
+//Includes from codegen annotation
+#include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -43,8 +45,8 @@
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -157,6 +159,44 @@ void FUML_ObjectImpl::destroy()
     }
 
     this->getLocus()->remove(getThisFUML_ObjectPtr());
+	//end of body
+}
+
+void FUML_ObjectImpl::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// NOTE: Destruction of composite properties is handled in subclass-specific generated destroy methods
+
+if(isDestroyLinks || isDestroyOwnedObjects)
+{
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& links = this->getLinks();
+
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *links)
+	{
+		if(isDestroyOwnedObjects)
+		{
+			const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>> linkEnds = link->getLinkEnds();
+
+			for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> linkEnd : *linkEnds)
+			{
+				if(linkEnd->getEnd()->getAggregation() == uml::AggregationKind::COMPOSITE)
+				{
+					if(linkEnd->getEndValue() != this->getThisFUML_ObjectPtr())
+					{
+						linkEnd->getEndValue()->destroy(isDestroyLinks, isDestroyOwnedObjects);
+					}
+				}
+			}
+		}
+		if(isDestroyLinks)
+		{
+			link->destroy();
+		}
+	}
+}
+
+this->destroy();
 	//end of body
 }
 
@@ -714,6 +754,40 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_DESTROY:
 		{
 			this->destroy();
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::destroy(bool, bool): 709810581
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_DESTROY_EBOOLEAN_EBOOLEAN:
+		{
+			//Retrieve input parameter 'isDestroyLinks'
+			//parameter 0
+			bool incoming_param_isDestroyLinks;
+			Bag<Any>::const_iterator incoming_param_isDestroyLinks_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_isDestroyLinks = (*incoming_param_isDestroyLinks_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isDestroyLinks'. Failed to invoke operation 'destroy'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'isDestroyOwnedObjects'
+			//parameter 1
+			bool incoming_param_isDestroyOwnedObjects;
+			Bag<Any>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isDestroyOwnedObjects'. Failed to invoke operation 'destroy'!")
+				return nullptr;
+			}
+		
+			this->destroy(incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::getTypes() : uml::Classifier[*] {const}: 1742598842

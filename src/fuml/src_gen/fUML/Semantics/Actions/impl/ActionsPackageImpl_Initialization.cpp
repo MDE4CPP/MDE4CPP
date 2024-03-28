@@ -22,7 +22,6 @@
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
@@ -1580,35 +1579,6 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 	m_destroyObjectActionActivation_Operation_doAction->_setID(DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION);
 	
 	
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setName("objectIsComposite");
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setLowerBound(1);
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setUpperBound(1);
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setUnique(true);
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->setOrdered(false);
-	
-	m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element->_setID(DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_ELEMENT_ELEMENT);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element);
-		parameter->setName("reference");
-		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element);
-		parameter->setName("link");
-		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
 	
 }
 
@@ -2934,17 +2904,17 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setName("getMatchingLinks");
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setEType(uml::umlPackage::eInstance()->getElement_Class());
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setLowerBound(0);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setUpperBound(-1);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setUnique(true);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->setOrdered(false);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object->setName("getMatchingLinks");
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object->setLowerBound(0);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object->setUpperBound(-1);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object->setUnique(true);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object->setOrdered(false);
 	
-	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject->_setID(STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_EJAVAOBJECT);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object->_setID(STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_FUML_OBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object);
 		parameter->setName("association");
 		parameter->setEType(uml::umlPackage::eInstance()->getAssociation_Class());
 		parameter->setLowerBound(0);
@@ -2954,7 +2924,7 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object);
 		parameter->setName("end");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -2964,26 +2934,26 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object);
 		parameter->setName("oppositeValue");
-		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setName("getMatchingLinksForEndValue");
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setEType(uml::umlPackage::eInstance()->getElement_Class());
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setLowerBound(0);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setUpperBound(-1);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setUnique(true);
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->setOrdered(true);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object->setName("getMatchingLinksForEndValue");
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object->setLowerBound(0);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object->setUpperBound(-1);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object->setUnique(true);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object->setOrdered(true);
 	
-	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject->_setID(STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_EJAVAOBJECT);
+	m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object->_setID(STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_FUML_OBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object);
 		parameter->setName("association");
 		parameter->setEType(uml::umlPackage::eInstance()->getAssociation_Class());
 		parameter->setLowerBound(0);
@@ -2993,7 +2963,7 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object);
 		parameter->setName("end");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -3003,9 +2973,9 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object);
 		parameter->setName("oppositeValue");
-		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -3013,9 +2983,9 @@ void ActionsPackageImpl::initializeStructuralFeatureActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object);
 		parameter->setName("endValue");
-		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

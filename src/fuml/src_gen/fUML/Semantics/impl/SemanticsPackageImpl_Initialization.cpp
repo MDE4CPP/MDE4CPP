@@ -23,17 +23,11 @@
 
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
-
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
 #include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
 
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
@@ -65,12 +59,9 @@ void SemanticsPackageImpl::initializePackageContents()
 
 	std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionsPackageImpl>(getActions_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivitiesPackageImpl>(getActivities_Package())->initializePackageContents();
-	std::dynamic_pointer_cast<fUML::Semantics::Classification::ClassificationPackageImpl>(getClassification_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl>(getCommonBehavior_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<fUML::Semantics::Loci::LociPackageImpl>(getLoci_Package())->initializePackageContents();
-	std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl>(getSimpleClassifiers_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl>(getStructuredClassifiers_Package())->initializePackageContents();
-	std::dynamic_pointer_cast<fUML::Semantics::Values::ValuesPackageImpl>(getValues_Package())->initializePackageContents();
 }
 
 

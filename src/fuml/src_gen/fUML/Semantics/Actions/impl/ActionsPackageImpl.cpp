@@ -480,10 +480,6 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 {
 	return m_destroyObjectActionActivation_Operation_doAction;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const
-{
-	return m_destroyObjectActionActivation_Operation_objectIsComposite_Element_Element;
-}
 
 // End Class DestroyObjectActionActivation
 
@@ -892,13 +888,13 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 {
 	return m_structuralFeatureActionActivation_Operation_getAssociation_StructuralFeature;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object() const
 {
-	return m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject;
+	return m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object() const
 {
-	return m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject;
+	return m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const
 {

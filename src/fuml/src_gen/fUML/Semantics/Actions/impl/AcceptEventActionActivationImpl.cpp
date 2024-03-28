@@ -52,8 +52,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/AcceptEventAction.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 #include "uml/Action.hpp"

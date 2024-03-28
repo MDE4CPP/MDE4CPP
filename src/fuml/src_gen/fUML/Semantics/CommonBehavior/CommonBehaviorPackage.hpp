@@ -143,7 +143,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long EXECUTION_CLASS = 921905715;
 			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 59;
 			
 			static const unsigned long EXECUTION_ATTRIBUTE_BEHAVIOR = 106545659;
 			static const unsigned long EXECUTION_ATTRIBUTE_CONTEXT = 646122967;

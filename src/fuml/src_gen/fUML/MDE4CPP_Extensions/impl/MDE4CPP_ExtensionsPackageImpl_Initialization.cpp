@@ -457,6 +457,41 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 	m_fUML_Object_Operation_destroy->_setID(FUML_OBJECT_OPERATION_DESTROY);
 	
 	
+	m_fUML_Object_Operation_destroy_EBoolean_EBoolean->setName("destroy");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_fUML_Object_Operation_destroy_EBoolean_EBoolean->setEType(unknownClass);
+	}
+	m_fUML_Object_Operation_destroy_EBoolean_EBoolean->setLowerBound(1);
+	m_fUML_Object_Operation_destroy_EBoolean_EBoolean->setUpperBound(1);
+	m_fUML_Object_Operation_destroy_EBoolean_EBoolean->setUnique(true);
+	m_fUML_Object_Operation_destroy_EBoolean_EBoolean->setOrdered(true);
+	
+	m_fUML_Object_Operation_destroy_EBoolean_EBoolean->_setID(FUML_OBJECT_OPERATION_DESTROY_EBOOLEAN_EBOOLEAN);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_destroy_EBoolean_EBoolean);
+		parameter->setName("isDestroyLinks");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_destroy_EBoolean_EBoolean);
+		parameter->setName("isDestroyOwnedObjects");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_fUML_Object_Operation_getTypes->setName("getTypes");
 	m_fUML_Object_Operation_getTypes->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 	m_fUML_Object_Operation_getTypes->setLowerBound(0);
