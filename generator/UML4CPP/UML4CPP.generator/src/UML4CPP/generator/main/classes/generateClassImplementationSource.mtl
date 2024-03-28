@@ -398,6 +398,24 @@ const std::shared_ptr<Bag<uml::Classifier>>& [className/]::getTypes() const
 	return types;
 }
 
+void destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
+{
+	[for (compositeProperty : Property | aClass.getAllAttributes()->select(p : Property | p.aggregation = AggregationKind::composite and p.type.isComplex())) before('\tif(isDestroyOwnedObjects)\n\t{') after('\n\t}')]
+		// Recursively destroy object(s) of composite property [compositeProperty.name/]
+		[if (compositeProperty.upper = 1)]
+		const std::shared_ptr<[compositeProperty.type.generateCppRawType(true)/]>& _[compositeProperty.name/] = this->[compositeProperty.getterName()/]();
+		_[compositeProperty.name/]->destroy(isDestroyLinks, isDestroyOwnedObjects);
+		[else]
+		const std::shared_ptr<Bag<[compositeProperty.type.generateCppRawType(true)/]>>& _[compositeProperty.name/]s = this->[compositeProperty.getterName()/]();
+		for(const std::shared_ptr<[compositeProperty.type.generateCppRawType(true)/]>& _[compositeProperty.name/] : *_[compositeProperty.name/]s)
+		{
+			_[compositeProperty.name/]->destroy(isDestroyLinks, isDestroyOwnedObjects);
+		}
+		[/if]
+	[/for]
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
+}
+
 [/if]
 //**************************************
 // StructuralFeature Getter & Setter

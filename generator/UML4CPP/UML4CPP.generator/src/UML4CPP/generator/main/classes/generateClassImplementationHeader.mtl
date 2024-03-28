@@ -113,7 +113,8 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			[/for]
 			[if (isFUMLExecutable())]
 			// fUML-specific Operations
-			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+			virtual void destroy(bool, bool);
 
 			[/if]
 			//*********************************
