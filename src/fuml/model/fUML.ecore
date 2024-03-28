@@ -464,23 +464,25 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DestroyObjectActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;uml/Property.hpp&quot;&#xA;#include &quot;uml/DestroyObjectAction.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;//#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;"/>
+          <details key="implIncludes" value="#include &quot;fUML/MDE4CPP_Extensions/FUML_Object.hpp&quot;&#xA;#include &quot;uml/UMLAny.hpp&quot;&#xA;"/>
         </eAnnotations>
         <eOperations name="destroyObject" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// If the given value contains an uml::Element, then destroy the contained object, per the given destroy action attribute values.&#xA;&#xA;&#x9;try&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Element> object = value->get&lt;std::shared_ptr&lt;uml::Element>>();&#xA;&#xA;&#x9;&#x9;if (isDestroyLinks || isDestroyOwnedObjects)&#xA;&#x9;&#x9;{&#x9;&#xA;&#x9;&#x9;&#x9;/*Currently not supported&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValues = this->getExecutionLocus()->getExtensionalValues();&#xA;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue>&amp; extensionalValue : *extensionalValues)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Link> link = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link> (extensionalValue);&#xA;&#x9;&#x9;&#x9;&#x9;if (link)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (this->valueParticipatesInLink(reference, link))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (isDestroyLinks | this->objectIsComposite(reference, link))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;link->destroy();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;*/&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (isDestroyOwnedObjects)&#xA;&#x9;&#x9;{&#x9;&#xA;&#x9;&#x9;&#x9;/*Currently not supported&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::SimpleClassifiers::FeatureValue>> objectFeatureValues = reference->retrieveFeatureValues();&#xA;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::FeatureValue>&amp; featureValue : *objectFeatureValues)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Property> property = std::dynamic_pointer_cast&lt;uml::Property> (featureValue->getFeature());&#xA;&#x9;&#x9;&#x9;&#x9;if(property)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (property->getAggregation() == uml::AggregationKind::COMPOSITE)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Values::Value>> values = featureValue->getValues();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;fUML::Semantics::Values::Value>&amp; ownedValue : *values)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;this->destroyObject(ownedValue, isDestroyLinks, isDestroyOwnedObjects);&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;*/&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;object->destroy();&#xA;&#x9;}&#xA;&#x9;catch(...)&#xA;&#x9;{&#xA;&#x9;&#x9;DEBUG_ERROR(&quot;Provided object is not an instance of uml::Element! Failed to destroy object!&quot;)&#xA;&#x9;}"/>
+            <details key="body" value="// If the given value contains an FUML_Object, then destroy the contained object, per the given destroy action attribute values.&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::UMLAny> umlAny = std::dynamic_pointer_cast&lt;uml::UMLAny>(value);&#xA;&#xA;&#x9;try&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Element> element = umlAny->getAsElement();&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object> object = std::dynamic_pointer_cast&lt;fUML::MDE4CPP_Extensions::FUML_Object>(element);&#xA;&#x9;&#xA;&#x9;&#x9;object->destroy(isDestroyLinks, isDestroyOwnedObjects);&#xA;&#x9;}&#xA;&#x9;catch(...)&#xA;&#x9;{&#xA;&#x9;&#x9;DEBUG_ERROR(&quot;Provided context is not an instance of uml::Element! Failed to add feature value!&quot;)&#xA;&#x9;}"/>
           </eAnnotations>
           <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="isDestroyLinks" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
           <eParameters name="isDestroyOwnedObjects" ordered="false" lowerBound="1"
               eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         </eOperations>
-        <eOperations name="objectIsComposite" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eOperations name="getCompositeValue" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="&#x9;// Test whether the given reference participates in the given link as a composite.&#xA;&#x9;/*Currently not supported&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::SimpleClassifiers::FeatureValue>> linkFeatureValues = link->getFeatureValues();&#xA;&#x9;for(const std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::FeatureValue>&amp; featureValue : *linkFeatureValues)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Values::Value>> values= featureValue->getValues();&#xA;&#x9;&#x9;for(&amp;std::shared_ptr&lt;fUML::Semantics::Values::Value>&amp; value : *values)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;value->equals(reference);&#xA;&#xA;&#x9;&#x9;&#x9;if(!(value->equals(reference)))&#xA;&#x9;&#x9;&#x9;{&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Property> property = std::dynamic_pointer_cast&lt;uml::Property> (featureValue->getFeature());&#xA;&#x9;&#x9;&#x9;&#x9;if(property)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (property->getAggregation() == uml::AggregationKind::COMPOSITE)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;return true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;*/&#xA;&#x9;return false;"/>
+            <details key="body" value="// If the given reference participates in the given link as a composite,&#xA;&#x9;// then return the opposite value. Otherwise return null.&#xD;&#xA;&#xA;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = link->getLinkEnds();&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;&#x9;{&#xA;&#x9;&#x9;const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; endValue = linkEnd->getEndValue();&#xA;&#x9;&#x9;if(reference != endValue)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;const std::shared_ptr&lt;uml::Property>&amp; property = linkEnd->getEnd();&#xA;&#xA;&#x9;&#x9;&#x9;if (property->getAggregation() == uml::AggregationKind::COMPOSITE)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;return endValue;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return nullptr;"/>
+            <details key="doNotGenerate" value="Operation DestroyObjectActionActivation::getCompositeValue is obsolete in this implementation. The corresponding semantics are handled by generated destroy operations.&#xA;Thus, it is not generated."/>
           </eAnnotations>
-          <eParameters name="reference" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
-          <eParameters name="link" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+          <eAnnotations source="obsolete"/>
+          <eParameters name="reference" ordered="false" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
+          <eParameters name="link" ordered="false" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Link"/>
         </eOperations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -948,13 +950,13 @@
           </eAnnotations>
           <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
         </eOperations>
-        <eOperations name="getMatchingLinks" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
+        <eOperations name="getMatchingLinks" ordered="false" upperBound="-1" eType="#//MDE4CPP_Extensions/FUML_Link">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Get the links of the given binary association whose end opposite&#xA;// to the given end has the given value&#xA;&#xA;return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);"/>
           </eAnnotations>
           <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
           <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-          <eParameters name="oppositeValue" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="oppositeValue" ordered="false" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
         </eOperations>
         <eOperations name="getOppositeEnd" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -963,14 +965,14 @@
           <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
           <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
         </eOperations>
-        <eOperations name="getMatchingLinksForEndValue" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
+        <eOperations name="getMatchingLinksForEndValue" upperBound="-1" eType="#//MDE4CPP_Extensions/FUML_Link">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Get the links of the given binary association whose end opposite&#xA;// to the given end has the given opposite value and, optionally, that&#xA;// has a given end value for the given end.&#xA;&#xA;/* Currently not supported&#xA;std::shared_ptr&lt;uml::Property> oppositeEnd = getOppositeEnd(association, end);&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getExecutionLocus()->retrieveExtent(association);&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::StructuredClassifiers::Link>> links(new Bag&lt;fUML::Semantics::StructuredClassifiers::Link>);&#xA;for(unsigned int i = 0; i &lt; extent->size(); i++){&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);&#xA;&#x9;if(link->retrieveFeatureValue(oppositeEnd)->getValues()->at(0) == oppositeValue) {&#xA;&#x9;&#x9;bool matches = true;&#xA;&#x9;&#x9;if(endValue != nullptr) {&#xA;&#x9;&#x9;&#x9;matches = (link->retrieveFeatureValue(end)->getValues()->at(0) == endValue);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if(matches){&#xA;&#x9;&#x9;&#x9;if(!(std::dynamic_pointer_cast&lt;uml::MultiplicityElement>(end)->getIsOrdered()) || (links->size() == 0)){&#xA;&#x9;&#x9;&#x9;&#x9;links->add(std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link>(link));&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;unsigned int n = link->retrieveFeatureValue(end)->getPosition();&#xA;&#x9;&#x9;&#x9;&#x9;bool continueSearching = true;&#xA;&#x9;&#x9;&#x9;&#x9;unsigned int j = 0;&#xA;&#x9;&#x9;&#x9;&#x9;while(continueSearching &amp;&amp; (j &lt; links->size())){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;j += 1;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;continueSearching = (unsigned int)(links->at(j-1)->retrieveFeatureValue(end)->getPosition()) &lt; n;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;if(continueSearching){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;links->add(std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link>(link));&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;links->insert((links->begin() + (j-1)), std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link>(link));&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;return links;&#xA;*/&#xA;&#xA;throw std::runtime_error(&quot;UnsupportedOperationException: &quot; + std::string(__PRETTY_FUNCTION__));"/>
           </eAnnotations>
           <eParameters name="association" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
           <eParameters name="end" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-          <eParameters name="oppositeValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eParameters name="endValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="oppositeValue" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
+          <eParameters name="endValue" eType="#//MDE4CPP_Extensions/FUML_Object"/>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StructuredActivityNodeActivation"
@@ -1908,6 +1910,9 @@
     <eSubpackages name="Classification" nsURI="http:///fUML_Semantics/Semantics/Classification.ecore"
         nsPrefix="fUML_Semantics.Semantics.Classification">
       <eAnnotations source="obsolete"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="doNotGenerate" value="Package 'Classification' is excluded from generation because it is obsolete."/>
+      </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="InstanceValueEvaluation" eSuperTypes="#//Semantics/Values/Evaluation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;&#xA;#include &quot;abstractDataTypes/Subset.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/DataValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/Values/Value.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/DataType.hpp&quot;&#xA;#include &quot;uml/Enumeration.hpp&quot;&#xA;#include &quot;uml/EnumerationLiteral.hpp&quot;&#xA;#include &quot;uml/InstanceSpecification.hpp&quot;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xA;#include &quot;uml/Slot.hpp&quot;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
@@ -2648,6 +2653,9 @@
     <eSubpackages name="SimpleClassifiers" nsURI="http:///fUML_Semantics/Semantics/SimpleClassifiers.ecore"
         nsPrefix="fUML_Semantics.Semantics.SimpleClassifiers">
       <eAnnotations source="obsolete"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="doNotGenerate" value="Package 'SimpleClassifiers' is excluded from generation because it is obsolete."/>
+      </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//Semantics/SimpleClassifiers/PrimitiveValue">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/umlFactory.hpp&quot;"/>
@@ -2908,7 +2916,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SignalInstance" eSuperTypes="#//Semantics/SimpleClassifiers/CompoundValue">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'SignalInstance' is currently not supported."/>
+          <details key="doNotGenerate" value="SignalInstances are represented by class fUML::MDE4CPP_Extensions::FUML_SignalInstance in this fUML implementation."/>
         </eAnnotations>
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -3328,6 +3336,9 @@
     <eSubpackages name="Values" nsURI="http:///fUML_Semantics/Semantics/Values.ecore"
         nsPrefix="fUML_Semantics.Semantics.Values">
       <eAnnotations source="obsolete"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="doNotGenerate" value="Package 'Values' is excluded from generation because it is obsolete."/>
+      </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="Evaluation" abstract="true" eSuperTypes="#//Semantics/Loci/SemanticVisitor">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="doNotGenerate" value="Class 'Evaluation' is currently not supported and might be obsolete."/>
@@ -3474,6 +3485,9 @@
   </eSubpackages>
   <eSubpackages name="MDE4CPP_Extensions" nsPrefix="fUML_Semantics.Semantics.MDE4CPP_Extensions">
     <eClassifiers xsi:type="ecore:EClass" name="FUML_Object" abstract="true" eSuperTypes="http://www.eclipse.org/uml2/5.0.0/UML#//Element">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp&quot;"/>
+      </eAnnotations>
       <eAnnotations source="MDE4CPP_Substitutes" references="#//Semantics/StructuredClassifiers/Object">
         <details key="doc" value="This class is meant to provide an interface defining fUML-specific functionality of fUML::Semantics::StructuredClassifiers::Object&#xA;to generated UML model classes within MDE4CPP. Thus, it can be understood as a substitution of fUML::Semantics::StructuredClassifiers::Object."/>
       </eAnnotations>
@@ -3516,6 +3530,13 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="    if(this->getObjectActivation() != nullptr)&#xA;    {&#xA;        this->getObjectActivation()->stop();&#xA;        this->setObjectActivation(nullptr);&#xA;    }&#xA;&#xA;    this->getLocus()->remove(getThisFUML_ObjectPtr());"/>
         </eAnnotations>
+      </eOperations>
+      <eOperations name="destroy" lowerBound="1">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="// NOTE: Destruction of composite properties is handled in subclass-specific generated destroy methods&#xA;&#xA;if(isDestroyLinks || isDestroyOwnedObjects)&#xA;{&#xA;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; links = this->getLinks();&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link>&amp; link : *links)&#xA;&#x9;{&#xA;&#x9;&#x9;if(isDestroyOwnedObjects)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>> linkEnds = link->getLinkEnds();&#xA;&#xA;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd> linkEnd : *linkEnds)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;if(linkEnd->getEnd()->getAggregation() == uml::AggregationKind::COMPOSITE)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(linkEnd->getEndValue() != this->getThisFUML_ObjectPtr())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;linkEnd->getEndValue()->destroy(isDestroyLinks, isDestroyOwnedObjects);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if(isDestroyLinks)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;link->destroy();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;this->destroy();"/>
+        </eAnnotations>
+        <eParameters name="isDestroyLinks" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        <eParameters name="isDestroyOwnedObjects" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       </eOperations>
       <eOperations name="invokeOperation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
         <eParameters name="_qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
