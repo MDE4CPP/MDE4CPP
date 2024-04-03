@@ -36,9 +36,7 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-//#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-//#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -163,51 +161,58 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> StructuralFeatureActio
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Get the links of the given binary association whose end opposite
-// to the given end has the given opposite value and, optionally, that
-// has a given end value for the given end.
+		// Get the links of the given binary association whose end opposite
+	// to the given end has the given opposite value and, optionally, that
+	// has a given end value for the given end.
 
-/* Currently not supported
-std::shared_ptr<uml::Property> oppositeEnd = getOppositeEnd(association, end);
+	std::shared_ptr<uml::Property> oppositeEnd = getOppositeEnd(association, end);
+	std::shared_ptr<uml::Property> endAsProperty = std::dynamic_pointer_cast<uml::Property>(end);
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getExecutionLocus()->retrieveExtent(association);
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinksOfOppositeValue = oppositeValue->getLinks();
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links(new Bag<fUML::Semantics::StructuredClassifiers::Link>);
-for(unsigned int i = 0; i < extent->size(); i++){
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);
-	if(link->retrieveFeatureValue(oppositeEnd)->getValues()->at(0) == oppositeValue) {
-		bool matches = true;
-		if(endValue != nullptr) {
-			matches = (link->retrieveFeatureValue(end)->getValues()->at(0) == endValue);
-		}
-		
-		if(matches){
-			if(!(std::dynamic_pointer_cast<uml::MultiplicityElement>(end)->getIsOrdered()) || (links->size() == 0)){
-				links->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links(new Bag<fUML::MDE4CPP_Extensions::FUML_Link>);
+
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinksOfOppositeValue)
+	{
+		if(link->retrieveLinkEndValue(oppositeEnd) == oppositeValue) 
+		{
+			bool matches = true;
+			if(endValue != nullptr) 
+			{
+				matches = (link->retrieveLinkEndValue(endAsProperty) == endValue);
 			}
-			else {
-				unsigned int n = link->retrieveFeatureValue(end)->getPosition();
-				bool continueSearching = true;
-				unsigned int j = 0;
-				while(continueSearching && (j < links->size())){
-					j += 1;
-					continueSearching = (unsigned int)(links->at(j-1)->retrieveFeatureValue(end)->getPosition()) < n;
+			
+			if(matches)
+			{
+				if(!(endAsProperty->getIsOrdered()) || (links->size() == 0))
+				{
+					links->add(link);
 				}
-				if(continueSearching){
-					links->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
-				}
-				else {
-					links->insert((links->begin() + (j-1)), std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
+				else 
+				{
+					unsigned int n = link->retrieveLinkEnd(endAsProperty)->getPosition();
+					bool continueSearching = true;
+					unsigned int j = 0,
+								linksSize = links->size();
+					while(continueSearching && (j < linksSize))
+					{
+						j += 1;
+						continueSearching = (unsigned int)(links->at(j-1)->retrieveLinkEnd(endAsProperty)->getPosition()) < n;
+					}
+					if(continueSearching)
+					{
+						links->add(link);
+					}
+					else 
+					{
+						links->insert((links->begin() + (j-1)), link);
+					}
 				}
 			}
 		}
 	}
-}
 
-return links;
-*/
-
-throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	return links;
 	//end of body
 }
 

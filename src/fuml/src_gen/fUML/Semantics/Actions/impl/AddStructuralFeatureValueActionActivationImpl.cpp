@@ -36,14 +36,17 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "uml/UMLAny.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/AddStructuralFeatureValueAction.hpp"
-#include "uml/Property.hpp"
 #include "uml/InputPin.hpp"
+#include "uml/Property.hpp"
+#include "uml/UMLAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -142,11 +145,11 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// Get the values of the object and value input pins.
+	// Get the values of the object and value input pins.
 	// If the given feature is an association end, then create a link between the object and value inputs.
 	// Otherwise, if the object input is a structural value, then add a value to the values for the feature.
 	// If isReplaceAll is true, first remove all current matching links or feature values.
-	// If isReplaceAll is false and there is an insertAt pin, insert the value at the appropriate position.
+	// If isReplaceAll is false and there is an insertAt pin, insert the value at the appropriate position.	
 
 	const std::shared_ptr<uml::AddStructuralFeatureValueAction>& action = this->getAddStructuralFeatureValueAction();
 	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
@@ -173,53 +176,61 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 		insertAt = insertValue->get<int>();
 	}
 
-	/*
-	 * Currently not supported
 	if(association != nullptr) 
 	{
-		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
-		
-		std::shared_ptr<uml::Property> oppositeEnd = this->getOppositeEnd(association, feature);
-		int position = 0;
-		if(oppositeEnd->getIsOrdered()) {
-			position = this->getMatchingLinks(association, oppositeEnd, inputValue)->size() + 1;
-		}
-		
-		if (action->getIsReplaceAll()){
-			for(int unsigned i = 0; i < links->size(); i++) {
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
-				link->destroy();
-			}			
-		}
-		else if(feature->getIsUnique())
+		try
 		{
-			unsigned int i = 1;
-			bool destroyed = false;
-			while(!destroyed && i <= links->size()){
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i-1);
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = link->retrieveFeatureValue(feature);
-				if(featureValue->getValues()->at(0)->equals(inputValue))
-				{
-					position = link->retrieveFeatureValue(oppositeEnd)->getPosition();
-					link->destroy();
-					destroyed = true;
-				}
-				i++;
+			std::shared_ptr<uml::UMLAny> umlAny_InputValue = std::dynamic_pointer_cast<uml::UMLAny>(inputValue);
+			std::shared_ptr<uml::UMLAny> umlAny_Value = std::dynamic_pointer_cast<uml::UMLAny>(value);
+
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> inputValueObject = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(umlAny_InputValue->getAsElement());
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> valueObject = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(umlAny_Value->getAsElement());
+
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links = this->getMatchingLinks(association, feature, valueObject);
+		
+			std::shared_ptr<uml::Property> oppositeEnd = this->getOppositeEnd(association, feature);
+			int position = 0;
+			if(oppositeEnd->getIsOrdered()) 
+			{
+				position = this->getMatchingLinks(association, oppositeEnd, inputValueObject)->size() + 1;
 			}
+			
+			if (action->getIsReplaceAll())
+			{
+				for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *links) 
+				{
+					link->destroy();
+				}			
+			}
+			else if(feature->getIsUnique())
+			{
+				unsigned int i = 1,
+							linksSize = links->size();
+				bool destroyed = false;
+				while(!destroyed && i <= linksSize)
+				{
+					const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link = links->at(i-1);
+					if(link->retrieveLinkEndValue(property) == inputValueObject)
+					{
+						position = link->retrieveLinkEnd(oppositeEnd)->getPosition();
+						link->destroy();
+						destroyed = true;
+					}
+					i++;
+				}
+			}
+
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> newLink = fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createFUML_Link();
+			newLink->setType(association);
+			newLink->add(inputValueObject, property, insertAt);
+			newLink->add(valueObject, oppositeEnd, position);
 		}
-		
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> newLink = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createLink();
-		newLink->setType(association);
-		
-		newLink->assignFeatureValue(feature, inputValues, insertAt);
-		
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> oppositeValues(new Bag<fUML::Semantics::Values::Value>());
-		oppositeValues->add(value);
-		newLink->assignFeatureValue(oppositeEnd, oppositeValues, position);
-		
-		newLink->getLocus()->add(newLink);
+		catch(...)
+		{
+			DEBUG_ERROR("Either provided object or value is not an instance of uml::Element! Failed to add feature value!")
+		}
 	}
-	else */
+	else
 	{
 		std::shared_ptr<uml::Element> structuredValue = nullptr;
 
