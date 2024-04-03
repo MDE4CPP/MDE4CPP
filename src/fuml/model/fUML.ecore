@@ -970,11 +970,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StructuralFeatureActionActivation"
-          abstract="true" eSuperTypes="#//Semantics/Actions/ActionActivation">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp&quot;"/>
-        </eAnnotations>
-      </eClassifiers>
+          abstract="true" eSuperTypes="#//Semantics/Actions/ActionActivation"/>
       <eClassifiers xsi:type="ecore:EClass" name="StructuredActivityNodeActivation"
           eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
