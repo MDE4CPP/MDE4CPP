@@ -90,7 +90,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="ActionActivation" abstract="true"
           eSuperTypes="#//Semantics/Activities/ActivityNodeActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &lt;algorithm>&#xA;#include &lt;iterator>&#xA;#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityNodeActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ControlToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ForkNodeActivation.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/PinActivation.hpp&quot;&#xA;#include &quot;uml/Action.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/DataStoreNode.hpp&quot;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xA;#include &quot;uml/umlFactory.hpp&quot;&#xA;#include &quot;uml/ForkNode.hpp&quot;&#xA;#include &quot;uml/Activity.hpp&quot;&#xA;#include &quot;uml/UMLAny.hpp&quot;"/>
+          <details key="implIncludes" value="#include &lt;algorithm>&#xA;#include &lt;iterator>&#xA;#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ActivityNodeActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ControlToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ForkNodeActivation.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ObjectToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/PinActivation.hpp&quot;&#xA;#include &quot;uml/Action.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/DataStoreNode.hpp&quot;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xA;#include &quot;uml/umlFactory.hpp&quot;&#xA;#include &quot;uml/ForkNode.hpp&quot;&#xA;#include &quot;uml/Activity.hpp&quot;&#xA;#include &quot;uml/UMLAny.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="isFirng" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -203,6 +203,36 @@
             <details key="body" value="&#x9;    bool isSource = false;&#xD;&#xA;    if (this->getOutgoingEdges()->size() > 0)&#xD;&#xA;    {&#xD;&#xA;    &#x9;auto target=this->getOutgoingEdges()->at(0)->getTarget().lock();&#xD;&#xA;    &#x9;if(target)&#xD;&#xA;    &#x9;{&#xD;&#xA;    &#x9;&#x9;isSource = target->isSourceFor(edgeInstance);&#xD;&#xA;    &#x9;}&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isSource;"/>
           </eAnnotations>
           <eParameters name="edgeInstance" ordered="false" lowerBound="1" eType="#//Semantics/Activities/ActivityEdgeInstance"/>
+        </eOperations>
+        <eOperations name="getAssociation" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// If the structural feature for the action of this activation is an association end,&#xA;// then get the associated association.&#xA;&#xA;std::shared_ptr&lt;uml::Association> association = nullptr;&#xA;std::shared_ptr&lt;uml::Property> property = std::dynamic_pointer_cast&lt;uml::Property>(feature);&#xA;&#xA;if(property != nullptr)&#xA;{&#xA;&#x9;association = property->getAssociation();&#xA;}&#xA;&#xA;return association;"/>
+          </eAnnotations>
+          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+        </eOperations>
+        <eOperations name="getMatchingLinks" ordered="false" upperBound="-1" eType="#//MDE4CPP_Extensions/FUML_Link">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Get the links of the given binary association whose end opposite&#xA;// to the given end has the given value&#xA;&#xA;return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);"/>
+          </eAnnotations>
+          <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
+          <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+          <eParameters name="oppositeValue" ordered="false" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
+        </eOperations>
+        <eOperations name="getOppositeEnd" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Get the end of a binary association opposite to the given end.&#xA;&#xA;std::shared_ptr&lt;uml::Property> oppositeEnd = association->getMemberEnd()->at(0);&#xA;if(oppositeEnd == end)&#xA;{&#xA;&#x9;&#x9;oppositeEnd = association->getMemberEnd()->at(1);&#xA;}&#xA;&#xA;return oppositeEnd;"/>
+          </eAnnotations>
+          <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
+          <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+        </eOperations>
+        <eOperations name="getMatchingLinksForEndValue" upperBound="-1" eType="#//MDE4CPP_Extensions/FUML_Link">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="&#x9;// Get the links of the given binary association whose end opposite&#xA;&#x9;// to the given end has the given opposite value and, optionally, that&#xA;&#x9;// has a given end value for the given end.&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::Property> oppositeEnd = getOppositeEnd(association, end);&#xA;&#x9;std::shared_ptr&lt;uml::Property> endAsProperty = std::dynamic_pointer_cast&lt;uml::Property>(end);&#xA;&#xA;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; allLinksOfOppositeValue = oppositeValue->getLinks();&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>> links(new Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>);&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link>&amp; link : *allLinksOfOppositeValue)&#xA;&#x9;{&#xA;&#x9;&#x9;if(link->retrieveLinkEndValue(oppositeEnd) == oppositeValue) &#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;bool matches = true;&#xA;&#x9;&#x9;&#x9;if(endValue != nullptr) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;matches = (link->retrieveLinkEndValue(endAsProperty) == endValue);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(matches)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;if(!(endAsProperty->getIsOrdered()) || (links->size() == 0))&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;links->add(link);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;unsigned int n = link->retrieveLinkEnd(endAsProperty)->getPosition();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;bool continueSearching = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;unsigned int j = 0,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;linksSize = links->size();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;while(continueSearching &amp;&amp; (j &lt; linksSize))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;j += 1;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;continueSearching = (unsigned int)(links->at(j-1)->retrieveLinkEnd(endAsProperty)->getPosition()) &lt; n;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(continueSearching)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;links->add(link);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;links->insert((links->begin() + (j-1)), link);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;return links;"/>
+          </eAnnotations>
+          <eParameters name="association" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
+          <eParameters name="end" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+          <eParameters name="oppositeValue" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
+          <eParameters name="endValue" eType="#//MDE4CPP_Extensions/FUML_Object"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="pinActivation" ordered="false"
             upperBound="-1" eType="#//Semantics/Actions/PinActivation" eOpposite="#//Semantics/Actions/PinActivation/actionActivation">
@@ -944,36 +974,6 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp&quot;"/>
         </eAnnotations>
-        <eOperations name="getAssociation" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// If the structural feature for the action of this activation is an association end,&#xA;// then get the associated association.&#xA;&#xA;std::shared_ptr&lt;uml::Association> association = nullptr;&#xA;std::shared_ptr&lt;uml::Property> property = std::dynamic_pointer_cast&lt;uml::Property>(feature);&#xA;&#xA;if(property != nullptr)&#xA;{&#xA;&#x9;association = property->getAssociation();&#xA;}&#xA;&#xA;return association;"/>
-          </eAnnotations>
-          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-        </eOperations>
-        <eOperations name="getMatchingLinks" ordered="false" upperBound="-1" eType="#//MDE4CPP_Extensions/FUML_Link">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Get the links of the given binary association whose end opposite&#xA;// to the given end has the given value&#xA;&#xA;return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);"/>
-          </eAnnotations>
-          <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
-          <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-          <eParameters name="oppositeValue" ordered="false" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
-        </eOperations>
-        <eOperations name="getOppositeEnd" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Get the end of a binary association opposite to the given end.&#xA;&#xA;std::shared_ptr&lt;uml::Property> oppositeEnd = association->getMemberEnd()->at(0);&#xA;if(oppositeEnd == end)&#xA;{&#xA;&#x9;&#x9;oppositeEnd = association->getMemberEnd()->at(1);&#xA;}&#xA;&#xA;return oppositeEnd;"/>
-          </eAnnotations>
-          <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
-          <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-        </eOperations>
-        <eOperations name="getMatchingLinksForEndValue" upperBound="-1" eType="#//MDE4CPP_Extensions/FUML_Link">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="&#x9;// Get the links of the given binary association whose end opposite&#xA;&#x9;// to the given end has the given opposite value and, optionally, that&#xA;&#x9;// has a given end value for the given end.&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::Property> oppositeEnd = getOppositeEnd(association, end);&#xA;&#x9;std::shared_ptr&lt;uml::Property> endAsProperty = std::dynamic_pointer_cast&lt;uml::Property>(end);&#xA;&#xA;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; allLinksOfOppositeValue = oppositeValue->getLinks();&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>> links(new Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>);&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link>&amp; link : *allLinksOfOppositeValue)&#xA;&#x9;{&#xA;&#x9;&#x9;if(link->retrieveLinkEndValue(oppositeEnd) == oppositeValue) &#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;bool matches = true;&#xA;&#x9;&#x9;&#x9;if(endValue != nullptr) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;matches = (link->retrieveLinkEndValue(endAsProperty) == endValue);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(matches)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;if(!(endAsProperty->getIsOrdered()) || (links->size() == 0))&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;links->add(link);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;unsigned int n = link->retrieveLinkEnd(endAsProperty)->getPosition();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;bool continueSearching = true;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;unsigned int j = 0,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;linksSize = links->size();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;while(continueSearching &amp;&amp; (j &lt; linksSize))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;j += 1;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;continueSearching = (unsigned int)(links->at(j-1)->retrieveLinkEnd(endAsProperty)->getPosition()) &lt; n;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(continueSearching)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;links->add(link);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;links->insert((links->begin() + (j-1)), link);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;return links;"/>
-          </eAnnotations>
-          <eParameters name="association" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
-          <eParameters name="end" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-          <eParameters name="oppositeValue" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
-          <eParameters name="endValue" eType="#//MDE4CPP_Extensions/FUML_Object"/>
-        </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StructuredActivityNodeActivation"
           eSuperTypes="#//Semantics/Actions/ActionActivation">
