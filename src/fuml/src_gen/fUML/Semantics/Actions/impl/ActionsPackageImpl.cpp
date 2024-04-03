@@ -206,6 +206,22 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 {
 	return m_actionActivation_Operation_fire_Token;
 }
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_getAssociation_StructuralFeature() const
+{
+	return m_actionActivation_Operation_getAssociation_StructuralFeature;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_getMatchingLinks_Association_FUML_Object() const
+{
+	return m_actionActivation_Operation_getMatchingLinks_Association_FUML_Object;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object() const
+{
+	return m_actionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const
+{
+	return m_actionActivation_Operation_getOppositeEnd_Association_StructuralFeature;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_getTokens_InputPin() const
 {
 	return m_actionActivation_Operation_getTokens_InputPin;
@@ -884,22 +900,6 @@ const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageIm
 
 
 
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getAssociation_StructuralFeature() const
-{
-	return m_structuralFeatureActionActivation_Operation_getAssociation_StructuralFeature;
-}
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object() const
-{
-	return m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_FUML_Object;
-}
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object() const
-{
-	return m_structuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object;
-}
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const
-{
-	return m_structuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature;
-}
 
 // End Class StructuralFeatureActionActivation
 

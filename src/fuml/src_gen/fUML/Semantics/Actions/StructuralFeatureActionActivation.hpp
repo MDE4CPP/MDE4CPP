@@ -44,18 +44,10 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
-namespace fUML::MDE4CPP_Extensions 
-{
-	class FUML_Link;
-	class FUML_Object;
-}
 namespace uml 
 {
 	class Action;
 	class ActivityNode;
-	class Association;
-	class Property;
-	class StructuralFeature;
 }
 
 // namespace macro header include
@@ -88,10 +80,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Association> getAssociation(const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
-			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& oppositeValue) = 0;
-			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& oppositeValue, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& endValue) = 0;
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
