@@ -907,4 +907,14 @@
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>
+  <eSubpackages name="MDE4CPP_Extensions" nsPrefix="PSCS_Semantics.MDE4CPP_Extensions">
+    <eClassifiers xsi:type="ecore:EClass" name="PSCS_Object" eSuperTypes="../../fuml/model/fUML.ecore#//MDE4CPP_Extensions/FUML_Object">
+      <eOperations name="isInteractionPoint" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="return (this->getDefiningPort() != nullptr);"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="definingPort" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Port"/>
+    </eClassifiers>
+  </eSubpackages>
 </ecore:EPackage>
