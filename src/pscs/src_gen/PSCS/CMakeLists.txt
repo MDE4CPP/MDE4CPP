@@ -42,25 +42,33 @@ SET(SOURCE_FILES
 	Semantics/impl/SemanticsPackageImpl.cpp
 	Semantics/impl/SemanticsPackageImpl_Creation.cpp
 	Semantics/impl/SemanticsPackageImpl_Initialization.cpp
+	Semantics/Actions/impl/ActionsFactoryImpl.cpp
+	Semantics/Actions/impl/ActionsPackageImpl.cpp
+	Semantics/Actions/impl/ActionsPackageImpl_Creation.cpp
+	Semantics/Actions/impl/ActionsPackageImpl_Initialization.cpp
 	Semantics/Loci/impl/LociFactoryImpl.cpp
 	Semantics/Loci/impl/LociPackageImpl.cpp
 	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
 	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
-	Semantics/Values/impl/ValuesFactoryImpl.cpp
-	Semantics/Values/impl/ValuesPackageImpl.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Creation.cpp
-	Semantics/Values/impl/ValuesPackageImpl_Initialization.cpp
-	Semantics/Classification/impl/ClassificationFactoryImpl.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Creation.cpp
-	Semantics/Classification/impl/ClassificationPackageImpl_Initialization.cpp
 	
 # Package plugin
 	impl/PSCSPluginImpl.cpp
 # Package content
+	Semantics/Actions/impl/CS_AcceptEventActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_AddStructuralFeatureValueActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_CallOperationActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_ClearStructuralFeatureActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_ConstructStrategyImpl.cpp
+	Semantics/Actions/impl/CS_CreateLinkActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_CreateObjectActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_DefaultConstructStrategyImpl.cpp
 	Semantics/Loci/impl/CS_ExecutionFactoryImpl.cpp
 	Semantics/Loci/impl/CS_ExecutorImpl.cpp
 	Semantics/Loci/impl/CS_LocusImpl.cpp
+	Semantics/Actions/impl/CS_ReadExtentActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_ReadSelfActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.cpp
+	Semantics/Actions/impl/CS_SendSignalActionActivationImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
@@ -78,44 +86,44 @@ endif(APPLE)
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_DEBUG fUMLd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_DEBUG fUMLd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(FUML_RELEASE fUML.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_RELEASE fUML.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(FUML_DEBUG fUMLd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(FUML_DEBUG fUMLd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(FUML_RELEASE fUML ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(FUML_RELEASE fUML ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		
 	ENDIF()
 ENDIF()
@@ -128,17 +136,17 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${ECORE_DEBUG}
-		debug ${FUML_DEBUG}
 		debug ${TYPES_DEBUG}
 		debug ${UML_DEBUG}
+		debug ${FUML_DEBUG}
+		debug ${ECORE_DEBUG}
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${ECORE_RELEASE}
-		optimized ${FUML_RELEASE}
 		optimized ${TYPES_RELEASE}
 		optimized ${UML_RELEASE}
+		optimized ${FUML_RELEASE}
+		optimized ${ECORE_RELEASE}
 	)
 ENDIF()
 

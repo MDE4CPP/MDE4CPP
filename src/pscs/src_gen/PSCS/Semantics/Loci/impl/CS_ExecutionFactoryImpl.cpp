@@ -36,11 +36,7 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-#include "fUML/fUMLFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "uml/umlPackage.hpp"
-//#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-//#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 #include "uml/ReadExtentAction.hpp"
 #include "uml/AddStructuralFeatureValueAction.hpp"
@@ -58,26 +54,23 @@
 #include "uml/Classifier.hpp"
 //#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
 
-/*
+
 #include "PSCS/Semantics/Actions/CS_ReadExtentActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_AddStructuralFeatureValueActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_ClearStructuralFeatureActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_CreateLinkActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_CreateObjectActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_ReadSelfActionActivation.hpp"
-#include "PSCS/Semantics/Actions/CS_AcceptCallActionActivation.hpp"
-#include "PSCS/Semantics/Classification/CS_InstanceValueEvaluation.hpp"
+//#include "PSCS/Semantics/Actions/CS_AcceptCallActionActivation.hpp"
+//#include "PSCS/Semantics/Classification/CS_InstanceValueEvaluation.hpp"
 #include "PSCS/Semantics/Actions/CS_AcceptEventActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_CallOperationActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_SendSignalActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_RemoveStructuralFeatureValueActionActivation.hpp"
-#include "PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp"
-#include "PSCS/Semantics/CommonBehavior/CS_CallEventExecution.hpp"
-#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+//#include "PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp"
+//#include "PSCS/Semantics/CommonBehavior/CS_CallEventExecution.hpp"
+//#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
-#include "PSCS/Semantics/Classification/ClassificationFactory.hpp"
-#include "PSCS/Semantics/Values/ValuesFactory.hpp"
-*/
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -96,10 +89,10 @@
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Loci;
@@ -213,32 +206,32 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 	{
 		case uml::umlPackage::READEXTENTACTION_CLASS: 
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadExtentActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadExtentActionActivation();
 			break;
 		}
 		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
 			break;
 		}
 		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
 			break;
 		}
 		case uml::umlPackage::CREATELINKACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateLinkActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::CREATEOBJECTACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateObjectActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::READSELFACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadSelfActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadSelfActionActivation();
 			break;
 		}
 		case uml::umlPackage::ACCEPTCALLACTION_CLASS:
@@ -253,17 +246,17 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_CLASS: 
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptEventActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptEventActionActivation();
 			break;
 		}
 		case uml::umlPackage::CALLOPERATIONACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CallOperationActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CallOperationActionActivation();
 			break;
 		}
 		case uml::umlPackage::SENDSIGNALACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_SendSignalActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_SendSignalActionActivation();
 			break;
 		}
 		case uml::umlPackage::OPAQUEEXPRESSION_CLASS:
@@ -273,7 +266,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 		}
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
 			break;
 		}
 		/*case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:

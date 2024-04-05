@@ -14,35 +14,30 @@
 
 namespace ecore 
 {
-	class EGenericType;
-	class EReference;
-	class EDataType;
-	class EParameter;
-	class EAttribute;
-	class EAnnotation;
-	class EClass;
-	class EEnumLiteral;
-	class EOperation;
-	class EPackage;
 	class EEnum;
 	class EStringToStringMapEntry;
+	class EDataType;
+	class EAttribute;
+	class EParameter;
+	class EClass;
+	class EReference;
+	class EOperation;
+	class EPackage;
+	class EAnnotation;
+	class EEnumLiteral;
+	class EGenericType;
 }
 
 namespace PSCS::Semantics 
 {
-	namespace Classification 
+	namespace Actions 
 	{
-		class ClassificationPackage;
+		class ActionsPackage;
 	}
 
 	namespace Loci 
 	{
 		class LociPackage;
-	}
-
-	namespace Values 
-	{
-		class ValuesPackage;
 	}
 
 }
@@ -72,9 +67,8 @@ namespace PSCS::Semantics
 			
 			
 
-			virtual std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> getClassification_Package() const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> getActions_Package() const = 0;
 			virtual std::shared_ptr<PSCS::Semantics::Loci::LociPackage> getLoci_Package() const = 0;
-			virtual std::shared_ptr<PSCS::Semantics::Values::ValuesPackage> getValues_Package() const = 0;
 			
 
 			//Singleton Getter

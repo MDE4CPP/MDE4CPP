@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EPackage.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/SemanticsFactory.hpp"
@@ -26,11 +26,9 @@
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
-#include "PSCS/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
+#include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
 #include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "PSCS/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
 using namespace PSCS::Semantics;
 
@@ -83,17 +81,13 @@ void SemanticsPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> PSCS::Semantics::SemanticsPackageImpl::getClassification_Package() const
+std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> PSCS::Semantics::SemanticsPackageImpl::getActions_Package() const
 {
-	return PSCS::Semantics::Classification::ClassificationPackage::eInstance();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance();
 } 
 std::shared_ptr<PSCS::Semantics::Loci::LociPackage> PSCS::Semantics::SemanticsPackageImpl::getLoci_Package() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance();
-} 
-std::shared_ptr<PSCS::Semantics::Values::ValuesPackage> PSCS::Semantics::SemanticsPackageImpl::getValues_Package() const
-{
-	return PSCS::Semantics::Values::ValuesPackage::eInstance();
 } 
 
 
