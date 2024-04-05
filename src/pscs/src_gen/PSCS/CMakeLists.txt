@@ -50,6 +50,10 @@ SET(SOURCE_FILES
 	Semantics/Loci/impl/LociPackageImpl.cpp
 	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
 	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
+	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.cpp
+	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl.cpp
+	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl_Creation.cpp
+	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl_Initialization.cpp
 	
 # Package plugin
 	impl/PSCSPluginImpl.cpp
@@ -69,6 +73,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/CS_ReadSelfActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_SendSignalActionActivationImpl.cpp
+	MDE4CPP_Extensions/impl/PSCS_ObjectImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 

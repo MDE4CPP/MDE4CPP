@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EPackage.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "PSCS/PSCSFactory.hpp"
@@ -25,6 +25,8 @@
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl.hpp"
+
 #include "PSCS/Semantics/impl/SemanticsPackageImpl.hpp"
 
 using namespace PSCS;
@@ -78,6 +80,10 @@ void PSCSPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
+std::shared_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> PSCS::PSCSPackageImpl::getMDE4CPP_Extensions_Package() const
+{
+	return PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance();
+} 
 std::shared_ptr<PSCS::Semantics::SemanticsPackage> PSCS::PSCSPackageImpl::getSemantics_Package() const
 {
 	return PSCS::Semantics::SemanticsPackage::eInstance();

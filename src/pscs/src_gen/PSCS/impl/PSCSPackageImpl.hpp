@@ -18,6 +18,11 @@
 
 namespace PSCS 
 {
+	namespace MDE4CPP_Extensions 
+	{
+		class MDE4CPP_ExtensionsPackage;
+	}
+
 	namespace Semantics 
 	{
 		class SemanticsPackage;
@@ -46,6 +51,7 @@ namespace PSCS
 
 			
 			// SubPackages Getters
+			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> getMDE4CPP_Extensions_Package() const ;
 			virtual std::shared_ptr<PSCS::Semantics::SemanticsPackage> getSemantics_Package() const ;
 			
 

@@ -20,6 +20,16 @@ namespace PSCS
 {
 	class PSCSPackage;
 }
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace uml
+{
+	class DirectedRelationship;
+}
+
+
 namespace fUML::Semantics::Activities
 {
 	class ActivityNodeActivationGroup;

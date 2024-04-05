@@ -14,22 +14,27 @@
 
 namespace ecore 
 {
-	class EGenericType;
-	class EReference;
-	class EDataType;
-	class EParameter;
-	class EAttribute;
-	class EAnnotation;
-	class EClass;
-	class EEnumLiteral;
-	class EOperation;
-	class EPackage;
 	class EEnum;
 	class EStringToStringMapEntry;
+	class EDataType;
+	class EAttribute;
+	class EParameter;
+	class EClass;
+	class EReference;
+	class EOperation;
+	class EPackage;
+	class EAnnotation;
+	class EEnumLiteral;
+	class EGenericType;
 }
 
 namespace PSCS 
 {
+	namespace MDE4CPP_Extensions 
+	{
+		class MDE4CPP_ExtensionsPackage;
+	}
+
 	namespace Semantics 
 	{
 		class SemanticsPackage;
@@ -62,6 +67,7 @@ namespace PSCS
 			
 			
 
+			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> getMDE4CPP_Extensions_Package() const = 0;
 			virtual std::shared_ptr<PSCS::Semantics::SemanticsPackage> getSemantics_Package() const = 0;
 			
 

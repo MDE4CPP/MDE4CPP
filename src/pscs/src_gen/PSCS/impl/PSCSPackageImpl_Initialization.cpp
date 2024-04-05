@@ -4,23 +4,25 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EPackage.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EGenericType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
 
 //depending model packages
+#include "PSCS/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl.hpp"
+
 #include "PSCS/Semantics/impl/SemanticsPackageImpl.hpp"
 
 #include "ecore/ecorePackage.hpp"
@@ -51,6 +53,7 @@ void PSCSPackageImpl::initializePackageContents()
 
 	initializePackageEDataTypes();
 
+	std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl>(getMDE4CPP_Extensions_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<PSCS::Semantics::SemanticsPackageImpl>(getSemantics_Package())->initializePackageContents();
 }
 
