@@ -3479,7 +3479,7 @@
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>
-  <eSubpackages name="MDE4CPP_Extensions" nsPrefix="fUML_Semantics.Semantics.MDE4CPP_Extensions">
+  <eSubpackages name="MDE4CPP_Extensions" nsPrefix="fUML_Semantics.MDE4CPP_Extensions">
     <eClassifiers xsi:type="ecore:EClass" name="FUML_Object" abstract="true" eSuperTypes="http://www.eclipse.org/uml2/5.0.0/UML#//Element">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="implIncludes" value="#include &quot;fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp&quot;"/>
