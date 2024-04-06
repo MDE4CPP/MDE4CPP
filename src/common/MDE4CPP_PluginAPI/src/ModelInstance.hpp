@@ -1,5 +1,5 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef MODELINSTANCE_H
+#define MODELINSTANCE_H
 
 #include "ecore/EObject.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -43,7 +43,7 @@ class ModelInstance{
          *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
          *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
         */
-        const std::shared_ptr<EObject>& getObjectAtPath(std::deque<std::string>& path); 
+        std::shared_ptr<EObject> getObjectAtPath(std::deque<std::string>& path); 
 
         /**
          * navigate to the EObject specified in the path and returns a shared_ptr to it; starts at m_rootObject 
@@ -72,4 +72,4 @@ class ModelInstance{
 
 };
 
-#endif /*MODEL_H*/
+#endif /*MODELINSTANCE_H*/

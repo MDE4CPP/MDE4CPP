@@ -53,8 +53,8 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
         }
 
         std::deque<std::string> segmented_path;
-        split_string(segmented_path, path, ':');
-;		auto obj = m_modelInsts[modelInstName]->navigateToObject(segmented_path);
+        helperFunctions::split_string(segmented_path, path, ':');
+;		auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
         
         auto result = writeValue(obj);
         return crow::response(200, result);
@@ -77,10 +77,10 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
         }
 		
         std::deque<std::string> segmented_path;
-        split_string(segmented_path, path, ':');
-;		auto obj = m_modelInsts[modelInstName]->navigateToObject(segmented_path);
+        helperFunctions::split_string(segmented_path, path, ':');
+;		auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
 
-        m_modelInsts.erase(m_modelInsts.find(objectName)); //TODO smarter update function
+        m_modelInsts.erase(m_modelInsts.find(modelInstName)); //TODO smarter update function
         auto object = readValue(crow::json::load(request.body), className, plugin);
         m_models[objectName] = object;
         return crow::response(200);

@@ -12,7 +12,7 @@
      * @param s : string that is supposed to be split
      * @param split_char : char denoting the boundery between to segments 
     */
-    void split_string(const std::deque<std::string>& buffer, std::string s, char split_char);
+    void split_string(std::deque<std::string>& buffer, const std::string s, char split_char);
  }
 
 #endif /*HELPERFUNCTIONS_H*/

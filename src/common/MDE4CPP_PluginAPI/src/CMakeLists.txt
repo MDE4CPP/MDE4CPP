@@ -46,11 +46,13 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 SET(SOURCE_FILES
 	MDE4CPP_PluginAPI.cpp
 	MDE4CPP_PluginAPI_Main.cpp
+	ModelInstance.cpp
+	helperFunc.cpp
 )
 
 INCLUDE_DIRECTORIES(
 	../
-	${MDE4CPP_HOME}/application/include
+	$ENV{MDE4CPP_HOME}/application/include
 )
 # Apple specific stuff
 IF(APPLE)
@@ -61,21 +63,21 @@ ENDIF(APPLE)
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so $ENV{MDE4CPP_HOME}/application/bin)
 	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so $ENV{MDE4CPP_HOME}/application/bin)
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib $ENV{MDE4CPP_HOME}/application/bin)
 	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.dylib $ENV{MDE4CPP_HOME}/application/bin)
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd $ENV{MDE4CPP_HOME}/application/lib)
 	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework $ENV{MDE4CPP_HOME}/application/lib)
 	ENDIF()
 ENDIF()
 
@@ -102,9 +104,9 @@ ENDIF()
 #-----------------------------------------------------
 
 INSTALL(TARGETS ${PROJECT_NAME}
-	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
-    LIBRARY DESTINATION ${MDE4CPP_HOME}/application/bin
-    ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
+	RUNTIME DESTINATION $ENV{MDE4CPP_HOME}/application/bin
+    LIBRARY DESTINATION $ENV{MDE4CPP_HOME}/application/bin
+    ARCHIVE DESTINATION $ENV{MDE4CPP_HOME}/application/lib
 )
 
 # Interface are installed from gradle task "deliverPluginFrameworkInterface"
