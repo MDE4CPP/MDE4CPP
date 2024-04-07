@@ -100,6 +100,22 @@ TEST_F(ModelInstanceTest, getObjectAtPath_OutOfBounds) {//tests getObjectAtPath 
     EXPECT_EQ(error, "Bag.hpp: index out of range");
 }
 
+TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {//tests getObjectAtPath with a path that tries to access a container of pimitive types
+    std::deque<std::string> dq_path = {"book@0","genre@0"};
+    std::shared_ptr<Any> p1;
+    std::string error;
+    try
+    {
+        p1 = m1_->getAnyAtPath(dq_path);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    auto p1_name = p1->get<std::string>();
+    EXPECT_EQ(p1_name, "Art");
+}
+
 TEST_F(ModelInstanceTest, getObjectAtPath_UnknownStrucFeature) {//tests getObjectAtPath with a path that tries to access a StrcuturalFeature that does not exist at that path 
     std::deque<std::string> dq_path = {"pictures"};
     std::shared_ptr<EObject> p1;

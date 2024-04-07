@@ -35,6 +35,8 @@ class ModelInstance{
         std::shared_ptr<EObject> lookUpAlias(std::string alias); //allows to retrieve a pointer to the object associated with an aliases
 
         
+        std::shared_ptr<Any> getAnyAtPath(std::deque<std::string>& path); 
+        
         /**
          * navigates through modelInstance starting from m_rootObject along specified path the an target EObject and return shared pointer to it.
          * mainly used for resolving references
