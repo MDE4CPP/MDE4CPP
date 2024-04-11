@@ -3225,7 +3225,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//Semantics/SimpleClassifiers/StructuredValue">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &lt;uml/Classifier.hpp>&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;"/>
-          <details key="doNotGenerate" value="Class 'CompoundValue' is excluded from generation because it is obsolete.&#xA;CompoundValues are omitted in this fUML implementation, &#xA;as all objects (i.e. C++ instances) in MDE4CPP are handled by C++ std::shared_ptr anyway.&#xA;This is sufficient to substitute the fUML reference concept."/>
+          <details key="doNotGenerate" value="Class 'Reference' is excluded from generation because it is obsolete.&#xA;References are omitted in this fUML implementation, &#xA;as all objects (i.e. C++ instances) in MDE4CPP are handled by C++ std::shared_ptr anyway.&#xA;This is sufficient to substitute the fUML reference concept."/>
         </eAnnotations>
         <eOperations name="startBehavior" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
