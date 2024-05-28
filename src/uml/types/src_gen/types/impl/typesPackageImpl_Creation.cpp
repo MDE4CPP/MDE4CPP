@@ -7,9 +7,9 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 
 //depending model packages
 //include subpackages 

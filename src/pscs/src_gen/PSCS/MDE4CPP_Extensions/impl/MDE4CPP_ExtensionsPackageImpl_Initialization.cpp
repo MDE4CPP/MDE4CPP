@@ -4,13 +4,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"

@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EEnum.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EParameter.hpp"
 
 //metamodel factory

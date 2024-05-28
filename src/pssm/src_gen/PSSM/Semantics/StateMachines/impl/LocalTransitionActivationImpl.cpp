@@ -46,10 +46,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -58,8 +58,8 @@
 #include "PSSM/Semantics/StateMachines/TransitionActivation.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"

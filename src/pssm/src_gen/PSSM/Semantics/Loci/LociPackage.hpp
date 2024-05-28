@@ -14,12 +14,12 @@
 
 namespace ecore 
 {
+	class EClass;
 	class EAnnotation;
-	class EStringToStringMapEntry;
 	class EGenericType;
+	class EStringToStringMapEntry;
 	class EOperation;
 	class EParameter;
-	class EClass;
 }
 
 namespace PSSM::Semantics::Loci 

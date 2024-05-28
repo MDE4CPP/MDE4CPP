@@ -44,8 +44,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Element.hpp"
 #include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
