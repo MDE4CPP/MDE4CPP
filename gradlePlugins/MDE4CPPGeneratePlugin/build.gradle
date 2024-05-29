@@ -1,0 +1,41 @@
+plugins {                                                           
+    id 'java-gradle-plugin'                                         
+    id 'java'                       
+    id 'maven-publish'                              
+}
+
+repositories {
+	mavenLocal()
+}
+
+group = 'tui.sse.mde4cpp'
+version = '0.6'
+
+// The configuration example below shows the minimum required properties
+// configured to publish your plugin to the plugin portal
+gradlePlugin {
+	website = 'http:///sse.tu-ilmenau.de/mde4cpp'
+ 	vcsUrl = 'https://github.com/mde4cpp/gradlePlugins'
+	description = 'Gradle plugins developed for MDE4CPP framework. More information about MDE4CPP can be found under https://sse.tu-ilmenau.de/mde4cpp.'
+
+	plugins {
+		mde4cppGeneratePlugin {
+			id = 'tui.sse.mde4cpp.MDE4CPPGenerate'
+			displayName = 'MDE4CPP Generate Plugin'
+			description = 'Gradle plugin to generate C++ code of ecore or UML models inside the MDE4CPP framework. \n\nRelease notes version 0.1: \n - Plugin to execute MDE4CPP generators\n\nRelease notes version 0.2: \n - add up-to-date check\n\nRelease notes version 0.3: \n - add related models to up-to-date check (only available in experimental mode)\n - add experimental mode (declare property \'experimentalMode=true\' inside gradle.properties\n\nRelease notes version 0.4: \n - add dependency to generator\n - rename compile property "make_parallel_jobs" to "workerCount"\n\nRelease notes version 0.5: \n - no changes, maintenance release only\n\nMore information about MDE4CPP can be found under https://sse.tu-ilmenau.de/mde4cpp.\n Information about this plugin can be found under https://github.com/MDE4CPP/gradlePlugins.'
+			tags.set(['MDE4CPP']) 
+			implementationClass = 'tui.sse.mde4cpp.MDE4CPPGeneratePlugin'
+		}
+	}
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['src/resources']
+        }
+    }
+}
