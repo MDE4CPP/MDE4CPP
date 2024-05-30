@@ -117,7 +117,7 @@ task deliverUML4CPP(dependsOn: jar) {
     }
 
 	outputs.upToDateWhen{false}
-    outputs.file([rootDir,'application','generator',jar.archiveFileName].join(File.separator))
+    outputs.file([rootDir,'application','generator',jar.archiveFileName.get()].join(File.separator))
 }
 
 //EOF
