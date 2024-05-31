@@ -65,6 +65,8 @@ dependencies {
 		'org.eclipse.ocl.common_*.jar',
 		'org.eclipse.ocl.ecore_*.jar',
 		'org.eclipse.ocl_*.jar',
+		
+		'org.osgi.service.prefs_*.jar',
 
 		'guava_*.jar'
 	])
