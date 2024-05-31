@@ -48,6 +48,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

@@ -126,6 +126,11 @@ const std::shared_ptr<Bag<uml::Classifier>>& StandardOutputChannelImpl::getTypes
 	return types;
 }
 
+void StandardOutputChannelImpl::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
+{
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
+}
+
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************

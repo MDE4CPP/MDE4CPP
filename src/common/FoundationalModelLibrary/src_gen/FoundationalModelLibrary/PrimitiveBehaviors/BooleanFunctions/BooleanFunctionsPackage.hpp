@@ -61,6 +61,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

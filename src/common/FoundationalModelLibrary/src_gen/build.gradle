@@ -3,6 +3,7 @@
 plugins{
 	id "tui.sse.mde4cpp.MDE4CPPCompile" version "0.6"	
 }
+
 import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile tasks for project: FoundationalModelLibrary'

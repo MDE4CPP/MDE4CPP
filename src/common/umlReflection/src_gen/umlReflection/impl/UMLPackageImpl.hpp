@@ -3286,6 +3286,7 @@ namespace UML
 			virtual const std::shared_ptr<uml::Constraint>& get_UML_WriteVariableAction_value_type();  
 			
 			
+			
 
 			//getter for subPackages
 
@@ -8763,6 +8764,7 @@ namespace UML
 			std::shared_ptr<uml::LiteralInteger> uML_WriteVariableAction_value_lowerValue_LiteralInteger_UML_WriteVariableAction_value = nullptr;
 			std::shared_ptr<uml::Constraint> uML_WriteVariableAction_value_type = nullptr;
 			std::shared_ptr<uml::OpaqueExpression> uML_WriteVariableAction_value_type_specification_OpaqueExpression = nullptr;
+			
 			
 			
 

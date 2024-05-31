@@ -42,6 +42,7 @@ namespace FoundationalModelLibrary::Common
 			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_description() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

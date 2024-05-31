@@ -40,6 +40,7 @@ namespace PrimitiveTypes
 			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_UnlimitedNatural() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

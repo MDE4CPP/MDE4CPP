@@ -103,6 +103,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

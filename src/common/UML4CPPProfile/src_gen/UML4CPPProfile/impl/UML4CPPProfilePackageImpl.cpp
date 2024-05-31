@@ -327,6 +327,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_DoNotGenerate_base_Element->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_DoNotGenerate_base_Element->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_DoNotGenerate_base_Element->setAssociation(get_UML4CPPProfile_Element_DoNotGenerate());
+	uML4CPPProfile_DoNotGenerate_base_Element->setOpposite(get_ExtensionEnd_extension_DoNotGenerate_UML4CPPProfile_DoNotGenerate());
 	
 	uML4CPPProfile_DoNotGenerate_base_Element->_setID(DONOTGENERATE_PROPERTY_BASE_ELEMENT);
 	
@@ -340,6 +341,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_base_Package->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_ExternalLibrary_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_ExternalLibrary_base_Package->setAssociation(get_UML4CPPProfile_Package_ExternalLibrary());
+	uML4CPPProfile_ExternalLibrary_base_Package->setOpposite(get_ExtensionEnd_extension_ExternalLibrary_UML4CPPProfile_ExternalLibrary());
 	
 	uML4CPPProfile_ExternalLibrary_base_Package->_setID(EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE);
 	uML4CPPProfile_ExternalLibrary_includePath->setName("includePath");
@@ -349,6 +351,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_includePath->setIsUnique(true);
 	uML4CPPProfile_ExternalLibrary_includePath->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_ExternalLibrary_includePath->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	uML4CPPProfile_ExternalLibrary_includePath->_setID(EXTERNALLIBRARY_PROPERTY_INCLUDEPATH);
@@ -361,6 +364,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_libraryName->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
+	
 	uML4CPPProfile_ExternalLibrary_libraryName->_setID(EXTERNALLIBRARY_PROPERTY_LIBRARYNAME);
 	uML4CPPProfile_ExternalLibrary_libraryPath->setName("libraryPath");
 	uML4CPPProfile_ExternalLibrary_libraryPath->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
@@ -369,6 +373,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_ExternalLibrary_libraryPath->setIsUnique(true);
 	uML4CPPProfile_ExternalLibrary_libraryPath->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_ExternalLibrary_libraryPath->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	uML4CPPProfile_ExternalLibrary_libraryPath->_setID(EXTERNALLIBRARY_PROPERTY_LIBRARYPATH);
@@ -383,6 +388,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_GetterName_base_Property->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_GetterName_base_Property->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_GetterName_base_Property->setAssociation(get_UML4CPPProfile_Property_GetterName());
+	uML4CPPProfile_GetterName_base_Property->setOpposite(get_ExtensionEnd_extension_GetterName_UML4CPPProfile_GetterName());
 	
 	uML4CPPProfile_GetterName_base_Property->_setID(GETTERNAME_PROPERTY_BASE_PROPERTY);
 	uML4CPPProfile_GetterName_getterName->setName("getterName");
@@ -392,6 +398,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_GetterName_getterName->setIsUnique(true);
 	uML4CPPProfile_GetterName_getterName->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_GetterName_getterName->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	uML4CPPProfile_GetterName_getterName->_setID(GETTERNAME_PROPERTY_GETTERNAME);
@@ -406,6 +413,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_MainBehavior_base_Behavior->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_MainBehavior_base_Behavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_MainBehavior_base_Behavior->setAssociation(get_UML4CPPProfile_Behavior_MainBehavior());
+	uML4CPPProfile_MainBehavior_base_Behavior->setOpposite(get_ExtensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior());
 	
 	uML4CPPProfile_MainBehavior_base_Behavior->_setID(MAINBEHAVIOR_PROPERTY_BASE_BEHAVIOR);
 	
@@ -419,6 +427,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_NonExecutable_base_NamedElement->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_NonExecutable_base_NamedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_NonExecutable_base_NamedElement->setAssociation(get_UML4CPPProfile_NamedElement_NonExecutable());
+	uML4CPPProfile_NonExecutable_base_NamedElement->setOpposite(get_ExtensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable());
 	
 	uML4CPPProfile_NonExecutable_base_NamedElement->_setID(NONEXECUTABLE_PROPERTY_BASE_NAMEDELEMENT);
 	
@@ -433,6 +442,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_SetterName_base_Property->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_SetterName_base_Property->setAssociation(get_UML4CPPProfile_Property_SetterName());
 	
+	
 	uML4CPPProfile_SetterName_base_Property->_setID(SETTERNAME_PROPERTY_BASE_PROPERTY);
 	uML4CPPProfile_SetterName_setterName->setName("setterName");
 	uML4CPPProfile_SetterName_setterName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
@@ -442,6 +452,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_SetterName_setterName->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_SetterName_setterName->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_SetterName_setterName->setAssociation(get_UML4CPPProfile_Property_SetterName());
+	
 	
 	uML4CPPProfile_SetterName_setterName->_setID(SETTERNAME_PROPERTY_SETTERNAME);
 	
@@ -455,6 +466,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_Singleton_base_Class->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_Singleton_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_Singleton_base_Class->setAssociation(get_UML4CPPProfile_Class_Singleton());
+	uML4CPPProfile_Singleton_base_Class->setOpposite(get_ExtensionEnd_extension_Singleton_UML4CPPProfile_Singleton());
 	
 	uML4CPPProfile_Singleton_base_Class->_setID(SINGLETON_PROPERTY_BASE_CLASS);
 	
@@ -468,6 +480,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_base_Package->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_UML4CPPPackage_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_UML4CPPPackage_base_Package->setAssociation(get_UML4CPPProfile_Package_UML4CPPPackage());
+	uML4CPPProfile_UML4CPPPackage_base_Package->setOpposite(get_ExtensionEnd_extension_UML4CPPPackage_UML4CPPProfile_UML4CPPPackage());
 	
 	uML4CPPProfile_UML4CPPPackage_base_Package->_setID(UML4CPPPACKAGE_PROPERTY_BASE_PACKAGE);
 	uML4CPPProfile_UML4CPPPackage_eclipseURI->setName("eclipseURI");
@@ -479,6 +492,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_eclipseURI->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
+	
 	uML4CPPProfile_UML4CPPPackage_eclipseURI->_setID(UML4CPPPACKAGE_PROPERTY_ECLIPSEURI);
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setName("ignoreNamespace");
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
@@ -487,6 +501,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setIsUnique(true);
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->setDefaultValue(uML4CPPProfile_UML4CPPPackage_ignoreNamespace_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_ignoreNamespace);
 	uML4CPPProfile_UML4CPPPackage_ignoreNamespace->_setID(UML4CPPPACKAGE_PROPERTY_IGNORENAMESPACE);
@@ -497,6 +512,7 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setIsUnique(true);
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML4CPPProfile_UML4CPPPackage_packageOnly->setDefaultValue(uML4CPPProfile_UML4CPPPackage_packageOnly_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_packageOnly);
 	uML4CPPProfile_UML4CPPPackage_packageOnly->_setID(UML4CPPPACKAGE_PROPERTY_PACKAGEONLY);

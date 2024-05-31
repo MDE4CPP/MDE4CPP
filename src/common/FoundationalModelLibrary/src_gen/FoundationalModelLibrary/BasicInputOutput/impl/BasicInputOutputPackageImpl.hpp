@@ -140,6 +140,7 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			virtual const std::shared_ptr<uml::OutputPin>& get_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result();  
 			
 			
+			
 
 			//getter for subPackages
 
@@ -322,6 +323,7 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			std::shared_ptr<uml::OutputPin> outputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result = nullptr;
 			std::shared_ptr<uml::LiteralInteger> outputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result_lowerValue_LiteralInteger_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result = nullptr;
 			std::shared_ptr<uml::LiteralUnlimitedNatural> outputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result_upperValue_LiteralUnlimitedNatural_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result = nullptr;
+			
 			
 			
 

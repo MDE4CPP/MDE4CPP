@@ -78,6 +78,7 @@ namespace UML4CPPProfile
 			virtual const std::shared_ptr<uml::Property>& get_UML4CPPProfile_UML4CPPPackage_packageOnly() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

@@ -152,6 +152,7 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			virtual const std::shared_ptr<uml::OutputPin>& get_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 
@@ -220,25 +221,25 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READCHARACTER_FEATURE_COUNT = 0;
 			static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READCHARACTER_OPERATION_COUNT = 0;
 			
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readLine
-				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE = 1471477029;
-				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_FEATURE_COUNT = 0;
-				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_OPERATION_COUNT = 0;
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_peekCharacter
+				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER = 548795195;
+				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_FEATURE_COUNT = 0;
+				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_OPERATION_COUNT = 0;
 				
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readBoolean
 				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READBOOLEAN = 818339417;
 				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READBOOLEAN_FEATURE_COUNT = 0;
 				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READBOOLEAN_OPERATION_COUNT = 0;
 				
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readLine
+				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE = 1471477029;
+				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_FEATURE_COUNT = 0;
+				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_OPERATION_COUNT = 0;
+				
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readInteger
 				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER = 446400749;
 				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER_FEATURE_COUNT = 0;
 				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER_OPERATION_COUNT = 0;
-				
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_peekCharacter
-				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER = 548795195;
-				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_FEATURE_COUNT = 0;
-				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_OPERATION_COUNT = 0;
 				
 			
 			//Class FoundationalModelLibrary::BasicInputOutput::TextOutputChannel
@@ -261,20 +262,15 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			//FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeUnlimitedNatural(int, FoundationalModelLibrary::Common::Status)
 			static const unsigned long TEXTOUTPUTCHANNEL_OPERATION_WRITEUNLIMITEDNATURAL_UNLIMITEDNATURAL_STATUS = 1732555673;
 			//Behaviors
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeString
-			static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING = 512413595;
-			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_FEATURE_COUNT = 0;
-			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_OPERATION_COUNT = 0;
-			
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeBoolean
-				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN = 54149987;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_FEATURE_COUNT = 0;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_OPERATION_COUNT = 0;
-				
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeNewLine
-				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE = 1078171085;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE_FEATURE_COUNT = 0;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE_OPERATION_COUNT = 0;
+			static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN = 54149987;
+			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_FEATURE_COUNT = 0;
+			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_OPERATION_COUNT = 0;
+			
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeString
+				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING = 512413595;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_FEATURE_COUNT = 0;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_OPERATION_COUNT = 0;
 				
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeLine
 				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITELINE = 766667557;
@@ -285,6 +281,11 @@ namespace FoundationalModelLibrary::BasicInputOutput
 				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER = 1102967664;
 				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER_FEATURE_COUNT = 0;
 				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER_OPERATION_COUNT = 0;
+				
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeNewLine
+				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE = 1078171085;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE_FEATURE_COUNT = 0;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE_OPERATION_COUNT = 0;
 				
 			
 			//Activity FoundationalModelLibrary::BasicInputOutput::WriteLine

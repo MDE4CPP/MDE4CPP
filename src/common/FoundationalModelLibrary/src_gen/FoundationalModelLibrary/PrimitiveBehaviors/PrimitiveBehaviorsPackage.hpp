@@ -58,6 +58,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors
 			//getter for the ownedMember
 			
 			
+			
 
 			//getter for subPackages
 			virtual std::shared_ptr<BooleanFunctions::BooleanFunctionsPackage> getBooleanFunctions_Package() const  = 0;

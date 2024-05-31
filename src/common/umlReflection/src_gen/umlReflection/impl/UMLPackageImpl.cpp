@@ -19634,6 +19634,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Abstraction_mapping->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Abstraction_mapping->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Abstraction_mapping->setAssociation(get_UML_A_mapping_abstraction());
+	uML_Abstraction_mapping->setOpposite(get_UML_A_mapping_abstraction_abstraction());
 	
 	
 
@@ -19656,6 +19657,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AcceptCallAction_returnInformation->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_AcceptCallAction_returnInformation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_AcceptCallAction_returnInformation->setAssociation(get_UML_A_returnInformation_acceptCallAction());
+	uML_AcceptCallAction_returnInformation->setOpposite(get_UML_A_returnInformation_acceptCallAction_acceptCallAction());
 	
 	
 
@@ -19678,6 +19680,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AcceptEventAction_isUnmarshall->setAggregation(uml::AggregationKind::NONE);
 	uML_AcceptEventAction_isUnmarshall->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_AcceptEventAction_isUnmarshall->setDefaultValue(uML_AcceptEventAction_isUnmarshall_defaultValue_LiteralBoolean_UML_AcceptEventAction_isUnmarshall);
 	
 	//result
@@ -19689,6 +19692,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AcceptEventAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_AcceptEventAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_AcceptEventAction_result->setAssociation(get_UML_A_result_acceptEventAction());
+	uML_AcceptEventAction_result->setOpposite(get_UML_A_result_acceptEventAction_acceptEventAction());
 	
 	
 	//trigger
@@ -19700,6 +19704,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AcceptEventAction_trigger->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_AcceptEventAction_trigger->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_AcceptEventAction_trigger->setAssociation(get_UML_A_trigger_acceptEventAction());
+	uML_AcceptEventAction_trigger->setOpposite(get_UML_A_trigger_acceptEventAction_acceptEventAction());
 	
 	
 
@@ -19722,6 +19727,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_context->setAggregation(uml::AggregationKind::NONE);
 	uML_Action_context->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Action_context->setAssociation(get_UML_A_context_action());
+	uML_Action_context->setOpposite(get_UML_A_context_action_action());
 	
 	
 	//input
@@ -19733,6 +19739,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_input->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Action_input->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Action_input->setAssociation(get_UML_A_input_action());
+	uML_Action_input->setOpposite(get_UML_A_input_action_action());
 	
 	
 	//isLocallyReentrant
@@ -19743,6 +19750,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_isLocallyReentrant->setIsUnique(true);
 	uML_Action_isLocallyReentrant->setAggregation(uml::AggregationKind::NONE);
 	uML_Action_isLocallyReentrant->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Action_isLocallyReentrant->setDefaultValue(uML_Action_isLocallyReentrant_defaultValue_LiteralBoolean_UML_Action_isLocallyReentrant);
 	
@@ -19755,6 +19763,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_localPostcondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Action_localPostcondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Action_localPostcondition->setAssociation(get_UML_A_localPostcondition_action());
+	uML_Action_localPostcondition->setOpposite(get_UML_A_localPostcondition_action_action());
 	
 	
 	//localPrecondition
@@ -19766,6 +19775,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_localPrecondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Action_localPrecondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Action_localPrecondition->setAssociation(get_UML_A_localPrecondition_action());
+	uML_Action_localPrecondition->setOpposite(get_UML_A_localPrecondition_action_action());
 	
 	
 	//output
@@ -19777,6 +19787,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_output->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Action_output->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Action_output->setAssociation(get_UML_A_output_action());
+	uML_Action_output->setOpposite(get_UML_A_output_action_action());
 	
 	
 
@@ -19851,6 +19862,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActionExecutionSpecification_action->setAggregation(uml::AggregationKind::NONE);
 	uML_ActionExecutionSpecification_action->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActionExecutionSpecification_action->setAssociation(get_UML_A_action_actionExecutionSpecification());
+	uML_ActionExecutionSpecification_action->setOpposite(get_UML_A_action_actionExecutionSpecification_actionExecutionSpecification());
 	
 	
 
@@ -19873,6 +19885,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActionInputPin_fromAction->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ActionInputPin_fromAction->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActionInputPin_fromAction->setAssociation(get_UML_A_fromAction_actionInputPin());
+	uML_ActionInputPin_fromAction->setOpposite(get_UML_A_fromAction_actionInputPin_actionInputPin());
 	
 	
 
@@ -19895,6 +19908,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_edge->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Activity_edge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Activity_edge->setAssociation(get_UML_A_edge_activity());
+	uML_Activity_edge->setOpposite(get_UML_ActivityEdge_activity());
 	
 	
 	//group
@@ -19906,6 +19920,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_group->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Activity_group->setVisibility(uml::VisibilityKind::PROTECTED);
 	uML_Activity_group->setAssociation(get_UML_A_group_inActivity());
+	uML_Activity_group->setOpposite(get_UML_ActivityGroup_inActivity());
 	
 	
 	//isReadOnly
@@ -19916,6 +19931,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_isReadOnly->setIsUnique(true);
 	uML_Activity_isReadOnly->setAggregation(uml::AggregationKind::NONE);
 	uML_Activity_isReadOnly->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Activity_isReadOnly->setDefaultValue(uML_Activity_isReadOnly_defaultValue_LiteralBoolean_UML_Activity_isReadOnly);
 	
@@ -19928,6 +19944,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_isSingleExecution->setAggregation(uml::AggregationKind::NONE);
 	uML_Activity_isSingleExecution->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Activity_isSingleExecution->setDefaultValue(uML_Activity_isSingleExecution_defaultValue_LiteralBoolean_UML_Activity_isSingleExecution);
 	
 	//node
@@ -19939,6 +19956,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_node->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Activity_node->setVisibility(uml::VisibilityKind::PROTECTED);
 	uML_Activity_node->setAssociation(get_UML_A_node_activity());
+	uML_Activity_node->setOpposite(get_UML_ActivityNode_activity());
 	
 	
 	//ownedGroup
@@ -19949,6 +19967,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_ownedGroup->setIsUnique(true);
 	uML_Activity_ownedGroup->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Activity_ownedGroup->setVisibility(uml::VisibilityKind::PROTECTED);
+	
 	
 	
 	
@@ -19963,6 +19982,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//partition
 	uML_Activity_partition->setName("partition");
 	uML_Activity_partition->setType(get_UML_ActivityPartition());
@@ -19972,6 +19992,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_partition->setAggregation(uml::AggregationKind::NONE);
 	uML_Activity_partition->setVisibility(uml::VisibilityKind::PROTECTED);
 	uML_Activity_partition->setAssociation(get_UML_A_partition_activity());
+	uML_Activity_partition->setOpposite(get_UML_A_partition_activity_activity());
 	
 	
 	//structuredNode
@@ -19985,6 +20006,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_structuredNode->setAssociation(get_UML_A_structuredNode_activity());
 	
 	
+	
 	//variable
 	uML_Activity_variable->setName("variable");
 	uML_Activity_variable->setType(get_UML_Variable());
@@ -19994,6 +20016,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_variable->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Activity_variable->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Activity_variable->setAssociation(get_UML_A_variable_activityScope());
+	uML_Activity_variable->setOpposite(get_UML_Variable_activityScope());
 	
 	
 
@@ -20016,6 +20039,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_activity->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_activity->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_activity->setAssociation(get_UML_A_edge_activity());
+	uML_ActivityEdge_activity->setOpposite(get_UML_Activity_edge());
 	
 	
 	//guard
@@ -20027,6 +20051,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_guard->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ActivityEdge_guard->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_guard->setAssociation(get_UML_A_guard_activityEdge());
+	uML_ActivityEdge_guard->setOpposite(get_UML_A_guard_activityEdge_activityEdge());
 	
 	
 	//inGroup
@@ -20038,6 +20063,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_inGroup->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_inGroup->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_inGroup->setAssociation(get_UML_A_containedEdge_inGroup());
+	uML_ActivityEdge_inGroup->setOpposite(get_UML_ActivityGroup_containedEdge());
 	
 	
 	//inPartition
@@ -20049,6 +20075,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_inPartition->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_inPartition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_inPartition->setAssociation(get_UML_A_edge_inPartition());
+	uML_ActivityEdge_inPartition->setOpposite(get_UML_ActivityPartition_edge());
 	
 	
 	//inStructuredNode
@@ -20060,6 +20087,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_inStructuredNode->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_inStructuredNode->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_inStructuredNode->setAssociation(get_UML_A_edge_inStructuredNode());
+	uML_ActivityEdge_inStructuredNode->setOpposite(get_UML_StructuredActivityNode_edge());
 	
 	
 	//interrupts
@@ -20071,6 +20099,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_interrupts->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_interrupts->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_interrupts->setAssociation(get_UML_A_interruptingEdge_interrupts());
+	uML_ActivityEdge_interrupts->setOpposite(get_UML_InterruptibleActivityRegion_interruptingEdge());
 	
 	
 	//redefinedEdge
@@ -20082,6 +20111,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_redefinedEdge->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_redefinedEdge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_redefinedEdge->setAssociation(get_UML_A_redefinedEdge_activityEdge());
+	uML_ActivityEdge_redefinedEdge->setOpposite(get_UML_A_redefinedEdge_activityEdge_activityEdge());
 	
 	
 	//source
@@ -20093,6 +20123,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_source->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_source->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_source->setAssociation(get_UML_A_outgoing_source_node());
+	uML_ActivityEdge_source->setOpposite(get_UML_ActivityNode_outgoing());
 	
 	
 	//target
@@ -20104,6 +20135,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_target->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityEdge_target->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_target->setAssociation(get_UML_A_incoming_target_node());
+	uML_ActivityEdge_target->setOpposite(get_UML_ActivityNode_incoming());
 	
 	
 	//weight
@@ -20115,6 +20147,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_weight->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ActivityEdge_weight->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityEdge_weight->setAssociation(get_UML_A_weight_activityEdge());
+	uML_ActivityEdge_weight->setOpposite(get_UML_A_weight_activityEdge_activityEdge());
 	
 	
 
@@ -20173,6 +20206,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_containedEdge->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityGroup_containedEdge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityGroup_containedEdge->setAssociation(get_UML_A_containedEdge_inGroup());
+	uML_ActivityGroup_containedEdge->setOpposite(get_UML_ActivityEdge_inGroup());
 	
 	
 	//containedNode
@@ -20184,6 +20218,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_containedNode->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityGroup_containedNode->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityGroup_containedNode->setAssociation(get_UML_A_containedNode_inGroup());
+	uML_ActivityGroup_containedNode->setOpposite(get_UML_ActivityNode_inGroup());
 	
 	
 	//inActivity
@@ -20195,6 +20230,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_inActivity->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityGroup_inActivity->setVisibility(uml::VisibilityKind::PROTECTED);
 	uML_ActivityGroup_inActivity->setAssociation(get_UML_A_group_inActivity());
+	uML_ActivityGroup_inActivity->setOpposite(get_UML_Activity_group());
 	
 	
 	//subgroup
@@ -20206,6 +20242,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_subgroup->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ActivityGroup_subgroup->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityGroup_subgroup->setAssociation(get_UML_A_subgroup_superGroup());
+	uML_ActivityGroup_subgroup->setOpposite(get_UML_ActivityGroup_superGroup());
 	
 	
 	//superGroup
@@ -20217,6 +20254,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_superGroup->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityGroup_superGroup->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityGroup_superGroup->setAssociation(get_UML_A_subgroup_superGroup());
+	uML_ActivityGroup_superGroup->setOpposite(get_UML_ActivityGroup_subgroup());
 	
 	
 
@@ -20252,6 +20290,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_activity->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_activity->setVisibility(uml::VisibilityKind::PROTECTED);
 	uML_ActivityNode_activity->setAssociation(get_UML_A_node_activity());
+	uML_ActivityNode_activity->setOpposite(get_UML_Activity_node());
 	
 	
 	//inGroup
@@ -20263,6 +20302,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inGroup->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_inGroup->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityNode_inGroup->setAssociation(get_UML_A_containedNode_inGroup());
+	uML_ActivityNode_inGroup->setOpposite(get_UML_ActivityGroup_containedNode());
 	
 	
 	//inInterruptibleRegion
@@ -20274,6 +20314,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inInterruptibleRegion->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_inInterruptibleRegion->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityNode_inInterruptibleRegion->setAssociation(get_UML_A_inInterruptibleRegion_node());
+	uML_ActivityNode_inInterruptibleRegion->setOpposite(get_UML_InterruptibleActivityRegion_node());
 	
 	
 	//inPartition
@@ -20285,6 +20326,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inPartition->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_inPartition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityNode_inPartition->setAssociation(get_UML_A_inPartition_node());
+	uML_ActivityNode_inPartition->setOpposite(get_UML_ActivityPartition_node());
 	
 	
 	//inStructuredNode
@@ -20296,6 +20338,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inStructuredNode->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_inStructuredNode->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityNode_inStructuredNode->setAssociation(get_UML_A_node_inStructuredNode());
+	uML_ActivityNode_inStructuredNode->setOpposite(get_UML_StructuredActivityNode_node());
 	
 	
 	//incoming
@@ -20307,6 +20350,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_incoming->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_incoming->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityNode_incoming->setAssociation(get_UML_A_incoming_target_node());
+	uML_ActivityNode_incoming->setOpposite(get_UML_ActivityEdge_target());
 	
 	
 	//outgoing
@@ -20318,6 +20362,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_outgoing->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_outgoing->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityNode_outgoing->setAssociation(get_UML_A_outgoing_source_node());
+	uML_ActivityNode_outgoing->setOpposite(get_UML_ActivityEdge_source());
 	
 	
 	//redefinedNode
@@ -20329,6 +20374,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_redefinedNode->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityNode_redefinedNode->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityNode_redefinedNode->setAssociation(get_UML_A_redefinedNode_activityNode());
+	uML_ActivityNode_redefinedNode->setOpposite(get_UML_A_redefinedNode_activityNode_activityNode());
 	
 	
 
@@ -20391,6 +20437,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityParameterNode_parameter->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityParameterNode_parameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityParameterNode_parameter->setAssociation(get_UML_A_parameter_activityParameterNode());
+	uML_ActivityParameterNode_parameter->setOpposite(get_UML_A_parameter_activityParameterNode_activityParameterNode());
 	
 	
 
@@ -20413,6 +20460,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_edge->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityPartition_edge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityPartition_edge->setAssociation(get_UML_A_edge_inPartition());
+	uML_ActivityPartition_edge->setOpposite(get_UML_ActivityEdge_inPartition());
 	
 	
 	//isDimension
@@ -20423,6 +20471,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_isDimension->setIsUnique(true);
 	uML_ActivityPartition_isDimension->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityPartition_isDimension->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ActivityPartition_isDimension->setDefaultValue(uML_ActivityPartition_isDimension_defaultValue_LiteralBoolean_UML_ActivityPartition_isDimension);
 	
@@ -20435,6 +20484,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_isExternal->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityPartition_isExternal->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_ActivityPartition_isExternal->setDefaultValue(uML_ActivityPartition_isExternal_defaultValue_LiteralBoolean_UML_ActivityPartition_isExternal);
 	
 	//node
@@ -20446,6 +20496,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_node->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityPartition_node->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityPartition_node->setAssociation(get_UML_A_inPartition_node());
+	uML_ActivityPartition_node->setOpposite(get_UML_ActivityNode_inPartition());
 	
 	
 	//represents
@@ -20457,6 +20508,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_represents->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityPartition_represents->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityPartition_represents->setAssociation(get_UML_A_represents_activityPartition());
+	uML_ActivityPartition_represents->setOpposite(get_UML_A_represents_activityPartition_activityPartition());
 	
 	
 	//subpartition
@@ -20468,6 +20520,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_subpartition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ActivityPartition_subpartition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityPartition_subpartition->setAssociation(get_UML_A_subpartition_superPartition());
+	uML_ActivityPartition_subpartition->setOpposite(get_UML_ActivityPartition_superPartition());
 	
 	
 	//superPartition
@@ -20479,6 +20532,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_superPartition->setAggregation(uml::AggregationKind::NONE);
 	uML_ActivityPartition_superPartition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ActivityPartition_superPartition->setAssociation(get_UML_A_subpartition_superPartition());
+	uML_ActivityPartition_superPartition->setOpposite(get_UML_ActivityPartition_subpartition());
 	
 	
 
@@ -20510,6 +20564,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AddStructuralFeatureValueAction_insertAt->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_AddStructuralFeatureValueAction_insertAt->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_AddStructuralFeatureValueAction_insertAt->setAssociation(get_UML_A_insertAt_addStructuralFeatureValueAction());
+	uML_AddStructuralFeatureValueAction_insertAt->setOpposite(get_UML_A_insertAt_addStructuralFeatureValueAction_addStructuralFeatureValueAction());
 	
 	
 	//isReplaceAll
@@ -20520,6 +20575,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AddStructuralFeatureValueAction_isReplaceAll->setIsUnique(true);
 	uML_AddStructuralFeatureValueAction_isReplaceAll->setAggregation(uml::AggregationKind::NONE);
 	uML_AddStructuralFeatureValueAction_isReplaceAll->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_AddStructuralFeatureValueAction_isReplaceAll->setDefaultValue(uML_AddStructuralFeatureValueAction_isReplaceAll_defaultValue_LiteralBoolean_UML_AddStructuralFeatureValueAction_isReplaceAll);
 	
@@ -20543,6 +20599,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AddVariableValueAction_insertAt->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_AddVariableValueAction_insertAt->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_AddVariableValueAction_insertAt->setAssociation(get_UML_A_insertAt_addVariableValueAction());
+	uML_AddVariableValueAction_insertAt->setOpposite(get_UML_A_insertAt_addVariableValueAction_addVariableValueAction());
 	
 	
 	//isReplaceAll
@@ -20553,6 +20610,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AddVariableValueAction_isReplaceAll->setIsUnique(true);
 	uML_AddVariableValueAction_isReplaceAll->setAggregation(uml::AggregationKind::NONE);
 	uML_AddVariableValueAction_isReplaceAll->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_AddVariableValueAction_isReplaceAll->setDefaultValue(uML_AddVariableValueAction_isReplaceAll_defaultValue_LiteralBoolean_UML_AddVariableValueAction_isReplaceAll);
 	
@@ -20590,6 +20648,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//manifestation
 	uML_Artifact_manifestation->setName("manifestation");
 	uML_Artifact_manifestation->setType(get_UML_Manifestation());
@@ -20599,6 +20658,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_manifestation->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Artifact_manifestation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Artifact_manifestation->setAssociation(get_UML_A_manifestation_artifact());
+	uML_Artifact_manifestation->setOpposite(get_UML_A_manifestation_artifact_artifact());
 	
 	
 	//nestedArtifact
@@ -20610,6 +20670,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_nestedArtifact->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Artifact_nestedArtifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Artifact_nestedArtifact->setAssociation(get_UML_A_nestedArtifact_artifact());
+	uML_Artifact_nestedArtifact->setOpposite(get_UML_A_nestedArtifact_artifact_artifact());
 	
 	
 	//ownedAttribute
@@ -20621,6 +20682,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_ownedAttribute->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Artifact_ownedAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Artifact_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_artifact());
+	uML_Artifact_ownedAttribute->setOpposite(get_UML_A_ownedAttribute_artifact_artifact());
 	
 	
 	//ownedOperation
@@ -20632,6 +20694,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_ownedOperation->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Artifact_ownedOperation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Artifact_ownedOperation->setAssociation(get_UML_A_ownedOperation_artifact());
+	uML_Artifact_ownedOperation->setOpposite(get_UML_A_ownedOperation_artifact_artifact());
 	
 	
 
@@ -20795,6 +20858,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_endType->setAggregation(uml::AggregationKind::NONE);
 	uML_Association_endType->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Association_endType->setAssociation(get_UML_A_endType_association());
+	uML_Association_endType->setOpposite(get_UML_A_endType_association_association());
 	
 	
 	//isDerived
@@ -20805,6 +20869,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_isDerived->setIsUnique(true);
 	uML_Association_isDerived->setAggregation(uml::AggregationKind::NONE);
 	uML_Association_isDerived->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Association_isDerived->setDefaultValue(uML_Association_isDerived_defaultValue_LiteralBoolean_UML_Association_isDerived);
 	
@@ -20817,6 +20882,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_memberEnd->setAggregation(uml::AggregationKind::NONE);
 	uML_Association_memberEnd->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Association_memberEnd->setAssociation(get_UML_A_memberEnd_association());
+	uML_Association_memberEnd->setOpposite(get_UML_Property_association());
 	
 	
 	//navigableOwnedEnd
@@ -20828,6 +20894,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_navigableOwnedEnd->setAggregation(uml::AggregationKind::NONE);
 	uML_Association_navigableOwnedEnd->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Association_navigableOwnedEnd->setAssociation(get_UML_A_navigableOwnedEnd_association());
+	uML_Association_navigableOwnedEnd->setOpposite(get_UML_A_navigableOwnedEnd_association_association());
 	
 	
 	//ownedEnd
@@ -20839,6 +20906,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_ownedEnd->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Association_ownedEnd->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Association_ownedEnd->setAssociation(get_UML_A_ownedEnd_owningAssociation());
+	uML_Association_ownedEnd->setOpposite(get_UML_Property_owningAssociation());
 	
 	
 
@@ -20899,6 +20967,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_context->setAggregation(uml::AggregationKind::NONE);
 	uML_Behavior_context->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Behavior_context->setAssociation(get_UML_A_context_behavior());
+	uML_Behavior_context->setOpposite(get_UML_A_context_behavior_behavior());
 	
 	
 	//isReentrant
@@ -20909,6 +20978,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_isReentrant->setIsUnique(true);
 	uML_Behavior_isReentrant->setAggregation(uml::AggregationKind::NONE);
 	uML_Behavior_isReentrant->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Behavior_isReentrant->setDefaultValue(uML_Behavior_isReentrant_defaultValue_LiteralBoolean_UML_Behavior_isReentrant);
 	
@@ -20921,6 +20991,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_ownedParameter->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Behavior_ownedParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Behavior_ownedParameter->setAssociation(get_UML_A_ownedParameter_behavior());
+	uML_Behavior_ownedParameter->setOpposite(get_UML_A_ownedParameter_behavior_behavior());
 	
 	
 	//ownedParameterSet
@@ -20932,6 +21003,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_ownedParameterSet->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Behavior_ownedParameterSet->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Behavior_ownedParameterSet->setAssociation(get_UML_A_ownedParameterSet_behavior());
+	uML_Behavior_ownedParameterSet->setOpposite(get_UML_A_ownedParameterSet_behavior_behavior());
 	
 	
 	//postcondition
@@ -20943,6 +21015,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_postcondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Behavior_postcondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Behavior_postcondition->setAssociation(get_UML_A_postcondition_behavior());
+	uML_Behavior_postcondition->setOpposite(get_UML_A_postcondition_behavior_behavior());
 	
 	
 	//precondition
@@ -20954,6 +21027,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_precondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Behavior_precondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Behavior_precondition->setAssociation(get_UML_A_precondition_behavior());
+	uML_Behavior_precondition->setOpposite(get_UML_A_precondition_behavior_behavior());
 	
 	
 	//redefinedBehavior
@@ -20965,6 +21039,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_redefinedBehavior->setAggregation(uml::AggregationKind::NONE);
 	uML_Behavior_redefinedBehavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Behavior_redefinedBehavior->setAssociation(get_UML_A_redefinedBehavior_behavior());
+	uML_Behavior_redefinedBehavior->setOpposite(get_UML_A_redefinedBehavior_behavior_behavior());
 	
 	
 	//specification
@@ -20976,6 +21051,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_specification->setAggregation(uml::AggregationKind::NONE);
 	uML_Behavior_specification->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Behavior_specification->setAssociation(get_UML_A_method_specification());
+	uML_Behavior_specification->setOpposite(get_UML_BehavioralFeature_method());
 	
 	
 
@@ -21064,6 +21140,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehaviorExecutionSpecification_behavior->setAggregation(uml::AggregationKind::NONE);
 	uML_BehaviorExecutionSpecification_behavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehaviorExecutionSpecification_behavior->setAssociation(get_UML_A_behavior_behaviorExecutionSpecification());
+	uML_BehaviorExecutionSpecification_behavior->setOpposite(get_UML_A_behavior_behaviorExecutionSpecification_behaviorExecutionSpecification());
 	
 	
 
@@ -21089,6 +21166,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_concurrency->setAggregation(uml::AggregationKind::NONE);
 	uML_BehavioralFeature_concurrency->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_BehavioralFeature_concurrency->setDefaultValue(uML_BehavioralFeature_concurrency_defaultValue_InstanceValue);
 	
 	//isAbstract
@@ -21099,6 +21177,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_isAbstract->setIsUnique(true);
 	uML_BehavioralFeature_isAbstract->setAggregation(uml::AggregationKind::NONE);
 	uML_BehavioralFeature_isAbstract->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_BehavioralFeature_isAbstract->setDefaultValue(uML_BehavioralFeature_isAbstract_defaultValue_LiteralBoolean_UML_BehavioralFeature_isAbstract);
 	
@@ -21111,6 +21190,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_method->setAggregation(uml::AggregationKind::NONE);
 	uML_BehavioralFeature_method->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehavioralFeature_method->setAssociation(get_UML_A_method_specification());
+	uML_BehavioralFeature_method->setOpposite(get_UML_Behavior_specification());
 	
 	
 	//ownedParameter
@@ -21122,6 +21202,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_ownedParameter->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_BehavioralFeature_ownedParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehavioralFeature_ownedParameter->setAssociation(get_UML_A_ownedParameter_ownerFormalParam());
+	uML_BehavioralFeature_ownedParameter->setOpposite(get_UML_A_ownedParameter_ownerFormalParam_ownerFormalParam());
 	
 	
 	//ownedParameterSet
@@ -21133,6 +21214,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_ownedParameterSet->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_BehavioralFeature_ownedParameterSet->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehavioralFeature_ownedParameterSet->setAssociation(get_UML_A_ownedParameterSet_behavioralFeature());
+	uML_BehavioralFeature_ownedParameterSet->setOpposite(get_UML_A_ownedParameterSet_behavioralFeature_behavioralFeature());
 	
 	
 	//raisedException
@@ -21144,6 +21226,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_raisedException->setAggregation(uml::AggregationKind::NONE);
 	uML_BehavioralFeature_raisedException->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehavioralFeature_raisedException->setAssociation(get_UML_A_raisedException_behavioralFeature());
+	uML_BehavioralFeature_raisedException->setOpposite(get_UML_A_raisedException_behavioralFeature_behavioralFeature());
 	
 	
 
@@ -21274,6 +21357,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_classifierBehavior->setAggregation(uml::AggregationKind::NONE);
 	uML_BehavioredClassifier_classifierBehavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehavioredClassifier_classifierBehavior->setAssociation(get_UML_A_classifierBehavior_behavioredClassifier());
+	uML_BehavioredClassifier_classifierBehavior->setOpposite(get_UML_A_classifierBehavior_behavioredClassifier_behavioredClassifier());
 	
 	
 	//interfaceRealization
@@ -21285,6 +21369,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_interfaceRealization->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_BehavioredClassifier_interfaceRealization->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehavioredClassifier_interfaceRealization->setAssociation(get_UML_A_interfaceRealization_implementingClassifier());
+	uML_BehavioredClassifier_interfaceRealization->setOpposite(get_UML_InterfaceRealization_implementingClassifier());
 	
 	
 	//ownedBehavior
@@ -21296,6 +21381,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_ownedBehavior->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_BehavioredClassifier_ownedBehavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BehavioredClassifier_ownedBehavior->setAssociation(get_UML_A_ownedBehavior_behavioredClassifier());
+	uML_BehavioredClassifier_ownedBehavior->setOpposite(get_UML_A_ownedBehavior_behavioredClassifier_behavioredClassifier());
 	
 	
 
@@ -21344,6 +21430,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BroadcastSignalAction_signal->setAggregation(uml::AggregationKind::NONE);
 	uML_BroadcastSignalAction_signal->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_BroadcastSignalAction_signal->setAssociation(get_UML_A_signal_broadcastSignalAction());
+	uML_BroadcastSignalAction_signal->setOpposite(get_UML_A_signal_broadcastSignalAction_broadcastSignalAction());
 	
 	
 
@@ -21366,6 +21453,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallAction_isSynchronous->setAggregation(uml::AggregationKind::NONE);
 	uML_CallAction_isSynchronous->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_CallAction_isSynchronous->setDefaultValue(uML_CallAction_isSynchronous_defaultValue_LiteralBoolean_UML_CallAction_isSynchronous);
 	
 	//result
@@ -21377,6 +21465,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CallAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CallAction_result->setAssociation(get_UML_A_result_callAction());
+	uML_CallAction_result->setOpposite(get_UML_A_result_callAction_callAction());
 	
 	
 
@@ -21425,6 +21514,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallBehaviorAction_behavior->setAggregation(uml::AggregationKind::NONE);
 	uML_CallBehaviorAction_behavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CallBehaviorAction_behavior->setAssociation(get_UML_A_behavior_callBehaviorAction());
+	uML_CallBehaviorAction_behavior->setOpposite(get_UML_A_behavior_callBehaviorAction_callBehaviorAction());
 	
 	
 
@@ -21473,6 +21563,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallEvent_operation->setAggregation(uml::AggregationKind::NONE);
 	uML_CallEvent_operation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CallEvent_operation->setAssociation(get_UML_A_operation_callEvent());
+	uML_CallEvent_operation->setOpposite(get_UML_A_operation_callEvent_callEvent());
 	
 	
 
@@ -21495,6 +21586,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallOperationAction_operation->setAggregation(uml::AggregationKind::NONE);
 	uML_CallOperationAction_operation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CallOperationAction_operation->setAssociation(get_UML_A_operation_callOperationAction());
+	uML_CallOperationAction_operation->setOpposite(get_UML_A_operation_callOperationAction_callOperationAction());
 	
 	
 	//target
@@ -21506,6 +21598,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallOperationAction_target->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CallOperationAction_target->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CallOperationAction_target->setAssociation(get_UML_A_target_callOperationAction());
+	uML_CallOperationAction_target->setOpposite(get_UML_A_target_callOperationAction_callOperationAction());
 	
 	
 
@@ -21563,6 +21656,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ChangeEvent_changeExpression->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ChangeEvent_changeExpression->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ChangeEvent_changeExpression->setAssociation(get_UML_A_changeExpression_changeEvent());
+	uML_ChangeEvent_changeExpression->setOpposite(get_UML_A_changeExpression_changeEvent_changeEvent());
 	
 	
 
@@ -21588,6 +21682,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_extension->setAggregation(uml::AggregationKind::NONE);
 	uML_Class_extension->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Class_extension->setAssociation(get_UML_A_extension_metaclass());
+	uML_Class_extension->setOpposite(get_UML_Extension_metaclass());
 	
 	
 	//isAbstract
@@ -21598,6 +21693,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_isAbstract->setIsUnique(true);
 	uML_Class_isAbstract->setAggregation(uml::AggregationKind::NONE);
 	uML_Class_isAbstract->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Class_isAbstract->setDefaultValue(uML_Class_isAbstract_defaultValue_LiteralBoolean_UML_Class_isAbstract);
 	
@@ -21610,6 +21706,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_isActive->setAggregation(uml::AggregationKind::NONE);
 	uML_Class_isActive->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Class_isActive->setDefaultValue(uML_Class_isActive_defaultValue_LiteralBoolean_UML_Class_isActive);
 	
 	//nestedClassifier
@@ -21621,6 +21718,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_nestedClassifier->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Class_nestedClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Class_nestedClassifier->setAssociation(get_UML_A_nestedClassifier_nestingClass());
+	uML_Class_nestedClassifier->setOpposite(get_UML_A_nestedClassifier_nestingClass_nestingClass());
 	
 	
 	//ownedAttribute
@@ -21632,6 +21730,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_ownedAttribute->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Class_ownedAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Class_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_class());
+	uML_Class_ownedAttribute->setOpposite(get_UML_Property_class());
 	
 	
 	//ownedOperation
@@ -21643,6 +21742,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_ownedOperation->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Class_ownedOperation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Class_ownedOperation->setAssociation(get_UML_A_ownedOperation_class());
+	uML_Class_ownedOperation->setOpposite(get_UML_Operation_class());
 	
 	
 	//ownedReception
@@ -21654,6 +21754,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_ownedReception->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Class_ownedReception->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Class_ownedReception->setAssociation(get_UML_A_ownedReception_class());
+	uML_Class_ownedReception->setOpposite(get_UML_A_ownedReception_class_class());
 	
 	
 	//superClass
@@ -21665,6 +21766,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_superClass->setAggregation(uml::AggregationKind::NONE);
 	uML_Class_superClass->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Class_superClass->setAssociation(get_UML_A_superClass_class());
+	uML_Class_superClass->setOpposite(get_UML_A_superClass_class_class());
 	
 	
 
@@ -21804,6 +21906,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_attribute->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_attribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_attribute->setAssociation(get_UML_A_attribute_classifier());
+	uML_Classifier_attribute->setOpposite(get_UML_A_attribute_classifier_classifier());
 	
 	
 	//collaborationUse
@@ -21815,6 +21918,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_collaborationUse->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Classifier_collaborationUse->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_collaborationUse->setAssociation(get_UML_A_collaborationUse_classifier());
+	uML_Classifier_collaborationUse->setOpposite(get_UML_A_collaborationUse_classifier_classifier());
 	
 	
 	//feature
@@ -21826,6 +21930,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_feature->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_feature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_feature->setAssociation(get_UML_A_feature_featuringClassifier());
+	uML_Classifier_feature->setOpposite(get_UML_Feature_featuringClassifier());
 	
 	
 	//general
@@ -21837,6 +21942,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_general->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_general->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_general->setAssociation(get_UML_A_general_classifier());
+	uML_Classifier_general->setOpposite(get_UML_A_general_classifier_classifier());
 	
 	
 	//generalization
@@ -21848,6 +21954,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_generalization->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Classifier_generalization->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_generalization->setAssociation(get_UML_A_generalization_specific());
+	uML_Classifier_generalization->setOpposite(get_UML_Generalization_specific());
 	
 	
 	//inheritedMember
@@ -21859,6 +21966,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_inheritedMember->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_inheritedMember->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_inheritedMember->setAssociation(get_UML_A_inheritedMember_inheritingClassifier());
+	uML_Classifier_inheritedMember->setOpposite(get_UML_A_inheritedMember_inheritingClassifier_inheritingClassifier());
 	
 	
 	//isAbstract
@@ -21869,6 +21977,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_isAbstract->setIsUnique(true);
 	uML_Classifier_isAbstract->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_isAbstract->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Classifier_isAbstract->setDefaultValue(uML_Classifier_isAbstract_defaultValue_LiteralBoolean_UML_Classifier_isAbstract);
 	
@@ -21881,6 +21990,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_isFinalSpecialization->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_isFinalSpecialization->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Classifier_isFinalSpecialization->setDefaultValue(uML_Classifier_isFinalSpecialization_defaultValue_LiteralBoolean_UML_Classifier_isFinalSpecialization);
 	
 	//ownedTemplateSignature
@@ -21892,6 +22002,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_ownedTemplateSignature->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Classifier_ownedTemplateSignature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_ownedTemplateSignature->setAssociation(get_UML_A_ownedTemplateSignature_classifier());
+	uML_Classifier_ownedTemplateSignature->setOpposite(get_UML_RedefinableTemplateSignature_classifier());
 	
 	
 	//ownedUseCase
@@ -21903,6 +22014,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_ownedUseCase->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Classifier_ownedUseCase->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_ownedUseCase->setAssociation(get_UML_A_ownedUseCase_classifier());
+	uML_Classifier_ownedUseCase->setOpposite(get_UML_A_ownedUseCase_classifier_classifier());
 	
 	
 	//powertypeExtent
@@ -21914,6 +22026,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_powertypeExtent->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_powertypeExtent->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_powertypeExtent->setAssociation(get_UML_A_powertypeExtent_powertype());
+	uML_Classifier_powertypeExtent->setOpposite(get_UML_GeneralizationSet_powertype());
 	
 	
 	//redefinedClassifier
@@ -21925,6 +22038,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_redefinedClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_redefinedClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_redefinedClassifier->setAssociation(get_UML_A_redefinedClassifier_classifier());
+	uML_Classifier_redefinedClassifier->setOpposite(get_UML_A_redefinedClassifier_classifier_classifier());
 	
 	
 	//representation
@@ -21936,6 +22050,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_representation->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_representation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_representation->setAssociation(get_UML_A_representation_classifier());
+	uML_Classifier_representation->setOpposite(get_UML_A_representation_classifier_classifier());
 	
 	
 	//substitution
@@ -21947,6 +22062,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_substitution->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Classifier_substitution->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_substitution->setAssociation(get_UML_A_substitution_substitutingClassifier());
+	uML_Classifier_substitution->setOpposite(get_UML_Substitution_substitutingClassifier());
 	
 	
 	//templateParameter
@@ -21958,6 +22074,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_templateParameter->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_templateParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_templateParameter->setAssociation(get_UML_A_classifier_templateParameter_parameteredElement());
+	uML_Classifier_templateParameter->setOpposite(get_UML_ClassifierTemplateParameter_parameteredElement());
 	
 	
 	//useCase
@@ -21969,6 +22086,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_useCase->setAggregation(uml::AggregationKind::NONE);
 	uML_Classifier_useCase->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Classifier_useCase->setAssociation(get_UML_A_subject_useCase());
+	uML_Classifier_useCase->setOpposite(get_UML_UseCase_subject());
 	
 	
 
@@ -22498,6 +22616,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClassifierTemplateParameter_allowSubstitutable->setAggregation(uml::AggregationKind::NONE);
 	uML_ClassifierTemplateParameter_allowSubstitutable->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_ClassifierTemplateParameter_allowSubstitutable->setDefaultValue(uML_ClassifierTemplateParameter_allowSubstitutable_defaultValue_LiteralBoolean_UML_ClassifierTemplateParameter_allowSubstitutable);
 	
 	//constrainingClassifier
@@ -22509,6 +22628,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClassifierTemplateParameter_constrainingClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_ClassifierTemplateParameter_constrainingClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ClassifierTemplateParameter_constrainingClassifier->setAssociation(get_UML_A_constrainingClassifier_classifierTemplateParameter());
+	uML_ClassifierTemplateParameter_constrainingClassifier->setOpposite(get_UML_A_constrainingClassifier_classifierTemplateParameter_classifierTemplateParameter());
 	
 	
 	//parameteredElement
@@ -22520,6 +22640,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClassifierTemplateParameter_parameteredElement->setAggregation(uml::AggregationKind::NONE);
 	uML_ClassifierTemplateParameter_parameteredElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ClassifierTemplateParameter_parameteredElement->setAssociation(get_UML_A_classifier_templateParameter_parameteredElement());
+	uML_ClassifierTemplateParameter_parameteredElement->setOpposite(get_UML_Classifier_templateParameter());
 	
 	
 
@@ -22542,6 +22663,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_body->setAggregation(uml::AggregationKind::NONE);
 	uML_Clause_body->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Clause_body->setAssociation(get_UML_A_body_clause());
+	uML_Clause_body->setOpposite(get_UML_A_body_clause_clause());
 	
 	
 	//bodyOutput
@@ -22553,6 +22675,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_bodyOutput->setAggregation(uml::AggregationKind::NONE);
 	uML_Clause_bodyOutput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Clause_bodyOutput->setAssociation(get_UML_A_bodyOutput_clause());
+	uML_Clause_bodyOutput->setOpposite(get_UML_A_bodyOutput_clause_clause());
 	
 	
 	//decider
@@ -22564,6 +22687,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_decider->setAggregation(uml::AggregationKind::NONE);
 	uML_Clause_decider->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Clause_decider->setAssociation(get_UML_A_decider_clause());
+	uML_Clause_decider->setOpposite(get_UML_A_decider_clause_clause());
 	
 	
 	//predecessorClause
@@ -22575,6 +22699,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_predecessorClause->setAggregation(uml::AggregationKind::NONE);
 	uML_Clause_predecessorClause->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Clause_predecessorClause->setAssociation(get_UML_A_predecessorClause_successorClause());
+	uML_Clause_predecessorClause->setOpposite(get_UML_Clause_successorClause());
 	
 	
 	//successorClause
@@ -22586,6 +22711,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_successorClause->setAggregation(uml::AggregationKind::NONE);
 	uML_Clause_successorClause->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Clause_successorClause->setAssociation(get_UML_A_predecessorClause_successorClause());
+	uML_Clause_successorClause->setOpposite(get_UML_Clause_predecessorClause());
 	
 	
 	//test
@@ -22597,6 +22723,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_test->setAggregation(uml::AggregationKind::NONE);
 	uML_Clause_test->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Clause_test->setAssociation(get_UML_A_test_clause());
+	uML_Clause_test->setOpposite(get_UML_A_test_clause_clause());
 	
 	
 
@@ -22619,6 +22746,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClearAssociationAction_association->setAggregation(uml::AggregationKind::NONE);
 	uML_ClearAssociationAction_association->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ClearAssociationAction_association->setAssociation(get_UML_A_association_clearAssociationAction());
+	uML_ClearAssociationAction_association->setOpposite(get_UML_A_association_clearAssociationAction_clearAssociationAction());
 	
 	
 	//object
@@ -22630,6 +22758,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClearAssociationAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ClearAssociationAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ClearAssociationAction_object->setAssociation(get_UML_A_object_clearAssociationAction());
+	uML_ClearAssociationAction_object->setOpposite(get_UML_A_object_clearAssociationAction_clearAssociationAction());
 	
 	
 
@@ -22652,6 +22781,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClearStructuralFeatureAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ClearStructuralFeatureAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ClearStructuralFeatureAction_result->setAssociation(get_UML_A_result_clearStructuralFeatureAction());
+	uML_ClearStructuralFeatureAction_result->setOpposite(get_UML_A_result_clearStructuralFeatureAction_clearStructuralFeatureAction());
 	
 	
 
@@ -22686,6 +22816,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Collaboration_collaborationRole->setAggregation(uml::AggregationKind::NONE);
 	uML_Collaboration_collaborationRole->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Collaboration_collaborationRole->setAssociation(get_UML_A_collaborationRole_collaboration());
+	uML_Collaboration_collaborationRole->setOpposite(get_UML_A_collaborationRole_collaboration_collaboration());
 	
 	
 
@@ -22708,6 +22839,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CollaborationUse_roleBinding->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CollaborationUse_roleBinding->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CollaborationUse_roleBinding->setAssociation(get_UML_A_roleBinding_collaborationUse());
+	uML_CollaborationUse_roleBinding->setOpposite(get_UML_A_roleBinding_collaborationUse_collaborationUse());
 	
 	
 	//type
@@ -22719,6 +22851,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CollaborationUse_type->setAggregation(uml::AggregationKind::NONE);
 	uML_CollaborationUse_type->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CollaborationUse_type->setAssociation(get_UML_A_type_collaborationUse());
+	uML_CollaborationUse_type->setOpposite(get_UML_A_type_collaborationUse_collaborationUse());
 	
 	
 
@@ -22741,6 +22874,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CombinedFragment_cfragmentGate->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CombinedFragment_cfragmentGate->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CombinedFragment_cfragmentGate->setAssociation(get_UML_A_cfragmentGate_combinedFragment());
+	uML_CombinedFragment_cfragmentGate->setOpposite(get_UML_A_cfragmentGate_combinedFragment_combinedFragment());
 	
 	
 	//interactionOperator
@@ -22751,6 +22885,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CombinedFragment_interactionOperator->setIsUnique(true);
 	uML_CombinedFragment_interactionOperator->setAggregation(uml::AggregationKind::NONE);
 	uML_CombinedFragment_interactionOperator->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_CombinedFragment_interactionOperator->setDefaultValue(uML_CombinedFragment_interactionOperator_defaultValue_InstanceValue);
 	
@@ -22763,6 +22898,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CombinedFragment_operand->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CombinedFragment_operand->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CombinedFragment_operand->setAssociation(get_UML_A_operand_combinedFragment());
+	uML_CombinedFragment_operand->setOpposite(get_UML_A_operand_combinedFragment_combinedFragment());
 	
 	
 
@@ -22785,6 +22921,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Comment_annotatedElement->setAggregation(uml::AggregationKind::NONE);
 	uML_Comment_annotatedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Comment_annotatedElement->setAssociation(get_UML_A_annotatedElement_comment());
+	uML_Comment_annotatedElement->setOpposite(get_UML_A_annotatedElement_comment_comment());
 	
 	
 	//body
@@ -22795,6 +22932,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Comment_body->setIsUnique(true);
 	uML_Comment_body->setAggregation(uml::AggregationKind::NONE);
 	uML_Comment_body->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -22827,6 +22965,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_isIndirectlyInstantiated->setAggregation(uml::AggregationKind::NONE);
 	uML_Component_isIndirectlyInstantiated->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Component_isIndirectlyInstantiated->setDefaultValue(uML_Component_isIndirectlyInstantiated_defaultValue_LiteralBoolean_UML_Component_isIndirectlyInstantiated);
 	
 	//packagedElement
@@ -22838,6 +22977,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_packagedElement->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Component_packagedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Component_packagedElement->setAssociation(get_UML_A_packagedElement_component());
+	uML_Component_packagedElement->setOpposite(get_UML_A_packagedElement_component_component());
 	
 	
 	//provided
@@ -22849,6 +22989,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_provided->setAggregation(uml::AggregationKind::NONE);
 	uML_Component_provided->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Component_provided->setAssociation(get_UML_A_provided_component());
+	uML_Component_provided->setOpposite(get_UML_A_provided_component_component());
 	
 	
 	//realization
@@ -22860,6 +23001,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_realization->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Component_realization->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Component_realization->setAssociation(get_UML_A_realization_abstraction_component());
+	uML_Component_realization->setOpposite(get_UML_ComponentRealization_abstraction());
 	
 	
 	//required
@@ -22871,6 +23013,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_required->setAggregation(uml::AggregationKind::NONE);
 	uML_Component_required->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Component_required->setAssociation(get_UML_A_required_component());
+	uML_Component_required->setOpposite(get_UML_A_required_component_component());
 	
 	
 
@@ -23041,6 +23184,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ComponentRealization_abstraction->setAggregation(uml::AggregationKind::NONE);
 	uML_ComponentRealization_abstraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ComponentRealization_abstraction->setAssociation(get_UML_A_realization_abstraction_component());
+	uML_ComponentRealization_abstraction->setOpposite(get_UML_Component_realization());
 	
 	
 	//realizingClassifier
@@ -23052,6 +23196,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ComponentRealization_realizingClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_ComponentRealization_realizingClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ComponentRealization_realizingClassifier->setAssociation(get_UML_A_realizingClassifier_componentRealization());
+	uML_ComponentRealization_realizingClassifier->setOpposite(get_UML_A_realizingClassifier_componentRealization_componentRealization());
 	
 	
 
@@ -23074,6 +23219,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConditionalNode_clause->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ConditionalNode_clause->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConditionalNode_clause->setAssociation(get_UML_A_clause_conditionalNode());
+	uML_ConditionalNode_clause->setOpposite(get_UML_A_clause_conditionalNode_conditionalNode());
 	
 	
 	//isAssured
@@ -23084,6 +23230,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConditionalNode_isAssured->setIsUnique(true);
 	uML_ConditionalNode_isAssured->setAggregation(uml::AggregationKind::NONE);
 	uML_ConditionalNode_isAssured->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ConditionalNode_isAssured->setDefaultValue(uML_ConditionalNode_isAssured_defaultValue_LiteralBoolean_UML_ConditionalNode_isAssured);
 	
@@ -23096,6 +23243,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConditionalNode_isDeterminate->setAggregation(uml::AggregationKind::NONE);
 	uML_ConditionalNode_isDeterminate->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_ConditionalNode_isDeterminate->setDefaultValue(uML_ConditionalNode_isDeterminate_defaultValue_LiteralBoolean_UML_ConditionalNode_isDeterminate);
 	
 	//result
@@ -23107,6 +23255,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConditionalNode_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ConditionalNode_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConditionalNode_result->setAssociation(get_UML_A_result_conditionalNode());
+	uML_ConditionalNode_result->setOpposite(get_UML_A_result_conditionalNode_conditionalNode());
 	
 	
 
@@ -23147,6 +23296,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectableElement_end->setAssociation(get_UML_A_end_role());
 	
 	
+	
 	//templateParameter
 	uML_ConnectableElement_templateParameter->setName("templateParameter");
 	uML_ConnectableElement_templateParameter->setType(get_UML_ConnectableElementTemplateParameter());
@@ -23156,6 +23306,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectableElement_templateParameter->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectableElement_templateParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectableElement_templateParameter->setAssociation(get_UML_A_connectableElement_templateParameter_parameteredElement());
+	uML_ConnectableElement_templateParameter->setOpposite(get_UML_ConnectableElementTemplateParameter_parameteredElement());
 	
 	
 
@@ -23191,6 +23342,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectableElementTemplateParameter_parameteredElement->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectableElementTemplateParameter_parameteredElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectableElementTemplateParameter_parameteredElement->setAssociation(get_UML_A_connectableElement_templateParameter_parameteredElement());
+	uML_ConnectableElementTemplateParameter_parameteredElement->setOpposite(get_UML_ConnectableElement_templateParameter());
 	
 	
 
@@ -23213,6 +23365,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectionPointReference_entry->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectionPointReference_entry->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectionPointReference_entry->setAssociation(get_UML_A_entry_connectionPointReference());
+	uML_ConnectionPointReference_entry->setOpposite(get_UML_A_entry_connectionPointReference_connectionPointReference());
 	
 	
 	//exit
@@ -23224,6 +23377,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectionPointReference_exit->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectionPointReference_exit->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectionPointReference_exit->setAssociation(get_UML_A_exit_connectionPointReference());
+	uML_ConnectionPointReference_exit->setOpposite(get_UML_A_exit_connectionPointReference_connectionPointReference());
 	
 	
 	//state
@@ -23235,6 +23389,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectionPointReference_state->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectionPointReference_state->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectionPointReference_state->setAssociation(get_UML_A_connection_state());
+	uML_ConnectionPointReference_state->setOpposite(get_UML_State_connection());
 	
 	
 
@@ -23257,6 +23412,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_contract->setAggregation(uml::AggregationKind::NONE);
 	uML_Connector_contract->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Connector_contract->setAssociation(get_UML_A_contract_connector());
+	uML_Connector_contract->setOpposite(get_UML_A_contract_connector_connector());
 	
 	
 	//end
@@ -23268,6 +23424,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_end->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Connector_end->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Connector_end->setAssociation(get_UML_A_end_connector());
+	uML_Connector_end->setOpposite(get_UML_A_end_connector_connector());
 	
 	
 	//kind
@@ -23281,6 +23438,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//redefinedConnector
 	uML_Connector_redefinedConnector->setName("redefinedConnector");
 	uML_Connector_redefinedConnector->setType(get_UML_Connector());
@@ -23290,6 +23448,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_redefinedConnector->setAggregation(uml::AggregationKind::NONE);
 	uML_Connector_redefinedConnector->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Connector_redefinedConnector->setAssociation(get_UML_A_redefinedConnector_connector());
+	uML_Connector_redefinedConnector->setOpposite(get_UML_A_redefinedConnector_connector_connector());
 	
 	
 	//type
@@ -23301,6 +23460,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_type->setAggregation(uml::AggregationKind::NONE);
 	uML_Connector_type->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Connector_type->setAssociation(get_UML_A_type_connector());
+	uML_Connector_type->setOpposite(get_UML_A_type_connector_connector());
 	
 	
 
@@ -23336,6 +23496,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectorEnd_definingEnd->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectorEnd_definingEnd->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectorEnd_definingEnd->setAssociation(get_UML_A_definingEnd_connectorEnd());
+	uML_ConnectorEnd_definingEnd->setOpposite(get_UML_A_definingEnd_connectorEnd_connectorEnd());
 	
 	
 	//partWithPort
@@ -23347,6 +23508,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectorEnd_partWithPort->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectorEnd_partWithPort->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectorEnd_partWithPort->setAssociation(get_UML_A_partWithPort_connectorEnd());
+	uML_ConnectorEnd_partWithPort->setOpposite(get_UML_A_partWithPort_connectorEnd_connectorEnd());
 	
 	
 	//role
@@ -23358,6 +23520,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectorEnd_role->setAggregation(uml::AggregationKind::NONE);
 	uML_ConnectorEnd_role->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConnectorEnd_role->setAssociation(get_UML_A_end_role());
+	
 	
 	
 
@@ -23393,6 +23556,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConsiderIgnoreFragment_message->setAggregation(uml::AggregationKind::NONE);
 	uML_ConsiderIgnoreFragment_message->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ConsiderIgnoreFragment_message->setAssociation(get_UML_A_message_considerIgnoreFragment());
+	uML_ConsiderIgnoreFragment_message->setOpposite(get_UML_A_message_considerIgnoreFragment_considerIgnoreFragment());
 	
 	
 
@@ -23415,6 +23579,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Constraint_constrainedElement->setAggregation(uml::AggregationKind::NONE);
 	uML_Constraint_constrainedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Constraint_constrainedElement->setAssociation(get_UML_A_constrainedElement_constraint());
+	uML_Constraint_constrainedElement->setOpposite(get_UML_A_constrainedElement_constraint_constraint());
 	
 	
 	//context
@@ -23426,6 +23591,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Constraint_context->setAggregation(uml::AggregationKind::NONE);
 	uML_Constraint_context->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Constraint_context->setAssociation(get_UML_A_ownedRule_context());
+	uML_Constraint_context->setOpposite(get_UML_Namespace_ownedRule());
 	
 	
 	//specification
@@ -23437,6 +23603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Constraint_specification->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Constraint_specification->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Constraint_specification->setAssociation(get_UML_A_specification_owningConstraint());
+	uML_Constraint_specification->setOpposite(get_UML_A_specification_owningConstraint_owningConstraint());
 	
 	
 
@@ -23458,6 +23625,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Continuation_setting->setIsUnique(true);
 	uML_Continuation_setting->setAggregation(uml::AggregationKind::NONE);
 	uML_Continuation_setting->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Continuation_setting->setDefaultValue(uML_Continuation_setting_defaultValue_LiteralBoolean_UML_Continuation_setting);
 	
@@ -23499,6 +23667,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CreateLinkAction_endData->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CreateLinkAction_endData->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CreateLinkAction_endData->setAssociation(get_UML_A_endData_createLinkAction());
+	uML_CreateLinkAction_endData->setOpposite(get_UML_A_endData_createLinkAction_createLinkAction());
 	
 	
 
@@ -23521,6 +23690,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CreateLinkObjectAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CreateLinkObjectAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CreateLinkObjectAction_result->setAssociation(get_UML_A_result_createLinkObjectAction());
+	uML_CreateLinkObjectAction_result->setOpposite(get_UML_A_result_createLinkObjectAction_createLinkObjectAction());
 	
 	
 
@@ -23543,6 +23713,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CreateObjectAction_classifier->setAggregation(uml::AggregationKind::NONE);
 	uML_CreateObjectAction_classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CreateObjectAction_classifier->setAssociation(get_UML_A_classifier_createObjectAction());
+	uML_CreateObjectAction_classifier->setOpposite(get_UML_A_classifier_createObjectAction_createObjectAction());
 	
 	
 	//result
@@ -23554,6 +23725,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CreateObjectAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_CreateObjectAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_CreateObjectAction_result->setAssociation(get_UML_A_result_createObjectAction());
+	uML_CreateObjectAction_result->setOpposite(get_UML_A_result_createObjectAction_createObjectAction());
 	
 	
 
@@ -23585,6 +23757,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DataType_ownedAttribute->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_DataType_ownedAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DataType_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_datatype());
+	uML_DataType_ownedAttribute->setOpposite(get_UML_Property_datatype());
 	
 	
 	//ownedOperation
@@ -23596,6 +23769,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DataType_ownedOperation->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_DataType_ownedOperation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DataType_ownedOperation->setAssociation(get_UML_A_ownedOperation_datatype());
+	uML_DataType_ownedOperation->setOpposite(get_UML_Operation_datatype());
 	
 	
 
@@ -23756,6 +23930,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DecisionNode_decisionInput->setAggregation(uml::AggregationKind::NONE);
 	uML_DecisionNode_decisionInput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DecisionNode_decisionInput->setAssociation(get_UML_A_decisionInput_decisionNode());
+	uML_DecisionNode_decisionInput->setOpposite(get_UML_A_decisionInput_decisionNode_decisionNode());
 	
 	
 	//decisionInputFlow
@@ -23767,6 +23942,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DecisionNode_decisionInputFlow->setAggregation(uml::AggregationKind::NONE);
 	uML_DecisionNode_decisionInputFlow->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DecisionNode_decisionInputFlow->setAssociation(get_UML_A_decisionInputFlow_decisionNode());
+	uML_DecisionNode_decisionInputFlow->setOpposite(get_UML_A_decisionInputFlow_decisionNode_decisionNode());
 	
 	
 
@@ -23794,6 +23970,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Dependency_client->setAssociation(get_UML_A_clientDependency_client());
 	
 	
+	
 	//supplier
 	uML_Dependency_supplier->setName("supplier");
 	uML_Dependency_supplier->setType(get_UML_NamedElement());
@@ -23803,6 +23980,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Dependency_supplier->setAggregation(uml::AggregationKind::NONE);
 	uML_Dependency_supplier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Dependency_supplier->setAssociation(get_UML_A_supplier_supplierDependency());
+	uML_Dependency_supplier->setOpposite(get_UML_A_supplier_supplierDependency_supplierDependency());
 	
 	
 
@@ -23834,6 +24012,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Deployment_configuration->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Deployment_configuration->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Deployment_configuration->setAssociation(get_UML_A_configuration_deployment());
+	uML_Deployment_configuration->setOpposite(get_UML_DeploymentSpecification_deployment());
 	
 	
 	//deployedArtifact
@@ -23845,6 +24024,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Deployment_deployedArtifact->setAggregation(uml::AggregationKind::NONE);
 	uML_Deployment_deployedArtifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Deployment_deployedArtifact->setAssociation(get_UML_A_deployedArtifact_deploymentForArtifact());
+	uML_Deployment_deployedArtifact->setOpposite(get_UML_A_deployedArtifact_deploymentForArtifact_deploymentForArtifact());
 	
 	
 	//location
@@ -23856,6 +24036,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Deployment_location->setAggregation(uml::AggregationKind::NONE);
 	uML_Deployment_location->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Deployment_location->setAssociation(get_UML_A_deployment_location());
+	uML_Deployment_location->setOpposite(get_UML_DeploymentTarget_deployment());
 	
 	
 
@@ -23878,6 +24059,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DeploymentSpecification_deployment->setAggregation(uml::AggregationKind::NONE);
 	uML_DeploymentSpecification_deployment->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DeploymentSpecification_deployment->setAssociation(get_UML_A_configuration_deployment());
+	uML_DeploymentSpecification_deployment->setOpposite(get_UML_Deployment_configuration());
 	
 	
 	//deploymentLocation
@@ -23891,6 +24073,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//executionLocation
 	uML_DeploymentSpecification_executionLocation->setName("executionLocation");
 	uML_DeploymentSpecification_executionLocation->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
@@ -23899,6 +24082,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DeploymentSpecification_executionLocation->setIsUnique(true);
 	uML_DeploymentSpecification_executionLocation->setAggregation(uml::AggregationKind::NONE);
 	uML_DeploymentSpecification_executionLocation->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -23922,6 +24106,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DeploymentTarget_deployedElement->setAggregation(uml::AggregationKind::NONE);
 	uML_DeploymentTarget_deployedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DeploymentTarget_deployedElement->setAssociation(get_UML_A_deployedElement_deploymentTarget());
+	uML_DeploymentTarget_deployedElement->setOpposite(get_UML_A_deployedElement_deploymentTarget_deploymentTarget());
 	
 	
 	//deployment
@@ -23933,6 +24118,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DeploymentTarget_deployment->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_DeploymentTarget_deployment->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DeploymentTarget_deployment->setAssociation(get_UML_A_deployment_location());
+	uML_DeploymentTarget_deployment->setOpposite(get_UML_Deployment_location());
 	
 	
 
@@ -23968,6 +24154,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DestroyLinkAction_endData->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_DestroyLinkAction_endData->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DestroyLinkAction_endData->setAssociation(get_UML_A_endData_destroyLinkAction());
+	uML_DestroyLinkAction_endData->setOpposite(get_UML_A_endData_destroyLinkAction_destroyLinkAction());
 	
 	
 
@@ -23990,6 +24177,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DestroyObjectAction_isDestroyLinks->setAggregation(uml::AggregationKind::NONE);
 	uML_DestroyObjectAction_isDestroyLinks->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_DestroyObjectAction_isDestroyLinks->setDefaultValue(uML_DestroyObjectAction_isDestroyLinks_defaultValue_LiteralBoolean_UML_DestroyObjectAction_isDestroyLinks);
 	
 	//isDestroyOwnedObjects
@@ -24000,6 +24188,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setIsUnique(true);
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setAggregation(uml::AggregationKind::NONE);
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setDefaultValue(uML_DestroyObjectAction_isDestroyOwnedObjects_defaultValue_LiteralBoolean_UML_DestroyObjectAction_isDestroyOwnedObjects);
 	
@@ -24012,6 +24201,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DestroyObjectAction_target->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_DestroyObjectAction_target->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DestroyObjectAction_target->setAssociation(get_UML_A_target_destroyObjectAction());
+	uML_DestroyObjectAction_target->setOpposite(get_UML_A_target_destroyObjectAction_destroyObjectAction());
 	
 	
 
@@ -24052,6 +24242,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DirectedRelationship_source->setAggregation(uml::AggregationKind::NONE);
 	uML_DirectedRelationship_source->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DirectedRelationship_source->setAssociation(get_UML_A_source_directedRelationship());
+	uML_DirectedRelationship_source->setOpposite(get_UML_A_source_directedRelationship_directedRelationship());
 	
 	
 	//target
@@ -24063,6 +24254,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DirectedRelationship_target->setAggregation(uml::AggregationKind::NONE);
 	uML_DirectedRelationship_target->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DirectedRelationship_target->setAssociation(get_UML_A_target_directedRelationship());
+	uML_DirectedRelationship_target->setOpposite(get_UML_A_target_directedRelationship_directedRelationship());
 	
 	
 
@@ -24085,6 +24277,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Duration_expr->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Duration_expr->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Duration_expr->setAssociation(get_UML_A_expr_duration());
+	uML_Duration_expr->setOpposite(get_UML_A_expr_duration_duration());
 	
 	
 	//observation
@@ -24096,6 +24289,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Duration_observation->setAggregation(uml::AggregationKind::NONE);
 	uML_Duration_observation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Duration_observation->setAssociation(get_UML_A_observation_duration());
+	uML_Duration_observation->setOpposite(get_UML_A_observation_duration_duration());
 	
 	
 
@@ -24133,6 +24327,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//specification
 	uML_DurationConstraint_specification->setName("specification");
 	uML_DurationConstraint_specification->setType(get_UML_DurationInterval());
@@ -24142,6 +24337,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DurationConstraint_specification->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_DurationConstraint_specification->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DurationConstraint_specification->setAssociation(get_UML_A_specification_durationConstraint());
+	uML_DurationConstraint_specification->setOpposite(get_UML_A_specification_durationConstraint_durationConstraint());
 	
 	
 
@@ -24164,6 +24360,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DurationInterval_max->setAggregation(uml::AggregationKind::NONE);
 	uML_DurationInterval_max->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DurationInterval_max->setAssociation(get_UML_A_max_durationInterval());
+	uML_DurationInterval_max->setOpposite(get_UML_A_max_durationInterval_durationInterval());
 	
 	
 	//min
@@ -24175,6 +24372,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DurationInterval_min->setAggregation(uml::AggregationKind::NONE);
 	uML_DurationInterval_min->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DurationInterval_min->setAssociation(get_UML_A_min_durationInterval());
+	uML_DurationInterval_min->setOpposite(get_UML_A_min_durationInterval_durationInterval());
 	
 	
 
@@ -24197,6 +24395,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DurationObservation_event->setAggregation(uml::AggregationKind::NONE);
 	uML_DurationObservation_event->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_DurationObservation_event->setAssociation(get_UML_A_event_durationObservation());
+	uML_DurationObservation_event->setOpposite(get_UML_A_event_durationObservation_durationObservation());
 	
 	
 	//firstEvent
@@ -24207,6 +24406,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DurationObservation_firstEvent->setIsUnique(true);
 	uML_DurationObservation_firstEvent->setAggregation(uml::AggregationKind::NONE);
 	uML_DurationObservation_firstEvent->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -24230,6 +24430,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_ownedComment->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Element_ownedComment->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Element_ownedComment->setAssociation(get_UML_A_ownedComment_owningElement());
+	uML_Element_ownedComment->setOpposite(get_UML_A_ownedComment_owningElement_owningElement());
 	
 	
 	//ownedElement
@@ -24241,6 +24442,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_ownedElement->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Element_ownedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Element_ownedElement->setAssociation(get_UML_A_ownedElement_owner());
+	uML_Element_ownedElement->setOpposite(get_UML_Element_owner());
 	
 	
 	//owner
@@ -24252,6 +24454,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_owner->setAggregation(uml::AggregationKind::NONE);
 	uML_Element_owner->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Element_owner->setAssociation(get_UML_A_ownedElement_owner());
+	uML_Element_owner->setOpposite(get_UML_Element_ownedElement());
 	
 	
 
@@ -25059,6 +25262,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//importedElement
 	uML_ElementImport_importedElement->setName("importedElement");
 	uML_ElementImport_importedElement->setType(get_UML_PackageableElement());
@@ -25068,6 +25272,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ElementImport_importedElement->setAggregation(uml::AggregationKind::NONE);
 	uML_ElementImport_importedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ElementImport_importedElement->setAssociation(get_UML_A_importedElement_import());
+	uML_ElementImport_importedElement->setOpposite(get_UML_A_importedElement_import_import());
 	
 	
 	//importingNamespace
@@ -25079,6 +25284,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ElementImport_importingNamespace->setAggregation(uml::AggregationKind::NONE);
 	uML_ElementImport_importingNamespace->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ElementImport_importingNamespace->setAssociation(get_UML_A_elementImport_importingNamespace());
+	uML_ElementImport_importingNamespace->setOpposite(get_UML_Namespace_elementImport());
 	
 	
 	//visibility
@@ -25089,6 +25295,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ElementImport_visibility->setIsUnique(true);
 	uML_ElementImport_visibility->setAggregation(uml::AggregationKind::NONE);
 	uML_ElementImport_visibility->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ElementImport_visibility->setDefaultValue(uML_ElementImport_visibility_defaultValue_InstanceValue);
 	
@@ -25125,6 +25332,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EncapsulatedClassifier_ownedPort->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_EncapsulatedClassifier_ownedPort->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_EncapsulatedClassifier_ownedPort->setAssociation(get_UML_A_ownedPort_encapsulatedClassifier());
+	uML_EncapsulatedClassifier_ownedPort->setOpposite(get_UML_A_ownedPort_encapsulatedClassifier_encapsulatedClassifier());
 	
 	
 
@@ -25160,6 +25368,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Enumeration_ownedLiteral->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Enumeration_ownedLiteral->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Enumeration_ownedLiteral->setAssociation(get_UML_A_ownedLiteral_enumeration());
+	uML_Enumeration_ownedLiteral->setOpposite(get_UML_EnumerationLiteral_enumeration());
 	
 	
 
@@ -25182,6 +25391,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EnumerationLiteral_classifier->setAggregation(uml::AggregationKind::NONE);
 	uML_EnumerationLiteral_classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_EnumerationLiteral_classifier->setAssociation(get_UML_A_classifier_enumerationLiteral());
+	uML_EnumerationLiteral_classifier->setOpposite(get_UML_A_classifier_enumerationLiteral_enumerationLiteral());
 	
 	
 	//enumeration
@@ -25193,6 +25403,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EnumerationLiteral_enumeration->setAggregation(uml::AggregationKind::NONE);
 	uML_EnumerationLiteral_enumeration->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_EnumerationLiteral_enumeration->setAssociation(get_UML_A_ownedLiteral_enumeration());
+	uML_EnumerationLiteral_enumeration->setOpposite(get_UML_Enumeration_ownedLiteral());
 	
 	
 
@@ -25250,6 +25461,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExceptionHandler_exceptionInput->setAggregation(uml::AggregationKind::NONE);
 	uML_ExceptionHandler_exceptionInput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExceptionHandler_exceptionInput->setAssociation(get_UML_A_exceptionInput_exceptionHandler());
+	uML_ExceptionHandler_exceptionInput->setOpposite(get_UML_A_exceptionInput_exceptionHandler_exceptionHandler());
 	
 	
 	//exceptionType
@@ -25261,6 +25473,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExceptionHandler_exceptionType->setAggregation(uml::AggregationKind::NONE);
 	uML_ExceptionHandler_exceptionType->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExceptionHandler_exceptionType->setAssociation(get_UML_A_exceptionType_exceptionHandler());
+	uML_ExceptionHandler_exceptionType->setOpposite(get_UML_A_exceptionType_exceptionHandler_exceptionHandler());
 	
 	
 	//handlerBody
@@ -25272,6 +25485,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExceptionHandler_handlerBody->setAggregation(uml::AggregationKind::NONE);
 	uML_ExceptionHandler_handlerBody->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExceptionHandler_handlerBody->setAssociation(get_UML_A_handlerBody_exceptionHandler());
+	uML_ExceptionHandler_handlerBody->setOpposite(get_UML_A_handlerBody_exceptionHandler_exceptionHandler());
 	
 	
 	//protectedNode
@@ -25283,6 +25497,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExceptionHandler_protectedNode->setAggregation(uml::AggregationKind::NONE);
 	uML_ExceptionHandler_protectedNode->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExceptionHandler_protectedNode->setAssociation(get_UML_A_handler_protectedNode());
+	uML_ExceptionHandler_protectedNode->setOpposite(get_UML_ExecutableNode_handler());
 	
 	
 
@@ -25305,6 +25520,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExecutableNode_handler->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ExecutableNode_handler->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExecutableNode_handler->setAssociation(get_UML_A_handler_protectedNode());
+	uML_ExecutableNode_handler->setOpposite(get_UML_ExceptionHandler_protectedNode());
 	
 	
 
@@ -25336,6 +25552,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExecutionOccurrenceSpecification_execution->setAggregation(uml::AggregationKind::NONE);
 	uML_ExecutionOccurrenceSpecification_execution->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExecutionOccurrenceSpecification_execution->setAssociation(get_UML_A_execution_executionOccurrenceSpecification());
+	uML_ExecutionOccurrenceSpecification_execution->setOpposite(get_UML_A_execution_executionOccurrenceSpecification_executionOccurrenceSpecification());
 	
 	
 
@@ -25358,6 +25575,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExecutionSpecification_finish->setAggregation(uml::AggregationKind::NONE);
 	uML_ExecutionSpecification_finish->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExecutionSpecification_finish->setAssociation(get_UML_A_finish_executionSpecification());
+	uML_ExecutionSpecification_finish->setOpposite(get_UML_A_finish_executionSpecification_executionSpecification());
 	
 	
 	//start
@@ -25369,6 +25587,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExecutionSpecification_start->setAggregation(uml::AggregationKind::NONE);
 	uML_ExecutionSpecification_start->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExecutionSpecification_start->setAssociation(get_UML_A_start_executionSpecification());
+	uML_ExecutionSpecification_start->setOpposite(get_UML_A_start_executionSpecification_executionSpecification());
 	
 	
 
@@ -25391,6 +25610,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExpansionNode_regionAsInput->setAggregation(uml::AggregationKind::NONE);
 	uML_ExpansionNode_regionAsInput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExpansionNode_regionAsInput->setAssociation(get_UML_A_inputElement_regionAsInput());
+	uML_ExpansionNode_regionAsInput->setOpposite(get_UML_ExpansionRegion_inputElement());
 	
 	
 	//regionAsOutput
@@ -25402,6 +25622,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExpansionNode_regionAsOutput->setAggregation(uml::AggregationKind::NONE);
 	uML_ExpansionNode_regionAsOutput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExpansionNode_regionAsOutput->setAssociation(get_UML_A_outputElement_regionAsOutput());
+	uML_ExpansionNode_regionAsOutput->setOpposite(get_UML_ExpansionRegion_outputElement());
 	
 	
 
@@ -25424,6 +25645,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExpansionRegion_inputElement->setAggregation(uml::AggregationKind::NONE);
 	uML_ExpansionRegion_inputElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExpansionRegion_inputElement->setAssociation(get_UML_A_inputElement_regionAsInput());
+	uML_ExpansionRegion_inputElement->setOpposite(get_UML_ExpansionNode_regionAsInput());
 	
 	
 	//mode
@@ -25434,6 +25656,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExpansionRegion_mode->setIsUnique(true);
 	uML_ExpansionRegion_mode->setAggregation(uml::AggregationKind::NONE);
 	uML_ExpansionRegion_mode->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ExpansionRegion_mode->setDefaultValue(uML_ExpansionRegion_mode_defaultValue_InstanceValue);
 	
@@ -25446,6 +25669,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExpansionRegion_outputElement->setAggregation(uml::AggregationKind::NONE);
 	uML_ExpansionRegion_outputElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExpansionRegion_outputElement->setAssociation(get_UML_A_outputElement_regionAsOutput());
+	uML_ExpansionRegion_outputElement->setOpposite(get_UML_ExpansionNode_regionAsOutput());
 	
 	
 
@@ -25468,6 +25692,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Expression_operand->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Expression_operand->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Expression_operand->setAssociation(get_UML_A_operand_expression());
+	uML_Expression_operand->setOpposite(get_UML_A_operand_expression_expression());
 	
 	
 	//symbol
@@ -25478,6 +25703,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Expression_symbol->setIsUnique(true);
 	uML_Expression_symbol->setAggregation(uml::AggregationKind::NONE);
 	uML_Expression_symbol->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -25504,6 +25730,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extend_condition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Extend_condition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Extend_condition->setAssociation(get_UML_A_condition_extend());
+	uML_Extend_condition->setOpposite(get_UML_A_condition_extend_extend());
 	
 	
 	//extendedCase
@@ -25515,6 +25742,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extend_extendedCase->setAggregation(uml::AggregationKind::NONE);
 	uML_Extend_extendedCase->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Extend_extendedCase->setAssociation(get_UML_A_extendedCase_extend());
+	uML_Extend_extendedCase->setOpposite(get_UML_A_extendedCase_extend_extend());
 	
 	
 	//extension
@@ -25526,6 +25754,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extend_extension->setAggregation(uml::AggregationKind::NONE);
 	uML_Extend_extension->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Extend_extension->setAssociation(get_UML_A_extend_extension());
+	uML_Extend_extension->setOpposite(get_UML_UseCase_extend());
 	
 	
 	//extensionLocation
@@ -25537,6 +25766,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extend_extensionLocation->setAggregation(uml::AggregationKind::NONE);
 	uML_Extend_extensionLocation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Extend_extensionLocation->setAssociation(get_UML_A_extensionLocation_extension());
+	uML_Extend_extensionLocation->setOpposite(get_UML_A_extensionLocation_extension_extension());
 	
 	
 
@@ -25561,6 +25791,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//metaclass
 	uML_Extension_metaclass->setName("metaclass");
 	uML_Extension_metaclass->setType(get_UML_Class());
@@ -25570,6 +25801,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_metaclass->setAggregation(uml::AggregationKind::NONE);
 	uML_Extension_metaclass->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Extension_metaclass->setAssociation(get_UML_A_extension_metaclass());
+	uML_Extension_metaclass->setOpposite(get_UML_Class_extension());
 	
 	
 	//ownedEnd
@@ -25581,6 +25813,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_ownedEnd->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Extension_ownedEnd->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Extension_ownedEnd->setAssociation(get_UML_A_ownedEnd_extension());
+	uML_Extension_ownedEnd->setOpposite(get_UML_A_ownedEnd_extension_extension());
 	
 	
 
@@ -25670,6 +25903,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//type
 	uML_ExtensionEnd_type->setName("type");
 	uML_ExtensionEnd_type->setType(get_UML_Stereotype());
@@ -25679,6 +25913,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExtensionEnd_type->setAggregation(uml::AggregationKind::NONE);
 	uML_ExtensionEnd_type->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExtensionEnd_type->setAssociation(get_UML_A_type_extensionEnd());
+	uML_ExtensionEnd_type->setOpposite(get_UML_A_type_extensionEnd_extensionEnd());
 	
 	
 
@@ -25739,6 +25974,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExtensionPoint_useCase->setAggregation(uml::AggregationKind::NONE);
 	uML_ExtensionPoint_useCase->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ExtensionPoint_useCase->setAssociation(get_UML_A_extensionPoint_useCase());
+	uML_ExtensionPoint_useCase->setOpposite(get_UML_UseCase_extensionPoint());
 	
 	
 
@@ -25761,6 +25997,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Feature_featuringClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_Feature_featuringClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Feature_featuringClassifier->setAssociation(get_UML_A_feature_featuringClassifier());
+	uML_Feature_featuringClassifier->setOpposite(get_UML_Classifier_feature());
 	
 	
 	//isStatic
@@ -25771,6 +26008,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Feature_isStatic->setIsUnique(true);
 	uML_Feature_isStatic->setAggregation(uml::AggregationKind::NONE);
 	uML_Feature_isStatic->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Feature_isStatic->setDefaultValue(uML_Feature_isStatic_defaultValue_LiteralBoolean_UML_Feature_isStatic);
 	
@@ -26021,6 +26259,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralOrdering_after->setAggregation(uml::AggregationKind::NONE);
 	uML_GeneralOrdering_after->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_GeneralOrdering_after->setAssociation(get_UML_A_toBefore_after());
+	uML_GeneralOrdering_after->setOpposite(get_UML_OccurrenceSpecification_toBefore());
 	
 	
 	//before
@@ -26032,6 +26271,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralOrdering_before->setAggregation(uml::AggregationKind::NONE);
 	uML_GeneralOrdering_before->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_GeneralOrdering_before->setAssociation(get_UML_A_before_toAfter());
+	uML_GeneralOrdering_before->setOpposite(get_UML_OccurrenceSpecification_toAfter());
 	
 	
 
@@ -26054,6 +26294,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Generalization_general->setAggregation(uml::AggregationKind::NONE);
 	uML_Generalization_general->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Generalization_general->setAssociation(get_UML_A_general_generalization());
+	uML_Generalization_general->setOpposite(get_UML_A_general_generalization_generalization());
 	
 	
 	//generalizationSet
@@ -26065,6 +26306,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Generalization_generalizationSet->setAggregation(uml::AggregationKind::NONE);
 	uML_Generalization_generalizationSet->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Generalization_generalizationSet->setAssociation(get_UML_A_generalizationSet_generalization());
+	uML_Generalization_generalizationSet->setOpposite(get_UML_GeneralizationSet_generalization());
 	
 	
 	//isSubstitutable
@@ -26075,6 +26317,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Generalization_isSubstitutable->setIsUnique(true);
 	uML_Generalization_isSubstitutable->setAggregation(uml::AggregationKind::NONE);
 	uML_Generalization_isSubstitutable->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Generalization_isSubstitutable->setDefaultValue(uML_Generalization_isSubstitutable_defaultValue_LiteralBoolean_UML_Generalization_isSubstitutable);
 	
@@ -26087,6 +26330,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Generalization_specific->setAggregation(uml::AggregationKind::NONE);
 	uML_Generalization_specific->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Generalization_specific->setAssociation(get_UML_A_generalization_specific());
+	uML_Generalization_specific->setOpposite(get_UML_Classifier_generalization());
 	
 	
 
@@ -26109,6 +26353,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralizationSet_generalization->setAggregation(uml::AggregationKind::NONE);
 	uML_GeneralizationSet_generalization->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_GeneralizationSet_generalization->setAssociation(get_UML_A_generalizationSet_generalization());
+	uML_GeneralizationSet_generalization->setOpposite(get_UML_Generalization_generalizationSet());
 	
 	
 	//isCovering
@@ -26119,6 +26364,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralizationSet_isCovering->setIsUnique(true);
 	uML_GeneralizationSet_isCovering->setAggregation(uml::AggregationKind::NONE);
 	uML_GeneralizationSet_isCovering->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_GeneralizationSet_isCovering->setDefaultValue(uML_GeneralizationSet_isCovering_defaultValue_LiteralBoolean_UML_GeneralizationSet_isCovering);
 	
@@ -26131,6 +26377,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralizationSet_isDisjoint->setAggregation(uml::AggregationKind::NONE);
 	uML_GeneralizationSet_isDisjoint->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_GeneralizationSet_isDisjoint->setDefaultValue(uML_GeneralizationSet_isDisjoint_defaultValue_LiteralBoolean_UML_GeneralizationSet_isDisjoint);
 	
 	//powertype
@@ -26142,6 +26389,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralizationSet_powertype->setAggregation(uml::AggregationKind::NONE);
 	uML_GeneralizationSet_powertype->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_GeneralizationSet_powertype->setAssociation(get_UML_A_powertypeExtent_powertype());
+	uML_GeneralizationSet_powertype->setOpposite(get_UML_Classifier_powertypeExtent());
 	
 	
 
@@ -26166,6 +26414,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//format
 	uML_Image_format->setName("format");
 	uML_Image_format->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
@@ -26177,6 +26426,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//location
 	uML_Image_location->setName("location");
 	uML_Image_location->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
@@ -26185,6 +26435,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Image_location->setIsUnique(true);
 	uML_Image_location->setAggregation(uml::AggregationKind::NONE);
 	uML_Image_location->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -26211,6 +26462,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Include_addition->setAggregation(uml::AggregationKind::NONE);
 	uML_Include_addition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Include_addition->setAssociation(get_UML_A_addition_include());
+	uML_Include_addition->setOpposite(get_UML_A_addition_include_include());
 	
 	
 	//includingCase
@@ -26222,6 +26474,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Include_includingCase->setAggregation(uml::AggregationKind::NONE);
 	uML_Include_includingCase->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Include_includingCase->setAssociation(get_UML_A_include_includingCase());
+	uML_Include_includingCase->setOpposite(get_UML_UseCase_include());
 	
 	
 
@@ -26247,6 +26500,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_conveyed->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationFlow_conveyed->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationFlow_conveyed->setAssociation(get_UML_A_conveyed_conveyingFlow());
+	uML_InformationFlow_conveyed->setOpposite(get_UML_A_conveyed_conveyingFlow_conveyingFlow());
 	
 	
 	//informationSource
@@ -26258,6 +26512,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_informationSource->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationFlow_informationSource->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationFlow_informationSource->setAssociation(get_UML_A_informationSource_informationFlow());
+	uML_InformationFlow_informationSource->setOpposite(get_UML_A_informationSource_informationFlow_informationFlow());
 	
 	
 	//informationTarget
@@ -26269,6 +26524,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_informationTarget->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationFlow_informationTarget->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationFlow_informationTarget->setAssociation(get_UML_A_informationTarget_informationFlow());
+	uML_InformationFlow_informationTarget->setOpposite(get_UML_A_informationTarget_informationFlow_informationFlow());
 	
 	
 	//realization
@@ -26280,6 +26536,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_realization->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationFlow_realization->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationFlow_realization->setAssociation(get_UML_A_realization_abstraction_flow());
+	uML_InformationFlow_realization->setOpposite(get_UML_A_realization_abstraction_flow_abstraction());
 	
 	
 	//realizingActivityEdge
@@ -26291,6 +26548,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_realizingActivityEdge->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationFlow_realizingActivityEdge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationFlow_realizingActivityEdge->setAssociation(get_UML_A_realizingActivityEdge_informationFlow());
+	uML_InformationFlow_realizingActivityEdge->setOpposite(get_UML_A_realizingActivityEdge_informationFlow_informationFlow());
 	
 	
 	//realizingConnector
@@ -26302,6 +26560,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_realizingConnector->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationFlow_realizingConnector->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationFlow_realizingConnector->setAssociation(get_UML_A_realizingConnector_informationFlow());
+	uML_InformationFlow_realizingConnector->setOpposite(get_UML_A_realizingConnector_informationFlow_informationFlow());
 	
 	
 	//realizingMessage
@@ -26313,6 +26572,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_realizingMessage->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationFlow_realizingMessage->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationFlow_realizingMessage->setAssociation(get_UML_A_realizingMessage_informationFlow());
+	uML_InformationFlow_realizingMessage->setOpposite(get_UML_A_realizingMessage_informationFlow_informationFlow());
 	
 	
 
@@ -26335,6 +26595,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationItem_represented->setAggregation(uml::AggregationKind::NONE);
 	uML_InformationItem_represented->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InformationItem_represented->setAssociation(get_UML_A_represented_representation());
+	uML_InformationItem_represented->setOpposite(get_UML_A_represented_representation_representation());
 	
 	
 
@@ -26381,6 +26642,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceSpecification_classifier->setAggregation(uml::AggregationKind::NONE);
 	uML_InstanceSpecification_classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InstanceSpecification_classifier->setAssociation(get_UML_A_classifier_instanceSpecification());
+	uML_InstanceSpecification_classifier->setOpposite(get_UML_A_classifier_instanceSpecification_instanceSpecification());
 	
 	
 	//slot
@@ -26392,6 +26654,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceSpecification_slot->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InstanceSpecification_slot->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InstanceSpecification_slot->setAssociation(get_UML_A_slot_owningInstance());
+	uML_InstanceSpecification_slot->setOpposite(get_UML_Slot_owningInstance());
 	
 	
 	//specification
@@ -26403,6 +26666,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceSpecification_specification->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InstanceSpecification_specification->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InstanceSpecification_specification->setAssociation(get_UML_A_specification_owningInstanceSpec());
+	uML_InstanceSpecification_specification->setOpposite(get_UML_A_specification_owningInstanceSpec_owningInstanceSpec());
 	
 	
 
@@ -26425,6 +26689,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceValue_instance->setAggregation(uml::AggregationKind::NONE);
 	uML_InstanceValue_instance->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InstanceValue_instance->setAssociation(get_UML_A_instance_instanceValue());
+	uML_InstanceValue_instance->setOpposite(get_UML_A_instance_instanceValue_instanceValue());
 	
 	
 
@@ -26463,6 +26728,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_action->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interaction_action->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interaction_action->setAssociation(get_UML_A_action_interaction());
+	uML_Interaction_action->setOpposite(get_UML_A_action_interaction_interaction());
 	
 	
 	//formalGate
@@ -26474,6 +26740,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_formalGate->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interaction_formalGate->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interaction_formalGate->setAssociation(get_UML_A_formalGate_interaction());
+	uML_Interaction_formalGate->setOpposite(get_UML_A_formalGate_interaction_interaction());
 	
 	
 	//fragment
@@ -26485,6 +26752,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_fragment->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interaction_fragment->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interaction_fragment->setAssociation(get_UML_A_fragment_enclosingInteraction());
+	uML_Interaction_fragment->setOpposite(get_UML_InteractionFragment_enclosingInteraction());
 	
 	
 	//lifeline
@@ -26496,6 +26764,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_lifeline->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interaction_lifeline->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interaction_lifeline->setAssociation(get_UML_A_lifeline_interaction());
+	uML_Interaction_lifeline->setOpposite(get_UML_Lifeline_interaction());
 	
 	
 	//message
@@ -26507,6 +26776,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_message->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interaction_message->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interaction_message->setAssociation(get_UML_A_message_interaction());
+	uML_Interaction_message->setOpposite(get_UML_Message_interaction());
 	
 	
 
@@ -26529,6 +26799,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionConstraint_maxint->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionConstraint_maxint->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionConstraint_maxint->setAssociation(get_UML_A_maxint_interactionConstraint());
+	uML_InteractionConstraint_maxint->setOpposite(get_UML_A_maxint_interactionConstraint_interactionConstraint());
 	
 	
 	//minint
@@ -26540,6 +26811,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionConstraint_minint->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionConstraint_minint->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionConstraint_minint->setAssociation(get_UML_A_minint_interactionConstraint());
+	uML_InteractionConstraint_minint->setOpposite(get_UML_A_minint_interactionConstraint_interactionConstraint());
 	
 	
 
@@ -26562,6 +26834,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionFragment_covered->setAggregation(uml::AggregationKind::NONE);
 	uML_InteractionFragment_covered->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionFragment_covered->setAssociation(get_UML_A_covered_coveredBy());
+	uML_InteractionFragment_covered->setOpposite(get_UML_Lifeline_coveredBy());
 	
 	
 	//enclosingInteraction
@@ -26573,6 +26846,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionFragment_enclosingInteraction->setAggregation(uml::AggregationKind::NONE);
 	uML_InteractionFragment_enclosingInteraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionFragment_enclosingInteraction->setAssociation(get_UML_A_fragment_enclosingInteraction());
+	uML_InteractionFragment_enclosingInteraction->setOpposite(get_UML_Interaction_fragment());
 	
 	
 	//enclosingOperand
@@ -26584,6 +26858,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionFragment_enclosingOperand->setAggregation(uml::AggregationKind::NONE);
 	uML_InteractionFragment_enclosingOperand->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionFragment_enclosingOperand->setAssociation(get_UML_A_fragment_enclosingOperand());
+	uML_InteractionFragment_enclosingOperand->setOpposite(get_UML_InteractionOperand_fragment());
 	
 	
 	//generalOrdering
@@ -26595,6 +26870,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionFragment_generalOrdering->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionFragment_generalOrdering->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionFragment_generalOrdering->setAssociation(get_UML_A_generalOrdering_interactionFragment());
+	uML_InteractionFragment_generalOrdering->setOpposite(get_UML_A_generalOrdering_interactionFragment_interactionFragment());
 	
 	
 
@@ -26620,6 +26896,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionOperand_fragment->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionOperand_fragment->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionOperand_fragment->setAssociation(get_UML_A_fragment_enclosingOperand());
+	uML_InteractionOperand_fragment->setOpposite(get_UML_InteractionFragment_enclosingOperand());
 	
 	
 	//guard
@@ -26631,6 +26908,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionOperand_guard->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionOperand_guard->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionOperand_guard->setAssociation(get_UML_A_guard_interactionOperand());
+	uML_InteractionOperand_guard->setOpposite(get_UML_A_guard_interactionOperand_interactionOperand());
 	
 	
 
@@ -26653,6 +26931,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_actualGate->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionUse_actualGate->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionUse_actualGate->setAssociation(get_UML_A_actualGate_interactionUse());
+	uML_InteractionUse_actualGate->setOpposite(get_UML_A_actualGate_interactionUse_interactionUse());
 	
 	
 	//argument
@@ -26664,6 +26943,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_argument->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionUse_argument->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionUse_argument->setAssociation(get_UML_A_argument_interactionUse());
+	uML_InteractionUse_argument->setOpposite(get_UML_A_argument_interactionUse_interactionUse());
 	
 	
 	//refersTo
@@ -26675,6 +26955,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_refersTo->setAggregation(uml::AggregationKind::NONE);
 	uML_InteractionUse_refersTo->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionUse_refersTo->setAssociation(get_UML_A_refersTo_interactionUse());
+	uML_InteractionUse_refersTo->setOpposite(get_UML_A_refersTo_interactionUse_interactionUse());
 	
 	
 	//returnValue
@@ -26686,6 +26967,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_returnValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InteractionUse_returnValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionUse_returnValue->setAssociation(get_UML_A_returnValue_interactionUse());
+	uML_InteractionUse_returnValue->setOpposite(get_UML_A_returnValue_interactionUse_interactionUse());
 	
 	
 	//returnValueRecipient
@@ -26697,6 +26979,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_returnValueRecipient->setAggregation(uml::AggregationKind::NONE);
 	uML_InteractionUse_returnValueRecipient->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InteractionUse_returnValueRecipient->setAssociation(get_UML_A_returnValueRecipient_interactionUse());
+	uML_InteractionUse_returnValueRecipient->setOpposite(get_UML_A_returnValueRecipient_interactionUse_interactionUse());
 	
 	
 
@@ -26719,6 +27002,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_nestedClassifier->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interface_nestedClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interface_nestedClassifier->setAssociation(get_UML_A_nestedClassifier_interface());
+	uML_Interface_nestedClassifier->setOpposite(get_UML_A_nestedClassifier_interface_interface());
 	
 	
 	//ownedAttribute
@@ -26730,6 +27014,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_ownedAttribute->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interface_ownedAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interface_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_interface());
+	uML_Interface_ownedAttribute->setOpposite(get_UML_Property_interface());
 	
 	
 	//ownedOperation
@@ -26741,6 +27026,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_ownedOperation->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interface_ownedOperation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interface_ownedOperation->setAssociation(get_UML_A_ownedOperation_interface());
+	uML_Interface_ownedOperation->setOpposite(get_UML_Operation_interface());
 	
 	
 	//ownedReception
@@ -26752,6 +27038,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_ownedReception->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interface_ownedReception->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interface_ownedReception->setAssociation(get_UML_A_ownedReception_interface());
+	uML_Interface_ownedReception->setOpposite(get_UML_A_ownedReception_interface_interface());
 	
 	
 	//protocol
@@ -26763,6 +27050,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_protocol->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Interface_protocol->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interface_protocol->setAssociation(get_UML_A_protocol_interface());
+	uML_Interface_protocol->setOpposite(get_UML_A_protocol_interface_interface());
 	
 	
 	//redefinedInterface
@@ -26774,6 +27062,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_redefinedInterface->setAggregation(uml::AggregationKind::NONE);
 	uML_Interface_redefinedInterface->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interface_redefinedInterface->setAssociation(get_UML_A_redefinedInterface_interface());
+	uML_Interface_redefinedInterface->setOpposite(get_UML_A_redefinedInterface_interface_interface());
 	
 	
 
@@ -26934,6 +27223,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InterfaceRealization_contract->setAggregation(uml::AggregationKind::NONE);
 	uML_InterfaceRealization_contract->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InterfaceRealization_contract->setAssociation(get_UML_A_contract_interfaceRealization());
+	uML_InterfaceRealization_contract->setOpposite(get_UML_A_contract_interfaceRealization_interfaceRealization());
 	
 	
 	//implementingClassifier
@@ -26945,6 +27235,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InterfaceRealization_implementingClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_InterfaceRealization_implementingClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InterfaceRealization_implementingClassifier->setAssociation(get_UML_A_interfaceRealization_implementingClassifier());
+	uML_InterfaceRealization_implementingClassifier->setOpposite(get_UML_BehavioredClassifier_interfaceRealization());
 	
 	
 
@@ -26967,6 +27258,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InterruptibleActivityRegion_interruptingEdge->setAggregation(uml::AggregationKind::NONE);
 	uML_InterruptibleActivityRegion_interruptingEdge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InterruptibleActivityRegion_interruptingEdge->setAssociation(get_UML_A_interruptingEdge_interrupts());
+	uML_InterruptibleActivityRegion_interruptingEdge->setOpposite(get_UML_ActivityEdge_interrupts());
 	
 	
 	//node
@@ -26978,6 +27270,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InterruptibleActivityRegion_node->setAggregation(uml::AggregationKind::NONE);
 	uML_InterruptibleActivityRegion_node->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InterruptibleActivityRegion_node->setAssociation(get_UML_A_inInterruptibleRegion_node());
+	uML_InterruptibleActivityRegion_node->setOpposite(get_UML_ActivityNode_inInterruptibleRegion());
 	
 	
 
@@ -27000,6 +27293,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interval_max->setAggregation(uml::AggregationKind::NONE);
 	uML_Interval_max->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interval_max->setAssociation(get_UML_A_max_interval());
+	uML_Interval_max->setOpposite(get_UML_A_max_interval_interval());
 	
 	
 	//min
@@ -27011,6 +27305,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interval_min->setAggregation(uml::AggregationKind::NONE);
 	uML_Interval_min->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Interval_min->setAssociation(get_UML_A_min_interval());
+	uML_Interval_min->setOpposite(get_UML_A_min_interval_interval());
 	
 	
 
@@ -27033,6 +27328,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_IntervalConstraint_specification->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_IntervalConstraint_specification->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_IntervalConstraint_specification->setAssociation(get_UML_A_specification_intervalConstraint());
+	uML_IntervalConstraint_specification->setOpposite(get_UML_A_specification_intervalConstraint_intervalConstraint());
 	
 	
 
@@ -27055,6 +27351,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InvocationAction_argument->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_InvocationAction_argument->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InvocationAction_argument->setAssociation(get_UML_A_argument_invocationAction());
+	uML_InvocationAction_argument->setOpposite(get_UML_A_argument_invocationAction_invocationAction());
 	
 	
 	//onPort
@@ -27066,6 +27363,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InvocationAction_onPort->setAggregation(uml::AggregationKind::NONE);
 	uML_InvocationAction_onPort->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_InvocationAction_onPort->setAssociation(get_UML_A_onPort_invocationAction());
+	uML_InvocationAction_onPort->setOpposite(get_UML_A_onPort_invocationAction_invocationAction());
 	
 	
 
@@ -27088,6 +27386,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_JoinNode_isCombineDuplicate->setAggregation(uml::AggregationKind::NONE);
 	uML_JoinNode_isCombineDuplicate->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_JoinNode_isCombineDuplicate->setDefaultValue(uML_JoinNode_isCombineDuplicate_defaultValue_LiteralBoolean_UML_JoinNode_isCombineDuplicate);
 	
 	//joinSpec
@@ -27099,6 +27398,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_JoinNode_joinSpec->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_JoinNode_joinSpec->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_JoinNode_joinSpec->setAssociation(get_UML_A_joinSpec_joinNode());
+	uML_JoinNode_joinSpec->setOpposite(get_UML_A_joinSpec_joinNode_joinNode());
 	
 	
 
@@ -27121,6 +27421,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_coveredBy->setAggregation(uml::AggregationKind::NONE);
 	uML_Lifeline_coveredBy->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Lifeline_coveredBy->setAssociation(get_UML_A_covered_coveredBy());
+	uML_Lifeline_coveredBy->setOpposite(get_UML_InteractionFragment_covered());
 	
 	
 	//decomposedAs
@@ -27132,6 +27433,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_decomposedAs->setAggregation(uml::AggregationKind::NONE);
 	uML_Lifeline_decomposedAs->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Lifeline_decomposedAs->setAssociation(get_UML_A_decomposedAs_lifeline());
+	uML_Lifeline_decomposedAs->setOpposite(get_UML_A_decomposedAs_lifeline_lifeline());
 	
 	
 	//interaction
@@ -27143,6 +27445,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_interaction->setAggregation(uml::AggregationKind::NONE);
 	uML_Lifeline_interaction->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Lifeline_interaction->setAssociation(get_UML_A_lifeline_interaction());
+	uML_Lifeline_interaction->setOpposite(get_UML_Interaction_lifeline());
 	
 	
 	//represents
@@ -27154,6 +27457,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_represents->setAggregation(uml::AggregationKind::NONE);
 	uML_Lifeline_represents->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Lifeline_represents->setAssociation(get_UML_A_represents_lifeline());
+	uML_Lifeline_represents->setOpposite(get_UML_A_represents_lifeline_lifeline());
 	
 	
 	//selector
@@ -27165,6 +27469,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_selector->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Lifeline_selector->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Lifeline_selector->setAssociation(get_UML_A_selector_lifeline());
+	uML_Lifeline_selector->setOpposite(get_UML_A_selector_lifeline_lifeline());
 	
 	
 
@@ -27187,6 +27492,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkAction_endData->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_LinkAction_endData->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LinkAction_endData->setAssociation(get_UML_A_endData_linkAction());
+	uML_LinkAction_endData->setOpposite(get_UML_A_endData_linkAction_linkAction());
 	
 	
 	//inputValue
@@ -27198,6 +27504,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkAction_inputValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_LinkAction_inputValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LinkAction_inputValue->setAssociation(get_UML_A_inputValue_linkAction());
+	uML_LinkAction_inputValue->setOpposite(get_UML_A_inputValue_linkAction_linkAction());
 	
 	
 
@@ -27233,6 +27540,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndCreationData_insertAt->setAggregation(uml::AggregationKind::NONE);
 	uML_LinkEndCreationData_insertAt->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LinkEndCreationData_insertAt->setAssociation(get_UML_A_insertAt_linkEndCreationData());
+	uML_LinkEndCreationData_insertAt->setOpposite(get_UML_A_insertAt_linkEndCreationData_linkEndCreationData());
 	
 	
 	//isReplaceAll
@@ -27243,6 +27551,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndCreationData_isReplaceAll->setIsUnique(true);
 	uML_LinkEndCreationData_isReplaceAll->setAggregation(uml::AggregationKind::NONE);
 	uML_LinkEndCreationData_isReplaceAll->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_LinkEndCreationData_isReplaceAll->setDefaultValue(uML_LinkEndCreationData_isReplaceAll_defaultValue_LiteralBoolean_UML_LinkEndCreationData_isReplaceAll);
 	
@@ -27279,6 +27588,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndData_end->setAggregation(uml::AggregationKind::NONE);
 	uML_LinkEndData_end->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LinkEndData_end->setAssociation(get_UML_A_end_linkEndData());
+	uML_LinkEndData_end->setOpposite(get_UML_A_end_linkEndData_linkEndData());
 	
 	
 	//qualifier
@@ -27290,6 +27600,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndData_qualifier->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_LinkEndData_qualifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LinkEndData_qualifier->setAssociation(get_UML_A_qualifier_linkEndData());
+	uML_LinkEndData_qualifier->setOpposite(get_UML_A_qualifier_linkEndData_linkEndData());
 	
 	
 	//value
@@ -27301,6 +27612,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndData_value->setAggregation(uml::AggregationKind::NONE);
 	uML_LinkEndData_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LinkEndData_value->setAssociation(get_UML_A_value_linkEndData());
+	uML_LinkEndData_value->setOpposite(get_UML_A_value_linkEndData_linkEndData());
 	
 	
 
@@ -27336,6 +27648,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndDestructionData_destroyAt->setAggregation(uml::AggregationKind::NONE);
 	uML_LinkEndDestructionData_destroyAt->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LinkEndDestructionData_destroyAt->setAssociation(get_UML_A_destroyAt_linkEndDestructionData());
+	uML_LinkEndDestructionData_destroyAt->setOpposite(get_UML_A_destroyAt_linkEndDestructionData_linkEndDestructionData());
 	
 	
 	//isDestroyDuplicates
@@ -27346,6 +27659,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndDestructionData_isDestroyDuplicates->setIsUnique(true);
 	uML_LinkEndDestructionData_isDestroyDuplicates->setAggregation(uml::AggregationKind::NONE);
 	uML_LinkEndDestructionData_isDestroyDuplicates->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_LinkEndDestructionData_isDestroyDuplicates->setDefaultValue(uML_LinkEndDestructionData_isDestroyDuplicates_defaultValue_LiteralBoolean_UML_LinkEndDestructionData_isDestroyDuplicates);
 	
@@ -27381,6 +27695,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralBoolean_value->setIsUnique(true);
 	uML_LiteralBoolean_value->setAggregation(uml::AggregationKind::NONE);
 	uML_LiteralBoolean_value->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_LiteralBoolean_value->setDefaultValue(uML_LiteralBoolean_value_defaultValue_LiteralBoolean_UML_LiteralBoolean_value);
 	
@@ -27442,6 +27757,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralInteger_value->setIsUnique(true);
 	uML_LiteralInteger_value->setAggregation(uml::AggregationKind::NONE);
 	uML_LiteralInteger_value->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_LiteralInteger_value->setDefaultValue(uML_LiteralInteger_value_defaultValue_LiteralInteger_UML_LiteralInteger_value);
 	
@@ -27541,6 +27857,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 
     // LiteralReal operations
 	//isComputable
@@ -27608,6 +27925,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralString_value->setIsUnique(true);
 	uML_LiteralString_value->setAggregation(uml::AggregationKind::NONE);
 	uML_LiteralString_value->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -27683,6 +28001,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralUnlimitedNatural_value->setAggregation(uml::AggregationKind::NONE);
 	uML_LiteralUnlimitedNatural_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_LiteralUnlimitedNatural_value->setDefaultValue(uML_LiteralUnlimitedNatural_value_defaultValue_LiteralUnlimitedNatural_UML_LiteralUnlimitedNatural_value);
 	
 
@@ -27744,6 +28063,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_bodyOutput->setAggregation(uml::AggregationKind::NONE);
 	uML_LoopNode_bodyOutput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_bodyOutput->setAssociation(get_UML_A_bodyOutput_loopNode());
+	uML_LoopNode_bodyOutput->setOpposite(get_UML_A_bodyOutput_loopNode_loopNode());
 	
 	
 	//bodyPart
@@ -27755,6 +28075,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_bodyPart->setAggregation(uml::AggregationKind::NONE);
 	uML_LoopNode_bodyPart->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_bodyPart->setAssociation(get_UML_A_bodyPart_loopNode());
+	uML_LoopNode_bodyPart->setOpposite(get_UML_A_bodyPart_loopNode_loopNode());
 	
 	
 	//decider
@@ -27766,6 +28087,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_decider->setAggregation(uml::AggregationKind::NONE);
 	uML_LoopNode_decider->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_decider->setAssociation(get_UML_A_decider_loopNode());
+	uML_LoopNode_decider->setOpposite(get_UML_A_decider_loopNode_loopNode());
 	
 	
 	//isTestedFirst
@@ -27776,6 +28098,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_isTestedFirst->setIsUnique(true);
 	uML_LoopNode_isTestedFirst->setAggregation(uml::AggregationKind::NONE);
 	uML_LoopNode_isTestedFirst->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_LoopNode_isTestedFirst->setDefaultValue(uML_LoopNode_isTestedFirst_defaultValue_LiteralBoolean_UML_LoopNode_isTestedFirst);
 	
@@ -27788,6 +28111,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_loopVariable->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_LoopNode_loopVariable->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_loopVariable->setAssociation(get_UML_A_loopVariable_loopNode());
+	uML_LoopNode_loopVariable->setOpposite(get_UML_A_loopVariable_loopNode_loopNode());
 	
 	
 	//loopVariableInput
@@ -27799,6 +28123,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_loopVariableInput->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_LoopNode_loopVariableInput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_loopVariableInput->setAssociation(get_UML_A_loopVariableInput_loopNode());
+	uML_LoopNode_loopVariableInput->setOpposite(get_UML_A_loopVariableInput_loopNode_loopNode());
 	
 	
 	//result
@@ -27810,6 +28135,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_LoopNode_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_result->setAssociation(get_UML_A_result_loopNode());
+	uML_LoopNode_result->setOpposite(get_UML_A_result_loopNode_loopNode());
 	
 	
 	//setupPart
@@ -27821,6 +28147,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_setupPart->setAggregation(uml::AggregationKind::NONE);
 	uML_LoopNode_setupPart->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_setupPart->setAssociation(get_UML_A_setupPart_loopNode());
+	uML_LoopNode_setupPart->setOpposite(get_UML_A_setupPart_loopNode_loopNode());
 	
 	
 	//test
@@ -27832,6 +28159,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_test->setAggregation(uml::AggregationKind::NONE);
 	uML_LoopNode_test->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_LoopNode_test->setAssociation(get_UML_A_test_loopNode());
+	uML_LoopNode_test->setOpposite(get_UML_A_test_loopNode_loopNode());
 	
 	
 
@@ -27880,6 +28208,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Manifestation_utilizedElement->setAggregation(uml::AggregationKind::NONE);
 	uML_Manifestation_utilizedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Manifestation_utilizedElement->setAssociation(get_UML_A_utilizedElement_manifestation());
+	uML_Manifestation_utilizedElement->setOpposite(get_UML_A_utilizedElement_manifestation_manifestation());
 	
 	
 
@@ -27911,6 +28240,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_argument->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Message_argument->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Message_argument->setAssociation(get_UML_A_argument_message());
+	uML_Message_argument->setOpposite(get_UML_A_argument_message_message());
 	
 	
 	//connector
@@ -27922,6 +28252,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_connector->setAggregation(uml::AggregationKind::NONE);
 	uML_Message_connector->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Message_connector->setAssociation(get_UML_A_connector_message());
+	uML_Message_connector->setOpposite(get_UML_A_connector_message_message());
 	
 	
 	//interaction
@@ -27933,6 +28264,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_interaction->setAggregation(uml::AggregationKind::NONE);
 	uML_Message_interaction->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Message_interaction->setAssociation(get_UML_A_message_interaction());
+	uML_Message_interaction->setOpposite(get_UML_Interaction_message());
 	
 	
 	//messageKind
@@ -27943,6 +28275,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_messageKind->setIsUnique(true);
 	uML_Message_messageKind->setAggregation(uml::AggregationKind::NONE);
 	uML_Message_messageKind->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Message_messageKind->setDefaultValue(uML_Message_messageKind_defaultValue_InstanceValue);
 	
@@ -27955,6 +28288,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_messageSort->setAggregation(uml::AggregationKind::NONE);
 	uML_Message_messageSort->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Message_messageSort->setDefaultValue(uML_Message_messageSort_defaultValue_InstanceValue);
 	
 	//receiveEvent
@@ -27966,6 +28300,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_receiveEvent->setAggregation(uml::AggregationKind::NONE);
 	uML_Message_receiveEvent->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Message_receiveEvent->setAssociation(get_UML_A_receiveEvent_endMessage());
+	uML_Message_receiveEvent->setOpposite(get_UML_A_receiveEvent_endMessage_endMessage());
 	
 	
 	//sendEvent
@@ -27977,6 +28312,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_sendEvent->setAggregation(uml::AggregationKind::NONE);
 	uML_Message_sendEvent->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Message_sendEvent->setAssociation(get_UML_A_sendEvent_endMessage());
+	uML_Message_sendEvent->setOpposite(get_UML_A_sendEvent_endMessage_endMessage());
 	
 	
 	//signature
@@ -27988,6 +28324,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_signature->setAggregation(uml::AggregationKind::NONE);
 	uML_Message_signature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Message_signature->setAssociation(get_UML_A_signature_message());
+	uML_Message_signature->setOpposite(get_UML_A_signature_message_message());
 	
 	
 
@@ -28064,6 +28401,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MessageEnd_message->setAggregation(uml::AggregationKind::NONE);
 	uML_MessageEnd_message->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_MessageEnd_message->setAssociation(get_UML_A_message_messageEnd());
+	uML_MessageEnd_message->setOpposite(get_UML_A_message_messageEnd_messageEnd());
 	
 	
 
@@ -28161,6 +28499,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 
     // Model operations
 	//isMetamodel
@@ -28194,6 +28533,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_isOrdered->setAggregation(uml::AggregationKind::NONE);
 	uML_MultiplicityElement_isOrdered->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_MultiplicityElement_isOrdered->setDefaultValue(uML_MultiplicityElement_isOrdered_defaultValue_LiteralBoolean_UML_MultiplicityElement_isOrdered);
 	
 	//isUnique
@@ -28204,6 +28544,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_isUnique->setIsUnique(true);
 	uML_MultiplicityElement_isUnique->setAggregation(uml::AggregationKind::NONE);
 	uML_MultiplicityElement_isUnique->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_MultiplicityElement_isUnique->setDefaultValue(uML_MultiplicityElement_isUnique_defaultValue_LiteralBoolean_UML_MultiplicityElement_isUnique);
 	
@@ -28216,6 +28557,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_lower->setAggregation(uml::AggregationKind::NONE);
 	uML_MultiplicityElement_lower->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_MultiplicityElement_lower->setDefaultValue(uML_MultiplicityElement_lower_defaultValue_LiteralInteger_UML_MultiplicityElement_lower);
 	
 	//lowerValue
@@ -28227,6 +28569,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_lowerValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_MultiplicityElement_lowerValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_MultiplicityElement_lowerValue->setAssociation(get_UML_A_lowerValue_owningLower());
+	uML_MultiplicityElement_lowerValue->setOpposite(get_UML_A_lowerValue_owningLower_owningLower());
 	
 	
 	//upper
@@ -28237,6 +28580,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_upper->setIsUnique(true);
 	uML_MultiplicityElement_upper->setAggregation(uml::AggregationKind::NONE);
 	uML_MultiplicityElement_upper->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_MultiplicityElement_upper->setDefaultValue(uML_MultiplicityElement_upper_defaultValue_LiteralUnlimitedNatural_UML_MultiplicityElement_upper);
 	
@@ -28249,6 +28593,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_upperValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_MultiplicityElement_upperValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_MultiplicityElement_upperValue->setAssociation(get_UML_A_upperValue_owningUpper());
+	uML_MultiplicityElement_upperValue->setOpposite(get_UML_A_upperValue_owningUpper_owningUpper());
 	
 	
 
@@ -28457,6 +28802,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_clientDependency->setAssociation(get_UML_A_clientDependency_client());
 	
 	
+	
 	//name
 	uML_NamedElement_name->setName("name");
 	uML_NamedElement_name->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
@@ -28465,6 +28811,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_name->setIsUnique(true);
 	uML_NamedElement_name->setAggregation(uml::AggregationKind::NONE);
 	uML_NamedElement_name->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -28477,6 +28824,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_nameExpression->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_NamedElement_nameExpression->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_NamedElement_nameExpression->setAssociation(get_UML_A_nameExpression_namedElement());
+	uML_NamedElement_nameExpression->setOpposite(get_UML_A_nameExpression_namedElement_namedElement());
 	
 	
 	//namespace
@@ -28488,6 +28836,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_namespace->setAggregation(uml::AggregationKind::NONE);
 	uML_NamedElement_namespace->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_NamedElement_namespace->setAssociation(get_UML_A_ownedMember_namespace());
+	uML_NamedElement_namespace->setOpposite(get_UML_Namespace_ownedMember());
 	
 	
 	//qualifiedName
@@ -28501,6 +28850,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//visibility
 	uML_NamedElement_visibility->setName("visibility");
 	uML_NamedElement_visibility->setType(get_UML_VisibilityKind());
@@ -28509,6 +28859,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_visibility->setIsUnique(true);
 	uML_NamedElement_visibility->setAggregation(uml::AggregationKind::NONE);
 	uML_NamedElement_visibility->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -28745,6 +29096,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_elementImport->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Namespace_elementImport->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Namespace_elementImport->setAssociation(get_UML_A_elementImport_importingNamespace());
+	uML_Namespace_elementImport->setOpposite(get_UML_ElementImport_importingNamespace());
 	
 	
 	//importedMember
@@ -28756,6 +29108,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_importedMember->setAggregation(uml::AggregationKind::NONE);
 	uML_Namespace_importedMember->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Namespace_importedMember->setAssociation(get_UML_A_importedMember_namespace());
+	uML_Namespace_importedMember->setOpposite(get_UML_A_importedMember_namespace_namespace());
 	
 	
 	//member
@@ -28767,6 +29120,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_member->setAggregation(uml::AggregationKind::NONE);
 	uML_Namespace_member->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Namespace_member->setAssociation(get_UML_A_member_memberNamespace());
+	uML_Namespace_member->setOpposite(get_UML_A_member_memberNamespace_memberNamespace());
 	
 	
 	//ownedMember
@@ -28778,6 +29132,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_ownedMember->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Namespace_ownedMember->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Namespace_ownedMember->setAssociation(get_UML_A_ownedMember_namespace());
+	uML_Namespace_ownedMember->setOpposite(get_UML_NamedElement_namespace());
 	
 	
 	//ownedRule
@@ -28789,6 +29144,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_ownedRule->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Namespace_ownedRule->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Namespace_ownedRule->setAssociation(get_UML_A_ownedRule_context());
+	uML_Namespace_ownedRule->setOpposite(get_UML_Constraint_context());
 	
 	
 	//packageImport
@@ -28800,6 +29156,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_packageImport->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Namespace_packageImport->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Namespace_packageImport->setAssociation(get_UML_A_packageImport_importingNamespace());
+	uML_Namespace_packageImport->setOpposite(get_UML_PackageImport_importingNamespace());
 	
 	
 
@@ -29053,6 +29410,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Node_nestedNode->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Node_nestedNode->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Node_nestedNode->setAssociation(get_UML_A_nestedNode_node());
+	uML_Node_nestedNode->setOpposite(get_UML_A_nestedNode_node_node());
 	
 	
 
@@ -29255,6 +29613,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectFlow_isMulticast->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectFlow_isMulticast->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_ObjectFlow_isMulticast->setDefaultValue(uML_ObjectFlow_isMulticast_defaultValue_LiteralBoolean_UML_ObjectFlow_isMulticast);
 	
 	//isMultireceive
@@ -29265,6 +29624,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectFlow_isMultireceive->setIsUnique(true);
 	uML_ObjectFlow_isMultireceive->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectFlow_isMultireceive->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ObjectFlow_isMultireceive->setDefaultValue(uML_ObjectFlow_isMultireceive_defaultValue_LiteralBoolean_UML_ObjectFlow_isMultireceive);
 	
@@ -29277,6 +29637,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectFlow_selection->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectFlow_selection->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ObjectFlow_selection->setAssociation(get_UML_A_selection_objectFlow());
+	uML_ObjectFlow_selection->setOpposite(get_UML_A_selection_objectFlow_objectFlow());
 	
 	
 	//transformation
@@ -29288,6 +29649,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectFlow_transformation->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectFlow_transformation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ObjectFlow_transformation->setAssociation(get_UML_A_transformation_objectFlow());
+	uML_ObjectFlow_transformation->setOpposite(get_UML_A_transformation_objectFlow_objectFlow());
 	
 	
 
@@ -29313,6 +29675,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectNode_inState->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectNode_inState->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ObjectNode_inState->setAssociation(get_UML_A_inState_objectNode());
+	uML_ObjectNode_inState->setOpposite(get_UML_A_inState_objectNode_objectNode());
 	
 	
 	//isControlType
@@ -29323,6 +29686,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectNode_isControlType->setIsUnique(true);
 	uML_ObjectNode_isControlType->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectNode_isControlType->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ObjectNode_isControlType->setDefaultValue(uML_ObjectNode_isControlType_defaultValue_LiteralBoolean_UML_ObjectNode_isControlType);
 	
@@ -29335,6 +29699,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectNode_ordering->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectNode_ordering->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_ObjectNode_ordering->setDefaultValue(uML_ObjectNode_ordering_defaultValue_InstanceValue);
 	
 	//selection
@@ -29346,6 +29711,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectNode_selection->setAggregation(uml::AggregationKind::NONE);
 	uML_ObjectNode_selection->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ObjectNode_selection->setAssociation(get_UML_A_selection_objectNode());
+	uML_ObjectNode_selection->setOpposite(get_UML_A_selection_objectNode_objectNode());
 	
 	
 	//upperBound
@@ -29357,6 +29723,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectNode_upperBound->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ObjectNode_upperBound->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ObjectNode_upperBound->setAssociation(get_UML_A_upperBound_objectNode());
+	uML_ObjectNode_upperBound->setOpposite(get_UML_A_upperBound_objectNode_objectNode());
 	
 	
 
@@ -29388,6 +29755,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_covered->setAggregation(uml::AggregationKind::NONE);
 	uML_OccurrenceSpecification_covered->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OccurrenceSpecification_covered->setAssociation(get_UML_A_covered_events());
+	uML_OccurrenceSpecification_covered->setOpposite(get_UML_A_covered_events_events());
 	
 	
 	//toAfter
@@ -29399,6 +29767,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_toAfter->setAggregation(uml::AggregationKind::NONE);
 	uML_OccurrenceSpecification_toAfter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OccurrenceSpecification_toAfter->setAssociation(get_UML_A_before_toAfter());
+	uML_OccurrenceSpecification_toAfter->setOpposite(get_UML_GeneralOrdering_before());
 	
 	
 	//toBefore
@@ -29410,6 +29779,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_toBefore->setAggregation(uml::AggregationKind::NONE);
 	uML_OccurrenceSpecification_toBefore->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OccurrenceSpecification_toBefore->setAssociation(get_UML_A_toBefore_after());
+	uML_OccurrenceSpecification_toBefore->setOpposite(get_UML_GeneralOrdering_after());
 	
 	
 
@@ -29459,6 +29829,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//inputValue
 	uML_OpaqueAction_inputValue->setName("inputValue");
 	uML_OpaqueAction_inputValue->setType(get_UML_InputPin());
@@ -29468,6 +29839,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueAction_inputValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_OpaqueAction_inputValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OpaqueAction_inputValue->setAssociation(get_UML_A_inputValue_opaqueAction());
+	uML_OpaqueAction_inputValue->setOpposite(get_UML_A_inputValue_opaqueAction_opaqueAction());
 	
 	
 	//language
@@ -29481,6 +29853,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//outputValue
 	uML_OpaqueAction_outputValue->setName("outputValue");
 	uML_OpaqueAction_outputValue->setType(get_UML_OutputPin());
@@ -29490,6 +29863,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueAction_outputValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_OpaqueAction_outputValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OpaqueAction_outputValue->setAssociation(get_UML_A_outputValue_opaqueAction());
+	uML_OpaqueAction_outputValue->setOpposite(get_UML_A_outputValue_opaqueAction_opaqueAction());
 	
 	
 
@@ -29514,6 +29888,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//language
 	uML_OpaqueBehavior_language->setName("language");
 	uML_OpaqueBehavior_language->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
@@ -29522,6 +29897,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueBehavior_language->setIsUnique(true);
 	uML_OpaqueBehavior_language->setAggregation(uml::AggregationKind::NONE);
 	uML_OpaqueBehavior_language->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -29545,6 +29921,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_behavior->setAggregation(uml::AggregationKind::NONE);
 	uML_OpaqueExpression_behavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OpaqueExpression_behavior->setAssociation(get_UML_A_behavior_opaqueExpression());
+	uML_OpaqueExpression_behavior->setOpposite(get_UML_A_behavior_opaqueExpression_opaqueExpression());
 	
 	
 	//body
@@ -29555,6 +29932,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_body->setIsUnique(false);
 	uML_OpaqueExpression_body->setAggregation(uml::AggregationKind::NONE);
 	uML_OpaqueExpression_body->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -29569,6 +29947,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//result
 	uML_OpaqueExpression_result->setName("result");
 	uML_OpaqueExpression_result->setType(get_UML_Parameter());
@@ -29578,6 +29957,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_result->setAggregation(uml::AggregationKind::NONE);
 	uML_OpaqueExpression_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OpaqueExpression_result->setAssociation(get_UML_A_result_opaqueExpression());
+	uML_OpaqueExpression_result->setOpposite(get_UML_A_result_opaqueExpression_opaqueExpression());
 	
 	
 
@@ -29684,6 +30064,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_bodyCondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Operation_bodyCondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_bodyCondition->setAssociation(get_UML_A_bodyCondition_bodyContext());
+	uML_Operation_bodyCondition->setOpposite(get_UML_A_bodyCondition_bodyContext_bodyContext());
 	
 	
 	//class
@@ -29695,6 +30076,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_class->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_class->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_class->setAssociation(get_UML_A_ownedOperation_class());
+	uML_Operation_class->setOpposite(get_UML_Class_ownedOperation());
 	
 	
 	//datatype
@@ -29706,6 +30088,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_datatype->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_datatype->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_datatype->setAssociation(get_UML_A_ownedOperation_datatype());
+	uML_Operation_datatype->setOpposite(get_UML_DataType_ownedOperation());
 	
 	
 	//interface
@@ -29717,6 +30100,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_interface->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_interface->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_interface->setAssociation(get_UML_A_ownedOperation_interface());
+	uML_Operation_interface->setOpposite(get_UML_Interface_ownedOperation());
 	
 	
 	//isOrdered
@@ -29730,6 +30114,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//isQuery
 	uML_Operation_isQuery->setName("isQuery");
 	uML_Operation_isQuery->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
@@ -29738,6 +30123,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_isQuery->setIsUnique(true);
 	uML_Operation_isQuery->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_isQuery->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Operation_isQuery->setDefaultValue(uML_Operation_isQuery_defaultValue_LiteralBoolean_UML_Operation_isQuery);
 	
@@ -29750,6 +30136,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_isUnique->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_isUnique->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Operation_isUnique->setDefaultValue(uML_Operation_isUnique_defaultValue_LiteralBoolean_UML_Operation_isUnique);
 	
 	//lower
@@ -29760,6 +30147,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_lower->setIsUnique(true);
 	uML_Operation_lower->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_lower->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Operation_lower->setDefaultValue(uML_Operation_lower_defaultValue_LiteralInteger_UML_Operation_lower);
 	
@@ -29772,6 +30160,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_ownedParameter->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Operation_ownedParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_ownedParameter->setAssociation(get_UML_A_ownedParameter_operation());
+	uML_Operation_ownedParameter->setOpposite(get_UML_Parameter_operation());
 	
 	
 	//postcondition
@@ -29783,6 +30172,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_postcondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Operation_postcondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_postcondition->setAssociation(get_UML_A_postcondition_postContext());
+	uML_Operation_postcondition->setOpposite(get_UML_A_postcondition_postContext_postContext());
 	
 	
 	//precondition
@@ -29794,6 +30184,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_precondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Operation_precondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_precondition->setAssociation(get_UML_A_precondition_preContext());
+	uML_Operation_precondition->setOpposite(get_UML_A_precondition_preContext_preContext());
 	
 	
 	//raisedException
@@ -29805,6 +30196,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_raisedException->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_raisedException->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_raisedException->setAssociation(get_UML_A_raisedException_operation());
+	uML_Operation_raisedException->setOpposite(get_UML_A_raisedException_operation_operation());
 	
 	
 	//redefinedOperation
@@ -29816,6 +30208,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_redefinedOperation->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_redefinedOperation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_redefinedOperation->setAssociation(get_UML_A_redefinedOperation_operation());
+	uML_Operation_redefinedOperation->setOpposite(get_UML_A_redefinedOperation_operation_operation());
 	
 	
 	//templateParameter
@@ -29827,6 +30220,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_templateParameter->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_templateParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_templateParameter->setAssociation(get_UML_A_operation_templateParameter_parameteredElement());
+	uML_Operation_templateParameter->setOpposite(get_UML_OperationTemplateParameter_parameteredElement());
 	
 	
 	//type
@@ -29838,6 +30232,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_type->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_type->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Operation_type->setAssociation(get_UML_A_type_operation());
+	uML_Operation_type->setOpposite(get_UML_A_type_operation_operation());
 	
 	
 	//upper
@@ -29848,6 +30243,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_upper->setIsUnique(true);
 	uML_Operation_upper->setAggregation(uml::AggregationKind::NONE);
 	uML_Operation_upper->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Operation_upper->setDefaultValue(uML_Operation_upper_defaultValue_LiteralUnlimitedNatural_UML_Operation_upper);
 	
@@ -30049,6 +30445,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OperationTemplateParameter_parameteredElement->setAggregation(uml::AggregationKind::NONE);
 	uML_OperationTemplateParameter_parameteredElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_OperationTemplateParameter_parameteredElement->setAssociation(get_UML_A_operation_templateParameter_parameteredElement());
+	uML_OperationTemplateParameter_parameteredElement->setOpposite(get_UML_Operation_templateParameter());
 	
 	
 
@@ -30088,6 +30485,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//nestedPackage
 	uML_Package_nestedPackage->setName("nestedPackage");
 	uML_Package_nestedPackage->setType(get_UML_Package());
@@ -30097,6 +30495,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_nestedPackage->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Package_nestedPackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Package_nestedPackage->setAssociation(get_UML_A_nestedPackage_nestingPackage());
+	uML_Package_nestedPackage->setOpposite(get_UML_Package_nestingPackage());
 	
 	
 	//nestingPackage
@@ -30108,6 +30507,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_nestingPackage->setAggregation(uml::AggregationKind::NONE);
 	uML_Package_nestingPackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Package_nestingPackage->setAssociation(get_UML_A_nestedPackage_nestingPackage());
+	uML_Package_nestingPackage->setOpposite(get_UML_Package_nestedPackage());
 	
 	
 	//ownedStereotype
@@ -30119,6 +30519,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_ownedStereotype->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Package_ownedStereotype->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Package_ownedStereotype->setAssociation(get_UML_A_ownedStereotype_owningPackage());
+	uML_Package_ownedStereotype->setOpposite(get_UML_A_ownedStereotype_owningPackage_owningPackage());
 	
 	
 	//ownedType
@@ -30130,6 +30531,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_ownedType->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Package_ownedType->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Package_ownedType->setAssociation(get_UML_A_ownedType_package());
+	uML_Package_ownedType->setOpposite(get_UML_Type_package());
 	
 	
 	//packageMerge
@@ -30141,6 +30543,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_packageMerge->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Package_packageMerge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Package_packageMerge->setAssociation(get_UML_A_packageMerge_receivingPackage());
+	uML_Package_packageMerge->setOpposite(get_UML_PackageMerge_receivingPackage());
 	
 	
 	//packagedElement
@@ -30152,6 +30555,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_packagedElement->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Package_packagedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Package_packagedElement->setAssociation(get_UML_A_packagedElement_owningPackage());
+	uML_Package_packagedElement->setOpposite(get_UML_A_packagedElement_owningPackage_owningPackage());
 	
 	
 	//profileApplication
@@ -30163,6 +30567,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_profileApplication->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Package_profileApplication->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Package_profileApplication->setAssociation(get_UML_A_profileApplication_applyingPackage());
+	uML_Package_profileApplication->setOpposite(get_UML_ProfileApplication_applyingPackage());
 	
 	
 
@@ -30735,6 +31140,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageImport_importedPackage->setAggregation(uml::AggregationKind::NONE);
 	uML_PackageImport_importedPackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_PackageImport_importedPackage->setAssociation(get_UML_A_importedPackage_packageImport());
+	uML_PackageImport_importedPackage->setOpposite(get_UML_A_importedPackage_packageImport_packageImport());
 	
 	
 	//importingNamespace
@@ -30746,6 +31152,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageImport_importingNamespace->setAggregation(uml::AggregationKind::NONE);
 	uML_PackageImport_importingNamespace->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_PackageImport_importingNamespace->setAssociation(get_UML_A_packageImport_importingNamespace());
+	uML_PackageImport_importingNamespace->setOpposite(get_UML_Namespace_packageImport());
 	
 	
 	//visibility
@@ -30756,6 +31163,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageImport_visibility->setIsUnique(true);
 	uML_PackageImport_visibility->setAggregation(uml::AggregationKind::NONE);
 	uML_PackageImport_visibility->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_PackageImport_visibility->setDefaultValue(uML_PackageImport_visibility_defaultValue_InstanceValue);
 	
@@ -30779,6 +31187,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageMerge_mergedPackage->setAggregation(uml::AggregationKind::NONE);
 	uML_PackageMerge_mergedPackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_PackageMerge_mergedPackage->setAssociation(get_UML_A_mergedPackage_packageMerge());
+	uML_PackageMerge_mergedPackage->setOpposite(get_UML_A_mergedPackage_packageMerge_packageMerge());
 	
 	
 	//receivingPackage
@@ -30790,6 +31199,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageMerge_receivingPackage->setAggregation(uml::AggregationKind::NONE);
 	uML_PackageMerge_receivingPackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_PackageMerge_receivingPackage->setAssociation(get_UML_A_packageMerge_receivingPackage());
+	uML_PackageMerge_receivingPackage->setOpposite(get_UML_Package_packageMerge());
 	
 	
 
@@ -30814,6 +31224,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageableElement_visibility->setIsUnique(true);
 	uML_PackageableElement_visibility->setAggregation(uml::AggregationKind::NONE);
 	uML_PackageableElement_visibility->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_PackageableElement_visibility->setDefaultValue(uML_PackageableElement_visibility_defaultValue_InstanceValue);
 	
@@ -30842,6 +31253,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//defaultValue
 	uML_Parameter_defaultValue->setName("defaultValue");
 	uML_Parameter_defaultValue->setType(get_UML_ValueSpecification());
@@ -30851,6 +31263,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_defaultValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Parameter_defaultValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Parameter_defaultValue->setAssociation(get_UML_A_defaultValue_owningParameter());
+	uML_Parameter_defaultValue->setOpposite(get_UML_A_defaultValue_owningParameter_owningParameter());
 	
 	
 	//direction
@@ -30861,6 +31274,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_direction->setIsUnique(true);
 	uML_Parameter_direction->setAggregation(uml::AggregationKind::NONE);
 	uML_Parameter_direction->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Parameter_direction->setDefaultValue(uML_Parameter_direction_defaultValue_InstanceValue);
 	
@@ -30875,6 +31289,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//isException
 	uML_Parameter_isException->setName("isException");
 	uML_Parameter_isException->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
@@ -30883,6 +31298,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_isException->setIsUnique(true);
 	uML_Parameter_isException->setAggregation(uml::AggregationKind::NONE);
 	uML_Parameter_isException->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Parameter_isException->setDefaultValue(uML_Parameter_isException_defaultValue_LiteralBoolean_UML_Parameter_isException);
 	
@@ -30895,6 +31311,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_isStream->setAggregation(uml::AggregationKind::NONE);
 	uML_Parameter_isStream->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Parameter_isStream->setDefaultValue(uML_Parameter_isStream_defaultValue_LiteralBoolean_UML_Parameter_isStream);
 	
 	//operation
@@ -30906,6 +31323,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_operation->setAggregation(uml::AggregationKind::NONE);
 	uML_Parameter_operation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Parameter_operation->setAssociation(get_UML_A_ownedParameter_operation());
+	uML_Parameter_operation->setOpposite(get_UML_Operation_ownedParameter());
 	
 	
 	//parameterSet
@@ -30917,6 +31335,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_parameterSet->setAggregation(uml::AggregationKind::NONE);
 	uML_Parameter_parameterSet->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Parameter_parameterSet->setAssociation(get_UML_A_parameterSet_parameter());
+	uML_Parameter_parameterSet->setOpposite(get_UML_ParameterSet_parameter());
 	
 	
 
@@ -31047,6 +31466,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterSet_condition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ParameterSet_condition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ParameterSet_condition->setAssociation(get_UML_A_condition_parameterSet());
+	uML_ParameterSet_condition->setOpposite(get_UML_A_condition_parameterSet_parameterSet());
 	
 	
 	//parameter
@@ -31058,6 +31478,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterSet_parameter->setAggregation(uml::AggregationKind::NONE);
 	uML_ParameterSet_parameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ParameterSet_parameter->setAssociation(get_UML_A_parameterSet_parameter());
+	uML_ParameterSet_parameter->setOpposite(get_UML_Parameter_parameterSet());
 	
 	
 
@@ -31080,6 +31501,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterableElement_owningTemplateParameter->setAggregation(uml::AggregationKind::NONE);
 	uML_ParameterableElement_owningTemplateParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ParameterableElement_owningTemplateParameter->setAssociation(get_UML_A_ownedParameteredElement_owningTemplateParameter());
+	uML_ParameterableElement_owningTemplateParameter->setOpposite(get_UML_TemplateParameter_ownedParameteredElement());
 	
 	
 	//templateParameter
@@ -31091,6 +31513,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterableElement_templateParameter->setAggregation(uml::AggregationKind::NONE);
 	uML_ParameterableElement_templateParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ParameterableElement_templateParameter->setAssociation(get_UML_A_parameteredElement_templateParameter());
+	uML_ParameterableElement_templateParameter->setOpposite(get_UML_TemplateParameter_parameteredElement());
 	
 	
 
@@ -31165,6 +31588,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Pin_isControl->setAggregation(uml::AggregationKind::NONE);
 	uML_Pin_isControl->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Pin_isControl->setDefaultValue(uML_Pin_isControl_defaultValue_LiteralBoolean_UML_Pin_isControl);
 	
 
@@ -31187,6 +31611,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_isBehavior->setAggregation(uml::AggregationKind::NONE);
 	uML_Port_isBehavior->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Port_isBehavior->setDefaultValue(uML_Port_isBehavior_defaultValue_LiteralBoolean_UML_Port_isBehavior);
 	
 	//isConjugated
@@ -31197,6 +31622,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_isConjugated->setIsUnique(true);
 	uML_Port_isConjugated->setAggregation(uml::AggregationKind::NONE);
 	uML_Port_isConjugated->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Port_isConjugated->setDefaultValue(uML_Port_isConjugated_defaultValue_LiteralBoolean_UML_Port_isConjugated);
 	
@@ -31209,6 +31635,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_isService->setAggregation(uml::AggregationKind::NONE);
 	uML_Port_isService->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Port_isService->setDefaultValue(uML_Port_isService_defaultValue_LiteralBoolean_UML_Port_isService);
 	
 	//protocol
@@ -31220,6 +31647,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_protocol->setAggregation(uml::AggregationKind::NONE);
 	uML_Port_protocol->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Port_protocol->setAssociation(get_UML_A_protocol_port());
+	uML_Port_protocol->setOpposite(get_UML_A_protocol_port_port());
 	
 	
 	//provided
@@ -31231,6 +31659,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_provided->setAggregation(uml::AggregationKind::NONE);
 	uML_Port_provided->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Port_provided->setAssociation(get_UML_A_provided_port());
+	uML_Port_provided->setOpposite(get_UML_A_provided_port_port());
 	
 	
 	//redefinedPort
@@ -31242,6 +31671,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_redefinedPort->setAggregation(uml::AggregationKind::NONE);
 	uML_Port_redefinedPort->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Port_redefinedPort->setAssociation(get_UML_A_redefinedPort_port());
+	uML_Port_redefinedPort->setOpposite(get_UML_A_redefinedPort_port_port());
 	
 	
 	//required
@@ -31253,6 +31683,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_required->setAggregation(uml::AggregationKind::NONE);
 	uML_Port_required->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Port_required->setAssociation(get_UML_A_required_port());
+	uML_Port_required->setOpposite(get_UML_A_required_port_port());
 	
 	
 
@@ -31336,6 +31767,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_metaclassReference->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Profile_metaclassReference->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Profile_metaclassReference->setAssociation(get_UML_A_metaclassReference_profile());
+	uML_Profile_metaclassReference->setOpposite(get_UML_A_metaclassReference_profile_profile());
 	
 	
 	//metamodelReference
@@ -31347,6 +31779,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_metamodelReference->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Profile_metamodelReference->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Profile_metamodelReference->setAssociation(get_UML_A_metamodelReference_profile());
+	uML_Profile_metamodelReference->setOpposite(get_UML_A_metamodelReference_profile_profile());
 	
 	
 
@@ -31515,6 +31948,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_appliedProfile->setAggregation(uml::AggregationKind::NONE);
 	uML_ProfileApplication_appliedProfile->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProfileApplication_appliedProfile->setAssociation(get_UML_A_appliedProfile_profileApplication());
+	uML_ProfileApplication_appliedProfile->setOpposite(get_UML_A_appliedProfile_profileApplication_profileApplication());
 	
 	
 	//applyingPackage
@@ -31526,6 +31960,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_applyingPackage->setAggregation(uml::AggregationKind::NONE);
 	uML_ProfileApplication_applyingPackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProfileApplication_applyingPackage->setAssociation(get_UML_A_profileApplication_applyingPackage());
+	uML_ProfileApplication_applyingPackage->setOpposite(get_UML_Package_profileApplication());
 	
 	
 	//isStrict
@@ -31536,6 +31971,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_isStrict->setIsUnique(true);
 	uML_ProfileApplication_isStrict->setAggregation(uml::AggregationKind::NONE);
 	uML_ProfileApplication_isStrict->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ProfileApplication_isStrict->setDefaultValue(uML_ProfileApplication_isStrict_defaultValue_LiteralBoolean_UML_ProfileApplication_isStrict);
 	
@@ -31605,6 +32041,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_aggregation->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_aggregation->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Property_aggregation->setDefaultValue(uML_Property_aggregation_defaultValue_InstanceValue);
 	
 	//association
@@ -31616,6 +32053,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_association->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_association->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_association->setAssociation(get_UML_A_memberEnd_association());
+	uML_Property_association->setOpposite(get_UML_Association_memberEnd());
 	
 	
 	//associationEnd
@@ -31627,6 +32065,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_associationEnd->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_associationEnd->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_associationEnd->setAssociation(get_UML_A_qualifier_associationEnd());
+	uML_Property_associationEnd->setOpposite(get_UML_Property_qualifier());
 	
 	
 	//class
@@ -31638,6 +32077,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_class->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_class->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_class->setAssociation(get_UML_A_ownedAttribute_class());
+	uML_Property_class->setOpposite(get_UML_Class_ownedAttribute());
 	
 	
 	//datatype
@@ -31649,6 +32089,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_datatype->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_datatype->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_datatype->setAssociation(get_UML_A_ownedAttribute_datatype());
+	uML_Property_datatype->setOpposite(get_UML_DataType_ownedAttribute());
 	
 	
 	//default
@@ -31662,6 +32103,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//defaultValue
 	uML_Property_defaultValue->setName("defaultValue");
 	uML_Property_defaultValue->setType(get_UML_ValueSpecification());
@@ -31671,6 +32113,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_defaultValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Property_defaultValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_defaultValue->setAssociation(get_UML_A_defaultValue_owningProperty());
+	uML_Property_defaultValue->setOpposite(get_UML_A_defaultValue_owningProperty_owningProperty());
 	
 	
 	//interface
@@ -31682,6 +32125,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_interface->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_interface->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_interface->setAssociation(get_UML_A_ownedAttribute_interface());
+	uML_Property_interface->setOpposite(get_UML_Interface_ownedAttribute());
 	
 	
 	//isComposite
@@ -31692,6 +32136,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isComposite->setIsUnique(true);
 	uML_Property_isComposite->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_isComposite->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Property_isComposite->setDefaultValue(uML_Property_isComposite_defaultValue_LiteralBoolean_UML_Property_isComposite);
 	
@@ -31704,6 +32149,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isDerived->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_isDerived->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Property_isDerived->setDefaultValue(uML_Property_isDerived_defaultValue_LiteralBoolean_UML_Property_isDerived);
 	
 	//isDerivedUnion
@@ -31714,6 +32160,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isDerivedUnion->setIsUnique(true);
 	uML_Property_isDerivedUnion->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_isDerivedUnion->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Property_isDerivedUnion->setDefaultValue(uML_Property_isDerivedUnion_defaultValue_LiteralBoolean_UML_Property_isDerivedUnion);
 	
@@ -31726,6 +32173,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isID->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_isID->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Property_isID->setDefaultValue(uML_Property_isID_defaultValue_LiteralBoolean_UML_Property_isID);
 	
 	//opposite
@@ -31737,6 +32185,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_opposite->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_opposite->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_opposite->setAssociation(get_UML_A_opposite_property());
+	uML_Property_opposite->setOpposite(get_UML_A_opposite_property_property());
 	
 	
 	//owningAssociation
@@ -31748,6 +32197,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_owningAssociation->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_owningAssociation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_owningAssociation->setAssociation(get_UML_A_ownedEnd_owningAssociation());
+	uML_Property_owningAssociation->setOpposite(get_UML_Association_ownedEnd());
 	
 	
 	//qualifier
@@ -31759,6 +32209,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_qualifier->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Property_qualifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_qualifier->setAssociation(get_UML_A_qualifier_associationEnd());
+	uML_Property_qualifier->setOpposite(get_UML_Property_associationEnd());
 	
 	
 	//redefinedProperty
@@ -31770,6 +32221,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_redefinedProperty->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_redefinedProperty->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_redefinedProperty->setAssociation(get_UML_A_redefinedProperty_property());
+	uML_Property_redefinedProperty->setOpposite(get_UML_A_redefinedProperty_property_property());
 	
 	
 	//subsettedProperty
@@ -31781,6 +32233,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_subsettedProperty->setAggregation(uml::AggregationKind::NONE);
 	uML_Property_subsettedProperty->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Property_subsettedProperty->setAssociation(get_UML_A_subsettedProperty_property());
+	uML_Property_subsettedProperty->setOpposite(get_UML_A_subsettedProperty_property_property());
 	
 	
 
@@ -32079,6 +32532,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolConformance_generalMachine->setAggregation(uml::AggregationKind::NONE);
 	uML_ProtocolConformance_generalMachine->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProtocolConformance_generalMachine->setAssociation(get_UML_A_generalMachine_protocolConformance());
+	uML_ProtocolConformance_generalMachine->setOpposite(get_UML_A_generalMachine_protocolConformance_protocolConformance());
 	
 	
 	//specificMachine
@@ -32090,6 +32544,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolConformance_specificMachine->setAggregation(uml::AggregationKind::NONE);
 	uML_ProtocolConformance_specificMachine->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProtocolConformance_specificMachine->setAssociation(get_UML_A_conformance_specificMachine());
+	uML_ProtocolConformance_specificMachine->setOpposite(get_UML_ProtocolStateMachine_conformance());
 	
 	
 
@@ -32112,6 +32567,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolStateMachine_conformance->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ProtocolStateMachine_conformance->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProtocolStateMachine_conformance->setAssociation(get_UML_A_conformance_specificMachine());
+	uML_ProtocolStateMachine_conformance->setOpposite(get_UML_ProtocolConformance_specificMachine());
 	
 	
 
@@ -32134,6 +32590,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolTransition_postCondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ProtocolTransition_postCondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProtocolTransition_postCondition->setAssociation(get_UML_A_postCondition_owningTransition());
+	uML_ProtocolTransition_postCondition->setOpposite(get_UML_A_postCondition_owningTransition_owningTransition());
 	
 	
 	//preCondition
@@ -32145,6 +32602,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolTransition_preCondition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ProtocolTransition_preCondition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProtocolTransition_preCondition->setAssociation(get_UML_A_preCondition_protocolTransition());
+	uML_ProtocolTransition_preCondition->setOpposite(get_UML_A_preCondition_protocolTransition_protocolTransition());
 	
 	
 	//referred
@@ -32156,6 +32614,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolTransition_referred->setAggregation(uml::AggregationKind::NONE);
 	uML_ProtocolTransition_referred->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ProtocolTransition_referred->setAssociation(get_UML_A_referred_protocolTransition());
+	uML_ProtocolTransition_referred->setOpposite(get_UML_A_referred_protocolTransition_protocolTransition());
 	
 	
 
@@ -32191,6 +32650,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Pseudostate_kind->setAggregation(uml::AggregationKind::NONE);
 	uML_Pseudostate_kind->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_Pseudostate_kind->setDefaultValue(uML_Pseudostate_kind_defaultValue_InstanceValue);
 	
 	//state
@@ -32202,6 +32662,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Pseudostate_state->setAggregation(uml::AggregationKind::NONE);
 	uML_Pseudostate_state->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Pseudostate_state->setAssociation(get_UML_A_connectionPoint_state());
+	uML_Pseudostate_state->setOpposite(get_UML_State_connectionPoint());
 	
 	
 	//stateMachine
@@ -32213,6 +32674,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Pseudostate_stateMachine->setAggregation(uml::AggregationKind::NONE);
 	uML_Pseudostate_stateMachine->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Pseudostate_stateMachine->setAssociation(get_UML_A_connectionPoint_stateMachine());
+	uML_Pseudostate_stateMachine->setOpposite(get_UML_StateMachine_connectionPoint());
 	
 	
 
@@ -32235,6 +32697,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_QualifierValue_qualifier->setAggregation(uml::AggregationKind::NONE);
 	uML_QualifierValue_qualifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_QualifierValue_qualifier->setAssociation(get_UML_A_qualifier_qualifierValue());
+	uML_QualifierValue_qualifier->setOpposite(get_UML_A_qualifier_qualifierValue_qualifierValue());
 	
 	
 	//value
@@ -32246,6 +32709,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_QualifierValue_value->setAggregation(uml::AggregationKind::NONE);
 	uML_QualifierValue_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_QualifierValue_value->setAssociation(get_UML_A_value_qualifierValue());
+	uML_QualifierValue_value->setOpposite(get_UML_A_value_qualifierValue_qualifierValue());
 	
 	
 
@@ -32268,6 +32732,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RaiseExceptionAction_exception->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_RaiseExceptionAction_exception->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RaiseExceptionAction_exception->setAssociation(get_UML_A_exception_raiseExceptionAction());
+	uML_RaiseExceptionAction_exception->setOpposite(get_UML_A_exception_raiseExceptionAction_raiseExceptionAction());
 	
 	
 
@@ -32290,6 +32755,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadExtentAction_classifier->setAggregation(uml::AggregationKind::NONE);
 	uML_ReadExtentAction_classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadExtentAction_classifier->setAssociation(get_UML_A_classifier_readExtentAction());
+	uML_ReadExtentAction_classifier->setOpposite(get_UML_A_classifier_readExtentAction_readExtentAction());
 	
 	
 	//result
@@ -32301,6 +32767,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadExtentAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadExtentAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadExtentAction_result->setAssociation(get_UML_A_result_readExtentAction());
+	uML_ReadExtentAction_result->setOpposite(get_UML_A_result_readExtentAction_readExtentAction());
 	
 	
 
@@ -32323,6 +32790,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadIsClassifiedObjectAction_classifier->setAggregation(uml::AggregationKind::NONE);
 	uML_ReadIsClassifiedObjectAction_classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadIsClassifiedObjectAction_classifier->setAssociation(get_UML_A_classifier_readIsClassifiedObjectAction());
+	uML_ReadIsClassifiedObjectAction_classifier->setOpposite(get_UML_A_classifier_readIsClassifiedObjectAction_readIsClassifiedObjectAction());
 	
 	
 	//isDirect
@@ -32333,6 +32801,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadIsClassifiedObjectAction_isDirect->setIsUnique(true);
 	uML_ReadIsClassifiedObjectAction_isDirect->setAggregation(uml::AggregationKind::NONE);
 	uML_ReadIsClassifiedObjectAction_isDirect->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ReadIsClassifiedObjectAction_isDirect->setDefaultValue(uML_ReadIsClassifiedObjectAction_isDirect_defaultValue_LiteralBoolean_UML_ReadIsClassifiedObjectAction_isDirect);
 	
@@ -32345,6 +32814,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadIsClassifiedObjectAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadIsClassifiedObjectAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadIsClassifiedObjectAction_object->setAssociation(get_UML_A_object_readIsClassifiedObjectAction());
+	uML_ReadIsClassifiedObjectAction_object->setOpposite(get_UML_A_object_readIsClassifiedObjectAction_readIsClassifiedObjectAction());
 	
 	
 	//result
@@ -32356,6 +32826,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadIsClassifiedObjectAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadIsClassifiedObjectAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadIsClassifiedObjectAction_result->setAssociation(get_UML_A_result_readIsClassifiedObjectAction());
+	uML_ReadIsClassifiedObjectAction_result->setOpposite(get_UML_A_result_readIsClassifiedObjectAction_readIsClassifiedObjectAction());
 	
 	
 
@@ -32378,6 +32849,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadLinkAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadLinkAction_result->setAssociation(get_UML_A_result_readLinkAction());
+	uML_ReadLinkAction_result->setOpposite(get_UML_A_result_readLinkAction_readLinkAction());
 	
 	
 
@@ -32413,6 +32885,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndAction_end->setAggregation(uml::AggregationKind::NONE);
 	uML_ReadLinkObjectEndAction_end->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadLinkObjectEndAction_end->setAssociation(get_UML_A_end_readLinkObjectEndAction());
+	uML_ReadLinkObjectEndAction_end->setOpposite(get_UML_A_end_readLinkObjectEndAction_readLinkObjectEndAction());
 	
 	
 	//object
@@ -32424,6 +32897,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadLinkObjectEndAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadLinkObjectEndAction_object->setAssociation(get_UML_A_object_readLinkObjectEndAction());
+	uML_ReadLinkObjectEndAction_object->setOpposite(get_UML_A_object_readLinkObjectEndAction_readLinkObjectEndAction());
 	
 	
 	//result
@@ -32435,6 +32909,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadLinkObjectEndAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadLinkObjectEndAction_result->setAssociation(get_UML_A_result_readLinkObjectEndAction());
+	uML_ReadLinkObjectEndAction_result->setOpposite(get_UML_A_result_readLinkObjectEndAction_readLinkObjectEndAction());
 	
 	
 
@@ -32457,6 +32932,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndQualifierAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadLinkObjectEndQualifierAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadLinkObjectEndQualifierAction_object->setAssociation(get_UML_A_object_readLinkObjectEndQualifierAction());
+	uML_ReadLinkObjectEndQualifierAction_object->setOpposite(get_UML_A_object_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction());
 	
 	
 	//qualifier
@@ -32468,6 +32944,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndQualifierAction_qualifier->setAggregation(uml::AggregationKind::NONE);
 	uML_ReadLinkObjectEndQualifierAction_qualifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadLinkObjectEndQualifierAction_qualifier->setAssociation(get_UML_A_qualifier_readLinkObjectEndQualifierAction());
+	uML_ReadLinkObjectEndQualifierAction_qualifier->setOpposite(get_UML_A_qualifier_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction());
 	
 	
 	//result
@@ -32479,6 +32956,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndQualifierAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadLinkObjectEndQualifierAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadLinkObjectEndQualifierAction_result->setAssociation(get_UML_A_result_readLinkObjectEndQualifierAction());
+	uML_ReadLinkObjectEndQualifierAction_result->setOpposite(get_UML_A_result_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction());
 	
 	
 
@@ -32501,6 +32979,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadSelfAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadSelfAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadSelfAction_result->setAssociation(get_UML_A_result_readSelfAction());
+	uML_ReadSelfAction_result->setOpposite(get_UML_A_result_readSelfAction_readSelfAction());
 	
 	
 
@@ -32523,6 +33002,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadStructuralFeatureAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadStructuralFeatureAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadStructuralFeatureAction_result->setAssociation(get_UML_A_result_readStructuralFeatureAction());
+	uML_ReadStructuralFeatureAction_result->setOpposite(get_UML_A_result_readStructuralFeatureAction_readStructuralFeatureAction());
 	
 	
 
@@ -32545,6 +33025,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadVariableAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReadVariableAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReadVariableAction_result->setAssociation(get_UML_A_result_readVariableAction());
+	uML_ReadVariableAction_result->setOpposite(get_UML_A_result_readVariableAction_readVariableAction());
 	
 	
 
@@ -32576,6 +33057,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Reception_signal->setAggregation(uml::AggregationKind::NONE);
 	uML_Reception_signal->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Reception_signal->setAssociation(get_UML_A_signal_reception());
+	uML_Reception_signal->setOpposite(get_UML_A_signal_reception_reception());
 	
 	
 
@@ -32598,6 +33080,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReclassifyObjectAction_isReplaceAll->setAggregation(uml::AggregationKind::NONE);
 	uML_ReclassifyObjectAction_isReplaceAll->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_ReclassifyObjectAction_isReplaceAll->setDefaultValue(uML_ReclassifyObjectAction_isReplaceAll_defaultValue_LiteralBoolean_UML_ReclassifyObjectAction_isReplaceAll);
 	
 	//newClassifier
@@ -32609,6 +33092,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReclassifyObjectAction_newClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_ReclassifyObjectAction_newClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReclassifyObjectAction_newClassifier->setAssociation(get_UML_A_newClassifier_reclassifyObjectAction());
+	uML_ReclassifyObjectAction_newClassifier->setOpposite(get_UML_A_newClassifier_reclassifyObjectAction_reclassifyObjectAction());
 	
 	
 	//object
@@ -32620,6 +33104,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReclassifyObjectAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReclassifyObjectAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReclassifyObjectAction_object->setAssociation(get_UML_A_object_reclassifyObjectAction());
+	uML_ReclassifyObjectAction_object->setOpposite(get_UML_A_object_reclassifyObjectAction_reclassifyObjectAction());
 	
 	
 	//oldClassifier
@@ -32631,6 +33116,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReclassifyObjectAction_oldClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_ReclassifyObjectAction_oldClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReclassifyObjectAction_oldClassifier->setAssociation(get_UML_A_oldClassifier_reclassifyObjectAction());
+	uML_ReclassifyObjectAction_oldClassifier->setOpposite(get_UML_A_oldClassifier_reclassifyObjectAction_reclassifyObjectAction());
 	
 	
 
@@ -32653,6 +33139,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableElement_isLeaf->setAggregation(uml::AggregationKind::NONE);
 	uML_RedefinableElement_isLeaf->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_RedefinableElement_isLeaf->setDefaultValue(uML_RedefinableElement_isLeaf_defaultValue_LiteralBoolean_UML_RedefinableElement_isLeaf);
 	
 	//redefinedElement
@@ -32664,6 +33151,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableElement_redefinedElement->setAggregation(uml::AggregationKind::NONE);
 	uML_RedefinableElement_redefinedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RedefinableElement_redefinedElement->setAssociation(get_UML_A_redefinedElement_redefinableElement());
+	uML_RedefinableElement_redefinedElement->setOpposite(get_UML_A_redefinedElement_redefinableElement_redefinableElement());
 	
 	
 	//redefinitionContext
@@ -32675,6 +33163,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableElement_redefinitionContext->setAggregation(uml::AggregationKind::NONE);
 	uML_RedefinableElement_redefinitionContext->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RedefinableElement_redefinitionContext->setAssociation(get_UML_A_redefinitionContext_redefinableElement());
+	uML_RedefinableElement_redefinitionContext->setOpposite(get_UML_A_redefinitionContext_redefinableElement_redefinableElement());
 	
 	
 
@@ -32754,6 +33243,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableTemplateSignature_classifier->setAggregation(uml::AggregationKind::NONE);
 	uML_RedefinableTemplateSignature_classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RedefinableTemplateSignature_classifier->setAssociation(get_UML_A_ownedTemplateSignature_classifier());
+	uML_RedefinableTemplateSignature_classifier->setOpposite(get_UML_Classifier_ownedTemplateSignature());
 	
 	
 	//extendedSignature
@@ -32765,6 +33255,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableTemplateSignature_extendedSignature->setAggregation(uml::AggregationKind::NONE);
 	uML_RedefinableTemplateSignature_extendedSignature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RedefinableTemplateSignature_extendedSignature->setAssociation(get_UML_A_extendedSignature_redefinableTemplateSignature());
+	uML_RedefinableTemplateSignature_extendedSignature->setOpposite(get_UML_A_extendedSignature_redefinableTemplateSignature_redefinableTemplateSignature());
 	
 	
 	//inheritedParameter
@@ -32776,6 +33267,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableTemplateSignature_inheritedParameter->setAggregation(uml::AggregationKind::NONE);
 	uML_RedefinableTemplateSignature_inheritedParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RedefinableTemplateSignature_inheritedParameter->setAssociation(get_UML_A_inheritedParameter_redefinableTemplateSignature());
+	uML_RedefinableTemplateSignature_inheritedParameter->setOpposite(get_UML_A_inheritedParameter_redefinableTemplateSignature_redefinableTemplateSignature());
 	
 	
 
@@ -32838,6 +33330,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReduceAction_collection->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReduceAction_collection->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReduceAction_collection->setAssociation(get_UML_A_collection_reduceAction());
+	uML_ReduceAction_collection->setOpposite(get_UML_A_collection_reduceAction_reduceAction());
 	
 	
 	//isOrdered
@@ -32848,6 +33341,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReduceAction_isOrdered->setIsUnique(true);
 	uML_ReduceAction_isOrdered->setAggregation(uml::AggregationKind::NONE);
 	uML_ReduceAction_isOrdered->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_ReduceAction_isOrdered->setDefaultValue(uML_ReduceAction_isOrdered_defaultValue_LiteralBoolean_UML_ReduceAction_isOrdered);
 	
@@ -32860,6 +33354,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReduceAction_reducer->setAggregation(uml::AggregationKind::NONE);
 	uML_ReduceAction_reducer->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReduceAction_reducer->setAssociation(get_UML_A_reducer_reduceAction());
+	uML_ReduceAction_reducer->setOpposite(get_UML_A_reducer_reduceAction_reduceAction());
 	
 	
 	//result
@@ -32871,6 +33366,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReduceAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReduceAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReduceAction_result->setAssociation(get_UML_A_result_reduceAction());
+	uML_ReduceAction_result->setOpposite(get_UML_A_result_reduceAction_reduceAction());
 	
 	
 
@@ -32896,6 +33392,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_extendedRegion->setAggregation(uml::AggregationKind::NONE);
 	uML_Region_extendedRegion->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Region_extendedRegion->setAssociation(get_UML_A_extendedRegion_region());
+	uML_Region_extendedRegion->setOpposite(get_UML_A_extendedRegion_region_region());
 	
 	
 	//redefinitionContext
@@ -32907,6 +33404,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_redefinitionContext->setAggregation(uml::AggregationKind::NONE);
 	uML_Region_redefinitionContext->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Region_redefinitionContext->setAssociation(get_UML_A_redefinitionContext_region());
+	uML_Region_redefinitionContext->setOpposite(get_UML_A_redefinitionContext_region_region());
 	
 	
 	//state
@@ -32918,6 +33416,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_state->setAggregation(uml::AggregationKind::NONE);
 	uML_Region_state->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Region_state->setAssociation(get_UML_A_region_state());
+	uML_Region_state->setOpposite(get_UML_State_region());
 	
 	
 	//stateMachine
@@ -32929,6 +33428,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_stateMachine->setAggregation(uml::AggregationKind::NONE);
 	uML_Region_stateMachine->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Region_stateMachine->setAssociation(get_UML_A_region_stateMachine());
+	uML_Region_stateMachine->setOpposite(get_UML_StateMachine_region());
 	
 	
 	//subvertex
@@ -32940,6 +33440,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_subvertex->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Region_subvertex->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Region_subvertex->setAssociation(get_UML_A_subvertex_container());
+	uML_Region_subvertex->setOpposite(get_UML_Vertex_container());
 	
 	
 	//transition
@@ -32951,6 +33452,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_transition->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Region_transition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Region_transition->setAssociation(get_UML_A_transition_container());
+	uML_Region_transition->setOpposite(get_UML_Transition_container());
 	
 	
 
@@ -33066,6 +33568,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Relationship_relatedElement->setAggregation(uml::AggregationKind::NONE);
 	uML_Relationship_relatedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Relationship_relatedElement->setAssociation(get_UML_A_relatedElement_relationship());
+	uML_Relationship_relatedElement->setOpposite(get_UML_A_relatedElement_relationship_relationship());
 	
 	
 
@@ -33088,6 +33591,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates->setAggregation(uml::AggregationKind::NONE);
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates->setDefaultValue(uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates_defaultValue_LiteralBoolean_UML_RemoveStructuralFeatureValueAction_isRemoveDuplicates);
 	
 	//removeAt
@@ -33099,6 +33603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RemoveStructuralFeatureValueAction_removeAt->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_RemoveStructuralFeatureValueAction_removeAt->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RemoveStructuralFeatureValueAction_removeAt->setAssociation(get_UML_A_removeAt_removeStructuralFeatureValueAction());
+	uML_RemoveStructuralFeatureValueAction_removeAt->setOpposite(get_UML_A_removeAt_removeStructuralFeatureValueAction_removeStructuralFeatureValueAction());
 	
 	
 
@@ -33121,6 +33626,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RemoveVariableValueAction_isRemoveDuplicates->setAggregation(uml::AggregationKind::NONE);
 	uML_RemoveVariableValueAction_isRemoveDuplicates->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_RemoveVariableValueAction_isRemoveDuplicates->setDefaultValue(uML_RemoveVariableValueAction_isRemoveDuplicates_defaultValue_LiteralBoolean_UML_RemoveVariableValueAction_isRemoveDuplicates);
 	
 	//removeAt
@@ -33132,6 +33638,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RemoveVariableValueAction_removeAt->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_RemoveVariableValueAction_removeAt->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_RemoveVariableValueAction_removeAt->setAssociation(get_UML_A_removeAt_removeVariableValueAction());
+	uML_RemoveVariableValueAction_removeAt->setOpposite(get_UML_A_removeAt_removeVariableValueAction_removeVariableValueAction());
 	
 	
 
@@ -33154,6 +33661,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReplyAction_replyToCall->setAggregation(uml::AggregationKind::NONE);
 	uML_ReplyAction_replyToCall->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReplyAction_replyToCall->setAssociation(get_UML_A_replyToCall_replyAction());
+	uML_ReplyAction_replyToCall->setOpposite(get_UML_A_replyToCall_replyAction_replyAction());
 	
 	
 	//replyValue
@@ -33165,6 +33673,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReplyAction_replyValue->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReplyAction_replyValue->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReplyAction_replyValue->setAssociation(get_UML_A_replyValue_replyAction());
+	uML_ReplyAction_replyValue->setOpposite(get_UML_A_replyValue_replyAction_replyAction());
 	
 	
 	//returnInformation
@@ -33176,6 +33685,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReplyAction_returnInformation->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ReplyAction_returnInformation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ReplyAction_returnInformation->setAssociation(get_UML_A_returnInformation_replyAction());
+	uML_ReplyAction_returnInformation->setOpposite(get_UML_A_returnInformation_replyAction_replyAction());
 	
 	
 
@@ -33198,6 +33708,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SendObjectAction_request->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_SendObjectAction_request->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_SendObjectAction_request->setAssociation(get_UML_A_request_sendObjectAction());
+	uML_SendObjectAction_request->setOpposite(get_UML_A_request_sendObjectAction_sendObjectAction());
 	
 	
 	//target
@@ -33209,6 +33720,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SendObjectAction_target->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_SendObjectAction_target->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_SendObjectAction_target->setAssociation(get_UML_A_target_sendObjectAction());
+	uML_SendObjectAction_target->setOpposite(get_UML_A_target_sendObjectAction_sendObjectAction());
 	
 	
 
@@ -33231,6 +33743,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SendSignalAction_signal->setAggregation(uml::AggregationKind::NONE);
 	uML_SendSignalAction_signal->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_SendSignalAction_signal->setAssociation(get_UML_A_signal_sendSignalAction());
+	uML_SendSignalAction_signal->setOpposite(get_UML_A_signal_sendSignalAction_sendSignalAction());
 	
 	
 	//target
@@ -33242,6 +33755,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SendSignalAction_target->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_SendSignalAction_target->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_SendSignalAction_target->setAssociation(get_UML_A_target_sendSignalAction());
+	uML_SendSignalAction_target->setOpposite(get_UML_A_target_sendSignalAction_sendSignalAction());
 	
 	
 
@@ -33264,6 +33778,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SequenceNode_executableNode->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_SequenceNode_executableNode->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_SequenceNode_executableNode->setAssociation(get_UML_A_executableNode_sequenceNode());
+	uML_SequenceNode_executableNode->setOpposite(get_UML_A_executableNode_sequenceNode_sequenceNode());
 	
 	
 
@@ -33286,6 +33801,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Signal_ownedAttribute->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Signal_ownedAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Signal_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_owningSignal());
+	uML_Signal_ownedAttribute->setOpposite(get_UML_A_ownedAttribute_owningSignal_owningSignal());
 	
 	
 
@@ -33377,6 +33893,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SignalEvent_signal->setAggregation(uml::AggregationKind::NONE);
 	uML_SignalEvent_signal->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_SignalEvent_signal->setAssociation(get_UML_A_signal_signalEvent());
+	uML_SignalEvent_signal->setOpposite(get_UML_A_signal_signalEvent_signalEvent());
 	
 	
 
@@ -33399,6 +33916,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Slot_definingFeature->setAggregation(uml::AggregationKind::NONE);
 	uML_Slot_definingFeature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Slot_definingFeature->setAssociation(get_UML_A_definingFeature_slot());
+	uML_Slot_definingFeature->setOpposite(get_UML_A_definingFeature_slot_slot());
 	
 	
 	//owningInstance
@@ -33410,6 +33928,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Slot_owningInstance->setAggregation(uml::AggregationKind::NONE);
 	uML_Slot_owningInstance->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Slot_owningInstance->setAssociation(get_UML_A_slot_owningInstance());
+	uML_Slot_owningInstance->setOpposite(get_UML_InstanceSpecification_slot());
 	
 	
 	//value
@@ -33421,6 +33940,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Slot_value->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Slot_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Slot_value->setAssociation(get_UML_A_value_owningSlot());
+	uML_Slot_value->setOpposite(get_UML_A_value_owningSlot_owningSlot());
 	
 	
 
@@ -33443,6 +33963,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StartClassifierBehaviorAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StartClassifierBehaviorAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StartClassifierBehaviorAction_object->setAssociation(get_UML_A_object_startClassifierBehaviorAction());
+	uML_StartClassifierBehaviorAction_object->setOpposite(get_UML_A_object_startClassifierBehaviorAction_startClassifierBehaviorAction());
 	
 	
 
@@ -33465,6 +33986,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StartObjectBehaviorAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StartObjectBehaviorAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StartObjectBehaviorAction_object->setAssociation(get_UML_A_object_startObjectBehaviorAction());
+	uML_StartObjectBehaviorAction_object->setOpposite(get_UML_A_object_startObjectBehaviorAction_startObjectBehaviorAction());
 	
 	
 
@@ -33532,6 +34054,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_connection->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_connection->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_connection->setAssociation(get_UML_A_connection_state());
+	uML_State_connection->setOpposite(get_UML_ConnectionPointReference_state());
 	
 	
 	//connectionPoint
@@ -33543,6 +34066,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_connectionPoint->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_connectionPoint->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_connectionPoint->setAssociation(get_UML_A_connectionPoint_state());
+	uML_State_connectionPoint->setOpposite(get_UML_Pseudostate_state());
 	
 	
 	//deferrableTrigger
@@ -33554,6 +34078,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_deferrableTrigger->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_deferrableTrigger->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_deferrableTrigger->setAssociation(get_UML_A_deferrableTrigger_state());
+	uML_State_deferrableTrigger->setOpposite(get_UML_A_deferrableTrigger_state_state());
 	
 	
 	//doActivity
@@ -33565,6 +34090,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_doActivity->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_doActivity->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_doActivity->setAssociation(get_UML_A_doActivity_state());
+	uML_State_doActivity->setOpposite(get_UML_A_doActivity_state_state());
 	
 	
 	//entry
@@ -33576,6 +34102,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_entry->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_entry->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_entry->setAssociation(get_UML_A_entry_state());
+	uML_State_entry->setOpposite(get_UML_A_entry_state_state());
 	
 	
 	//exit
@@ -33587,6 +34114,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_exit->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_exit->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_exit->setAssociation(get_UML_A_exit_state());
+	uML_State_exit->setOpposite(get_UML_A_exit_state_state());
 	
 	
 	//isComposite
@@ -33597,6 +34125,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_isComposite->setIsUnique(true);
 	uML_State_isComposite->setAggregation(uml::AggregationKind::NONE);
 	uML_State_isComposite->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -33611,6 +34140,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//isSimple
 	uML_State_isSimple->setName("isSimple");
 	uML_State_isSimple->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
@@ -33619,6 +34149,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_isSimple->setIsUnique(true);
 	uML_State_isSimple->setAggregation(uml::AggregationKind::NONE);
 	uML_State_isSimple->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_State_isSimple->setDefaultValue(uML_State_isSimple_defaultValue_LiteralBoolean_UML_State_isSimple);
 	
@@ -33633,6 +34164,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//redefinedState
 	uML_State_redefinedState->setName("redefinedState");
 	uML_State_redefinedState->setType(get_UML_State());
@@ -33642,6 +34174,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_redefinedState->setAggregation(uml::AggregationKind::NONE);
 	uML_State_redefinedState->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_redefinedState->setAssociation(get_UML_A_redefinedState_state());
+	uML_State_redefinedState->setOpposite(get_UML_A_redefinedState_state_state());
 	
 	
 	//redefinitionContext
@@ -33653,6 +34186,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_redefinitionContext->setAggregation(uml::AggregationKind::NONE);
 	uML_State_redefinitionContext->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_redefinitionContext->setAssociation(get_UML_A_redefinitionContext_state());
+	uML_State_redefinitionContext->setOpposite(get_UML_A_redefinitionContext_state_state());
 	
 	
 	//region
@@ -33664,6 +34198,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_region->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_region->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_region->setAssociation(get_UML_A_region_state());
+	uML_State_region->setOpposite(get_UML_Region_state());
 	
 	
 	//stateInvariant
@@ -33675,6 +34210,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_stateInvariant->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_State_stateInvariant->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_stateInvariant->setAssociation(get_UML_A_stateInvariant_owningState());
+	uML_State_stateInvariant->setOpposite(get_UML_A_stateInvariant_owningState_owningState());
 	
 	
 	//submachine
@@ -33686,6 +34222,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_submachine->setAggregation(uml::AggregationKind::NONE);
 	uML_State_submachine->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_State_submachine->setAssociation(get_UML_A_submachineState_submachine());
+	uML_State_submachine->setOpposite(get_UML_StateMachine_submachineState());
 	
 	
 
@@ -33840,6 +34377,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateInvariant_covered->setAggregation(uml::AggregationKind::NONE);
 	uML_StateInvariant_covered->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StateInvariant_covered->setAssociation(get_UML_A_covered_stateInvariant());
+	uML_StateInvariant_covered->setOpposite(get_UML_A_covered_stateInvariant_stateInvariant());
 	
 	
 	//invariant
@@ -33851,6 +34389,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateInvariant_invariant->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StateInvariant_invariant->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StateInvariant_invariant->setAssociation(get_UML_A_invariant_stateInvariant());
+	uML_StateInvariant_invariant->setOpposite(get_UML_A_invariant_stateInvariant_stateInvariant());
 	
 	
 
@@ -33873,6 +34412,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_connectionPoint->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StateMachine_connectionPoint->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StateMachine_connectionPoint->setAssociation(get_UML_A_connectionPoint_stateMachine());
+	uML_StateMachine_connectionPoint->setOpposite(get_UML_Pseudostate_stateMachine());
 	
 	
 	//extendedStateMachine
@@ -33884,6 +34424,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_extendedStateMachine->setAggregation(uml::AggregationKind::NONE);
 	uML_StateMachine_extendedStateMachine->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StateMachine_extendedStateMachine->setAssociation(get_UML_A_extendedStateMachine_stateMachine());
+	uML_StateMachine_extendedStateMachine->setOpposite(get_UML_A_extendedStateMachine_stateMachine_stateMachine());
 	
 	
 	//region
@@ -33895,6 +34436,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_region->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StateMachine_region->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StateMachine_region->setAssociation(get_UML_A_region_stateMachine());
+	uML_StateMachine_region->setOpposite(get_UML_Region_stateMachine());
 	
 	
 	//submachineState
@@ -33906,6 +34448,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_submachineState->setAggregation(uml::AggregationKind::NONE);
 	uML_StateMachine_submachineState->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StateMachine_submachineState->setAssociation(get_UML_A_submachineState_submachine());
+	uML_StateMachine_submachineState->setOpposite(get_UML_State_submachine());
 	
 	
 
@@ -34105,6 +34648,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_icon->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Stereotype_icon->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Stereotype_icon->setAssociation(get_UML_A_icon_stereotype());
+	uML_Stereotype_icon->setOpposite(get_UML_A_icon_stereotype_stereotype());
 	
 	
 	//profile
@@ -34116,6 +34660,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_profile->setAggregation(uml::AggregationKind::NONE);
 	uML_Stereotype_profile->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Stereotype_profile->setAssociation(get_UML_A_profile_stereotype());
+	uML_Stereotype_profile->setOpposite(get_UML_A_profile_stereotype_stereotype());
 	
 	
 
@@ -34355,6 +34900,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StringExpression_owningExpression->setAggregation(uml::AggregationKind::NONE);
 	uML_StringExpression_owningExpression->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StringExpression_owningExpression->setAssociation(get_UML_A_subExpression_owningExpression());
+	uML_StringExpression_owningExpression->setOpposite(get_UML_StringExpression_subExpression());
 	
 	
 	//subExpression
@@ -34366,6 +34912,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StringExpression_subExpression->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StringExpression_subExpression->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StringExpression_subExpression->setAssociation(get_UML_A_subExpression_owningExpression());
+	uML_StringExpression_subExpression->setOpposite(get_UML_StringExpression_owningExpression());
 	
 	
 
@@ -34407,6 +34954,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuralFeature_isReadOnly->setAggregation(uml::AggregationKind::NONE);
 	uML_StructuralFeature_isReadOnly->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_StructuralFeature_isReadOnly->setDefaultValue(uML_StructuralFeature_isReadOnly_defaultValue_LiteralBoolean_UML_StructuralFeature_isReadOnly);
 	
 
@@ -34429,6 +34977,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuralFeatureAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuralFeatureAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuralFeatureAction_object->setAssociation(get_UML_A_object_structuralFeatureAction());
+	uML_StructuralFeatureAction_object->setOpposite(get_UML_A_object_structuralFeatureAction_structuralFeatureAction());
 	
 	
 	//structuralFeature
@@ -34440,6 +34989,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuralFeatureAction_structuralFeature->setAggregation(uml::AggregationKind::NONE);
 	uML_StructuralFeatureAction_structuralFeature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuralFeatureAction_structuralFeature->setAssociation(get_UML_A_structuralFeature_structuralFeatureAction());
+	uML_StructuralFeatureAction_structuralFeature->setOpposite(get_UML_A_structuralFeature_structuralFeatureAction_structuralFeatureAction());
 	
 	
 
@@ -34470,6 +35020,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_activity->setAssociation(get_UML_A_structuredNode_activity());
 	
 	
+	
 	//edge
 	uML_StructuredActivityNode_edge->setName("edge");
 	uML_StructuredActivityNode_edge->setType(get_UML_ActivityEdge());
@@ -34479,6 +35030,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_edge->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuredActivityNode_edge->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredActivityNode_edge->setAssociation(get_UML_A_edge_inStructuredNode());
+	uML_StructuredActivityNode_edge->setOpposite(get_UML_ActivityEdge_inStructuredNode());
 	
 	
 	//mustIsolate
@@ -34489,6 +35041,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_mustIsolate->setIsUnique(true);
 	uML_StructuredActivityNode_mustIsolate->setAggregation(uml::AggregationKind::NONE);
 	uML_StructuredActivityNode_mustIsolate->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_StructuredActivityNode_mustIsolate->setDefaultValue(uML_StructuredActivityNode_mustIsolate_defaultValue_LiteralBoolean_UML_StructuredActivityNode_mustIsolate);
 	
@@ -34501,6 +35054,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_node->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuredActivityNode_node->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredActivityNode_node->setAssociation(get_UML_A_node_inStructuredNode());
+	uML_StructuredActivityNode_node->setOpposite(get_UML_ActivityNode_inStructuredNode());
 	
 	
 	//structuredNodeInput
@@ -34512,6 +35066,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_structuredNodeInput->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuredActivityNode_structuredNodeInput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredActivityNode_structuredNodeInput->setAssociation(get_UML_A_structuredNodeInput_structuredActivityNode());
+	uML_StructuredActivityNode_structuredNodeInput->setOpposite(get_UML_A_structuredNodeInput_structuredActivityNode_structuredActivityNode());
 	
 	
 	//structuredNodeOutput
@@ -34523,6 +35078,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_structuredNodeOutput->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuredActivityNode_structuredNodeOutput->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredActivityNode_structuredNodeOutput->setAssociation(get_UML_A_structuredNodeOutput_structuredActivityNode());
+	uML_StructuredActivityNode_structuredNodeOutput->setOpposite(get_UML_A_structuredNodeOutput_structuredActivityNode_structuredActivityNode());
 	
 	
 	//variable
@@ -34534,6 +35090,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_variable->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuredActivityNode_variable->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredActivityNode_variable->setAssociation(get_UML_A_variable_scope());
+	uML_StructuredActivityNode_variable->setOpposite(get_UML_Variable_scope());
 	
 	
 
@@ -34621,6 +35178,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_ownedAttribute->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuredClassifier_ownedAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredClassifier_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_structuredClassifier());
+	uML_StructuredClassifier_ownedAttribute->setOpposite(get_UML_A_ownedAttribute_structuredClassifier_structuredClassifier());
 	
 	
 	//ownedConnector
@@ -34632,6 +35190,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_ownedConnector->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_StructuredClassifier_ownedConnector->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredClassifier_ownedConnector->setAssociation(get_UML_A_ownedConnector_structuredClassifier());
+	uML_StructuredClassifier_ownedConnector->setOpposite(get_UML_A_ownedConnector_structuredClassifier_structuredClassifier());
 	
 	
 	//part
@@ -34643,6 +35202,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_part->setAggregation(uml::AggregationKind::NONE);
 	uML_StructuredClassifier_part->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredClassifier_part->setAssociation(get_UML_A_part_structuredClassifier());
+	uML_StructuredClassifier_part->setOpposite(get_UML_A_part_structuredClassifier_structuredClassifier());
 	
 	
 	//role
@@ -34654,6 +35214,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_role->setAggregation(uml::AggregationKind::NONE);
 	uML_StructuredClassifier_role->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_StructuredClassifier_role->setAssociation(get_UML_A_role_structuredClassifier());
+	uML_StructuredClassifier_role->setOpposite(get_UML_A_role_structuredClassifier_structuredClassifier());
 	
 	
 
@@ -34771,6 +35332,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Substitution_contract->setAggregation(uml::AggregationKind::NONE);
 	uML_Substitution_contract->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Substitution_contract->setAssociation(get_UML_A_contract_substitution());
+	uML_Substitution_contract->setOpposite(get_UML_A_contract_substitution_substitution());
 	
 	
 	//substitutingClassifier
@@ -34782,6 +35344,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Substitution_substitutingClassifier->setAggregation(uml::AggregationKind::NONE);
 	uML_Substitution_substitutingClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Substitution_substitutingClassifier->setAssociation(get_UML_A_substitution_substitutingClassifier());
+	uML_Substitution_substitutingClassifier->setOpposite(get_UML_Classifier_substitution());
 	
 	
 
@@ -34804,6 +35367,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateBinding_boundElement->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateBinding_boundElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateBinding_boundElement->setAssociation(get_UML_A_templateBinding_boundElement());
+	uML_TemplateBinding_boundElement->setOpposite(get_UML_TemplateableElement_templateBinding());
 	
 	
 	//parameterSubstitution
@@ -34815,6 +35379,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateBinding_parameterSubstitution->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TemplateBinding_parameterSubstitution->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateBinding_parameterSubstitution->setAssociation(get_UML_A_parameterSubstitution_templateBinding());
+	uML_TemplateBinding_parameterSubstitution->setOpposite(get_UML_TemplateParameterSubstitution_templateBinding());
 	
 	
 	//signature
@@ -34826,6 +35391,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateBinding_signature->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateBinding_signature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateBinding_signature->setAssociation(get_UML_A_signature_templateBinding());
+	uML_TemplateBinding_signature->setOpposite(get_UML_A_signature_templateBinding_templateBinding());
 	
 	
 
@@ -34848,6 +35414,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_default->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateParameter_default->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameter_default->setAssociation(get_UML_A_default_templateParameter());
+	uML_TemplateParameter_default->setOpposite(get_UML_A_default_templateParameter_templateParameter());
 	
 	
 	//ownedDefault
@@ -34859,6 +35426,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_ownedDefault->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TemplateParameter_ownedDefault->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameter_ownedDefault->setAssociation(get_UML_A_ownedDefault_templateParameter());
+	uML_TemplateParameter_ownedDefault->setOpposite(get_UML_A_ownedDefault_templateParameter_templateParameter());
 	
 	
 	//ownedParameteredElement
@@ -34870,6 +35438,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_ownedParameteredElement->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TemplateParameter_ownedParameteredElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameter_ownedParameteredElement->setAssociation(get_UML_A_ownedParameteredElement_owningTemplateParameter());
+	uML_TemplateParameter_ownedParameteredElement->setOpposite(get_UML_ParameterableElement_owningTemplateParameter());
 	
 	
 	//parameteredElement
@@ -34881,6 +35450,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_parameteredElement->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateParameter_parameteredElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameter_parameteredElement->setAssociation(get_UML_A_parameteredElement_templateParameter());
+	uML_TemplateParameter_parameteredElement->setOpposite(get_UML_ParameterableElement_templateParameter());
 	
 	
 	//signature
@@ -34892,6 +35462,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_signature->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateParameter_signature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameter_signature->setAssociation(get_UML_A_ownedParameter_signature());
+	uML_TemplateParameter_signature->setOpposite(get_UML_TemplateSignature_ownedParameter());
 	
 	
 
@@ -34914,6 +35485,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameterSubstitution_actual->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateParameterSubstitution_actual->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameterSubstitution_actual->setAssociation(get_UML_A_actual_templateParameterSubstitution());
+	uML_TemplateParameterSubstitution_actual->setOpposite(get_UML_A_actual_templateParameterSubstitution_templateParameterSubstitution());
 	
 	
 	//formal
@@ -34925,6 +35497,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameterSubstitution_formal->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateParameterSubstitution_formal->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameterSubstitution_formal->setAssociation(get_UML_A_formal_templateParameterSubstitution());
+	uML_TemplateParameterSubstitution_formal->setOpposite(get_UML_A_formal_templateParameterSubstitution_templateParameterSubstitution());
 	
 	
 	//ownedActual
@@ -34936,6 +35509,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameterSubstitution_ownedActual->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TemplateParameterSubstitution_ownedActual->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameterSubstitution_ownedActual->setAssociation(get_UML_A_ownedActual_owningTemplateParameterSubstitution());
+	uML_TemplateParameterSubstitution_ownedActual->setOpposite(get_UML_A_ownedActual_owningTemplateParameterSubstitution_owningTemplateParameterSubstitution());
 	
 	
 	//templateBinding
@@ -34947,6 +35521,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameterSubstitution_templateBinding->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateParameterSubstitution_templateBinding->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateParameterSubstitution_templateBinding->setAssociation(get_UML_A_parameterSubstitution_templateBinding());
+	uML_TemplateParameterSubstitution_templateBinding->setOpposite(get_UML_TemplateBinding_parameterSubstitution());
 	
 	
 
@@ -34969,6 +35544,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateSignature_ownedParameter->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TemplateSignature_ownedParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateSignature_ownedParameter->setAssociation(get_UML_A_ownedParameter_signature());
+	uML_TemplateSignature_ownedParameter->setOpposite(get_UML_TemplateParameter_signature());
 	
 	
 	//parameter
@@ -34980,6 +35556,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateSignature_parameter->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateSignature_parameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateSignature_parameter->setAssociation(get_UML_A_parameter_templateSignature());
+	uML_TemplateSignature_parameter->setOpposite(get_UML_A_parameter_templateSignature_templateSignature());
 	
 	
 	//template
@@ -34991,6 +35568,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateSignature_template->setAggregation(uml::AggregationKind::NONE);
 	uML_TemplateSignature_template->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateSignature_template->setAssociation(get_UML_A_ownedTemplateSignature_template());
+	uML_TemplateSignature_template->setOpposite(get_UML_TemplateableElement_ownedTemplateSignature());
 	
 	
 
@@ -35013,6 +35591,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateableElement_ownedTemplateSignature->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TemplateableElement_ownedTemplateSignature->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateableElement_ownedTemplateSignature->setAssociation(get_UML_A_ownedTemplateSignature_template());
+	uML_TemplateableElement_ownedTemplateSignature->setOpposite(get_UML_TemplateSignature_template());
 	
 	
 	//templateBinding
@@ -35024,6 +35603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateableElement_templateBinding->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TemplateableElement_templateBinding->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TemplateableElement_templateBinding->setAssociation(get_UML_A_templateBinding_boundElement());
+	uML_TemplateableElement_templateBinding->setOpposite(get_UML_TemplateBinding_boundElement());
 	
 	
 
@@ -35072,6 +35652,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TestIdentityAction_first->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TestIdentityAction_first->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TestIdentityAction_first->setAssociation(get_UML_A_first_testIdentityAction());
+	uML_TestIdentityAction_first->setOpposite(get_UML_A_first_testIdentityAction_testIdentityAction());
 	
 	
 	//result
@@ -35083,6 +35664,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TestIdentityAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TestIdentityAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TestIdentityAction_result->setAssociation(get_UML_A_result_testIdentityAction());
+	uML_TestIdentityAction_result->setOpposite(get_UML_A_result_testIdentityAction_testIdentityAction());
 	
 	
 	//second
@@ -35094,6 +35676,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TestIdentityAction_second->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TestIdentityAction_second->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TestIdentityAction_second->setAssociation(get_UML_A_second_testIdentityAction());
+	uML_TestIdentityAction_second->setOpposite(get_UML_A_second_testIdentityAction_testIdentityAction());
 	
 	
 
@@ -35116,6 +35699,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeConstraint_firstEvent->setAggregation(uml::AggregationKind::NONE);
 	uML_TimeConstraint_firstEvent->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_TimeConstraint_firstEvent->setDefaultValue(uML_TimeConstraint_firstEvent_defaultValue_LiteralBoolean_UML_TimeConstraint_firstEvent);
 	
 	//specification
@@ -35127,6 +35711,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeConstraint_specification->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TimeConstraint_specification->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TimeConstraint_specification->setAssociation(get_UML_A_specification_timeConstraint());
+	uML_TimeConstraint_specification->setOpposite(get_UML_A_specification_timeConstraint_timeConstraint());
 	
 	
 
@@ -35149,6 +35734,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeEvent_isRelative->setAggregation(uml::AggregationKind::NONE);
 	uML_TimeEvent_isRelative->setVisibility(uml::VisibilityKind::PUBLIC);
 	
+	
 	uML_TimeEvent_isRelative->setDefaultValue(uML_TimeEvent_isRelative_defaultValue_LiteralBoolean_UML_TimeEvent_isRelative);
 	
 	//when
@@ -35160,6 +35746,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeEvent_when->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TimeEvent_when->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TimeEvent_when->setAssociation(get_UML_A_when_timeEvent());
+	uML_TimeEvent_when->setOpposite(get_UML_A_when_timeEvent_timeEvent());
 	
 	
 
@@ -35182,6 +35769,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeExpression_expr->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_TimeExpression_expr->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TimeExpression_expr->setAssociation(get_UML_A_expr_timeExpression());
+	uML_TimeExpression_expr->setOpposite(get_UML_A_expr_timeExpression_timeExpression());
 	
 	
 	//observation
@@ -35193,6 +35781,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeExpression_observation->setAggregation(uml::AggregationKind::NONE);
 	uML_TimeExpression_observation->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TimeExpression_observation->setAssociation(get_UML_A_observation_timeExpression());
+	uML_TimeExpression_observation->setOpposite(get_UML_A_observation_timeExpression_timeExpression());
 	
 	
 
@@ -35228,6 +35817,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeInterval_max->setAggregation(uml::AggregationKind::NONE);
 	uML_TimeInterval_max->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TimeInterval_max->setAssociation(get_UML_A_max_timeInterval());
+	uML_TimeInterval_max->setOpposite(get_UML_A_max_timeInterval_timeInterval());
 	
 	
 	//min
@@ -35239,6 +35829,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeInterval_min->setAggregation(uml::AggregationKind::NONE);
 	uML_TimeInterval_min->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TimeInterval_min->setAssociation(get_UML_A_min_timeInterval());
+	uML_TimeInterval_min->setOpposite(get_UML_A_min_timeInterval_timeInterval());
 	
 	
 
@@ -35261,6 +35852,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeObservation_event->setAggregation(uml::AggregationKind::NONE);
 	uML_TimeObservation_event->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TimeObservation_event->setAssociation(get_UML_A_event_timeObservation());
+	uML_TimeObservation_event->setOpposite(get_UML_A_event_timeObservation_timeObservation());
 	
 	
 	//firstEvent
@@ -35271,6 +35863,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeObservation_firstEvent->setIsUnique(true);
 	uML_TimeObservation_firstEvent->setAggregation(uml::AggregationKind::NONE);
 	uML_TimeObservation_firstEvent->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_TimeObservation_firstEvent->setDefaultValue(uML_TimeObservation_firstEvent_defaultValue_LiteralBoolean_UML_TimeObservation_firstEvent);
 	
@@ -35297,6 +35890,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_container->setAggregation(uml::AggregationKind::NONE);
 	uML_Transition_container->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Transition_container->setAssociation(get_UML_A_transition_container());
+	uML_Transition_container->setOpposite(get_UML_Region_transition());
 	
 	
 	//effect
@@ -35308,6 +35902,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_effect->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Transition_effect->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Transition_effect->setAssociation(get_UML_A_effect_transition());
+	uML_Transition_effect->setOpposite(get_UML_A_effect_transition_transition());
 	
 	
 	//guard
@@ -35319,6 +35914,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_guard->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Transition_guard->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Transition_guard->setAssociation(get_UML_A_guard_transition());
+	uML_Transition_guard->setOpposite(get_UML_A_guard_transition_transition());
 	
 	
 	//kind
@@ -35329,6 +35925,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_kind->setIsUnique(true);
 	uML_Transition_kind->setAggregation(uml::AggregationKind::NONE);
 	uML_Transition_kind->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	uML_Transition_kind->setDefaultValue(uML_Transition_kind_defaultValue_InstanceValue);
 	
@@ -35341,6 +35938,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_redefinedTransition->setAggregation(uml::AggregationKind::NONE);
 	uML_Transition_redefinedTransition->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Transition_redefinedTransition->setAssociation(get_UML_A_redefinedTransition_transition());
+	uML_Transition_redefinedTransition->setOpposite(get_UML_A_redefinedTransition_transition_transition());
 	
 	
 	//redefinitionContext
@@ -35352,6 +35950,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_redefinitionContext->setAggregation(uml::AggregationKind::NONE);
 	uML_Transition_redefinitionContext->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Transition_redefinitionContext->setAssociation(get_UML_A_redefinitionContext_transition());
+	uML_Transition_redefinitionContext->setOpposite(get_UML_A_redefinitionContext_transition_transition());
 	
 	
 	//source
@@ -35365,6 +35964,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_source->setAssociation(get_UML_A_outgoing_source_vertex());
 	
 	
+	
 	//target
 	uML_Transition_target->setName("target");
 	uML_Transition_target->setType(get_UML_Vertex());
@@ -35376,6 +35976,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_target->setAssociation(get_UML_A_incoming_target_vertex());
 	
 	
+	
 	//trigger
 	uML_Transition_trigger->setName("trigger");
 	uML_Transition_trigger->setType(get_UML_Trigger());
@@ -35385,6 +35986,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_trigger->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_Transition_trigger->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Transition_trigger->setAssociation(get_UML_A_trigger_transition());
+	uML_Transition_trigger->setOpposite(get_UML_A_trigger_transition_transition());
 	
 	
 
@@ -35460,6 +36062,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Trigger_event->setAggregation(uml::AggregationKind::NONE);
 	uML_Trigger_event->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Trigger_event->setAssociation(get_UML_A_event_trigger());
+	uML_Trigger_event->setOpposite(get_UML_A_event_trigger_trigger());
 	
 	
 	//port
@@ -35471,6 +36074,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Trigger_port->setAggregation(uml::AggregationKind::NONE);
 	uML_Trigger_port->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Trigger_port->setAssociation(get_UML_A_port_trigger());
+	uML_Trigger_port->setOpposite(get_UML_A_port_trigger_trigger());
 	
 	
 
@@ -35493,6 +36097,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Type_package->setAggregation(uml::AggregationKind::NONE);
 	uML_Type_package->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Type_package->setAssociation(get_UML_A_ownedType_package());
+	uML_Type_package->setOpposite(get_UML_Package_ownedType());
 	
 	
 
@@ -35722,6 +36327,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TypedElement_type->setAggregation(uml::AggregationKind::NONE);
 	uML_TypedElement_type->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_TypedElement_type->setAssociation(get_UML_A_type_typedElement());
+	uML_TypedElement_type->setOpposite(get_UML_A_type_typedElement_typedElement());
 	
 	
 
@@ -35744,6 +36350,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UnmarshallAction_object->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_UnmarshallAction_object->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_UnmarshallAction_object->setAssociation(get_UML_A_object_unmarshallAction());
+	uML_UnmarshallAction_object->setOpposite(get_UML_A_object_unmarshallAction_unmarshallAction());
 	
 	
 	//result
@@ -35755,6 +36362,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UnmarshallAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_UnmarshallAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_UnmarshallAction_result->setAssociation(get_UML_A_result_unmarshallAction());
+	uML_UnmarshallAction_result->setOpposite(get_UML_A_result_unmarshallAction_unmarshallAction());
 	
 	
 	//unmarshallType
@@ -35766,6 +36374,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UnmarshallAction_unmarshallType->setAggregation(uml::AggregationKind::NONE);
 	uML_UnmarshallAction_unmarshallType->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_UnmarshallAction_unmarshallType->setAssociation(get_UML_A_unmarshallType_unmarshallAction());
+	uML_UnmarshallAction_unmarshallType->setOpposite(get_UML_A_unmarshallType_unmarshallAction_unmarshallAction());
 	
 	
 
@@ -35797,6 +36406,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_extend->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_UseCase_extend->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_UseCase_extend->setAssociation(get_UML_A_extend_extension());
+	uML_UseCase_extend->setOpposite(get_UML_Extend_extension());
 	
 	
 	//extensionPoint
@@ -35808,6 +36418,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_extensionPoint->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_UseCase_extensionPoint->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_UseCase_extensionPoint->setAssociation(get_UML_A_extensionPoint_useCase());
+	uML_UseCase_extensionPoint->setOpposite(get_UML_ExtensionPoint_useCase());
 	
 	
 	//include
@@ -35819,6 +36430,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_include->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_UseCase_include->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_UseCase_include->setAssociation(get_UML_A_include_includingCase());
+	uML_UseCase_include->setOpposite(get_UML_Include_includingCase());
 	
 	
 	//subject
@@ -35830,6 +36442,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_subject->setAggregation(uml::AggregationKind::NONE);
 	uML_UseCase_subject->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_UseCase_subject->setAssociation(get_UML_A_subject_useCase());
+	uML_UseCase_subject->setOpposite(get_UML_Classifier_useCase());
 	
 	
 
@@ -35865,6 +36478,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValuePin_value->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ValuePin_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ValuePin_value->setAssociation(get_UML_A_value_valuePin());
+	uML_ValuePin_value->setOpposite(get_UML_A_value_valuePin_valuePin());
 	
 	
 
@@ -36017,6 +36631,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecificationAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ValueSpecificationAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ValueSpecificationAction_result->setAssociation(get_UML_A_result_valueSpecificationAction());
+	uML_ValueSpecificationAction_result->setOpposite(get_UML_A_result_valueSpecificationAction_valueSpecificationAction());
 	
 	
 	//value
@@ -36028,6 +36643,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecificationAction_value->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_ValueSpecificationAction_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_ValueSpecificationAction_value->setAssociation(get_UML_A_value_valueSpecificationAction());
+	uML_ValueSpecificationAction_value->setOpposite(get_UML_A_value_valueSpecificationAction_valueSpecificationAction());
 	
 	
 
@@ -36053,6 +36669,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Variable_activityScope->setAggregation(uml::AggregationKind::NONE);
 	uML_Variable_activityScope->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Variable_activityScope->setAssociation(get_UML_A_variable_activityScope());
+	uML_Variable_activityScope->setOpposite(get_UML_Activity_variable());
 	
 	
 	//scope
@@ -36064,6 +36681,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Variable_scope->setAggregation(uml::AggregationKind::NONE);
 	uML_Variable_scope->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Variable_scope->setAssociation(get_UML_A_variable_scope());
+	uML_Variable_scope->setOpposite(get_UML_StructuredActivityNode_variable());
 	
 	
 
@@ -36113,6 +36731,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_VariableAction_variable->setAggregation(uml::AggregationKind::NONE);
 	uML_VariableAction_variable->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_VariableAction_variable->setAssociation(get_UML_A_variable_variableAction());
+	uML_VariableAction_variable->setOpposite(get_UML_A_variable_variableAction_variableAction());
 	
 	
 
@@ -36135,6 +36754,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_container->setAggregation(uml::AggregationKind::NONE);
 	uML_Vertex_container->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Vertex_container->setAssociation(get_UML_A_subvertex_container());
+	uML_Vertex_container->setOpposite(get_UML_Region_subvertex());
 	
 	
 	//incoming
@@ -36148,6 +36768,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_incoming->setAssociation(get_UML_A_incoming_target_vertex());
 	
 	
+	
 	//outgoing
 	uML_Vertex_outgoing->setName("outgoing");
 	uML_Vertex_outgoing->setType(get_UML_Transition());
@@ -36157,6 +36778,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_outgoing->setAggregation(uml::AggregationKind::NONE);
 	uML_Vertex_outgoing->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_Vertex_outgoing->setAssociation(get_UML_A_outgoing_source_vertex());
+	
 	
 	
 
@@ -36281,6 +36903,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_WriteStructuralFeatureAction_result->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_WriteStructuralFeatureAction_result->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_WriteStructuralFeatureAction_result->setAssociation(get_UML_A_result_writeStructuralFeatureAction());
+	uML_WriteStructuralFeatureAction_result->setOpposite(get_UML_A_result_writeStructuralFeatureAction_writeStructuralFeatureAction());
 	
 	
 	//value
@@ -36292,6 +36915,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_WriteStructuralFeatureAction_value->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_WriteStructuralFeatureAction_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_WriteStructuralFeatureAction_value->setAssociation(get_UML_A_value_writeStructuralFeatureAction());
+	uML_WriteStructuralFeatureAction_value->setOpposite(get_UML_A_value_writeStructuralFeatureAction_writeStructuralFeatureAction());
 	
 	
 
@@ -36314,6 +36938,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_WriteVariableAction_value->setAggregation(uml::AggregationKind::COMPOSITE);
 	uML_WriteVariableAction_value->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML_WriteVariableAction_value->setAssociation(get_UML_A_value_writeVariableAction());
+	uML_WriteVariableAction_value->setOpposite(get_UML_A_value_writeVariableAction_writeVariableAction());
 	
 	
 

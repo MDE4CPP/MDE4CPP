@@ -173,6 +173,7 @@ namespace StandardProfile
 			virtual const std::shared_ptr<uml::Property>& get_StandardProfile_Utility_base_Class() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

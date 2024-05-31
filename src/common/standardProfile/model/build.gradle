@@ -3,7 +3,6 @@
 plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
-
 description 'Generate tasks for project: StandardProfile'
 
 task generateStandardProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {

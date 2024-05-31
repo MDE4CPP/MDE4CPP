@@ -36,6 +36,58 @@ SET(SOURCE_FILES
 	impl/FoundationalModelLibraryFactoryImpl.cpp
 	# Contents of FoundationalModelLibrary
 	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors
+	PrimitiveBehaviors/impl/PrimitiveBehaviorsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors
+	PrimitiveBehaviors/impl/PrimitiveBehaviorsFactoryImpl.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors
+	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	
+	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
+	PrimitiveBehaviors/BooleanFunctions/impl/BooleanFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
+	PrimitiveBehaviors/BooleanFunctions/impl/BooleanFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
+	PrimitiveBehaviors/BooleanFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
+	
+	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	
+	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	PrimitiveBehaviors/RealFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	
+	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
+	PrimitiveBehaviors/UnlimitedNaturalFunctions/impl/UnlimitedNaturalFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
+	PrimitiveBehaviors/UnlimitedNaturalFunctions/impl/UnlimitedNaturalFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
+	PrimitiveBehaviors/UnlimitedNaturalFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
+	
+	
+	
 	# Package of FoundationalModelLibrary::Common
 	Common/impl/CommonPackageImpl.cpp
 	# Factory of FoundationalModelLibrary::Common
@@ -58,58 +110,6 @@ SET(SOURCE_FILES
 	BasicInputOutput/impl/StandardOutputChannelImpl.cpp
 	BasicInputOutput/impl/TextInputChannelImpl.cpp
 	BasicInputOutput/impl/TextOutputChannelImpl.cpp
-	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors
-	PrimitiveBehaviors/impl/PrimitiveBehaviorsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors
-	PrimitiveBehaviors/impl/PrimitiveBehaviorsFactoryImpl.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
-	PrimitiveBehaviors/BooleanFunctions/impl/BooleanFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
-	PrimitiveBehaviors/BooleanFunctions/impl/BooleanFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
-	PrimitiveBehaviors/BooleanFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
-	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
-	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
-	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
-	PrimitiveBehaviors/RealFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
-	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
-	PrimitiveBehaviors/UnlimitedNaturalFunctions/impl/UnlimitedNaturalFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
-	PrimitiveBehaviors/UnlimitedNaturalFunctions/impl/UnlimitedNaturalFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
-	PrimitiveBehaviors/UnlimitedNaturalFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
-	
 	
 	
 	

@@ -56,6 +56,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors
 			//getter for the ownedMember
 			
 			
+			
 
 			//getter for subPackages
 			virtual std::shared_ptr<BooleanFunctions::BooleanFunctionsPackage> getBooleanFunctions_Package() const ;
@@ -66,6 +67,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors
 
 		private:
 			//private variables for ownedMember of the metamodel package
+			
 			
 			
 
