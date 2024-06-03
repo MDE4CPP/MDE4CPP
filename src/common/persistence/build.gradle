@@ -147,10 +147,6 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "Persistence"
 	description "compile Persistence"
 
-	// dependency to model 'ecore'
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('compilePluginFramework', true)
-
 	dependsOn 'compileXerces'
 
 	projectFolder = file('.')
@@ -183,7 +179,27 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 	outputs.files(fileTree([rootDir,'application','include','persistence'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','persistence'].join(File.separator))
+	
+	// dependency to 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
 
+	// dependency to 'uml'
+	def uml = getRootProject().getTasksByName('compileUml', true)
+	dependsOn uml
+	inputs.files(uml.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to 'pluginFramwork'
+	def pluginFramwork = getRootProject().getTasksByName('compilePluginFramework', true)
+	dependsOn pluginFramwork
+	inputs.files(pluginFramwork.outputs)
+	
 	mustRunAfter = ["compileXerces"]
 }
 
