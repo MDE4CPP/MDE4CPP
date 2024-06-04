@@ -352,9 +352,6 @@
     </eSubpackages>
     <eSubpackages name="StructuredClassifiers" nsURI="http:///PSCS_Semantics/Semantics/StructuredClassifiers.ecore"
         nsPrefix="PSCS_Semantics.Semantics.StructuredClassifiers">
-      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="doNotGenerate"/>
-      </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="CS_DispatchOperationOfInterfaceStrategy"
           eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -404,10 +401,16 @@
           </eAnnotations>
         </eOperations>
         <eOperations name="read" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/SimpleClassifiers/FeatureValue">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="doNotGenerate"/>
+          </eAnnotations>
           <eParameters name="cs_Object" ordered="false" lowerBound="1" eType="#//Semantics/StructuredClassifiers/CS_Object"/>
           <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
         </eOperations>
         <eOperations name="write" ordered="false" lowerBound="1">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="doNotGenerate"/>
+          </eAnnotations>
           <eParameters name="cs_Object" ordered="false" lowerBound="1" eType="#//Semantics/StructuredClassifiers/CS_Object"/>
           <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
           <eParameters name="values" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
@@ -417,6 +420,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CS_Object" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Object">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/CS_RequestPropagationStrategy.hpp&quot;&#xA;#include &quot;PSCS/Semantics/CommonBehavior/CS_CallEventExecution.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/CS_StructuralFeatureOfInterfaceAccessStrategy.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/CS_LinkKind.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/ConnectorKind.hpp&quot;&#xA;#include &quot;uml/InterfaceRealization.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/CallOperationActionActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/SendSignalActionActivation.hpp&quot;&#xA;#include &quot;fUML/Semantics/Actions/ActionsFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ChoiceStrategy.hpp&quot;"/>
+          <details key="doNotGenerate" value="Class 'CS_Object' is excluded from generation because it is obsolete.&#xA;CS_Objects are represented by class PSCS::MDE4CPP_Extensions::PSCS_Object in this PSCS implementation.&#xA;This is possible because in MDE4CPP, all C++ classes generated from UML classes can be used directly as their own objects."/>
         </eAnnotations>
         <eOperations name="dispatchIn" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/Execution">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -584,6 +588,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CS_InteractionPoint" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Reference">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp&quot;&#xA;#include &quot;PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;"/>
+          <details key="doNotGenerate" value="Class 'CS_InteractionPoint' is excluded from generation because it is obsolete.&#xA;See class CS_Reference."/>
         </eAnnotations>
         <eOperations name="startBehavior" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -619,6 +624,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CS_Reference" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Reference">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
+          <details key="doNotGenerate" value="Class 'CS_Reference' is excluded from generation because it is obsolete.&#xA;See class fUML::Semantics::StructuredClassifiers::Reference."/>
         </eAnnotations>
         <eOperations name="copy" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -705,6 +711,9 @@
           </eAnnotations>
         </eOperations>
         <eOperations name="select" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Reference">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="doNotGenerate"/>
+          </eAnnotations>
           <eParameters name="potentialTargets" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Reference"/>
           <eParameters name="context" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/Loci/SemanticVisitor"/>
         </eOperations>
@@ -717,6 +726,7 @@
         <eOperations name="select" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Reference">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="&#x9;&#x9;// returns all potential targets in the case where the context is a SendSignalActionActivation&#xA;&#x9;// returns the first potential target in the case where the context is anything else&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets(new Bag&lt;fUML::Semantics::StructuredClassifiers::Reference>());&#xA;&#x9;if(std::dynamic_pointer_cast&lt;fUML::Semantics::Actions::SendSignalActionActivation>(context) != nullptr) {&#xA;&#x9;&#x9;for(unsigned int i = 0; i &lt; potentialTargets->size(); i++) {&#xA;&#x9;&#x9;&#x9;selectedTargets->add(potentialTargets->at(i));&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;else {&#xA;&#x9;&#x9;if(potentialTargets->size() >= 1) {&#xA;&#x9;&#x9;&#x9;selectedTargets->add(potentialTargets->at(0));&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return selectedTargets;"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
           <eParameters name="potentialTargets" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Reference"/>
           <eParameters name="context" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/Loci/SemanticVisitor"/>
@@ -725,6 +735,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CS_Link" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Link">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
+          <details key="doNotGenerate" value="Class 'CS_Link' is excluded from generation because it is obsolete.&#xA;CS_Links are represented by class PSCS::MDE4CPP_Extensions::PSCS_Link in this PSCS implementation."/>
         </eAnnotations>
         <eOperations name="hasValueForAFeature" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -793,9 +804,6 @@
     </eSubpackages>
     <eSubpackages name="CommonBehavior" nsURI="http:///PSCS_Semantics/Semantics/CommonBehavior.ecore"
         nsPrefix="PSCS_Semantics.Semantics.CommonBehavior">
-      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="doNotGenerate"/>
-      </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="CS_CallEventExecution" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/CallEventExecution">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;"/>
@@ -823,39 +831,47 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
         </eAnnotations>
-        <eAnnotations source="TODO"/>
         <eOperations name="getParameterValues" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/ParameterValue">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Return the parametric data of the referenced event occurrence&#xA;return this->getWrappedEventOccurrence()->getParameterValues();"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="&#x9;// If the trigger references ports then to match this latter it is required that &#xA;&#x9;// 1] the interaction point is instance of port referenced by the trigger&#xA;&#x9;// 2] the referenced event occurrence match operation returns true.&#xA;&#x9;// If the trigger does not reference ports then the behavior is the same than for fUML.&#xA;&#xA;&#x9;bool matches = false;&#xA;&#x9;if(trigger->getPort()->size() > 0) {&#xA;&#x9;&#x9;unsigned int i = 1;&#xA;&#x9;&#x9;while((!matches) &amp;&amp; (i &lt;= trigger->getPort()->size())) {&#xA;&#x9;&#x9;&#x9;if(this->getInteractionPoint()->getDefiningPort() == trigger->getPort()->at(i-1)){&#xA;&#x9;&#x9;&#x9;&#x9;matches = true;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;i++;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if(matches)&#x9;{&#xA;&#x9;&#x9;&#x9;matches = this->getWrappedEventOccurrence()->match(trigger);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;else {&#xA;&#x9;&#x9;matches = this->getWrappedEventOccurrence()->match(trigger);&#xA;&#x9;}&#xA;&#x9;return matches;"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
           <eParameters name="trigger" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
         </eOperations>
         <eOperations name="doSend" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="&#x9;// If the specified target is a CS_Reference and the propagation must be done&#xA;&#x9;// to the environment, then the operation sendOut(EventOccurrence, Port) is called&#xA;&#x9;// and make the propagation to continue.&#xA;&#x9;// If the specified target is a CS_Reference but the propagation must be done to&#xA;&#x9;// the internals then the operation sendIn(EventOccurrence, Port) is called.&#xA;&#x9;// In the case were the target is not a CS_EventOccurrence then send(EventOccurence)&#xA;&#x9;// is called.&#xA;&#x9;if(std::dynamic_pointer_cast&lt;PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget()) != nullptr) {&#xA;&#x9;&#x9;if(this->isPropagationInward()) {&#xA;&#x9;&#x9;&#x9;std::dynamic_pointer_cast&lt;PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget())->sendIn(this->getThisCS_EventOccurrencePtr(), this->getOnPort());&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;std::dynamic_pointer_cast&lt;PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget())->sendOut(this->getThisCS_EventOccurrencePtr(), this->getOnPort());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;else {&#xA;&#x9;&#x9;fUML::Semantics::CommonBehavior::EventOccurrenceImpl::doSend();&#xA;&#x9;}"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="sendInTo" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="&#x9;// Propagate the sending of the event occurrence to the internals&#xA;&#x9;this->setOnPort(port);&#xA;&#x9;this->setPropagationInward(true);&#xA;&#x9;this->sendTo(std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Reference>(target));"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
-          <eParameters name="target" ordered="false" lowerBound="1" eType="#//Semantics/StructuredClassifiers/CS_Reference"/>
+          <eParameters name="target" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
           <eParameters name="port" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Port"/>
         </eOperations>
         <eOperations name="sendOutTo" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="&#x9;// Propagate the sending of the event occurrence to the environment&#xA;&#x9;this->setOnPort(port);&#xA;&#x9;this->setPropagationInward(false);&#xA;&#x9;this->sendTo(std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Reference>(target));"/>
+            <details key="doNotGenerate"/>
           </eAnnotations>
-          <eParameters name="target" ordered="false" lowerBound="1" eType="#//Semantics/StructuredClassifiers/CS_Reference"/>
+          <eParameters name="target" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
           <eParameters name="port" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Port"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="interactionPoint" ordered="false"
-            eType="#//Semantics/StructuredClassifiers/CS_InteractionPoint"/>
+            eType="#//Semantics/StructuredClassifiers/CS_InteractionPoint">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="doNotGenerate"/>
+          </eAnnotations>
+        </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="wrappedEventOccurrence"
             ordered="false" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/EventOccurrence"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="propagationInward"
