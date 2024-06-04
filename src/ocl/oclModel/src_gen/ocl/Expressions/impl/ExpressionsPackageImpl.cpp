@@ -4,13 +4,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EEnumLiteral.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
 #include "ocl/Expressions/ExpressionsFactory.hpp"

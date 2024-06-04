@@ -38,11 +38,9 @@
 //Includes from codegen annotation
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/fUMLFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Classification/ClassificationFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 #include "uml/OpaqueBehavior.hpp"
@@ -50,18 +48,8 @@
 //#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
 #include "uml/CentralBufferNode.hpp"
 #include "uml/StructuredActivityNode.hpp"
-//#include "fUML/Semantics/Values/Value.hpp"
-//#include "fUML/Semantics/Values/Evaluation.hpp"
 #include "uml/Element.hpp"
 #include "uml/ValueSpecification.hpp"
-/* #include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
-#include "fUML/Semantics/Values/LiteralStringEvaluation.hpp"
-#include "fUML/Semantics/Values/LiteralNullEvaluation.hpp"
-#include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
-#include "fUML/Semantics/Values/LiteralUnlimitedNaturalEvaluation.hpp"
-#include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
-#include "fUML/Semantics/Values/LiteralRealEvaluation.hpp" 
-#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp" */
 #include "uml/umlPackage.hpp"
 #include "uml/InstanceValue.hpp"
 #include "uml/LiteralBoolean.hpp"
@@ -155,8 +143,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"

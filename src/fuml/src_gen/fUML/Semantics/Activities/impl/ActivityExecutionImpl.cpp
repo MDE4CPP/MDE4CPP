@@ -56,11 +56,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Behavior.hpp"

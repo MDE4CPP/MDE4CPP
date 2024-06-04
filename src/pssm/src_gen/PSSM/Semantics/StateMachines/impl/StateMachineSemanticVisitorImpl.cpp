@@ -64,8 +64,8 @@
 #include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"

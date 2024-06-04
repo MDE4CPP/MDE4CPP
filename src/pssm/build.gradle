@@ -10,9 +10,9 @@ task buildPSSM() {
 	dependsOn 'model:generatePSSM'
 	dependsOn 'src_gen:compilePSSM'
 
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
 tasks.getByPath('src_gen:compilePSSM').mustRunAfter tasks.getByPath('model:generatePSSM')

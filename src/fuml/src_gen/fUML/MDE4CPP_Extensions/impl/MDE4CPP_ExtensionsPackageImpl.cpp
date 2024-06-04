@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
@@ -39,7 +39,7 @@ std::shared_ptr<MDE4CPP_ExtensionsPackage> MDE4CPP_ExtensionsPackage::eInstance(
 //static initialisation
 const std::string MDE4CPP_ExtensionsPackage::eNAME ="MDE4CPP_Extensions";
 const std::string MDE4CPP_ExtensionsPackage::eNS_URI ="";
-const std::string MDE4CPP_ExtensionsPackage::eNS_PREFIX ="fUML_Semantics.Semantics.MDE4CPP_Extensions";
+const std::string MDE4CPP_ExtensionsPackage::eNS_PREFIX ="fUML_Semantics.MDE4CPP_Extensions";
 
 bool MDE4CPP_ExtensionsPackageImpl::isInited = false;
 

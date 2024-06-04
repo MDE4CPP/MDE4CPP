@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
+	class EAttribute;
 	class EEnumLiteral;
 	class EAnnotation;
+	class EClass;
+	class EOperation;
+	class EParameter;
 	class EStringToStringMapEntry;
 	class EGenericType;
-	class EOperation;
-	class EAttribute;
-	class EParameter;
-	class EEnum;
 	class EPackage;
-	class EClass;
+	class EEnum;
 	class EDataType;
 	class EReference;
 }

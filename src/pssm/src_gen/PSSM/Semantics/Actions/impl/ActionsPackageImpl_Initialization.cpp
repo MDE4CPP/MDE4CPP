@@ -5,10 +5,10 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"

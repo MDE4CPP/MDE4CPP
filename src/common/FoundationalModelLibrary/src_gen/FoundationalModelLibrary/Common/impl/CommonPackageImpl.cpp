@@ -268,6 +268,7 @@ void CommonPackageImpl::initializePackageDataTypes()
 	foundationalModelLibrary_Common_Status_code->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
+	
 	foundationalModelLibrary_Common_Status_code->_setID(STATUS_PROPERTY_CODE);
 	
 	//context
@@ -280,6 +281,7 @@ void CommonPackageImpl::initializePackageDataTypes()
 	foundationalModelLibrary_Common_Status_context->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
+	
 	foundationalModelLibrary_Common_Status_context->_setID(STATUS_PROPERTY_CONTEXT);
 	
 	//description
@@ -290,6 +292,7 @@ void CommonPackageImpl::initializePackageDataTypes()
 	foundationalModelLibrary_Common_Status_description->setIsUnique(true);
 	foundationalModelLibrary_Common_Status_description->setAggregation(uml::AggregationKind::NONE);
 	foundationalModelLibrary_Common_Status_description->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	foundationalModelLibrary_Common_Status_description->_setID(STATUS_PROPERTY_DESCRIPTION);

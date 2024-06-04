@@ -398,7 +398,7 @@ const std::shared_ptr<Bag<uml::Classifier>>& [className/]::getTypes() const
 	return types;
 }
 
-void destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
+void [className/]::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
 {
 	[for (compositeProperty : Property | aClass.getAllAttributes()->select(p : Property | p.aggregation = AggregationKind::composite and p.type.isComplex())) before('\tif(isDestroyOwnedObjects)\n\t{') after('\n\t}')]
 		// Recursively destroy object(s) of composite property [compositeProperty.name/]

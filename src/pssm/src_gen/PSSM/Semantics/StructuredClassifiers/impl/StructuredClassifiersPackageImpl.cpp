@@ -5,11 +5,11 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
 
 //metamodel factory
 #include "PSSM/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"

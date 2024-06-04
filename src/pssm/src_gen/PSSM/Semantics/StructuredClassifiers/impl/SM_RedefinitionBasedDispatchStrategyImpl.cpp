@@ -47,8 +47,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
-#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"

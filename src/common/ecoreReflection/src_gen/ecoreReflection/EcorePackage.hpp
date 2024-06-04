@@ -346,6 +346,7 @@ namespace Ecore
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_ETypedElement_upperBound() = 0;  
 			
 			
+			
 
 			//getter for subPackages
 

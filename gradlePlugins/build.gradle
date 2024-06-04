@@ -1,0 +1,26 @@
+task createMDE4CPPCompilePlugin() {
+	group 'base'
+	description 'create gradle plugin to compile MDE4CPP C++ projects'
+	
+	dependsOn 'MDE4CPPCompilePlugin:clean'
+	dependsOn 'MDE4CPPCompilePlugin:jar'
+}
+
+task createMDE4CPPGeneratePlugin() {
+	group 'base'
+	description 'create gradle plugin to generate MDE4CPP related models'
+	dependsOn 'MDE4CPPGeneratePlugin:clean'
+	dependsOn 'MDE4CPPGeneratePlugin:jar'
+}
+
+task publishMDE4CPPPluginsToMavenLocal() {
+	group 'base'
+	description 'publish MDE4CPP gradle Plugins to mavenLocal (see <user>/.m2)'
+	
+	dependsOn 'createMDE4CPPGeneratePlugin'
+	dependsOn 'createMDE4CPPCompilePlugin'
+	dependsOn 'MDE4CPPCompilePlugin:publishToMavenLocal'
+	dependsOn 'MDE4CPPGeneratePlugin:publishToMavenLocal'
+	
+	mustRunAfter = ["createMDE4CPPGeneratePlugin", "createMDE4CPPCompilePlugin"]
+}

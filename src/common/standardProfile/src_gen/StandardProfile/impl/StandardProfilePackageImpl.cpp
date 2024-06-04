@@ -539,6 +539,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Auxiliary_base_Class->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Auxiliary_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Auxiliary_base_Class->setAssociation(get_StandardProfile_Class_Auxiliary());
+	standardProfile_Auxiliary_base_Class->setOpposite(get_ExtensionEnd_extension_Auxiliary_StandardProfile_Auxiliary());
 	
 	standardProfile_Auxiliary_base_Class->_setID(AUXILIARY_PROPERTY_BASE_CLASS);
 	
@@ -552,6 +553,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_BuildComponent_base_Component->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_BuildComponent_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_BuildComponent_base_Component->setAssociation(get_StandardProfile_Component_BuildComponent());
+	standardProfile_BuildComponent_base_Component->setOpposite(get_ExtensionEnd_extension_BuildComponent_StandardProfile_BuildComponent());
 	
 	standardProfile_BuildComponent_base_Component->_setID(BUILDCOMPONENT_PROPERTY_BASE_COMPONENT);
 	
@@ -565,6 +567,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Call_base_Usage->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Call_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Call_base_Usage->setAssociation(get_StandardProfile_Usage_Call());
+	standardProfile_Call_base_Usage->setOpposite(get_ExtensionEnd_extension_Call_StandardProfile_Call());
 	
 	standardProfile_Call_base_Usage->_setID(CALL_PROPERTY_BASE_USAGE);
 	
@@ -578,6 +581,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Create_base_BehavioralFeature->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Create_base_BehavioralFeature->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Create_base_BehavioralFeature->setAssociation(get_StandardProfile_BehavioralFeature_Create());
+	standardProfile_Create_base_BehavioralFeature->setOpposite(get_ExtensionEnd_extension_BehavioralFeature_Create_StandardProfile_Create());
 	
 	standardProfile_Create_base_BehavioralFeature->_setID(CREATE_PROPERTY_BASE_BEHAVIORALFEATURE);
 	standardProfile_Create_base_Usage->setName("base_Usage");
@@ -588,6 +592,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Create_base_Usage->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Create_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Create_base_Usage->setAssociation(get_StandardProfile_Usage_Create());
+	standardProfile_Create_base_Usage->setOpposite(get_ExtensionEnd_extension_Usage_Create_StandardProfile_Create());
 	
 	standardProfile_Create_base_Usage->_setID(CREATE_PROPERTY_BASE_USAGE);
 	
@@ -601,6 +606,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Derive_base_Abstraction->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Derive_base_Abstraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Derive_base_Abstraction->setAssociation(get_StandardProfile_Abstraction_Derive());
+	standardProfile_Derive_base_Abstraction->setOpposite(get_ExtensionEnd_extension_Derive_StandardProfile_Derive());
 	
 	standardProfile_Derive_base_Abstraction->_setID(DERIVE_PROPERTY_BASE_ABSTRACTION);
 	
@@ -614,6 +620,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Destroy_base_BehavioralFeature->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Destroy_base_BehavioralFeature->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Destroy_base_BehavioralFeature->setAssociation(get_StandardProfile_BehavioralFeature_Destroy());
+	standardProfile_Destroy_base_BehavioralFeature->setOpposite(get_ExtensionEnd_extension_Destroy_StandardProfile_Destroy());
 	
 	standardProfile_Destroy_base_BehavioralFeature->_setID(DESTROY_PROPERTY_BASE_BEHAVIORALFEATURE);
 	
@@ -627,6 +634,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Document_base_Artifact->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Document_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Document_base_Artifact->setAssociation(get_StandardProfile_Artifact_Document());
+	standardProfile_Document_base_Artifact->setOpposite(get_ExtensionEnd_extension_Document_StandardProfile_Document());
 	
 	standardProfile_Document_base_Artifact->_setID(DOCUMENT_PROPERTY_BASE_ARTIFACT);
 	
@@ -640,6 +648,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Entity_base_Component->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Entity_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Entity_base_Component->setAssociation(get_StandardProfile_Component_Entity());
+	standardProfile_Entity_base_Component->setOpposite(get_ExtensionEnd_extension_Entity_StandardProfile_Entity());
 	
 	standardProfile_Entity_base_Component->_setID(ENTITY_PROPERTY_BASE_COMPONENT);
 	
@@ -653,6 +662,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Executable_base_Artifact->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Executable_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Executable_base_Artifact->setAssociation(get_StandardProfile_Artifact_Executable());
+	standardProfile_Executable_base_Artifact->setOpposite(get_ExtensionEnd_extension_Executable_StandardProfile_Executable());
 	
 	standardProfile_Executable_base_Artifact->_setID(EXECUTABLE_PROPERTY_BASE_ARTIFACT);
 	
@@ -666,6 +676,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_File_base_Artifact->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_File_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_File_base_Artifact->setAssociation(get_StandardProfile_Artifact_File());
+	standardProfile_File_base_Artifact->setOpposite(get_ExtensionEnd_extension_File_StandardProfile_File());
 	
 	standardProfile_File_base_Artifact->_setID(FILE_PROPERTY_BASE_ARTIFACT);
 	
@@ -679,6 +690,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Focus_base_Class->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Focus_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Focus_base_Class->setAssociation(get_StandardProfile_Class_Focus());
+	standardProfile_Focus_base_Class->setOpposite(get_ExtensionEnd_extension_Focus_StandardProfile_Focus());
 	
 	standardProfile_Focus_base_Class->_setID(FOCUS_PROPERTY_BASE_CLASS);
 	
@@ -692,6 +704,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Framework_base_Package->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Framework_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Framework_base_Package->setAssociation(get_StandardProfile_Package_Framework());
+	standardProfile_Framework_base_Package->setOpposite(get_ExtensionEnd_extension_Framework_StandardProfile_Framework());
 	
 	standardProfile_Framework_base_Package->_setID(FRAMEWORK_PROPERTY_BASE_PACKAGE);
 	
@@ -705,6 +718,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Implement_base_Component->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Implement_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Implement_base_Component->setAssociation(get_StandardProfile_Component_Implement());
+	standardProfile_Implement_base_Component->setOpposite(get_ExtensionEnd_extension_Implement_StandardProfile_Implement());
 	
 	standardProfile_Implement_base_Component->_setID(IMPLEMENT_PROPERTY_BASE_COMPONENT);
 	
@@ -718,6 +732,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_ImplementationClass_base_Class->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_ImplementationClass_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_ImplementationClass_base_Class->setAssociation(get_StandardProfile_Class_ImplementationClass());
+	standardProfile_ImplementationClass_base_Class->setOpposite(get_ExtensionEnd_extension_ImplementationClass_StandardProfile_ImplementationClass());
 	
 	standardProfile_ImplementationClass_base_Class->_setID(IMPLEMENTATIONCLASS_PROPERTY_BASE_CLASS);
 	
@@ -731,6 +746,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Instantiate_base_Usage->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Instantiate_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Instantiate_base_Usage->setAssociation(get_StandardProfile_Usage_Instantiate());
+	standardProfile_Instantiate_base_Usage->setOpposite(get_ExtensionEnd_extension_Instantiate_StandardProfile_Instantiate());
 	
 	standardProfile_Instantiate_base_Usage->_setID(INSTANTIATE_PROPERTY_BASE_USAGE);
 	
@@ -744,6 +760,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Library_base_Artifact->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Library_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Library_base_Artifact->setAssociation(get_StandardProfile_Artifact_Library());
+	standardProfile_Library_base_Artifact->setOpposite(get_ExtensionEnd_extension_Library_StandardProfile_Library());
 	
 	standardProfile_Library_base_Artifact->_setID(LIBRARY_PROPERTY_BASE_ARTIFACT);
 	
@@ -757,6 +774,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Metaclass_base_Class->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Metaclass_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Metaclass_base_Class->setAssociation(get_StandardProfile_Class_Metaclass());
+	standardProfile_Metaclass_base_Class->setOpposite(get_ExtensionEnd_extension_Metaclass_StandardProfile_Metaclass());
 	
 	standardProfile_Metaclass_base_Class->_setID(METACLASS_PROPERTY_BASE_CLASS);
 	
@@ -770,6 +788,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Metamodel_base_Model->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Metamodel_base_Model->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Metamodel_base_Model->setAssociation(get_StandardProfile_Model_Metamodel());
+	standardProfile_Metamodel_base_Model->setOpposite(get_ExtensionEnd_extension_Metamodel_StandardProfile_Metamodel());
 	
 	standardProfile_Metamodel_base_Model->_setID(METAMODEL_PROPERTY_BASE_MODEL);
 	
@@ -783,6 +802,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_ModelLibrary_base_Package->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_ModelLibrary_base_Package->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_ModelLibrary_base_Package->setAssociation(get_StandardProfile_Package_ModelLibrary());
+	standardProfile_ModelLibrary_base_Package->setOpposite(get_ExtensionEnd_extension_ModelLibrary_StandardProfile_ModelLibrary());
 	
 	standardProfile_ModelLibrary_base_Package->_setID(MODELLIBRARY_PROPERTY_BASE_PACKAGE);
 	
@@ -796,6 +816,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Process_base_Component->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Process_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Process_base_Component->setAssociation(get_StandardProfile_Component_Process());
+	standardProfile_Process_base_Component->setOpposite(get_ExtensionEnd_extension_Process_StandardProfile_Process());
 	
 	standardProfile_Process_base_Component->_setID(PROCESS_PROPERTY_BASE_COMPONENT);
 	
@@ -809,6 +830,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Realization_base_Classifier->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Realization_base_Classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Realization_base_Classifier->setAssociation(get_StandardProfile_Classifier_Realization());
+	standardProfile_Realization_base_Classifier->setOpposite(get_ExtensionEnd_extension_Realization_StandardProfile_Realization());
 	
 	standardProfile_Realization_base_Classifier->_setID(REALIZATION_PROPERTY_BASE_CLASSIFIER);
 	
@@ -822,6 +844,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Refine_base_Abstraction->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Refine_base_Abstraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Refine_base_Abstraction->setAssociation(get_StandardProfile_Abstraction_Refine());
+	standardProfile_Refine_base_Abstraction->setOpposite(get_ExtensionEnd_extension_Refine_StandardProfile_Refine());
 	
 	standardProfile_Refine_base_Abstraction->_setID(REFINE_PROPERTY_BASE_ABSTRACTION);
 	
@@ -835,6 +858,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Responsibility_base_Usage->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Responsibility_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Responsibility_base_Usage->setAssociation(get_StandardProfile_Usage_Responsibility());
+	standardProfile_Responsibility_base_Usage->setOpposite(get_ExtensionEnd_extension_Responsibility_StandardProfile_Responsibility());
 	
 	standardProfile_Responsibility_base_Usage->_setID(RESPONSIBILITY_PROPERTY_BASE_USAGE);
 	
@@ -848,6 +872,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Script_base_Artifact->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Script_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Script_base_Artifact->setAssociation(get_StandardProfile_Artifact_Script());
+	standardProfile_Script_base_Artifact->setOpposite(get_ExtensionEnd_extension_Script_StandardProfile_Script());
 	
 	standardProfile_Script_base_Artifact->_setID(SCRIPT_PROPERTY_BASE_ARTIFACT);
 	
@@ -861,6 +886,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Send_base_Usage->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Send_base_Usage->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Send_base_Usage->setAssociation(get_StandardProfile_Usage_Send());
+	standardProfile_Send_base_Usage->setOpposite(get_ExtensionEnd_extension_Send_StandardProfile_Send());
 	
 	standardProfile_Send_base_Usage->_setID(SEND_PROPERTY_BASE_USAGE);
 	
@@ -874,6 +900,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Service_base_Component->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Service_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Service_base_Component->setAssociation(get_StandardProfile_Component_Service());
+	standardProfile_Service_base_Component->setOpposite(get_ExtensionEnd_extension_Service_StandardProfile_Service());
 	
 	standardProfile_Service_base_Component->_setID(SERVICE_PROPERTY_BASE_COMPONENT);
 	
@@ -887,6 +914,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Source_base_Artifact->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Source_base_Artifact->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Source_base_Artifact->setAssociation(get_StandardProfile_Artifact_Source());
+	standardProfile_Source_base_Artifact->setOpposite(get_ExtensionEnd_extension_Source_StandardProfile_Source());
 	
 	standardProfile_Source_base_Artifact->_setID(SOURCE_PROPERTY_BASE_ARTIFACT);
 	
@@ -900,6 +928,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Specification_base_Classifier->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Specification_base_Classifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Specification_base_Classifier->setAssociation(get_StandardProfile_Classifier_Specification());
+	standardProfile_Specification_base_Classifier->setOpposite(get_ExtensionEnd_extension_Specification_StandardProfile_Specification());
 	
 	standardProfile_Specification_base_Classifier->_setID(SPECIFICATION_PROPERTY_BASE_CLASSIFIER);
 	
@@ -913,6 +942,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Subsystem_base_Component->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Subsystem_base_Component->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Subsystem_base_Component->setAssociation(get_StandardProfile_Component_Subsystem());
+	standardProfile_Subsystem_base_Component->setOpposite(get_ExtensionEnd_extension_Subsystem_StandardProfile_Subsystem());
 	
 	standardProfile_Subsystem_base_Component->_setID(SUBSYSTEM_PROPERTY_BASE_COMPONENT);
 	
@@ -926,6 +956,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_SystemModel_base_Model->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_SystemModel_base_Model->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_SystemModel_base_Model->setAssociation(get_StandardProfile_Model_SystemModel());
+	standardProfile_SystemModel_base_Model->setOpposite(get_ExtensionEnd_extension_SystemModel_StandardProfile_SystemModel());
 	
 	standardProfile_SystemModel_base_Model->_setID(SYSTEMMODEL_PROPERTY_BASE_MODEL);
 	
@@ -939,6 +970,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Trace_base_Abstraction->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Trace_base_Abstraction->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Trace_base_Abstraction->setAssociation(get_StandardProfile_Abstraction_Trace());
+	standardProfile_Trace_base_Abstraction->setOpposite(get_ExtensionEnd_extension_Trace_StandardProfile_Trace());
 	
 	standardProfile_Trace_base_Abstraction->_setID(TRACE_PROPERTY_BASE_ABSTRACTION);
 	
@@ -952,6 +984,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Type_base_Class->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Type_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Type_base_Class->setAssociation(get_StandardProfile_Class_Type());
+	standardProfile_Type_base_Class->setOpposite(get_ExtensionEnd_extension_Type_StandardProfile_Type());
 	
 	standardProfile_Type_base_Class->_setID(TYPE_PROPERTY_BASE_CLASS);
 	
@@ -965,6 +998,7 @@ void StandardProfilePackageImpl::initializePackageStereotypes()
 	standardProfile_Utility_base_Class->setAggregation(uml::AggregationKind::NONE);
 	standardProfile_Utility_base_Class->setVisibility(uml::VisibilityKind::PUBLIC);
 	standardProfile_Utility_base_Class->setAssociation(get_StandardProfile_Class_Utility());
+	standardProfile_Utility_base_Class->setOpposite(get_ExtensionEnd_extension_Utility_StandardProfile_Utility());
 	
 	standardProfile_Utility_base_Class->_setID(UTILITY_PROPERTY_BASE_CLASS);
 	

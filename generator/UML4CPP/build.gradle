@@ -35,7 +35,8 @@ task checkDependencies {
 	
 	[	
 		'com.google.guava_*.jar',
-		'javax.inject_*.jar',
+		'jakarta.inject.jakarta.inject-api_*.jar',
+		'jakarta.annotation-api_*.jar',
 		'lpg.runtime.java_*.jar',
 		'org.eclipse.acceleo.common_*.jar',
 		'org.eclipse.acceleo.engine_*.jar',

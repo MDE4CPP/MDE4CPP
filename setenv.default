@@ -63,3 +63,8 @@ export CLASSPATH=$MDE4CPP_ECLIPSE_HOME/plugins
 
 # compiler version, only necessary for include path generation for Eclipse Project file
 #export COMPILER_VERSION=
+
+cd ./gradlePlugins
+gradlew publishMDE4CPPPluginsToMavenLocal
+
+cd %MDE4CPP_HOME%

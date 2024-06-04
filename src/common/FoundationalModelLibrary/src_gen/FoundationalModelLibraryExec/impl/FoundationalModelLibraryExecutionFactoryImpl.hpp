@@ -23,8 +23,8 @@ namespace FoundationalModelLibrary
 		private:    
 			FoundationalModelLibraryExecutionFactoryImpl& operator=(FoundationalModelLibraryExecutionFactoryImpl const&) = delete;
 			//Methods to create ActivityExecution Prototypes
-			void createFoundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype();
 			void createFoundationalModelLibrary_BasicInputOutput_ReadLineExecutionPrototype();
+			void createFoundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype();
 
 		public:
 			FoundationalModelLibraryExecutionFactoryImpl();
@@ -37,8 +37,8 @@ namespace FoundationalModelLibrary
 	
 		private:
 			//ActivityExecution Prototypes
-			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_foundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype;
 			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_foundationalModelLibrary_BasicInputOutput_ReadLineExecutionPrototype;
+			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_foundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype;
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_EXECUTIONFACTORYIMPL_HPP */

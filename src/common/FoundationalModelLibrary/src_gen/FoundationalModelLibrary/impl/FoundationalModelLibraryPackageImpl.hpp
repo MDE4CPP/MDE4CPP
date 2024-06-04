@@ -48,6 +48,7 @@ namespace FoundationalModelLibrary
 			//getter for the ownedMember
 			
 			
+			
 
 			//getter for subPackages
 			virtual std::shared_ptr<BasicInputOutput::BasicInputOutputPackage> getBasicInputOutput_Package() const ;
@@ -56,6 +57,7 @@ namespace FoundationalModelLibrary
 
 		private:
 			//private variables for ownedMember of the metamodel package
+			
 			
 			
 

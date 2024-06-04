@@ -25,14 +25,14 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunction
 
 namespace FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
 {
-	bool lessOrEqual(const int x, const int y);
-	int ToInteger(const int x);
 	int ToUnlimitedNatural(const std::string x);
-	bool lessThan(const int x, const int y);
-	std::string ToString(const int x);
+	bool lessOrEqual(const int x, const int y);
 	bool greaterOrEqual(const int x, const int y);
-	int Max(const int x, const int y);
 	int Min(const int x, const int y);
+	std::string ToString(const int x);
+	int Max(const int x, const int y);
+	bool lessThan(const int x, const int y);
+	int ToInteger(const int x);
 	bool greaterThan(const int x, const int y);
 }
 

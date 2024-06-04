@@ -1,4 +1,6 @@
-import tui.sse.mde4cpp.MDE4CPPGenerate
+plugins{
+	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
+}
 
 task generateModel(type: tui.sse.mde4cpp.MDE4CPPGenerate){
 	group 'MDE4CPP'

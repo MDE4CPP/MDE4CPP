@@ -4,9 +4,9 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"

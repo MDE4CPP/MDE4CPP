@@ -14,13 +14,13 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EDataType;
-	class EClass;
-	class EReference;
-	class EOperation;
 	class EAnnotation;
+	class EClass;
+	class EOperation;
+	class EStringToStringMapEntry;
 	class EGenericType;
+	class EDataType;
+	class EReference;
 }
 
 namespace PSCS::MDE4CPP_Extensions 

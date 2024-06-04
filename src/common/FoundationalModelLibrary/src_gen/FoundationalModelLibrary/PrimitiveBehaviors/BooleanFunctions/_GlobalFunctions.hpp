@@ -27,11 +27,11 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 {
 	bool Not(const bool x);
 	bool Or(const bool x, const bool y);
-	bool Xor(const bool x, const bool y);
-	bool Implies(const bool x, const bool y);
 	bool And(const bool x, const bool y);
-	bool ToBoolean(const std::string x);
+	bool Implies(const bool x, const bool y);
 	std::string ToString(const bool x);
+	bool Xor(const bool x, const bool y);
+	bool ToBoolean(const std::string x);
 }
 
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_BOOLEANFUNCTIONS__GLOBALFUNCTIONS_HPP */

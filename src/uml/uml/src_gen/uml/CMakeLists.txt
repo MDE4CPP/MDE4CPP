@@ -307,32 +307,32 @@ endif(APPLE)
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		
 	ENDIF()
 ENDIF()
@@ -345,13 +345,13 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${ECORE_DEBUG}
 		debug ${TYPES_DEBUG}
+		debug ${ECORE_DEBUG}
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${ECORE_RELEASE}
 		optimized ${TYPES_RELEASE}
+		optimized ${ECORE_RELEASE}
 	)
 ENDIF()
 

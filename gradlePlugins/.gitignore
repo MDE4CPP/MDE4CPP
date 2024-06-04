@@ -1,0 +1,4 @@
+.cmake
+.gradle/
+build/
+bin/

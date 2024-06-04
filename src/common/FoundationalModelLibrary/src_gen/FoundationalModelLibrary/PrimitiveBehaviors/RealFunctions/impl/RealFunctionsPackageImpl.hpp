@@ -96,6 +96,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y();  
 			
 			
+			
 
 			//getter for subPackages
 
@@ -167,6 +168,7 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			std::shared_ptr<uml::Parameter> foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result = nullptr;
 			std::shared_ptr<uml::Parameter> foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x = nullptr;
 			std::shared_ptr<uml::Parameter> foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y = nullptr;
+			
 			
 			
 

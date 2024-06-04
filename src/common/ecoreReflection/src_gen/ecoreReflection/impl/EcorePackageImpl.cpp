@@ -1494,6 +1494,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_contents->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EAnnotation_contents->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EAnnotation_contents->setAssociation(get_A_Ecore_EObject_contents_eAnnotation());
+	ecore_EAnnotation_contents->setOpposite(get_A_Ecore_EObject_contents_eAnnotation_eAnnotation());
 	
 	
 	//details
@@ -1505,6 +1506,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_details->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EAnnotation_details->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EAnnotation_details->setAssociation(get_A_Ecore_EStringToStringMapEntry_details_eAnnotation());
+	ecore_EAnnotation_details->setOpposite(get_A_Ecore_EStringToStringMapEntry_details_eAnnotation_eAnnotation());
 	
 	
 	//eModelElement
@@ -1516,6 +1518,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_eModelElement->setAggregation(uml::AggregationKind::NONE);
 	ecore_EAnnotation_eModelElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EAnnotation_eModelElement->setAssociation(get_A_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement());
+	ecore_EAnnotation_eModelElement->setOpposite(get_Ecore_EModelElement_eAnnotations());
 	
 	
 	//references
@@ -1527,6 +1530,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_references->setAggregation(uml::AggregationKind::NONE);
 	ecore_EAnnotation_references->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EAnnotation_references->setAssociation(get_A_Ecore_EObject_references_eAnnotation());
+	ecore_EAnnotation_references->setOpposite(get_A_Ecore_EObject_references_eAnnotation_eAnnotation());
 	
 	
 	//source
@@ -1537,6 +1541,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_source->setIsUnique(true);
 	ecore_EAnnotation_source->setAggregation(uml::AggregationKind::NONE);
 	ecore_EAnnotation_source->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -1560,6 +1565,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAttribute_eAttributeType->setAggregation(uml::AggregationKind::NONE);
 	ecore_EAttribute_eAttributeType->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EAttribute_eAttributeType->setAssociation(get_A_Ecore_EDataType_eAttributeType_eAttribute());
+	ecore_EAttribute_eAttributeType->setOpposite(get_A_Ecore_EDataType_eAttributeType_eAttribute_eAttribute());
 	
 	
 	//id
@@ -1570,6 +1576,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAttribute_id->setIsUnique(true);
 	ecore_EAttribute_id->setAggregation(uml::AggregationKind::NONE);
 	ecore_EAttribute_id->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -1595,6 +1602,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//eAllAttributes
 	ecore_EClass_eAllAttributes->setName("eAllAttributes");
 	ecore_EClass_eAllAttributes->setType(get_Ecore_EAttribute());
@@ -1604,6 +1612,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllAttributes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllAttributes->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAllAttributes->setAssociation(get_A_Ecore_EAttribute_eAllAttributes_eClass());
+	ecore_EClass_eAllAttributes->setOpposite(get_A_Ecore_EAttribute_eAllAttributes_eClass_eClass());
 	
 	
 	//eAllContainments
@@ -1615,6 +1624,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllContainments->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllContainments->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAllContainments->setAssociation(get_A_Ecore_EReference_eAllContainments_eClass());
+	ecore_EClass_eAllContainments->setOpposite(get_A_Ecore_EReference_eAllContainments_eClass_eClass());
 	
 	
 	//eAllGenericSuperTypes
@@ -1626,6 +1636,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllGenericSuperTypes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllGenericSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAllGenericSuperTypes->setAssociation(get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass());
+	ecore_EClass_eAllGenericSuperTypes->setOpposite(get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass_eClass());
 	
 	
 	//eAllOperations
@@ -1637,6 +1648,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllOperations->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllOperations->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAllOperations->setAssociation(get_A_Ecore_EOperation_eAllOperations_eClass());
+	ecore_EClass_eAllOperations->setOpposite(get_A_Ecore_EOperation_eAllOperations_eClass_eClass());
 	
 	
 	//eAllReferences
@@ -1648,6 +1660,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllReferences->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllReferences->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAllReferences->setAssociation(get_A_Ecore_EReference_eAllReferences_eClass());
+	ecore_EClass_eAllReferences->setOpposite(get_A_Ecore_EReference_eAllReferences_eClass_eClass());
 	
 	
 	//eAllStructuralFeatures
@@ -1659,6 +1672,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllStructuralFeatures->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllStructuralFeatures->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAllStructuralFeatures->setAssociation(get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass());
+	ecore_EClass_eAllStructuralFeatures->setOpposite(get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass_eClass());
 	
 	
 	//eAllSuperTypes
@@ -1670,6 +1684,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllSuperTypes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAllSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAllSuperTypes->setAssociation(get_A_Ecore_EClass_eAllSuperTypes_eClass());
+	ecore_EClass_eAllSuperTypes->setOpposite(get_A_Ecore_EClass_eAllSuperTypes_eClass_eClass());
 	
 	
 	//eAttributes
@@ -1681,6 +1696,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAttributes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eAttributes->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eAttributes->setAssociation(get_A_Ecore_EAttribute_eAttributes_eClass());
+	ecore_EClass_eAttributes->setOpposite(get_A_Ecore_EAttribute_eAttributes_eClass_eClass());
 	
 	
 	//eGenericSuperTypes
@@ -1692,6 +1708,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eGenericSuperTypes->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EClass_eGenericSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eGenericSuperTypes->setAssociation(get_A_Ecore_EGenericType_eGenericSuperTypes_eClass());
+	ecore_EClass_eGenericSuperTypes->setOpposite(get_A_Ecore_EGenericType_eGenericSuperTypes_eClass_eClass());
 	
 	
 	//eIDAttribute
@@ -1703,6 +1720,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eIDAttribute->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eIDAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eIDAttribute->setAssociation(get_A_Ecore_EAttribute_eIDAttribute_eClass());
+	ecore_EClass_eIDAttribute->setOpposite(get_A_Ecore_EAttribute_eIDAttribute_eClass_eClass());
 	
 	
 	//eOperations
@@ -1714,6 +1732,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eOperations->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EClass_eOperations->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eOperations->setAssociation(get_A_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass());
+	ecore_EClass_eOperations->setOpposite(get_Ecore_EOperation_eContainingClass());
 	
 	
 	//eReferences
@@ -1725,6 +1744,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eReferences->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eReferences->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eReferences->setAssociation(get_A_Ecore_EReference_eReferences_eClass());
+	ecore_EClass_eReferences->setOpposite(get_A_Ecore_EReference_eReferences_eClass_eClass());
 	
 	
 	//eStructuralFeatures
@@ -1736,6 +1756,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eStructuralFeatures->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EClass_eStructuralFeatures->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eStructuralFeatures->setAssociation(get_A_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass());
+	ecore_EClass_eStructuralFeatures->setOpposite(get_Ecore_EStructuralFeature_eContainingClass());
 	
 	
 	//eSuperTypes
@@ -1747,6 +1768,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eSuperTypes->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_eSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClass_eSuperTypes->setAssociation(get_A_Ecore_EClass_eSuperTypes_eClass());
+	ecore_EClass_eSuperTypes->setOpposite(get_A_Ecore_EClass_eSuperTypes_eClass_eClass());
 	
 	
 	//interface
@@ -1757,6 +1779,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_interface->setIsUnique(true);
 	ecore_EClass_interface->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClass_interface->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -1903,6 +1926,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//ePackage
 	ecore_EClassifier_ePackage->setName("ePackage");
 	ecore_EClassifier_ePackage->setType(get_Ecore_EPackage());
@@ -1912,6 +1936,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_ePackage->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClassifier_ePackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClassifier_ePackage->setAssociation(get_A_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage());
+	ecore_EClassifier_ePackage->setOpposite(get_Ecore_EPackage_eClassifiers());
 	
 	
 	//eTypeParameters
@@ -1923,6 +1948,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_eTypeParameters->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EClassifier_eTypeParameters->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EClassifier_eTypeParameters->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier());
+	ecore_EClassifier_eTypeParameters->setOpposite(get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier_eClassifier());
 	
 	
 	//instanceClass
@@ -1933,6 +1959,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_instanceClass->setIsUnique(true);
 	ecore_EClassifier_instanceClass->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClassifier_instanceClass->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -1947,6 +1974,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//instanceTypeName
 	ecore_EClassifier_instanceTypeName->setName("instanceTypeName");
 	ecore_EClassifier_instanceTypeName->setType(get_Ecore_EString());
@@ -1955,6 +1983,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_instanceTypeName->setIsUnique(true);
 	ecore_EClassifier_instanceTypeName->setAggregation(uml::AggregationKind::NONE);
 	ecore_EClassifier_instanceTypeName->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -2020,6 +2049,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 
 
     //-------------------------------------------
@@ -2040,6 +2070,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_eLiterals->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EEnum_eLiterals->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EEnum_eLiterals->setAssociation(get_A_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum());
+	ecore_EEnum_eLiterals->setOpposite(get_Ecore_EEnumLiteral_eEnum());
 	
 	
 
@@ -2143,6 +2174,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnumLiteral_eEnum->setAggregation(uml::AggregationKind::NONE);
 	ecore_EEnumLiteral_eEnum->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EEnumLiteral_eEnum->setAssociation(get_A_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum());
+	ecore_EEnumLiteral_eEnum->setOpposite(get_Ecore_EEnum_eLiterals());
 	
 	
 	//instance
@@ -2153,6 +2185,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnumLiteral_instance->setIsUnique(true);
 	ecore_EEnumLiteral_instance->setAggregation(uml::AggregationKind::NONE);
 	ecore_EEnumLiteral_instance->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -2167,6 +2200,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//value
 	ecore_EEnumLiteral_value->setName("value");
 	ecore_EEnumLiteral_value->setType(get_Ecore_EInt());
@@ -2175,6 +2209,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnumLiteral_value->setIsUnique(true);
 	ecore_EEnumLiteral_value->setAggregation(uml::AggregationKind::NONE);
 	ecore_EEnumLiteral_value->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -2198,6 +2233,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_ePackage->setAggregation(uml::AggregationKind::NONE);
 	ecore_EFactory_ePackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EFactory_ePackage->setAssociation(get_A_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance());
+	ecore_EFactory_ePackage->setOpposite(get_Ecore_EPackage_eFactoryInstance());
 	
 	
 
@@ -2329,6 +2365,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eClassifier->setAggregation(uml::AggregationKind::NONE);
 	ecore_EGenericType_eClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EGenericType_eClassifier->setAssociation(get_A_Ecore_EClassifier_eClassifier_eGenericType());
+	ecore_EGenericType_eClassifier->setOpposite(get_A_Ecore_EClassifier_eClassifier_eGenericType_eGenericType());
 	
 	
 	//eLowerBound
@@ -2340,6 +2377,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eLowerBound->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EGenericType_eLowerBound->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EGenericType_eLowerBound->setAssociation(get_A_Ecore_EGenericType_eLowerBound_eGenericType());
+	ecore_EGenericType_eLowerBound->setOpposite(get_A_Ecore_EGenericType_eLowerBound_eGenericType_eGenericType());
 	
 	
 	//eRawType
@@ -2351,6 +2389,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eRawType->setAggregation(uml::AggregationKind::NONE);
 	ecore_EGenericType_eRawType->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EGenericType_eRawType->setAssociation(get_A_Ecore_EClassifier_eRawType_eGenericType());
+	ecore_EGenericType_eRawType->setOpposite(get_A_Ecore_EClassifier_eRawType_eGenericType_eGenericType());
 	
 	
 	//eTypeArguments
@@ -2362,6 +2401,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eTypeArguments->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EGenericType_eTypeArguments->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EGenericType_eTypeArguments->setAssociation(get_A_Ecore_EGenericType_eTypeArguments_eGenericType());
+	ecore_EGenericType_eTypeArguments->setOpposite(get_A_Ecore_EGenericType_eTypeArguments_eGenericType_eGenericType());
 	
 	
 	//eTypeParameter
@@ -2373,6 +2413,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eTypeParameter->setAggregation(uml::AggregationKind::NONE);
 	ecore_EGenericType_eTypeParameter->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EGenericType_eTypeParameter->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType());
+	ecore_EGenericType_eTypeParameter->setOpposite(get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType_eGenericType());
 	
 	
 	//eUpperBound
@@ -2384,6 +2425,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eUpperBound->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EGenericType_eUpperBound->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EGenericType_eUpperBound->setAssociation(get_A_Ecore_EGenericType_eUpperBound_eGenericType());
+	ecore_EGenericType_eUpperBound->setOpposite(get_A_Ecore_EGenericType_eUpperBound_eGenericType_eGenericType());
 	
 	
 
@@ -2406,6 +2448,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EModelElement_eAnnotations->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EModelElement_eAnnotations->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EModelElement_eAnnotations->setAssociation(get_A_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement());
+	ecore_EModelElement_eAnnotations->setOpposite(get_Ecore_EAnnotation_eModelElement());
 	
 	
 
@@ -2454,6 +2497,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ENamedElement_name->setIsUnique(true);
 	ecore_ENamedElement_name->setAggregation(uml::AggregationKind::NONE);
 	ecore_ENamedElement_name->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -2761,6 +2805,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eContainingClass->setAggregation(uml::AggregationKind::NONE);
 	ecore_EOperation_eContainingClass->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EOperation_eContainingClass->setAssociation(get_A_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass());
+	ecore_EOperation_eContainingClass->setOpposite(get_Ecore_EClass_eOperations());
 	
 	
 	//eExceptions
@@ -2772,6 +2817,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eExceptions->setAggregation(uml::AggregationKind::NONE);
 	ecore_EOperation_eExceptions->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EOperation_eExceptions->setAssociation(get_A_Ecore_EClassifier_eExceptions_eOperation());
+	ecore_EOperation_eExceptions->setOpposite(get_A_Ecore_EClassifier_eExceptions_eOperation_eOperation());
 	
 	
 	//eGenericExceptions
@@ -2783,6 +2829,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eGenericExceptions->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EOperation_eGenericExceptions->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EOperation_eGenericExceptions->setAssociation(get_A_Ecore_EGenericType_eGenericExceptions_eOperation());
+	ecore_EOperation_eGenericExceptions->setOpposite(get_A_Ecore_EGenericType_eGenericExceptions_eOperation_eOperation());
 	
 	
 	//eParameters
@@ -2794,6 +2841,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eParameters->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EOperation_eParameters->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EOperation_eParameters->setAssociation(get_A_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation());
+	ecore_EOperation_eParameters->setOpposite(get_Ecore_EParameter_eOperation());
 	
 	
 	//eTypeParameters
@@ -2805,6 +2853,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eTypeParameters->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EOperation_eTypeParameters->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EOperation_eTypeParameters->setAssociation(get_A_Ecore_ETypeParameter_eTypeParameters_eOperation());
+	ecore_EOperation_eTypeParameters->setOpposite(get_A_Ecore_ETypeParameter_eTypeParameters_eOperation_eOperation());
 	
 	
 
@@ -2827,6 +2876,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eClassifiers->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EPackage_eClassifiers->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EPackage_eClassifiers->setAssociation(get_A_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage());
+	ecore_EPackage_eClassifiers->setOpposite(get_Ecore_EClassifier_ePackage());
 	
 	
 	//eFactoryInstance
@@ -2838,6 +2888,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eFactoryInstance->setAggregation(uml::AggregationKind::NONE);
 	ecore_EPackage_eFactoryInstance->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EPackage_eFactoryInstance->setAssociation(get_A_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance());
+	ecore_EPackage_eFactoryInstance->setOpposite(get_Ecore_EFactory_ePackage());
 	
 	
 	//eSubpackages
@@ -2849,6 +2900,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eSubpackages->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_EPackage_eSubpackages->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EPackage_eSubpackages->setAssociation(get_A_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage());
+	ecore_EPackage_eSubpackages->setOpposite(get_Ecore_EPackage_eSuperPackage());
 	
 	
 	//eSuperPackage
@@ -2860,6 +2912,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eSuperPackage->setAggregation(uml::AggregationKind::NONE);
 	ecore_EPackage_eSuperPackage->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EPackage_eSuperPackage->setAssociation(get_A_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage());
+	ecore_EPackage_eSuperPackage->setOpposite(get_Ecore_EPackage_eSubpackages());
 	
 	
 	//nsPrefix
@@ -2873,6 +2926,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//nsURI
 	ecore_EPackage_nsURI->setName("nsURI");
 	ecore_EPackage_nsURI->setType(get_Ecore_EString());
@@ -2881,6 +2935,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_nsURI->setIsUnique(true);
 	ecore_EPackage_nsURI->setAggregation(uml::AggregationKind::NONE);
 	ecore_EPackage_nsURI->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -2931,6 +2986,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EParameter_eOperation->setAggregation(uml::AggregationKind::NONE);
 	ecore_EParameter_eOperation->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EParameter_eOperation->setAssociation(get_A_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation());
+	ecore_EParameter_eOperation->setOpposite(get_Ecore_EOperation_eParameters());
 	
 	
 
@@ -2955,6 +3011,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//containment
 	ecore_EReference_containment->setName("containment");
 	ecore_EReference_containment->setType(get_Ecore_EBoolean());
@@ -2963,6 +3020,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_containment->setIsUnique(true);
 	ecore_EReference_containment->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_containment->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -2975,6 +3033,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eKeys->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_eKeys->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EReference_eKeys->setAssociation(get_A_Ecore_EAttribute_eKeys_eReference());
+	ecore_EReference_eKeys->setOpposite(get_A_Ecore_EAttribute_eKeys_eReference_eReference());
 	
 	
 	//eOpposite
@@ -2986,6 +3045,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eOpposite->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_eOpposite->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EReference_eOpposite->setAssociation(get_A_Ecore_EReference_eOpposite_eReference());
+	ecore_EReference_eOpposite->setOpposite(get_A_Ecore_EReference_eOpposite_eReference_eReference());
 	
 	
 	//eReferenceType
@@ -2997,6 +3057,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eReferenceType->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_eReferenceType->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EReference_eReferenceType->setAssociation(get_A_Ecore_EClass_eReferenceType_eReference());
+	ecore_EReference_eReferenceType->setOpposite(get_A_Ecore_EClass_eReferenceType_eReference_eReference());
 	
 	
 	//resolveProxies
@@ -3007,6 +3068,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_resolveProxies->setIsUnique(true);
 	ecore_EReference_resolveProxies->setAggregation(uml::AggregationKind::NONE);
 	ecore_EReference_resolveProxies->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3029,6 +3091,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//value
 	ecore_EStringToStringMapEntry_value->setName("value");
 	ecore_EStringToStringMapEntry_value->setType(get_Ecore_EString());
@@ -3037,6 +3100,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStringToStringMapEntry_value->setIsUnique(true);
 	ecore_EStringToStringMapEntry_value->setAggregation(uml::AggregationKind::NONE);
 	ecore_EStringToStringMapEntry_value->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3062,6 +3126,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//defaultValue
 	ecore_EStructuralFeature_defaultValue->setName("defaultValue");
 	ecore_EStructuralFeature_defaultValue->setType(get_Ecore_EJavaObject());
@@ -3070,6 +3135,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_defaultValue->setIsUnique(true);
 	ecore_EStructuralFeature_defaultValue->setAggregation(uml::AggregationKind::NONE);
 	ecore_EStructuralFeature_defaultValue->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3084,6 +3150,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//derived
 	ecore_EStructuralFeature_derived->setName("derived");
 	ecore_EStructuralFeature_derived->setType(get_Ecore_EBoolean());
@@ -3092,6 +3159,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_derived->setIsUnique(true);
 	ecore_EStructuralFeature_derived->setAggregation(uml::AggregationKind::NONE);
 	ecore_EStructuralFeature_derived->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3104,6 +3172,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_eContainingClass->setAggregation(uml::AggregationKind::NONE);
 	ecore_EStructuralFeature_eContainingClass->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_EStructuralFeature_eContainingClass->setAssociation(get_A_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass());
+	ecore_EStructuralFeature_eContainingClass->setOpposite(get_Ecore_EClass_eStructuralFeatures());
 	
 	
 	//transient
@@ -3114,6 +3183,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_transient->setIsUnique(true);
 	ecore_EStructuralFeature_transient->setAggregation(uml::AggregationKind::NONE);
 	ecore_EStructuralFeature_transient->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3128,6 +3198,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//volatile
 	ecore_EStructuralFeature_volatile->setName("volatile");
 	ecore_EStructuralFeature_volatile->setType(get_Ecore_EBoolean());
@@ -3136,6 +3207,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_volatile->setIsUnique(true);
 	ecore_EStructuralFeature_volatile->setAggregation(uml::AggregationKind::NONE);
 	ecore_EStructuralFeature_volatile->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3185,6 +3257,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypeParameter_eBounds->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_ETypeParameter_eBounds->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_ETypeParameter_eBounds->setAssociation(get_A_Ecore_EGenericType_eBounds_eTypeParameter());
+	ecore_ETypeParameter_eBounds->setOpposite(get_A_Ecore_EGenericType_eBounds_eTypeParameter_eTypeParameter());
 	
 	
 
@@ -3207,6 +3280,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_eGenericType->setAggregation(uml::AggregationKind::COMPOSITE);
 	ecore_ETypedElement_eGenericType->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_ETypedElement_eGenericType->setAssociation(get_A_Ecore_EGenericType_eGenericType_eTypedElement());
+	ecore_ETypedElement_eGenericType->setOpposite(get_A_Ecore_EGenericType_eGenericType_eTypedElement_eTypedElement());
 	
 	
 	//eType
@@ -3218,6 +3292,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_eType->setAggregation(uml::AggregationKind::NONE);
 	ecore_ETypedElement_eType->setVisibility(uml::VisibilityKind::PUBLIC);
 	ecore_ETypedElement_eType->setAssociation(get_A_Ecore_EClassifier_eType_eTypedElement());
+	ecore_ETypedElement_eType->setOpposite(get_A_Ecore_EClassifier_eType_eTypedElement_eTypedElement());
 	
 	
 	//lowerBound
@@ -3228,6 +3303,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_lowerBound->setIsUnique(true);
 	ecore_ETypedElement_lowerBound->setAggregation(uml::AggregationKind::NONE);
 	ecore_ETypedElement_lowerBound->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3242,6 +3318,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//ordered
 	ecore_ETypedElement_ordered->setName("ordered");
 	ecore_ETypedElement_ordered->setType(get_Ecore_EBoolean());
@@ -3250,6 +3327,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_ordered->setIsUnique(true);
 	ecore_ETypedElement_ordered->setAggregation(uml::AggregationKind::NONE);
 	ecore_ETypedElement_ordered->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	
@@ -3264,6 +3342,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//unique
 	ecore_ETypedElement_unique->setName("unique");
 	ecore_ETypedElement_unique->setType(get_Ecore_EBoolean());
@@ -3275,6 +3354,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+	
 	//upperBound
 	ecore_ETypedElement_upperBound->setName("upperBound");
 	ecore_ETypedElement_upperBound->setType(get_Ecore_EInt());
@@ -3283,6 +3363,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_upperBound->setIsUnique(true);
 	ecore_ETypedElement_upperBound->setAggregation(uml::AggregationKind::NONE);
 	ecore_ETypedElement_upperBound->setVisibility(uml::VisibilityKind::PUBLIC);
+	
 	
 	
 	

@@ -14,13 +14,13 @@
 
 namespace ecore 
 {
-	class EReference;
+	class EAttribute;
 	class EClass;
 	class EOperation;
-	class EDataType;
-	class EAttribute;
-	class EGenericType;
 	class EParameter;
+	class EGenericType;
+	class EDataType;
+	class EReference;
 }
 
 namespace ocl::Evaluations 

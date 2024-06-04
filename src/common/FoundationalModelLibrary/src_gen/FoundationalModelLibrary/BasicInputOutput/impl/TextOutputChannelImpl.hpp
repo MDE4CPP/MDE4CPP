@@ -56,7 +56,8 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			virtual void writeUnlimitedNatural(int value, std::shared_ptr<FoundationalModelLibrary::Common::Status> errorStatus) ;
 
 			// fUML-specific Operations
-			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+			virtual void destroy(bool, bool);
 
 			//*********************************
 			// Attributes Getter Setter

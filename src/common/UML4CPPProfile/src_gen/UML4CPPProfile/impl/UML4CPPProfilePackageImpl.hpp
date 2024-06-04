@@ -72,6 +72,7 @@ namespace UML4CPPProfile
 			virtual const std::shared_ptr<uml::Property>& get_UML4CPPProfile_UML4CPPPackage_packageOnly();  
 			
 			
+			
 
 			//getter for subPackages
 
@@ -119,6 +120,7 @@ namespace UML4CPPProfile
 			std::shared_ptr<uml::LiteralBoolean> uML4CPPProfile_UML4CPPPackage_ignoreNamespace_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_ignoreNamespace = nullptr;
 			std::shared_ptr<uml::Property> uML4CPPProfile_UML4CPPPackage_packageOnly = nullptr;
 			std::shared_ptr<uml::LiteralBoolean> uML4CPPProfile_UML4CPPPackage_packageOnly_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_packageOnly = nullptr;
+			
 			
 			
 

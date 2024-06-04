@@ -1,0 +1,42 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'java'
+    id 'maven-publish'                                                             
+}
+
+repositories {
+	mavenLocal()
+}
+
+group = 'tui.sse.mde4cpp'
+version = '0.6'
+
+// The configuration example below shows the minimum required properties
+// configured to publish your plugin to the plugin portal
+gradlePlugin {
+	website = 'http:///sse.tu-ilmenau.de/mde4cpp'
+	vcsUrl = 'https://github.com/mde4cpp/gradlePlugins'
+	description = 'Gradle plugins developed for MDE4CPP framework. More information about MDE4CPP can be found under https://sse.tu-ilmenau.de/mde4cpp.'
+
+	plugins {
+		mde4cppCompilePlugin {
+			id = 'tui.sse.mde4cpp.MDE4CPPCompile'
+			displayName = 'MDE4CPP Compile Plugin'
+			description = 'Gradle plugin to compile C++ projects of the MDE4CPP framework on Windows systems using cmake and c++ compiler. \n\nRelease notes version 0.3: \n - add support of Linux and MacOS systems\n\nRelease notes version 0.4: \n - rename compile property "make_parallel_jobs" to "workerCount"\n\nRelease notes version 0.5: \n - property analysis improved\n - configure system environment based on Gradle properties\n - add system environment variables to up-to-date check\n\nMore information about MDE4CPP can be found under https://sse.tu-ilmenau.de/mde4cpp. Information about this plugin can be found under https://github.com/MDE4CPP/gradlePlugins.'
+			tags.set(['MDE4CPP'])
+			implementationClass = 'tui.sse.mde4cpp.MDE4CPPCompilePlugin'
+		
+		}
+	}
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['src/resources']
+        }
+    }
+}

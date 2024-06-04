@@ -37,7 +37,6 @@
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
