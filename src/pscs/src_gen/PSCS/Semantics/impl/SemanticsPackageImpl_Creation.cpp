@@ -29,7 +29,11 @@
 //include subpackages 
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
+#include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
+
 #include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
+
+#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
  
 using namespace PSCS::Semantics;
 
@@ -48,7 +52,11 @@ void SemanticsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage
 
 	std::dynamic_pointer_cast<PSCS::Semantics::Actions::ActionsPackageImpl>(getActions_Package())->createPackageContents(getActions_Package());
 
+	std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl>(getCommonBehavior_Package())->createPackageContents(getCommonBehavior_Package());
+
 	std::dynamic_pointer_cast<PSCS::Semantics::Loci::LociPackageImpl>(getLoci_Package())->createPackageContents(getLoci_Package());
+
+	std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl>(getStructuredClassifiers_Package())->createPackageContents(getStructuredClassifiers_Package());
 
 }
 

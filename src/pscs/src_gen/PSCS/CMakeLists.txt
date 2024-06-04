@@ -46,10 +46,18 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/ActionsPackageImpl.cpp
 	Semantics/Actions/impl/ActionsPackageImpl_Creation.cpp
 	Semantics/Actions/impl/ActionsPackageImpl_Initialization.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Creation.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Initialization.cpp
 	Semantics/Loci/impl/LociFactoryImpl.cpp
 	Semantics/Loci/impl/LociPackageImpl.cpp
 	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
 	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Creation.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Initialization.cpp
 	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.cpp
 	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl.cpp
 	MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl_Creation.cpp
@@ -66,13 +74,19 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/CS_CreateLinkActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_CreateObjectActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_DefaultConstructStrategyImpl.cpp
+	Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.cpp
+	Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.cpp
+	Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.cpp
 	Semantics/Loci/impl/CS_ExecutionFactoryImpl.cpp
 	Semantics/Loci/impl/CS_ExecutorImpl.cpp
 	Semantics/Loci/impl/CS_LocusImpl.cpp
+	Semantics/StructuredClassifiers/impl/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl.cpp
 	Semantics/Actions/impl/CS_ReadExtentActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_ReadSelfActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/CS_RequestPropagationStrategyImpl.cpp
 	Semantics/Actions/impl/CS_SendSignalActionActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/CS_StructuralFeatureOfInterfaceAccessStrategyImpl.cpp
 	MDE4CPP_Extensions/impl/PSCS_ObjectImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )

@@ -22,10 +22,18 @@ namespace fUML::Semantics::Activities
 }
 
 
+namespace fUML::Semantics::CommonBehavior
+{
+	class ObjectActivation;
+}
+
+
 namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
+
+
 
 
 

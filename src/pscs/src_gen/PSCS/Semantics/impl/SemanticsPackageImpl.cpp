@@ -28,7 +28,11 @@
 #include "uml/umlPackage.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
+#include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
+
 #include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
+
+#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
 using namespace PSCS::Semantics;
 
@@ -85,9 +89,17 @@ std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> PSCS::Semantics::Seman
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance();
 } 
+std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> PSCS::Semantics::SemanticsPackageImpl::getCommonBehavior_Package() const
+{
+	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
+} 
 std::shared_ptr<PSCS::Semantics::Loci::LociPackage> PSCS::Semantics::SemanticsPackageImpl::getLoci_Package() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance();
+} 
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> PSCS::Semantics::SemanticsPackageImpl::getStructuredClassifiers_Package() const
+{
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 } 
 
 

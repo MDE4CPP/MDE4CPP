@@ -23,7 +23,11 @@
 //depending model packages
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
+#include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
+
 #include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
+
+#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
 #include "PSCS/PSCSPackage.hpp"
 #include "ecore/ecorePackage.hpp"
@@ -55,7 +59,9 @@ void SemanticsPackageImpl::initializePackageContents()
 	initializePackageEDataTypes();
 
 	std::dynamic_pointer_cast<PSCS::Semantics::Actions::ActionsPackageImpl>(getActions_Package())->initializePackageContents();
+	std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl>(getCommonBehavior_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<PSCS::Semantics::Loci::LociPackageImpl>(getLoci_Package())->initializePackageContents();
+	std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl>(getStructuredClassifiers_Package())->initializePackageContents();
 }
 
 

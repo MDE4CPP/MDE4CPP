@@ -35,9 +35,19 @@ namespace PSCS::Semantics
 		class ActionsPackage;
 	}
 
+	namespace CommonBehavior 
+	{
+		class CommonBehaviorPackage;
+	}
+
 	namespace Loci 
 	{
 		class LociPackage;
+	}
+
+	namespace StructuredClassifiers 
+	{
+		class StructuredClassifiersPackage;
 	}
 
 }
@@ -68,7 +78,9 @@ namespace PSCS::Semantics
 			
 
 			virtual std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> getActions_Package() const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const = 0;
 			virtual std::shared_ptr<PSCS::Semantics::Loci::LociPackage> getLoci_Package() const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const = 0;
 			
 
 			//Singleton Getter
