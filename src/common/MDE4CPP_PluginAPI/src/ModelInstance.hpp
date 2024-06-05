@@ -34,29 +34,35 @@ class ModelInstance{
         */
         std::shared_ptr<EObject> lookUpAlias(std::string alias); //allows to retrieve a pointer to the object associated with an aliases
 
-        
+        /**
+         * navigates through modelInstance starting from m_rootObject along specified path to the target Any and return shared pointer to it.
+         * mainly used for accessing StructFeatures
+         * @param path = deque containg names of StructualFeature as strings; If empty returns m_rootObject
+         *  elements must be in the form:   - "StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "authors@9")
+         *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
+         *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
+        */
         std::shared_ptr<Any> getAnyAtPath(std::deque<std::string>& path); 
         
         /**
          * navigates through modelInstance starting from m_rootObject along specified path the an target EObject and return shared pointer to it.
          * mainly used for resolving references
          * @param path = deque containg names of StructualFeature as strings; If empty returns m_rootObject
-         *  elements must be in the form:   - "#StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "#authors@9")
+         *  elements must be in the form:   - "StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "authors@9")
          *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
          *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
+         * 
         */
         std::shared_ptr<EObject> getObjectAtPath(std::deque<std::string>& path); 
 
         /**
-         * navigate to the EObject specified in the path and returns a shared_ptr to it; starts at m_rootObject 
-         * @param path = deque containg names of StructualFeature as strings; If empty returns m_rootObject
-         *  elements must be in the form:   - "#StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "#authors@9")
-         *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
-         *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
+         * allows to get the path to a given EObject in the model from the root_obj as a deque of pathsegments as strings
+         * @param obj pointer to Object whos path shall be returned
+         * @return deque containing names of StructuralFeatures as strings starting at a StructFeature of root
         */
-        std::shared_ptr<Any> getValueOfStructFeatureAtPath(std::deque<std::string>& path);
+        std::deque<std::string> getAttributesAsString(const std::shared_ptr<EObject>& obj);
 
-        void renameModelInstance(std::string new_name);
+        void setModelInstance(std::string new_name);
         std::string getModelInstanceName();
 
     private : 

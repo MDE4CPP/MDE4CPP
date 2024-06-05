@@ -1,5 +1,5 @@
-#ifndef HELPERFUNCTIONS_H
-#define HELPERFUNCTIONS_H
+#ifndef HELPERFUNCTIONS_HPP
+#define HELPERFUNCTIONS_HPP
 
 #include <deque>
 #include <string>
@@ -15,4 +15,4 @@
     void split_string(std::deque<std::string>& buffer, const std::string s, char split_char);
  }
 
-#endif /*HELPERFUNCTIONS_H*/
+#endif /*HELPERFUNCTIONS_HPP*/

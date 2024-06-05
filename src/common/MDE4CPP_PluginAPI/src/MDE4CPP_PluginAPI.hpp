@@ -1,3 +1,6 @@
+#ifndef MDE4CPP_PLUGINAPI_HPP
+#define MDE4CPP_PLUGINAPI_HPP
+
 #include "util/crow_all.h"
 #include "ModelInstance.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -102,3 +105,4 @@ private:
 	std::map<std::string,std::shared_ptr<MDE4CPPPlugin>> m_plugins{}; //map of all plugins currently detected
 
 };
+#endif /*MDE4CPP_PLUGINAPI_HPP*/

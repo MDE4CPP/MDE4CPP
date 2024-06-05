@@ -33,15 +33,15 @@ std::shared_ptr<EObject> ModelInstance::lookUpAlias(std::string alias){
     } 
 }
 
- std::shared_ptr<Any> ModelInstance::getAnyAtPath(std::deque<std::string>& path){
+std::shared_ptr<Any> ModelInstance::getAnyAtPath(std::deque<std::string>& path){
     std::string last_segment = path.back();
     path.pop_back();
     std::shared_ptr<EObject> obj = getObjectAtPath(path);
     std::shared_ptr<Any> ret_obj = getValueOfStructFeatureByName(obj,last_segment);
     return ret_obj;
- }
+}
 
- std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::deque<std::string>& path){
+std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::deque<std::string>& path){
     std::shared_ptr<EObject> current_object = this->m_rootObject;
     
     while(!path.empty()){
@@ -166,4 +166,11 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
     }
 }
 
+std::deque<std::string> ModelInstance::getAttributesAsString(const std::shared_ptr<EObject>& obj){
+    std::shared_ptr<EObject> currentObj = obj;
+    std::string returnString;
+    while(currentObj->eContainer() != nullptr){ //if nullptr -> root_obj
 
+        auto prevStructFeature = currentObj->eContainer();
+    }
+}
