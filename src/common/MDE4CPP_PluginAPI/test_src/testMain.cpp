@@ -144,3 +144,22 @@ TEST_F(ModelInstanceTest, getObjectAtPath_UnknownStrucFeature) {//tests getObjec
     }
     EXPECT_EQ(error, "structuralFeature: pictures not found in LibraryModel!");
 }
+
+TEST_F(ModelInstanceTest, test_ecore_eContainer) {//tests the ecore eContainerFunction
+    auto p0 = m1_->getRootObject();
+    EXPECT_TRUE(p0->eContainer() == nullptr); //root_obj should return nullptr
+
+    std::deque<std::string> dq_path = {"book@1","pictures@0"};//get picture 
+    std::shared_ptr<EObject> p1;
+    std::string error;
+    try
+    {
+        p1 = m1_->getObjectAtPath(dq_path);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
+    EXPECT_FALSE(p1 == nullptr); //eContainer of picture should be set
+}
