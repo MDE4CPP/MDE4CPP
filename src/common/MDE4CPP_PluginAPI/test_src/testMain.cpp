@@ -8,9 +8,22 @@
 
 
 
+#include "helpersFunc.hpp"
+#include <tuple>
+
 /**
  * Testing the HelperFunctions
 */
+
+
+TEST(helperFunctions_Tests, splitObjectClassKey){
+    auto [pluginName, className] = helperFunctions::splitObjectClassKey( "PluginName:ClassName");
+    EXPECT_EQ(pluginName , "PluginName");
+    EXPECT_EQ(className , "ClassName");
+
+    auto [ _ , classNamespaceAndName] = helperFunctions::splitObjectClassKey( "PluginName:ClassNamespace:ClassName");
+    EXPECT_EQ(classNamespaceAndName , "ClassNamespace:ClassName");
+};
 
 
 
