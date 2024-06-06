@@ -25,24 +25,24 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 
 namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 {
-	std::string ToString(const double x);
-	int ToInteger(const double x);
 	double ToReal(const std::string x);
-	double Max(const double x, const double y);
-	int Round(const double x);
-	double Abs(const double x);
-	bool lessOrEqual(const double x, const double y);
-	double plus(const double x, const double y);
 	double minus(const double x, const double y);
-	bool lessThan(const double x, const double y);
-	double Neg(const double x);
-	bool greaterOrEqual(const double x, const double y);
-	int Floor(const double x);
-	double times(const double x, const double y);
-	double Min(const double x, const double y);
 	bool greaterThan(const double x, const double y);
-	double Inv(const double x);
+	bool lessOrEqual(const double x, const double y);
 	double divide(const double x, const double y);
+	bool lessThan(const double x, const double y);
+	double times(const double x, const double y);
+	double Max(const double x, const double y);
+	std::string ToString(const double x);
+	bool greaterOrEqual(const double x, const double y);
+	double plus(const double x, const double y);
+	double Min(const double x, const double y);
+	double Neg(const double x);
+	int Round(const double x);
+	int Floor(const double x);
+	double Abs(const double x);
+	int ToInteger(const double x);
+	double Inv(const double x);
 }
 
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_REALFUNCTIONS__GLOBALFUNCTIONS_HPP */

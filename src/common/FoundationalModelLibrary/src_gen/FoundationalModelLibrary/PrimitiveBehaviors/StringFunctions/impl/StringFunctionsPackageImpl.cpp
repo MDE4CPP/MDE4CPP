@@ -127,17 +127,17 @@ void StringFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Packa
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat);
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat);
 	
+	//Size
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size);
+	
 	//Substring
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions);
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring);
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring);
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring);
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring);
-	
-	//Size
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size);
 	
 }
 
@@ -265,6 +265,25 @@ void StringFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_CONCAT);
 	
 	
+	//Size
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->setName("Size");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE);
+	
+	
 	//Substring
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring->setName("Substring");
 	// parameter x
@@ -296,25 +315,6 @@ void StringFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SUBSTRING);
-	
-	
-	//Size
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->setName("Size");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE);
 	
 	
 }
@@ -353,6 +353,25 @@ void StringFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_CONCAT);
 	
 	
+	//Size
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->setName("Size");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE);
+	
+	
 	//Substring
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring->setName("Substring");
 	// parameter x
@@ -384,25 +403,6 @@ void StringFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SUBSTRING);
-	
-	
-	//Size
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->setName("Size");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size->_setID(STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE);
 	
 	
 }

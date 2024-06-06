@@ -139,12 +139,33 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 
 description 'Build task for project: [packageName/]'
 
+task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment internal task --> no group --> no visualisation in gradle tasks/]
+	commandLine 'cmd', '/c', 'gradlew src_gen:compile[packageName.toUpperFirst()/]Src'
+	[aPackage.generateMustRunAfter()/]
+}
+
+task compile[packageName.toUpperFirst()/]() {
+	group '[packageName/]'
+	description 'compile [packageName/]' 
+
+	def buildFile = file('src_gen/build.gradle')
+
+	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
+		dependsOn 'model:generate[packageName.toUpperFirst()/]'
+		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
+	}
+	if(buildFile.exists()){
+		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
+	} 
+	[aPackage.generateMustRunAfter()/]
+}
+
 task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'build [packageName/]'
 
 	dependsOn 'model:generate[packageName.toUpperFirst()/]'
-	dependsOn 'src_gen:compile[packageName.toUpperFirst()/]'
+	dependsOn 'compile[packageName.toUpperFirst()/]'
 [if(aPackage.prepareApplication())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
@@ -163,7 +184,6 @@ task build[packageName.toUpperFirst()/]() {
 [if hasCreateApiFlag()]
 tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter getRootProject().getTasksByName('deliverBoostLibray',true)
 [/if]
-tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
 [/file]
 
 [comment ------------------------------------------------------------------- /]
@@ -214,7 +234,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: [packageName/]'
 
-task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
@@ -247,6 +267,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	outputs.files(fileTree(['['/]rootDir,'application','include','[packageName/]'[']'/].join(File.separator)))
 	outputs.dir(['['/]rootDir,'application','include','[packageName/]'[']'/].join(File.separator))
 
+	mustRunAfter =  ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]',true) [']'/]	
 	[comment
 	// dependency to 'persistence'
 	//def persistence = getRootProject().getTasksByName('compilePersistence', true)
@@ -295,7 +316,7 @@ task clean {
 			println "deleting: " + dot_cmake.absolutePath
 		}
 		
-		compile[packageName.toUpperFirst()/].outputs.files.each{
+		compile[packageName.toUpperFirst()/]Src.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it
@@ -304,6 +325,27 @@ task clean {
 	}
 }
 [/file]
+[/template]
+
+[template private generateMustRunAfter(aPackage : EPackage) {packageName : String = aPackage.generateNamespacePath();}]
+mustRunAfter =  ['['/]
+	"model:generate[packageName.toUpperFirst()/]" 
+[if(aPackage.prepareApplication())]
+	, "application:compileApplicationFor[packageName.toUpperFirst()/]"
+[/if]
+[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) before ('\n') ? (not(pack.name = aPackage.name))]
+	, getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
+[/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	, getRootProject().getTasksByName('compile[libName.toUpperFirst()/]', true)
+[/if]
+[/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	, getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true)
+[/if]
+[/for] [']'/]
 [/template]
 
 [template private generatePackageAndFactory(aPackage : EPackage) { packageName : String = aPackage.name; }]	

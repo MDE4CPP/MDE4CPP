@@ -30,12 +30,34 @@
 
 description 'Build tasks for project: [packageName/]'
 
+task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment internal task --> no group --> no visualisation in gradle tasks/]
+	commandLine 'cmd', '/c', 'gradlew src_gen:compile[packageName.toUpperFirst()/]Src'
+	[aPackage.generateMustRunAfter()/]
+}
+
+task compile[packageName.toUpperFirst()/]Src() {
+	group '[packageName/]'
+	description 'compile [packageName/]'
+
+	def buildFile = file('src_gen/build.gradle')
+	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
+		dependsOn 'model:generate[packageName.toUpperFirst()/]'
+		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
+	}
+
+	if(buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
+		dependsOn 'model:generate[packageName.toUpperFirst()/]'
+		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
+	}
+	[aPackage.generateMustRunAfter()/]
+}
+
 task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'build [packageName/]'
 
-	dependsOn project.tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
-	dependsOn project.tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]')
+	dependsOn 'model:generate[packageName.toUpperFirst()/]'
+	dependsOn 'compile[packageName.toUpperFirst()/]'
 [if(aPackage.hasMainBehavior())]
 	dependsOn project.tasks.getByPath('application:compileApplicationFor[packageName.toUpperFirst()/]')
 [/if]
@@ -44,7 +66,6 @@ task build[packageName.toUpperFirst()/]() {
 [/for]
 }
 
-tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
 [/file]
 
 [comment ------------------------------------------------------------------- /]
@@ -85,7 +106,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile tasks for project: [packageName/]'
 
-task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
@@ -130,7 +151,8 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	outputs.files(fileTree(['['/]rootDir,'application','include','[execPackageName/]'[']'/].join(File.separator)))
 	outputs.dir(['['/]rootDir,'application','include','[packageName/]'[']'/].join(File.separator))
 	outputs.dir(['['/]rootDir,'application','include','[execPackageName/]'[']'/].join(File.separator))
-	
+
+	mustRunAfter =  ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]',true) [']'/]	
 	[comment
 	// dependency to basic interfaces
 	//   - deliverAbstractDataTypes 
@@ -164,7 +186,7 @@ task clean {
 			println "deleting: " + dot_cmakeExec.absolutePath
 		}
 		
-		compile[packageName.toUpperFirst()/].outputs.files.each{
+		compile[packageName.toUpperFirst()/]Src.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it
@@ -173,6 +195,18 @@ task clean {
 	}
 }
 [/file]
+
+[/template]
+
+[template private generateMustRunAfter(aPackage : Package) {packageName : String = getPackageName();}]
+mustRunAfter =  ['['/]
+	"model:generate[packageName.toUpperFirst()/]" 
+[if(aPackage.hasMainBehavior())]
+	, project.tasks.getByPath('application:compileApplicationFor[packageName.toUpperFirst()/]')
+[/if]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name))) ? (not(packName = aPackage.getPackageName()))]
+	, getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
+[/for] [']'/]
 [/template]
 
 [template private generateRelatedModelNameList(aPackage : Package) post (trim())]
