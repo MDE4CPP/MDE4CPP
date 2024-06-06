@@ -8,7 +8,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: types'
 
-task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileTypesSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'types'
 	description 'compile types'
 
@@ -41,6 +41,7 @@ task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.files(fileTree([rootDir,'application','include','types'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','types'].join(File.separator))
 
+	mustRunAfter =  [getRootProject().getTasksByName('generateTypes',true) ]	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
@@ -60,7 +61,7 @@ task clean {
 			println "deleting: " + dot_cmake.absolutePath
 		}
 		
-		compileTypes.outputs.files.each{
+		compileTypesSrc.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it

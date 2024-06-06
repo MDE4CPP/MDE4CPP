@@ -47,7 +47,8 @@ dependencies {
 		'org.eclipse.core.runtime_*.jar',
 		
 		'org.eclipse.osgi_*.jar',
-		
+		'org.osgi.service.prefs_*.jar',
+				
 		'org.eclipse.uml2.common_*.jar',
 		'org.eclipse.uml2.types_*.jar',
 		'org.eclipse.uml2.uml_*.jar',

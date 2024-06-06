@@ -25,6 +25,8 @@
 
 description 'Models and generated source code collection'
 
+import org.gradle.internal.os.OperatingSystem;
+
 task deliverBasicInterfaces() {
 	group 'Basic interfaces'
 	description 'deliver abstractDataTypes, util, persistence and pluginFramework interfaces'
@@ -39,6 +41,8 @@ task buildEcoreModels() {
 	group 'Source'
 	description 'generate and compile all ecore models'
 	
+	dependsOn 'generateEcoreModels'
+	dependsOn 'compileEcoreModels'
 	dependsOn 'ecore:buildEcore'
 	dependsOn 'uml:types:buildTypes'
 	dependsOn 'uml:uml:buildUml'
@@ -66,21 +70,46 @@ task buildUMLProfiles() {
 	dependsOn 'common:UML4CPPProfile:buildUML4CPPProfile'
 }
 
-
-// Compile all without generating the models
-task compileEcoreModels() {
+task compileEcoreModels(){
 	group 'Source'
 	description 'compile all ecore models'
+
+	// MS Windows
+	def String[] compileTasksList = ['Ecore','Uml', 'Types', 'FUML','PSCS','PSSM'] // OCL see following lines
+
+	compileTasksList.each()		
+	{
+		if ((it == 'Uml') || (it == 'Types'))
+		{
+			def umlFile = file('.' + File.separator + 'uml' + File.separator + it + File.separator + 'src_gen' + File.separator + 'build.gradle')
+			if (!umlFile.exists())
+			{
+				dependsOn 'uml:' + it.toLowerCase() + ':model:generate' + it
+			}
+		}
+		else
+		{
+			def buildFile = file('.' + File.separator + it + File.separator + 'src_gen' + File.separator + 'build.gradle')
+			if (!buildFile.exists())
+			{
+				dependsOn it.toLowerCase() + ':model:generate' + it
+			}
+		}
+	}
 	
-	dependsOn 'deliverBasicInterfaces'
-	
-	dependsOn 'ecore:src_gen:compileEcore'
-	dependsOn 'uml:types:src_gen:compileTypes'
-	dependsOn 'uml:uml:src_gen:compileUml'
-	dependsOn 'fuml:src_gen:compileFUML'
-	dependsOn 'pscs:src_gen:compilePSCS'
-	dependsOn 'pssm:src_gen:compilePSSM'
-	dependsOn 'ocl:oclModel:src_gen:compileOcl'
+	def oclFile = file('.' + File.separator + 'ocl' + File.separator + 'oclModel' + File.separator + 'src_gen' + File.separator + 'build.gradle')
+	if (!oclFile.exists())
+	{
+		dependsOn 'ocl:oclModel:model:generateOcl'
+	}
+
+	dependsOn 'ecore:compileEcore'
+	dependsOn 'uml:types:compileTypes'
+	dependsOn 'uml:uml:compileUml'
+	dependsOn 'fuml:compileFUML'
+	dependsOn 'pscs:compilePSCS'
+	dependsOn 'pssm:compilePSSM'
+	dependsOn 'ocl:oclModel:compileOcl'
 }
 
 // Compile all without generating the models
@@ -88,9 +117,9 @@ task compileReflectionModels() {
 	group 'Source'
 	description 'compile all reflection models'
 	
-	dependsOn 'common:ecoreReflection:src_gen:compileEcoreReflection'
-	dependsOn 'common:primitivetypesReflection:src_gen:compilePrimitivetypesReflection'
-	dependsOn 'common:umlReflection:src_gen:compileUmlReflection'
+	dependsOn 'common:ecoreReflection:compileEcoreReflection'
+	dependsOn 'common:primitivetypesReflection:compilePrimitivetypesReflection'
+	dependsOn 'common:umlReflection:compileUmlReflection'
 	
 	/*dependsOn 'ocl:oclParser:compileOclParser'
 	rootProject.tasks.getByPath(':src:common:umlReflection:src_gen:compileUmlReflection')
@@ -101,8 +130,8 @@ task compileUMLProfiles() {
 	group 'Source'
 	description 'compile all uml profile models'
 	
-	dependsOn 'common:standardProfile:src_gen:compileStandardProfile'
-	dependsOn 'common:UML4CPPProfile:src_gen:compileUML4CPPProfile'
+	dependsOn 'common:standardProfile:compileStandardProfile'
+	dependsOn 'common:UML4CPPProfile:compileUML4CPPProfile'
 }
 
 

@@ -3,13 +3,41 @@
 
 description 'Build task for project: ocl'
 
+task runCommandCompileOcl(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileOclSrc'
+	mustRunAfter =  [
+		"model:generateOcl" 
+	
+		, getRootProject().getTasksByName('compileEcore', true)
+	]
+}
+
+task compileOcl() {
+	group 'ocl'
+	description 'compile ocl' 
+
+	def buildFile = file('src_gen/build.gradle')
+
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generateOcl'
+		dependsOn 'runCommandCompileOcl'
+	}
+	if(buildFile.exists()){
+		dependsOn 'src_gen:compileOclSrc'
+	} 
+	mustRunAfter =  [
+		"model:generateOcl" 
+	
+		, getRootProject().getTasksByName('compileEcore', true)
+	]
+}
+
 task buildOcl() {
 	group 'ocl'
 	description 'build ocl'
 
 	dependsOn 'model:generateOcl'
-	dependsOn 'src_gen:compileOcl'
+	dependsOn 'compileOcl'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
-tasks.getByPath('src_gen:compileOcl').mustRunAfter tasks.getByPath('model:generateOcl')

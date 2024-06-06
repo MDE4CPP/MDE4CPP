@@ -3,15 +3,41 @@
 
 description 'Build tasks for project: primitivetypesReflection'
 
+task runCommandCompilePrimitivetypesReflection(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compilePrimitivetypesReflectionSrc'
+	mustRunAfter =  [
+		"model:generatePrimitivetypesReflection" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
+task compilePrimitivetypesReflection() {
+	group 'primitivetypesReflection'
+	description 'compile primitivetypesReflection'
+
+	def buildFile = file('src_gen/build.gradle')
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generatePrimitivetypesReflection'
+		dependsOn 'runCommandCompilePrimitivetypesReflection'
+	}
+	if(buildFile.exists()){
+		dependsOn 'model:generatePrimitivetypesReflection'
+		dependsOn 'src_gen:compilePrimitivetypesReflectionSrc'
+	}
+	mustRunAfter =  [
+		"model:generatePrimitivetypesReflection" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
 task buildPrimitivetypesReflection() {
 	group 'primitivetypesReflection'
 	description 'build primitivetypesReflection'
 
-	dependsOn project.tasks.getByPath('model:generatePrimitivetypesReflection')
-	dependsOn project.tasks.getByPath('src_gen:compilePrimitivetypesReflection')
-
+	dependsOn 'compilePrimitivetypesReflection'
+	dependsOn 'model:generatePrimitivetypesReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }
-
-tasks.getByPath('src_gen:compilePrimitivetypesReflection').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')

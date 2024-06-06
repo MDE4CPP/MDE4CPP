@@ -3,16 +3,50 @@
 
 description 'Build task for project: PSSM'
 
+task runCommandCompilePSSM(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSMSrc'
+	mustRunAfter =  [
+		"model:generatePSSM" 
+	
+		, getRootProject().getTasksByName('compileFUML', true)
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
+task compilePSSM() {
+	group 'PSSM'
+	description 'compile PSSM' 
+
+	def buildFile = file('src_gen/build.gradle')
+
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generatePSSM'
+		dependsOn 'runCommandCompilePSSM'
+	}
+	if(buildFile.exists()){
+		dependsOn 'src_gen:compilePSSMSrc'
+	} 
+	mustRunAfter =  [
+		"model:generatePSSM" 
+	
+		, getRootProject().getTasksByName('compileFUML', true)
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
 task buildPSSM() {
 	group 'PSSM'
 	description 'build PSSM'
 
 	dependsOn 'model:generatePSSM'
-	dependsOn 'src_gen:compilePSSM'
+	dependsOn 'compilePSSM'
 
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
-tasks.getByPath('src_gen:compilePSSM').mustRunAfter tasks.getByPath('model:generatePSSM')

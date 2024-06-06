@@ -3,15 +3,47 @@
 
 description 'Build task for project: fUML'
 
+task runCommandCompileFUML(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileFUMLSrc'
+	mustRunAfter =  [
+		"model:generateFUML" 
+	
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
+task compileFUML() {
+	group 'fUML'
+	description 'compile fUML' 
+
+	def buildFile = file('src_gen/build.gradle')
+
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generateFUML'
+		dependsOn 'runCommandCompileFUML'
+	}
+	if(buildFile.exists()){
+		dependsOn 'src_gen:compileFUMLSrc'
+	} 
+	mustRunAfter =  [
+		"model:generateFUML" 
+	
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
 task buildFUML() {
 	group 'fUML'
 	description 'build fUML'
 
 	dependsOn 'model:generateFUML'
-	dependsOn 'src_gen:compileFUML'
+	dependsOn 'compileFUML'
 
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
-tasks.getByPath('src_gen:compileFUML').mustRunAfter tasks.getByPath('model:generateFUML')

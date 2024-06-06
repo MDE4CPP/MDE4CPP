@@ -7,7 +7,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile tasks for project: umlReflection'
 
-task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileUmlReflectionSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'umlReflection'
 	description 'compile umlReflection'
 
@@ -39,7 +39,8 @@ task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 	outputs.files(fileTree([rootDir,'application','include','umlReflection'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','umlReflection'].join(File.separator))
-
+	
+	mustRunAfter =  [getRootProject().getTasksByName('generateUmlReflection',true) ]	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 	// dependency to model 'ecore'
@@ -72,7 +73,7 @@ task clean {
 			println "deleting: " + dot_cmake.absolutePath
 		}
 		
-		compileUmlReflection.outputs.files.each{
+		compileUmlReflectionSrc.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it

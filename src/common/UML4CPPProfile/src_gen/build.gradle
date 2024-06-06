@@ -7,7 +7,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile tasks for project: UML4CPPProfile'
 
-task compileUML4CPPProfile(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileUML4CPPProfileSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'UML4CPPProfile'
 	description 'compile UML4CPPProfile'
 
@@ -39,7 +39,8 @@ task compileUML4CPPProfile(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 	outputs.files(fileTree([rootDir,'application','include','UML4CPPProfile'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','UML4CPPProfile'].join(File.separator))
-
+	
+	mustRunAfter =  [getRootProject().getTasksByName('generateUML4CPPProfile',true) ]	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 	// dependency to model 'ecore'
@@ -77,7 +78,7 @@ task clean {
 			println "deleting: " + dot_cmake.absolutePath
 		}
 		
-		compileUML4CPPProfile.outputs.files.each{
+		compileUML4CPPProfileSrc.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it

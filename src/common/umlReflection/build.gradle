@@ -3,17 +3,47 @@
 
 description 'Build tasks for project: umlReflection'
 
+task runCommandCompileUmlReflection(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileUmlReflectionSrc'
+	mustRunAfter =  [
+		"model:generateUmlReflection" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileEcoreReflection', true)
+		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+	]
+}
+
+task compileUmlReflection() {
+	group 'umlReflection'
+	description 'compile umlReflection'
+
+	def buildFile = file('src_gen/build.gradle')
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generateUmlReflection'
+		dependsOn 'runCommandCompileUmlReflection'
+	}
+	if(buildFile.exists()){
+		dependsOn 'model:generateUmlReflection'
+		dependsOn 'src_gen:compileUmlReflectionSrc'
+	}
+	mustRunAfter =  [
+		"model:generateUmlReflection" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileEcoreReflection', true)
+		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+	]
+}
+
 task buildUmlReflection() {
 	group 'umlReflection'
 	description 'build umlReflection'
 
-	dependsOn project.tasks.getByPath('model:generateUmlReflection')
-	dependsOn project.tasks.getByPath('src_gen:compileUmlReflection')
-
+	dependsOn 'compileUmlReflection'
+	dependsOn 'model:generateUmlReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 }
-
-tasks.getByPath('src_gen:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')

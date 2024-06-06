@@ -3,12 +3,38 @@
 
 description 'Build task for project: ecore'
 
+task runCommandCompileEcore(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileEcoreSrc'
+	mustRunAfter =  [
+		"model:generateEcore" 
+	
+	]
+}
+
+task compileEcore() {
+	group 'ecore'
+	description 'compile ecore' 
+
+	def buildFile = file('src_gen/build.gradle')
+
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generateEcore'
+		dependsOn 'runCommandCompileEcore'
+	}
+	if(buildFile.exists()){
+		dependsOn 'src_gen:compileEcoreSrc'
+	} 
+	mustRunAfter =  [
+		"model:generateEcore" 
+	
+	]
+}
+
 task buildEcore() {
 	group 'ecore'
 	description 'build ecore'
 
 	dependsOn 'model:generateEcore'
-	dependsOn 'src_gen:compileEcore'
+	dependsOn 'compileEcore'
 
 }
-tasks.getByPath('src_gen:compileEcore').mustRunAfter tasks.getByPath('model:generateEcore')

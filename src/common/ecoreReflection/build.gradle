@@ -3,15 +3,41 @@
 
 description 'Build tasks for project: ecoreReflection'
 
+task runCommandCompileEcoreReflection(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileEcoreReflectionSrc'
+	mustRunAfter =  [
+		"model:generateEcoreReflection" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
+task compileEcoreReflection() {
+	group 'ecoreReflection'
+	description 'compile ecoreReflection'
+
+	def buildFile = file('src_gen/build.gradle')
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generateEcoreReflection'
+		dependsOn 'runCommandCompileEcoreReflection'
+	}
+	if(buildFile.exists()){
+		dependsOn 'model:generateEcoreReflection'
+		dependsOn 'src_gen:compileEcoreReflectionSrc'
+	}
+	mustRunAfter =  [
+		"model:generateEcoreReflection" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+}
+
 task buildEcoreReflection() {
 	group 'ecoreReflection'
 	description 'build ecoreReflection'
 
-	dependsOn project.tasks.getByPath('model:generateEcoreReflection')
-	dependsOn project.tasks.getByPath('src_gen:compileEcoreReflection')
-
+	dependsOn 'compileEcoreReflection'
+	dependsOn 'model:generateEcoreReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }
-
-tasks.getByPath('src_gen:compileEcoreReflection').mustRunAfter tasks.getByPath('model:generateEcoreReflection')

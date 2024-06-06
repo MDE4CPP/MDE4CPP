@@ -24,7 +24,7 @@
  */
 
 plugins {
-  id "org.barfuin.gradle.taskinfo" version "2.2.0"
+//  id "org.barfuin.gradle.taskinfo" version "2.2.0"
 }
 
 import org.gradle.internal.os.OperatingSystem;
@@ -51,7 +51,7 @@ task compileAll() {
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:compileUMLProfiles'
-	dependsOn 'src:common:FoundationalModelLibrary:src_gen:compileFoundationalModelLibrary'
+	dependsOn 'src:common:FoundationalModelLibrary:compileFoundationalModelLibrarySrc'
 	
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
@@ -66,6 +66,7 @@ task buildAll() {
 	
 	tasks.getByPath('compileAll').mustRunAfter tasks.getByPath('generateAll')
 }
+
 
 task installationInstruction() {
 	group 'MDE4CPP'

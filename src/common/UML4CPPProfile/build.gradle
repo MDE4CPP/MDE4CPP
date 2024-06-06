@@ -3,18 +3,50 @@
 
 description 'Build tasks for project: UML4CPPProfile'
 
+task runCommandCompileUML4CPPProfile(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileUML4CPPProfileSrc'
+	mustRunAfter =  [
+		"model:generateUML4CPPProfile" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileEcoreReflection', true)
+		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+		, getRootProject().getTasksByName('compileUmlReflection', true)
+	]
+}
+
+task compileUML4CPPProfile() {
+	group 'UML4CPPProfile'
+	description 'compile UML4CPPProfile'
+
+	def buildFile = file('src_gen/build.gradle')
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generateUML4CPPProfile'
+		dependsOn 'runCommandCompileUML4CPPProfile'
+	}
+	if(buildFile.exists()){
+		dependsOn 'model:generateUML4CPPProfile'
+		dependsOn 'src_gen:compileUML4CPPProfileSrc'
+	}
+	mustRunAfter =  [
+		"model:generateUML4CPPProfile" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileEcoreReflection', true)
+		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+		, getRootProject().getTasksByName('compileUmlReflection', true)
+	]
+}
+
 task buildUML4CPPProfile() {
 	group 'UML4CPPProfile'
 	description 'build UML4CPPProfile'
 
-	dependsOn project.tasks.getByPath('model:generateUML4CPPProfile')
-	dependsOn project.tasks.getByPath('src_gen:compileUML4CPPProfile')
-
+	dependsOn 'compileUML4CPPProfile'
+	dependsOn 'model:generateUML4CPPProfile'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
-
-tasks.getByPath('src_gen:compileUML4CPPProfile').mustRunAfter tasks.getByPath('model:generateUML4CPPProfile')

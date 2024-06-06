@@ -3,18 +3,50 @@
 
 description 'Build tasks for project: StandardProfile'
 
+task runCommandCompileStandardProfile(type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileStandardProfileSrc'
+	mustRunAfter =  [
+		"model:generateStandardProfile" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileEcoreReflection', true)
+		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+		, getRootProject().getTasksByName('compileUmlReflection', true)
+	]
+}
+
+task compileStandardProfile() {
+	group 'StandardProfile'
+	description 'compile StandardProfile'
+
+	def buildFile = file('src_gen/build.gradle')
+	if(!buildFile.exists()){ 
+		dependsOn 'model:generateStandardProfile'
+		dependsOn 'runCommandCompileStandardProfile'
+	}
+	if(buildFile.exists()){
+		dependsOn 'model:generateStandardProfile'
+		dependsOn 'src_gen:compileStandardProfileSrc'
+	}
+	mustRunAfter =  [
+		"model:generateStandardProfile" 
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileEcoreReflection', true)
+		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+		, getRootProject().getTasksByName('compileUmlReflection', true)
+	]
+}
+
 task buildStandardProfile() {
 	group 'StandardProfile'
 	description 'build StandardProfile'
 
-	dependsOn project.tasks.getByPath('model:generateStandardProfile')
-	dependsOn project.tasks.getByPath('src_gen:compileStandardProfile')
-
+	dependsOn 'compileStandardProfile'
+	dependsOn 'model:generateStandardProfile'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
-
-tasks.getByPath('src_gen:compileStandardProfile').mustRunAfter tasks.getByPath('model:generateStandardProfile')

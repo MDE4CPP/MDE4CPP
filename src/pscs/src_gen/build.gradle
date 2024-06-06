@@ -8,7 +8,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: PSCS'
 
-task compilePSCS(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compilePSCSSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'PSCS'
 	description 'compile PSCS'
 
@@ -41,6 +41,7 @@ task compilePSCS(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.files(fileTree([rootDir,'application','include','PSCS'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','PSCS'].join(File.separator))
 
+	mustRunAfter =  [getRootProject().getTasksByName('generatePSCS',true) ]	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
@@ -75,7 +76,7 @@ task clean {
 			println "deleting: " + dot_cmake.absolutePath
 		}
 		
-		compilePSCS.outputs.files.each{
+		compilePSCSSrc.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it

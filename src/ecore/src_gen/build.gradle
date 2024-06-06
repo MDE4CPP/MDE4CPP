@@ -8,7 +8,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: ecore'
 
-task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileEcoreSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'ecore'
 	description 'compile ecore'
 
@@ -41,6 +41,7 @@ task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.files(fileTree([rootDir,'application','include','ecore'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','ecore'].join(File.separator))
 
+	mustRunAfter =  [getRootProject().getTasksByName('generateEcore',true) ]	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
@@ -55,7 +56,7 @@ task clean {
 			println "deleting: " + dot_cmake.absolutePath
 		}
 		
-		compileEcore.outputs.files.each{
+		compileEcoreSrc.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it

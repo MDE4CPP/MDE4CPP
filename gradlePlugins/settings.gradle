@@ -1,2 +1,4 @@
+rootProject.name = 'MDE4CPPPlugin'
+
 include 'MDE4CPPCompilePlugin', 'MDE4CPPGeneratePlugin'
 

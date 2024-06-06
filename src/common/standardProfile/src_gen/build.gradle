@@ -7,7 +7,7 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile tasks for project: StandardProfile'
 
-task compileStandardProfile(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileStandardProfileSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'StandardProfile'
 	description 'compile StandardProfile'
 
@@ -39,7 +39,8 @@ task compileStandardProfile(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 	outputs.files(fileTree([rootDir,'application','include','StandardProfile'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','StandardProfile'].join(File.separator))
-
+	
+	mustRunAfter =  [getRootProject().getTasksByName('generateStandardProfile',true) ]	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 	// dependency to model 'ecore'
@@ -77,7 +78,7 @@ task clean {
 			println "deleting: " + dot_cmake.absolutePath
 		}
 		
-		compileStandardProfile.outputs.files.each{
+		compileStandardProfileSrc.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it

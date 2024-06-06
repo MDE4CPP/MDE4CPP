@@ -13,9 +13,14 @@ fileTree('.') {
 	include '**/build.gradle'
 	exclude 'build.gradle' // Exclude root build file
 	exclude '**/examples/' // Exclude examples directory
+	exclude '**/gradlePlugins'
 }.collect { 
 	relativePath(it.parent).replace(File.separator, ':') 
 }.each {
 	include(it)
 //  println it
 }
+
+//includeBuild './src/examples/'
+includeBuild './gradlePlugins'
+//includeBuild './generator'
