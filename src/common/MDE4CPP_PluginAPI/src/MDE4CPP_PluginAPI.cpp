@@ -3,19 +3,19 @@
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "abstractDataTypes/Bag.hpp"
+#include "pluginHandler.hpp"
 #include "helpersFunc.hpp"
 
 #include <sstream>
 #include <string>
 
-std::shared_ptr<GenericApi> GenericApi::eInstance(std::shared_ptr<PluginFramework> &pluginFramework) {
-    static std::shared_ptr<GenericApi> instance = std::make_shared<GenericApi>(GenericApi(pluginFramework));
+std::shared_ptr<GenericApi> GenericApi::eInstance() {
+    static std::shared_ptr<GenericApi> instance = std::make_shared<GenericApi>(GenericApi());
     return instance;
 }
 
-GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
-    m_pluginFramework = pluginFramework;
-	mapPlugins(); //makes an inital map of all plugins 
+GenericApi::GenericApi() {
+	m_pluginHandler = pluginHandler::eInstance();
     crow::SimpleApp app;
 
     /**
@@ -55,7 +55,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
         helperFunctions::split_string(segmented_path, path, ':');
     	auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
         
-        //TODO: implement parsing of eObject to JSON 
+        //TODO: implement parsing of eObject to JSON
         
         return crow::response(200, result);
     });
@@ -126,21 +126,42 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
         
         //TODO implement call of operation
 
-        //TODE return return-value of the operation
+        //TODO return return-value of the operation
     });
 
-	//Get name of all plugins found and currently in m_plugins 
+    //TODO better docu
+	/**
+     * Returns list of all plugin names currently in m_plugins 
+     * Signatur : GET /plugins
+    */
 	CROW_ROUTE(app, "/plugins").methods(crow::HTTPMethod::Get)([this](){
 		
        auto list = crow::json::wvalue::list();
-	   for(const std::pair<std::string,std::shared_ptr<MDE4CPPPlugin>>& entry : m_plugins){
-		   list.push_back(crow::json::wvalue(entry.first));
+	   for(std::string entry : m_pluginHandler->getAllPluginNames()){
+		   list.push_back(crow::json::wvalue(entry));
 	   }
 	   crow::json::wvalue result = crow::json::wvalue(list);
 	   return crow::response(200, result);
     });
 
-    //Swagger
+    //TODO better docu
+    /**
+     * Initiates a refresh of the plugin list by scanning the current directory 
+     * Signatur : GET /plugins
+    */
+    CROW_ROUTE(app, "/refreshPlugins").methods(crow::HTTPMethod::Get)([this](){
+		
+        m_pluginHandler->refreshPlugins();
+
+       auto list = crow::json::wvalue::list();
+	   for(std::string entry : m_pluginHandler->getAllPluginNames()){
+		   list.push_back(crow::json::wvalue(entry));
+	   }
+	   crow::json::wvalue result = crow::json::wvalue(list);
+	   return crow::response(200, result);
+    });
+
+    //Swagger specific interfaces
     CROW_ROUTE(app, "/")([](){
         auto page = crow::mustache::load_text("index.html");
         return crow::response(page);
@@ -154,30 +175,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
     app.bindaddr("127.0.0.1").port(8080).multithreaded().run(); //sets address and port  //TODO let user assign adress and port 
 }
 
-/**
- * getter for single MDE4CPPPlugin from m_plugins
-* @name string : name of the plugin (usualy name of model)
-* @return shared_ptr<MDE4CPPPlugin> : nullptr if plugin with name was not found 
-*/
-std::shared_ptr<MDE4CPPPlugin> GenericApi::getPlugin(std::string name){
-	if(m_plugins.find(name) != m_plugins.end()){
-		return m_plugins.find(name)->second; //plugin found
-	}
-	return nullptr; //plugin not found
-}
-
-/*populates m_plugin with shared_ptr to MDE4CPPPlugins found in the current directory 
-*/
-void GenericApi::mapPlugins(){
-	m_plugins.clear(); //clears map before inserting -> can be used for refreshing m_plugins without restarting application
-    std::shared_ptr<Bag<MDE4CPPPlugin>> plugins = m_pluginFramework->getAllPlugins();
-	for(std::shared_ptr<MDE4CPPPlugin>& plugin : *plugins){
-		m_plugins.insert({plugin->eNAME(),plugin});
-		CROW_LOG_INFO << "found plugin " << plugin->eNAME(); //outputs found plugins as INFO msg
-	}
-}
-
-const std::shared_ptr<Any>& setStructuralFeature(const std::shared_ptr<EObject>& start_object, std::string path, const std::shared_ptr<Any>& value){
+/*const std::shared_ptr<Any>& setStructuralFeature(const std::shared_ptr<EObject>& start_object, std::string path, const std::shared_ptr<Any>& value){
 
     if (start_object == nullptr){ //check for nullptr start_object
         CROW_LOG_ERROR << "navigate() called nullptr as start_object!";
@@ -197,4 +195,4 @@ const std::shared_ptr<Any>& setStructuralFeature(const std::shared_ptr<EObject>&
     split_path.pop_back();
     auto obj = navigateToObject(start_object, split_path);
     obj->eSet(obj->eClass()->getEStructuralFeature(strucFeature),value);
-}
+}*/

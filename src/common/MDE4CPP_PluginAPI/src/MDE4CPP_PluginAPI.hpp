@@ -12,6 +12,7 @@
 #include "ecore/EcoreContainerAny.hpp"
 #include "pluginFramework/PluginFramework.hpp"
 #include "ecore/ecorePackage.hpp"
+#include "pluginHandler.hpp"
 #include <deque>
 
 using namespace ecore;
@@ -39,7 +40,7 @@ using namespace ecore;
 
 class GenericApi{
 public:
-    static std::shared_ptr<GenericApi> eInstance(std::shared_ptr<PluginFramework>& pluginFramework);
+    static std::shared_ptr<GenericApi> eInstance();
 
     /**
      * pares an object of the model and returns a json of it
@@ -57,7 +58,7 @@ public:
     std::shared_ptr<ecore::EObject> readValue(const crow::json::rvalue& content);
 
 private:
-    explicit GenericApi(std::shared_ptr<PluginFramework>& pluginFramework);
+    explicit GenericApi();
 
     /**
      * helper function to write the value of a StructuralFeature into a json
@@ -86,10 +87,7 @@ private:
     */
     std::shared_ptr<MDE4CPPPlugin> getPlugin(std::string name);
 
-    /**
-     * populates the m_plugins variable with pointers to all plugins found in the current directory 
-    */
-	void mapPlugins();
+
 
     /**
      * creates a Model Instance from a json
@@ -99,10 +97,10 @@ private:
     */
     std::shared_ptr<ModelInstance> createModelInst(const crow::json::rvalue& content);
     
-    std::shared_ptr<PluginFramework> m_pluginFramework;
+    std::shared_ptr<pluginHandler> m_pluginHandler;
 
     std::map<std::string,std::shared_ptr<ModelInstance>> m_modelInsts{}; //map of all root-artifacts 
-	std::map<std::string,std::shared_ptr<MDE4CPPPlugin>> m_plugins{}; //map of all plugins currently detected
+	
 
 };
 #endif /*MDE4CPP_PLUGINAPI_HPP*/
