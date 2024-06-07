@@ -147,8 +147,10 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "Persistence"
 	description "compile Persistence"
 
-	dependsOn 'compileXerces'
-
+	def xercesBuildFile = file('xerces'+File.separator+'bin')
+	if(!xercesBuildFile.exists()){ 
+		dependsOn 'compileXerces'
+	}
 	projectFolder = file('.')
 
 	inputs.files(fileTree('.') {
@@ -206,19 +208,21 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 task clean {
 	// Extension of gradle built-in task:clean
 	doLast {
-		def xerces_dir = file('xerces')
-		if(xerces_dir.exists()){
-			delete xerces_dir.absolutePath
-			println "deleting: " + xerces_dir.absolutePath
-		}
-		
-		compileXerces.outputs.files.each{
-			if(it.exists()){
-				delete it.absolutePath
-			    println "deleting: " + it
+		if (project.hasProperty('all')) {
+			def xerces_dir = file('xerces')
+			if(xerces_dir.exists()){
+				delete xerces_dir.absolutePath
+				println "deleting: " + xerces_dir.absolutePath
 			}
-  		}
-  		
+			
+			compileXerces.outputs.files.each{
+				if(it.exists()){
+					delete it.absolutePath
+					println "deleting: " + it
+				}
+			}
+		}
+  
 		compilePersistence.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath

@@ -174,7 +174,7 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 [for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
 
 	// dependency to model '[packName/]'
-	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
+	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]Src', true)
 	dependsOn [packName/]
 	inputs.files([packName/].outputs)
 [/for]

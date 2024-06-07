@@ -292,7 +292,7 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 [for (pack : EPackage | aPackage.metaModelLibraries()->sortedBy(name)->reject(doNotGenerateEPackage())) ? (not(pack.name = aPackage.name))]
 
 	// dependency to model '[pack.name/]'
-	def [pack.name/] = getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
+	def [pack.name/] = getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]Src', true)
 	dependsOn [pack.name/]
 	inputs.files([pack.name/].outputs)
 [/for]
@@ -300,7 +300,7 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 [if (not (libName.oclIsUndefined() or libName = ''))]
 
 	// dependency to model '[libName/]'
-	def [libName/] = getRootProject().getTasksByName('compile[libName.toUpperFirst()/]', true)
+	def [libName/] = getRootProject().getTasksByName('compile[libName.toUpperFirst()/]Src', true)
 	dependsOn [libName/]
 	inputs.files([libName/].outputs)
 [/if]

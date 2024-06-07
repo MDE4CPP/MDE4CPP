@@ -61,7 +61,7 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 	}
 
 	// dependency to model '[packageName/]'
-	def [packageName/] = getRootProject().getTasksByName('compile[packageName.toUpperFirst()/]', true)
+	def [packageName/] = getRootProject().getTasksByName('compile[packageName.toUpperFirst()/]Src', true)
 	if (![packageName/].isEmpty()){
 		dependsOn [packageName/]
 		inputs.files([packageName/].outputs)
