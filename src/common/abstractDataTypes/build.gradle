@@ -23,10 +23,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-task deliverAbstractDataTypes(type: Copy) {
-	description 'deliver abstract data types header to %MDE4CPP_HOME%/application/include/abstractDataTypes'
-	group 'abstractDataTypes'
 
+task copyAbstractDataTypes(type: Copy) {
 	from(['src','abstractDataTypes'].join(File.separator)){
 		include "**/*.hpp"
 		exclude "build", ".gradle"
@@ -38,15 +36,52 @@ task deliverAbstractDataTypes(type: Copy) {
 	outputs.dir([rootDir,'application','include','abstractDataTypes'].join(File.separator))
 }
 
+task copyEcoreAbstractDataTypes(type: Copy) {
+	from(['src','ecore'].join(File.separator)){
+		include "**/*.hpp"
+		exclude "build", ".gradle"
+	}
+	
+	into([rootDir,'application','include','ecore'].join(File.separator))
+	
+	inputs.dir(['src','ecore'].join(File.separator))
+	outputs.dir([rootDir,'application','include','ecore'].join(File.separator))
+}
+
+task copyUmlAbstractDataTypes(type: Copy) {
+	from(['src','uml'].join(File.separator)){
+		include "**/*.hpp"
+		exclude "build", ".gradle"
+	}
+	
+	into([rootDir,'application','include','uml'].join(File.separator))
+	
+	inputs.dir(['src','uml'].join(File.separator))
+	outputs.dir([rootDir,'application','include','uml'].join(File.separator))
+}
+
+
+
+task deliverAbstractDataTypes()
+{
+	description 'deliver abstract data types header to %MDE4CPP_HOME%/application/include/abstractDataTypes'
+	group 'abstractDataTypes'
+
+	dependsOn 'copyAbstractDataTypes'
+	dependsOn 'copyEcoreAbstractDataTypes' 
+	dependsOn 'copyUmlAbstractDataTypes' 
+} 
+
 task clean {
 	// Extension of gradle built-in task:clean
 	doLast {
-		deliverAbstractDataTypes.outputs.files.each{
+		copyAbstractDataTypes.outputs.files.each{
 			if(it.exists()){
 				delete it.absolutePath
 			    println "deleting: " + it
 			}
   		}
+  		//do not clean copyEcoreAbstractDataTypes copyUmlAbstractDataTypes task files (already deleted by ecore/uml)
 	}
 }
 
