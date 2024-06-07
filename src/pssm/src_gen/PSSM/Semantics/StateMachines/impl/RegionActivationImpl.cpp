@@ -45,8 +45,8 @@
 
 #include <exception> // used in Persistence
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/InitialPseudostateActivation.hpp"
 #include "uml/NamedElement.hpp"
