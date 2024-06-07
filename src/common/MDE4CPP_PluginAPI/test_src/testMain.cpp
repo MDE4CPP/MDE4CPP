@@ -15,7 +15,7 @@
  * Testing the HelperFunctions
 */
 
-
+//tests splitObjectClassKey function
 TEST(helperFunctions_Tests, splitObjectClassKey){
     auto [pluginName, className] = helperFunctions::splitObjectClassKey( "PluginName:ClassName");
     EXPECT_EQ(pluginName , "PluginName");
@@ -25,6 +25,16 @@ TEST(helperFunctions_Tests, splitObjectClassKey){
     EXPECT_EQ(classNamespaceAndName , "ClassNamespace:ClassName");
 };
 
+//tests splitString function
+TEST(helperFunctions_Tests, splitString){
+    std::string test_string_1 = "segment_0:segment_1:segment_2";
+    std::deque<std::string> segmented_string;
+    helperFunctions::split_string(segmented_string, test_string_1, ':');
+    EXPECT_EQ(segmented_string.at(0), "segment_0");
+    EXPECT_EQ(segmented_string.at(1), "segment_1");
+    EXPECT_EQ(segmented_string.at(2), "segment_2");
+    EXPECT_THROW(segmented_string.at(4), std::out_of_range);
+}
 
 
 #include "libraryModel_ecore/libraryModel_ecorePackage.hpp" //for Test printModel
@@ -45,13 +55,14 @@ class ModelInstanceTest : public testing::Test { //helper class for testing Mode
     std::shared_ptr<ModelInstance> m1_;
 };
 
-
-TEST_F(ModelInstanceTest, printModel) { //tests if SetUp was successfull
+//tests if SetUp was successfull
+TEST_F(ModelInstanceTest, printModel) { 
     auto printLibOp = m1_->getRootObject()->eClass()->getEOperation(libraryModel_ecore::libraryModel_ecorePackage::LIBRARYMODEL_OPERATION_PRINTLIBRARY);
     m1_->getRootObject()->eInvoke(printLibOp, std::make_shared<Bag<Any>>(Bag<Any>()));
 }
 
-TEST_F(ModelInstanceTest, getObjectAtPath_EmptyPath) {//tests getObjectAtPath with empty path
+//tests getObjectAtPath with empty path
+TEST_F(ModelInstanceTest, getObjectAtPath_EmptyPath) {
     auto p1 = m1_->getRootObject();
     std::deque<std::string> dq_path = {};
     EXPECT_TRUE(dq_path.empty());
@@ -67,7 +78,8 @@ TEST_F(ModelInstanceTest, getObjectAtPath_EmptyPath) {//tests getObjectAtPath wi
     EXPECT_EQ(p1.get(), p2.get());
 }
 
-TEST_F(ModelInstanceTest, getObjectAtPath_Author) {//tests getObjectAtPath with path to first first auhor
+//tests getObjectAtPath with path to first first auhor
+TEST_F(ModelInstanceTest, getObjectAtPath_Author) {
     std::deque<std::string> dq_path = {"authors@0"};
     std::shared_ptr<EObject> p1;
     try
@@ -82,7 +94,8 @@ TEST_F(ModelInstanceTest, getObjectAtPath_Author) {//tests getObjectAtPath with 
     EXPECT_EQ(p1_name, "Author");
 }
 
-TEST_F(ModelInstanceTest, getObjectAtPath_Picure) {//tests getObjectAtPath with a longer path path 
+//tests getObjectAtPath with a longer path path 
+TEST_F(ModelInstanceTest, getObjectAtPath_Picure) {
     std::deque<std::string> dq_path = {"book@0","pictures@0"};
     std::shared_ptr<EObject> p1;
     try
@@ -97,7 +110,8 @@ TEST_F(ModelInstanceTest, getObjectAtPath_Picure) {//tests getObjectAtPath with 
     EXPECT_EQ(p1_name, "Picture");
 }
 
-TEST_F(ModelInstanceTest, getObjectAtPath_OutOfBounds) {//tests getObjectAtPath with a path that tries to access a container out of bound 
+//tests getObjectAtPath with a path that tries to access a container out of bound 
+TEST_F(ModelInstanceTest, getObjectAtPath_OutOfBounds) {
     std::deque<std::string> dq_path = {"book@1","pictures@0"};
     std::shared_ptr<EObject> p1;
     std::string error;
@@ -113,7 +127,8 @@ TEST_F(ModelInstanceTest, getObjectAtPath_OutOfBounds) {//tests getObjectAtPath 
     EXPECT_EQ(error, "Bag.hpp: index out of range");
 }
 
-TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {//tests getObjectAtPath with a path that tries to access a container StructFeature of pimitive types
+//tests getObjectAtPath with a path that tries to access a container StructFeature of pimitive types
+TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {
     std::deque<std::string> dq_path = {"book@0","genres@1"};
     std::shared_ptr<Any> p1;
     try
@@ -128,7 +143,8 @@ TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {//tests getObjectAtPath wi
     EXPECT_EQ(*p1_name, "Architecture");
 }
 
-TEST_F(ModelInstanceTest, getObjectAtPath_PicurePage) {//tests getObjectAtPath with a path that tries to access a non-container StructFeature of pimitive type
+//tests getObjectAtPath with a path that tries to access a non-container StructFeature of pimitive type
+TEST_F(ModelInstanceTest, getObjectAtPath_PicurePage) {
     std::deque<std::string> dq_path = {"book@0","pictures@0","pageNumber"};
     std::shared_ptr<Any> p1;
     try
@@ -176,3 +192,4 @@ TEST_F(ModelInstanceTest, test_ecore_eContainer) {//tests the ecore eContainerFu
 
     EXPECT_FALSE(p1 == nullptr); //eContainer of picture should be set
 }
+
