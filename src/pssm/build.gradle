@@ -8,9 +8,9 @@ task runCommandCompilePSSM(type:Exec) {
 	mustRunAfter =  [
 		"model:generatePSSM" 
 	
-		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
@@ -31,9 +31,9 @@ task compilePSSM() {
 	mustRunAfter =  [
 		"model:generatePSSM" 
 	
-		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
@@ -45,8 +45,8 @@ task buildPSSM() {
 	dependsOn 'model:generatePSSM'
 	dependsOn 'compilePSSM'
 
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

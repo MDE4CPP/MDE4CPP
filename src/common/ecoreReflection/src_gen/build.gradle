@@ -44,12 +44,12 @@ task compileEcoreReflectionSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	def ecore = getRootProject().getTasksByName('compileEcoreSrc', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
 
 	// dependency to model 'uml'
-	def uml = getRootProject().getTasksByName('compileUml', true)
+	def uml = getRootProject().getTasksByName('compileUmlSrc', true)
 	dependsOn uml
 	inputs.files(uml.outputs)
 }

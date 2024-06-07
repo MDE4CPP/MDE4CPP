@@ -47,7 +47,7 @@ task compileTypesSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 
 	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	def ecore = getRootProject().getTasksByName('compileEcoreSrc', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
 }
