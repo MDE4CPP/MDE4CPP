@@ -2,9 +2,10 @@
 #include "abstractDataTypes/Bag.hpp"
 
 //public functions
-std::shared_ptr<pluginHandler> pluginHandler::eInstance(){
-    static std::shared_ptr<pluginHandler> instance = std::make_shared<pluginHandler>(new pluginHandler());
-    return instance;
+pluginHandler::pluginHandler()
+{
+    m_pluginFramework = PluginFramework::eInstance();
+    mapPlugins(); //inital map of all plugins currently in the cwd
 }
 
 std::shared_ptr<MDE4CPPPlugin> pluginHandler::getPluginByName(std::string name){
@@ -27,12 +28,6 @@ void pluginHandler::refreshPlugins(){
 }
 
 //private functions
-pluginHandler::pluginHandler()
-{
-    m_pluginFramework = PluginFramework::eInstance();
-    mapPlugins(); //inital map of all plugins currently in the cwd
-}
-
 void pluginHandler::mapPlugins(){
 	m_plugins.clear(); //clears map before inserting -> can be used for refreshing m_plugins without restarting application
     std::shared_ptr<Bag<MDE4CPPPlugin>> plugins = m_pluginFramework->getAllPlugins();

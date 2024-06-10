@@ -18,7 +18,7 @@
 class JSON2Model {
     public:
         //methodes
-        static std::shared_ptr<JSON2Model> eInstance(std::shared_ptr<pluginHandler> pluginHandler);
+        JSON2Model(std::shared_ptr<pluginHandler> pluginHandler);
 
         /**
          * parses the json supplied in content and constructs a Model, all found crossreferences will be noted as tuples in the crossReferenceBuffer-vector
@@ -35,17 +35,10 @@ class JSON2Model {
        
     private:
         //methodes
-        JSON2Model(std::shared_ptr<pluginHandler> pluginHandler);
-
         template <typename T> T convert_to(const crow::json::rvalue& value);
 
         template<typename T> std::shared_ptr<Any> readAttributeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EStructuralFeature>& feature, const crow::json::rvalue& content);
        
-        /**
-         * gets the value of the appropiate key for a sructuralFeature
-        */
-        crow::json::rvalue getValueOfStrucFeature(std::shared_ptr<ecore::EStructuralFeature> structFeature, const crow::json::rvalue& content);
-
         //variables
         std::shared_ptr<pluginHandler> m_pluginHandler;
 

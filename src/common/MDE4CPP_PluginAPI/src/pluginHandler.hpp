@@ -9,11 +9,7 @@
 
 class pluginHandler{
     public:
-
-        /**
-         * Singleton Getter
-        */
-        static std::shared_ptr<pluginHandler> eInstance();
+        pluginHandler();
 
         /**
          * retrieves a pointer to a MDE4CPP-Plugin by its name 
@@ -34,8 +30,6 @@ class pluginHandler{
         void refreshPlugins();
 
     private:
-
-        pluginHandler();
 
         /**
          * populates the m_plugins variable with pointers to all plugins found in the current directory 

@@ -10,10 +10,6 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EcoreContainerAny.hpp"
 
-std::shared_ptr<JSON2Model> JSON2Model::eInstance(std::shared_ptr<pluginHandler> pluginHandler){
-    static std::shared_ptr<JSON2Model> instance = std::make_shared<JSON2Model>(JSON2Model(pluginHandler));
-}
-
 JSON2Model::JSON2Model(std::shared_ptr<pluginHandler> pluginHandler){
     m_pluginHandler = pluginHandler;
 }
