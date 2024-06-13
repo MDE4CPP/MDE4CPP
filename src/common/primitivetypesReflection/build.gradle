@@ -6,10 +6,30 @@ description 'Build tasks for project: primitivetypesReflection'
 task runCommandCompilePrimitivetypesReflection(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compilePrimitivetypesReflectionSrc'
 	mustRunAfter =  [
-		"model:generatePrimitivetypesReflection" 
+		"generatePrimitivetypesReflection" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
+}
+
+task runCommandGeneratePrimitivetypesReflection(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'primitivetypesReflection.uml')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generatePrimitivetypesReflection() {
+	group 'primitivetypesReflection'	
+	description 'generate C++ code of primitivetypesReflection.uml model primitivetypesReflection' 
+ 
+	def buildFile = file('model/build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGeneratePrimitivetypesReflection'
+	}
+	else
+	{
+		dependsOn 'model:generatePrimitivetypesReflectionModel'
+	}
 }
 
 task compilePrimitivetypesReflection() {
@@ -18,15 +38,16 @@ task compilePrimitivetypesReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generatePrimitivetypesReflection'
+		dependsOn 'generatePrimitivetypesReflection'
 		dependsOn 'runCommandCompilePrimitivetypesReflection'
 	}
-	if(buildFile.exists()){
-		dependsOn 'model:generatePrimitivetypesReflection'
+	else
+	{
+		dependsOn 'generatePrimitivetypesReflection'
 		dependsOn 'src_gen:compilePrimitivetypesReflectionSrc'
 	}
 	mustRunAfter =  [
-		"model:generatePrimitivetypesReflection" 
+		"generatePrimitivetypesReflection" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
@@ -36,8 +57,8 @@ task buildPrimitivetypesReflection() {
 	group 'primitivetypesReflection'
 	description 'build primitivetypesReflection'
 
+	dependsOn 'generatePrimitivetypesReflection'
 	dependsOn 'compilePrimitivetypesReflection'
-	dependsOn 'model:generatePrimitivetypesReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

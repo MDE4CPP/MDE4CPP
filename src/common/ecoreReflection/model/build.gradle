@@ -5,8 +5,7 @@ plugins{
 }
 description 'Generate tasks for project: ecoreReflection'
 
-task generateEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'ecoreReflection'
+task generateEcoreReflectionModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of ecoreReflection.uml model'
 
 	modelFilePath = file('.' + File.separator + 'ecoreReflection.uml')

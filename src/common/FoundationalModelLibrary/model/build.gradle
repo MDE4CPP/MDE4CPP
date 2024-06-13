@@ -5,8 +5,7 @@ plugins{
 }
 description 'Generate tasks for project: FoundationalModelLibrary'
 
-task generateFoundationalModelLibrary(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'FoundationalModelLibrary'
+task generateFoundationalModelLibraryModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of FoundationalModelLibrary.uml model'
 
 	modelFilePath = file('.' + File.separator + 'FoundationalModelLibrary.uml')

@@ -6,34 +6,56 @@ description 'Build task for project: PSSM'
 task runCommandCompilePSSM(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSMSrc'
 	mustRunAfter =  [
-		"model:generatePSSM" 
+		'generatePSSM'
 	
+		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
+}
+
+task runCommandGeneratePSSM(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSSM.ecore')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generatePSSM() {
+	group 'PSSM'	
+	description 'generate C++ code of PSSM.ecore model PSSM' 
+ 
+	def buildFile = file('model'+ File.separator +'build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGeneratePSSM'
+	}
+	else
+	{
+		dependsOn 'model:generatePSSMModel'
+	}
 }
 
 task compilePSSM() {
 	group 'PSSM'
 	description 'compile PSSM' 
 
-	def buildFile = file('src_gen/build.gradle')
+	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generatePSSM'
+		dependsOn 'generatePSSM'
 		dependsOn 'runCommandCompilePSSM'
 	}
-	if(buildFile.exists()){
+	else
+	{
+		dependsOn 'generatePSSM'
 		dependsOn 'src_gen:compilePSSMSrc'
 	} 
 	mustRunAfter =  [
-		"model:generatePSSM" 
+		'generatePSSM'
 	
+		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
@@ -42,11 +64,11 @@ task buildPSSM() {
 	group 'PSSM'
 	description 'build PSSM'
 
-	dependsOn 'model:generatePSSM'
+	dependsOn 'generatePSSM'
 	dependsOn 'compilePSSM'
 
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

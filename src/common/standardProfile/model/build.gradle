@@ -5,8 +5,7 @@ plugins{
 }
 description 'Generate tasks for project: StandardProfile'
 
-task generateStandardProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'StandardProfile'
+task generateStandardProfileModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of StandardProfile.uml model'
 
 	modelFilePath = file('.' + File.separator + 'StandardProfile.uml')

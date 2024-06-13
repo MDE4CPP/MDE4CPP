@@ -6,27 +6,49 @@ description 'Build task for project: types'
 task runCommandCompileTypes(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compileTypesSrc'
 	mustRunAfter =  [
-		"model:generateTypes" 
+		'generateTypes'
 	
 		, getRootProject().getTasksByName('compileEcore', true)
 	]
+}
+
+task runCommandGenerateTypes(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'types.ecore')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generateTypes() {
+	group 'types'	
+	description 'generate C++ code of types.ecore model types' 
+ 
+	def buildFile = file('model'+ File.separator +'build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGenerateTypes'
+	}
+	else
+	{
+		dependsOn 'model:generateTypesModel'
+	}
 }
 
 task compileTypes() {
 	group 'types'
 	description 'compile types' 
 
-	def buildFile = file('src_gen/build.gradle')
+	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generateTypes'
+		dependsOn 'generateTypes'
 		dependsOn 'runCommandCompileTypes'
 	}
-	if(buildFile.exists()){
+	else
+	{
+		dependsOn 'generateTypes'
 		dependsOn 'src_gen:compileTypesSrc'
 	} 
 	mustRunAfter =  [
-		"model:generateTypes" 
+		'generateTypes'
 	
 		, getRootProject().getTasksByName('compileEcore', true)
 	]
@@ -36,7 +58,7 @@ task buildTypes() {
 	group 'types'
 	description 'build types'
 
-	dependsOn 'model:generateTypes'
+	dependsOn 'generateTypes'
 	dependsOn 'compileTypes'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)

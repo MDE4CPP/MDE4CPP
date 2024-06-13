@@ -6,7 +6,7 @@ description 'Build tasks for project: FoundationalModelLibrary'
 task runCommandCompileFoundationalModelLibrary(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compileFoundationalModelLibrarySrc'
 	mustRunAfter =  [
-		"model:generateFoundationalModelLibrary" 
+		"generateFoundationalModelLibrary" 
 		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileEcoreReflection', true)
 		, getRootProject().getTasksByName('compileUml', true)
@@ -16,22 +16,42 @@ task runCommandCompileFoundationalModelLibrary(type:Exec) {
 	]
 }
 
+task runCommandGenerateFoundationalModelLibrary(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'FoundationalModelLibrary.uml')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generateFoundationalModelLibrary() {
+	group 'FoundationalModelLibrary'
+	description 'description generate C++ code of FoundationalModelLibrary.uml model FoundationalModelLibrary' 
+ 
+	def buildFile = file('model/build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGenerateFoundationalModelLibrary'
+	}
+	else
+	{
+		dependsOn 'model:generateFoundationalModelLibraryModel'
+	}
+}
+
 task compileFoundationalModelLibrarySrc() {
 	group 'FoundationalModelLibrary'
 	description 'compile FoundationalModelLibrary'
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generateFoundationalModelLibrary'
+		dependsOn 'generateFoundationalModelLibrary'
 		dependsOn 'runCommandCompileFoundationalModelLibrary'
 	}
-
-	if(buildFile.exists()){ 
-		dependsOn 'model:generateFoundationalModelLibrary'
+	else
+	{
+		dependsOn 'generateFoundationalModelLibrary'
 		dependsOn 'src_gen:compileFoundationalModelLibrarySrc'
 	}
 	mustRunAfter =  [
-		"model:generateFoundationalModelLibrary" 
+		"generateFoundationalModelLibrary" 
 		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileEcoreReflection', true)
 		, getRootProject().getTasksByName('compileUml', true)
@@ -45,7 +65,7 @@ task buildFoundationalModelLibrary() {
 	group 'FoundationalModelLibrary'
 	description 'build FoundationalModelLibrary'
 
-	dependsOn 'model:generateFoundationalModelLibrary'
+	dependsOn 'generateFoundationalModelLibrary'
 	dependsOn 'compileFoundationalModelLibrary'
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)

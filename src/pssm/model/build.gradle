@@ -6,8 +6,7 @@ plugins{
 
 description 'Generate task for project: PSSM'
 
-task generatePSSM(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'PSSM'
+task generatePSSMModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of PSSM.ecore model'
 
 	generateAPI = false;

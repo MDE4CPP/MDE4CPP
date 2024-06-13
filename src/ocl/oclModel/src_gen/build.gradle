@@ -9,7 +9,6 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Compile task for project: ocl'
 
 task compileOclSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'ocl'
 	description 'compile ocl'
 
 	projectFolder = file('.' + File.separator + 'ocl')
@@ -41,15 +40,38 @@ task compileOclSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.files(fileTree([rootDir,'application','include','ocl'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','ocl'].join(File.separator))
 
-	mustRunAfter =  [getRootProject().getTasksByName('generateOcl',true) ]	
+	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
+	if(!buildFile.exists()) 
+	{
+		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerateOcl', true)
+		dependsOn runGeneratorTask
+		inputs.files(runGeneratorTask.outputs)
+	}
+	else
+	{
+		def generatorTask = getRootProject().getTasksByName('generateOclModel', true)
+		println(generatorTask)
+		dependsOn generatorTask
+		inputs.files(generatorTask.outputs)
+	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 
 	// dependency to model 'ecore'
 	def ecore = getRootProject().getTasksByName('compileEcoreSrc', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
+	if(ecore.isEmpty())  
+	{
+		logger.info('Task not found: ' + ecore.toString() + '. Use buildEcore now')
+		def buildecore = getRootProject().getTasksByName('buildEcore', true)
+		dependsOn buildecore
+		inputs.files(buildecore.outputs)
+	}
+	else
+	{
+		dependsOn ecore
+		inputs.files(ecore.outputs)
+	}
 }
 
 task clean {

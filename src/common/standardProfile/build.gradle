@@ -6,7 +6,7 @@ description 'Build tasks for project: StandardProfile'
 task runCommandCompileStandardProfile(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compileStandardProfileSrc'
 	mustRunAfter =  [
-		"model:generateStandardProfile" 
+		"generateStandardProfile" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcoreReflection', true)
@@ -15,21 +15,42 @@ task runCommandCompileStandardProfile(type:Exec) {
 	]
 }
 
+task runCommandGenerateStandardProfile(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'StandardProfile.uml')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generateStandardProfile() {
+	group 'StandardProfile'	
+	description 'generate C++ code of StandardProfile.uml model StandardProfile' 
+ 
+	def buildFile = file('model/build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGenerateStandardProfile'
+	}
+	else
+	{
+		dependsOn 'model:generateStandardProfileModel'
+	}
+}
+
 task compileStandardProfile() {
 	group 'StandardProfile'
 	description 'compile StandardProfile'
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generateStandardProfile'
+		dependsOn 'generateStandardProfile'
 		dependsOn 'runCommandCompileStandardProfile'
 	}
-	if(buildFile.exists()){
-		dependsOn 'model:generateStandardProfile'
+	else
+	{
+		dependsOn 'generateStandardProfile'
 		dependsOn 'src_gen:compileStandardProfileSrc'
 	}
 	mustRunAfter =  [
-		"model:generateStandardProfile" 
+		"generateStandardProfile" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcoreReflection', true)
@@ -42,8 +63,8 @@ task buildStandardProfile() {
 	group 'StandardProfile'
 	description 'build StandardProfile'
 
+	dependsOn 'generateStandardProfile'
 	dependsOn 'compileStandardProfile'
-	dependsOn 'model:generateStandardProfile'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)

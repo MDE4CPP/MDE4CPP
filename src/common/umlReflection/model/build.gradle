@@ -5,8 +5,7 @@ plugins{
 }
 description 'Generate tasks for project: umlReflection'
 
-task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'umlReflection'
+task generateUmlReflectionModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of umlReflection.uml model'
 
 	modelFilePath = file('.' + File.separator + 'umlReflection.uml')

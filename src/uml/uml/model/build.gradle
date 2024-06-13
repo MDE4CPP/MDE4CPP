@@ -6,8 +6,7 @@ plugins{
 
 description 'Generate task for project: uml'
 
-task generateUml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'uml'
+task generateUmlModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of uml.ecore model'
 
 	generateAPI = false;

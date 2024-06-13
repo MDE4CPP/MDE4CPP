@@ -5,8 +5,7 @@ plugins{
 }
 description 'Generate tasks for project: UML4CPPProfile'
 
-task generateUML4CPPProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'UML4CPPProfile'
+task generateUML4CPPProfileModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of UML4CPPProfile.uml model'
 
 	modelFilePath = file('.' + File.separator + 'UML4CPPProfile.uml')

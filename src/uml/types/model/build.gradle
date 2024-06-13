@@ -6,8 +6,7 @@ plugins{
 
 description 'Generate task for project: types'
 
-task generateTypes(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'types'
+task generateTypesModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of types.ecore model'
 
 	generateAPI = false;

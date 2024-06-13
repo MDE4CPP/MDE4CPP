@@ -6,8 +6,7 @@ plugins{
 
 description 'Generate task for project: fUML'
 
-task generateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'fUML'
+task generateFUMLModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of fUML.ecore model'
 
 	generateAPI = false;

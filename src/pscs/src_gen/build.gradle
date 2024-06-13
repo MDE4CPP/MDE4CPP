@@ -9,7 +9,6 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Compile task for project: PSCS'
 
 task compilePSCSSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'PSCS'
 	description 'compile PSCS'
 
 	projectFolder = file('.' + File.separator + 'PSCS')
@@ -41,30 +40,83 @@ task compilePSCSSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.files(fileTree([rootDir,'application','include','PSCS'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','PSCS'].join(File.separator))
 
-	mustRunAfter =  [getRootProject().getTasksByName('generatePSCS',true) ]	
+	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
+	if(!buildFile.exists()) 
+	{
+		def runGeneratorTask = getRootProject().getTasksByName('runCommandGeneratePSCS', true)
+		dependsOn runGeneratorTask
+		inputs.files(runGeneratorTask.outputs)
+	}
+	else
+	{
+		def generatorTask = getRootProject().getTasksByName('generatePSCSModel', true)
+		println(generatorTask)
+		dependsOn generatorTask
+		inputs.files(generatorTask.outputs)
+	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 
 	// dependency to model 'ecore'
 	def ecore = getRootProject().getTasksByName('compileEcoreSrc', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
+	if(ecore.isEmpty())  
+	{
+		logger.info('Task not found: ' + ecore.toString() + '. Use buildEcore now')
+		def buildecore = getRootProject().getTasksByName('buildEcore', true)
+		dependsOn buildecore
+		inputs.files(buildecore.outputs)
+	}
+	else
+	{
+		dependsOn ecore
+		inputs.files(ecore.outputs)
+	}
 
 	// dependency to model 'fUML'
 	def fUML = getRootProject().getTasksByName('compileFUMLSrc', true)
-	dependsOn fUML
-	inputs.files(fUML.outputs)
+	if(fUML.isEmpty())  
+	{
+		logger.info('Task not found: ' + fUML.toString() + '. Use buildFUML now')
+		def buildfUML = getRootProject().getTasksByName('buildFUML', true)
+		dependsOn buildfUML
+		inputs.files(buildfUML.outputs)
+	}
+	else
+	{
+		dependsOn fUML
+		inputs.files(fUML.outputs)
+	}
 
 	// dependency to model 'types'
 	def types = getRootProject().getTasksByName('compileTypesSrc', true)
-	dependsOn types
-	inputs.files(types.outputs)
+	if(types.isEmpty())  
+	{
+		logger.info('Task not found: ' + types.toString() + '. Use buildTypes now')
+		def buildtypes = getRootProject().getTasksByName('buildTypes', true)
+		dependsOn buildtypes
+		inputs.files(buildtypes.outputs)
+	}
+	else
+	{
+		dependsOn types
+		inputs.files(types.outputs)
+	}
 
 	// dependency to model 'uml'
 	def uml = getRootProject().getTasksByName('compileUmlSrc', true)
-	dependsOn uml
-	inputs.files(uml.outputs)
+	if(uml.isEmpty())  
+	{
+		logger.info('Task not found: ' + uml.toString() + '. Use buildUml now')
+		def builduml = getRootProject().getTasksByName('buildUml', true)
+		dependsOn builduml
+		inputs.files(builduml.outputs)
+	}
+	else
+	{
+		dependsOn uml
+		inputs.files(uml.outputs)
+	}
 }
 
 task clean {

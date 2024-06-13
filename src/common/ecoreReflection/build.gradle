@@ -6,10 +6,30 @@ description 'Build tasks for project: ecoreReflection'
 task runCommandCompileEcoreReflection(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compileEcoreReflectionSrc'
 	mustRunAfter =  [
-		"model:generateEcoreReflection" 
+		"generateEcoreReflection" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
+}
+
+task runCommandGenerateEcoreReflection(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'ecoreReflection.uml')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generateEcoreReflection() {
+	group 'ecoreReflection'	
+	description 'generate C++ code of ecoreReflection.uml model ecoreReflection' 
+ 
+	def buildFile = file('model/build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGenerateEcoreReflection'
+	}
+	else
+	{
+		dependsOn 'model:generateEcoreReflectionModel'
+	}
 }
 
 task compileEcoreReflection() {
@@ -18,15 +38,16 @@ task compileEcoreReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generateEcoreReflection'
+		dependsOn 'generateEcoreReflection'
 		dependsOn 'runCommandCompileEcoreReflection'
 	}
-	if(buildFile.exists()){
-		dependsOn 'model:generateEcoreReflection'
+	else
+	{
+		dependsOn 'generateEcoreReflection'
 		dependsOn 'src_gen:compileEcoreReflectionSrc'
 	}
 	mustRunAfter =  [
-		"model:generateEcoreReflection" 
+		"generateEcoreReflection" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 	]
@@ -36,8 +57,8 @@ task buildEcoreReflection() {
 	group 'ecoreReflection'
 	description 'build ecoreReflection'
 
+	dependsOn 'generateEcoreReflection'
 	dependsOn 'compileEcoreReflection'
-	dependsOn 'model:generateEcoreReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

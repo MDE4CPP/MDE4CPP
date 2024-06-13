@@ -6,8 +6,7 @@ plugins{
 
 description 'Generate task for project: ecore'
 
-task generateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'ecore'
+task generateEcoreModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of ecore.ecore model'
 
 	generateAPI = false;

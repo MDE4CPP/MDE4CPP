@@ -9,7 +9,6 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Compile task for project: ecore'
 
 task compileEcoreSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'ecore'
 	description 'compile ecore'
 
 	projectFolder = file('.' + File.separator + 'ecore')
@@ -41,7 +40,20 @@ task compileEcoreSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.files(fileTree([rootDir,'application','include','ecore'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','ecore'].join(File.separator))
 
-	mustRunAfter =  [getRootProject().getTasksByName('generateEcore',true) ]	
+	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
+	if(!buildFile.exists()) 
+	{
+		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerateEcore', true)
+		dependsOn runGeneratorTask
+		inputs.files(runGeneratorTask.outputs)
+	}
+	else
+	{
+		def generatorTask = getRootProject().getTasksByName('generateEcoreModel', true)
+		println(generatorTask)
+		dependsOn generatorTask
+		inputs.files(generatorTask.outputs)
+	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 

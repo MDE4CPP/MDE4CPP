@@ -6,7 +6,7 @@ description 'Build task for project: PSCS'
 task runCommandCompilePSCS(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compilePSCSSrc'
 	mustRunAfter =  [
-		"model:generatePSCS" 
+		'generatePSCS'
 	
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileFUML', true)
@@ -15,21 +15,43 @@ task runCommandCompilePSCS(type:Exec) {
 	]
 }
 
+task runCommandGeneratePSCS(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSCS.ecore')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generatePSCS() {
+	group 'PSCS'	
+	description 'generate C++ code of PSCS.ecore model PSCS' 
+ 
+	def buildFile = file('model'+ File.separator +'build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGeneratePSCS'
+	}
+	else
+	{
+		dependsOn 'model:generatePSCSModel'
+	}
+}
+
 task compilePSCS() {
 	group 'PSCS'
 	description 'compile PSCS' 
 
-	def buildFile = file('src_gen/build.gradle')
+	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generatePSCS'
+		dependsOn 'generatePSCS'
 		dependsOn 'runCommandCompilePSCS'
 	}
-	if(buildFile.exists()){
+	else
+	{
+		dependsOn 'generatePSCS'
 		dependsOn 'src_gen:compilePSCSSrc'
 	} 
 	mustRunAfter =  [
-		"model:generatePSCS" 
+		'generatePSCS'
 	
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileFUML', true)
@@ -42,7 +64,7 @@ task buildPSCS() {
 	group 'PSCS'
 	description 'build PSCS'
 
-	dependsOn 'model:generatePSCS'
+	dependsOn 'generatePSCS'
 	dependsOn 'compilePSCS'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)

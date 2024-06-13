@@ -6,8 +6,7 @@ plugins{
 
 description 'Generate task for project: ocl'
 
-task generateOcl(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'ocl'
+task generateOclModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of ocl.ecore model'
 
 	generateAPI = false;

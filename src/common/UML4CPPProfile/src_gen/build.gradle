@@ -8,7 +8,6 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Compile tasks for project: UML4CPPProfile'
 
 task compileUML4CPPProfileSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'UML4CPPProfile'
 	description 'compile UML4CPPProfile'
 
 	projectFolder = file('.' + File.separator + 'UML4CPPProfile')
@@ -39,34 +38,97 @@ task compileUML4CPPProfileSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 	outputs.files(fileTree([rootDir,'application','include','UML4CPPProfile'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','UML4CPPProfile'].join(File.separator))
-	
-	mustRunAfter =  [getRootProject().getTasksByName('generateUML4CPPProfile',true) ]	
+
+	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
+	if(!buildFile.exists()) 
+	{
+		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerateUML4CPPProfile', true)
+		dependsOn runGeneratorTask 
+		inputs.files(runGeneratorTask .outputs)
+	}
+	else
+	{
+		def generatorTask = getRootProject().getTasksByName('generateUML4CPPProfileModel', true)
+		dependsOn generatorTask
+		inputs.files(generatorTask.outputs)
+
+	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 	// dependency to model 'ecore'
 	def ecore = getRootProject().getTasksByName('compileEcoreSrc', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
+	if(ecore.isEmpty())  
+	{
+		logger.info('Task not found: ' + ecore.toString() + '. Use buildEcore now')
+		def buildecore = getRootProject().getTasksByName('buildEcore', true)
+		dependsOn buildecore
+		inputs.files(buildecore.outputs)
+	}
+	else
+	{
+		dependsOn ecore
+		inputs.files(ecore.outputs)
+	}
 
 	// dependency to model 'uml'
 	def uml = getRootProject().getTasksByName('compileUmlSrc', true)
-	dependsOn uml
-	inputs.files(uml.outputs)
+	if(uml.isEmpty())  
+	{
+		logger.info('Task not found: ' + uml.toString() + '. Use buildUml now')
+		def builduml = getRootProject().getTasksByName('buildUml', true)
+		dependsOn builduml
+		inputs.files(builduml.outputs)
+	}
+	else
+	{
+		dependsOn uml
+		inputs.files(uml.outputs)
+	}
 
 	// dependency to model 'ecoreReflection'
 	def ecoreReflection = getRootProject().getTasksByName('compileEcoreReflectionSrc', true)
-	dependsOn ecoreReflection
-	inputs.files(ecoreReflection.outputs)
+	if(ecoreReflection.isEmpty())  
+	{
+		logger.info('Task not found: ' + ecoreReflection.toString() + '. Use buildEcoreReflection now')
+		def buildecoreReflection = getRootProject().getTasksByName('buildEcoreReflection', true)
+		dependsOn buildecoreReflection
+		inputs.files(buildecoreReflection.outputs)
+	}
+	else
+	{
+		dependsOn ecoreReflection
+		inputs.files(ecoreReflection.outputs)
+	}
 
 	// dependency to model 'primitivetypesReflection'
 	def primitivetypesReflection = getRootProject().getTasksByName('compilePrimitivetypesReflectionSrc', true)
-	dependsOn primitivetypesReflection
-	inputs.files(primitivetypesReflection.outputs)
+	if(primitivetypesReflection.isEmpty())  
+	{
+		logger.info('Task not found: ' + primitivetypesReflection.toString() + '. Use buildPrimitivetypesReflection now')
+		def buildprimitivetypesReflection = getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+		dependsOn buildprimitivetypesReflection
+		inputs.files(buildprimitivetypesReflection.outputs)
+	}
+	else
+	{
+		dependsOn primitivetypesReflection
+		inputs.files(primitivetypesReflection.outputs)
+	}
 
 	// dependency to model 'umlReflection'
 	def umlReflection = getRootProject().getTasksByName('compileUmlReflectionSrc', true)
-	dependsOn umlReflection
-	inputs.files(umlReflection.outputs)
+	if(umlReflection.isEmpty())  
+	{
+		logger.info('Task not found: ' + umlReflection.toString() + '. Use buildUmlReflection now')
+		def buildumlReflection = getRootProject().getTasksByName('buildUmlReflection', true)
+		dependsOn buildumlReflection
+		inputs.files(buildumlReflection.outputs)
+	}
+	else
+	{
+		dependsOn umlReflection
+		inputs.files(umlReflection.outputs)
+	}
 }
 
 task clean {

@@ -6,12 +6,32 @@ description 'Build tasks for project: umlReflection'
 task runCommandCompileUmlReflection(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compileUmlReflectionSrc'
 	mustRunAfter =  [
-		"model:generateUmlReflection" 
+		"generateUmlReflection" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcoreReflection', true)
 		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 	]
+}
+
+task runCommandGenerateUmlReflection(type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + 'umlReflection.uml')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generateUmlReflection() {
+	group 'umlReflection'	
+	description 'generate C++ code of umlReflection.uml model umlReflection' 
+ 
+	def buildFile = file('model/build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGenerateUmlReflection'
+	}
+	else
+	{
+		dependsOn 'model:generateUmlReflectionModel'
+	}
 }
 
 task compileUmlReflection() {
@@ -20,15 +40,16 @@ task compileUmlReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'model:generateUmlReflection'
+		dependsOn 'generateUmlReflection'
 		dependsOn 'runCommandCompileUmlReflection'
 	}
-	if(buildFile.exists()){
-		dependsOn 'model:generateUmlReflection'
+	else
+	{
+		dependsOn 'generateUmlReflection'
 		dependsOn 'src_gen:compileUmlReflectionSrc'
 	}
 	mustRunAfter =  [
-		"model:generateUmlReflection" 
+		"generateUmlReflection" 
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcoreReflection', true)
@@ -40,8 +61,8 @@ task buildUmlReflection() {
 	group 'umlReflection'
 	description 'build umlReflection'
 
+	dependsOn 'generateUmlReflection'
 	dependsOn 'compileUmlReflection'
-	dependsOn 'model:generateUmlReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)

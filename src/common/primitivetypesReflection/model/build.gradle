@@ -5,8 +5,7 @@ plugins{
 }
 description 'Generate tasks for project: primitivetypesReflection'
 
-task generatePrimitivetypesReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'primitivetypesReflection'
+task generatePrimitivetypesReflectionModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of primitivetypesReflection.uml model'
 
 	modelFilePath = file('.' + File.separator + 'primitivetypesReflection.uml')
