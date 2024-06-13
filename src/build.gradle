@@ -74,34 +74,13 @@ task compileEcoreModels(){
 	group 'Source'
 	description 'compile all ecore models'
 
-	// MS Windows
-	def String[] compileTasksList = ['Ecore','Uml', 'Types', 'FUML','PSCS','PSSM'] // OCL see following lines
-
-	compileTasksList.each()		
-	{
-		if ((it == 'Uml') || (it == 'Types'))
-		{
-			def umlFile = file('.' + File.separator + 'uml' + File.separator + it + File.separator + 'src_gen' + File.separator + 'build.gradle')
-			if (!umlFile.exists())
-			{
-				dependsOn 'uml:' + it.toLowerCase() + ':model:generate' + it
-			}
-		}
-		else
-		{
-			def buildFile = file('.' + File.separator + it + File.separator + 'src_gen' + File.separator + 'build.gradle')
-			if (!buildFile.exists())
-			{
-				dependsOn it.toLowerCase() + ':model:generate' + it
-			}
-		}
-	}
-	
-	def oclFile = file('.' + File.separator + 'ocl' + File.separator + 'oclModel' + File.separator + 'src_gen' + File.separator + 'build.gradle')
-	if (!oclFile.exists())
-	{
-		dependsOn 'ocl:oclModel:model:generateOcl'
-	}
+	dependsOn 'ecore:generateEcore'
+	dependsOn 'uml:types:generateTypes'
+	dependsOn 'uml:uml:generateUml'
+	dependsOn 'fuml:generateFUML'
+	dependsOn 'pscs:generatePSCS'
+	dependsOn 'pssm:generatePSSM'
+	dependsOn 'ocl:oclModel:generateOcl'
 
 	dependsOn 'ecore:compileEcore'
 	dependsOn 'uml:types:compileTypes'
@@ -139,13 +118,13 @@ task generateEcoreModels() {
 	group 'Source'
 	description 'generate all ecore models'
 	
-	dependsOn 'ecore:model:generateEcore'
-	dependsOn 'uml:types:model:generateTypes'
-	dependsOn 'uml:uml:model:generateUml'
-	dependsOn 'fuml:model:generateFUML'
-	dependsOn 'pscs:model:generatePSCS'
-	dependsOn 'pssm:model:generatePSSM'
-	dependsOn 'ocl:oclModel:model:generateOcl'
+	dependsOn 'ecore:generateEcore'
+	dependsOn 'uml:types:generateTypes'
+	dependsOn 'uml:uml:generateUml'
+	dependsOn 'fuml:generateFUML'
+	dependsOn 'pscs:generatePSCS'
+	dependsOn 'pssm:generatePSSM'
+	dependsOn 'ocl:oclModel:generateOcl'
 }
 
 
@@ -153,17 +132,17 @@ task generateReflectionModels() {
 	group 'Source'
 	description 'generate all reflection models'
 	
-	dependsOn 'common:ecoreReflection:model:generateEcoreReflection'
-	dependsOn 'common:primitivetypesReflection:model:generatePrimitivetypesReflection'
-	dependsOn 'common:umlReflection:model:generateUmlReflection'
+	dependsOn 'common:ecoreReflection:generateEcoreReflection'
+	dependsOn 'common:primitivetypesReflection:generatePrimitivetypesReflection'
+	dependsOn 'common:umlReflection:generateUmlReflection'
 }
 
 task generateUMLProfiles() {
 	group 'Source'
 	description 'generate all uml profile models'
 	
-	dependsOn 'common:standardProfile:model:generateStandardProfile'
-	dependsOn 'common:UML4CPPProfile:model:generateUML4CPPProfile'
+	dependsOn 'common:standardProfile:generateStandardProfile'
+	dependsOn 'common:UML4CPPProfile:generateUML4CPPProfile'
 }
 
 

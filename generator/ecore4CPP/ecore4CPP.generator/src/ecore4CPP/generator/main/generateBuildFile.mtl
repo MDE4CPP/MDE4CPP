@@ -144,17 +144,39 @@ task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment interna
 	[aPackage.generateMustRunAfter()/]
 }
 
+task runCommandGenerate[packageName.toUpperFirst()/](type:Exec) {
+	def modelPath = file('.' + File.separator + 'model' + File.separator + '[packageName/].ecore')
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+}
+
+task generate[packageName.toUpperFirst()/]() {
+	group '[packageName/]'	
+	description 'generate C++ code of [packageName/].ecore model [packageName/]' 
+ 
+	def buildFile = file('model'+ File.separator +'build.gradle')
+	if(!buildFile.exists())
+	{
+		dependsOn 'runCommandGenerate[packageName.toUpperFirst()/]'
+	}
+	else
+	{
+		dependsOn 'model:generate[packageName.toUpperFirst()/]Model'
+	}
+}
+
 task compile[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'compile [packageName/]' 
 
-	def buildFile = file('src_gen/build.gradle')
+	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
-		dependsOn 'model:generate[packageName.toUpperFirst()/]'
+		dependsOn 'generate[packageName.toUpperFirst()/]'
 		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
 	}
-	if(buildFile.exists()){
+	else
+	{
+		dependsOn 'generate[packageName.toUpperFirst()/]'
 		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
 	} 
 	[aPackage.generateMustRunAfter()/]
@@ -164,7 +186,7 @@ task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'build [packageName/]'
 
-	dependsOn 'model:generate[packageName.toUpperFirst()/]'
+	dependsOn 'generate[packageName.toUpperFirst()/]'
 	dependsOn 'compile[packageName.toUpperFirst()/]'
 [if(aPackage.prepareApplication())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
@@ -198,8 +220,8 @@ plugins{
 
 description 'Generate task for project: [packageName/]'
 
-task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group '[packageName/]'
+task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+[comment group '[packageName ?' invisible internal generate tasks/]
 	description 'generate C++ code of [packageName/].ecore model'
 
 	[if hasCreateApiFlag()]
@@ -235,7 +257,7 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Compile task for project: [packageName/]'
 
 task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group '[packageName/]'
+[comment group '[packageName?' invisible internal compile tasks /]
 	description 'compile [packageName/]'
 
 	projectFolder = file('.' + File.separator + '[packageName/]')
@@ -267,7 +289,20 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 	outputs.files(fileTree(['['/]rootDir,'application','include','[packageName/]'[']'/].join(File.separator)))
 	outputs.dir(['['/]rootDir,'application','include','[packageName/]'[']'/].join(File.separator))
 
-	mustRunAfter =  ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]',true) [']'/]	
+	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
+	if(!buildFile.exists()) [comment In case of model build file was deleted /]
+	{
+		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerate[packageName.toUpperFirst()/]', true)
+		dependsOn runGeneratorTask
+		inputs.files(runGeneratorTask.outputs)
+	}
+	else
+	{
+		def generatorTask = getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)
+		println(generatorTask)
+		dependsOn generatorTask
+		inputs.files(generatorTask.outputs)
+	}	
 	[comment
 	// dependency to 'persistence'
 	//def persistence = getRootProject().getTasksByName('compilePersistence', true)
@@ -293,8 +328,18 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 
 	// dependency to model '[pack.name/]'
 	def [pack.name/] = getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]Src', true)
-	dependsOn [pack.name/]
-	inputs.files([pack.name/].outputs)
+	if([pack.name/].isEmpty())  [comment if src_gen folder was deleted --> no compileTasks --> no dependency/]
+	{
+		logger.info('Task not found: ' + [pack.name/].toString() + '. Use build[pack.name.toUpperFirst()/] now')
+		def build[pack.name/] = getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true)
+		dependsOn build[pack.name/]
+		inputs.files(build[pack.name/].outputs)
+	}
+	else
+	{
+		dependsOn [pack.name/]
+		inputs.files([pack.name/].outputs)
+	}
 [/for]
 [for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
@@ -329,7 +374,7 @@ task clean {
 
 [template private generateMustRunAfter(aPackage : EPackage) {packageName : String = aPackage.generateNamespacePath();}]
 mustRunAfter =  ['['/]
-	"model:generate[packageName.toUpperFirst()/]" 
+	'generate[packageName.toUpperFirst()/]'
 [if(aPackage.prepareApplication())]
 	, "application:compileApplicationFor[packageName.toUpperFirst()/]"
 [/if]

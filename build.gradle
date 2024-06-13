@@ -39,7 +39,7 @@ task generateAll() {
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
 	dependsOn 'src:generateUMLProfiles'
-	dependsOn 'src:common:FoundationalModelLibrary:model:generateFoundationalModelLibrary'
+	dependsOn 'src:common:FoundationalModelLibrary:generateFoundationalModelLibrary'
 }
 
 task compileAll() {
