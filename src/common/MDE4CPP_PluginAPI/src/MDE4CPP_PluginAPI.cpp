@@ -10,14 +10,14 @@
 #include <string>
 
 std::shared_ptr<GenericApi> GenericApi::eInstance() {
-    static std::shared_ptr<GenericApi> instance = std::make_shared<GenericApi>(new GenericApi());
-    return instance;
+    static GenericApi instance = GenericApi();
+    return std::make_shared<GenericApi>(instance);
 }
 
 GenericApi::GenericApi() {
-	m_pluginHandler = std::make_shared<pluginHandler>(new pluginHandler());
+	m_pluginHandler = std::make_shared<pluginHandler>();
 
-    m_Json2Ecore_handler = std::make_shared<Json2Ecore>(new Json2Ecore());
+    m_Json2Ecore_handler = std::make_shared<Json2Ecore>();
 
     crow::SimpleApp app;
 
@@ -29,6 +29,7 @@ GenericApi::GenericApi() {
     */
     CROW_ROUTE(app, "/<string>/").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& modelInstName){
         if(m_modelInsts.find(modelInstName) != m_modelInsts.end()){
+            CROW_LOG_INFO<<"modelInst:\""<< modelInstName <<"\" already exists";
             return crow::response(400, "Model already exists!");
         }
 
@@ -58,7 +59,7 @@ GenericApi::GenericApi() {
         
         //TODO: implement parsing of eObject to JSON
         
-        return crow::response(200, result);
+        return crow::response(418, "not  implemented");
     });
 
     /**
@@ -84,7 +85,7 @@ GenericApi::GenericApi() {
 
         //TODO: implement update function
 
-        return crow::response(200);
+        return crow::response(418, "not  implemented");
     });
 
     /**
@@ -124,7 +125,7 @@ GenericApi::GenericApi() {
 ;		auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
         
         //TODO implement call of operation
-
+        return crow::response(418, "not fully implemented");
         //TODO return return-value of the operation
     });
 
@@ -173,25 +174,3 @@ GenericApi::GenericApi() {
 
     app.bindaddr("127.0.0.1").port(8080).multithreaded().run(); //sets address and port  //TODO let user assign adress and port 
 }
-
-/*const std::shared_ptr<Any>& setStructuralFeature(const std::shared_ptr<EObject>& start_object, std::string path, const std::shared_ptr<Any>& value){
-
-    if (start_object == nullptr){ //check for nullptr start_object
-        CROW_LOG_ERROR << "navigate() called nullptr as start_object!";
-        return nullptr;
-    }
-
-    std::shared_ptr<EObject> current_object = start_object;
-
-    if (path.size()== 0){ //check for empty path
-        CROW_LOG_ERROR << "navigate() called with empy path!";
-        return nullptr;
-    }
-
-    std::deque<std::string> split_path;
-    helperFunctions::split_string(split_path, path, '/'); //split path into segments that were seperated by "/" -> last will be name of target StructuralFeature; everything before will be path-segments to get there from the start_object
-    std::string strucFeature = split_path.back();
-    split_path.pop_back();
-    auto obj = navigateToObject(start_object, split_path);
-    obj->eSet(obj->eClass()->getEStructuralFeature(strucFeature),value);
-}*/

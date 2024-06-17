@@ -48,8 +48,9 @@ SET(SOURCE_FILES
 	MDE4CPP_PluginAPI_Main.cpp
 	ModelInstance.cpp
 	helperFunc.cpp
-	json2model.cpp
-	model2json.cpp
+	pluginHandler.cpp
+	json2ecore.cpp
+	#ecore2json.cpp
 )
 
 INCLUDE_DIRECTORIES(
