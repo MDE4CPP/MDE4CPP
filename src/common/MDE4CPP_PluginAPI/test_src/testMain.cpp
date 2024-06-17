@@ -142,8 +142,8 @@ TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {
     {
         std::cerr << e.what() << '\n';
     }
-    auto p1_name = p1->get<std::shared_ptr<std::string>>();
-    EXPECT_EQ(*p1_name, "Architecture");
+    auto p1_name = p1->get<std::string>();
+    EXPECT_EQ(p1_name, "Architecture");
 }
 
 //tests getObjectAtPath with a path that tries to access a non-container StructFeature of pimitive type
@@ -232,13 +232,9 @@ TEST_F(Json2EcoreTest, Json2Ecore_createModel){
     auto printLibOp = m->getRootObject()->eClass()->getEOperation(libraryModel_ecore::libraryModel_ecorePackage::LIBRARYMODEL_OPERATION_PRINTLIBRARY);
     m->getRootObject()->eInvoke(printLibOp, std::make_shared<Bag<Any>>(Bag<Any>()));
 
-    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"book@0"}));
-    auto obj = m->getObjectAtPath(dq_path);
-
-    std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature("Name");
-    auto obj_name_any = obj->eGet(sFeature);
-    std::cout << "type of any is " << obj_name_any->getTypeId() << std::endl;
-    auto s = obj_name_any->get<std::string>();
-    //auto obj_name = obj->get<std::shared_ptr<std::string>>();
-    //EXPECT_EQ(*obj_name, "Der letzte Wunsch");
+    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"book@0", "Name"}));
+    auto obj = m->getAnyAtPath(dq_path);
+    std::cout << "type of any is " << obj->getTypeId() << std::endl;
+    auto obj_name = obj->get<std::string>();
+    EXPECT_EQ(obj_name, "Metro 2033");
 }
