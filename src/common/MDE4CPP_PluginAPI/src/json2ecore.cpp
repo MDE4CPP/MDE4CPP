@@ -1,4 +1,4 @@
-#include "json2Model.hpp"
+#include "json2Ecore.hpp"
 #include "helpersFunc.hpp"
 
 //PluginFramework includes
@@ -10,12 +10,53 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EcoreContainerAny.hpp"
 
-JSON2Model::JSON2Model(std::shared_ptr<pluginHandler> pluginHandler){
-    m_pluginHandler = pluginHandler;
+Json2Ecore::Json2Ecore(){
+    m_pluginHandler = pluginHandler();
+}
+
+std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::json::rvalue& content){
+    
+    std::vector<std::tuple<std::shared_ptr<EObject>, std::shared_ptr<ecore::EReference>, crow::json::rvalue>> crossReferenceBuffer;
+    auto root_object = createModelWithoutCrossRef(content, crossReferenceBuffer);
+    
+    auto m = std::make_shared<ModelInstance>(root_object); //create a new model instance with no name
+    
+
+    //add crossreferences into the Model 
+    for(auto [eObj, eRef, json] : crossReferenceBuffer){
+
+        auto referenceTypeID = eObj->eGet(eRef)->getTypeId();
+
+        std::shared_ptr<Any> referenceContent;
+
+
+        if(eObj->eGet(eRef)->isContainer()){ //reference is of multiplicity > 1 
+
+            auto bag = std::make_shared<Bag<ecore::EObject>>();
+
+            for(const auto & entry : json){ //iterates over all paths 
+                auto segmented_path = helperFunctions::split_string(std::string(entry), ':');
+                auto refTarget = m->getObjectAtPath(segmented_path);
+                bag->add(refTarget);
+            }
+
+            referenceContent = eEcoreContainerAny(bag, referenceTypeID);
+
+        }else{//reference is of multiplicity <= 1
+            
+            auto segmented_path = helperFunctions::split_string(std::string(json), ':');
+            auto refTarget = m->getObjectAtPath(segmented_path);
+            referenceContent = eAny(refTarget, referenceTypeID, false);
+        }
+        eObj->eSet(eRef, referenceContent);
+
+    }
+    
+    return m; //return complete model
 }
 
 //creates an object encoded in a json
-std::shared_ptr<ecore::EObject> JSON2Model::createModelWithoutCrossReferencesFromJson(const crow::json::rvalue& content, std::vector<std::tuple<std::shared_ptr<ecore::EReference>, crow::json::rvalue, long, bool>>& crossReferenceBuffer){
+std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const crow::json::rvalue& content, std::vector<std::tuple<std::shared_ptr<EObject> ,std::shared_ptr<ecore::EReference>, crow::json::rvalue>>& crossReferenceBuffer){
 
     auto ObjClass_KeyVal = content["ObjectClass"];
     if(ObjClass_KeyVal.t() != crow::json::type::String){ //if type of the key value is anything else except for a string (eg. null)
@@ -23,13 +64,21 @@ std::shared_ptr<ecore::EObject> JSON2Model::createModelWithoutCrossReferencesFro
     }
     auto [pluginName , eClass] = helperFunctions::splitObjectClassKey(std::string(ObjClass_KeyVal));
 
-    auto plugin = m_pluginHandler->getPluginByName(pluginName);
-    auto result = plugin->create(eClass); //TODO check for unexpected behavior (e.g unknown ClassName)
+    auto plugin = m_pluginHandler.getPluginByName(pluginName);
+    auto result = plugin->create(pluginName + "::" + eClass);
+    if(result == nullptr){
+        throw std::runtime_error( "create-methode of the plugin returned nllptr; most likely \""+ eClass + "\"-class not found in Plugin of the Model!");
+    }
 
     //handeling of all member attibutes of the object
     std::shared_ptr<Bag<ecore::EAttribute>> attributes = result->eClass()->getEAllAttributes();
     for(const auto & attribute : *attributes){
         try {
+            if(!content.has(attribute->getName())){
+                CROW_LOG_INFO << attribute->getName()  << " does not exist in json of the objectClass: " << ObjClass_KeyVal;
+                continue;
+            }
+
             auto value = content[attribute->getName()];
             if(value.t() == crow::json::type::Null){
                 CROW_LOG_INFO << attribute->getName()  << " not set in json for object";
@@ -40,7 +89,7 @@ std::shared_ptr<ecore::EObject> JSON2Model::createModelWithoutCrossReferencesFro
             continue;
         }
 
-        auto attributeTypeId = result->eGet(attribute)->getTypeId(); //TODO make less complicated
+        auto attributeTypeId = result->eGet(attribute)->getTypeId();
         switch (attributeTypeId) {
             case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
             case ecore::ecorePackage::EBOOLEAN_CLASS:
@@ -92,38 +141,43 @@ std::shared_ptr<ecore::EObject> JSON2Model::createModelWithoutCrossReferencesFro
             CROW_LOG_ERROR << "shared_ptr to reference is nullptr!" ;
         }
 
-        try {
-            auto value = content[reference->getName()];
-            if(value.t() == crow::json::type::Null){ //no matching key was found in the json 
-                CROW_LOG_INFO << reference->getName()  << " not set in json for object";
+        try { 
+            if(!content.has(reference->getName())){
+                CROW_LOG_INFO << reference->getName()  << " does not exist in json of the objectClass: " << ObjClass_KeyVal;
                 continue;
             }
+
+            auto value = content[reference->getName()];
+
+            if(value.t() == crow::json::type::Null){ //no matching key was found in the json 
+                CROW_LOG_INFO << reference->getName()  << " has no value in json";
+                continue;
+            }
+
         } catch (std::runtime_error& error){
             CROW_LOG_ERROR << "runtime error occured in createOjectFromJSON : "  << error.what() <<" !" ;
             continue;
         }
 
         if(reference->isContainment()){ //handles all containment references; container (back-)references will also automaticly be set
-            auto referenceTypeID = result->eGet(reference)->getTypeId(); //Gets TypeID of the reference target //TODO make less complicated
+            auto referenceTypeID = result->eGet(reference)->getTypeId(); //Gets TypeID of the reference target
             std::shared_ptr<Any> referenceContent;
 
             if(result->eGet(reference)->isContainer()){
                 auto bag = std::make_shared<Bag<ecore::EObject>>();
                 for(const auto & entry : content[reference->getName()]){
-                    bag->add(createModelWithoutCrossReferencesFromJson(entry, crossReferenceBuffer)); //recursive call to creates each object that is being referenced 
+                    bag->add(createModelWithoutCrossRef(entry, crossReferenceBuffer)); //recursive call to creates each object that is being referenced 
                 }
                 referenceContent = eEcoreContainerAny(bag, referenceTypeID);
             }else{
-                auto value = createModelWithoutCrossReferencesFromJson(content[reference->getName()], crossReferenceBuffer); //recursive call to creates the referenced object 
+                auto value = createModelWithoutCrossRef(content[reference->getName()], crossReferenceBuffer); //recursive call to creates the referenced object 
                 referenceContent = eAny(value, referenceTypeID, false);
             }
             result->eSet(reference, referenceContent);
         }
 
         if(!reference->isContainer() && !reference->isContainment()){ //handles all references other than containment- and container-references
-            auto referenceTypeID = result->eGet(reference)->getTypeId(); //Gets TypeID of the reference target //TODO make less complicated
-            crossReferenceBuffer.push_back({reference,content[reference->getName()],referenceTypeID,result->eGet(reference)->isContainer()});
-            //TODO: process referenceBuffer after recursion finished to set References
+            crossReferenceBuffer.push_back({result, reference ,content[reference->getName()]});
         }
 
     }
@@ -131,7 +185,7 @@ std::shared_ptr<ecore::EObject> JSON2Model::createModelWithoutCrossReferencesFro
 }
 
 template<typename T>
-std::shared_ptr<Any> JSON2Model::readAttributeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EStructuralFeature>& feature, const crow::json::rvalue& content){
+std::shared_ptr<Any> Json2Ecore::readAttributeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EStructuralFeature>& feature, const crow::json::rvalue& content){
     auto attributeTypeId = object->eGet(feature)->getTypeId();
     auto isContainer = object->eGet(feature)->isContainer();
 
@@ -148,12 +202,17 @@ std::shared_ptr<Any> JSON2Model::readAttributeValue(const std::shared_ptr<ecore:
 }
 
 //generic conversion methods for json
-template<> bool JSON2Model::convert_to<bool>(const crow::json::rvalue& value){
+template<> bool Json2Ecore::convert_to<bool>(const crow::json::rvalue& value){
     return value.b();
 }
 
-template <typename T> T JSON2Model::convert_to(const crow::json::rvalue& value){
-    std::istringstream ss(value.operator std::string());
+template<> std::string Json2Ecore::convert_to<std::string>(const crow::json::rvalue& value){
+    return std::string(value);
+}
+
+template <typename T> T Json2Ecore::convert_to(const crow::json::rvalue& value){
+    std::stringstream ss;
+    ss << std::string(value);
     T num;
     ss >> num;
     return num;
