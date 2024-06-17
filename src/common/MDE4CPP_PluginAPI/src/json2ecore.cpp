@@ -17,11 +17,11 @@ Json2Ecore::Json2Ecore(){
 std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::json::rvalue& content){
     
     std::vector<std::tuple<std::shared_ptr<EObject>, std::shared_ptr<ecore::EReference>, crow::json::rvalue>> crossReferenceBuffer;
+
     auto root_object = createModelWithoutCrossRef(content, crossReferenceBuffer);
     
     auto m = std::make_shared<ModelInstance>(root_object); //create a new model instance with no name
     
-
     //add crossreferences into the Model 
     for(auto [eObj, eRef, json] : crossReferenceBuffer){
 
@@ -206,7 +206,7 @@ template<> bool Json2Ecore::convert_to<bool>(const crow::json::rvalue& value){
     return value.b();
 }
 
-template<> std::string Json2Ecore::convert_to<std::string>(const crow::json::rvalue& value){
+template<> std::string Json2Ecore::convert_to<std::string>(const crow::json::rvalue& value){ //needed to preserve whitespaces in string
     return std::string(value);
 }
 
