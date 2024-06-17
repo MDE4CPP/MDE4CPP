@@ -3,6 +3,7 @@
 
 #include <deque>
 #include <string>
+#include <memory> //for shared_ptr
 
  namespace helperFunctions{
    /**
@@ -12,7 +13,7 @@
     * @param s : string that is supposed to be split
     * @param split_char : char denoting the boundery between to segments 
    */
-    void split_string(std::deque<std::string>& buffer, const std::string s, char split_char);
+    std::shared_ptr<std::deque<std::string>> split_string(const std::string s, const char split_char);
 
    /**
     * intended to split the ObjectClass key into PluginName and object namespace and class name
