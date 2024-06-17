@@ -118,37 +118,37 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
             switch (any->getTypeId()) {
                 case ecore::ecorePackage::EBOOLEAN_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<bool>>>();
-                    return eAny(bag->at(containerIndex), any->getTypeId(), false);
+                    return eAny(*(bag->at(containerIndex)), any->getTypeId(), false); //dereferencing of "bag->at()" as to not insert a shared_ptr but the value of the bool  
                     break;
                 }
                 case ecore::ecorePackage::ECHAR_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<char>>>();
-                    return eAny(bag->at(containerIndex), any->getTypeId(), false);
+                    return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
                 case ecore::ecorePackage::EINT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<int>>>();
-                    return eAny(bag->at(containerIndex), any->getTypeId(), false);
+                    return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
                 case ecore::ecorePackage::ELONG_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<long>>>();
-                    return eAny(bag->at(containerIndex), any->getTypeId(), false);
+                    return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
                 case ecore::ecorePackage::EFLOAT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<float>>>();
-                    return eAny(bag->at(containerIndex), any->getTypeId(), false);
+                    return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
                 case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<double>>>();
-                    return eAny(bag->at(containerIndex), any->getTypeId(), false);
+                    return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
                 case ecore::ecorePackage::ESTRING_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<std::string>>>();
-                    return eAny(bag->at(containerIndex), any->getTypeId(), false);
+                    return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
                 default: //should not get here -> unsupported DataType

@@ -41,6 +41,8 @@ class ModelInstance{
          *  elements must be in the form:   - "StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "authors@9")
          *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
          *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
+         * @return = a shared pointer to an Any;    -the Any of a primitve Datatype (int, long, char, string, etc) will contain the value directly; eg. Any<string>
+         *                                          -the Any of a non-primitive Datatype (eClass, Bag) will contain a shared_ptr; eg. Any<shared_ptr<eObject>>
         */
         std::shared_ptr<Any> getAnyAtPath(std::shared_ptr<std::deque<std::string>>& path); 
         
@@ -51,7 +53,7 @@ class ModelInstance{
          *  elements must be in the form:   - "StructFeatureName@Index" -> for structural featues with the type containers (e.g.: "authors@9")
          *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
          *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
-         * 
+         * @return = a shared_ptr to an eObject
         */
         std::shared_ptr<EObject> getObjectAtPath(std::shared_ptr<std::deque<std::string>>& path); 
 
