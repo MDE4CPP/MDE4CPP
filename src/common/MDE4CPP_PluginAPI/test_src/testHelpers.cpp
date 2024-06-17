@@ -62,4 +62,105 @@ std::shared_ptr<ecore::EObject> testHelpers::getExampleModelInstance_1(){
     return lm;
 }
 
+std::string testHelpers::getTestJSON_Large(){
+    std::string json =R"V0G0N(
+    {
+        "ObjectClass" : "libraryModel_ecore::LibraryModel",
+        "authors" : [
+            {
+                "ObjectClass" : "libraryModel_ecore::Author",
+                "Name" : "Andrzej Sapkowski"
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Author",
+                "Alias" : "Glukhovsky",
+                "Name" : "Dimity Glukhovsky"
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Author",
+                "Name" : "Frank Herbert"
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Author",
+                "Name" : "Andy Weir"
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Author",
+                "Alias" : "Tolkin",
+                "Name" : "J.R.R. Tolkin"
+            }
+        ],
+        "book" : [
+            {
+                "ObjectClass" : "libraryModel_ecore::Book",
+                "Name" : "Metro 2033",
+                "authors" : ["authors@1"],
+                "pictures" : []
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Book",
+                "Name" : "Metro 2034",
+                "authors" : ["authors@1"],
+                "pictures" : []
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Book",
+                "Name" : "Artemis",
+                "authors" : ["authors@3"],
+                "pictures" : []
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Book",
+                "Name" : "Der Hobbit",
+                "authors" : ["authors@4"],
+                "pictures" : []
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Book",
+                "Name" : "Der letzte Wunsch",
+                "authors" : ["authors@0"],
+                "pictures" : []
+            },
+            {
+                "ObjectClass" : "libraryModel_ecore::Book",
+                "Name" : "Dune, der Wüstenplanet",
+                "authors" : ["authors@2"],
+                "pictures" : [
+                    {
+                        "ObjectClass" : "libraryModel_ecore::Picture",
+                        "Name" : "Albtraum der Wüste",
+                        "pageNumber" : "385"
+                    },
+                    {
+                        "ObjectClass" : "libraryModel_ecore::Picture",
+                        "Name" : "Flug über den Schildwall",
+                        "pageNumber" : "417"
+                    }
+                ]
+            }
+        ]
+    })V0G0N";
+    return(json);
+}
 
+std::string testHelpers::getTestJSON_Small(){
+    std::string json =R"V0G0N(
+    {
+        "ObjectClass" : "libraryModel_ecore:LibraryModel",
+        "authors" : [
+            {
+                "ObjectClass" : "libraryModel_ecore:Author",
+                "Name" : "Andrzej Sapkowski"
+            }
+        ],
+        "book" : [
+            {
+                "ObjectClass" : "libraryModel_ecore:Book",
+                "Name" : "Der letzte Wunsch",
+                "authors" : ["authors@0"],
+                "pictures" : []
+            }
+        ]
+    })V0G0N";
+    return(json);
+}

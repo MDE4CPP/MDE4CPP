@@ -20,7 +20,8 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        v1.14.0
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -33,6 +34,8 @@ SET(SOURCE_FILES
   testHelpers.cpp
   ../src/ModelInstance.cpp
   ../src/helperFunc.cpp
+  ../src/json2ecore.cpp
+  ../src/pluginHandler.cpp
 )
 
 INCLUDE_DIRECTORIES(
@@ -49,14 +52,17 @@ ENDIF(APPLE)
 IF(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
   FIND_LIBRARY(TYPES typesd.so $ENV{MDE4CPP_HOME}/application/lib)
   FIND_LIBRARY(ECORE ecored.so $ENV{MDE4CPP_HOME}/application/lib)
+  FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so $ENV{MDE4CPP_HOME}/application/bin)
   FIND_LIBRARY(LIBRARYMODEL_ECORE libraryModel_ecored.so ${MDE4CPP_HOME}/application/lib)
 ELSEIF(APPLE)
   FIND_LIBRARY(TYPES typesd.dylib $ENV{MDE4CPP_HOME}/application/lib)
   FIND_LIBRARY(ECORE ecored.dylib $ENV{MDE4CPP_HOME}/application/lib)
+  FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib $ENV{MDE4CPP_HOME}/application/bin)
   FIND_LIBRARY(LIBRARYMODEL_ECORE libraryModel_ecored.dylib $ENV{MDE4CPP_HOME}/application/lib)
 ELSE() # for Windows
   FIND_LIBRARY(TYPES typesd $ENV{MDE4CPP_HOME}/application/lib)
   FIND_LIBRARY(ECORE ecored $ENV{MDE4CPP_HOME}/application/lib)
+  FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd $ENV{MDE4CPP_HOME}/application/lib)
   FIND_LIBRARY(LIBRARYMODEL_ECORE libraryModel_ecored $ENV{MDE4CPP_HOME}/application/lib)
 ENDIF()
 
@@ -67,10 +73,11 @@ TARGET_LINK_LIBRARIES(
 	debug ${LIBRARYMODEL_ECORE}
   debug ${TYPES}
   debug ${ECORE}
+  debug ${PLUGINFRAMEWORK_DEBUG}
 	ws2_32
 	wsock32
   GTest::gtest_main
 )
 
-include(GoogleTest)
+include(googletest)
 gtest_discover_tests(${PROJECT_NAME})
