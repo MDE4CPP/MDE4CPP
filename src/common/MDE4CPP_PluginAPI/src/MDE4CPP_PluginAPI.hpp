@@ -2,17 +2,23 @@
 #define MDE4CPP_PLUGINAPI_HPP
 
 #include "util/crow_all.h"
+
 #include "ModelInstance.hpp"
+#include "pluginHandler.hpp"
+#include "Json2Ecore.hpp"
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
+
 #include "ecore/EObject.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EcoreContainerAny.hpp"
-#include "pluginFramework/PluginFramework.hpp"
 #include "ecore/ecorePackage.hpp"
-#include "pluginHandler.hpp"
+
+#include "pluginFramework/PluginFramework.hpp"
+
 #include <deque>
 
 using namespace ecore;
@@ -98,6 +104,9 @@ private:
     std::shared_ptr<ModelInstance> createModelInst(const crow::json::rvalue& content);
     
     std::shared_ptr<pluginHandler> m_pluginHandler;
+
+    std::shared_ptr<Json2Ecore> m_Json2Ecore_handler;
+
 
     std::map<std::string,std::shared_ptr<ModelInstance>> m_modelInsts{}; //map of all root-artifacts 
 	

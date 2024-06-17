@@ -28,6 +28,7 @@ void pluginHandler::refreshPlugins(){
 }
 
 //private functions
+
 void pluginHandler::mapPlugins(){
 	m_plugins.clear(); //clears map before inserting -> can be used for refreshing m_plugins without restarting application
     std::shared_ptr<Bag<MDE4CPPPlugin>> plugins = m_pluginFramework->getAllPlugins();

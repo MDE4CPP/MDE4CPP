@@ -11,8 +11,8 @@ using namespace ecore;
 
 class ModelInstance{
     public: 
-        ModelInstance(std::shared_ptr<EObject> root_Object, std::string modelName = "untitled modelInstance"); //rootobj is set during creation of a model instance
-        
+        ModelInstance(const std::shared_ptr<EObject> root_Object = nullptr, const std::string modelName = "untitled modelInstance"); //rootobj is set during creation of a model instance
+
         /**
          * allows to retrieve a pointer to the root_object of the model instance
          * @return shared pointer from m_rootObject
@@ -42,7 +42,7 @@ class ModelInstance{
          *                                  - "$aliasNameOfStructFeature" -> for if alias should be used (e.g.: $tolkin)
          *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
         */
-        std::shared_ptr<Any> getAnyAtPath(std::deque<std::string>& path); 
+        std::shared_ptr<Any> getAnyAtPath(std::shared_ptr<std::deque<std::string>>& path); 
         
         /**
          * navigates through modelInstance starting from m_rootObject along specified path the an target EObject and return shared pointer to it.
@@ -53,7 +53,7 @@ class ModelInstance{
          *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
          * 
         */
-        std::shared_ptr<EObject> getObjectAtPath(std::deque<std::string>& path); 
+        std::shared_ptr<EObject> getObjectAtPath(std::shared_ptr<std::deque<std::string>>& path); 
 
         /**
          * allows to get the path to a given EObject in the model from the root_obj as a deque of pathsegments as strings
@@ -62,7 +62,13 @@ class ModelInstance{
         */
         std::deque<std::string> getAttributesAsString(const std::shared_ptr<EObject>& obj);
 
-        void setModelInstance(std::string new_name);
+
+        /**
+         * sets the Reference at the path to the referenceTarget
+         */
+        void setReferenceAtPath(const std::string& path, std::shared_ptr<EObject> referenceTarget);
+
+        void setModelInstanceName(std::string new_name);
         std::string getModelInstanceName();
 
     private : 

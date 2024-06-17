@@ -30,7 +30,6 @@ class pluginHandler{
         void refreshPlugins();
 
     private:
-
         /**
          * populates the m_plugins variable with pointers to all plugins found in the current directory 
         */

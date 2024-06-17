@@ -10,12 +10,15 @@
 #include <string>
 
 std::shared_ptr<GenericApi> GenericApi::eInstance() {
-    static std::shared_ptr<GenericApi> instance = std::make_shared<GenericApi>(GenericApi());
+    static std::shared_ptr<GenericApi> instance = std::make_shared<GenericApi>(new GenericApi());
     return instance;
 }
 
 GenericApi::GenericApi() {
-	m_pluginHandler = pluginHandler::eInstance();
+	m_pluginHandler = std::make_shared<pluginHandler>(new pluginHandler());
+
+    m_Json2Ecore_handler = std::make_shared<Json2Ecore>(new Json2Ecore());
+
     crow::SimpleApp app;
 
     /**
@@ -28,11 +31,11 @@ GenericApi::GenericApi() {
         if(m_modelInsts.find(modelInstName) != m_modelInsts.end()){
             return crow::response(400, "Model already exists!");
         }
-        auto root_object = readValue(crow::json::load(request.body)); //TODO repair readValue
-        
-        ModelInstance* m = new ModelInstance(root_object, modelInstName); //create a new model instance
 
-        m_modelInsts[modelInstName] = std::make_shared<ModelInstance>(m); //insert model instance into modelInsts map
+        auto m = m_Json2Ecore_handler->createEcoreModelFromJson(crow::json::load(request.body));
+        
+
+        m_modelInsts[modelInstName] = m; //insert model instance into modelInsts map
         return crow::response(201);
     });
 
@@ -50,9 +53,7 @@ GenericApi::GenericApi() {
         if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
             return crow::response(404, "Model not found!");
         }
-
-        std::deque<std::string> segmented_path;
-        helperFunctions::split_string(segmented_path, path, ':');
+        auto segmented_path = helperFunctions::split_string(path, ':');
     	auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
         
         //TODO: implement parsing of eObject to JSON
@@ -78,8 +79,7 @@ GenericApi::GenericApi() {
         }
 		
         //splits path input into segments seperated by ':'
-        std::deque<std::string> segmented_path;
-        helperFunctions::split_string(segmented_path, path, ':');
+        auto segmented_path = helperFunctions::split_string(path, ':');
 ;		auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
 
         //TODO: implement update function
@@ -119,8 +119,7 @@ GenericApi::GenericApi() {
         }
 
         //splits path input into segments seperated by ':'
-        std::deque<std::string> segmented_path;
-        helperFunctions::split_string(segmented_path, path, ':');
+        auto segmented_path = helperFunctions::split_string(path, ':');
         //retrives a pointer to the EObject whose operation should be invoked
 ;		auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
         

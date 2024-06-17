@@ -6,7 +6,7 @@
 #include "abstractDataTypes/Bag.hpp"
 #include <string>
 
-ModelInstance::ModelInstance(std::shared_ptr<EObject> root_obj, std::string modelInstName){
+ModelInstance::ModelInstance(const std::shared_ptr<EObject> root_obj /* = nullptr*/, const std::string modelInstName /* = untitled modelInstance*/){
     m_rootObject = root_obj;
     m_modelInstanceName = modelInstName;
 }
@@ -33,20 +33,20 @@ std::shared_ptr<EObject> ModelInstance::lookUpAlias(std::string alias){
     } 
 }
 
-std::shared_ptr<Any> ModelInstance::getAnyAtPath(std::deque<std::string>& path){
-    std::string last_segment = path.back();
-    path.pop_back();
+std::shared_ptr<Any> ModelInstance::getAnyAtPath(std::shared_ptr<std::deque<std::string>>& path){
+    std::string last_segment = path->back();
+    path->pop_back();
     std::shared_ptr<EObject> obj = getObjectAtPath(path);
     std::shared_ptr<Any> ret_obj = getValueOfStructFeatureByName(obj,last_segment);
     return ret_obj;
 }
 
-std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::deque<std::string>& path){
+std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::shared_ptr<std::deque<std::string>>& path){
     std::shared_ptr<EObject> current_object = this->m_rootObject;
     
-    while(!path.empty()){
-        std::string next_path_segment = path.front();
-        path.pop_front();
+    while(!path->empty()){
+        std::string next_path_segment = path->front();
+        path->pop_front();
         switch(next_path_segment[0]){ //check first char in next_path_segment
 
             case '$': { //alias handling; path segment is in form: $alias  
@@ -75,14 +75,14 @@ std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::deque<std::string>&
 }
 
 std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureName){
-    std::deque<std::string> sFeatureName_segments;
-    helperFunctions::split_string(sFeatureName_segments,sFeatureName,'@'); 
-    switch (sFeatureName_segments.size())//first enty in sFeatureName_segments will be name of the StructuralFeature, if a second entry exists it will be an index for the container as an int
+
+    auto segmentedString = helperFunctions::split_string(sFeatureName,'@'); 
+    switch (segmentedString->size())//first enty in sFeatureName_segments will be name of the StructuralFeature, if a second entry exists it will be an index for the container as an int
     {
     case 1:{ //handling sFeatureName without container index 
-        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(sFeatureName_segments[0]); //gets sFeature by name from eClass of obj
+        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(segmentedString->at(0)); //gets sFeature by name from eClass of obj
         if(sFeature == nullptr){ //no strucural Feature with sFeatureName found
-            throw std::runtime_error("structuralFeature: " + sFeatureName_segments[0] + " not found in " + obj->eClass()->getName() + "!");
+            throw std::runtime_error("structuralFeature: " + segmentedString->at(0) + " not found in " + obj->eClass()->getName() + "!");
             return nullptr; //abort
         }
         return obj->eGet(sFeature);
@@ -90,17 +90,17 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
 
     case 2:{ //handling sFeatureName with container index 
 
-        int containerIndex = std::stoi(sFeatureName_segments[1]); //convert second string in parts to int
+        int containerIndex = std::stoi(segmentedString->at(1)); //convert second string in parts to int
 
-        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(sFeatureName_segments[0]); //gets sFeature by name from eClass of obj
+        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(segmentedString->at(0)); //gets sFeature by name from eClass of obj
         if(sFeature == nullptr){ //no strucural Feature with sFeatureName found
-            throw std::runtime_error("structuralFeature: " + sFeatureName_segments[0] + " not found in " + obj->eClass()->getName() + "!");
+            throw std::runtime_error("structuralFeature: " + segmentedString->at(0) + " not found in " + obj->eClass()->getName() + "!");
             return nullptr; //abort
         }
         
         std::shared_ptr<Any> any = obj->eGet(sFeature); //get any container
-        if(!any->isContainer()){ //check if Value of StructuralFeature is a container
-            throw std::runtime_error("\""+ sFeatureName_segments[0] +"\" is not a container!");
+        if(!any->isContainer()){ //check if Value of StructuralFeature is a container as it should be
+            throw std::runtime_error("\""+ segmentedString->at(0) +"\" is not a container!");
             return nullptr; //abort
         }
 
@@ -166,11 +166,12 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
     }
 }
 
-std::deque<std::string> ModelInstance::getAttributesAsString(const std::shared_ptr<EObject>& obj){
+/*std::deque<std::string> ModelInstance::getPathAsString(const std::shared_ptr<EObject>& obj){
     std::shared_ptr<EObject> currentObj = obj;
     std::string returnString;
     while(currentObj->eContainer() != nullptr){ //if nullptr -> root_obj
 
         auto prevStructFeature = currentObj->eContainer();
     }
-}
+
+}*/
