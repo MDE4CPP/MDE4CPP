@@ -146,16 +146,16 @@ std::string testHelpers::getTestJSON_Large(){
 std::string testHelpers::getTestJSON_Small(){
     std::string json =R"V0G0N(
     {
-        "ObjectClass" : "libraryModel_ecore:LibraryModel",
+        "ObjectClass" : "libraryModel_ecore::LibraryModel",
         "authors" : [
             {
-                "ObjectClass" : "libraryModel_ecore:Author",
+                "ObjectClass" : "libraryModel_ecore::Author",
                 "Name" : "Andrzej Sapkowski"
             }
         ],
         "book" : [
             {
-                "ObjectClass" : "libraryModel_ecore:Book",
+                "ObjectClass" : "libraryModel_ecore::Book",
                 "Name" : "Der letzte Wunsch",
                 "authors" : ["authors@0"],
                 "pictures" : []
