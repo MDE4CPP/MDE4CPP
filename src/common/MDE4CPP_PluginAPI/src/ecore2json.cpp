@@ -85,7 +85,7 @@ crow::json::wvalue Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::
             if(object->eGet(reference)->isContainer()){
                 auto list = crow::json::wvalue();
                 auto bag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(object->eGet(reference))->getAsEObjectContainer();
-                for(int j=0;j<bag->size();j++){
+                for(unsigned int j=0;j<bag->size();j++){
                     list[j] = createJsonOfEObject(bag->at(j));
                 }
                 result_json[reference->getName()] = std::move(list);
@@ -96,7 +96,7 @@ crow::json::wvalue Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::
             break;
         }
         if(!reference->isContainer() && !reference->isContainment()){
-            //TODO set approriate path for reference
+            //TODO set approriate path for reference!!!!
             result_json[reference->getName()] =  reinterpret_cast<intptr_t>(object->eGet(reference).get());
         }
     }
@@ -109,7 +109,7 @@ crow::json::wvalue Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject
     if(isContainer){
         auto list = crow::json::wvalue();
         auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
-        for (int j=0;j<bag->size();j++) {
+        for (unsigned int j=0;j<bag->size();j++) {
             auto value = bag->at(j).get();
             list[j] = value;
         }
