@@ -55,19 +55,19 @@ task generate[packageName.toUpperFirst()/]() {
 	}
 }
 
-task compile[packageName.toUpperFirst()/]Src() {
+task compile[packageName.toUpperFirst()/] {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
-		dependsOn 'generate[packageName.toUpperFirst()/]'
+		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
 	}
 	else
 	{
 	[comment if(buildFile.exists()){ only if src_gen folder is removed, regenerate src_gen folder and compile external/]
-		dependsOn 'generate[packageName.toUpperFirst()/]'
+		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
 	}
 	[aPackage.generateMustRunAfter()/]
@@ -109,7 +109,7 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
 
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
 
-	dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:buildGenerator_fUML4CPP')
+	[comment dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:buildGenerator_fUML4CPP')/]
 }
 [/file]
 
@@ -176,15 +176,11 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) [comment In case of model build file was deleted /]
 	{
-		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerate[packageName.toUpperFirst()/]', true)
-		dependsOn runGeneratorTask 
-		inputs.files(runGeneratorTask .outputs)
+		mustRunAfter = ['['/]getRootProject().getTasksByName('runCommandGenerate[packageName.toUpperFirst()/]', true)[']'/]
 	}
 	else
 	{
-		def generatorTask = getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)
-		dependsOn generatorTask
-		inputs.files(generatorTask.outputs)
+		mustRunAfter = ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)[']'/]
 	}	
 
 	[comment

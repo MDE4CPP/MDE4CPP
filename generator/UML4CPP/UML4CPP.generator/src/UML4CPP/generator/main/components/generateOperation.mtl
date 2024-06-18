@@ -125,12 +125,21 @@ else
 */]
 [template public generateOperationCreation(anOperation : Operation) post(trim())]
 [if (not anOperation.getFeaturingClassifier().oclIsUndefined())]
-[memberName(anOperation)/] = factory->createOperation_as_ownedOperation_in_Class([memberName(anOperation.getFeaturingClassifier())/]);
+[memberName(anOperation)/] = [generateOperationCreationCall(anOperation.getFeaturingClassifier())/];
 [elseif (not anOperation.interface.oclIsUndefined())]
-[memberName(anOperation)/] = factory->createOperation_as_ownedOperation_in_Interface([memberName(anOperation.interface)/]);
+[memberName(anOperation)/] = [generateOperationCreationCall(anOperation.interface)/]);
 [/if]
 [anOperation.ownedParameter.generateParameterCreation()/]
 [/template]
+
+[template public generateOperationCreationCall(anClassifier: Classifier)]
+factory->createOperation_as_ownedOperation_in_Class([memberName(anClassifier)/]);
+[/template]
+
+[template public generateOperationCreationCall(anInterface: Interface)]
+factory->createOperation_as_ownedOperation_in_Interface([memberName(anInterface)/]);
+[/template]
+
 
 [**
  * generate initialization of meta model instance for an anOperation element

@@ -51,7 +51,7 @@ task compileAll() {
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:compileUMLProfiles'
-	dependsOn 'src:common:FoundationalModelLibrary:compileFoundationalModelLibrarySrc'
+	dependsOn 'src:common:FoundationalModelLibrary:compileFoundationalModelLibrary'
 	
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
@@ -139,7 +139,7 @@ task startModelingEclipse(type:Exec){
 
 	if(OperatingSystem.current().isWindows()){
 		// MS Windows
-		commandLine 'cmd', '/c', 'start eclipse.exe'
+		commandLine 'start /b cmd', '/c', 'start eclipse.exe'
 	} else if(OperatingSystem.current().isLinux()){
 		// GNU/Linux
 		commandLine './eclipse'
@@ -167,12 +167,12 @@ task startCPPEclipse(type:Exec){
 		if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows'))
 		{
 			//on windows:
-			commandLine 'cmd', '/c', ('start "" "' + System.getenv('CPP_IDE_EXECUTABLE') + '"')
+			commandLine 'start /b cmd', '/c', ('start "" "' + System.getenv('CPP_IDE_EXECUTABLE') + '/eclipse.exe')
 		}
 		else
 		{
 			//on linux
-			commandLine 'bash' , System.getenv('CPP_IDE_EXECUTABLE')
+			commandLine 'bash' , System.getenv('CPP_IDE_EXECUTABLE')+'/eclipse'
 		}
 	}
 }

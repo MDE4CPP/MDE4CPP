@@ -152,7 +152,7 @@
 	[/for]
 [/for]
 [comment Includes from roles of ConnectorEnds /]
-[for (aConnector : Connector | aClass.ownedConnector->select(c : Connector | c.end->size() > 0)) before('\nIncludes from roles of ConnectorEnds\n') after('\n')][for (anEnd : ConnectorEnd | aConnector.end)]
+[for (aConnector : Connector | aClass.ownedConnector->select(c : Connector | c.end->size() > 0)) before('\n//Includes from roles of ConnectorEnds\n') after('\n')][for (anEnd : ConnectorEnd | aConnector.end)]
 #include "[anEnd.role.type._package.generateNamespacePath(true)/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]
 
