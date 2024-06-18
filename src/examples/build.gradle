@@ -28,8 +28,8 @@ description 'Example collection'
 import org.gradle.internal.os.OperatingSystem;
 
 // global variables
-project.ext.gradle_mde4cpp_compile_plugin_version  = '0.6.0-rc1'
-project.ext.gradle_mde4cpp_generate_plugin_version = '0.6.0-rc1'
+//project.ext.gradle_mde4cpp_compile_plugin_version  = '0.6.0-rc1'
+//project.ext.gradle_mde4cpp_generate_plugin_version = '0.6.0-rc1'
 
 task generateAllExamples() {
 	group 'Examples'
@@ -50,19 +50,6 @@ task generateAllExamples() {
 		}
 		
 		def examples = []
-
-		// PSCS examples ----------------------------------
-		if(OperatingSystem.current().isWindows()){
-			examples.add('./PSCSExamples/Ampelsteuerung_Example/model')
-		}
-		
-		// UML examples -----------------------------------
-			//UMLExamples/TestSuite/copyTestUML
-		examples.add('./UMLExamples/TestSuite/copyTestUML/model')
-			//UMLExamples/UMLModelExample
-
-		examples.add('./UMLExamples/UMLModelExample/model/')
-
 		// common examples --------------------------------
 			
 		// ecore examples ---------------------------------
@@ -72,6 +59,13 @@ task generateAllExamples() {
 		examples.add('./ecoreExamples/TestSuite/eInvokeTest/model/')
 		//examples.add('./ecoreExamples/TestSuite/templateTest/model/')
 		examples.add('./ecoreExamples/ecoreModelExample/model/')
+		
+		// UML examples -----------------------------------
+			//UMLExamples/TestSuite/copyTestUML
+			examples.add('./UMLExamples/TestSuite/copyTestUML/model')
+			//UMLExamples/UMLModelExample
+			examples.add('./UMLExamples/UMLModelExample/model/')
+
 
 		// fUML examples ----------------------------------
 		examples.add('./fUMLExamples/Calculator/model/')
@@ -81,6 +75,11 @@ task generateAllExamples() {
 		examples.add('./oclExamples/oclModelExample/oclEcoreModelExample/model')
 		examples.add('./oclExamples/oclModelExample/oclFumlModelExample/model')
 		// examples.add('./oclExamples/oclModelExample/oclUmlModelExample/model')
+
+		// PSCS examples ----------------------------------
+		//if(OperatingSystem.current().isWindows()){
+		//	examples.add('./PSCSExamples/Ampelsteuerung_Example/model')
+		//}
 
 		examples.each { String path -> 
 			exec {
@@ -100,57 +99,58 @@ task generateAllExamples() {
 task compileAllExamples() {
 	group 'Examples'
 	description 'compile applications for all examples without generating the models'
-	
-	// PSCS examples --------------------------------------
-	if(OperatingSystem.current().isWindows()){
-		dependsOn getRootProject().getTasksByName('compileApplicationForAmpelsteuerung_Example', true)
-	}
-	
-	// UML examples ---------------------------------------
-		//UMLExamples/TestSuite/copyTestUML
-	dependsOn getRootProject().getTasksByName('compileApplicationForCopyTestUML', true)
-		//UMLExamples/UMLExample
-	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
-		//UMLExamples/UMLModelExample
-	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_uml', true)
-	
+
 	// common examples ------------------------------------
 		//commonExamples/persistenceExample
-	//dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
+		dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
 		//commonExamples/pluginFrameworkExample
-	//dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
+		dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
 	
 	// ecore examples -------------------------------------
 		//ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion
-	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnion', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnion', true)
 		//ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth
-	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnionDepth', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnionDepth', true)
 		//ecoreExamples/TestSuite/copyTest
-	dependsOn getRootProject().getTasksByName('compileApplicationForCopyTest', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForCopyTest', true)
 		//ecoreExamples/TestSuite/eInvokeTest
-	dependsOn getRootProject().getTasksByName('compileApplicationForEInvokeTest', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForEInvokeTest', true)
 		//ecoreExamples/ecoreExample
-	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
+		dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
 		//ecoreExamples/ecoreModelExample/application
-	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_ecore', true) 
+		dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_ecore', true) 
 		//ecoreExamples/TestSuite/templateTest
-	//dependsOn getRootProject().getTasksByName('compileApplicationForTemplateTest', true)
+		//dependsOn getRootProject().getTasksByName('compileApplicationForTemplateTest', true)
+
+	// UML examples ---------------------------------------
+		//UMLExamples/TestSuite/copyTestUML
+		dependsOn getRootProject().getTasksByName('compileApplicationForCopyTestUML', true)
+		//UMLExamples/UMLExample
+		dependsOn getRootProject().getTasksByName('compileUMLExample', true)
+		//UMLExamples/UMLModelExample
+		dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_uml', true)
 	
 	// fUML examples --------------------------------------
 		//fUMLExamples/Calculator
-	dependsOn getRootProject().getTasksByName('compileApplicationForCalcModel', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForCalcModel', true)
 		//fUMLExamples/ThreePhilosophers
-	dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
 	
 	// OCL examples ---------------------------------------
 		//oclExamples/applications/oclEcoreExample
-	dependsOn getRootProject().getTasksByName('compileOclEcoreExample', true)
+		dependsOn getRootProject().getTasksByName('compileOclEcoreExample', true)
 		//oclExamples/applications/oclExample
-	dependsOn getRootProject().getTasksByName('compileOclExample', true)
+		dependsOn getRootProject().getTasksByName('compileOclExample', true)
 		//oclExamples/applications/oclUmlExample
-	// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
+		// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
 		//oclExamples/oclModelExample/oclFumlModelExample
-	// dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
+		// dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
+	
+	// PSCS examples --------------------------------------
+		//if(OperatingSystem.current().isWindows()){
+		//	dependsOn getRootProject().getTasksByName('compileApplicationForAmpelsteuerung_Example', true)
+		//}
+
 }
 
 task buildAllExamples(){
