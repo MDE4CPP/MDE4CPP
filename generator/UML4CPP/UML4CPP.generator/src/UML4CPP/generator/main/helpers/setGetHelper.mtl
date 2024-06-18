@@ -618,7 +618,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, co
 					return true;
 				}
 				[else]
-				if(this->[aProperty.getterName()/]()->size() >= removeAt)
+				if((long)this->[aProperty.getterName()/]()->size() >= (long)removeAt)
 				{
 					this->[aProperty.getterName()/]()->erase(this->[aProperty.getterName()/]()->begin() + (removeAt - 1));
 					return true;

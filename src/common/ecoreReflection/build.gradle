@@ -38,12 +38,12 @@ task compileEcoreReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'generateEcoreReflection'
+		mustRunAfter = ["generateEcoreReflection"]
 		dependsOn 'runCommandCompileEcoreReflection'
 	}
 	else
 	{
-		dependsOn 'generateEcoreReflection'
+		mustRunAfter = ["generateEcoreReflection"]
 		dependsOn 'src_gen:compileEcoreReflectionSrc'
 	}
 	mustRunAfter =  [

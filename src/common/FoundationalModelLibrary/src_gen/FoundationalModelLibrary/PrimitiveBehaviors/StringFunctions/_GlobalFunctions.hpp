@@ -25,9 +25,9 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 
 namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 {
-	std::string Concat(const std::string x, const std::string y);
 	int Size(const std::string x);
 	std::string Substring(const std::string x, const int lower, const int upper);
+	std::string Concat(const std::string x, const std::string y);
 }
 
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_STRINGFUNCTIONS__GLOBALFUNCTIONS_HPP */

@@ -41,12 +41,12 @@ task compileStandardProfile() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'generateStandardProfile'
+		mustRunAfter = ["generateStandardProfile"]
 		dependsOn 'runCommandCompileStandardProfile'
 	}
 	else
 	{
-		dependsOn 'generateStandardProfile'
+		mustRunAfter = ["generateStandardProfile"]
 		dependsOn 'src_gen:compileStandardProfileSrc'
 	}
 	mustRunAfter =  [

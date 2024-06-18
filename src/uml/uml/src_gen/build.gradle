@@ -43,16 +43,11 @@ task compileUmlSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
-		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerateUml', true)
-		dependsOn runGeneratorTask
-		inputs.files(runGeneratorTask.outputs)
+		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateUml', true)]
 	}
 	else
 	{
-		def generatorTask = getRootProject().getTasksByName('generateUmlModel', true)
-		println(generatorTask)
-		dependsOn generatorTask
-		inputs.files(generatorTask.outputs)
+		mustRunAfter = [getRootProject().getTasksByName('generateUmlModel', true)]
 	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

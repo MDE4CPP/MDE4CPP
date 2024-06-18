@@ -40,12 +40,12 @@ task compileUmlReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'generateUmlReflection'
+		mustRunAfter = ["generateUmlReflection"]
 		dependsOn 'runCommandCompileUmlReflection'
 	}
 	else
 	{
-		dependsOn 'generateUmlReflection'
+		mustRunAfter = ["generateUmlReflection"]
 		dependsOn 'src_gen:compileUmlReflectionSrc'
 	}
 	mustRunAfter =  [

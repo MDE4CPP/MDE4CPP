@@ -39,12 +39,12 @@ task compileOcl() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generateOcl'
+		mustRunAfter = ["generateOcl"]
 		dependsOn 'runCommandCompileOcl'
 	}
 	else
 	{
-		dependsOn 'generateOcl'
+		mustRunAfter = ["generateOcl"]
 		dependsOn 'src_gen:compileOclSrc'
 	} 
 	mustRunAfter =  [

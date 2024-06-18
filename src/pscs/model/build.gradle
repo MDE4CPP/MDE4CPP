@@ -10,14 +10,10 @@ task generatePSCSModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of PSCS.ecore model'
 
 	generateAPI = false;
-	
 	modelFilePath = file('.' + File.separator + 'PSCS.ecore')
-
-	relatedModels = ['ecore', 'fUML', 'types', 'uml']
-	
+	relatedModels = ['ecore', 'fUML', 'types', 'uml']	
 	outputs.files(fileTree('../src_gen/PSCS') {
         exclude '.cmake/**'
     })
 
-	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:buildGenerator_ecore4CPP')
 }

@@ -131,52 +131,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 		unsigned long uID = opaqueBehavior->_getID();
 		switch(uID)
 		{
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL:
+			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_NOT:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToReal has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Not has no context
 				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::greaterOrEqual has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MAX:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Max has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessThan has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MOD:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Mod has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::greaterThan has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result());
+				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result());
 				break;
 			}
 			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MIN:
@@ -187,117 +147,29 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_MIN:
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::Min has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToString has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterOrEqual has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_XOR:
+			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Xor has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MIN:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Min has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_PLUS:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::plus has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::ToInteger has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Neg has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Size has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Abs has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result());
-				break;
-			}
-			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeInteger specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeInteger
+				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeNewLine specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeNewLine
 				if(!context)
 				{
-					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeInteger is null!");
+					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeNewLine is null!");
 					return outputParameterValues;
 				}
-				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITEINTEGER_INTEGER_STATUS, inputArguments, outputArguments);
+				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITENEWLINE_STATUS, inputArguments, outputArguments);
 
 				//Create output ParameterValue for out parameter errorStatus
 				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_errorStatus());
+				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine_errorStatus());
 				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
 				outputParameterValues->add(errorStatusParameterValue);
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TIMES:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::times has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_TOUNLIMITEDNATURAL:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::ToUnlimitedNatural has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::ToString has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result());
 				break;
 			}
 			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL:
@@ -308,20 +180,217 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_IMPLIES:
+			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Implies has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::lessThan has no context
 				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result());
+				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MINUS:
+			case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SUBSTRING:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::minus has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Substring has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TIMES:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::times has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::lessThan has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Abs has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::times has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MINUS:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::minus has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::ToInteger has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result());
+				break;
+			}
+			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READBOOLEAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readBoolean specifies Operation FoundationalModelLibrary::BasicInputOutput::TextInputChannel::readBoolean
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readBoolean is null!");
+					return outputParameterValues;
+				}
+				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_OPERATION_READBOOLEAN_STATUS, inputArguments, outputArguments);
+
+				//Create output ParameterValue for out parameter errorStatus
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_errorStatus());
+				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
+				outputParameterValues->add(errorStatusParameterValue);
+				returnParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_ReturnResult());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_ABS:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Abs has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Max has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::lessOrEqual has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToString has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::lessOrEqual has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result());
+				break;
+			}
+			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readLine specifies Operation FoundationalModelLibrary::BasicInputOutput::TextInputChannel::readLine
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readLine is null!");
+					return outputParameterValues;
+				}
+				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_OPERATION_READLINE_STATUS, inputArguments, outputArguments);
+
+				//Create output ParameterValue for out parameter errorStatus
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_errorStatus());
+				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
+				outputParameterValues->add(errorStatusParameterValue);
+				returnParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_ReturnResult());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MOD:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Mod has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::greaterOrEqual has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOBOOLEAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToBoolean has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_ROUND:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Round has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_TOUNLIMITEDNATURAL:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::ToUnlimitedNatural has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToUnlimitedNatural_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_EQUALS:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::equals has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result());
+				break;
+			}
+			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeBoolean specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeBoolean
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeBoolean is null!");
+					return outputParameterValues;
+				}
+				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITEBOOLEAN_BOOLEAN_STATUS, inputArguments, outputArguments);
+
+				//Create output ParameterValue for out parameter errorStatus
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_errorStatus());
+				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
+				outputParameterValues->add(errorStatusParameterValue);
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::greaterThan has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result());
 				break;
 			}
 			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER:
@@ -342,20 +411,36 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				returnParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter_ReturnResult());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN:
+			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_MIN:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::greaterThan has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::Min has no context
 				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result());
+				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Min_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX:
+			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_IMPLIES:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Max has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Implies has no context
 				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result());
+				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_PLUS:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::plus has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_CONCAT:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Concat has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result());
 				break;
 			}
 			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_MAX:
@@ -364,71 +449,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
 				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_Max_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_AND:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::And has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::lessThan has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessThan_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::lessOrEqual has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_lessOrEqual_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOUNLIMITEDNATURAL:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::ToUnlimitedNatural has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result());
-				break;
-			}
-			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeNewLine specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeNewLine
-				if(!context)
-				{
-					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeNewLine is null!");
-					return outputParameterValues;
-				}
-				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITENEWLINE_STATUS, inputArguments, outputArguments);
-
-				//Create output ParameterValue for out parameter errorStatus
-				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine_errorStatus());
-				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
-				outputParameterValues->add(errorStatusParameterValue);
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_EQUALS:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::equals has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SUBSTRING:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Substring has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result());
 				break;
 			}
 			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER:
@@ -457,112 +477,132 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_NEG:
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_INV:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Neg has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::lessOrEqual has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result());
-				break;
-			}
-			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READBOOLEAN:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readBoolean specifies Operation FoundationalModelLibrary::BasicInputOutput::TextInputChannel::readBoolean
-				if(!context)
-				{
-					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readBoolean is null!");
-					return outputParameterValues;
-				}
-				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_OPERATION_READBOOLEAN_STATUS, inputArguments, outputArguments);
-
-				//Create output ParameterValue for out parameter errorStatus
-				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_errorStatus());
-				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
-				outputParameterValues->add(errorStatusParameterValue);
-				returnParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_ReturnResult());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterOrEqual has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Inv has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToString has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::ToString has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TOUNLIMITEDNATURAL:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::ToUnlimitedNatural has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MAX:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Max has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_PLUS:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::plus has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToString has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Size has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_OR:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Or has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result());
 				break;
 			}
-			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE:
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MIN:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readLine specifies Operation FoundationalModelLibrary::BasicInputOutput::TextInputChannel::readLine
-				if(!context)
-				{
-					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readLine is null!");
-					return outputParameterValues;
-				}
-				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_OPERATION_READLINE_STATUS, inputArguments, outputArguments);
-
-				//Create output ParameterValue for out parameter errorStatus
-				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_errorStatus());
-				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
-				outputParameterValues->add(errorStatusParameterValue);
-				returnParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_ReturnResult());
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Min has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_PLUS:
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_MINUS:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::plus has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::minus has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_NOT:
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Not has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::greaterOrEqual has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterOrEqual_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MINUS:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::minus has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToReal has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN:
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterThan has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Neg has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Floor has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::greaterOrEqual has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessThan has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_DIV:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Div has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result());
 				break;
 			}
 			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_DIVIDE:
@@ -573,12 +613,70 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES:
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::times has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToInteger has no context
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result());
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_result());
+				break;
+			}
+			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeInteger specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeInteger
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeInteger is null!");
+					return outputParameterValues;
+				}
+				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITEINTEGER_INTEGER_STATUS, inputArguments, outputArguments);
+
+				//Create output ParameterValue for out parameter errorStatus
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_errorStatus());
+				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
+				outputParameterValues->add(errorStatusParameterValue);
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::greaterThan has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_greaterThan_result());
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_AND:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::And has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result());
+				break;
+			}
+			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITELINE:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeLine specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeLine
+				if(!context)
+				{
+					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeLine is null!");
+					return outputParameterValues;
+				}
+				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITELINE_STRING_STATUS, inputArguments, outputArguments);
+
+				//Create output ParameterValue for out parameter errorStatus
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_errorStatus());
+				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
+				outputParameterValues->add(errorStatusParameterValue);
+				break;
+			}
+			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN:
+			{	
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterThan has no context
+				// and is therefore realized as a global function
+				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result());
 				break;
 			}
 			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READCHARACTER:
@@ -599,12 +697,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				returnParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter_ReturnResult());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_TOBOOLEAN:
+			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_NEG:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::ToBoolean has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Neg has no context
 				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result());
+				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result());
 				break;
 			}
 			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER:
@@ -613,30 +711,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				// and is therefore realized as a global function
 				result = FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::invoke(uID, inputArguments, outputArguments);
 				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToInteger_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_CONCAT:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Concat has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_ROUND:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Round has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Floor has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result());
 				break;
 			}
 			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING:
@@ -656,80 +730,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				outputParameterValues->add(errorStatusParameterValue);
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_ABS:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Abs has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result());
-				break;
-			}
-			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITELINE:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeLine specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeLine
-				if(!context)
-				{
-					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeLine is null!");
-					return outputParameterValues;
-				}
-				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITELINE_STRING_STATUS, inputArguments, outputArguments);
-
-				//Create output ParameterValue for out parameter errorStatus
-				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_errorStatus());
-				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
-				outputParameterValues->add(errorStatusParameterValue);
-				break;
-			}
-			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeBoolean specifies Operation FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeBoolean
-				if(!context)
-				{
-					DEBUG_ERROR("Context for execution OpaqueBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeBoolean is null!");
-					return outputParameterValues;
-				}
-				result = context->invokeOperation(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_OPERATION_WRITEBOOLEAN_BOOLEAN_STATUS, inputArguments, outputArguments);
-
-				//Create output ParameterValue for out parameter errorStatus
-				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> errorStatusParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-				errorStatusParameterValue->setParameter(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_errorStatus());
-				errorStatusParameterValue->getValues()->add(outputArguments->at(0));
-				outputParameterValues->add(errorStatusParameterValue);
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::lessThan has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_OR:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Or has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_INV:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Inv has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result());
-				break;
-			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER:
-			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToInteger has no context
-				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_result());
-				break;
-			}
 			case FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
 			{	
 				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::ToString has no context
@@ -738,12 +738,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions::UnlimitedNaturalFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_UnlimitedNaturalFunctions_ToString_result());
 				break;
 			}
-			case FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_DIV:
+			case FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_XOR:
 			{	
-				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::Div has no context
+				// OpaqueBehavior FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::Xor has no context
 				// and is therefore realized as a global function
-				result = FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::invoke(uID, inputArguments, outputArguments);
-				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions::IntegerFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result());
+				result = FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::invoke(uID, inputArguments, outputArguments);
+				returnParameterValue->setParameter(FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions::BooleanFunctionsPackage::eInstance()->get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result());
 				break;
 			}
 

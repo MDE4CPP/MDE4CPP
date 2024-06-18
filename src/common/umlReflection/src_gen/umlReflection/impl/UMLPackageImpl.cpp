@@ -1990,19 +1990,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Action_output = factory->createProperty_as_ownedAttribute_in_Class(uML_Action);
     // Action operations
 	//allActions
-	uML_Action_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);
+	uML_Action_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);;
 	uML_Action_allActions_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Action_allActions__);
 
 	//allOwnedNodes
-	uML_Action_allOwnedNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);
+	uML_Action_allOwnedNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);;
 	uML_Action_allOwnedNodes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Action_allOwnedNodes__);
 
 	//containingBehavior
-	uML_Action_containingBehavior__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);
+	uML_Action_containingBehavior__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);;
 	uML_Action_containingBehavior_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Action_containingBehavior__);
 
 	//context
-	uML_Action_context__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);
+	uML_Action_context__ = factory->createOperation_as_ownedOperation_in_Class(uML_Action);;
 	uML_Action_context_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Action_context__);
 
     //-------------------------------------------
@@ -2172,7 +2172,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ActivityEdge_weight = factory->createProperty_as_ownedAttribute_in_Class(uML_ActivityEdge);
     // ActivityEdge operations
 	//isConsistentWith
-	uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityEdge);
+	uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityEdge);;
 	uML_ActivityEdge_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement);uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
@@ -2226,7 +2226,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ActivityGroup_superGroup = factory->createProperty_as_ownedAttribute_in_Class(uML_ActivityGroup);
     // ActivityGroup operations
 	//containingActivity
-	uML_ActivityGroup_containingActivity__ = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityGroup);
+	uML_ActivityGroup_containingActivity__ = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityGroup);;
 	uML_ActivityGroup_containingActivity_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ActivityGroup_containingActivity__);
 
     //-------------------------------------------
@@ -2252,11 +2252,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ActivityNode_redefinedNode = factory->createProperty_as_ownedAttribute_in_Class(uML_ActivityNode);
     // ActivityNode operations
 	//containingActivity
-	uML_ActivityNode_containingActivity__ = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityNode);
+	uML_ActivityNode_containingActivity__ = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityNode);;
 	uML_ActivityNode_containingActivity_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ActivityNode_containingActivity__);
 
 	//isConsistentWith
-	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityNode);
+	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ActivityNode);;
 	uML_ActivityNode_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement);uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
@@ -2568,11 +2568,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Artifact_ownedOperation = factory->createProperty_as_ownedAttribute_in_Class(uML_Artifact);
     // Artifact operations
 	//createOwnedAttribute
-	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Artifact);
+	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Artifact);;
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
 	//createOwnedOperation
-	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Artifact);
+	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Artifact);;
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_as_ownedParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
     //-------------------------------------------
@@ -2660,11 +2660,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Association_ownedEnd = factory->createProperty_as_ownedAttribute_in_Class(uML_Association);
     // Association operations
 	//endType
-	uML_Association_endType__ = factory->createOperation_as_ownedOperation_in_Class(uML_Association);
+	uML_Association_endType__ = factory->createOperation_as_ownedOperation_in_Class(uML_Association);;
 	uML_Association_endType_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Association_endType__);
 
 	//isBinary
-	uML_Association_isBinary__ = factory->createOperation_as_ownedOperation_in_Class(uML_Association);
+	uML_Association_isBinary__ = factory->createOperation_as_ownedOperation_in_Class(uML_Association);;
 	uML_Association_isBinary__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Association_isBinary__);
 
     //-------------------------------------------
@@ -2753,19 +2753,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Behavior_specification = factory->createProperty_as_ownedAttribute_in_Class(uML_Behavior);
     // Behavior operations
 	//behavioredClassifier
-	uML_Behavior_behavioredClassifier_Element_Element = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);
+	uML_Behavior_behavioredClassifier_Element_Element = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);;
 	uML_Behavior_behavioredClassifier_Element_Element_from = factory->createParameter_as_ownedParameter_in_Operation(uML_Behavior_behavioredClassifier_Element_Element);uML_Behavior_behavioredClassifier_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Behavior_behavioredClassifier_Element_Element);
 
 	//context
-	uML_Behavior_context__ = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);
+	uML_Behavior_context__ = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);;
 	uML_Behavior_context_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Behavior_context__);
 
 	//inputParameters
-	uML_Behavior_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);
+	uML_Behavior_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);;
 	uML_Behavior_inputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Behavior_inputParameters__);
 
 	//outputParameters
-	uML_Behavior_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);
+	uML_Behavior_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_Behavior);;
 	uML_Behavior_outputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Behavior_outputParameters__);
 
     //-------------------------------------------
@@ -2803,19 +2803,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_BehavioralFeature_raisedException = factory->createProperty_as_ownedAttribute_in_Class(uML_BehavioralFeature);
     // BehavioralFeature operations
 	//createReturnResult
-	uML_BehavioralFeature_createReturnResult_String_Type_String_Type = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);
+	uML_BehavioralFeature_createReturnResult_String_Type_String_Type = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);;
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_createReturnResult_String_Type_String_Type);uML_BehavioralFeature_createReturnResult_String_Type_String_Type_name = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_createReturnResult_String_Type_String_Type);uML_BehavioralFeature_createReturnResult_String_Type_String_Type_type = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_createReturnResult_String_Type_String_Type);
 
 	//inputParameters
-	uML_BehavioralFeature_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);
+	uML_BehavioralFeature_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);;
 	uML_BehavioralFeature_inputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_inputParameters__);
 
 	//isDistinguishableFrom
-	uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);
+	uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);;
 	uML_BehavioralFeature_isDistinguishableFrom_result = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
 	//outputParameters
-	uML_BehavioralFeature_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);
+	uML_BehavioralFeature_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioralFeature);;
 	uML_BehavioralFeature_outputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioralFeature_outputParameters__);
 
     //-------------------------------------------
@@ -2839,11 +2839,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_BehavioredClassifier_ownedBehavior = factory->createProperty_as_ownedAttribute_in_Class(uML_BehavioredClassifier);
     // BehavioredClassifier operations
 	//getAllImplementedInterfaces
-	uML_BehavioredClassifier_getAllImplementedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioredClassifier);
+	uML_BehavioredClassifier_getAllImplementedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioredClassifier);;
 	uML_BehavioredClassifier_getAllImplementedInterfaces__return = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioredClassifier_getAllImplementedInterfaces__);
 
 	//getImplementedInterfaces
-	uML_BehavioredClassifier_getImplementedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioredClassifier);
+	uML_BehavioredClassifier_getImplementedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_BehavioredClassifier);;
 	uML_BehavioredClassifier_getImplementedInterfaces__return = factory->createParameter_as_ownedParameter_in_Operation(uML_BehavioredClassifier_getImplementedInterfaces__);
 
     //-------------------------------------------
@@ -2960,11 +2960,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_CallAction_result = factory->createProperty_as_ownedAttribute_in_Class(uML_CallAction);
     // CallAction operations
 	//inputParameters
-	uML_CallAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallAction);
+	uML_CallAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallAction);;
 	uML_CallAction_inputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_CallAction_inputParameters__);
 
 	//outputParameters
-	uML_CallAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallAction);
+	uML_CallAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallAction);;
 	uML_CallAction_outputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_CallAction_outputParameters__);
 
     //-------------------------------------------
@@ -2984,11 +2984,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_CallBehaviorAction_behavior = factory->createProperty_as_ownedAttribute_in_Class(uML_CallBehaviorAction);
     // CallBehaviorAction operations
 	//inputParameters
-	uML_CallBehaviorAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallBehaviorAction);
+	uML_CallBehaviorAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallBehaviorAction);;
 	uML_CallBehaviorAction_inputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_CallBehaviorAction_inputParameters__);
 
 	//outputParameters
-	uML_CallBehaviorAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallBehaviorAction);
+	uML_CallBehaviorAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallBehaviorAction);;
 	uML_CallBehaviorAction_outputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_CallBehaviorAction_outputParameters__);
 
     //-------------------------------------------
@@ -3020,11 +3020,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_CallOperationAction_target = factory->createProperty_as_ownedAttribute_in_Class(uML_CallOperationAction);
     // CallOperationAction operations
 	//inputParameters
-	uML_CallOperationAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallOperationAction);
+	uML_CallOperationAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallOperationAction);;
 	uML_CallOperationAction_inputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_CallOperationAction_inputParameters__);
 
 	//outputParameters
-	uML_CallOperationAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallOperationAction);
+	uML_CallOperationAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_CallOperationAction);;
 	uML_CallOperationAction_outputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_CallOperationAction_outputParameters__);
 
     //-------------------------------------------
@@ -3071,19 +3071,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Class_superClass = factory->createProperty_as_ownedAttribute_in_Class(uML_Class);
     // Class operations
 	//createOwnedOperation
-	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Class);
+	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Class);;
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
 	//extension
-	uML_Class_extension__ = factory->createOperation_as_ownedOperation_in_Class(uML_Class);
+	uML_Class_extension__ = factory->createOperation_as_ownedOperation_in_Class(uML_Class);;
 	uML_Class_extension_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_extension__);
 
 	//isMetaclass
-	uML_Class_isMetaclass__ = factory->createOperation_as_ownedOperation_in_Class(uML_Class);
+	uML_Class_isMetaclass__ = factory->createOperation_as_ownedOperation_in_Class(uML_Class);;
 	uML_Class_isMetaclass__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_isMetaclass__);
 
 	//superClass
-	uML_Class_superClass__ = factory->createOperation_as_ownedOperation_in_Class(uML_Class);
+	uML_Class_superClass__ = factory->createOperation_as_ownedOperation_in_Class(uML_Class);;
 	uML_Class_superClass_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Class_superClass__);
 
     //-------------------------------------------
@@ -3178,103 +3178,103 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Classifier_useCase = factory->createProperty_as_ownedAttribute_in_Class(uML_Classifier);
     // Classifier operations
 	//allAttributes
-	uML_Classifier_allAttributes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_allAttributes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_allAttributes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_allAttributes__);
 
 	//allFeatures
-	uML_Classifier_allFeatures__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_allFeatures__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_allFeatures_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_allFeatures__);
 
 	//allParents
-	uML_Classifier_allParents__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_allParents__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_allParents_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_allParents__);
 
 	//allRealizedInterfaces
-	uML_Classifier_allRealizedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_allRealizedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_allRealizedInterfaces_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_allRealizedInterfaces__);
 
 	//allSlottableFeatures
-	uML_Classifier_allSlottableFeatures__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_allSlottableFeatures__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_allSlottableFeatures_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_allSlottableFeatures__);
 
 	//allUsedInterfaces
-	uML_Classifier_allUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_allUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_allUsedInterfaces_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_allUsedInterfaces__);
 
 	//conformsTo
-	uML_Classifier_conformsTo_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_conformsTo_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_conformsTo_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_conformsTo_Type_Type);uML_Classifier_conformsTo_Type_Type_other = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_conformsTo_Type_Type);
 
 	//directlyRealizedInterfaces
-	uML_Classifier_directlyRealizedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_directlyRealizedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_directlyRealizedInterfaces_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_directlyRealizedInterfaces__);
 
 	//directlyUsedInterfaces
-	uML_Classifier_directlyUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_directlyUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_directlyUsedInterfaces_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_directlyUsedInterfaces__);
 
 	//general
-	uML_Classifier_general__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_general__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_general_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_general__);
 
 	//getAllAttributes
-	uML_Classifier_getAllAttributes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_getAllAttributes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_getAllAttributes__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getAllAttributes__);
 
 	//getAllOperations
-	uML_Classifier_getAllOperations__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_getAllOperations__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_getAllOperations__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getAllOperations__);
 
 	//getAllUsedInterfaces
-	uML_Classifier_getAllUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_getAllUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_getAllUsedInterfaces__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getAllUsedInterfaces__);
 
 	//getOperation
-	uML_Classifier_getOperation_String_String_Type_String_String_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_getOperation_String_String_Type_String_String_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_getOperation_String_String_Type_String_String_Typereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);uML_Classifier_getOperation_String_String_Type_String_String_Type_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterNames = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterTypes = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);
 
 	//getOperation
-	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterNames = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterTypes = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_ignoreCase = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);
 
 	//getOperations
-	uML_Classifier_getOperations__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_getOperations__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_getOperations__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getOperations__);
 
 	//getUsedInterfaces
-	uML_Classifier_getUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_getUsedInterfaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_getUsedInterfaces__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_getUsedInterfaces__);
 
 	//hasVisibilityOf
-	uML_Classifier_hasVisibilityOf_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_hasVisibilityOf_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_hasVisibilityOf_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_hasVisibilityOf_NamedElement_NamedElement);uML_Classifier_hasVisibilityOf_NamedElement_NamedElement_n = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_hasVisibilityOf_NamedElement_NamedElement);
 
 	//inherit
-	uML_Classifier_inherit_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_inherit_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_inherit_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_inherit_NamedElement_NamedElement);uML_Classifier_inherit_NamedElement_NamedElement_inhs = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_inherit_NamedElement_NamedElement);
 
 	//inheritableMembers
-	uML_Classifier_inheritableMembers_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_inheritableMembers_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_inheritableMembers_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_inheritableMembers_Classifier_Classifier);uML_Classifier_inheritableMembers_Classifier_Classifier_c = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_inheritableMembers_Classifier_Classifier);
 
 	//inheritedMember
-	uML_Classifier_inheritedMember__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_inheritedMember__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_inheritedMember_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_inheritedMember__);
 
 	//isSubstitutableFor
-	uML_Classifier_isSubstitutableFor_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_isSubstitutableFor_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_isSubstitutableFor_Classifier_Classifier_contract = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_isSubstitutableFor_Classifier_Classifier);uML_Classifier_isSubstitutableFor_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_isSubstitutableFor_Classifier_Classifier);
 
 	//isTemplate
-	uML_Classifier_isTemplate__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_isTemplate__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_isTemplate_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_isTemplate__);
 
 	//maySpecializeType
-	uML_Classifier_maySpecializeType_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_maySpecializeType_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_maySpecializeType_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_maySpecializeType_Classifier_Classifier);uML_Classifier_maySpecializeType_Classifier_Classifier_c = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_maySpecializeType_Classifier_Classifier);
 
 	//parents
-	uML_Classifier_parents__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);
+	uML_Classifier_parents__ = factory->createOperation_as_ownedOperation_in_Class(uML_Classifier);;
 	uML_Classifier_parents_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Classifier_parents__);
 
     //-------------------------------------------
@@ -3704,27 +3704,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Component_required = factory->createProperty_as_ownedAttribute_in_Class(uML_Component);
     // Component operations
 	//createOwnedClass
-	uML_Component_createOwnedClass_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Component);
+	uML_Component_createOwnedClass_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Component);;
 	uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedClass_String_Boolean_String_Boolean);uML_Component_createOwnedClass_String_Boolean_String_Boolean_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedClass_String_Boolean_String_Boolean);uML_Component_createOwnedClass_String_Boolean_String_Boolean_isAbstract = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedClass_String_Boolean_String_Boolean);
 
 	//createOwnedEnumeration
-	uML_Component_createOwnedEnumeration_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Component);
+	uML_Component_createOwnedEnumeration_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Component);;
 	uML_Component_createOwnedEnumeration_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedEnumeration_String_String);uML_Component_createOwnedEnumeration_String_String_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedEnumeration_String_String);
 
 	//createOwnedInterface
-	uML_Component_createOwnedInterface_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Component);
+	uML_Component_createOwnedInterface_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Component);;
 	uML_Component_createOwnedInterface_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedInterface_String_String);uML_Component_createOwnedInterface_String_String_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedInterface_String_String);
 
 	//createOwnedPrimitiveType
-	uML_Component_createOwnedPrimitiveType_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Component);
+	uML_Component_createOwnedPrimitiveType_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Component);;
 	uML_Component_createOwnedPrimitiveType_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedPrimitiveType_String_String);uML_Component_createOwnedPrimitiveType_String_String_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_createOwnedPrimitiveType_String_String);
 
 	//provided
-	uML_Component_provided__ = factory->createOperation_as_ownedOperation_in_Class(uML_Component);
+	uML_Component_provided__ = factory->createOperation_as_ownedOperation_in_Class(uML_Component);;
 	uML_Component_provided_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_provided__);
 
 	//required
-	uML_Component_required__ = factory->createOperation_as_ownedOperation_in_Class(uML_Component);
+	uML_Component_required__ = factory->createOperation_as_ownedOperation_in_Class(uML_Component);;
 	uML_Component_required_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Component_required__);
 
     //-------------------------------------------
@@ -3844,7 +3844,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ConditionalNode_result = factory->createProperty_as_ownedAttribute_in_Class(uML_ConditionalNode);
     // ConditionalNode operations
 	//allActions
-	uML_ConditionalNode_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_ConditionalNode);
+	uML_ConditionalNode_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_ConditionalNode);;
 	uML_ConditionalNode_allActions_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ConditionalNode_allActions__);
 
     //-------------------------------------------
@@ -3858,7 +3858,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ConnectableElement_templateParameter = factory->createProperty_as_ownedAttribute_in_Class(uML_ConnectableElement);
     // ConnectableElement operations
 	//end
-	uML_ConnectableElement_end__ = factory->createOperation_as_ownedOperation_in_Class(uML_ConnectableElement);
+	uML_ConnectableElement_end__ = factory->createOperation_as_ownedOperation_in_Class(uML_ConnectableElement);;
 	uML_ConnectableElement_end_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ConnectableElement_end__);
 
     //-------------------------------------------
@@ -3950,7 +3950,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Connector_type = factory->createProperty_as_ownedAttribute_in_Class(uML_Connector);
     // Connector operations
 	//kind
-	uML_Connector_kind__ = factory->createOperation_as_ownedOperation_in_Class(uML_Connector);
+	uML_Connector_kind__ = factory->createOperation_as_ownedOperation_in_Class(uML_Connector);;
 	uML_Connector_kind_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Connector_kind__);
 
     //-------------------------------------------
@@ -4018,7 +4018,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ConnectorEnd_role = factory->createProperty_as_ownedAttribute_in_Class(uML_ConnectorEnd);
     // ConnectorEnd operations
 	//definingEnd
-	uML_ConnectorEnd_definingEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_ConnectorEnd);
+	uML_ConnectorEnd_definingEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_ConnectorEnd);;
 	uML_ConnectorEnd_definingEnd_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ConnectorEnd_definingEnd__);
 
     //-------------------------------------------
@@ -4347,11 +4347,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_DataType_ownedOperation = factory->createProperty_as_ownedAttribute_in_Class(uML_DataType);
     // DataType operations
 	//createOwnedAttribute
-	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_DataType);
+	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_DataType);;
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
 	//createOwnedOperation
-	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_DataType);
+	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_DataType);;
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_as_ownedParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
     //-------------------------------------------
@@ -4566,7 +4566,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_DeploymentTarget_deployment = factory->createProperty_as_ownedAttribute_in_Class(uML_DeploymentTarget);
     // DeploymentTarget operations
 	//deployedElement
-	uML_DeploymentTarget_deployedElement__ = factory->createOperation_as_ownedOperation_in_Class(uML_DeploymentTarget);
+	uML_DeploymentTarget_deployedElement__ = factory->createOperation_as_ownedOperation_in_Class(uML_DeploymentTarget);;
 	uML_DeploymentTarget_deployedElement_result = factory->createParameter_as_ownedParameter_in_Operation(uML_DeploymentTarget_deployedElement__);
 
     //-------------------------------------------
@@ -4660,7 +4660,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Duration_observation = factory->createProperty_as_ownedAttribute_in_Class(uML_Duration);
     // Duration operations
 	//stringValue
-	uML_Duration_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_Duration);
+	uML_Duration_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_Duration);;
 	uML_Duration_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Duration_stringValue__);
 
     //-------------------------------------------
@@ -4762,138 +4762,138 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Element_owner = factory->createProperty_as_ownedAttribute_in_Class(uML_Element);
     // Element operations
 	//addKeyword
-	uML_Element_addKeyword_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_addKeyword_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_addKeyword_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_addKeyword_String_String);uML_Element_addKeyword_String_String_keyword = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_addKeyword_String_String);
 
 	//allOwnedElements
-	uML_Element_allOwnedElements__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_allOwnedElements__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_allOwnedElements_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_allOwnedElements__);
 
 	//applyStereotype
-	uML_Element_applyStereotype_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_applyStereotype_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_applyStereotype_Stereotype_Stereotypereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_applyStereotype_Stereotype_Stereotype);uML_Element_applyStereotype_Stereotype_Stereotype_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_applyStereotype_Stereotype_Stereotype);
 
 	//createEAnnotation
-	uML_Element_createEAnnotation_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_createEAnnotation_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_createEAnnotation_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_createEAnnotation_String_String);uML_Element_createEAnnotation_String_String_source = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_createEAnnotation_String_String);
 
 	//destroy
-	uML_Element_destroy__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_destroy__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 
 	//getApplicableStereotype
-	uML_Element_getApplicableStereotype_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getApplicableStereotype_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getApplicableStereotype_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getApplicableStereotype_String_String);uML_Element_getApplicableStereotype_String_String_qualifiedName = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getApplicableStereotype_String_String);
 
 	//getApplicableStereotypes
-	uML_Element_getApplicableStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getApplicableStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getApplicableStereotypes__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getApplicableStereotypes__);
 
 	//getAppliedStereotype
-	uML_Element_getAppliedStereotype_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getAppliedStereotype_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getAppliedStereotype_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedStereotype_String_String);uML_Element_getAppliedStereotype_String_String_qualifiedName = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedStereotype_String_String);
 
 	//getAppliedStereotypes
-	uML_Element_getAppliedStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getAppliedStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getAppliedStereotypes__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedStereotypes__);
 
 	//getAppliedSubstereotype
-	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String);uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String);uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_qualifiedName = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String);
 
 	//getAppliedSubstereotypes
-	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype);uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype);
 
 	//getKeywords
-	uML_Element_getKeywords__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getKeywords__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getKeywords__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getKeywords__);
 
 	//getModel
-	uML_Element_getModel__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getModel__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getModel__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getModel__);
 
 	//getNearestPackage
-	uML_Element_getNearestPackage__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getNearestPackage__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getNearestPackage__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getNearestPackage__);
 
 	//getRelationships
-	uML_Element_getRelationships__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getRelationships__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getRelationships__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getRelationships__);
 
 	//getRelationships
-	uML_Element_getRelationships_EClass_EClass = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getRelationships_EClass_EClass = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getRelationships_EClass_EClassreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getRelationships_EClass_EClass);uML_Element_getRelationships_EClass_EClass_eClass = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getRelationships_EClass_EClass);
 
 	//getRequiredStereotype
-	uML_Element_getRequiredStereotype_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getRequiredStereotype_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getRequiredStereotype_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getRequiredStereotype_String_String);uML_Element_getRequiredStereotype_String_String_qualifiedName = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getRequiredStereotype_String_String);
 
 	//getRequiredStereotypes
-	uML_Element_getRequiredStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getRequiredStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getRequiredStereotypes__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getRequiredStereotypes__);
 
 	//getSourceDirectedRelationships
-	uML_Element_getSourceDirectedRelationships__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getSourceDirectedRelationships__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getSourceDirectedRelationships__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getSourceDirectedRelationships__);
 
 	//getSourceDirectedRelationships
-	uML_Element_getSourceDirectedRelationships_EClass_EClass = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getSourceDirectedRelationships_EClass_EClass = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getSourceDirectedRelationships_EClass_EClassreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getSourceDirectedRelationships_EClass_EClass);uML_Element_getSourceDirectedRelationships_EClass_EClass_eClass = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getSourceDirectedRelationships_EClass_EClass);
 
 	//getStereotypeApplication
-	uML_Element_getStereotypeApplication_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getStereotypeApplication_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getStereotypeApplication_Stereotype_Stereotype);uML_Element_getStereotypeApplication_Stereotype_Stereotype_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getStereotypeApplication_Stereotype_Stereotype);
 
 	//getStereotypeApplications
-	uML_Element_getStereotypeApplications__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getStereotypeApplications__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getStereotypeApplications__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getStereotypeApplications__);
 
 	//getTargetDirectedRelationships
-	uML_Element_getTargetDirectedRelationships__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getTargetDirectedRelationships__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getTargetDirectedRelationships__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getTargetDirectedRelationships__);
 
 	//getTargetDirectedRelationships
-	uML_Element_getTargetDirectedRelationships_EClass_EClass = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getTargetDirectedRelationships_EClass_EClass = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getTargetDirectedRelationships_EClass_EClassreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getTargetDirectedRelationships_EClass_EClass);uML_Element_getTargetDirectedRelationships_EClass_EClass_eClass = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getTargetDirectedRelationships_EClass_EClass);
 
 	//getValue
-	uML_Element_getValue_Stereotype_String_Stereotype_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_getValue_Stereotype_String_Stereotype_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getValue_Stereotype_String_Stereotype_String);uML_Element_getValue_Stereotype_String_Stereotype_String_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getValue_Stereotype_String_Stereotype_String);uML_Element_getValue_Stereotype_String_Stereotype_String_propertyName = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_getValue_Stereotype_String_Stereotype_String);
 
 	//hasKeyword
-	uML_Element_hasKeyword_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_hasKeyword_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_hasKeyword_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_hasKeyword_String_String);uML_Element_hasKeyword_String_String_keyword = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_hasKeyword_String_String);
 
 	//hasValue
-	uML_Element_hasValue_Stereotype_String_Stereotype_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_hasValue_Stereotype_String_Stereotype_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_hasValue_Stereotype_String_Stereotype_String);uML_Element_hasValue_Stereotype_String_Stereotype_String_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_hasValue_Stereotype_String_Stereotype_String);uML_Element_hasValue_Stereotype_String_Stereotype_String_propertyName = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_hasValue_Stereotype_String_Stereotype_String);
 
 	//isStereotypeApplicable
-	uML_Element_isStereotypeApplicable_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_isStereotypeApplicable_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_isStereotypeApplicable_Stereotype_Stereotype);uML_Element_isStereotypeApplicable_Stereotype_Stereotype_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_isStereotypeApplicable_Stereotype_Stereotype);
 
 	//isStereotypeApplied
-	uML_Element_isStereotypeApplied_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_isStereotypeApplied_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_isStereotypeApplied_Stereotype_Stereotype);uML_Element_isStereotypeApplied_Stereotype_Stereotype_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_isStereotypeApplied_Stereotype_Stereotype);
 
 	//isStereotypeRequired
-	uML_Element_isStereotypeRequired_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_isStereotypeRequired_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_isStereotypeRequired_Stereotype_Stereotype);uML_Element_isStereotypeRequired_Stereotype_Stereotype_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_isStereotypeRequired_Stereotype_Stereotype);
 
 	//mustBeOwned
-	uML_Element_mustBeOwned__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_mustBeOwned__ = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_mustBeOwned_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_mustBeOwned__);
 
 	//removeKeyword
-	uML_Element_removeKeyword_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_removeKeyword_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_removeKeyword_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_removeKeyword_String_String);uML_Element_removeKeyword_String_String_keyword = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_removeKeyword_String_String);
 
 	//setValue
-	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject);uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_propertyName = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject);uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_newValue = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject);
 
 	//unapplyStereotype
-	uML_Element_unapplyStereotype_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);
+	uML_Element_unapplyStereotype_Stereotype_Stereotype = factory->createOperation_as_ownedOperation_in_Class(uML_Element);;
 	uML_Element_unapplyStereotype_Stereotype_Stereotypereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_unapplyStereotype_Stereotype_Stereotype);uML_Element_unapplyStereotype_Stereotype_Stereotype_stereotype = factory->createParameter_as_ownedParameter_in_Operation(uML_Element_unapplyStereotype_Stereotype_Stereotype);
 
     //-------------------------------------------
@@ -4933,7 +4933,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ElementImport_visibility = factory->createProperty_as_ownedAttribute_in_Class(uML_ElementImport);
     // ElementImport operations
 	//getName
-	uML_ElementImport_getName__ = factory->createOperation_as_ownedOperation_in_Class(uML_ElementImport);
+	uML_ElementImport_getName__ = factory->createOperation_as_ownedOperation_in_Class(uML_ElementImport);;
 	uML_ElementImport_getName_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ElementImport_getName__);
 
     //-------------------------------------------
@@ -4945,7 +4945,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_EncapsulatedClassifier_ownedPort = factory->createProperty_as_ownedAttribute_in_Class(uML_EncapsulatedClassifier);
     // EncapsulatedClassifier operations
 	//ownedPort
-	uML_EncapsulatedClassifier_ownedPort__ = factory->createOperation_as_ownedOperation_in_Class(uML_EncapsulatedClassifier);
+	uML_EncapsulatedClassifier_ownedPort__ = factory->createOperation_as_ownedOperation_in_Class(uML_EncapsulatedClassifier);;
 	uML_EncapsulatedClassifier_ownedPort_result = factory->createParameter_as_ownedParameter_in_Operation(uML_EncapsulatedClassifier_ownedPort__);
 
     //-------------------------------------------
@@ -4975,11 +4975,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_EnumerationLiteral_enumeration = factory->createProperty_as_ownedAttribute_in_Class(uML_EnumerationLiteral);
     // EnumerationLiteral operations
 	//classifier
-	uML_EnumerationLiteral_classifier__ = factory->createOperation_as_ownedOperation_in_Class(uML_EnumerationLiteral);
+	uML_EnumerationLiteral_classifier__ = factory->createOperation_as_ownedOperation_in_Class(uML_EnumerationLiteral);;
 	uML_EnumerationLiteral_classifier_result = factory->createParameter_as_ownedParameter_in_Operation(uML_EnumerationLiteral_classifier__);
 
 	//getClassifiers
-	uML_EnumerationLiteral_getClassifiers__ = factory->createOperation_as_ownedOperation_in_Class(uML_EnumerationLiteral);
+	uML_EnumerationLiteral_getClassifiers__ = factory->createOperation_as_ownedOperation_in_Class(uML_EnumerationLiteral);;
 	uML_EnumerationLiteral_getClassifiers__return = factory->createParameter_as_ownedParameter_in_Operation(uML_EnumerationLiteral_getClassifiers__);
 
     //-------------------------------------------
@@ -5243,23 +5243,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Extension_ownedEnd = factory->createProperty_as_ownedAttribute_in_Class(uML_Extension);
     // Extension operations
 	//getStereotype
-	uML_Extension_getStereotype__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);
+	uML_Extension_getStereotype__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);;
 	uML_Extension_getStereotype__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Extension_getStereotype__);
 
 	//getStereotypeEnd
-	uML_Extension_getStereotypeEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);
+	uML_Extension_getStereotypeEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);;
 	uML_Extension_getStereotypeEnd__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Extension_getStereotypeEnd__);
 
 	//isRequired
-	uML_Extension_isRequired__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);
+	uML_Extension_isRequired__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);;
 	uML_Extension_isRequired_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Extension_isRequired__);
 
 	//metaclass
-	uML_Extension_metaclass__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);
+	uML_Extension_metaclass__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);;
 	uML_Extension_metaclass_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Extension_metaclass__);
 
 	//metaclassEnd
-	uML_Extension_metaclassEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);
+	uML_Extension_metaclassEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_Extension);;
 	uML_Extension_metaclassEnd_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Extension_metaclassEnd__);
 
     //-------------------------------------------
@@ -5295,15 +5295,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ExtensionEnd_type = factory->createProperty_as_ownedAttribute_in_Class(uML_ExtensionEnd);
     // ExtensionEnd operations
 	//getLower
-	uML_ExtensionEnd_getLower__ = factory->createOperation_as_ownedOperation_in_Class(uML_ExtensionEnd);
+	uML_ExtensionEnd_getLower__ = factory->createOperation_as_ownedOperation_in_Class(uML_ExtensionEnd);;
 	uML_ExtensionEnd_getLower__return = factory->createParameter_as_ownedParameter_in_Operation(uML_ExtensionEnd_getLower__);
 
 	//lowerBound
-	uML_ExtensionEnd_lowerBound__ = factory->createOperation_as_ownedOperation_in_Class(uML_ExtensionEnd);
+	uML_ExtensionEnd_lowerBound__ = factory->createOperation_as_ownedOperation_in_Class(uML_ExtensionEnd);;
 	uML_ExtensionEnd_lowerBound_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ExtensionEnd_lowerBound__);
 
 	//setLower
-	uML_ExtensionEnd_setLower_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_ExtensionEnd);
+	uML_ExtensionEnd_setLower_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_ExtensionEnd);;
 	uML_ExtensionEnd_setLower_Integer_Integer_newLower = factory->createParameter_as_ownedParameter_in_Operation(uML_ExtensionEnd_setLower_Integer_Integer);
 
     //-------------------------------------------
@@ -5492,7 +5492,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
     // FunctionBehavior operations
 	//hasAllDataTypeAttributes
-	uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType = factory->createOperation_as_ownedOperation_in_Class(uML_FunctionBehavior);
+	uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType = factory->createOperation_as_ownedOperation_in_Class(uML_FunctionBehavior);;
 	uML_FunctionBehavior_hasAllDataTypeAttributes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType);uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType_d = factory->createParameter_as_ownedParameter_in_Operation(uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType);
 
     //-------------------------------------------
@@ -5609,35 +5609,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
     // Gate operations
 	//getName
-	uML_Gate_getName__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_getName__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_getName_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_getName__);
 
 	//getOperand
-	uML_Gate_getOperand__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_getOperand__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_getOperand_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_getOperand__);
 
 	//isActual
-	uML_Gate_isActual__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_isActual__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_isActual_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_isActual__);
 
 	//isDistinguishableFrom
-	uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_isDistinguishableFrom_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
 	//isFormal
-	uML_Gate_isFormal__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_isFormal__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_isFormal_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_isFormal__);
 
 	//isInsideCF
-	uML_Gate_isInsideCF__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_isInsideCF__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_isInsideCF_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_isInsideCF__);
 
 	//isOutsideCF
-	uML_Gate_isOutsideCF__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_isOutsideCF__ = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_isOutsideCF_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_isOutsideCF__);
 
 	//matches
-	uML_Gate_matches_Gate_Gate = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);
+	uML_Gate_matches_Gate_Gate = factory->createOperation_as_ownedOperation_in_Class(uML_Gate);;
 	uML_Gate_matches_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_matches_Gate_Gate);uML_Gate_matches_Gate_Gate_gateToMatch = factory->createParameter_as_ownedParameter_in_Operation(uML_Gate_matches_Gate_Gate);
 
     //-------------------------------------------
@@ -5977,7 +5977,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_InstanceValue_instance = factory->createProperty_as_ownedAttribute_in_Class(uML_InstanceValue);
     // InstanceValue operations
 	//stringValue
-	uML_InstanceValue_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_InstanceValue);
+	uML_InstanceValue_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_InstanceValue);;
 	uML_InstanceValue_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_InstanceValue_stringValue__);
 
     //-------------------------------------------
@@ -6277,11 +6277,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Interface_redefinedInterface = factory->createProperty_as_ownedAttribute_in_Class(uML_Interface);
     // Interface operations
 	//createOwnedAttribute
-	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Interface);
+	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Interface);;
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
 	//createOwnedOperation
-	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Interface);
+	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Interface);;
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_as_ownedParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
     //-------------------------------------------
@@ -6529,7 +6529,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LinkAction_inputValue = factory->createProperty_as_ownedAttribute_in_Class(uML_LinkAction);
     // LinkAction operations
 	//association
-	uML_LinkAction_association__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkAction);
+	uML_LinkAction_association__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkAction);;
 	uML_LinkAction_association_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LinkAction_association__);
 
     //-------------------------------------------
@@ -6551,7 +6551,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LinkEndCreationData_isReplaceAll = factory->createProperty_as_ownedAttribute_in_Class(uML_LinkEndCreationData);
     // LinkEndCreationData operations
 	//allPins
-	uML_LinkEndCreationData_allPins__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkEndCreationData);
+	uML_LinkEndCreationData_allPins__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkEndCreationData);;
 	uML_LinkEndCreationData_allPins_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LinkEndCreationData_allPins__);
 
     //-------------------------------------------
@@ -6631,7 +6631,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LinkEndData_value = factory->createProperty_as_ownedAttribute_in_Class(uML_LinkEndData);
     // LinkEndData operations
 	//allPins
-	uML_LinkEndData_allPins__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkEndData);
+	uML_LinkEndData_allPins__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkEndData);;
 	uML_LinkEndData_allPins_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LinkEndData_allPins__);
 
     //-------------------------------------------
@@ -6658,7 +6658,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LinkEndDestructionData_isDestroyDuplicates = factory->createProperty_as_ownedAttribute_in_Class(uML_LinkEndDestructionData);
     // LinkEndDestructionData operations
 	//allPins
-	uML_LinkEndDestructionData_allPins__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkEndDestructionData);
+	uML_LinkEndDestructionData_allPins__ = factory->createOperation_as_ownedOperation_in_Class(uML_LinkEndDestructionData);;
 	uML_LinkEndDestructionData_allPins_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LinkEndDestructionData_allPins__);
 
     //-------------------------------------------
@@ -6670,15 +6670,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LiteralBoolean_value = factory->createProperty_as_ownedAttribute_in_Class(uML_LiteralBoolean);
     // LiteralBoolean operations
 	//booleanValue
-	uML_LiteralBoolean_booleanValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralBoolean);
+	uML_LiteralBoolean_booleanValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralBoolean);;
 	uML_LiteralBoolean_booleanValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralBoolean_booleanValue__);
 
 	//isComputable
-	uML_LiteralBoolean_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralBoolean);
+	uML_LiteralBoolean_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralBoolean);;
 	uML_LiteralBoolean_isComputable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralBoolean_isComputable__);
 
 	//stringValue
-	uML_LiteralBoolean_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralBoolean);
+	uML_LiteralBoolean_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralBoolean);;
 	uML_LiteralBoolean_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralBoolean_stringValue__);
 
     //-------------------------------------------
@@ -6690,15 +6690,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LiteralInteger_value = factory->createProperty_as_ownedAttribute_in_Class(uML_LiteralInteger);
     // LiteralInteger operations
 	//integerValue
-	uML_LiteralInteger_integerValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralInteger);
+	uML_LiteralInteger_integerValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralInteger);;
 	uML_LiteralInteger_integerValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralInteger_integerValue__);
 
 	//isComputable
-	uML_LiteralInteger_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralInteger);
+	uML_LiteralInteger_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralInteger);;
 	uML_LiteralInteger_isComputable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralInteger_isComputable__);
 
 	//stringValue
-	uML_LiteralInteger_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralInteger);
+	uML_LiteralInteger_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralInteger);;
 	uML_LiteralInteger_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralInteger_stringValue__);
 
     //-------------------------------------------
@@ -6707,11 +6707,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
     // LiteralNull operations
 	//isComputable
-	uML_LiteralNull_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralNull);
+	uML_LiteralNull_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralNull);;
 	uML_LiteralNull_isComputable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralNull_isComputable__);
 
 	//isNull
-	uML_LiteralNull_isNull__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralNull);
+	uML_LiteralNull_isNull__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralNull);;
 	uML_LiteralNull_isNull_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralNull_isNull__);
 
     //-------------------------------------------
@@ -6723,15 +6723,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LiteralReal_value = factory->createProperty_as_ownedAttribute_in_Class(uML_LiteralReal);
     // LiteralReal operations
 	//isComputable
-	uML_LiteralReal_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralReal);
+	uML_LiteralReal_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralReal);;
 	uML_LiteralReal_isComputable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralReal_isComputable__);
 
 	//realValue
-	uML_LiteralReal_realValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralReal);
+	uML_LiteralReal_realValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralReal);;
 	uML_LiteralReal_realValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralReal_realValue__);
 
 	//stringValue
-	uML_LiteralReal_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralReal);
+	uML_LiteralReal_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralReal);;
 	uML_LiteralReal_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralReal_stringValue__);
 
     //-------------------------------------------
@@ -6748,19 +6748,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LiteralString_value = factory->createProperty_as_ownedAttribute_in_Class(uML_LiteralString);
     // LiteralString operations
 	//integerValue
-	uML_LiteralString_integerValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);
+	uML_LiteralString_integerValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);;
 	uML_LiteralString_integerValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralString_integerValue__);
 
 	//isComputable
-	uML_LiteralString_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);
+	uML_LiteralString_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);;
 	uML_LiteralString_isComputable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralString_isComputable__);
 
 	//stringValue
-	uML_LiteralString_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);
+	uML_LiteralString_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);;
 	uML_LiteralString_stringValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralString_stringValue__);
 
 	//unlimitedValue
-	uML_LiteralString_unlimitedValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);
+	uML_LiteralString_unlimitedValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralString);;
 	uML_LiteralString_unlimitedValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralString_unlimitedValue__);
 
     //-------------------------------------------
@@ -6772,15 +6772,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LiteralUnlimitedNatural_value = factory->createProperty_as_ownedAttribute_in_Class(uML_LiteralUnlimitedNatural);
     // LiteralUnlimitedNatural operations
 	//isComputable
-	uML_LiteralUnlimitedNatural_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralUnlimitedNatural);
+	uML_LiteralUnlimitedNatural_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralUnlimitedNatural);;
 	uML_LiteralUnlimitedNatural_isComputable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralUnlimitedNatural_isComputable__);
 
 	//stringValue
-	uML_LiteralUnlimitedNatural_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralUnlimitedNatural);
+	uML_LiteralUnlimitedNatural_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralUnlimitedNatural);;
 	uML_LiteralUnlimitedNatural_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralUnlimitedNatural_stringValue__);
 
 	//unlimitedValue
-	uML_LiteralUnlimitedNatural_unlimitedValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralUnlimitedNatural);
+	uML_LiteralUnlimitedNatural_unlimitedValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_LiteralUnlimitedNatural);;
 	uML_LiteralUnlimitedNatural_unlimitedValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LiteralUnlimitedNatural_unlimitedValue__);
 
     //-------------------------------------------
@@ -6958,11 +6958,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_LoopNode_test = factory->createProperty_as_ownedAttribute_in_Class(uML_LoopNode);
     // LoopNode operations
 	//allActions
-	uML_LoopNode_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_LoopNode);
+	uML_LoopNode_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_LoopNode);;
 	uML_LoopNode_allActions_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LoopNode_allActions__);
 
 	//sourceNodes
-	uML_LoopNode_sourceNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_LoopNode);
+	uML_LoopNode_sourceNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_LoopNode);;
 	uML_LoopNode_sourceNodes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_LoopNode_sourceNodes__);
 
     //-------------------------------------------
@@ -7204,11 +7204,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Message_signature = factory->createProperty_as_ownedAttribute_in_Class(uML_Message);
     // Message operations
 	//isDistinguishableFrom
-	uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_Message);
+	uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_Message);;
 	uML_Message_isDistinguishableFrom_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_as_ownedParameter_in_Operation(uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_as_ownedParameter_in_Operation(uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
 	//messageKind
-	uML_Message_messageKind__ = factory->createOperation_as_ownedOperation_in_Class(uML_Message);
+	uML_Message_messageKind__ = factory->createOperation_as_ownedOperation_in_Class(uML_Message);;
 	uML_Message_messageKind_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Message_messageKind__);
 
     //-------------------------------------------
@@ -7220,19 +7220,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_MessageEnd_message = factory->createProperty_as_ownedAttribute_in_Class(uML_MessageEnd);
     // MessageEnd operations
 	//enclosingFragment
-	uML_MessageEnd_enclosingFragment__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);
+	uML_MessageEnd_enclosingFragment__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);;
 	uML_MessageEnd_enclosingFragment_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MessageEnd_enclosingFragment__);
 
 	//isReceive
-	uML_MessageEnd_isReceive__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);
+	uML_MessageEnd_isReceive__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);;
 	uML_MessageEnd_isReceive_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MessageEnd_isReceive__);
 
 	//isSend
-	uML_MessageEnd_isSend__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);
+	uML_MessageEnd_isSend__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);;
 	uML_MessageEnd_isSend_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MessageEnd_isSend__);
 
 	//oppositeEnd
-	uML_MessageEnd_oppositeEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);
+	uML_MessageEnd_oppositeEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_MessageEnd);;
 	uML_MessageEnd_oppositeEnd_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MessageEnd_oppositeEnd__);
 
     //-------------------------------------------
@@ -7254,7 +7254,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Model_viewpoint = factory->createProperty_as_ownedAttribute_in_Class(uML_Model);
     // Model operations
 	//isMetamodel
-	uML_Model_isMetamodel__ = factory->createOperation_as_ownedOperation_in_Class(uML_Model);
+	uML_Model_isMetamodel__ = factory->createOperation_as_ownedOperation_in_Class(uML_Model);;
 	uML_Model_isMetamodel__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Model_isMetamodel__);
 
     //-------------------------------------------
@@ -7346,43 +7346,43 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_MultiplicityElement_upperValue = factory->createProperty_as_ownedAttribute_in_Class(uML_MultiplicityElement);
     // MultiplicityElement operations
 	//compatibleWith
-	uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_compatibleWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement);uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement_other = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement);
 
 	//includesMultiplicity
-	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_includesMultiplicity_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement);uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement_M = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement);
 
 	//is
-	uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_is_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural);uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_lowerbound = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural);uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_upperbound = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural);
 
 	//isMultivalued
-	uML_MultiplicityElement_isMultivalued__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_isMultivalued__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_isMultivalued_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_isMultivalued__);
 
 	//lower
-	uML_MultiplicityElement_lower__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_lower__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_lower_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_lower__);
 
 	//lowerBound
-	uML_MultiplicityElement_lowerBound__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_lowerBound__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_lowerBound_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_lowerBound__);
 
 	//setLower
-	uML_MultiplicityElement_setLower_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_setLower_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_setLower_Integer_Integer_newLower = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_setLower_Integer_Integer);
 
 	//setUpper
-	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural);
 
 	//upper
-	uML_MultiplicityElement_upper__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_upper__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_upper_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_upper__);
 
 	//upperBound
-	uML_MultiplicityElement_upperBound__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);
+	uML_MultiplicityElement_upperBound__ = factory->createOperation_as_ownedOperation_in_Class(uML_MultiplicityElement);;
 	uML_MultiplicityElement_upperBound_result = factory->createParameter_as_ownedParameter_in_Operation(uML_MultiplicityElement_upperBound__);
 
     //-------------------------------------------
@@ -7440,47 +7440,47 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_NamedElement_visibility = factory->createProperty_as_ownedAttribute_in_Class(uML_NamedElement);
     // NamedElement operations
 	//allNamespaces
-	uML_NamedElement_allNamespaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_allNamespaces__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_allNamespaces_result = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_allNamespaces__);
 
 	//allOwningPackages
-	uML_NamedElement_allOwningPackages__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_allOwningPackages__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_allOwningPackages_result = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_allOwningPackages__);
 
 	//clientDependency
-	uML_NamedElement_clientDependency__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_clientDependency__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_clientDependency_result = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_clientDependency__);
 
 	//createDependency
-	uML_NamedElement_createDependency_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_createDependency_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_createDependency_NamedElement_NamedElementreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_createDependency_NamedElement_NamedElement);uML_NamedElement_createDependency_NamedElement_NamedElement_supplier = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_createDependency_NamedElement_NamedElement);
 
 	//createUsage
-	uML_NamedElement_createUsage_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_createUsage_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_createUsage_NamedElement_NamedElementreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_createUsage_NamedElement_NamedElement);uML_NamedElement_createUsage_NamedElement_NamedElement_supplier = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_createUsage_NamedElement_NamedElement);
 
 	//getLabel
-	uML_NamedElement_getLabel__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_getLabel__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_getLabel__return = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_getLabel__);
 
 	//getLabel
-	uML_NamedElement_getLabel_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_getLabel_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_getLabel_Boolean_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_getLabel_Boolean_Boolean);uML_NamedElement_getLabel_Boolean_Boolean_localize = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_getLabel_Boolean_Boolean);
 
 	//isDistinguishableFrom
-	uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_isDistinguishableFrom_result = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
 	//namespace
-	uML_NamedElement_namespace__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_namespace__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_namespace_result = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_namespace__);
 
 	//qualifiedName
-	uML_NamedElement_qualifiedName__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_qualifiedName__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_qualifiedName_result = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_qualifiedName__);
 
 	//separator
-	uML_NamedElement_separator__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);
+	uML_NamedElement_separator__ = factory->createOperation_as_ownedOperation_in_Class(uML_NamedElement);;
 	uML_NamedElement_separator_result = factory->createParameter_as_ownedParameter_in_Operation(uML_NamedElement_separator__);
 
     //-------------------------------------------
@@ -7538,43 +7538,43 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Namespace_packageImport = factory->createProperty_as_ownedAttribute_in_Class(uML_Namespace);
     // Namespace operations
 	//createElementImport
-	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind);uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_element = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind);uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_visibility = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind);
 
 	//createPackageImport
-	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind);uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_package_ = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind);uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_visibility = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind);
 
 	//excludeCollisions
-	uML_Namespace_excludeCollisions_PackageableElement_PackageableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_excludeCollisions_PackageableElement_PackageableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_excludeCollisions_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_excludeCollisions_PackageableElement_PackageableElement);uML_Namespace_excludeCollisions_PackageableElement_PackageableElement_imps = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_excludeCollisions_PackageableElement_PackageableElement);
 
 	//getImportedElements
-	uML_Namespace_getImportedElements__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_getImportedElements__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_getImportedElements__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_getImportedElements__);
 
 	//getImportedPackages
-	uML_Namespace_getImportedPackages__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_getImportedPackages__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_getImportedPackages__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_getImportedPackages__);
 
 	//getNamesOfMember
-	uML_Namespace_getNamesOfMember_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_getNamesOfMember_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_getNamesOfMember_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_getNamesOfMember_NamedElement_NamedElement);uML_Namespace_getNamesOfMember_NamedElement_NamedElement_element = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_getNamesOfMember_NamedElement_NamedElement);
 
 	//importMembers
-	uML_Namespace_importMembers_PackageableElement_PackageableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_importMembers_PackageableElement_PackageableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_importMembers_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_importMembers_PackageableElement_PackageableElement);uML_Namespace_importMembers_PackageableElement_PackageableElement_imps = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_importMembers_PackageableElement_PackageableElement);
 
 	//importedMember
-	uML_Namespace_importedMember__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_importedMember__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_importedMember_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_importedMember__);
 
 	//membersAreDistinguishable
-	uML_Namespace_membersAreDistinguishable__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_membersAreDistinguishable__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_membersAreDistinguishable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_membersAreDistinguishable__);
 
 	//ownedMember
-	uML_Namespace_ownedMember__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);
+	uML_Namespace_ownedMember__ = factory->createOperation_as_ownedOperation_in_Class(uML_Namespace);;
 	uML_Namespace_ownedMember_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Namespace_ownedMember__);
 
     //-------------------------------------------
@@ -7594,11 +7594,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Node_nestedNode = factory->createProperty_as_ownedAttribute_in_Class(uML_Node);
     // Node operations
 	//createCommunicationPath
-	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Node);
+	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Node);;
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Node = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 
 	//getCommunicationPaths
-	uML_Node_getCommunicationPaths__ = factory->createOperation_as_ownedOperation_in_Class(uML_Node);
+	uML_Node_getCommunicationPaths__ = factory->createOperation_as_ownedOperation_in_Class(uML_Node);;
 	uML_Node_getCommunicationPaths__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Node_getCommunicationPaths__);
 
     //-------------------------------------------
@@ -7795,11 +7795,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_OccurrenceSpecification_toBefore = factory->createProperty_as_ownedAttribute_in_Class(uML_OccurrenceSpecification);
     // OccurrenceSpecification operations
 	//getCovered
-	uML_OccurrenceSpecification_getCovered__ = factory->createOperation_as_ownedOperation_in_Class(uML_OccurrenceSpecification);
+	uML_OccurrenceSpecification_getCovered__ = factory->createOperation_as_ownedOperation_in_Class(uML_OccurrenceSpecification);;
 	uML_OccurrenceSpecification_getCovered__return = factory->createParameter_as_ownedParameter_in_Operation(uML_OccurrenceSpecification_getCovered__);
 
 	//setCovered
-	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline = factory->createOperation_as_ownedOperation_in_Class(uML_OccurrenceSpecification);
+	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline = factory->createOperation_as_ownedOperation_in_Class(uML_OccurrenceSpecification);;
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value = factory->createParameter_as_ownedParameter_in_Operation(uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline);
 
     //-------------------------------------------
@@ -7887,27 +7887,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_OpaqueExpression_result = factory->createProperty_as_ownedAttribute_in_Class(uML_OpaqueExpression);
     // OpaqueExpression operations
 	//isIntegral
-	uML_OpaqueExpression_isIntegral__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);
+	uML_OpaqueExpression_isIntegral__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);;
 	uML_OpaqueExpression_isIntegral_result = factory->createParameter_as_ownedParameter_in_Operation(uML_OpaqueExpression_isIntegral__);
 
 	//isNonNegative
-	uML_OpaqueExpression_isNonNegative__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);
+	uML_OpaqueExpression_isNonNegative__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);;
 	uML_OpaqueExpression_isNonNegative_result = factory->createParameter_as_ownedParameter_in_Operation(uML_OpaqueExpression_isNonNegative__);
 
 	//isPositive
-	uML_OpaqueExpression_isPositive__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);
+	uML_OpaqueExpression_isPositive__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);;
 	uML_OpaqueExpression_isPositive_result = factory->createParameter_as_ownedParameter_in_Operation(uML_OpaqueExpression_isPositive__);
 
 	//result
-	uML_OpaqueExpression_result__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);
+	uML_OpaqueExpression_result__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);;
 	uML_OpaqueExpression_result_result = factory->createParameter_as_ownedParameter_in_Operation(uML_OpaqueExpression_result__);
 
 	//stringValue
-	uML_OpaqueExpression_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);
+	uML_OpaqueExpression_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);;
 	uML_OpaqueExpression_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_OpaqueExpression_stringValue__);
 
 	//value
-	uML_OpaqueExpression_value__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);
+	uML_OpaqueExpression_value__ = factory->createOperation_as_ownedOperation_in_Class(uML_OpaqueExpression);;
 	uML_OpaqueExpression_value_result = factory->createParameter_as_ownedParameter_in_Operation(uML_OpaqueExpression_value__);
 
     //-------------------------------------------
@@ -7971,55 +7971,55 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Operation_upper = factory->createProperty_as_ownedAttribute_in_Class(uML_Operation);
     // Operation operations
 	//getReturnResult
-	uML_Operation_getReturnResult__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_getReturnResult__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_getReturnResult__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_getReturnResult__);
 
 	//isConsistentWith
-	uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement);uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement);
 
 	//isOrdered
-	uML_Operation_isOrdered__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_isOrdered__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_isOrdered_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_isOrdered__);
 
 	//isUnique
-	uML_Operation_isUnique__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_isUnique__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_isUnique_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_isUnique__);
 
 	//lower
-	uML_Operation_lower__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_lower__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_lower_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_lower__);
 
 	//returnResult
-	uML_Operation_returnResult__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_returnResult__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_returnResult_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_returnResult__);
 
 	//setIsOrdered
-	uML_Operation_setIsOrdered_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_setIsOrdered_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_setIsOrdered_Boolean_Boolean);
 
 	//setIsUnique
-	uML_Operation_setIsUnique_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_setIsUnique_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_setIsUnique_Boolean_Boolean_newIsUnique = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_setIsUnique_Boolean_Boolean);
 
 	//setLower
-	uML_Operation_setLower_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_setLower_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_setLower_Integer_Integer_newLower = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_setLower_Integer_Integer);
 
 	//setType
-	uML_Operation_setType_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_setType_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_setType_Type_Type_newType = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_setType_Type_Type);
 
 	//setUpper
-	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural);
 
 	//type
-	uML_Operation_type__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_type__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_type_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_type__);
 
 	//upper
-	uML_Operation_upper__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);
+	uML_Operation_upper__ = factory->createOperation_as_ownedOperation_in_Class(uML_Operation);;
 	uML_Operation_upper_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Operation_upper__);
 
     //-------------------------------------------
@@ -8089,99 +8089,99 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Package_profileApplication = factory->createProperty_as_ownedAttribute_in_Class(uML_Package);
     // Package operations
 	//allApplicableStereotypes
-	uML_Package_allApplicableStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_allApplicableStereotypes__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_allApplicableStereotypes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_allApplicableStereotypes__);
 
 	//applyProfile
-	uML_Package_applyProfile_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_applyProfile_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_applyProfile_Profile_Profilereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_applyProfile_Profile_Profile);uML_Package_applyProfile_Profile_Profile_profile = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_applyProfile_Profile_Profile);
 
 	//containingProfile
-	uML_Package_containingProfile__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_containingProfile__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_containingProfile_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_containingProfile__);
 
 	//createOwnedClass
-	uML_Package_createOwnedClass_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_createOwnedClass_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedClass_String_Boolean_String_Boolean);uML_Package_createOwnedClass_String_Boolean_String_Boolean_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedClass_String_Boolean_String_Boolean);uML_Package_createOwnedClass_String_Boolean_String_Boolean_isAbstract = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedClass_String_Boolean_String_Boolean);
 
 	//createOwnedEnumeration
-	uML_Package_createOwnedEnumeration_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_createOwnedEnumeration_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_createOwnedEnumeration_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedEnumeration_String_String);uML_Package_createOwnedEnumeration_String_String_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedEnumeration_String_String);
 
 	//createOwnedInterface
-	uML_Package_createOwnedInterface_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_createOwnedInterface_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_createOwnedInterface_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedInterface_String_String);uML_Package_createOwnedInterface_String_String_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedInterface_String_String);
 
 	//createOwnedPrimitiveType
-	uML_Package_createOwnedPrimitiveType_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_createOwnedPrimitiveType_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_createOwnedPrimitiveType_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedPrimitiveType_String_String);uML_Package_createOwnedPrimitiveType_String_String_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedPrimitiveType_String_String);
 
 	//createOwnedStereotype
-	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedStereotype_String_Boolean_String_Boolean);uML_Package_createOwnedStereotype_String_Boolean_String_Boolean_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedStereotype_String_Boolean_String_Boolean);uML_Package_createOwnedStereotype_String_Boolean_String_Boolean_isAbstract = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_createOwnedStereotype_String_Boolean_String_Boolean);
 
 	//getAllAppliedProfiles
-	uML_Package_getAllAppliedProfiles__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_getAllAppliedProfiles__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_getAllAppliedProfiles__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAllAppliedProfiles__);
 
 	//getAllProfileApplications
-	uML_Package_getAllProfileApplications__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_getAllProfileApplications__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_getAllProfileApplications__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAllProfileApplications__);
 
 	//getAppliedProfile
-	uML_Package_getAppliedProfile_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_getAppliedProfile_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_getAppliedProfile_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAppliedProfile_String_String);uML_Package_getAppliedProfile_String_String_qualifiedName = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAppliedProfile_String_String);
 
 	//getAppliedProfile
-	uML_Package_getAppliedProfile_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_getAppliedProfile_String_Boolean_String_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAppliedProfile_String_Boolean_String_Boolean);uML_Package_getAppliedProfile_String_Boolean_String_Boolean_qualifiedName = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAppliedProfile_String_Boolean_String_Boolean);uML_Package_getAppliedProfile_String_Boolean_String_Boolean_recurse = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAppliedProfile_String_Boolean_String_Boolean);
 
 	//getAppliedProfiles
-	uML_Package_getAppliedProfiles__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_getAppliedProfiles__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_getAppliedProfiles__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getAppliedProfiles__);
 
 	//getProfileApplication
-	uML_Package_getProfileApplication_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_getProfileApplication_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_getProfileApplication_Profile_Profilereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getProfileApplication_Profile_Profile);uML_Package_getProfileApplication_Profile_Profile_profile = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getProfileApplication_Profile_Profile);
 
 	//getProfileApplication
-	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean);uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_profile = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean);uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_recurse = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean);
 
 	//isModelLibrary
-	uML_Package_isModelLibrary__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_isModelLibrary__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_isModelLibrary__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_isModelLibrary__);
 
 	//isProfileApplied
-	uML_Package_isProfileApplied_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_isProfileApplied_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_isProfileApplied_Profile_Profilereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_isProfileApplied_Profile_Profile);uML_Package_isProfileApplied_Profile_Profile_profile = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_isProfileApplied_Profile_Profile);
 
 	//makesVisible
-	uML_Package_makesVisible_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_makesVisible_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_makesVisible_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_makesVisible_NamedElement_NamedElement);uML_Package_makesVisible_NamedElement_NamedElement_el = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_makesVisible_NamedElement_NamedElement);
 
 	//mustBeOwned
-	uML_Package_mustBeOwned__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_mustBeOwned__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_mustBeOwned_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_mustBeOwned__);
 
 	//nestedPackage
-	uML_Package_nestedPackage__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_nestedPackage__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_nestedPackage_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_nestedPackage__);
 
 	//ownedStereotype
-	uML_Package_ownedStereotype__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_ownedStereotype__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_ownedStereotype_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_ownedStereotype__);
 
 	//ownedType
-	uML_Package_ownedType__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_ownedType__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_ownedType_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_ownedType__);
 
 	//unapplyProfile
-	uML_Package_unapplyProfile_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_unapplyProfile_Profile_Profile = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_unapplyProfile_Profile_Profilereturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_unapplyProfile_Profile_Profile);uML_Package_unapplyProfile_Profile_Profile_profile = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_unapplyProfile_Profile_Profile);
 
 	//visibleMembers
-	uML_Package_visibleMembers__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);
+	uML_Package_visibleMembers__ = factory->createOperation_as_ownedOperation_in_Class(uML_Package);;
 	uML_Package_visibleMembers_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Package_visibleMembers__);
 
     //-------------------------------------------
@@ -8335,42 +8335,42 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Parameter_parameterSet = factory->createProperty_as_ownedAttribute_in_Class(uML_Parameter);
     // Parameter operations
 	//default
-	uML_Parameter_default__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_default__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_default_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_default__);
 
 	//isSetDefault
-	uML_Parameter_isSetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_isSetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_isSetDefault__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_isSetDefault__);
 
 	//setBooleanDefaultValue
-	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_setBooleanDefaultValue_Boolean_Boolean);
 
 	//setDefault
-	uML_Parameter_setDefault_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_setDefault_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_setDefault_String_String_newDefault = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_setDefault_String_String);
 
 	//setIntegerDefaultValue
-	uML_Parameter_setIntegerDefaultValue_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_setIntegerDefaultValue_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_setIntegerDefaultValue_Integer_Integer_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_setIntegerDefaultValue_Integer_Integer);
 
 	//setNullDefaultValue
-	uML_Parameter_setNullDefaultValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_setNullDefaultValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 
 	//setRealDefaultValue
-	uML_Parameter_setRealDefaultValue_Real_Real = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_setRealDefaultValue_Real_Real = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_setRealDefaultValue_Real_Real_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_setRealDefaultValue_Real_Real);
 
 	//setStringDefaultValue
-	uML_Parameter_setStringDefaultValue_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_setStringDefaultValue_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_setStringDefaultValue_String_String_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_setStringDefaultValue_String_String);
 
 	//setUnlimitedNaturalDefaultValue
-	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural);
 
 	//unsetDefault
-	uML_Parameter_unsetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);
+	uML_Parameter_unsetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Parameter);;
 
     //-------------------------------------------
 	//ParameterSet
@@ -8433,11 +8433,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ParameterableElement_templateParameter = factory->createProperty_as_ownedAttribute_in_Class(uML_ParameterableElement);
     // ParameterableElement operations
 	//isCompatibleWith
-	uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ParameterableElement);
+	uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ParameterableElement);;
 	uML_ParameterableElement_isCompatibleWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement);uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement_p = factory->createParameter_as_ownedParameter_in_Operation(uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement);
 
 	//isTemplateParameter
-	uML_ParameterableElement_isTemplateParameter__ = factory->createOperation_as_ownedOperation_in_Class(uML_ParameterableElement);
+	uML_ParameterableElement_isTemplateParameter__ = factory->createOperation_as_ownedOperation_in_Class(uML_ParameterableElement);;
 	uML_ParameterableElement_isTemplateParameter_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ParameterableElement_isTemplateParameter__);
 
     //-------------------------------------------
@@ -8558,19 +8558,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Port_required = factory->createProperty_as_ownedAttribute_in_Class(uML_Port);
     // Port operations
 	//basicProvided
-	uML_Port_basicProvided__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);
+	uML_Port_basicProvided__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);;
 	uML_Port_basicProvided_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Port_basicProvided__);
 
 	//basicRequired
-	uML_Port_basicRequired__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);
+	uML_Port_basicRequired__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);;
 	uML_Port_basicRequired_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Port_basicRequired__);
 
 	//provided
-	uML_Port_provided__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);
+	uML_Port_provided__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);;
 	uML_Port_provided_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Port_provided__);
 
 	//required
-	uML_Port_required__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);
+	uML_Port_required__ = factory->createOperation_as_ownedOperation_in_Class(uML_Port);;
 	uML_Port_required_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Port_required__);
 
     //-------------------------------------------
@@ -8619,35 +8619,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Profile_metamodelReference = factory->createProperty_as_ownedAttribute_in_Class(uML_Profile);
     // Profile operations
 	//create
-	uML_Profile_create_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_create_Classifier_Classifier = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_create_Classifier_Classifierreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_create_Classifier_Classifier);uML_Profile_create_Classifier_Classifier_classifier = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_create_Classifier_Classifier);
 
 	//define
-	uML_Profile_define__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_define__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_define__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_define__);
 
 	//getDefinition
-	uML_Profile_getDefinition__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_getDefinition__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_getDefinition__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_getDefinition__);
 
 	//getDefinition
-	uML_Profile_getDefinition_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_getDefinition_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_getDefinition_NamedElement_NamedElementreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_getDefinition_NamedElement_NamedElement);uML_Profile_getDefinition_NamedElement_NamedElement_namedElement = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_getDefinition_NamedElement_NamedElement);
 
 	//getOwnedExtensions
-	uML_Profile_getOwnedExtensions_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_getOwnedExtensions_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_getOwnedExtensions_Boolean_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_getOwnedExtensions_Boolean_Boolean);uML_Profile_getOwnedExtensions_Boolean_Boolean_requiredOnly = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_getOwnedExtensions_Boolean_Boolean);
 
 	//getReferencedMetaclasses
-	uML_Profile_getReferencedMetaclasses__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_getReferencedMetaclasses__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_getReferencedMetaclasses__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_getReferencedMetaclasses__);
 
 	//getReferencedMetamodels
-	uML_Profile_getReferencedMetamodels__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_getReferencedMetamodels__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_getReferencedMetamodels__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_getReferencedMetamodels__);
 
 	//isDefined
-	uML_Profile_isDefined__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);
+	uML_Profile_isDefined__ = factory->createOperation_as_ownedOperation_in_Class(uML_Profile);;
 	uML_Profile_isDefined__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Profile_isDefined__);
 
     //-------------------------------------------
@@ -8663,11 +8663,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ProfileApplication_isStrict = factory->createProperty_as_ownedAttribute_in_Class(uML_ProfileApplication);
     // ProfileApplication operations
 	//getAppliedDefinition
-	uML_ProfileApplication_getAppliedDefinition__ = factory->createOperation_as_ownedOperation_in_Class(uML_ProfileApplication);
+	uML_ProfileApplication_getAppliedDefinition__ = factory->createOperation_as_ownedOperation_in_Class(uML_ProfileApplication);;
 	uML_ProfileApplication_getAppliedDefinition__return = factory->createParameter_as_ownedParameter_in_Operation(uML_ProfileApplication_getAppliedDefinition__);
 
 	//getAppliedDefinition
-	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_ProfileApplication);
+	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement = factory->createOperation_as_ownedOperation_in_Class(uML_ProfileApplication);;
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement);uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement_namedElement = factory->createParameter_as_ownedParameter_in_Operation(uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement);
 
     //-------------------------------------------
@@ -8871,86 +8871,86 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Property_subsettedProperty = factory->createProperty_as_ownedAttribute_in_Class(uML_Property);
     // Property operations
 	//getDefault
-	uML_Property_getDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_getDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_getDefault_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_getDefault__);
 
 	//getOtherEnd
-	uML_Property_getOtherEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_getOtherEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_getOtherEnd__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_getOtherEnd__);
 
 	//isAttribute
-	uML_Property_isAttribute__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_isAttribute__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_isAttribute_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isAttribute__);
 
 	//isCompatibleWith
-	uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_isCompatibleWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement);uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement_p = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement);
 
 	//isComposite
-	uML_Property_isComposite__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_isComposite__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_isComposite_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isComposite__);
 
 	//isConsistentWith
-	uML_Property_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isConsistentWith_RedefinableElement_RedefinableElement);uML_Property_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isConsistentWith_RedefinableElement_RedefinableElement);
 
 	//isNavigable
-	uML_Property_isNavigable__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_isNavigable__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_isNavigable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isNavigable__);
 
 	//isSetDefault
-	uML_Property_isSetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_isSetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_isSetDefault__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_isSetDefault__);
 
 	//opposite
-	uML_Property_opposite__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_opposite__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_opposite_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_opposite__);
 
 	//setBooleanDefaultValue
-	uML_Property_setBooleanDefaultValue_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setBooleanDefaultValue_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setBooleanDefaultValue_Boolean_Boolean_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setBooleanDefaultValue_Boolean_Boolean);
 
 	//setDefault
-	uML_Property_setDefault_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setDefault_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setDefault_String_String_newDefault = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setDefault_String_String);
 
 	//setIntegerDefaultValue
-	uML_Property_setIntegerDefaultValue_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setIntegerDefaultValue_Integer_Integer = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setIntegerDefaultValue_Integer_Integer_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setIntegerDefaultValue_Integer_Integer);
 
 	//setIsComposite
-	uML_Property_setIsComposite_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setIsComposite_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setIsComposite_Boolean_Boolean_newIsComposite = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setIsComposite_Boolean_Boolean);
 
 	//setIsNavigable
-	uML_Property_setIsNavigable_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setIsNavigable_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setIsNavigable_Boolean_Boolean_isNavigable = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setIsNavigable_Boolean_Boolean);
 
 	//setNullDefaultValue
-	uML_Property_setNullDefaultValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setNullDefaultValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 
 	//setOpposite
-	uML_Property_setOpposite_Property_Property = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setOpposite_Property_Property = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setOpposite_Property_Property_newOpposite = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setOpposite_Property_Property);
 
 	//setRealDefaultValue
-	uML_Property_setRealDefaultValue_Real_Real = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setRealDefaultValue_Real_Real = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setRealDefaultValue_Real_Real_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setRealDefaultValue_Real_Real);
 
 	//setStringDefaultValue
-	uML_Property_setStringDefaultValue_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setStringDefaultValue_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setStringDefaultValue_String_String_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setStringDefaultValue_String_String);
 
 	//setUnlimitedNaturalDefaultValue
-	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural);
 
 	//subsettingContext
-	uML_Property_subsettingContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_subsettingContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 	uML_Property_subsettingContext_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Property_subsettingContext__);
 
 	//unsetDefault
-	uML_Property_unsetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);
+	uML_Property_unsetDefault__ = factory->createOperation_as_ownedOperation_in_Class(uML_Property);;
 
     //-------------------------------------------
 	//ProtocolConformance
@@ -9073,7 +9073,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ProtocolTransition_referred = factory->createProperty_as_ownedAttribute_in_Class(uML_ProtocolTransition);
     // ProtocolTransition operations
 	//referred
-	uML_ProtocolTransition_referred__ = factory->createOperation_as_ownedOperation_in_Class(uML_ProtocolTransition);
+	uML_ProtocolTransition_referred__ = factory->createOperation_as_ownedOperation_in_Class(uML_ProtocolTransition);;
 	uML_ProtocolTransition_referred_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ProtocolTransition_referred__);
 
     //-------------------------------------------
@@ -9445,7 +9445,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_ReadLinkAction_result = factory->createProperty_as_ownedAttribute_in_Class(uML_ReadLinkAction);
     // ReadLinkAction operations
 	//openEnd
-	uML_ReadLinkAction_openEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_ReadLinkAction);
+	uML_ReadLinkAction_openEnd__ = factory->createOperation_as_ownedOperation_in_Class(uML_ReadLinkAction);;
 	uML_ReadLinkAction_openEnd_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ReadLinkAction_openEnd__);
 
     //-------------------------------------------
@@ -9938,11 +9938,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_RedefinableElement_redefinitionContext = factory->createProperty_as_ownedAttribute_in_Class(uML_RedefinableElement);
     // RedefinableElement operations
 	//isConsistentWith
-	uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableElement);
+	uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableElement);;
 	uML_RedefinableElement_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement);uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement);
 
 	//isRedefinitionContextValid
-	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableElement);
+	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableElement);;
 	uML_RedefinableElement_isRedefinitionContextValid_result = factory->createParameter_as_ownedParameter_in_Operation(uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_as_ownedParameter_in_Operation(uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
@@ -9966,11 +9966,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_RedefinableTemplateSignature_inheritedParameter = factory->createProperty_as_ownedAttribute_in_Class(uML_RedefinableTemplateSignature);
     // RedefinableTemplateSignature operations
 	//inheritedParameter
-	uML_RedefinableTemplateSignature_inheritedParameter__ = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableTemplateSignature);
+	uML_RedefinableTemplateSignature_inheritedParameter__ = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableTemplateSignature);;
 	uML_RedefinableTemplateSignature_inheritedParameter_result = factory->createParameter_as_ownedParameter_in_Operation(uML_RedefinableTemplateSignature_inheritedParameter__);
 
 	//isConsistentWith
-	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableTemplateSignature);
+	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_RedefinableTemplateSignature);;
 	uML_RedefinableTemplateSignature_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement);uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
@@ -10102,23 +10102,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Region_transition = factory->createProperty_as_ownedAttribute_in_Class(uML_Region);
     // Region operations
 	//belongsToPSM
-	uML_Region_belongsToPSM__ = factory->createOperation_as_ownedOperation_in_Class(uML_Region);
+	uML_Region_belongsToPSM__ = factory->createOperation_as_ownedOperation_in_Class(uML_Region);;
 	uML_Region_belongsToPSM_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Region_belongsToPSM__);
 
 	//containingStateMachine
-	uML_Region_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_Region);
+	uML_Region_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_Region);;
 	uML_Region_containingStateMachine_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Region_containingStateMachine__);
 
 	//isConsistentWith
-	uML_Region_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Region);
+	uML_Region_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Region);;
 	uML_Region_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Region_isConsistentWith_RedefinableElement_RedefinableElement);uML_Region_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_Region_isConsistentWith_RedefinableElement_RedefinableElement);
 
 	//isRedefinitionContextValid
-	uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Region);
+	uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Region);;
 	uML_Region_isRedefinitionContextValid_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_as_ownedParameter_in_Operation(uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
 	//redefinitionContext
-	uML_Region_redefinitionContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_Region);
+	uML_Region_redefinitionContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_Region);;
 	uML_Region_redefinitionContext_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Region_redefinitionContext__);
 
     //-------------------------------------------
@@ -10312,7 +10312,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Signal_ownedAttribute = factory->createProperty_as_ownedAttribute_in_Class(uML_Signal);
     // Signal operations
 	//createOwnedAttribute
-	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Signal);
+	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Signal);;
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_as_ownedParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_as_ownedParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_as_ownedParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_as_ownedParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
     //-------------------------------------------
@@ -10412,15 +10412,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_StartObjectBehaviorAction_object = factory->createProperty_as_ownedAttribute_in_Class(uML_StartObjectBehaviorAction);
     // StartObjectBehaviorAction operations
 	//behavior
-	uML_StartObjectBehaviorAction_behavior__ = factory->createOperation_as_ownedOperation_in_Class(uML_StartObjectBehaviorAction);
+	uML_StartObjectBehaviorAction_behavior__ = factory->createOperation_as_ownedOperation_in_Class(uML_StartObjectBehaviorAction);;
 	uML_StartObjectBehaviorAction_behavior_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StartObjectBehaviorAction_behavior__);
 
 	//inputParameters
-	uML_StartObjectBehaviorAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_StartObjectBehaviorAction);
+	uML_StartObjectBehaviorAction_inputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_StartObjectBehaviorAction);;
 	uML_StartObjectBehaviorAction_inputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StartObjectBehaviorAction_inputParameters__);
 
 	//outputParameters
-	uML_StartObjectBehaviorAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_StartObjectBehaviorAction);
+	uML_StartObjectBehaviorAction_outputParameters__ = factory->createOperation_as_ownedOperation_in_Class(uML_StartObjectBehaviorAction);;
 	uML_StartObjectBehaviorAction_outputParameters_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StartObjectBehaviorAction_outputParameters__);
 
     //-------------------------------------------
@@ -10528,35 +10528,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_State_submachine = factory->createProperty_as_ownedAttribute_in_Class(uML_State);
     // State operations
 	//containingStateMachine
-	uML_State_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_containingStateMachine_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_containingStateMachine__);
 
 	//isComposite
-	uML_State_isComposite__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_isComposite__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_isComposite_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isComposite__);
 
 	//isConsistentWith
-	uML_State_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isConsistentWith_RedefinableElement_RedefinableElement);uML_State_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isConsistentWith_RedefinableElement_RedefinableElement);
 
 	//isOrthogonal
-	uML_State_isOrthogonal__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_isOrthogonal__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_isOrthogonal_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isOrthogonal__);
 
 	//isRedefinitionContextValid
-	uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_isRedefinitionContextValid_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
 	//isSimple
-	uML_State_isSimple__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_isSimple__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_isSimple_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isSimple__);
 
 	//isSubmachineState
-	uML_State_isSubmachineState__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_isSubmachineState__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_isSubmachineState_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_isSubmachineState__);
 
 	//redefinitionContext
-	uML_State_redefinitionContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);
+	uML_State_redefinitionContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_State);;
 	uML_State_redefinitionContext_result = factory->createParameter_as_ownedParameter_in_Operation(uML_State_redefinitionContext__);
 
     //-------------------------------------------
@@ -10634,23 +10634,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_StateMachine_submachineState = factory->createProperty_as_ownedAttribute_in_Class(uML_StateMachine);
     // StateMachine operations
 	//LCA
-	uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);
+	uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);;
 	uML_StateMachine_LCA_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s1 = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s2 = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex);
 
 	//LCAState
-	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);
+	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);;
 	uML_StateMachine_LCAState_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v1 = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v2 = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex);
 
 	//ancestor
-	uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);
+	uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);;
 	uML_StateMachine_ancestor_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s1 = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s2 = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex);
 
 	//isConsistentWith
-	uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);
+	uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);;
 	uML_StateMachine_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement);uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement);
 
 	//isRedefinitionContextValid
-	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);
+	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_StateMachine);;
 	uML_StateMachine_isRedefinitionContextValid_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_as_ownedParameter_in_Operation(uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
@@ -10744,43 +10744,43 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Stereotype_profile = factory->createProperty_as_ownedAttribute_in_Class(uML_Stereotype);
     // Stereotype operations
 	//containingProfile
-	uML_Stereotype_containingProfile__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_containingProfile__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_containingProfile_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_containingProfile__);
 
 	//createExtension
-	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createExtension_Class_Boolean_Class_Boolean);uML_Stereotype_createExtension_Class_Boolean_Class_Boolean_metaclass = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createExtension_Class_Boolean_Class_Boolean);uML_Stereotype_createExtension_Class_Boolean_Class_Boolean_isRequired = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createExtension_Class_Boolean_Class_Boolean);
 
 	//createIcon
-	uML_Stereotype_createIcon_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_createIcon_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_createIcon_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createIcon_String_String);uML_Stereotype_createIcon_String_String_location = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createIcon_String_String);
 
 	//createIcon
-	uML_Stereotype_createIcon_String_String_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_createIcon_String_String_String_String = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_createIcon_String_String_String_Stringreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createIcon_String_String_String_String);uML_Stereotype_createIcon_String_String_String_String_format = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createIcon_String_String_String_String);uML_Stereotype_createIcon_String_String_String_String_content = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_createIcon_String_String_String_String);
 
 	//getAllExtendedMetaclasses
-	uML_Stereotype_getAllExtendedMetaclasses__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_getAllExtendedMetaclasses__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_getAllExtendedMetaclasses__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_getAllExtendedMetaclasses__);
 
 	//getDefinition
-	uML_Stereotype_getDefinition__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_getDefinition__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_getDefinition__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_getDefinition__);
 
 	//getExtendedMetaclasses
-	uML_Stereotype_getExtendedMetaclasses__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_getExtendedMetaclasses__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_getExtendedMetaclasses__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_getExtendedMetaclasses__);
 
 	//getKeyword
-	uML_Stereotype_getKeyword__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_getKeyword__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_getKeyword__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_getKeyword__);
 
 	//getKeyword
-	uML_Stereotype_getKeyword_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_getKeyword_Boolean_Boolean = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_getKeyword_Boolean_Booleanreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_getKeyword_Boolean_Boolean);uML_Stereotype_getKeyword_Boolean_Boolean_localize = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_getKeyword_Boolean_Boolean);
 
 	//profile
-	uML_Stereotype_profile__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);
+	uML_Stereotype_profile__ = factory->createOperation_as_ownedOperation_in_Class(uML_Stereotype);;
 	uML_Stereotype_profile_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Stereotype_profile__);
 
     //-------------------------------------------
@@ -10816,7 +10816,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_StringExpression_subExpression = factory->createProperty_as_ownedAttribute_in_Class(uML_StringExpression);
     // StringExpression operations
 	//stringValue
-	uML_StringExpression_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_StringExpression);
+	uML_StringExpression_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_StringExpression);;
 	uML_StringExpression_stringValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StringExpression_stringValue__);
 
     //-------------------------------------------
@@ -10961,23 +10961,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_StructuredActivityNode_variable = factory->createProperty_as_ownedAttribute_in_Class(uML_StructuredActivityNode);
     // StructuredActivityNode operations
 	//allActions
-	uML_StructuredActivityNode_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);
+	uML_StructuredActivityNode_allActions__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);;
 	uML_StructuredActivityNode_allActions_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredActivityNode_allActions__);
 
 	//allOwnedNodes
-	uML_StructuredActivityNode_allOwnedNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);
+	uML_StructuredActivityNode_allOwnedNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);;
 	uML_StructuredActivityNode_allOwnedNodes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredActivityNode_allOwnedNodes__);
 
 	//containingActivity
-	uML_StructuredActivityNode_containingActivity__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);
+	uML_StructuredActivityNode_containingActivity__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);;
 	uML_StructuredActivityNode_containingActivity_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredActivityNode_containingActivity__);
 
 	//sourceNodes
-	uML_StructuredActivityNode_sourceNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);
+	uML_StructuredActivityNode_sourceNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);;
 	uML_StructuredActivityNode_sourceNodes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredActivityNode_sourceNodes__);
 
 	//targetNodes
-	uML_StructuredActivityNode_targetNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);
+	uML_StructuredActivityNode_targetNodes__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredActivityNode);;
 	uML_StructuredActivityNode_targetNodes_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredActivityNode_targetNodes__);
 
     //-------------------------------------------
@@ -10995,15 +10995,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_StructuredClassifier_role = factory->createProperty_as_ownedAttribute_in_Class(uML_StructuredClassifier);
     // StructuredClassifier operations
 	//allRoles
-	uML_StructuredClassifier_allRoles__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredClassifier);
+	uML_StructuredClassifier_allRoles__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredClassifier);;
 	uML_StructuredClassifier_allRoles_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredClassifier_allRoles__);
 
 	//createOwnedAttribute
-	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredClassifier);
+	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredClassifier);;
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
 	//part
-	uML_StructuredClassifier_part__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredClassifier);
+	uML_StructuredClassifier_part__ = factory->createOperation_as_ownedOperation_in_Class(uML_StructuredClassifier);;
 	uML_StructuredClassifier_part_result = factory->createParameter_as_ownedParameter_in_Operation(uML_StructuredClassifier_part__);
 
     //-------------------------------------------
@@ -11143,11 +11143,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_TemplateableElement_templateBinding = factory->createProperty_as_ownedAttribute_in_Class(uML_TemplateableElement);
     // TemplateableElement operations
 	//isTemplate
-	uML_TemplateableElement_isTemplate__ = factory->createOperation_as_ownedOperation_in_Class(uML_TemplateableElement);
+	uML_TemplateableElement_isTemplate__ = factory->createOperation_as_ownedOperation_in_Class(uML_TemplateableElement);;
 	uML_TemplateableElement_isTemplate_result = factory->createParameter_as_ownedParameter_in_Operation(uML_TemplateableElement_isTemplate__);
 
 	//parameterableElements
-	uML_TemplateableElement_parameterableElements__ = factory->createOperation_as_ownedOperation_in_Class(uML_TemplateableElement);
+	uML_TemplateableElement_parameterableElements__ = factory->createOperation_as_ownedOperation_in_Class(uML_TemplateableElement);;
 	uML_TemplateableElement_parameterableElements_result = factory->createParameter_as_ownedParameter_in_Operation(uML_TemplateableElement_parameterableElements__);
 
     //-------------------------------------------
@@ -11253,7 +11253,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_TimeExpression_observation = factory->createProperty_as_ownedAttribute_in_Class(uML_TimeExpression);
     // TimeExpression operations
 	//stringValue
-	uML_TimeExpression_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_TimeExpression);
+	uML_TimeExpression_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_TimeExpression);;
 	uML_TimeExpression_stringValue__return = factory->createParameter_as_ownedParameter_in_Operation(uML_TimeExpression_stringValue__);
 
     //-------------------------------------------
@@ -11429,15 +11429,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Transition_trigger = factory->createProperty_as_ownedAttribute_in_Class(uML_Transition);
     // Transition operations
 	//containingStateMachine
-	uML_Transition_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_Transition);
+	uML_Transition_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_Transition);;
 	uML_Transition_containingStateMachine_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Transition_containingStateMachine__);
 
 	//isConsistentWith
-	uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Transition);
+	uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_as_ownedOperation_in_Class(uML_Transition);;
 	uML_Transition_isConsistentWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement);uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_as_ownedParameter_in_Operation(uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement);
 
 	//redefinitionContext
-	uML_Transition_redefinitionContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_Transition);
+	uML_Transition_redefinitionContext__ = factory->createOperation_as_ownedOperation_in_Class(uML_Transition);;
 	uML_Transition_redefinitionContext_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Transition_redefinitionContext__);
 
     //-------------------------------------------
@@ -11467,15 +11467,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Type_package = factory->createProperty_as_ownedAttribute_in_Class(uML_Type);
     // Type operations
 	//conformsTo
-	uML_Type_conformsTo_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Type);
+	uML_Type_conformsTo_Type_Type = factory->createOperation_as_ownedOperation_in_Class(uML_Type);;
 	uML_Type_conformsTo_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_conformsTo_Type_Type);uML_Type_conformsTo_Type_Type_other = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_conformsTo_Type_Type);
 
 	//createAssociation
-	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Type);
+	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createOperation_as_ownedOperation_in_Class(uML_Type);;
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Type = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 
 	//getAssociations
-	uML_Type_getAssociations__ = factory->createOperation_as_ownedOperation_in_Class(uML_Type);
+	uML_Type_getAssociations__ = factory->createOperation_as_ownedOperation_in_Class(uML_Type);;
 	uML_Type_getAssociations__return = factory->createParameter_as_ownedParameter_in_Operation(uML_Type_getAssociations__);
 
     //-------------------------------------------
@@ -11650,7 +11650,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_UseCase_subject = factory->createProperty_as_ownedAttribute_in_Class(uML_UseCase);
     // UseCase operations
 	//allIncludedUseCases
-	uML_UseCase_allIncludedUseCases__ = factory->createOperation_as_ownedOperation_in_Class(uML_UseCase);
+	uML_UseCase_allIncludedUseCases__ = factory->createOperation_as_ownedOperation_in_Class(uML_UseCase);;
 	uML_UseCase_allIncludedUseCases_result = factory->createParameter_as_ownedParameter_in_Operation(uML_UseCase_allIncludedUseCases__);
 
     //-------------------------------------------
@@ -11689,35 +11689,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
     // ValueSpecification operations
 	//booleanValue
-	uML_ValueSpecification_booleanValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_booleanValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_booleanValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_booleanValue__);
 
 	//integerValue
-	uML_ValueSpecification_integerValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_integerValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_integerValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_integerValue__);
 
 	//isCompatibleWith
-	uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_isCompatibleWith_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement);uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement_p = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement);
 
 	//isComputable
-	uML_ValueSpecification_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_isComputable__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_isComputable_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_isComputable__);
 
 	//isNull
-	uML_ValueSpecification_isNull__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_isNull__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_isNull_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_isNull__);
 
 	//realValue
-	uML_ValueSpecification_realValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_realValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_realValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_realValue__);
 
 	//stringValue
-	uML_ValueSpecification_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_stringValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_stringValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_stringValue__);
 
 	//unlimitedValue
-	uML_ValueSpecification_unlimitedValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);
+	uML_ValueSpecification_unlimitedValue__ = factory->createOperation_as_ownedOperation_in_Class(uML_ValueSpecification);;
 	uML_ValueSpecification_unlimitedValue_result = factory->createParameter_as_ownedParameter_in_Operation(uML_ValueSpecification_unlimitedValue__);
 
     //-------------------------------------------
@@ -11763,7 +11763,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Variable_scope = factory->createProperty_as_ownedAttribute_in_Class(uML_Variable);
     // Variable operations
 	//isAccessibleBy
-	uML_Variable_isAccessibleBy_Action_Action = factory->createOperation_as_ownedOperation_in_Class(uML_Variable);
+	uML_Variable_isAccessibleBy_Action_Action = factory->createOperation_as_ownedOperation_in_Class(uML_Variable);;
 	uML_Variable_isAccessibleBy_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Variable_isAccessibleBy_Action_Action);uML_Variable_isAccessibleBy_Action_Action_a = factory->createParameter_as_ownedParameter_in_Operation(uML_Variable_isAccessibleBy_Action_Action);
 
     //-------------------------------------------
@@ -11795,23 +11795,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	uML_Vertex_outgoing = factory->createProperty_as_ownedAttribute_in_Class(uML_Vertex);
     // Vertex operations
 	//containingStateMachine
-	uML_Vertex_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);
+	uML_Vertex_containingStateMachine__ = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);;
 	uML_Vertex_containingStateMachine_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Vertex_containingStateMachine__);
 
 	//incoming
-	uML_Vertex_incoming__ = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);
+	uML_Vertex_incoming__ = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);;
 	uML_Vertex_incoming_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Vertex_incoming__);
 
 	//isContainedInRegion
-	uML_Vertex_isContainedInRegion_Region_Region = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);
+	uML_Vertex_isContainedInRegion_Region_Region = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);;
 	uML_Vertex_isContainedInRegion_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Vertex_isContainedInRegion_Region_Region);uML_Vertex_isContainedInRegion_Region_Region_r = factory->createParameter_as_ownedParameter_in_Operation(uML_Vertex_isContainedInRegion_Region_Region);
 
 	//isContainedInState
-	uML_Vertex_isContainedInState_State_State = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);
+	uML_Vertex_isContainedInState_State_State = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);;
 	uML_Vertex_isContainedInState_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Vertex_isContainedInState_State_State);uML_Vertex_isContainedInState_State_State_s = factory->createParameter_as_ownedParameter_in_Operation(uML_Vertex_isContainedInState_State_State);
 
 	//outgoing
-	uML_Vertex_outgoing__ = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);
+	uML_Vertex_outgoing__ = factory->createOperation_as_ownedOperation_in_Class(uML_Vertex);;
 	uML_Vertex_outgoing_result = factory->createParameter_as_ownedParameter_in_Operation(uML_Vertex_outgoing__);
 
     //-------------------------------------------

@@ -18,9 +18,9 @@ namespace ecore
 	class EEnum;
 	class EGenericType;
 	class EAttribute;
-	class EEnumLiteral;
 	class EReference;
 	class EDataType;
+	class EEnumLiteral;
 }
 
 namespace ocl::Expressions 

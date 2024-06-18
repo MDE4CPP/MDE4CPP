@@ -15,11 +15,11 @@
 namespace ecore 
 {
 	class EClass;
+	class EOperation;
+	class EParameter;
 	class EAnnotation;
 	class EGenericType;
 	class EStringToStringMapEntry;
-	class EOperation;
-	class EParameter;
 }
 
 namespace PSSM::Semantics::StructuredClassifiers 

@@ -15,16 +15,16 @@
 namespace ecore 
 {
 	class EClass;
-	class EAnnotation;
+	class EOperation;
 	class EEnum;
+	class EParameter;
+	class EAnnotation;
 	class EGenericType;
 	class EAttribute;
-	class EEnumLiteral;
-	class EStringToStringMapEntry;
-	class EOperation;
 	class EReference;
+	class EStringToStringMapEntry;
 	class EDataType;
-	class EParameter;
+	class EEnumLiteral;
 }
 
 namespace PSSM::Semantics::StateMachines 

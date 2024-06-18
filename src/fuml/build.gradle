@@ -8,9 +8,9 @@ task runCommandCompileFUML(type:Exec) {
 	mustRunAfter =  [
 		'generateFUML'
 	
+		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
 
@@ -41,20 +41,20 @@ task compileFUML() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generateFUML'
+		mustRunAfter = ["generateFUML"]
 		dependsOn 'runCommandCompileFUML'
 	}
 	else
 	{
-		dependsOn 'generateFUML'
+		mustRunAfter = ["generateFUML"]
 		dependsOn 'src_gen:compileFUMLSrc'
 	} 
 	mustRunAfter =  [
 		'generateFUML'
 	
+		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
 
@@ -65,7 +65,7 @@ task buildFUML() {
 	dependsOn 'generateFUML'
 	dependsOn 'compileFUML'
 
+	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

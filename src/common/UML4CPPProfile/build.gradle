@@ -41,12 +41,12 @@ task compileUML4CPPProfile() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'generateUML4CPPProfile'
+		mustRunAfter = ["generateUML4CPPProfile"]
 		dependsOn 'runCommandCompileUML4CPPProfile'
 	}
 	else
 	{
-		dependsOn 'generateUML4CPPProfile'
+		mustRunAfter = ["generateUML4CPPProfile"]
 		dependsOn 'src_gen:compileUML4CPPProfileSrc'
 	}
 	mustRunAfter =  [

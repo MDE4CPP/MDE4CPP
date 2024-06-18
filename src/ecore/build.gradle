@@ -38,12 +38,12 @@ task compileEcore() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generateEcore'
+		mustRunAfter = ["generateEcore"]
 		dependsOn 'runCommandCompileEcore'
 	}
 	else
 	{
-		dependsOn 'generateEcore'
+		mustRunAfter = ["generateEcore"]
 		dependsOn 'src_gen:compileEcoreSrc'
 	} 
 	mustRunAfter =  [

@@ -10,14 +10,10 @@ task generateUmlModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of uml.ecore model'
 
 	generateAPI = false;
-	
 	modelFilePath = file('.' + File.separator + 'uml.ecore')
-
-	relatedModels = ['ecore', 'types']
-	
+	relatedModels = ['ecore', 'types']	
 	outputs.files(fileTree('../src_gen/uml') {
         exclude '.cmake/**'
     })
 
-	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:buildGenerator_ecore4CPP')
 }

@@ -13,5 +13,4 @@ task generateUmlReflectionModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 
 	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection']
 
-	dependsOn rootProject.tasks.getByPath(':generator:UML4CPP:buildGenerator_UML4CPP')
 }

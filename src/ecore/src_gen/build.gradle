@@ -43,16 +43,11 @@ task compileEcoreSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
-		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerateEcore', true)
-		dependsOn runGeneratorTask
-		inputs.files(runGeneratorTask.outputs)
+		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateEcore', true)]
 	}
 	else
 	{
-		def generatorTask = getRootProject().getTasksByName('generateEcoreModel', true)
-		println(generatorTask)
-		dependsOn generatorTask
-		inputs.files(generatorTask.outputs)
+		mustRunAfter = [getRootProject().getTasksByName('generateEcoreModel', true)]
 	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

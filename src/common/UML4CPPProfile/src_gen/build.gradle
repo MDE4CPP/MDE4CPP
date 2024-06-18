@@ -42,16 +42,11 @@ task compileUML4CPPProfileSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
-		def runGeneratorTask = getRootProject().getTasksByName('runCommandGenerateUML4CPPProfile', true)
-		dependsOn runGeneratorTask 
-		inputs.files(runGeneratorTask .outputs)
+		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateUML4CPPProfile', true)]
 	}
 	else
 	{
-		def generatorTask = getRootProject().getTasksByName('generateUML4CPPProfileModel', true)
-		dependsOn generatorTask
-		inputs.files(generatorTask.outputs)
-
+		mustRunAfter = [getRootProject().getTasksByName('generateUML4CPPProfileModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 

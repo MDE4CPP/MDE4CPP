@@ -38,12 +38,12 @@ task compilePrimitivetypesReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
-		dependsOn 'generatePrimitivetypesReflection'
+		mustRunAfter = ["generatePrimitivetypesReflection"]
 		dependsOn 'runCommandCompilePrimitivetypesReflection'
 	}
 	else
 	{
-		dependsOn 'generatePrimitivetypesReflection'
+		mustRunAfter = ["generatePrimitivetypesReflection"]
 		dependsOn 'src_gen:compilePrimitivetypesReflectionSrc'
 	}
 	mustRunAfter =  [

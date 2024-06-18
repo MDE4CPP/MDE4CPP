@@ -10,14 +10,10 @@ task generateEcoreModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of ecore.ecore model'
 
 	generateAPI = false;
-	
 	modelFilePath = file('.' + File.separator + 'ecore.ecore')
-
-	relatedModels = []
-	
+	relatedModels = []	
 	outputs.files(fileTree('../src_gen/ecore') {
         exclude '.cmake/**'
     })
 
-	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:buildGenerator_ecore4CPP')
 }

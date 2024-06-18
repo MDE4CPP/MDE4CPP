@@ -10,14 +10,10 @@ task generateFUMLModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of fUML.ecore model'
 
 	generateAPI = false;
-	
 	modelFilePath = file('.' + File.separator + 'fUML.ecore')
-
-	relatedModels = ['ecore', 'types', 'uml']
-	
+	relatedModels = ['ecore', 'types', 'uml']	
 	outputs.files(fileTree('../src_gen/fUML') {
         exclude '.cmake/**'
     })
 
-	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:buildGenerator_ecore4CPP')
 }

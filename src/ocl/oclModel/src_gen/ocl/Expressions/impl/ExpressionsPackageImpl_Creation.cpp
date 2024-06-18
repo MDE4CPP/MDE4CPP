@@ -11,9 +11,9 @@
 #include "ecore/EEnum.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"

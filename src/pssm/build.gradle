@@ -8,10 +8,10 @@ task runCommandCompilePSSM(type:Exec) {
 	mustRunAfter =  [
 		'generatePSSM'
 	
-		, getRootProject().getTasksByName('compileFUML', true)
+		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileFUML', true)
 	]
 }
 
@@ -42,21 +42,21 @@ task compilePSSM() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generatePSSM'
+		mustRunAfter = ["generatePSSM"]
 		dependsOn 'runCommandCompilePSSM'
 	}
 	else
 	{
-		dependsOn 'generatePSSM'
+		mustRunAfter = ["generatePSSM"]
 		dependsOn 'src_gen:compilePSSMSrc'
 	} 
 	mustRunAfter =  [
 		'generatePSSM'
 	
-		, getRootProject().getTasksByName('compileFUML', true)
+		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileFUML', true)
 	]
 }
 
@@ -67,8 +67,8 @@ task buildPSSM() {
 	dependsOn 'generatePSSM'
 	dependsOn 'compilePSSM'
 
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
 }

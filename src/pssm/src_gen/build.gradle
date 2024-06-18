@@ -43,16 +43,11 @@ task compilePSSMSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
-		def runGeneratorTask = getRootProject().getTasksByName('runCommandGeneratePSSM', true)
-		dependsOn runGeneratorTask
-		inputs.files(runGeneratorTask.outputs)
+		mustRunAfter = [getRootProject().getTasksByName('runCommandGeneratePSSM', true)]
 	}
 	else
 	{
-		def generatorTask = getRootProject().getTasksByName('generatePSSMModel', true)
-		println(generatorTask)
-		dependsOn generatorTask
-		inputs.files(generatorTask.outputs)
+		mustRunAfter = [getRootProject().getTasksByName('generatePSSMModel', true)]
 	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

@@ -39,12 +39,12 @@ task compileTypes() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generateTypes'
+		mustRunAfter = ["generateTypes"]
 		dependsOn 'runCommandCompileTypes'
 	}
 	else
 	{
-		dependsOn 'generateTypes'
+		mustRunAfter = ["generateTypes"]
 		dependsOn 'src_gen:compileTypesSrc'
 	} 
 	mustRunAfter =  [
