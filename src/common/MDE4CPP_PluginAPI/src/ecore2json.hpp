@@ -12,18 +12,15 @@
 class Ecore2Json {
     public:
         //methodes
-        static std::shared_ptr<Ecore2Json> eInstance(std::shared_ptr<pluginHandler> pluginHandler);
-        crow::json::wvalue writeValue(const std::shared_ptr<ecore::EObject>& object);
+        Ecore2Json();
+        //static std::shared_ptr<Ecore2Json> eInstance(std::shared_ptr<pluginHandler> pluginHandler);
+        crow::json::wvalue createJsonOfEObject(const std::shared_ptr<ecore::EObject>& object);
         
     private:
         //methodes
-        Ecore2Json(std::shared_ptr<pluginHandler> pluginHandler);
-        
+          
         template<typename T> crow::json::wvalue writeFeature(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EStructuralFeature>& feature);
 
-        template <typename T> T convert_to(const crow::json::rvalue& value);
-
         //variables
-        std::shared_ptr<pluginHandler> m_pluginHandler;
 };
 #endif /*ECORE2JSON_HPP*/
