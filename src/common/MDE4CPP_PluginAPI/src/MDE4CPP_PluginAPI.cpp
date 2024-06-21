@@ -1,4 +1,3 @@
-#define CROW_JSON_USE_MAP
 #include "MDE4CPP_PluginAPI.hpp"
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"
@@ -63,7 +62,8 @@ GenericApi::GenericApi() {
         //auto segmented_path = helperFunctions::split_string(path, ':');
     	auto obj = m_modelInsts[modelInstName]->getRootObject();/*m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);*/ 
 
-        auto responds_json = m_Ecore2Json_handler->createJsonOfEObject(obj);
+        crow::json::wvalue responds_json = crow::json::wvalue();
+        m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
         
         //std::cout <<responds_json.dump();
 
@@ -75,7 +75,8 @@ GenericApi::GenericApi() {
         //auto segmented_path = helperFunctions::split_string(path, ':');
     	auto obj = debugModelInstanceCreator::getExampleModelInstance();
 
-        crow::json::wvalue responds_json = std::move(m_Ecore2Json_handler->createJsonOfEObject(obj));
+        crow::json::wvalue responds_json = crow::json::wvalue();
+        m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
         
         std::cout <<responds_json.dump();
 
