@@ -6,6 +6,8 @@
 #include "pluginHandler.hpp"
 #include "helpersFunc.hpp"
 
+#include "debugModelInstanceCreator.hpp"
+
 #include <sstream>
 #include <string>
 
@@ -18,6 +20,8 @@ GenericApi::GenericApi() {
 	m_pluginHandler = std::make_shared<pluginHandler>();
 
     m_Json2Ecore_handler = std::make_shared<Json2Ecore>();
+
+    m_Ecore2Json_handler = std::make_shared<Ecore2Json>();
 
     crow::SimpleApp app;
 
@@ -34,7 +38,8 @@ GenericApi::GenericApi() {
         }
 
         auto m = m_Json2Ecore_handler->createEcoreModelFromJson(crow::json::load(request.body));
-        
+
+        //TODO set m.modelName
 
         m_modelInsts[modelInstName] = m; //insert model instance into modelInsts map
         return crow::response(201);
@@ -47,20 +52,36 @@ GenericApi::GenericApi() {
      * @param path : path to the StructuralFeature in the model instance where the update shall be made
      *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :StructuralFeatureContaingTheTargetEObject
      *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
-     *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: #auhors@0 for first element in authors container; '#' indicates that it is a container; '@' indicates the index in the container)
+     *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container; '@' indicates the index in the container)
      *                                      -for normal StructFeatures = NameOfStructFeat                                   
     */
-    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& modelInstName, const std::string& path){
+    CROW_ROUTE(app, "/modelInst/<string>/").methods(crow::HTTPMethod::Get)([this](const std::string& modelInstName/*, const std::string& path*/){
         if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
-            return crow::response(404, "Model not found!");
+            CROW_LOG_INFO << modelInstName <<" not found in modelInst map!";
+            return crow::response(400, "Model not found!");
         }
-        auto segmented_path = helperFunctions::split_string(path, ':');
-    	auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
+        //auto segmented_path = helperFunctions::split_string(path, ':');
+    	auto obj = m_modelInsts[modelInstName]->getRootObject();/*m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);*/ 
+
+        auto responds_json = m_Ecore2Json_handler->createJsonOfEObject(obj);
         
-        //TODO: implement parsing of eObject to JSON
-        
-        return crow::response(418, "not  implemented");
+        //std::cout <<responds_json.dump();
+
+        return crow::response(200, responds_json);
     });
+
+    CROW_ROUTE(app, "/debugModel/").methods(crow::HTTPMethod::Get)([this](){
+
+        //auto segmented_path = helperFunctions::split_string(path, ':');
+    	auto obj = debugModelInstanceCreator::getExampleModelInstance();
+
+        crow::json::wvalue responds_json = std::move(m_Ecore2Json_handler->createJsonOfEObject(obj));
+        
+        std::cout <<responds_json.dump();
+
+        return crow::response(200, responds_json);
+    });
+
 
     /**
      * Initiates an Update on a model instance with the attached json

@@ -23,3 +23,4 @@ std::tuple<std::string,std::string> helperFunctions::splitObjectClassKey(const s
     }
     return {s.substr(0,pos), s.substr(pos + namespace_delimiter.size(), std::string::npos)};
 }
+

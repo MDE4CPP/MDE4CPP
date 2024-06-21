@@ -205,7 +205,7 @@ TEST_F(ModelInstanceTest, test_ecore_eContainer) {//tests the ecore eContainerFu
 class Json2EcoreTest : public testing::Test {
     protected:
         void SetUp() override {
-           rval = crow::json::load(testHelpers::getTestJSON_Large());
+           rval = crow::json::load(testHelpers::getTestJSON_Medium());
            Json2Ecore_Inst = Json2Ecore();
         };
     crow::json::rvalue rval;
@@ -236,5 +236,29 @@ TEST_F(Json2EcoreTest, Json2Ecore_createModel){
     auto obj = m->getAnyAtPath(dq_path);
     std::cout << "type of any is " << obj->getTypeId() << std::endl;
     auto obj_name = obj->get<std::string>();
-    EXPECT_EQ(obj_name, "Metro 2033");
+    EXPECT_EQ(obj_name, "Magritte");
+
+    auto dq_path2 = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"authors@0", "Name"}));
+    auto obj2 = m->getAnyAtPath(dq_path2);
+    std::cout << "type of any is " << obj->getTypeId() << std::endl;
+    auto obj_name2 = obj2->get<std::string>();
+    EXPECT_EQ(obj_name2, "David Sylvester");
+}
+
+#include "ecore2json.hpp"
+
+class Ecore2JsonTest : public testing::Test{
+    protected:
+        void SetUp() override {
+            m_ = testHelpers::getExampleModelInstance_1();
+            e2j_ = Ecore2Json();
+        }
+    ModelInstance m_;
+    Ecore2Json e2j_;
+};
+
+TEST_F (Ecore2JsonTest , modelParsing){
+    auto root_obj = m_.getRootObject();
+    auto result = e2j_.createJsonOfEObject(root_obj);
+    std::cout << result.dump() << std::endl;
 }

@@ -35,6 +35,7 @@ SET(SOURCE_FILES
   ../src/ModelInstance.cpp
   ../src/helperFunc.cpp
   ../src/json2ecore.cpp
+  ../src/ecore2json.cpp
   ../src/pluginHandler.cpp
 )
 

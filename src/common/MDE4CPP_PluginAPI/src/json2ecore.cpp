@@ -190,15 +190,16 @@ std::shared_ptr<Any> Json2Ecore::readAttributeValue(const std::shared_ptr<ecore:
     auto isContainer = object->eGet(feature)->isContainer();
 
     if(isContainer){ //handling of Attributes with multiplicity of > 1
-        auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
+        auto any = object->eGet(feature);
+        auto bag = any->get<std::shared_ptr<Bag<T>>>();
         for(const auto & entry : content[feature->getName()]){
             auto value = std::make_shared<T>(convert_to<T>(entry));
             bag->add(value);
         }
         return eAny(bag, attributeTypeId, true);
     }
-
-    return eAny(convert_to<T>(content[feature->getName()]), attributeTypeId, false);
+    T val = convert_to<T>(content[feature->getName()]);
+    return eAny(val, attributeTypeId, false);
 }
 
 //generic conversion methods for json
@@ -207,7 +208,7 @@ template<> bool Json2Ecore::convert_to<bool>(const crow::json::rvalue& value){
 }
 
 template<> std::string Json2Ecore::convert_to<std::string>(const crow::json::rvalue& value){ //needed to preserve whitespaces in string
-    return std::string(value);
+    return value.s();
 }
 
 template <typename T> T Json2Ecore::convert_to(const crow::json::rvalue& value){

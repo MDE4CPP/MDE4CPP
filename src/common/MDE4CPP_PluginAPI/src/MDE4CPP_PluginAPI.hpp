@@ -5,7 +5,8 @@
 
 #include "ModelInstance.hpp"
 #include "pluginHandler.hpp"
-#include "Json2Ecore.hpp"
+#include "json2ecore.hpp"
+#include "ecore2json.hpp"
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
@@ -107,8 +108,10 @@ private:
 
     std::shared_ptr<Json2Ecore> m_Json2Ecore_handler;
 
+    std::shared_ptr<Ecore2Json> m_Ecore2Json_handler;
 
-    std::map<std::string,std::shared_ptr<ModelInstance>> m_modelInsts{}; //map of all root-artifacts 
+
+    std::map<std::string,std::shared_ptr<ModelInstance>> m_modelInsts{}; //map of all modelinstances
 	
 
 };

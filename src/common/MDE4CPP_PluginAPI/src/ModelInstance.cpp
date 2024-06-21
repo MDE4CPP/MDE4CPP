@@ -105,7 +105,7 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
         }
 
         std::shared_ptr<EcoreContainerAny> ecore_container = std::dynamic_pointer_cast<EcoreContainerAny>(any);//cast into ECoreContainer
-        if (ecore_container){ //true if type of StruxtFeature is a Class
+        if (ecore_container){ //true if type of StructFeature is a Class
             std::shared_ptr<Bag<EObject>> bag = ecore_container->getAsEObjectContainer();
             try{
                 std::shared_ptr<EObject> content = bag->at(containerIndex);

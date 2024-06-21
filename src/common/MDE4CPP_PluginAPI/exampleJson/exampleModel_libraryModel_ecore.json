@@ -69,8 +69,34 @@
 					"ObjectClass" : "libraryModel_ecore::Picture",
 					"Name" : "Flug über den Schildwall",
 					"pageNumber" : "417"
-				},
+				}
 			]
 		}
 	]
 }
+
+{
+		"ObjectClass" : "libraryModel_ecore::LibraryModel",
+		"authors" : [
+			{
+				"ObjectClass" : "libraryModel_ecore::Author",
+				"Name" : "David Sylvester"
+			},
+		],
+		"book" : [
+			{
+				"ObjectClass" : "libraryModel_ecore::Book",
+				"Name" : "Magritte",
+				"authors" : ["authors@0"],
+				"pages" : 448,
+				"genres" : ["Art","Architecture"],
+				"pictures" : [
+					{
+						"ObjectClass" : "libraryModel_ecore::Picture",
+						"Name" : "Der Verrat der Binder (La trahison des images)",
+						"pageNumber" : 212
+					}
+				]
+			}
+		]
+	}

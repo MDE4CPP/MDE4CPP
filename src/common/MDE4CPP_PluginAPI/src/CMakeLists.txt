@@ -50,7 +50,8 @@ SET(SOURCE_FILES
 	helperFunc.cpp
 	pluginHandler.cpp
 	json2ecore.cpp
-	#ecore2json.cpp
+	ecore2json.cpp
+	debugModelInstanceCreator.cpp
 )
 
 INCLUDE_DIRECTORIES(
@@ -78,8 +79,17 @@ ELSEIF(APPLE)
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+
+		FIND_LIBRARY(TYPES_DEBUG typesd $ENV{MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_DEBUG ecored $ENV{MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored $ENV{MDE4CPP_HOME}/application/lib)
+
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd $ENV{MDE4CPP_HOME}/application/lib)
 	ELSE()
+		FIND_LIBRARY(TYPES_RELEASE types $ENV{MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_RELEASE ecore $ENV{MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore $ENV{MDE4CPP_HOME}/application/lib)
+		
 		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework $ENV{MDE4CPP_HOME}/application/lib)
 	ENDIF()
 ENDIF()
@@ -90,12 +100,22 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		debug ${PLUGINFRAMEWORK_DEBUG}
+
+		debug ${LIBRARYMODEL_ECORE_DEBUG}
+		debug ${TYPES_DEBUG}
+		debug ${ECORE_DEBUG}
+
 	    debug ws2_32
 	    debug wsock32
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		optimized ${PLUGINFRAMEWORK_RELEASE}
+
+		debug ${LIBRARYMODEL_ECORE_RELEASE}
+		debug ${TYPES_RELEASE}
+		debug ${ECORE_RELEASE}
+
 	    optimized ws2_32
 	    optimized wsock32
 	)

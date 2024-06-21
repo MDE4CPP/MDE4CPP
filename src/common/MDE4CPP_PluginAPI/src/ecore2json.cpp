@@ -17,13 +17,23 @@
 Ecore2Json::Ecore2Json(){}
 
 crow::json::wvalue Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& object){
-    auto result_json = crow::json::wvalue();
+
+    if(object == nullptr){
+        throw std::runtime_error("createJson : object parameter was a nullptr!");
+    }
+
+    crow::json::wvalue::object json_obj = crow::json::wvalue::object();
+
+    //sets "ObjectClass" key
+    std::string objClassName = object->eClass()->getName(); //TODO implement correctly : currently missing namespace of the class
+    CROW_LOG_INFO << "started creating json of " << objClassName;
+    json_obj["ObjectClass"] = std::move(crow::json::wvalue(objClassName));
 
     //parsing of all attributes
     std::shared_ptr<Bag<ecore::EAttribute>> attributes = object->eClass()->getEAllAttributes();
     for(const std::shared_ptr<ecore::EAttribute> & attribute : *attributes){
         if(attribute == nullptr){
-            CROW_LOG_INFO << "createJsonOfEObject() : an attribute was a nullptr";
+            CROW_LOG_WARNING << "createJsonOfEObject() : an attribute was a nullptr";
             continue;   //skips nullptr
         }
 
@@ -31,15 +41,31 @@ crow::json::wvalue Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::
         switch (attributeTypeId) {
             case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
             case ecore::ecorePackage::EBOOLEAN_CLASS:
-                result_json[attribute->getName()] = writeFeature<bool>(object, attribute);
+            {
+                auto value = writeFeature<bool>(object, attribute);
+                if(value.t()  != crow::json::type::Null){
+                    CROW_LOG_INFO << "setting " << attribute->getName() << " to " << value.dump();
+                    json_obj[attribute->getName()] = std::move(writeFeature<bool>(object, attribute));
+                }else{
+                    CROW_LOG_WARNING << attribute->getName() <<" is null!" ;
+                }
                 break;
+            }
             case ecore::ecorePackage::EBYTE_CLASS:
             case ecore::ecorePackage::EBYTEARRAY_CLASS:
             case ecore::ecorePackage::EBYTEOBJECT_CLASS:
             case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
             case ecore::ecorePackage::ECHAR_CLASS:
-                result_json[attribute->getName()] = writeFeature<char>(object, attribute);
+            {
+                auto value = writeFeature<char>(object, attribute);
+                if(value.t()  != crow::json::type::Null){
+                    CROW_LOG_INFO << "setting " << attribute->getName() << " to " << value.dump();
+                    json_obj[attribute->getName()] = std::move(writeFeature<char>(object, attribute));
+                }else{
+                    CROW_LOG_WARNING << attribute->getName() <<" is null!" ;
+                }
                 break;
+            }
             case ecore::ecorePackage::EDATE_CLASS:
             case ecore::ecorePackage::ERESOURCE_CLASS:
             case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
@@ -47,24 +73,62 @@ crow::json::wvalue Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::
             case ecore::ecorePackage::ESHORT_CLASS:
             case ecore::ecorePackage::ESHORTOBJECT_CLASS:
             case ecore::ecorePackage::EINT_CLASS:
-                result_json[attribute->getName()] = writeFeature<int>(object, attribute);
+             {
+                auto value = writeFeature<int>(object, attribute);
+                if(value.t()  != crow::json::type::Null){
+                    CROW_LOG_INFO << "setting " << attribute->getName() << " to " << value.dump();
+                    json_obj[attribute->getName()] = std::move(writeFeature<int>(object, attribute));
+                }else{
+                    CROW_LOG_WARNING << attribute->getName() <<" is null!" ;
+                }
                 break;
+            }
             case ecore::ecorePackage::ELONGOBJECT_CLASS:
             case ecore::ecorePackage::ELONG_CLASS:
-                result_json[attribute->getName()] = writeFeature<int>(object, attribute);
+            {
+                auto value = writeFeature<int>(object, attribute);
+                if(value.t()  != crow::json::type::Null){
+                    CROW_LOG_INFO << "setting " << attribute->getName() << " to " << value.dump();
+                    json_obj[attribute->getName()] = std::move(writeFeature<int>(object, attribute));
+                }else{
+                    CROW_LOG_WARNING << attribute->getName() <<" is null!" ;
+                }
                 break;
+            }
             case ecore::ecorePackage::EFLOATOBJECT_CLASS:
             case ecore::ecorePackage::EFLOAT_CLASS:
-                result_json[attribute->getName()] = writeFeature<float>(object, attribute);
+            {
+                auto value = writeFeature<float>(object, attribute);
+                if(value.t()  != crow::json::type::Null){
+                    CROW_LOG_INFO << "setting " << attribute->getName() << " to " << value.dump();
+                    json_obj[attribute->getName()] = std::move(writeFeature<float>(object, attribute));
+                }else{
+                    CROW_LOG_WARNING << attribute->getName() <<" is null!" ;
+                }
                 break;
+            }
             case ecore::ecorePackage::EBIGDECIMAL_CLASS:
             case ecore::ecorePackage::EDOUBLE_CLASS:
             case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
-                result_json[attribute->getName()] = writeFeature<bool>(object, attribute);
-                break;
-            case ecore::ecorePackage::ESTRING_CLASS:
             {
-                result_json[attribute->getName()] = writeFeature<std::string>(object, attribute);
+                auto value = writeFeature<double>(object, attribute);
+                if(value.t()  != crow::json::type::Null){
+                    CROW_LOG_INFO << "setting " << attribute->getName() << " to " << value.dump();
+                    json_obj[attribute->getName()] = std::move(writeFeature<double>(object, attribute));
+                }else{
+                    CROW_LOG_WARNING << attribute->getName() <<" is null!" ;
+                }
+                break;
+            }
+            case ecore::ecorePackage::ESTRING_CLASS:
+             {
+                auto value = writeFeature<std::string>(object, attribute);
+                if(value.t()  != crow::json::type::Null){
+                    CROW_LOG_INFO << "setting " << attribute->getName() << " to " << value.dump();
+                    json_obj[attribute->getName()] = std::move(writeFeature<std::string>(object, attribute));
+                }else{
+                    CROW_LOG_WARNING << attribute->getName() <<" is null!" ;
+                }
                 break;
             }
             default:{ //should never be reached
@@ -78,42 +142,81 @@ crow::json::wvalue Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::
     std::shared_ptr<Bag<ecore::EReference>> references = object->eClass()->getEAllReferences();
     for(const std::shared_ptr<ecore::EReference> & reference : *references){
         if(reference == nullptr){
-            CROW_LOG_INFO << "createJsonOfEObject() : a reference was a nullptr";
+            CROW_LOG_WARNING << "createJsonOfEObject : createJsonOfEObject() : a reference was a nullptr";
             continue;
         }
-        if(reference->isContainment()){ //handles all containment references
+        if(reference->isContainment()){ //parses containment references
             if(object->eGet(reference)->isContainer()){
-                auto list = crow::json::wvalue();
+                auto list = crow::json::wvalue::list();
                 auto bag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(object->eGet(reference))->getAsEObjectContainer();
-                for(unsigned int j=0;j<bag->size();j++){
-                    list[j] = createJsonOfEObject(bag->at(j));
+                if(bag == nullptr){
+                    CROW_LOG_WARNING << "createJsonOfEObject : bag cast failed for Reference "<< reference->getName() << "!" ;
                 }
-                result_json[reference->getName()] = std::move(list);
-                break;
+                for(const std::shared_ptr<ecore::EObject> & obj : *bag){
+                    if(obj == nullptr){
+                    CROW_LOG_WARNING << "createJsonOfEObject : on refernce in "<< reference->getName() << " was a nullptr!" ;
+                    continue;
+                    }
+                    //crow::json::wvalue o = createJsonOfEObject(obj);
+                    list.push_back(std::move(createJsonOfEObject(obj)));
+                }
+                json_obj[reference->getName()] = move(list);
+            }else{
+                auto refValue = object->eGet(reference)->get<std::shared_ptr<ecore::EObject>>();
+                if(refValue == nullptr){
+                    CROW_LOG_WARNING << "createJsonOfEObject : the value of "<< reference->getName() << " was a nullptr!" ;
+                }
+                //auto value = createJsonOfEObject(refValue);
+                json_obj[reference->getName()] = std::move(crow::json::wvalue(createJsonOfEObject(refValue)));
             }
-            auto value = createJsonOfEObject(object->eGet(reference)->get<std::shared_ptr<ecore::EObject>>());
-            result_json[reference->getName()] = std::move(value);
-            break;
         }
-        if(!reference->isContainer() && !reference->isContainment()){
+        if(!reference->isContainer() && !reference->isContainment()){//parses crossReferences
             //TODO set approriate path for reference!!!!
-            result_json[reference->getName()] =  reinterpret_cast<intptr_t>(object->eGet(reference).get());
+            //result_json[reference->getName()] =  reinterpret_cast<intptr_t>(object->eGet(reference).get());
         }
     }
+
+    crow::json::wvalue result_json = move(json_obj);
+    //std::cout << result_json.dump() << std::endl;
     return result_json;
 }
+
+
+/*template<>
+crow::json::wvalue Ecore2Json::writeFeature<bool>(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EStructuralFeature> &feature) {
+    auto isContainer = object->eGet(feature)->isContainer();
+    if(isContainer){
+        auto list = std::vector<bool>();
+        auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<bool>>>();
+        for (const auto & value : *bag) {
+            list.push_back(*value);
+        }
+        crow::json::wvalue v = {};
+        v = list;
+        return v;
+    }
+    return crow::json::wvalue(object->eGet(feature)->get<bool>());
+    return crow::json::wvalue();
+}*/
+
 
 template<typename T>
 crow::json::wvalue Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EStructuralFeature> &feature) {
     auto isContainer = object->eGet(feature)->isContainer();
+    crow::json::wvalue ret_json;
     if(isContainer){
-        auto list = crow::json::wvalue();
+        auto list = crow::json::wvalue::list();
         auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
-        for (unsigned int j=0;j<bag->size();j++) {
-            auto value = bag->at(j).get();
-            list[j] = value;
+        for (auto const & val : *bag) {
+            auto v = *val;
+            auto o = crow::json::wvalue(v);
+            list.push_back(std::move(o));
         }
-        return list;
+        ret_json =  crow::json::wvalue(move(list));
+    }else{
+        auto any = object->eGet(feature);
+        auto v = any->get<T>();
+        ret_json = std::move(crow::json::wvalue(v));
     }
-    return crow::json::wvalue(object->eGet(feature)->get<T>());
+    return ret_json;
 }

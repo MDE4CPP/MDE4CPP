@@ -122,6 +122,8 @@ namespace testHelpers{
 	std::string getTestJSON_Large();
 
 	std::string getTestJSON_Small();
+
+	std::string getTestJSON_Medium();
 }
 
 

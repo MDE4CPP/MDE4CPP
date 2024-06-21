@@ -32,7 +32,7 @@ std::shared_ptr<ecore::EObject> testHelpers::getExampleModelInstance_1(){
     //creates an instance of a Book with name "Magritte" in lm
 	std::shared_ptr<ecore::EObject> book = plugin->create("libraryModel_ecore::Book", lm, package->LIBRARYMODEL_ATTRIBUTE_BOOK);
     std::string bookname = "Magritte";
-    book->eSet(package->getNamedElement_Attribute_name(), eAny(bookname, package->NAMEDELEMENT_ATTRIBUTE_NAME, false)); //set attribute name to "Magritte"
+    book->eSet(package->getNamedElement_Attribute_name(), eAny(bookname, ecore::ecorePackage::ESTRING_CLASS, false)); //set attribute name to "Magritte"
     Bag<std::string> b = Bag<std::string>();
     std::shared_ptr<Bag<std::string>> b_ptr = std::make_shared<Bag<std::string>>(b);
     b_ptr->push_back(std::make_shared<std::string>("Art"));
@@ -44,7 +44,7 @@ std::shared_ptr<ecore::EObject> testHelpers::getExampleModelInstance_1(){
     //creates an instance of an Author with name "David Sylvester" in lm
     std::shared_ptr<ecore::EObject> author = plugin->create("libraryModel_ecore::Author", lm, package->LIBRARYMODEL_ATTRIBUTE_AUTHORS);
     std::string authorname = "David Sylvester";
-    author->eSet(package->getNamedElement_Attribute_name(), eAny(authorname, package->NAMEDELEMENT_ATTRIBUTE_NAME, false)); //set attribute name to "David Sylvester"
+    author->eSet(package->getNamedElement_Attribute_name(), eAny(authorname, ecore::ecorePackage::ESTRING_CLASS, false)); //set attribute name to "David Sylvester"
 
     //set author of the book
     std::shared_ptr<Any> anybookauthors = book->eGet(package->getBook_Attribute_authors());
@@ -161,6 +161,33 @@ std::string testHelpers::getTestJSON_Small(){
                 "pictures" : []
             }
         ]
+    })V0G0N";
+    return(json);
+}
+
+std::string testHelpers::getTestJSON_Medium(){
+    std::string json =R"V0G0N(
+    {
+        "ObjectClass" : "libraryModel_ecore::LibraryModel",
+        "authors" : [
+            {
+                "ObjectClass" : "libraryModel_ecore::Author",
+                "Name" : "David Sylvester"
+            }],
+        "book" : [
+            {
+                "ObjectClass" : "libraryModel_ecore::Book",
+                "Name" : "Magritte",
+                "authors" : ["authors@0"],
+                "pages" : 448,
+                "genres" : ["Art","Architecture"],
+                "pictures" : [
+                    {
+                        "ObjectClass" : "libraryModel_ecore::Picture",
+                        "Name" : "Der Verrat der Binder",
+                        "pageNumber" : 212
+                    }]
+            }]
     })V0G0N";
     return(json);
 }
