@@ -259,6 +259,7 @@ class Ecore2JsonTest : public testing::Test{
 
 TEST_F (Ecore2JsonTest , modelParsing){
     auto root_obj = m_.getRootObject();
-    auto result = e2j_.createJsonOfEObject(root_obj);
+    auto result = crow::json::wvalue();
+    e2j_.createJsonOfEObject(root_obj, result);
     std::cout << result.dump() << std::endl;
 }

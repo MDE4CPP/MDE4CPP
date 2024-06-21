@@ -5,7 +5,6 @@
 
 #include "libraryModel_ecore/libraryModel_ecoreFactory.hpp"
 #include "libraryModel_ecore/libraryModel_ecorePackage.hpp"
-#include "libraryModel_ecore/libraryModel_ecoreApi.hpp"
 
 #include "libraryModel_ecore/Book.hpp"
 #include "libraryModel_ecore/Author.hpp"
