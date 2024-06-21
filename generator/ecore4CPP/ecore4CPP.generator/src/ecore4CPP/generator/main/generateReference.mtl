@@ -209,6 +209,18 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 	//end of body
 	[else]
     m_[anEReference.name/] = _[anEReference.name/];
+	[comment also calls setter for the containment-reference it is derived from an other reference/]
+	[if (anEReference.container)]
+		[if (anEReference.hasSubset())]
+	//Recursive call to the reference this one is derived from
+	[anEReference.Subset().oclAsType(EReference).SetterName()/](_[anEReference.name/]);
+		[else]
+			[if(not (anEReference.name = 'eContainer'))]
+	//Setter call to implicedly redefined eContainer from eObject
+	setEContainer(_[anEReference.name/]);
+			[/if]
+		[/if]
+	[/if]
 	[anEReference._generateRedefinedReferencesSetterCalls()/]
 	[/if]
 }
