@@ -81,7 +81,7 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const cro
 
             auto value = content[attribute->getName()];
             if(value.t() == crow::json::type::Null){
-                CROW_LOG_INFO << attribute->getName()  << " not set in json for object";
+                CROW_LOG_INFO << attribute->getName()  << " is set to null and will be ignored!";
                 continue;
             }
         } catch (std::runtime_error& error){
