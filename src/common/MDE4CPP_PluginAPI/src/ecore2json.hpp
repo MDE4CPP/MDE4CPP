@@ -15,18 +15,40 @@ class Ecore2Json {
     public:
         //methodes
         Ecore2Json();
-        //static std::shared_ptr<Ecore2Json> eInstance(std::shared_ptr<pluginHandler> pluginHandler);
+
+        /**
+         * parses an eObject and stores its attributes and refernces as a json
+         *  -ignores backreferences since ecore should set them automatically
+         *  -cross references are stored as the path to the object they reference in the modelInstance
+         * @param object : ptr to the object being parsed
+         * @param return_json : reference to the json::wvalue where the parsed attributes and refernces are to be stored
+         */
         void createJsonOfEObject(const std::shared_ptr<ecore::EObject>& object, crow::json::wvalue& result_json);
         
     private:
         //methodes
 
+        /**
+         * returns the full namespace + name of a given eObject
+         * @param object : ptr to the object
+         */
         std::string getObjectClassName(const std::shared_ptr<ecore::EObject>& obj);
 
+        /**
+         * returns if a passed reference is a container (is the opposite reference of a containment reference)
+         * workaround for currently not properly implemented isContainer()-methoded of eReference
+         * @param eRef : shared pointer to an eReference
+         * @return :    -true : eRef should heve the container flag set
+         *              -false : otherwise
+         */
         bool isContainer(const std::shared_ptr<ecore::EReference>& eRef);
-          
-        template<typename T> void writeFeature(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EStructuralFeature>& feature, crow::json::wvalue& return_json);
-
-        //variables
+        
+        /**
+         * writes the value of a passed structuralFeature into the passed json::wvalue; does insert a list if multiplicity of the structuralFeature is > 1
+         * @param object : ptr to the object containing the structFeature being parsed
+         * @param feature : ptr to the stuctFeature in the meta model, needed for calling eGet
+         * @param return_json : reference to the json::wvalue where the parsed value is to be stored
+         */
+        template<typename T> void writeFeature(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EAttribute>& feature, crow::json::wvalue& return_json);
 };
 #endif /*ECORE2JSON_HPP*/

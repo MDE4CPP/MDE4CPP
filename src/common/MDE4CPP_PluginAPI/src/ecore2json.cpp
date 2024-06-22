@@ -10,9 +10,6 @@
 #include "ecore/EReference.hpp"
 #include "ecore/EcoreContainerAny.hpp"
 
-/*std::shared_ptr<Ecore2Json> Ecore2Json::eInstance(std::shared_ptr<pluginHandler> pluginHandler){
-    static std::shared_ptr<Ecore2Json> instance = std::make_shared<Ecore2Json>(Ecore2Json(pluginHandler));
-}*/
 
 Ecore2Json::Ecore2Json(){}
 
@@ -35,7 +32,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             continue;   //skips nullptr
         }
 
-        auto attributeTypeId = object->eGet(attribute)->getTypeId();
+        unsigned long attributeTypeId = object->eGet(attribute)->getTypeId();
         switch (attributeTypeId) {
             case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
             case ecore::ecorePackage::EBOOLEAN_CLASS:
@@ -145,23 +142,23 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             continue;
         }
         if(reference->isContainment()){ //parses containment references
-            if(object->eGet(reference)->isContainer()){
+            if(object->eGet(reference)->isContainer()){ //muliplicy of reference > 1
                 crow::json::wvalue& list = result_json[reference->getName()];
-                auto bag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(object->eGet(reference))->getAsEObjectContainer();
+                std::shared_ptr<Bag<ecore::EObject>> bag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(object->eGet(reference))->getAsEObjectContainer();
                 if(bag == nullptr){
                     CROW_LOG_WARNING << "createJsonOfEObject : bag cast failed for Reference "<< reference->getName() << "!" ;
                 }
                 int i = 0;
                 for(const std::shared_ptr<ecore::EObject> & obj : *bag){
                     if(obj == nullptr){
-                    CROW_LOG_WARNING << "createJsonOfEObject : on refernce in "<< reference->getName() << " was a nullptr!" ;
-                    continue;
+                        CROW_LOG_WARNING << "createJsonOfEObject : on refernce in "<< reference->getName() << " was a nullptr!" ;
+                        continue;
                     }
                     createJsonOfEObject(obj, list[i]);
                     i++;
                 }
-            }else{
-                auto refValue = object->eGet(reference)->get<std::shared_ptr<ecore::EObject>>();
+            }else{ //muliplicy of reference = 1
+                std::shared_ptr<ecore::EObject> refValue = object->eGet(reference)->get<std::shared_ptr<ecore::EObject>>();
                 if(refValue == nullptr){
                     CROW_LOG_WARNING << "createJsonOfEObject : the value of "<< reference->getName() << " was a nullptr!" ;
                 }
@@ -188,30 +185,29 @@ std::string Ecore2Json::getObjectClassName(const std::shared_ptr<ecore::EObject>
 bool Ecore2Json::isContainer(const std::shared_ptr<ecore::EReference>& eRef){ //neccesary since isConstainer Function of eReference is not implemented
     bool ret = false;
     try{
-        auto eOp = eRef->getEOpposite();
+        const std::shared_ptr<ecore::EReference>& eOp = eRef->getEOpposite();
         if(eOp != nullptr && eOp->isContainment()){
             ret = true;
         }
     }catch(...){
-        std::cout<< "ecore2json::isContainer : An error rccurred!" << std::endl;
+        std::cout<< "ecore2json::isContainer : An error occurred!" << std::endl;
     }
     return ret;
 }
 
 
 template<typename T>
-void Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EStructuralFeature> &feature, crow::json::wvalue& return_json) {
+void Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EAttribute> &feature, crow::json::wvalue& return_json) {
     bool isContainer = object->eGet(feature)->isContainer();
-    if(isContainer){
+    if(isContainer){//attributes with multiplicity > 1 
         std::shared_ptr<Bag<T>> bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
         int i = 0;
         for (const std::shared_ptr<T>& val : *bag) {
             T v = *val;
-            //auto o = crow::json::wvalue(v);
             return_json[i] = v;
             i++;
         }
-    }else{
+    }else{//attributes with multiplicity = 1
         std::shared_ptr<Any> any = object->eGet(feature);
         T v = any->get<T>();
         return_json = v;
