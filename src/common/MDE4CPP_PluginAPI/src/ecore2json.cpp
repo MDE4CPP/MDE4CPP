@@ -120,7 +120,8 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             }
             case ecore::ecorePackage::ESTRING_CLASS:
              {
-                if(! object->eGet(attribute)->isEmpty()){
+                std::shared_ptr<Any> any = object->eGet(attribute);
+                if(! any->isEmpty()){
                     writeFeature<std::string>(object, attribute,result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
@@ -167,30 +168,35 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
                 createJsonOfEObject(refValue, result_json[reference->getName()]);
             }
         }
-        if(!reference->isContainer() && !reference->isContainment()){//parses crossReferences
+        if(!isContainer(reference) && !reference->isContainment()){//parses crossReferences //TODO fix setting of m_container
             //TODO set approriate path for reference!!!!
             result_json[reference->getName()] =  reinterpret_cast<intptr_t>(object->eGet(reference).get());
         }
     }
 }
 
-
-/*template<>
-crow::json::wvalue Ecore2Json::writeFeature<bool>(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EStructuralFeature> &feature) {
-    auto isContainer = object->eGet(feature)->isContainer();
-    if(isContainer){
-        auto list = std::vector<bool>();
-        auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<bool>>>();
-        for (const auto & value : *bag) {
-            list.push_back(*value);
-        }
-        crow::json::wvalue v = {};
-        v = list;
-        return v;
+std::string Ecore2Json::getObjectClassName(const std::shared_ptr<ecore::EObject>& obj){
+    std::shared_ptr<ecore::EClass> c = obj->eClass();
+    std::string return_string = "";
+    while(c != nullptr){
+        return_string = c->getName();
+        //TODO get namespace of a class
     }
-    return crow::json::wvalue(object->eGet(feature)->get<bool>());
-    return crow::json::wvalue();
-}*/
+    return return_string;
+}
+
+bool Ecore2Json::isContainer(const std::shared_ptr<ecore::EReference>& eRef){ //neccesary since isConstainer Function of eReference is not implemented
+    bool ret = false;
+    try{
+        auto eOp = eRef->getEOpposite();
+        if(eOp != nullptr && eOp->isContainment()){
+            ret = true;
+        }
+    }catch(...){
+        std::cout<< "ecore2json::isContainer : An error rccurred!" << std::endl;
+    }
+    return ret;
+}
 
 
 template<typename T>

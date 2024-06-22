@@ -4,6 +4,7 @@
 #include "util/crow_all.h"
 
 #include "ecore/EObject.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/ecorePackage.hpp"
@@ -19,6 +20,10 @@ class Ecore2Json {
         
     private:
         //methodes
+
+        std::string getObjectClassName(const std::shared_ptr<ecore::EObject>& obj);
+
+        bool isContainer(const std::shared_ptr<ecore::EReference>& eRef);
           
         template<typename T> void writeFeature(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EStructuralFeature>& feature, crow::json::wvalue& return_json);
 
