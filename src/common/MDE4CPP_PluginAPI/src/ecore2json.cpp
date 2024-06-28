@@ -20,12 +20,11 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
     }
 
     //sets "ObjectClass" key
-    std::string objClassName = object->eClass()->getName(); //TODO implement correctly : currently missing namespace of the class
+    std::string objClassName = getObjectClassName(object);
     auto objectID = reinterpret_cast<intptr_t>(object.get());
     CROW_LOG_INFO << "started creating json of " << objClassName << " with id: " << objectID;
     result_json["ObjectClass"] = objClassName;
     result_json["ObjectID"] = objectID;
-
 
     //parsing of all attributes
     std::shared_ptr<Bag<ecore::EAttribute>> attributes = object->eClass()->getEAllAttributes();
@@ -173,7 +172,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
                     list[i] = reinterpret_cast<intptr_t>(obj.get());
                     break;
                 default:
-                    throw std::runtime_error("unexpected reference Type encountered");
+                    throw std::runtime_error("unexpected referenceType encountered");
                     break;
                 }
 
@@ -193,7 +192,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
                     result_json[reference->getName()] =  reinterpret_cast<intptr_t>(refValue.get());
                     break;
                 default:
-                    throw std::runtime_error("unexpected reference Type encountered");
+                    throw std::runtime_error("unexpected referenceType encountered");
                     break;
             }
         }
@@ -201,11 +200,11 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
 }
 
 std::string Ecore2Json::getObjectClassName(const std::shared_ptr<ecore::EObject>& obj){
-    std::shared_ptr<ecore::EObject> o = obj;
-    std::string return_string = "";
-    while(o != nullptr){
-        return_string = o->eClass()->getName() + "::" + return_string;
-        o = o->eContainer();
+    std::string return_string = obj->eClass()->getName();
+    std::shared_ptr<ecore::EPackage> package = obj->eClass()->getEPackage().lock();
+    while(package != nullptr){
+        return_string = package->getName() + "::" + return_string;
+        package = package->getESuperPackage().lock();
     }
     return return_string;
 }
