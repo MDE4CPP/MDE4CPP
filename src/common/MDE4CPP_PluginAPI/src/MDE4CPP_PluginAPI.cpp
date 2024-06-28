@@ -18,8 +18,6 @@ std::shared_ptr<GenericApi> GenericApi::eInstance() {
 GenericApi::GenericApi() {
 	m_pluginHandler = std::make_shared<pluginHandler>();
 
-    m_Json2Ecore_handler = std::make_shared<Json2Ecore>();
-
     m_Ecore2Json_handler = std::make_shared<Ecore2Json>();
 
     crow::SimpleApp app;
@@ -35,8 +33,9 @@ GenericApi::GenericApi() {
             CROW_LOG_INFO<<"modelInst:\""<< modelInstName <<"\" already exists";
             return crow::response(400, "Model already exists!");
         }
+        Json2Ecore json2ecore_handler = Json2Ecore();
 
-        auto m = m_Json2Ecore_handler->createEcoreModelFromJson(crow::json::load(request.body));
+        auto m = json2ecore_handler.createEcoreModelFromJson(crow::json::load(request.body));
 
         //TODO set m.modelName
 
@@ -64,9 +63,7 @@ GenericApi::GenericApi() {
 
         crow::json::wvalue responds_json = crow::json::wvalue();
         m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
-        
-        //std::cout <<responds_json.dump();
-
+    
         return crow::response(200, responds_json);
     });
 

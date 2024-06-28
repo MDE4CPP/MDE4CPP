@@ -26,7 +26,6 @@ class Ecore2Json {
         void createJsonOfEObject(const std::shared_ptr<ecore::EObject>& object, crow::json::wvalue& result_json);
         
     private:
-        //enums 
         enum referenceType { //enum for reference types
             CONTAINMENT_REFERENCE,
             CROSS_REFERENCE,

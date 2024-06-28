@@ -19,7 +19,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
         throw std::runtime_error("createJson : object parameter was a nullptr!");
     }
 
-    //sets "ObjectClass" key
+    //sets "ObjectClass" and "ObjectID" keys
     std::string objClassName = getObjectClassName(object);
     auto objectID = reinterpret_cast<intptr_t>(object.get());
     CROW_LOG_INFO << "started creating json of " << objClassName << " with id: " << objectID;

@@ -106,8 +106,6 @@ private:
     
     std::shared_ptr<pluginHandler> m_pluginHandler;
 
-    std::shared_ptr<Json2Ecore> m_Json2Ecore_handler;
-
     std::shared_ptr<Ecore2Json> m_Ecore2Json_handler;
 
 

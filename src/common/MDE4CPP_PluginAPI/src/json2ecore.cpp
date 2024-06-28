@@ -1,5 +1,6 @@
 #include "json2Ecore.hpp"
 #include "helpersFunc.hpp"
+#include <map>
 
 //PluginFramework includes
 #include "pluginFramework/MDE4CPPPlugin.hpp"
@@ -15,60 +16,82 @@ Json2Ecore::Json2Ecore(){
 }
 
 std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::json::rvalue& content){
-    
-    std::vector<std::tuple<std::shared_ptr<EObject>, std::shared_ptr<ecore::EReference>, crow::json::rvalue>> crossReferenceBuffer;
 
-    auto root_object = createModelWithoutCrossRef(content, crossReferenceBuffer);
+    auto root_object = createModelWithoutCrossRef(content);
     
     auto m = std::make_shared<ModelInstance>(root_object); //create a new model instance with no name
     
     //add crossreferences into the Model 
-    for(auto [eObj, eRef, json] : crossReferenceBuffer){
+    for(auto [eObj, eRef, json] : m_crossReferenceBuffer){
 
         auto referenceTypeID = eObj->eGet(eRef)->getTypeId();
-
         std::shared_ptr<Any> referenceContent;
-
-
         if(eObj->eGet(eRef)->isContainer()){ //reference is of multiplicity > 1 
-
             auto bag = std::make_shared<Bag<ecore::EObject>>();
-
-            for(const auto & entry : json){ //iterates over all paths 
-                auto segmented_path = helperFunctions::split_string(std::string(entry), ':');
-                auto refTarget = m->getObjectAtPath(segmented_path);
+            for(const auto & entry : json){
+                std::string s = std::string(entry);
+                std::shared_ptr<ecore::EObject> refTarget = getReferencedObject(entry, m);
                 bag->add(refTarget);
             }
-
             referenceContent = eEcoreContainerAny(bag, referenceTypeID);
-
         }else{//reference is of multiplicity <= 1
-            
-            auto segmented_path = helperFunctions::split_string(std::string(json), ':');
-            auto refTarget = m->getObjectAtPath(segmented_path);
-            referenceContent = eAny(refTarget, referenceTypeID, false);
+            std::shared_ptr<ecore::EObject> refTarget = getReferencedObject(content, m);
         }
         eObj->eSet(eRef, referenceContent);
-
     }
-    
     return m; //return complete model
 }
 
-//creates an object encoded in a json
-std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const crow::json::rvalue& content, std::vector<std::tuple<std::shared_ptr<EObject> ,std::shared_ptr<ecore::EReference>, crow::json::rvalue>>& crossReferenceBuffer){
+std::shared_ptr<ecore::EObject> Json2Ecore::getReferencedObject(const crow::json::rvalue& json, const std::shared_ptr<ModelInstance>& modelInst){
+    std::shared_ptr<ecore::EObject> refTarget;
+    switch(json.t()){
+        case crow::json::type::String : { //handles references as a path
+            auto segmented_path = helperFunctions::split_string(json.s(), ':');
+            refTarget = modelInst->getObjectAtPath(segmented_path);
+            break;
+        }
+        case crow::json::type::Number : { //handles references as an ObjectID
+            if (auto iter = m_objectMap.find(json.i()); iter != m_objectMap.end())
+                refTarget = iter->second;
+            else
+                CROW_LOG_ERROR << "could not resolve reference with ID : " << json.i();
+            break;
+        }
+        default : {
+            CROW_LOG_ERROR << "cross-references can either be a string for a path, or a number for an ObjectID";
+        }
+    }
+    return refTarget;
+}
 
+//creates an object encoded in a json
+std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const crow::json::rvalue& content){
+
+    if(!content.has("ObjectClass")){
+        throw std::runtime_error("ObjectClass key not set!");
+    }
     auto ObjClass_KeyVal = content["ObjectClass"];
     if(ObjClass_KeyVal.t() != crow::json::type::String){ //if type of the key value is anything else except for a string (eg. null)
-        throw std::runtime_error("ObjectClass key not set!");
+        throw std::runtime_error("ObjectClass key has wrong type! Expected Type : String");
     }
     auto [pluginName , eClass] = helperFunctions::splitObjectClassKey(std::string(ObjClass_KeyVal));
 
-    auto plugin = m_pluginHandler.getPluginByName(pluginName);
-    auto result = plugin->create(pluginName + "::" + eClass);
+    std::shared_ptr<MDE4CPPPlugin> plugin = m_pluginHandler.getPluginByName(pluginName);
+    std::shared_ptr<ecore::EObject> result = plugin->create(pluginName + "::" + eClass);
     if(result == nullptr){
         throw std::runtime_error( "create-methode of the plugin returned nllptr; most likely \""+ eClass + "\"-class not found in Plugin of the Model!");
     }
+
+    //inserts eObject into objectMap with its ObjectID
+    if(content.has("ObjectID")){
+        crow::json::rvalue ObjID_KeyValue = content["ObjectID"];
+        int64_t objID = ObjID_KeyValue.i();
+        m_objectMap.insert({objID,result});
+        CROW_LOG_INFO << "added " << eClass << " with ID : " << objID << " into objectMap";
+    }else{
+        CROW_LOG_INFO << "no ObjectID key found in " << eClass << "; will not be added into objectMap!";
+    }
+
 
     //handeling of all member attibutes of the object
     std::shared_ptr<Bag<ecore::EAttribute>> attributes = result->eClass()->getEAllAttributes();
@@ -166,18 +189,18 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const cro
             if(result->eGet(reference)->isContainer()){
                 auto bag = std::make_shared<Bag<ecore::EObject>>();
                 for(const auto & entry : content[reference->getName()]){
-                    bag->add(createModelWithoutCrossRef(entry, crossReferenceBuffer)); //recursive call to creates each object that is being referenced 
+                    bag->add(createModelWithoutCrossRef(entry)); //recursive call to creates each object that is being referenced 
                 }
                 referenceContent = eEcoreContainerAny(bag, referenceTypeID);
             }else{
-                auto value = createModelWithoutCrossRef(content[reference->getName()], crossReferenceBuffer); //recursive call to creates the referenced object 
+                auto value = createModelWithoutCrossRef(content[reference->getName()]); //recursive call to creates the referenced object 
                 referenceContent = eAny(value, referenceTypeID, false);
             }
             result->eSet(reference, referenceContent);
         }
 
         if(!reference->isContainer() && !reference->isContainment()){ //handles all references other than containment- and container-references
-            crossReferenceBuffer.push_back({result, reference ,content[reference->getName()]});
+            m_crossReferenceBuffer.push_back({result, reference ,content[reference->getName()]});
         }
 
     }
