@@ -165,7 +165,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
                 createJsonOfEObject(refValue, result_json[reference->getName()]);
             }
         }
-        if(!isContainer(reference) && !reference->isContainment()){//parses crossReferences //TODO fix setting of m_container
+        if(!reference->isContainer() && !reference->isContainment()){//parses crossReferences //TODO fix setting of m_container
             //TODO set approriate path for reference!!!!
             result_json[reference->getName()] =  reinterpret_cast<intptr_t>(object->eGet(reference).get());
         }
@@ -181,20 +181,6 @@ std::string Ecore2Json::getObjectClassName(const std::shared_ptr<ecore::EObject>
     }
     return return_string;
 }
-
-bool Ecore2Json::isContainer(const std::shared_ptr<ecore::EReference>& eRef){ //neccesary since isConstainer Function of eReference is not implemented
-    bool ret = false;
-    try{
-        const std::shared_ptr<ecore::EReference>& eOp = eRef->getEOpposite();
-        if(eOp != nullptr && eOp->isContainment()){
-            ret = true;
-        }
-    }catch(...){
-        std::cout<< "ecore2json::isContainer : An error occurred!" << std::endl;
-    }
-    return ret;
-}
-
 
 template<typename T>
 void Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EAttribute> &feature, crow::json::wvalue& return_json) {

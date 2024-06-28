@@ -547,7 +547,11 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="container" eType="#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="if(getEOpposite() != nullptr &amp;&amp; getEOpposite()->isContainment()){&#xA;&#x9;return true;&#xA;}&#xA;return false;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolveProxies" eType="#//EBoolean"
         defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eOpposite" eType="#//EReference"/>

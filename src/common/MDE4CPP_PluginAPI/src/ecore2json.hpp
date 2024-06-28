@@ -33,15 +33,6 @@ class Ecore2Json {
          * @param object : ptr to the object
          */
         std::string getObjectClassName(const std::shared_ptr<ecore::EObject>& obj);
-
-        /**
-         * returns if a passed reference is a container (is the opposite reference of a containment reference)
-         * workaround for currently not properly implemented isContainer()-methoded of eReference
-         * @param eRef : shared pointer to an eReference
-         * @return :    -true : eRef should heve the container flag set
-         *              -false : otherwise
-         */
-        bool isContainer(const std::shared_ptr<ecore::EReference>& eRef);
         
         /**
          * writes the value of a passed structuralFeature into the passed json::wvalue; does insert a list if multiplicity of the structuralFeature is > 1
