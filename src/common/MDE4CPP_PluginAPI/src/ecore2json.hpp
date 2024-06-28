@@ -26,13 +26,27 @@ class Ecore2Json {
         void createJsonOfEObject(const std::shared_ptr<ecore::EObject>& object, crow::json::wvalue& result_json);
         
     private:
-        //methodes
+        //enums 
+        enum referenceType { //enum for reference types
+            CONTAINMENT_REFERENCE,
+            CROSS_REFERENCE,
+            BACK_REFERENCE
+        };
 
+        //methodes
         /**
          * returns the full namespace + name of a given eObject
          * @param object : ptr to the object
+         * //TODO document return
          */
         std::string getObjectClassName(const std::shared_ptr<ecore::EObject>& obj);
+
+        /**
+         * returns the type of a given eReference
+         * @param eRef : ptr to an eReference; will throw runtime error if it is a nullptr
+         * @return appropriate reference type
+         */
+        referenceType getRefType(const std::shared_ptr<ecore::EReference>& eRef);
         
         /**
          * writes the value of a passed structuralFeature into the passed json::wvalue; does insert a list if multiplicity of the structuralFeature is > 1

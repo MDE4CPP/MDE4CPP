@@ -21,8 +21,11 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
 
     //sets "ObjectClass" key
     std::string objClassName = object->eClass()->getName(); //TODO implement correctly : currently missing namespace of the class
-    CROW_LOG_INFO << "started creating json of " << objClassName;
+    auto objectID = reinterpret_cast<intptr_t>(object.get());
+    CROW_LOG_INFO << "started creating json of " << objClassName << " with id: " << objectID;
     result_json["ObjectClass"] = objClassName;
+    result_json["ObjectID"] = objectID;
+
 
     //parsing of all attributes
     std::shared_ptr<Bag<ecore::EAttribute>> attributes = object->eClass()->getEAllAttributes();
@@ -141,46 +144,85 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             CROW_LOG_WARNING << "createJsonOfEObject : createJsonOfEObject() : a reference was a nullptr";
             continue;
         }
-        if(reference->isContainment()){ //parses containment references
-            if(object->eGet(reference)->isContainer()){ //muliplicy of reference > 1
-                crow::json::wvalue& list = result_json[reference->getName()];
-                std::shared_ptr<Bag<ecore::EObject>> bag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(object->eGet(reference))->getAsEObjectContainer();
-                if(bag == nullptr){
-                    CROW_LOG_WARNING << "createJsonOfEObject : bag cast failed for Reference "<< reference->getName() << "!" ;
-                }
-                int i = 0;
-                for(const std::shared_ptr<ecore::EObject> & obj : *bag){
-                    if(obj == nullptr){
-                        CROW_LOG_WARNING << "createJsonOfEObject : on refernce in "<< reference->getName() << " was a nullptr!" ;
-                        continue;
-                    }
-                    createJsonOfEObject(obj, list[i]);
-                    i++;
-                }
-            }else{ //muliplicy of reference = 1
-                std::shared_ptr<ecore::EObject> refValue = object->eGet(reference)->get<std::shared_ptr<ecore::EObject>>();
-                if(refValue == nullptr){
-                    CROW_LOG_WARNING << "createJsonOfEObject : the value of "<< reference->getName() << " was a nullptr!" ;
-                }
-                createJsonOfEObject(refValue, result_json[reference->getName()]);
-            }
+
+        Ecore2Json::referenceType refType = getRefType(reference);
+
+        if(refType == Ecore2Json::BACK_REFERENCE){
+            continue; //ignores all backreferences
         }
-        if(!reference->isContainer() && !reference->isContainment()){//parses crossReferences //TODO fix setting of m_container
-            //TODO set approriate path for reference!!!!
-            result_json[reference->getName()] =  reinterpret_cast<intptr_t>(object->eGet(reference).get());
+
+        if(object->eGet(reference)->isContainer()){ //muliplicy of reference > 1
+            crow::json::wvalue& list = result_json[reference->getName()];
+            std::shared_ptr<Bag<ecore::EObject>> bag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(object->eGet(reference))->getAsEObjectContainer();
+            if(bag == nullptr){
+                CROW_LOG_WARNING << "createJsonOfEObject : bag cast failed for Reference "<< reference->getName() << "!" ;
+            }
+            int i = 0;
+            for(const std::shared_ptr<ecore::EObject> & obj : *bag){
+                if(obj == nullptr){
+                    CROW_LOG_WARNING << "createJsonOfEObject : on refernce in "<< reference->getName() << " was a nullptr!" ;
+                    continue;
+                }
+
+                switch (refType){
+                case Ecore2Json::CONTAINMENT_REFERENCE :
+                    createJsonOfEObject(obj, list[i]);
+                    break;
+                
+                case Ecore2Json::CROSS_REFERENCE: 
+                    list[i] = reinterpret_cast<intptr_t>(obj.get());
+                    break;
+                default:
+                    throw std::runtime_error("unexpected reference Type encountered");
+                    break;
+                }
+
+                i++;
+            }
+        }else{ //muliplicy of reference = 1
+            std::shared_ptr<ecore::EObject> refValue = object->eGet(reference)->get<std::shared_ptr<ecore::EObject>>();
+            if(refValue == nullptr){
+                CROW_LOG_WARNING << "createJsonOfEObject : the value of "<< reference->getName() << " was a nullptr!" ;
+            }
+            switch (refType){
+                case Ecore2Json::CONTAINMENT_REFERENCE :
+                    createJsonOfEObject(refValue, result_json[reference->getName()]);
+                    break;
+
+                case Ecore2Json::CROSS_REFERENCE: 
+                    result_json[reference->getName()] =  reinterpret_cast<intptr_t>(refValue.get());
+                    break;
+                default:
+                    throw std::runtime_error("unexpected reference Type encountered");
+                    break;
+            }
         }
     }
 }
 
 std::string Ecore2Json::getObjectClassName(const std::shared_ptr<ecore::EObject>& obj){
-    std::shared_ptr<ecore::EClass> c = obj->eClass();
+    std::shared_ptr<ecore::EObject> o = obj;
     std::string return_string = "";
-    while(c != nullptr){
-        return_string = c->getName();
-        //TODO get namespace of a class
+    while(o != nullptr){
+        return_string = o->eClass()->getName() + "::" + return_string;
+        o = o->eContainer();
     }
     return return_string;
 }
+
+Ecore2Json::referenceType Ecore2Json::getRefType(const std::shared_ptr<ecore::EReference>& eRef){
+    if(eRef == nullptr){
+        throw std::runtime_error("getRefType : Reference was a nullptr");
+    }
+    if(eRef->isContainment()){
+        return Ecore2Json::CONTAINMENT_REFERENCE;
+    }else if (eRef->isContainer())
+    {
+        return Ecore2Json::BACK_REFERENCE;
+    }else{ //equal to (!eRef->isContainer() && !eRef->isContainment())
+        return Ecore2Json::CROSS_REFERENCE;
+    }
+};
 
 template<typename T>
 void Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EAttribute> &feature, crow::json::wvalue& return_json) {
