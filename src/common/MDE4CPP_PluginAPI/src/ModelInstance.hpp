@@ -9,7 +9,7 @@
 
 using namespace ecore;
 
-class ModelInstance{
+struct ModelInstance{
     public: 
         ModelInstance(const std::shared_ptr<EObject> root_Object = nullptr, const std::string modelName = "untitled modelInstance"); //rootobj is set during creation of a model instance
 

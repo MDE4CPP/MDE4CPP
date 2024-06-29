@@ -25,89 +25,45 @@
 using namespace ecore;
 
 /** 
- * Json Formate for EObjects and Models: 
+ * JSON Formate for Model Instances: 
  * {
- *  Alias : "User_defined_Alias_for_EObject"                                                           //OPTIONAL; for easier use of the Objects in the API and for easier setting of References
- *  ObjectClass : "pluginName::ClassNamespaces::ClassName"                                             // used to specify the class of an object ??ONLY NEEDED FOR ROOT OBJECT?? -> what is the correct way for derived Classes? 
+ *  ObjectClass : "pluginName::ClassNamespaces::ClassName"                                             //REQUIRED; used to specify the class of an object ??ONLY NEEDED FOR ROOT OBJECT?? -> what is the correct way for derived Classes? 
+ *  ObjectID : Number                                                                                  //OPTIONAL; unique identifier used for resolving the target-EObject of a reference
  *  StructuralFeature_Name_0 : Value,                                                                  //for Attributes with primitive type 
  *  StructuralFeature_Name_1 : [Value_0, Value_1, ...],                                                //for Attributes that are containers
- *  StructuralFeature_Name_2 : { EObject_json },                                                       //for Containment-References with multiplicity of "1"
- *  StructuralFeature_Name_3 : [{EObject_0_json}, {EObject_1_json}, ...],                              //for Containment-References with multiplicity of greater than "1"
- *  StructuralFeature_Name_4 : Path_to_Referenced_EObject,                                             //for Non-Containment Reference with multiplicity of "1"
- *  StructuralFeature_Name_5 : [Path_to_Referenced_EObject_0, Path_to_Referenced_EObject_1, ...]       //for Non-Containment Reference with multiplicity of greater than "1"
- *  StructuralFeature_Name_4 : $Alias_of_Referenced_EObject,                                           //for Non-Containment Reference with multiplicity of "1"
- *  StructuralFeature_Name_5 : [$Alias_of_Referenced_EObject_0, Path_to_Referenced_EObject_1, ...]     //for Non-Containment Reference with multiplicity of greater than "1"
+ *  StructuralFeature_Name_2 : { EObject_JSON },                                                       //for Containment-References with multiplicity of "1"
+ *  StructuralFeature_Name_3 : [{EObject_0_JSON}, {EObject_1_JSON}, ...],                              //for Containment-References with multiplicity of greater than "1"
+ *  StructuralFeature_Name_4 : Reference_Target,                                                       //for Non-Containment Reference with multiplicity of "1"
+ *  StructuralFeature_Name_5 : [Reference_Target_0, Reference_Target_1, ...]                           //for Non-Containment Reference with multiplicity of greater than "1"
  *  ...
  *      } 
- *  
- *  Clarification concering Alias of EObject: 
- *  -> Can be used to set References instead of using the path to the EObject 
- *  -> Just internal in the API; not present in the resulting model 
+ *  Reference_Targets can be either :   -the ObjectID of the target-EObject as a number;
+ *                                      -the path to the EObject in the Model from the rootObject
+ *                                          -> must be in the form: "first_reference_name[@index_0](::next_reference_name[@index_1])"
+ *                                          -> index must only be used if the multipicity of the reference is > 1
+ *                                          -> first_reference_name must be contained in the root object of the model instance
  */
 
 class GenericApi{
 public:
-    static std::shared_ptr<GenericApi> eInstance();
-
     /**
-     * pares an object of the model and returns a json of it
-     * @param object : pointer to the EObject that should be parsed
-     * @return json in the form specified above
+     * Singleton-Getter
+     * retrieves a pointer to the existing instance or creates a new one should none exist yet
+     * 
+     * needed since only one application can bound to a port at the same time 
      */
-    crow::json::wvalue writeValue(const std::shared_ptr<ecore::EObject>& object);
-
-
-    /**
-     * creates an EObject of the EClass and sets the StructuralFeatures of it according to the values specified in the json
-     * @param content : json with StructuralFeatures of the Object and their Values; has to follow the form outlined above
-     * @return shared_ptr to created EObject
-     */
-    std::shared_ptr<ecore::EObject> readValue(const crow::json::rvalue& content);
+    static std::shared_ptr<GenericApi> getInstance();
 
 private:
+    /**
+     * creates a REST-API and binds it to http://127.0.0.1:8080
+     * for Enpoint documentation refer to Implemention
+     */
     explicit GenericApi();
-
-    /**
-     * helper function to write the value of a StructuralFeature into a json
-     * @param object : the EObject where the StructuralFeature is a part of
-     * @param feature : the Feature whos value shall be written into the json
-     * @return : a json representation of the StructuralFeature 
-     */
-    template<typename T> crow::json::wvalue writeFeature(const std::shared_ptr<EObject>& object, const std::shared_ptr<EStructuralFeature>& feature);
-
-
-    template <typename T> T convert_to(const crow::json::rvalue& value);
-    
-    /**
-     * helper function to parse a json and create an Any-Object with the correct Value for an StructuralFeature of an Object
-     * @param object : the EObject where the StructuralFeature is a part of
-     * @param feature : the Feature whos value shall be written to
-     * @param content : the json holding a Key/Value Pair with the Name of the StructuralFeature and its intended value
-     * @return : pointer to an Any containing the value(s) specified in the json
-     */
-    template<typename T> std::shared_ptr<Any> readFeature(const std::shared_ptr<EObject>& object, const std::shared_ptr<EStructuralFeature>& feature, const crow::json::rvalue& content);
-    
-    /**
-     * Allows getting a plugin by its name 
-     * @param name : name of the plugin as a string
-     * @return : pointer to the plugin; nullptr if plugin could not found 
-    */
-    std::shared_ptr<MDE4CPPPlugin> getPlugin(std::string name);
-
-
-
-    /**
-     * creates a Model Instance from a json
-     * @param content : json representing the model that should be created in the form defined above 
-     *  -json needs to atleast include one object (root object)
-     * @return : shared pointer to the Model instance that was created 
-    */
-    std::shared_ptr<ModelInstance> createModelInst(const crow::json::rvalue& content);
     
     std::shared_ptr<pluginHandler> m_pluginHandler;
 
     std::shared_ptr<Ecore2Json> m_Ecore2Json_handler;
-
 
     std::map<std::string,std::shared_ptr<ModelInstance>> m_modelInsts{}; //map of all modelinstances
 	

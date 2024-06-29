@@ -2,5 +2,5 @@
 #include "pluginFramework/PluginFramework.hpp"
 
 int main() {
-	std::shared_ptr<GenericApi> api_obj = GenericApi::eInstance(); //starts API
+	std::shared_ptr<GenericApi> api_obj = GenericApi::getInstance(); //starts API
 }

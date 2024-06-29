@@ -10,7 +10,7 @@
 #include <sstream>
 #include <string>
 
-std::shared_ptr<GenericApi> GenericApi::eInstance() {
+std::shared_ptr<GenericApi> GenericApi::getInstance() {
     static GenericApi instance = GenericApi();
     return std::make_shared<GenericApi>(instance);
 }
@@ -47,21 +47,28 @@ GenericApi::GenericApi() {
      * Return the value of the EObject specified in the path as a json; if path is empty return the whole model
      * Signature: GET /modelInstName/path/
      * @param modelInstName : name the model instance will have afterwards
-     * @param path : path to the StructuralFeature in the model instance where the update shall be made
+     * @param path : path to the StructuralFeature in the model instance that shall be returned as a json; or '*' for the whole model
      *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :StructuralFeatureContaingTheTargetEObject
      *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
      *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container; '@' indicates the index in the container)
      *                                      -for normal StructFeatures = NameOfStructFeat                                   
     */
-    CROW_ROUTE(app, "/modelInst/<string>/").methods(crow::HTTPMethod::Get)([this](const std::string& modelInstName/*, const std::string& path*/){
+    CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& modelInstName, const std::string& path){
         if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
             CROW_LOG_INFO << modelInstName <<" not found in modelInst map!";
             return crow::response(400, "Model not found!");
         }
-        //auto segmented_path = helperFunctions::split_string(path, ':');
-    	auto obj = m_modelInsts[modelInstName]->getRootObject();/*m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);*/ 
 
-        crow::json::wvalue responds_json = crow::json::wvalue();
+        std::shared_ptr<ecore::EObject> obj = nullptr;
+
+        if(path == "*"){//get whole model
+            obj = m_modelInsts[modelInstName]->getRootObject();
+        }else{//get part of the model //TODO support retrieving of complete lists not just single entries
+            auto segmented_path = helperFunctions::split_string(path, ':');
+            obj =  m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
+        }
+
+  	    crow::json::wvalue responds_json = crow::json::wvalue();
         m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
     
         return crow::response(200, responds_json);

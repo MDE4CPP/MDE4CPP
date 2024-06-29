@@ -17,7 +17,14 @@ Json2Ecore::Json2Ecore(){
 
 std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::json::rvalue& content){
 
-    auto root_object = createModelWithoutCrossRef(content);
+    std::shared_ptr<ecore::EObject> root_object = nullptr;
+    try{
+        root_object = createModelWithoutCrossRef(content);
+    }
+    catch(const std::exception& e){
+        CROW_LOG_ERROR << "createEcoreModelFromJson : createModelWithoutCrossRef returned an error \"" << e.what() <<"\"" ; 
+        return nullptr;
+    }
     
     auto m = std::make_shared<ModelInstance>(root_object); //create a new model instance with no name
     
@@ -43,18 +50,25 @@ std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::
 }
 
 std::shared_ptr<ecore::EObject> Json2Ecore::getReferencedObject(const crow::json::rvalue& json, const std::shared_ptr<ModelInstance>& modelInst){
-    std::shared_ptr<ecore::EObject> refTarget;
+    std::shared_ptr<ecore::EObject> refTarget = nullptr;
     switch(json.t()){
         case crow::json::type::String : { //handles references as a path
-            auto segmented_path = helperFunctions::split_string(json.s(), ':');
-            refTarget = modelInst->getObjectAtPath(segmented_path);
+            std::string path = json.s();
+            auto segmented_path = helperFunctions::split_string(path, ':');
+            try{
+                refTarget = modelInst->getObjectAtPath(segmented_path);
+            }
+            catch(const std::runtime_error&){ //path was malformed
+                CROW_LOG_ERROR << "could not resolve reference with path : " << path;
+                }
             break;
         }
         case crow::json::type::Number : { //handles references as an ObjectID
-            if (auto iter = m_objectMap.find(json.i()); iter != m_objectMap.end())
+            int64_t objID = json.i();
+            if (auto iter = m_objectMap.find(objID); iter != m_objectMap.end())
                 refTarget = iter->second;
             else
-                CROW_LOG_ERROR << "could not resolve reference with ID : " << json.i();
+                CROW_LOG_ERROR << "could not resolve reference with ID : " << objID;
             break;
         }
         default : {
@@ -189,11 +203,11 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const cro
             if(result->eGet(reference)->isContainer()){
                 auto bag = std::make_shared<Bag<ecore::EObject>>();
                 for(const auto & entry : content[reference->getName()]){
-                    bag->add(createModelWithoutCrossRef(entry)); //recursive call to creates each object that is being referenced 
+                    bag->add(createModelWithoutCrossRef(entry)); //recursive call creates each object that is being referenced 
                 }
                 referenceContent = eEcoreContainerAny(bag, referenceTypeID);
             }else{
-                auto value = createModelWithoutCrossRef(content[reference->getName()]); //recursive call to creates the referenced object 
+                auto value = createModelWithoutCrossRef(content[reference->getName()]); //recursive call creates the referenced object 
                 referenceContent = eAny(value, referenceTypeID, false);
             }
             result->eSet(reference, referenceContent);
@@ -208,20 +222,20 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const cro
 }
 
 template<typename T>
-std::shared_ptr<Any> Json2Ecore::readAttributeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EStructuralFeature>& feature, const crow::json::rvalue& content){
-    auto attributeTypeId = object->eGet(feature)->getTypeId();
-    auto isContainer = object->eGet(feature)->isContainer();
+std::shared_ptr<Any> Json2Ecore::readAttributeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EAttribute>& eAttr, const crow::json::rvalue& content){
+    auto attributeTypeId = object->eGet(eAttr)->getTypeId();
+    auto isContainer = object->eGet(eAttr)->isContainer();
 
     if(isContainer){ //handling of Attributes with multiplicity of > 1
-        auto any = object->eGet(feature);
+        auto any = object->eGet(eAttr);
         auto bag = any->get<std::shared_ptr<Bag<T>>>();
-        for(const auto & entry : content[feature->getName()]){
+        for(const auto & entry : content[eAttr->getName()]){
             auto value = std::make_shared<T>(convert_to<T>(entry));
             bag->add(value);
         }
         return eAny(bag, attributeTypeId, true);
     }
-    T val = convert_to<T>(content[feature->getName()]);
+    T val = convert_to<T>(content[eAttr->getName()]);
     return eAny(val, attributeTypeId, false);
 }
 

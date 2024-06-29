@@ -11,7 +11,7 @@
 
 #include "pluginHandler.hpp"
 
-class Ecore2Json {
+struct Ecore2Json {
     public:
         //methodes
         Ecore2Json();
@@ -36,7 +36,7 @@ class Ecore2Json {
         /**
          * returns the full namespace + name of a given eObject
          * @param object : ptr to the object
-         * //TODO document return
+         * @return : class name as string in the format : PackageName::(SubPackageName::...)ClassName
          */
         std::string getObjectClassName(const std::shared_ptr<ecore::EObject>& obj);
 

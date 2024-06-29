@@ -40,11 +40,10 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             case ecore::ecorePackage::EBOOLEAN_CLASS:
             {
                 if(! object->eGet(attribute)->isEmpty()){
-                    writeFeature<bool>(object, attribute,result_json[attribute->getName()]);
+                    writeFeature<bool>(object, attribute, result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
                     CROW_LOG_WARNING << attribute->getName() <<" is not set!" ;
-                    result_json[attribute->getName()].clear();
                 }
                 break;
             }
@@ -55,11 +54,10 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             case ecore::ecorePackage::ECHAR_CLASS:
             {
                 if(! object->eGet(attribute)->isEmpty()){
-                    writeFeature<char>(object, attribute,result_json[attribute->getName()]);
+                    writeFeature<char>(object, attribute, result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
                     CROW_LOG_WARNING << attribute->getName() <<" is not set!" ;
-                    result_json[attribute->getName()].clear();
                 }
                 break;
             }
@@ -72,11 +70,10 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             case ecore::ecorePackage::EINT_CLASS:
              {
                 if(! object->eGet(attribute)->isEmpty()){
-                    writeFeature<int>(object, attribute,result_json[attribute->getName()]);
+                    writeFeature<int>(object, attribute, result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
                     CROW_LOG_WARNING << attribute->getName() <<" is not set!" ;
-                    result_json[attribute->getName()].clear();
                 }
                 break;
             }
@@ -84,11 +81,10 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             case ecore::ecorePackage::ELONG_CLASS:
             {
                 if(! object->eGet(attribute)->isEmpty()){
-                    writeFeature<int>(object, attribute,result_json[attribute->getName()]);
+                    writeFeature<int>(object, attribute, result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
                     CROW_LOG_WARNING << attribute->getName() <<" is not set!" ;
-                    result_json[attribute->getName()].clear();
                 }
                 break;
             }
@@ -96,11 +92,10 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             case ecore::ecorePackage::EFLOAT_CLASS:
             {
                 if(! object->eGet(attribute)->isEmpty()){
-                    writeFeature<float>(object, attribute,result_json[attribute->getName()]);
+                    writeFeature<float>(object, attribute, result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
                     CROW_LOG_WARNING << attribute->getName() <<" is not set!" ;
-                    result_json[attribute->getName()].clear();
                 }
                 break;
             }
@@ -109,11 +104,10 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
             {
                 if(! object->eGet(attribute)->isEmpty()){
-                    writeFeature<double>(object, attribute,result_json[attribute->getName()]);
+                    writeFeature<double>(object, attribute, result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
                     CROW_LOG_WARNING << attribute->getName() <<" is not set!" ;
-                    result_json[attribute->getName()].clear();
                 }
                 break;
             }
@@ -121,11 +115,10 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
              {
                 std::shared_ptr<Any> any = object->eGet(attribute);
                 if(! any->isEmpty()){
-                    writeFeature<std::string>(object, attribute,result_json[attribute->getName()]);
+                    writeFeature<std::string>(object, attribute, result_json[attribute->getName()]);
                     CROW_LOG_INFO << "setting " << attribute->getName() << " to " << result_json[attribute->getName()].dump();
                 }else{
                     CROW_LOG_WARNING << attribute->getName() <<" is not set!" ;
-                    result_json[attribute->getName()].clear();
                 }
                 break;
             }
@@ -224,10 +217,10 @@ Ecore2Json::referenceType Ecore2Json::getRefType(const std::shared_ptr<ecore::ER
 };
 
 template<typename T>
-void Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EAttribute> &feature, crow::json::wvalue& return_json) {
-    bool isContainer = object->eGet(feature)->isContainer();
+void Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, const std::shared_ptr<ecore::EAttribute> &eAttr, crow::json::wvalue& return_json) {
+    bool isContainer = object->eGet(eAttr)->isContainer();
     if(isContainer){//attributes with multiplicity > 1 
-        std::shared_ptr<Bag<T>> bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
+        std::shared_ptr<Bag<T>> bag = object->eGet(eAttr)->get<std::shared_ptr<Bag<T>>>();
         int i = 0;
         for (const std::shared_ptr<T>& val : *bag) {
             T v = *val;
@@ -235,7 +228,7 @@ void Ecore2Json::writeFeature(const std::shared_ptr<ecore::EObject> &object, con
             i++;
         }
     }else{//attributes with multiplicity = 1
-        std::shared_ptr<Any> any = object->eGet(feature);
+        std::shared_ptr<Any> any = object->eGet(eAttr);
         T v = any->get<T>();
         return_json = v;
     }

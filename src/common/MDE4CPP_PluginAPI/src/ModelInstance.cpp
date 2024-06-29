@@ -64,7 +64,7 @@ std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::shared_ptr<std::deq
                 //TODO maybe check if Any is nullptr?  
                 try {
                     current_object = any->get<std::shared_ptr<EObject>>(); //advances current_object to the Value of the StructualFeature with the same name as next_segment
-                } catch (std::runtime_error& error){    //Type cast to EObject failed
+                } catch (std::runtime_error& error){//Type cast to EObject failed
                     throw std::runtime_error("malformed path error: "+ next_path_segment +" could not be cast to correct type or is primitive");
                     return nullptr; //abort
                 }
