@@ -51,7 +51,6 @@ SET(SOURCE_FILES
 	pluginHandler.cpp
 	json2ecore.cpp
 	ecore2json.cpp
-	debugModelInstanceCreator.cpp
 )
 
 INCLUDE_DIRECTORIES(
