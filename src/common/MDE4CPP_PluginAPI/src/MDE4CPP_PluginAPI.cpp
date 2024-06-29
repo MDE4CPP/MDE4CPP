@@ -74,20 +74,6 @@ GenericApi::GenericApi() {
         return crow::response(200, responds_json);
     });
 
-    CROW_ROUTE(app, "/debugModel/").methods(crow::HTTPMethod::Get)([this](){
-
-        //auto segmented_path = helperFunctions::split_string(path, ':');
-    	auto obj = debugModelInstanceCreator::getExampleModelInstance();
-
-        crow::json::wvalue responds_json = crow::json::wvalue();
-        m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
-        
-        std::cout <<responds_json.dump();
-
-        return crow::response(200, responds_json);
-    });
-
-
     /**
      * Initiates an Update on a model instance with the attached json
      * Signature: PUT /modelInstName/path/
