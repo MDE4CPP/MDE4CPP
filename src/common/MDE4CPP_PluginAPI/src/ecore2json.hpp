@@ -3,6 +3,8 @@
 
 #include "util/crow_all.h"
 
+#include "abstractDataTypes/Any.hpp"
+
 #include "ecore/EObject.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -24,6 +26,8 @@ struct Ecore2Json {
          * @param return_json : reference to the json::wvalue where the parsed attributes and refernces are to be stored
          */
         void createJsonOfEObject(const std::shared_ptr<ecore::EObject>& object, crow::json::wvalue& result_json);
+
+        void createJsonOfAny(const std::shared_ptr<Any>& any, crow::json::wvalue& result_json);
         
     private:
         enum referenceType { //enum for reference types
@@ -53,6 +57,6 @@ struct Ecore2Json {
          * @param feature : ptr to the stuctFeature in the meta model, needed for calling eGet
          * @param return_json : reference to the json::wvalue where the parsed value is to be stored
          */
-        template<typename T> void writeFeature(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EAttribute>& feature, crow::json::wvalue& return_json);
+        template<typename T> void writeAttributeValue(const std::shared_ptr<Any>& any, crow::json::wvalue& return_json);
 };
 #endif /*ECORE2JSON_HPP*/

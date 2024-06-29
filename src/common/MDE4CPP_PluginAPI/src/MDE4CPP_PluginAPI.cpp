@@ -2,10 +2,10 @@
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Any.hpp"
+
 #include "pluginHandler.hpp"
 #include "helpersFunc.hpp"
-
-#include "debugModelInstanceCreator.hpp"
 
 #include <sstream>
 #include <string>
@@ -58,19 +58,18 @@ GenericApi::GenericApi() {
             CROW_LOG_INFO << modelInstName <<" not found in modelInst map!";
             return crow::response(400, "Model not found!");
         }
-
         std::shared_ptr<ecore::EObject> obj = nullptr;
+        crow::json::wvalue responds_json = crow::json::wvalue();
 
         if(path == "*"){//get whole model
-            obj = m_modelInsts[modelInstName]->getRootObject();
+            std::shared_ptr<ecore::EObject> obj = m_modelInsts[modelInstName]->getRootObject();
+            m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
         }else{//get part of the model //TODO support retrieving of complete lists not just single entries
             auto segmented_path = helperFunctions::split_string(path, ':');
-            obj =  m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
+            std::shared_ptr<Any> any =  m_modelInsts[modelInstName]->getAnyAtPath(segmented_path);
+            m_Ecore2Json_handler->createJsonOfAny(any, responds_json);
         }
-
-  	    crow::json::wvalue responds_json = crow::json::wvalue();
-        m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
-    
+        
         return crow::response(200, responds_json);
     });
 
@@ -80,7 +79,6 @@ GenericApi::GenericApi() {
      * @param modelInstName : name the model instance will have afterwards
      * @param path : path to the StructuralFeature in the model instance where the update shall be made
      *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :targetStructuralFeature 
-     *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
      *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container)
      *                                      -for normal StructFeatures = NameOfStructFeat
      * @param request : request that contains the json representation of changes that are to be inserted at the specified path 
