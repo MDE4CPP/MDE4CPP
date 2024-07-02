@@ -9,6 +9,7 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EcoreContainerAny.hpp"
+#include "ecore/EcoreAny.hpp"
 
 
 Ecore2Json::Ecore2Json(){}
@@ -158,13 +159,14 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             }
         }else{ //muliplicy of reference = 1
 
-            std::shared_ptr<Any> any = object->eGet(reference);
-            if(any->isEmpty()){
+            std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(object->eGet(reference));
+            if(ecoreAny == nullptr || ecoreAny->isEmpty()){
                 CROW_LOG_WARNING << "createJsonOfEObject : any of Reference "<< reference->getName() << " was empty; skipping reference!";
                 continue;
             }
 
-            std::shared_ptr<ecore::EObject> refValue = object->eGet(reference)->get<std::shared_ptr<ecore::EObject>>();
+            std::shared_ptr<ecore::EObject> refValue = ecoreAny->getAsEObject();
+
             if(refValue == nullptr){//skipps reference if it points to null
                 CROW_LOG_WARNING << "createJsonOfEObject : the value of "<< reference->getName() << " was a nullptr!" ;
                 continue;
