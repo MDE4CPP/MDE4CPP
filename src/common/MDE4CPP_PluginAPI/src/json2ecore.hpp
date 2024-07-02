@@ -30,12 +30,17 @@ struct Json2Ecore {
          * @param json : a json representation of a model (see MDE4CPP_PluginAPI docu for expected layout)
          * @return : shared_ptr to a model instance; or nullptr if json was malformed
          */
-        std::shared_ptr<ModelInstance>createEcoreModelFromJson(const crow::json::rvalue& json);
+        std::shared_ptr<ModelInstance> createEcoreModelFromJson(const crow::json::rvalue& json);
+
+        //TODO documentation
+        std::shared_ptr<Any> createAnyFromJSON(const crow::json::rvalue& json, const unsigned long typeID,  const bool isContainer);
 
         
     private:
         TEST_FRIENDS;
         //methodes
+        //TODO docu
+        void resolveCrossreferences(const std::shared_ptr<ModelInstance>& modelInst);
 
         /**
          * returns the referenced eObject
@@ -48,18 +53,27 @@ struct Json2Ecore {
         std::shared_ptr<ecore::EObject> getReferencedObject(const crow::json::rvalue& json, const std::shared_ptr<ModelInstance>& modelInst);
 
         /**
-         * helperfunction that constructs a Model without crossreferences from a json, all found crossreferences will be noted as tuples in the crossReferenceBuffer-vector
+         * helperfunction that recursivly constructs an eObject and its contents from a json, all found crossreferences will be noted as tuples in the crossReferenceBuffer-vector
          * @param content : json containing the model
         */
-        std::shared_ptr<ecore::EObject> createModelWithoutCrossRef(const crow::json::rvalue& content);
-        
-        template <typename T> T convert_to(const crow::json::rvalue& value);
+        std::shared_ptr<ecore::EObject> createObjectWithoutCrossRef(const crow::json::rvalue& content);
+
+        //TODO Docu           
+        std::shared_ptr<Any> createAnyOfType(const unsigned long attributeTypeId, const bool isContainer, const crow::json::rvalue& content);
 
         /**
-         * populates a
+         * constructs an Any of the spectified Type
+         * if isConatiner then the Any will contain a Bag
+         * //TODO docu
          */
-        template<typename T> std::shared_ptr<Any> readAttributeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EAttribute>& feature, const crow::json::rvalue& content);
-       
+        template<typename T> std::shared_ptr<Any> writeAnyValue(
+            const unsigned long attributeTypeId,
+            const bool isContainer,
+            const crow::json::rvalue& content);
+    
+        //TODO docu
+        template <typename T> T convert_to(const crow::json::rvalue& value);
+
         //variables
         /**
          * instance of a plugin_Handler;

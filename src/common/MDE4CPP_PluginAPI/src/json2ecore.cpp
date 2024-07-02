@@ -17,18 +17,35 @@ Json2Ecore::Json2Ecore(){
 
 std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::json::rvalue& content){
 
+    //todo check content type
+    if(content.t() != crow::json::type::Object){
+        CROW_LOG_ERROR << "createEcoreModelFromJson : Json malformed! Must contain a single rootobject!";
+        return nullptr;
+    }
+
     std::shared_ptr<ecore::EObject> root_object = nullptr;
     try{
-        root_object = createModelWithoutCrossRef(content);
+        root_object = createObjectWithoutCrossRef(content);
     }
     catch(const std::exception& e){
         CROW_LOG_ERROR << "createEcoreModelFromJson : createModelWithoutCrossRef returned an error \"" << e.what() <<"\"" ; 
         return nullptr;
     }
     
-    auto m = std::make_shared<ModelInstance>(root_object); //create a new model instance with no name
+    std::shared_ptr<ModelInstance> modelInst = std::make_shared<ModelInstance>(root_object); //create a new model instance with no name
     
     //add crossreferences into the Model 
+    resolveCrossreferences(modelInst);
+
+    return modelInst; //return complete model
+}
+
+void Json2Ecore::resolveCrossreferences(const std::shared_ptr<ModelInstance>& modelInst){
+
+    if(modelInst == nullptr){//maybe a redundant check
+        return;
+    }
+
     for(auto [eObj, eRef, json] : m_crossReferenceBuffer){
 
         auto referenceTypeID = eObj->eGet(eRef)->getTypeId();
@@ -37,16 +54,15 @@ std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::
             auto bag = std::make_shared<Bag<ecore::EObject>>();
             for(const auto & entry : json){
                 std::string s = std::string(entry);
-                std::shared_ptr<ecore::EObject> refTarget = getReferencedObject(entry, m);
+                std::shared_ptr<ecore::EObject> refTarget = getReferencedObject(entry, modelInst);
                 bag->add(refTarget);
             }
             referenceContent = eEcoreContainerAny(bag, referenceTypeID);
         }else{//reference is of multiplicity <= 1
-            std::shared_ptr<ecore::EObject> refTarget = getReferencedObject(content, m);
+            std::shared_ptr<ecore::EObject> refTarget = getReferencedObject(json, modelInst);
         }
         eObj->eSet(eRef, referenceContent);
     }
-    return m; //return complete model
 }
 
 std::shared_ptr<ecore::EObject> Json2Ecore::getReferencedObject(const crow::json::rvalue& json, const std::shared_ptr<ModelInstance>& modelInst){
@@ -79,7 +95,7 @@ std::shared_ptr<ecore::EObject> Json2Ecore::getReferencedObject(const crow::json
 }
 
 //creates an object encoded in a json
-std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const crow::json::rvalue& content){
+std::shared_ptr<ecore::EObject> Json2Ecore::createObjectWithoutCrossRef(const crow::json::rvalue& content){
 
     if(!content.has("ObjectClass")){
         throw std::runtime_error("ObjectClass key not set!");
@@ -110,64 +126,28 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const cro
     //handeling of all member attibutes of the object
     std::shared_ptr<Bag<ecore::EAttribute>> attributes = result->eClass()->getEAllAttributes();
     for(const auto & attribute : *attributes){
-        try {
-            if(!content.has(attribute->getName())){
-                CROW_LOG_INFO << attribute->getName()  << " does not exist in json of the objectClass: " << ObjClass_KeyVal;
-                continue;
-            }
 
-            auto value = content[attribute->getName()];
-            if(value.t() == crow::json::type::Null){
-                CROW_LOG_INFO << attribute->getName()  << " is set to null and will be ignored!";
-                continue;
-            }
-        } catch (std::runtime_error& error){
-            CROW_LOG_WARNING << "an error occured in createOjectFromJSON : "  << error.what() <<" !" ;
+        if(!content.has(attribute->getName())){
+            CROW_LOG_INFO << attribute->getName()  << " does not exist in json of the objectClass: " << ObjClass_KeyVal;
             continue;
         }
 
-        auto attributeTypeId = result->eGet(attribute)->getTypeId();
-        switch (attributeTypeId) {
-            case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
-            case ecore::ecorePackage::EBOOLEAN_CLASS:
-                result->eSet(attribute, readAttributeValue<bool>(result, attribute, content));
-                break;
-            case ecore::ecorePackage::EBYTE_CLASS:
-            case ecore::ecorePackage::EBYTEARRAY_CLASS:
-            case ecore::ecorePackage::EBYTEOBJECT_CLASS:
-            case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
-            case ecore::ecorePackage::ECHAR_CLASS:
-                result->eSet(attribute, readAttributeValue<char>(result, attribute, content));
-                break;
-            case ecore::ecorePackage::EDATE_CLASS:
-            case ecore::ecorePackage::ERESOURCE_CLASS:
-            case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
-            case ecore::ecorePackage::EBIGINTEGER_CLASS:
-            case ecore::ecorePackage::ESHORT_CLASS:
-            case ecore::ecorePackage::ESHORTOBJECT_CLASS:
-            case ecore::ecorePackage::EINT_CLASS:
-                result->eSet(attribute, readAttributeValue<int>(result, attribute, content));
-                break;
-            case ecore::ecorePackage::ELONGOBJECT_CLASS:
-            case ecore::ecorePackage::ELONG_CLASS:
-                result->eSet(attribute, readAttributeValue<long>(result, attribute, content));
-                break;
-            case ecore::ecorePackage::EFLOATOBJECT_CLASS:
-            case ecore::ecorePackage::EFLOAT_CLASS:
-                result->eSet(attribute, readAttributeValue<float>(result, attribute, content));
-                break;
-            case ecore::ecorePackage::EBIGDECIMAL_CLASS:
-            case ecore::ecorePackage::EDOUBLE_CLASS:
-            case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
-                result->eSet(attribute, readAttributeValue<double>(result, attribute, content));
-                break;
-            case ecore::ecorePackage::ESTRING_CLASS:
-                result->eSet(attribute, readAttributeValue<std::string>(result, attribute, content));
-                break;
-            default :
-                CROW_LOG_ERROR <<"encountered attribute of unknown type : " << attributeTypeId;
-                break;
+        auto attrValue = content[attribute->getName()];
+        if(attrValue.t() == crow::json::type::Null){
+            CROW_LOG_INFO << attribute->getName()  << " is set to null and will be ignored!";
+            continue;
         }
+
+        unsigned long attributeTypeId = result->eGet(attribute)->getTypeId();
+        bool isContainer = result->eGet(attribute)->isContainer();
+        std::shared_ptr<Any> any = createAnyOfType(attributeTypeId, isContainer, attrValue);
+
+        if(any == nullptr){
+            CROW_LOG_ERROR <<"tried to create primitv any with unsupported type : " << attributeTypeId;
+            continue;
+        }
+
+        result->eSet(attribute, any);
     }
         
     //handeling of all member references of the object
@@ -178,64 +158,102 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createModelWithoutCrossRef(const cro
             CROW_LOG_ERROR << "shared_ptr to reference is nullptr!" ;
         }
 
-        try { 
-            if(!content.has(reference->getName())){
-                CROW_LOG_INFO << reference->getName()  << " does not exist in json of the objectClass: " << ObjClass_KeyVal;
-                continue;
-            }
-
-            auto value = content[reference->getName()];
-
-            if(value.t() == crow::json::type::Null){ //no matching key was found in the json 
-                CROW_LOG_INFO << reference->getName()  << " has no value in json";
-                continue;
-            }
-
-        } catch (std::runtime_error& error){
-            CROW_LOG_ERROR << "runtime error occured in createOjectFromJSON : "  << error.what() <<" !" ;
+        if(!content.has(reference->getName())){
+            CROW_LOG_INFO << reference->getName()  << " does not exist in json of the objectClass: " << ObjClass_KeyVal;
             continue;
         }
 
+        crow::json::rvalue refValue = content[reference->getName()];
+
+        if(refValue.t() == crow::json::type::Null){ //no matching key was found in the json 
+            CROW_LOG_INFO << reference->getName()  << " has no value in json";
+            continue;
+        }
+
+
         if(reference->isContainment()){ //handles all containment references; container (back-)references will also automaticly be set
             auto referenceTypeID = result->eGet(reference)->getTypeId(); //Gets TypeID of the reference target
-            std::shared_ptr<Any> referenceContent;
+            auto isContainer = result->eGet(reference)->isContainer();
 
-            if(result->eGet(reference)->isContainer()){
-                auto bag = std::make_shared<Bag<ecore::EObject>>();
-                for(const auto & entry : content[reference->getName()]){
-                    bag->add(createModelWithoutCrossRef(entry)); //recursive call creates each object that is being referenced 
-                }
-                referenceContent = eEcoreContainerAny(bag, referenceTypeID);
-            }else{
-                auto value = createModelWithoutCrossRef(content[reference->getName()]); //recursive call creates the referenced object 
-                referenceContent = eAny(value, referenceTypeID, false);
-            }
+            std::shared_ptr<Any> referenceContent = createAnyOfType(referenceTypeID, isContainer, refValue);
+            
             result->eSet(reference, referenceContent);
         }
 
         if(!reference->isContainer() && !reference->isContainment()){ //handles all references other than containment- and container-references
-            m_crossReferenceBuffer.push_back({result, reference ,content[reference->getName()]});
+            m_crossReferenceBuffer.push_back({result, reference, refValue});
         }
 
     }
     return result;
 }
 
-template<typename T>
-std::shared_ptr<Any> Json2Ecore::readAttributeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<ecore::EAttribute>& eAttr, const crow::json::rvalue& content){
-    auto attributeTypeId = object->eGet(eAttr)->getTypeId();
-    auto isContainer = object->eGet(eAttr)->isContainer();
+std::shared_ptr<Any> Json2Ecore::createAnyOfType(const unsigned long typeId, const bool isContainer, const crow::json::rvalue& content){
+    switch (typeId) {
+            case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
+            case ecore::ecorePackage::EBOOLEAN_CLASS:
+                return writeAnyValue<bool>(typeId, isContainer, content);
+                break;
+            case ecore::ecorePackage::EBYTE_CLASS:
+            case ecore::ecorePackage::EBYTEARRAY_CLASS:
+            case ecore::ecorePackage::EBYTEOBJECT_CLASS:
+            case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
+            case ecore::ecorePackage::ECHAR_CLASS:
+                return writeAnyValue<char>(typeId, isContainer, content);
+                break;
+            case ecore::ecorePackage::EDATE_CLASS:
+            case ecore::ecorePackage::ERESOURCE_CLASS:
+            case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
+            case ecore::ecorePackage::EBIGINTEGER_CLASS:
+            case ecore::ecorePackage::ESHORT_CLASS:
+            case ecore::ecorePackage::ESHORTOBJECT_CLASS:
+            case ecore::ecorePackage::EINT_CLASS:
+                return writeAnyValue<int>(typeId, isContainer, content);
+                break;
+            case ecore::ecorePackage::ELONGOBJECT_CLASS:
+            case ecore::ecorePackage::ELONG_CLASS:
+                return writeAnyValue<long>(typeId, isContainer, content);
+                break;
+            case ecore::ecorePackage::EFLOATOBJECT_CLASS:
+            case ecore::ecorePackage::EFLOAT_CLASS:
+                return writeAnyValue<float>(typeId, isContainer, content);
+                break;
+            case ecore::ecorePackage::EBIGDECIMAL_CLASS:
+            case ecore::ecorePackage::EDOUBLE_CLASS:
+            case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
+                return writeAnyValue<double>(typeId, isContainer, content);
+                break;
+            case ecore::ecorePackage::ESTRING_CLASS:
+                return writeAnyValue<std::string>(typeId, isContainer, content);
+                break;
+            default : //is a non primitive type -> eObject
+                std::shared_ptr<Any> any = nullptr;
+                if(isContainer){
+                    auto bag = std::make_shared<Bag<ecore::EObject>>();
+                    for(const auto & entry : content){
+                        bag->add(createObjectWithoutCrossRef(entry)); //recursive call creates each object that is being referenced 
+                    }
+                    any = eEcoreContainerAny(bag, typeId);
+                }else{
+                    auto value = createObjectWithoutCrossRef(content); //recursive call creates the referenced object 
+                    any = eAny(value, typeId, false);
+                }
+                return any;
+                break;
+        }
+}
 
+template<typename T>
+std::shared_ptr<Any> Json2Ecore::writeAnyValue(const unsigned long attributeTypeId, const bool isContainer, const crow::json::rvalue& content){
     if(isContainer){ //handling of Attributes with multiplicity of > 1
-        auto any = object->eGet(eAttr);
-        auto bag = any->get<std::shared_ptr<Bag<T>>>();
-        for(const auto & entry : content[eAttr->getName()]){
+        std::shared_ptr<Bag<T>> bag = std::make_shared<Bag<T>>();
+        for(const auto & entry : content){
             auto value = std::make_shared<T>(convert_to<T>(entry));
             bag->add(value);
         }
         return eAny(bag, attributeTypeId, true);
     }
-    T val = convert_to<T>(content[eAttr->getName()]);
+    T val = convert_to<T>(content);
     return eAny(val, attributeTypeId, false);
 }
 
