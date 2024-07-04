@@ -16,7 +16,8 @@
 
 [import ecore4CPP::generator::main::helpers::keywords /]
 [import ecore4CPP::generator::main::helpers::transformTypeName /]
-
+[import ecore4CPP::generator::main::helpers::EnvirnomentVariableHelper /]
+ 
 [**
  * Helper for c++ abstract function sufix
 */]
@@ -32,15 +33,24 @@
 
 [query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyIncludes())->notEmpty() else false endif /]
 [query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyIncludes())->first().value /]
-[query public hasCreateApiFlag() : Boolean = invoke('ecore4CPP.generator.main.Generate', 'getGenerateApi()', Sequence{}) /]
+[query public hasCreateApiFlag(ePackage : EPackage) : Boolean = ePackage.getProperty(keyGenerateRestApi()).toBoolean() /]
+
+[comment query public hasCreateApiFlag(ePackage : EPackage) : Boolean = getProperty(keyGenerateRestApi()) /]
 
 [**
  * namespace generation
 */]
 [query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if anEPackage.oclIsUndefined() then '' else if (ignoreRoot) then '' else anEPackage.name endif endif/]
 [query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(aEPackage.oclIsUndefined()) then '' else if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif endif/]
-[query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false) /]
+[query public generatePackageName(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false) /]
+[query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false)+'/src' /]
 [query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.generateNamespacePath() /]
+
+[query public getMDE4CPPPath(anEPackage : EPackage) : String = if oclIsUndefined() then './' else let s : String = anEPackage.getEnvirnomentVariableValue('MDE4CPP_HOME') in if s.oclIsUndefined() then './' else s.substituteAll('\\','/').concat('/') endif endif /]
+
+[query public getSrcGenPath(anEPackage : EPackage, anSubFolder: EString) : String = if oclIsUndefined() then './' else (anEPackage.getMDE4CPPPath()).concat('src_gen/').concat(anSubFolder).concat(anEPackage.generateNamespacePath()).concat('/') endif /]
+[query public getModelPath(anEObject : EObject) : EString = invoke('ecore4CPP.generator.main.Generate', 'getModelPath()', Sequence{}) /]
+
 [query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = if(anEClassifier.oclIsUndefined()) then '' else if(anEClassifier.ePackage.oclIsUndefined()) then '' else anEClassifier.ePackage.getNamespace('::', false) endif endif/]
 [query public generateNamespaceDefinition(anEStructuralFeature : EStructuralFeature) : String = anEStructuralFeature.eContainingClass.generateNamespaceDefinition() + '::' + anEStructuralFeature.eContainingClass.name + '::' + anEStructuralFeature.name/]
 [query public generateNamespaceDefinition(anEOperation : EOperation) : String = anEOperation.eContainingClass.generateNamespaceDefinition() + '::' + anEOperation.eContainingClass.name  + '::' + anEOperation.name/]
@@ -172,6 +182,7 @@
 		then namedelement.name.concat(sufix).concat('_hpp').toUpperCase() 
 		else namedelement.eContainer().oclAsType(EPackage).getNamespace('_', false).concat('_').concat(namedelement.name).concat(sufix).concat('_hpp').toUpperCase()
 		endif/]
+
 
 [**
  * Helper for include guard

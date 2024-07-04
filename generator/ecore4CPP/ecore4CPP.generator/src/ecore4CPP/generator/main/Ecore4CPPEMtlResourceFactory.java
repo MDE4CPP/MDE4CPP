@@ -140,6 +140,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	{
 		String[] moduleNames = {"keywords",
 								"IDHelper",
+								"EnvirnomentVariableHelper",
 								"transformTypeName"
 								};
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);

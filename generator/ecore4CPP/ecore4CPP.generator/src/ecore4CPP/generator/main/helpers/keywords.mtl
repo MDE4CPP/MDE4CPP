@@ -17,7 +17,7 @@
  * module for providing keywords used by models
  * 
  */]
-[module keywords('http://www.eclipse.org/emf/2002/Ecore')]
+[module keywords('http://www.eclipse.org/emf/2002/Ecore')] 
 
 [** 
  * keywords for source name and keys of CodeGen annoation
@@ -78,3 +78,8 @@
  * keywords for source name and keys of prepareApplication annoation
 */]
 [query public sourceNamePrepareApplication(any : OclAny) : String = 'http://tu-ilmenau.de/see/prepareApplication' /]	[** special source for generating class with main function /]
+
+[** keywords used in property files */]
+
+[query public keyGenerateRestApi(any : OclAny) : String = 'GenerateRestApi'/] [** indicates that a RestAPI shpuld be generated/]
+[query public keyRootTargetFolder (any : OclAny) : String ='rootTargetFolder' /] [** defines the root folder of all generated files/]

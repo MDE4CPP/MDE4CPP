@@ -1,0 +1,15 @@
+[comment encoding = Cp1252 /]
+[module EnvirnomentVariableHelper('http://www.eclipse.org/emf/2002/Ecore')/]
+
+
+[comment]
+Queries in Acceleo have their result stored in a cache. Hence, query is only executed once. --> use template
+[/comment]
+[template public getEnvirnomentVariableValue(o : EObject, variable : String)][variable.invokeGetEnvirnomentVariableValue()/][/template]
+
+
+[query private invokeGetEnvirnomentVariableValue(arg1 : String) : EString
+	= invoke('ecore4CPP.generator.main.helpers.EnvironmentVariableService', 'getEnvironmentVariableValue(java.lang.String)', Sequence{arg1}).toString() 					
+/] 
+
+ 
