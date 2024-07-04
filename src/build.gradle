@@ -49,7 +49,6 @@ task buildEcoreModels() {
 	dependsOn 'fuml:buildFUML'
 	dependsOn 'pscs:buildPSCS'
 	dependsOn 'pssm:buildPSSM'
-	dependsOn 'ocl:oclModel:buildOcl'
 }
 
 
@@ -70,17 +69,18 @@ task buildUMLProfiles() {
 	dependsOn 'common:UML4CPPProfile:buildUML4CPPProfile'
 }
 
+task buildOCL() { 
+	group 'Source'
+	description 'generate and compile OCL meta-model and parser'
+	
+	dependsOn 'ocl:oclModel:buildOcl'
+	dependsOn 'ocl:oclParser:buildOclParser'
+	dependsOn 'compileOCL'
+}	
+
 task compileEcoreModels(){
 	group 'Source'
 	description 'compile all ecore models'
-
-	dependsOn 'ecore:generateEcore'
-	dependsOn 'uml:types:generateTypes'
-	dependsOn 'uml:uml:generateUml'
-	dependsOn 'fuml:generateFUML'
-	dependsOn 'pscs:generatePSCS'
-	dependsOn 'pssm:generatePSSM'
-	dependsOn 'ocl:oclModel:generateOcl'
 
 	dependsOn 'ecore:compileEcore'
 	dependsOn 'uml:types:compileTypes'
@@ -88,7 +88,15 @@ task compileEcoreModels(){
 	dependsOn 'fuml:compileFUML'
 	dependsOn 'pscs:compilePSCS'
 	dependsOn 'pssm:compilePSSM'
-	dependsOn 'ocl:oclModel:compileOcl'
+	
+	mustRunAfter =  ['ecore:generateEcore'
+		, 'uml:types:generateTypes'
+		, 'uml:uml:generateUml'
+		, 'fuml:generateFUML'
+		, 'pscs:generatePSCS'
+		, 'pssm:generatePSSM'
+		,'ocl:oclModel:generateOcl'
+		]	
 }
 
 // Compile all without generating the models
@@ -113,6 +121,13 @@ task compileUMLProfiles() {
 	dependsOn 'common:UML4CPPProfile:compileUML4CPPProfile'
 }
 
+task compileOCL() {
+	group 'Source'
+	description 'compile OCL meta-model and parser'
+
+	dependsOn 'ocl:oclModel:compileOcl'
+	dependsOn 'ocl:oclParser:compileOclParser' 
+}
 
 task generateEcoreModels() {
 	group 'Source'
@@ -144,7 +159,6 @@ task generateUMLProfiles() {
 	dependsOn 'common:standardProfile:generateStandardProfile'
 	dependsOn 'common:UML4CPPProfile:generateUML4CPPProfile'
 }
-
 
 /**
  * Convert line endings on GNU/Linux & macOS

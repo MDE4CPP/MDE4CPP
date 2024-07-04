@@ -34,11 +34,7 @@ import org.gradle.internal.os.OperatingSystem;
 task generateAllExamples() {
 	group 'Examples'
 	description 'generate all examples'	
-	
-	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
-		
-	doLast {				
-
+	doLast {	
 		def generate_file = './generate'
 		def generate_interp = '/bin/sh' 
 		def generate_interp_option = '-c'
@@ -53,47 +49,51 @@ task generateAllExamples() {
 		// common examples --------------------------------
 			
 		// ecore examples ---------------------------------
-		examples.add('./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/model/')
-		examples.add('./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/model/')
-		examples.add('./ecoreExamples/TestSuite/copyTest/model/')
-		examples.add('./ecoreExamples/TestSuite/eInvokeTest/model/')
-		//examples.add('./ecoreExamples/TestSuite/templateTest/model/')
-		examples.add('./ecoreExamples/ecoreModelExample/model/')
+	
+		examples.add('./ecoreExamples/TestSuite/eInvokeTest/')
+		//examples.add('./ecoreExamples/TestSuite/templateTest/')
+		examples.add('./ecoreExamples/ecoreModelExample/')
 		
 		// UML examples -----------------------------------
 			//UMLExamples/TestSuite/copyTestUML
-			examples.add('./UMLExamples/TestSuite/copyTestUML/model')
+			examples.add('./UMLExamples/TestSuite/copyTestUML/')
 			//UMLExamples/UMLModelExample
-			examples.add('./UMLExamples/UMLModelExample/model/')
-
-
+			examples.add('./UMLExamples/UMLModelExample/')
+	
+	
 		// fUML examples ----------------------------------
-		examples.add('./fUMLExamples/Calculator/model/')
-		examples.add('./fUMLExamples/ThreePhilosophers/model/')
+		examples.add('./fUMLExamples/Calculator/')
+		examples.add('./fUMLExamples/ThreePhilosophers/')
 	
 		// ocl examples -----------------------------------
-		examples.add('./oclExamples/oclModelExample/oclEcoreModelExample/model')
-		examples.add('./oclExamples/oclModelExample/oclFumlModelExample/model')
-		// examples.add('./oclExamples/oclModelExample/oclUmlModelExample/model')
-
+		examples.add('./oclExamples/oclEcoreModelExample/')
+		examples.add('./oclExamples/oclQueryEcoreModelExample/')
+		//examples.add('./oclExamples/Connect4/')
+		//examples.add('./oclExamples/oclFumlModelExample/')
+	
 		// PSCS examples ----------------------------------
 		//if(OperatingSystem.current().isWindows()){
 		//	examples.add('./PSCSExamples/Ampelsteuerung_Example/model')
 		//}
-
+	
 		examples.each { String path -> 
-			exec {
-				println "\n\n----- Generating example: $path\n"
-				workingDir = file("${path}")
-				commandLine = [
-					generate_interp, 
-					generate_interp_option,
-					generate_file
-				]
-				sleep (250)
-			}
+			def buildModelFile = file(path+'model'+ File.separator +'build.gradle')
+			def buildSrcFile = file(path+'src_gen'+ File.separator +'build.gradle')
+			println "\n\n----- Generating example: $buildSrcFile\n"
+			if(!(buildFile.exists() && buildSrcFile.exists()))
+			{
+				exec {
+					println "\n\n----- Generating example: $path\n"
+					workingDir = file("${path}"+'model'+ File.separator)
+					commandLine = [
+						generate_interp, 
+						generate_interp_option,
+						generate_file
+					]
+				}
+			}		
 		}
-    }
+	}
 }
 
 task compileAllExamples() {
@@ -137,14 +137,23 @@ task compileAllExamples() {
 		dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
 	
 	// OCL examples ---------------------------------------
-		//oclExamples/applications/oclEcoreExample
-		dependsOn getRootProject().getTasksByName('compileOclEcoreExample', true)
-		//oclExamples/applications/oclExample
-		dependsOn getRootProject().getTasksByName('compileOclExample', true)
+		//oclExamples/oclEcoreModelExample
+		dependsOn getRootProject().getTasksByName('compileLibrary_ecore', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_ecore',true)
+		//oclExamples/oclQueryEcoreModelExample
+		dependsOn getRootProject().getTasksByName('compileLibrary_QueryEcore', true)
+		dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_QueryEcore', true)
+		//oclExamples/Connect4
 		//oclExamples/applications/oclUmlExample
 		// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
+
 		//oclExamples/oclModelExample/oclFumlModelExample
 		// dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
+		
+		//examples.add('./oclExamples/oclModelExample/oclFumlModelExample/model')
+
+		// PSCS examples ----------------------------------
+		
 	
 	// PSCS examples --------------------------------------
 		//if(OperatingSystem.current().isWindows()){
@@ -192,13 +201,44 @@ task compileAllBenchmarks() {
 	dependsOn getRootProject().getTasksByName('compileUMLBenchmark', true)
 }
 
+task generateEcoreTestSuite() {
+	group 'Tests'
+	description 'generate test suite for ecore'	
+	doLast {	
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		[  	 './ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/'
+			,'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/'
+			,'./ecoreExamples/TestSuite/SubPackagetest'						
+			,'./ecoreExamples/TestSuite/copyTest/'
+			,'./ecoreExamples/templateTest'
+		].each { path ->
+			def buildModelFile = file(path+'model'+ File.separator +'build.gradle')
+			def buildSrcFile = file(path+'src_gen'+ File.separator +'build.gradle')
+			if(!(buildFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${path}"+ File.separator)
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+		}
+	} 			
+}
+
 task generateFUMLTestSuite() {
 	group 'Tests'
 	description 'generate test suite for fUML'	
-	
-	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
-		
-	doLast {				
+	doLast {	
 		def tool = '/bin/sh'
 		def command = '-c'
 		def prefix = './'
@@ -211,7 +251,7 @@ task generateFUMLTestSuite() {
 	
 		[  	'./fUMLExamples/TestSuite/ActionTest/model/',
 			'./fUMLExamples/TestSuite/ForkNodeTest/model/',
-			'./fUMLExamples/TestSuite/JoinNodeTest/model/',
+			'./fUMLExamples/TestSuite/JoinNodeTest/model/',	
 			'./fUMLExamples/TestSuite/MultiplePins/model/',
 			'./fUMLExamples/TestSuite/RegionTest/model/',
 			'./fUMLExamples/TestSuite/SimpleBehaviorTest/model/',
@@ -219,13 +259,51 @@ task generateFUMLTestSuite() {
 			'./fUMLExamples/TestSuite/TestModelImport/model/',
 			'./fUMLExamples/TestSuite/TestModelMain/model/'
 		].each { path ->
-			exec
+			def buildModelFile = file(path+'model'+ File.separator +'build.gradle')
+			def buildSrcFile = file(path+'src_gen'+ File.separator +'build.gradle')
+			if(!(buildFile.exists() && buildSrcFile.exists()))
 			{
-				workingDir = file("${path}")
-				commandLine = [tool, command, prefix + 'generate']
+				exec
+				{
+					workingDir = file("${path}"+ File.separator)
+					commandLine = [tool, command, prefix + 'generate']
+				}
 			}
-		} 		
-    }
+		}
+	} 		
+}
+
+task compileEcoreTestSuite() {
+	group 'Tests'
+	description 'compile applications for ecore test suite'
+
+	// ecore tests
+	dependsOn getRootProject().getTasksByName('compileApplicationForCopyTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForEInvokeTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnion', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnionDepth', true)
+
+	//templateTest	
+	
+	//SubPackagetest
+
+//		./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/'
+//		,'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/'
+//		,'./ecoreExamples/TestSuite/copyTest/'	
+}	
+	
+
+task buildEcoreTestSuite() {
+	group 'Tests'
+	description 'generate and compile applications for ecore test suite'
+	
+	// ecore tests
+	dependsOn getRootProject().getTasksByName('buildCopyTest', true)
+	dependsOn getRootProject().getTasksByName('buildEInvokeTest', true)
+	dependsOn getRootProject().getTasksByName('buildSubsetUnion', true)
+	dependsOn getRootProject().getTasksByName('buildSubsetUnionDepth', true)	
+	//templateTest
+	//SubPackagetest	
 }
 
 task compileFUMLTestSuite() {
@@ -256,6 +334,23 @@ task buildFUMLTestSuite() {
 	dependsOn getRootProject().getTasksByName('buildSimpleBehaviorTest', true)
 	dependsOn getRootProject().getTasksByName('buildTargetPinTest', true)
 	dependsOn getRootProject().getTasksByName('buildTestModelMain', true)	
+}
+
+task compileOCLTestSuite() {
+	group 'Tests'
+	description 'compile applications for OCL test suite'
+	
+	dependsOn getRootProject().getTasksByName('compileSimpleOCLExample', true)
+	//oclExamples/applications/oclUmlExample
+	// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
+	// dependsOn getRootProject().getTasksByName('compileApplicationForOCLModelExample', true)
+}
+
+task buildOCLTestSuite() {
+	group 'Tests'
+	description 'generate and compile applications for fUML test suite'
+	
+	//examples.add('./oclExamples/TestSuite/oclUmlModelExample/model')	
 }
 
 /*
@@ -378,6 +473,7 @@ task generateAllTests() {
 	group 'Tests'
 	description 'generate all test suites (currently only fUML test suite can be generated automatically)'
 	
+	dependsOn getRootProject().getTasksByName('generateEcoreTestSuite', true)
 	dependsOn getRootProject().getTasksByName('generateFUMLTestSuite', true)
 	//dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
 }
@@ -386,6 +482,7 @@ task compileAllTests() {
 	group 'Tests'
 	description 'compile applications for all test suites (currently only fUML test suite can be compiled automatically)'
 	
+	dependsOn getRootProject().getTasksByName('compileEcoreTestSuite', true)
 	dependsOn getRootProject().getTasksByName('compileFUMLTestSuite', true)
 	//dependsOn getRootProject().getTasksByName('compilePSCSTestSuite', true)
 }

@@ -1,4 +1,3 @@
-#include <chrono>
 
 #include <iostream>
 
@@ -16,11 +15,11 @@
 
 #include <string>
 #include <sstream>
-#include <oclParser/Utilities/Ocl.h>
+#include <oclParser/Utilities/OclEcore.h>
 #include <ecore/EObject.hpp>
 #include <ecore/EObjectAny.hpp>
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "abstractDataTypes/EcoreAny.hpp"
+#include "abstractDataTypes/EcoreContainerAny.hpp"
 #include <ecore/EFactory.hpp>
 #include <ecore/EPackage.hpp>
 #include <ecore/ecorePackage.hpp>
@@ -691,30 +690,13 @@ int main ()
 	//Create Model Factory
 	std::shared_ptr<Library_QueryEcoreFactory> factory = Library_QueryEcoreFactory::eInstance();
 
-	{
-	std::string qry = "Set{1, 2 .. 10000}->iterate(i:Integer;sum:Integer=0 | sum + i)";
-    std::shared_ptr<ecore::EClass> context = Library_QueryEcore::Library_QueryEcorePackage::eInstance()->getLibrary_Class();
-    clock_t begin_time = clock();
-
-    Any value = queryValue(qry,context);
-     std::cout << "10000: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC << std::endl;
-   
-    std::cout << "START Query_Any_8 : " << qry << std::endl;
-    std::cout << print(value);
-	
-    std::string t;
-	std::getline(std::cin, t);
-
-	}
-	
-	
 	std::shared_ptr<Library_QueryEcore::LibraryModel> libModel=factory->createLibraryModel();
 
 	std::shared_ptr<Library_QueryEcore::Library> lib1= createTestLibrary(libModel,"TU Ilmenau - University Library");
 	std::shared_ptr<Library_QueryEcore::Library> lib2= createTestLibrary(libModel,"FH Schmalkalden - Cellarius University Library Schmalkalden");
 
 	std::string enterValue;
-	
+
 	std::shared_ptr<ecore::EObject> context=libModel;
 	Clear();
 	printMainMenu(currentContextNumber);

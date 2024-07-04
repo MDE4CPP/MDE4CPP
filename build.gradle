@@ -51,6 +51,7 @@ task compileAll() {
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:compileUMLProfiles'
+	dependsOn 'src:compileOCL'
 	dependsOn 'src:common:FoundationalModelLibrary:compileFoundationalModelLibrary'
 	
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
@@ -63,7 +64,8 @@ task buildAll() {
 
 	dependsOn 'generateAll'
 	dependsOn 'compileAll'
-	
+	dependsOn 'src:buildOCL'
+		
 	tasks.getByPath('compileAll').mustRunAfter tasks.getByPath('generateAll')
 }
 
@@ -139,7 +141,7 @@ task startModelingEclipse(type:Exec){
 
 	if(OperatingSystem.current().isWindows()){
 		// MS Windows
-		commandLine 'start /b cmd', '/c', 'start eclipse.exe'
+		commandLine 'cmd', '/c', 'eclipse.exe'
 	} else if(OperatingSystem.current().isLinux()){
 		// GNU/Linux
 		commandLine './eclipse'
@@ -158,7 +160,6 @@ task startCPPEclipse(type:Exec){
 
 	dependsOn 'checkEnvironment'
 
-	doFirst{
 		if(System.getenv('CPP_IDE_EXECUTABLE') == null)
 		{
 			throw new GradleException("The required variable CPP_IDE_EXECUTABLE has not been set in your setEnv file.")
@@ -167,14 +168,15 @@ task startCPPEclipse(type:Exec){
 		if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows'))
 		{
 			//on windows:
-			commandLine 'start /b cmd', '/c', ('start "" "' + System.getenv('CPP_IDE_EXECUTABLE') + '/eclipse.exe')
+			 Thread.start {
+			commandLine 'cmd', '/c', (System.getenv('CPP_IDE_EXECUTABLE') + '/eclipse.exe')
+			}
 		}
 		else
 		{
 			//on linux
 			commandLine 'bash' , System.getenv('CPP_IDE_EXECUTABLE')+'/eclipse'
 		}
-	}
 }
 
 

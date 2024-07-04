@@ -133,18 +133,20 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 task clean {
 	// Extension of gradle built-in task:clean
 	doLast {
-		def antlr4_dir = file('antlr4')
-		if(antlr4_dir.exists()){
-			delete antlr4_dir.absolutePath
-			println "deleting: " + antlr4_dir.absolutePath
-		}
-		
-		compileAntlr4.outputs.files.each{
-			if(it.exists()){
-				delete it.absolutePath
-			    println "deleting: " + it
+		if (project.hasProperty('all')) {
+			def antlr4_dir = file('antlr4')
+			if(antlr4_dir.exists()){
+				delete antlr4_dir.absolutePath
+				println "deleting: " + antlr4_dir.absolutePath
 			}
-  		}
+			
+			compileAntlr4.outputs.files.each{
+				if(it.exists()){
+					delete it.absolutePath
+					println "deleting: " + it
+				}
+			}
+		}
 	}
 }
 

@@ -1,2 +1,3 @@
 call setenv.bat
-%MDE4CPP_ECLIPSE_HOME%/eclipse.exe
+
+start /b %MDE4CPP_ECLIPSE_HOME%/eclipse.exe
