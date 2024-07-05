@@ -9,7 +9,6 @@ description 'Generate task for project: types'
 task generateTypesModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of types.ecore model'
 
-	generateAPI = false;
 	modelFilePath = file('.' + File.separator + 'types.ecore')
 	relatedModels = ['ecore']	
 	outputs.files(fileTree('../src_gen/types') {

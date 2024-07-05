@@ -13,7 +13,7 @@ task runCommandCompileEcore(type:Exec) {
 
 task runCommandGenerateEcore(type:Exec) {
 	def modelPath = file('.' + File.separator + 'model' + File.separator + 'ecore.ecore')
-	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
 task generateEcore() {

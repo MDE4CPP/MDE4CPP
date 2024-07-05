@@ -14,7 +14,7 @@ task runCommandCompileTypes(type:Exec) {
 
 task runCommandGenerateTypes(type:Exec) {
 	def modelPath = file('.' + File.separator + 'model' + File.separator + 'types.ecore')
-	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
 task generateTypes() {

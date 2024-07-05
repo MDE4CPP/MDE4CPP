@@ -20,7 +20,7 @@
 
 [query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().getRootPackage(),anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten()->sortedBy(name) /]
 
-[template public generateBuildFile(aPackage : EPackage) { packageName : String = aPackage.generateNamespacePath(); }]
+[template public generateBuildFile(aPackage : EPackage) { packageSrcPath : String = aPackage.generateNamespacePath(); packageName : String = aPackage.generatePackageName();  }]
 
 [comment ------------------------------------------------------------------- /]
 [comment generate CMakeLists.txt for model libary                            /]
@@ -146,7 +146,7 @@ task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment interna
 
 task runCommandGenerate[packageName.toUpperFirst()/](type:Exec) {
 	def modelPath = file('.' + File.separator + 'model' + File.separator + '[packageName/].ecore')
-	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
 task generate[packageName.toUpperFirst()/]() {
@@ -224,11 +224,6 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
 [comment group '[packageName ?' invisible internal generate tasks/]
 	description 'generate C++ code of [packageName/].ecore model'
 
-	[if hasCreateApiFlag()]
-	generateAPI = true;
-	[else]
-	generateAPI = false;
-	[/if]
 	modelFilePath = file('.' + File.separator + '[packageName/].ecore')
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]	
 	outputs.files(fileTree('../src_gen/[packageName/]') {
@@ -364,7 +359,7 @@ task clean {
 [/file]
 [/template]
 
-[template private generateMustRunAfter(aPackage : EPackage) {packageName : String = aPackage.generateNamespacePath();}]
+[template private generateMustRunAfter(aPackage : EPackage) {packageName : String = aPackage.generatePackageName();}]
 mustRunAfter =  ['['/]
 	'generate[packageName.toUpperFirst()/]'
 [if(aPackage.prepareApplication())]

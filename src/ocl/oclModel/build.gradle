@@ -14,7 +14,7 @@ task runCommandCompileOcl(type:Exec) {
 
 task runCommandGenerateOcl(type:Exec) {
 	def modelPath = file('.' + File.separator + 'model' + File.separator + 'ocl.ecore')
-	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
 task generateOcl() {

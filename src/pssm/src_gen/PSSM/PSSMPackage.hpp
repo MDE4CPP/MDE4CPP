@@ -14,18 +14,18 @@
 
 namespace ecore 
 {
-	class EClass;
-	class EOperation;
-	class EEnum;
-	class EParameter;
-	class EAnnotation;
-	class EGenericType;
-	class EPackage;
-	class EAttribute;
 	class EReference;
-	class EStringToStringMapEntry;
-	class EDataType;
 	class EEnumLiteral;
+	class EAnnotation;
+	class EParameter;
+	class EAttribute;
+	class EClass;
+	class EDataType;
+	class EOperation;
+	class EStringToStringMapEntry;
+	class EPackage;
+	class EEnum;
+	class EGenericType;
 }
 
 namespace PSSM 

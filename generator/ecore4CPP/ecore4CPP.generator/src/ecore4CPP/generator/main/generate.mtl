@@ -22,6 +22,7 @@
 [import ecore4CPP::generator::main::generateProjectFiles/] 
 [import ecore4CPP::generator::main::generatePackageHeaderFile/]
 [import ecore4CPP::generator::main::helper/]
+[import ecore4CPP::generator::main::helpers::IDHelper/]
 [import ecore4CPP::generator::main::classes::generateClass/]
 [import ecore4CPP::generator::main::model_package::generateMetamodelPackage/]
 [import ecore4CPP::generator::main::model_plugin::generateEcorePlugin/]
@@ -48,7 +49,6 @@
 	[printInfo('Generation started', 'ecore4CPP.generator.main.generate:generteModel')/]
 [/let]
 [/if]
-
 
 [comment]
  * Info as well as warning messages can also be disabled from a specific level of depth
@@ -96,7 +96,6 @@
 	[if (anEPackage.eSuperPackage.oclIsUndefined())]
 		[printInfo('Generating plugin class for EPackage ' + anEPackage.generateNamespaceDefinition(), 1)/]
 		[anEPackage.generateEcorePlugin()/]
-	
 		[anEPackage.generateBuildFile()/]
 		[anEPackage.generateProjectsFiles()/]
 		[anEPackage.generatePackageHeaderFile()/]

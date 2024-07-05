@@ -8,16 +8,16 @@ task runCommandCompilePSSM(type:Exec) {
 	mustRunAfter =  [
 		'generatePSSM'
 	
+		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileFUML', true)
 	]
 }
 
 task runCommandGeneratePSSM(type:Exec) {
 	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSSM.ecore')
-	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
 task generatePSSM() {
@@ -53,9 +53,9 @@ task compilePSSM() {
 	mustRunAfter =  [
 		'generatePSSM'
 	
+		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileUml', true)
 		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileFUML', true)
 	]
 }
@@ -67,8 +67,8 @@ task buildPSSM() {
 	dependsOn 'generatePSSM'
 	dependsOn 'compilePSSM'
 
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 }

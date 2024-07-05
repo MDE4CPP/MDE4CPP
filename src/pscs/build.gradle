@@ -8,16 +8,16 @@ task runCommandCompilePSCS(type:Exec) {
 	mustRunAfter =  [
 		'generatePSCS'
 	
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileFUML', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
 task runCommandGeneratePSCS(type:Exec) {
 	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSCS.ecore')
-	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
 task generatePSCS() {
@@ -53,10 +53,10 @@ task compilePSCS() {
 	mustRunAfter =  [
 		'generatePSCS'
 	
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileUml', true)
+		, getRootProject().getTasksByName('compileFUML', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -67,8 +67,8 @@ task buildPSCS() {
 	dependsOn 'generatePSCS'
 	dependsOn 'compilePSCS'
 
-	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }

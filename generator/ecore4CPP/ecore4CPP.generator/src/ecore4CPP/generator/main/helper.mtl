@@ -35,15 +35,16 @@
 [query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyIncludes())->first().value /]
 [query public hasCreateApiFlag(ePackage : EPackage) : Boolean = ePackage.getProperty(keyGenerateRestApi()).toBoolean() /]
 
-[comment query public hasCreateApiFlag(ePackage : EPackage) : Boolean = getProperty(keyGenerateRestApi()) /]
-
 [**
  * namespace generation
 */]
 [query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if anEPackage.oclIsUndefined() then '' else if (ignoreRoot) then '' else anEPackage.name endif endif/]
 [query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(aEPackage.oclIsUndefined()) then '' else if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif endif/]
 [query public generatePackageName(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false) /]
-[query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false)+'/src' /]
+[comment]
+[query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false)+ePackage.getProperty(keySrcSubFolder()) /]
+[/comment]
+[query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false)/]
 [query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.generateNamespacePath() /]
 
 [query public getMDE4CPPPath(anEPackage : EPackage) : String = if oclIsUndefined() then './' else let s : String = anEPackage.getEnvirnomentVariableValue('MDE4CPP_HOME') in if s.oclIsUndefined() then './' else s.substituteAll('\\','/').concat('/') endif endif /]

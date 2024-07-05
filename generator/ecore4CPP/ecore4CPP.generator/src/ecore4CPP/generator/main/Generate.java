@@ -26,6 +26,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
 
+//import org.eclipse.emf.common.EMFPlugin;
+//import org.eclipse.acceleo.engine.utils.AcceleoEngineUtils;
+
 /**
  * Entry point of the 'Generate' generation module.
  *
@@ -47,11 +50,11 @@ public class Generate extends AbstractAcceleoGenerator {
     public static final String[] TEMPLATE_NAMES = { "generateModel" };
     
     /**
-     * Indicates if a rest api should be generated.
+     * store the model path.
      *
      *@generated NOT
      */
-    public static boolean apiFlag = false;
+    public static String modelPath = "";
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
@@ -134,47 +137,55 @@ public class Generate extends AbstractAcceleoGenerator {
             } else {
                 URI modelURI = URI.createFileURI(args[0]);
                 File folder = new File(args[1]);
-                boolean apiFlag = Boolean.parseBoolean(args[2]);
-                Generate.apiFlag = apiFlag;
 
-                System.out.println("Generate c++ code for: " + modelURI.devicePath());
-                System.out.println("          into folder: " + folder.getAbsolutePath().replace("\\", "/"));
-                System.out.println("Generate code with api: " + apiFlag);
-                
-                List<String> arguments = new ArrayList<String>();
-                
-                /*
-                 * If you want to change the content of this method, do NOT forget to change the "@generated"
-                 * tag in the Javadoc of this method to "@generated NOT". Without this new tag, any compilation
-                 * of the Acceleo module with the main template that has caused the creation of this class will
-                 * revert your modifications.
-                 */
-
-                /*
-                 * Add in this list all the arguments used by the starting point of the generation
-                 * If your main template is called on an element of your model and a String, you can
-                 * add in "arguments" this "String" attribute.
-                 */
-                
-                Generate generator = new Generate(modelURI, folder, arguments);
-                
-                /*
-                 * Add the properties from the launch arguments.
-                 * If you want to programmatically add new properties, add them in "propertiesFiles"
-                 * You can add the absolute path of a properties files, or even a project relative path.
-                 * If you want to add another "protocol" for your properties files, please override 
-                 * "getPropertiesLoaderService(AcceleoService)" in order to return a new property loader.
-                 * The behavior of the properties loader service is explained in the Acceleo documentation
-                 * (Help -> Help Contents).
-                 */
-                 
-                for (int i = 3; i < args.length; i++) {
-                    generator.addPropertiesFile(args[i]);
+                File modelfolder = new File(args[0]);
+                if(null != modelfolder)
+                {
+                	Generate.modelPath = modelfolder.getAbsolutePath().replace("\\", "/").replaceAll("(.*\\/)(.*).ecore" , "$1");                
+                	System.out.println("Generate c++ code for: " + modelURI.devicePath());
+	                System.out.println("          from folder: " + Generate.modelPath );
+	                System.out.println("          into folder: " + folder.getAbsolutePath().replace("\\", "/"));
+                	
+	                List<String> arguments = new ArrayList<String>();
+	                
+	                /*
+	                 * If you want to change the content of this method, do NOT forget to change the "@generated"
+	                 * tag in the Javadoc of this method to "@generated NOT". Without this new tag, any compilation
+	                 * of the Acceleo module with the main template that has caused the creation of this class will
+	                 * revert your modifications.
+	                 */
+	
+	                /*
+	                 * Add in this list all the arguments used by the starting point of the generation
+	                 * If your main template is called on an element of your model and a String, you can
+	                 * add in "arguments" this "String" attribute.
+	                 */
+	                
+	                Generate generator = new Generate(modelURI, folder, arguments);
+	                
+	                /*
+	                 * Add the properties from the launch arguments.
+	                 * If you want to programmatically add new properties, add them in "propertiesFiles"
+	                 * You can add the absolute path of a properties files, or even a project relative path.
+	                 * If you want to add another "protocol" for your properties files, please override 
+	                 * "getPropertiesLoaderService(AcceleoService)" in order to return a new property loader.
+	                 * The behavior of the properties loader service is explained in the Acceleo documentation
+	                 * (Help -> Help Contents).
+	                 */
+	                 
+	                for (int i = 3; i < args.length; i++) {
+	                    generator.addPropertiesFile(args[i]);
+	                }
+	                
+	                generator.doGenerate(new BasicMonitor());
+	            }
+                else
+                {                	
+	                System.out.println("unable to Generate c++ code for: " + modelURI.devicePath() + " File not found.");
                 }
-                
-                generator.doGenerate(new BasicMonitor());
+
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -317,7 +328,25 @@ public class Generate extends AbstractAcceleoGenerator {
          * 
          * To learn more about Properties Files, have a look at the Acceleo documentation (Help -> Help Contents).
          */
+
+    	String modelPropertyPath=modelPath+model.eResource().getURI().toString().replace(".ecore" , ".properties");
+    	addToPropertiesFile(modelPropertyPath); // add mmodel file properties 
+    	addToPropertiesFile("./ecore.properties"); // add generator properties (MDE4CPP/generator/ecore4CPP/ecore4CPP.generator)
+    	addToPropertiesFile(System.getenv("MDE4CPP_HOME")+"/MDE4CPP_Generator.properties"); // // add general generator properties 
+    	
         return propertiesFiles;
+    }
+    
+    /** Check if a given .proterty file is existing. If it true then store it into propertiesFiles. 
+     */
+    protected void addToPropertiesFile(String prpertyPath)
+    {
+    	File testFile = new File(prpertyPath);        
+        if(testFile.exists())
+        {
+        	System.out.println("property file found: " + prpertyPath);
+        	propertiesFiles.add(prpertyPath);
+        }
     }
     
     /**
@@ -398,9 +427,10 @@ public class Generate extends AbstractAcceleoGenerator {
              // The normal package registration if your metamodel is in a plugin.
              resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
         }
-
-        //System.out.println();
-        /*System.out.println("registered packages:");
+         /* Debug: print out registred packages */
+         /*
+        System.out.println();
+        System.out.println("registered packages:");
         for (String nsuri : resourceSet.getPackageRegistry().keySet()) {
 			System.out.println("    " + nsuri);
 		}*/
@@ -425,7 +455,7 @@ public class Generate extends AbstractAcceleoGenerator {
         
         /*
          * TODO If you need additional resource factories registrations, you can register them here. the following line
-         * (in comment) is an example of the resource factory registration for UML.
+         * (in comment) is an example of the resource factory registration.
          *
          * If you want to use the generator in stand alone, the resource factory registration will be required.
          *  
@@ -439,8 +469,8 @@ public class Generate extends AbstractAcceleoGenerator {
      * Returns if a rest api should be generated.
      * @return true if flag was set, otherwise false
      */
-    public boolean getGenerateApi()
+    public String getModelPath()
     {
-        return Generate.apiFlag;
+        return Generate.modelPath;
     }
 }

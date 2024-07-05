@@ -9,7 +9,6 @@ description 'Generate task for project: PSSM'
 task generatePSSMModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of PSSM.ecore model'
 
-	generateAPI = false;
 	modelFilePath = file('.' + File.separator + 'PSSM.ecore')
 	relatedModels = ['ecore', 'fUML', 'types', 'uml']	
 	outputs.files(fileTree('../src_gen/PSSM') {

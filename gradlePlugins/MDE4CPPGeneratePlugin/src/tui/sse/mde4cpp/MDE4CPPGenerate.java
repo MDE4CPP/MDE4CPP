@@ -3,6 +3,9 @@ package tui.sse.mde4cpp;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
@@ -45,13 +48,11 @@ public class MDE4CPPGenerate extends DefaultTask
 {
 	private File modelFile = null;
 	private boolean m_structureOnly = false;
-	private boolean m_apiFlag = false;
 	
 	private String m_targetFolder = null;
-	private String m_srcGenFolder = ".." + File.separator + "src_gen";
 
 	private GENERATOR m_generator = GENERATOR.ECORE4CPP;
-	private String m_workingDirectory = "";
+	private String m_workingDirectory = null;
 	private String m_modelFileName = "";
 	private List<String> m_relatedModels = null;
 	
@@ -66,11 +67,6 @@ public class MDE4CPPGenerate extends DefaultTask
 			boolean structureOnly = PropertyAnalyser.isStructuredOnlyRequested(getProject());
 			setStructureOnly(structureOnly);
 		}
-		if(PropertyAnalyser.hasApiGenerationFlag(getProject()))
-		{
-			boolean generateApi = PropertyAnalyser.isApiGenerationRequested(getProject());
-			setApiFlag(generateApi);
-		}
 		
 		return new File(m_generator.getPath());
 	}
@@ -81,7 +77,7 @@ public class MDE4CPPGenerate extends DefaultTask
 	@OutputFile
 	public File getGradleBuildFile()
 	{
-		return new File(m_workingDirectory + File.separator + ".." + File.separator + "build.gradle");
+		return new File(getWorkingDirectory() + File.separator + ".." + File.separator + "build.gradle");
 	}	
 	
 	/**
@@ -129,19 +125,65 @@ public class MDE4CPPGenerate extends DefaultTask
 	{
 		if (m_targetFolder == null)
 		{
-			m_targetFolder = m_workingDirectory + File.separator + m_srcGenFolder;
+			m_targetFolder=getTargetFolderPathFromConfig();
 		}
 		return new File(m_targetFolder);
 	}
 
-	/**
-	 * @param generateAPI : Bool - specifing if the API should be build
+	/** 
+	 * @return working directory as String. If it is not allready set, it will be set by model-File. Hence, the working directory ot the generator is always the model file folder.
 	 */
-	public void setGenerateAPI(boolean generateAPI)
+	private String getWorkingDirectory()
 	{
-		setApiFlag(generateAPI);
-	}	
+		if(null!=m_workingDirectory)
+		{
+			if(null!=modelFile)
+			{
+				m_workingDirectory = modelFile.getParent();
+			}
+			else
+			{
+				throw new GradleException("modelFile not defined!");
+			}
+		}
+		return m_workingDirectory;
+	}
 	
+	/**
+	 * create the default target Folder out of the MDE4CPP_Generator.properties file. If no properties file existing; standsrd Value are used. 
+	 * @return
+	 * /
+	 */
+	private String getTargetFolderPathFromConfig()
+	{
+		String returnTargetFolder = getWorkingDirectory() + File.separator + ".." + File.separator + "src_gen";			
+		String mde4CppRoot=System.getenv("MDE4CPP_HOME");
+		Properties prop = new Properties();          
+		try {
+			String configFilePath=mde4CppRoot + File.separator + "MDE4CPP_Generator.properties";
+			File configFile = new File(configFilePath);
+			
+			if(configFile.exists())
+			{
+				FileInputStream stream = new FileInputStream(configFile);
+	
+				prop.load(stream); 
+				if(0 == prop.getProperty("useRootTargetFolder").compareToIgnoreCase("true"))
+				{
+					returnTargetFolder  = System.getenv("MDE4CPP_HOME") + File.separator + prop.getProperty("rootTargetFolder");
+				}
+			}
+			else
+			{
+				System.out.println("Properties file MDE4CPP_Generator.properties not found. Use standard values.");
+			}
+		} catch (IOException e) 
+		{
+		    e.printStackTrace();
+		}
+		return returnTargetFolder;
+	}
+
 	/**
 	 * @param relatedModels - name list of related model
 	 */
@@ -168,31 +210,6 @@ public class MDE4CPPGenerate extends DefaultTask
 		{
 			m_generator.setPath(generatorPath);
 		}
-	}
-	
-	/**
-	 * @param generateApi - api creation flag
-	 */
-	@Option(option = "generateApi", description = "Specifies if the generator should create the rest api.")
-	public void setGenerateApiFlag(boolean generateApi)
-	{
-		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-			if(generateApi){
-				setApiFlag(true);
-			}
-		}else {
-			throw new GradleException("RestAPI is only supported on Windows currently. Please generate the modell without the -PGenerateAPI property");
-		}
-		
-	}
-
-	/**
-	 * indicates, that rest api files should be generated or not
-	 *
-	 * @param generateApi : Boolean - true to generate rest api files, false to not generate rest api files
-	 */
-	public void setApiFlag(boolean generateApi) {
-		this.m_apiFlag = generateApi;
 	}
 	
 	/**
@@ -243,8 +260,6 @@ public class MDE4CPPGenerate extends DefaultTask
 			setStructureOnly(structureOnly);
 		}
 	}
-	
-	
 	
 	/**
 	 * indicates, that UML4CPP should be used to generate only the structure of the model, not the activity execution part
@@ -326,6 +341,11 @@ public class MDE4CPPGenerate extends DefaultTask
 											System.lineSeparator() + "Please set 'MDE4CPP_HOME' correctly or use property 'generatorPath' for manual configuration.");			
 		}
 		
+		if (m_targetFolder == null)
+		{
+			m_targetFolder=getTargetFolderPathFromConfig();
+		}
+
 		file = new File(m_targetFolder);
 		if (!file.isDirectory())
 		{
@@ -348,13 +368,10 @@ public class MDE4CPPGenerate extends DefaultTask
 		command.add(m_generator.getPath());
 		command.add(m_modelFileName);
 		command.add(m_targetFolder);
-		if(m_generator == GENERATOR.ECORE4CPP) {
-			command.add(String.valueOf(m_apiFlag));
-			}
 		
-		String startingMessage = "Generating model " + m_modelFileName + " using generator " + m_generator.getName() + " generating api files " + m_apiFlag;
+		String startingMessage = "Generating model " + m_modelFileName + " using generator " + m_generator.getName() + " to " + m_targetFolder;
 		
-		executeGenerateProcess(command, m_workingDirectory, startingMessage);		
+		executeGenerateProcess(command, getWorkingDirectory(), startingMessage);		
 	}
 
 	/**

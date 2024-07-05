@@ -15,7 +15,7 @@ fileTree('.') {
 	exclude '**/examples/' // Exclude examples directory
 	exclude '**/.cmake/' // Exclude examples directory
 	exclude '**/gradlePlugins'
-	exclude '**/src_gen'
+	//exclude '**/src_gen'
 }.collect { 
 	relativePath(it.parent).replace(File.separator, ':') 
 }.each {

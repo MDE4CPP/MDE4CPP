@@ -8,14 +8,14 @@ task runCommandCompileUml(type:Exec) {
 	mustRunAfter =  [
 		'generateUml'
 	
-		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
 task runCommandGenerateUml(type:Exec) {
 	def modelPath = file('.' + File.separator + 'model' + File.separator + 'uml.ecore')
-	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
+	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
 task generateUml() {
@@ -51,8 +51,8 @@ task compileUml() {
 	mustRunAfter =  [
 		'generateUml'
 	
-		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -63,6 +63,6 @@ task buildUml() {
 	dependsOn 'generateUml'
 	dependsOn 'compileUml'
 
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }

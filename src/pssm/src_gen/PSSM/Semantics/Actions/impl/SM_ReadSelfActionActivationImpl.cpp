@@ -41,8 +41,8 @@
 #include <exception> // used in Persistence
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 

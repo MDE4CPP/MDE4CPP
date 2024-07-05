@@ -9,7 +9,6 @@ description 'Generate task for project: ocl'
 task generateOclModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of ocl.ecore model'
 
-	generateAPI = false;
 	modelFilePath = file('.' + File.separator + 'ocl.ecore')
 	relatedModels = ['ecore']	
 	outputs.files(fileTree('../src_gen/ocl') {
