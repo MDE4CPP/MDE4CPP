@@ -27,9 +27,9 @@ std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::
     try{
         root_object = createObjectWithoutCrossRef(content);
     }
-    catch(const std::exception& e){
-        CROW_LOG_ERROR << "createEcoreModelFromJson : createModelWithoutCrossRef returned an error \"" << e.what() <<"\"" ; 
-        return nullptr;
+    catch(const std::runtime_error& e){
+        //CROW_LOG_ERROR << "createObjectWithoutCrossRef returned an error : \"" << e.what() <<"\"" ;
+        throw(std::runtime_error("could not create Model : " + std::string(e.what())));
     }
     
     std::shared_ptr<ModelInstance> modelInst = std::make_shared<ModelInstance>(root_object); //create a new model instance with no name
@@ -152,7 +152,7 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createObjectWithoutCrossRef(const cr
         
     //handeling of all member references of the object
     std::shared_ptr<Bag<ecore::EReference>> references = result->eClass()->getEAllReferences();
-    for(auto reference : *references){
+    for(const std::shared_ptr<ecore::EReference>& reference : *references){
 
         if(reference == nullptr){
             CROW_LOG_ERROR << "shared_ptr to reference is nullptr!" ;
@@ -172,12 +172,15 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createObjectWithoutCrossRef(const cr
 
 
         if(reference->isContainment()){ //handles all containment references; container (back-)references will also automaticly be set
-            auto referenceTypeID = result->eGet(reference)->getTypeId(); //Gets TypeID of the reference target
-            auto isContainer = result->eGet(reference)->isContainer();
+            unsigned long referenceTypeID = result->eGet(reference)->getTypeId(); //Gets TypeID of the reference target
+            bool isContainer = (reference->getUpperBound() > 1 || reference->getUpperBound() == -1);
 
             std::shared_ptr<Any> referenceContent = createAnyOfType(referenceTypeID, isContainer, refValue);
             
             result->eSet(reference, referenceContent);
+            if (!result->eIsSet(reference)){
+                CROW_LOG_ERROR << "failed to set " << reference->getName() <<" to " << referenceContent->toString();
+            }
         }
 
         if(!reference->isContainer() && !reference->isContainment()){ //handles all references other than containment- and container-references
@@ -230,7 +233,7 @@ std::shared_ptr<Any> Json2Ecore::createAnyOfType(const unsigned long typeId, con
                 std::shared_ptr<Any> any = nullptr;
                 if(isContainer){
                     auto bag = std::make_shared<Bag<ecore::EObject>>();
-                    for(const auto & entry : content){
+                    for(const crow::json::rvalue & entry : content){
                         bag->add(createObjectWithoutCrossRef(entry)); //recursive call creates each object that is being referenced 
                     }
                     any = eEcoreContainerAny(bag, typeId);

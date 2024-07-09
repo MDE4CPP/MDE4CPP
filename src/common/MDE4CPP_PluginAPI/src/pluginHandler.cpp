@@ -17,7 +17,7 @@ std::shared_ptr<MDE4CPPPlugin> pluginHandler::getPluginByName(std::string name){
 
 std::vector<std::string> pluginHandler::getAllPluginNames(){
     std::vector<std::string> ret_vector;
-    for(const std::pair<std::string,std::shared_ptr<MDE4CPPPlugin>>& entry : m_plugins){
+    for(const std::pair<std::string,std::shared_ptr<MDE4CPPPlugin>> entry : m_plugins){
 		   ret_vector.push_back(entry.first);
 	}
     return ret_vector;
