@@ -77,6 +77,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_EmptyPath) {
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
+        FAIL();
     }
     EXPECT_EQ(p1.get(), p2.get());
 }
@@ -92,6 +93,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_Author) {
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
+        FAIL();
     }
     auto p1_name = p1->eClass()->getName();
     EXPECT_EQ(p1_name, "Author");
@@ -99,7 +101,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_Author) {
 
 //tests getObjectAtPath with a longer path path 
 TEST_F(ModelInstanceTest, getObjectAtPath_Picure) {
-    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"book@0","pictures@0"}));
+    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"books@0","pictures@0"}));
     std::shared_ptr<EObject> p1;
     try
     {
@@ -115,7 +117,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_Picure) {
 
 //tests getObjectAtPath with a path that tries to access a container out of bound 
 TEST_F(ModelInstanceTest, getObjectAtPath_OutOfBounds) {
-    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"book@1","pictures@0"}));
+    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"books@1","pictures@0"}));
     std::shared_ptr<EObject> p1;
     std::string error;
     try
@@ -132,7 +134,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_OutOfBounds) {
 
 //tests getObjectAtPath with a path that tries to access a container StructFeature of pimitive types
 TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {
-    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"book@0","genres@1"}));
+    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"books@0","genres@1"}));
     std::shared_ptr<Any> p1;
     try
     {
@@ -141,6 +143,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
+        FAIL();
     }
     auto p1_name = p1->get<std::string>();
     EXPECT_EQ(p1_name, "Architecture");
@@ -148,7 +151,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_BookGenre) {
 
 //tests getObjectAtPath with a path that tries to access a non-container StructFeature of pimitive type
 TEST_F(ModelInstanceTest, getObjectAtPath_PicurePage) {
-    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"book@0","pictures@0","pageNumber"}));
+    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"books@0","pictures@0","pageNumber"}));
     std::shared_ptr<Any> p1;
     try
     {
@@ -157,6 +160,7 @@ TEST_F(ModelInstanceTest, getObjectAtPath_PicurePage) {
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
+        FAIL();
     }
     auto p1_name = p1->get<int>();
     EXPECT_EQ(p1_name, 212);
@@ -182,7 +186,7 @@ TEST_F(ModelInstanceTest, test_ecore_eContainer) {//tests the ecore eContainerFu
     auto p0 = m1_->getRootObject();
     EXPECT_TRUE(p0->eContainer() == nullptr); //root_obj should return nullptr
 
-    std::deque<std::string> dq_path = {"book@1","pictures@0"};//get picture 
+    std::deque<std::string> dq_path = {"books@1","pictures@0"};//get picture 
     std::shared_ptr<EObject> p1;
     std::string error;
     try
@@ -219,9 +223,8 @@ TEST_F(Json2EcoreTest, jsonPrint){
 }
 
 TEST_F(Json2EcoreTest, Json2Ecore_createModel_without_crossRef){
-    std::vector<std::tuple<std::shared_ptr<EObject>, std::shared_ptr<ecore::EReference>, crow::json::rvalue>> crossReferenceBuffer;
-    auto rootObj = Json2Ecore_Inst.createModelWithoutCrossRef(rval,crossReferenceBuffer);
-    for(const auto [eObj, eRef, rval] : crossReferenceBuffer){
+    auto rootObj = Json2Ecore_Inst.createObjectWithoutCrossRef(rval);
+    for(const auto & [eObj, eRef, rval] : Json2Ecore_Inst.m_crossReferenceBuffer){
         crow::json::wvalue wval(rval);
         std::cout<<"reference " << eRef->getName() << " links to : " << wval.dump() << "; isContainer : " << eRef->isContainer() <<std::endl;
     }
@@ -232,7 +235,7 @@ TEST_F(Json2EcoreTest, Json2Ecore_createModel){
     auto printLibOp = m->getRootObject()->eClass()->getEOperation(libraryModel_ecore::libraryModel_ecorePackage::LIBRARYMODEL_OPERATION_PRINTLIBRARY);
     m->getRootObject()->eInvoke(printLibOp, std::make_shared<Bag<Any>>(Bag<Any>()));
 
-    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"book@0", "Name"}));
+    auto dq_path = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"books@0", "Name"}));
     auto obj = m->getAnyAtPath(dq_path);
     std::cout << "type of any is " << obj->getTypeId() << std::endl;
     auto obj_name = obj->get<std::string>();
@@ -261,5 +264,6 @@ TEST_F (Ecore2JsonTest , modelParsing){
     auto root_obj = m_.getRootObject();
     auto result = crow::json::wvalue();
     e2j_.createJsonOfEObject(root_obj, result);
+    EXPECT_EQ(result["books"][0]["authors"][0].dump(), result["authors"][0]["ObjectID"].dump());
     std::cout << result.dump() << std::endl;
 }

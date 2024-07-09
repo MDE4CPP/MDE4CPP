@@ -30,7 +30,7 @@ std::shared_ptr<ecore::EObject> testHelpers::getExampleModelInstance_1(){
     std::shared_ptr<ecore::EObject> lm = plugin->create("libraryModel_ecore::LibraryModel");
 
     //creates an instance of a Book with name "Magritte" in lm
-	std::shared_ptr<ecore::EObject> book = plugin->create("libraryModel_ecore::Book", lm, package->LIBRARYMODEL_ATTRIBUTE_BOOK);
+	std::shared_ptr<ecore::EObject> book = plugin->create("libraryModel_ecore::Book", lm, package->LIBRARYMODEL_ATTRIBUTE_BOOKS);
     std::string bookname = "Magritte";
     book->eSet(package->getNamedElement_Attribute_name(), eAny(bookname, ecore::ecorePackage::ESTRING_CLASS, false)); //set attribute name to "Magritte"
     Bag<std::string> b = Bag<std::string>();
@@ -90,7 +90,7 @@ std::string testHelpers::getTestJSON_Large(){
                 "Name" : "J.R.R. Tolkin"
             }
         ],
-        "book" : [
+        "books" : [
             {
                 "ObjectClass" : "libraryModel_ecore::Book",
                 "Name" : "Metro 2033",
@@ -153,7 +153,7 @@ std::string testHelpers::getTestJSON_Small(){
                 "Name" : "Andrzej Sapkowski"
             }
         ],
-        "book" : [
+        "books" : [
             {
                 "ObjectClass" : "libraryModel_ecore::Book",
                 "Name" : "Der letzte Wunsch",
@@ -174,7 +174,7 @@ std::string testHelpers::getTestJSON_Medium(){
                 "ObjectClass" : "libraryModel_ecore::Author",
                 "Name" : "David Sylvester"
             }],
-        "book" : [
+        "books" : [
             {
                 "ObjectClass" : "libraryModel_ecore::Book",
                 "Name" : "Magritte",
