@@ -10,6 +10,7 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EcoreContainerAny.hpp"
+#include "ecore/EcoreAny.hpp"
 
 Json2Ecore::Json2Ecore(){
     m_pluginHandler = pluginHandler();
@@ -50,7 +51,7 @@ void Json2Ecore::resolveCrossreferences(const std::shared_ptr<ModelInstance>& mo
 
         auto referenceTypeID = eObj->eGet(eRef)->getTypeId();
         std::shared_ptr<Any> referenceContent;
-        if(eObj->eGet(eRef)->isContainer()){ //reference is of multiplicity > 1 
+        if((eRef->getUpperBound() > 1 || eRef->getUpperBound() == -1)){ //reference is of multiplicity > 1 
             auto bag = std::make_shared<Bag<ecore::EObject>>();
             for(const auto & entry : json){
                 std::string s = std::string(entry);
@@ -58,8 +59,9 @@ void Json2Ecore::resolveCrossreferences(const std::shared_ptr<ModelInstance>& mo
                 bag->add(refTarget);
             }
             referenceContent = eEcoreContainerAny(bag, referenceTypeID);
-        }else{//reference is of multiplicity <= 1
+        }else{//reference is of multiplicity == 1
             std::shared_ptr<ecore::EObject> refTarget = getReferencedObject(json, modelInst);
+            referenceContent = eEcoreAny(refTarget, referenceTypeID);
         }
         eObj->eSet(eRef, referenceContent);
     }
@@ -139,7 +141,7 @@ std::shared_ptr<ecore::EObject> Json2Ecore::createObjectWithoutCrossRef(const cr
         }
 
         unsigned long attributeTypeId = result->eGet(attribute)->getTypeId();
-        bool isContainer = result->eGet(attribute)->isContainer();
+        bool isContainer = (attribute->getUpperBound() > 1 || attribute->getUpperBound() == -1);
         std::shared_ptr<Any> any = createAnyOfType(attributeTypeId, isContainer, attrValue);
 
         if(any == nullptr){
@@ -239,7 +241,7 @@ std::shared_ptr<Any> Json2Ecore::createAnyOfType(const unsigned long typeId, con
                     any = eEcoreContainerAny(bag, typeId);
                 }else{
                     auto value = createObjectWithoutCrossRef(content); //recursive call creates the referenced object 
-                    any = eAny(value, typeId, false);
+                    any = eEcoreAny(value, typeId);
                 }
                 return any;
                 break;

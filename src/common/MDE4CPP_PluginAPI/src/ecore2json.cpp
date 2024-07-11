@@ -110,7 +110,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
 
     //parsing of all references
     std::shared_ptr<Bag<ecore::EReference>> references = object->eClass()->getEAllReferences();
-    for(const std::shared_ptr<ecore::EReference> & reference : *references){
+    for(const std::shared_ptr<ecore::EReference>& reference : *references){
         if(reference == nullptr){
             CROW_LOG_WARNING << "createJsonOfEObject : createJsonOfEObject() : a reference was a nullptr";
             continue;
@@ -122,7 +122,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
             continue; //ignores all backreferences
         }
 
-        if(object->eGet(reference)->isContainer()){ //muliplicy of reference > 1
+        if(reference->getUpperBound() > 1 || reference->getUpperBound() == -1){ //muliplicy of reference > 1
             std::shared_ptr<Bag<ecore::EObject>> bag = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(object->eGet(reference))->getAsEObjectContainer();
             if(bag == nullptr){
                 CROW_LOG_ERROR << "createJsonOfEObject : bag cast failed for Reference "<< reference->getName() << "!" ;
@@ -158,8 +158,8 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
                 i++;
             }
         }else{ //muliplicy of reference = 1
-
-            std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(object->eGet(reference));
+            std::shared_ptr<Any> any = object->eGet(reference);
+            std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(any);
             if(ecoreAny == nullptr || ecoreAny->isEmpty()){
                 CROW_LOG_WARNING << "createJsonOfEObject : any of Reference "<< reference->getName() << " was empty; skipping reference!";
                 continue;
