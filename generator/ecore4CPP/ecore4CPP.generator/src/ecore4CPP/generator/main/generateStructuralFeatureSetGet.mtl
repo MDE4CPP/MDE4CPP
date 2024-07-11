@@ -58,7 +58,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int feat
 			return eEcoreAny(returnValue,[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		}
 				[else]
-			return eAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/],false); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			return eEcoreAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 				[/if]
 			[else]
 			return eEcoreContainerAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
