@@ -14,6 +14,7 @@
     friend class Json2EcoreTest_Json2Ecore_createModel_without_crossRef_Test;
 #include "json2ecore.hpp"
 
+#include "libraryModel_ecore/LibraryModel.hpp"
 
 /**
  * Testing the HelperFunctions
@@ -246,6 +247,16 @@ TEST_F(Json2EcoreTest, Json2Ecore_createModel){
     std::cout << "type of any is " << obj->getTypeId() << std::endl;
     auto obj_name2 = obj2->get<std::string>();
     EXPECT_EQ(obj_name2, "David Sylvester");
+
+    auto dq_path3 = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"authors@0"}));
+    auto obj3 = m->getObjectAtPath(dq_path3);
+    auto dq_path4 = std::make_shared<std::deque<std::string>>(std::deque<std::string>({"books@0", "authors@0"}));
+    auto obj4 = m->getObjectAtPath(dq_path4);
+    std::cout << "type of any is " << obj->getTypeId() << std::endl;
+    EXPECT_EQ(obj3.get(), obj4.get());
+
+    std::shared_ptr<ecore::EObject> r_obj = m->getRootObject();
+    std::shared_ptr<libraryModel_ecore::LibraryModel> debugModel = std::dynamic_pointer_cast<libraryModel_ecore::LibraryModel>(r_obj);
 }
 
 #include "ecore2json.hpp"

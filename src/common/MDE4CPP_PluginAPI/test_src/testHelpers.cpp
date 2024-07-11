@@ -17,6 +17,7 @@
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
 #include "ecore/EcoreContainerAny.hpp"
+#include "ecore/EcoreAny.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EReference.hpp"
 
@@ -59,6 +60,33 @@ std::shared_ptr<ecore::EObject> testHelpers::getExampleModelInstance_1(){
     std::string picname = "Der Verrat der Binder (La trahison des images), 1929: l, 60x82 cm";
     picture->eSet(package->getNamedElement_Attribute_name(), eAny(picname, package->NAMEDELEMENT_ATTRIBUTE_NAME, false));
 
+    //creates an instance of a Publisher in Library Model
+    std::shared_ptr<ecore::EObject> publisher = plugin->create("libraryModel_ecore::Publisher", lm, package->LIBRARYMODEL_ATTRIBUTE_PUBLISHERS);
+    std::string publisher_name = "Avus Buch & Medien";
+    publisher->eSet(package->getNamedElement_Attribute_name(), eAny(publisher_name, package->NAMEDELEMENT_ATTRIBUTE_NAME, false));
+
+    //set books of publisher
+    std::shared_ptr<Any> any_publisher_books = publisher->eGet(package->getPublisher_Attribute_books());
+    std::shared_ptr<Bag<libraryModel_ecore::Book>> publisher_books = any_publisher_books->get<std::shared_ptr<Bag<libraryModel_ecore::Book>>>();
+    publisher_books->add(std::dynamic_pointer_cast<Book>(book));
+    book->eSet(package->getPublisher_Attribute_books(), eEcoreContainerAny(publisher_books, package->PUBLISHER_ATTRIBUTE_BOOKS));
+
+    //set publisher of book
+    book->eSet(package->getBook_Attribute_publisher(), eEcoreAny(publisher, package->BOOK_ATTRIBUTE_PUBLISHER));
+
+    //creates an instance of Adress in Publisher
+    std::shared_ptr<ecore::EObject> adress = plugin->create("libraryModel_ecore::Adress", publisher, package->PUBLISHER_ATTRIBUTE_ADRESS);
+    std::string adress_country = "Germany";
+    adress->eSet(package->getAdress_Attribute_county(), eAny(adress_country, package->ADRESS_ATTRIBUTE_COUNTY, false));
+    std::string adress_city = "Köln";
+    adress->eSet(package->getAdress_Attribute_city(), eAny(adress_city, package->ADRESS_ATTRIBUTE_CITY, false));
+    std::string adress_street = "Schanzenstraße";
+    adress->eSet(package->getAdress_Attribute_street(), eAny(adress_street, package->ADRESS_ATTRIBUTE_STREET, false));
+    int adress_housenumber = 13;
+    adress->eSet(package->getAdress_Attribute_house_number(), eAny(adress_housenumber, package->ADRESS_ATTRIBUTE_HOUSE_NUMBER, false));
+
+
+    std::shared_ptr<libraryModel_ecore::LibraryModel> debugModel = std::dynamic_pointer_cast<libraryModel_ecore::LibraryModel>(lm);
     return lm;
 }
 
@@ -181,13 +209,27 @@ std::string testHelpers::getTestJSON_Medium(){
                 "authors" : ["authors@0"],
                 "pages" : 448,
                 "genres" : ["Art","Architecture"],
+                "publisher" : "publishers@0",
                 "pictures" : [
                     {
                         "ObjectClass" : "libraryModel_ecore::Picture",
                         "Name" : "Der Verrat der Binder",
                         "pageNumber" : 212
                     }]
-            }]
+            }],
+        "publishers" : [
+            {
+			"ObjectClass" : "libraryModel_ecore::Publisher",
+			"Name" : "Avus Buch & Medien",
+			"adress" : {
+				"ObjectClass" : "libraryModel_ecore::Adress",
+				"county" : "Germany",
+				"city" : "Köln",
+				"street" : "Schanzenstr",
+				"house_number" : 13
+			    }
+		    }
+	    ] 
     })V0G0N";
     return(json);
 }
