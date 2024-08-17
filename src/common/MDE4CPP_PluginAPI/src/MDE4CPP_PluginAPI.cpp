@@ -18,8 +18,6 @@ std::shared_ptr<GenericApi> GenericApi::getInstance() {
 GenericApi::GenericApi() {
 	m_pluginHandler = std::make_shared<pluginHandler>();
 
-    m_Ecore2Json_handler = std::make_shared<Ecore2Json>();
-
     crow::SimpleApp app;
 
     /**
@@ -35,11 +33,23 @@ GenericApi::GenericApi() {
         }
         Json2Ecore json2ecore_handler = Json2Ecore();
 
-        auto m = json2ecore_handler.createEcoreModelFromJson(crow::json::load(request.body));
+        crow::json::rvalue json;
+        try{
+            json = crow::json::load(request.body);
+        }catch(const std::exception& e){
+            CROW_LOG_ERROR << "Error while loading json: " << e.what();
+        }
 
-        //TODO set m.modelName
-
-        m_modelInsts[modelInstName] = m; //insert model instance into modelInsts map
+        try
+        {
+            m_modelInsts[modelInstName] = json2ecore_handler.createEcoreModelFromJson(json);
+        }
+        catch(const std::runtime_error& e)
+        {
+            CROW_LOG_ERROR << e.what();
+            return crow::response(400 , e.what());
+        }
+        
         return crow::response(201);
     });
 
@@ -47,11 +57,11 @@ GenericApi::GenericApi() {
      * Return the value of the EObject specified in the path as a json; if path is empty return the whole model
      * Signature: GET /modelInstName/path/
      * @param modelInstName : name the model instance will have afterwards
-     * @param path : path to the StructuralFeature in the model instance that shall be returned as a json; or '*' for the whole model
-     *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :StructuralFeatureContaingTheTargetEObject
-     *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
-     *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container; '@' indicates the index in the container)
-     *                                      -for normal StructFeatures = NameOfStructFeat                                   
+     * @param path : path to the StructuralFeature in the model instance that shall be returned as a json; or '*' for the whole model;
+     *      -form of path :     - "*" means no path;
+     *                          - path from root = "StucturalFeatureOfRoot:NextStructuralFeature: ... :StructuralFeatureContaingTheTargetEObject";
+     *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container; '@' indicates the index in the container);
+     *                                      -for normal StructFeatures = NameOfStructFeat;
     */
     CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& modelInstName, const std::string& path){
         if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
@@ -61,15 +71,24 @@ GenericApi::GenericApi() {
         std::shared_ptr<ecore::EObject> obj = nullptr;
         crow::json::wvalue responds_json = crow::json::wvalue();
 
+        Ecore2Json ecore2Json_handler; 
+
         if(path == "*"){//get whole model
             std::shared_ptr<ecore::EObject> obj = m_modelInsts[modelInstName]->getRootObject();
-            m_Ecore2Json_handler->createJsonOfEObject(obj, responds_json);
-        }else{//get part of the model //TODO support retrieving of complete lists not just single entries
+            ecore2Json_handler.createJsonOfEObject(obj, responds_json);
+        }else{//get part of the model
             auto segmented_path = helperFunctions::split_string(path, ':');
-            std::shared_ptr<Any> any =  m_modelInsts[modelInstName]->getAnyAtPath(segmented_path);
-            m_Ecore2Json_handler->createJsonOfAny(any, responds_json);
+            std::shared_ptr<Any> any = nullptr;
+            try{
+                any =  m_modelInsts[modelInstName]->getAnyAtPath(segmented_path);
+            }
+            catch(const std::runtime_error& e){
+                return crow::response(400, e.what());
+            }
+                      
+            ecore2Json_handler.createJsonOfAny(any, responds_json);
         }
-        
+
         return crow::response(200, responds_json);
     });
 

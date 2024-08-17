@@ -3,6 +3,7 @@
 #include "ecore/EClass.hpp"
 #include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/Any.hpp"
+#include "ecore/EcoreAny.hpp"
 #include "abstractDataTypes/Bag.hpp"
 #include <string>
 
@@ -109,7 +110,7 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
             std::shared_ptr<Bag<EObject>> bag = ecore_container->getAsEObjectContainer();
             try{
                 std::shared_ptr<EObject> content = bag->at(containerIndex);
-                return eAny(content, content->eClass()->getClassifierID(), false);
+                return eEcoreAny(content, content->eClass()->getClassifierID());
             }catch(std::out_of_range&){ 
                 throw std::runtime_error("container index \""+ sFeatureName +"\" is out of range!");
                 return nullptr; //abort
@@ -160,7 +161,7 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
         break;
     }
     default: //should not get here; eighter empty sFeatureName or more than one '@' in sFeatureName
-        throw std::runtime_error("malformed sFeatureName:" + sFeatureName + "!");
+        throw std::runtime_error("getValueOfStructFeatureByName : malformed sFeatureName:" + sFeatureName + "!");
         return nullptr; //abort
         break;
     }
