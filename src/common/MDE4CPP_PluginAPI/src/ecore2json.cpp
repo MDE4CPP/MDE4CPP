@@ -253,10 +253,12 @@ void Ecore2Json::createJsonOfAny(const std::shared_ptr<Any>& any, crow::json::wv
                 for(std::shared_ptr<ecore::EObject> obj : *eObjBag){
                     createJsonOfEObject(obj,result_json[index]);
                 }
-            }else{//any can only contain one EObject -> is a normal Any
+            }else{//any can only contain one EObject -> is a ecoreAny
+
+                std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(any);
                 std::shared_ptr<ecore::EObject> obj = nullptr;
                 try{
-                    obj = any->get<std::shared_ptr<ecore::EObject>>();
+                    obj = ecoreAny->getAsEObject();
                 }
                 catch(const std::runtime_error& e){
                     CROW_LOG_ERROR <<"createJsonOfAny : any with type : \"" << typeID << "\" could not be cast into an EObject!";
