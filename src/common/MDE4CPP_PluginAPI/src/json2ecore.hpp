@@ -1,8 +1,8 @@
 #ifndef JSON2ECORE_HPP
 #define JSON2ECORE_HPP
 
-#ifndef TEST_FRIENDS //macro for testing private members 
-#define TEST_FRIENDS
+#ifndef TEST_FRIENDS_JSON2ECORE //macro for testing private members 
+#define TEST_FRIENDS_JSON2ECORE
 #endif
 
 #include <tuple>
@@ -32,12 +32,12 @@ struct Json2Ecore {
          */
         std::shared_ptr<ModelInstance> createEcoreModelFromJson(const crow::json::rvalue& json);
 
-        //TODO documentation
-        std::shared_ptr<Any> createAnyFromJSON(const crow::json::rvalue& json, const unsigned long typeID,  const bool isContainer);
+        //TODO Docu           
+        std::shared_ptr<Any> createAnyOfType(const unsigned long attributeTypeId, const bool isContainer, const crow::json::rvalue& content);
 
         
     private:
-        TEST_FRIENDS;
+        TEST_FRIENDS_JSON2ECORE;
         //methodes
         //TODO docu
         void resolveCrossreferences(const std::shared_ptr<ModelInstance>& modelInst);
@@ -57,9 +57,6 @@ struct Json2Ecore {
          * @param content : json containing the model
         */
         std::shared_ptr<ecore::EObject> createObjectWithoutCrossRef(const crow::json::rvalue& content);
-
-        //TODO Docu           
-        std::shared_ptr<Any> createAnyOfType(const unsigned long attributeTypeId, const bool isContainer, const crow::json::rvalue& content);
 
         /**
          * constructs an Any of the spectified Type

@@ -109,12 +109,24 @@ GenericApi::GenericApi() {
         }
 		
         //splits path input into segments seperated by ':'
-        auto segmented_path = helperFunctions::split_string(path, ':');
-;		auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
+        std::deque<std::string> segmented_path = helperFunctions::split_string(path, ':');
+        std::shared_ptr<Any> any = m_modelInsts[modelInstName]->getAnyAtPath(segmented_path);//might be hacky TODO make less hacky
 
-        //TODO: implement update function
+        Json2Ecore json2Ecore_handler;
 
-        return crow::response(418, "not  implemented");
+        crow::json::rvalue json;
+        try{
+            json = crow::json::load(request.body);
+        }catch(const std::exception& e){
+            CROW_LOG_ERROR << "Error while loading json: " << e.what();
+        }
+        auto new_any = json2Ecore_handler.createAnyOfType(any->getTypeId(), any->isContainer(), json);
+
+        m_modelInsts[modelInstName]->updateAttributeAtPath(segmented_path,new_any);
+
+        //TODO: put any in right place
+
+        return crow::response(226, "not  implemented");
     });
 
     /**

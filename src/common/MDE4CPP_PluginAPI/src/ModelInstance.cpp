@@ -1,10 +1,15 @@
 #include "ModelInstance.hpp"
-#include "abstractDataTypes/Any.hpp"
+
 #include "ecore/EClass.hpp"
-#include "ecore/EcoreContainerAny.hpp"
-#include "abstractDataTypes/Any.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/EAttribute.hpp"
+
 #include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
+
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
+
 #include <string>
 
 ModelInstance::ModelInstance(const std::shared_ptr<EObject> root_obj /* = nullptr*/, const std::string modelInstName /* = untitled modelInstance*/){
@@ -34,74 +39,58 @@ std::shared_ptr<EObject> ModelInstance::lookUpAlias(std::string alias){
     } 
 }
 
-std::shared_ptr<Any> ModelInstance::getAnyAtPath(std::shared_ptr<std::deque<std::string>>& path){
-    std::string last_segment = path->back();
-    path->pop_back();
+std::shared_ptr<Any> ModelInstance::getAnyAtPath(std::deque<std::string> path){
+    std::string last_segment = path.back();
+    path.pop_back();
     std::shared_ptr<EObject> obj = getObjectAtPath(path);
     std::shared_ptr<Any> ret_obj = getValueOfStructFeatureByName(obj,last_segment);
     return ret_obj;
 }
 
-std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::shared_ptr<std::deque<std::string>>& path){
+std::shared_ptr<EObject> ModelInstance::getObjectAtPath(std::deque<std::string> path){
     std::shared_ptr<EObject> current_object = this->m_rootObject;
     
-    while(!path->empty()){
-        std::string next_path_segment = path->front();
-        path->pop_front();
-        switch(next_path_segment[0]){ //check first char in next_path_segment
-
-            case '$': { //alias handling; path segment is in form: $alias  
-                std::string alias = next_path_segment.substr(1); //cuts $
-                current_object = lookUpAlias(alias);
-                if(current_object == nullptr){
-                    throw std::runtime_error("alias "+ next_path_segment +" used in path was not declared previosly");
-                    return nullptr; //abort
-                }
-                break;
-            }
-            default :   //handling for normal StructuralFeatures; path_segment is in form: nameOfStructuralFeature
-                std::string sFeatureName = next_path_segment;
-                std::shared_ptr<Any> any = getValueOfStructFeatureByName(current_object,sFeatureName);
-                //TODO maybe check if Any is nullptr?  
-                try {
-                    current_object = any->get<std::shared_ptr<EObject>>(); //advances current_object to the Value of the StructualFeature with the same name as next_segment
-                } catch (std::runtime_error& error){//Type cast to EObject failed
-                    throw std::runtime_error("malformed path error: "+ next_path_segment +" could not be cast to correct type or is primitive");
-                    return nullptr; //abort
-                }
-                break;
+    while(!path.empty()){
+        std::string next_path_segment = path.front();
+        path.pop_front();
+        //handling for normal StructuralFeatures; path_segment is in form: nameOfStructuralFeature
+        std::string sFeatureName = next_path_segment;
+        std::shared_ptr<Any> any = getValueOfStructFeatureByName(current_object,sFeatureName);
+        //TODO maybe check if Any is nullptr?  
+        try {
+            std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(any);
+            current_object = ecoreAny->getAsEObject(); //advances current_object to the Value of the StructualFeature with the same name as next_segment
+        } catch (std::runtime_error& error){//Type cast to EObject failed
+            throw std::runtime_error("malformed path error: "+ next_path_segment +" could not be cast to correct type or is primitive");
+            return nullptr; //abort
         }
+        
     }
     return current_object;
 }
 
-std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureName){
+std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureIdentifier){
 
-    auto segmentedString = helperFunctions::split_string(sFeatureName,'@'); 
-    switch (segmentedString->size())//first enty in sFeatureName_segments will be name of the StructuralFeature, if a second entry exists it will be an index for the container as an int
-    {
-    case 1:{ //handling sFeatureName without container index 
-        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(segmentedString->at(0)); //gets sFeature by name from eClass of obj
+    const auto [stuctFeatureName, hasIndex, containerIndex] = helperFunctions::splitStructuralFeaturePathSegment(sFeatureIdentifier);
+    if(!hasIndex){ //handling sFeatureName without container index 
+
+        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(stuctFeatureName); //gets sFeature by name from eClass of obj
         if(sFeature == nullptr){ //no strucural Feature with sFeatureName found
-            throw std::runtime_error("structuralFeature: " + segmentedString->at(0) + " not found in " + obj->eClass()->getName() + "!");
+            throw std::runtime_error("structuralFeature: " + stuctFeatureName + " not found in " + obj->eClass()->getName() + "!");
             return nullptr; //abort
         }
         return obj->eGet(sFeature);
-        break;}
+    }else{ //handling sFeatureName with container index 
 
-    case 2:{ //handling sFeatureName with container index 
-
-        int containerIndex = std::stoi(segmentedString->at(1)); //convert second string in parts to int
-
-        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(segmentedString->at(0)); //gets sFeature by name from eClass of obj
+        std::shared_ptr<EStructuralFeature> sFeature = obj->eClass()->getEStructuralFeature(stuctFeatureName); //gets sFeature by name from eClass of obj
         if(sFeature == nullptr){ //no strucural Feature with sFeatureName found
-            throw std::runtime_error("structuralFeature: " + segmentedString->at(0) + " not found in " + obj->eClass()->getName() + "!");
+            throw std::runtime_error("structuralFeature: " + stuctFeatureName + " not found in " + obj->eClass()->getName() + "!");
             return nullptr; //abort
         }
         
         std::shared_ptr<Any> any = obj->eGet(sFeature); //get any container
         if(!any->isContainer()){ //check if Value of StructuralFeature is a container as it should be
-            throw std::runtime_error("\""+ segmentedString->at(0) +"\" is not a container!");
+            throw std::runtime_error("\""+ stuctFeatureName +"\" is not a container!");
             return nullptr; //abort
         }
 
@@ -112,7 +101,7 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
                 std::shared_ptr<EObject> content = bag->at(containerIndex);
                 return eEcoreAny(content, content->eClass()->getClassifierID());
             }catch(std::out_of_range&){ 
-                throw std::runtime_error("container index \""+ sFeatureName +"\" is out of range!");
+                throw std::runtime_error("container index \""+ sFeatureIdentifier +"\" is out of range!");
                 return nullptr; //abort
             }
         }else{ //type must be primitive (BOOLEAN, INTEGER, FLOAT, DOUBLE, LONG, CHAR, STRING)
@@ -158,21 +147,48 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
                     break;
             }
         }
-        break;
-    }
-    default: //should not get here; eighter empty sFeatureName or more than one '@' in sFeatureName
-        throw std::runtime_error("getValueOfStructFeatureByName : malformed sFeatureName:" + sFeatureName + "!");
-        return nullptr; //abort
-        break;
     }
 }
 
-/*std::deque<std::string> ModelInstance::getPathAsString(const std::shared_ptr<EObject>& obj){
-    std::shared_ptr<EObject> currentObj = obj;
-    std::string returnString;
-    while(currentObj->eContainer() != nullptr){ //if nullptr -> root_obj
+void ModelInstance::updateAttributeAtPath(std::deque<std::string> path, std::shared_ptr<Any> new_content){
+    std::string structFeatureIdentifier = path.back();
 
-        auto prevStructFeature = currentObj->eContainer();
+    path.pop_back();
+    std::shared_ptr<EObject> obj = getObjectAtPath(path);
+    const auto [stuctFeatureName, hasIndex, containerIndex] = helperFunctions::splitStructuralFeaturePathSegment(structFeatureIdentifier);
+    std::shared_ptr<ecore::EStructuralFeature> structFeature = obj->eClass()->getEStructuralFeature(stuctFeatureName);
+
+    std::shared_ptr<ecore::EAttribute> attibute = std::dynamic_pointer_cast<ecore::EAttribute>(structFeature);
+    if(attibute == nullptr){
+        throw std::runtime_error("updateAttributeAtPath : " + stuctFeatureName + " is not an attribute!" );
     }
 
-}*/
+    if(structFeature->getUpperBound() == 1){
+        if(hasIndex){
+            throw std::runtime_error("updateAttributeAtPath : index used while updating a structFeature with multiplicity of 1!");
+        }else{
+            if(!new_content->isContainer()){
+                obj->eSet(structFeature,new_content);
+            }else{
+                throw std::invalid_argument("updateAttributeAtPath : any has wrong container-flag");
+            }
+        }
+    }else{ //attributes with multiplicty of > 1 or -1 
+        if(hasIndex){//replace specified element in the bag 
+            if(!new_content->isContainer()){
+                std::shared_ptr<Any> any = obj->eGet(structFeature);
+                helperFunctions::replaceElementInAnyBag(any, containerIndex, new_content);
+            }else{
+                throw std::invalid_argument("updateAttributeAtPath : any has wrong container-flag");
+            }
+        }else{//replace entire bag
+            if(new_content->isContainer()){
+                std::shared_ptr<Any> bag_ptr = obj->eGet(structFeature);
+                helperFunctions::replaceCompleteAnyBag(bag_ptr, new_content);
+            }else{
+                throw std::invalid_argument("updateAttributeAtPath : any has wrong container-flag");
+            }
+        }
+    } 
+}
+

@@ -1,6 +1,11 @@
 #ifndef MODELINSTANCE_H
 #define MODELINSTANCE_H
 
+#ifndef TEST_FRIENDS_MODELINSTANCE //macro for testing private members 
+#define TEST_FRIENDS_MODELINSTANCE
+#endif
+
+
 #include "ecore/EObject.hpp"
 #include "abstractDataTypes/Any.hpp"
 #include <map>
@@ -44,7 +49,10 @@ struct ModelInstance{
          * @return = a shared pointer to an Any;    -the Any of a primitve Datatype (int, long, char, string, etc) will contain the value directly; eg. Any<string>
          *                                          -the Any of a non-primitive Datatype (eClass, Bag) will contain a shared_ptr; eg. Any<shared_ptr<eObject>>
         */
-        std::shared_ptr<Any> getAnyAtPath(std::shared_ptr<std::deque<std::string>>& path); 
+        std::shared_ptr<Any> getAnyAtPath(std::deque<std::string> path); 
+
+        //TODO Docu
+        void setAnyAtPath(std::deque<std::string> path, std::shared_ptr<Any>);
         
         /**
          * navigates through modelInstance starting from m_rootObject along specified path the an target EObject and return shared pointer to it.
@@ -55,7 +63,7 @@ struct ModelInstance{
          *                                  - "nameOfStructFeature" -> for normal structural features (e.g.: "name") 
          * @return = a shared_ptr to an eObject
         */
-        std::shared_ptr<EObject> getObjectAtPath(std::shared_ptr<std::deque<std::string>>& path); 
+        std::shared_ptr<EObject> getObjectAtPath(std::deque<std::string> path); 
 
         /**
          * allows to get the path to a given EObject in the model from the root_obj as a deque of pathsegments as strings
@@ -73,7 +81,10 @@ struct ModelInstance{
         void setModelInstanceName(std::string new_name);
         std::string getModelInstanceName();
 
-    private : 
+    private :
+        TEST_FRIENDS_MODELINSTANCE;
+        friend class GenericApi; //temporary while update functionality for references is still missing
+
         /**
          * helper function to get the Value of the StructuralFeature with a specific name from an object
          * @param obj :  pinter to an EObject
@@ -81,6 +92,12 @@ struct ModelInstance{
          * @return : shared_ptr to Value of StructFeature; OR nullptr if no StructFeature with the given name exists in the object -> throws runtime_exeption
          */
         std::shared_ptr<Any> getValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureName);
+
+        void setValueOfStructFeatureByName(const std::shared_ptr<EObject> obj ,const std::string& sFeatureName, std::shared_ptr<Any> new_content);
+
+        void updateAttributeAtPath(std::deque<std::string> path, std::shared_ptr<Any> new_content);
+
+        
 
         std::shared_ptr<EObject> m_rootObject; //pointer to the root object
         std::map<std::string, std::weak_ptr<EObject>> m_aliases; //allows to access certain object directly via their aliases; aliases have to be assigned by the user

@@ -20,16 +20,17 @@ std::shared_ptr<ModelInstance> Json2Ecore::createEcoreModelFromJson(const crow::
 
     //todo check content type
     if(content.t() != crow::json::type::Object){
-        CROW_LOG_ERROR << "createEcoreModelFromJson : Json malformed! Must contain a single rootobject!";
+        CROW_LOG_ERROR << "createEcoreModelFromJson : Json malformed! Must contain a single root object!";
         return nullptr;
     }
+
+    m_crossReferenceBuffer.clear();//makes sure the buffer is empty
 
     std::shared_ptr<ecore::EObject> root_object = nullptr;
     try{
         root_object = createObjectWithoutCrossRef(content);
     }
     catch(const std::runtime_error& e){
-        //CROW_LOG_ERROR << "createObjectWithoutCrossRef returned an error : \"" << e.what() <<"\"" ;
         throw(std::runtime_error("could not create Model : " + std::string(e.what())));
     }
     
