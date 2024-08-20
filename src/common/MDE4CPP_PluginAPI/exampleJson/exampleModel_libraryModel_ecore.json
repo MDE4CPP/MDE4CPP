@@ -24,7 +24,7 @@
 			"Name" : "J.R.R. Tolkin"
 		}
 	],
-	"book" : [
+	"books" : [
 		{
 			"ObjectClass" : "libraryModel_ecore::Book",
 			"Name" : "Metro 2033",
@@ -76,27 +76,40 @@
 }
 
 {
-		"ObjectClass" : "libraryModel_ecore::LibraryModel",
-		"authors" : [
-			{
-				"ObjectClass" : "libraryModel_ecore::Author",
-				"Name" : "David Sylvester"
-			},
-		],
-		"book" : [
-			{
-				"ObjectClass" : "libraryModel_ecore::Book",
-				"Name" : "Magritte",
-				"authors" : ["authors@0"],
-				"pages" : 448,
-				"genres" : ["Art","Architecture"],
-				"pictures" : [
-					{
-						"ObjectClass" : "libraryModel_ecore::Picture",
-						"Name" : "Der Verrat der Binder (La trahison des images)",
-						"pageNumber" : 212
-					}
-				]
+	"ObjectClass" : "libraryModel_ecore::LibraryModel",
+	"authors" : [
+		{
+			"ObjectClass" : "libraryModel_ecore::Author",
+			"Name" : "David Sylvester"
+		}
+	],
+	"books" : [
+		{
+			"ObjectClass" : "libraryModel_ecore::Book",
+			"Name" : "Magritte",
+			"authors" : ["authors@0"],
+			"pages" : 448,
+			"genres" : ["Art","Architecture"],
+			"pictures" : [
+				{
+					"ObjectClass" : "libraryModel_ecore::Picture",
+					"Name" : "Der Verrat der Binder",
+					"pageNumber" : 212
+				}
+			]
+		}
+	],
+	"publishers" : [
+		{
+			"ObjectClass" : "libraryModel_ecore::Publisher",
+			"Name" : "Avus Buch & Medien",
+			"adress" : {
+				"ObjectClass" : "libraryModel_ecore::Adress",
+				"country" : "Germany",
+				"city" : "Köln",
+				"street" : "Schanzenstr",
+				"house_number" : 13
 			}
-		]
-	}
+		}
+	] 
+}
