@@ -47,7 +47,7 @@ SET(SOURCE_FILES
 	MDE4CPP_PluginAPI.cpp
 	MDE4CPP_PluginAPI_Main.cpp
 	ModelInstance.cpp
-	helperFunc.cpp
+	helpersFunc.cpp
 	pluginHandler.cpp
 	json2ecore.cpp
 	ecore2json.cpp
@@ -81,14 +81,10 @@ ELSE()
 
 		FIND_LIBRARY(TYPES_DEBUG typesd $ENV{MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_DEBUG ecored $ENV{MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored $ENV{MDE4CPP_HOME}/application/lib)
-
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd $ENV{MDE4CPP_HOME}/application/lib)
 	ELSE()
 		FIND_LIBRARY(TYPES_RELEASE types $ENV{MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_RELEASE ecore $ENV{MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore $ENV{MDE4CPP_HOME}/application/lib)
-		
 		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework $ENV{MDE4CPP_HOME}/application/lib)
 	ENDIF()
 ENDIF()
@@ -100,7 +96,6 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		debug ${PLUGINFRAMEWORK_DEBUG}
 
-		debug ${LIBRARYMODEL_ECORE_DEBUG}
 		debug ${TYPES_DEBUG}
 		debug ${ECORE_DEBUG}
 
@@ -111,7 +106,6 @@ ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		optimized ${PLUGINFRAMEWORK_RELEASE}
 
-		debug ${LIBRARYMODEL_ECORE_RELEASE}
 		debug ${TYPES_RELEASE}
 		debug ${ECORE_RELEASE}
 

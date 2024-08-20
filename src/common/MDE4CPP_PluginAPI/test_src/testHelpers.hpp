@@ -24,6 +24,7 @@ namespace testHelpers{
 				"ObjectClass" : "libraryModel_ecore::Book",
 				"Name" : "Magritte",
 				"authors" : ["#authors@0"],
+				"publisher": "publisher@0",
 				"pages" : "448",
 				"genres" : ["Art","Architecture"],
 				"pictures" : [
@@ -34,15 +35,27 @@ namespace testHelpers{
 					}
 				]
 			}
+		],
+		"publishers": [
+			{
+			"ObjectClass": "libraryModel_ecore::Publisher"
+			"adress": {
+				"ObjectClass": "libraryModel_ecore::Adress"
+				"street": "Schanzenstr",
+				"county": "Germany",
+				"house_number": 13,
+				"city": "Köln",
+			},
+			"Name": "Avus Buch & Medien",
+			}
 		]
 	}
 	*/
 	std::shared_ptr<ecore::EObject> getExampleModelInstance_1();
 
-
 	/**
-	 * returns the following json:
-	 * {
+	 * returns a model json of the form:
+	  	{
 			"ObjectClass" : "libraryModel_ecore::LibraryModel",
 			"authors" : [
 				{
@@ -51,7 +64,6 @@ namespace testHelpers{
 				},
 				{
 					"ObjectClass" : "libraryModel_ecore::Author",
-					"Alias" : "Glukhovsky"
 					"Name" : "Dimity Glukhovsky"
 				},
 				{
@@ -64,7 +76,6 @@ namespace testHelpers{
 				},
 				{
 					"ObjectClass" : "libraryModel_ecore::Author",
-					"Alias" : "Tolkin"
 					"Name" : "J.R.R. Tolkin"
 				}
 			],
@@ -121,8 +132,65 @@ namespace testHelpers{
 	*/
 	std::string getTestJSON_Large();
 
+	/* returns a model json of the form:
+		{
+			"ObjectClass" : "libraryModel_ecore::LibraryModel",
+			"authors" : [
+				{
+					"ObjectClass" : "libraryModel_ecore::Author",
+					"Name" : "Andrzej Sapkowski"
+				}
+			],
+			"books" : [
+				{
+					"ObjectClass" : "libraryModel_ecore::Book",
+					"Name" : "Der letzte Wunsch",
+					"authors" : ["authors@0"],
+					"pictures" : []
+				}
+			]
+		}
+	*/
 	std::string getTestJSON_Small();
 
+	/* returns a model json of the form:
+		{
+			"ObjectClass" : "libraryModel_ecore::LibraryModel",
+			"authors" : [
+				{
+					"ObjectClass" : "libraryModel_ecore::Author",
+					"Name" : "David Sylvester"
+				}],
+			"books" : [
+				{
+					"ObjectClass" : "libraryModel_ecore::Book",
+					"Name" : "Magritte",
+					"authors" : ["authors@0"],
+					"pages" : 448,
+					"genres" : ["Art","Architecture"],
+					"publisher" : "publishers@0",
+					"pictures" : [
+						{
+							"ObjectClass" : "libraryModel_ecore::Picture",
+							"Name" : "Der Verrat der Binder",
+							"pageNumber" : 212
+						}]
+				}],
+			"publishers" : [
+				{
+				"ObjectClass" : "libraryModel_ecore::Publisher",
+				"Name" : "Avus Buch & Medien",
+				"adress" : {
+					"ObjectClass" : "libraryModel_ecore::Adress",
+					"county" : "Germany",
+					"city" : "Köln",
+					"street" : "Schanzenstr",
+					"house_number" : 13
+					}
+				}
+			] 
+		}
+	*/
 	std::string getTestJSON_Medium();
 }
 

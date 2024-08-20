@@ -33,7 +33,7 @@ SET(SOURCE_FILES
   testMain.cpp
   testHelpers.cpp
   ../src/ModelInstance.cpp
-  ../src/helperFunc.cpp
+  ../src/helpersFunc.cpp
   ../src/json2ecore.cpp
   ../src/ecore2json.cpp
   ../src/pluginHandler.cpp
