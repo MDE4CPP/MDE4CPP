@@ -4,6 +4,8 @@
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Any.hpp"
 
+#include "ecore/EAttribute.hpp"
+
 #include "pluginHandler.hpp"
 #include "helpersFunc.hpp"
 
@@ -97,7 +99,7 @@ GenericApi::GenericApi() {
      * Signature: PUT /modelInstName/path/
      * @param modelInstName : name the model instance will have afterwards
      * @param path : path to the StructuralFeature in the model instance where the update shall be made
-     *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :targetStructuralFeature 
+     *      -form of path : path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :targetStructuralFeature 
      *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container)
      *                                      -for normal StructFeatures = NameOfStructFeat
      * @param request : request that contains the json representation of changes that are to be inserted at the specified path 
@@ -110,7 +112,17 @@ GenericApi::GenericApi() {
 		
         //splits path input into segments seperated by ':'
         std::deque<std::string> segmented_path = helperFunctions::split_string(path, ':');
-        std::shared_ptr<Any> any = m_modelInsts[modelInstName]->getAnyAtPath(segmented_path);//might be hacky TODO make less hacky
+        std::deque<std::string> segmented_object_path = segmented_path;
+        auto [stuctFeatureName, isContainer, index] = helperFunctions::splitStructuralFeaturePathSegment(segmented_object_path.back());
+        segmented_object_path.pop_back();
+        std::shared_ptr<ecore::EStructuralFeature> structFeature = m_modelInsts[modelInstName]->getObjectAtPath(segmented_object_path)->eClass()->getEStructuralFeature(stuctFeatureName);
+        
+        std::shared_ptr<ecore::EAttribute> attibute = std::dynamic_pointer_cast<ecore::EAttribute>(structFeature);
+        if(attibute == nullptr){
+            return crow::response(400, "updates currently not supported for references!");
+        }
+        
+        std::shared_ptr<Any> any =  m_modelInsts[modelInstName]->getObjectAtPath(segmented_object_path)->eGet(structFeature);
 
         Json2Ecore json2Ecore_handler;
 
@@ -119,14 +131,19 @@ GenericApi::GenericApi() {
             json = crow::json::load(request.body);
         }catch(const std::exception& e){
             CROW_LOG_ERROR << "Error while loading json: " << e.what();
+            return crow::response(400, "json malformed!");
         }
-        auto new_any = json2Ecore_handler.createAnyOfType(any->getTypeId(), any->isContainer(), json);
 
+        std::shared_ptr<Any> new_any;
+        if(isContainer && any->isContainer()){ //replace only one element in the container
+            new_any = json2Ecore_handler.createAnyOfType(any->getTypeId(), false, json);
+        }else{
+            new_any = json2Ecore_handler.createAnyOfType(any->getTypeId(), any->isContainer(), json);
+        }
+        
         m_modelInsts[modelInstName]->updateAttributeAtPath(segmented_path,new_any);
 
-        //TODO: put any in right place
-
-        return crow::response(226, "not  implemented");
+        return crow::response(200);
     });
 
     /**

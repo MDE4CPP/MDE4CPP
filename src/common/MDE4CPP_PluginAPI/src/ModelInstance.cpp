@@ -6,6 +6,7 @@
 
 #include "ecore/EcoreAny.hpp"
 #include "ecore/EcoreContainerAny.hpp"
+#include "ecore/EReference.hpp"
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
@@ -106,37 +107,37 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
             }
         }else{ //type must be primitive (BOOLEAN, INTEGER, FLOAT, DOUBLE, LONG, CHAR, STRING)
             switch (any->getTypeId()) {
-                case ecore::ecorePackage::EBOOLEAN_CLASS:{
+                case ecorePackage::EBOOLEAN_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<bool>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false); //dereferencing of "bag->at()" as to not insert a shared_ptr but the value of the bool  
                     break;
                 }
-                case ecore::ecorePackage::ECHAR_CLASS:{
+                case ecorePackage::ECHAR_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<char>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
-                case ecore::ecorePackage::EINT_CLASS:{
+                case ecorePackage::EINT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<int>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
-                case ecore::ecorePackage::ELONG_CLASS:{
+                case ecorePackage::ELONG_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<long>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
-                case ecore::ecorePackage::EFLOAT_CLASS:{
+                case ecorePackage::EFLOAT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<float>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
-                case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:{
+                case ecorePackage::EDOUBLEOBJECT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<double>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
-                case ecore::ecorePackage::ESTRING_CLASS:{
+                case ecorePackage::ESTRING_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<std::string>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
@@ -156,9 +157,9 @@ void ModelInstance::updateAttributeAtPath(std::deque<std::string> path, std::sha
     path.pop_back();
     std::shared_ptr<EObject> obj = getObjectAtPath(path);
     const auto [stuctFeatureName, hasIndex, containerIndex] = helperFunctions::splitStructuralFeaturePathSegment(structFeatureIdentifier);
-    std::shared_ptr<ecore::EStructuralFeature> structFeature = obj->eClass()->getEStructuralFeature(stuctFeatureName);
+    std::shared_ptr<EStructuralFeature> structFeature = obj->eClass()->getEStructuralFeature(stuctFeatureName);
 
-    std::shared_ptr<ecore::EAttribute> attibute = std::dynamic_pointer_cast<ecore::EAttribute>(structFeature);
+    std::shared_ptr<EAttribute> attibute = std::dynamic_pointer_cast<EAttribute>(structFeature);
     if(attibute == nullptr){
         throw std::runtime_error("updateAttributeAtPath : " + stuctFeatureName + " is not an attribute!" );
     }
