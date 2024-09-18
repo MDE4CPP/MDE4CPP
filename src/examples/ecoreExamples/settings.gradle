@@ -1,0 +1,24 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
+rootProject.name = 'ecoreExamples'
+
+//Search recursivly for all build.gradle file and add the imports
+fileTree('.') {
+	include '**/build.gradle'
+	exclude 'build.gradle' // Exclude root build file
+	exclude '**/.cmake/' // Exclude examples directory
+//	exclude '**/src_gen/' // Exclude src_gen folder, use project gradle.build file only
+}.collect { 
+	relativePath(it.parent).replace(File.separator, ':') 
+}.each {
+  include(it)
+  println it
+}
+
+includeBuild '../../..'
