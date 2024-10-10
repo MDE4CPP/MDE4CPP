@@ -290,7 +290,7 @@ public class Generate extends AbstractAcceleoGenerator {
      * 
      * @return The list of properties file we need to add to the generation context.
      * @see java.util.ResourceBundle#getBundle(String)
-     * @generated
+     * @generated NOT
      */
     @Override
     public List<String> getProperties() {
