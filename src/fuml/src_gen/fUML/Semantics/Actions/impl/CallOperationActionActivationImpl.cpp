@@ -316,10 +316,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());		
 			
-			const std::shared_ptr<Bag<uml::Parameter>>& parametersOfBehavior = this->retrieveBehavior()->getOwnedParameter();
+			const std::shared_ptr<Bag<uml::Parameter>>& callParameters = this->retrieveCallParameters();
 			bool foundFirstReturnParameter = false;
 			
-			for(const std::shared_ptr<uml::Parameter>& aParameter : *parametersOfBehavior)
+			for(const std::shared_ptr<uml::Parameter>& aParameter : *callParameters)
 			{
 				unsigned int parameterCounter = 0;
 		
