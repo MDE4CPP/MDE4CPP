@@ -26,6 +26,7 @@ namespace helperFunctions{
    * @param PathSegment : string that is supposed to be split
    *   - expectet format: NameOfStructFeature [@Index]
    * @return : tuple in the form (featureName, hasIndex, Index)
+   *   - index will be reaturned as 0 if hasIndex = false
    */
   std::tuple<std::string, bool, unsigned int> splitStructuralFeaturePathSegment(const std::string PathSegment);
 

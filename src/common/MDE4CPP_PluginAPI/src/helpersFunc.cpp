@@ -23,7 +23,7 @@ std::tuple<std::string, bool, unsigned int> helperFunctions::splitStructuralFeat
             return {d[0], false, 0};
             break;
         case 2 : 
-            return {d[0], true, std::stoi(d[1])};
+            return {d[0], true, std::stoi(d[1])};//name_of_structFeature , hasIndex , index
             break;
         default : 
             throw std::invalid_argument("splitStructuralFeaturePathSegment : more than one @ found in segment");
