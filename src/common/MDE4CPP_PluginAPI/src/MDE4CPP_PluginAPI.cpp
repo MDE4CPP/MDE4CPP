@@ -79,7 +79,7 @@ GenericApi::GenericApi() {
             std::shared_ptr<ecore::EObject> obj = m_modelInsts[modelInstName]->getRootObject();
             ecore2Json_handler.createJsonOfEObject(obj, responds_json);
         }else{//get part of the model
-            auto segmented_path = helperFunctions::split_string(path, ':');
+            auto segmented_path = helperFunctions::split_string(path, ":");
             std::shared_ptr<Any> any = nullptr;
             try{
                 any =  m_modelInsts[modelInstName]->getAnyAtPath(segmented_path);
@@ -178,7 +178,7 @@ GenericApi::GenericApi() {
         }
 
         //splits path input into segments seperated by ':'
-        auto segmented_path = helperFunctions::split_string(path, ':');
+        auto segmented_path = helperFunctions::split_string(path, ":");
         //retrives a pointer to the EObject whose operation should be invoked
 ;		auto obj = m_modelInsts[modelInstName]->getObjectAtPath(segmented_path);
         

@@ -30,7 +30,7 @@ TEST(helperFunctions_Tests, splitObjectClassKey){
 //tests splitString function
 TEST(helperFunctions_Tests, splitString){
     std::string test_string_1 = "segment_0:segment_1:segment_2";
-    auto segmented_string = helperFunctions::split_string(test_string_1, ':');
+    auto segmented_string = helperFunctions::split_string(test_string_1, ":");
     EXPECT_EQ(segmented_string.at(0), "segment_0");
     EXPECT_EQ(segmented_string.at(1), "segment_1");
     EXPECT_EQ(segmented_string.at(2), "segment_2");

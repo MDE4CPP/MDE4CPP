@@ -13,13 +13,13 @@
 
 namespace helperFunctions{
   /**
-  * splits the string s at every occurence of split_char and writes every segment into the buffer
+  * splits the string s at every occurence of delimter and return all segment in a deque
   * does not ever insert an empty string into buffer
-  * @param buffer : reference to the vector where the string segments are supposed to be stored (empty segments are not inserted)
   * @param s : string that is supposed to be split
-  * @param split_char : char denoting the boundery between to segments 
+  * @param delimiter : string denoting the boundery between to segments 
+  * @return a deque with the segments
   */
-  std::deque<std::string> split_string(const std::string s, const char split_char);
+  std::deque<std::string> split_string(const std::string& s, const std::string& delimiter);
 
   /**
    * splits the PathSegment into the name of the StructuralFeature as a String and an index as an integer if one exists in the Segment

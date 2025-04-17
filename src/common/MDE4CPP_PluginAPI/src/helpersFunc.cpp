@@ -3,20 +3,20 @@
 #include <string>
 #include <tuple>
 
-std::deque<std::string> helperFunctions::split_string(const std::string s, const char split_char){
-    std::stringstream ss;
-    std::deque<std::string> buffer = std::deque<std::string>();
-    ss << s; //initilize stringstream with sting 
-    std::string segment; 
-    while(std::getline(ss, segment, split_char)) //reads ss into segment until split_char is reached or ss is empty
-    {
-        buffer.push_back(segment); 
+std::deque<std::string> helperFunctions::split_string(const std::string& s, const std::string& delimiter){
+    std::deque<std::string> tokens;
+    size_t last = 0;
+    size_t next = 0;
+    while ((next = s.find(delimiter, last)) != std::string::npos) {
+        tokens.push_back(s.substr(last, next-last));
+        last = next + 1;
     }
-    return buffer;
+    tokens.push_back(s.substr(last)); //handling of the segment after the last delimiter
+    return tokens;
 }
 
 std::tuple<std::string, bool, unsigned int> helperFunctions::splitStructuralFeaturePathSegment(const std::string PathSegment){
-    char indexSymbol = '@';
+    std::string indexSymbol = "@";
     std::deque<std::string> d = split_string(PathSegment, indexSymbol);
     switch(d.size()){
         case 1 : 

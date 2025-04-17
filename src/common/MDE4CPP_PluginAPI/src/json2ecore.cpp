@@ -73,7 +73,7 @@ std::shared_ptr<ecore::EObject> Json2Ecore::getReferencedObject(const crow::json
     switch(json.t()){
         case crow::json::type::String : { //handles references as a path
             std::string path = json.s();
-            auto segmented_path = helperFunctions::split_string(path, ':');
+            auto segmented_path = helperFunctions::split_string(path, ":");
             try{
                 refTarget = modelInst->getObjectAtPath(segmented_path);
             }
