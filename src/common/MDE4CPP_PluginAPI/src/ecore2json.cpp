@@ -37,6 +37,7 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
 
         std::shared_ptr<Any> attributeValue = object->eGet(attribute);
 
+        //TODO: fix isEmpty check
         if(attributeValue->isEmpty()){ //skips attributes with no content
             CROW_LOG_WARNING << attribute->getName() <<" is not set!";
             continue;
@@ -165,7 +166,17 @@ void Ecore2Json::createJsonOfEObject(const std::shared_ptr<ecore::EObject>& obje
                 continue;
             }
 
-            std::shared_ptr<ecore::EObject> refValue = ecoreAny->getAsEObject();
+            //workaround for unset references with multiplicity of 0-1 
+            //TODO proper fix 
+            std::shared_ptr<ecore::EObject> refValue;
+            try{
+                refValue = ecoreAny->getAsEObject();
+            }
+            catch(const std::runtime_error& e){
+                CROW_LOG_WARNING << "createJsonOfEObject : casting the any of "<< reference->getName() << " failed, skipping it!" ;
+                continue;
+            }
+            
 
             if(refValue == nullptr){//skipps reference if it points to null
                 CROW_LOG_WARNING << "createJsonOfEObject : the value of "<< reference->getName() << " was a nullptr!" ;
@@ -252,6 +263,7 @@ void Ecore2Json::createJsonOfAny(const std::shared_ptr<Any>& any, crow::json::wv
                 int index = 0;
                 for(std::shared_ptr<ecore::EObject> obj : *eObjBag){
                     createJsonOfEObject(obj,result_json[index]);
+                    index++;
                 }
             }else{//any can only contain one EObject -> is a ecoreAny
 
