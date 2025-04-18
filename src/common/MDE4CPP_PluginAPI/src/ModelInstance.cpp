@@ -2,7 +2,9 @@
 
 #include "ecore/EClass.hpp"
 #include "ecore/EStructuralFeature.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EObject.hpp"
 
 #include "ecore/EcoreAny.hpp"
 #include "ecore/EcoreContainerAny.hpp"
@@ -188,6 +190,32 @@ void ModelInstance::updateAttributeAtPath(std::deque<std::string> path, std::sha
                 helperFunctions::replaceCompleteAnyBag(bag_ptr, new_content);
             }else{
                 throw std::invalid_argument("updateAttributeAtPath : any has wrong container-flag");
+            }
+        }
+    } 
+}
+
+std::vector<std::shared_ptr<EObject>> ModelInstance::collectAllObjectsInSubtreeOfAnObject(std::shared_ptr<EObject> obj_ptr){
+    std::vector<std::shared_ptr<EObject>> resultVector;
+    _collectAllObjectsInSubtreeOfAnObject(obj_ptr, resultVector);
+    return resultVector;
+}
+
+void ModelInstance::_collectAllObjectsInSubtreeOfAnObject(std::shared_ptr<EObject> obj_ptr, std::vector<std::shared_ptr<EObject>> &resultVectorRef){
+    resultVectorRef.push_back(obj_ptr); //insert current obj (obj_ptr)
+    std::shared_ptr<Bag<ecore::EReference>> eRefs = obj_ptr->eClass()->getEAllReferences();
+    for(std::shared_ptr<ecore::EReference> eRef : *eRefs){ //iterate over all references of current object (obj_ptr)
+        if(eRef->isContainment()){//only collect objects contained by the current obj; skip cross-references
+            std::shared_ptr<Any> ref_any = obj_ptr->eGet(eRef);
+            if (ref_any->isContainer()){ //handle references with multilicity of > 1
+                std::shared_ptr<EcoreContainerAny> ref_eContainerAny = std::dynamic_pointer_cast<EcoreContainerAny>(ref_any);
+                std::shared_ptr<Bag<EObject>> ref_objBag = ref_eContainerAny->getAsEObjectContainer(); 
+                for(std::shared_ptr<ecore::EObject> refEObj : *ref_objBag){
+                    _collectAllObjectsInSubtreeOfAnObject(refEObj, resultVectorRef);//recursive call with each eObj in Reference
+                }
+            }else{ //handle references with multilicity of = 1
+                std::shared_ptr<EcoreAny> ref_eAny = std::dynamic_pointer_cast<EcoreAny>(ref_any);
+                _collectAllObjectsInSubtreeOfAnObject(ref_eAny->getAsEObject(), resultVectorRef);//recursive call
             }
         }
     } 

@@ -10,6 +10,8 @@
 #include "abstractDataTypes/Any.hpp"
 #include <map>
 #include <deque>
+#include <vector>
+#include <tuple>
 #include "helpersFunc.hpp"
 
 using namespace ecore;
@@ -97,7 +99,19 @@ struct ModelInstance{
 
         void updateAttributeAtPath(std::deque<std::string> path, std::shared_ptr<Any> new_content);
 
-        
+        void removeCossReferencesToObj(std::shared_ptr<EObject> obj);
+
+        /**
+         * result vector includes subTree_rootObj
+         */
+        std::vector<std::shared_ptr<EObject>> collectAllObjectsInSubtreeOfAnObject(std::shared_ptr<EObject> subTree_rootObj_ptr);
+
+        /**
+         * helper function for recursive building of subTree
+         */
+        void _collectAllObjectsInSubtreeOfAnObject(std::shared_ptr<EObject> obj_ptr, std::vector<std::shared_ptr<EObject>> &resultVectorRef);
+
+        std::vector<std::tuple<EObject,EReference>> findAllReferencesToAnObject(const std::shared_ptr<EObject> obj_ptr);
 
         std::shared_ptr<EObject> m_rootObject; //pointer to the root object
         std::map<std::string, std::weak_ptr<EObject>> m_aliases; //allows to access certain object directly via their aliases; aliases have to be assigned by the user
