@@ -42,31 +42,46 @@ std::tuple<std::string,std::string> helperFunctions::splitObjectClassKey(const s
 void helperFunctions::replaceElementInAnyBag(const std::shared_ptr<Any>& any_ptr, unsigned int index, const std::shared_ptr<Any>& new_element){
     unsigned long typeID = any_ptr->getTypeId();
     switch (typeID){
+        case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
         case ecore::ecorePackage::EBOOLEAN_CLASS:{
             std::shared_ptr<Bag<bool>> bag = any_ptr->get<std::shared_ptr<Bag<bool>>>();
             replaceElementInBag(bag, index, new_element);
             break;
         }
+        case ecore::ecorePackage::EBYTE_CLASS:
+        case ecore::ecorePackage::EBYTEARRAY_CLASS:
+        case ecore::ecorePackage::EBYTEOBJECT_CLASS:
+        case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
         case ecore::ecorePackage::ECHAR_CLASS:{
             std::shared_ptr<Bag<char>> bag = any_ptr->get<std::shared_ptr<Bag<char>>>();
             replaceElementInBag(bag, index, new_element);
             break;
         }
+        case ecore::ecorePackage::EDATE_CLASS:
+        case ecore::ecorePackage::ERESOURCE_CLASS:
+        case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
+        case ecore::ecorePackage::EBIGINTEGER_CLASS:
+        case ecore::ecorePackage::ESHORT_CLASS:
+        case ecore::ecorePackage::ESHORTOBJECT_CLASS:
         case ecore::ecorePackage::EINT_CLASS:{
             std::shared_ptr<Bag<int>> bag = any_ptr->get<std::shared_ptr<Bag<int>>>();
             replaceElementInBag(bag, index, new_element);
             break;
         }
+        case ecore::ecorePackage::ELONGOBJECT_CLASS:
         case ecore::ecorePackage::ELONG_CLASS:{
             std::shared_ptr<Bag<long>> bag = any_ptr->get<std::shared_ptr<Bag<long>>>();
             replaceElementInBag(bag, index, new_element);
             break;
         }
+        case ecore::ecorePackage::EFLOATOBJECT_CLASS:
         case ecore::ecorePackage::EFLOAT_CLASS:{
             std::shared_ptr<Bag<float>> bag = any_ptr->get<std::shared_ptr<Bag<float>>>();
             replaceElementInBag(bag, index, new_element);
             break;
         }
+        case ecore::ecorePackage::EBIGDECIMAL_CLASS:
+        case ecore::ecorePackage::EDOUBLE_CLASS:
         case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:{
             std::shared_ptr<Bag<double>> bag = any_ptr->get<std::shared_ptr<Bag<double>>>();
             replaceElementInBag(bag, index, new_element);

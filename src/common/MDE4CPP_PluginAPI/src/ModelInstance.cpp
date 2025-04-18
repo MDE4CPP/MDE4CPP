@@ -109,31 +109,46 @@ std::shared_ptr<Any> ModelInstance::getValueOfStructFeatureByName(const std::sha
             }
         }else{ //type must be primitive (BOOLEAN, INTEGER, FLOAT, DOUBLE, LONG, CHAR, STRING)
             switch (any->getTypeId()) {
+                case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
                 case ecorePackage::EBOOLEAN_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<bool>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false); //dereferencing of "bag->at()" as to not insert a shared_ptr but the value of the bool  
                     break;
                 }
+                case ecore::ecorePackage::EBYTE_CLASS:
+                case ecore::ecorePackage::EBYTEARRAY_CLASS:
+                case ecore::ecorePackage::EBYTEOBJECT_CLASS:
+                case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
                 case ecorePackage::ECHAR_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<char>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
+                case ecore::ecorePackage::EDATE_CLASS:
+                case ecore::ecorePackage::ERESOURCE_CLASS:
+                case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
+                case ecore::ecorePackage::EBIGINTEGER_CLASS:
+                case ecore::ecorePackage::ESHORT_CLASS:
+                case ecore::ecorePackage::ESHORTOBJECT_CLASS:
                 case ecorePackage::EINT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<int>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
+                case ecore::ecorePackage::ELONGOBJECT_CLASS:
                 case ecorePackage::ELONG_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<long>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
+                case ecore::ecorePackage::EFLOATOBJECT_CLASS:
                 case ecorePackage::EFLOAT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<float>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
                     break;
                 }
+                case ecore::ecorePackage::EBIGDECIMAL_CLASS:
+                case ecore::ecorePackage::EDOUBLE_CLASS:
                 case ecorePackage::EDOUBLEOBJECT_CLASS:{
                     auto bag = any->get<std::shared_ptr<Bag<double>>>();
                     return eAny(*(bag->at(containerIndex)), any->getTypeId(), false);
@@ -218,6 +233,6 @@ void ModelInstance::_collectAllObjectsInSubtreeOfAnObject(std::shared_ptr<EObjec
                 _collectAllObjectsInSubtreeOfAnObject(ref_eAny->getAsEObject(), resultVectorRef);//recursive call
             }
         }
-    } 
+    }
 }
 
