@@ -106,26 +106,12 @@ GenericApi::GenericApi() {
     */
     CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& modelInstName, const std::string path){
 
+        //check if modelInst with name exists
         if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
             return crow::response(404, "Model not found!");
         }
 		
-        //splits path input into segments seperated by ':'
-        std::deque<std::string> segmented_path = helperFunctions::split_string(path, ':');
-        std::deque<std::string> segmented_object_path = segmented_path;
-        auto [stuctFeatureName, isContainer, index] = helperFunctions::splitStructuralFeaturePathSegment(segmented_object_path.back());
-        segmented_object_path.pop_back();
-        std::shared_ptr<ecore::EStructuralFeature> structFeature = m_modelInsts[modelInstName]->getObjectAtPath(segmented_object_path)->eClass()->getEStructuralFeature(stuctFeatureName);
-        
-        std::shared_ptr<ecore::EAttribute> attibute = std::dynamic_pointer_cast<ecore::EAttribute>(structFeature);
-        if(attibute == nullptr){
-            return crow::response(400, "updates currently not supported for references!");
-        }
-        
-        std::shared_ptr<Any> any =  m_modelInsts[modelInstName]->getObjectAtPath(segmented_object_path)->eGet(structFeature);
-
-        Json2Ecore json2Ecore_handler;
-
+        //check if json is malformed
         crow::json::rvalue json;
         try{
             json = crow::json::load(request.body);
@@ -134,15 +120,39 @@ GenericApi::GenericApi() {
             return crow::response(400, "json malformed!");
         }
 
-        std::shared_ptr<Any> new_any;
+        //processing of path
+        std::deque<std::string> segmented_path = helperFunctions::split_string(path, ":");
+        std::deque<std::string> segmented_object_path = segmented_path; //copied since segmented_path is needed later
+        auto [stuctFeatureName, isContainer, index] = helperFunctions::splitStructuralFeaturePathSegment(segmented_object_path.back());
+        segmented_object_path.pop_back();//remove name of 
+        std::shared_ptr<ecore::EStructuralFeature> structFeature = m_modelInsts[modelInstName]->getObjectAtPath(segmented_object_path)->eClass()->getEStructuralFeature(stuctFeatureName);
+        
+        std::shared_ptr<Any> any =  m_modelInsts[modelInstName]->getObjectAtPath(segmented_object_path)->eGet(structFeature);
+
+
+        Json2Ecore json2Ecore_handler;
+
+        std::shared_ptr<Any> new_any; //updated value
         if(isContainer && any->isContainer()){ //replace only one element in the container
             new_any = json2Ecore_handler.createAnyOfType(any->getTypeId(), false, json);
         }else{
+            if(any->isContainer() && json.t() != crow::json::type::List){
+                CROW_LOG_ERROR << "tried to update value of structFeature : \"" << structFeature->getName() << "\" with single item despite of its multiplicty being >1 !";
+                return crow::response(400, "expected a list!");
+            }
             new_any = json2Ecore_handler.createAnyOfType(any->getTypeId(), any->isContainer(), json);
         }
-        
-        m_modelInsts[modelInstName]->updateAttributeAtPath(segmented_path,new_any);
 
+        std::shared_ptr<ecore::EAttribute> attibute = std::dynamic_pointer_cast<ecore::EAttribute>(structFeature);
+        if(attibute != nullptr){//structFeature is an EAttribute
+            m_modelInsts[modelInstName]->updateAttributeAtPath(segmented_path,new_any);
+        }else{//structFeature is an EReference
+            std::shared_ptr<ecore::EReference> reference = std::dynamic_pointer_cast<ecore::EReference>(structFeature);
+            if(reference->isContainer()){
+
+            }
+        }
+        
         return crow::response(200);
     });
 
@@ -165,8 +175,7 @@ GenericApi::GenericApi() {
      * Signature: POST invoke/modelInstName/path/operationName
      * @param modelInstName : name the model instance will have afterwards
      * @param path : path to the StructuralFeature in the model instance where the update shall be made
-     *      -form of path : - path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :targetStructuralFeature 
-     *                      - path with alias = $alias:StucturalFeatureOfAlias:NextStructuralFeature: ... :targetStructuralFeature
+     *      -form of path : path from root = StucturalFeatureOfRoot:NextStructuralFeature: ... :targetStructuralFeature 
      *      -form of StructuralFeature :    -for containers = NameOfStructFeat@IndexInContainer (e.g: auhors@0 for first element in authors container)
      *                                      -for normal StructFeatures = NameOfStructFeat
      * @param operationName : name of the operation that should be invoked
