@@ -252,6 +252,11 @@ std::shared_ptr<Any> Json2Ecore::createAnyOfType(const unsigned long typeId, con
 template<typename T>
 std::shared_ptr<Any> Json2Ecore::writeAnyValue(const unsigned long attributeTypeId, const bool isContainer, const crow::json::rvalue& content){
     if(isContainer){ //handling of Attributes with multiplicity of > 1
+        
+        if(content.t() != crow::json::type::List){
+            throw std::runtime_error("json2ecore::writeAnyValue : tried to convert non-list type json into container!");
+        }
+
         std::shared_ptr<Bag<T>> bag = std::make_shared<Bag<T>>();
         for(const auto & entry : content){
             auto value = std::make_shared<T>(convert_to<T>(entry));
