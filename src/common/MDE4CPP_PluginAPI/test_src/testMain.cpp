@@ -8,6 +8,7 @@
 
 #include "helpersFunc.hpp"
 #include <tuple>
+#include <algorithm>
 
 #include "util/crow_all.h"
 
@@ -80,7 +81,9 @@ TEST(helperFunctions_Tests, replaceElementInBag){
     friend class ModelInstanceTest_setAttributeAtPath_Number_Test;\
     friend class ModelInstanceTest_setAttributeAtPath_StringBag_ReplaceBag_Test;\
     friend class ModelInstanceTest_setAttributeAtPath_StringBag_UpdateElement_Test;\
-    friend class ModelInstanceTest_setAttributeAtPath_StringBag_NewElement_Test;
+    friend class ModelInstanceTest_setAttributeAtPath_StringBag_NewElement_Test;\
+    friend class ModelInstanceTest_collectAllObjectsInSubtreeOfAnObject_fromRootObject_Test;\
+    friend class ModelInstanceTest_collectAllObjectsInSubtreeOfAnObject_fromABook_Test;
 #include "ModelInstance.hpp"
 
 class ModelInstanceTest : public testing::Test { //helper class for testing ModelInstance
@@ -392,6 +395,76 @@ TEST_F(ModelInstanceTest, setAttributeAtPath_String){
         std::cerr << e.what() << '\n';
         FAIL();
     }
+}
+
+TEST_F(ModelInstanceTest, collectAllObjectsInSubtreeOfAnObject_fromRootObject){
+    auto dq_path_rootObj = std::deque<std::string>({});
+    std::shared_ptr<ecore::EObject> obj = m1_->getObjectAtPath(dq_path_rootObj);
+    std::vector<std::shared_ptr<ecore::EObject>> res_vect = m1_->collectAllObjectsInSubtreeOfAnObject(obj);
+    EXPECT_EQ(res_vect.size(), 6);
+
+    std::deque<std::string> dq_path_testObj;
+    std::shared_ptr<ecore::EObject> test_obj;
+
+    dq_path_testObj = dq_path_rootObj; //check that inital Object is contained
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"books@0"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"books@0","pictures@0"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"authors@0"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"publishers@0"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"publishers@0","adress"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+}
+
+TEST_F(ModelInstanceTest, collectAllObjectsInSubtreeOfAnObject_fromABook){
+    auto dq_path_BookObj = std::deque<std::string>({"books@0"});
+    std::shared_ptr<ecore::EObject> obj = m1_->getObjectAtPath(dq_path_BookObj);
+    std::vector<std::shared_ptr<ecore::EObject>> res_vect = m1_->collectAllObjectsInSubtreeOfAnObject(obj);
+    EXPECT_EQ(res_vect.size(), 2);
+
+    std::deque<std::string> dq_path_testObj;
+    std::shared_ptr<ecore::EObject> test_obj;
+
+    //check if expected objects are in res_vec
+    dq_path_testObj = dq_path_BookObj;//check that inital Object is contained
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"books@0","pictures@0"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_TRUE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    //check that no other objects are in res_vec
+    dq_path_testObj = std::deque<std::string>({});// root object sh
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_FALSE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"authors@0"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_FALSE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"publishers@0"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_FALSE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
+
+    dq_path_testObj = std::deque<std::string>({"publishers@0","adress"});
+    test_obj = m1_->getObjectAtPath(dq_path_testObj);
+    EXPECT_FALSE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
 }
 
 /*
