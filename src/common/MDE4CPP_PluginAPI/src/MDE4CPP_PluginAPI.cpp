@@ -29,7 +29,7 @@ GenericApi::GenericApi() {
      * @param request : request that contains the json representation of the model instance 
     */
     CROW_ROUTE(app, "/<string>/").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& modelInstName){
-        if(m_modelInsts.find(modelInstName) != m_modelInsts.end()){
+        if(m_modelInsts.contains(modelInstName)){//already a model instance with same name
             CROW_LOG_INFO<<"modelInst:\""<< modelInstName <<"\" already exists";
             return crow::response(400, "Model already exists!");
         }
@@ -66,7 +66,7 @@ GenericApi::GenericApi() {
      *                                      -for normal StructFeatures = NameOfStructFeat;
     */
     CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& modelInstName, const std::string& path){
-        if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
+        if(!m_modelInsts.contains(modelInstName)){
             CROW_LOG_INFO << modelInstName <<" not found in modelInst map!";
             return crow::response(400, "Model not found!");
         }
@@ -107,7 +107,7 @@ GenericApi::GenericApi() {
     CROW_ROUTE(app, "/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& modelInstName, const std::string path){
 
         //check if modelInst with name exists
-        if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
+        if(!m_modelInsts.contains(modelInstName)){
             return crow::response(404, "Model not found!");
         }
 		
@@ -162,8 +162,8 @@ GenericApi::GenericApi() {
      * @param modelInstName : name the model instance will have afterwards
     */
     CROW_ROUTE(app, "/<string>/").methods(crow::HTTPMethod::Delete)([this](const std::string& modelInstName){
-        if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
-            return crow::response(404);
+        if(!m_modelInsts.contains(modelInstName)){
+            return crow::response(404, "Model not Found!");
         }
 
         m_modelInsts.erase(m_modelInsts.find(modelInstName));
@@ -182,7 +182,7 @@ GenericApi::GenericApi() {
      * @param request : Json-list of arguemts for the called Operation as strings; for each element of the list a cast into the appropriate type will be performed  
     */
 	CROW_ROUTE(app, "/invoke/<string>/<string>/<string>/").methods(crow::HTTPMethod::Post)([this](const std::string& modelInstName, const std::string& path, const std::string& operationName){
-        if(m_modelInsts.find(modelInstName) == m_modelInsts.end()){
+        if(m_modelInsts.contains(modelInstName)){
             return crow::response(404);
         }
 
