@@ -83,7 +83,8 @@ TEST(helperFunctions_Tests, replaceElementInBag){
     friend class ModelInstanceTest_setAttributeAtPath_StringBag_UpdateElement_Test;\
     friend class ModelInstanceTest_setAttributeAtPath_StringBag_NewElement_Test;\
     friend class ModelInstanceTest_collectAllObjectsInSubtreeOfAnObject_fromRootObject_Test;\
-    friend class ModelInstanceTest_collectAllObjectsInSubtreeOfAnObject_fromABook_Test;
+    friend class ModelInstanceTest_collectAllObjectsInSubtreeOfAnObject_fromABook_Test;\
+    friend class ModelInstanceTest_removeCrossRefsToObject_Test;
 #include "ModelInstance.hpp"
 
 class ModelInstanceTest : public testing::Test { //helper class for testing ModelInstance
@@ -467,25 +468,26 @@ TEST_F(ModelInstanceTest, collectAllObjectsInSubtreeOfAnObject_fromABook){
     EXPECT_FALSE(std::find(res_vect.begin(), res_vect.end(), test_obj) != res_vect.end());
 }
 
-/*
-TEST_F(ModelInstanceTest, test_ecore_eContainer) {//tests the ecore eContainerFunction
-    auto p0 = m1_->getRootObject();
-    EXPECT_TRUE(p0->eContainer() == nullptr); //root_obj should return nullptr
+#include "ecore2json.hpp"
+TEST_F(ModelInstanceTest, removeCrossRefsToObject) {//TODO: Doku
+    auto e2j_ = Ecore2Json();
+    auto result_1 = crow::json::wvalue();
+    e2j_.createJsonOfEObject(m1_->getRootObject(), result_1);
+    std::cout << "before removal of publisher crossRef\n" <<result_1.dump() << std::endl << std::endl;
 
-    std::deque<std::string> dq_path = {"books@1","pictures@0"};//get picture 
-    std::shared_ptr<EObject> p1;
-    std::string error;
-    try
-    {
-        p1 = m1_->getObjectAtPath(dq_path);
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    m1_->removeCrossRefsToObject(m1_->getObjectAtPath({"publishers@0"}));
+    
+    auto result_2 = crow::json::wvalue();
+    e2j_.createJsonOfEObject(m1_->getRootObject(), result_2);
+    std::cout << "after removal of publisher crossRef\n" <<result_2.dump() << std::endl << std::endl;
 
-    EXPECT_FALSE(p1 == nullptr); //eContainer of picture should be set
-}*/
+    std::cout<<std::endl;
+    m1_->removeCrossRefsToObject(m1_->getObjectAtPath({"authors@0"}));
+
+    auto result_3 = crow::json::wvalue();
+    e2j_.createJsonOfEObject(m1_->getRootObject(), result_3);
+    std::cout << "after removal of author crossRef\n" <<result_3.dump() << std::endl;
+}
 
 /**
  * testing Json2Ecore 

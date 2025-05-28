@@ -23,7 +23,7 @@ namespace testHelpers{
 			{
 				"ObjectClass" : "libraryModel_ecore::Book",
 				"Name" : "Magritte",
-				"authors" : ["#authors@0"],
+				"authors" : ["authors@0"],
 				"publisher": "publisher@0",
 				"pages" : "448",
 				"genres" : ["Art","Architecture"],
