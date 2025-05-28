@@ -53,7 +53,7 @@ struct ModelInstance{
         */
         std::shared_ptr<Any> getAnyAtPath(std::deque<std::string> path); 
 
-        //TODO Docu
+        //TODO Doku
         void setAnyAtPath(std::deque<std::string> path, std::shared_ptr<Any>);
         
         /**
@@ -113,7 +113,11 @@ struct ModelInstance{
         std::vector<std::tuple<EObject,EReference>> findAllReferencesToAnObject(const std::shared_ptr<EObject> obj_ptr);
 
         //TODO : Doku
+        void unsetReferenceInAnObject(const std::shared_ptr<EReference> ref, const std::shared_ptr<EObject>& obj);
+
+        //TODO : Doku
         void removeCrossRefsToObject(const std::shared_ptr<EObject> obj);
+        void _removeCrossRefsToObject(const std::shared_ptr<EObject> current_object, const std::shared_ptr<EObject> obj_to_remove);
 
         std::shared_ptr<EObject> m_rootObject; //pointer to the root object
         std::map<std::string, std::weak_ptr<EObject>> m_aliases; //allows to access certain object directly via their aliases; aliases have to be assigned by the user

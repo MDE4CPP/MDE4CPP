@@ -236,39 +236,61 @@ void ModelInstance::_collectAllObjectsInSubtreeOfAnObject(std::shared_ptr<EObjec
     }
 }
 
-void ModelInstance::removeCrossRefsToObject(const std::shared_ptr<EObject> obj){
-    auto allObjects = collectAllObjectsInSubtreeOfAnObject(m_rootObject);//collect all objects in Model
-    for(std::shared_ptr<EObject> anObj : allObjects ){
-        std::cout<<"for an object of class: "<< anObj->eClass()->getName()<<std::endl;
-        auto anObjRefs = anObj->eClass()->getEAllReferences();
-        for (auto aRef : *anObjRefs)
-        {
-            if (!aRef->isContainment() && !aRef->isContainer()){ //ignore all non-Cross-References //TODO do ContainerRef need to be removed aswell?
-                auto ref_any = anObj->eGet(aRef);
-                if (ref_any->isContainer())//multiplicity > 1
+void ModelInstance::removeCrossRefsToObject(const std::shared_ptr<EObject> obj_to_remove){
+    _removeCrossRefsToObject(this->m_rootObject, obj_to_remove);
+}
+
+void ModelInstance::_removeCrossRefsToObject(const std::shared_ptr<EObject> current_object ,  const std::shared_ptr<EObject> obj_to_remove){
+
+    std::cout<<"for an object of class: "<< current_object->eClass()->getName()<<std::endl;
+    auto anObjRefs = current_object->eClass()->getEAllReferences();
+    for (auto aRef : *anObjRefs)
+    {
+        if (!aRef->isContainment() && !aRef->isContainer())
+        { //handle all cross-References
+            auto ref_any = current_object->eGet(aRef);
+            if (ref_any->isContainer())//multiplicity > 1
+            {
+                std::shared_ptr<EcoreContainerAny> ref_eContainerAny = std::dynamic_pointer_cast<EcoreContainerAny>(ref_any);
+                std::shared_ptr<Bag<EObject>> ref_objBag = ref_eContainerAny->getAsEObjectContainer();
+                auto it = ref_objBag->find(obj_to_remove);
+                if(it != ref_objBag->end()){    
+                    ref_objBag->erase(it);// TODO is this enough to delete it? Or does the new Bag has to be written back with an eSet? 
+                    std::cout<<"erased reference to " << obj_to_remove->eClass()->getName() << " in bag of: "<< current_object->eClass()->getName() << "/" << aRef->getName() <<std::endl;
+                }else{
+                    //std::cout<<" did not find reference to " << obj->eClass()->getName() << " in : "<< anObj->eClass()->getName() << "/" << aRef->getName() <<std::endl;
+                }
+                current_object->eSet(aRef,eEcoreContainerAny(ref_objBag, ref_eContainerAny->getTypeId()));
+            }else{//multiplicity == 1
+                std::shared_ptr<EcoreAny> ref_eAny = std::dynamic_pointer_cast<EcoreAny>(ref_any);
+                if( ref_eAny->getAsEObject() == obj_to_remove){
+                    unsigned long typeID = current_object->eGet(aRef)->getTypeId(); // TODO simplify
+                    current_object->eSet(aRef, eEcoreAny(aRef->getDefaultValue(), typeID)); //TODO how to unset a reference? Replace content with EcoreAny containing a nullptr?
+                    std::cout<<"erased reference to " << obj_to_remove->eClass()->getName() << " of: "<< current_object->eClass()->getName() << "/" << aRef->getName() <<std::endl;
+                }else
                 {
+                    //std::cout<<"did not find reference to " << obj->eClass()->getName() << " in : "<< anObj->eClass()->getName() << "/" << aRef->getName() <<std::endl;
+                }
+            }        
+        }else
+        {
+            if(aRef->isContainment()){ //recursively call this for all contained objects
+                auto ref_any = current_object->eGet(aRef);
+                if (ref_any->isContainer())
+                {//multiplicity > 1
                     std::shared_ptr<EcoreContainerAny> ref_eContainerAny = std::dynamic_pointer_cast<EcoreContainerAny>(ref_any);
                     std::shared_ptr<Bag<EObject>> ref_objBag = ref_eContainerAny->getAsEObjectContainer();
-                    auto it = ref_objBag->find(obj);
-                    if(it != ref_objBag->end()){
-                        ref_objBag->erase(it);// TODO is this enough to delete it? Or does the new Bag has to be written back with an eSet? 
-                        std::cout<<"erased reference to " << obj->eClass()->getName() << " in bag of: "<< anObj->eClass()->getName() << "/" << aRef->getName() <<std::endl;
-                    }else{
-                        //std::cout<<" did not find reference to " << obj->eClass()->getName() << " in : "<< anObj->eClass()->getName() << "/" << aRef->getName() <<std::endl;
-                    }
-                }else{//multiplicity == 1
-                    std::shared_ptr<EcoreAny> ref_eAny = std::dynamic_pointer_cast<EcoreAny>(ref_any);
-                    if( ref_eAny->getAsEObject() == obj){
-                        unsigned long typeID = anObj->eGet(aRef)->getTypeId(); // TODO simplify
-                        obj->eSet(aRef, eEcoreAny(nullptr, typeID)); //TODO how to unset a reference? Replace content with EcoreAny containing a nullptr?
-                        std::cout<<"erased reference to " << obj->eClass()->getName() << " of: "<< anObj->eClass()->getName() << "/" << aRef->getName() <<std::endl;
-                    }else
+                    for (std::shared_ptr<EObject> next_obj: *ref_objBag)
                     {
-                        //std::cout<<"did not find reference to " << obj->eClass()->getName() << " in : "<< anObj->eClass()->getName() << "/" << aRef->getName() <<std::endl;
-                    }
-                }        
+                        _removeCrossRefsToObject(next_obj, obj_to_remove);
+                    }      
+                }else
+                {//multiplicity == 1
+                    std::shared_ptr<EcoreAny> ref_eAny = std::dynamic_pointer_cast<EcoreAny>(ref_any);
+                    std::shared_ptr<EObject> next_obj = ref_eAny->getAsEObject();
+                    _removeCrossRefsToObject(next_obj, obj_to_remove);
+                }               
             }
         }
-        
     }
 }
