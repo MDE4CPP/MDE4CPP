@@ -99,8 +99,6 @@ struct ModelInstance{
 
         void updateAttributeAtPath(std::deque<std::string> path, std::shared_ptr<Any> new_content);
 
-        void removeCossReferencesToObj(std::shared_ptr<EObject> obj);
-
         /**
          * result vector includes subTree_rootObj
          */
@@ -111,12 +109,17 @@ struct ModelInstance{
          */
         void _collectAllObjectsInSubtreeOfAnObject(std::shared_ptr<EObject> obj_ptr, std::vector<std::shared_ptr<EObject>> &resultVectorRef);
 
+        //TODO : Doku
         std::vector<std::tuple<EObject,EReference>> findAllReferencesToAnObject(const std::shared_ptr<EObject> obj_ptr);
+
+        //TODO : Doku
+        void removeCrossRefsToObject(const std::shared_ptr<EObject> obj);
 
         std::shared_ptr<EObject> m_rootObject; //pointer to the root object
         std::map<std::string, std::weak_ptr<EObject>> m_aliases; //allows to access certain object directly via their aliases; aliases have to be assigned by the user
         std::string m_modelInstanceName;
 
+        
 };
 
 #endif /*MODELINSTANCE_H*/
