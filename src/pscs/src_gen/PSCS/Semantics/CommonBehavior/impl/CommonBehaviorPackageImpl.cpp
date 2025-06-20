@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -87,6 +87,10 @@ const std::shared_ptr<ecore::EAttribute>& PSCS::Semantics::CommonBehavior::Commo
 	return m_cS_EventOccurrence_Attribute_propagationInward;
 }
 
+const std::shared_ptr<ecore::EReference>& PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_interactionPoint() const
+{
+	return m_cS_EventOccurrence_Attribute_interactionPoint;
+}
 const std::shared_ptr<ecore::EReference>& PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_onPort() const
 {
 	return m_cS_EventOccurrence_Attribute_onPort;
@@ -96,6 +100,26 @@ const std::shared_ptr<ecore::EReference>& PSCS::Semantics::CommonBehavior::Commo
 	return m_cS_EventOccurrence_Attribute_wrappedEventOccurrence;
 }
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_doSend() const
+{
+	return m_cS_EventOccurrence_Operation_doSend;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_getParameterValues() const
+{
+	return m_cS_EventOccurrence_Operation_getParameterValues;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_match_Trigger() const
+{
+	return m_cS_EventOccurrence_Operation_match_Trigger;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_sendInTo_Element_Port() const
+{
+	return m_cS_EventOccurrence_Operation_sendInTo_Element_Port;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_sendOutTo_Element_Port() const
+{
+	return m_cS_EventOccurrence_Operation_sendOutTo_Element_Port;
+}
 
 // End Class CS_EventOccurrence
 

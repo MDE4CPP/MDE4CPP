@@ -4,13 +4,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -39,14 +39,38 @@ void MDE4CPP_ExtensionsPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
+	m_pSCS_Link_Class->getESuperTypes()->push_back(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
 	m_pSCS_Object_Class->getESuperTypes()->push_back(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	
 
  	// Initialize classes and features; add operations and parameters
+	initializePSCS_LinkContent();
 	initializePSCS_ObjectContent();
 
 	initializePackageEDataTypes();
 
+}
+
+void MDE4CPP_ExtensionsPackageImpl::initializePSCS_LinkContent()
+{
+	m_pSCS_Link_Class->setName("PSCS_Link");
+	m_pSCS_Link_Class->setAbstract(false);
+	m_pSCS_Link_Class->setInterface(false);
+	
+	m_pSCS_Link_Class->_setID(PSCS_LINK_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
+	
 }
 
 void MDE4CPP_ExtensionsPackageImpl::initializePSCS_ObjectContent()

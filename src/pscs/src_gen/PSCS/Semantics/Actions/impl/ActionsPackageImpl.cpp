@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
@@ -83,6 +83,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_AcceptEventActionActivation_Operation_accept_EventOccurrence() const
+{
+	return m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence;
+}
 
 // End Class CS_AcceptEventActionActivation
 
@@ -94,6 +98,14 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_AddStructuralFeatureValueActionActivation_Operation_doAction() const
+{
+	return m_cS_AddStructuralFeatureValueActionActivation_Operation_doAction;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_AddStructuralFeatureValueActionActivation_Operation_doActionDefault() const
+{
+	return m_cS_AddStructuralFeatureValueActionActivation_Operation_doActionDefault;
+}
 
 // End Class CS_AddStructuralFeatureValueActionActivation
 
@@ -105,6 +117,30 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation__isCreate_Operation() const
+{
+	return m_cS_CallOperationActionActivation_Operation__isCreate_Operation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_doAction() const
+{
+	return m_cS_CallOperationActionActivation_Operation_doAction;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_getCallExecution() const
+{
+	return m_cS_CallOperationActionActivation_Operation_getCallExecution;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_isCreate_Operation() const
+{
+	return m_cS_CallOperationActionActivation_Operation_isCreate_Operation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation() const
+{
+	return m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation() const
+{
+	return m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation;
+}
 
 // End Class CS_CallOperationActionActivation
 
@@ -116,6 +152,18 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_ClearStructuralFeatureActionActivation_Operation_doAction() const
+{
+	return m_cS_ClearStructuralFeatureActionActivation_Operation_doAction;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature() const
+{
+	return m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature() const
+{
+	return m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature;
+}
 
 // End Class CS_ClearStructuralFeatureActionActivation
 
@@ -127,6 +175,14 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_ConstructStrategy_Operation_construct_Operation_PSCS_Object() const
+{
+	return m_cS_ConstructStrategy_Operation_construct_Operation_PSCS_Object;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_ConstructStrategy_Operation_getName() const
+{
+	return m_cS_ConstructStrategy_Operation_getName;
+}
 
 // End Class CS_ConstructStrategy
 
@@ -138,6 +194,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CreateLinkActionActivation_Operation_doAction() const
+{
+	return m_cS_CreateLinkActionActivation_Operation_doAction;
+}
 
 // End Class CS_CreateLinkActionActivation
 
@@ -149,6 +209,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CreateObjectActionActivation_Operation_doAction() const
+{
+	return m_cS_CreateObjectActionActivation_Operation_doAction;
+}
 
 // End Class CS_CreateObjectActionActivation
 
@@ -172,6 +236,62 @@ const std::shared_ptr<ecore::EReference>& PSCS::Semantics::Actions::ActionsPacka
 	return m_cS_DefaultConstructStrategy_Attribute_locus;
 }
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_PSCS_Object_EJavaObject() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_PSCS_Object_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_canInstantiate_Property() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_construct_Operation_PSCS_Object() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_construct_Operation_PSCS_Object;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_constructObject_PSCS_Object_Class() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_constructObject_PSCS_Object_Class;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_generateArrayPattern_PSCS_Object_Connector() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_PSCS_Object_Connector;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_generateStarPattern_PSCS_Object_Connector() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_generateStarPattern_PSCS_Object_Connector;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_getDefaultAssociation() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_getDefaultAssociation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_getRealizingClass_Interface() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_getRealizingClass_Interface;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_PSCS_Object_ConnectorEnd() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_PSCS_Object_ConnectorEnd;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_isArrayPattern_Connector() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_isArrayPattern_Connector;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_DefaultConstructStrategy_Operation_isStarPattern_Connector() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_isStarPattern_Connector;
+}
 
 // End Class CS_DefaultConstructStrategy
 
@@ -183,6 +303,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_ReadExtentActionActivation_Operation_doAction() const
+{
+	return m_cS_ReadExtentActionActivation_Operation_doAction;
+}
 
 // End Class CS_ReadExtentActionActivation
 
@@ -194,6 +318,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_ReadSelfActionActivation_Operation_doAction() const
+{
+	return m_cS_ReadSelfActionActivation_Operation_doAction;
+}
 
 // End Class CS_ReadSelfActionActivation
 
@@ -205,6 +333,18 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_doAction() const
+{
+	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_doAction;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject() const
+{
+	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature() const
+{
+	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature;
+}
 
 // End Class CS_RemoveStructuralFeatureValueActionActivation
 
@@ -216,6 +356,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Actions::ActionsPackageIm
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_SendSignalActionActivation_Operation_doAction() const
+{
+	return m_cS_SendSignalActionActivation_Operation_doAction;
+}
 
 // End Class CS_SendSignalActionActivation
 

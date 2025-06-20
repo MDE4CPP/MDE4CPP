@@ -7,13 +7,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -33,10 +33,19 @@ void MDE4CPP_ExtensionsPackageImpl::createPackageContents(std::shared_ptr<ecore:
 
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
+	createPSCS_LinkContent(package, factory);
 	createPSCS_ObjectContent(package, factory);
 
 	createPackageEDataTypes(package, factory);
 
+}
+
+void MDE4CPP_ExtensionsPackageImpl::createPSCS_LinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_pSCS_Link_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, PSCS_LINK_CLASS);
+	
+	
+	
 }
 
 void MDE4CPP_ExtensionsPackageImpl::createPSCS_ObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)

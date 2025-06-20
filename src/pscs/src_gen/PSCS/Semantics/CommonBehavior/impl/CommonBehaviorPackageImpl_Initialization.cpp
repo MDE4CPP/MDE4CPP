@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -20,8 +20,8 @@
 //depending model packages
 
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -84,6 +84,22 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	/*
 	 * EReferences
 	 */
+	m_cS_EventOccurrence_Attribute_interactionPoint->setName("interactionPoint");
+	m_cS_EventOccurrence_Attribute_interactionPoint->setEType(PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getPSCS_Object_Class());
+	m_cS_EventOccurrence_Attribute_interactionPoint->setLowerBound(0);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setUpperBound(1);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setTransient(false);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setVolatile(false);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setChangeable(true);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setUnsettable(false);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setUnique(true);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setDerived(false);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setOrdered(false);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setContainment(false);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setResolveProxies(true);
+	m_cS_EventOccurrence_Attribute_interactionPoint->setDefaultValueLiteral("");	
+	
+	m_cS_EventOccurrence_Attribute_interactionPoint->_setID(CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT);
 	m_cS_EventOccurrence_Attribute_onPort->setName("onPort");
 	m_cS_EventOccurrence_Attribute_onPort->setEType(uml::umlPackage::eInstance()->getPort_Class());
 	m_cS_EventOccurrence_Attribute_onPort->setLowerBound(0);
@@ -120,6 +136,121 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	/*
 	 * EOperations
 	 */
+	m_cS_EventOccurrence_Operation_doSend->setName("doSend");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_EventOccurrence_Operation_doSend->setEType(unknownClass);
+	}
+	m_cS_EventOccurrence_Operation_doSend->setLowerBound(1);
+	m_cS_EventOccurrence_Operation_doSend->setUpperBound(1);
+	m_cS_EventOccurrence_Operation_doSend->setUnique(true);
+	m_cS_EventOccurrence_Operation_doSend->setOrdered(false);
+	
+	m_cS_EventOccurrence_Operation_doSend->_setID(CS_EVENTOCCURRENCE_OPERATION_DOSEND);
+	
+	
+	m_cS_EventOccurrence_Operation_getParameterValues->setName("getParameterValues");
+	m_cS_EventOccurrence_Operation_getParameterValues->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+	m_cS_EventOccurrence_Operation_getParameterValues->setLowerBound(0);
+	m_cS_EventOccurrence_Operation_getParameterValues->setUpperBound(-1);
+	m_cS_EventOccurrence_Operation_getParameterValues->setUnique(true);
+	m_cS_EventOccurrence_Operation_getParameterValues->setOrdered(false);
+	
+	m_cS_EventOccurrence_Operation_getParameterValues->_setID(CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES);
+	
+	
+	m_cS_EventOccurrence_Operation_match_Trigger->setName("match");
+	m_cS_EventOccurrence_Operation_match_Trigger->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_cS_EventOccurrence_Operation_match_Trigger->setLowerBound(1);
+	m_cS_EventOccurrence_Operation_match_Trigger->setUpperBound(1);
+	m_cS_EventOccurrence_Operation_match_Trigger->setUnique(true);
+	m_cS_EventOccurrence_Operation_match_Trigger->setOrdered(false);
+	
+	m_cS_EventOccurrence_Operation_match_Trigger->_setID(CS_EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_match_Trigger);
+		parameter->setName("trigger");
+		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_cS_EventOccurrence_Operation_sendInTo_Element_Port->setName("sendInTo");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_EventOccurrence_Operation_sendInTo_Element_Port->setEType(unknownClass);
+	}
+	m_cS_EventOccurrence_Operation_sendInTo_Element_Port->setLowerBound(1);
+	m_cS_EventOccurrence_Operation_sendInTo_Element_Port->setUpperBound(1);
+	m_cS_EventOccurrence_Operation_sendInTo_Element_Port->setUnique(true);
+	m_cS_EventOccurrence_Operation_sendInTo_Element_Port->setOrdered(false);
+	
+	m_cS_EventOccurrence_Operation_sendInTo_Element_Port->_setID(CS_EVENTOCCURRENCE_OPERATION_SENDINTO_ELEMENT_PORT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendInTo_Element_Port);
+		parameter->setName("target");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendInTo_Element_Port);
+		parameter->setName("port");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_cS_EventOccurrence_Operation_sendOutTo_Element_Port->setName("sendOutTo");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_EventOccurrence_Operation_sendOutTo_Element_Port->setEType(unknownClass);
+	}
+	m_cS_EventOccurrence_Operation_sendOutTo_Element_Port->setLowerBound(1);
+	m_cS_EventOccurrence_Operation_sendOutTo_Element_Port->setUpperBound(1);
+	m_cS_EventOccurrence_Operation_sendOutTo_Element_Port->setUnique(true);
+	m_cS_EventOccurrence_Operation_sendOutTo_Element_Port->setOrdered(false);
+	
+	m_cS_EventOccurrence_Operation_sendOutTo_Element_Port->_setID(CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_ELEMENT_PORT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendOutTo_Element_Port);
+		parameter->setName("target");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendOutTo_Element_Port);
+		parameter->setName("port");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 

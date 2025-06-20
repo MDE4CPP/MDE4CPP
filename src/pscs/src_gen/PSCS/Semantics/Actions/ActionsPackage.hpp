@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EAnnotation;
-	class EParameter;
 	class EClass;
-	class EDataType;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EAnnotation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSCS::Semantics::Actions 
@@ -66,15 +66,17 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_ACCEPTEVENTACTIONACTIVATION_CLASS = 967219298;
 			static const unsigned int CS_ACCEPTEVENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int CS_ACCEPTEVENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int CS_ACCEPTEVENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 59;
 			
 			
+			static const unsigned long CS_ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE = 1744804804;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_AcceptEventActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_AcceptEventActionActivation_Operation_accept_EventOccurrence() const = 0;
 			
 			// End Class CS_AcceptEventActionActivation
 
@@ -83,15 +85,19 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS = 666852493;
 			static const unsigned int CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
+			static const unsigned int CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 54;
 			
 			
+			static const unsigned long CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION = 2459034463;
+			static const unsigned long CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTIONDEFAULT = 572905456;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_AddStructuralFeatureValueActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_AddStructuralFeatureValueActionActivation_Operation_doAction() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_AddStructuralFeatureValueActionActivation_Operation_doActionDefault() const = 0;
 			
 			// End Class CS_AddStructuralFeatureValueActionActivation
 
@@ -100,15 +106,27 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_CLASS = 359462383;
 			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 57;
+			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 63;
 			
 			
+			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION = 1345774800;
+			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION = 1729294133;
+			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION = 3811651158;
+			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION = 2024874825;
+			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONPROVIDED_PORT_OPERATION = 4192990466;
+			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONREQUIRED_PORT_OPERATION = 2625896910;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_CallOperationActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation__isCreate_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_doAction() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_getCallExecution() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isCreate_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation() const = 0;
 			
 			// End Class CS_CallOperationActionActivation
 
@@ -117,15 +135,21 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 116608301;
 			static const unsigned int CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 54;
 			
 			
+			static const unsigned long CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION = 1473569464;
+			static const unsigned long CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_STRUCTURALFEATURE = 2497461247;
+			static const unsigned long CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_PSCS_OBJECT_STRUCTURALFEATURE = 3139549290;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_ClearStructuralFeatureActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ClearStructuralFeatureActionActivation_Operation_doAction() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature() const = 0;
 			
 			// End Class CS_ClearStructuralFeatureActionActivation
 
@@ -134,15 +158,19 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CONSTRUCTSTRATEGY_CLASS = 983698108;
 			static const unsigned int CS_CONSTRUCTSTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CS_CONSTRUCTSTRATEGY_CLASS_OPERATION_COUNT = 1;
+			static const unsigned int CS_CONSTRUCTSTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
 			
+			static const unsigned long CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_PSCS_OBJECT = 593085527;
+			static const unsigned long CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME = 753057332;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_ConstructStrategy_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ConstructStrategy_Operation_construct_Operation_PSCS_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ConstructStrategy_Operation_getName() const = 0;
 			
 			// End Class CS_ConstructStrategy
 
@@ -151,15 +179,17 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CREATELINKACTIONACTIVATION_CLASS = 606847404;
 			static const unsigned int CS_CREATELINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int CS_CREATELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 54;
+			static const unsigned int CS_CREATELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 55;
 			
 			
+			static const unsigned long CS_CREATELINKACTIONACTIVATION_OPERATION_DOACTION = 3584940798;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_CreateLinkActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CreateLinkActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_CreateLinkActionActivation
 
@@ -168,15 +198,17 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CREATEOBJECTACTIONACTIVATION_CLASS = 1438312354;
 			static const unsigned int CS_CREATEOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_CREATEOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int CS_CREATEOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
 			
+			static const unsigned long CS_CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION = 1795145183;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_CreateObjectActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CreateObjectActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_CreateObjectActionActivation
 
@@ -185,12 +217,26 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_CLASS = 1444853409;
 			static const unsigned int CS_DEFAULTCONSTRUCTSTRATEGY_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int CS_DEFAULTCONSTRUCTSTRATEGY_CLASS_OPERATION_COUNT = 1;
+			static const unsigned int CS_DEFAULTCONSTRUCTSTRATEGY_CLASS_OPERATION_COUNT = 17;
 			
 			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION = 1521826585;
 			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES = 1929799087;
 			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS = 783119218;
 			
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ADDSTRUCTURALFEATUREVALUE_PSCS_OBJECT_EJAVAOBJECT = 3950176590;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY = 1675598055;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_PSCS_OBJECT = 3765673740;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCTOBJECT_PSCS_OBJECT_CLASS = 3651672876;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEARRAYPATTERN_PSCS_OBJECT_CONNECTOR = 2388741565;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEREALIZINGCLASS_INTERFACE_ESTRING = 3303361213;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATESTARPATTERN_PSCS_OBJECT_CONNECTOR = 1857555240;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETCARDINALITY_CONNECTOREND = 929434209;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETDEFAULTASSOCIATION = 3875607915;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETREALIZINGCLASS_INTERFACE = 2418555460;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETVALUESFROMCONNECTOREND_PSCS_OBJECT_CONNECTOREND = 3415863806;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_INSTANTIATEINTERFACE_INTERFACE_LOCUS = 2967185512;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISARRAYPATTERN_CONNECTOR = 2364964836;
+			static const unsigned long CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISSTARPATTERN_CONNECTOR = 1857762815;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_DefaultConstructStrategy_Class() const = 0;
@@ -200,6 +246,20 @@ namespace PSCS::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EReference>& getCS_DefaultConstructStrategy_Attribute_generatedRealizingClasses() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getCS_DefaultConstructStrategy_Attribute_locus() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_PSCS_Object_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_canInstantiate_Property() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_construct_Operation_PSCS_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_constructObject_PSCS_Object_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_generateArrayPattern_PSCS_Object_Connector() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_generateStarPattern_PSCS_Object_Connector() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getDefaultAssociation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getRealizingClass_Interface() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_PSCS_Object_ConnectorEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_isArrayPattern_Connector() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_isStarPattern_Connector() const = 0;
 			
 			// End Class CS_DefaultConstructStrategy
 
@@ -208,15 +268,17 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_READEXTENTACTIONACTIVATION_CLASS = 1846972855;
 			static const unsigned int CS_READEXTENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_READEXTENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int CS_READEXTENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
 			
+			static const unsigned long CS_READEXTENTACTIONACTIVATION_OPERATION_DOACTION = 212290264;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_ReadExtentActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ReadExtentActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_ReadExtentActionActivation
 
@@ -225,15 +287,17 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_READSELFACTIONACTIVATION_CLASS = 1154790487;
 			static const unsigned int CS_READSELFACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_READSELFACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int CS_READSELFACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
 			
+			static const unsigned long CS_READSELFACTIONACTIVATION_OPERATION_DOACTION = 1702243650;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_ReadSelfActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ReadSelfActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_ReadSelfActionActivation
 
@@ -242,15 +306,21 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS = 1505686076;
 			static const unsigned int CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
+			static const unsigned int CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 55;
 			
 			
+			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION = 1253243884;
+			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_EJAVAOBJECT = 104693391;
+			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_PSCS_OBJECT_STRUCTURALFEATURE = 4005559406;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_RemoveStructuralFeatureValueActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_doAction() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature() const = 0;
 			
 			// End Class CS_RemoveStructuralFeatureValueActionActivation
 
@@ -259,15 +329,17 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_SENDSIGNALACTIONACTIVATION_CLASS = 263661846;
 			static const unsigned int CS_SENDSIGNALACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_SENDSIGNALACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int CS_SENDSIGNALACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
 			
+			static const unsigned long CS_SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION = 796983372;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_SendSignalActionActivation_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_SendSignalActionActivation_Operation_doAction() const = 0;
 			
 			// End Class CS_SendSignalActionActivation
 

@@ -40,10 +40,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -276,7 +276,7 @@ std::shared_ptr<Any> PSCS_ObjectImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
-			return eAny(getDefiningPort(),uml::umlPackage::PORT_CLASS,false); //317
+			return eAny(getDefiningPort(),uml::umlPackage::PORT_CLASS,false); //327
 	}
 	return fUML::MDE4CPP_Extensions::FUML_ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -286,7 +286,7 @@ bool PSCS_ObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
-			return getDefiningPort() != nullptr; //317
+			return getDefiningPort() != nullptr; //327
 	}
 	return fUML::MDE4CPP_Extensions::FUML_ObjectImpl::internalEIsSet(featureID);
 }
@@ -306,7 +306,7 @@ bool PSCS_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<uml::Port> _definingPort = std::dynamic_pointer_cast<uml::Port>(eObject);
 					if(_definingPort)
 					{
-						setDefiningPort(_definingPort); //317
+						setDefiningPort(_definingPort); //327
 					}
 					else
 					{

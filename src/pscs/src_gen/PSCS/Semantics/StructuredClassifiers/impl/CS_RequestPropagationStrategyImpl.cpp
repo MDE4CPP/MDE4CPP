@@ -42,12 +42,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
@@ -113,7 +115,10 @@ std::string CS_RequestPropagationStrategyImpl::getName()
 	//end of body
 }
 
-
+std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> CS_RequestPropagationStrategyImpl::select(const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -239,6 +244,74 @@ std::shared_ptr<Any> CS_RequestPropagationStrategyImpl::eInvoke(int operationID,
 		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName(), 0, false);
+			break;
+		}
+		// PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy::select(fUML::MDE4CPP_Extensions::FUML_Object[*], fUML::Semantics::Loci::SemanticVisitor) : fUML::MDE4CPP_Extensions::FUML_Object[*]: 2213778459
+		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_FUML_OBJECT_SEMANTICVISITOR:
+		{
+			//Retrieve input parameter 'potentialTargets'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> incoming_param_potentialTargets;
+			Bag<Any>::const_iterator incoming_param_potentialTargets_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_potentialTargets_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_potentialTargets.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _temp = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(anEObject);
+								incoming_param_potentialTargets->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'potentialTargets'. Failed to invoke operation 'select'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'potentialTargets'. Failed to invoke operation 'select'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticVisitor>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'select'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'select'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> resultList = this->select(incoming_param_potentialTargets,incoming_param_context);
+			return eEcoreContainerAny(resultList,fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
 

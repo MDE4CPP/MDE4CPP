@@ -49,9 +49,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -65,8 +65,8 @@
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -138,7 +138,33 @@ std::shared_ptr<ecore::EObject> CS_ReadSelfActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void CS_ReadSelfActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Get the context object of the activity execution containing this
+	// action activation and place a reference to it on the result output
+	// pin.
+	// Extends fUML semantics in the sense that the reference placed on
+	// the result pin is a CS_Reference, not a Reference
 
+	//DEBUG_MESSAGE(std::cout << "[ReadSelfActionActivation] Start..." << std::endl;)
+	
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+	context->setReferent(this->getExecutionContext());
+	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context->getReferent()) != nullptr) {
+		// i.e. alternatively, it can be an execution
+		context->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context->getReferent()));
+	}
+	
+	//DEBUG_MESSAGE(std::cout << "[ReadSelfActionActivation] context object = " << context->getReferent()->toString() << std::endl;)
+	
+	std::shared_ptr<uml::OutputPin> resultPin = this->getReadSelfAction()->getResult();
+	this->putToken(resultPin, context);
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -270,6 +296,12 @@ std::shared_ptr<Any> CS_ReadSelfActionActivationImpl::eInvoke(int operationID, c
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::Actions::CS_ReadSelfActionActivation::doAction(): 1702243650
+		case ActionsPackage::CS_READSELFACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
 
 		default:
 		{

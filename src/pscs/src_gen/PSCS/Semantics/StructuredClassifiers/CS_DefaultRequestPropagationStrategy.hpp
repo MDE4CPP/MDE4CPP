@@ -37,6 +37,10 @@ namespace fUML::Semantics::Loci
 {
 	class SemanticVisitor;
 }
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
+}
 
 // namespace macro header include
 #include "PSCS/PSCS.hpp"
@@ -68,7 +72,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			
+			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> select(const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

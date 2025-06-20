@@ -41,10 +41,12 @@
 
 #include <exception> // used in Persistence
 #include "PSCS/Semantics/StructuredClassifiers/CS_StructuralFeatureOfInterfaceAccessStrategy.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 #include "uml/StructuralFeature.hpp"
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -110,9 +112,58 @@ std::shared_ptr<ecore::EObject> CS_NameBased_StructuralFeatureOfInterfaceAccessS
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<Any> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::read(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// returns a copy of the first feature value of cs_Object where the name
+	// of the corresponding feature matches the name of the feature given as a parameter
+	// Otherwise, returns an empty feature value
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = cs_Object->getFeatureValues();
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> matchingFeatureValue = nullptr;
+	for(unsigned int i = 0; (i < featureValues->size()) && (matchingFeatureValue == nullptr); i++) {
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
+		if(featureValue->getFeature()->getName() == feature->getName()) {
+			matchingFeatureValue = featureValue;
+		}
+	}
+	if(matchingFeatureValue != nullptr) {
+		matchingFeatureValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(matchingFeatureValue->copy());
+		matchingFeatureValue->setFeature(feature);
+	}
+	else {
+		matchingFeatureValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue();
+		matchingFeatureValue->setFeature(feature);
+		matchingFeatureValue->setPosition(0);
+	}
+	return matchingFeatureValue;
+*/
+	//end of body
+}
 
-
-
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::write(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<Any>>& values, int position)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// returns a copy of the first feature value of cs_Object where the name
+	// of the corresponding feature matches the name of the feature given as a parameter
+	// Otherwise, returns an empty feature value
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = cs_Object->getFeatureValues();
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> matchingFeatureValue = nullptr;
+	for(unsigned int i = 0; (i < featureValues->size()) && (matchingFeatureValue == nullptr); i++) {
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
+		if(featureValue->getFeature()->getName() == feature->getName()) {
+			matchingFeatureValue = featureValue;
+		}
+	}
+	if(matchingFeatureValue != nullptr) {
+		cs_Object->assignFeatureValue(matchingFeatureValue->getFeature(), values, position);
+	}
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -236,6 +287,150 @@ std::shared_ptr<Any> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy::read(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::StructuralFeature) : Any: 777642571
+		case StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_PSCS_OBJECT_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'cs_Object'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_cs_Object;
+			Bag<Any>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_cs_Object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_cs_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'cs_Object'. Failed to invoke operation 'read'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'cs_Object'. Failed to invoke operation 'read'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_feature_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'read'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'read'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->read(incoming_param_cs_Object,incoming_param_feature), 0, false);
+			break;
+		}
+		// PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy::write(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::StructuralFeature, Any[*], int): 3706266521
+		case StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_PSCS_OBJECT_EINT:
+		{
+			//Retrieve input parameter 'cs_Object'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_cs_Object;
+			Bag<Any>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_cs_Object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_cs_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'cs_Object'. Failed to invoke operation 'write'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'cs_Object'. Failed to invoke operation 'write'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_feature_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'write'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'write'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'values'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_values;
+			Bag<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'values'. Failed to invoke operation 'write'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'position'
+			//parameter 3
+			int incoming_param_position;
+			Bag<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_position = (*incoming_param_position_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'position'. Failed to invoke operation 'write'!")
+				return nullptr;
+			}
+		
+			this->write(incoming_param_cs_Object,incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
+		}
 
 		default:
 		{

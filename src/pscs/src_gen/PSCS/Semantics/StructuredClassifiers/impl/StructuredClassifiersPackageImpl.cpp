@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
@@ -86,6 +86,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::St
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor() const
+{
+	return m_cS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor;
+}
 
 // End Class CS_DefaultRequestPropagationStrategy
 
@@ -97,6 +101,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::St
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const
+{
+	return m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation;
+}
 
 // End Class CS_DispatchOperationOfInterfaceStrategy
 
@@ -108,6 +116,14 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::St
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const
+{
+	return m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt() const
+{
+	return m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt;
+}
 
 // End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 
@@ -123,6 +139,10 @@ const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers
 {
 	return m_cS_RequestPropagationStrategy_Operation_getName;
 }
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor() const
+{
+	return m_cS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor;
+}
 
 // End Class CS_RequestPropagationStrategy
 
@@ -137,6 +157,14 @@ const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::St
 const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName() const
 {
 	return m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const
+{
+	return m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer() const
+{
+	return m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer;
 }
 
 // End Class CS_StructuralFeatureOfInterfaceAccessStrategy

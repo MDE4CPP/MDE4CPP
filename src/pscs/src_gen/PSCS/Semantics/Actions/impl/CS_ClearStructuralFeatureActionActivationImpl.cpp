@@ -57,26 +57,30 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/ClearStructuralFeatureAction.hpp"
 #include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Actions;
@@ -147,11 +151,189 @@ std::shared_ptr<ecore::EObject> CS_ClearStructuralFeatureActionActivationImpl::c
 //*********************************
 // Operations
 //*********************************
+void CS_ClearStructuralFeatureActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		/*
+	// Get the value of the object input pin.
+	// If the given feature is an association end, then
+	// destroy all links that have the object input on the opposite end.
+	// Otherwise, if the object input is a structured value, then
+	// set the appropriate feature of the input value to be empty.
 
+	std::shared_ptr<uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(this->getNode());
+	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
+	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
 
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	/*std::string targetPinName = action->getObject()->getName();
+	if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+		//target is set to the context of the current activity execution
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+		contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+			
+		value = contextReference;
+	}
+	else{
+		value = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
 
+	/*if(association != nullptr) {
+		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
+		for(unsigned int i = 0; i < links->size(); i++) {
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
+			link->destroy();
+		}
+	}
+	else if(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value) != nullptr){
+		// If the value is a data value, then it must be copied before
+		// any change is made.
+		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value) == nullptr) {
+			value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(value->copy());
+		}
+		else {
+			// extension to fUML
+			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linksToDestroy = this->getLinksToDestroy(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value), feature);
+			for(unsigned int i = 0; i < linksToDestroy->size(); i++) {
+				linksToDestroy->at(i)->destroy();
+			}
+			//
+		}
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> newValueList(new Bag<fUML::Semantics::Values::Value>());
+		(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value))->assignFeatureValue(action->getStructuralFeature(), newValueList, 0);
+	}
+	if(action->getResult() != nullptr) {
+		this->putToken(action->getResult(), value);
+	}
+*/
+	//end of body
+}
 
+std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> CS_ClearStructuralFeatureActionActivationImpl::getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Retrieves links that must be destroyed when the given feature
+	// is cleared in the context of the given value
+	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linksToDestroy(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>);
+	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value) != nullptr) {
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value);
+		// Retrieves the feature values for the structural feature associated with this action,
+		// in the context of this reference
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = context->retrieveFeatureValue(feature);
+		if(std::dynamic_pointer_cast<uml::Port>(feature) != nullptr) {
+			// all values are interaction points
+			// any link targeting this interaction point must be destroyed
+			for(unsigned int i = 0; i < featureValue->getValues()->size(); i++) {
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(featureValue->getValues()->at(i));
+				std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> connectorInstances = context->getCompositeReferent()->getLinks(interactionPoint);
+				for(unsigned int j = 0; j < connectorInstances->size(); j++) {
+					std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = connectorInstances->at(j);
+					linksToDestroy->add(link);
+				}
+			}
+		}
+		else {
+			// feature is an attribute
+			// Retrieve all potential link ends,
+			// separating potential link ends corresponding to the given feature,
+			// and potential link ends corresponding to other features.
+			// By "potential link ends", we refer to the values of a given feature,
+			// as well as interaction points associated with this value, if any.
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> allValuesForFeature(new Bag<fUML::Semantics::Values::Value>());
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> allOtherValues(new Bag<fUML::Semantics::Values::Value>());
+			for(unsigned int i = 0; i < context->getReferent()->getFeatureValues()->size(); i++) {
+				std::shared_ptr<uml::StructuralFeature> currentFeature = context->getReferent()->getFeatureValues()->at(i)->getFeature();
+				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getPotentialLinkEnds(context, currentFeature);
+				for(unsigned int j = 0; j < values->size(); j++) {
+					std::shared_ptr<fUML::Semantics::Values::Value> v = values->at(j);
+					if(currentFeature != feature) {
+						allOtherValues->add(v);
+					}
+					else {
+						allValuesForFeature->add(v);
+					}
+				}
+			}
+			// Retrieves all links available at the locus
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValues = this->getExecutionLocus()->getExtensionalValues();
+			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
+			for(unsigned int i = 0; i < extensionalValues->size(); i++) {
+				std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValue = extensionalValues->at(i);
+				if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Link>(extensionalValue) != nullptr) {
+					allLinks->add(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Link>(extensionalValue));
+				}
+			}
+			//Retrieves links representing connector instances in the context object
+			for(unsigned int i = 0; i < allLinks->size(); i++) {
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = allLinks->at(i);
+				bool linkHasToBeDestroyed = false;
+				for(unsigned int j = 0; j < allValuesForFeature->size() && !linkHasToBeDestroyed; j++) {
+					std::shared_ptr<fUML::Semantics::Values::Value> v = allValuesForFeature->at(j);
+					std::shared_ptr<uml::StructuralFeature> featureForV = link->getFeature(v);
+					if(featureForV != nullptr) {
+						// Check if feature values of this link for other features
+						// contains elements identified in allOtherValue
+						for(unsigned int k = 0; k < link->retrieveFeatureValues()->size() && !linkHasToBeDestroyed; k++) {
+							std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue = link->retrieveFeatureValues()->at(k);
+							if(otherFeatureValue->getFeature() != featureForV) {
+								for (unsigned int l = 0; l < otherFeatureValue->getValues()->size() && !linkHasToBeDestroyed; l++) {
+									for(unsigned int m = 0; m < allOtherValues->size() && !linkHasToBeDestroyed; m++) {
+										if(otherFeatureValue->getValues()->at(l) == allOtherValues->at(m)) {
+											linkHasToBeDestroyed = true;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				if(linkHasToBeDestroyed) {
+					linksToDestroy->add(link);
+				}
+			}
+		}
+	}
+	return linksToDestroy;
+*/
+	//end of body
+}
 
+std::shared_ptr<Bag<Any>> CS_ClearStructuralFeatureActionActivationImpl::getPotentialLinkEnds(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::StructuralFeature>& feature)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Retrieves all feature values for the context object for the given feature,
+	// as well as all interaction point for these values
+
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> potentialLinkEnds(new Bag<fUML::Semantics::Values::Value>);
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = context->retrieveFeatureValue(feature);
+	for(unsigned int i = 0; i < featureValue->getValues()->size(); i++) {
+		std::shared_ptr<fUML::Semantics::Values::Value> v = featureValue->getValues()->at(i);
+		potentialLinkEnds->add(v);
+		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(v)) {
+			// add all interaction points associated with va_arg
+			for (unsigned int j = 0; j < (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(v))->getReferent()->getFeatureValues()->size(); j++) {
+				if(std::dynamic_pointer_cast<uml::Port>((std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(v))->getReferent()->getFeatureValues()->at(j)->getFeature())) {
+					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> interactionPoints = ((std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(v))->getReferent()->getFeatureValues()->at(j))->getValues();
+					for(unsigned int k = 0; k < interactionPoints->size(); k++) {
+						potentialLinkEnds->add(interactionPoints->at(k));
+					}
+				}
+			}
+		}
+	}
+	return potentialLinkEnds;
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -285,6 +467,129 @@ std::shared_ptr<Any> CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int 
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::doAction(): 1473569464
+		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getLinksToDestroy(uml::Element, uml::StructuralFeature) : PSCS::MDE4CPP_Extensions::PSCS_Link[*]: 2497461247
+		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<uml::Element> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_value_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_value = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'getLinksToDestroy'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'value'. Failed to invoke operation 'getLinksToDestroy'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_feature_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getLinksToDestroy'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getLinksToDestroy'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature);
+			return eEcoreContainerAny(resultList,PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getPotentialLinkEnds(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::StructuralFeature) : Any[*]: 3139549290
+		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_PSCS_OBJECT_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'getPotentialLinkEnds'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'getPotentialLinkEnds'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_feature_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getPotentialLinkEnds'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'getPotentialLinkEnds'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature), 0, true);
+			break;
+		}
 
 		default:
 		{

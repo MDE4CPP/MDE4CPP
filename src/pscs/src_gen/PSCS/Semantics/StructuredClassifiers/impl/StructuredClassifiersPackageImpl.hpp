@@ -49,6 +49,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor() const ;
 			
 			// End Class CS_DefaultRequestPropagationStrategy
 
@@ -58,6 +59,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const ;
 			
 			// End Class CS_DispatchOperationOfInterfaceStrategy
 
@@ -67,6 +69,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt() const ;
 			
 			// End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 
@@ -77,6 +81,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_RequestPropagationStrategy_Operation_getName() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor() const ;
 			
 			// End Class CS_RequestPropagationStrategy
 
@@ -87,6 +92,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer() const ;
 			
 			// End Class CS_StructuralFeatureOfInterfaceAccessStrategy
 
@@ -100,7 +107,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			std::shared_ptr<ecore::EEnum> m_cS_LinkKind_Class = nullptr;
 			
 			
-			std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName = nullptr;std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_getName = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName = nullptr;std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_getName = nullptr;std::shared_ptr<ecore::EOperation> m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation = nullptr;std::shared_ptr<ecore::EOperation> m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = nullptr;std::shared_ptr<ecore::EOperation> m_cS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = nullptr;std::shared_ptr<ecore::EOperation> m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer = nullptr;
 
 			friend class StructuredClassifiersPackage;
 

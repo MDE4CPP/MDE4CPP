@@ -56,9 +56,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -73,8 +73,8 @@
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -146,7 +146,72 @@ std::shared_ptr<ecore::EObject> CS_CreateLinkActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void CS_CreateLinkActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*	
+	// Get the extent at the current execution locus of the association for
+	// which a link is being created.
+	// Destroy all links that have a value for any end for which
+	// isReplaceAll is true.
+	// Create a new link for the association, at the current locus, with the
+	// given end data values,
+	// inserted at the given insertAt position (for ordered ends).
+	// fUML semantics is extended in the sense that a CS_Link is created instead of
+	// a Link
 
+	std::shared_ptr<uml::CreateLinkAction> action = std::dynamic_pointer_cast<uml::CreateLinkAction>(this->getNode());
+	std::shared_ptr<Bag<uml::LinkEndCreationData>> endDataList = std::dynamic_pointer_cast<Bag<uml::LinkEndCreationData>>(action->getEndData());
+	
+	std::shared_ptr<uml::Association> linkAssociation = this->getAssociation();
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getExecutionLocus()->retrieveExtent(linkAssociation);
+	
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> oldLink = nullptr;
+	for(unsigned int i = 0; i < extent->size(); i++) {
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value = extent->at(i);
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(value);
+		
+		bool noMatch = true;
+		unsigned int j = 1;
+		while ((noMatch) && (j <= endDataList->size())) {
+			std::shared_ptr<uml::LinkEndCreationData> endData = endDataList->at(j-1);
+			if((endData->getIsReplaceAll()) && (this->endMatchesEndData(link, endData))) {
+				oldLink = link;
+				link->destroy();
+				noMatch = false;
+			}
+			j += 1;
+		}
+	}
+	
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+	newLink->setType(linkAssociation);
+	// This is necessary when setting a feature value with an insertAt position
+	newLink->setLocus(this->getExecutionLocus());
+	
+	for(unsigned int i = 0; i < endDataList->size(); i++) {
+		std::shared_ptr<uml::LinkEndCreationData> endData = endDataList->at(i);
+		
+		int insertAt;
+		if (endData->getInsertAt() == nullptr) {
+			insertAt = 0;
+		}
+		else {
+			insertAt = (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(this->takeTokens(endData->getInsertAt())->at(0)))->getValue();
+			if(oldLink != nullptr) {
+				if(oldLink->retrieveFeatureValue(endData->getEnd())->getPosition() < insertAt) {
+					insertAt = insertAt - 1;
+				}
+			}
+		}
+		newLink->assignFeatureValue(endData->getEnd(), this->takeTokens(endData->getValue()), insertAt);
+	}
+	
+	this->getExecutionLocus()->add(newLink);
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -282,6 +347,12 @@ std::shared_ptr<Any> CS_CreateLinkActionActivationImpl::eInvoke(int operationID,
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::Actions::CS_CreateLinkActionActivation::doAction(): 3584940798
+		case ActionsPackage::CS_CREATELINKACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
 
 		default:
 		{

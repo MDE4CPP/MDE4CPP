@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef PSCS_SEMANTICS_ACTIONS_CS_SENDSIGNALACTIONACTIVATION_HPP
-#define PSCS_SEMANTICS_ACTIONS_CS_SENDSIGNALACTIONACTIVATION_HPP
+#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_LINK_HPP
+#define PSCS_MDE4CPP_EXTENSIONS_PSCS_LINK_HPP
 
 
 #include <memory>
@@ -32,56 +32,45 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Actions 
+namespace fUML::MDE4CPP_Extensions 
 {
-	class InputPinActivation;
-	class OutputPinActivation;
-	class PinActivation;
-}
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-	class ActivityNodeActivationGroup;
-	class Token;
+	class FUML_LinkEnd;
 }
 namespace uml 
 {
-	class Action;
-	class ActivityNode;
-	class SendSignalAction;
+	class Association;
 }
 
 // namespace macro header include
 #include "PSCS/PSCS.hpp"
 
 // base class includes
-#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 
 
 
 
 //*********************************
-namespace PSCS::Semantics::Actions 
+namespace PSCS::MDE4CPP_Extensions 
 {
 	
-	class PSCS_API CS_SendSignalActionActivation : virtual public fUML::Semantics::Actions::SendSignalActionActivation
+	class PSCS_API PSCS_Link : virtual public fUML::MDE4CPP_Extensions::FUML_Link
 	{
 		public:
- 			CS_SendSignalActionActivation(const CS_SendSignalActionActivation &) {}
+ 			PSCS_Link(const PSCS_Link &) {}
 
 		protected:
-			CS_SendSignalActionActivation(){}
+			PSCS_Link(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~CS_SendSignalActionActivation() {}
+			virtual ~PSCS_Link() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void doAction() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -117,4 +106,4 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 	};
 }
-#endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_SENDSIGNALACTIONACTIVATION_HPP */
+#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_LINK_HPP */

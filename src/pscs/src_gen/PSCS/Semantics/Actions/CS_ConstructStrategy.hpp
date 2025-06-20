@@ -32,6 +32,14 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
+}
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Object;
+}
 namespace uml 
 {
 	class Operation;
@@ -67,8 +75,8 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context) = 0;
+			virtual std::string getName() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

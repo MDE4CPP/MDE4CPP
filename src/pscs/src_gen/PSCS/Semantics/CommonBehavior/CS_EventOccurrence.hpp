@@ -36,6 +36,10 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class ParameterValue;
 }
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Object;
+}
 namespace uml 
 {
 	class Element;
@@ -73,11 +77,11 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
-			
-			
-			
+			virtual void doSend() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() = 0;
+			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
+			virtual void sendInTo(const std::shared_ptr<uml::Element>& target, const std::shared_ptr<uml::Port>& port) = 0;
+			virtual void sendOutTo(const std::shared_ptr<uml::Element>& target, const std::shared_ptr<uml::Port>& port) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -88,7 +92,8 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			
+			virtual const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& getInteractionPoint() const = 0;
+			virtual void setInteractionPoint(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>&) = 0;
 			virtual const std::shared_ptr<uml::Port>& getOnPort() const = 0;
 			virtual void setOnPort(const std::shared_ptr<uml::Port>&) = 0;
 			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& getWrappedEventOccurrence() const = 0;
@@ -119,7 +124,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> m_interactionPoint;
 			std::shared_ptr<uml::Port> m_onPort;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> m_wrappedEventOccurrence;
 	};

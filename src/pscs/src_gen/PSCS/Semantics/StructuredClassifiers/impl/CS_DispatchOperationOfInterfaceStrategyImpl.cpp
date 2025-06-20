@@ -51,8 +51,8 @@
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
@@ -117,7 +117,38 @@ std::shared_ptr<ecore::EObject> CS_DispatchOperationOfInterfaceStrategyImpl::cop
 //*********************************
 // Operations
 //*********************************
+bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(const std::shared_ptr<uml::Operation>& ownedOperation, const std::shared_ptr<uml::Operation>& baseOperation)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Override operationsMatch, in the case where baseOperation belongs 
+	// to an Interface.
+	// In this case, ownedOperation matches baseOperation if it has the same name and signature
+	// Otherwise, behaves like fUML RedefinitionBasedDispatchStrategy
 
+	bool matches = true;
+	if(baseOperation->getNamespace().lock()->getMetaElementID() == uml::umlPackage::INTERFACE_CLASS) {
+		matches = (baseOperation->getName()) == (ownedOperation->getName());
+		matches = matches && ((baseOperation->getOwnedParameter()->size()) == (ownedOperation->getOwnedParameter()->size()));
+		std::shared_ptr<Bag<uml::Parameter>> ownedOperationParameters = ownedOperation->getOwnedParameter();
+		std::shared_ptr<Bag<uml::Parameter>> baseOperationParameters = baseOperation->getOwnedParameter();
+		for(unsigned int i=0; (matches==true) && (i < ownedOperationParameters->size()); i++) {
+			std::shared_ptr<uml::Parameter> ownedParameter = ownedOperationParameters->at(i);
+			std::shared_ptr<uml::Parameter> baseParameter = baseOperationParameters->at(i);
+			matches = (ownedParameter->getType()) == (baseParameter->getType());
+			matches = (matches) && ((ownedParameter->getLower()) == (baseParameter->getLower()));
+			matches = (matches) && ((ownedParameter->getUpper()) == (baseParameter->getUpper()));
+			matches = (matches) && ((ownedParameter->getDirection()) == (baseParameter->getDirection()));
+		}
+	}
+	else {
+		matches = fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::operationsMatch(ownedOperation, baseOperation);
+	}
+	return matches;
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -243,6 +274,64 @@ std::shared_ptr<Any> CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int op
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy::operationsMatch(uml::Operation, uml::Operation) : bool: 746775994
+		case StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
+		{
+			//Retrieve input parameter 'ownedOperation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_ownedOperation;
+			Bag<Any>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_ownedOperation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_ownedOperation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'ownedOperation'. Failed to invoke operation 'operationsMatch'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'ownedOperation'. Failed to invoke operation 'operationsMatch'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'baseOperation'
+			//parameter 1
+			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
+			Bag<Any>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_baseOperation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_baseOperation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'baseOperation'. Failed to invoke operation 'operationsMatch'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'baseOperation'. Failed to invoke operation 'operationsMatch'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation), 0, false);
+			break;
+		}
 
 		default:
 		{

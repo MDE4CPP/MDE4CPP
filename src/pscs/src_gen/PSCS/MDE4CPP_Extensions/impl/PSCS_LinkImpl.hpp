@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCECS_EVENTOCCURRENCEIMPL_HPP
-#define PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCECS_EVENTOCCURRENCEIMPL_HPP
+#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKPSCS_LINKIMPL_HPP
+#define PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKPSCS_LINKIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,56 +14,43 @@
 #include "PSCS/PSCS.hpp" 
 
 // model includes
-#include "../CS_EventOccurrence.hpp"
+#include "../PSCS_Link.hpp"
 
-#include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
+#include "PSCS/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/FUML_LinkImpl.hpp"
 
 //*********************************
-namespace PSCS::Semantics::CommonBehavior 
+namespace PSCS::MDE4CPP_Extensions 
 {
-	class PSCS_API CS_EventOccurrenceImpl : virtual public fUML::Semantics::CommonBehavior::EventOccurrenceImpl, virtual public CS_EventOccurrence 
+	class PSCS_API PSCS_LinkImpl : virtual public fUML::MDE4CPP_Extensions::FUML_LinkImpl, virtual public PSCS_Link 
 	{
 		public: 
-			CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj);
+			PSCS_LinkImpl(const PSCS_LinkImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			CS_EventOccurrenceImpl& operator=(CS_EventOccurrenceImpl const&); 
+			PSCS_LinkImpl& operator=(PSCS_LinkImpl const&); 
 
 		protected:
-			friend class PSCS::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
-			CS_EventOccurrenceImpl();
-			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> getThisCS_EventOccurrencePtr() const;
-			virtual void setThisCS_EventOccurrencePtr(std::weak_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> thisCS_EventOccurrencePtr);
+			friend class PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactoryImpl;
+			PSCS_LinkImpl();
+			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> getThisPSCS_LinkPtr() const;
+			virtual void setThisPSCS_LinkPtr(std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> thisPSCS_LinkPtr);
 
 
 		public:
 			//destructor
-			virtual ~CS_EventOccurrenceImpl();
+			virtual ~PSCS_LinkImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void doSend() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() ;
-			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) ;
-			virtual void sendInTo(const std::shared_ptr<uml::Element>& target, const std::shared_ptr<uml::Port>& port) ;
-			virtual void sendOutTo(const std::shared_ptr<uml::Element>& target, const std::shared_ptr<uml::Port>& port) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual bool isPropagationInward() const ;
-			virtual void setPropagationInward (bool _propagationInward);
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& getInteractionPoint() const ;
-			virtual void setInteractionPoint(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>&) ;
-			virtual const std::shared_ptr<uml::Port>& getOnPort() const ;
-			virtual void setOnPort(const std::shared_ptr<uml::Port>&) ;
-			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& getWrappedEventOccurrence() const ;
-			virtual void setWrappedEventOccurrence(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -100,7 +87,7 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
-			std::weak_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> m_thisCS_EventOccurrencePtr;
+			std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> m_thisPSCS_LinkPtr;
 	};
 }
-#endif /* end of include guard: PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCECS_EVENTOCCURRENCEIMPL_HPP */
+#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKPSCS_LINKIMPL_HPP */

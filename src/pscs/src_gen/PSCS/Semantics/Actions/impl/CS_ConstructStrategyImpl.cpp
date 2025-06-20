@@ -41,13 +41,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "uml/Operation.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Actions;
@@ -104,9 +108,19 @@ CS_ConstructStrategyImpl& CS_ConstructStrategyImpl::operator=(const CS_Construct
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> CS_ConstructStrategyImpl::construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
 
-
-
+std::string CS_ConstructStrategyImpl::getName()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// a CS_ConstructionStrategy is always named "constructStrategy"
+	return "constructStrategy";
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -228,6 +242,70 @@ std::shared_ptr<Any> CS_ConstructStrategyImpl::eInvoke(int operationID, const st
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::Actions::CS_ConstructStrategy::construct(uml::Operation, PSCS::MDE4CPP_Extensions::PSCS_Object) : fUML::MDE4CPP_Extensions::FUML_Object: 593085527
+		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_PSCS_OBJECT:
+		{
+			//Retrieve input parameter 'constructor'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_constructor;
+			Bag<Any>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_constructor_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_constructor = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'constructor'. Failed to invoke operation 'construct'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'constructor'. Failed to invoke operation 'construct'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'construct'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'construct'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->construct(incoming_param_constructor,incoming_param_context), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_ConstructStrategy::getName() : std::string: 753057332
+		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName(), 0, false);
+			break;
+		}
 
 		default:
 		{

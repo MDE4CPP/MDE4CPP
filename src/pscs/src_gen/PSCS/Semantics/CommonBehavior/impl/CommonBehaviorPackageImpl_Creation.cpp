@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
@@ -47,9 +47,15 @@ void CommonBehaviorPackageImpl::createCS_EventOccurrenceContent(std::shared_ptr<
 	m_cS_EventOccurrence_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_EVENTOCCURRENCE_CLASS);
 	m_cS_EventOccurrence_Attribute_propagationInward = factory->createEAttribute_as_eAttributes_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD);
 	
+	m_cS_EventOccurrence_Attribute_interactionPoint = factory->createEReference_as_eReferences_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT);
 	m_cS_EventOccurrence_Attribute_onPort = factory->createEReference_as_eReferences_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT);
 	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence = factory->createEReference_as_eReferences_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE);
 	
+	m_cS_EventOccurrence_Operation_doSend = factory->createEOperation_as_eOperations_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_OPERATION_DOSEND);
+	m_cS_EventOccurrence_Operation_getParameterValues = factory->createEOperation_as_eOperations_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES);
+	m_cS_EventOccurrence_Operation_match_Trigger = factory->createEOperation_as_eOperations_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER);
+	m_cS_EventOccurrence_Operation_sendInTo_Element_Port = factory->createEOperation_as_eOperations_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_OPERATION_SENDINTO_ELEMENT_PORT);
+	m_cS_EventOccurrence_Operation_sendOutTo_Element_Port = factory->createEOperation_as_eOperations_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_ELEMENT_PORT);
 	
 }
 

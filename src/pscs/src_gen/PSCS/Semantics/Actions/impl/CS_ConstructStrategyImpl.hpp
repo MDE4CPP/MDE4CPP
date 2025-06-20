@@ -43,8 +43,8 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context) ;
+			virtual std::string getName() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

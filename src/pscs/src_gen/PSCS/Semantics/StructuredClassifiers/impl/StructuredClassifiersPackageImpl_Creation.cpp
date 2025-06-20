@@ -7,16 +7,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
@@ -53,6 +53,7 @@ void StructuredClassifiersPackageImpl::createCS_DefaultRequestPropagationStrateg
 	m_cS_DefaultRequestPropagationStrategy_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS);
 	
 	
+	m_cS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = factory->createEOperation_as_eOperations_in_EClass(m_cS_DefaultRequestPropagationStrategy_Class, CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_FUML_OBJECT_SEMANTICVISITOR);
 	
 }
 
@@ -61,6 +62,7 @@ void StructuredClassifiersPackageImpl::createCS_DispatchOperationOfInterfaceStra
 	m_cS_DispatchOperationOfInterfaceStrategy_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS);
 	
 	
+	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation = factory->createEOperation_as_eOperations_in_EClass(m_cS_DispatchOperationOfInterfaceStrategy_Class, CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION);
 	
 }
 
@@ -69,6 +71,8 @@ void StructuredClassifiersPackageImpl::createCS_NameBased_StructuralFeatureOfInt
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS);
 	
 	
+	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature = factory->createEOperation_as_eOperations_in_EClass(m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class, CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_PSCS_OBJECT_STRUCTURALFEATURE);
+	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt = factory->createEOperation_as_eOperations_in_EClass(m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class, CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_PSCS_OBJECT_EINT);
 	
 }
 
@@ -78,6 +82,7 @@ void StructuredClassifiersPackageImpl::createCS_RequestPropagationStrategyConten
 	
 	
 	m_cS_RequestPropagationStrategy_Operation_getName = factory->createEOperation_as_eOperations_in_EClass(m_cS_RequestPropagationStrategy_Class, CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_GETNAME);
+	m_cS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = factory->createEOperation_as_eOperations_in_EClass(m_cS_RequestPropagationStrategy_Class, CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_FUML_OBJECT_SEMANTICVISITOR);
 	
 }
 
@@ -87,6 +92,8 @@ void StructuredClassifiersPackageImpl::createCS_StructuralFeatureOfInterfaceAcce
 	
 	
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName = factory->createEOperation_as_eOperations_in_EClass(m_cS_StructuralFeatureOfInterfaceAccessStrategy_Class, CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_GETNAME);
+	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature = factory->createEOperation_as_eOperations_in_EClass(m_cS_StructuralFeatureOfInterfaceAccessStrategy_Class, CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_PSCS_OBJECT_STRUCTURALFEATURE);
+	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer = factory->createEOperation_as_eOperations_in_EClass(m_cS_StructuralFeatureOfInterfaceAccessStrategy_Class, CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_PSCS_OBJECT_INTEGER);
 	
 }
 

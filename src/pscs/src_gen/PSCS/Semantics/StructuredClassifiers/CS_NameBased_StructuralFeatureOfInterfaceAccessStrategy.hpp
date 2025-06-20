@@ -13,6 +13,7 @@
 // forward declarations
 template<class T> class Bag; 
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -33,6 +34,10 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Object;
+}
 namespace uml 
 {
 	class StructuralFeature;
@@ -68,8 +73,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual std::shared_ptr<Any> read(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
+			virtual void write(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<Any>>& values, int position) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

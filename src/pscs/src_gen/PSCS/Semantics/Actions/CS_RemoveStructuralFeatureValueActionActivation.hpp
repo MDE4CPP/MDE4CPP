@@ -12,6 +12,7 @@
 #include <string>
 // forward declarations
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -44,10 +45,16 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Link;
+	class PSCS_Object;
+}
 namespace uml 
 {
 	class Action;
 	class ActivityNode;
+	class Element;
 	class RemoveStructuralFeatureValueAction;
 	class StructuralFeature;
 }
@@ -82,9 +89,9 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
-			
+			virtual void doAction() = 0;
+			virtual std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Any>& removedValue) = 0;
+			virtual std::shared_ptr<Bag<Any>> getPotentialLinkEnds(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

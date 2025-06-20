@@ -14,17 +14,18 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EAnnotation;
 	class EClass;
-	class EDataType;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EReference;
 	class EGenericType;
+	class EAnnotation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSCS::MDE4CPP_Extensions 
 {
+	class PSCS_Link;
 	class PSCS_Object;
 }
  
@@ -49,6 +50,23 @@ namespace PSCS::MDE4CPP_Extensions
 			static const std::string eNAME;
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
+
+			// Begin Class PSCS_Link
+			//Class and Feature IDs 
+			static const unsigned long PSCS_LINK_CLASS = 1393528252;
+			static const unsigned int PSCS_LINK_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 5;
+			
+			
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getPSCS_Link_Class() const = 0;
+			
+			
+			
+			
+			// End Class PSCS_Link
+
 
 			// Begin Class PSCS_Object
 			//Class and Feature IDs 

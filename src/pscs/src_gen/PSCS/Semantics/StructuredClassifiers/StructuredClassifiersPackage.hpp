@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EEnumLiteral;
-	class EAnnotation;
-	class EParameter;
 	class EClass;
-	class EDataType;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EEnumLiteral;
+	class EReference;
+	class EParameter;
 	class EEnum;
 	class EGenericType;
+	class EAnnotation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -61,15 +61,17 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS = 114292004;
 			static const unsigned int CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS_OPERATION_COUNT = 2;
+			static const unsigned int CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
+			static const unsigned long CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_FUML_OBJECT_SEMANTICVISITOR = 1919174488;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_DefaultRequestPropagationStrategy_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor() const = 0;
 			
 			// End Class CS_DefaultRequestPropagationStrategy
 
@@ -78,15 +80,17 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS = 732334652;
 			static const unsigned int CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS_OPERATION_COUNT = 6;
+			static const unsigned int CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS_OPERATION_COUNT = 7;
 			
 			
+			static const unsigned long CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 746775994;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_DispatchOperationOfInterfaceStrategy_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const = 0;
 			
 			// End Class CS_DispatchOperationOfInterfaceStrategy
 
@@ -95,15 +99,19 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS = 1596515744;
 			static const unsigned int CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_OPERATION_COUNT = 2;
+			static const unsigned int CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_OPERATION_COUNT = 6;
 			
 			
+			static const unsigned long CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_PSCS_OBJECT_STRUCTURALFEATURE = 777642571;
+			static const unsigned long CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_PSCS_OBJECT_EINT = 3706266521;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt() const = 0;
 			
 			// End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 
@@ -112,10 +120,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_REQUESTPROPAGATIONSTRATEGY_CLASS = 1044958815;
 			static const unsigned int CS_REQUESTPROPAGATIONSTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CS_REQUESTPROPAGATIONSTRATEGY_CLASS_OPERATION_COUNT = 2;
+			static const unsigned int CS_REQUESTPROPAGATIONSTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
 			
 			static const unsigned long CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_GETNAME = 2901676164;
+			static const unsigned long CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_FUML_OBJECT_SEMANTICVISITOR = 2213778459;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_RequestPropagationStrategy_Class() const = 0;
@@ -123,6 +132,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_RequestPropagationStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor() const = 0;
 			
 			// End Class CS_RequestPropagationStrategy
 
@@ -131,10 +141,12 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS = 1746875136;
 			static const unsigned int CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_OPERATION_COUNT = 2;
+			static const unsigned int CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
 			static const unsigned long CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_GETNAME = 2308162148;
+			static const unsigned long CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_PSCS_OBJECT_STRUCTURALFEATURE = 2978571036;
+			static const unsigned long CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_PSCS_OBJECT_INTEGER = 1300082458;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Class() const = 0;
@@ -142,6 +154,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer() const = 0;
 			
 			// End Class CS_StructuralFeatureOfInterfaceAccessStrategy
 

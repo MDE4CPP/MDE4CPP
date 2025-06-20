@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "PSCS/MDE4CPP_Extensions/impl/PSCS_LinkImpl.hpp"
 #include "PSCS/MDE4CPP_Extensions/impl/PSCS_ObjectImpl.hpp"
 
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -31,6 +32,7 @@ std::shared_ptr<MDE4CPP_ExtensionsFactory> MDE4CPP_ExtensionsFactory::eInstance(
 
 MDE4CPP_ExtensionsFactoryImpl::MDE4CPP_ExtensionsFactoryImpl()
 {
+	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::PSCS_Link", MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::PSCS_Object", MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS));
 }
 
@@ -51,6 +53,12 @@ std::shared_ptr<ecore::EObject> MDE4CPP_ExtensionsFactoryImpl::create(const int 
 {
 	switch(metaElementID)
 	{
+		case MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS:
+		{
+				return this->createPSCS_Link(metaElementID);
+			
+			break;
+		}
 		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS:
 		{
 			if (nullptr == container)
@@ -113,6 +121,13 @@ std::shared_ptr<ecore::EObject> MDE4CPP_ExtensionsFactoryImpl::create(std::strin
     return nullptr;
 }
 
+std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> MDE4CPP_ExtensionsFactoryImpl::createPSCS_Link(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkImpl> element(new PSCS::MDE4CPP_Extensions::PSCS_LinkImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisPSCS_LinkPtr(element);
+	return element;
+}
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> MDE4CPP_ExtensionsFactoryImpl::createPSCS_Object(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl> element(new PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl());

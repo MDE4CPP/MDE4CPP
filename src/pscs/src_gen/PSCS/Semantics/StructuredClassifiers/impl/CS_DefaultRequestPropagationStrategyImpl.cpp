@@ -43,11 +43,13 @@
 
 #include <exception> // used in Persistence
 #include "PSCS/Semantics/StructuredClassifiers/CS_RequestPropagationStrategy.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
@@ -112,7 +114,28 @@ std::shared_ptr<ecore::EObject> CS_DefaultRequestPropagationStrategyImpl::copy()
 //*********************************
 // Operations
 //*********************************
-
+std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> CS_DefaultRequestPropagationStrategyImpl::select(const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*	
+	// returns all potential targets in the case where the context is a SendSignalActionActivation
+	// returns the first potential target in the case where the context is anything else
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets(new Bag<fUML::Semantics::StructuredClassifiers::Reference>());
+	if(std::dynamic_pointer_cast<fUML::Semantics::Actions::SendSignalActionActivation>(context) != nullptr) {
+		for(unsigned int i = 0; i < potentialTargets->size(); i++) {
+			selectedTargets->add(potentialTargets->at(i));
+		}
+	}
+	else {
+		if(potentialTargets->size() >= 1) {
+			selectedTargets->add(potentialTargets->at(0));
+		}
+	}
+	return selectedTargets;
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -236,6 +259,74 @@ std::shared_ptr<Any> CS_DefaultRequestPropagationStrategyImpl::eInvoke(int opera
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy::select(fUML::MDE4CPP_Extensions::FUML_Object[*], fUML::Semantics::Loci::SemanticVisitor) : fUML::MDE4CPP_Extensions::FUML_Object[*]: 1919174488
+		case StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_FUML_OBJECT_SEMANTICVISITOR:
+		{
+			//Retrieve input parameter 'potentialTargets'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> incoming_param_potentialTargets;
+			Bag<Any>::const_iterator incoming_param_potentialTargets_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_potentialTargets_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_potentialTargets.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _temp = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(anEObject);
+								incoming_param_potentialTargets->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'potentialTargets'. Failed to invoke operation 'select'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'potentialTargets'. Failed to invoke operation 'select'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticVisitor>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'select'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'select'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> resultList = this->select(incoming_param_potentialTargets,incoming_param_context);
+			return eEcoreContainerAny(resultList,fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
+			break;
+		}
 
 		default:
 		{

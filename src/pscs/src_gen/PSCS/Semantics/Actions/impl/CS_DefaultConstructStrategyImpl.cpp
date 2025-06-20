@@ -67,15 +67,19 @@
 #include "uml/Class.hpp"
 #include "uml/Connector.hpp"
 #include "uml/ConnectorEnd.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "uml/Interface.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/Operation.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 #include "uml/Property.hpp"
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Actions;
@@ -166,33 +170,506 @@ std::shared_ptr<ecore::EObject> CS_DefaultConstructStrategyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Property>& feature, const std::shared_ptr<Any>& value)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		/*
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = context->retrieveFeatureValue(feature);
+	if(featureValue != nullptr) {
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
 
+		/*
+		 * MDE4CPP-specific implementation: Since specialized references (i.e. CS_References vs. CS_InteractionPoints) are handled on a lower level,
+		 * it is sufficient to just insert a CS_Reference at this point.
+		 */
+		/*std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+		reference->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+		values->add(reference);
+		context->assignFeatureValue(feature, values, -1);
 
+		/*ORIGINAL IMPLEMENTATION
+		if(std::dynamic_pointer_cast<uml::Port>(feature) != nullptr)
+		{
+			// insert an interaction point
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
+			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
+			interactionPoint->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+			interactionPoint->setOwner(context);
+			values->add(interactionPoint);
+		}
+		else if (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value) != nullptr)
+		{
+			// insert a reference
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+			reference->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+			values->add(reference);
+		}
+		else
+		{
+			values->add(value);
+		}
+		*/
+	/*}
+*/
+	//end of body
+}
 
+bool CS_DefaultConstructStrategyImpl::canInstantiate(const std::shared_ptr<uml::Property>& p)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Instantiate is possible if:
+	// - p is composite
+	// - p is typed
+	// - This type is a Class and it is not abstract
+	// - Or p is a Port and the type is an Interface
 
+	if(p->isComposite()) {
+		if(std::dynamic_pointer_cast<uml::TypedElement>(p) != nullptr) {
+			if(p->getType() != nullptr) {
+				if(std::dynamic_pointer_cast<uml::Class>(p->getType()) != nullptr) {
+					return !((std::dynamic_pointer_cast<uml::Class>(p->getType()))->getIsAbstract());
+				}
+			}
+			else if(std::dynamic_pointer_cast<uml::Interface>(p->getType()) != nullptr) {
+					return ((std::dynamic_pointer_cast<uml::Port>(p)) != nullptr);
+			}
+		}
+	}
+	return false;
+*/
+	//end of body
+}
 
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> CS_DefaultConstructStrategyImpl::construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	this->setLocus(context->getLocus());
+	return this->constructObject(context, std::dynamic_pointer_cast<uml::Class>(constructor->getType()));
+*/
+	//end of body
+}
 
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> CS_DefaultConstructStrategyImpl::constructObject(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Class>& type)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		/*
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToContext = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+	referenceToContext->setReferent(context);
+	referenceToContext->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+	// FIXME detect infinite recursive instantiation
+	std::shared_ptr<Bag<uml::Property>> allAttributes = type->getAttribute();
+	unsigned int i = 1;
+	// Instantiate ports and parts
+	while(i <= allAttributes->size()) {
+		std::shared_ptr<uml::Property> p = allAttributes->at(i-1);
+		if(p->getDefaultValue() != nullptr) {
+			std::shared_ptr<uml::ValueSpecification> defaultValueSpecification = p->getDefaultValue();
+			std::shared_ptr<fUML::Semantics::Values::Evaluation> evaluation = std::dynamic_pointer_cast<fUML::Semantics::Values::Evaluation>(context->getLocus()->getFactory()->instantiateVisitor(defaultValueSpecification));
+			evaluation->setSpecification(defaultValueSpecification);
+			evaluation->setLocus(context->getLocus());
+			if(std::dynamic_pointer_cast<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation>(evaluation) != nullptr) {
+				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> evaluations = (std::dynamic_pointer_cast<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation>(evaluation))->executeExpressionBehavior();
+				for(unsigned int j = 0; j < evaluations->size(); j++) {
+					this->addStructuralFeatureValue(referenceToContext, p, evaluations->at(j));
+				}
+			}
+			else {
+				std::shared_ptr<fUML::Semantics::Values::Value> defaultValue = evaluation->evaluate();
+				this->addStructuralFeatureValue(referenceToContext, p, defaultValue);
+			}
+		}
+		else if (this->canInstantiate(p)) {
+			int j = 1;
+			while(j <= p->getLower()){
+				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> value;
+				// if p is a Port typed by an Interface
+				// creates an Object without type, but with FeatureValues corresponding to
+				// structural features of the interface.
+				if((std::dynamic_pointer_cast<uml::Port>(p) != nullptr) && (std::dynamic_pointer_cast<uml::Interface>(p->getType()) != nullptr)) {
+					value = this->instantiateInterface(std::dynamic_pointer_cast<uml::Interface>(p->getType()), this->getLocus());
+					this->addStructuralFeatureValue(referenceToContext, p, value);
+				}
+				else {
+					value = context->getLocus()->instantiate(std::dynamic_pointer_cast<uml::Class>(p->getType()));
+					// TODO account for existing constructors
+					value = this->constructObject(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value), std::dynamic_pointer_cast<uml::Class>(p->getType()));
+					this->addStructuralFeatureValue(referenceToContext, p, std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+					if((std::dynamic_pointer_cast<uml::Class>(p->getType()))->getIsActive()) {
+						std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+						value->startBehavior(std::dynamic_pointer_cast<uml::Class>(p->getType()), parameterValues);
+					}
+				}
+				j += 1;
+			}
+		}
+		i += 1;
+	}
+	// Instantiate connectors
 
+	/*
+	 * MDE4CPP-specific implementation: We can directly access the types owned connectors rather than iterating over all members and
+	 * searching for owned connectors.
+	 */
+	/*std::shared_ptr<Bag<uml::Connector>> allConnectors = type->getOwnedConnector();
+	i = 1;
+	unsigned int numberOfConnectors = allConnectors->size();
+	while(i <= numberOfConnectors) {
+		std::shared_ptr<uml::Connector> connector = allConnectors->at(i-1);
+			if(this->isArrayPattern(connector)) {
+				this->generateArrayPattern(referenceToContext, connector);
+			}
+			else if(this->isStarPattern(connector)) {
+				this->generateStarPattern(referenceToContext, connector);
+			}
+		i += 1;
+	}
 
+	/*ORIGINAL IMPLEMENTATION
+	std::shared_ptr<Bag<uml::NamedElement>> allMembers = type->getMember();
+	i = 1;
+	while(i <= allMembers->size()) {
+		std::shared_ptr<uml::NamedElement> member = allMembers->at(i-1);
+		if(std::dynamic_pointer_cast<uml::Connector>(member) != nullptr) {
+			std::shared_ptr<uml::Connector> connector = std::dynamic_pointer_cast<uml::Connector>(member);
+			if(this->isArrayPattern(connector)) {
+				this->generateArrayPattern(referenceToContext, connector);
+			}
+			else if(this->isStarPattern(connector)) {
+				this->generateStarPattern(referenceToContext, connector);
+			}
+		}
+		i += 1;
+	}
+	 */
+	/*return referenceToContext->getReferent();
+*/
+	//end of body
+}
 
+void CS_DefaultConstructStrategyImpl::generateArrayPattern(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Connector>& connector)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	std::shared_ptr<uml::ConnectorEnd> end1 = connector->getEnd()->at(0);
+	std::shared_ptr<uml::ConnectorEnd> end2 = connector->getEnd()->at(1);
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end1Values =
+			this->getValuesFromConnectorEnd(context, end1);
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end2Values =
+			this->getValuesFromConnectorEnd(context, end2);
+	for (unsigned int i = 0; i < end1Values->size(); i++) {
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link =
+				PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+		if (connector->getType() == nullptr) {
+			link->setType(this->getDefaultAssociation());
+		} else {
+			link->setType(connector->getType());
+		}
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd1(
+				new Bag<fUML::Semantics::Values::Value>());
+		valuesForEnd1->add(end1Values->at(i));
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd2(
+				new Bag<fUML::Semantics::Values::Value>());
+		valuesForEnd2->add(end2Values->at(i));
+		link->assignFeatureValue(link->getType()->getMemberEnd()->at(0),
+				valuesForEnd1, -1);
+		link->assignFeatureValue(link->getType()->getMemberEnd()->at(1),
+				valuesForEnd2, -1);
+		link->addTo(context->getReferent()->getLocus());
+	}
+*/
+	//end of body
+}
 
+std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::generateRealizingClass(const std::shared_ptr<uml::Interface>& interface_, std::string className)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	std::shared_ptr<uml::Class> realizingClass = uml::umlFactory::eInstance()->createClass();
+	realizingClass->setName(className);
+	std::shared_ptr<uml::InterfaceRealization> realization = uml::umlFactory::eInstance()->createInterfaceRealization();
+	realization->setContract(interface_);
+	realization->setImplementingClassifier(realizingClass);
+	realizingClass->getInterfaceRealization()->add(realization);
+	// TODO Deal with structural features of the interface
+	// TODO Make a test case for reading/writing structural features of an interface
+	return realizingClass;
+*/
+	//end of body
+}
 
+void CS_DefaultConstructStrategyImpl::generateStarPattern(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Connector>& connector)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	std::shared_ptr<uml::ConnectorEnd> end1 = connector->getEnd()->at(0);
+	std::shared_ptr<uml::ConnectorEnd> end2 = connector->getEnd()->at(1);
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end1Values =
+			this->getValuesFromConnectorEnd(context, end1);
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end2Values =
+			this->getValuesFromConnectorEnd(context, end2);
+	for (unsigned int i = 0; i < end1Values->size(); i++) {
+		for (unsigned int j = 0; j < end2Values->size(); j++) {
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link =
+					PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+			if (connector->getType() == nullptr) {
+				link->setType(this->getDefaultAssociation());
+			} else {
+				link->setType(connector->getType());
+			}
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd1(
+					new Bag<fUML::Semantics::Values::Value>());
+			valuesForEnd1->add(end1Values->at(i));
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd2(
+					new Bag<fUML::Semantics::Values::Value>());
+			valuesForEnd2->add(end2Values->at(j));
+			link->assignFeatureValue(link->getType()->getMemberEnd()->at(0),
+					valuesForEnd1, -1);
+			link->assignFeatureValue(link->getType()->getMemberEnd()->at(1),
+					valuesForEnd2, -1);
+			link->addTo(context->getReferent()->getLocus());
+		}
+	}
+*/
+	//end of body
+}
 
+int CS_DefaultConstructStrategyImpl::getCardinality(const std::shared_ptr<uml::ConnectorEnd>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	int lowerOfRole;
+	if(std::dynamic_pointer_cast<uml::MultiplicityElement>(end->getRole()) != nullptr){
+		lowerOfRole = (std::dynamic_pointer_cast<uml::MultiplicityElement>(end->getRole()))->getLower();
+	}
+	else {
+		std::string errorMessage = "UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::getCardinality(): unexpected type '"
+		+ end->getRole()->eClass()->getName() + "' is not an instance of uml::MultiplicityElement\n";
+		
+		throw std::runtime_error(errorMessage);
+	}
+	
+	if(lowerOfRole == 0) {
+		return 0;
+	}
+	else if (end->getPartWithPort() == nullptr) {
+		return lowerOfRole;
+	}
+	else {
+		int lowerOfPart = end->getPartWithPort()->getLower();
+		return (lowerOfRole * lowerOfPart);
+	}
+*/
+	//end of body
+}
 
+std::shared_ptr<uml::Association> CS_DefaultConstructStrategyImpl::getDefaultAssociation()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Computes an returns an Association with two untyped owned ends,
+	// with multiplicity [*].
+	// This association can be used to type links instantiated from untyped connec
+	
+	if(m_defaultAssociation == nullptr) {
+		m_defaultAssociation = uml::umlFactory::eInstance()->createAssociation();
+		m_defaultAssociation->setName("DefaultGeneratedAssociation");
+		std::shared_ptr<uml::Property> end1 = uml::umlFactory::eInstance()->createProperty();
+		end1->setName("x");
+		end1->setLower(0);
+		end1->setUpper(-1);
+		end1->setIsOrdered(true);
+		end1->setIsUnique(true);
+		m_defaultAssociation->getOwnedEnd()->add(end1);
+		std::shared_ptr<uml::Property> end2 = uml::umlFactory::eInstance()->createProperty();
+		end2->setName("y");
+		end2->setLower(0);
+		end2->setUpper(-1);
+		end2->setIsOrdered(true);
+		end2->setIsUnique(true);
+		m_defaultAssociation->getOwnedEnd()->add(end2);
+	}
+	return m_defaultAssociation;
+*/
+	//end of body
+}
 
+std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::getRealizingClass(const std::shared_ptr<uml::Interface>& interface_)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	std::shared_ptr<uml::Class> realizingClass = nullptr;
+	// TODO For cached RealizingClasses, search based on InterfaceRealizations rather than name
+	std::string realizingClassName = interface_->getQualifiedName() + "GeneratedRealizingClass";
+	unsigned int i = 0;
+	while((i <= m_generatedRealizingClasses->size()) && (realizingClass == nullptr)) {
+		std::shared_ptr<uml::Class> cddRealizingClass = m_generatedRealizingClasses->at(i-1);
+		if(cddRealizingClass->getName() == realizingClassName) {
+			realizingClass = cddRealizingClass;
+		}
+		i += 1;
+	}
+	if(realizingClass == nullptr) {
+		realizingClass = this->generateRealizingClass(interface_, realizingClassName);
+		m_generatedRealizingClasses->add(realizingClass);
+	}
+	return realizingClass;
+*/
+	//end of body
+}
 
+std::shared_ptr<Bag<Any>> CS_DefaultConstructStrategyImpl::getValuesFromConnectorEnd(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::ConnectorEnd>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> endValues(new Bag<fUML::Semantics::Values::Value>());
+	if(end->getPartWithPort() != nullptr) {
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> valueForPart = context->retrieveFeatureValue(end->getPartWithPort());
+		if(valueForPart != nullptr) {
+			for(unsigned int i = 0; i < valueForPart->getValues()->size(); i++) {
+				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(valueForPart->getValues()->at(i));
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> valueForPort = reference->retrieveFeatureValue(std::dynamic_pointer_cast<uml::Port>(end->getRole()));
+				if(valueForPort != nullptr) {
+					for(unsigned int j = 0; j < valueForPort->getValues()->size(); j++) {
+						endValues->add(valueForPort->getValues()->at(j));
+					}
+				}
+			}
+		}
+	}
+	else {
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> valueForRole = context->retrieveFeatureValue(std::dynamic_pointer_cast<uml::Property>(end->getRole()));
+		if(valueForRole != nullptr) {
+			for (unsigned int i = 0; i < valueForRole->getValues()->size(); i++) {
+				endValues->add(valueForRole->getValues()->at(i));
+			}
+		}
+	}
+	return endValues;
+*/
+	//end of body
+}
 
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> CS_DefaultConstructStrategyImpl::instantiateInterface(const std::shared_ptr<uml::Interface>& interface, const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	std::shared_ptr<uml::Class> realizingClass = this->getRealizingClass(interface);
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object = locus->instantiate(realizingClass);
+	return object;
+*/
+	//end of body
+}
 
+bool CS_DefaultConstructStrategyImpl::isArrayPattern(const std::shared_ptr<uml::Connector>& c)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// This is an array pattern if:
+	// - c is binary
+	// - lower bound of the two connector ends is 1
+	// - Cardinality of ends are equals
 
+	if (c->getEnd()->size() == 2) {
+		if (std::dynamic_pointer_cast<uml::MultiplicityElement>(
+				c->getEnd()->at(0)->getRole()) != nullptr) {
+			if (c->getEnd()->at(0)->getLower() == 1) {
+				if (std::dynamic_pointer_cast<uml::MultiplicityElement>(
+						c->getEnd()->at(1)->getRole()) != nullptr) {
+					if (c->getEnd()->at(1)->getLower() == 1) {
+						if ((this->canInstantiate(
+								std::dynamic_pointer_cast<uml::Property>(
+										c->getEnd()->at(0)->getRole())))
+								&& (this->canInstantiate(
+										std::dynamic_pointer_cast<uml::Property>(
+												c->getEnd()->at(1)->getRole())))) {
+							int cardinality1 = this->getCardinality(
+									c->getEnd()->at(0));
+							int cardinality2 = this->getCardinality(
+									c->getEnd()->at(1));
+							return (cardinality1 == cardinality2);
+						}
+					}
+				} else {
+					std::string errorMessage =
+							"UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isArrayPattern(): unexpected type '"
+									+ c->getEnd()->at(1)->getRole()->eClass()->getName()
+									+ "' is not an instance of uml::MultiplicityElement\n";
 
+					throw std::runtime_error(errorMessage);
+				}
+			}
+		} else {
+			std::string errorMessage =
+					"UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isArrayPattern(): unexpected type '"
+							+ c->getEnd()->at(0)->getRole()->eClass()->getName()
+							+ "' is not an instance of uml::MultiplicityElement\n";
 
+			throw std::runtime_error(errorMessage);
+		}
+	}
+	return false;
+*/
+	//end of body
+}
 
+bool CS_DefaultConstructStrategyImpl::isStarPattern(const std::shared_ptr<uml::Connector>& c)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// This is a star pattern if:
+	// - c is binary
+	// - lower bound of end1 equals cardinality of end1
+	// - lower bound of end2 equals cardinality of end2	
 
-
-
-
-
-
+	 if(c->getEnd()->size() == 2) {
+		if(std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(0)->getRole())) {
+			if(std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(1)->getRole())) {
+				if((this->canInstantiate(std::dynamic_pointer_cast<uml::Property>(c->getEnd()->at(0)->getRole()))) && (this->canInstantiate(std::dynamic_pointer_cast<uml::Property>(c->getEnd()->at(1)->getRole())))) {
+					int cardinalityOfEnd1 = this->getCardinality(c->getEnd()->at(0));
+					int lowerBoundofEnd1 = std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(0)->getRole())->getLower();
+					if (cardinalityOfEnd1 == lowerBoundofEnd1) {
+						int cardinalityOfEnd2 = this->getCardinality(c->getEnd()->at(1));
+						int lowerBoundofEnd2 = std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(1)->getRole())->getLower();
+						return (cardinalityOfEnd2 == lowerBoundofEnd2);
+						}
+					}
+				}
+			else {
+				std::string errorMessage = "UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isStarPattern(): unexpected type '"
+				+ c->getEnd()->at(1)->getRole()->eClass()->getName() + "' is not an instance of uml::MultiplicityElement\n";
+		
+				throw std::runtime_error(errorMessage);
+				}
+			}
+		else {
+			std::string errorMessage = "UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isStarPattern(): unexpected type '"
+			+ c->getEnd()->at(0)->getRole()->eClass()->getName() + "' is not an instance of uml::MultiplicityElement\n";
+		
+			throw std::runtime_error(errorMessage);
+			}
+		}
+	return false;
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -575,6 +1052,638 @@ std::shared_ptr<Any> CS_DefaultConstructStrategyImpl::eInvoke(int operationID, c
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::addStructuralFeatureValue(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::Property, Any): 3950176590
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ADDSTRUCTURALFEATUREVALUE_PSCS_OBJECT_EJAVAOBJECT:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'addStructuralFeatureValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'addStructuralFeatureValue'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_feature;
+			Bag<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_feature_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_feature = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'addStructuralFeatureValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'feature'. Failed to invoke operation 'addStructuralFeatureValue'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'value'
+			//parameter 2
+			std::shared_ptr<Any> incoming_param_value;
+			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<Any>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'value'. Failed to invoke operation 'addStructuralFeatureValue'!")
+				return nullptr;
+			}
+		
+			this->addStructuralFeatureValue(incoming_param_context,incoming_param_feature,incoming_param_value);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::canInstantiate(uml::Property) : bool: 1675598055
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY:
+		{
+			//Retrieve input parameter 'p'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_p;
+			Bag<Any>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_p_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_p = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'p'. Failed to invoke operation 'canInstantiate'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'p'. Failed to invoke operation 'canInstantiate'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->canInstantiate(incoming_param_p), 0, false);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::construct(uml::Operation, PSCS::MDE4CPP_Extensions::PSCS_Object) : fUML::MDE4CPP_Extensions::FUML_Object: 3765673740
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_PSCS_OBJECT:
+		{
+			//Retrieve input parameter 'constructor'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_constructor;
+			Bag<Any>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_constructor_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_constructor = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'constructor'. Failed to invoke operation 'construct'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'constructor'. Failed to invoke operation 'construct'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'construct'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'construct'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->construct(incoming_param_constructor,incoming_param_context), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::constructObject(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::Class) : fUML::MDE4CPP_Extensions::FUML_Object: 3651672876
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCTOBJECT_PSCS_OBJECT_CLASS:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'constructObject'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'constructObject'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'type'
+			//parameter 1
+			std::shared_ptr<uml::Class> incoming_param_type;
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'constructObject'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'constructObject'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->constructObject(incoming_param_context,incoming_param_type), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::generateArrayPattern(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::Connector): 2388741565
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEARRAYPATTERN_PSCS_OBJECT_CONNECTOR:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'generateArrayPattern'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'generateArrayPattern'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'connector'
+			//parameter 1
+			std::shared_ptr<uml::Connector> incoming_param_connector;
+			Bag<Any>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_connector_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'connector'. Failed to invoke operation 'generateArrayPattern'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'connector'. Failed to invoke operation 'generateArrayPattern'!")
+					return nullptr;
+				}
+			}
+		
+			this->generateArrayPattern(incoming_param_context,incoming_param_connector);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::generateRealizingClass(uml::Interface, std::string) : uml::Class: 3303361213
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEREALIZINGCLASS_INTERFACE_ESTRING:
+		{
+			//Retrieve input parameter 'interface_'
+			//parameter 0
+			std::shared_ptr<uml::Interface> incoming_param_interface_;
+			Bag<Any>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_interface__arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_interface_ = std::dynamic_pointer_cast<uml::Interface>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'interface_'. Failed to invoke operation 'generateRealizingClass'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'interface_'. Failed to invoke operation 'generateRealizingClass'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'className'
+			//parameter 1
+			std::string incoming_param_className;
+			Bag<Any>::const_iterator incoming_param_className_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_className = (*incoming_param_className_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'className'. Failed to invoke operation 'generateRealizingClass'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->generateRealizingClass(incoming_param_interface_,incoming_param_className), uml::umlPackage::CLASS_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::generateStarPattern(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::Connector): 1857555240
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATESTARPATTERN_PSCS_OBJECT_CONNECTOR:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'generateStarPattern'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'generateStarPattern'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'connector'
+			//parameter 1
+			std::shared_ptr<uml::Connector> incoming_param_connector;
+			Bag<Any>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_connector_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'connector'. Failed to invoke operation 'generateStarPattern'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'connector'. Failed to invoke operation 'generateStarPattern'!")
+					return nullptr;
+				}
+			}
+		
+			this->generateStarPattern(incoming_param_context,incoming_param_connector);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getCardinality(uml::ConnectorEnd) : int: 929434209
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETCARDINALITY_CONNECTOREND:
+		{
+			//Retrieve input parameter 'end'
+			//parameter 0
+			std::shared_ptr<uml::ConnectorEnd> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::ConnectorEnd>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getCardinality'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getCardinality'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->getCardinality(incoming_param_end), 0, false);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getDefaultAssociation() : uml::Association: 3875607915
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETDEFAULTASSOCIATION:
+		{
+			result = eEcoreAny(this->getDefaultAssociation(), uml::umlPackage::ASSOCIATION_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getRealizingClass(uml::Interface) : uml::Class: 2418555460
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETREALIZINGCLASS_INTERFACE:
+		{
+			//Retrieve input parameter 'interface_'
+			//parameter 0
+			std::shared_ptr<uml::Interface> incoming_param_interface_;
+			Bag<Any>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_interface__arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_interface_ = std::dynamic_pointer_cast<uml::Interface>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'interface_'. Failed to invoke operation 'getRealizingClass'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'interface_'. Failed to invoke operation 'getRealizingClass'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getRealizingClass(incoming_param_interface_), uml::umlPackage::CLASS_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getValuesFromConnectorEnd(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::ConnectorEnd) : Any[*]: 3415863806
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETVALUESFROMCONNECTOREND_PSCS_OBJECT_CONNECTOREND:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_context;
+			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'getValuesFromConnectorEnd'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'context'. Failed to invoke operation 'getValuesFromConnectorEnd'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::ConnectorEnd> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::ConnectorEnd>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getValuesFromConnectorEnd'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'getValuesFromConnectorEnd'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->getValuesFromConnectorEnd(incoming_param_context,incoming_param_end), 0, true);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::instantiateInterface(uml::Interface, fUML::Semantics::Loci::Locus) : fUML::MDE4CPP_Extensions::FUML_Object: 2967185512
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_INSTANTIATEINTERFACE_INTERFACE_LOCUS:
+		{
+			//Retrieve input parameter 'interface'
+			//parameter 0
+			std::shared_ptr<uml::Interface> incoming_param_interface;
+			Bag<Any>::const_iterator incoming_param_interface_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_interface_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'interface'. Failed to invoke operation 'instantiateInterface'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'interface'. Failed to invoke operation 'instantiateInterface'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'locus'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Loci::Locus> incoming_param_locus;
+			Bag<Any>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_locus_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'locus'. Failed to invoke operation 'instantiateInterface'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'locus'. Failed to invoke operation 'instantiateInterface'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->instantiateInterface(incoming_param_interface,incoming_param_locus), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::isArrayPattern(uml::Connector) : bool: 2364964836
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISARRAYPATTERN_CONNECTOR:
+		{
+			//Retrieve input parameter 'c'
+			//parameter 0
+			std::shared_ptr<uml::Connector> incoming_param_c;
+			Bag<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_c_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_c = std::dynamic_pointer_cast<uml::Connector>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'isArrayPattern'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'isArrayPattern'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isArrayPattern(incoming_param_c), 0, false);
+			break;
+		}
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::isStarPattern(uml::Connector) : bool: 1857762815
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISSTARPATTERN_CONNECTOR:
+		{
+			//Retrieve input parameter 'c'
+			//parameter 0
+			std::shared_ptr<uml::Connector> incoming_param_c;
+			Bag<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_c_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_c = std::dynamic_pointer_cast<uml::Connector>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'isStarPattern'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'c'. Failed to invoke operation 'isStarPattern'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->isStarPattern(incoming_param_c), 0, false);
+			break;
+		}
 
 		default:
 		{

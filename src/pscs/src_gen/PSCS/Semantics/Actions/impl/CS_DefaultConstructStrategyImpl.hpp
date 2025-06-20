@@ -43,20 +43,20 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			virtual void addStructuralFeatureValue(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Property>& feature, const std::shared_ptr<Any>& value) ;
+			virtual bool canInstantiate(const std::shared_ptr<uml::Property>& p) ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context) ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> constructObject(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Class>& type) ;
+			virtual void generateArrayPattern(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Connector>& connector) ;
+			virtual std::shared_ptr<uml::Class> generateRealizingClass(const std::shared_ptr<uml::Interface>& interface_, std::string className) ;
+			virtual void generateStarPattern(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Connector>& connector) ;
+			virtual int getCardinality(const std::shared_ptr<uml::ConnectorEnd>& end) ;
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ;
+			virtual std::shared_ptr<uml::Class> getRealizingClass(const std::shared_ptr<uml::Interface>& interface_) ;
+			virtual std::shared_ptr<Bag<Any>> getValuesFromConnectorEnd(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::ConnectorEnd>& end) ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiateInterface(const std::shared_ptr<uml::Interface>& interface, const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus) ;
+			virtual bool isArrayPattern(const std::shared_ptr<uml::Connector>& c) ;
+			virtual bool isStarPattern(const std::shared_ptr<uml::Connector>& c) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

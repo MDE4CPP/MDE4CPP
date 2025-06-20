@@ -13,6 +13,7 @@
 // forward declarations
 template<class T> class Bag; 
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -36,6 +37,14 @@ namespace PSCS
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
+}
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
+}
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Object;
 }
 namespace uml 
 {
@@ -78,20 +87,20 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			virtual void addStructuralFeatureValue(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Property>& feature, const std::shared_ptr<Any>& value) = 0;
+			virtual bool canInstantiate(const std::shared_ptr<uml::Property>& p) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> constructObject(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Class>& type) = 0;
+			virtual void generateArrayPattern(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Connector>& connector) = 0;
+			virtual std::shared_ptr<uml::Class> generateRealizingClass(const std::shared_ptr<uml::Interface>& interface_, std::string className) = 0;
+			virtual void generateStarPattern(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::Connector>& connector) = 0;
+			virtual int getCardinality(const std::shared_ptr<uml::ConnectorEnd>& end) = 0;
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() = 0;
+			virtual std::shared_ptr<uml::Class> getRealizingClass(const std::shared_ptr<uml::Interface>& interface_) = 0;
+			virtual std::shared_ptr<Bag<Any>> getValuesFromConnectorEnd(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::ConnectorEnd>& end) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiateInterface(const std::shared_ptr<uml::Interface>& interface, const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus) = 0;
+			virtual bool isArrayPattern(const std::shared_ptr<uml::Connector>& c) = 0;
+			virtual bool isStarPattern(const std::shared_ptr<uml::Connector>& c) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

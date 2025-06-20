@@ -42,11 +42,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Port.hpp"
 #include "uml/Trigger.hpp"
@@ -55,6 +56,7 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::CommonBehavior;
@@ -105,6 +107,7 @@ CS_EventOccurrenceImpl& CS_EventOccurrenceImpl::operator=(const CS_EventOccurren
 	m_propagationInward = obj.isPropagationInward();
 
 	//copy references with no containment (soft copy)
+	m_interactionPoint  = obj.getInteractionPoint();
 	m_onPort  = obj.getOnPort();
 	m_wrappedEventOccurrence  = obj.getWrappedEventOccurrence();
 	//Clone references with containment (deep copy)
@@ -122,15 +125,92 @@ std::shared_ptr<ecore::EObject> CS_EventOccurrenceImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void CS_EventOccurrenceImpl::doSend()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// If the specified target is a CS_Reference and the propagation must be done
+	// to the environment, then the operation sendOut(EventOccurrence, Port) is called
+	// and make the propagation to continue.
+	// If the specified target is a CS_Reference but the propagation must be done to
+	// the internals then the operation sendIn(EventOccurrence, Port) is called.
+	// In the case were the target is not a CS_EventOccurrence then send(EventOccurence)
+	// is called.
+	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget()) != nullptr) {
+		if(this->isPropagationInward()) {
+			std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget())->sendIn(this->getThisCS_EventOccurrencePtr(), this->getOnPort());
+		}
+		else {
+			std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget())->sendOut(this->getThisCS_EventOccurrencePtr(), this->getOnPort());
+		}
+	}
+	else {
+		fUML::Semantics::CommonBehavior::EventOccurrenceImpl::doSend();
+	}
+*/
+	//end of body
+}
 
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CS_EventOccurrenceImpl::getParameterValues()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return the parametric data of the referenced event occurrence
+return this->getWrappedEventOccurrence()->getParameterValues(nullptr);
+	//end of body
+}
 
+bool CS_EventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigger)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// If the trigger references ports then to match this latter it is required that 
+	// 1] the interaction point is instance of port referenced by the trigger
+	// 2] the referenced event occurrence match operation returns true.
+	// If the trigger does not reference ports then the behavior is the same than for fUML.
 
+	bool matches = false;
+	if(trigger->getPort()->size() > 0) {
+		unsigned int i = 1;
+		while((!matches) && (i <= trigger->getPort()->size())) {
+			if(this->getInteractionPoint()->getDefiningPort() == trigger->getPort()->at(i-1)){
+				matches = true;
+			}
+			i++;
+		}
+		if(matches)	{
+			matches = this->getWrappedEventOccurrence()->match(trigger);
+		}
+	}
+	else {
+		matches = this->getWrappedEventOccurrence()->match(trigger);
+	}
+	return matches;
+	//end of body
+}
 
+void CS_EventOccurrenceImpl::sendInTo(const std::shared_ptr<uml::Element>& target, const std::shared_ptr<uml::Port>& port)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Propagate the sending of the event occurrence to the internals
+	this->setOnPort(port);
+	this->setPropagationInward(true);
+	this->sendTo(target);
+	//end of body
+}
 
-
-
-
-
+void CS_EventOccurrenceImpl::sendOutTo(const std::shared_ptr<uml::Element>& target, const std::shared_ptr<uml::Port>& port)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Propagate the sending of the event occurrence to the environment
+	this->setOnPort(port);
+	this->setPropagationInward(false);
+	this->sendTo(target);
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -149,7 +229,16 @@ void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
 //*********************************
 // Reference Getters & Setters
 //*********************************
-
+/* Getter & Setter for reference interactionPoint */
+const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& CS_EventOccurrenceImpl::getInteractionPoint() const
+{
+    return m_interactionPoint;
+}
+void CS_EventOccurrenceImpl::setInteractionPoint(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& _interactionPoint)
+{
+    m_interactionPoint = _interactionPoint;
+	
+}
 
 /* Getter & Setter for reference onPort */
 const std::shared_ptr<uml::Port>& CS_EventOccurrenceImpl::getOnPort() const
@@ -219,6 +308,13 @@ void CS_EventOccurrenceImpl::loadAttributes(std::shared_ptr<persistence::interfa
 			this->setPropagationInward(value);
 		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("interactionPoint");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("interactionPoint")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("onPort");
 		if ( iter != attr_list.end() )
 		{
@@ -256,6 +352,18 @@ void CS_EventOccurrenceImpl::resolveReferences(const int featureID, std::vector<
 {
 	switch(featureID)
 	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> _interactionPoint = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>( references.front() );
+				setInteractionPoint(_interactionPoint);
+			}
+			
+			return;
+		}
+
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 		{
 			if (references.size() == 1)
@@ -303,6 +411,10 @@ void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces
 			saveHandler->addAttribute("propagationInward", this->isPropagationInward());
           }
 	// Add references
+	if ( this->eIsSet(package->getCS_EventOccurrence_Attribute_interactionPoint()) )
+	{
+		saveHandler->addReference(this->getInteractionPoint(), "interactionPoint", getInteractionPoint()->eClass() != PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getPSCS_Object_Class()); 
+	}
 	if ( this->eIsSet(package->getCS_EventOccurrence_Attribute_onPort()) )
 	{
 		saveHandler->addReference(this->getOnPort(), "onPort", getOnPort()->eClass() != uml::umlPackage::eInstance()->getPort_Class()); 
@@ -330,6 +442,8 @@ std::shared_ptr<Any> CS_EventOccurrenceImpl::eGet(int featureID, bool resolve, b
 {
 	switch(featureID)
 	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+			return eAny(getInteractionPoint(),PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS,false); //131
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 			return eAny(getOnPort(),uml::umlPackage::PORT_CLASS,false); //134
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
@@ -344,6 +458,8 @@ bool CS_EventOccurrenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+			return getInteractionPoint() != nullptr; //131
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 			return getOnPort() != nullptr; //134
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
@@ -358,6 +474,37 @@ bool CS_EventOccurrenceImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 {
 	switch(featureID)
 	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> _interactionPoint = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(eObject);
+					if(_interactionPoint)
+					{
+						setInteractionPoint(_interactionPoint); //131
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'interactionPoint'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'interactionPoint'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 		{
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
@@ -448,6 +595,167 @@ std::shared_ptr<Any> CS_EventOccurrenceImpl::eInvoke(int operationID, const std:
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::doSend(): 1735238335
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_DOSEND:
+		{
+			this->doSend();
+			break;
+		}
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 4181762813
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->getParameterValues();
+			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
+			break;
+		}
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::match(uml::Trigger) : bool: 1214438023
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'trigger'
+			//parameter 0
+			std::shared_ptr<uml::Trigger> incoming_param_trigger;
+			Bag<Any>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_trigger_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_trigger = std::dynamic_pointer_cast<uml::Trigger>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'trigger'. Failed to invoke operation 'match'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'trigger'. Failed to invoke operation 'match'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->match(incoming_param_trigger), 0, false);
+			break;
+		}
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::sendInTo(uml::Element, uml::Port): 3478873697
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDINTO_ELEMENT_PORT:
+		{
+			//Retrieve input parameter 'target'
+			//parameter 0
+			std::shared_ptr<uml::Element> incoming_param_target;
+			Bag<Any>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_target_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_target = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'target'. Failed to invoke operation 'sendInTo'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'target'. Failed to invoke operation 'sendInTo'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'port'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_port;
+			Bag<Any>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_port_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_port = std::dynamic_pointer_cast<uml::Port>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'port'. Failed to invoke operation 'sendInTo'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'port'. Failed to invoke operation 'sendInTo'!")
+					return nullptr;
+				}
+			}
+		
+			this->sendInTo(incoming_param_target,incoming_param_port);
+			break;
+		}
+		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::sendOutTo(uml::Element, uml::Port): 3375904462
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_ELEMENT_PORT:
+		{
+			//Retrieve input parameter 'target'
+			//parameter 0
+			std::shared_ptr<uml::Element> incoming_param_target;
+			Bag<Any>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_target_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_target = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'target'. Failed to invoke operation 'sendOutTo'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'target'. Failed to invoke operation 'sendOutTo'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'port'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_port;
+			Bag<Any>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_port_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_port = std::dynamic_pointer_cast<uml::Port>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'port'. Failed to invoke operation 'sendOutTo'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'port'. Failed to invoke operation 'sendOutTo'!")
+					return nullptr;
+				}
+			}
+		
+			this->sendOutTo(incoming_param_target,incoming_param_port);
+			break;
+		}
 
 		default:
 		{

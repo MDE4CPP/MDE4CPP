@@ -43,8 +43,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
+			virtual std::shared_ptr<Any> read(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature) ;
+			virtual void write(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<Any>>& values, int position) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

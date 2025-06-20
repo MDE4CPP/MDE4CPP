@@ -45,7 +45,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			
+			virtual void doAction() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

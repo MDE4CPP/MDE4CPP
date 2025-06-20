@@ -54,9 +54,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -70,8 +70,8 @@
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -143,7 +143,39 @@ std::shared_ptr<ecore::EObject> CS_ReadExtentActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void CS_ReadExtentActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Get the extent, at the current execution locus, of the classifier
+	// (which must be a class) identified in the action.
+	// Place references to the resulting set of objects on the result pin.
+	// Extends default fUML semantics in the sense that produced tokens contain
+	// CS_References instead of References, in the case where the object is a
+	// CS_Object
 
+	std::shared_ptr<uml::ReadExtentAction> action = std::dynamic_pointer_cast<uml::ReadExtentAction>(this->getNode());
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> objects = this->getExecutionLocus()->retrieveExtent(action->getClassifier());
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> references(new Bag<fUML::Semantics::Values::Value>());
+	
+	for(unsigned int i = 0; i < objects->size(); i++) {
+		std::shared_ptr<fUML::Semantics::Values::Value> object = objects->at(i);
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = nullptr;
+		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object) != nullptr) {
+			reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object));
+		}
+		else {
+			reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+		}
+		reference->setReferent(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(object));
+		references->add(reference);
+	}	
+	this->putTokens(action->getResult(), references);
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -275,6 +307,12 @@ std::shared_ptr<Any> CS_ReadExtentActionActivationImpl::eInvoke(int operationID,
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::Actions::CS_ReadExtentActionActivation::doAction(): 212290264
+		case ActionsPackage::CS_READEXTENTACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
 
 		default:
 		{

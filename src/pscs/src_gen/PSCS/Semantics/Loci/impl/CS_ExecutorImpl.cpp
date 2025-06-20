@@ -143,25 +143,12 @@ std::shared_ptr<uml::Element> CS_ExecutorImpl::start(const std::shared_ptr<uml::
 	// is a CS_Object, a CS_Reference is returned (instead of a Reference)
 	DEBUG_INFO("[start] Starting " << type->getName() << "...")
 	
-	std::shared_ptr<uml::Element> object = this->getLocus().lock()->instantiate(type);
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> object = this->getLocus().lock()->instantiate(type);
 	
-	/* Currently not supported
-	DEBUG_MESSAGE(std::cout << "[start] Object = " << object->toString() << std::endl;)
+	DEBUG_INFO("[start] Object = " << object)
 	object->startBehavior(type, inputs);
 	
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
-	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object) != nullptr) {
-		reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-		(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object));
-	}
-	else {
-		reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-	}
-	reference->setReferent(object);
-	
-	return reference;*/
-
-	return nullptr;
+	return object;
 	//end of body
 }
 

@@ -54,9 +54,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -70,8 +70,8 @@
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -143,7 +143,39 @@ std::shared_ptr<ecore::EObject> CS_CreateObjectActionActivationImpl::copy() cons
 //*********************************
 // Operations
 //*********************************
+void CS_CreateObjectActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+	// Create an object with the given classifier (which must be a class) as
+	// its type, at the same locus as the action activation.
+	// Place a reference to the object on the result pin of the action.
+	// Extends fUML semantics in the sense that the reference placed
+	// on the result pin is a CS_Reference (in the case where the instantiated object
+	// is a CS_Object) not a Reference
+	// Note that Locus.instantiate(Class) is extended in this specification
+	// to produce a CS_Object instead of an Object in the case where the class
+	// to be instantiated is not a behavior
 
+	std::shared_ptr<uml::CreateObjectAction> action = this->getCreateObjectAction();
+	
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> referent = this->getExecutionLocus()->instantiate(std::dynamic_pointer_cast<uml::Class>(action->getClassifier()));
+	
+	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(referent) != nullptr) {
+		reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(referent));
+	}
+	else {
+		reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+	}
+	reference->setReferent(referent);
+	
+	this->putToken(action->getResult(), reference);
+*/
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -275,6 +307,12 @@ std::shared_ptr<Any> CS_CreateObjectActionActivationImpl::eInvoke(int operationI
  
   	switch(operationID)
 	{
+		// PSCS::Semantics::Actions::CS_CreateObjectActionActivation::doAction(): 1795145183
+		case ActionsPackage::CS_CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
 
 		default:
 		{
