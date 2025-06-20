@@ -54,8 +54,8 @@ namespace PSCS::MDE4CPP_Extensions
 			// Begin Class PSCS_Link
 			//Class and Feature IDs 
 			static const unsigned long PSCS_LINK_CLASS = 1393528252;
-			static const unsigned int PSCS_LINK_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 5;
+			static const unsigned int PSCS_LINK_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 54;
 			
 			
 			

@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -42,6 +42,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
+	m_fUML_Link_Class->getESuperTypes()->push_back(getFUML_Object_Class());
 	m_fUML_Object_Class->getESuperTypes()->push_back(uml::umlPackage::eInstance()->getElement_Class());
 	m_fUML_SignalInstance_Class->getESuperTypes()->push_back(uml::umlPackage::eInstance()->getElement_Class());
 	

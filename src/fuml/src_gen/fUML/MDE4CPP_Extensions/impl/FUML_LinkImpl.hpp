@@ -17,14 +17,12 @@
 #include "../FUML_Link.hpp"
 
 #include "fUML/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
 
 //*********************************
 namespace fUML::MDE4CPP_Extensions 
 {
-	class FUML_API FUML_LinkImpl : virtual public ecore::EModelElementImpl,
-virtual public FUML_Link 
+	class FUML_API FUML_LinkImpl : virtual public FUML_ObjectImpl, virtual public FUML_Link 
 	{
 		public: 
 			FUML_LinkImpl(const FUML_LinkImpl & obj);

@@ -22,7 +22,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
 
 
 #include "ecore/EcoreAny.hpp"
@@ -40,15 +40,26 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Association.hpp"
+#include "uml/Comment.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "uml/Element.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 //Factories and Package includes
 #include "PSCS/PSCSPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::MDE4CPP_Extensions;
@@ -176,6 +187,12 @@ void PSCS_LinkImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	saveContent(saveHandler);
 
 	fUML::MDE4CPP_Extensions::FUML_LinkImpl::saveContent(saveHandler);
+	
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::saveContent(saveHandler);
+	
+	uml::ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }

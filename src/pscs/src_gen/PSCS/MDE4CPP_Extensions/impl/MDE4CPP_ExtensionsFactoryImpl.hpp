@@ -40,6 +40,8 @@ namespace PSCS::MDE4CPP_Extensions
 
 			//Creator functions
 			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> createPSCS_Link(const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> createPSCS_Link_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS) const ;
 			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> createPSCS_Object(const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> createPSCS_Object_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS) const ;

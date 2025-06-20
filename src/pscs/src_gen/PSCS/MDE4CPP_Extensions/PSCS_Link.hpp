@@ -32,13 +32,26 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ObjectActivation;
+}
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
 namespace fUML::MDE4CPP_Extensions 
 {
 	class FUML_LinkEnd;
 }
+namespace ecore 
+{
+	class EAnnotation;
+}
 namespace uml 
 {
 	class Association;
+	class Comment;
 }
 
 // namespace macro header include

@@ -36,33 +36,23 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-/*
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-
 #include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Port.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "uml/Association.hpp"
 #include "uml/umlPackage.hpp"
 #include "uml/InputPin.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-*/
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/UMLAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -161,77 +151,66 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		/*	
 	// If the feature is a port and the input value to be added is a
 	// Reference,
 	// Replaces this Reference by an InteractionPoint, and then behaves
 	// as usual.
 	// If the feature is not a port, behaves as usual
 
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::AddStructuralFeatureValueAction>& action = this->getAddStructuralFeatureValueAction();
+	std::shared_ptr<uml::Property> feature = std::dynamic_pointer_cast<uml::Property>(action->getStructuralFeature());
 	
 	if(feature->getMetaElementID() != uml::umlPackage::PORT_CLASS) {
 		// Behaves as usual
 		this->doActionDefault();
 	}
 	else {
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = this->takeTokens(action->getValue());
+		std::shared_ptr<Bag<Any>> inputValues = this->takeTokens(action->getValue());
+		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(inputValues->at(0));
+		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
 		// NOTE: Multiplicity of the value input pin is required to be 1..1.
-		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = inputValues->at(0);
-		if(inputValue->getMetaElementID() == fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS ||
-		   inputValue->getMetaElementID() == PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_REFERENCE_CLASS ||
-		   inputValue->getMetaElementID() == PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_CLASS) {
+		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(element);
+			object != nullptr)
+		{
 			// First constructs an InteractionPoint from the inputValue
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
-			interactionPoint->setReferent(reference->getReferent());
-			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
+			object->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
 
-			std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
-	*/
+			std::shared_ptr<uml::Element> owner = nullptr;		
 			/* MDE4CPP specific implementation for handling "self"-Pin */
-			/*std::string targetPinName = action->getObject()->getName();
+			std::string targetPinName = action->getObject()->getName();
 			if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
 				//target is set to the context of the current activity execution
-				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
-				contextReference->setReferent(context);
-				contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
-			
-				value = contextReference;
+				owner = this->getActivityExecution()->getContext();
 			}
 			else{
-				value = this->takeTokens(action->getObject())->at(0);
+				std::shared_ptr<Any> value = this->takeTokens(action->getObject())->at(0);
+				std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				owner = uMLAny->getAsElement();
 			}
 			/*--------------------------------------------------------*/
 
-			// The value on action.object is necessarily instanceof
-			// CS_Reference (otherwise, the feature cannot be a port)
-			/*std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> owner = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value);
-			interactionPoint->setOwner(owner);
-			// Then replaces the CS_Reference by a CS_InteractionPoint in the inputValues
-			inputValues->erase(inputValues->begin());
-			inputValues->insert(inputValues->begin(), interactionPoint);
 			// Finally concludes with usual fUML behavior of
 			// AddStructuralFeatureValueAction (i.e., the usual behavior when
 			// the value on action.object pin is a StructuredValue)
 			int insertAt = 0;
 			if(action->getInsertAt() != nullptr) {
-				insertAt = (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(this->takeTokens(action->getInsertAt())->at(0)))->getValue();
+				insertAt = (this->takeTokens(action->getInsertAt())->at(0))->get<int>();
 			}
 			if(action->getIsReplaceAll()) {
-				owner->assignFeatureValue(feature, inputValues, 0);
+				owner->set(feature, eUMLAny(object, object->getMetaElementID()));
 			}
 			else {
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = owner->retrieveFeatureValue(feature);
+				std::shared_ptr<Any> featureValue = owner->get(feature);
 				
+				/*
+				 * Currently not supported
 				if((featureValue->getValues()->size() > 0) && (insertAt == 0)) {
 					// If there is no insertAt pin, then the structural
 					// feature must be unordered, and the insertion position is
 					// immaterial.
 					insertAt = (std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getExecutionLocus()->getFactory()->getStrategy("choice")))->choose(featureValue->getValues()->size());
 				}
+				
 				if(feature->getIsUnique()) {
 					// Remove any existing value that duplicates the input value
 					int j = position(interactionPoint, featureValue->getValues(), 1);
@@ -242,18 +221,19 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 						}
 					}
 				}
+				*/
 				
 				if(insertAt <= 0) {
 					// Note: insertAt = -1 indicates an unlimited value of
 					// "*"
-					featureValue->getValues()->add(interactionPoint);
+					owner->add(feature, eUMLAny(object, object->getMetaElementID()));
 				}
 				else {
-					featureValue->getValues()->insert((featureValue->getValues()->begin() + (insertAt - 1)), interactionPoint);
+					owner->add(feature, eUMLAny(object, object->getMetaElementID()), (insertAt - 1));
 				}
 			}
 			if (action->getResult() != nullptr) {
-				this->putToken(action->getResult(), owner);
+				this->putToken(action->getResult(), eUMLAny(owner, owner->getMetaElementID()));
 			}	
 		}
 		else {
@@ -261,7 +241,6 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 			this->doActionDefault();
 		}
 	}
-*/
 	//end of body
 }
 
@@ -269,7 +248,6 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		/*
 	// Get the values of the object and value input pins.
 	// If the given feature is an association end, then create a link
 	// between the object and value inputs.
@@ -284,41 +262,44 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 	// when the feature is an association end, a CS_Link will be created instead
 	// of a Link
 
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::AddStructuralFeatureValueAction>& action = this->getAddStructuralFeatureValueAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
-	/*std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
+	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
 	
-	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
+
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> value = nullptr;
+	std::shared_ptr<Any> any = this->takeTokens(action->getObject())->at(0);
 
 	/* MDE4CPP specific implementation for handling "self"-Pin */
-	/*std::string targetPinName = action->getObject()->getName();
+	std::string targetPinName = action->getObject()->getName();
 	if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
 		//target is set to the context of the current activity execution
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
-		contextReference->setReferent(context);
-		contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
-			
-		value = contextReference;
+		value = this->getActivityExecution()->getContext();
 	}
 	else{
-		value = this->takeTokens(action->getObject())->at(0);
+		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(any);
+		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
 	}
 	/*--------------------------------------------------------*/
 
-	/*std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = this->takeTokens(action->getValue());
+	std::shared_ptr<Bag<Any>> inputValues = this->takeTokens(action->getValue());
 	
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.
-	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = inputValues->at(0);
+	std::shared_ptr<Any> inputValue = inputValues->at(0);
 	
 	int insertAt = 0;
 	if(action->getInsertAt() != nullptr) {
-		insertAt = (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(this->takeTokens(action->getInsertAt())->at(0)))->getValue();
+		insertAt = this->takeTokens(action->getInsertAt())->at(0)->get<int>();
 	}
 	
 	if(association != nullptr) {
-		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
+		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(inputValue);
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> inputObject = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(uMLAny->getAsElement());
+
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links = this->getMatchingLinks(association, feature, value);
 		
 		std::shared_ptr<uml::Property> oppositeEnd = this->getOppositeEnd(association, feature);
 		int position = 0;
@@ -328,17 +309,18 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 		
 		if (action->getIsReplaceAll()){
 			for(int unsigned i = 0; i < links->size(); i++) {
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
+				const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link = links->at(i);
 				link->destroy();
 			}			
 		}
 		else if (feature->getIsUnique()) {
 			for(int unsigned i = 0; i < links->size(); i++) {
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = link->retrieveFeatureValue(feature);
-				if(featureValue->getValues()->at(0)->equals(inputValue)) {
-					position = link->retrieveFeatureValue(oppositeEnd)->getPosition();
-					if((insertAt > 0) && (featureValue->getPosition() < insertAt)) {
+				const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link = links->at(i);
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> linkEnd = link->retrieveLinkEnd(property);
+
+				if(linkEnd->getEndValue() == uMLAny->getAsElement()) {
+					position = link->retrieveLinkEnd(oppositeEnd)->getPosition();
+					if((insertAt > 0) && (linkEnd->getPosition() < insertAt)) {
 						insertAt = insertAt - 1;
 					}
 					link->destroy();
@@ -346,30 +328,28 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 			}
 		}
 		
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType(association);
 		
 		// This necessary when setting a feature value with an insertAt
 		// position
 		newLink->setLocus(this->getExecutionLocus());
 		
-		newLink->assignFeatureValue(feature, inputValues, insertAt);
-		
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> oppositeValues(new Bag<fUML::Semantics::Values::Value>());
-		oppositeValues->add(value);
-		newLink->assignFeatureValue(oppositeEnd, oppositeValues, position);
+		newLink->add(inputObject, property, insertAt);
+		newLink->add(value, oppositeEnd, position);
 		
 		newLink->getLocus()->add(newLink);
 	}
-	else if (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value) != nullptr) {
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
+	else {
 		
 		if(action->getIsReplaceAll()) {
-			structuredValue->assignFeatureValue(feature, inputValues, 0);
+			value->set(property, inputValue);
 		}
 		else {
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);
+			std::shared_ptr<Any> featureValue = value->get(property);
 			
+			/*
+			 * Currently not supported
 			if((featureValue->getValues()->size() > 0) && (insertAt ==0)) {
 				// *** If there is no insertAt pin, then the structural
 				// feature must be unordered, and the insertion position is
@@ -386,25 +366,22 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 						insertAt = insertAt - 1;
 					}
 				}
-			}
+			}*/
 			
 			if(insertAt <= 0) {
 				// Note: insertAt = -1 indicates an
 				// unlimited value of "*"
-				featureValue->getValues()->add(inputValue);
+				value->add(property, inputValue);
 			}
 			else {
-				featureValue->getValues()->insert((featureValue->getValues()->begin() + (insertAt - 1)), inputValue);
+				value->add(property, inputValue, (insertAt - 1));
 			}
-			
-			structuredValue->assignFeatureValue(feature, featureValue->getValues(), 0);
 		}
 	}
 	
 	if(action->getResult() != nullptr) {
-		this->putToken(action->getResult(), value);
+		this->putToken(action->getResult(), any);
 	}
-*/
 	//end of body
 }
 

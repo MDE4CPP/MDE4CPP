@@ -44,9 +44,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/AcceptEventAction.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
@@ -140,17 +140,23 @@ void CS_AcceptEventActionActivationImpl::accept(const std::shared_ptr<fUML::Sema
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
 	// If the accepted event occurrence is a CS_EventOccurrence then the wrapped
 	// event occurrence is extracted. The acceptance process is the one define
 	// by AcceptEventActionActivation defined in fUML.
-	if(std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence) != nullptr) {
-		fUML::Semantics::Actions::AcceptEventActionActivationImpl::accept((std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence))->getWrappedEventOccurrence());
+	if(std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> cS_EventOccurrence = std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence);
+		cS_EventOccurrence != nullptr) 
+	{
+
+		fUML::Semantics::Actions::AcceptEventActionActivationImpl::accept(cS_EventOccurrence->getWrappedEventOccurrence());
+	
 	}
-	else {
+
+	else 
+	{
+
 		fUML::Semantics::Actions::AcceptEventActionActivationImpl::accept(eventOccurrence);
+
 	}
-*/
 	//end of body
 }
 

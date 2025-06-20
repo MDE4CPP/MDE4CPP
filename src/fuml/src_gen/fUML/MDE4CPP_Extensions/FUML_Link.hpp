@@ -33,30 +33,43 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ObjectActivation;
+}
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
 namespace fUML::MDE4CPP_Extensions 
 {
 	class FUML_LinkEnd;
-	class FUML_Object;
+}
+namespace ecore 
+{
+	class EAnnotation;
 }
 namespace uml 
 {
 	class Association;
+	class Comment;
 	class Property;
 }
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
+// base class includes
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace fUML::MDE4CPP_Extensions 
 {
 	
-	class FUML_API FUML_Link : virtual public ecore::EModelElement
+	class FUML_API FUML_Link : virtual public FUML_Object
 	{
 		public:
  			FUML_Link(const FUML_Link &) {}

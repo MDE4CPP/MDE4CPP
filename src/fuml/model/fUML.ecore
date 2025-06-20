@@ -3593,7 +3593,7 @@
         </eAnnotations>
       </eOperations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FUML_Link">
+    <eClassifiers xsi:type="ecore:EClass" name="FUML_Link" eSuperTypes="#//MDE4CPP_Extensions/FUML_Object">
       <eAnnotations source="MDE4CPP_Substitutes" references="#//Semantics/StructuredClassifiers/Object">
         <details key="doc" value="This class is a substitution of fUML::Semantics::StructuredClassifiers::Link.&#xA;It realizes the concept of runtime links in a way that is more suitable for the overall MDE4CPP framework than the implementation of the fuml specification.&#xA;In contrast to fUML::Semantics::StructuredClassifiers::Link, FUML_Link instances directly reference instances of FUML_Object instead of fUML::Semantics::SimpleClassifiers::FeatureValues.&#xA;Furthermore a back reference is added (see reference FUML_Object::links), so that an object also reference the links that it participates in."/>
       </eAnnotations>

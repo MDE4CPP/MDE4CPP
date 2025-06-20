@@ -47,6 +47,8 @@ namespace fUML::MDE4CPP_Extensions
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> createFUML_Link(const int metaElementID = MDE4CPP_ExtensionsPackage::FUML_LINK_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> createFUML_Link_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = MDE4CPP_ExtensionsPackage::FUML_LINK_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> createFUML_LinkEnd(const int metaElementID = MDE4CPP_ExtensionsPackage::FUML_LINKEND_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> createFUML_LinkEnd_as_linkEnds_in_FUML_Link(std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> par_FUML_Link, const int metaElementID = MDE4CPP_ExtensionsPackage::FUML_LINKEND_CLASS) const = 0;

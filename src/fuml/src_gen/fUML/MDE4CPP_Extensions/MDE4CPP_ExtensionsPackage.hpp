@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EAnnotation;
-	class EParameter;
-	class EAttribute;
 	class EClass;
-	class EDataType;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EAnnotation;
+	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace fUML::MDE4CPP_Extensions 
@@ -58,8 +58,8 @@ namespace fUML::MDE4CPP_Extensions
 			// Begin Class FUML_Link
 			//Class and Feature IDs 
 			static const unsigned long FUML_LINK_CLASS = 1317507267;
-			static const unsigned int FUML_LINK_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int FUML_LINK_CLASS_OPERATION_COUNT = 5;
+			static const unsigned int FUML_LINK_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int FUML_LINK_CLASS_OPERATION_COUNT = 54;
 			
 			static const unsigned long FUML_LINK_ATTRIBUTE_LINKENDS = 487915139;
 			static const unsigned long FUML_LINK_ATTRIBUTE_TYPE = 894190498;

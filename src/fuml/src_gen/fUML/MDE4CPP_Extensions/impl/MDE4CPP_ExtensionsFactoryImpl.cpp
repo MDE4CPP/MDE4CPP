@@ -57,8 +57,16 @@ std::shared_ptr<ecore::EObject> MDE4CPP_ExtensionsFactoryImpl::create(const int 
 	{
 		case MDE4CPP_ExtensionsPackage::FUML_LINK_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createFUML_Link(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>(this->createFUML_Link_as_extensionalValues_in_Locus(castedContainer,metaElementID));
+			}
 			break;
 		}
 		case MDE4CPP_ExtensionsPackage::FUML_LINKEND_CLASS:
@@ -109,6 +117,19 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> MDE4CPP_ExtensionsFactoryIm
 	element->setMetaElementID(metaElementID);
 	element->setThisFUML_LinkPtr(element);
 	return element;
+}
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> MDE4CPP_ExtensionsFactoryImpl::createFUML_Link_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID) const
+{
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkImpl> element(new fUML::MDE4CPP_Extensions::FUML_LinkImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_Locus)
+	{
+		par_Locus->getExtensionalValues()->push_back(element);
+	}
+	
+	element->setThisFUML_LinkPtr(element);
+	return element;
+	
 }
 std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> MDE4CPP_ExtensionsFactoryImpl::createFUML_LinkEnd(const int metaElementID/*=-1*/) const
 {
