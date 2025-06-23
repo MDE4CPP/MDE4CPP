@@ -232,15 +232,24 @@ void ActionsPackageImpl::initializeCS_CallOperationActionActivationContent()
 	m_cS_CallOperationActionActivation_Operation_doAction->_setID(CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION);
 	
 	
-	m_cS_CallOperationActionActivation_Operation_getCallExecution->setName("getCallExecution");
-	m_cS_CallOperationActionActivation_Operation_getCallExecution->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
-	m_cS_CallOperationActionActivation_Operation_getCallExecution->setLowerBound(1);
-	m_cS_CallOperationActionActivation_Operation_getCallExecution->setUpperBound(1);
-	m_cS_CallOperationActionActivation_Operation_getCallExecution->setUnique(true);
-	m_cS_CallOperationActionActivation_Operation_getCallExecution->setOrdered(false);
+	m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue->setName("doCall");
+	m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+	m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue->setLowerBound(0);
+	m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue->setUpperBound(-1);
+	m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue->setUnique(true);
+	m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue->setOrdered(true);
 	
-	m_cS_CallOperationActionActivation_Operation_getCallExecution->_setID(CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION);
+	m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue->_setID(CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE);
 	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue);
+		parameter->setName("inputParameterValues");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_cS_CallOperationActionActivation_Operation_isCreate_Operation->setName("isCreate");
 	m_cS_CallOperationActionActivation_Operation_isCreate_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());

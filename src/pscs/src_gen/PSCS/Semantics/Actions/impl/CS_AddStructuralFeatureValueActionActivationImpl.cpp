@@ -309,13 +309,13 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 		
 		if (action->getIsReplaceAll()){
 			for(int unsigned i = 0; i < links->size(); i++) {
-				const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link = links->at(i);
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> link = links->at(i);
 				link->destroy();
 			}			
 		}
 		else if (feature->getIsUnique()) {
 			for(int unsigned i = 0; i < links->size(); i++) {
-				const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link = links->at(i);
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> link = links->at(i);
 				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> linkEnd = link->retrieveLinkEnd(property);
 
 				if(linkEnd->getEndValue() == uMLAny->getAsElement()) {

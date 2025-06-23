@@ -56,6 +56,9 @@ namespace PSCS::MDE4CPP_Extensions
 			
 			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_definingPort() const ;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_contains_FUML_Object() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isInteractionPoint() const ;
 			
 			// End Class PSCS_Object
@@ -69,7 +72,7 @@ namespace PSCS::MDE4CPP_Extensions
 			
 			
 			std::shared_ptr<ecore::EReference> m_pSCS_Object_Attribute_definingPort = nullptr;
-			std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isInteractionPoint = nullptr;
+			std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_contains_FUML_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isInteractionPoint = nullptr;
 
 			friend class MDE4CPP_ExtensionsPackage;
 

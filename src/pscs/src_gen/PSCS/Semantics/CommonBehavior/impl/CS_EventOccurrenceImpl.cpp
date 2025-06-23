@@ -43,8 +43,8 @@
 
 #include <exception> // used in Persistence
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"

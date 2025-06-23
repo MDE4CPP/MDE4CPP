@@ -42,8 +42,8 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -52,6 +52,7 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+#include "uml/Operation.hpp"
 #include "uml/Port.hpp"
 //Factories and Package includes
 #include "PSCS/PSCSPackage.hpp"
@@ -125,6 +126,39 @@ std::shared_ptr<ecore::EObject> PSCS_ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+bool PSCS_ObjectImpl::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+ * Should be implemented class-specific in every generated UML class
+ */
+return false;
+	//end of body
+}
+
+std::shared_ptr<Any> PSCS_ObjectImpl::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+ * Should be implemented class-specific in every generated UML class
+ */
+return nullptr;
+	//end of body
+}
+
+std::shared_ptr<Any> PSCS_ObjectImpl::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+ * Should be implemented class-specific in every generated UML class
+ */
+return nullptr;
+	//end of body
+}
+
 bool PSCS_ObjectImpl::isInteractionPoint()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -340,6 +374,210 @@ std::shared_ptr<Any> PSCS_ObjectImpl::eInvoke(int operationID, const std::shared
  
   	switch(operationID)
 	{
+		// PSCS::MDE4CPP_Extensions::PSCS_Object::contains(fUML::MDE4CPP_Extensions::FUML_Object) : bool: 480294208
+		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'contains'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'contains'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->contains(incoming_param_object), 0, false);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Object::dispatchCallIn(uml::Operation, uml::Port, Any[*], Any[*]) : Any: 158727684
+		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_DISPATCHCALLIN_OPERATION_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param__operation;
+			Bag<Any>::const_iterator incoming_param__operation_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__operation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_operation'. Failed to invoke operation 'dispatchCallIn'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_operation'. Failed to invoke operation 'dispatchCallIn'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'onPort'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_onPort;
+			Bag<Any>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_onPort_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'onPort'. Failed to invoke operation 'dispatchCallIn'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'onPort'. Failed to invoke operation 'dispatchCallIn'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'dispatchCallIn'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 3
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'dispatchCallIn'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->dispatchCallIn(incoming_param__operation,incoming_param_onPort,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Object::dispatchCallOut(uml::Operation, uml::Port, Any[*], Any[*]) : Any: 3938656865
+		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_DISPATCHCALLOUT_OPERATION_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param__operation;
+			Bag<Any>::const_iterator incoming_param__operation_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param__operation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param__operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_operation'. Failed to invoke operation 'dispatchCallOut'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_operation'. Failed to invoke operation 'dispatchCallOut'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'onPort'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_onPort;
+			Bag<Any>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_onPort_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'onPort'. Failed to invoke operation 'dispatchCallOut'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'onPort'. Failed to invoke operation 'dispatchCallOut'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'dispatchCallOut'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 3
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'dispatchCallOut'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->dispatchCallOut(incoming_param__operation,incoming_param_onPort,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
 		// PSCS::MDE4CPP_Extensions::PSCS_Object::isInteractionPoint() : bool: 4059681913
 		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_ISINTERACTIONPOINT:
 		{

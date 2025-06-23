@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 
 
 //*********************************
@@ -47,6 +48,7 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
+	class ParameterValue;
 }
 namespace uml 
 {
@@ -90,7 +92,8 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual bool _isCreate(const std::shared_ptr<uml::Operation>& operation) = 0;
 			virtual void doAction() = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> doCall(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameterValues) = 0;
+			
 			virtual bool isCreate(const std::shared_ptr<uml::Operation>& operation) = 0;
 			virtual bool isOperationProvided(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation) = 0;
 			virtual bool isOperationRequired(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation) = 0;

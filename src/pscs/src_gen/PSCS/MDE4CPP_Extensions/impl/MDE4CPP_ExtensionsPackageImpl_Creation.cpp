@@ -10,6 +10,7 @@
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
@@ -54,6 +55,9 @@ void MDE4CPP_ExtensionsPackageImpl::createPSCS_ObjectContent(std::shared_ptr<eco
 	
 	m_pSCS_Object_Attribute_definingPort = factory->createEReference_as_eReferences_in_EClass(m_pSCS_Object_Class, PSCS_OBJECT_ATTRIBUTE_DEFININGPORT);
 	
+	m_pSCS_Object_Operation_contains_FUML_Object = factory->createEOperation_as_eOperations_in_EClass(m_pSCS_Object_Class, PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT);
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_pSCS_Object_Class, PSCS_OBJECT_OPERATION_DISPATCHCALLIN_OPERATION_EJAVAOBJECT);
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_pSCS_Object_Class, PSCS_OBJECT_OPERATION_DISPATCHCALLOUT_OPERATION_EJAVAOBJECT);
 	m_pSCS_Object_Operation_isInteractionPoint = factory->createEOperation_as_eOperations_in_EClass(m_pSCS_Object_Class, PSCS_OBJECT_OPERATION_ISINTERACTIONPOINT);
 	
 }

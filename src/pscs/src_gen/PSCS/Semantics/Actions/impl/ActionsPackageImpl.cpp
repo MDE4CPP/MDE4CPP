@@ -125,9 +125,9 @@ const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPacka
 {
 	return m_cS_CallOperationActionActivation_Operation_doAction;
 }
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_getCallExecution() const
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_doCall_ParameterValue() const
 {
-	return m_cS_CallOperationActionActivation_Operation_getCallExecution;
+	return m_cS_CallOperationActionActivation_Operation_doCall_ParameterValue;
 }
 const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_CallOperationActionActivation_Operation_isCreate_Operation() const
 {

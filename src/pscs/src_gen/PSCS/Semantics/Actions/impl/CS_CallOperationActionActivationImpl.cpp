@@ -57,6 +57,18 @@
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
 #include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
 */
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
+#include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
+#include "uml/Class.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -64,8 +76,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -77,6 +89,7 @@
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "uml/Port.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -162,26 +175,18 @@ bool CS_CallOperationActionActivationImpl::_isCreate(const std::shared_ptr<uml::
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::string stereotypeQualifiedName = "StandardProfile::Create";
-
 const std::shared_ptr<uml::Stereotype>& stereotypeClass = operation->getAppliedStereotype(stereotypeQualifiedName);
 
-
 if(stereotypeClass != nullptr)
-{
-	
-DEBUG_INFO("Stereotype '"<<stereotypeQualifiedName<<"' applied...")
-
+{	
+	DEBUG_INFO("Stereotype '"<<stereotypeQualifiedName<<"' applied...")
 	return true;
-
 }
 
 else 
 {
-
 	DEBUG_INFO("Stereotype '"<<stereotypeQualifiedName<<"' not applied...")
-
 	return false;
-
 }
 	//end of body
 }
@@ -190,8 +195,7 @@ void CS_CallOperationActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
-	// First determines if this is a call to a constructor and if a default
+		// First determines if this is a call to a constructor and if a default
 	// construction strategy needs to be applied.
 	// This is a call to a constructor if the called operation has
 	// stereotype <<Create>> applied.
@@ -199,17 +203,19 @@ void CS_CallOperationActionActivationImpl::doAction()
 	// <<Create>> operation.
 	// Otherwise, behaves like in fUML.
 
-	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
+	const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
 
 	if((action->getOnPort() == nullptr) && (this->_isCreate(action->getOperation())) && (action->getOperation()->getMethod()->size() == 0)) {
 		std::shared_ptr<fUML::Semantics::Loci::Locus> locus = this->getExecutionLocus();
 		std::shared_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::Actions::CS_ConstructStrategy>(locus->getFactory()->getStrategy("constructStrategy"));
-		std::shared_ptr<fUML::Semantics::Values::Value> target = this->takeTokens(action->getTarget())->at(0);
-		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target) != nullptr) {
-			strategy->construct(action->getOperation(), (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target))->getCompositeReferent());
-			std::shared_ptr<Bag<uml::Parameter>> parameters = action->getOperation()->getOwnedParameter();
-			std::shared_ptr<Bag<uml::OutputPin>> resultPins = action->getResult();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
+		std::shared_ptr<Any> target = this->takeTokens(action->getTarget())->at(0);
+		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(target);
+		std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(target); cS_Object != nullptr) {
+			strategy->construct(action->getOperation(), cS_Object);
+			const std::shared_ptr<Bag<uml::Parameter>>& parameters = action->getOperation()->getOwnedParameter();
+			const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = action->getResult();
+			std::shared_ptr<Bag<Any>> values(new Bag<Any>());
 			values->add(target);
 			unsigned int i = 1;
 			while(i <= parameters->size()) {
@@ -225,15 +231,13 @@ void CS_CallOperationActionActivationImpl::doAction()
 	else {
 		fUML::Semantics::Actions::CallActionActivationImpl::doAction();
 	}
-*/
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActionActivationImpl::getCallExecution()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CS_CallOperationActionActivationImpl::doCall(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		/*
 	// If onPort is not specified, behaves like in fUML
 	// If onPort is specified, and if the value on the target input pin is a 
 	// reference, dispatch the operation 
@@ -251,80 +255,212 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 	// the invocation is made out of the target object through the given Port. 
 	// Otherwise the invocation is made into the target object through the given Port.
 
-	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
-	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
-	if(action->getOnPort() == nullptr) {
-		execution = fUML::Semantics::Actions::CallOperationActionActivationImpl::getCallExecution();
+	const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
+
+	if(action->getOnPort() == nullptr)
+	{
+		return fUML::Semantics::Actions::CallOperationActionActivationImpl::doCall(inputParameterValues);
 	}
-	else {
-		std::shared_ptr<fUML::Semantics::Values::Value> target = nullptr;		
+	else
+	{
+		std::shared_ptr<uml::Element> target = nullptr;
 
 		/* MDE4CPP specific implementation for handling "self"-Pin */
-		/*std::string targetPinName = action->getTarget()->getName();
-		if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+		std::string targetPinName = action->getTarget()->getName();
+		if((targetPinName.empty()) || (targetPinName.find("self") == 0))
+		{
 			//target is set to the context of the current activity execution
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
-			contextReference->setReferent(context);
-			contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
-			
-			target = contextReference;
+			if(targetPinName.find("self.") == 0)
+			{
+				std::string attributeName = targetPinName.substr (5, std::string::npos);
+				DEBUG_INFO("Changing execution context to self." << attributeName << ".")
+
+				std::shared_ptr<uml::Property> attribute = nullptr;
+
+				std::shared_ptr<uml::Classifier> contextImmediateType = target->getMetaClass();
+				std::shared_ptr<Bag<uml::Classifier>> contextTypes = contextImmediateType->allParents();
+				contextTypes->insert(contextTypes->begin(), contextImmediateType);
+
+				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
+				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
+
+				while (attribute == nullptr || contextTypesIter < contextTypesEnd)
+				{
+					std::shared_ptr<uml::Classifier> classifier = *contextTypesIter;
+					contextTypesIter++;
+
+					std::shared_ptr<Bag<uml::Property>> attributes = classifier->getAllAttributes();
+					Bag<uml::Property>::iterator attributeIter = attributes->begin();
+					Bag<uml::Property>::iterator attributeEnd = attributes->end();
+					while (attribute == nullptr || attributeIter < attributeEnd)
+					{
+						if ((*attributeIter)->getName() == attributeName)
+						{
+							attribute = *attributeIter;
+						}
+						attributeIter++;
+					}
+				}
+
+				if(nullptr == attribute)
+				{
+					std::cerr << "Could not find the attribute in the current context for input pin '" << targetPinName << "'." << std::endl;
+					exit(EXIT_FAILURE);
+				}
+
+				DEBUG_INFO("Found context attribute self."<< attributeName << " for target pin.")
+
+				if (target != nullptr)
+				{
+					std::shared_ptr<Any> attributeValue = target->get(attribute);
+
+					if(attributeValue->isContainer())
+					{
+						try
+						{
+							std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(attributeValue);
+							std::shared_ptr<Bag<uml::Element>> elements = umlContainerAny->getAsElementContainer();
+
+							if(elements->size() > 0)
+							{
+								target = elements->front();
+							}
+						}
+						catch(...)
+						{
+							DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
+						}
+					}
+					else
+					{
+						try
+						{
+							std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(attributeValue);
+							target = umlAny->getAsElement();
+						}
+						catch(...)
+						{
+							DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
+						}
+					}
+				}
+			}
 		}
-		else{
-			target = this->takeTokens(action->getTarget())->at(0);
+		else
+		{
+			std::shared_ptr<Any> targetAny = this->takeTokens(action->getTarget())->at(0);
+
+			if(targetAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(targetAny);
+					target = umlAny->getAsElement();
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
+				}
+			}
 		}
 		/*--------------------------------------------------------*/
 
-		/*if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target) != nullptr) {
+		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_target = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(target);
+			cS_target != nullptr)
+		{
+			std::shared_ptr<Bag<Any>> inputArguments(new Bag<Any>());
+			for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& inputParameterValue : *inputParameterValues)
+			{
+				//Only first value as lists are handled by a single instance of Any
+				const std::shared_ptr<Any>& argument = inputParameterValue->getValues()->at(0);
+				inputArguments->add(argument);
+			}
+
+			std::shared_ptr<Bag<Any>> outputArguments(new Bag<Any>());
+			std::shared_ptr<Any> returnValue = nullptr;
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+
 			// Tries to determine if the operation call has to be
 			// dispatched to the environment or to the internals of
 			// target, through onPort
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> targetReference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target);
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> executionContext = this->getActivityExecution()->getContext();
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> executionContext = this->getActivityExecution()->getContext();
 			bool operationIsOnProvidedInterface = this->isOperationProvided(action->getOnPort(), action->getOperation());
 			bool operationIsOnRequiredInterface = this->isOperationRequired(action->getOnPort(), action->getOperation());
 			// Operation is on a provided interface only
-			if(operationIsOnProvidedInterface && !operationIsOnRequiredInterface) {
-				execution = targetReference->dispatchIn(action->getOperation(), action->getOnPort());
+			if(operationIsOnProvidedInterface && !operationIsOnRequiredInterface)
+			{
+				returnValue = cS_target->dispatchCallIn(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
 			}
 			// Operation is on a required interface only
-			else if (!operationIsOnProvidedInterface && operationIsOnRequiredInterface) {
+			else if (!operationIsOnProvidedInterface && operationIsOnRequiredInterface)
+			{
 				// If not executing in the context of the target,
 				// Semantics are undefined.
 				// Otherwise, dispatch outside.
-				if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
-					execution = targetReference->dispatchOut(action->getOperation(), action->getOnPort());
+				if((executionContext == cS_target) || (cS_target->contains(executionContext)))
+				{
+					returnValue = cS_target->dispatchCallOut(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
 				}
 			}
 			// Operation is both on a provided and a required interface
-			else if (operationIsOnProvidedInterface && operationIsOnRequiredInterface) {
-				if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
-					execution = targetReference->dispatchOut(action->getOperation(), action->getOnPort());
+			else if (operationIsOnProvidedInterface && operationIsOnRequiredInterface)
+			{
+				if((executionContext == cS_target) || (cS_target->contains(executionContext)))
+				{
+					returnValue = cS_target->dispatchCallOut(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
 				}
-			else {
-					execution = targetReference->dispatchIn(action->getOperation(), action->getOnPort()); 
+				else
+				{
+				returnValue = cS_target->dispatchCallIn(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
 				}	
 			}
+
+			const std::shared_ptr<Bag<uml::Parameter>>& callParameters = this->retrieveCallParameters();
+			bool foundFirstReturnParameter = false;
+
+			for(const std::shared_ptr<uml::Parameter>& aParameter : *callParameters)
+			{
+				unsigned int parameterCounter = 0;
+
+				if(aParameter->getDirection() == uml::ParameterDirectionKind::INOUT || aParameter->getDirection() == uml::ParameterDirectionKind::OUT)
+				{
+					std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> outputParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+					outputParameterValue->setParameter(aParameter);
+					outputParameterValue->getValues()->add(outputArguments->at(parameterCounter));
+					outputParameterValues->add(outputParameterValue);
+				}
+				else if(aParameter->getDirection() == uml::ParameterDirectionKind::RETURN)
+				{
+					if(!foundFirstReturnParameter)
+					{
+						if(!returnValue->isEmpty())
+						{
+							std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+							returnParameterValue->setParameter(aParameter);
+							returnParameterValue->getValues()->add(returnValue);
+							outputParameterValues->add(returnParameterValue);
+						}
+
+						foundFirstReturnParameter = true;
+					}
+				}
+
+				parameterCounter++;
+			}
+			return outputParameterValues;
 		}
 	}
-	return execution;
-*/
+	return nullptr;
 	//end of body
 }
+
+
 
 bool CS_CallOperationActionActivationImpl::isCreate(const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
-	std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> executionFactory = std::dynamic_pointer_cast<PSCS::Semantics::Loci::CS_ExecutionFactory>(this->getExecutionLocus()->getFactory());
-	std::shared_ptr<uml::Class> stereotypeCreate = std::dynamic_pointer_cast<uml::Class>(executionFactory->getStereotypeClass("StandardProfile", "Create"));
-	if(stereotypeCreate == nullptr) {
-		// standard profile is not applied
-		return false;
-	}
-	return executionFactory->getStereotypeApplication(stereotypeCreate, operation) != nullptr;
-*/
+	return operation->getAppliedStereotype("StandardProfile::Create") != nullptr;
 	//end of body
 }
 
@@ -332,28 +468,32 @@ bool CS_CallOperationActionActivationImpl::isOperationProvided(const std::shared
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			bool isProvided = false;
-	/*if(std::dynamic_pointer_cast<uml::Interface>(operation->getOwner().lock()) != nullptr) {*/
-	// We have to look in provided interfaces of the port if
-	// they define directly or indirectly the Operation
-	/*unsigned int interfaceIndex = 1;
-	// Iterates on provided interfaces of the port
-	std::shared_ptr<Bag<uml::Interface>> providedInterfaces = port->getProvideds();
-	while((interfaceIndex <= providedInterfaces->size()) && (!isProvided)) {
-		std::shared_ptr<uml::Interface> interface_ = providedInterfaces->at(interfaceIndex-1);
-		// Iterates on members of the current Interface
-		unsigned int memberIndex = 1;
-		while((memberIndex <= interface_->getMember()->size()) && (!isProvided)) {
-			std::shared_ptr<uml::NamedElement> cddOperation = interface_->getMember()->at(memberIndex-1);
-			if(std::dynamic_pointer_cast<uml::Operation>(cddOperation) != nullptr) {
+	bool isProvided = false;
+	if(std::dynamic_pointer_cast<uml::Interface>(operation->getOwner().lock()) != nullptr)
+	{
+		// We have to look in provided interfaces of the port if
+		// they define directly or indirectly the Operation
+		// Iterates on provided interfaces of the port
+		std::shared_ptr<Bag<uml::Interface>> providedInterfaces = port->getProvideds();
+		unsigned int interfaceIndex = 1, providedInterfacesSize = providedInterfaces->size();
+		while((interfaceIndex <= providedInterfacesSize) && (!isProvided))
+		{
+			const std::shared_ptr<uml::Interface>& interface_ = providedInterfaces->at(interfaceIndex-1);
+			// Iterates on members of the current Interface
+			std::shared_ptr<Bag<uml::Operation>> allOperations = interface_->getAllOperations();
+			unsigned int operationIndex = 1, allOperationsSize = allOperations->size();
+			while((operationIndex <= allOperationsSize) && (!isProvided))
+			{
+				const std::shared_ptr<uml::Operation>& cddOperation = allOperations->at(operationIndex-1);
+
 				//isProvided = (operation == cddOperation);
-				isProvided = operation->matches(std::dynamic_pointer_cast<uml::Operation>(cddOperation));
+				isProvided = operation->matches(cddOperation);
+
+				operationIndex += 1;
 			}
-			memberIndex += 1;
+			interfaceIndex += 1;
 		}
-		interfaceIndex += 1;
 	}
-	/*}*/
 	return isProvided;
 	//end of body
 }
@@ -362,24 +502,27 @@ bool CS_CallOperationActionActivationImpl::isOperationRequired(const std::shared
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		bool isRequired = false;
-	/*unsigned int interfaceIndex = 1;
+	bool isRequired = false;
 	// Interfaces on provided interfaces of the port
 	std::shared_ptr<Bag<uml::Interface>> requiredInterfaces = port->getRequireds();
-	while((interfaceIndex <= requiredInterfaces->size()) && (!isRequired)) {
-		std::shared_ptr<uml::Interface> interface_ = requiredInterfaces->at(interfaceIndex-1);
+	unsigned int interfaceIndex = 1, requiredInterfacesSize = requiredInterfaces->size();
+	while((interfaceIndex <= requiredInterfacesSize) && (!isRequired))
+	{
+		const std::shared_ptr<uml::Interface>& interface_ = requiredInterfaces->at(interfaceIndex-1);
 		// Iterates on members of the current Interface
-		unsigned int memberIndex = 1;
-		while((memberIndex <= interface_->getMember()->size()) && (!isRequired)) {
-			std::shared_ptr<uml::NamedElement> cddOperation = interface_->getMember()->at(memberIndex-1);
-			if(std::dynamic_pointer_cast<uml::Operation>(cddOperation)) {
-				//isRequired = (operation == cddOperation);
-				isRequired = operation->matches(std::dynamic_pointer_cast<uml::Operation>(cddOperation));
-			}
-			memberIndex += 1;
+		std::shared_ptr<Bag<uml::Operation>> allOperations = interface_->getAllOperations();
+		unsigned int operationIndex = 1, allOperationsSize = allOperations->size();
+		while((operationIndex <= allOperationsSize) && (!isRequired))
+		{
+			const std::shared_ptr<uml::Operation>& cddOperation = allOperations->at(operationIndex-1);
+
+			//isRequired = (operation == cddOperation);
+			isRequired = operation->matches(cddOperation);
+
+			operationIndex += 1;
 		}
 		interfaceIndex += 1;
-	}*/
+	}
 	return isRequired;
 	//end of body
 }
@@ -556,10 +699,46 @@ std::shared_ptr<Any> CS_CallOperationActionActivationImpl::eInvoke(int operation
 			this->doAction();
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 3811651158
-		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::doCall(fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 717615249
+		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE:
 		{
-			result = eEcoreAny(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS);
+			//Retrieve input parameter 'inputParameterValues'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameterValues;
+			Bag<Any>::const_iterator incoming_param_inputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inputParameterValues_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inputParameterValues.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
+								incoming_param_inputParameterValues->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputParameterValues'. Failed to invoke operation 'doCall'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->doCall(incoming_param_inputParameterValues);
+			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isCreate(uml::Operation) : bool: 2024874825

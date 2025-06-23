@@ -7,6 +7,7 @@
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
@@ -96,6 +97,18 @@ const std::shared_ptr<ecore::EReference>& PSCS::MDE4CPP_Extensions::MDE4CPP_Exte
 	return m_pSCS_Object_Attribute_definingPort;
 }
 
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_contains_FUML_Object() const
+{
+	return m_pSCS_Object_Operation_contains_FUML_Object;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const
+{
+	return m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const
+{
+	return m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject;
+}
 const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_isInteractionPoint() const
 {
 	return m_pSCS_Object_Operation_isInteractionPoint;

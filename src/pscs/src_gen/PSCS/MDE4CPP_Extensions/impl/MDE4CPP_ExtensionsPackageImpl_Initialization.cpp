@@ -7,6 +7,7 @@
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
@@ -108,6 +109,123 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_ObjectContent()
 	/*
 	 * EOperations
 	 */
+	m_pSCS_Object_Operation_contains_FUML_Object->setName("contains");
+	m_pSCS_Object_Operation_contains_FUML_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_pSCS_Object_Operation_contains_FUML_Object->setLowerBound(1);
+	m_pSCS_Object_Operation_contains_FUML_Object->setUpperBound(1);
+	m_pSCS_Object_Operation_contains_FUML_Object->setUnique(true);
+	m_pSCS_Object_Operation_contains_FUML_Object->setOrdered(true);
+	
+	m_pSCS_Object_Operation_contains_FUML_Object->_setID(PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_contains_FUML_Object);
+		parameter->setName("object");
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject->setName("dispatchCallIn");
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject->setLowerBound(1);
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject->setUpperBound(1);
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject->setUnique(true);
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject->setOrdered(true);
+	
+	m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject->_setID(PSCS_OBJECT_OPERATION_DISPATCHCALLIN_OPERATION_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject);
+		parameter->setName("_operation");
+		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject);
+		parameter->setName("onPort");
+		parameter->setEType(uml::umlPackage::eInstance()->getPort_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject);
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject);
+		parameter->setName("outputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject->setName("dispatchCallOut");
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject->setLowerBound(1);
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject->setUpperBound(1);
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject->setUnique(true);
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject->setOrdered(true);
+	
+	m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject->_setID(PSCS_OBJECT_OPERATION_DISPATCHCALLOUT_OPERATION_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject);
+		parameter->setName("_operation");
+		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject);
+		parameter->setName("onPort");
+		parameter->setEType(uml::umlPackage::eInstance()->getPort_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject);
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject);
+		parameter->setName("outputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_pSCS_Object_Operation_isInteractionPoint->setName("isInteractionPoint");
 	m_pSCS_Object_Operation_isInteractionPoint->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pSCS_Object_Operation_isInteractionPoint->setLowerBound(1);

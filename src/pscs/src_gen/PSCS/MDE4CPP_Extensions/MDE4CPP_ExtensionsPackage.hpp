@@ -17,6 +17,7 @@ namespace ecore
 	class EClass;
 	class EOperation;
 	class EReference;
+	class EParameter;
 	class EGenericType;
 	class EAnnotation;
 	class EDataType;
@@ -72,10 +73,13 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_OBJECT_CLASS = 1088313541;
 			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 50;
+			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 53;
 			
 			static const unsigned long PSCS_OBJECT_ATTRIBUTE_DEFININGPORT = 1420013449;
 			
+			static const unsigned long PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT = 480294208;
+			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLIN_OPERATION_EJAVAOBJECT = 158727684;
+			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLOUT_OPERATION_EJAVAOBJECT = 3938656865;
 			static const unsigned long PSCS_OBJECT_OPERATION_ISINTERACTIONPOINT = 4059681913;
 			
 			//Class and Feature Getter
@@ -84,6 +88,9 @@ namespace PSCS::MDE4CPP_Extensions
 			
 			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_definingPort() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_contains_FUML_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isInteractionPoint() const = 0;
 			
 			// End Class PSCS_Object

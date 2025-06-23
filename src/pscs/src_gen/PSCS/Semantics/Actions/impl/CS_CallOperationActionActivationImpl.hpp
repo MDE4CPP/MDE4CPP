@@ -47,7 +47,8 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual bool _isCreate(const std::shared_ptr<uml::Operation>& operation) ;
 			virtual void doAction() ;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> doCall(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameterValues) ;
+			
 			virtual bool isCreate(const std::shared_ptr<uml::Operation>& operation) ;
 			virtual bool isOperationProvided(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation) ;
 			virtual bool isOperationRequired(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation) ;

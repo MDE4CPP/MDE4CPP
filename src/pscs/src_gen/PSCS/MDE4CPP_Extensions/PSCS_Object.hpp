@@ -11,7 +11,9 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 
+class Any;
 
 //*********************************
 // generated Includes
@@ -51,6 +53,7 @@ namespace ecore
 namespace uml 
 {
 	class Comment;
+	class Operation;
 	class Port;
 }
 
@@ -84,6 +87,9 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Operations
 			//*********************************
+			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) = 0;
+			virtual std::shared_ptr<Any> dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;
+			virtual std::shared_ptr<Any> dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;
 			virtual bool isInteractionPoint() = 0;
 
 			//*********************************

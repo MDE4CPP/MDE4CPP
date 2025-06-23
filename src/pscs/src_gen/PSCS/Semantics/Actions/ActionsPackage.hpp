@@ -111,7 +111,7 @@ namespace PSCS::Semantics::Actions
 			
 			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION = 1345774800;
 			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION = 1729294133;
-			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION = 3811651158;
+			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOCALL_PARAMETERVALUE = 717615249;
 			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION = 2024874825;
 			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONPROVIDED_PORT_OPERATION = 4192990466;
 			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONREQUIRED_PORT_OPERATION = 2625896910;
@@ -123,7 +123,7 @@ namespace PSCS::Semantics::Actions
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation__isCreate_Operation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_doAction() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_getCallExecution() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_doCall_ParameterValue() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isCreate_Operation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation() const = 0;
