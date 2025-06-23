@@ -18,6 +18,7 @@
 
 namespace PSCS::MDE4CPP_Extensions 
 {
+	class MDE4CPP_ConstructStrategy;
 	class PSCS_Link;
 	class PSCS_Object;}
 
@@ -40,6 +41,16 @@ namespace PSCS::MDE4CPP_Extensions
 		public:
 			virtual ~MDE4CPP_ExtensionsPackageImpl();
 
+			// Begin Class MDE4CPP_ConstructStrategy
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getMDE4CPP_ConstructStrategy_Class() const ;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getMDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object() const ;
+			
+			// End Class MDE4CPP_ConstructStrategy
+
 			// Begin Class PSCS_Link
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getPSCS_Link_Class() const ;
@@ -56,6 +67,7 @@ namespace PSCS::MDE4CPP_Extensions
 			
 			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_definingPort() const ;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_constructObject_Class() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_contains_FUML_Object() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const ;
@@ -68,11 +80,11 @@ namespace PSCS::MDE4CPP_Extensions
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_pSCS_Link_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_Object_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_mDE4CPP_ConstructStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_Link_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_Object_Class = nullptr;
 			
 			
 			std::shared_ptr<ecore::EReference> m_pSCS_Object_Attribute_definingPort = nullptr;
-			std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_contains_FUML_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isInteractionPoint = nullptr;
+			std::shared_ptr<ecore::EOperation> m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_constructObject_Class = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_contains_FUML_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isInteractionPoint = nullptr;
 
 			friend class MDE4CPP_ExtensionsPackage;
 
@@ -88,10 +100,12 @@ namespace PSCS::MDE4CPP_Extensions
 			void initializePackageContents();
 
 		private:
+			void createMDE4CPP_ConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPSCS_LinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPSCS_ObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
+			void initializeMDE4CPP_ConstructStrategyContent();
 			void initializePSCS_LinkContent();
 			void initializePSCS_ObjectContent();
 			void initializePackageEDataTypes();

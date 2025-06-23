@@ -158,6 +158,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CS_DefaultConstructStrategy" eSuperTypes="#//Semantics/Actions/CS_ConstructStrategy">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="/*&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &lt;stdexcept>&#xA;&#xA;#include &quot;uml/Port.hpp&quot;&#xA;#include &quot;uml/TypedElement.hpp&quot;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;&#xA;#include &quot;uml/InterfaceRealization.hpp&quot;&#xA;#include &quot;uml/umlFactory.hpp&quot;&#xA;#include &quot;uml/umlPackage.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/Values/Evaluation.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/ParameterValue.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp&quot;&#xA;#include &quot;PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/CS_Link.hpp&quot;&#xA;#include &quot;PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;*/"/>
+          <details key="doNotGenerate" value="Class 'CS_DefaultConstructStrategy' is excluded from generation because it is substituted with class 'PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategy'."/>
         </eAnnotations>
         <eOperations name="addStructuralFeatureValue" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -898,8 +899,26 @@
         <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
       </eOperations>
+      <eOperations name="constructObject">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="/*&#xA; * Should be implemented class-specific in every generated UML class&#xA; */&#xA;return;"/>
+        </eAnnotations>
+        <eParameters name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="definingPort" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Port"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PSCS_Link" eSuperTypes="../../fuml/model/fUML.ecore#//MDE4CPP_Extensions/FUML_Link"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MDE4CPP_ConstructStrategy" eSuperTypes="#//Semantics/Actions/CS_ConstructStrategy">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;uml/Class.hpp&quot;"/>
+      </eAnnotations>
+      <eOperations name="construct" eType="ecore:EClass ../../fuml/model/fUML.ecore#//MDE4CPP_Extensions/FUML_Object">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="context->constructObject(std::dynamic_pointer_cast&lt;uml::Class>(constructor->getType()));&#xA;return context;"/>
+        </eAnnotations>
+        <eParameters name="constructor" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+        <eParameters name="context" eType="#//MDE4CPP_Extensions/PSCS_Object"/>
+      </eOperations>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

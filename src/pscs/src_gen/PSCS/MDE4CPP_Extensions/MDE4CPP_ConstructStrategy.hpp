@@ -4,16 +4,14 @@
 //*
 //********************************************************************
 
-#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_OBJECT_HPP
-#define PSCS_MDE4CPP_EXTENSIONS_PSCS_OBJECT_HPP
+#ifndef PSCS_MDE4CPP_EXTENSIONS_MDE4CPP_CONSTRUCTSTRATEGY_HPP
+#define PSCS_MDE4CPP_EXTENSIONS_MDE4CPP_CONSTRUCTSTRATEGY_HPP
 
 
 #include <memory>
 #include <string>
 // forward declarations
-template<class T> class Bag; 
 
-class Any;
 
 //*********************************
 // generated Includes
@@ -34,35 +32,24 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ObjectActivation;
-}
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 namespace fUML::MDE4CPP_Extensions 
 {
-	class FUML_Link;
+	class FUML_Object;
 }
-namespace ecore 
+namespace PSCS::MDE4CPP_Extensions 
 {
-	class EAnnotation;
+	class PSCS_Object;
 }
 namespace uml 
 {
-	class Class;
-	class Comment;
 	class Operation;
-	class Port;
 }
 
 // namespace macro header include
 #include "PSCS/PSCS.hpp"
 
 // base class includes
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
 
 
 
@@ -71,28 +58,24 @@ namespace uml
 namespace PSCS::MDE4CPP_Extensions 
 {
 	
-	class PSCS_API PSCS_Object : virtual public fUML::MDE4CPP_Extensions::FUML_Object
+	class PSCS_API MDE4CPP_ConstructStrategy : virtual public PSCS::Semantics::Actions::CS_ConstructStrategy
 	{
 		public:
- 			PSCS_Object(const PSCS_Object &) {}
+ 			MDE4CPP_ConstructStrategy(const MDE4CPP_ConstructStrategy &) {}
 
 		protected:
-			PSCS_Object(){}
+			MDE4CPP_ConstructStrategy(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~PSCS_Object() {}
+			virtual ~MDE4CPP_ConstructStrategy() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void constructObject(const std::shared_ptr<uml::Class>& type) = 0;
-			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) = 0;
-			virtual std::shared_ptr<Any> dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;
-			virtual std::shared_ptr<Any> dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;
-			virtual bool isInteractionPoint() = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -101,8 +84,6 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<uml::Port>& getDefiningPort() const = 0;
-			virtual void setDefiningPort(const std::shared_ptr<uml::Port>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -128,7 +109,6 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<uml::Port> m_definingPort;
 	};
 }
-#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_OBJECT_HPP */
+#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_MDE4CPP_CONSTRUCTSTRATEGY_HPP */

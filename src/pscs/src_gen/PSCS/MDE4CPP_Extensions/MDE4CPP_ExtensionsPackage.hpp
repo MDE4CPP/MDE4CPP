@@ -26,6 +26,7 @@ namespace ecore
 
 namespace PSCS::MDE4CPP_Extensions 
 {
+	class MDE4CPP_ConstructStrategy;
 	class PSCS_Link;
 	class PSCS_Object;
 }
@@ -52,6 +53,25 @@ namespace PSCS::MDE4CPP_Extensions
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
+			// Begin Class MDE4CPP_ConstructStrategy
+			//Class and Feature IDs 
+			static const unsigned long MDE4CPP_CONSTRUCTSTRATEGY_CLASS = 1335077633;
+			static const unsigned int MDE4CPP_CONSTRUCTSTRATEGY_CLASS_FEATURE_COUNT = 0;
+			static const unsigned int MDE4CPP_CONSTRUCTSTRATEGY_CLASS_OPERATION_COUNT = 4;
+			
+			
+			static const unsigned long MDE4CPP_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_PSCS_OBJECT = 1962636174;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getMDE4CPP_ConstructStrategy_Class() const = 0;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getMDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object() const = 0;
+			
+			// End Class MDE4CPP_ConstructStrategy
+
+
 			// Begin Class PSCS_Link
 			//Class and Feature IDs 
 			static const unsigned long PSCS_LINK_CLASS = 1393528252;
@@ -73,10 +93,11 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_OBJECT_CLASS = 1088313541;
 			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 53;
+			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 54;
 			
 			static const unsigned long PSCS_OBJECT_ATTRIBUTE_DEFININGPORT = 1420013449;
 			
+			static const unsigned long PSCS_OBJECT_OPERATION_CONSTRUCTOBJECT_CLASS = 3312036985;
 			static const unsigned long PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT = 480294208;
 			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLIN_OPERATION_EJAVAOBJECT = 158727684;
 			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLOUT_OPERATION_EJAVAOBJECT = 3938656865;
@@ -88,6 +109,7 @@ namespace PSCS::MDE4CPP_Extensions
 			
 			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_definingPort() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_constructObject_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_contains_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const = 0;

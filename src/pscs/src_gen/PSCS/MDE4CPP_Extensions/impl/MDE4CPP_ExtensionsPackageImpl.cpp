@@ -17,6 +17,7 @@
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 
 //depending model packages
+#include "PSCS/PSCSPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -74,6 +75,21 @@ void MDE4CPP_ExtensionsPackageImpl::init(std::shared_ptr<ecore::EPackage> packag
 
 
 
+// Begin Class MDE4CPP_ConstructStrategy
+const std::shared_ptr<ecore::EClass>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getMDE4CPP_ConstructStrategy_Class() const
+{
+	return m_mDE4CPP_ConstructStrategy_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getMDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object() const
+{
+	return m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object;
+}
+
+// End Class MDE4CPP_ConstructStrategy
+
 // Begin Class PSCS_Link
 const std::shared_ptr<ecore::EClass>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Class() const
 {
@@ -97,6 +113,10 @@ const std::shared_ptr<ecore::EReference>& PSCS::MDE4CPP_Extensions::MDE4CPP_Exte
 	return m_pSCS_Object_Attribute_definingPort;
 }
 
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_constructObject_Class() const
+{
+	return m_pSCS_Object_Operation_constructObject_Class;
+}
 const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_contains_FUML_Object() const
 {
 	return m_pSCS_Object_Operation_contains_FUML_Object;

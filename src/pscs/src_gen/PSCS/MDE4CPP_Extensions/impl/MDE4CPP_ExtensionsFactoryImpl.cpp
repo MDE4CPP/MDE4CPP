@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "PSCS/MDE4CPP_Extensions/impl/MDE4CPP_ConstructStrategyImpl.hpp"
 #include "PSCS/MDE4CPP_Extensions/impl/PSCS_LinkImpl.hpp"
 #include "PSCS/MDE4CPP_Extensions/impl/PSCS_ObjectImpl.hpp"
 
@@ -32,6 +33,7 @@ std::shared_ptr<MDE4CPP_ExtensionsFactory> MDE4CPP_ExtensionsFactory::eInstance(
 
 MDE4CPP_ExtensionsFactoryImpl::MDE4CPP_ExtensionsFactoryImpl()
 {
+	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategy", MDE4CPP_ExtensionsPackage::MDE4CPP_CONSTRUCTSTRATEGY_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::PSCS_Link", MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::PSCS_Object", MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS));
 }
@@ -53,6 +55,12 @@ std::shared_ptr<ecore::EObject> MDE4CPP_ExtensionsFactoryImpl::create(const int 
 {
 	switch(metaElementID)
 	{
+		case MDE4CPP_ExtensionsPackage::MDE4CPP_CONSTRUCTSTRATEGY_CLASS:
+		{
+				return this->createMDE4CPP_ConstructStrategy(metaElementID);
+			
+			break;
+		}
 		case MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS:
 		{
 			if (nullptr == container)
@@ -129,6 +137,13 @@ std::shared_ptr<ecore::EObject> MDE4CPP_ExtensionsFactoryImpl::create(std::strin
     return nullptr;
 }
 
+std::shared_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategy> MDE4CPP_ExtensionsFactoryImpl::createMDE4CPP_ConstructStrategy(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategyImpl> element(new PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategyImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisMDE4CPP_ConstructStrategyPtr(element);
+	return element;
+}
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> MDE4CPP_ExtensionsFactoryImpl::createPSCS_Link(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkImpl> element(new PSCS::MDE4CPP_Extensions::PSCS_LinkImpl());

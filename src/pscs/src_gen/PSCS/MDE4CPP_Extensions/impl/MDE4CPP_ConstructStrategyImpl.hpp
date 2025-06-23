@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_OBJECTPSCS_OBJECTIMPL_HPP
-#define PSCS_MDE4CPP_EXTENSIONS_PSCS_OBJECTPSCS_OBJECTIMPL_HPP
+#ifndef PSCS_MDE4CPP_EXTENSIONS_MDE4CPP_CONSTRUCTSTRATEGYMDE4CPP_CONSTRUCTSTRATEGYIMPL_HPP
+#define PSCS_MDE4CPP_EXTENSIONS_MDE4CPP_CONSTRUCTSTRATEGYMDE4CPP_CONSTRUCTSTRATEGYIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,40 +14,36 @@
 #include "PSCS/PSCS.hpp" 
 
 // model includes
-#include "../PSCS_Object.hpp"
+#include "../MDE4CPP_ConstructStrategy.hpp"
 
 #include "PSCS/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
-#include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
+#include "PSCS/Semantics/Actions/impl/CS_ConstructStrategyImpl.hpp"
 
 //*********************************
 namespace PSCS::MDE4CPP_Extensions 
 {
-	class PSCS_API PSCS_ObjectImpl : virtual public fUML::MDE4CPP_Extensions::FUML_ObjectImpl, virtual public PSCS_Object 
+	class PSCS_API MDE4CPP_ConstructStrategyImpl : virtual public PSCS::Semantics::Actions::CS_ConstructStrategyImpl, virtual public MDE4CPP_ConstructStrategy 
 	{
 		public: 
-			PSCS_ObjectImpl(const PSCS_ObjectImpl & obj);
+			MDE4CPP_ConstructStrategyImpl(const MDE4CPP_ConstructStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			PSCS_ObjectImpl& operator=(PSCS_ObjectImpl const&); 
+			MDE4CPP_ConstructStrategyImpl& operator=(MDE4CPP_ConstructStrategyImpl const&); 
 
 		protected:
 			friend class PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactoryImpl;
-			PSCS_ObjectImpl();
-			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> getThisPSCS_ObjectPtr() const;
-			virtual void setThisPSCS_ObjectPtr(std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> thisPSCS_ObjectPtr);
+			MDE4CPP_ConstructStrategyImpl();
+			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategy> getThisMDE4CPP_ConstructStrategyPtr() const;
+			virtual void setThisMDE4CPP_ConstructStrategyPtr(std::weak_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategy> thisMDE4CPP_ConstructStrategyPtr);
 
 
 		public:
 			//destructor
-			virtual ~PSCS_ObjectImpl();
+			virtual ~MDE4CPP_ConstructStrategyImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void constructObject(const std::shared_ptr<uml::Class>& type) ;
-			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) ;
-			virtual std::shared_ptr<Any> dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) ;
-			virtual std::shared_ptr<Any> dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) ;
-			virtual bool isInteractionPoint() ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -56,8 +52,6 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<uml::Port>& getDefiningPort() const ;
-			virtual void setDefiningPort(const std::shared_ptr<uml::Port>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -94,7 +88,7 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
-			std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> m_thisPSCS_ObjectPtr;
+			std::weak_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategy> m_thisMDE4CPP_ConstructStrategyPtr;
 	};
 }
-#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_OBJECTPSCS_OBJECTIMPL_HPP */
+#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_MDE4CPP_CONSTRUCTSTRATEGYMDE4CPP_CONSTRUCTSTRATEGYIMPL_HPP */

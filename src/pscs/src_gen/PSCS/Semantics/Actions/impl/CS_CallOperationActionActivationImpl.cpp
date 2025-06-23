@@ -36,27 +36,6 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-/*
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/CallOperationAction.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/ParameterDirectionKind.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
-#include "uml/Class.hpp"
-#include "uml/Interface.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
-#include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
-*/
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
@@ -74,10 +53,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"

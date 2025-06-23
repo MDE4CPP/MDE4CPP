@@ -11,7 +11,6 @@
 #include "PSCS/Semantics/Actions/impl/CS_ConstructStrategyImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_CreateLinkActionActivationImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_CreateObjectActionActivationImpl.hpp"
-#include "PSCS/Semantics/Actions/impl/CS_DefaultConstructStrategyImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_ReadExtentActionActivationImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_ReadSelfActionActivationImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.hpp"
@@ -46,7 +45,6 @@ ActionsFactoryImpl::ActionsFactoryImpl()
 	m_idMap.insert(std::make_pair("PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation", ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::Semantics::Actions::CS_CreateLinkActionActivation", ActionsPackage::CS_CREATELINKACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::Semantics::Actions::CS_CreateObjectActionActivation", ActionsPackage::CS_CREATEOBJECTACTIONACTIVATION_CLASS));
-	m_idMap.insert(std::make_pair("PSCS::Semantics::Actions::CS_DefaultConstructStrategy", ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::Semantics::Actions::CS_ReadExtentActionActivation", ActionsPackage::CS_READEXTENTACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::Semantics::Actions::CS_ReadSelfActionActivation", ActionsPackage::CS_READSELFACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation", ActionsPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS));
@@ -152,12 +150,6 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 				assert(castedContainer);
 				return std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation>(this->createCS_CreateObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
 			}
-			break;
-		}
-		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_CLASS:
-		{
-				return this->createCS_DefaultConstructStrategy(metaElementID);
-			
 			break;
 		}
 		case ActionsPackage::CS_READEXTENTACTIONACTIVATION_CLASS:
@@ -363,13 +355,6 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> Actio
 	element->setThisCS_CreateObjectActionActivationPtr(element);
 	return element;
 	
-}
-std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> ActionsFactoryImpl::createCS_DefaultConstructStrategy(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl> element(new PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl());
-	element->setMetaElementID(metaElementID);
-	element->setThisCS_DefaultConstructStrategyPtr(element);
-	return element;
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> ActionsFactoryImpl::createCS_ReadExtentActionActivation(const int metaElementID/*=-1*/) const
 {

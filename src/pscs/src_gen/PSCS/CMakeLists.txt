@@ -73,7 +73,6 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/CS_ConstructStrategyImpl.cpp
 	Semantics/Actions/impl/CS_CreateLinkActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_CreateObjectActionActivationImpl.cpp
-	Semantics/Actions/impl/CS_DefaultConstructStrategyImpl.cpp
 	Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.cpp
 	Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.cpp
 	Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.cpp
@@ -87,6 +86,7 @@ SET(SOURCE_FILES
 	Semantics/StructuredClassifiers/impl/CS_RequestPropagationStrategyImpl.cpp
 	Semantics/Actions/impl/CS_SendSignalActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/CS_StructuralFeatureOfInterfaceAccessStrategyImpl.cpp
+	MDE4CPP_Extensions/impl/MDE4CPP_ConstructStrategyImpl.cpp
 	MDE4CPP_Extensions/impl/PSCS_LinkImpl.cpp
 	MDE4CPP_Extensions/impl/PSCS_ObjectImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp

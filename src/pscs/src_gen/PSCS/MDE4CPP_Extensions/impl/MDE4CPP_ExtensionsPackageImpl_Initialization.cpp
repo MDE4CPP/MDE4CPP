@@ -18,7 +18,9 @@
 
 //depending model packages
 
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -40,16 +42,69 @@ void MDE4CPP_ExtensionsPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
+	m_mDE4CPP_ConstructStrategy_Class->getESuperTypes()->push_back(PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ConstructStrategy_Class());
 	m_pSCS_Link_Class->getESuperTypes()->push_back(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
 	m_pSCS_Object_Class->getESuperTypes()->push_back(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	
 
  	// Initialize classes and features; add operations and parameters
+	initializeMDE4CPP_ConstructStrategyContent();
 	initializePSCS_LinkContent();
 	initializePSCS_ObjectContent();
 
 	initializePackageEDataTypes();
 
+}
+
+void MDE4CPP_ExtensionsPackageImpl::initializeMDE4CPP_ConstructStrategyContent()
+{
+	m_mDE4CPP_ConstructStrategy_Class->setName("MDE4CPP_ConstructStrategy");
+	m_mDE4CPP_ConstructStrategy_Class->setAbstract(false);
+	m_mDE4CPP_ConstructStrategy_Class->setInterface(false);
+	
+	m_mDE4CPP_ConstructStrategy_Class->_setID(MDE4CPP_CONSTRUCTSTRATEGY_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
+	m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object->setName("construct");
+	m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
+	m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object->setLowerBound(0);
+	m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object->setUpperBound(1);
+	m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object->setUnique(true);
+	m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object->setOrdered(true);
+	
+	m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object->_setID(MDE4CPP_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_PSCS_OBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object);
+		parameter->setName("constructor");
+		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object);
+		parameter->setName("context");
+		parameter->setEType(getPSCS_Object_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	
 }
 
 void MDE4CPP_ExtensionsPackageImpl::initializePSCS_LinkContent()
@@ -109,6 +164,31 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_ObjectContent()
 	/*
 	 * EOperations
 	 */
+	m_pSCS_Object_Operation_constructObject_Class->setName("constructObject");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_pSCS_Object_Operation_constructObject_Class->setEType(unknownClass);
+	}
+	m_pSCS_Object_Operation_constructObject_Class->setLowerBound(0);
+	m_pSCS_Object_Operation_constructObject_Class->setUpperBound(1);
+	m_pSCS_Object_Operation_constructObject_Class->setUnique(true);
+	m_pSCS_Object_Operation_constructObject_Class->setOrdered(true);
+	
+	m_pSCS_Object_Operation_constructObject_Class->_setID(PSCS_OBJECT_OPERATION_CONSTRUCTOBJECT_CLASS);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_constructObject_Class);
+		parameter->setName("type");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_pSCS_Object_Operation_contains_FUML_Object->setName("contains");
 	m_pSCS_Object_Operation_contains_FUML_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pSCS_Object_Operation_contains_FUML_Object->setLowerBound(1);

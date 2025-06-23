@@ -41,10 +41,11 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/Class.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
@@ -126,6 +127,17 @@ std::shared_ptr<ecore::EObject> PSCS_ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void PSCS_ObjectImpl::constructObject(const std::shared_ptr<uml::Class>& type)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+ * Should be implemented class-specific in every generated UML class
+ */
+return;
+	//end of body
+}
+
 bool PSCS_ObjectImpl::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -310,7 +322,7 @@ std::shared_ptr<Any> PSCS_ObjectImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
-			return eAny(getDefiningPort(),uml::umlPackage::PORT_CLASS,false); //327
+			return eAny(getDefiningPort(),uml::umlPackage::PORT_CLASS,false); //337
 	}
 	return fUML::MDE4CPP_Extensions::FUML_ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -320,7 +332,7 @@ bool PSCS_ObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
-			return getDefiningPort() != nullptr; //327
+			return getDefiningPort() != nullptr; //337
 	}
 	return fUML::MDE4CPP_Extensions::FUML_ObjectImpl::internalEIsSet(featureID);
 }
@@ -340,7 +352,7 @@ bool PSCS_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<uml::Port> _definingPort = std::dynamic_pointer_cast<uml::Port>(eObject);
 					if(_definingPort)
 					{
-						setDefiningPort(_definingPort); //327
+						setDefiningPort(_definingPort); //337
 					}
 					else
 					{
@@ -374,6 +386,38 @@ std::shared_ptr<Any> PSCS_ObjectImpl::eInvoke(int operationID, const std::shared
  
   	switch(operationID)
 	{
+		// PSCS::MDE4CPP_Extensions::PSCS_Object::constructObject(uml::Class): 3312036985
+		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_CONSTRUCTOBJECT_CLASS:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_type;
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'constructObject'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'constructObject'!")
+					return nullptr;
+				}
+			}
+		
+			this->constructObject(incoming_param_type);
+			break;
+		}
 		// PSCS::MDE4CPP_Extensions::PSCS_Object::contains(fUML::MDE4CPP_Extensions::FUML_Object) : bool: 480294208
 		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT:
 		{

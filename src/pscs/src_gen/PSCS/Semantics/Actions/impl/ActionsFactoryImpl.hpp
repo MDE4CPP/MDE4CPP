@@ -22,7 +22,6 @@ namespace Actions
 	class CS_ConstructStrategy;
 	class CS_CreateLinkActionActivation;
 	class CS_CreateObjectActionActivation;
-	class CS_DefaultConstructStrategy;
 	class CS_ReadExtentActionActivation;
 	class CS_ReadSelfActionActivation;
 	class CS_RemoveStructuralFeatureValueActionActivation;
@@ -67,7 +66,6 @@ namespace PSCS::Semantics::Actions
 			 virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> createCS_CreateObjectActionActivation(const int metaElementID = ActionsPackage::CS_CREATEOBJECTACTIONACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> createCS_CreateObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::CS_CREATEOBJECTACTIONACTIVATION_CLASS) const ;
-			 virtual std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> createCS_DefaultConstructStrategy(const int metaElementID = ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_CLASS) const ;
 			 virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> createCS_ReadExtentActionActivation(const int metaElementID = ActionsPackage::CS_READEXTENTACTIONACTIVATION_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> createCS_ReadExtentActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::CS_READEXTENTACTIONACTIVATION_CLASS) const ;
