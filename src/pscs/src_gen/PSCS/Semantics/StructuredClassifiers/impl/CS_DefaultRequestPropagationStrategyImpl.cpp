@@ -118,14 +118,12 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> CS_DefaultRequestPro
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*	
 	// returns all potential targets in the case where the context is a SendSignalActionActivation
 	// returns the first potential target in the case where the context is anything else
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets(new Bag<fUML::Semantics::StructuredClassifiers::Reference>());
+	
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> selectedTargets(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
 	if(std::dynamic_pointer_cast<fUML::Semantics::Actions::SendSignalActionActivation>(context) != nullptr) {
-		for(unsigned int i = 0; i < potentialTargets->size(); i++) {
-			selectedTargets->add(potentialTargets->at(i));
-		}
+		selectedTargets = potentialTargets;
 	}
 	else {
 		if(potentialTargets->size() >= 1) {
@@ -133,7 +131,6 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> CS_DefaultRequestPro
 		}
 	}
 	return selectedTargets;
-*/
 	//end of body
 }
 

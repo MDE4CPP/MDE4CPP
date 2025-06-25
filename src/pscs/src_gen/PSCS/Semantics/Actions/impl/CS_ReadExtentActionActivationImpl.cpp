@@ -35,28 +35,14 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
-//Includes from codegen annotation
-/*
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/ReadExtentAction.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-*/
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -147,7 +133,6 @@ void CS_ReadExtentActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
 	// Get the extent, at the current execution locus, of the classifier
 	// (which must be a class) identified in the action.
 	// Place references to the resulting set of objects on the result pin.
@@ -155,25 +140,10 @@ void CS_ReadExtentActionActivationImpl::doAction()
 	// CS_References instead of References, in the case where the object is a
 	// CS_Object
 
-	std::shared_ptr<uml::ReadExtentAction> action = std::dynamic_pointer_cast<uml::ReadExtentAction>(this->getNode());
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> objects = this->getExecutionLocus()->retrieveExtent(action->getClassifier());
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> references(new Bag<fUML::Semantics::Values::Value>());
-	
-	for(unsigned int i = 0; i < objects->size(); i++) {
-		std::shared_ptr<fUML::Semantics::Values::Value> object = objects->at(i);
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = nullptr;
-		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object) != nullptr) {
-			reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-			(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object));
-		}
-		else {
-			reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		}
-		reference->setReferent(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(object));
-		references->add(reference);
-	}	
-	this->putTokens(action->getResult(), references);
-*/
+	/*
+	 * Since there are no references in this implementation, we can simply invoke the base class behavior.
+	 */
+	fUML::Semantics::Actions::ReadExtentActionActivationImpl::doAction();
 	//end of body
 }
 

@@ -19,10 +19,7 @@
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_DefaultRequestPropagationStrategy;
-	class CS_DispatchOperationOfInterfaceStrategy;
-	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy;
-	class CS_RequestPropagationStrategy;
-	class CS_StructuralFeatureOfInterfaceAccessStrategy;}
+	class CS_RequestPropagationStrategy;}
 
 namespace ecore
 {
@@ -53,27 +50,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_DefaultRequestPropagationStrategy
 
-			// Begin Class CS_DispatchOperationOfInterfaceStrategy
-			//Class and Feature Getter
-			virtual const std::shared_ptr<ecore::EClass>& getCS_DispatchOperationOfInterfaceStrategy_Class() const ;
-			
-			
-			
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const ;
-			
-			// End Class CS_DispatchOperationOfInterfaceStrategy
-
-			// Begin Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
-			//Class and Feature Getter
-			virtual const std::shared_ptr<ecore::EClass>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class() const ;
-			
-			
-			
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt() const ;
-			
-			// End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
-
 			// Begin Class CS_RequestPropagationStrategy
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getCS_RequestPropagationStrategy_Class() const ;
@@ -85,29 +61,17 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_RequestPropagationStrategy
 
-			// Begin Class CS_StructuralFeatureOfInterfaceAccessStrategy
-			//Class and Feature Getter
-			virtual const std::shared_ptr<ecore::EClass>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Class() const ;
-			
-			
-			
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer() const ;
-			
-			// End Class CS_StructuralFeatureOfInterfaceAccessStrategy
-
 			virtual const std::shared_ptr<ecore::EEnum>& getCS_LinkKind_Class() const ;
 			
 			// SubPackages Getters
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_cS_DefaultRequestPropagationStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_cS_DispatchOperationOfInterfaceStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_cS_RequestPropagationStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_cS_DefaultRequestPropagationStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_cS_RequestPropagationStrategy_Class = nullptr;
 			std::shared_ptr<ecore::EEnum> m_cS_LinkKind_Class = nullptr;
 			
 			
-			std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName = nullptr;std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_getName = nullptr;std::shared_ptr<ecore::EOperation> m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation = nullptr;std::shared_ptr<ecore::EOperation> m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = nullptr;std::shared_ptr<ecore::EOperation> m_cS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = nullptr;std::shared_ptr<ecore::EOperation> m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_getName = nullptr;std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = nullptr;std::shared_ptr<ecore::EOperation> m_cS_DefaultRequestPropagationStrategy_Operation_select_FUML_Object_SemanticVisitor = nullptr;
 
 			friend class StructuredClassifiersPackage;
 
@@ -124,17 +88,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 		private:
 			void createCS_DefaultRequestPropagationStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createCS_DispatchOperationOfInterfaceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCS_RequestPropagationStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
-			void createCS_StructuralFeatureOfInterfaceAccessStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeCS_DefaultRequestPropagationStrategyContent();
-			void initializeCS_DispatchOperationOfInterfaceStrategyContent();
-			void initializeCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyContent();
 			void initializeCS_RequestPropagationStrategyContent();
-			void initializeCS_StructuralFeatureOfInterfaceAccessStrategyContent();
 			void initializePackageEDataTypes();
 
 

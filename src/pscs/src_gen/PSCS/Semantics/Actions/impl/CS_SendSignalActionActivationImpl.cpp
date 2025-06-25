@@ -36,33 +36,24 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-/*
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/SendSignalAction.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/Port.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
-#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/Signal.hpp"
-#include "uml/Property.hpp"
-#include "uml/InputPin.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-*/
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
+#include "uml/Signal.hpp"
+#include "uml/UMLAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -153,7 +144,6 @@ void CS_SendSignalActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
 	// If onPort is not specified, behaves like in fUML
 	// If onPort is specified,
 	// Get the value from the target pin. If the value is not a reference,
@@ -173,50 +163,50 @@ void CS_SendSignalActionActivationImpl::doAction()
 	// - Otherwise the invocation is made into the target object through the
 	// given Port.
 	
-	std::shared_ptr<uml::SendSignalAction> action = std::dynamic_pointer_cast<uml::SendSignalAction>(this->getNode());
-	if(action->getOnPort() == nullptr) {
+	const std::shared_ptr<uml::SendSignalAction>& action = this->getSendSignalAction();
+	if(action->getOnPort() == nullptr) 
+	{
 		// Behaves like in fUML
 		fUML::Semantics::Actions::SendSignalActionActivationImpl::doAction();
 	}
-	else {
-		std::shared_ptr<fUML::Semantics::Values::Value> target = this->takeTokens(action->getTarget())->at(0);
-		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target) != nullptr) {
+	else 
+	{
+		std::shared_ptr<uml::UMLAny> token = std::dynamic_pointer_cast<uml::UMLAny>(this->takeTokens(action->getTarget())->at(0));
+		std::shared_ptr<uml::Element> target = token->getAsElement();
+		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_target = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(target); cS_target != nullptr) {
 			// Constructs the signal instance
-			std::shared_ptr<uml::Signal> signal = action->getSignal();
+			const std::shared_ptr<uml::Signal>& signal = action->getSignal();
 			
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createSignalInstance();
-			signalInstance->setType(signal);
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> signalInstance = this->getExecutionLocus()->instantiate(signal);
 			
-			std::shared_ptr<Bag<uml::Property>> attributes = signal->getOwnedAttribute();
-			std::shared_ptr<Bag<uml::InputPin>> argumentPins = action->getArgument();
-			unsigned int i = 0;
-			while(i < attributes->size()) {
-				std::shared_ptr<uml::Property> attribute = attributes->at(i);
-				std::shared_ptr<uml::InputPin> argumentPin = argumentPins->at(i);
-				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->takeTokens(argumentPin);
-				signalInstance->assignFeatureValue(attribute, values, 0);
+			const std::shared_ptr<Bag<uml::Property>>& attributes = signal->getOwnedAttribute();
+			const std::shared_ptr<Bag<uml::InputPin>>& argumentPins = action->getArgument();
+			unsigned int i = 0, attributesSize = attributes->size();
+			while(i < attributesSize) {
+				const std::shared_ptr<uml::Property>& attribute = attributes->at(i);
+				const std::shared_ptr<uml::InputPin>& argumentPin = argumentPins->at(i);
+				std::shared_ptr<Bag<Any>> values = this->takeTokens(argumentPin);
+				signalInstance->add(attribute, values->at(0), 0);
 				i += 1;
 			}
 			// Construct the signal event occurrence
 			std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> signalEventOccurrence = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createSignalEventOccurrence();
-			signalEventOccurrence->setSignalInstance(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(signalInstance->copy()));
+			signalEventOccurrence->setSignalInstance(signalInstance);
 			
 			std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurence = PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_EventOccurrence();
 			wrappingEventOccurence->setWrappedEventOccurrence(signalEventOccurrence);
 			// Tries to determine if the signal has to be
 			// sent to the environment or to the internals of
 			// target, through onPort
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> targetReference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target);
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> executionContext = this->getActivityExecution()->getContext();
-			if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
-				wrappingEventOccurence->sendOutTo(targetReference, action->getOnPort());
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> executionContext = this->getActivityExecution()->getContext();
+			if((executionContext == cS_target) || (cS_target->contains(executionContext))) {
+				wrappingEventOccurence->sendOutTo(cS_target, action->getOnPort());
 			}
 			else {
-				wrappingEventOccurence->sendInTo(targetReference, action->getOnPort());
+				wrappingEventOccurence->sendInTo(cS_target, action->getOnPort());
 			}
 		}
 	}
-*/
 	//end of body
 }
 

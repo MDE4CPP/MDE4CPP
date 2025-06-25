@@ -35,28 +35,14 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
-//Includes from codegen annotation
-/*
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/CreateObjectAction.hpp"
-#include "uml/Class.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-*/
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -147,7 +133,6 @@ void CS_CreateObjectActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
 	// Create an object with the given classifier (which must be a class) as
 	// its type, at the same locus as the action activation.
 	// Place a reference to the object on the result pin of the action.
@@ -158,22 +143,10 @@ void CS_CreateObjectActionActivationImpl::doAction()
 	// to produce a CS_Object instead of an Object in the case where the class
 	// to be instantiated is not a behavior
 
-	std::shared_ptr<uml::CreateObjectAction> action = this->getCreateObjectAction();
-	
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> referent = this->getExecutionLocus()->instantiate(std::dynamic_pointer_cast<uml::Class>(action->getClassifier()));
-	
-	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(referent) != nullptr) {
-		reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-		(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(referent));
-	}
-	else {
-		reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-	}
-	reference->setReferent(referent);
-	
-	this->putToken(action->getResult(), reference);
-*/
+	/*
+	 * Since there are no references in this implementation, we can simply invoke the base class behavior.
+	 */
+	fUML::Semantics::Actions::CreateObjectActionActivationImpl::doAction();
 	//end of body
 }
 

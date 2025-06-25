@@ -36,34 +36,22 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-/*
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/RemoveStructuralFeatureValueAction.hpp"
-#include "uml/Association.hpp"
-#include "uml/Port.hpp"
-#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/InputPin.hpp"
-*/
+#include "uml/Property.hpp"
+#include "uml/UMLAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -159,7 +147,6 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		/*
 	// Get the values of the object and value input pins.
 	// If the given feature is an association end, then destroy any
 	// matching links. Otherwise, if the object input is a structural
@@ -173,43 +160,50 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	// If isRemoveDuplicates is false, and there is a removeAt input pin
 	// remove the feature value at that position.
 
-	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = this->getRemoveStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& action = this->getRemoveStructuralFeatureValueAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
-	/*std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
-	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
+	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
+	std::shared_ptr<Any> valueAny = nullptr;
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> value = nullptr;
 
 	/* MDE4CPP specific implementation for handling "self"-Pin */
-	/*std::string targetPinName = action->getObject()->getName();
-	if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+	std::string targetPinName = action->getObject()->getName();
+	if((targetPinName.empty()) || (targetPinName.find("self") == 0))
+	{
 		//target is set to the context of the current activity execution
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
-		contextReference->setReferent(context);
-		contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
-			
-		value = contextReference;
+		value = this->getActivityExecution()->getContext();
 	}
-	else{
-		value = this->takeTokens(action->getObject())->at(0);
+	else
+	{
+		valueAny = this->takeTokens(action->getObject())->at(0);
+		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(valueAny);
+		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
 	}
 	/*--------------------------------------------------------*/
 
-	/*std::shared_ptr<fUML::Semantics::Values::Value> inputValue = nullptr;
-	if(action->getValue() != nullptr) {
+	std::shared_ptr<Any> inputValueAny = nullptr;
+	if(action->getValue() != nullptr)
+	{
 		// NOTE: Multiplicity of the value input pin is required to be 1..1.
-		inputValue = this->takeTokens(action->getValue())->at(0);
+		inputValueAny = this->takeTokens(action->getValue())->at(0);
 	}
 
 	int removeAt = 0;
 	if(action->getRemoveAt() != nullptr) {
-		removeAt = (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(this->takeTokens(action->getRemoveAt())->at(0)))->getValue();
+		removeAt = this->takeTokens(action->getRemoveAt())->at(0)->get<int>();
 	}
 	if(association != nullptr) {
-		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinksForEndValue(association, feature, value, inputValue);
+		// Do we have to do this? If the value that should be removed is a structured value, all links that the value is conected to have to be destroyed... right?
+		//std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links = this->getMatchingLinksForEndValue(association, feature, value, inputValue);
+		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(inputValueAny);
+		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> inputValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
+		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& links = inputValue->getLinks();
 		if(action->getIsRemoveDuplicates()) {
-			for(unsigned int i = 0; i < links->size(); i++) {
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
+			for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *links) {
 				link->destroy();
 			}
 		}
@@ -225,70 +219,30 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 			bool notFound = true;
 			unsigned int i = 1;
 			while((notFound) && (i <= links->size())) {
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i-1);
-				if(link->retrieveFeatureValue(feature)->getPosition() == removeAt) {
+				const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link = links->at(i-1);
+				if(link->retrieveLinkEnd(property)->getPosition() == removeAt) {
 					notFound = false;
 					link->destroy();
 				}
 			}
 		}
 	}
-	else if (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value) != nullptr) {
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
-
+	else if (value != nullptr) {
 		// If the value is a data value, then it must be copied before
 		// any change is made.
-		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value) == nullptr) {
-			value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(value->copy());
-		}
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> removedValues(new Bag<fUML::Semantics::Values::Value>());
 
-		if(action->getIsRemoveDuplicates()) {
-			unsigned int j = this->position(inputValue, featureValue->getValues(), 1);
-			while(j > 0) {
-				removedValues->add(featureValue->getValues()->at(j-1));
-				//featureValue->getValues()->erase(featureValue->getValues()->begin() + (j-1));
-				structuredValue->removeValue(feature, featureValue->getValues()->at(j-1));
-				j = this->position(inputValue, featureValue->getValues(), j);
-			}
-		}
-		else if(action->getRemoveAt() == nullptr) {
-			std::vector<unsigned int> positions;
-			/*!
-			Hier sitzt das Problem: in position() liefert der Vergleich zwischen inputValue und dem Value im extrahierten FeatureValue ungleich (müsste gleich sein)
-			--> da ohnehin bisher als ChoiceStrategy nur die FirstChoiceStrategy in der fUML implementiert ist wird dieser Code vorerst ersetzt durch die fUML-Funktionalität
-			*/
-			/*
-			unsigned int j = this->position(inputValue, featureValue->getValues(), 1);
+		std::shared_ptr<Any> featureValue = value->get(property);
 
-			std::cout<<"inputValue* : "<<inputValue.get()<<std::endl;
-			std::cout<<"retrievedValue* : "<<featureValue->getValues()->at(0).get()<<std::endl;
-
-			while(j > 0) {
-				positions.push_back(j);
-				j = this->position(inputValue, featureValue->getValues(), j);
-			}
-			if(positions.size() > 0) {
-				// *** Nondeterministically choose which value to remove.
-				// ***
-				int k = (std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getExecutionLocus()->getFactory()->getStrategy("choice")))->choose(positions.size());
-				removedValues->add(featureValue->getValues()->at(positions.at(k-1)-1));
-				//featureValue->getValues()->erase(featureValue->getValues()->begin() + (positions.at(k-1)-1));
-				structuredValue->removeValue(feature, featureValue->getValues()->at(positions.at(k-1)-1));
-			}*/
-			/*removedValues->add(inputValue);
-			structuredValue->removeValue(feature, inputValue);
-
+		bool isRemoveDuplicates = action->getIsRemoveDuplicates();
+		int removeAt = -1;
+		std::shared_ptr<uml::InputPin> removeAtPin = action->getRemoveAt();
+		if(removeAtPin)
+		{
+			removeAt = this->takeTokens(removeAtPin)->at(0)->get<int>();
 		}
-		else {
-			if((int)featureValue->getValues()->size() >= removeAt) {
-				removedValues->add(featureValue->getValues()->at(removeAt-1));
-				//featureValue->getValues()->erase(featureValue->getValues()->begin() + (removeAt-1));
-				structuredValue->removeValue(feature, featureValue->getValues()->at(removeAt-1));
-				featureValue = structuredValue->retrieveFeatureValue(feature);
-			}
-		}
+
+		value->remove(property, inputValueAny, removeAt, isRemoveDuplicates);
+
 		// When values are removed from the list of values associated to the feature
 		// (in the context of the target), these latter may be involved in links representing
 		// instance of connectors. If this is the case, links in which the removed values are
@@ -296,17 +250,17 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		/*!
 			This functionality is excluded from PSCS in MDE4CPP because link destruction is handled on model level, not execution level.
 		*/
-		/*for(unsigned int i = 0; i < removedValues->size(); i++) {
+		/*
+		for(unsigned int i = 0; i < removedValues->size(); i++) {
 			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linkToDestroy = this->getLinksToDestroy(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value), feature, removedValues->at(i));
 			for(unsigned int j = 0; j < linkToDestroy->size(); j++) {
 				linkToDestroy->at(j)->destroy();
 			}
 		}*/
-	/*}
-	if(action->getResult() != nullptr) {
-		this->putToken(action->getResult(), value);
 	}
-*/
+	if(action->getResult() != nullptr) {
+		this->putToken(action->getResult(), valueAny);
+	}
 	//end of body
 }
 
@@ -383,6 +337,8 @@ std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> CS_RemoveStructuralFea
 	}
 	return linksToDestroy;
 */
+
+throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 	//end of body
 }
 
@@ -413,6 +369,8 @@ std::shared_ptr<Bag<Any>> CS_RemoveStructuralFeatureValueActionActivationImpl::g
 	}
 	return potentialLinkEnds;
 */
+
+throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 	//end of body
 }
 

@@ -74,18 +74,15 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/CS_CreateLinkActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_CreateObjectActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.cpp
 	Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.cpp
 	Semantics/Loci/impl/CS_ExecutionFactoryImpl.cpp
 	Semantics/Loci/impl/CS_ExecutorImpl.cpp
 	Semantics/Loci/impl/CS_LocusImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl.cpp
 	Semantics/Actions/impl/CS_ReadExtentActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_ReadSelfActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/CS_RequestPropagationStrategyImpl.cpp
 	Semantics/Actions/impl/CS_SendSignalActionActivationImpl.cpp
-	Semantics/StructuredClassifiers/impl/CS_StructuralFeatureOfInterfaceAccessStrategyImpl.cpp
 	MDE4CPP_Extensions/impl/MDE4CPP_ConstructStrategyImpl.cpp
 	MDE4CPP_Extensions/impl/PSCS_LinkImpl.cpp
 	MDE4CPP_Extensions/impl/PSCS_ObjectImpl.cpp

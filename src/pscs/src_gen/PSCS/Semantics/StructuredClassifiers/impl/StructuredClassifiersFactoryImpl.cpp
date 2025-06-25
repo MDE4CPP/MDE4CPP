@@ -5,10 +5,7 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_RequestPropagationStrategyImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/CS_StructuralFeatureOfInterfaceAccessStrategyImpl.hpp"
 
 
 
@@ -32,8 +29,6 @@ std::shared_ptr<StructuredClassifiersFactory> StructuredClassifiersFactory::eIns
 StructuredClassifiersFactoryImpl::StructuredClassifiersFactoryImpl()
 {
 	m_idMap.insert(std::make_pair("PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy", StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS));
-	m_idMap.insert(std::make_pair("PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy", StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS));
-	m_idMap.insert(std::make_pair("PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy", StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS));
 }
 
 StructuredClassifiersFactoryImpl::~StructuredClassifiersFactoryImpl()
@@ -56,18 +51,6 @@ std::shared_ptr<ecore::EObject> StructuredClassifiersFactoryImpl::create(const i
 		case StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS:
 		{
 				return this->createCS_DefaultRequestPropagationStrategy(metaElementID);
-			
-			break;
-		}
-		case StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS:
-		{
-				return this->createCS_DispatchOperationOfInterfaceStrategy(metaElementID);
-			
-			break;
-		}
-		case StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS:
-		{
-				return this->createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(metaElementID);
 			
 			break;
 		}
@@ -104,20 +87,6 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropaga
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategyImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategyImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_DefaultRequestPropagationStrategyPtr(element);
-	return element;
-}
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> StructuredClassifiersFactoryImpl::createCS_DispatchOperationOfInterfaceStrategy(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategyImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategyImpl());
-	element->setMetaElementID(metaElementID);
-	element->setThisCS_DispatchOperationOfInterfaceStrategyPtr(element);
-	return element;
-}
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> StructuredClassifiersFactoryImpl::createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl());
-	element->setMetaElementID(metaElementID);
-	element->setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
 	return element;
 }
 

@@ -93,40 +93,6 @@ const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers
 
 // End Class CS_DefaultRequestPropagationStrategy
 
-// Begin Class CS_DispatchOperationOfInterfaceStrategy
-const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_DispatchOperationOfInterfaceStrategy_Class() const
-{
-	return m_cS_DispatchOperationOfInterfaceStrategy_Class;
-}
-
-
-
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const
-{
-	return m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation;
-}
-
-// End Class CS_DispatchOperationOfInterfaceStrategy
-
-// Begin Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
-const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class() const
-{
-	return m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class;
-}
-
-
-
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const
-{
-	return m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature;
-}
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt() const
-{
-	return m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_EInt;
-}
-
-// End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
-
 // Begin Class CS_RequestPropagationStrategy
 const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_RequestPropagationStrategy_Class() const
 {
@@ -145,29 +111,6 @@ const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers
 }
 
 // End Class CS_RequestPropagationStrategy
-
-// Begin Class CS_StructuralFeatureOfInterfaceAccessStrategy
-const std::shared_ptr<ecore::EClass>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_StructuralFeatureOfInterfaceAccessStrategy_Class() const
-{
-	return m_cS_StructuralFeatureOfInterfaceAccessStrategy_Class;
-}
-
-
-
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName() const
-{
-	return m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName;
-}
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature() const
-{
-	return m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_PSCS_Object_StructuralFeature;
-}
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer() const
-{
-	return m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_PSCS_Object_Integer;
-}
-
-// End Class CS_StructuralFeatureOfInterfaceAccessStrategy
 const std::shared_ptr<ecore::EEnum>& PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getCS_LinkKind_Class() const
 {
 	return m_cS_LinkKind_Class;

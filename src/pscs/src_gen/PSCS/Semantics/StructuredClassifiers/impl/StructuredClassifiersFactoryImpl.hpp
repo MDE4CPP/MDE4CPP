@@ -16,10 +16,7 @@
 
 namespace StructuredClassifiers 
 {	class CS_DefaultRequestPropagationStrategy;
-	class CS_DispatchOperationOfInterfaceStrategy;
-	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy;
 	class CS_RequestPropagationStrategy;
-	class CS_StructuralFeatureOfInterfaceAccessStrategy;
 }
 
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -43,8 +40,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			//Creator functions
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> createCS_DefaultRequestPropagationStrategy(const int metaElementID = StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS) const ;
-			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> createCS_DispatchOperationOfInterfaceStrategy(const int metaElementID = StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS) const ;
-			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(const int metaElementID = StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS) const ;
 			 
 
 		private:

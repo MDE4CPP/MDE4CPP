@@ -35,23 +35,14 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
-//Includes from codegen annotation
-/*
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "uml/OutputPin.hpp"
-#include "uml/ReadSelfAction.hpp"
-*/
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -142,27 +133,16 @@ void CS_ReadSelfActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
 	// Get the context object of the activity execution containing this
 	// action activation and place a reference to it on the result output
 	// pin.
 	// Extends fUML semantics in the sense that the reference placed on
 	// the result pin is a CS_Reference, not a Reference
 
-	//DEBUG_MESSAGE(std::cout << "[ReadSelfActionActivation] Start..." << std::endl;)
-	
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-	context->setReferent(this->getExecutionContext());
-	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context->getReferent()) != nullptr) {
-		// i.e. alternatively, it can be an execution
-		context->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context->getReferent()));
-	}
-	
-	//DEBUG_MESSAGE(std::cout << "[ReadSelfActionActivation] context object = " << context->getReferent()->toString() << std::endl;)
-	
-	std::shared_ptr<uml::OutputPin> resultPin = this->getReadSelfAction()->getResult();
-	this->putToken(resultPin, context);
-*/
+	/*
+	 * Since there are no references in this implementation, we can simply invoke the base class behavior.
+	 */
+	fUML::Semantics::Actions::ReadSelfActionActivationImpl::doAction();
 	//end of body
 }
 
