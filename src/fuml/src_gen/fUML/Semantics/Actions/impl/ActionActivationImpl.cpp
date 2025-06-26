@@ -426,51 +426,54 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> ActionActivationImpl::
 	std::shared_ptr<uml::Property> oppositeEnd = getOppositeEnd(association, end);
 	std::shared_ptr<uml::Property> endAsProperty = std::dynamic_pointer_cast<uml::Property>(end);
 
-	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinksOfOppositeValue = oppositeValue->getLinks();
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinksOfEndValue = endValue->getLinks();
 
-	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links(new Bag<fUML::MDE4CPP_Extensions::FUML_Link>);
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> matchingLinks(new Bag<fUML::MDE4CPP_Extensions::FUML_Link>);
 
-	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinksOfOppositeValue)
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinksOfEndValue)
 	{
-		if(link->retrieveLinkEndValue(oppositeEnd) == oppositeValue) 
+		if(link->getType() == association)
 		{
-			bool matches = true;
-			if(endValue != nullptr) 
+			if(link->retrieveLinkEndValue(oppositeEnd) == oppositeValue)
 			{
-				matches = (link->retrieveLinkEndValue(endAsProperty) == endValue);
-			}
-			
-			if(matches)
-			{
-				if(!(endAsProperty->getIsOrdered()) || (links->size() == 0))
+				bool matches = true;
+				if(endValue != nullptr)
 				{
-					links->add(link);
+					matches = (link->retrieveLinkEndValue(endAsProperty) == endValue);
 				}
-				else 
+
+				if(matches)
 				{
-					unsigned int n = link->retrieveLinkEnd(endAsProperty)->getPosition();
-					bool continueSearching = true;
-					unsigned int j = 0,
-								linksSize = links->size();
-					while(continueSearching && (j < linksSize))
+					if(!(endAsProperty->getIsOrdered()) || (matchingLinks->size() == 0))
 					{
-						j += 1;
-						continueSearching = (unsigned int)(links->at(j-1)->retrieveLinkEnd(endAsProperty)->getPosition()) < n;
-					}
-					if(continueSearching)
-					{
-						links->add(link);
+						matchingLinks->add(link);
 					}
 					else 
 					{
-						links->insert((links->begin() + (j-1)), link);
+						unsigned int n = link->retrieveLinkEnd(endAsProperty)->getPosition();
+						bool continueSearching = true;
+						unsigned int j = 0,
+									linksSize = matchingLinks->size();
+						while(continueSearching && (j < linksSize))
+						{
+							j += 1;
+							continueSearching = (unsigned int)(matchingLinks->at(j-1)->retrieveLinkEnd(endAsProperty)->getPosition()) < n;
+						}
+						if(continueSearching)
+						{
+							matchingLinks->add(link);
+						}
+						else
+						{
+							matchingLinks->insert((matchingLinks->begin() + (j-1)), link);
+						}
 					}
 				}
 			}
 		}
 	}
 
-	return links;
+	return matchingLinks;
 	//end of body
 }
 

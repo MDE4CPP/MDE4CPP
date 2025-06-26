@@ -144,6 +144,22 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_ObjectContent()
 	/*
 	 * EReferences
 	 */
+	m_pSCS_Object_Attribute_compositeOwner->setName("compositeOwner");
+	m_pSCS_Object_Attribute_compositeOwner->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
+	m_pSCS_Object_Attribute_compositeOwner->setLowerBound(0);
+	m_pSCS_Object_Attribute_compositeOwner->setUpperBound(1);
+	m_pSCS_Object_Attribute_compositeOwner->setTransient(false);
+	m_pSCS_Object_Attribute_compositeOwner->setVolatile(false);
+	m_pSCS_Object_Attribute_compositeOwner->setChangeable(true);
+	m_pSCS_Object_Attribute_compositeOwner->setUnsettable(false);
+	m_pSCS_Object_Attribute_compositeOwner->setUnique(true);
+	m_pSCS_Object_Attribute_compositeOwner->setDerived(false);
+	m_pSCS_Object_Attribute_compositeOwner->setOrdered(true);
+	m_pSCS_Object_Attribute_compositeOwner->setContainment(false);
+	m_pSCS_Object_Attribute_compositeOwner->setResolveProxies(true);
+	m_pSCS_Object_Attribute_compositeOwner->setDefaultValueLiteral("");	
+	
+	m_pSCS_Object_Attribute_compositeOwner->_setID(PSCS_OBJECT_ATTRIBUTE_COMPOSITEOWNER);
 	m_pSCS_Object_Attribute_definingPort->setName("definingPort");
 	m_pSCS_Object_Attribute_definingPort->setEType(uml::umlPackage::eInstance()->getPort_Class());
 	m_pSCS_Object_Attribute_definingPort->setLowerBound(0);
@@ -200,6 +216,25 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_ObjectContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_contains_FUML_Object);
+		parameter->setName("object");
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_pSCS_Object_Operation_directlyContains_FUML_Object->setName("directlyContains");
+	m_pSCS_Object_Operation_directlyContains_FUML_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_pSCS_Object_Operation_directlyContains_FUML_Object->setLowerBound(1);
+	m_pSCS_Object_Operation_directlyContains_FUML_Object->setUpperBound(1);
+	m_pSCS_Object_Operation_directlyContains_FUML_Object->setUnique(true);
+	m_pSCS_Object_Operation_directlyContains_FUML_Object->setOrdered(true);
+	
+	m_pSCS_Object_Operation_directlyContains_FUML_Object->_setID(PSCS_OBJECT_OPERATION_DIRECTLYCONTAINS_FUML_OBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_directlyContains_FUML_Object);
 		parameter->setName("object");
 		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);

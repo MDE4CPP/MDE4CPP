@@ -46,7 +46,7 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual void doAction() ;
-			virtual std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Any>& removedValue) ;
+			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Any>& removedValue) ;
 			virtual std::shared_ptr<Bag<Any>> getPotentialLinkEnds(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::StructuralFeature>& feature) ;
 			
 			//*********************************

@@ -40,11 +40,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -111,6 +111,7 @@ PSCS_ObjectImpl& PSCS_ObjectImpl::operator=(const PSCS_ObjectImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_compositeOwner  = obj.getCompositeOwner();
 	m_definingPort  = obj.getDefiningPort();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -139,6 +140,17 @@ return;
 }
 
 bool PSCS_ObjectImpl::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
+ * Should be implemented class-specific in every generated UML class
+ */
+return false;
+	//end of body
+}
+
+bool PSCS_ObjectImpl::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -186,6 +198,17 @@ bool PSCS_ObjectImpl::isInteractionPoint()
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference compositeOwner */
+const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& PSCS_ObjectImpl::getCompositeOwner() const
+{
+    return m_compositeOwner;
+}
+void PSCS_ObjectImpl::setCompositeOwner(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& _compositeOwner)
+{
+    m_compositeOwner = _compositeOwner;
+	
+}
+
 /* Getter & Setter for reference definingPort */
 const std::shared_ptr<uml::Port>& PSCS_ObjectImpl::getDefiningPort() const
 {
@@ -234,6 +257,13 @@ void PSCS_ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	{
 		std::map<std::string, std::string>::const_iterator iter;
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("compositeOwner");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("compositeOwner")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("definingPort");
 		if ( iter != attr_list.end() )
 		{
@@ -264,6 +294,18 @@ void PSCS_ObjectImpl::resolveReferences(const int featureID, std::vector<std::sh
 {
 	switch(featureID)
 	{
+		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_COMPOSITEOWNER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _compositeOwner = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>( references.front() );
+				setCompositeOwner(_compositeOwner);
+			}
+			
+			return;
+		}
+
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
 		{
 			if (references.size() == 1)
@@ -298,6 +340,10 @@ void PSCS_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> package = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance();
 	// Add references
+	if ( this->eIsSet(package->getPSCS_Object_Attribute_compositeOwner()) )
+	{
+		saveHandler->addReference(this->getCompositeOwner(), "compositeOwner", getCompositeOwner()->eClass() != fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class()); 
+	}
 	if ( this->eIsSet(package->getPSCS_Object_Attribute_definingPort()) )
 	{
 		saveHandler->addReference(this->getDefiningPort(), "definingPort", getDefiningPort()->eClass() != uml::umlPackage::eInstance()->getPort_Class()); 
@@ -321,6 +367,8 @@ std::shared_ptr<Any> PSCS_ObjectImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
+		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_COMPOSITEOWNER:
+			return eAny(getCompositeOwner(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //338
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
 			return eAny(getDefiningPort(),uml::umlPackage::PORT_CLASS,false); //337
 	}
@@ -331,6 +379,8 @@ bool PSCS_ObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_COMPOSITEOWNER:
+			return getCompositeOwner() != nullptr; //338
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
 			return getDefiningPort() != nullptr; //337
 	}
@@ -341,6 +391,37 @@ bool PSCS_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
+		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_COMPOSITEOWNER:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _compositeOwner = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(eObject);
+					if(_compositeOwner)
+					{
+						setCompositeOwner(_compositeOwner); //338
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'compositeOwner'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'compositeOwner'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_OBJECT_ATTRIBUTE_DEFININGPORT:
 		{
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
@@ -448,6 +529,38 @@ std::shared_ptr<Any> PSCS_ObjectImpl::eInvoke(int operationID, const std::shared
 			}
 		
 			result = eAny(this->contains(incoming_param_object), 0, false);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Object::directlyContains(fUML::MDE4CPP_Extensions::FUML_Object) : bool: 3588575596
+		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_DIRECTLYCONTAINS_FUML_OBJECT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'directlyContains'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'directlyContains'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->directlyContains(incoming_param_object), 0, false);
 			break;
 		}
 		// PSCS::MDE4CPP_Extensions::PSCS_Object::dispatchCallIn(uml::Operation, uml::Port, Any[*], Any[*]) : Any: 158727684

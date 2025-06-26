@@ -108,6 +108,10 @@ const std::shared_ptr<ecore::EClass>& PSCS::MDE4CPP_Extensions::MDE4CPP_Extensio
 }
 
 
+const std::shared_ptr<ecore::EReference>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Attribute_compositeOwner() const
+{
+	return m_pSCS_Object_Attribute_compositeOwner;
+}
 const std::shared_ptr<ecore::EReference>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Attribute_definingPort() const
 {
 	return m_pSCS_Object_Attribute_definingPort;
@@ -120,6 +124,10 @@ const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_Exte
 const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_contains_FUML_Object() const
 {
 	return m_pSCS_Object_Operation_contains_FUML_Object;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_directlyContains_FUML_Object() const
+{
+	return m_pSCS_Object_Operation_directlyContains_FUML_Object;
 }
 const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const
 {

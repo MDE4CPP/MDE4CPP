@@ -90,6 +90,7 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			virtual void constructObject(const std::shared_ptr<uml::Class>& type) = 0;
 			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) = 0;
+			virtual bool directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) = 0;
 			virtual std::shared_ptr<Any> dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;
 			virtual std::shared_ptr<Any> dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) = 0;
 			virtual bool isInteractionPoint() = 0;
@@ -101,6 +102,8 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getCompositeOwner() const = 0;
+			virtual void setCompositeOwner(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) = 0;
 			virtual const std::shared_ptr<uml::Port>& getDefiningPort() const = 0;
 			virtual void setDefiningPort(const std::shared_ptr<uml::Port>&) = 0;
 
@@ -128,6 +131,7 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> m_compositeOwner;
 			std::shared_ptr<uml::Port> m_definingPort;
 	};
 }

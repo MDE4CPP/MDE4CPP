@@ -92,13 +92,15 @@ namespace PSCS::MDE4CPP_Extensions
 			// Begin Class PSCS_Object
 			//Class and Feature IDs 
 			static const unsigned long PSCS_OBJECT_CLASS = 1088313541;
-			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 54;
+			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 55;
 			
+			static const unsigned long PSCS_OBJECT_ATTRIBUTE_COMPOSITEOWNER = 1481579593;
 			static const unsigned long PSCS_OBJECT_ATTRIBUTE_DEFININGPORT = 1420013449;
 			
 			static const unsigned long PSCS_OBJECT_OPERATION_CONSTRUCTOBJECT_CLASS = 3312036985;
 			static const unsigned long PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT = 480294208;
+			static const unsigned long PSCS_OBJECT_OPERATION_DIRECTLYCONTAINS_FUML_OBJECT = 3588575596;
 			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLIN_OPERATION_EJAVAOBJECT = 158727684;
 			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLOUT_OPERATION_EJAVAOBJECT = 3938656865;
 			static const unsigned long PSCS_OBJECT_OPERATION_ISINTERACTIONPOINT = 4059681913;
@@ -107,10 +109,12 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EClass>& getPSCS_Object_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_compositeOwner() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_definingPort() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_constructObject_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_contains_FUML_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_directlyContains_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isInteractionPoint() const = 0;
