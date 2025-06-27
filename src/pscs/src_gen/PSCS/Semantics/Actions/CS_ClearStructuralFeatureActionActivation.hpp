@@ -44,9 +44,12 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Link;
+}
 namespace PSCS::MDE4CPP_Extensions 
 {
-	class PSCS_Link;
 	class PSCS_Object;
 }
 namespace uml 
@@ -89,7 +92,7 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual void doAction() = 0;
-			virtual std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
+			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
 			virtual std::shared_ptr<Bag<Any>> getPotentialLinkEnds(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& context, const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
 
 			//*********************************

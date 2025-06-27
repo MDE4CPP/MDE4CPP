@@ -36,22 +36,12 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-/*
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/ClearStructuralFeatureAction.hpp"
-#include "uml/Association.hpp"
-#include "uml/Port.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "uml/Class.hpp"
 #include "uml/InputPin.hpp"
-*/
+#include "uml/Property.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -67,9 +57,9 @@
 #include "uml/ClearStructuralFeatureAction.hpp"
 #include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"
 #include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
 #include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "uml/StructuralFeature.hpp"
@@ -80,6 +70,7 @@
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -155,88 +146,91 @@ void CS_ClearStructuralFeatureActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		/*
 	// Get the value of the object input pin.
 	// If the given feature is an association end, then
 	// destroy all links that have the object input on the opposite end.
 	// Otherwise, if the object input is a structured value, then
 	// set the appropriate feature of the input value to be empty.
 
-	std::shared_ptr<uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(this->getNode());
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::ClearStructuralFeatureAction>& action = this->getClearStructuralFeatureAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
-	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
+	std::shared_ptr<Any> valueAny = nullptr;
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> value = nullptr;
 
 	/* MDE4CPP specific implementation for handling "self"-Pin */
-	/*std::string targetPinName = action->getObject()->getName();
-	if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+	std::string targetPinName = action->getObject()->getName();
+	if((targetPinName.empty()) || (targetPinName.find("self") == 0))
+	{
 		//target is set to the context of the current activity execution
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
-		contextReference->setReferent(context);
-		contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
-			
-		value = contextReference;
+		value = this->getActivityExecution()->getContext();
 	}
-	else{
-		value = this->takeTokens(action->getObject())->at(0);
+	else
+	{
+		valueAny = this->takeTokens(action->getObject())->at(0);
+		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(valueAny);
+		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
 	}
 	/*--------------------------------------------------------*/
 
-	/*if(association != nullptr) {
-		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
-		for(unsigned int i = 0; i < links->size(); i++) {
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
+	if(association != nullptr)
+	{
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links = this->getMatchingLinks(association, feature, value);
+		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *links)
+		{
 			link->destroy();
 		}
 	}
-	else if(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value) != nullptr){
-		// If the value is a data value, then it must be copied before
-		// any change is made.
-		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value) == nullptr) {
-			value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(value->copy());
+	else if(value != nullptr)
+	{
+
+		// extension to fUML
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> linksToDestroy = this->getLinksToDestroy(value, feature);
+		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& linkToDestroy : *linksToDestroy)
+		{
+			linkToDestroy->destroy();
+		//
 		}
-		else {
-			// extension to fUML
-			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linksToDestroy = this->getLinksToDestroy(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value), feature);
-			for(unsigned int i = 0; i < linksToDestroy->size(); i++) {
-				linksToDestroy->at(i)->destroy();
-			}
-			//
-		}
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> newValueList(new Bag<fUML::Semantics::Values::Value>());
-		(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value))->assignFeatureValue(action->getStructuralFeature(), newValueList, 0);
+		value->unset(property);
 	}
-	if(action->getResult() != nullptr) {
-		this->putToken(action->getResult(), value);
+	if(action->getResult() != nullptr)
+	{
+		this->putToken(action->getResult(), eUMLAny(value, value->getMetaElementID()));
 	}
-*/
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> CS_ClearStructuralFeatureActionActivationImpl::getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature)
+std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeatureActionActivationImpl::getLinksToDestroy(const std::shared_ptr<uml::Element>& value, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	/*
 	// Retrieves links that must be destroyed when the given feature
 	// is cleared in the context of the given value
-	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linksToDestroy(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>);
-	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value) != nullptr) {
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value);
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> linksToDestroy(new Bag<fUML::MDE4CPP_Extensions::FUML_Link>());
+	if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(value); context != nullptr)
+	{
+		std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 		// Retrieves the feature values for the structural feature associated with this action,
 		// in the context of this reference
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = context->retrieveFeatureValue(feature);
-		if(std::dynamic_pointer_cast<uml::Port>(feature) != nullptr) {
+		std::shared_ptr<Any> featureValue = context->get(property);
+		if(property->getMetaElementID() == uml::umlPackage::PORT_CLASS) {
 			// all values are interaction points
 			// any link targeting this interaction point must be destroyed
-			for(unsigned int i = 0; i < featureValue->getValues()->size(); i++) {
-				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(featureValue->getValues()->at(i));
-				std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> connectorInstances = context->getCompositeReferent()->getLinks(interactionPoint);
-				for(unsigned int j = 0; j < connectorInstances->size(); j++) {
-					std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = connectorInstances->at(j);
-					linksToDestroy->add(link);
+
+			if(!featureValue->isContainer())
+			{
+				std::shared_ptr<Bag<uml::Element>> values = std::dynamic_pointer_cast<uml::UMLContainerAny>(featureValue)->getAsElementContainer();
+				for(const std::shared_ptr<uml::Element>& value : *values)
+				{
+					linksToDestroy->insert(*(std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value)->getLinks()));
 				}
+			}
+			else
+			{
+				std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(featureValue)->getAsElement();
+				linksToDestroy->insert(*(std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value)->getLinks()));
 			}
 		}
 		else {
@@ -246,62 +240,130 @@ std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> CS_ClearStructuralFeat
 			// and potential link ends corresponding to other features.
 			// By "potential link ends", we refer to the values of a given feature,
 			// as well as interaction points associated with this value, if any.
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> allValuesForFeature(new Bag<fUML::Semantics::Values::Value>());
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> allOtherValues(new Bag<fUML::Semantics::Values::Value>());
-			for(unsigned int i = 0; i < context->getReferent()->getFeatureValues()->size(); i++) {
-				std::shared_ptr<uml::StructuralFeature> currentFeature = context->getReferent()->getFeatureValues()->at(i)->getFeature();
-				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getPotentialLinkEnds(context, currentFeature);
-				for(unsigned int j = 0; j < values->size(); j++) {
-					std::shared_ptr<fUML::Semantics::Values::Value> v = values->at(j);
-					if(currentFeature != feature) {
-						allOtherValues->add(v);
+
+			std::shared_ptr<uml::Property> opposite = property->getOpposite();
+			std::shared_ptr<Any> featureValue = context->get(property);
+
+			if(featureValue->isContainer())
+			{
+				// TODO: Implement something like PSCS_Object::getLinksFromInteractionPoints(), much of this can be generated
+				// Idee: generierte Klassen bekommen sowas wie "destroyLinks" woebi man beachten muss, ob die Links in einem bestimmten Kontext existeren oder nicht.
+				std::shared_ptr<Bag<uml::Element>> values = std::dynamic_pointer_cast<uml::UMLContainerAny>(featureValue)->getAsElementContainer();
+				if(!values->empty())
+				{
+					const std::shared_ptr<uml::Class>& metaClass = values->at(0)->getMetaClass();
+					std::shared_ptr<Bag<uml::Property>> allAttributes = metaClass->getAllAttributes();
+					std::shared_ptr<Bag<uml::Property>> portAttributes(new Bag<uml::Property>());
+
+					for(const std::shared_ptr<uml::Property>& property : *allAttributes)
+					{
+						if(property->getMetaElementID() == uml::umlPackage::PORT_CLASS)
+						{
+							portAttributes->add(property);
+						}
 					}
-					else {
-						allValuesForFeature->add(v);
-					}
-				}
-			}
-			// Retrieves all links available at the locus
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValues = this->getExecutionLocus()->getExtensionalValues();
-			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
-			for(unsigned int i = 0; i < extensionalValues->size(); i++) {
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValue = extensionalValues->at(i);
-				if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Link>(extensionalValue) != nullptr) {
-					allLinks->add(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Link>(extensionalValue));
-				}
-			}
-			//Retrieves links representing connector instances in the context object
-			for(unsigned int i = 0; i < allLinks->size(); i++) {
-				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = allLinks->at(i);
-				bool linkHasToBeDestroyed = false;
-				for(unsigned int j = 0; j < allValuesForFeature->size() && !linkHasToBeDestroyed; j++) {
-					std::shared_ptr<fUML::Semantics::Values::Value> v = allValuesForFeature->at(j);
-					std::shared_ptr<uml::StructuralFeature> featureForV = link->getFeature(v);
-					if(featureForV != nullptr) {
-						// Check if feature values of this link for other features
-						// contains elements identified in allOtherValue
-						for(unsigned int k = 0; k < link->retrieveFeatureValues()->size() && !linkHasToBeDestroyed; k++) {
-							std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue = link->retrieveFeatureValues()->at(k);
-							if(otherFeatureValue->getFeature() != featureForV) {
-								for (unsigned int l = 0; l < otherFeatureValue->getValues()->size() && !linkHasToBeDestroyed; l++) {
-									for(unsigned int m = 0; m < allOtherValues->size() && !linkHasToBeDestroyed; m++) {
-										if(otherFeatureValue->getValues()->at(l) == allOtherValues->at(m)) {
-											linkHasToBeDestroyed = true;
-										}
-									}
+
+					for(const std::shared_ptr<uml::Element>& value : *values)
+					{
+						std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
+						// First add all links from the current object to a link end within the given context
+						const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinks = object->getLinks();
+
+						for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
+						{
+							std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveLinkEndValue(opposite);
+							if(context->directlyContains(oppositeEndValue))
+							{
+								linksToDestroy->add(link);
+							}
+							else if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> interactionPoint = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(oppositeEndValue); interactionPoint != nullptr && interactionPoint->isInteractionPoint())
+							{
+								if(context->directlyContains(interactionPoint->getCompositeOwner()))
+								{
+									linksToDestroy->add(link);
 								}
+							}
+						}
+
+						// Next, add all links of potential interaction points owned by the current object
+						for(const std::shared_ptr<uml::Property>& port : *portAttributes)
+						{
+							std::shared_ptr<Any> portValue = value->get(port);
+							if(portValue->isContainer())
+							{
+								std::shared_ptr<Bag<uml::Element>> values = std::dynamic_pointer_cast<uml::UMLContainerAny>(portValue)->getAsElementContainer();
+								for(const std::shared_ptr<uml::Element>& value : *values)
+								{
+									std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> interactionPoint = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
+									linksToDestroy->insert(*(interactionPoint->getLinks()));
+								}
+							}
+							else
+							{
+								std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(portValue)->getAsElement();
+								std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> interactionPoint = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
+								linksToDestroy->insert(*(interactionPoint->getLinks()));
 							}
 						}
 					}
 				}
-				if(linkHasToBeDestroyed) {
-					linksToDestroy->add(link);
+			}
+			else
+			{
+				std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(featureValue)->getAsElement();
+
+				if(value != nullptr)
+				{
+					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
+					// First add all links from the current object to a link end within the given context
+					const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinks = object->getLinks();
+
+					for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
+					{
+						std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveLinkEndValue(opposite);
+						if(context->directlyContains(oppositeEndValue))
+						{
+							linksToDestroy->add(link);
+						}
+						else if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> interactionPoint = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(oppositeEndValue); interactionPoint != nullptr && interactionPoint->isInteractionPoint())
+						{
+							if(context->directlyContains(interactionPoint->getCompositeOwner()))
+							{
+								linksToDestroy->add(link);
+							}
+						}
+					}
+
+					const std::shared_ptr<uml::Class>& metaClass = value->getMetaClass();
+					std::shared_ptr<Bag<uml::Property>> allAttributes = metaClass->getAllAttributes();
+
+					for(const std::shared_ptr<uml::Property>& property : *allAttributes)
+					{
+						if(property->getMetaElementID() == uml::umlPackage::PORT_CLASS)
+						{
+							std::shared_ptr<Any> portValue = value->get(property);
+							if(portValue->isContainer())
+							{
+								std::shared_ptr<Bag<uml::Element>> values = std::dynamic_pointer_cast<uml::UMLContainerAny>(portValue)->getAsElementContainer();
+								for(const std::shared_ptr<uml::Element>& value : *values)
+								{
+									std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> interactionPoint = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
+									linksToDestroy->insert(*(interactionPoint->getLinks()));
+								}
+							}
+							else
+							{
+								std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(portValue)->getAsElement();
+								std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> interactionPoint = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
+								linksToDestroy->insert(*(interactionPoint->getLinks()));
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 	return linksToDestroy;
-*/
 	//end of body
 }
 
@@ -332,6 +394,8 @@ std::shared_ptr<Bag<Any>> CS_ClearStructuralFeatureActionActivationImpl::getPote
 	}
 	return potentialLinkEnds;
 */
+
+throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 	//end of body
 }
 
@@ -473,7 +537,7 @@ std::shared_ptr<Any> CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int 
 			this->doAction();
 			break;
 		}
-		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getLinksToDestroy(uml::Element, uml::StructuralFeature) : PSCS::MDE4CPP_Extensions::PSCS_Link[*]: 2497461247
+		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getLinksToDestroy(uml::Element, uml::StructuralFeature) : fUML::MDE4CPP_Extensions::FUML_Link[*]: 3064224045
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'value'
@@ -528,8 +592,8 @@ std::shared_ptr<Any> CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int 
 				}
 			}
 		
-			std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature);
-			return eEcoreContainerAny(resultList,PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS);
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature);
+			return eEcoreContainerAny(resultList,fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINK_CLASS);
 			break;
 		}
 		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getPotentialLinkEnds(PSCS::MDE4CPP_Extensions::PSCS_Object, uml::StructuralFeature) : Any[*]: 3139549290
