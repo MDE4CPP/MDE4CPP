@@ -267,6 +267,8 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [if (aClass.superClass->isEmpty())]
 	[if (isFUMLExecutable())]
 	setThisFUML_ObjectPtr([aClass.generateGetThisPtrPropertyName()/]);
+	[elseif (isPSCSExecutable())]
+	setThisPSCS_ObjectPtr([aClass.generateGetThisPtrPropertyName()/]);
 	[else]
 		[if (aClass.oclIsKindOf(Stereotype))]
 	setThisStereotypePtr([aClass.generateGetThisPtrPropertyName()/]);

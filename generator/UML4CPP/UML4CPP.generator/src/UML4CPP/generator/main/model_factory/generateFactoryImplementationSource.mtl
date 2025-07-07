@@ -167,7 +167,6 @@ std::shared_ptr<[aClass.generateCppRawType(true)/]> [className/]::create[aClass.
 	std::shared_ptr<[aClass.generateCppRawType(true)/]Impl> element(new [aClass.generateCppRawType(true)/]Impl());
 	element->setMetaElementID(metaElementID);
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
-	element->instantiate();
 	return element;
 }
 
@@ -188,7 +187,6 @@ std::shared_ptr<[aClass.generateCppRawType(true)/]> [className/]::create[aClass.
 		[if (containmentProperty.isBackReference())]wp[else]par_[containmentProperty.name.toLowerFirst()/][/if]->[if(containerProperty.upper <> 1)][containerProperty.getterName()/]()->push_back(element)[else][containerProperty.setterName()/](element)[/if];
 	}
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
-	element->instantiate();
 	return element;
 }
 			[/let]
@@ -207,7 +205,6 @@ std::shared_ptr<[aClass.generateCppRawType(true)/]> [className/]::create[aClass.
 		wp->[if(compositeProperty.upper <> 1)][compositeProperty.getterName()/]()->push_back(element)[else][compositeProperty.setterName()/](element)[/if];
 	}
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
-	element->instantiate();
 	return element;
 }
 [/for]

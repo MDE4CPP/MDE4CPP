@@ -117,6 +117,16 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			virtual void destroy(bool, bool);
 
 			[/if]
+			[if (isPSCSExecutable())]
+			// PSCS-specific Operations
+			virtual void construct();
+			virtual void constructObject(const std::shared_ptr<uml::Class>&);
+			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
+			virtual bool directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
+			virtual std::shared_ptr<Any> dispatchCallIn(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+			virtual std::shared_ptr<Any> dispatchCallOut(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+
+			[/if]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -133,8 +143,6 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 
 		protected:
 			virtual const std::shared_ptr<uml::Class>& getMetaClass() const;
-			virtual void instantiate();
-			virtual void destroy();
 
 		public:
 			//**************************************

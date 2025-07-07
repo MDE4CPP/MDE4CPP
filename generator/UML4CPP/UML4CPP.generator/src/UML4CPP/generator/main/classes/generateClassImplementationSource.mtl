@@ -37,27 +37,96 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::model_execution::model_execution /]
 
-[query private includes(aClass : Class)  : Set(Type) = OrderedSet
-{
-	aClass.member->selectByKind(TypedElement)->reject(tE : TypedElement | tE.type.oclIsUndefined()).type, 
-	aClass.ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type,
-	aClass.collectOpaqueBehaviorsContexedByClass().ownedParameter.type,
-	aClass.getAllAttributes()->reject(p : Property | p.type.oclIsUndefined()).type, 
-	aClass.importedMember, 
-	aClass.getImplicitCompositeOwners()
-}->flatten() /]
-
-[query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
-
-[query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
-[query private getAllAttributes(aClass : Class) : Set(Property) = OrderedSet{aClass.ownedAttribute, aClass.generalization.general->selectByType(Class).getAllAttributes(), aClass.interfaceRealization.contract.getAllAttributes()}->flatten() /]
-
 [template public generateClassImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.generateNamespacePath(false)/]/impl/[className.concat('.hpp')/]"
 
 [defineDebugMacro()/]
 
+[generateIncludes()/]
+
+[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[aClass.generateConstructors()/]
+
+[aClass.generateDestructors()/]
+
+[aClass.generateCopyMethods()/]
+[if (isSingleton())]
+
+[aClass.name.toUpperFirst()/]* [className/]::create()
+{
+	return new [className/]();
+}
+[/if]
+
+[aClass.generateGetMetaClassMethod()/]
+
+//*********************************
+// Attribute Setter Getter
+//*********************************
+[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
+[aAttribute.generateAttributeSetterImplementationCpp()/]
+[aAttribute.generateAttributeGetterImplementationCpp()/]
+[/for]
+[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+[aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
+[aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
+[/if][/for][/for]
+[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
+[aClass.generateCompositeOwnerAttributeGetterImplementationCpp(compositeOwnerClass)/]
+[aClass.generateCompositeOwnerAttributeSetterImplementationCpp(compositeOwnerClass)/]
+[/for]
+
+//*********************************
+// Union Getter
+//*********************************
+[aClass.generateUnionGetterCpp()/]
+
+//*********************************
+// Operations
+//*********************************
+[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n') after('\n')]
+[aOperation.generateOperationImplementation()/]
+[/for]
+[comment OpaqueBehaviors directly or indirectly owned by aClass that have no defined specification
+(i.e. they do not define the method for any Operation) are treated as normal C++ methods.
+PSSM: OpaqueBehaviors owned by a State are not included in aClass./]
+[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) separator('\n') after('\n')]
+[anOpaqueBehavior.generateOpaqueBehaviorImplementation()/]
+[/for]
+[if (isFUMLExecutable())]
+
+[aClass.generateFUMLSpecificMethods()/]
+[/if]
+[if (isPSCSExecutable())]
+
+[aClass.generatePSCSSpecificMethods()/]
+[/if]
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
+[aClass.generateeGetSetImpl()/]
+
+//**************************************
+// Operation & OpaqueBehavior Invocation
+//**************************************
+[aClass.generateInvokeImpl()/]
+
+[aClass.generateGetThisPtrCPP()/]
+[/file]
+[/template]
+
+
+
+[template private generateIncludes(aClass : Class) post(trim())
+{
+	className : String = aClass.name.toUpperFirst().concat('Impl'); 
+	aPackage : Package = aClass.ancestors()->filter(Package)->first(); 
+}]
 //General includes
 #include <iostream>
 [if (aClass.ownedOperation->select(method->isEmpty())->notEmpty())]
@@ -155,12 +224,10 @@
 [for (aConnector : Connector | aClass.ownedConnector->select(c : Connector | c.end->size() > 0)) before('\n//Includes from roles of ConnectorEnds\n') after('\n')][for (anEnd : ConnectorEnd | aConnector.end)]
 #include "[anEnd.role.type._package.generateNamespacePath(true)/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]
+[/template]
 
-[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
-
-//*********************************
-// Constructor / Destructor
-//*********************************
+[template private generateConstructors(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
 [className/]::[className/]()
 {
 	/*
@@ -185,20 +252,26 @@
 [/comment]
     m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
 }
-[/if] [/let] [/if] [/let] [/for]
-[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
+[/if][/let][/if][/let][/for]
+[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('\r\n')]
 [className/]::[className/](std::weak_ptr<[compositeOwnerClass.generateCppRawType(true)/]> [compositeOwnerClass.name.toLowerFirst()/])
 :[className/]()
 {
     m_[compositeOwnerClass.name/] = [compositeOwnerClass.name.toLowerFirst()/];
 }
 [/for]
+[/template]
 
+[template private generateDestructors(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
 [className/]::~[className/]()
 {
 	DEBUG_INFO("Instance of '[aClass.name.toUpperFirst()/]' is destroyed.")
 }
+[/template]
 
+[template private generateCopyMethods(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
 [className/]::[className/](const [className/] & obj):[className/]()
 {
 	*this = obj;
@@ -227,7 +300,6 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 [for (aProperty : Property | aClass.ownedAttribute->select(isBackReference() or not (isComposite() or isSubset()))->asOrderedSet()->sortedBy(name))]
@@ -266,14 +338,13 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 
 	return *this;
 }
+[/template]
 
-[if (isSingleton())]
-[aClass.name.toUpperFirst()/]* [className/]::create()
+[template private generateGetMetaClassMethod(aClass : Class) post(trim())
 {
-	return new [className/]();
-}
-[/if]
-
+	className : String = aClass.name.toUpperFirst().concat('Impl');
+	aPackage : Package = aClass.ancestors()->filter(Package)->first();
+}]
 const std::shared_ptr<uml::Class>& [className/]::getMetaClass() const
 {
 	[if (aClass.oclIsKindOf(Stereotype))]
@@ -283,31 +354,58 @@ const std::shared_ptr<uml::Class>& [className/]::getMetaClass() const
 	return [aPackage.name.concat('PackageImpl')/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
 	[/if]
 }
+[/template]
 
-void [className/]::instantiate()
-{   [comment call instantiate of superclasses/]
-	[for (aSuperClass : Class | aClass.superClass)]
-	[aSuperClass.name.toUpperFirst()/]Impl::instantiate();
+[comment fUML-specific methods /]
+[template private generateFUMLSpecificMethods(aClass : Class) post(trim())]
+// fUML-specific Method Overrides
+[aClass.generateGetTypesMethod()/]
+
+[aClass.generateDestroyMethod()/]
+[/template]
+
+[template private generateGetTypesMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+const std::shared_ptr<Bag<uml::Classifier>>& [className/]::getTypes() const
+{
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset();
+		// Add type of self '[aClass.name/]' : Class
+		types->add([aClass.generatePackageGetterCall()/]);
+		[for (parent : Classifier | aClass.allParents())]
+		// Add base type '[parent.name/]' : [parent.eClass().name/]
+		types->add([parent.generatePackageGetterCall()/]);
+		[/for]
+	}
+
+	return types;
+}
+[/template]
+
+[template private generateDestroyMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+void [className/]::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
+{
+	[for (compositeProperty : Property | aClass.getAllAttributes()->select(p : Property | p.aggregation = AggregationKind::composite and p.type.isComplex())) before('\tif(isDestroyOwnedObjects)\n\t{') after('\n\t}')]
+		// Recursively destroy object(s) of composite property [compositeProperty.name/]
+		[if (compositeProperty.upper = 1)]
+		const std::shared_ptr<[compositeProperty.type.generateCppRawType(true)/]>& _[compositeProperty.name/] = this->[compositeProperty.getterName()/]();
+		_[compositeProperty.name/]->destroy(isDestroyLinks, isDestroyOwnedObjects);
+		[else]
+		const std::shared_ptr<Bag<[compositeProperty.type.generateCppRawType(true)/]>>& _[compositeProperty.name/]s = this->[compositeProperty.getterName()/]();
+		for(const std::shared_ptr<[compositeProperty.type.generateCppRawType(true)/]>& _[compositeProperty.name/] : *_[compositeProperty.name/]s)
+		{
+			_[compositeProperty.name/]->destroy(isDestroyLinks, isDestroyOwnedObjects);
+		}
+		[/if]
 	[/for]
-	[comment Init properties without default value/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | p.default->isEmpty()))]
-	[aProperty.generateAttributeInstantiation()/]
-	[/for]
-	[comment Init properties with default value/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | (not p.defaultValue.oclIsUndefined())))]
-	[if ((aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
-	[if (not aProperty.defaultValue.type.oclIsTypeOf(Enumeration))]
-	[aProperty.generateAttributeDefaultInstantiation()/]
-	[/if][/if]
-	[/for]
-	[comment Init connector patterns/]
-	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
-	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
-	[aConnector.generateConnectorInstantiation()/]
-	[/if]
-	[/for]
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
 }
 
+/*
 void [className/]::destroy()
 {	[comment Destroy corresponding links if existing/]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
@@ -343,90 +441,118 @@ void [className/]::destroy()
 	[if (isFUMLExecutable())]
 	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
 	[/if]
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
-[aAttribute.generateAttributeSetterImplementationCpp()/]
-[aAttribute.generateAttributeGetterImplementationCpp()/]
-[/for]
-[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
-[aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
-[aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
-[/if][/for][/for]
-[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
-[aClass.generateCompositeOwnerAttributeGetterImplementationCpp(compositeOwnerClass)/]
-[aClass.generateCompositeOwnerAttributeSetterImplementationCpp(compositeOwnerClass)/]
-[/for]
-
-//*********************************
-// Union Getter
-//*********************************
-[aClass.generateUnionGetterCpp()/]
-
-//*********************************
-// Operations
-//*********************************
-[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n') after('\n')]
-[aOperation.generateOperationImplementation()/]
-[/for]
-[comment OpaqueBehaviors directly or indirectly owned by aClass that have no defined specification
-(i.e. they do not define the method for any Operation) are treated as normal C++ methods.
-PSSM: OpaqueBehaviors owned by a State are not included in aClass./]
-[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) separator('\n') after('\n')]
-[anOpaqueBehavior.generateOpaqueBehaviorImplementation()/]
-[/for]
-[if (isFUMLExecutable())]
-// fUML-specific Operations
-const std::shared_ptr<Bag<uml::Classifier>>& [className/]::getTypes() const
-{
-	static std::shared_ptr<Bag<uml::Classifier>> types;
-
-	if(!types)
-	{
-		types.reset();
-		// Add type of self '[aClass.name/]' : Class
-		types->add([aClass.generatePackageGetterCall()/]);
-		[for (parent : Classifier | aClass.allParents())]
-		// Add base type '[parent.name/]' : [parent.eClass().name/]
-		types->add([parent.generatePackageGetterCall()/]);
-		[/for]
-	}
-
-	return types;
-}
-
-void [className/]::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
-{
-	[for (compositeProperty : Property | aClass.getAllAttributes()->select(p : Property | p.aggregation = AggregationKind::composite and p.type.isComplex())) before('\tif(isDestroyOwnedObjects)\n\t{') after('\n\t}')]
-		// Recursively destroy object(s) of composite property [compositeProperty.name/]
-		[if (compositeProperty.upper = 1)]
-		const std::shared_ptr<[compositeProperty.type.generateCppRawType(true)/]>& _[compositeProperty.name/] = this->[compositeProperty.getterName()/]();
-		_[compositeProperty.name/]->destroy(isDestroyLinks, isDestroyOwnedObjects);
-		[else]
-		const std::shared_ptr<Bag<[compositeProperty.type.generateCppRawType(true)/]>>& _[compositeProperty.name/]s = this->[compositeProperty.getterName()/]();
-		for(const std::shared_ptr<[compositeProperty.type.generateCppRawType(true)/]>& _[compositeProperty.name/] : *_[compositeProperty.name/]s)
-		{
-			_[compositeProperty.name/]->destroy(isDestroyLinks, isDestroyOwnedObjects);
-		}
-		[/if]
-	[/for]
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
-}
-
-[/if]
-//**************************************
-// StructuralFeature Getter & Setter
-//**************************************
-[aClass.generateeGetSetImpl()/]
-
-//**************************************
-// Operation & OpaqueBehavior Invocation
-//**************************************
-[aClass.generateInvokeImpl()/]
-
-[aClass.generateGetThisPtrCPP()/]
-[/file]
+}*/
 [/template]
+
+[comment PSCS-specific methods /]
+[template private generatePSCSSpecificMethods(aClass : Class) post(trim())]
+// PSCS-specific Method Overrides
+[aClass.generateConstructMethod()/]
+
+[aClass.generateConstructObjectMethod()/]
+
+[aClass.generateContainsMethod()/]
+
+[aClass.generateDirectlyContainsMethod()/]
+
+[aClass.generateDispatchCallInMethod()/]
+
+[aClass.generateDispatchCallOutMethod()/]
+[/template]
+
+[template private generateConstructMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+void [className/]::construct()
+{
+	[comment call construct of superclasses/]
+	[for (aSuperClass : Class | aClass.superClass)]
+	[aSuperClass.name.toUpperFirst()/]Impl::construct();
+	[/for]
+	[comment Init properties without default value/]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | p.default->isEmpty()))]
+	[aProperty.generateAttributeInstantiation()/]
+	[/for]
+	[comment Init properties with default value/]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | (not p.defaultValue.oclIsUndefined())))]
+	[if ((aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
+	[if (not aProperty.defaultValue.type.oclIsTypeOf(Enumeration))]
+	[aProperty.generateAttributeDefaultInstantiation()/]
+	[/if][/if]
+	[/for]
+	[comment Init connector patterns/]
+	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
+	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
+	[aConnector.generateConnectorInstantiation()/]
+	[/if]
+	[/for]
+}
+[/template]
+
+[template private generateConstructObjectMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+void [className/]::constructObject(const std::shared_ptr<uml::Class>& type)
+{
+	switch(type->_getID())
+	{
+		case [aClass.getNearestPackage().generateNamespace(true)/]::[aClass.getNearestPackage().getPackageName()/]Package::[aClass.getMemberName().toUpperCase()/]:
+		{
+			this->construct();
+			break;
+		}
+		[for (parent : Class | aClass.allParents()->selectByType(Class))]
+		case [parent.getNearestPackage().generateNamespace(true)/]::[parent.getNearestPackage().getPackageName()/]Package::[parent.getMemberName().toUpperCase()/]:
+		{
+			[parent.name.toUpperFirst()/]Impl::construct();
+			break;
+		}
+		[/for]
+		default:
+		{
+			return;
+		}
+	}
+}
+[/template]
+
+[template private generateContainsMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+bool [className/]::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+}
+[/template]
+
+[template private generateDirectlyContainsMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+bool [className/]::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+}
+[/template]
+
+[template private generateDispatchCallInMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+std::shared_ptr<Any> [className/]::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+}
+[/template]
+
+[template private generateDispatchCallOutMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+std::shared_ptr<Any> [className/]::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+}
+[/template]
+
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet
+{
+	aClass.member->selectByKind(TypedElement)->reject(tE : TypedElement | tE.type.oclIsUndefined()).type, 
+	aClass.ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type,
+	aClass.collectOpaqueBehaviorsContexedByClass().ownedParameter.type,
+	aClass.getAllAttributes()->reject(p : Property | p.type.oclIsUndefined()).type, 
+	aClass.importedMember, 
+	aClass.getImplicitCompositeOwners()
+}->flatten() /]
+
+[query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
+
+[query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
+[query private getAllAttributes(aClass : Class) : Set(Property) = OrderedSet{aClass.ownedAttribute, aClass.generalization.general->selectByType(Class).getAllAttributes(), aClass.interfaceRealization.contract.getAllAttributes()}->flatten() /]
