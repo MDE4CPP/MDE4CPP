@@ -465,25 +465,29 @@ void [className/]::destroy()
 void [className/]::construct()
 {
 	[comment call construct of superclasses/]
-	[for (aSuperClass : Class | aClass.superClass)]
+	[for (aSuperClass : Class | aClass.superClass) after('\r\n')]
 	[aSuperClass.name.toUpperFirst()/]Impl::construct();
 	[/for]
 	[comment Init properties without default value/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | p.default->isEmpty()))]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | p.default->isEmpty())) separator('\r\n') after('\r\n')]
 	[aProperty.generateAttributeInstantiation()/]
 	[/for]
 	[comment Init properties with default value/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | (not p.defaultValue.oclIsUndefined())))]
-	[if ((aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
-	[if (not aProperty.defaultValue.type.oclIsTypeOf(Enumeration))]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())
+		->select(p : Property | 
+			(not p.defaultValue.oclIsUndefined() 
+			and p.defaultValue.oclIsTypeOf(InstanceValue)
+			and not p.defaultValue.type.oclIsTypeOf(Enumeration))))
+	separator('\r\n') after('\r\n')]
 	[aProperty.generateAttributeDefaultInstantiation()/]
-	[/if][/if]
 	[/for]
 	[comment Init connector patterns/]
-	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
-	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
+	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName())
+			->select(c : Connector | 
+			not c.type.oclIsUndefined()
+			and not c.type.name.oclIsUndefined())) 
+	separator('\r\n')]
 	[aConnector.generateConnectorInstantiation()/]
-	[/if]
 	[/for]
 }
 [/template]

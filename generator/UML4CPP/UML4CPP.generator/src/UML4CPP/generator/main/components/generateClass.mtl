@@ -342,7 +342,7 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [aClassifier.getUnionProperties()->sortedBy(name).generateUnionGetterDeclaretaionBag(impl)/]
 [/template]
 
-[template public generateUnionGetterDeclaretaionBag(aProperty : Property, impl : Boolean) ? (isUnion())]
+[template public generateUnionGetterDeclaretaionBag(aProperty : Property, impl : Boolean) ? (isUnion()) post(trim())]
 virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
 
 [/template]
@@ -355,7 +355,7 @@ virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstra
 [**
  * generates the lazy creation functionality for Subsets, Unions and SubsetUnions
 */]
-[template public generateContainerPropertyInit(aProperty : Property) ? (not (aProperty.upper = 1))]
+[template public generateContainerPropertyInit(aProperty : Property) ? (not (aProperty.upper = 1)) post(trim())]
 [if(aProperty.isSubsetUnion())]
 /*SubsetUnion*/
 m_[aProperty.name/].reset(new SubsetUnion<[aProperty.type.generateCppRawType(true)/], [aProperty.generateSubsetTypes()/] >());
@@ -379,7 +379,7 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.generateCppRawType(true)/]>())
 [/if]
 [/template]
 
-[template public generateSubsetUnionInit(aProperty : Property)? (not (aProperty.upper = 1))]
+[template public generateSubsetUnionInit(aProperty : Property)? (not (aProperty.upper = 1)) post(trim())]
 [if(aProperty.isSubsetUnion())]
 /*SubsetUnion*/
 [aProperty.getterName()/]()->initSubsetUnion([aProperty.generateSubsetElements()/]);

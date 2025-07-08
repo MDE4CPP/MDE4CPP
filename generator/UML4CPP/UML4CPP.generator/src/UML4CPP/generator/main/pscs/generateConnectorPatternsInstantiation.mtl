@@ -27,7 +27,7 @@
 [**
  * Template for generation of connector patterns
 */]
-[template public generateConnectorInstantiation(aConnector : Connector)]
+[template public generateConnectorInstantiation(aConnector : Connector) post(trim())]
 [if (aConnector.isArrayPattern())]
 {
 	[aConnector.generateArrayPatternInstantiation()/]
@@ -43,12 +43,17 @@
 [**
  * Template for generation of array pattern
 */]
-[template private generateArrayPatternInstantiation(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private generateArrayPatternInstantiation(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1); 
+	end2 : ConnectorEnd = aConnector.end->at(2); 
+	definingAssociation : Association = aConnector.type;
+}]
 [if(not definingAssociation.oclIsUndefined())]
 [if(end1.role.type.oclIsTypeOf(Interface) or end2.role.type.oclIsTypeOf(Interface))]
 /*
 Note: Connector pattern will not be instantiated because at least one end of connector [aConnector.name/] is typed by an interface.
-Links can be created manually after instantiating the corresponding properties with instances typed by a class that realized the interface.
+Links can be created manually after instantiating the corresponding properties with instances typed by a class that realizes the interface.
 */
 [else]
 [if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
@@ -76,35 +81,40 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
 [**
  * Template for generation of array pattern between a part and a part
 */]
-[template private initArrayPattern_P_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initArrayPattern_P_P(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end1/] 
 [comment if property of end1 has *-multiplicity then end2 must have *-multiplicity too for array pattern between part and part /]
-	for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
-	{
-		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(i);
-	[if (end2.definingEnd.getUpper() <> 1)]
-		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
-		end1Part->get[end2.definingEnd.name.toUpperFirst()/]()->add(end2Part);
-		end2Part->get[end1.definingEnd.name.toUpperFirst()/]()->add(end1Part);
-	[else]
-		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();	
-		end1Part->set[end2.definingEnd.name.toUpperFirst()/](end2Part);
-		end2Part->get[end1.definingEnd.name.toUpperFirst()/]()->add(end1Part);
-	[/if]
-	}
-[else] [comment 1-multiplicity/] [comment if property of end1 has 1-multiplicity then end2 must have 1-multiplicity too for array pattern between part and part /]
-	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
-	[if(end2.definingEnd.getUpper() <> 1)]
-	for(unsigned int i = 0; i < [end2.role.oclAsType(MultiplicityElement).getLower()/]; i++)
-	{
-		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
-		end1Part->get[end2.definingEnd.name.toUpperFirst()/]()->add(end2Part);
-		end2Part->set[end1.definingEnd.name.toUpperFirst()/](end1Part);
-	}
-	[else]
-	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+{
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(i);
+[if (end2.definingEnd.getUpper() <> 1)]
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
+	end1Part->get[end2.definingEnd.name.toUpperFirst()/]()->add(end2Part);
+	end2Part->get[end1.definingEnd.name.toUpperFirst()/]()->add(end1Part);
+[else]
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();	
 	end1Part->set[end2.definingEnd.name.toUpperFirst()/](end2Part);
+	end2Part->get[end1.definingEnd.name.toUpperFirst()/]()->add(end1Part);
+[/if]
+}
+[else] [comment 1-multiplicity/] [comment if property of end1 has 1-multiplicity then end2 must have 1-multiplicity too for array pattern between part and part /]
+std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
+	[if(end2.definingEnd.getUpper() <> 1)]
+for(unsigned int i = 0; i < [end2.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+{
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
+	end1Part->get[end2.definingEnd.name.toUpperFirst()/]()->add(end2Part);
 	end2Part->set[end1.definingEnd.name.toUpperFirst()/](end1Part);
+}
+	[else]
+std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+end1Part->set[end2.definingEnd.name.toUpperFirst()/](end2Part);
+end2Part->set[end1.definingEnd.name.toUpperFirst()/](end1Part);
 	[/if]
 [/if]
 [/template]
@@ -113,7 +123,12 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
 [**
  * Template for generation of array pattern between a part and a part with port
 */]
-[template private initArrayPattern_P_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initArrayPattern_P_PWP(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if(end1.definingEnd.getUpper() <> 1)][comment *-multiplicity of end1 (= port)/]
 [comment if property of end1 has *-multiplicity then either part or port or both of end2 must have *-multiplicity too for array pattern between part and part with port /]
 unsigned int k = 0;
@@ -201,7 +216,12 @@ end1Part->set[end2.definingEnd.name.toUpperFirst()/](end2Port);
 [**
  * Template for generation of array pattern between a part with port and a part
 */]
-[template private initArrayPattern_PWP_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initArrayPattern_PWP_P(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 (= port)/]
 unsigned int k = 0;
 [if (end1.partWithPort.getUpper() <> 1)][comment *-multiplicity of end1-partWithPort/]
@@ -288,7 +308,12 @@ end2Part->set[end1.definingEnd.name.toUpperFirst()/](end1Port);
 [**
  * Template for generation of array pattern between a part with port and a part with port
 */]
-[template private initArrayPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initArrayPattern_PWP_PWP(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of port of end1/]
 unsigned int end1PortIndex = 0;
 [if(end1.partWithPort.getUpper() <> 1 and end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of parts of end1 and end2/]
@@ -469,7 +494,12 @@ end2Port->set[end1.definingEnd.name.toUpperFirst()/](end1Port);
 
 
 
-[template private generateStarPatternInstantiation(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private generateStarPatternInstantiation(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [comment TODO: Implement instatiation if ends are parts with ports /]
 [if(not definingAssociation.oclIsUndefined())]
 [if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
@@ -496,7 +526,12 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
 [**
  * Template for generation of star pattern between a part and a part
 */]
-[template private initStarPattern_P_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initStarPattern_P_P(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end1/]
 for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
 {
@@ -529,7 +564,12 @@ this->get[end2.role.name.toUpperFirst()/]()->set[end1.definingEnd.name.toUpperFi
 [**
  * Template for generation of star pattern between a part and a part with port
 */]
-[template private initStarPattern_P_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initStarPattern_P_PWP(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of associationEnd 1 = left port/]
 [if(end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = right part/]
 for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
@@ -628,7 +668,12 @@ for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()
 [**
  * Template for generation of star pattern between a part with port and a part
 */]
-[template private initStarPattern_PWP_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initStarPattern_PWP_P(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if(end2.definingEnd.getUpper() <> 1)] [comment *-multiplicity of associationEnd 2 = right port/]
 [if(end1.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = left part/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
@@ -728,7 +773,12 @@ for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()
 [**
  * Template for generation of star pattern between a part with port and a part with port
 */]
-[template private initStarPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[template private initStarPattern_PWP_PWP(aConnector : Connector) post(trim())
+{
+	end1 : ConnectorEnd = aConnector.end->at(1);
+	end2 : ConnectorEnd = aConnector.end->at(2);
+	definingAssociation : Association = aConnector.type;
+}]
 [if (end1.partWithPort.getUpper() <> 1)] [comment *-multiplicity of end1 part/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
