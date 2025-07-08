@@ -169,8 +169,7 @@ void CS_ClearStructuralFeatureActionActivationImpl::doAction()
 	else
 	{
 		valueAny = this->takeTokens(action->getObject())->at(0);
-		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(valueAny);
-		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		std::shared_ptr<uml::Element> element = retrieveAnyValueAsUMLElement(valueAny);
 		value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
 	}
 	/*--------------------------------------------------------*/
@@ -229,7 +228,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 			}
 			else
 			{
-				std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(featureValue)->getAsElement();
+				std::shared_ptr<uml::Element> value = retrieveAnyValueAsUMLElement(featureValue);
 				linksToDestroy->insert(*(std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value)->getLinks()));
 			}
 		}
@@ -300,7 +299,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 							}
 							else
 							{
-								std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(portValue)->getAsElement();
+								std::shared_ptr<uml::Element> value = retrieveAnyValueAsUMLElement(portValue);
 								std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> interactionPoint = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
 								linksToDestroy->insert(*(interactionPoint->getLinks()));
 							}
@@ -310,7 +309,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 			}
 			else
 			{
-				std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(featureValue)->getAsElement();
+				std::shared_ptr<uml::Element> value = retrieveAnyValueAsUMLElement(featureValue);
 
 				if(value != nullptr)
 				{
@@ -353,7 +352,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 							}
 							else
 							{
-								std::shared_ptr<uml::Element> value = std::dynamic_pointer_cast<uml::UMLAny>(portValue)->getAsElement();
+								std::shared_ptr<uml::Element> value = retrieveAnyValueAsUMLElement(portValue);
 								std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> interactionPoint = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(value);
 								linksToDestroy->insert(*(interactionPoint->getLinks()));
 							}

@@ -174,7 +174,7 @@ void CS_CallOperationActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// First determines if this is a call to a constructor and if a default
+	// First determines if this is a call to a constructor and if a default
 	// construction strategy needs to be applied.
 	// This is a call to a constructor if the called operation has
 	// stereotype <<Create>> applied.
@@ -188,9 +188,8 @@ void CS_CallOperationActionActivationImpl::doAction()
 		std::shared_ptr<fUML::Semantics::Loci::Locus> locus = this->getExecutionLocus();
 		std::shared_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::Actions::CS_ConstructStrategy>(locus->getFactory()->getStrategy("constructStrategy"));
 		std::shared_ptr<Any> target = this->takeTokens(action->getTarget())->at(0);
-		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(target);
-		std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(target); cS_Object != nullptr) {
+		std::shared_ptr<uml::Element> targetElement = retrieveAnyValueAsUMLElement(target);
+		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(targetElement); cS_Object != nullptr) {
 			strategy->construct(action->getOperation(), cS_Object);
 			const std::shared_ptr<Bag<uml::Parameter>>& parameters = action->getOperation()->getOwnedParameter();
 			const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = action->getResult();
@@ -314,8 +313,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CS_CallOpe
 					{
 						try
 						{
-							std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(attributeValue);
-							target = umlAny->getAsElement();
+							target = retrieveAnyValueAsUMLElement(attributeValue);
 						}
 						catch(...)
 						{
@@ -333,8 +331,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CS_CallOpe
 			{
 				try
 				{
-					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(targetAny);
-					target = umlAny->getAsElement();
+					target = retrieveAnyValueAsUMLElement(targetAny);
 				}
 				catch(...)
 				{

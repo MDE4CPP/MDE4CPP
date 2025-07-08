@@ -171,8 +171,7 @@ void CS_SendSignalActionActivationImpl::doAction()
 	}
 	else 
 	{
-		std::shared_ptr<uml::UMLAny> token = std::dynamic_pointer_cast<uml::UMLAny>(this->takeTokens(action->getTarget())->at(0));
-		std::shared_ptr<uml::Element> target = token->getAsElement();
+		std::shared_ptr<uml::Element> target = retrieveAnyValueAsUMLElement(this->takeTokens(action->getTarget())->at(0));
 		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_target = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(target); cS_target != nullptr) {
 			// Constructs the signal instance
 			const std::shared_ptr<uml::Signal>& signal = action->getSignal();

@@ -195,8 +195,8 @@ void CS_CreateLinkActionActivationImpl::doAction()
 			}
 		}
 
-		std::shared_ptr<uml::UMLAny> firstToken = std::dynamic_pointer_cast<uml::UMLAny>(this->takeTokens(endData->getValue())->at(0));
-		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> endValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(firstToken->getAsElement());
+		std::shared_ptr<uml::Element> firstTokenElement = retrieveAnyValueAsUMLElement(this->takeTokens(endData->getValue())->at(0));
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> endValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(firstTokenElement);
 
 		newLink->add(endValue, endData->getEnd(), insertAt);
 	}

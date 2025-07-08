@@ -166,8 +166,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 	}
 	else {
 		std::shared_ptr<Bag<Any>> inputValues = this->takeTokens(action->getValue());
-		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(inputValues->at(0));
-		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		std::shared_ptr<uml::Element> element = retrieveAnyValueAsUMLElement(inputValues->at(0));
 		// NOTE: Multiplicity of the value input pin is required to be 1..1.
 		if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(element);
 			object != nullptr)
@@ -184,8 +183,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 			}
 			else{
 				std::shared_ptr<Any> value = this->takeTokens(action->getObject())->at(0);
-				std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-				owner = uMLAny->getAsElement();
+				owner = retrieveAnyValueAsUMLElement(value);
 			}
 			/*--------------------------------------------------------*/
 
@@ -279,8 +277,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 		value = this->getActivityExecution()->getContext();
 	}
 	else{
-		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(any);
-		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		std::shared_ptr<uml::Element> element = retrieveAnyValueAsUMLElement(any);
 		value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
 	}
 	/*--------------------------------------------------------*/
@@ -296,8 +293,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 	}
 	
 	if(association != nullptr) {
-		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(inputValue);
-		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> inputObject = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(uMLAny->getAsElement());
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> inputObject = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(retrieveAnyValueAsUMLElement(inputValue));
 
 		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links = this->getMatchingLinks(association, feature, value);
 		
@@ -318,7 +314,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> link = links->at(i);
 				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> linkEnd = link->retrieveLinkEnd(property);
 
-				if(linkEnd->getEndValue() == uMLAny->getAsElement()) {
+				if(linkEnd->getEndValue() == inputObject) {
 					position = link->retrieveLinkEnd(oppositeEnd)->getPosition();
 					if((insertAt > 0) && (linkEnd->getPosition() < insertAt)) {
 						insertAt = insertAt - 1;

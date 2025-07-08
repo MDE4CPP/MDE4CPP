@@ -179,8 +179,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	else
 	{
 		valueAny = this->takeTokens(action->getObject())->at(0);
-		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(valueAny);
-		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		std::shared_ptr<uml::Element> element = retrieveAnyValueAsUMLElement(valueAny);
 		value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
 	}
 	/*--------------------------------------------------------*/
@@ -197,8 +196,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		removeAt = this->takeTokens(action->getRemoveAt())->at(0)->get<int>();
 	}
 	if(association != nullptr) {
-		std::shared_ptr<uml::UMLAny> uMLAny = std::dynamic_pointer_cast<uml::UMLAny>(inputValueAny);
-		std::shared_ptr<uml::Element> element = uMLAny->getAsElement();
+		std::shared_ptr<uml::Element> element = retrieveAnyValueAsUMLElement(inputValueAny);
 		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> inputValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(element);
 		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& links = this->getMatchingLinksForEndValue(association, feature, value, inputValue);
 		if(action->getIsRemoveDuplicates()) {
@@ -275,7 +273,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_RemoveStructuralFea
 	// Get all links that are required to be destroyed due to the removal of the removedValue
 	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> linksToDestroy(new Bag<fUML::MDE4CPP_Extensions::FUML_Link>());
 	if(std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> context = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(value); context != nullptr) {
-		std::shared_ptr<uml::Element> element = std::dynamic_pointer_cast<uml::UMLAny>(removedValue)->getAsElement();
+		std::shared_ptr<uml::Element> element = retrieveAnyValueAsUMLElement(removedValue);
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> removedCSObject = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(element);
 		// Retrieves the feature values for the structural feature associated with this action,
 		// in the context of this reference
