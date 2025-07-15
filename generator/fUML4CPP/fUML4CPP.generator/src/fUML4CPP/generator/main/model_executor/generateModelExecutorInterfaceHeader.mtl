@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [template public generateModelExecutorInterfaceHeader(aPackage : Package)
@@ -26,12 +27,11 @@ originalName : String = aPackage.generateNamespacePath(false);
 [file (originalName.concat('Exec/') + upperName.concat('Executor.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Executor')/]
 
-//#include "PSCS/Semantics/Loci/CS_Executor.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
+#include "[getSuperClassInclude()/]"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]Executor: virtual public /*PSCS::Semantics::Loci::CS_Executor*/ fUML::Semantics::Loci::Executor
+	class [upperName/]Executor: virtual public [getSuperClassName()/]
 	{
 		public: 
 			[upperName/]Executor (){};
@@ -49,3 +49,21 @@ namespace [aPackage.generateNamespace(false)/]
 [endGuard(aPackage,'Executor')/]
 [/file]
 [/template]
+
+[query private getSuperClassName(anOclAny: OclAny) : String = 
+	if(isPSCSExecutable())
+	then
+		'PSCS::Semantics::Loci::CS_Executor'
+	else
+		'fUML::Semantics::Loci::Executor'
+	endif
+/]
+
+[query private getSuperClassInclude(anOclAny: OclAny) : String = 
+	if(isPSCSExecutable())
+	then
+		'PSCS/Semantics/Loci/CS_Executor.hpp'
+	else
+		'fUML/Semantics/Loci/Executor.hpp'
+	endif
+/]

@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [template public generateModelLocusInterfaceHeader(aPackage : Package)
@@ -26,20 +27,11 @@ originalName : String = aPackage.generateNamespacePath(false);
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Locus')/]
 
-[if (aPackage.includesPSSM())]
-#include "PSSM/Semantics/Loci/SM_Locus.hpp"
-[else]
-//#include "PSCS/Semantics/Loci/CS_Locus.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-[/if]
+#include "[getSuperClassInclude()/]"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	[if (aPackage.includesPSSM())]
-	class [upperName/]Locus: virtual public PSSM::Semantics::Loci::SM_Locus
-	[else]
-	class [upperName/]Locus: virtual public /*PSCS::Semantics::Loci::CS_Locus*/ fUML::Semantics::Loci::Locus
-	[/if]
+	class [upperName/]Locus: virtual public [getSuperClassName()/]
 	{
 		public: 
 			[upperName/]Locus (){};
@@ -57,3 +49,31 @@ namespace [aPackage.generateNamespace(false)/]
 [endGuard(aPackage,'Locus')/]
 [/file]
 [/template]
+
+[query private getSuperClassName(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM::Semantics::Loci::SM_Locus'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS::Semantics::Loci::CS_Locus'
+		else
+			'fUML::Semantics::Loci::Locus'
+		endif
+	endif
+/]
+
+[query private getSuperClassInclude(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM/Semantics/Loci/SM_Locus.hpp'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS/Semantics/Loci/CS_Locus.hpp'
+		else
+			'fUML/Semantics/Loci/Locus.hpp'
+		endif
+	endif
+/]

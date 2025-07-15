@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [template public generateModelExecutionFactoryInterfaceHeader(aPackage : Package) 
@@ -26,20 +27,11 @@ originalName : String = aPackage.generateNamespacePath(false);
 [file (originalName.concat('Exec/') + upperName.concat('ExecutionFactory.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'ExecutionFactory')/]
 
-[if (aPackage.includesPSSM())]
-#include "PSSM/Semantics/Loci/impl/SM_ExecutionFactoryImpl.hpp"
-[else]
-#include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
-[/if]
+#include "[getSuperClassInclude()/]"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	[if (aPackage.includesPSSM())]
-	class [upperName/]ExecutionFactory : virtual public PSSM::Semantics::Loci::SM_ExecutionFactory
-	[else]
-	class [upperName/]ExecutionFactory : virtual public/*PSCS::Semantics::Loci::CS_ExecutionFactory*/ fUML::Semantics::Loci::ExecutionFactory
-	[/if]
+	class [upperName/]ExecutionFactory: virtual public [getSuperClassName()/]
 	{
 		public: 
 			[upperName/]ExecutionFactory (){};
@@ -56,3 +48,31 @@ namespace [aPackage.generateNamespace(false)/]
 [endGuard(aPackage,'ExecutionFactory')/]
 [/file]
 [/template]
+
+[query private getSuperClassName(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM::Semantics::Loci::SM_ExecutionFactory'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS::Semantics::Loci::CS_ExecutionFactory'
+		else
+			'fUML::Semantics::Loci::ExecutionFactory'
+		endif
+	endif
+/]
+
+[query private getSuperClassInclude(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM/Semantics/Loci/SM_ExecutionFactory.hpp'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS/Semantics/Loci/CS_ExecutionFactory.hpp'
+		else
+			'fUML/Semantics/Loci/ExecutionFactory.hpp'
+		endif
+	endif
+/]

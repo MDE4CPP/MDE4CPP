@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
@@ -190,50 +191,31 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 [/template]
 
 [template private generateMainIncludes(aPackage : Package)]
-//fUML includes
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+[if (isPSCSExecutable())]
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+[else]
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+[/if]
 
 //Semantic Strategy Includes
-[if (aPackage.hasChoiceStrategy())][let choiceStrategy : Class = aPackage.getChoiceStrategy()]
-#include "[choiceStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[choiceStrategy.name.toUpperFirst()/].hpp"
-[/let][else]
-#include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
+[aPackage.generateChoiceStrategyInclude()/]
+[aPackage.generateDispatchStrategyInclude()/]
+[aPackage.generateGetNextEventStrategyInclude()/]
+[if (isPSCSExecutable())]
+[aPackage.generateConstructStrategyInclude()/]
+[aPackage.generateRequestPropagationStrategyInclude()/]
+[aPackage.generateStructuralFeatureOfInterfaceAccessStrategyInclude()/]
 [/if]
-[if (aPackage.hasGetNextEventStrategy())][let getNextEventStrategy : Class = aPackage.getGetNextEventStrategy()]
-#include "[getNextEventStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[getNextEventStrategy.name.toUpperFirst()/].hpp"
-[/let][else]
-#include "fUML/Semantics/CommonBehavior/FIFOGetNextEventStrategy.hpp"
-[/if]
-[comment] TODO later
-[if (aPackage.hasDispatchStrategy())][let dispatchStrategy : Class = aPackage.getDispatchStrategy()]
-#include "[dispatchStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[dispatchStrategy.name.toUpperFirst()/].hpp"
-[/let][else]
-#include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
-[/if]
-[if (aPackage.hasCS_RequestPropagationStrategy())][let cS_RequestPropagationStrategy : Class = aPackage.getCS_RequestPropagationStrategy()]
-#include "[cS_RequestPropagationStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_RequestPropagationStrategy.name.toUpperFirst()/].hpp"
-[/let][else]
-#include "PSCS/Semantics/StructuredClassifiers/CS_DefaultRequestPropagationStrategy.hpp"
-[/if]
-[if (aPackage.hasCS_StructuralFeatureOfInterfaceAccessStrategy())][let cS_StructuralFeatureOfInterfaceAccessStrategy : Class = aPackage.getCS_StructuralFeatureOfInterfaceAccessStrategy()]
-#include "[cS_StructuralFeatureOfInterfaceAccessStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_StructuralFeatureOfInterfaceAccessStrategy.name.toUpperFirst()/].hpp"
-[/let][else]
-#include "PSCS/Semantics/StructuredClassifiers/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
-[/if]
-[if (aPackage.hasCS_ConstructStrategy())][let cS_ConstructStrategy : Class = aPackage.getCS_ConstructStrategy()]
-#include "[cS_ConstructStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_ConstructStrategy.name.toUpperFirst()/].hpp"
-[/let][else]
-#include "PSCS/Semantics/Actions/CS_DefaultConstructStrategy.hpp"
-[/if]
-[/comment]
 
 //UML includes
 #include "uml/Element.hpp"
@@ -250,6 +232,63 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 )]
 #include "[act_SM_Package.generateNamespacePath(false)/]/[act_SM_Package.getPackageName()/]Package.hpp"
 [/for]
+[/template]
+
+[template private generateConstructStrategyInclude(aPackage : Package) post(trim())]
+[if (aPackage.hasCS_ConstructStrategy())]
+	[let cS_ConstructStrategy : Class = aPackage.getCS_ConstructStrategy()]
+#include "[cS_ConstructStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_ConstructStrategy.name.toUpperFirst()/].hpp"
+	[/let]
+[else]
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ConstructStrategy.hpp"
+[/if]
+[/template]
+[template private generateChoiceStrategyInclude(aPackage : Package) post(trim())]
+[if (aPackage.hasChoiceStrategy())]
+	[let choiceStrategy : Class = aPackage.getChoiceStrategy()]
+#include "[choiceStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[choiceStrategy.name.toUpperFirst()/].hpp"
+	[/let]
+[else]
+#include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
+[/if]
+[/template]
+[template private generateDispatchStrategyInclude(aPackage : Package) post(trim())]
+[if (aPackage.hasDispatchStrategy())]
+	[let dispatchStrategy : Class = aPackage.getDispatchStrategy()]
+#include "[dispatchStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[dispatchStrategy.name.toUpperFirst()/].hpp"
+	[/let]
+[elseif(isPSCSExecutable())]
+//#include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
+[else]
+//#include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
+[/if]
+[/template]
+[template private generateGetNextEventStrategyInclude(aPackage : Package) post(trim())]
+[if (aPackage.hasGetNextEventStrategy())]
+	[let getNextEventStrategy : Class = aPackage.getGetNextEventStrategy()]
+#include "[getNextEventStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[getNextEventStrategy.name.toUpperFirst()/].hpp"
+	[/let]
+[else]
+#include "fUML/Semantics/CommonBehavior/FIFOGetNextEventStrategy.hpp"
+[/if]
+[/template]
+[template private generateRequestPropagationStrategyInclude(aPackage : Package) post(trim())]
+[if (aPackage.hasCS_RequestPropagationStrategy())]
+	[let cS_RequestPropagationStrategy : Class = aPackage.getCS_RequestPropagationStrategy()]
+#include "[cS_RequestPropagationStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_RequestPropagationStrategy.name.toUpperFirst()/].hpp"
+	[/let]
+[else]
+#include "PSCS/Semantics/StructuredClassifiers/CS_DefaultRequestPropagationStrategy.hpp"
+[/if]
+[/template]
+[template private generateStructuralFeatureOfInterfaceAccessStrategyInclude(aPackage : Package) post(trim())]
+[if (aPackage.hasCS_StructuralFeatureOfInterfaceAccessStrategy())]
+	[let cS_StructuralFeatureOfInterfaceAccessStrategy : Class = aPackage.getCS_StructuralFeatureOfInterfaceAccessStrategy()]
+#include "[cS_StructuralFeatureOfInterfaceAccessStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_StructuralFeatureOfInterfaceAccessStrategy.name.toUpperFirst()/].hpp"
+	[/let]
+[else]
+//#include "PSCS/Semantics/StructuredClassifiers/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
+[/if]
 [/template]
 
 
@@ -279,52 +318,73 @@ m_factory = executionFactoryImpl;
 
 m_locus->setFactory(m_factory);
 m_factory->setLocus(m_locus);
+[aPackage.generateChoiceStrategyAssignment()/]
+[aPackage.generateDispatchStrategyAssignment()/]
+[aPackage.generateGetNextEventStrategyAssignment()/]
+[if (isPSCSExecutable())]
+[aPackage.generateConstructStrategyAssignment()/]
+[aPackage.generateRequestPropagationStrategyAssignment()/]
+[aPackage.generateStructuralFeatureOfInterfaceAccessStrategyAssignment()/]
+[/if]
+[/template]
 
+[template private generateStrategyAssignment(aStrategyClass : Class)]
+//Assign [aStrategyClass.name.toUpperFirst()/] to execution factory
+std::shared_ptr<[aStrategyClass.generateNamespaceName(true)/]> [aStrategyClass.name.toLowerFirst()/](new [aStrategyClass.generateNamespaceName(true)/]());
+[aStrategyClass.name.toLowerFirst()/]->setThis[aStrategyClass.name.toUpperFirst()/]Ptr([aStrategyClass.name.toLowerFirst()/]);
+m_factory->assignStrategy([aStrategyClass.name.toLowerFirst()/]);
+[/template]
+
+[template private generateConstructStrategyAssignment(aPackage : Package) post(trim())]
+[if (aPackage.hasCS_ConstructStrategy())]
+[aPackage.getCS_ConstructStrategy().generateStrategyAssignment()/]
+[else]
+//Assign CS_DefaultConstructStrategy to execution factory
+m_factory->assignStrategy(PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createMDE4CPP_ConstructStrategy());
+[/if]
+[/template]
+[template private generateChoiceStrategyAssignment(aPackage : Package) post(trim())]
 [if (aPackage.hasChoiceStrategy())]
 [aPackage.getChoiceStrategy().generateStrategyAssignment()/]
 [else]
 //Assign FirstChoiceStrategy to execution factory
 m_factory->assignStrategy(fUML::Semantics::Loci::LociFactory::eInstance()->createFirstChoiceStrategy());
 [/if]
+[/template]
+[template private generateDispatchStrategyAssignment(aPackage : Package) post(trim())]
+[if (aPackage.hasDispatchStrategy())]
+[aPackage.getDispatchStrategy().generateStrategyAssignment()/]
+[elseif(isPSCSExecutable())]
+//Assign CS_DispatchOperationOfInterfaceStrategy to execution factory
+//m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DispatchOperationOfInterfaceStrategy());
+[else]
+//Assign RedefinitionBasedDispatchStrategy to execution factory
+//m_factory->assignStrategy(fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createRedefinitionBasedDispatchStrategy());
+[/if]
+[/template]
+[template private generateGetNextEventStrategyAssignment(aPackage : Package) post(trim())]
 [if (aPackage.hasGetNextEventStrategy())]
 [aPackage.getGetNextEventStrategy().generateStrategyAssignment()/]
 [else]
-//assign FIFOGetNextEventStrategy to execution factory
+//Assign FIFOGetNextEventStrategy to execution factory
 m_factory->assignStrategy(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createFIFOGetNextEventStrategy());
 [/if]
-[comment] TODO: later
-[if (aPackage.hasDispatchStrategy())]
-[aPackage.getDispatchStrategy().generateStrategyAssignment()/]
-[else]
-//assign CS_DispatchOperationOfInterfaceStrategy to execution factory
-m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DispatchOperationOfInterfaceStrategy());
-[/if]
+[/template]
+[template private generateRequestPropagationStrategyAssignment(aPackage : Package) post(trim())]
 [if (aPackage.hasCS_RequestPropagationStrategy())]
 [aPackage.getCS_RequestPropagationStrategy().generateStrategyAssignment()/]
 [else]
-//assign CS_DefaultRequestPropagationStrategy to execution factory
+//Assign CS_DefaultRequestPropagationStrategy to execution factory
 m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DefaultRequestPropagationStrategy());
 [/if]
+[/template]
+[template private generateStructuralFeatureOfInterfaceAccessStrategyAssignment(aPackage : Package) post(trim())]
 [if (aPackage.hasCS_StructuralFeatureOfInterfaceAccessStrategy())]
 [aPackage.getCS_StructuralFeatureOfInterfaceAccessStrategy().generateStrategyAssignment()/]
 [else]
-//assign CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy to execution factory
-m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy());
+//Assign CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy to execution factory
+//m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy());
 [/if]
-[if (aPackage.hasCS_ConstructStrategy())]
-[aPackage.getCS_ConstructStrategy().generateStrategyAssignment()/]
-[else]
-//assign CS_DefaultConstructStrategy to execution factory
-m_factory->assignStrategy(PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_DefaultConstructStrategy());
-[/if]
-[/comment]
-[/template]
-
-[template private generateStrategyAssignment(aStrategyClass : Class)]
-//assign [aStrategyClass.name.toUpperFirst()/] to execution factory
-std::shared_ptr<[aStrategyClass.generateNamespaceName(true)/]> [aStrategyClass.name.toLowerFirst()/](new [aStrategyClass.generateNamespaceName(true)/]());
-[aStrategyClass.name.toLowerFirst()/]->setThis[aStrategyClass.name.toUpperFirst()/]Ptr([aStrategyClass.name.toLowerFirst()/]);
-m_factory->assignStrategy([aStrategyClass.name.toLowerFirst()/]);
 [/template]
 
 [template private generateActivityExecution(anActivity : Activity) post(trim())]

@@ -19,6 +19,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateModelExecutionFactoryImplementationSource(aPackage : Package)
@@ -55,6 +56,9 @@ originalName : String = aPackage.generateNamespacePath(false);
 	.generateCorrespondingActivityNodeActivationInclude()->asSet()) before('//ActivityNodeActivation includes\n')]
 [anIncludeString/]
 [/for]
+[if (isPSCSExecutable())]
+#include "PSCS/Semantics/Actions/ActionsFactory.hpp"
+[/if]
 [if (aPackage.includesPSSM())]
 
 //PSSM includes
@@ -227,7 +231,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newAct
 [template private generateActivityNodeActivationCreation(anActivityNode : ActivityNode)  post(trim())]
 //Create ActivityNodeActivation for [anActivityNode.eClass().name/] '[anActivityNode.metamodelElementName()/]'
 DEBUG_INFO("Creating [anActivityNode.eClass().name/]Activation for [anActivityNode.eClass().name/] '[anActivityNode.metamodelElementName()/]'.")
-std::shared_ptr<[anActivityNode.generateCorrespondingActivityNodeActivationCPPType()/]> [anActivityNode.getActivityNodeActivationVariableName()/] = [anActivityNode.generateCorrespondingFactoryNamespace()/]::eInstance()->create[anActivityNode.eClass().name/]Activation();
+std::shared_ptr<[anActivityNode.generateCorrespondingActivityNodeActivationCPPType()/]> [anActivityNode.getActivityNodeActivationVariableName()/] = [anActivityNode.generateCorrespondingFactoryNamespace()/]::eInstance()->create[anActivityNode.generateCorrespondingActivityNodeActivationClassName()/]();
 [anActivityNode.getActivityNodeActivationVariableName()/]->setNode([anActivityNode.generatePackageGetterCall()/]);
 [anActivityNode.getActivityNodeActivationVariableName()/]->setRunning(false);
 newActivationGroup->addNodeActivation([anActivityNode.getActivityNodeActivationVariableName()/]);
@@ -271,98 +275,183 @@ newActivationGroup->addEdgeInstance([anActivityEdge.getEdgeInstanceVariableName(
 The following templates return the C++ type of the corresponding ActivityNodeActivation class for a given ActivityNode
 [/comment]
 [comment ControlNodes /]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(InitialNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(InitialNode)) post(trim())]
 fUML::Semantics::Activities::InitialNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(FlowFinalNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(FlowFinalNode)) post(trim())]
 fUML::Semantics::Activities::FlowFinalNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ActivityFinalNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ActivityFinalNode)) post(trim())]
 fUML::Semantics::Activities::ActivityFinalNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ForkNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ForkNode)) post(trim())]
 fUML::Semantics::Activities::ForkNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(JoinNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(JoinNode)) post(trim())]
 fUML::Semantics::Activities::JoinNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(MergeNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(MergeNode)) post(trim())]
 fUML::Semantics::Activities::MergeNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(DecisionNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(DecisionNode)) post(trim())]
 fUML::Semantics::Activities::DecisionNodeActivation
 [/template]
 
 [comment ObjectNodes /]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ActivityParameterNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ActivityParameterNode)) post(trim())]
 fUML::Semantics::Activities::ActivityParameterNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsTypeOf(CentralBufferNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsTypeOf(CentralBufferNode)) post(trim())]
 fUML::Semantics::Activities::CentralBufferNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsTypeOf(DataStoreNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsTypeOf(DataStoreNode)) post(trim())]
 fUML::Semantics::Activities::DataStoreNodeActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(InputPin))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(InputPin)) post(trim())]
 fUML::Semantics::Actions::InputPinActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(OutputPin))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(OutputPin)) post(trim())]
 fUML::Semantics::Actions::OutputPinActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ExpansionNode))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ExpansionNode)) post(trim())]
 fUML::Semantics::Actions::ExpansionNodeActivation
 [/template]
 
 [comment Actions /]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AcceptEventAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AcceptCallAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_AcceptCallActionActivation
+[else]
+fUML::Semantics::Actions::AcceptCallActionActivation
+[/if]
+[/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AcceptEventAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_AcceptEventActionActivation
+[else]
 fUML::Semantics::Actions::AcceptEventActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AddStructuralFeatureValueAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AddStructuralFeatureValueAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation
+[else]
 fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CallOperationAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CallOperationAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_CallOperationActionActivation
+[else]
 fUML::Semantics::Actions::CallOperationActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CallBehaviorAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CallBehaviorAction)) post(trim())]
 fUML::Semantics::Actions::CallBehaviorActionActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ClearStructuralFeatureAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ClearStructuralFeatureAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation
+[else]
 fUML::Semantics::Actions::ClearStructuralFeatureActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CreateObjectAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CreateLinkAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_CreateLinkActionActivation
+[else]
+fUML::Semantics::Actions::CreateLinkActionActivation
+[/if]
+[/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CreateObjectAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_CreateObjectActionActivation
+[else]
 fUML::Semantics::Actions::CreateObjectActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(DestroyObjectAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(DestroyObjectAction)) post(trim())]
 fUML::Semantics::Actions::DestroyObjectActionActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadExtentAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadExtentAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_ReadExtentActionActivation
+[else]
 fUML::Semantics::Actions::ReadExtentActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadSelfAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadSelfAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_ReadSelfActionActivation
+[else]
 fUML::Semantics::Actions::ReadSelfActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadStructuralFeatureAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadStructuralFeatureAction)) post(trim())]
 fUML::Semantics::Actions::ReadStructuralFeatureActionActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(RemoveStructuralFeatureValueAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(RemoveStructuralFeatureValueAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation
+[else]
 fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(SendSignalAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(SendSignalAction)) post(trim())]
+[if (isPSCSExecutable())]
+PSCS::Semantics::Actions::CS_SendSignalActionActivation
+[else]
 fUML::Semantics::Actions::SendSignalActionActivation
+[/if]
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ValueSpecificationAction))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ValueSpecificationAction)) post(trim())]
 fUML::Semantics::Actions::ValueSpecificationActionActivation
 [/template]
 
 [comment Structured Activity Nodes /]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ExpansionRegion))]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ExpansionRegion)) post(trim())]
 fUML::Semantics::Actions::ExpansionRegionActivation
+[/template]
+
+[comment]
+The following templates return the class name of the corresponding fUML/PSCS ActivityNodeActivation subclass for a given ActivityNode
+[/comment]
+[template private generateCorrespondingFactoryNamespace(anActivityNode : ActivityNode)
+? (
+	isPSCSExecutable() and
+	(
+		anActivityNode.oclIsTypeOf(AcceptCallAction) or
+		anActivityNode.oclIsTypeOf(AcceptEventAction) or
+		anActivityNode.oclIsTypeOf(AddStructuralFeatureValueAction) or
+		anActivityNode.oclIsTypeOf(CallOperationAction) or
+		anActivityNode.oclIsTypeOf(ClearStructuralFeatureAction) or
+		anActivityNode.oclIsTypeOf(CreateLinkAction) or
+		anActivityNode.oclIsTypeOf(CreateObjectAction) or
+		anActivityNode.oclIsTypeOf(ReadExtentAction) or
+		anActivityNode.oclIsTypeOf(ReadSelfAction) or
+		anActivityNode.oclIsTypeOf(RemoveStructuralFeatureValueAction) or
+		anActivityNode.oclIsTypeOf(SendSignalAction)
+	)
+)
+post(trim())]
+PSCS::Semantics::Actions::ActionsFactory
+[/template]
+
+[template private generateCorrespondingFactoryNamespace(anActivityNode : ActivityNode)
+? (
+	anActivityNode.oclIsKindOf(Action) or
+	anActivityNode.oclIsKindOf(ExpansionNode) or
+	anActivityNode.oclIsKindOf(StructuredActivityNode) or
+	anActivityNode.oclIsKindOf(Pin)
+)
+post(trim())]
+fUML::Semantics::Actions::ActionsFactory
 [/template]
 
 [comment]
 The following templates return the include path of the corresponding ActivityNode as well as ActivityNodeActivation class for a given ActivityNode
 [/comment]
-[template private generateCorrespondingActivityNodeActivationInclude(anActivityNode : ActivityNode)]
+[template private generateCorrespondingActivityNodeActivationInclude(anActivityNode : ActivityNode) post(trim())]
 #include "[anActivityNode.generateCorrespondingActivityNodeActivationCPPType().substituteAll('::', '/')/].hpp"
 [/template]
 [template private generateCorrespondingActivityNodeInclude(anActivityNode : ActivityNode)]
@@ -372,42 +461,57 @@ The following templates return the include path of the corresponding ActivityNod
 [comment]
 The following template returns the C++ type of the corresponding ActivityEdgeInstance class for a given ActivityEdge
 [/comment]
-[template private generateCorrespondingActivityEdgeInstanceCPPType(anActivityEdge : ActivityEdge)]
+[template private generateCorrespondingActivityEdgeInstanceCPPType(anActivityEdge : ActivityEdge) post(trim())]
 fUML::Semantics::Activities::ActivityEdgeInstance
 [/template]
 
 [comment]
 The following templates return the include path of the corresponding ActivityEdge as well as ActivityEdgeInstance class for a given ActivityEdge
 [/comment]
-[template private generateCorrespondingActivityEdgeInstanceInclude(anActivityEdge : ActivityEdge)]
+[template private generateCorrespondingActivityEdgeInstanceInclude(anActivityEdge : ActivityEdge) post(trim())]
 #include "[anActivityEdge.generateCorrespondingActivityEdgeInstanceCPPType().substitute('::', '/')/].hpp"
 [/template]
-[template private generateCorrespondingActivityEdgeInclude(anActivityEdge : ActivityEdge)]
+[template private generateCorrespondingActivityEdgeInclude(anActivityEdge : ActivityEdge) post(trim())]
 #include "uml/[anActivityEdge.eClass().name/].hpp"
 [/template]
 
 
-[template private getActivityNodeActivationVariableName(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(Pin))]
+[template private getActivityNodeActivationVariableName(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(Pin)) post(trim())]
 [anActivityNode.memberName()/]_[anActivityNode.eClass().name/]Activation
 [/template]
 
-[template private getActivityNodeActivationVariableName(anActivityNode : ActivityNode)]
+[template private getActivityNodeActivationVariableName(anActivityNode : ActivityNode) post(trim())]
 [anActivityNode.memberName()/]_[anActivityNode.eClass().name/]Activation
 [/template]
 
 
 [comment]
-The following templates return the namespace name of the corresponding fUML subpackage Factory class for a given ActivityNode
+The following templates return the namespace name of the corresponding fUML/PSCS subpackage Factory class for a given ActivityNode
 [/comment]
 [comment Actions package /]
-[template private generateCorrespondingFactoryNamespace(anActivityNode : ActivityNode)
+[template private generateCorrespondingActivityNodeActivationClassName(anActivityNode : ActivityNode)
 ? (
-	anActivityNode.oclIsKindOf(Action) or
-	anActivityNode.oclIsKindOf(ExpansionNode) or
-	anActivityNode.oclIsKindOf(StructuredActivityNode) or
-	anActivityNode.oclIsKindOf(Pin)
-)]
-fUML::Semantics::Actions::ActionsFactory
+	isPSCSExecutable() and
+	(
+		anActivityNode.oclIsTypeOf(AcceptCallAction) or
+		anActivityNode.oclIsTypeOf(AcceptEventAction) or
+		anActivityNode.oclIsTypeOf(AddStructuralFeatureValueAction) or
+		anActivityNode.oclIsTypeOf(CallOperationAction) or
+		anActivityNode.oclIsTypeOf(ClearStructuralFeatureAction) or
+		anActivityNode.oclIsTypeOf(CreateLinkAction) or
+		anActivityNode.oclIsTypeOf(CreateObjectAction) or
+		anActivityNode.oclIsTypeOf(ReadExtentAction) or
+		anActivityNode.oclIsTypeOf(ReadSelfAction) or
+		anActivityNode.oclIsTypeOf(RemoveStructuralFeatureValueAction) or
+		anActivityNode.oclIsTypeOf(SendSignalAction)
+	)
+)
+post(trim())]
+CS_[anActivityNode.eClass().name/]Activation
+[/template]
+
+[template private generateCorrespondingActivityNodeActivationClassName(anActivityNode : ActivityNode) post(trim())]
+[anActivityNode.eClass().name/]Activation
 [/template]
 
 [comment Activities package /]
@@ -423,7 +527,8 @@ fUML::Semantics::Actions::ActionsFactory
 	anActivityNode.oclIsKindOf(InitialNode) or
 	anActivityNode.oclIsKindOf(JoinNode) or
 	anActivityNode.oclIsKindOf(MergeNode)
-)]
+)
+post(trim())]
 fUML::Semantics::Activities::ActivitiesFactory
 [/template]
 

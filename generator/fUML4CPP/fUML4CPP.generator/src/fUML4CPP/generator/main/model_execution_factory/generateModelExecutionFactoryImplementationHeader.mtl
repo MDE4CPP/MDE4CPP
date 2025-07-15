@@ -31,12 +31,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [startGuard(aPackage,'ExecutionFactoryImpl')/]
 
 #include "../[upperName/]ExecutionFactory.hpp"
-[if (aPackage.includesPSSM())]
-#include "PSSM/Semantics/Loci/impl/SM_ExecutionFactoryImpl.hpp"
-[else]
-#include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
-[/if]
+#include "[getSuperClassInclude()/]"
 
 namespace fUML::Semantics::Activities 
 {
@@ -52,11 +47,7 @@ namespace PSSM::Semantics::StateMachines
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	[if (aPackage.includesPSSM())]
-	class [upperName/]ExecutionFactoryImpl : virtual public PSSM::Semantics::Loci::SM_ExecutionFactoryImpl, virtual public [upperName/]ExecutionFactory
-	[else]
-	class [upperName/]ExecutionFactoryImpl : virtual public/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl*/ fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public [upperName/]ExecutionFactory
-	[/if]
+	class [upperName/]ExecutionFactoryImpl: virtual public [getSuperClassName()/], virtual public [upperName/]ExecutionFactory
 	{
 		private:    
 			[upperName/]ExecutionFactoryImpl& operator=([upperName/]ExecutionFactoryImpl const&) = delete;
@@ -93,3 +84,31 @@ namespace [aPackage.generateNamespace(false)/]
 [endGuard(aPackage,'ExecutionFactoryImpl')/]
 [/file]
 [/template]
+
+[query private getSuperClassName(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM::Semantics::Loci::SM_ExecutionFactoryImpl'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS::Semantics::Loci::CS_ExecutionFactoryImpl'
+		else
+			'fUML::Semantics::Loci::ExecutionFactoryImpl'
+		endif
+	endif
+/]
+
+[query private getSuperClassInclude(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM/Semantics/Loci/impl/SM_ExecutionFactoryImpl.hpp'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp'
+		else
+			'fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp'
+		endif
+	endif
+/]

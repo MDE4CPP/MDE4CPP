@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [template public generateModelExecutorImplementationHeader(aPackage : Package)
@@ -27,8 +28,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [startGuard(aPackage,'ExecutorImpl')/]
 
 #include "../[upperName/]Executor.hpp"
-#include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
+#include "[getSuperClassInclude()/]"
 
 //Forward Declaration for used types
 namespace uml
@@ -39,7 +39,7 @@ namespace uml
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]ExecutorImpl :virtual public /*PSCS::Semantics::Loci::CS_ExecutorImpl*/ fUML::Semantics::Loci::ExecutorImpl, virtual public [upperName/]Executor
+	class [upperName/]ExecutorImpl: virtual public [getSuperClassName()/], virtual public [upperName/]Executor
 	{
 		private:    
 			[upperName/]ExecutorImpl& operator=([upperName/]ExecutorImpl const&) = delete;
@@ -59,3 +59,21 @@ namespace [aPackage.generateNamespace(false)/]
 [endGuard(aPackage,'ExecutorImpl')/]
 [/file]
 [/template]
+
+[query private getSuperClassName(anOclAny: OclAny) : String = 
+	if(isPSCSExecutable())
+	then
+		'PSCS::Semantics::Loci::CS_ExecutorImpl'
+	else
+		'fUML::Semantics::Loci::ExecutorImpl'
+	endif
+/]
+
+[query private getSuperClassInclude(anOclAny: OclAny) : String = 
+	if(isPSCSExecutable())
+	then
+		'PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp'
+	else
+		'fUML/Semantics/Loci/impl/ExecutorImpl.hpp'
+	endif
+/]

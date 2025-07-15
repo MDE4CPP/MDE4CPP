@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [template public generateModelLocusImplementationHeader(aPackage : Package)
@@ -27,20 +28,11 @@ originalName : String = aPackage.generateNamespacePath(false);
 [startGuard(aPackage,'LocusImpl')/]
 
 #include "../[upperName/]Locus.hpp"
-[if (aPackage.includesPSSM())]
-#include "PSSM/Semantics/Loci/impl/SM_LocusImpl.hpp"
-[else]
-#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
-[/if]
+#include "[getSuperClassInclude()/]"
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	[if (aPackage.includesPSSM())]
-	class [upperName/]LocusImpl :virtual public PSSM::Semantics::Loci::SM_LocusImpl, virtual public [upperName/]Locus
-	[else]
-	class [upperName/]LocusImpl :virtual public /*PSCS::Semantics::Loci::CS_LocusImpl*/ fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
-	[/if]
+	class [upperName/]LocusImpl: virtual public [getSuperClassName()/], virtual public [upperName/]Locus
 	{
 		private:    
 			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
@@ -62,3 +54,31 @@ namespace [aPackage.generateNamespace(false)/]
 [endGuard(aPackage,'LocusImpl')/]
 [/file]
 [/template]
+
+[query private getSuperClassName(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM::Semantics::Loci::SM_LocusImpl'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS::Semantics::Loci::CS_LocusImpl'
+		else
+			'fUML::Semantics::Loci::LocusImpl'
+		endif
+	endif
+/]
+
+[query private getSuperClassInclude(anOclAny: OclAny) : String = 
+	if(isPSSMExecutable())
+	then 
+		'PSSM/Semantics/Loci/impl/SM_LocusImpl.hpp'
+	else
+		if(isPSCSExecutable())
+		then
+			'PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp'
+		else
+			'fUML/Semantics/Loci/impl/LocusImpl.hpp'
+		endif
+	endif
+/]
