@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:StandardProfile="http://www.omg.org/spec/UML/20161101/StandardProfile" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.omg.org/spec/UML/20161101/StandardProfile ../../../src/common/standardProfile/model/StandardProfile.uml#_1G3kkDMLEeq7iofTAEuRew http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:StandardProfile="http://www.omg.org/spec/UML/20161101/StandardProfile" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.omg.org/spec/UML/20161101/StandardProfile ../../../../../common/standardProfile/model/StandardProfile.uml#_1G3kkDMLEeq7iofTAEuRew http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
   <uml:Model xmi:id="_v34vsAGuEe-elp4mN3LRIg" name="DefaultValue_Structures">
     <ownedComment xmi:type="uml:Comment" xmi:id="_WPfzQAI9Ee-7BP3D2HOIzQ">
       <body>This test case addresses instantiation of default values for properties typed by composite structures.</body>
@@ -297,15 +297,15 @@ std::cout&lt;&lt;&quot;Finished assertion for A&quot;&lt;&lt;std::endl;</body>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_o16P4GLtEfC_j_kt7tq83A">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_o16P4WLtEfC_j_kt7tq83A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../../src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+        <references xmi:type="ecore:EPackage" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
       </eAnnotations>
-      <appliedProfile xmi:type="uml:Profile" href="../../../src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_o17eAGLtEfC_j_kt7tq83A">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_o17eAWLtEfC_j_kt7tq83A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../../src/common/standardProfile/model/StandardProfile.uml#_1G3kkDMLEeq7iofTAEuRew"/>
+        <references xmi:type="ecore:EPackage" href="../../../../../common/standardProfile/model/StandardProfile.uml#_1G3kkDMLEeq7iofTAEuRew"/>
       </eAnnotations>
-      <appliedProfile xmi:type="uml:Profile" href="../../../src/common/standardProfile/model/StandardProfile.uml#_0"/>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../../common/standardProfile/model/StandardProfile.uml#_0"/>
     </profileApplication>
   </uml:Model>
   <UML4CPPProfile:MainBehavior xmi:id="_rikqcGLtEfC_j_kt7tq83A" base_Behavior="_O2Ge4AGwEe-elp4mN3LRIg"/>
