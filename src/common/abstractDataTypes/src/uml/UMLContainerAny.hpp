@@ -70,4 +70,11 @@ template <typename T> static std::shared_ptr<Any> eUMLContainerAny(T value, unsi
 	std::shared_ptr<Any> any(new uml::UMLContainerAnyTemplate<T>(value, typeID, true));
 	return any;
 }
+
+[[maybe_unused]]
+static std::shared_ptr<Bag<uml::Element>> retrieveAnyValueAsUMLElementContainer(std::shared_ptr<Any> any)
+{
+	std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(any);
+	return umlContainerAny->getAsElementContainer();
+}
 #endif

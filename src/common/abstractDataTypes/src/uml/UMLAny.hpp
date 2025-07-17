@@ -65,6 +65,7 @@ template <typename T> static std::shared_ptr<Any> eUMLAny(T value, unsigned long
 	return any;
 }
 
+[[maybe_unused]]
 static std::shared_ptr<uml::Element> retrieveAnyValueAsUMLElement(std::shared_ptr<Any> any)
 {
 	std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(any);
