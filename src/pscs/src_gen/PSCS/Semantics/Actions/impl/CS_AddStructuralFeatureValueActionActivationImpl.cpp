@@ -338,10 +338,21 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 	}
 	else {
 		
-		if(action->getIsReplaceAll()) {
+		if(action->getIsReplaceAll())
+		{
+			value->unset(property);
+		}
+
+		int upperOfFeature = feature->getUpper();
+		if(upperOfFeature == 1)
+		{
+			// If upperOfFeature = 1, then feature is a "simple" feature
+			// insertAt as well as isUnique do not apply here, since the current value will be overwritten anyway
 			value->set(property, inputValue);
 		}
-		else {
+		else
+		{
+			//If upperOfFeature <> 1, then feature is a container
 			std::shared_ptr<Any> featureValue = value->get(property);
 			
 			/*
