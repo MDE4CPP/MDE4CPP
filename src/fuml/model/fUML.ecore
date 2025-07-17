@@ -3629,6 +3629,12 @@
         </eAnnotations>
         <eParameters name="end" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
       </eOperations>
+      <eOperations name="contains" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = this->getLinkEnds();&#xA;bool contains = false;&#xA;&#xA;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;{&#xA;&#x9;contains = (linkEnd->getEndValue() == object);&#xA;&#x9;&#x9;&#xA;&#x9;if(contains) break;&#xA;}&#xA;&#x9;&#xA;return contains;"/>
+        </eAnnotations>
+        <eParameters name="object" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="linkEnds" upperBound="-1"
           eType="#//MDE4CPP_Extensions/FUML_LinkEnd" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
