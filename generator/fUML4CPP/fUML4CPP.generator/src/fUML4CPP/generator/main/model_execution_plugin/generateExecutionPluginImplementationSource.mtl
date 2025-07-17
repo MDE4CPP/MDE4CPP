@@ -431,7 +431,31 @@ for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& para
 {
 	if(returnParameter == parameterValue->getParameter())
 	{
+	[if (par.upper <> 1)]
+		const std::shared_ptr<Bag<Any>>& anyList = parameterValue->getValues();
+		[if (par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration))]
+		[par.generateCppType(false)/] elementList(new Bag<[par.type.generateCppRawType(true)/]>());
+		[else]
+		std::shared_ptr<Bag<uml::Element>> elementList(new Bag<uml::Element>());
+		[/if]
+		for(const std::shared_ptr<Any>& any : *anyList)
+		{
+		[if (par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration))]
+			[par.type.generateCppRawType(true)/] element = any->get<[par.type.generateCppRawType(true)/]>();
+			elementList->add(element);
+		[else]
+			std::shared_ptr<uml::Element> element = retrieveAnyValueAsUMLElement(any);
+			elementList->add(element);
+		[/if]
+		}
+		[if (par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration))]
+		returnValue = eAny(elementList, -1 /*ID for primitive types??*/, true);
+		[else]
+		returnValue = eUMLContainerAny(elementList, [par.type.getNearestPackage().generateNamespace(true)/]::[par.type.getNearestPackage().getPackageName()/]Package::[par.type.oclAsType(Classifier).getMemberName().toUpperCase()/]);
+		[/if]
+	[else]
 		returnValue = parameterValue->getValues()->at(0);
+	[/if]
 		break;
 	}
 }
