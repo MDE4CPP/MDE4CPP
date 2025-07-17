@@ -132,7 +132,7 @@ FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [l
 	[/if]
 [/let]
 [/for]
-[if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
+[if(aPackage.allOwnedElements()->filter(Operation).method->filter(Activity)->notEmpty() or aPackage.allOwnedElements()->filter(Property).defaultValue->filter(OpaqueExpression).behavior->filter(Activity)->notEmpty())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])[/if]
 [/template]
 
@@ -158,7 +158,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[/if]
 [/let]
 [/for]
-[if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
+[if(aPackage.allOwnedElements()->filter(Operation).method->filter(Activity)->notEmpty() or aPackage.allOwnedElements()->filter(Property).defaultValue->filter(OpaqueExpression).behavior->filter(Activity)->notEmpty())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
 	${CMAKE_DL_LIBS}
 [/if]        

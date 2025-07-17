@@ -188,12 +188,12 @@ PSSM: OpaqueBehaviors owned by a State are not included in aClass./]
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 [comment Plugin Framework /]
-[if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
+[if (aClass.ownedOperation.method->reject(oclIsUndefined())->filter(Activity)->notEmpty() or aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(OpaqueExpression).behavior->reject(oclIsUndefined())->filter(Activity)->notEmpty())]
 
 //Includes for PluginFramework
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
-[/if][/if]
+[/if]
 [comment Includes of OpaqueBehavior methods of Operations/]
 [for (aOperation : Operation | aClass.ownedOperation->select(method->filter(OpaqueBehavior)->notEmpty())->asOrderedSet()->sortedBy(myQualifiedName())) before('\n//Includes of Operations') after('\n')]
 [let anOpaqueBehavior : OpaqueBehavior = aOperation.method->filter(OpaqueBehavior)->asOrderedSet()->first()]
@@ -224,6 +224,13 @@ PSSM: OpaqueBehaviors owned by a State are not included in aClass./]
 [for (aConnector : Connector | aClass.ownedConnector->select(c : Connector | c.end->size() > 0)) before('\n//Includes from roles of ConnectorEnds\n') after('\n')][for (anEnd : ConnectorEnd | aConnector.end)]
 #include "[anEnd.role.type._package.generateNamespacePath(true)/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]
+[comment PSCS-specific includes /]
+[if (isPSCSExecutable())]
+//PSCS-specific includes
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "uml/Port.hpp"
+[/if]
 [/template]
 
 [template private generateConstructors(aClass : Class) post(trim())
@@ -473,11 +480,18 @@ void [className/]::construct()
 	[aProperty.generateAttributeInstantiation()/]
 	[/for]
 	[comment Init properties with default value/]
+	[comment Default values for properties can be instatiated here if: the default value is an OpaqueExpression OR is an InstanceValue. /]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())
-		->select(p : Property | 
-			(not p.defaultValue.oclIsUndefined() 
-			and p.defaultValue.oclIsTypeOf(InstanceValue)
-			and not p.defaultValue.type.oclIsTypeOf(Enumeration))))
+			->select(p : Property | 
+			(
+				not p.defaultValue.oclIsUndefined() 
+				and 
+				(
+					p.defaultValue.oclIsTypeOf(OpaqueExpression) or
+					p.defaultValue.oclIsTypeOf(InstanceValue) 
+				)
+			)
+		))
 	separator('\r\n') after('\r\n')]
 	[aProperty.generateAttributeDefaultInstantiation()/]
 	[/for]
@@ -522,6 +536,7 @@ void [className/]::constructObject(const std::shared_ptr<uml::Class>& type)
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
 bool [className/]::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
 {
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 [/template]
 
@@ -529,6 +544,7 @@ bool [className/]::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
 bool [className/]::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
 {
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 [/template]
 
@@ -536,6 +552,7 @@ bool [className/]::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensio
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
 std::shared_ptr<Any> [className/]::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 [/template]
 
@@ -543,6 +560,7 @@ std::shared_ptr<Any> [className/]::dispatchCallIn(const std::shared_ptr<uml::Ope
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
 std::shared_ptr<Any> [className/]::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 [/template]
 

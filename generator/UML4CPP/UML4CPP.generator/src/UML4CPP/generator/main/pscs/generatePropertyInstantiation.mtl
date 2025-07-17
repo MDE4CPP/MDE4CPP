@@ -38,6 +38,7 @@ m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aPro
 		[else]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 		[/if]
+m_[aProperty.name/]->constructObject([aProperty.type.generatePackageGetterCall()/]);
 	[/if]
 [elseif (aProperty.canInstantiate())]
 //instantiate property '[aProperty.name/]'
@@ -60,34 +61,136 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 	aPackage : Package = aProperty.type.getNearestPackage(); 
 	factoryName : String = aPackage.name.concat('Factory');
 }]
-	[if (aProperty.isComposite)]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.getFeaturingClassifier().name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr[else]getThis[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr()[/if]);
-	[else]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
-	m_[aProperty.name/]->add(value);
-	[/if]
+[if (aProperty.isComposite)]
+std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.getFeaturingClassifier().name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr[else]getThis[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr()[/if]);
+[else]
+std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
+m_[aProperty.name/]->add(value);
+[/if]
+value->constructObject([aProperty.type.generatePackageGetterCall()/]);
 [/template]
 
+[**
+ * generate attribute member initialization for properties with OpaqueExpression as default value
+*/]
+[template public generateAttributeDefaultInstantiation(aProperty : Property) ? (aProperty.defaultValue.oclIsTypeOf(OpaqueExpression)) post(trim()) 
+{expression : OpaqueExpression = aProperty.defaultValue.oclAsType(OpaqueExpression);}]
+[comment PSCS only supports to compute values from default values that are OpaqueExpressions using OpaqueExpression::behavior /]
+[let expressionBehavior : Behavior = expression.behavior]
+[if (not expressionBehavior.oclIsUndefined())]
+//instantiate property '[aProperty.name/]' with opaque expression [if (not expression.name.oclIsUndefined())]'[expression.name/]'[else]anonymous opaque expression[/if]
+{
+	[if (expressionBehavior.oclIsTypeOf(Activity))]
+	[generateOpaqueExpressionEvaluationFromActivity(aProperty, expressionBehavior.oclAsType(Activity))/]
+	[elseif (expressionBehavior.oclIsKindOf(OpaqueBehavior))]
+	[generateOpaqueExpressionEvaluationFromOpaqueBehavior(aProperty, expressionBehavior.oclAsType(OpaqueBehavior))/]
+	[else]
+	// Cannot instatiate default value for property [aProperty.memberName()/] because opaque expression behavior of type [expressionBehavior.eClass().name/] is currently not supported.
+	[/if]
+}
+[/if]
+[/let]
+[/template]
+
+[template private generateOpaqueExpressionEvaluationFromActivity(aProperty : Property, anActivity : Activity) post(trim())]
+std::shared_ptr<Any> expressionResult;
+[if (not anActivity.specification.oclIsUndefined())]
+	[if (anActivity.specification.oclIsKindOf(Operation))]
+		[let specifiedOperation : Operation = anActivity.specification.oclAsType(Operation)]
+// Activity [anActivity.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
+expressionResult = this->invokeOperation([specifiedOperation.getNearestPackage().generateNamespace(true)/]::[specifiedOperation.getNearestPackage().getPackageName()/]Package::[specifiedOperation.getMemberName().toUpperCase()/], new Bag<Any>(), new Bag<Any>());
+		[/let]
+	[/if]
+[else]
+std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+std::string pluginName = "[anActivity.getRootPackage().getPackageName()/]Exec";
+std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+if (plugin)
+{
+	DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+
+	std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+	if (executionPlugin)
+	{
+		DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+		expressionResult = executionPlugin->executeActivity([anActivity.generatePackageGetterCall()/], std::shared_ptr<Bag<Any>>(new Bag<Any>()), nullptr);
+	}
+	else
+	{
+		std::cout << "Plugin '" << plugin->eNAME() << "' is not an execution plugin!" << std::endl;
+	}
+}
+else
+{ 
+	std::cout << "Plugin '" << pluginName << "' not found!" << std::endl;
+}
+[/if]
+[if (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+m_[aProperty.name/] = expressionResult->get<[aProperty.generateCppType()/]>();
+[else]
+	[if (aProperty.upper <> 1)]
+std::shared_ptr<Bag<uml::Element>> elementList = retrieveAnyValueAsUMLElementContainer(expressionResult);
+const [aProperty.generateCppType()/]& _[aProperty.name.toLowerFirst()/] = this->[aProperty.getterName()/]();
+for(const std::shared_ptr<uml::Element>& element : * elementList)
+{
+	_[aProperty.name.toLowerFirst()/]->add(std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element));
+}
+	[else]
+m_[aProperty.name/] = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(retrieveAnyValueAsUMLElement(expressionResult));
+	[/if]
+[/if]
+[/template]
+
+[template private generateOpaqueExpressionEvaluationFromOpaqueBehavior(aProperty : Property, anOpaqueBehavior: OpaqueBehavior) post(trim())]
+std::shared_ptr<Any> expressionResult;
+[if (not anOpaqueBehavior.specification.oclIsUndefined())]
+	[if (anOpaqueBehavior.specification.oclIsKindOf(Operation))]
+		[let specifiedOperation : Operation = anOpaqueBehavior.specification.oclAsType(Operation)]
+// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] specifies Operation [specifiedOperation.generateNamespaceName(true)/]
+expressionResult = this->invokeOperation([specifiedOperation.getNearestPackage().generateNamespace(true)/]::[specifiedOperation.getNearestPackage().getPackageName()/]Package::[specifiedOperation.getMemberName().toUpperCase()/], std::shared_ptr<Bag<Any>>(new Bag<Any>()), std::shared_ptr<Bag<Any>>(new Bag<Any>()));
+		[/let]
+	[/if]
+	[comment 
+		Else if the OpaqueBehavior has no specification (i.e. it does not implement any Operation)
+		but it has a defined context and this context is a class,
+		then execute this Behavior on the corresponding context object
+	/]
+[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class))]
+// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
+expressionResult = context->invokeOpaqueBehavior([anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/], std::shared_ptr<Bag<Any>>(new Bag<Any>()), std::shared_ptr<Bag<Any>>(new Bag<Any>()));
+	[comment 
+		Else execute the global model function corresponding to this Behavior
+	/]
+[else]
+// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
+// and is therefore realized as a global function
+expressionResult = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke([anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/], std::shared_ptr<Bag<Any>>(new Bag<Any>()), std::shared_ptr<Bag<Any>>(new Bag<Any>()));
+[/if]
+m_[aProperty.name/] = expressionResult->get<[aProperty.generateCppType()/]>();
+[/template]
 
 [**
  * generate attribute member initialization for properties with InstanceValue as default value
 */]
-[template public generateAttributeDefaultInstantiation(aProperty : Property) post(trim()) {instVal : InstanceValue = aProperty.defaultValue.oclAsType(InstanceValue);}]
+[template public generateAttributeDefaultInstantiation(aProperty : Property) ? (aProperty.defaultValue.oclIsTypeOf(InstanceValue)) post(trim()) 
+{instVal : InstanceValue = aProperty.defaultValue.oclAsType(InstanceValue);}]
+[if (not instVal.type.oclIsTypeOf(Enumeration))] [comment Default values for Enumerations are assigned ad-hoc in class header file /]
 [let specification : InstanceSpecification = instVal.instance]
 //instantiate property '[aProperty.name/]' with specification [if (not specification.name.oclIsUndefined())]'[specification.name/]'[else]anonymous instance specification[/if]
-[if (aProperty.upper <> 1)] [comment *-multiplicity /]
+	[if (aProperty.upper <> 1)] [comment *-multiplicity /]
 for(unsigned int i = 0; i < [aProperty.lower/]; i++)
 {
-[for (aSlot : Slot | specification.slot)]
+		[for (aSlot : Slot | specification.slot)]
 	[aSlot.generateSlotInitialization('m_'.concat(aProperty.name).concat('->at(i)'), 0)/]
-[/for]
+		[/for]
 }
-[else] [comment 1-multiplicity /]
-[for (aSlot : Slot | specification.slot)]
+	[else] [comment 1-multiplicity /]
+	[for (aSlot : Slot | specification.slot)]
 [aSlot.generateSlotInitialization('m_'.concat(aProperty.name), 0)/]
-[/for]
-[/if]
+	[/for]
+	[/if]
 [/let]
+[/if]
 [/template]
 
 [template private generateSlotInitialization(aSlot : Slot, recursiveString : String, recursionDepth : Integer) post(trim())]
