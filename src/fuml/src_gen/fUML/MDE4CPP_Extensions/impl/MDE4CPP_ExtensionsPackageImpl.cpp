@@ -99,6 +99,10 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Link_Operation_add_FUML_Object_EInt;
 }
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_contains_FUML_Object() const
+{
+	return m_fUML_Link_Operation_contains_FUML_Object;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_destroy() const
 {
 	return m_fUML_Link_Operation_destroy;

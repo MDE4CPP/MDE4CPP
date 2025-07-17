@@ -195,6 +195,24 @@ void FUML_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Obj
 	//end of body
 }
 
+bool FUML_LinkImpl::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();
+bool contains = false;
+
+for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd : *linkEnds)
+{
+	contains = (linkEnd->getEndValue() == object);
+		
+	if(contains) break;
+}
+	
+return contains;
+	//end of body
+}
+
 void FUML_LinkImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -685,6 +703,38 @@ std::shared_ptr<Any> FUML_LinkImpl::eInvoke(int operationID, const std::shared_p
 			}
 		
 			this->add(incoming_param_object,incoming_param_end,incoming_param_position);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Link::contains(fUML::MDE4CPP_Extensions::FUML_Object) : bool: 768015077
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_CONTAINS_FUML_OBJECT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'contains'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'contains'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->contains(incoming_param_object), 0, false);
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Link::destroy(): 1266427544

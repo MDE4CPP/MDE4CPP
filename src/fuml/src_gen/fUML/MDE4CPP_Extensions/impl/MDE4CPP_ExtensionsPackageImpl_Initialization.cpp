@@ -188,6 +188,25 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_fUML_Link_Operation_contains_FUML_Object->setName("contains");
+	m_fUML_Link_Operation_contains_FUML_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_fUML_Link_Operation_contains_FUML_Object->setLowerBound(1);
+	m_fUML_Link_Operation_contains_FUML_Object->setUpperBound(1);
+	m_fUML_Link_Operation_contains_FUML_Object->setUnique(true);
+	m_fUML_Link_Operation_contains_FUML_Object->setOrdered(true);
+	
+	m_fUML_Link_Operation_contains_FUML_Object->_setID(FUML_LINK_OPERATION_CONTAINS_FUML_OBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_contains_FUML_Object);
+		parameter->setName("object");
+		parameter->setEType(getFUML_Object_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_fUML_Link_Operation_destroy->setName("destroy");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
