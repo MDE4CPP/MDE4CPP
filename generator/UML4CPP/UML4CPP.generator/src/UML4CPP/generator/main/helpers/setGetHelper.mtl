@@ -27,6 +27,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [**
@@ -477,7 +478,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, const
 }
 [/template]
 
-[template private generateUnSetImplementation(aClass : Class)]
+[template private generateUnSetImplementation(aClass : Class) post(trim())]
 bool [aClass.name.toUpperFirst().concat('Impl')/]::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	return this->unset(_property->_getID());
@@ -498,11 +499,11 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.upper = 1)]
-			[if (aProperty.isBackReference())] [comment required for std::weak_ptr, as nullptr cannot be assigned to std::weak_ptr /]
+				[if (aProperty.isBackReference())] [comment required for std::weak_ptr, as nullptr cannot be assigned to std::weak_ptr /]
 			m_[aProperty.name/].reset();
-			[else]
+				[else]
 			m_[aProperty.name/] = [aProperty.type.generateDefaultValue()/];
-			[/if]
+				[/if]
 			return true;
 			[else]
 			this->[aProperty.getterName()/]()->clear();

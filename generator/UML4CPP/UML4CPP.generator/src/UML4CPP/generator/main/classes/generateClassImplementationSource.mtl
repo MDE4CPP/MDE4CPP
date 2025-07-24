@@ -227,6 +227,7 @@ PSSM: OpaqueBehaviors owned by a State are not included in aClass./]
 [comment PSCS-specific includes /]
 [if (isPSCSExecutable())]
 //PSCS-specific includes
+#include "fUML/Semantics/Loci/Locus.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
 #include "uml/Port.hpp"
@@ -379,7 +380,7 @@ const std::shared_ptr<Bag<uml::Classifier>>& [className/]::getTypes() const
 
 	if(!types)
 	{
-		types.reset();
+		types.reset(new Bag<uml::Classifier>());
 		// Add type of self '[aClass.name/]' : Class
 		types->add([aClass.generatePackageGetterCall()/]);
 		[for (parent : Classifier | aClass.allParents())]
@@ -411,44 +412,6 @@ void [className/]::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
 	[/for]
 	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
 }
-
-/*
-void [className/]::destroy()
-{	[comment Destroy corresponding links if existing/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[comment  property must belong to an association AND this association must be binary AND property must be owned by a class (i.e. not owned by an association) AND be typed AND neither be of primitive nor enumeration type AND not be a back reference/]
-	[if (not aProperty.association.oclIsUndefined() and aProperty.association.memberEnd->size() = 2 and aProperty.owner.oclIsTypeOf(Class) and (not aProperty.type.oclIsUndefined()) and (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))) and (not aProperty.isBackReference()))]
-	[for (anotherProperty : Property | aProperty.association.memberEnd->reject(p : Property | p = aProperty))]
-	[comment anotherProperty must be owned by a class (i.e. not by its association) /]
-	[if(anotherProperty.owner.oclIsTypeOf(Class))]
-	//Destroying links for opposite property [aProperty.name/]
-	[if (aProperty.upper <> 1)]
-	for(unsigned int i = 0; i < this->[aProperty.getterName()/]()->size(); i++)
-	{	
-		this->[aProperty.getterName()/]()->at(i)->[anotherProperty.getterName()/]()[if (anotherProperty.upper <> 1)]->erase([aClass.generateGetThisPtrPropertyGetterName()/]())[else].reset()[/if];
-	}
-	[else]
-	[if (anotherProperty.upper <> 1)]
-	this->[aProperty.getterName()/]()->[anotherProperty.getterName()/]()->erase([aClass.generateGetThisPtrPropertyGetterName()/]());
-	[else]
-	if(this->[aProperty.getterName()/]()->[anotherProperty.getterName()/]()[if (anotherProperty.isBackReference())].lock()[/if] == [aClass.generateGetThisPtrPropertyGetterName()/]()) { this->[aProperty.getterName()/]()->[anotherProperty.getterName()/]().reset(); }
-	[/if]
-	[/if]
-	[/if]
-	[/for]
-	[/if]
-	[/for]
-	[comment Recursively destroy properties/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) before('\n\t//Erase properties')]
-	[aProperty.generatePropertyDestruction()/]
-	[/for]
-	[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('\n\t//Erase back reference to owner')]
-	m_[compositeOwnerClass.name/].reset();
-	[/for]
-	[if (isFUMLExecutable())]
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
-	[/if]
-}*/
 [/template]
 
 [comment PSCS-specific methods /]
@@ -536,7 +499,33 @@ void [className/]::constructObject(const std::shared_ptr<uml::Class>& type)
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
 bool [className/]::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	/*
+	 * TODO Avoid cycles here
+	 */ 
+	[for (aProperty : Property | aClass.ownedAttribute->select(p : Property | p.type.isComplex())) separator('\r\n') after('\r\n')]
+	// Check if object is contained directly or indirectly in m_[aProperty.name/]
+	[if (aProperty.upper = 1)]
+	if(this->[aProperty.getterName()/]() == object) return true;
+	else 
+	{
+		if(this->[aProperty.getterName()/]()->contains(object)) return true;
+	}
+	[else]
+	const [aProperty.generateCppType()/]& _[aProperty.memberName()/] = this->[aProperty.getterName()/]();
+	for(const [aProperty.type.generateCppRawType(false)/]& element : *_[aProperty.memberName()/])
+	{
+		if(element == object) return true;
+		else
+		{
+			if(element->contains(object)) return true;
+		}
+	}
+	[/if]
+[/for]
+[for (aSuperClass : Class | aClass.superClass) after('\r\n')]
+	if([aSuperClass.name.toUpperFirst()/]Impl::contains(object)) return true;
+[/for]
+	return false;
 }
 [/template]
 
@@ -544,7 +533,22 @@ bool [className/]::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
 bool [className/]::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+[for (aProperty : Property | aClass.ownedAttribute->select(p : Property | p.type.isComplex())) separator('\r\n') after('\r\n')]
+	// Check if object is contained directly in m_[aProperty.name/]
+	[if (aProperty.upper = 1)]
+	if(this->[aProperty.getterName()/]() == object) return true;
+	[else]
+	const [aProperty.generateCppType()/]& _[aProperty.memberName()/] = this->[aProperty.getterName()/]();
+	for(const [aProperty.type.generateCppRawType(false)/]& element : *_[aProperty.memberName()/])
+	{
+		if(element == object) return true;
+	}
+	[/if]
+[/for]
+[for (aSuperClass : Class | aClass.superClass) after('\r\n')]
+	if([aSuperClass.name.toUpperFirst()/]Impl::directlyContains(object)) return true;
+[/for]
+	return false;
 }
 [/template]
 
