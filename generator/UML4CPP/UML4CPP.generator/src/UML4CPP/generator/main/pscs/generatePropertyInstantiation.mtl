@@ -38,6 +38,7 @@ m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aPro
 		[else]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 		[/if]
+this->getLocus()->add(m_[aProperty.name/]);
 m_[aProperty.name/]->constructObject([aProperty.type.generatePackageGetterCall()/]);
 	[/if]
 [elseif (aProperty.canInstantiate())]
@@ -67,6 +68,7 @@ std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNam
 std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 m_[aProperty.name/]->add(value);
 [/if]
+this->getLocus()->add(value);
 value->constructObject([aProperty.type.generatePackageGetterCall()/]);
 [/template]
 
