@@ -772,11 +772,11 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReadExtentActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/UMLAny.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_Object.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/UMLAny.hpp&quot;&#xA;#include &quot;uml/UMLContainerAny.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_Object.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Get the extent, at the current execution locus, of the classifier (which must be a class) identified in the action.&#xA;// Place references to the resulting set of objects on the result pin.&#xD;&#xA;&#xA;const std::shared_ptr&lt;uml::ReadExtentAction>&amp; action = this->getReadExtentAction();&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>> objects = this->getExecutionLocus()->retrieveExtent(action->getClassifier());&#xA;std::shared_ptr&lt;Bag&lt;Any>> values(new Bag&lt;Any>());&#xA;&#xA;const unsigned long classifierID = action->getClassifier()->_getID();&#xA;&#xA;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; object : *objects)&#xA;{&#xA;&#x9;values->add(eUMLAny(object, classifierID));&#xA;}&#xA;&#xA;this->putTokens(action->getResult(), values);"/>
+            <details key="body" value="// Get the extent, at the current execution locus, of the classifier (which must be a class) identified in the action.&#xA;// Place references to the resulting set of objects on the result pin.&#xD;&#xA;&#xA;const std::shared_ptr&lt;uml::ReadExtentAction>&amp; action = this->getReadExtentAction();&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>> objects = this->getExecutionLocus()->retrieveExtent(action->getClassifier());&#xA;std::shared_ptr&lt;Bag&lt;Any>> values(new Bag&lt;Any>());&#xA;&#xA;const unsigned long classifierID = action->getClassifier()->_getID();&#xA;&#xA;/*for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; object : *objects)&#xA;{&#xA;&#x9;values->add(eUMLAny(object, classifierID));&#xA;}*/&#xA;&#xA;//Experimental: Do we need to create an Any that contains a Bag of values instead of an individual Any for each value?&#xA;values->add(eUMLContainerAny(objects, classifierID));&#xA;&#xA;this->putTokens(action->getResult(), values);"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="readExtentAction" lowerBound="1"
@@ -2587,7 +2587,7 @@
         </eOperations>
         <eOperations name="retrieveExtent" ordered="false" upperBound="-1" eType="#//MDE4CPP_Extensions/FUML_Object">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>> extent(new Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>());&#xA;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; extensionalValues = this->getExtensionalValues();&#xA;&#xA;&#x9;for (const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; value : *extensionalValues)&#xA;&#x9;{&#xA;&#x9;&#x9;//Currently, only one type is supported&#xA;&#x9;&#x9;/*std::shared_ptr&lt;Bag&lt;uml::Classifier>> types = value->getTypes();&#xA;&#x9;&#x9;bool conforms = false;&#xA;&#x9;&#x9;unsigned int j = 0;&#xA;&#x9;&#x9;while(!conforms &amp;&amp; j &lt; types->size())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;conforms = this->conforms(types->at(j), classifier);&#xA;&#x9;&#x9;&#x9;j = j + 1;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if(conforms)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;extent->push_back(value);&#xA;&#x9;&#x9;}*/&#xA;&#xA;&#x9;&#x9;if(classifier->_getID() == value->getMetaElementID())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;extent->push_back(value);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return extent;"/>
+            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>> extent(new Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>());&#xA;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; extensionalValues = this->getExtensionalValues();&#xA;&#x9;unsigned int classifierID = classifier->_getID();&#xA;&#xA;&#x9;for (const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; value : *extensionalValues)&#xA;&#x9;{&#xA;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;uml::Classifier>>&amp; types = value->getTypes();&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;for(const std::shared_ptr&lt;uml::Classifier>&amp; type : *types)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;if(classifierID == type->_getID())&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;extent->push_back(value);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return extent;"/>
           </eAnnotations>
           <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
         </eOperations>
@@ -3529,7 +3529,7 @@
       </eOperations>
       <eOperations name="destroy" lowerBound="1">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="body" value="// NOTE: Destruction of composite properties is handled in subclass-specific generated destroy methods&#xA;&#xA;if(isDestroyLinks || isDestroyOwnedObjects)&#xA;{&#xA;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; links = this->getLinks();&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link>&amp; link : *links)&#xA;&#x9;{&#xA;&#x9;&#x9;if(isDestroyOwnedObjects)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>> linkEnds = link->getLinkEnds();&#xA;&#xA;&#x9;&#x9;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd> linkEnd : *linkEnds)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;if(linkEnd->getEnd()->getAggregation() == uml::AggregationKind::COMPOSITE)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(linkEnd->getEndValue() != this->getThisFUML_ObjectPtr())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;linkEnd->getEndValue()->destroy(isDestroyLinks, isDestroyOwnedObjects);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if(isDestroyLinks)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;link->destroy();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;this->destroy();"/>
+          <details key="body" value="// NOTE: Destruction of composite properties is handled in subclass-specific generated destroy methods&#xA;&#xA;&#x9;if(isDestroyLinks)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>> links = this->getLinks();&#xA;&#x9;&#x9;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>::iterator linkIterator = links->begin();&#xA;&#xA;&#x9;&#x9;// Careful: We have to use 'dynamic' iteration here.&#xA;&#x9;&#x9;while(linkIterator != links->end())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;(*linkIterator)->destroy();&#xA;&#x9;&#x9;&#x9;linkIterator = links->begin();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;this->destroy();"/>
         </eAnnotations>
         <eParameters name="isDestroyLinks" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         <eParameters name="isDestroyOwnedObjects" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -3614,7 +3614,7 @@
       </eOperations>
       <eOperations name="destroy" lowerBound="1">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="body" value="&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = this->getLinkEnds();&#x9;&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;&#x9;{&#xA;&#x9;&#x9;const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; endValue = linkEnd->getEndValue();&#xA;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; endValueLinks = endValue->getLinks();&#xA;&#x9;&#x9;endValueLinks->erase(this->getThisFUML_LinkPtr());&#xA;&#x9;}"/>
+          <details key="body" value="&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = this->getLinkEnds();&#x9;&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;&#x9;{&#xA;&#x9;&#x9;const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; endValue = linkEnd->getEndValue();&#xA;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; endValueLinks = endValue->getLinks();&#xA;&#x9;&#x9;endValueLinks->erase(this->getThisFUML_LinkPtr());&#xA;&#x9;}&#xA;&#x9;linkEnds->clear();&#xA;&#xA;&#x9;fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="retrieveLinkEnd" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_LinkEnd">
@@ -3634,6 +3634,25 @@
           <details key="body" value="const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = this->getLinkEnds();&#xA;bool contains = false;&#xA;&#xA;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;{&#xA;&#x9;contains = (linkEnd->getEndValue() == object);&#xA;&#x9;&#x9;&#xA;&#x9;if(contains) break;&#xA;}&#xA;&#x9;&#xA;return contains;"/>
         </eAnnotations>
         <eParameters name="object" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
+      </eOperations>
+      <eOperations name="getTypes" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="static std::shared_ptr&lt;Bag&lt;uml::Classifier>> types;&#xA;&#xA;&#x9;if(!types)&#xA;&#x9;{&#xA;&#x9;&#x9;types.reset(new Bag&lt;uml::Classifier>());&#xA;&#x9;&#x9;types->add(this->getType());&#xA;&#x9;}&#xA;&#xA;&#x9;return types;"/>
+          <details key="const"/>
+          <details key="forceConstRefReturn"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="retrieveOtherLinkEnd" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_LinkEnd">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = this->getLinkEnds();&#xA;&#xA;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;{&#xA;&#x9;if(linkEnd->getEnd() != end)&#xA;&#x9;{&#xA;&#x9;&#x9;return linkEnd;&#xA;&#x9;}&#xA;}&#xA;&#xA;return nullptr;"/>
+        </eAnnotations>
+        <eParameters name="end" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+      </eOperations>
+      <eOperations name="retrieveOtherLinkEndValue" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; otherLinkEnd = this->retrieveOtherLinkEnd(end);&#xA;&#xA;if(otherLinkEnd)&#xA;{&#xA;&#x9;return otherLinkEnd->getEndValue();&#xA;}&#xA;else&#xA;{&#xA;&#x9;return nullptr;&#xA;}"/>
+        </eAnnotations>
+        <eParameters name="end" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="linkEnds" upperBound="-1"
           eType="#//MDE4CPP_Extensions/FUML_LinkEnd" containment="true"/>
