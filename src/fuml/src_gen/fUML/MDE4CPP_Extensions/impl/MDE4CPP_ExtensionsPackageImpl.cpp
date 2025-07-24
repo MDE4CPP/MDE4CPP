@@ -107,6 +107,10 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Link_Operation_destroy;
 }
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_getTypes() const
+{
+	return m_fUML_Link_Operation_getTypes;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_retrieveLinkEnd_Property() const
 {
 	return m_fUML_Link_Operation_retrieveLinkEnd_Property;
@@ -114,6 +118,14 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_retrieveLinkEndValue_Property() const
 {
 	return m_fUML_Link_Operation_retrieveLinkEndValue_Property;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_retrieveOtherLinkEnd_Property() const
+{
+	return m_fUML_Link_Operation_retrieveOtherLinkEnd_Property;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_retrieveOtherLinkEndValue_Property() const
+{
+	return m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property;
 }
 
 // End Class FUML_Link

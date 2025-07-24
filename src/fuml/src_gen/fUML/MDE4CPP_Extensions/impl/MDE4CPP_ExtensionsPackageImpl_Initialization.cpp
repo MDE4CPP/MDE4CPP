@@ -223,6 +223,16 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 	m_fUML_Link_Operation_destroy->_setID(FUML_LINK_OPERATION_DESTROY);
 	
 	
+	m_fUML_Link_Operation_getTypes->setName("getTypes");
+	m_fUML_Link_Operation_getTypes->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
+	m_fUML_Link_Operation_getTypes->setLowerBound(0);
+	m_fUML_Link_Operation_getTypes->setUpperBound(-1);
+	m_fUML_Link_Operation_getTypes->setUnique(true);
+	m_fUML_Link_Operation_getTypes->setOrdered(true);
+	
+	m_fUML_Link_Operation_getTypes->_setID(FUML_LINK_OPERATION_GETTYPES);
+	
+	
 	m_fUML_Link_Operation_retrieveLinkEnd_Property->setName("retrieveLinkEnd");
 	m_fUML_Link_Operation_retrieveLinkEnd_Property->setEType(getFUML_LinkEnd_Class());
 	m_fUML_Link_Operation_retrieveLinkEnd_Property->setLowerBound(1);
@@ -253,6 +263,44 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_retrieveLinkEndValue_Property);
+		parameter->setName("end");
+		parameter->setEType(uml::umlPackage::eInstance()->getProperty_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property->setName("retrieveOtherLinkEnd");
+	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property->setEType(getFUML_LinkEnd_Class());
+	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property->setLowerBound(1);
+	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property->setUpperBound(1);
+	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property->setUnique(true);
+	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property->setOrdered(true);
+	
+	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property->_setID(FUML_LINK_OPERATION_RETRIEVEOTHERLINKEND_PROPERTY);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_retrieveOtherLinkEnd_Property);
+		parameter->setName("end");
+		parameter->setEType(uml::umlPackage::eInstance()->getProperty_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property->setName("retrieveOtherLinkEndValue");
+	m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property->setEType(getFUML_Object_Class());
+	m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property->setLowerBound(1);
+	m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property->setUpperBound(1);
+	m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property->setUnique(true);
+	m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property->setOrdered(true);
+	
+	m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property->_setID(FUML_LINK_OPERATION_RETRIEVEOTHERLINKENDVALUE_PROPERTY);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Link_Operation_retrieveOtherLinkEndValue_Property);
 		parameter->setName("end");
 		parameter->setEType(uml::umlPackage::eInstance()->getProperty_Class());
 		parameter->setLowerBound(0);

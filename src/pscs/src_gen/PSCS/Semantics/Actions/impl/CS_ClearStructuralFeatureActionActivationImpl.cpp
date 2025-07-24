@@ -218,7 +218,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 			// all values are interaction points
 			// any link targeting this interaction point must be destroyed
 
-			if(!featureValue->isContainer())
+			if(featureValue->isContainer())
 			{
 				std::shared_ptr<Bag<uml::Element>> values = std::dynamic_pointer_cast<uml::UMLContainerAny>(featureValue)->getAsElementContainer();
 				for(const std::shared_ptr<uml::Element>& value : *values)
@@ -240,7 +240,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 			// By "potential link ends", we refer to the values of a given feature,
 			// as well as interaction points associated with this value, if any.
 
-			std::shared_ptr<uml::Property> opposite = property->getOpposite();
+			//std::shared_ptr<uml::Property> opposite = property->getOpposite();
 			std::shared_ptr<Any> featureValue = context->get(property);
 
 			if(featureValue->isContainer())
@@ -270,7 +270,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 
 						for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
 						{
-							std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveLinkEndValue(opposite);
+							std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveOtherLinkEndValue(property);
 							if(context->directlyContains(oppositeEndValue))
 							{
 								linksToDestroy->add(link);
@@ -319,7 +319,7 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_ClearStructuralFeat
 
 					for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
 					{
-						std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveLinkEndValue(opposite);
+						std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveOtherLinkEndValue(property);
 						if(context->directlyContains(oppositeEndValue))
 						{
 							linksToDestroy->add(link);

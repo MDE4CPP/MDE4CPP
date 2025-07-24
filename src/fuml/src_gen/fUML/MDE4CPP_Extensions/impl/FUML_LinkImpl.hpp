@@ -47,8 +47,11 @@ namespace fUML::MDE4CPP_Extensions
 			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position) ;
 			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) ;
 			virtual void destroy() ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const ;
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> retrieveLinkEnd(const std::shared_ptr<uml::Property>& end) ;
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> retrieveLinkEndValue(const std::shared_ptr<uml::Property>& end) ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> retrieveOtherLinkEnd(const std::shared_ptr<uml::Property>& end) ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> retrieveOtherLinkEndValue(const std::shared_ptr<uml::Property>& end) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

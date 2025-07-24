@@ -46,6 +46,7 @@
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Association.hpp"
+#include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
@@ -225,6 +226,25 @@ void FUML_LinkImpl::destroy()
 		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& endValueLinks = endValue->getLinks();
 		endValueLinks->erase(this->getThisFUML_LinkPtr());
 	}
+	linkEnds->clear();
+
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
+	//end of body
+}
+
+const std::shared_ptr<Bag<uml::Classifier>>& FUML_LinkImpl::getTypes() const
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset(new Bag<uml::Classifier>());
+		types->add(this->getType());
+	}
+
+	return types;
 	//end of body
 }
 
@@ -255,6 +275,41 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FUML_LinkImpl::retrieveLi
 if(linkEnd)
 {
 	return linkEnd->getEndValue();
+}
+else
+{
+	return nullptr;
+}
+	//end of body
+}
+
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> FUML_LinkImpl::retrieveOtherLinkEnd(const std::shared_ptr<uml::Property>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();
+
+for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd : *linkEnds)
+{
+	if(linkEnd->getEnd() != end)
+	{
+		return linkEnd;
+	}
+}
+
+return nullptr;
+	//end of body
+}
+
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FUML_LinkImpl::retrieveOtherLinkEndValue(const std::shared_ptr<uml::Property>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& otherLinkEnd = this->retrieveOtherLinkEnd(end);
+
+if(otherLinkEnd)
+{
+	return otherLinkEnd->getEndValue();
 }
 else
 {
@@ -743,6 +798,13 @@ std::shared_ptr<Any> FUML_LinkImpl::eInvoke(int operationID, const std::shared_p
 			this->destroy();
 			break;
 		}
+		// fUML::MDE4CPP_Extensions::FUML_Link::getTypes() : uml::Classifier[*] {const}: 3361854073
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_GETTYPES:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> resultList = this->getTypes();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
+			break;
+		}
 		// fUML::MDE4CPP_Extensions::FUML_Link::retrieveLinkEnd(uml::Property) : fUML::MDE4CPP_Extensions::FUML_LinkEnd: 2164603078
 		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_RETRIEVELINKEND_PROPERTY:
 		{
@@ -805,6 +867,70 @@ std::shared_ptr<Any> FUML_LinkImpl::eInvoke(int operationID, const std::shared_p
 			}
 		
 			result = eEcoreAny(this->retrieveLinkEndValue(incoming_param_end), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Link::retrieveOtherLinkEnd(uml::Property) : fUML::MDE4CPP_Extensions::FUML_LinkEnd: 2722775416
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_RETRIEVEOTHERLINKEND_PROPERTY:
+		{
+			//Retrieve input parameter 'end'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveOtherLinkEnd'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveOtherLinkEnd'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->retrieveOtherLinkEnd(incoming_param_end), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_LINKEND_CLASS);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Link::retrieveOtherLinkEndValue(uml::Property) : fUML::MDE4CPP_Extensions::FUML_Object: 2415853951
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_RETRIEVEOTHERLINKENDVALUE_PROPERTY:
+		{
+			//Retrieve input parameter 'end'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveOtherLinkEndValue'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'retrieveOtherLinkEndValue'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->retrieveOtherLinkEndValue(incoming_param_end), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
 

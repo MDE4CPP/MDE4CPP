@@ -270,28 +270,20 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> LocusImpl::retrieveE
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> extent(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> extent(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
 	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& extensionalValues = this->getExtensionalValues();
+	unsigned int classifierID = classifier->_getID();
 
 	for (const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value : *extensionalValues)
 	{
-		//Currently, only one type is supported
-		/*std::shared_ptr<Bag<uml::Classifier>> types = value->getTypes();
-		bool conforms = false;
-		unsigned int j = 0;
-		while(!conforms && j < types->size())
+		const std::shared_ptr<Bag<uml::Classifier>>& types = value->getTypes();
+		
+		for(const std::shared_ptr<uml::Classifier>& type : *types)
 		{
-			conforms = this->conforms(types->at(j), classifier);
-			j = j + 1;
-		}
-		if(conforms)
-		{
-			extent->push_back(value);
-		}*/
-
-		if(classifier->_getID() == value->getMetaElementID())
-		{
-			extent->push_back(value);
+			if(classifierID == type->_getID())
+			{
+				extent->push_back(value);
+			}
 		}
 	}
 	return extent;

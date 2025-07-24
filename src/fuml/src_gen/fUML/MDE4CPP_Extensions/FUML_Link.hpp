@@ -52,6 +52,7 @@ namespace ecore
 namespace uml 
 {
 	class Association;
+	class Classifier;
 	class Comment;
 	class Property;
 }
@@ -90,8 +91,11 @@ namespace fUML::MDE4CPP_Extensions
 			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position) = 0;
 			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) = 0;
 			virtual void destroy() = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> retrieveLinkEnd(const std::shared_ptr<uml::Property>& end) = 0;
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> retrieveLinkEndValue(const std::shared_ptr<uml::Property>& end) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> retrieveOtherLinkEnd(const std::shared_ptr<uml::Property>& end) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> retrieveOtherLinkEndValue(const std::shared_ptr<uml::Property>& end) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

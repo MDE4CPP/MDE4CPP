@@ -168,35 +168,20 @@ void FUML_ObjectImpl::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
 	//generated from body annotation
 	// NOTE: Destruction of composite properties is handled in subclass-specific generated destroy methods
 
-if(isDestroyLinks || isDestroyOwnedObjects)
-{
-	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& links = this->getLinks();
-
-	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *links)
+	if(isDestroyLinks)
 	{
-		if(isDestroyOwnedObjects)
-		{
-			const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>> linkEnds = link->getLinkEnds();
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> links = this->getLinks();
+		Bag<fUML::MDE4CPP_Extensions::FUML_Link>::iterator linkIterator = links->begin();
 
-			for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> linkEnd : *linkEnds)
-			{
-				if(linkEnd->getEnd()->getAggregation() == uml::AggregationKind::COMPOSITE)
-				{
-					if(linkEnd->getEndValue() != this->getThisFUML_ObjectPtr())
-					{
-						linkEnd->getEndValue()->destroy(isDestroyLinks, isDestroyOwnedObjects);
-					}
-				}
-			}
-		}
-		if(isDestroyLinks)
+		// Careful: We have to use 'dynamic' iteration here.
+		while(linkIterator != links->end())
 		{
-			link->destroy();
+			(*linkIterator)->destroy();
+			linkIterator = links->begin();
 		}
 	}
-}
-
-this->destroy();
+	
+	this->destroy();
 	//end of body
 }
 

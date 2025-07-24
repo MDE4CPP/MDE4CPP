@@ -38,6 +38,7 @@
 //Includes from codegen annotation
 #include "uml/Classifier.hpp"
 #include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Forward declaration includes
@@ -148,10 +149,13 @@ std::shared_ptr<Bag<Any>> values(new Bag<Any>());
 
 const unsigned long classifierID = action->getClassifier()->_getID();
 
-for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object : *objects)
+/*for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object : *objects)
 {
 	values->add(eUMLAny(object, classifierID));
-}
+}*/
+
+//Experimental: Do we need to create an Any that contains a Bag of values instead of an individual Any for each value?
+values->add(eUMLContainerAny(objects, classifierID));
 
 this->putTokens(action->getResult(), values);
 	//end of body
