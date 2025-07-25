@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:StandardProfile="http://www.omg.org/spec/UML/20161101/StandardProfile" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.omg.org/spec/UML/20161101/StandardProfile ../../../../../common/standardProfile/model/StandardProfile.uml#_1G3kkDMLEeq7iofTAEuRew http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Model xmi:id="_Zyq_cAxLEe-7jJtWz9y30g" name="RemovingInstanceFromPart">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_f14fEAxLEe-7jJtWz9y30g">
+      <body>This test case validates that the removal of an instance from a part implies destruction of related links.</body>
+    </ownedComment>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_ZzQ1UAxLEe-7jJtWz9y30g">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_kqJfUAxLEe-7jJtWz9y30g" name="A">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_GuWvEAxNEe-7jJtWz9y30g" name="q" type="_teBIsAxLEe-7jJtWz9y30g" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_JvryEAxNEe-7jJtWz9y30g" name="b" type="_nD9PUAxLEe-7jJtWz9y30g" aggregation="composite"/>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_T3CckAxNEe-7jJtWz9y30g" name="r" type="_0-FycAxMEe-7jJtWz9y30g">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_T3DqsAxNEe-7jJtWz9y30g" role="_GuWvEAxNEe-7jJtWz9y30g"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_T3DqsQxNEe-7jJtWz9y30g" role="_JvryEAxNEe-7jJtWz9y30g"/>
+      </ownedConnector>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_fR6hgGPnEfCINuw3BFh4jg" name="ob_testBeforeRemoval" specification="_fR7IkWPnEfCINuw3BFh4jg">
+        <language>CPP</language>
+        <language>INCLUDE</language>
+        <body>//Assert A&#xD;
+#ifndef MYASSERT&#xD;
+#define MYASSERT(condition, message_success, message_failure) \&#xD;
+		if((condition)) { \&#xD;
+			std::cout &lt;&lt; &quot;[\e[0;32mAssertion Success\e[0m]:\t&quot; &lt;&lt; message_success &lt;&lt; std::endl; \&#xD;
+		} \&#xD;
+		else { \&#xD;
+			std::cout &lt;&lt; &quot;[\e[0;31mAssertion Failure\e[0m]:\t&quot; &lt;&lt; message_failure &lt;&lt; std::endl; \&#xD;
+		}&#xD;
+#endif&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Asserting A before part removal...&quot;&lt;&lt;std::endl;&#xD;
+const std::shared_ptr&lt;RemovingInstanceFromPart::B>&amp; b = this->getB();&#xD;
+const std::shared_ptr&lt;RemovingInstanceFromPart::IImpl>&amp; q = this->getQ();&#xD;
+const std::shared_ptr&lt;fUML::Semantics::Loci::Locus> locus = this->getLocus();&#xD;
+const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; allInstancesOfR = &#xD;
+	locus->retrieveExtent(RemovingInstanceFromPart::RemovingInstanceFromPartPackage::eInstance()->get_RemovingInstanceFromPart_R());&#xD;
+	&#xD;
+MYASSERT(b != nullptr, &quot;b &lt;> null&quot;, &quot;b == null&quot;);&#xD;
+MYASSERT(q != nullptr, &quot;q &lt;> null&quot;, &quot;q == null&quot;);&#xD;
+MYASSERT(allInstancesOfR->size() == 1, &quot;R.allInstances.size == &quot;&lt;&lt;allInstancesOfR->size(), &quot;R.allInstances.size == &quot;&lt;&lt;allInstancesOfR->size());&#xD;
+&#xD;
+const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; linksOfQ = q->getLinks();&#xD;
+bool isConnected = false;&#xD;
+&#xD;
+for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link>&amp; linkOfQ : *linksOfQ)&#xD;
+{&#xD;
+	isConnected = isConnected || linkOfQ->contains(b);&#xD;
+}&#xD;
+&#xD;
+MYASSERT(isConnected, &#xD;
+		&quot;q is connected to b&quot;,&#xD;
+		&quot;q is not connected to b&quot;);&#xD;
+			&#xD;
+std::cout&lt;&lt;&quot;Finished assertion for A before part removal&quot;&lt;&lt;std::endl;&#xD;
+</body>
+        <body>#include &quot;uml/Association.hpp&quot;</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_fR7IkGPnEfCINuw3BFh4jg" name="ob_testAfterRemoval" specification="_fR7IkmPnEfCINuw3BFh4jg">
+        <language>CPP</language>
+        <body>//Assert A&#xD;
+#ifndef MYASSERT&#xD;
+#define MYASSERT(condition, message_success, message_failure) \&#xD;
+		if((condition)) { \&#xD;
+			std::cout &lt;&lt; &quot;[\e[0;32mAssertion Success\e[0m]:\t&quot; &lt;&lt; message_success &lt;&lt; std::endl; \&#xD;
+		} \&#xD;
+		else { \&#xD;
+			std::cout &lt;&lt; &quot;[\e[0;31mAssertion Failure\e[0m]:\t&quot; &lt;&lt; message_failure &lt;&lt; std::endl; \&#xD;
+		}&#xD;
+#endif&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Asserting A after part removal...&quot;&lt;&lt;std::endl;&#xD;
+const std::shared_ptr&lt;RemovingInstanceFromPart::B>&amp; b = this->getB();&#xD;
+const std::shared_ptr&lt;RemovingInstanceFromPart::IImpl>&amp; q = this->getQ();&#xD;
+const std::shared_ptr&lt;fUML::Semantics::Loci::Locus> locus = this->getLocus();&#xD;
+const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; allInstancesOfR = &#xD;
+	locus->retrieveExtent(RemovingInstanceFromPart::RemovingInstanceFromPartPackage::eInstance()->get_RemovingInstanceFromPart_R());&#xD;
+	&#xD;
+MYASSERT(b == nullptr, &quot;b == null&quot;, &quot;b != null&quot;);&#xD;
+MYASSERT(q != nullptr, &quot;q &lt;> null&quot;, &quot;q == null&quot;);&#xD;
+MYASSERT(allInstancesOfR->size() == 0, &quot;R.allInstances.size == &quot;&lt;&lt;allInstancesOfR->size(), &quot;R.allInstances.size == &quot;&lt;&lt;allInstancesOfR->size());&#xD;
+&#xD;
+const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; linksOfQ = q->getLinks();&#xD;
+bool isConnected = false;&#xD;
+&#xD;
+for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link>&amp; linkOfQ : *linksOfQ)&#xD;
+{&#xD;
+	isConnected = isConnected || linkOfQ->contains(b);&#xD;
+}&#xD;
+&#xD;
+MYASSERT(!isConnected, &#xD;
+		&quot;q is not connected to b&quot;,&#xD;
+		&quot;q is connected to b&quot;);&#xD;
+			&#xD;
+std::cout&lt;&lt;&quot;Finished assertion for A after part removal&quot;&lt;&lt;std::endl;&#xD;
+</body>
+      </ownedBehavior>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zBgmcAxLEe-7jJtWz9y30g" name="_A_">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_066YEAxLEe-7jJtWz9y30g" name="result" visibility="public" type="_kqJfUAxLEe-7jJtWz9y30g" direction="return" effect="create"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_fR7IkWPnEfCINuw3BFh4jg" name="testBeforeRemoval" method="_fR6hgGPnEfCINuw3BFh4jg"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_fR7IkmPnEfCINuw3BFh4jg" name="testAfterRemoval" method="_fR7IkGPnEfCINuw3BFh4jg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_l-zlIAxLEe-7jJtWz9y30g" name="I">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_-H8IUAxLEe-7jJtWz9y30g" name="assignP">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="__RqwgAxLEe-7jJtWz9y30g" name="v">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nD9PUAxLEe-7jJtWz9y30g" name="B">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_s9tbgAxMEe-7jJtWz9y30g" name="p">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_rzAYYAxLEe-7jJtWz9y30g" name="IRealization" client="_nD9PUAxLEe-7jJtWz9y30g" supplier="_l-zlIAxLEe-7jJtWz9y30g" contract="_l-zlIAxLEe-7jJtWz9y30g"/>
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_s45-kAxNEe-7jJtWz9y30g" name="setPActivity" specification="_EUH9wAxMEe-7jJtWz9y30g" node="_xgi4EAxNEe-7jJtWz9y30g _BbZyQAxOEe-7jJtWz9y30g _FF3R0AxOEe-7jJtWz9y30g">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_wpR44AxNEe-7jJtWz9y30g" name="v">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_RQxIcAxOEe-7jJtWz9y30g" target="_FF4f8AxOEe-7jJtWz9y30g" source="_BbdcoAxOEe-7jJtWz9y30g">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_RQ1Z4AxOEe-7jJtWz9y30g" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_RQ1Z4QxOEe-7jJtWz9y30g" value="1"/>
+        </edge>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_R40m8AxOEe-7jJtWz9y30g" target="_HzbEQAxOEe-7jJtWz9y30g" source="_xgi4EAxNEe-7jJtWz9y30g">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_R444YAxOEe-7jJtWz9y30g" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_R444YQxOEe-7jJtWz9y30g" value="1"/>
+        </edge>
+        <node xmi:type="uml:ActivityParameterNode" xmi:id="_xgi4EAxNEe-7jJtWz9y30g" name="vParameterNode" outgoing="_R40m8AxOEe-7jJtWz9y30g" parameter="_wpR44AxNEe-7jJtWz9y30g">
+          <upperBound xmi:type="uml:LiteralInteger" xmi:id="_xgkGMAxNEe-7jJtWz9y30g" value="1"/>
+        </node>
+        <node xmi:type="uml:ReadSelfAction" xmi:id="_BbZyQAxOEe-7jJtWz9y30g" name="this">
+          <result xmi:type="uml:OutputPin" xmi:id="_BbdcoAxOEe-7jJtWz9y30g" name="result" outgoing="_RQxIcAxOEe-7jJtWz9y30g" type="_nD9PUAxLEe-7jJtWz9y30g">
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BbdcoQxOEe-7jJtWz9y30g" value="1"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BbdcogxOEe-7jJtWz9y30g" value="1"/>
+          </result>
+        </node>
+        <node xmi:type="uml:AddStructuralFeatureValueAction" xmi:id="_FF3R0AxOEe-7jJtWz9y30g" name="Set this.p" structuralFeature="_s9tbgAxMEe-7jJtWz9y30g">
+          <object xmi:type="uml:InputPin" xmi:id="_FF4f8AxOEe-7jJtWz9y30g" name="object" incoming="_RQxIcAxOEe-7jJtWz9y30g" type="_nD9PUAxLEe-7jJtWz9y30g">
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FF4f8QxOEe-7jJtWz9y30g" value="1"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FF4f8gxOEe-7jJtWz9y30g" value="1"/>
+          </object>
+          <result xmi:type="uml:OutputPin" xmi:id="_HzZPEAxOEe-7jJtWz9y30g" name="result" type="_nD9PUAxLEe-7jJtWz9y30g">
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HzZPEQxOEe-7jJtWz9y30g" value="1"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HzZPEgxOEe-7jJtWz9y30g" value="1"/>
+          </result>
+          <value xmi:type="uml:InputPin" xmi:id="_HzbEQAxOEe-7jJtWz9y30g" name="value" incoming="_R40m8AxOEe-7jJtWz9y30g">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HzbEQQxOEe-7jJtWz9y30g" value="1"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HzbEQgxOEe-7jJtWz9y30g" value="1"/>
+          </value>
+        </node>
+      </ownedBehavior>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_61tikAxLEe-7jJtWz9y30g" name="_B_">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_61tikQxLEe-7jJtWz9y30g" name="result" visibility="public" type="_nD9PUAxLEe-7jJtWz9y30g" direction="return" effect="create"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EUH9wAxMEe-7jJtWz9y30g" name="assignP" method="_s45-kAxNEe-7jJtWz9y30g">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_EUH9wQxMEe-7jJtWz9y30g" name="v">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_teBIsAxLEe-7jJtWz9y30g" name="IImpl">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_teBIsQxLEe-7jJtWz9y30g" name="IRealization" client="_teBIsAxLEe-7jJtWz9y30g" supplier="_l-zlIAxLEe-7jJtWz9y30g" contract="_l-zlIAxLEe-7jJtWz9y30g"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_q3Cp8AxMEe-7jJtWz9y30g" name="assignP">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_q3Cp8QxMEe-7jJtWz9y30g" name="v">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_0-FycAxMEe-7jJtWz9y30g" name="R" memberEnd="_5XA6gAxMEe-7jJtWz9y30g _8IeVgAxMEe-7jJtWz9y30g">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_5XA6gAxMEe-7jJtWz9y30g" name="x" type="_nD9PUAxLEe-7jJtWz9y30g" association="_0-FycAxMEe-7jJtWz9y30g"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_8IeVgAxMEe-7jJtWz9y30g" name="y" type="_teBIsAxLEe-7jJtWz9y30g" association="_0-FycAxMEe-7jJtWz9y30g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_lk0QcAxOEe-7jJtWz9y30g" name="main" node="_iJVA8BlHEe-rIabL4k0WtA _lpc4wBlHEe-rIabL4k0WtA _oDPlMBlIEe-rIabL4k0WtA _o0g5IGPnEfCINuw3BFh4jg _qkkhgGPnEfCINuw3BFh4jg _urFD4GPnEfCINuw3BFh4jg">
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_jMw-cBlIEe-rIabL4k0WtA" target="_m5AcIxlHEe-rIabL4k0WtA" source="_iJVA8RlHEe-rIabL4k0WtA">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_jM0BwBlIEe-rIabL4k0WtA" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_jM0BwRlIEe-rIabL4k0WtA" value="1"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_x3FF0GPnEfCINuw3BFh4jg" target="_rocZUGPnEfCINuw3BFh4jg" source="_o0g5IGPnEfCINuw3BFh4jg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_x3J-UGPnEfCINuw3BFh4jg" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_x3J-UWPnEfCINuw3BFh4jg" value="1"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_ypxuEGPnEfCINuw3BFh4jg" target="_0BSrkBlIEe-rIabL4k0WtA" source="_o0g5IGPnEfCINuw3BFh4jg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_yp3NoGPnEfCINuw3BFh4jg" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_yp3NoWPnEfCINuw3BFh4jg" value="1"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_zNopEGPnEfCINuw3BFh4jg" target="_vmJlAGPnEfCINuw3BFh4jg" source="_o0g5IGPnEfCINuw3BFh4jg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_zNthkGPnEfCINuw3BFh4jg" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_zNthkWPnEfCINuw3BFh4jg" value="1"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_0R3GMGPnEfCINuw3BFh4jg" target="_oDPlMBlIEe-rIabL4k0WtA" source="_qkkhgGPnEfCINuw3BFh4jg"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_02qcYGPnEfCINuw3BFh4jg" target="_urFD4GPnEfCINuw3BFh4jg" source="_oDPlMBlIEe-rIabL4k0WtA"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_-tqPUGPqEfCINuw3BFh4jg" target="_o0g5IGPnEfCINuw3BFh4jg" source="_m5AcIBlHEe-rIabL4k0WtA">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_-tw9AGPqEfCINuw3BFh4jg" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_-tw9AWPqEfCINuw3BFh4jg" value="1"/>
+      </edge>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_iJVA8BlHEe-rIabL4k0WtA" name="Create A" classifier="_kqJfUAxLEe-7jJtWz9y30g">
+        <result xmi:type="uml:OutputPin" xmi:id="_iJVA8RlHEe-rIabL4k0WtA" name="result" outgoing="_jMw-cBlIEe-rIabL4k0WtA" type="_kqJfUAxLEe-7jJtWz9y30g">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iJVA8hlHEe-rIabL4k0WtA" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iJVA8xlHEe-rIabL4k0WtA" value="1"/>
+        </result>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_lpc4wBlHEe-rIabL4k0WtA" name="A()" operation="_zBgmcAxLEe-7jJtWz9y30g">
+        <result xmi:type="uml:OutputPin" xmi:id="_m5AcIBlHEe-rIabL4k0WtA" name="result" outgoing="_-tqPUGPqEfCINuw3BFh4jg" type="_kqJfUAxLEe-7jJtWz9y30g">
+          <upperBound xmi:type="uml:LiteralInteger" xmi:id="_m5BDMBlHEe-rIabL4k0WtA" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_m5AcIRlHEe-rIabL4k0WtA" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_m5AcIhlHEe-rIabL4k0WtA" value="1"/>
+        </result>
+        <target xmi:type="uml:InputPin" xmi:id="_m5AcIxlHEe-rIabL4k0WtA" name="target" incoming="_jMw-cBlIEe-rIabL4k0WtA" type="_kqJfUAxLEe-7jJtWz9y30g">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_m5AcJBlHEe-rIabL4k0WtA" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_m5AcJRlHEe-rIabL4k0WtA" value="1"/>
+        </target>
+      </node>
+      <node xmi:type="uml:ClearStructuralFeatureAction" xmi:id="_oDPlMBlIEe-rIabL4k0WtA" name="Clear a.b" incoming="_0R3GMGPnEfCINuw3BFh4jg" outgoing="_02qcYGPnEfCINuw3BFh4jg" structuralFeature="_JvryEAxNEe-7jJtWz9y30g">
+        <object xmi:type="uml:InputPin" xmi:id="_0BSrkBlIEe-rIabL4k0WtA" name="object" incoming="_ypxuEGPnEfCINuw3BFh4jg" type="_kqJfUAxLEe-7jJtWz9y30g"/>
+        <result xmi:type="uml:OutputPin" xmi:id="_6Lb5oBlIEe-rIabL4k0WtA" name="result" type="_kqJfUAxLEe-7jJtWz9y30g"/>
+      </node>
+      <node xmi:type="uml:ForkNode" xmi:id="_o0g5IGPnEfCINuw3BFh4jg" name="ForkNode5" incoming="_-tqPUGPqEfCINuw3BFh4jg" outgoing="_x3FF0GPnEfCINuw3BFh4jg _ypxuEGPnEfCINuw3BFh4jg _zNopEGPnEfCINuw3BFh4jg"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_qkkhgGPnEfCINuw3BFh4jg" name="assert before" outgoing="_0R3GMGPnEfCINuw3BFh4jg" operation="_fR7IkWPnEfCINuw3BFh4jg">
+        <target xmi:type="uml:InputPin" xmi:id="_rocZUGPnEfCINuw3BFh4jg" name="target" incoming="_x3FF0GPnEfCINuw3BFh4jg" type="_kqJfUAxLEe-7jJtWz9y30g">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rocZUWPnEfCINuw3BFh4jg" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rocZUmPnEfCINuw3BFh4jg" value="1"/>
+        </target>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_urFD4GPnEfCINuw3BFh4jg" name="assert after" incoming="_02qcYGPnEfCINuw3BFh4jg" operation="_fR7IkmPnEfCINuw3BFh4jg">
+        <target xmi:type="uml:InputPin" xmi:id="_vmJlAGPnEfCINuw3BFh4jg" name="target" incoming="_zNopEGPnEfCINuw3BFh4jg" type="_kqJfUAxLEe-7jJtWz9y30g">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vmJlAWPnEfCINuw3BFh4jg" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vmJlAmPnEfCINuw3BFh4jg" value="1"/>
+        </target>
+      </node>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_3iXDEGPmEfCINuw3BFh4jg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3iXDEWPmEfCINuw3BFh4jg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_3iXqIGPmEfCINuw3BFh4jg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3iXqIWPmEfCINuw3BFh4jg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../common/standardProfile/model/StandardProfile.uml#_1G3kkDMLEeq7iofTAEuRew"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../../common/standardProfile/model/StandardProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_4wxW8GPmEfCINuw3BFh4jg" base_Behavior="_lk0QcAxOEe-7jJtWz9y30g"/>
+  <StandardProfile:Create xmi:id="_6yRUoGPmEfCINuw3BFh4jg" base_BehavioralFeature="_zBgmcAxLEe-7jJtWz9y30g"/>
+</xmi:XMI>
