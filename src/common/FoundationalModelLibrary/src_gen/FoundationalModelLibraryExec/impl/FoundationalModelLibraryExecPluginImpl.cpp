@@ -19,20 +19,25 @@
 #include "FoundationalModelLibraryExec/impl/FoundationalModelLibraryExecutorImpl.hpp"
 #include "FoundationalModelLibraryExec/impl/FoundationalModelLibraryExecutionFactoryImpl.hpp"
 
-//fUML includes
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //Semantic Strategy Includes
 #include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
+//#include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
 #include "fUML/Semantics/CommonBehavior/FIFOGetNextEventStrategy.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ConstructStrategy.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_DefaultRequestPropagationStrategy.hpp"
+//#include "PSCS/Semantics/StructuredClassifiers/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
 
 //UML includes
 #include "uml/Element.hpp"
@@ -130,11 +135,18 @@ void FoundationalModelLibraryExecPluginImpl::initialize()
 	
 	m_locus->setFactory(m_factory);
 	m_factory->setLocus(m_locus);
-	
 	//Assign FirstChoiceStrategy to execution factory
 	m_factory->assignStrategy(fUML::Semantics::Loci::LociFactory::eInstance()->createFirstChoiceStrategy());
-	//assign FIFOGetNextEventStrategy to execution factory
+	//Assign CS_DispatchOperationOfInterfaceStrategy to execution factory
+	//m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DispatchOperationOfInterfaceStrategy());
+	//Assign FIFOGetNextEventStrategy to execution factory
 	m_factory->assignStrategy(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createFIFOGetNextEventStrategy());
+	//Assign CS_DefaultConstructStrategy to execution factory
+	m_factory->assignStrategy(PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createMDE4CPP_ConstructStrategy());
+	//Assign CS_DefaultRequestPropagationStrategy to execution factory
+	m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DefaultRequestPropagationStrategy());
+	//Assign CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy to execution factory
+	//m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy());
 	
 
 	m_IsInitialized = true;

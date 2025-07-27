@@ -12,13 +12,13 @@
 
 
 // base class includes
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 
 
 
 namespace FoundationalModelLibrary::BasicInputOutput
 {
-	class Channel : virtual public fUML::MDE4CPP_Extensions::FUML_Object 
+	class Channel : virtual public PSCS::MDE4CPP_Extensions::PSCS_Object 
 	{
 		protected:
 			Channel(){}

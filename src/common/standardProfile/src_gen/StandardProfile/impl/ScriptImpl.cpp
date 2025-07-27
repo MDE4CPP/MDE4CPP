@@ -50,7 +50,6 @@ ScriptImpl::ScriptImpl()
 	//***********************************
 }
 
-
 ScriptImpl::~ScriptImpl()
 {
 	DEBUG_INFO("Instance of 'Script' is destroyed.")
@@ -77,7 +76,6 @@ ScriptImpl& ScriptImpl::operator=(const ScriptImpl & obj)
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Script "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 	m_base_Artifact = obj.getBase_Artifact();
@@ -87,25 +85,10 @@ ScriptImpl& ScriptImpl::operator=(const ScriptImpl & obj)
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& ScriptImpl::getMetaClass() const
 {
 	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Script();
 	return metaClass;
-}
-
-void ScriptImpl::instantiate()
-{   
-	FileImpl::instantiate();
-	
-}
-
-void ScriptImpl::destroy()
-{	
-
-	//Erase properties	//deleting property base_Artifact
-	m_base_Artifact.reset();
-	
 }
 
 //*********************************
@@ -266,49 +249,25 @@ bool ScriptImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool ScriptImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ScriptImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool ScriptImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ScriptImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool ScriptImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ScriptImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::SCRIPT_PROPERTY_BASE_ARTIFACT:
 		{
 			std::shared_ptr<uml::Artifact> valueToRemove = nullptr;
-			if(value->isContainer())
-			{
-				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
-				if(umlContainerAny)
-				{
-					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
-					if(container && !(container->empty()))
-					{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToRemove = std::dynamic_pointer_cast<uml::Artifact>(firstElement);
-					}
-				}
-			}
-			else
-			{
-				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-				if(umlAny)
-				{
-					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToRemove = std::dynamic_pointer_cast<uml::Artifact>(element);
-				}
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -316,24 +275,50 @@ bool ScriptImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, i
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eUMLAny(this->getBase_Artifact().lock(), uml::umlPackage::ARTIFACT_CLASS);
 					m_base_Artifact.reset();
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+					if(umlContainerAny)
+					{
+						std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+						if(container && !(container->empty()))
+						{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							std::shared_ptr<uml::Element> firstElement = container->at(0);
+							valueToRemove = std::dynamic_pointer_cast<uml::Artifact>(firstElement);
+						}
+					}
+				}
+				else
+				{
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+					if(umlAny)
+					{
+						std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+						valueToRemove = std::dynamic_pointer_cast<uml::Artifact>(element);
+					}
+				}
+
 				if(m_base_Artifact.lock() == valueToRemove)
 				{
+					removedValue = eUMLAny(valueToRemove, uml::umlPackage::ARTIFACT_CLASS);
 					m_base_Artifact.reset();
-					return true;
 				}
 			}
+			return removedValue;
 		}
 	}
 
 	//Call set() for base class File
-	if(StandardProfile::FileImpl::remove(_uID, value, removeAt, isRemoveDuplicates)) return true;
-	return false;
+	removedValue = StandardProfile::FileImpl::remove(_uID, value, removeAt, isRemoveDuplicates);
+	if(removedValue) return removedValue;
+	return removedValue;
 }
 
 //**************************************

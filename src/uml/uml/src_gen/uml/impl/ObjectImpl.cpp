@@ -141,7 +141,7 @@ std::shared_ptr<Any> ObjectImpl::invoke(const std::shared_ptr<uml::OpaqueBehavio
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates)
+std::shared_ptr<Any> ObjectImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -537,7 +537,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 			result = eAny(this->invoke(incoming_param__opaqueBehavior,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
 			break;
 		}
-		// uml::Object::remove(uml::Property, Any, int, bool) : bool: 1193303628
+		// uml::Object::remove(uml::Property, Any, int, bool) : Any: 3074312916
 		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN:
 		{
 			//Retrieve input parameter '_property'

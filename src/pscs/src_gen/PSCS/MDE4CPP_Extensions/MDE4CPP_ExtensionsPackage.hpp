@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EClass;
-	class EOperation;
-	class EReference;
-	class EParameter;
-	class EGenericType;
-	class EAnnotation;
-	class EDataType;
 	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EDataType;
+	class EAnnotation;
+	class EClass;
+	class EParameter;
+	class EOperation;
 }
 
 namespace PSCS::MDE4CPP_Extensions 
@@ -76,7 +76,7 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_LINK_CLASS = 1393528252;
 			static const unsigned int PSCS_LINK_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 54;
+			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 57;
 			
 			
 			

@@ -8,12 +8,11 @@
 #define FOUNDATIONALMODELLIBRARY_LOCUSIMPL_HPP
 
 #include "../FoundationalModelLibraryLocus.hpp"
-#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
 
 namespace FoundationalModelLibrary 
 {
-	class FoundationalModelLibraryLocusImpl :virtual public /*PSCS::Semantics::Loci::CS_LocusImpl*/ fUML::Semantics::Loci::LocusImpl, virtual public FoundationalModelLibraryLocus
+	class FoundationalModelLibraryLocusImpl: virtual public PSCS::Semantics::Loci::CS_LocusImpl, virtual public FoundationalModelLibraryLocus
 	{
 		private:    
 			FoundationalModelLibraryLocusImpl& operator=(FoundationalModelLibraryLocusImpl const&) = delete;

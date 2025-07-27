@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EEnum.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EGenericType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -12503,7 +12503,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	m_object_Operation_remove_Property_EBoolean->setName("remove");
-	m_object_Operation_remove_Property_EBoolean->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_object_Operation_remove_Property_EBoolean->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_object_Operation_remove_Property_EBoolean->setLowerBound(0);
 	m_object_Operation_remove_Property_EBoolean->setUpperBound(1);
 	m_object_Operation_remove_Property_EBoolean->setUnique(true);

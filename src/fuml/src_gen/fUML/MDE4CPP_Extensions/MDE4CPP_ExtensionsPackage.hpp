@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EClass;
-	class EOperation;
-	class EReference;
-	class EParameter;
+	class EStringToStringMapEntry;
 	class EGenericType;
+	class EReference;
+	class EDataType;
 	class EAnnotation;
 	class EAttribute;
-	class EDataType;
-	class EStringToStringMapEntry;
+	class EClass;
+	class EParameter;
+	class EOperation;
 }
 
 namespace fUML::MDE4CPP_Extensions 
@@ -59,7 +59,7 @@ namespace fUML::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long FUML_LINK_CLASS = 1317507267;
 			static const unsigned int FUML_LINK_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int FUML_LINK_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int FUML_LINK_CLASS_OPERATION_COUNT = 57;
 			
 			static const unsigned long FUML_LINK_ATTRIBUTE_LINKENDS = 487915139;
 			static const unsigned long FUML_LINK_ATTRIBUTE_TYPE = 894190498;
@@ -68,7 +68,6 @@ namespace fUML::MDE4CPP_Extensions
 			static const unsigned long FUML_LINK_OPERATION_ADD_FUML_OBJECT_EINT = 1930469695;
 			static const unsigned long FUML_LINK_OPERATION_CONTAINS_FUML_OBJECT = 768015077;
 			static const unsigned long FUML_LINK_OPERATION_DESTROY = 1266427544;
-			static const unsigned long FUML_LINK_OPERATION_GETTYPES = 3361854073;
 			static const unsigned long FUML_LINK_OPERATION_RETRIEVELINKEND_PROPERTY = 2164603078;
 			static const unsigned long FUML_LINK_OPERATION_RETRIEVELINKENDVALUE_PROPERTY = 2560483969;
 			static const unsigned long FUML_LINK_OPERATION_RETRIEVEOTHERLINKEND_PROPERTY = 2722775416;
@@ -85,7 +84,6 @@ namespace fUML::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_add_FUML_Object_EInt() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_contains_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_destroy() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_getTypes() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_retrieveLinkEnd_Property() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_retrieveLinkEndValue_Property() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Link_Operation_retrieveOtherLinkEnd_Property() const = 0;

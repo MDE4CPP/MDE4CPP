@@ -25,6 +25,11 @@
 #include "FoundationalModelLibrary/BasicInputOutput/BasicInputOutputFactory.hpp"
 #include "FoundationalModelLibrary/BasicInputOutput/impl/BasicInputOutputPackageImpl.hpp"
 #include "uml/Class.hpp"
+//PSCS-specific includes
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "uml/Port.hpp"
 
 using namespace FoundationalModelLibrary::BasicInputOutput;
 
@@ -39,7 +44,6 @@ ChannelImpl::ChannelImpl()
 	DEBUG_INFO("Instance of 'Channel' is created.")
 	//***********************************
 }
-
 
 ChannelImpl::~ChannelImpl()
 {
@@ -62,12 +66,11 @@ std::shared_ptr<ecore::EObject>  ChannelImpl::copy() const
 ChannelImpl& ChannelImpl::operator=(const ChannelImpl & obj)
 {
 	//call overloaded =Operator for each base class
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::operator=(obj);
+	PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::operator=(obj);
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Channel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 
@@ -76,19 +79,9 @@ ChannelImpl& ChannelImpl::operator=(const ChannelImpl & obj)
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& ChannelImpl::getMetaClass() const
 {
 	return BasicInputOutputPackageImpl::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel();
-}
-
-void ChannelImpl::instantiate()
-{   
-}
-
-void ChannelImpl::destroy()
-{	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
 }
 
 //*********************************
@@ -104,14 +97,15 @@ void ChannelImpl::destroy()
 //*********************************
 // Operations
 //*********************************
-// fUML-specific Operations
+
+// fUML-specific Method Overrides
 const std::shared_ptr<Bag<uml::Classifier>>& ChannelImpl::getTypes() const
 {
 	static std::shared_ptr<Bag<uml::Classifier>> types;
 
 	if(!types)
 	{
-		types.reset();
+		types.reset(new Bag<uml::Classifier>());
 		// Add type of self 'Channel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 	}
@@ -124,6 +118,49 @@ void ChannelImpl::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
 	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
 }
 
+// PSCS-specific Method Overrides
+void ChannelImpl::construct()
+{
+}
+
+void ChannelImpl::constructObject(const std::shared_ptr<uml::Class>& type)
+{
+	switch(type->_getID())
+	{
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::CHANNEL_CLASS:
+		{
+			this->construct();
+			break;
+		}
+		default:
+		{
+			return;
+		}
+	}
+}
+
+bool ChannelImpl::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	/*
+	 * TODO Avoid cycles here
+	 */ 
+	return false;
+}
+
+bool ChannelImpl::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	return false;
+}
+
+std::shared_ptr<Any> ChannelImpl::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> ChannelImpl::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************
@@ -196,20 +233,21 @@ bool ChannelImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool ChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool ChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool ChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	return false;
+	std::shared_ptr<Any> removedValue = nullptr;
+	return removedValue;
 }
 
 //**************************************

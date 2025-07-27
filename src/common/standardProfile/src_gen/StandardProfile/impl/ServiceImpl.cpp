@@ -50,7 +50,6 @@ ServiceImpl::ServiceImpl()
 	//***********************************
 }
 
-
 ServiceImpl::~ServiceImpl()
 {
 	DEBUG_INFO("Instance of 'Service' is destroyed.")
@@ -77,7 +76,6 @@ ServiceImpl& ServiceImpl::operator=(const ServiceImpl & obj)
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 	m_base_Component = obj.getBase_Component();
@@ -87,24 +85,10 @@ ServiceImpl& ServiceImpl::operator=(const ServiceImpl & obj)
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& ServiceImpl::getMetaClass() const
 {
 	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Service();
 	return metaClass;
-}
-
-void ServiceImpl::instantiate()
-{   
-	
-}
-
-void ServiceImpl::destroy()
-{	
-
-	//Erase properties	//deleting property base_Component
-	m_base_Component.reset();
-	
 }
 
 //*********************************
@@ -252,49 +236,25 @@ bool ServiceImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool ServiceImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ServiceImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool ServiceImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ServiceImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool ServiceImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ServiceImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::SERVICE_PROPERTY_BASE_COMPONENT:
 		{
 			std::shared_ptr<uml::Component> valueToRemove = nullptr;
-			if(value->isContainer())
-			{
-				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
-				if(umlContainerAny)
-				{
-					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
-					if(container && !(container->empty()))
-					{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToRemove = std::dynamic_pointer_cast<uml::Component>(firstElement);
-					}
-				}
-			}
-			else
-			{
-				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-				if(umlAny)
-				{
-					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToRemove = std::dynamic_pointer_cast<uml::Component>(element);
-				}
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -302,22 +262,47 @@ bool ServiceImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, 
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eUMLAny(this->getBase_Component().lock(), uml::umlPackage::COMPONENT_CLASS);
 					m_base_Component.reset();
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+					if(umlContainerAny)
+					{
+						std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+						if(container && !(container->empty()))
+						{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							std::shared_ptr<uml::Element> firstElement = container->at(0);
+							valueToRemove = std::dynamic_pointer_cast<uml::Component>(firstElement);
+						}
+					}
+				}
+				else
+				{
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+					if(umlAny)
+					{
+						std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+						valueToRemove = std::dynamic_pointer_cast<uml::Component>(element);
+					}
+				}
+
 				if(m_base_Component.lock() == valueToRemove)
 				{
+					removedValue = eUMLAny(valueToRemove, uml::umlPackage::COMPONENT_CLASS);
 					m_base_Component.reset();
-					return true;
 				}
 			}
+			return removedValue;
 		}
 	}
 
-	return false;
+	return removedValue;
 }
 
 //**************************************

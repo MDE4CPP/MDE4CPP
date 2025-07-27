@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -55,7 +55,6 @@ void MDE4CPP_ExtensionsPackageImpl::createFUML_LinkContent(std::shared_ptr<ecore
 	m_fUML_Link_Operation_add_FUML_Object_EInt = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_ADD_FUML_OBJECT_EINT);
 	m_fUML_Link_Operation_contains_FUML_Object = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_CONTAINS_FUML_OBJECT);
 	m_fUML_Link_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_DESTROY);
-	m_fUML_Link_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_GETTYPES);
 	m_fUML_Link_Operation_retrieveLinkEnd_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_RETRIEVELINKEND_PROPERTY);
 	m_fUML_Link_Operation_retrieveLinkEndValue_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_RETRIEVELINKENDVALUE_PROPERTY);
 	m_fUML_Link_Operation_retrieveOtherLinkEnd_Property = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Link_Class, FUML_LINK_OPERATION_RETRIEVEOTHERLINKEND_PROPERTY);

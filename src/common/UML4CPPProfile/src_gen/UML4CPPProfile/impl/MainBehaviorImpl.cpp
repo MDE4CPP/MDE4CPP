@@ -50,7 +50,6 @@ MainBehaviorImpl::MainBehaviorImpl()
 	//***********************************
 }
 
-
 MainBehaviorImpl::~MainBehaviorImpl()
 {
 	DEBUG_INFO("Instance of 'MainBehavior' is destroyed.")
@@ -77,7 +76,6 @@ MainBehaviorImpl& MainBehaviorImpl::operator=(const MainBehaviorImpl & obj)
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MainBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 	m_base_Behavior = obj.getBase_Behavior();
@@ -87,24 +85,10 @@ MainBehaviorImpl& MainBehaviorImpl::operator=(const MainBehaviorImpl & obj)
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& MainBehaviorImpl::getMetaClass() const
 {
 	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_MainBehavior();
 	return metaClass;
-}
-
-void MainBehaviorImpl::instantiate()
-{   
-	
-}
-
-void MainBehaviorImpl::destroy()
-{	
-
-	//Erase properties	//deleting property base_Behavior
-	m_base_Behavior.reset();
-	
 }
 
 //*********************************
@@ -252,49 +236,25 @@ bool MainBehaviorImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool MainBehaviorImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> MainBehaviorImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool MainBehaviorImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> MainBehaviorImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool MainBehaviorImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> MainBehaviorImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_PROPERTY_BASE_BEHAVIOR:
 		{
 			std::shared_ptr<uml::Behavior> valueToRemove = nullptr;
-			if(value->isContainer())
-			{
-				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
-				if(umlContainerAny)
-				{
-					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
-					if(container && !(container->empty()))
-					{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToRemove = std::dynamic_pointer_cast<uml::Behavior>(firstElement);
-					}
-				}
-			}
-			else
-			{
-				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-				if(umlAny)
-				{
-					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToRemove = std::dynamic_pointer_cast<uml::Behavior>(element);
-				}
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -302,22 +262,47 @@ bool MainBehaviorImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& va
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eUMLAny(this->getBase_Behavior().lock(), uml::umlPackage::BEHAVIOR_CLASS);
 					m_base_Behavior.reset();
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+					if(umlContainerAny)
+					{
+						std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+						if(container && !(container->empty()))
+						{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							std::shared_ptr<uml::Element> firstElement = container->at(0);
+							valueToRemove = std::dynamic_pointer_cast<uml::Behavior>(firstElement);
+						}
+					}
+				}
+				else
+				{
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+					if(umlAny)
+					{
+						std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+						valueToRemove = std::dynamic_pointer_cast<uml::Behavior>(element);
+					}
+				}
+
 				if(m_base_Behavior.lock() == valueToRemove)
 				{
+					removedValue = eUMLAny(valueToRemove, uml::umlPackage::BEHAVIOR_CLASS);
 					m_base_Behavior.reset();
-					return true;
 				}
 			}
+			return removedValue;
 		}
 	}
 
-	return false;
+	return removedValue;
 }
 
 //**************************************

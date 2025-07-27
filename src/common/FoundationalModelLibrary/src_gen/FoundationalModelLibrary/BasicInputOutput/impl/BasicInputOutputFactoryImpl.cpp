@@ -96,7 +96,6 @@ std::shared_ptr<FoundationalModelLibrary::BasicInputOutput::StandardInputChannel
 	std::shared_ptr<FoundationalModelLibrary::BasicInputOutput::StandardInputChannelImpl> element(new FoundationalModelLibrary::BasicInputOutput::StandardInputChannelImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisStandardInputChannelPtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -109,7 +108,6 @@ std::shared_ptr<FoundationalModelLibrary::BasicInputOutput::StandardOutputChanne
 	std::shared_ptr<FoundationalModelLibrary::BasicInputOutput::StandardOutputChannelImpl> element(new FoundationalModelLibrary::BasicInputOutput::StandardOutputChannelImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisStandardOutputChannelPtr(element);
-	element->instantiate();
 	return element;
 }
 

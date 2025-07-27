@@ -53,7 +53,6 @@ UML4CPPPackageImpl::UML4CPPPackageImpl()
 	//***********************************
 }
 
-
 UML4CPPPackageImpl::~UML4CPPPackageImpl()
 {
 	DEBUG_INFO("Instance of 'UML4CPPPackage' is destroyed.")
@@ -80,7 +79,6 @@ UML4CPPPackageImpl& UML4CPPPackageImpl::operator=(const UML4CPPPackageImpl & obj
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy UML4CPPPackage "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 	m_base_Package = obj.getBase_Package();
@@ -93,28 +91,10 @@ UML4CPPPackageImpl& UML4CPPPackageImpl::operator=(const UML4CPPPackageImpl & obj
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& UML4CPPPackageImpl::getMetaClass() const
 {
 	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_UML4CPPPackage();
 	return metaClass;
-}
-
-void UML4CPPPackageImpl::instantiate()
-{   
-	
-	
-}
-
-void UML4CPPPackageImpl::destroy()
-{	
-
-	//Erase properties	//deleting property base_Package
-	m_base_Package.reset();
-	
-	
-	
-	
 }
 
 //*********************************
@@ -361,49 +341,25 @@ bool UML4CPPPackageImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool UML4CPPPackageImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> UML4CPPPackageImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool UML4CPPPackageImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> UML4CPPPackageImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool UML4CPPPackageImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> UML4CPPPackageImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_BASE_PACKAGE:
 		{
 			std::shared_ptr<uml::Package> valueToRemove = nullptr;
-			if(value->isContainer())
-			{
-				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
-				if(umlContainerAny)
-				{
-					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
-					if(container && !(container->empty()))
-					{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToRemove = std::dynamic_pointer_cast<uml::Package>(firstElement);
-					}
-				}
-			}
-			else
-			{
-				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-				if(umlAny)
-				{
-					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToRemove = std::dynamic_pointer_cast<uml::Package>(element);
-				}
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -411,37 +367,47 @@ bool UML4CPPPackageImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& 
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eUMLAny(this->getBase_Package().lock(), uml::umlPackage::PACKAGE_CLASS);
 					m_base_Package.reset();
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+					if(umlContainerAny)
+					{
+						std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+						if(container && !(container->empty()))
+						{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							std::shared_ptr<uml::Element> firstElement = container->at(0);
+							valueToRemove = std::dynamic_pointer_cast<uml::Package>(firstElement);
+						}
+					}
+				}
+				else
+				{
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+					if(umlAny)
+					{
+						std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+						valueToRemove = std::dynamic_pointer_cast<uml::Package>(element);
+					}
+				}
+
 				if(m_base_Package.lock() == valueToRemove)
 				{
+					removedValue = eUMLAny(valueToRemove, uml::umlPackage::PACKAGE_CLASS);
 					m_base_Package.reset();
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_ECLIPSEURI:
 		{
 			std::string valueToRemove = "";
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<std::string>();
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -449,37 +415,37 @@ bool UML4CPPPackageImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& 
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->getEclipseURI(), types::typesPackage::STRING_CLASS, false);
 					m_eclipseURI = "";
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<std::string>();
+				}
+
 				if(m_eclipseURI == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::STRING_CLASS, false);
 					m_eclipseURI = "";
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_IGNORENAMESPACE:
 		{
 			bool valueToRemove = false;
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<bool>> container = value->get<std::shared_ptr<Bag<bool>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<bool>();
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -487,37 +453,37 @@ bool UML4CPPPackageImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& 
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->isIgnoreNamespace(), types::typesPackage::BOOLEAN_CLASS, false);
 					m_ignoreNamespace = false;
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<bool>> container = value->get<std::shared_ptr<Bag<bool>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<bool>();
+				}
+
 				if(m_ignoreNamespace == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::BOOLEAN_CLASS, false);
 					m_ignoreNamespace = false;
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_PROPERTY_PACKAGEONLY:
 		{
 			bool valueToRemove = false;
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<bool>> container = value->get<std::shared_ptr<Bag<bool>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<bool>();
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -525,22 +491,37 @@ bool UML4CPPPackageImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& 
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->isPackageOnly(), types::typesPackage::BOOLEAN_CLASS, false);
 					m_packageOnly = false;
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<bool>> container = value->get<std::shared_ptr<Bag<bool>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<bool>();
+				}
+
 				if(m_packageOnly == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::BOOLEAN_CLASS, false);
 					m_packageOnly = false;
-					return true;
 				}
 			}
+			return removedValue;
 		}
 	}
 
-	return false;
+	return removedValue;
 }
 
 //**************************************

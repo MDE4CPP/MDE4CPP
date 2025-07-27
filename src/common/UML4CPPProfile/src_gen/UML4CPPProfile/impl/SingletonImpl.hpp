@@ -61,8 +61,6 @@ namespace UML4CPPProfile
 
 		protected:
 			virtual const std::shared_ptr<uml::Class>& getMetaClass() const;
-			virtual void instantiate();
-			virtual void destroy();
 
 		public:
 			//**************************************
@@ -85,9 +83,9 @@ namespace UML4CPPProfile
 			virtual bool unset(std::string _qualifiedName) ;
 			virtual bool unset(unsigned long _uID) ;
 			//Remove
-			virtual bool remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
-			virtual bool remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
-			virtual bool remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual std::shared_ptr<Any> remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual std::shared_ptr<Any> remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual std::shared_ptr<Any> remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
 		
 			//**************************************
 			// Operation & OpaqueBehavior Invocation

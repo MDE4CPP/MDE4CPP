@@ -275,39 +275,25 @@ bool StatusImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool StatusImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> StatusImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool StatusImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> StatusImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	switch(_uID)
 	{
 		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CODE:
 		{
 			int valueToRemove = 0;
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<int>> container = value->get<std::shared_ptr<Bag<int>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<int>();
-			}
-
-
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -315,37 +301,36 @@ bool StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, i
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->getCode(), types::typesPackage::INTEGER_CLASS, false);
 					m_code = 0;
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<int>> container = value->get<std::shared_ptr<Bag<int>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<int>();
+				}
 				if(m_code == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::INTEGER_CLASS, false);
 					m_code = 0;
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CONTEXT:
 		{
 			std::string valueToRemove = "";
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<std::string>();
-			}
-
-
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -353,37 +338,36 @@ bool StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, i
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->getContext(), types::typesPackage::STRING_CLASS, false);
 					m_context = "";
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<std::string>();
+				}
 				if(m_context == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::STRING_CLASS, false);
 					m_context = "";
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_DESCRIPTION:
 		{
 			std::string valueToRemove = "";
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<std::string>();
-			}
-
-
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -391,22 +375,36 @@ bool StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, i
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->getDescription(), types::typesPackage::STRING_CLASS, false);
 					m_description = "";
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<std::string>();
+				}
 				if(m_description == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::STRING_CLASS, false);
 					m_description = "";
-					return true;
 				}
 			}
+			return removedValue;
 		}
 	}
 
-	return false;
+	return removedValue;
 }
 
 //**************************************

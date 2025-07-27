@@ -50,8 +50,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -67,10 +67,10 @@
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -191,7 +191,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		inputValueAny = this->takeTokens(action->getValue())->at(0);
 	}
 
-	int removeAt = 0;
+	int removeAt = -1;
 	if(action->getRemoveAt() != nullptr) {
 		removeAt = this->takeTokens(action->getRemoveAt())->at(0)->get<int>();
 	}
@@ -231,34 +231,18 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		std::shared_ptr<Any> featureValue = value->get(property);
 
 		bool isRemoveDuplicates = action->getIsRemoveDuplicates();
-		int removeAt = -1;
-		std::shared_ptr<uml::InputPin> removeAtPin = action->getRemoveAt();
-		if(removeAtPin)
-		{
-			removeAt = this->takeTokens(removeAtPin)->at(0)->get<int>();
-		}
 
-		value->remove(property, inputValueAny, removeAt, isRemoveDuplicates);
+		std::shared_ptr<Any> removedValue = value->remove(property, inputValueAny, removeAt, isRemoveDuplicates);
 
 		// When values are removed from the list of values associated to the feature
 		// (in the context of the target), these latter may be involved in links representing
 		// instance of connectors. If this is the case, links in which the removed values are
 		// involved are destroyed.
-		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> linkToDestroy = this->getLinksToDestroy(value, feature, inputValueAny);
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> linkToDestroy = this->getLinksToDestroy(value, feature, removedValue);
 		for(unsigned int j = 0; j < linkToDestroy->size(); j++)
 		{
 			linkToDestroy->at(j)->destroy();
 		}
-		/*!
-			This functionality is excluded from PSCS in MDE4CPP because link destruction is handled on model level, not execution level.
-		*/
-		/*
-		for(unsigned int i = 0; i < removedValues->size(); i++) {
-			std::shared_ptr<Bag<PSCS::MDE4CPP_Extensions::PSCS_Link>> linkToDestroy = this->getLinksToDestroy(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value), feature, removedValues->at(i));
-			for(unsigned int j = 0; j < linkToDestroy->size(); j++) {
-				linkToDestroy->at(j)->destroy();
-			}
-		}*/
 	}
 	if(action->getResult() != nullptr) {
 		this->putToken(action->getResult(), valueAny);
@@ -286,11 +270,10 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>> CS_RemoveStructuralFea
 			// Feature is not a Port. Search for all potential link
 			// ends existing in the context of this object.
 			std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
-			std::shared_ptr<uml::Property> opposite = property->getOpposite();
 			const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinks = removedCSObject->getLinks();
 			for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
 			{
-				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveLinkEndValue(opposite);
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> oppositeEndValue = link->retrieveOtherLinkEndValue(property);
 				if(context->directlyContains(oppositeEndValue))
 				{
 					linksToDestroy->add(link);

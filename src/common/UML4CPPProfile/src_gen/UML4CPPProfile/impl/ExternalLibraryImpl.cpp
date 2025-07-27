@@ -53,7 +53,6 @@ ExternalLibraryImpl::ExternalLibraryImpl()
 	//***********************************
 }
 
-
 ExternalLibraryImpl::~ExternalLibraryImpl()
 {
 	DEBUG_INFO("Instance of 'ExternalLibrary' is destroyed.")
@@ -80,7 +79,6 @@ ExternalLibraryImpl& ExternalLibraryImpl::operator=(const ExternalLibraryImpl & 
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExternalLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 	m_base_Package = obj.getBase_Package();
@@ -93,30 +91,10 @@ ExternalLibraryImpl& ExternalLibraryImpl::operator=(const ExternalLibraryImpl & 
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& ExternalLibraryImpl::getMetaClass() const
 {
 	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_ExternalLibrary();
 	return metaClass;
-}
-
-void ExternalLibraryImpl::instantiate()
-{   
-	
-	
-	
-	
-}
-
-void ExternalLibraryImpl::destroy()
-{	
-
-	//Erase properties	//deleting property base_Package
-	m_base_Package.reset();
-	
-	
-	
-	
 }
 
 //*********************************
@@ -363,49 +341,25 @@ bool ExternalLibraryImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool ExternalLibraryImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ExternalLibraryImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool ExternalLibraryImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ExternalLibraryImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE:
 		{
 			std::shared_ptr<uml::Package> valueToRemove = nullptr;
-			if(value->isContainer())
-			{
-				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
-				if(umlContainerAny)
-				{
-					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
-					if(container && !(container->empty()))
-					{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToRemove = std::dynamic_pointer_cast<uml::Package>(firstElement);
-					}
-				}
-			}
-			else
-			{
-				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-				if(umlAny)
-				{
-					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToRemove = std::dynamic_pointer_cast<uml::Package>(element);
-				}
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -413,37 +367,47 @@ bool ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>&
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eUMLAny(this->getBase_Package().lock(), uml::umlPackage::PACKAGE_CLASS);
 					m_base_Package.reset();
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+					if(umlContainerAny)
+					{
+						std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+						if(container && !(container->empty()))
+						{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							std::shared_ptr<uml::Element> firstElement = container->at(0);
+							valueToRemove = std::dynamic_pointer_cast<uml::Package>(firstElement);
+						}
+					}
+				}
+				else
+				{
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+					if(umlAny)
+					{
+						std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+						valueToRemove = std::dynamic_pointer_cast<uml::Package>(element);
+					}
+				}
+
 				if(m_base_Package.lock() == valueToRemove)
 				{
+					removedValue = eUMLAny(valueToRemove, uml::umlPackage::PACKAGE_CLASS);
 					m_base_Package.reset();
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_INCLUDEPATH:
 		{
 			std::string valueToRemove = "";
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<std::string>();
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -451,37 +415,37 @@ bool ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>&
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->getIncludePath(), types::typesPackage::STRING_CLASS, false);
 					m_includePath = "";
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<std::string>();
+				}
+
 				if(m_includePath == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::STRING_CLASS, false);
 					m_includePath = "";
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYNAME:
 		{
 			std::string valueToRemove = "";
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<std::string>();
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -489,37 +453,37 @@ bool ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>&
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->getLibraryName(), types::typesPackage::STRING_CLASS, false);
 					m_libraryName = "";
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<std::string>();
+				}
+
 				if(m_libraryName == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::STRING_CLASS, false);
 					m_libraryName = "";
-					return true;
 				}
 			}
+			return removedValue;
 		}
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYPATH:
 		{
 			std::string valueToRemove = "";
-			if(value->isContainer())
-			{
-				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = *(container->at(0));
-				}
-			}
-			else
-			{
-				valueToRemove = value->get<std::string>();
-			}
-
-			
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -527,22 +491,37 @@ bool ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>&
 				// NOTE: removeAt is 1-based rather than 0-based
 				if(removeAt == 1)
 				{
+					removedValue = eAny(this->getLibraryPath(), types::typesPackage::STRING_CLASS, false);
 					m_libraryPath = "";
-					return true;
 				}
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = *(container->at(0));
+					}
+				}
+				else
+				{
+					valueToRemove = value->get<std::string>();
+				}
+
 				if(m_libraryPath == valueToRemove)
 				{
+					removedValue = eAny(valueToRemove, types::typesPackage::STRING_CLASS, false);
 					m_libraryPath = "";
-					return true;
 				}
 			}
+			return removedValue;
 		}
 	}
 
-	return false;
+	return removedValue;
 }
 
 //**************************************

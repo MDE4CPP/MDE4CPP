@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -221,16 +221,6 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 	m_fUML_Link_Operation_destroy->setOrdered(true);
 	
 	m_fUML_Link_Operation_destroy->_setID(FUML_LINK_OPERATION_DESTROY);
-	
-	
-	m_fUML_Link_Operation_getTypes->setName("getTypes");
-	m_fUML_Link_Operation_getTypes->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
-	m_fUML_Link_Operation_getTypes->setLowerBound(0);
-	m_fUML_Link_Operation_getTypes->setUpperBound(-1);
-	m_fUML_Link_Operation_getTypes->setUnique(true);
-	m_fUML_Link_Operation_getTypes->setOrdered(true);
-	
-	m_fUML_Link_Operation_getTypes->_setID(FUML_LINK_OPERATION_GETTYPES);
 	
 	
 	m_fUML_Link_Operation_retrieveLinkEnd_Property->setName("retrieveLinkEnd");

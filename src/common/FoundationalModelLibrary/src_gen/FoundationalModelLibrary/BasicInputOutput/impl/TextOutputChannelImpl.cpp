@@ -47,6 +47,11 @@
 //Included from operation "writeString"
 #include <iostream>
 
+//PSCS-specific includes
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "uml/Port.hpp"
 
 using namespace FoundationalModelLibrary::BasicInputOutput;
 
@@ -61,7 +66,6 @@ TextOutputChannelImpl::TextOutputChannelImpl()
 	DEBUG_INFO("Instance of 'TextOutputChannel' is created.")
 	//***********************************
 }
-
 
 TextOutputChannelImpl::~TextOutputChannelImpl()
 {
@@ -89,7 +93,6 @@ TextOutputChannelImpl& TextOutputChannelImpl::operator=(const TextOutputChannelI
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TextOutputChannel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 
@@ -98,20 +101,9 @@ TextOutputChannelImpl& TextOutputChannelImpl::operator=(const TextOutputChannelI
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& TextOutputChannelImpl::getMetaClass() const
 {
 	return BasicInputOutputPackageImpl::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel();
-}
-
-void TextOutputChannelImpl::instantiate()
-{   
-	OutputChannelImpl::instantiate();
-}
-
-void TextOutputChannelImpl::destroy()
-{	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
 }
 
 //*********************************
@@ -187,20 +179,21 @@ void TextOutputChannelImpl::writeUnlimitedNatural(int value,std::shared_ptr<Foun
 
 }
 
-// fUML-specific Operations
+
+// fUML-specific Method Overrides
 const std::shared_ptr<Bag<uml::Classifier>>& TextOutputChannelImpl::getTypes() const
 {
 	static std::shared_ptr<Bag<uml::Classifier>> types;
 
 	if(!types)
 	{
-		types.reset();
+		types.reset(new Bag<uml::Classifier>());
 		// Add type of self 'TextOutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
-		// Add base type 'OutputChannel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
 		// Add base type 'Channel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
+		// Add base type 'OutputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
 	}
 
 	return types;
@@ -211,6 +204,65 @@ void TextOutputChannelImpl::destroy(bool isDestroyLinks, bool isDestroyOwnedObje
 	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
 }
 
+// PSCS-specific Method Overrides
+void TextOutputChannelImpl::construct()
+{
+	OutputChannelImpl::construct();
+
+}
+
+void TextOutputChannelImpl::constructObject(const std::shared_ptr<uml::Class>& type)
+{
+	switch(type->_getID())
+	{
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_CLASS:
+		{
+			this->construct();
+			break;
+		}
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::CHANNEL_CLASS:
+		{
+			ChannelImpl::construct();
+			break;
+		}
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::OUTPUTCHANNEL_CLASS:
+		{
+			OutputChannelImpl::construct();
+			break;
+		}
+		default:
+		{
+			return;
+		}
+	}
+}
+
+bool TextOutputChannelImpl::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	/*
+	 * TODO Avoid cycles here
+	 */ 
+	if(OutputChannelImpl::contains(object)) return true;
+
+	return false;
+}
+
+bool TextOutputChannelImpl::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	if(OutputChannelImpl::directlyContains(object)) return true;
+
+	return false;
+}
+
+std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************
@@ -296,22 +348,24 @@ bool TextOutputChannelImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool TextOutputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> TextOutputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool TextOutputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> TextOutputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool TextOutputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> TextOutputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	//Call set() for base class OutputChannel
-	if(FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::remove(_uID, value, removeAt, isRemoveDuplicates)) return true;
-	return false;
+	removedValue = FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::remove(_uID, value, removeAt, isRemoveDuplicates);
+	if(removedValue) return removedValue;
+	return removedValue;
 }
 
 //**************************************

@@ -8,8 +8,7 @@
 #define FOUNDATIONALMODELLIBRARY_EXECUTORIMPL_HPP
 
 #include "../FoundationalModelLibraryExecutor.hpp"
-#include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
 
 //Forward Declaration for used types
 namespace uml
@@ -20,7 +19,7 @@ namespace uml
 
 namespace FoundationalModelLibrary 
 {
-	class FoundationalModelLibraryExecutorImpl :virtual public /*PSCS::Semantics::Loci::CS_ExecutorImpl*/ fUML::Semantics::Loci::ExecutorImpl, virtual public FoundationalModelLibraryExecutor
+	class FoundationalModelLibraryExecutorImpl: virtual public PSCS::Semantics::Loci::CS_ExecutorImpl, virtual public FoundationalModelLibraryExecutor
 	{
 		private:    
 			FoundationalModelLibraryExecutorImpl& operator=(FoundationalModelLibraryExecutorImpl const&) = delete;

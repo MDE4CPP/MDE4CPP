@@ -111,6 +111,21 @@ task compileFoundationalModelLibrarySrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 		inputs.files(uml.outputs)
 	}
 
+	// dependency to model 'PSCS'
+	def PSCS = getRootProject().getTasksByName('compilePSCSSrc', true)
+	if(PSCS.isEmpty())  
+	{
+		logger.info('Task not found: ' + PSCS.toString() + '. Use buildPSCS now')
+		def buildPSCS = getRootProject().getTasksByName('buildPSCS', true)
+		dependsOn buildPSCS
+		inputs.files(buildPSCS.outputs)
+	}
+	else
+	{
+		dependsOn PSCS
+		inputs.files(PSCS.outputs)
+	}
+
 	// dependency to model 'primitivetypesReflection'
 	def primitivetypesReflection = getRootProject().getTasksByName('compilePrimitivetypesReflectionSrc', true)
 	if(primitivetypesReflection.isEmpty())  

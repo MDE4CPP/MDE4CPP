@@ -132,7 +132,6 @@ std::shared_ptr<UML4CPPProfile::DoNotGenerate> UML4CPPProfileFactoryImpl::create
 	std::shared_ptr<UML4CPPProfile::DoNotGenerateImpl> element(new UML4CPPProfile::DoNotGenerateImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisDoNotGeneratePtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -145,7 +144,6 @@ std::shared_ptr<UML4CPPProfile::ExternalLibrary> UML4CPPProfileFactoryImpl::crea
 	std::shared_ptr<UML4CPPProfile::ExternalLibraryImpl> element(new UML4CPPProfile::ExternalLibraryImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisExternalLibraryPtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -158,7 +156,6 @@ std::shared_ptr<UML4CPPProfile::GetterName> UML4CPPProfileFactoryImpl::createGet
 	std::shared_ptr<UML4CPPProfile::GetterNameImpl> element(new UML4CPPProfile::GetterNameImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisGetterNamePtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -171,7 +168,6 @@ std::shared_ptr<UML4CPPProfile::MainBehavior> UML4CPPProfileFactoryImpl::createM
 	std::shared_ptr<UML4CPPProfile::MainBehaviorImpl> element(new UML4CPPProfile::MainBehaviorImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisMainBehaviorPtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -184,7 +180,6 @@ std::shared_ptr<UML4CPPProfile::NonExecutable> UML4CPPProfileFactoryImpl::create
 	std::shared_ptr<UML4CPPProfile::NonExecutableImpl> element(new UML4CPPProfile::NonExecutableImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisNonExecutablePtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -197,7 +192,6 @@ std::shared_ptr<UML4CPPProfile::SetterName> UML4CPPProfileFactoryImpl::createSet
 	std::shared_ptr<UML4CPPProfile::SetterNameImpl> element(new UML4CPPProfile::SetterNameImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisSetterNamePtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -210,7 +204,6 @@ std::shared_ptr<UML4CPPProfile::Singleton> UML4CPPProfileFactoryImpl::createSing
 	std::shared_ptr<UML4CPPProfile::SingletonImpl> element(new UML4CPPProfile::SingletonImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisSingletonPtr(element);
-	element->instantiate();
 	return element;
 }
 
@@ -223,7 +216,6 @@ std::shared_ptr<UML4CPPProfile::UML4CPPPackage> UML4CPPProfileFactoryImpl::creat
 	std::shared_ptr<UML4CPPProfile::UML4CPPPackageImpl> element(new UML4CPPProfile::UML4CPPPackageImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisUML4CPPPackagePtr(element);
-	element->instantiate();
 	return element;
 }
 

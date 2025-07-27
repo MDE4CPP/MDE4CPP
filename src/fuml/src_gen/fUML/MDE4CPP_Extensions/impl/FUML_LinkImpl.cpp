@@ -41,12 +41,11 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Association.hpp"
-#include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
@@ -229,22 +228,6 @@ void FUML_LinkImpl::destroy()
 	linkEnds->clear();
 
 	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
-	//end of body
-}
-
-const std::shared_ptr<Bag<uml::Classifier>>& FUML_LinkImpl::getTypes() const
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	static std::shared_ptr<Bag<uml::Classifier>> types;
-
-	if(!types)
-	{
-		types.reset(new Bag<uml::Classifier>());
-		types->add(this->getType());
-	}
-
-	return types;
 	//end of body
 }
 
@@ -796,13 +779,6 @@ std::shared_ptr<Any> FUML_LinkImpl::eInvoke(int operationID, const std::shared_p
 		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_DESTROY:
 		{
 			this->destroy();
-			break;
-		}
-		// fUML::MDE4CPP_Extensions::FUML_Link::getTypes() : uml::Classifier[*] {const}: 3361854073
-		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_GETTYPES:
-		{
-			std::shared_ptr<Bag<uml::Classifier>> resultList = this->getTypes();
-			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Link::retrieveLinkEnd(uml::Property) : fUML::MDE4CPP_Extensions::FUML_LinkEnd: 2164603078

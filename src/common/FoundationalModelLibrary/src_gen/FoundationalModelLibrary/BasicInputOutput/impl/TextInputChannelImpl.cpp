@@ -47,6 +47,11 @@
 //Included from operation "readLine"
 #include <iostream>
 
+//PSCS-specific includes
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "uml/Port.hpp"
 
 using namespace FoundationalModelLibrary::BasicInputOutput;
 
@@ -61,7 +66,6 @@ TextInputChannelImpl::TextInputChannelImpl()
 	DEBUG_INFO("Instance of 'TextInputChannel' is created.")
 	//***********************************
 }
-
 
 TextInputChannelImpl::~TextInputChannelImpl()
 {
@@ -89,7 +93,6 @@ TextInputChannelImpl& TextInputChannelImpl::operator=(const TextInputChannelImpl
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TextInputChannel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	instantiate();
 
 	//copy attributes with no containment (soft copy)
 
@@ -98,20 +101,9 @@ TextInputChannelImpl& TextInputChannelImpl::operator=(const TextInputChannelImpl
 	return *this;
 }
 
-
 const std::shared_ptr<uml::Class>& TextInputChannelImpl::getMetaClass() const
 {
 	return BasicInputOutputPackageImpl::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel();
-}
-
-void TextInputChannelImpl::instantiate()
-{   
-	InputChannelImpl::instantiate();
-}
-
-void TextInputChannelImpl::destroy()
-{	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
 }
 
 //*********************************
@@ -206,14 +198,15 @@ int TextInputChannelImpl::readUnlimitedNatural(std::shared_ptr<FoundationalModel
 	return ReturnResult;
 }
 
-// fUML-specific Operations
+
+// fUML-specific Method Overrides
 const std::shared_ptr<Bag<uml::Classifier>>& TextInputChannelImpl::getTypes() const
 {
 	static std::shared_ptr<Bag<uml::Classifier>> types;
 
 	if(!types)
 	{
-		types.reset();
+		types.reset(new Bag<uml::Classifier>());
 		// Add type of self 'TextInputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel());
 		// Add base type 'InputChannel' : Class
@@ -230,6 +223,65 @@ void TextInputChannelImpl::destroy(bool isDestroyLinks, bool isDestroyOwnedObjec
 	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy(isDestroyLinks, isDestroyOwnedObjects);
 }
 
+// PSCS-specific Method Overrides
+void TextInputChannelImpl::construct()
+{
+	InputChannelImpl::construct();
+
+}
+
+void TextInputChannelImpl::constructObject(const std::shared_ptr<uml::Class>& type)
+{
+	switch(type->_getID())
+	{
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTINPUTCHANNEL_CLASS:
+		{
+			this->construct();
+			break;
+		}
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::INPUTCHANNEL_CLASS:
+		{
+			InputChannelImpl::construct();
+			break;
+		}
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::CHANNEL_CLASS:
+		{
+			ChannelImpl::construct();
+			break;
+		}
+		default:
+		{
+			return;
+		}
+	}
+}
+
+bool TextInputChannelImpl::contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	/*
+	 * TODO Avoid cycles here
+	 */ 
+	if(InputChannelImpl::contains(object)) return true;
+
+	return false;
+}
+
+bool TextInputChannelImpl::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	if(InputChannelImpl::directlyContains(object)) return true;
+
+	return false;
+}
+
+std::shared_ptr<Any> TextInputChannelImpl::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> TextInputChannelImpl::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************
@@ -315,22 +367,24 @@ bool TextInputChannelImpl::unset(unsigned long _uID)
 }
 
 //Remove
-bool TextInputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> TextInputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool TextInputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> TextInputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool TextInputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> TextInputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 	//Call set() for base class InputChannel
-	if(FoundationalModelLibrary::BasicInputOutput::InputChannelImpl::remove(_uID, value, removeAt, isRemoveDuplicates)) return true;
-	return false;
+	removedValue = FoundationalModelLibrary::BasicInputOutput::InputChannelImpl::remove(_uID, value, removeAt, isRemoveDuplicates);
+	if(removedValue) return removedValue;
+	return removedValue;
 }
 
 //**************************************

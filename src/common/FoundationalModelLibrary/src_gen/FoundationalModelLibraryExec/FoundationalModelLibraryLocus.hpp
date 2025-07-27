@@ -7,12 +7,11 @@
 #ifndef FOUNDATIONALMODELLIBRARY_LOCUS_HPP
 #define FOUNDATIONALMODELLIBRARY_LOCUS_HPP
 
-//#include "PSCS/Semantics/Loci/CS_Locus.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/Semantics/Loci/CS_Locus.hpp"
 
 namespace FoundationalModelLibrary 
 {
-	class FoundationalModelLibraryLocus: virtual public /*PSCS::Semantics::Loci::CS_Locus*/ fUML::Semantics::Loci::Locus
+	class FoundationalModelLibraryLocus: virtual public PSCS::Semantics::Loci::CS_Locus
 	{
 		public: 
 			FoundationalModelLibraryLocus (){};

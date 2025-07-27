@@ -9,9 +9,9 @@ task runCommandCompilePSCS(type:Exec) {
 		'generatePSCS'
 	
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -54,9 +54,9 @@ task compilePSCS() {
 		'generatePSCS'
 	
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileFUML', true)
 		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -68,7 +68,7 @@ task buildPSCS() {
 	dependsOn 'compilePSCS'
 
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }

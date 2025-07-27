@@ -50,6 +50,14 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
 			virtual void destroy(bool, bool);
 
+			// PSCS-specific Operations
+			virtual void construct();
+			virtual void constructObject(const std::shared_ptr<uml::Class>&);
+			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
+			virtual bool directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
+			virtual std::shared_ptr<Any> dispatchCallIn(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+			virtual std::shared_ptr<Any> dispatchCallOut(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -63,8 +71,6 @@ namespace FoundationalModelLibrary::BasicInputOutput
 
 		protected:
 			virtual const std::shared_ptr<uml::Class>& getMetaClass() const;
-			virtual void instantiate();
-			virtual void destroy();
 
 		public:
 			//**************************************
@@ -87,9 +93,9 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			virtual bool unset(std::string _qualifiedName) ;
 			virtual bool unset(unsigned long _uID) ;
 			//Remove
-			virtual bool remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
-			virtual bool remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
-			virtual bool remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual std::shared_ptr<Any> remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual std::shared_ptr<Any> remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual std::shared_ptr<Any> remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
 		
 			//**************************************
 			// Operation & OpaqueBehavior Invocation

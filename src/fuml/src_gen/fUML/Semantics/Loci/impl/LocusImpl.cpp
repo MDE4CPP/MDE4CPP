@@ -60,14 +60,16 @@
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
+#include "uml/Association.hpp"
 
 using namespace fUML::Semantics::Loci;
 
@@ -276,13 +278,23 @@ std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> LocusImpl::retrieveE
 
 	for (const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value : *extensionalValues)
 	{
-		const std::shared_ptr<Bag<uml::Classifier>>& types = value->getTypes();
-		
-		for(const std::shared_ptr<uml::Classifier>& type : *types)
+		if(std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> link = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Link>(value); link != nullptr)
 		{
-			if(classifierID == type->_getID())
+			if(classifierID == link->getType()->_getID())
 			{
-				extent->push_back(value);
+				extent->push_back(link);
+			}
+		}
+		else
+		{
+			const std::shared_ptr<Bag<uml::Classifier>>& types = value->getTypes();
+		
+			for(const std::shared_ptr<uml::Classifier>& type : *types)
+			{
+				if(classifierID == type->_getID())
+				{
+					extent->push_back(value);
+				}
 			}
 		}
 	}

@@ -8,8 +8,7 @@
 #define FOUNDATIONALMODELLIBRARY_EXECUTIONFACTORYIMPL_HPP
 
 #include "../FoundationalModelLibraryExecutionFactory.hpp"
-#include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
-//#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
 
 namespace fUML::Semantics::Activities 
 {
@@ -18,7 +17,7 @@ namespace fUML::Semantics::Activities
 
 namespace FoundationalModelLibrary 
 {
-	class FoundationalModelLibraryExecutionFactoryImpl : virtual public/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl*/ fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public FoundationalModelLibraryExecutionFactory
+	class FoundationalModelLibraryExecutionFactoryImpl: virtual public PSCS::Semantics::Loci::CS_ExecutionFactoryImpl, virtual public FoundationalModelLibraryExecutionFactory
 	{
 		private:    
 			FoundationalModelLibraryExecutionFactoryImpl& operator=(FoundationalModelLibraryExecutionFactoryImpl const&) = delete;

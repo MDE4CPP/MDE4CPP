@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
+	class EEnum;
+	class EStringToStringMapEntry;
+	class EGenericType;
 	class EReference;
-	class EEnumLiteral;
+	class EDataType;
 	class EAnnotation;
-	class EParameter;
 	class EAttribute;
 	class EClass;
-	class EDataType;
+	class EEnumLiteral;
+	class EParameter;
 	class EOperation;
-	class EStringToStringMapEntry;
-	class EEnum;
-	class EGenericType;
 }
 
 namespace uml 
@@ -3903,7 +3903,7 @@ namespace uml
 			static const unsigned long OBJECT_OPERATION_GET_PROPERTY = 511579154;
 			static const unsigned long OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT = 2370151843;
 			static const unsigned long OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT = 1414710241;
-			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN = 1193303628;
+			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN = 3074312916;
 			static const unsigned long OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 944063851;
 			static const unsigned long OBJECT_OPERATION_UNSET_PROPERTY = 2448223378;
 			
