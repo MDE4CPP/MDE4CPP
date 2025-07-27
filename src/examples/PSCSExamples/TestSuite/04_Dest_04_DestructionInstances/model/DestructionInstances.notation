@@ -57,10 +57,10 @@
               <layoutConstraint xmi:type="notation:Location" xmi:id="_jlZuaAGCEe-tCNtTGu3weA" y="15"/>
             </children>
             <styles xmi:type="notation:CanonicalStyle" xmi:id="_-cV7oAGCEe-tCNtTGu3weA"/>
-            <element xmi:type="uml:OutputPin" href="RemovingSpecificInstancesP_P.uml#_hlVUEQGCEe-tCNtTGu3weA"/>
+            <element xmi:type="uml:OutputPin" href="DestructionInstances.uml#_hlVUEQGCEe-tCNtTGu3weA"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jlZuZAGCEe-tCNtTGu3weA" x="199" y="15"/>
           </children>
-          <element xmi:type="uml:CreateObjectAction" href="RemovingSpecificInstancesP_P.uml#_hlVUEAGCEe-tCNtTGu3weA"/>
+          <element xmi:type="uml:CreateObjectAction" href="DestructionInstances.uml#_hlVUEAGCEe-tCNtTGu3weA"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jlXSIQGCEe-tCNtTGu3weA" x="25" y="79"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_jlXSJQGCEe-tCNtTGu3weA" type="CallOperationAction_Shape">
@@ -74,7 +74,7 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_jlXSLwGCEe-tCNtTGu3weA" type="InputPin_CallOperationActionTargetStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_jlXSMAGCEe-tCNtTGu3weA" y="15"/>
             </children>
-            <element xmi:type="uml:InputPin" href="RemovingSpecificInstancesP_P.uml#_hlV7JQGCEe-tCNtTGu3weA"/>
+            <element xmi:type="uml:InputPin" href="DestructionInstances.uml#_hlV7JQGCEe-tCNtTGu3weA"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jlXSLAGCEe-tCNtTGu3weA" x="-15" y="15"/>
           </children>
           <children xmi:type="notation:DecorationNode" xmi:id="_jlXSJwGCEe-tCNtTGu3weA" type="CallOperationAction_NameLabel"/>
@@ -97,10 +97,10 @@
               <layoutConstraint xmi:type="notation:Location" xmi:id="_1RdgdQGCEe-tCNtTGu3weA" y="15"/>
             </children>
             <styles xmi:type="notation:CanonicalStyle" xmi:id="__OlQ4AGCEe-tCNtTGu3weA" canonical="false"/>
-            <element xmi:type="uml:OutputPin" href="RemovingSpecificInstancesP_P.uml#_1RHiMAGCEe-tCNtTGu3weA"/>
+            <element xmi:type="uml:OutputPin" href="DestructionInstances.uml#_1RHiMAGCEe-tCNtTGu3weA"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1RdgcQGCEe-tCNtTGu3weA"/>
           </children>
-          <element xmi:type="uml:CallOperationAction" href="RemovingSpecificInstancesP_P.uml#_hlV7IAGCEe-tCNtTGu3weA"/>
+          <element xmi:type="uml:CallOperationAction" href="DestructionInstances.uml#_hlV7IAGCEe-tCNtTGu3weA"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jlXSKgGCEe-tCNtTGu3weA" x="175" y="88"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_umJ4cGlJEfCsG8ADGLyf-Q" type="ForkNode_Shape">
@@ -110,7 +110,7 @@
           <children xmi:type="notation:DecorationNode" xmi:id="_umKfgmlJEfCsG8ADGLyf-Q" type="ForkNode_StereotypeLabel">
             <layoutConstraint xmi:type="notation:Location" xmi:id="_umLGkGlJEfCsG8ADGLyf-Q" y="15"/>
           </children>
-          <element xmi:type="uml:ForkNode" href="RemovingSpecificInstancesP_P.uml#_umEY4GlJEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:ForkNode" href="DestructionInstances.uml#_umEY4GlJEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_umJ4cWlJEfCsG8ADGLyf-Q" x="255" y="48" width="5" height="321"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_z88W8GlJEfCsG8ADGLyf-Q" type="CallOperationAction_Shape">
@@ -121,14 +121,14 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_z88W-mlJEfCsG8ADGLyf-Q" type="InputPin_CallOperationActionTargetStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_z88-AGlJEfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:InputPin" href="RemovingSpecificInstancesP_P.uml#_z823YGlJEfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:InputPin" href="DestructionInstances.uml#_z823YGlJEfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z88W92lJEfCsG8ADGLyf-Q" x="-15" y="20"/>
           </children>
           <children xmi:type="notation:DecorationNode" xmi:id="_z88W8mlJEfCsG8ADGLyf-Q" type="CallOperationAction_NameLabel"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_z88W82lJEfCsG8ADGLyf-Q" type="CallOperationAction_FloatingNameLabel">
             <layoutConstraint xmi:type="notation:Location" xmi:id="_z88W9GlJEfCsG8ADGLyf-Q" y="15"/>
           </children>
-          <element xmi:type="uml:CallOperationAction" href="RemovingSpecificInstancesP_P.uml#_yzuFEGlJEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:CallOperationAction" href="DestructionInstances.uml#_yzuFEGlJEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z88W9WlJEfCsG8ADGLyf-Q" x="335" y="68"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_gzsxAGlQEfCsG8ADGLyf-Q" type="CallBehaviorAction_Shape">
@@ -139,14 +139,14 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_gztYFWlQEfCsG8ADGLyf-Q" type="InputPin_CallBehaviorActionArgumentStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_gztYFmlQEfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:InputPin" href="RemovingSpecificInstancesP_P.uml#_gzmDUGlQEfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:InputPin" href="DestructionInstances.uml#_gzmDUGlQEfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gztYEmlQEfCsG8ADGLyf-Q"/>
           </children>
           <children xmi:type="notation:DecorationNode" xmi:id="_gzsxAmlQEfCsG8ADGLyf-Q" type="CallBehaviorAction_NameLabel"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_gzsxA2lQEfCsG8ADGLyf-Q" type="CallBehaviorAction_FloatingNameLabel">
             <layoutConstraint xmi:type="notation:Location" xmi:id="_gzsxBGlQEfCsG8ADGLyf-Q" y="15"/>
           </children>
-          <element xmi:type="uml:CallBehaviorAction" href="RemovingSpecificInstancesP_P.uml#_fxGrkGlQEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:CallBehaviorAction" href="DestructionInstances.uml#_fxGrkGlQEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gztYEGlQEfCsG8ADGLyf-Q" x="335" y="148"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_t35nIGlQEfCsG8ADGLyf-Q" type="CallOperationAction_Shape">
@@ -157,14 +157,14 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_t35nKmlQEfCsG8ADGLyf-Q" type="InputPin_CallOperationActionTargetStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_t35nK2lQEfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:InputPin" href="RemovingSpecificInstancesP_P.uml#_t3y5cGlQEfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:InputPin" href="DestructionInstances.uml#_t3y5cGlQEfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_t35nJ2lQEfCsG8ADGLyf-Q" x="-15" y="20"/>
           </children>
           <children xmi:type="notation:DecorationNode" xmi:id="_t35nImlQEfCsG8ADGLyf-Q" type="CallOperationAction_NameLabel"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_t35nI2lQEfCsG8ADGLyf-Q" type="CallOperationAction_FloatingNameLabel">
             <layoutConstraint xmi:type="notation:Location" xmi:id="_t35nJGlQEfCsG8ADGLyf-Q" y="15"/>
           </children>
-          <element xmi:type="uml:CallOperationAction" href="RemovingSpecificInstancesP_P.uml#_s3prEGlQEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:CallOperationAction" href="DestructionInstances.uml#_s3prEGlQEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_t35nJWlQEfCsG8ADGLyf-Q" x="335" y="228"/>
         </children>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fha7oQGCEe-tCNtTGu3weA"/>
@@ -174,13 +174,13 @@
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fikLEgGCEe-tCNtTGu3weA"/>
       </children>
       <styles xmi:type="notation:CanonicalStyle" xmi:id="_jlOvQAGCEe-tCNtTGu3weA"/>
-      <element xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
+      <element xmi:type="uml:Activity" href="DestructionInstances.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fha7ogGCEe-tCNtTGu3weA" width="521" height="461"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_9r7HQGlVEfCsG8ADGLyf-Q" type="StereotypeComment">
       <styles xmi:type="notation:TitleStyle" xmi:id="_9r7HQWlVEfCsG8ADGLyf-Q"/>
       <styles xmi:type="notation:EObjectValueStyle" xmi:id="_9r7HQ2lVEfCsG8ADGLyf-Q" name="BASE_ELEMENT">
-        <eObjectValue xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
+        <eObjectValue xmi:type="uml:Activity" href="DestructionInstances.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
       </styles>
       <element xsi:nil="true"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9r7HQmlVEfCsG8ADGLyf-Q" x="200"/>
@@ -188,10 +188,10 @@
     <styles xmi:type="notation:StringValueStyle" xmi:id="_fha7owGCEe-tCNtTGu3weA" name="diagram_compatibility_version" stringValue="1.4.0"/>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_fha7pAGCEe-tCNtTGu3weA"/>
     <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_fha7pQGCEe-tCNtTGu3weA" diagramKindId="org.eclipse.papyrus.uml.diagram.activity">
-      <owner xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
+      <owner xmi:type="uml:Activity" href="DestructionInstances.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
     </styles>
     <styles xmi:type="notation:CanonicalStyle" xmi:id="_i3PA0AGCEe-tCNtTGu3weA"/>
-    <element xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
+    <element xmi:type="uml:Activity" href="DestructionInstances.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
     <edges xmi:type="notation:Connector" xmi:id="_-cgTsAGCEe-tCNtTGu3weA" type="ObjectFlow_Edge" source="_jlZuYwGCEe-tCNtTGu3weA" target="_jlXSKwGCEe-tCNtTGu3weA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-dd9AAGCEe-tCNtTGu3weA" source="PapyrusCSSForceValue">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-dd9AQGCEe-tCNtTGu3weA" key="mutable" value="true"/>
@@ -218,7 +218,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_-cgTwAGCEe-tCNtTGu3weA" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_-cgTsQGCEe-tCNtTGu3weA"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_hlTe4AGCEe-tCNtTGu3weA"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_hlTe4AGCEe-tCNtTGu3weA"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-cgTsgGCEe-tCNtTGu3weA" points="[229, 135, -643984, -643984]$[380, 140, -643984, -643984]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-cg6wAGCEe-tCNtTGu3weA" id="(0.0,0.0)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-cg6wQGCEe-tCNtTGu3weA" id="(0.0,0.0)"/>
@@ -246,7 +246,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_vuCtoGlJEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_vuCtkWlJEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_vt48kGlJEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_vt48kGlJEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vuCtkmlJEfCsG8ADGLyf-Q" points="[221, 141, -643984, -643984]$[260, 140, -643984, -643984]"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vuWPkGlJEfCsG8ADGLyf-Q" id="(0.2,0.19003115264797507)"/>
     </edges>
@@ -280,7 +280,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_2XXyDGlJEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_2XXK8WlJEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_2XRrYGlJEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_2XRrYGlJEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2XXK8mlJEfCsG8ADGLyf-Q" points="[270, 120, -643984, -643984]$[325, 131, -643984, -643984]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2XnCkGlJEfCsG8ADGLyf-Q" id="(1.0,0.12461059190031153)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2m1KUGlJEfCsG8ADGLyf-Q" id="(0.0,0.6875)"/>
@@ -308,7 +308,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_vncSLWlQEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_vnbrEWlQEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_vnVkcGlQEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_vnVkcGlQEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vnbrEmlQEfCsG8ADGLyf-Q" points="[270, 200, -643984, -643984]$[325, 197, -643984, -643984]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vnsw0GlQEfCsG8ADGLyf-Q" id="(1.0,0.37383177570093457)"/>
     </edges>
@@ -335,7 +335,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_wGygoGlQEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_wGygkWlQEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_wGrL0GlQEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_wGrL0GlQEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wGygkmlQEfCsG8ADGLyf-Q" points="[270, 280, -643984, -643984]$[333, 280, -643984, -643984]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wHC_QGlQEfCsG8ADGLyf-Q" id="(1.0,0.6230529595015576)"/>
     </edges>
@@ -353,7 +353,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_yYyYamlQEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_yYyYYWlQEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ControlFlow" href="RemovingSpecificInstancesP_P.uml#_yYqckGlQEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ControlFlow" href="DestructionInstances.uml#_yYqckGlQEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_yYyYYmlQEfCsG8ADGLyf-Q" points="[381, 140, -643984, -643984]$[378, 180, -643984, -643984]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_yZHvkGlQEfCsG8ADGLyf-Q" id="(0.5125,1.0)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_yZIWoGlQEfCsG8ADGLyf-Q" id="(0.21468926553672316,0.0)"/>
@@ -372,7 +372,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_y359VmlQEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_y35WQWlQEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ControlFlow" href="RemovingSpecificInstancesP_P.uml#_y3yokGlQEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ControlFlow" href="DestructionInstances.uml#_y3yokGlQEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_y35WQmlQEfCsG8ADGLyf-Q" points="[379, 220, -643984, -643984]$[372, 260, -643984, -643984]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_y4JN4GlQEfCsG8ADGLyf-Q" id="(0.22033898305084745,1.0)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_y4JN4WlQEfCsG8ADGLyf-Q" id="(0.45714285714285713,0.0)"/>
@@ -380,7 +380,7 @@
     <edges xmi:type="notation:Connector" xmi:id="_9r7HRGlVEfCsG8ADGLyf-Q" type="StereotypeCommentLink" source="_fha7kQGCEe-tCNtTGu3weA" target="_9r7HQGlVEfCsG8ADGLyf-Q">
       <styles xmi:type="notation:FontStyle" xmi:id="_9r7HRWlVEfCsG8ADGLyf-Q"/>
       <styles xmi:type="notation:EObjectValueStyle" xmi:id="_9r7HSWlVEfCsG8ADGLyf-Q" name="BASE_ELEMENT">
-        <eObjectValue xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
+        <eObjectValue xmi:type="uml:Activity" href="DestructionInstances.uml#_PUKCwAGCEe-tCNtTGu3weA"/>
       </styles>
       <element xsi:nil="true"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9r7HRmlVEfCsG8ADGLyf-Q" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
@@ -404,7 +404,7 @@
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Fb2ZomlREfCsG8ADGLyf-Q" source="PapyrusCSSForceValue">
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Fb2Zo2lREfCsG8ADGLyf-Q" key="mutable" value="true"/>
           </eAnnotations>
-          <element xmi:type="uml:Parameter" href="RemovingSpecificInstancesP_P.uml#__xYmoGlPEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:Parameter" href="DestructionInstances.uml#__xYmoGlPEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_FbLrQWlREfCsG8ADGLyf-Q"/>
         </children>
         <styles xmi:type="notation:SortingStyle" xmi:id="_CvoD9WlREfCsG8ADGLyf-Q"/>
@@ -444,10 +444,10 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_OPA4ZGlREfCsG8ADGLyf-Q" type="OutputPin_ValueSpecificationActionResultStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_OPA4ZWlREfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:OutputPin" href="RemovingSpecificInstancesP_P.uml#_OO6KsGlREfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:OutputPin" href="DestructionInstances.uml#_OO6KsGlREfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OPA4YWlREfCsG8ADGLyf-Q" x="20" y="-15"/>
           </children>
-          <element xmi:type="uml:ValueSpecificationAction" href="RemovingSpecificInstancesP_P.uml#_OO4VgGlREfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:ValueSpecificationAction" href="DestructionInstances.uml#_OO4VgGlREfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OO7Y0WlREfCsG8ADGLyf-Q" x="135" y="228"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_WXIPAGlREfCsG8ADGLyf-Q" type="ValueSpecificationAction_Shape">
@@ -472,10 +472,10 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_WXL5ZGlREfCsG8ADGLyf-Q" type="OutputPin_ValueSpecificationActionResultStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_WXL5ZWlREfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:OutputPin" href="RemovingSpecificInstancesP_P.uml#_WW7asWlREfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:OutputPin" href="DestructionInstances.uml#_WW7asWlREfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WXL5YWlREfCsG8ADGLyf-Q" x="34" y="-15"/>
           </children>
-          <element xmi:type="uml:ValueSpecificationAction" href="RemovingSpecificInstancesP_P.uml#_WW7asGlREfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:ValueSpecificationAction" href="DestructionInstances.uml#_WW7asGlREfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WXIPAWlREfCsG8ADGLyf-Q" x="355" y="228"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_G0WoMGlSEfCsG8ADGLyf-Q" type="ForkNode_Shape">
@@ -485,7 +485,7 @@
           <children xmi:type="notation:DecorationNode" xmi:id="_G0WoNGlSEfCsG8ADGLyf-Q" type="ForkNode_StereotypeLabel">
             <layoutConstraint xmi:type="notation:Location" xmi:id="_G0WoNWlSEfCsG8ADGLyf-Q" y="15"/>
           </children>
-          <element xmi:type="uml:ForkNode" href="RemovingSpecificInstancesP_P.uml#_G0UL8GlSEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:ForkNode" href="DestructionInstances.uml#_G0UL8GlSEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_G0WoMWlSEfCsG8ADGLyf-Q" x="95" y="28" width="5" height="161"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_NpgiIGlSEfCsG8ADGLyf-Q" type="ReadStructuralFeatureAction_Shape">
@@ -511,7 +511,7 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_NpjldGlSEfCsG8ADGLyf-Q" type="InputPin_ReadStructuralFeatureActionObjectStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_NpjldWlSEfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:InputPin" href="RemovingSpecificInstancesP_P.uml#_Npde0GlSEfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:InputPin" href="DestructionInstances.uml#_Npde0GlSEfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NpjlcWlSEfCsG8ADGLyf-Q" x="-15" y="20"/>
           </children>
           <children xmi:type="notation:Shape" xmi:id="_NCeh4WlTEfCsG8ADGLyf-Q" type="OutputPin_ReadStructuralFeatureActionResultShape">
@@ -524,11 +524,11 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_NCfI8mlTEfCsG8ADGLyf-Q" type="OutputPin_ReadStructuralFeatureActionResultStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_NCfI82lTEfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:OutputPin" href="RemovingSpecificInstancesP_P.uml#_C_YFQGlTEfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:OutputPin" href="DestructionInstances.uml#_C_YFQGlTEfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NCeh4mlTEfCsG8ADGLyf-Q" x="62" y="20"/>
           </children>
           <styles xmi:type="notation:CanonicalStyle" xmi:id="_Mke-UGlTEfCsG8ADGLyf-Q"/>
-          <element xmi:type="uml:ReadStructuralFeatureAction" href="RemovingSpecificInstancesP_P.uml#_Npc3wGlSEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:ReadStructuralFeatureAction" href="DestructionInstances.uml#_Npc3wGlSEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NpgiIWlSEfCsG8ADGLyf-Q" x="155" y="108"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_coZxEGlXEfCsG8ADGLyf-Q" type="CallBehaviorAction_Shape">
@@ -539,7 +539,7 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_coZxIGlXEfCsG8ADGLyf-Q" type="OutputPin_CallBehaviorActionResultStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_coZxIWlXEfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:OutputPin" href="RemovingSpecificInstancesP_P.uml#_coU4kGlXEfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:OutputPin" href="DestructionInstances.uml#_coU4kGlXEfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_coZxHWlXEfCsG8ADGLyf-Q"/>
           </children>
           <children xmi:type="notation:Shape" xmi:id="_coZxFmlXEfCsG8ADGLyf-Q" type="InputPin_CallBehaviorActionArgumentShape">
@@ -549,14 +549,14 @@
             <children xmi:type="notation:DecorationNode" xmi:id="_coZxGmlXEfCsG8ADGLyf-Q" type="InputPin_CallBehaviorActionArgumentStereotypeLabel">
               <layoutConstraint xmi:type="notation:Location" xmi:id="_coZxG2lXEfCsG8ADGLyf-Q" y="15"/>
             </children>
-            <element xmi:type="uml:InputPin" href="RemovingSpecificInstancesP_P.uml#_coURgGlXEfCsG8ADGLyf-Q"/>
+            <element xmi:type="uml:InputPin" href="DestructionInstances.uml#_coURgGlXEfCsG8ADGLyf-Q"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_coZxF2lXEfCsG8ADGLyf-Q"/>
           </children>
           <children xmi:type="notation:DecorationNode" xmi:id="_coZxEmlXEfCsG8ADGLyf-Q" type="CallBehaviorAction_NameLabel"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_coZxE2lXEfCsG8ADGLyf-Q" type="CallBehaviorAction_FloatingNameLabel">
             <layoutConstraint xmi:type="notation:Location" xmi:id="_coZxFGlXEfCsG8ADGLyf-Q" y="15"/>
           </children>
-          <element xmi:type="uml:CallBehaviorAction" href="RemovingSpecificInstancesP_P.uml#_b5n_gGlXEfCsG8ADGLyf-Q"/>
+          <element xmi:type="uml:CallBehaviorAction" href="DestructionInstances.uml#_b5n_gGlXEfCsG8ADGLyf-Q"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_coZxFWlXEfCsG8ADGLyf-Q" x="295" y="108"/>
         </children>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CvoEAWlREfCsG8ADGLyf-Q"/>
@@ -576,19 +576,19 @@
         <children xmi:type="notation:DecorationNode" xmi:id="_Fa9BxWlREfCsG8ADGLyf-Q" visible="false" type="ActivityParameterNode_ExceptionLabel">
           <layoutConstraint xmi:type="notation:Location" xmi:id="_Fa9BxmlREfCsG8ADGLyf-Q" y="15"/>
         </children>
-        <element xmi:type="uml:ActivityParameterNode" href="RemovingSpecificInstancesP_P.uml#_Wt6z0GlQEfCsG8ADGLyf-Q"/>
+        <element xmi:type="uml:ActivityParameterNode" href="DestructionInstances.uml#_Wt6z0GlQEfCsG8ADGLyf-Q"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Fa9BwWlREfCsG8ADGLyf-Q" x="-27" y="100"/>
       </children>
       <styles xmi:type="notation:CanonicalStyle" xmi:id="_Fa7zoGlREfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_7zU1oGlPEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:Activity" href="DestructionInstances.uml#_7zU1oGlPEfCsG8ADGLyf-Q"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CvoEAmlREfCsG8ADGLyf-Q" width="461" height="341"/>
     </children>
     <styles xmi:type="notation:StringValueStyle" xmi:id="_CvoEA2lREfCsG8ADGLyf-Q" name="diagram_compatibility_version" stringValue="1.4.0"/>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_CvoEBGlREfCsG8ADGLyf-Q"/>
     <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_CvoEBWlREfCsG8ADGLyf-Q" diagramKindId="org.eclipse.papyrus.uml.diagram.activity">
-      <owner xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_7zU1oGlPEfCsG8ADGLyf-Q"/>
+      <owner xmi:type="uml:Activity" href="DestructionInstances.uml#_7zU1oGlPEfCsG8ADGLyf-Q"/>
     </styles>
-    <element xmi:type="uml:Activity" href="RemovingSpecificInstancesP_P.uml#_7zU1oGlPEfCsG8ADGLyf-Q"/>
+    <element xmi:type="uml:Activity" href="DestructionInstances.uml#_7zU1oGlPEfCsG8ADGLyf-Q"/>
     <edges xmi:type="notation:Connector" xmi:id="_IPKZUGlSEfCsG8ADGLyf-Q" type="ObjectFlow_Edge" source="_Fa9BwGlREfCsG8ADGLyf-Q" target="_G0WoMGlSEfCsG8ADGLyf-Q">
       <children xmi:type="notation:DecorationNode" xmi:id="_IPLAYGlSEfCsG8ADGLyf-Q" type="ObjectFlow_NameLabel">
         <layoutConstraint xmi:type="notation:Location" xmi:id="_IPLAYWlSEfCsG8ADGLyf-Q" y="20"/>
@@ -612,7 +612,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_IPLAbWlSEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_IPKZUWlSEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_IPHWAGlSEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_IPHWAGlSEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_IPKZUmlSEfCsG8ADGLyf-Q" points="[28, 118, -643984, -643984]$[100, 120, -643984, -643984]"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_IPTjQGlSEfCsG8ADGLyf-Q" id="(0.4,0.36024844720496896)"/>
     </edges>
@@ -639,7 +639,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_BnY-sGlTEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_BnY-oWlTEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_BnUtMGlTEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_BnUtMGlTEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BnY-omlTEfCsG8ADGLyf-Q" points="[110, 160, -643984, -643984]$[153, 160, -643984, -643984]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bnj9wGlTEfCsG8ADGLyf-Q" id="(1.0,0.6211180124223602)"/>
     </edges>
@@ -666,7 +666,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_f9v8UGlXEfCsG8ADGLyf-Q" y="-20"/>
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_f9v8QWlXEfCsG8ADGLyf-Q"/>
-      <element xmi:type="uml:ObjectFlow" href="RemovingSpecificInstancesP_P.uml#_f9rDwGlXEfCsG8ADGLyf-Q"/>
+      <element xmi:type="uml:ObjectFlow" href="DestructionInstances.uml#_f9rDwGlXEfCsG8ADGLyf-Q"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_f9v8QmlXEfCsG8ADGLyf-Q" points="[238, 166, -643984, -643984]$[291, 149, -643984, -643984]"/>
     </edges>
   </notation:Diagram>

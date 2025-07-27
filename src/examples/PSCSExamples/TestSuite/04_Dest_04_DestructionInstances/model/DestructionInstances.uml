@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:StandardProfile="http://www.omg.org/spec/UML/20161101/StandardProfile" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.omg.org/spec/UML/20161101/StandardProfile ../../../../../common/standardProfile/model/StandardProfile.uml#_1G3kkDMLEeq7iofTAEuRew http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
-  <uml:Model xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="RemovingSpecificInstancesP_P">
+  <uml:Model xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="DestructionInstances">
     <ownedComment xmi:type="uml:Comment" xmi:id="_cfnBEKGPEeq_jPVfGA6A8w">
       <body>This test case validates that if a value is removed from a part or a port, then the links in which the&#xD;
 removed value was involved are destroyed.</body>
@@ -60,13 +60,13 @@ removed value was involved are destroyed.</body>
 #endif&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;Asserting S before removal...&quot;&lt;&lt;std::endl;&#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::P>>&amp; p1 = this->getP1();&#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::C>>&amp; c1 = this->getC1();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::P>>&amp; p1 = this->getP1();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::C>>&amp; c1 = this->getC1();&#xD;
 const std::shared_ptr&lt;fUML::Semantics::Loci::Locus> locus = this->getLocus();&#xD;
 const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; allInstancesOfR1 = &#xD;
-	locus->retrieveExtent(RemovingSpecificInstancesP_P::RemovingSpecificInstancesP_PPackage::eInstance()->get_RemovingSpecificInstancesP_P_R1());&#xD;
+	locus->retrieveExtent(DestructionInstances::DestructionInstancesPackage::eInstance()->get_DestructionInstances_R1());&#xD;
 const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; allInstancesOfR2 = &#xD;
-	locus->retrieveExtent(RemovingSpecificInstancesP_P::RemovingSpecificInstancesP_PPackage::eInstance()->get_RemovingSpecificInstancesP_P_R2());&#xD;
+	locus->retrieveExtent(DestructionInstances::DestructionInstancesPackage::eInstance()->get_DestructionInstances_R2());&#xD;
 &#xD;
 MYASSERT(p1->size() == 3, &quot;p1.size == &quot;&lt;&lt;p1->size(), &quot;p1.size == &quot;&lt;&lt;p1->size());&#xD;
 MYASSERT(c1->size() == 1, &quot;c1.size == &quot;&lt;&lt;c1->size(), &quot;c1.size == &quot;&lt;&lt;c1->size());&#xD;
@@ -91,8 +91,8 @@ for(unsigned int i = 0; i &lt; p1->size(); i++)&#xD;
 	}&#xD;
 }&#xD;
 &#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::P>>&amp; p2 = this->getP2();&#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::C>>&amp; c2 = this->getC2();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::P>>&amp; p2 = this->getP2();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::C>>&amp; c2 = this->getC2();&#xD;
 &#xD;
 MYASSERT(p2->size() == 1, &quot;p2.size == &quot;&lt;&lt;p2->size(), &quot;p2.size == &quot;&lt;&lt;p2->size());&#xD;
 MYASSERT(c2->size() == 3, &quot;c2.size == &quot;&lt;&lt;c2->size(), &quot;c2.size == &quot;&lt;&lt;c2->size());&#xD;
@@ -115,7 +115,7 @@ for(unsigned int i = 0; i &lt; c2->size(); i++)&#xD;
 &#xD;
 for(unsigned int i = 0; i &lt; p2->size(); i++)&#xD;
 {&#xD;
-	const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::IImpl>>&amp; ipp = p2->at(i)->getIpp();&#xD;
+	const std::shared_ptr&lt;Bag&lt;DestructionInstances::IImpl>>&amp; ipp = p2->at(i)->getIpp();&#xD;
 	&#xD;
 	for(unsigned int j = 0; j &lt; ipp->size(); j++)&#xD;
 	{&#xD;
@@ -163,13 +163,13 @@ std::cout&lt;&lt;&quot;Finished assertion for S before removal&quot;&lt;&lt;std:
 #endif&#xD;
 		&#xD;
 std::cout&lt;&lt;&quot;Asserting S after removal...&quot;&lt;&lt;std::endl;&#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::P>>&amp; p1 = this->getP1();&#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::C>>&amp; c1 = this->getC1();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::P>>&amp; p1 = this->getP1();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::C>>&amp; c1 = this->getC1();&#xD;
 const std::shared_ptr&lt;fUML::Semantics::Loci::Locus> locus = this->getLocus();&#xD;
 const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; allInstancesOfR1 = &#xD;
-	locus->retrieveExtent(RemovingSpecificInstancesP_P::RemovingSpecificInstancesP_PPackage::eInstance()->get_RemovingSpecificInstancesP_P_R1());&#xD;
+	locus->retrieveExtent(DestructionInstances::DestructionInstancesPackage::eInstance()->get_DestructionInstances_R1());&#xD;
 const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Object>>&amp; allInstancesOfR2 = &#xD;
-	locus->retrieveExtent(RemovingSpecificInstancesP_P::RemovingSpecificInstancesP_PPackage::eInstance()->get_RemovingSpecificInstancesP_P_R2());&#xD;
+	locus->retrieveExtent(DestructionInstances::DestructionInstancesPackage::eInstance()->get_DestructionInstances_R2());&#xD;
 &#xD;
 MYASSERT(p1->size() == 2, &quot;p1.size == &quot;&lt;&lt;p1->size(), &quot;p1.size == &quot;&lt;&lt;p1->size());&#xD;
 MYASSERT(c1->size() == 1, &quot;c1.size == &quot;&lt;&lt;c1->size(), &quot;c1.size == &quot;&lt;&lt;c1->size());&#xD;
@@ -194,8 +194,8 @@ for(unsigned int i = 0; i &lt; p1->size(); i++)&#xD;
 	}&#xD;
 }&#xD;
 &#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::P>>&amp; p2 = this->getP2();&#xD;
-const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::C>>&amp; c2 = this->getC2();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::P>>&amp; p2 = this->getP2();&#xD;
+const std::shared_ptr&lt;Bag&lt;DestructionInstances::C>>&amp; c2 = this->getC2();&#xD;
 &#xD;
 MYASSERT(p2->size() == 1, &quot;p2.size == &quot;&lt;&lt;p2->size(), &quot;p2.size == &quot;&lt;&lt;p2->size());&#xD;
 MYASSERT(c2->size() == 3, &quot;c2.size == &quot;&lt;&lt;c2->size(), &quot;c2.size == &quot;&lt;&lt;c2->size());&#xD;
@@ -218,7 +218,7 @@ unsigned int ippNum = 0;&#xD;
 &#xD;
 for(unsigned int i = 0; i &lt; p2->size(); i++)&#xD;
 {&#xD;
-	const std::shared_ptr&lt;Bag&lt;RemovingSpecificInstancesP_P::IImpl>>&amp; ipp = p2->at(i)->getIpp();&#xD;
+	const std::shared_ptr&lt;Bag&lt;DestructionInstances::IImpl>>&amp; ipp = p2->at(i)->getIpp();&#xD;
 	&#xD;
 	for(unsigned int j = 0; j &lt; ipp->size(); j++)&#xD;
 	{&#xD;
