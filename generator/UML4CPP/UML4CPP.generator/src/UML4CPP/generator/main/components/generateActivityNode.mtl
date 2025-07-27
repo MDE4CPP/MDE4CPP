@@ -227,8 +227,10 @@
 [let action : RemoveStructuralFeatureValueAction = self.oclAsType(RemoveStructuralFeatureValueAction)]
 	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
+[if (not action.value.oclIsUndefined())]
 	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_as_value_in_WriteStructuralFeatureAction([action.memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.value.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_WriteStructuralFeatureAction([action.memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [if (not action.removeAt.oclIsUndefined())]
