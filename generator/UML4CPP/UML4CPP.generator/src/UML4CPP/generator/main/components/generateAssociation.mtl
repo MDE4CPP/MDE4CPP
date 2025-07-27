@@ -41,5 +41,6 @@
 [for (memberEnd : Property | anAssociation.memberEnd)]
 [anAssociation.memberName()/]->getMemberEnd()->add([memberEnd.generatePackageGetterCall(anAssociation)/]);
 [/for]
+[anAssociation.memberName()/]->_setID([anAssociation.getMemberName().toUpperCase()/]);
 [anAssociation.generateStereotypeApplication()/]
 [/template]

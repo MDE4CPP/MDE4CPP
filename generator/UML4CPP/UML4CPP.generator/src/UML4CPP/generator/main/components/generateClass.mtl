@@ -156,6 +156,9 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
 	[/for]
 [/for]
+[for (anAssociation : Association | aPackage.allOwnedElements()->selectByType(Association)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	static const unsigned long [anAssociation.getMemberName().toUpperCase()/] = [anAssociation.generateNamespaceName(true).generatePolynomialRollingHash()/];
+[/for]
 
 [/template]
 
