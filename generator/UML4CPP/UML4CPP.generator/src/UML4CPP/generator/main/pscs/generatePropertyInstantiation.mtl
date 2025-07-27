@@ -32,9 +32,12 @@
 [template public generateAttributeInstantiation(aProperty : Property) ? (not isUnion()) post(trim())]
 [if (aProperty.upper = 1)]
 	[if (aProperty.canInstantiate() and (not aProperty.type.oclIsTypeOf(Interface)))]
-//instantiate property '[aProperty.name/]'
+//instantiate [aProperty.eClass().name/] '[aProperty.name/]'
 		[if (aProperty.isComposite())]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.getFeaturingClassifier().name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr[else]getThis[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr()[/if]);
+			[if (aProperty.oclIsTypeOf(Port))]
+m_[aProperty.name/]->setDefiningPort([aProperty.generatePackageGetterCall()/]);
+			[/if]
 		[else]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 		[/if]
@@ -42,7 +45,7 @@ this->getLocus()->add(m_[aProperty.name/]);
 m_[aProperty.name/]->constructObject([aProperty.type.generatePackageGetterCall()/]);
 	[/if]
 [elseif (aProperty.canInstantiate())]
-//instantiate property '[aProperty.name/]'
+//instantiate [aProperty.eClass().name/] '[aProperty.name/]'
 [aProperty.generateContainerPropertyInit()/]
 	[if (aProperty.getUpper() = -1 and aProperty.getLower() > 0 and (not aProperty.type.oclIsTypeOf(Interface)))]
 for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
@@ -64,6 +67,9 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 }]
 [if (aProperty.isComposite)]
 std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.getFeaturingClassifier().name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr[else]getThis[aProperty.getFeaturingClassifier().name.toUpperFirst()/]Ptr()[/if]);
+	[if (aProperty.oclIsTypeOf(Port))]
+value->setDefiningPort([aProperty.generatePackageGetterCall()/]);
+	[/if]
 [else]
 std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 m_[aProperty.name/]->add(value);
@@ -80,14 +86,14 @@ value->constructObject([aProperty.type.generatePackageGetterCall()/]);
 [comment PSCS only supports to compute values from default values that are OpaqueExpressions using OpaqueExpression::behavior /]
 [let expressionBehavior : Behavior = expression.behavior]
 [if (not expressionBehavior.oclIsUndefined())]
-//instantiate property '[aProperty.name/]' with opaque expression [if (not expression.name.oclIsUndefined())]'[expression.name/]'[else]anonymous opaque expression[/if]
+//instantiate [aProperty.eClass().name/] '[aProperty.name/]' with opaque expression [if (not expression.name.oclIsUndefined())]'[expression.name/]'[else]anonymous opaque expression[/if]
 {
 	[if (expressionBehavior.oclIsTypeOf(Activity))]
 	[generateOpaqueExpressionEvaluationFromActivity(aProperty, expressionBehavior.oclAsType(Activity))/]
 	[elseif (expressionBehavior.oclIsKindOf(OpaqueBehavior))]
 	[generateOpaqueExpressionEvaluationFromOpaqueBehavior(aProperty, expressionBehavior.oclAsType(OpaqueBehavior))/]
 	[else]
-	// Cannot instatiate default value for property [aProperty.memberName()/] because opaque expression behavior of type [expressionBehavior.eClass().name/] is currently not supported.
+	// Cannot instatiate default value for [aProperty.eClass().name/] [aProperty.memberName()/] because opaque expression behavior of type [expressionBehavior.eClass().name/] is currently not supported.
 	[/if]
 }
 [/if]
@@ -135,10 +141,19 @@ std::shared_ptr<Bag<uml::Element>> elementList = retrieveAnyValueAsUMLElementCon
 const [aProperty.generateCppType()/]& _[aProperty.name.toLowerFirst()/] = this->[aProperty.getterName()/]();
 for(const std::shared_ptr<uml::Element>& element : * elementList)
 {
+		[if (aProperty.oclIsTypeOf(Port))]
+	[aProperty.type.generateCppRawType(false)/] value = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element);
+	value->setDefiningPort([aProperty.generatePackageGetterCall()/]);
+	_[aProperty.name.toLowerFirst()/]->add(value;)
+		[else]
 	_[aProperty.name.toLowerFirst()/]->add(std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element));
+		[/if]
 }
 	[else]
 m_[aProperty.name/] = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(retrieveAnyValueAsUMLElement(expressionResult));
+		[if (aProperty.oclIsTypeOf(Port))]
+m_[aProperty.name/]->setDefiningPort([aProperty.generatePackageGetterCall()/]);
+		[/if]
 	[/if]
 [/if]
 [/template]
@@ -169,6 +184,9 @@ expressionResult = context->invokeOpaqueBehavior([anOpaqueBehavior.getNearestPac
 expressionResult = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke([anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/], std::shared_ptr<Bag<Any>>(new Bag<Any>()), std::shared_ptr<Bag<Any>>(new Bag<Any>()));
 [/if]
 m_[aProperty.name/] = expressionResult->get<[aProperty.generateCppType()/]>();
+[if (aProperty.oclIsTypeOf(Port))]
+m_[aProperty.name/]->setDefiningPort([aProperty.generatePackageGetterCall()/]);
+[/if]
 [/template]
 
 [**
@@ -177,8 +195,9 @@ m_[aProperty.name/] = expressionResult->get<[aProperty.generateCppType()/]>();
 [template public generateAttributeDefaultInstantiation(aProperty : Property) ? (aProperty.defaultValue.oclIsTypeOf(InstanceValue)) post(trim()) 
 {instVal : InstanceValue = aProperty.defaultValue.oclAsType(InstanceValue);}]
 [if (not instVal.type.oclIsTypeOf(Enumeration))] [comment Default values for Enumerations are assigned ad-hoc in class header file /]
+[aProperty.generateAttributeInstantiation()/]
 [let specification : InstanceSpecification = instVal.instance]
-//instantiate property '[aProperty.name/]' with specification [if (not specification.name.oclIsUndefined())]'[specification.name/]'[else]anonymous instance specification[/if]
+//instantiate [aProperty.eClass().name/] '[aProperty.name/]' with specification [if (not specification.name.oclIsUndefined())]'[specification.name/]'[else]anonymous instance specification[/if]
 	[if (aProperty.upper <> 1)] [comment *-multiplicity /]
 for(unsigned int i = 0; i < [aProperty.lower/]; i++)
 {

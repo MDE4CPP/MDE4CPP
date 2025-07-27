@@ -86,46 +86,48 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
-[if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end1/] 
+[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of end1/] 
 [comment if property of end1 has *-multiplicity then end2 must have *-multiplicity too for array pattern between part and part /]
-for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+for(unsigned int i = 0; i < [end1Role.getLower()/]; i++)
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(i);
-	[if (end2.definingEnd.getUpper() <> 1)]
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
+	const std::shareend1Role.role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(i);
+	[if (end2Role.getUpper() <> 1)]
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(i);
 
 	[else]
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();	
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();	
 	[/if]
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 [else] [comment 1-multiplicity/] [comment if property of end1 has 1-multiplicity then end2 must have 1-multiplicity too for array pattern between part and part /]
-const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]();
-	[if(end2.definingEnd.getUpper() <> 1)]
-for(unsigned int i = 0; i < [end2.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]();
+	[if(end2Role.getUpper() <> 1)]
+for(unsigned int i = 0; i < [end2Role.getLower()/]; i++)
 {
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(i);
 	
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 	[else]
-const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();
 
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 this->getLocus()->add(newLink);
 	[/if]
 [/if]
@@ -139,37 +141,39 @@ this->getLocus()->add(newLink);
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
-[if(end1.definingEnd.getUpper() <> 1)][comment *-multiplicity of end1 (= port)/]
+[if(end1Role.getUpper() <> 1)][comment *-multiplicity of end1 (= port)/]
 [comment if property of end1 has *-multiplicity then either part or port or both of end2 must have *-multiplicity too for array pattern between part and part with port /]
 unsigned int k = 0;
 	[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2-partWithPort/]
 for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if (end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2-Port/]
-	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if (end2Role.getUpper() <> 1)][comment *-multiplicity of end2-Port/]
+	for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(k);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 
 		k++;
 	}
 		[else][comment 1-multiplicity of end2-Port/]
-	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
-	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+	std::shared_ptr<[end2Role.type.transformType()/]> end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
+	std::shared_ptr<[end1Role.type.transformType()/]> end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(k);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	k++;
@@ -178,67 +182,67 @@ for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 	[else][comment 1-multiplicity of end2-partWithPort/]
 const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
 [comment since end1 has *-multiplicity and end2-partWithPort has 1-multiplicity, end2-Port can only have *-multiplicity for array pattern between part and part with port/]
-for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(k);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	k++;
 }
 	[/if]
 [else] [comment 1-multiplicity of end1/]
-const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]();
 	[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2-partWithPort/]
 for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if (end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2-Port/]
-	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if (end2Role.getUpper() <> 1)][comment *-multiplicity of end2-Port/]
+	for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 		[else][comment 1-multiplicity of end2-Port/]
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 		[/if]
 }
 	[else] [comment 1-multiplicity of end2-partWithPort/]
 const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
-		[if (end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2-Port/]
-for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if (end2Role.getUpper() <> 1)][comment *-multiplicity of end2-Port/]
+for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 		[else] [comment 1-multiplicity of end2-Port/]
-const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 this->getLocus()->add(newLink);
 		[/if]
 	[/if]
@@ -253,36 +257,38 @@ this->getLocus()->add(newLink);
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
-[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 (= port)/]
+[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 (= port)/]
 unsigned int k = 0;
 	[if (end1.partWithPort.getUpper() <> 1)][comment *-multiplicity of end1-partWithPort/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if (end1.definingEnd.getUpper() <> 1)][comment *-multiplicity of end1-Port/]
-	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if (end1Role.getUpper() <> 1)][comment *-multiplicity of end1-Port/]
+	for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(k);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 
 		k++;
 	}
 		[else][comment 1-multiplicity of end1-Port/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(k);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	k++;
@@ -291,67 +297,67 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 	[else][comment 1-multiplicity of end1-partWithPort/]
 const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
 [comment since end1 has *-multiplicity and end2-partWithPort has 1-multiplicity, end2-Port can only have *-multiplicity for array pattern between part and part with port/]
-for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(k);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	k++;
 }
 	[/if]
 [else] [comment 1-multiplicity of end2/]
-const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();
 	[if (end1.partWithPort.getUpper() <> 1)][comment *-multiplicity of end1-partWithPort/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if (end1.definingEnd.getUpper() <> 1)][comment *-multiplicity of end1-Port/]
-	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if (end1Role.getUpper() <> 1)][comment *-multiplicity of end1-Port/]
+	for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 		[else][comment 1-multiplicity of end1-Port/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 		[/if]
 }
 	[else] [comment 1-multiplicity of end1-partWithPort/]
 const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
-		[if (end1.definingEnd.getUpper() <> 1)][comment *-multiplicity of end1-Port/]
-for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if (end1Role.getUpper() <> 1)][comment *-multiplicity of end1-Port/]
+for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 		[else] [comment 1-multiplicity of end1-Port/]
-const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
 
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 this->getLocus()->add(newLink);
 		[/if]
 	[/if]
@@ -366,55 +372,58 @@ this->getLocus()->add(newLink);
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
-[if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of port of end1/]
+[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of port of end1/]
 unsigned int end1PortIndex = 0;
 	[if(end1.partWithPort.getUpper() <> 1 and end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of parts of end1 and end2/]
-unsigned int end1PartIndex = 0, end2PartIndex = 0, end2PortIndex=0;
+unsigned int end1PartIndex = 0, end2PartIndex = 0;
 while((end1PartIndex < [end1.partWithPort.getLower()/]) &&(end2PartIndex < [end2.partWithPort.getLower()/]))
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
 	const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(end2PartIndex);
-		[if(end2.definingEnd.getUpper() <> 1)] [comment *-multiplicity of port of end2/]
-	while((end1PortIndex < [end1.role.oclAsType(MultiplicityElement).getLower()/]) && (end2PortIndex < [end2.role.oclAsType(MultiplicityElement).getLower()/]))
+		[if(end2Role.getUpper() <> 1)] [comment *-multiplicity of port of end2/]
+	unsigned int end2PortIndex = 0;
+	while((end1PortIndex < [end1Role.getLower()/]) && (end2PortIndex < [end2Role.getLower()/]))
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(end1PortIndex);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(end2PortIndex);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 
 		end1PortIndex++;
 		end2PortIndex++;
 	}
-	if(end1PortIndex >= [end1.role.oclAsType(MultiplicityElement).getLower()/])
+	if(end1PortIndex >= [end1Role.getLower()/])
 	{
 		end1PortIndex = 0;
 		end1PartIndex++;
 	}
-	if(end2PortIndex >= [end2.role.oclAsType(MultiplicityElement).getLower()/])
+	if(end2PortIndex >= [end2Role.getLower()/])
 	{
 		end2PortIndex = 0;
 		end2PartIndex++;
 	}
 		[else][comment 1-multiplicity of port of end2/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(end1PortIndex);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 	
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	end1PortIndex++;
 	end2PartIndex++;
 
-	if(end1PortIndex >= [end1.role.oclAsType(MultiplicityElement).getLower()/])
+	if(end1PortIndex >= [end1Role.getLower()/])
 	{
 		end1PortIndex = 0;
 		end1PartIndex++;
@@ -427,15 +436,15 @@ const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = thi
 while(end1PartIndex < [end1.partWithPort.getLower()/])
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
-	while((end1PortIndex < [end1.role.oclAsType(MultiplicityElement).getLower()/]) && (end2PortIndex < [end2.role.oclAsType(MultiplicityElement).getLower()/])) [comment *-multiplicity of port of end2 -> since part and port of end1 are *-multiplicity and part of end2 is 1-multiplicity, port of end2 has to be *-multiplicity for array pattern between a part with port and a part with port/]
+	while((end1PortIndex < [end1Role.getLower()/]) && (end2PortIndex < [end2Role.getLower()/])) [comment *-multiplicity of port of end2 -> since part and port of end1 are *-multiplicity and part of end2 is 1-multiplicity, port of end2 has to be *-multiplicity for array pattern between a part with port and a part with port/]
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(end1PortIndex);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(end2PortIndex);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 
 		end1PortIndex++;
@@ -451,34 +460,34 @@ const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = thi
 while(end2PartIndex < [end2.partWithPort.getLower()/])
 {
 	const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(end2PartIndex);
-		[if (end2.definingEnd.getUpper() <> 1)] [comment *-multiplicity of port of end2/]
-	while(end2PortIndex < [end2.role.oclAsType(MultiplicityElement).getLower()/])
+		[if (end2Role.getUpper() <> 1)] [comment *-multiplicity of port of end2/]
+	while(end2PortIndex < [end2Role.getLower()/])
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(end1PortIndex);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(end2PortIndex);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 
 		end1PortIndex++;
 		end2PortIndex++;
 	}
-	if(end2PortIndex >= [end2.role.oclAsType(MultiplicityElement).getLower()/])
+	if(end2PortIndex >= [end2Role.getLower()/])
 	{
 		end2PortIndex = 0;
 		end2PartIndex++;
 	}
 		[else] [comment 1-multiplicity of port of end2/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(end1PortIndex);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	end1PortIndex++;
@@ -489,17 +498,17 @@ while(end2PartIndex < [end2.partWithPort.getLower()/])
 const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
 const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
 
-while(end1PortIndex < [end1.role.oclAsType(MultiplicityElement).getLower()/]) 
+while(end1PortIndex < [end1Role.getLower()/]) 
 [comment since parts of end1 and end2 both have a cardinality of 1, port of end1 and port of end2 must have the same cardinalities for array pattern -> it doesn't matter which portIndex is used to iterate /]
 [comment since port of end1 is assumed to be of *-multiplicity (see first condition of the template) port of end2 must also be of *-multiplicity/]
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end1PortIndex);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(end1PortIndex);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(end1PortIndex);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	end1PortIndex++;
@@ -513,33 +522,33 @@ while((end1PartIndex < [end1.partWithPort.getLower()/]) &&(end2PartIndex < [end2
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
 	const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(end2PartIndex);
-		[if(end2.definingEnd.getUpper() <> 1)] [comment *-multiplicity of port of end2/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+		[if(end2Role.getUpper() <> 1)] [comment *-multiplicity of port of end2/]
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(end2PortIndex);
 	
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	end2PortIndex++;
 	end1PartIndex++;
 
-	if(end2PortIndex >= [end2.role.oclAsType(MultiplicityElement).getLower()/])
+	if(end2PortIndex >= [end2Role.getLower()/])
 	{
 		end2PortIndex = 0;
 		end2PartIndex++;
 	}
 		[else] [comment 1-multiplicity of port of end2/]
 [comment since ports of end1 and end2 both have a cardinality of 1, parts of end1 and end2 must have the same cardinality for array pattern/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	end1PartIndex++;
@@ -553,26 +562,26 @@ const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = thi
 while(end1PartIndex < [end1.partWithPort.getLower()/])
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(end2PortIndex);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 
 	end1PartIndex++;
 	end2PortIndex++;
 }
 	[else] [comment 1-multiplicity of part of end1 -> both part and port must be of 1-multiplicity as well for array pattern between part with port and part with port/]
-const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
-const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1Role.name.toUpperFirst()/]();
+const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2Role.name.toUpperFirst()/]();
 
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 this->getLocus()->add(newLink);
 	[/if]
 [/if]
@@ -586,6 +595,8 @@ this->getLocus()->add(newLink);
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
 [comment TODO: Implement instatiation if ends are parts with ports /]
@@ -618,53 +629,55 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
-[if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end1/]
-for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of end1/]
+for(unsigned int i = 0; i < [end1Role.getLower()/]; i++)
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(i);
-	[if (end2.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end2/]
-	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(i);
+	[if (end2Role.getUpper() <> 1)] [comment *-multiplicity of end2/]
+	for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(j);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 	[else][comment 1-multiplicity of end2/]
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 	[/if]
 }
 [else] [comment 1-multiplicity of end1/]
-const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()
-	[if(end2.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end2/]
-for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()
+	[if(end2Role.getUpper() <> 1)] [comment *-multiplicity of end2/]
+for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(j);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 	[else] [comment 1-multiplicity of end2/][comment WOULD BE ARRAY PATTERN/]
-const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();
 
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 this->getLocus()->add(newLink);
 	[/if]
 [/if]
@@ -678,73 +691,75 @@ this->getLocus()->add(newLink);
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
-[if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of associationEnd 1 = left port/]
+[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of associationEnd 1 = left port/]
 	[if(end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = right part/]
 for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if(end2.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
-	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if(end2Role.getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
+	for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
 
-		for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+		for(unsigned int k = 0; k < [end1Role.getLower()/]; k++)
 		{
-			const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+			const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(k);
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 		}
 	}
 		[else] [comment 1-multiplicity of port of partWithPort = right port/]
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
-	for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	for(unsigned int k = 0; k < [end1Role.getLower()/]; k++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(k);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 		[/if]
 }
 	[else] [comment 1-multiplicity of part with port = right part/]
 const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
-		[if(end2.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
-for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if(end2Role.getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
+for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
 
-	for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	for(unsigned int k = 0; k < [end1Role.getLower()/]; k++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(k);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 }
 		[else] [comment 1-multiplicity of port of partWithPort = right port/]
-const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
-for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+for(unsigned int k = 0; k < [end1Role.getLower()/]; k++)
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]()->at(k);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 		[/if]
@@ -755,41 +770,41 @@ for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()
 for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if(end2.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
-	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if(end2Role.getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
+	for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]();
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]();
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 		[else] [comment 1-multiplicity of port of partWithPort = right port/]
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 		[/if]
 }
 	[else] [comment 1-multiplicity of part with port = right part/]
 const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
 [comment because left part as well as right partWithPort are assumed to be of 1-multiplicity, right port must be of *-multiplicity, otherwise this would be an array pattern/]
-for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+for(unsigned int j = 0; j < [end2Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Part = this->get[end1.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Part = this->get[end1Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Part, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Part, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 	[/if]
@@ -803,73 +818,75 @@ for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
-[if(end2.definingEnd.getUpper() <> 1)] [comment *-multiplicity of associationEnd 2 = right port/]
+[if(end2Role.getUpper() <> 1)] [comment *-multiplicity of associationEnd 2 = right port/]
 	[if(end1.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = left part/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if(end1.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
-	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
+	for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
 
-		for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+		for(unsigned int k = 0; k < [end2Role.getLower()/]; k++)
 		{
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(k);
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 		}
 	}
 		[else] [comment 1-multiplicity of port of partWithPort = left port/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
 
-	for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	for(unsigned int k = 0; k < [end2Role.getLower()/]; k++)
 	{
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(k);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 		[/if]
 }
 	[else] [comment 1-multiplicity of part with port = left part/]
 const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
-		[if(end1.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
-for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
+for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
 
-	for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	for(unsigned int k = 0; k < [end2Role.getLower()/]; k++)
 	{
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(k);
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 }
 		[else] [comment 1-multiplicity of port of partWithPort = left port/]
-const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
 
-for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+for(unsigned int k = 0; k < [end2Role.getLower()/]; k++)
 {
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]()->at(k);
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 		[/if]
@@ -880,41 +897,41 @@ for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-		[if(end1.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
-	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+		[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
+	for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
-		const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();
 
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 		newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-		newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-		newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+		newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+		newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 		this->getLocus()->add(newLink);
 	}
 		[else] [comment 1-multiplicity of port of partWithPort = left port/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 		[/if]
 }
 	[else] [comment 1-multiplicity of part with port = left part/]
 const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
 [comment because left part as well as right partWithPort are assumed to be of 1-multiplicity, right port must be of *-multiplicity, otherwise this would be an array pattern/]
-for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 {
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
-	const std::shared_ptr<[end2.role.type.transformType()/]>& end2Part = this->get[end2.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
+	const std::shared_ptr<[end2Role.type.transformType()/]>& end2Part = this->get[end2Role.name.toUpperFirst()/]();
 
 	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 	newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-	newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-	newLink->add(end2Part, [end2.role.generatePackageGetterCall()/]);
+	newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+	newLink->add(end2Part, [end2Role.generatePackageGetterCall()/]);
 	this->getLocus()->add(newLink);
 }
 	[/if]
@@ -929,117 +946,119 @@ for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()
 {
 	end1 : ConnectorEnd = aConnector.end->at(1);
 	end2 : ConnectorEnd = aConnector.end->at(2);
+	end1Role : Property = end1.role.oclAsType(Property);
+	end2Role : Property = end2.role.oclAsType(Property);
 	definingAssociation : Association = aConnector.type;
 }]
 [if (end1.partWithPort.getUpper() <> 1)] [comment *-multiplicity of end1 part/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-	[if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end1 port/]
-	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of end1 port/]
+	for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
 		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
 		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
 		{
 			const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
-			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
-			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2Role.getUpper() <> 1)][/comment]
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 			[else][comment 1-multiplicity of end2 port/]
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 			[/if]
 		}	
 		[else][comment 1-multiplicity of end2 part/]
 		const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
-			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
-			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2Role.getUpper() <> 1)][/comment]
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 			[else][comment 1-multiplicity of end2 port/]
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 			[/if]
 
 		[/if]	
 	}
 	[else][comment 1-multiplicity of end1 port/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
 		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
 		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
 		{
 			const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
-			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
-			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2Role.getUpper() <> 1)][/comment]
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 			[else][comment 1-multiplicity of end2 port/]
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 			[/if]
 		}	
 		[else][comment 1-multiplicity of end2 part/]
 		const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
-			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
-			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2Role.getUpper() <> 1)][/comment]
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 			[else][comment 1-multiplicity of end2 port/]
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 			[/if]
 		[/if]	
@@ -1047,101 +1066,101 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 }
 [else] [comment 1-multiplicity of end1 part/]
 	const std::shared_ptr<[end1.partWithPort.type.transformType()/]>& end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
-	[if(end1.definingEnd.getUpper() <> 1)] [comment *-multiplicity of end1 port/]
-	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	[if(end1Role.getUpper() <> 1)] [comment *-multiplicity of end1 port/]
+	for(unsigned int j = 0; j < [end1Role.getLower()/]; j++)
 	{
-		const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+		const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]()->at(j);
 		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
 		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
 		{
 			const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
-			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
-			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2Role.getUpper() <> 1)][/comment]
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 			[else][comment 1-multiplicity of end2 port/]
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 			[/if]
 		}	
 		[else][comment 1-multiplicity of end2 part/]
 		const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
-			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
-			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2Role.getUpper() <> 1)][/comment]
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 			[else][comment 1-multiplicity of end2 port/]
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 			[/if]
 
 		[/if]	
 	}
 	[else][comment 1-multiplicity of end1 port/]
-	const std::shared_ptr<[end1.role.type.transformType()/]>& end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	const std::shared_ptr<[end1Role.type.transformType()/]>& end1Port = end1Part->get[end1Role.name.toUpperFirst()/]();
 		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
 		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
 		{
 			const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
-			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
-			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			[if(end2Role.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2Role.getUpper() <> 1)][/comment]
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 			[else][comment 1-multiplicity of end2 port/]
-			const std::shared_ptr<[end2.role.type.transformType()/]>& end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			const std::shared_ptr<[end2Role.type.transformType()/]>& end2Port = end2Part->get[end2Role.name.toUpperFirst()/]();
 
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 			newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-			newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-			newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+			newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+			newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 			this->getLocus()->add(newLink);
 			[/if]
 		}	
 		[else][comment 1-multiplicity of end2 part/]
 		const std::shared_ptr<[end2.partWithPort.type.transformType()/]>& end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
 			[comment *-multiplicity of end2 port -> since part and port of end1 as well as part of end2 are of 1-multiplicity, port of end2 must be of *-multiplicity, otherwise this would be an array pattern /]
-			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			for(unsigned int l = 0; l < [end2Role.getLower()/]; l++)
 			{
-				const std::shared_ptr<[end2.role.type.transformType()/]>&end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				const std::shared_ptr<[end2Role.type.transformType()/]>&end2Port = end2Part->get[end2Role.name.toUpperFirst()/]()->at(l);
 
 				std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
 				newLink->setType([definingAssociation.generatePackageGetterCall()/]);
-				newLink->add(end1Port, [end1.role.generatePackageGetterCall()/]);
-				newLink->add(end2Port, [end2.role.generatePackageGetterCall()/]);
+				newLink->add(end1Port, [end1Role.generatePackageGetterCall()/]);
+				newLink->add(end2Port, [end2Role.generatePackageGetterCall()/]);
 				this->getLocus()->add(newLink);
 			}
 		[/if]	
