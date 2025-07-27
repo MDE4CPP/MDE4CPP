@@ -88,9 +88,9 @@ virtual bool unset(const std::shared_ptr<uml::Property>& _property) [abstractSuf
 virtual bool unset(std::string _qualifiedName) [abstractSuffix(impl)/];
 virtual bool unset(unsigned long _uID) [abstractSuffix(impl)/];
 //Remove
-virtual bool remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
-virtual bool remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
-virtual bool remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -516,19 +516,20 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 [/template]
 
 [template public generateRemoveImplementation(aDataType : DataType)]
-bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
-bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
 	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
-bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
+std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	std::shared_ptr<Any> removedValue = nullptr;
 [if (not aDataType.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly))->isEmpty())]
 	switch(_uID)
 	{
@@ -540,53 +541,6 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID,
 			[else]
 			[aProperty.type.generateCppRawType(false)/] valueToRemove = [aProperty.type.generateDefaultValue()/];
 			[/if]
-			if(value->isContainer())
-			{
-				[if (aProperty.type.oclIsUndefined())]
-				std::shared_ptr<Bag<Any>> container = value->get<std::shared_ptr<Bag<Any>>>();
-				if(container && !(container->empty()))
-				{
-					// If a non-empty container is passed, the first value of the container will be removed from the property
-					valueToRemove = container->at(0);
-				}
-				[elseif (not aProperty.type.isComplex())]
-				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>>();
-				if(container && !(container->empty()))
-				{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						valueToRemove = [if(not aProperty.type.isComplex())]*([/if]container->at(0)[if(not aProperty.type.isComplex())])[/if];
-				}
-				[else]
-				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
-				if(umlContainerAny)
-				{
-					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
-					if(container && !(container->empty()))
-					{
-						// If a non-empty container is passed, the first value of the container will be removed from the property
-						std::shared_ptr<uml::Element> firstElement = container->at(0);
-						valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(firstElement);
-					}
-				}
-				[/if]
-			}
-			else
-			{
-				[if (aProperty.type.oclIsUndefined())]
-				valueToRemove = value->get<std::shared_ptr<Any>>();
-				[elseif (not aProperty.type.isComplex())]
-				valueToRemove = value->get<[aProperty.type.generateCppRawType(false)/]>();
-				[else]
-				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
-				if(umlAny)
-				{
-					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
-					valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element);
-				}
-				[/if]
-			}
-
-
 			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
 			{
 				// If removeAt != -1, the value to remove is not taken into account anymore.
@@ -596,52 +550,106 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID,
 				[comment if aProperty is a simple property, removeAt may only be exactly 1 /]
 				if(removeAt == 1)
 				{
+					removedValue = [if (aProperty.type.isComplex())]eUMLAny(this->[aProperty.getterName()/]()[if (aProperty.isBackReference())].lock()[/if], [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/])[else]eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false)[/if];
 					[if (aProperty.isBackReference())] [comment required for std::weak_ptr, as nullptr cannot be assigned to std::weak_ptr /]
 					m_[aProperty.name/].reset();
 					[else]
 					m_[aProperty.name/] = [aProperty.type.generateDefaultValue()/];
 					[/if]
-					return true;
 				}
 				[else]
 				if((long)this->[aProperty.getterName()/]()->size() >= (long)removeAt)
 				{
-					this->[aProperty.getterName()/]()->erase(this->[aProperty.getterName()/]()->begin() + (removeAt - 1));
-					return true;
+					valueToRemove = this->[aProperty.getterName()/]()->at(removeAt - 1);
+					if(this->[aProperty.getterName()/]()->erase(this->[aProperty.getterName()/]()->begin() + (removeAt - 1)) != this->[aProperty.getterName()/]()->end())
+					{
+						removedValue = [if (aProperty.type.isComplex())]eUMLAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/])[else]eAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false)[/if];
+					}
 				}
 				[/if]
 			}
 			else
 			{
+				if(value->isContainer())
+				{
+					[if (aProperty.type.oclIsUndefined())]
+					std::shared_ptr<Bag<Any>> container = value->get<std::shared_ptr<Bag<Any>>>();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = container->at(0);
+					}
+					[elseif (not aProperty.type.isComplex())]
+					std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>>();
+					if(container && !(container->empty()))
+					{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							valueToRemove = [if(not aProperty.type.isComplex())]*([/if]container->at(0)[if(not aProperty.type.isComplex())])[/if];
+					}
+					[else]
+					std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+					if(umlContainerAny)
+					{
+						std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+						if(container && !(container->empty()))
+						{
+							// If a non-empty container is passed, the first value of the container will be removed from the property
+							std::shared_ptr<uml::Element> firstElement = container->at(0);
+							valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(firstElement);
+						}
+					}
+					[/if]
+				}
+				else
+				{
+					[if (aProperty.type.oclIsUndefined())]
+					valueToRemove = value->get<std::shared_ptr<Any>>();
+					[elseif (not aProperty.type.isComplex())]
+					valueToRemove = value->get<[aProperty.type.generateCppRawType(false)/]>();
+					[else]
+					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+					if(umlAny)
+					{
+						std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+						valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element);
+					}
+					[/if]
+				}
 				[if (aProperty.upper = 1)]
 				[comment if aProperty is a simple property, valueToRemove must equal the current value of aProperty /]
 				if(m_[aProperty.name/][if (aProperty.isBackReference())].lock()[/if] == valueToRemove)
 				{
+					removedValue = [if (aProperty.type.isComplex())]eUMLAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/])[else]eAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false)[/if];
 					[if (aProperty.isBackReference())] [comment required for std::weak_ptr, as nullptr cannot be assigned to std::weak_ptr /]
 					m_[aProperty.name/].reset();
 					[else]
 					m_[aProperty.name/] = [aProperty.type.generateDefaultValue()/];
 					[/if]
-					return true;
 				}
 				[else]
 				if(isRemoveDuplicates)
 				{
 					int index = this->[aProperty.getterName()/]()->index_of(valueToRemove);
+					if(index != -1)
+					{
+						removedValue = [if (aProperty.type.isComplex())]eUMLAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/])[else]eAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false)[/if];
+					}
 					while(index != -1)
 					{
 						this->[aProperty.getterName()/]()->erase(this->[aProperty.getterName()/]()->begin() + index);
 						index = this->[aProperty.getterName()/]()->index_of(valueToRemove);
 					}
-					return true;
 				}
 				else
 				{
-					this->[aProperty.getterName()/]()->erase(valueToRemove);
-					return true;
+					if(this->[aProperty.getterName()/]()->erase(valueToRemove) != this->[aProperty.getterName()/]()->end())
+					{
+						removedValue = [if (aProperty.type.isComplex())]eUMLAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/])[else]eAny(valueToRemove, [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false)[/if];
+					}
 				}
 				[/if]
 			}
+			return removedValue;
 		}
 		[/for]
 	}
@@ -649,9 +657,10 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID,
 [/if]
 [for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call remove() for base class [general.name/]
-	if([general.generateNamespaceName(true)/]Impl::remove(_uID, value, removeAt, isRemoveDuplicates)) return true;
+	removedValue = [general.generateNamespaceName(true)/]Impl::remove(_uID, value, removeAt, isRemoveDuplicates);
+	if(removedValue) return removedValue;
 [/for]
-	return false;
+	return removedValue;
 }
 [/template]
 
