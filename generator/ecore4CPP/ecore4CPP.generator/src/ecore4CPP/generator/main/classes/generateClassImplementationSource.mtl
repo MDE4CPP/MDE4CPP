@@ -73,6 +73,9 @@
 [/for]
 [comment] nur für saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nötig siehe generatePersistence.mtl
 [/comment]
+[for (aPackage : EPackage| anEClass.includes()->selectByKind(EEnum)->reject(doNotGenerateEClassifier())->including(anEClass).ePackage->asOrderedSet()->sortedBy(name))]
+#include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
+[/for]
 [for (aPackage : EPackage| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->including(anEClass).ePackage->asOrderedSet()->sortedBy(name))]
 #include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
 [/for]
