@@ -221,15 +221,16 @@ PSSM: OpaqueBehaviors owned by a State are not included in aClass./]
 	[/for]
 [/for]
 [comment Includes from roles of ConnectorEnds /]
-[for (aConnector : Connector | aClass.ownedConnector->select(c : Connector | c.end->size() > 0)) before('\n//Includes from roles of ConnectorEnds\n') after('\n')][for (anEnd : ConnectorEnd | aConnector.end)]
-#include "[anEnd.role.type._package.generateNamespacePath(true)/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
-[/for][/for]
+[for (aType : Type | aClass.ownedConnector->select(c : Connector | c.end->size() > 0).end.role.type->reject(oclIsUndefined())->asSet()) before('\n//Includes from roles of ConnectorEnds\n') after('\n')]
+#include "[aType._package.generateNamespacePath(true)/]/[aType.name.toUpperFirst()/].hpp"
+[/for]
 [comment PSCS-specific includes /]
 [if (isPSCSExecutable())]
 //PSCS-specific includes
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_LinkKind.hpp"
 #include "uml/Port.hpp"
 [/if]
 [/template]
@@ -425,9 +426,15 @@ void [className/]::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
 
 [aClass.generateDirectlyContainsMethod()/]
 
-[aClass.generateDispatchCallInMethod()/]
+[aClass.generateDispatchCallInMethods()/]
 
-[aClass.generateDispatchCallOutMethod()/]
+[aClass.generateDispatchCallOutMethods()/]
+
+[aClass.generateGetCompositeOwnerMethod()/]
+
+[aClass.generateIsOperationProvidedMethod()/]
+
+[aClass.generateIsOperationRequiredMethod()/]
 [/template]
 
 [template private generateConstructMethod(aClass : Class) post(trim())
@@ -552,19 +559,258 @@ bool [className/]::directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensio
 }
 [/template]
 
-[template private generateDispatchCallInMethod(aClass : Class) post(trim())
+[template private generateDispatchCallInMethods(aClass : Class) post(trim())
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
-std::shared_ptr<Any> [className/]::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> [className/]::dispatchCallInByPort(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+[if (not aClass.ownedAttribute->filter(Port)->isEmpty())]
+	switch(onPort->_getID())
+	{
+		[for (aPort : Port | aClass.ownedAttribute->filter(Port))]
+		case [aPort.getNearestPackage().generateNamespace(true)/]::[aPort.getNearestPackage().getPackageName()/]Package::[aPort.getMemberName().toUpperCase()/]:
+		{
+			const [aPort.generateCppType()/]& portValue = this->[aPort.getterName()/]();
+			[if (aPort.upper = 1)]
+			return portValue->dispatchCall(_operation, inputArguments, outputArguments);
+			[else]
+			int choice = 0; // TODO ChoiceStrategy should be invoked here
+			return portValue->at(choice)->dispatchCall(_operation, inputArguments, outputArguments);
+			[/if]
+		}
+		[/for]
+	}
+[/if]
+[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classList->size() > 0)]
+	std::shared_ptr<Any> result;
+	[for (sClass : Class | classList)]
+	//Call dispatchCallIn() for base class [sClass.name/]
+	result = [sClass.generateNamespaceName(true)/]Impl::dispatchCallInByPort(_operation, onPort, inputArguments, outputArguments);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	[/for]
+	return result;
+[else]
+	return nullptr;
+[/if]
+[/let]
+}
+
+std::shared_ptr<Any> [className/]::dispatchCallInOnInteractionPoint(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& interactionPoint, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	if(interactionPoint->getDefiningPort()->getIsBehavior())
+	{
+		return this->dispatchCall(_operation, inputArguments, outputArguments);
+	}
+	else
+	{
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> potentialTargets(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>);
+		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinks = interactionPoint->getLinks();
+		
+		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
+		{
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> cS_Link = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Link>(link);
+			if(cS_Link->retrieveLinkKind(interactionPoint) == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOINTERNAL)
+			{
+				potentialTargets->add(cS_Link->retrieveOtherLinkEndValue(interactionPoint->getDefiningPort()));
+			}
+		}
+		if(!(potentialTargets->size() == 0))
+		{
+			const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& target = potentialTargets->at(0); // TODO RequestPropagationStrategy should be invoked here
+			return target->dispatchCall(_operation, inputArguments, outputArguments);
+		}
+		
+		return nullptr;
+	}
 }
 [/template]
 
-[template private generateDispatchCallOutMethod(aClass : Class) post(trim())
+[template private generateDispatchCallOutMethods(aClass : Class) post(trim())
 {className : String = aClass.name.toUpperFirst().concat('Impl');}]
-std::shared_ptr<Any> [className/]::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> [className/]::dispatchCallOutByPort(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	[if (not aClass.ownedAttribute->filter(Port)->isEmpty())]
+	switch(onPort->_getID())
+	{
+		[for (aPort : Port | aClass.ownedAttribute->filter(Port))]
+		case [aPort.getNearestPackage().generateNamespace(true)/]::[aPort.getNearestPackage().getPackageName()/]Package::[aPort.getMemberName().toUpperCase()/]:
+		{
+			const [aPort.generateCppType()/]& portValue = this->[aPort.getterName()/]();
+			[if (aPort.upper = 1)]
+			return this->dispatchCallOutOnInteractionPoint(_operation, portValue, inputArguments, outputArguments);
+			[else]
+			const [aPort.type.generateCppRawType(false)/]& target = portValue->at(0); // TODO RequestPropagationStrategy should be invoked here
+			return this->dispatchCallOutOnInteractionPoint(_operation, target, inputArguments, outputArguments);
+			[/if]
+		}
+		[/for]
+	}
+[/if]
+[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classList->size() > 0)]
+	std::shared_ptr<Any> result;
+	[for (sClass : Class | classList)]
+	//Call dispatchCallOut() for base class [sClass.name/]
+	result = [sClass.generateNamespaceName(true)/]Impl::dispatchCallOutByPort(_operation, onPort, inputArguments, outputArguments);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	[/for]
+	return result;
+[else]
+	return nullptr;
+[/if]
+[/let]
+}
+
+std::shared_ptr<Any> [className/]::dispatchCallOutOnInteractionPoint(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& interactionPoint, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> targetsForDispatchingIn(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> targetsForDispatchingOut(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
+	
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinks = interactionPoint->getLinks();
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
+	{
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> cS_Link = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Link>(link);
+		if(cS_Link->retrieveLinkKind(interactionPoint) == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOENVIRONMENT)
+		{
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> otherEndValue = cS_Link->retrieveOtherLinkEndValue(interactionPoint->getDefiningPort());
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(otherEndValue);
+
+			if(!(cS_Object->isInteractionPoint()))
+			{
+				if(PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::isOperationProvided(cS_Object, _operation))
+				{
+					targetsForDispatchingIn->add(cS_Object);
+				}
+			}
+			else
+			{
+				bool isAssembly = true, isDelegation = false;
+				
+				switch(cS_Object->getDefiningPort()->_getID())
+				{
+[for (compositeOwnerPort : Port | aClass.getImplicitCompositeOwners().allAttributes()->selectByType(Port)) after('\t\t\t\t\tisAssembly = false;\r\n\t\t\t\t\tisDelegation = true;\r\n')]
+					case [compositeOwnerPort.getNearestPackage().generateNamespace(true)/]::[compositeOwnerPort.getNearestPackage().getPackageName()/]Package::[compositeOwnerPort.getMemberName().toUpperCase()/]:
+[/for]
+				}
+				
+				if(isAssembly)
+				{
+					if(PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::isOperationProvided(cS_Object, _operation))
+					{
+						targetsForDispatchingIn->add(cS_Object);
+					}
+				}
+				if(isDelegation)
+				{
+					if(PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::isOperationRequired(cS_Object, _operation))
+					{
+						targetsForDispatchingOut->add(cS_Object);
+					}
+				}
+			}
+		}
+	}
+
+	unsigned int numOfTargetsToDispatchInTo = targetsForDispatchingIn->size();
+	unsigned int numOfTargetsToDispatchOutTo = targetsForDispatchingOut->size();
+
+	std::shared_ptr<Any> result = nullptr;
+	
+	for(unsigned int i = 0; i < numOfTargetsToDispatchInTo && result == nullptr; i++)
+	{
+		result = targetsForDispatchingIn->at(i)->dispatchCall(_operation, inputArguments, outputArguments);
+	}
+	for(unsigned int i = 0; i < numOfTargetsToDispatchOutTo && result == nullptr; i++)
+	{
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(targetsForDispatchingOut->at(i));
+		if(cS_Object->isInteractionPoint())
+		{
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> compositeOwner = cS_Object->getCompositeOwner();
+			result = compositeOwner->dispatchCallOutOnInteractionPoint(_operation, cS_Object, inputArguments, outputArguments);
+		}
+	}
+	
+	return result;
+}
+[/template]
+
+[template private generateGetCompositeOwnerMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> [className/]::getCompositeOwner()
+{
+	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> compositeOwner = nullptr;
+[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
+	// Check if composite owner [compositeOwnerClass.name.toUpperFirst()/] is set
+	compositeOwner = this->get[compositeOwnerClass.name.toUpperFirst()/]().lock();
+	if(compositeOwner) return compositeOwner;
+[/for]
+
+	return nullptr;
+}
+[/template]
+
+[template private generateIsOperationProvidedMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+bool [className/]::isOperationProvided(const std::shared_ptr<uml::Operation>& operation)
+{
+	bool isProvided = false;
+	if(this->isInteractionPoint()) // For interaction points, only realized interfaces are taken into account
+	{
+[let providedOperations : Set(Operation) = aClass.collectAllRealizedInterfaces().ownedOperation->asSet()]
+[if (not providedOperations->isEmpty())]
+		switch(operation->_getID())
+		{
+	[for (anOperation : Operation | providedOperations) after('\t\t\tisProvided = true;\r\n')]
+			case [anOperation.getNearestPackage().generateNamespace(true)/]::[anOperation.getNearestPackage().getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/]:
+	[/for]
+		}
+[/if]
+[/let]
+	}
+	else
+	{
+		throw std::runtime_error("Now we are here...: " + std::string(__PRETTY_FUNCTION__));
+	}
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name))]
+	if(!isProvided)
+	{
+		//Call isOperationProvided() for base class [sClass.name/]
+		isProvided = [sClass.generateNamespaceName(true)/]Impl::isOperationProvided(operation);
+	}
+[/for]
+	return isProvided;
+}
+[/template]
+
+[template private generateIsOperationRequiredMethod(aClass : Class) post(trim())
+{className : String = aClass.name.toUpperFirst().concat('Impl');}]
+bool [className/]::isOperationRequired(const std::shared_ptr<uml::Operation>& operation)
+{
+	bool isRequired = false;
+[let requiredOperations : Set(Operation) = aClass.collectAllUsedInterfaces().ownedOperation->asSet()]
+[if (not requiredOperations->isEmpty())]
+	switch(operation->_getID())
+	{
+	[for (anOperation : Operation | requiredOperations) after('\t\tisRequired = true;\r\n')]
+		case [anOperation.getNearestPackage().generateNamespace(true)/]::[anOperation.getNearestPackage().getPackageName()/]Package::[anOperation.getMemberName().toUpperCase()/]:
+	[/for]
+	}
+[/if]
+[/let]
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name))]
+	if(!isRequired)
+	{
+		//Call isOperationRequired() for base class [sClass.name/]
+		isRequired = [sClass.generateNamespaceName(true)/]Impl::isOperationRequired(operation);
+	}
+[/for]
+	return isRequired;
 }
 [/template]
 

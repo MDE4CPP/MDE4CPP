@@ -66,7 +66,10 @@
 */]
 [query public collectAllRealizedInterfaces(aClass : Class) : Set(Interface) = aClass.interfaceRealization.contract->addAll(aClass.interfaceRealization.contract.getAllBaseInterfaces())->flatten()->asSet() /]
 
-
+[** 
+ * Get all Interfaces (direct or indirect) that are used by aClass
+*/]
+[query public collectAllUsedInterfaces(aClass : Class) : Set(Interface) = aClass.directlyUsedInterfaces()->addAll(aClass.directlyUsedInterfaces().getAllBaseInterfaces())->flatten()->asSet() /]
 
 [**
  * template to generate create function declarations
@@ -268,10 +271,10 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 {
 	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
 [if (aClass.superClass->isEmpty())]
-	[if (isFUMLExecutable())]
-	setThisFUML_ObjectPtr([aClass.generateGetThisPtrPropertyName()/]);
-	[elseif (isPSCSExecutable())]
+	[if (isPSCSExecutable())]
 	setThisPSCS_ObjectPtr([aClass.generateGetThisPtrPropertyName()/]);
+	[elseif (isFUMLExecutable())]
+	setThisFUML_ObjectPtr([aClass.generateGetThisPtrPropertyName()/]);
 	[else]
 		[if (aClass.oclIsKindOf(Stereotype))]
 	setThisStereotypePtr([aClass.generateGetThisPtrPropertyName()/]);
