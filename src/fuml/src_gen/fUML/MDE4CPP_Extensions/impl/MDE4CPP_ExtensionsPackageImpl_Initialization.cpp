@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -544,6 +544,45 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_destroy_EBoolean_EBoolean);
 		parameter->setName("isDestroyOwnedObjects");
 		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject->setName("dispatchCall");
+	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject->setLowerBound(1);
+	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject->setUpperBound(1);
+	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject->setUnique(true);
+	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject->setOrdered(true);
+	
+	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject->_setID(FUML_OBJECT_OPERATION_DISPATCHCALL_OPERATION_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject);
+		parameter->setName("operation");
+		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject);
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject);
+		parameter->setName("outputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

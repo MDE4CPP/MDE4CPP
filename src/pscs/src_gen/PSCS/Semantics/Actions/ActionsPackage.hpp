@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EDataType;
-	class EAnnotation;
 	class EClass;
-	class EParameter;
 	class EOperation;
+	class EReference;
+	class EParameter;
+	class EGenericType;
+	class EAnnotation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSCS::Semantics::Actions 
@@ -258,7 +258,7 @@ namespace PSCS::Semantics::Actions
 			
 			
 			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION = 1253243884;
-			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_EJAVAOBJECT = 2951554341;
+			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_STRUCTURALFEATURE_EJAVAOBJECT = 2951554341;
 			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_PSCS_OBJECT_STRUCTURALFEATURE = 4005559406;
 			
 			//Class and Feature Getter
@@ -267,7 +267,7 @@ namespace PSCS::Semantics::Actions
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_doAction() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature() const = 0;
 			
 			// End Class CS_RemoveStructuralFeatureValueActionActivation

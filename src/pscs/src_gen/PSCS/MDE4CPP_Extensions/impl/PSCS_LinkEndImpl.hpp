@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKPSCS_LINKIMPL_HPP
-#define PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKPSCS_LINKIMPL_HPP
+#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKENDPSCS_LINKENDIMPL_HPP
+#define PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKENDPSCS_LINKENDIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,44 +14,41 @@
 #include "PSCS/PSCS.hpp" 
 
 // model includes
-#include "../PSCS_Link.hpp"
+#include "../PSCS_LinkEnd.hpp"
 
 #include "PSCS/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
-#include "fUML/MDE4CPP_Extensions/impl/FUML_LinkImpl.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/FUML_LinkEndImpl.hpp"
 
 //*********************************
 namespace PSCS::MDE4CPP_Extensions 
 {
-	class PSCS_API PSCS_LinkImpl : virtual public fUML::MDE4CPP_Extensions::FUML_LinkImpl, virtual public PSCS_Link 
+	class PSCS_API PSCS_LinkEndImpl : virtual public fUML::MDE4CPP_Extensions::FUML_LinkEndImpl, virtual public PSCS_LinkEnd 
 	{
 		public: 
-			PSCS_LinkImpl(const PSCS_LinkImpl & obj);
+			PSCS_LinkEndImpl(const PSCS_LinkEndImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			PSCS_LinkImpl& operator=(PSCS_LinkImpl const&); 
+			PSCS_LinkEndImpl& operator=(PSCS_LinkEndImpl const&); 
 
 		protected:
 			friend class PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactoryImpl;
-			PSCS_LinkImpl();
-			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> getThisPSCS_LinkPtr() const;
-			virtual void setThisPSCS_LinkPtr(std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> thisPSCS_LinkPtr);
+			PSCS_LinkEndImpl();
+			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> getThisPSCS_LinkEndPtr() const;
+			virtual void setThisPSCS_LinkEndPtr(std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> thisPSCS_LinkEndPtr);
 
 
 		public:
 			//destructor
-			virtual ~PSCS_LinkImpl();
+			virtual ~PSCS_LinkEndImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end) ;
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position) ;
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind) ;
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind, int position) ;
-			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind retrieveLinkKind(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind getKind() const ;
+			virtual void setKind (PSCS::Semantics::StructuredClassifiers::CS_LinkKind _kind);
 			
 			//*********************************
 			// Reference Getters & Setters
@@ -92,7 +89,7 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
-			std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> m_thisPSCS_LinkPtr;
+			std::weak_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> m_thisPSCS_LinkEndPtr;
 	};
 }
-#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKPSCS_LINKIMPL_HPP */
+#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKENDPSCS_LINKENDIMPL_HPP */

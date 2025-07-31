@@ -35,26 +35,32 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
+//Includes from codegen annotation
+#include "PSCS/MDE4CPP_Extensions/PSCS_LinkEnd.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Association.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+#include "uml/Property.hpp"
 //Factories and Package includes
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -124,6 +130,93 @@ std::shared_ptr<ecore::EObject> PSCS_LinkImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void PSCS_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->add(object, end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE);
+	//end of body
+}
+
+void PSCS_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->add(object, end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE, position);
+	//end of body
+}
+
+void PSCS_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->add(object, end, kind, 0);
+	//end of body
+}
+
+void PSCS_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind, int position)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// If a link end already exists for the given end property, remove this link from the links of the current link end value
+	// and replace it with the given object.
+	// If no link end exists for the given end property, create a new one and add it to this link's link ends.
+	// Finally, add this link to the links of the given object.
+
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> matchingLinkEnd;
+
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd : *linkEnds)
+	{
+		if(linkEnd->getEnd() == end)
+		{
+			matchingLinkEnd = linkEnd;
+			break;
+		}
+	}
+
+	if(matchingLinkEnd)
+	{
+		// Extension to fUML: Erase old Link
+		const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& oldEndValue = matchingLinkEnd->getEndValue();
+		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& oldEndValueLinks = oldEndValue->getLinks();
+		oldEndValueLinks->erase(this->getThisFUML_LinkPtr());
+
+		matchingLinkEnd->setEndValue(object);
+		matchingLinkEnd->setPosition(position);
+	}
+	else
+	{
+		// Extension to fUML: Create PSCS_LinkEnd instead of fUML_LinkEnd
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> newLinkEnd = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_LinkEnd();
+		newLinkEnd->setEnd(end);
+		newLinkEnd->setEndValue(object);
+		newLinkEnd->setKind(kind);
+		newLinkEnd->setPosition(position);
+		this->getLinkEnds()->add(newLinkEnd);
+	}
+
+	object->getLinks()->add(this->getThisFUML_LinkPtr());
+	//end of body
+}
+
+PSCS::Semantics::StructuredClassifiers::CS_LinkKind PSCS_LinkImpl::retrieveLinkKind(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();
+
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd : *linkEnds)
+	{
+		if(linkEnd->getEndValue() == object)
+		{
+			return (std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd>(linkEnd))->getKind();
+		}
+	}
+
+	return PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE;
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -251,6 +344,326 @@ std::shared_ptr<Any> PSCS_LinkImpl::eInvoke(int operationID, const std::shared_p
  
   	switch(operationID)
 	{
+		// PSCS::MDE4CPP_Extensions::PSCS_Link::add(fUML::MDE4CPP_Extensions::FUML_Object, uml::Property): 3349335570
+		case MDE4CPP_ExtensionsPackage::PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			this->add(incoming_param_object,incoming_param_end);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Link::add(fUML::MDE4CPP_Extensions::FUML_Object, uml::Property, int): 2497370809
+		case MDE4CPP_ExtensionsPackage::PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_EINT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'position'
+			//parameter 2
+			int incoming_param_position;
+			Bag<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_position = (*incoming_param_position_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'position'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			this->add(incoming_param_object,incoming_param_end,incoming_param_position);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Link::add(fUML::MDE4CPP_Extensions::FUML_Object, uml::Property, PSCS::Semantics::StructuredClassifiers::CS_LinkKind): 764209268
+		case MDE4CPP_ExtensionsPackage::PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_CS_LINKKIND:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'kind'
+			//parameter 2
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind incoming_param_kind;
+			Bag<Any>::const_iterator incoming_param_kind_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_kind = (*incoming_param_kind_arguments_citer)->get<PSCS::Semantics::StructuredClassifiers::CS_LinkKind>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'kind'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			this->add(incoming_param_object,incoming_param_end,incoming_param_kind);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Link::add(fUML::MDE4CPP_Extensions::FUML_Object, uml::Property, PSCS::Semantics::StructuredClassifiers::CS_LinkKind, int): 3276009815
+		case MDE4CPP_ExtensionsPackage::PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_CS_LINKKIND_EINT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			Bag<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_end_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_end = std::dynamic_pointer_cast<uml::Property>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'end'. Failed to invoke operation 'add'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'kind'
+			//parameter 2
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind incoming_param_kind;
+			Bag<Any>::const_iterator incoming_param_kind_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_kind = (*incoming_param_kind_arguments_citer)->get<PSCS::Semantics::StructuredClassifiers::CS_LinkKind>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'kind'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'position'
+			//parameter 3
+			int incoming_param_position;
+			Bag<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_position = (*incoming_param_position_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'position'. Failed to invoke operation 'add'!")
+				return nullptr;
+			}
+		
+			this->add(incoming_param_object,incoming_param_end,incoming_param_kind,incoming_param_position);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Link::retrieveLinkKind(fUML::MDE4CPP_Extensions::FUML_Object) : PSCS::Semantics::StructuredClassifiers::CS_LinkKind: 1682992812
+		case MDE4CPP_ExtensionsPackage::PSCS_LINK_OPERATION_RETRIEVELINKKIND_FUML_OBJECT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'retrieveLinkKind'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'retrieveLinkKind'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->retrieveLinkKind(incoming_param_object), 0, false);
+			break;
+		}
 
 		default:
 		{

@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -673,17 +673,17 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_doAction->_setID(CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
 	
 	
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject->setName("getLinksToDestroy");
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject->setLowerBound(0);
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject->setUpperBound(-1);
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject->setUnique(true);
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject->setOrdered(false);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject->setName("getLinksToDestroy");
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Link_Class());
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject->setLowerBound(0);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject->setUpperBound(-1);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject->setUnique(true);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject->setOrdered(false);
 	
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject->_setID(CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_EJAVAOBJECT);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject->_setID(CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_STRUCTURALFEATURE_EJAVAOBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject);
 		parameter->setName("value");
 		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
 		parameter->setLowerBound(0);
@@ -693,7 +693,7 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -703,7 +703,7 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject);
 		parameter->setName("removedValue");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);

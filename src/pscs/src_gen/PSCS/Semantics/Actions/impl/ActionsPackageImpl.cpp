@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
@@ -258,9 +258,9 @@ const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPacka
 {
 	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_doAction;
 }
-const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject() const
 {
-	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject;
+	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject;
 }
 const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Actions::ActionsPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature() const
 {

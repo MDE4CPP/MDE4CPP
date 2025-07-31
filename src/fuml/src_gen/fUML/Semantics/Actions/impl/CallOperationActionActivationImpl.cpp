@@ -36,6 +36,7 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -56,8 +57,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -75,8 +76,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -155,7 +156,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
+	const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
 	if(action != nullptr)
 	{
 		const std::shared_ptr<uml::Operation>& operation = action->getOperation();
@@ -172,7 +173,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			return nullptr;
 		}
 		
-		std::shared_ptr<uml::Element> context = nullptr;
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> context = nullptr;
 		std::string targetPinName = targetPin->getName();
 
 		/* MDE4CPP specific implementation for handling "self"-Pin */
@@ -227,29 +228,27 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 					{
 						try
 						{
-							std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(attributeValue);
-							std::shared_ptr<Bag<uml::Element>> elements = umlContainerAny->getAsElementContainer();
+							std::shared_ptr<Bag<uml::Element>> elements = retrieveAnyValueAsUMLElementContainer(attributeValue);
 
 							if(elements->size() > 0)
 							{
-								context = elements->front();
+								context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(elements->front());
 							}
 						}
 						catch(...)
 						{
-							DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
+							DEBUG_ERROR("Provided context is not an instance of FUML_Object. Failed to call operation!")
 						}
 					}
 					else
 					{
 						try
 						{
-							std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(attributeValue);
-							context = umlAny->getAsElement();
+							context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(retrieveAnyValueAsUMLElement(attributeValue));
 						}
 						catch(...)
 						{
-							DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
+							DEBUG_ERROR("Provided context is not an instance of FUML_Object. Failed to call operation!")
 						}
 					}				
 				}
@@ -286,12 +285,11 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			{
 				try
 				{
-					std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(target);
-					context = umlAny->getAsElement();
+					context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(retrieveAnyValueAsUMLElement(target));
 				}
 				catch(...)
 				{
-					DEBUG_ERROR("Provided context is not an instance of uml::Element. Failed to call operation!")
+					DEBUG_ERROR("Provided context is not an instance of FUML_Object. Failed to call operation!")
 				}
 			}
 		}
@@ -312,7 +310,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			
 			// Do the actual call
 			std::shared_ptr<Bag<Any>> outputArguments(new Bag<Any>());
-			std::shared_ptr<Any> returnValue = context->invoke(operation, inputArguments, outputArguments);
+			std::shared_ptr<Any> returnValue = context->dispatchCall(operation, inputArguments, outputArguments);
 			
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());		
 			

@@ -6,10 +6,13 @@
 #include "ecore/EClass.hpp"
 #include "PSCS/MDE4CPP_Extensions/impl/MDE4CPP_ConstructStrategyImpl.hpp"
 #include "PSCS/MDE4CPP_Extensions/impl/PSCS_LinkImpl.hpp"
+#include "PSCS/MDE4CPP_Extensions/impl/PSCS_LinkEndImpl.hpp"
 #include "PSCS/MDE4CPP_Extensions/impl/PSCS_ObjectImpl.hpp"
 
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "uml/umlPackage.hpp"
 #include "uml/DirectedRelationship.hpp"
 
@@ -35,6 +38,7 @@ MDE4CPP_ExtensionsFactoryImpl::MDE4CPP_ExtensionsFactoryImpl()
 {
 	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::MDE4CPP_ConstructStrategy", MDE4CPP_ExtensionsPackage::MDE4CPP_CONSTRUCTSTRATEGY_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::PSCS_Link", MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS));
+	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::PSCS_LinkEnd", MDE4CPP_ExtensionsPackage::PSCS_LINKEND_CLASS));
 	m_idMap.insert(std::make_pair("PSCS::MDE4CPP_Extensions::PSCS_Object", MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS));
 }
 
@@ -72,6 +76,20 @@ std::shared_ptr<ecore::EObject> MDE4CPP_ExtensionsFactoryImpl::create(const int 
 				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
 				assert(castedContainer);
 				return std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link>(this->createPSCS_Link_as_extensionalValues_in_Locus(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case MDE4CPP_ExtensionsPackage::PSCS_LINKEND_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createPSCS_LinkEnd(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> castedContainer = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Link>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd>(this->createPSCS_LinkEnd_as_linkEnds_in_FUML_Link(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -161,6 +179,26 @@ std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> MDE4CPP_ExtensionsFactoryIm
 	}
 	
 	element->setThisPSCS_LinkPtr(element);
+	return element;
+	
+}
+std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> MDE4CPP_ExtensionsFactoryImpl::createPSCS_LinkEnd(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEndImpl> element(new PSCS::MDE4CPP_Extensions::PSCS_LinkEndImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisPSCS_LinkEndPtr(element);
+	return element;
+}
+std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> MDE4CPP_ExtensionsFactoryImpl::createPSCS_LinkEnd_as_linkEnds_in_FUML_Link(std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> par_FUML_Link, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEndImpl> element(new PSCS::MDE4CPP_Extensions::PSCS_LinkEndImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FUML_Link)
+	{
+		par_FUML_Link->getLinkEnds()->push_back(element);
+	}
+	
+	element->setThisPSCS_LinkEndPtr(element);
 	return element;
 	
 }

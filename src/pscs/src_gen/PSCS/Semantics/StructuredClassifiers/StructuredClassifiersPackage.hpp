@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EEnum;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EDataType;
-	class EAnnotation;
 	class EClass;
-	class EEnumLiteral;
-	class EParameter;
 	class EOperation;
+	class EEnumLiteral;
+	class EReference;
+	class EParameter;
+	class EEnum;
+	class EGenericType;
+	class EAnnotation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -93,7 +93,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			// End Class CS_RequestPropagationStrategy
 
-			static const int CS_LINKKIND_CLASS = 19;
+			static const unsigned long CS_LINKKIND_CLASS = 1840284119;
 			
 			virtual const std::shared_ptr<ecore::EEnum>& getCS_LinkKind_Class() const = 0;
 			

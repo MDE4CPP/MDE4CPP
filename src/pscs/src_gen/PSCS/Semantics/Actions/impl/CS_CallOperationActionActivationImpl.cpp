@@ -53,9 +53,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -73,10 +73,11 @@
 #include "uml/Port.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -360,12 +361,14 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CS_CallOpe
 			// dispatched to the environment or to the internals of
 			// target, through onPort
 			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> executionContext = this->getActivityExecution()->getContext();
-			bool operationIsOnProvidedInterface = this->isOperationProvided(action->getOnPort(), action->getOperation());
-			bool operationIsOnRequiredInterface = this->isOperationRequired(action->getOnPort(), action->getOperation());
+			const std::shared_ptr<uml::Port> onPort = action->getOnPort();
+			const std::shared_ptr<uml::Operation> operation = action->getOperation();
+			bool operationIsOnProvidedInterface = this->isOperationProvided(onPort, operation);
+			bool operationIsOnRequiredInterface = this->isOperationRequired(onPort, operation);
 			// Operation is on a provided interface only
 			if(operationIsOnProvidedInterface && !operationIsOnRequiredInterface)
 			{
-				returnValue = cS_target->dispatchCallIn(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
+				returnValue = cS_target->dispatchCallInByPort(operation, onPort, inputArguments, outputArguments);
 			}
 			// Operation is on a required interface only
 			else if (!operationIsOnProvidedInterface && operationIsOnRequiredInterface)
@@ -375,7 +378,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CS_CallOpe
 				// Otherwise, dispatch outside.
 				if((executionContext == cS_target) || (cS_target->contains(executionContext)))
 				{
-					returnValue = cS_target->dispatchCallOut(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
+					returnValue = cS_target->dispatchCallOutByPort(operation, onPort, inputArguments, outputArguments);
 				}
 			}
 			// Operation is both on a provided and a required interface
@@ -383,11 +386,11 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CS_CallOpe
 			{
 				if((executionContext == cS_target) || (cS_target->contains(executionContext)))
 				{
-					returnValue = cS_target->dispatchCallOut(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
+					returnValue = cS_target->dispatchCallOutByPort(operation, onPort, inputArguments, outputArguments);
 				}
 				else
 				{
-				returnValue = cS_target->dispatchCallIn(action->getOperation(), action->getOnPort(), inputArguments, outputArguments);
+				returnValue = cS_target->dispatchCallInByPort(operation, onPort, inputArguments, outputArguments);
 				}	
 			}
 
@@ -445,7 +448,7 @@ bool CS_CallOperationActionActivationImpl::isOperationProvided(const std::shared
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool isProvided = false;
-	if(std::dynamic_pointer_cast<uml::Interface>(operation->getOwner().lock()) != nullptr)
+	if(operation->getInterface().lock() != nullptr)
 	{
 		// We have to look in provided interfaces of the port if
 		// they define directly or indirectly the Operation
@@ -462,8 +465,8 @@ bool CS_CallOperationActionActivationImpl::isOperationProvided(const std::shared
 			{
 				const std::shared_ptr<uml::Operation>& cddOperation = allOperations->at(operationIndex-1);
 
-				//isProvided = (operation == cddOperation);
-				isProvided = operation->matches(cddOperation);
+				isProvided = (operation == cddOperation);
+				//isProvided = operation->matches(cddOperation);
 
 				operationIndex += 1;
 			}

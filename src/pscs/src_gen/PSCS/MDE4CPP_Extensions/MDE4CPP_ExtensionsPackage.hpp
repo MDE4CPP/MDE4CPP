@@ -14,20 +14,23 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EDataType;
-	class EAnnotation;
 	class EClass;
-	class EParameter;
 	class EOperation;
+	class EReference;
+	class EParameter;
+	class EEnum;
+	class EGenericType;
+	class EAnnotation;
+	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSCS::MDE4CPP_Extensions 
 {
 	class MDE4CPP_ConstructStrategy;
 	class PSCS_Link;
+	class PSCS_LinkEnd;
 	class PSCS_Object;
 }
  
@@ -76,48 +79,91 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_LINK_CLASS = 1393528252;
 			static const unsigned int PSCS_LINK_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 57;
+			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 63;
 			
 			
+			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY = 3349335570;
+			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_EINT = 2497370809;
+			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_CS_LINKKIND = 764209268;
+			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_CS_LINKKIND_EINT = 3276009815;
+			static const unsigned long PSCS_LINK_OPERATION_RETRIEVELINKKIND_FUML_OBJECT = 1682992812;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getPSCS_Link_Class() const = 0;
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_retrieveLinkKind_FUML_Object() const = 0;
 			
 			// End Class PSCS_Link
+
+
+			// Begin Class PSCS_LinkEnd
+			//Class and Feature IDs 
+			static const unsigned long PSCS_LINKEND_CLASS = 1711386748;
+			static const unsigned int PSCS_LINKEND_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int PSCS_LINKEND_CLASS_OPERATION_COUNT = 0;
+			static const unsigned long PSCS_LINKEND_ATTRIBUTE_KIND = 307586165;
+			
+			
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getPSCS_LinkEnd_Class() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EAttribute>& getPSCS_LinkEnd_Attribute_kind() const = 0;
+			
+			
+			
+			// End Class PSCS_LinkEnd
 
 
 			// Begin Class PSCS_Object
 			//Class and Feature IDs 
 			static const unsigned long PSCS_OBJECT_CLASS = 1088313541;
-			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 8;
+			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 64;
 			
-			static const unsigned long PSCS_OBJECT_ATTRIBUTE_COMPOSITEOWNER = 1481579593;
 			static const unsigned long PSCS_OBJECT_ATTRIBUTE_DEFININGPORT = 1420013449;
 			
 			static const unsigned long PSCS_OBJECT_OPERATION_CONSTRUCTOBJECT_CLASS = 3312036985;
 			static const unsigned long PSCS_OBJECT_OPERATION_CONTAINS_FUML_OBJECT = 480294208;
 			static const unsigned long PSCS_OBJECT_OPERATION_DIRECTLYCONTAINS_FUML_OBJECT = 3588575596;
-			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLIN_OPERATION_EJAVAOBJECT = 158727684;
-			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLOUT_OPERATION_EJAVAOBJECT = 3938656865;
+			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALL_OPERATION_EJAVAOBJECT_EJAVAOBJECT = 3206606566;
+			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLINBYPORT_OPERATION_PORT_EJAVAOBJECT_EJAVAOBJECT = 641059044;
+			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLINONINTERACTIONPOINT_OPERATION_PSCS_OBJECT_EJAVAOBJECT_EJAVAOBJECT = 2879969492;
+			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLOUTBYPORT_OPERATION_PORT_EJAVAOBJECT_EJAVAOBJECT = 3732415169;
+			static const unsigned long PSCS_OBJECT_OPERATION_DISPATCHCALLOUTONINTERACTIONPOINT_OPERATION_PSCS_OBJECT_EJAVAOBJECT_EJAVAOBJECT = 2135584625;
+			static const unsigned long PSCS_OBJECT_OPERATION_GETCOMPOSITEOWNER = 2803300241;
 			static const unsigned long PSCS_OBJECT_OPERATION_ISINTERACTIONPOINT = 4059681913;
+			static const unsigned long PSCS_OBJECT_OPERATION_ISOPERATIONPROVIDED_PSCS_OBJECT_OPERATION = 3516249720;
+			static const unsigned long PSCS_OBJECT_OPERATION_ISOPERATIONPROVIDED_OPERATION = 3365822900;
+			static const unsigned long PSCS_OBJECT_OPERATION_ISOPERATIONREQUIRED_PSCS_OBJECT_OPERATION = 762532692;
+			static const unsigned long PSCS_OBJECT_OPERATION_ISOPERATIONREQUIRED_OPERATION = 612105872;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getPSCS_Object_Class() const = 0;
 			
 			
-			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_compositeOwner() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_definingPort() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_constructObject_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_contains_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_directlyContains_FUML_Object() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallInByPort_Operation_Port_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallInOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOutByPort_Operation_Port_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOutOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_getCompositeOwner() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isInteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationProvided_PSCS_Object_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationProvided_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationRequired_PSCS_Object_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationRequired_Operation() const = 0;
 			
 			// End Class PSCS_Object
 

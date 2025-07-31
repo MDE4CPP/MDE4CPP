@@ -4,14 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
@@ -98,8 +100,43 @@ const std::shared_ptr<ecore::EClass>& PSCS::MDE4CPP_Extensions::MDE4CPP_Extensio
 
 
 
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Operation_add_FUML_Object_Property() const
+{
+	return m_pSCS_Link_Operation_add_FUML_Object_Property;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Operation_add_FUML_Object_Property_EInt() const
+{
+	return m_pSCS_Link_Operation_add_FUML_Object_Property_EInt;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind() const
+{
+	return m_pSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind_EInt() const
+{
+	return m_pSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind_EInt;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Operation_retrieveLinkKind_FUML_Object() const
+{
+	return m_pSCS_Link_Operation_retrieveLinkKind_FUML_Object;
+}
 
 // End Class PSCS_Link
+
+// Begin Class PSCS_LinkEnd
+const std::shared_ptr<ecore::EClass>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_LinkEnd_Class() const
+{
+	return m_pSCS_LinkEnd_Class;
+}
+
+const std::shared_ptr<ecore::EAttribute>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_LinkEnd_Attribute_kind() const
+{
+	return m_pSCS_LinkEnd_Attribute_kind;
+}
+
+
+
+// End Class PSCS_LinkEnd
 
 // Begin Class PSCS_Object
 const std::shared_ptr<ecore::EClass>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Class() const
@@ -108,10 +145,6 @@ const std::shared_ptr<ecore::EClass>& PSCS::MDE4CPP_Extensions::MDE4CPP_Extensio
 }
 
 
-const std::shared_ptr<ecore::EReference>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Attribute_compositeOwner() const
-{
-	return m_pSCS_Object_Attribute_compositeOwner;
-}
 const std::shared_ptr<ecore::EReference>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Attribute_definingPort() const
 {
 	return m_pSCS_Object_Attribute_definingPort;
@@ -129,17 +162,49 @@ const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_pSCS_Object_Operation_directlyContains_FUML_Object;
 }
-const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject() const
 {
-	return m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject;
+	return m_pSCS_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallInByPort_Operation_Port_EJavaObject_EJavaObject() const
 {
-	return m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject;
+	return m_pSCS_Object_Operation_dispatchCallInByPort_Operation_Port_EJavaObject_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallInOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject() const
+{
+	return m_pSCS_Object_Operation_dispatchCallInOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallOutByPort_Operation_Port_EJavaObject_EJavaObject() const
+{
+	return m_pSCS_Object_Operation_dispatchCallOutByPort_Operation_Port_EJavaObject_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_dispatchCallOutOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject() const
+{
+	return m_pSCS_Object_Operation_dispatchCallOutOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_getCompositeOwner() const
+{
+	return m_pSCS_Object_Operation_getCompositeOwner;
 }
 const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_isInteractionPoint() const
 {
 	return m_pSCS_Object_Operation_isInteractionPoint;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_isOperationProvided_PSCS_Object_Operation() const
+{
+	return m_pSCS_Object_Operation_isOperationProvided_PSCS_Object_Operation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_isOperationProvided_Operation() const
+{
+	return m_pSCS_Object_Operation_isOperationProvided_Operation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_isOperationRequired_PSCS_Object_Operation() const
+{
+	return m_pSCS_Object_Operation_isOperationRequired_PSCS_Object_Operation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_isOperationRequired_Operation() const
+{
+	return m_pSCS_Object_Operation_isOperationRequired_Operation;
 }
 
 // End Class PSCS_Object

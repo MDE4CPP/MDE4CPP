@@ -17,6 +17,7 @@
 namespace MDE4CPP_Extensions 
 {	class MDE4CPP_ConstructStrategy;
 	class PSCS_Link;
+	class PSCS_LinkEnd;
 	class PSCS_Object;
 }
 
@@ -44,6 +45,9 @@ namespace PSCS::MDE4CPP_Extensions
 			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> createPSCS_Link(const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> createPSCS_Link_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_LINK_CLASS) const ;
+			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> createPSCS_LinkEnd(const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_LINKEND_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> createPSCS_LinkEnd_as_linkEnds_in_FUML_Link(std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> par_FUML_Link, const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_LINKEND_CLASS) const ;
 			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> createPSCS_Object(const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> createPSCS_Object_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = MDE4CPP_ExtensionsPackage::PSCS_OBJECT_CLASS) const ;

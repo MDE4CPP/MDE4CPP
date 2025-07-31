@@ -43,10 +43,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -57,6 +57,7 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+#include "uml/Operation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Property.hpp"
 //Factories and Package includes
@@ -182,6 +183,14 @@ void FUML_ObjectImpl::destroy(bool isDestroyLinks, bool isDestroyOwnedObjects)
 	}
 	
 	this->destroy();
+	//end of body
+}
+
+std::shared_ptr<Any> FUML_ObjectImpl::dispatchCall(const std::shared_ptr<uml::Operation>& operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->invoke(operation, inputArguments, outputArguments);
 	//end of body
 }
 
@@ -773,6 +782,66 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			}
 		
 			this->destroy(incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::dispatchCall(uml::Operation, Any[*], Any[*]) : Any: 2639705452
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_DISPATCHCALL_OPERATION_EJAVAOBJECT:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			Bag<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_operation_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'dispatchCall'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'operation'. Failed to invoke operation 'dispatchCall'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 1
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'dispatchCall'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'dispatchCall'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->dispatchCall(incoming_param_operation,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::getTypes() : uml::Classifier[*] {const}: 1742598842

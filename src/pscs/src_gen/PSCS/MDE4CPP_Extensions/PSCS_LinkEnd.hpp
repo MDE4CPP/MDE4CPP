@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_LINK_HPP
-#define PSCS_MDE4CPP_EXTENSIONS_PSCS_LINK_HPP
+#ifndef PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKEND_HPP
+#define PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKEND_HPP
 
 
 #include <memory>
@@ -32,26 +32,12 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ObjectActivation;
-}
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 namespace fUML::MDE4CPP_Extensions 
 {
-	class FUML_LinkEnd;
-}
-namespace ecore 
-{
-	class EAnnotation;
+	class FUML_Object;
 }
 namespace uml 
 {
-	class Association;
-	class Comment;
 	class Property;
 }
 
@@ -59,7 +45,7 @@ namespace uml
 #include "PSCS/PSCS.hpp"
 
 // base class includes
-#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
 
 // enum includes
 #include "PSCS/Semantics/StructuredClassifiers/CS_LinkKind.hpp"
@@ -70,32 +56,29 @@ namespace uml
 namespace PSCS::MDE4CPP_Extensions 
 {
 	
-	class PSCS_API PSCS_Link : virtual public fUML::MDE4CPP_Extensions::FUML_Link
+	class PSCS_API PSCS_LinkEnd : virtual public fUML::MDE4CPP_Extensions::FUML_LinkEnd
 	{
 		public:
- 			PSCS_Link(const PSCS_Link &) {}
+ 			PSCS_LinkEnd(const PSCS_LinkEnd &) {}
 
 		protected:
-			PSCS_Link(){}
+			PSCS_LinkEnd(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~PSCS_Link() {}
+			virtual ~PSCS_LinkEnd() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end) = 0;
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position) = 0;
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind) = 0;
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind, int position) = 0;
-			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind retrieveLinkKind(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind getKind() const = 0;
+			virtual void setKind (PSCS::Semantics::StructuredClassifiers::CS_LinkKind _kind)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -121,10 +104,11 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind m_kind= PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 	};
 }
-#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_LINK_HPP */
+#endif /* end of include guard: PSCS_MDE4CPP_EXTENSIONS_PSCS_LINKEND_HPP */

@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
@@ -147,7 +147,7 @@ void ActionsPackageImpl::createCS_RemoveStructuralFeatureValueActionActivationCo
 	
 	
 	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_cS_RemoveStructuralFeatureValueActionActivation_Class, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
-	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_cS_RemoveStructuralFeatureValueActionActivation_Class, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_EJAVAOBJECT);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_Element_StructuralFeature_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_cS_RemoveStructuralFeatureValueActionActivation_Class, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_ELEMENT_STRUCTURALFEATURE_EJAVAOBJECT);
 	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_PSCS_Object_StructuralFeature = factory->createEOperation_as_eOperations_in_EClass(m_cS_RemoveStructuralFeatureValueActionActivation_Class, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_PSCS_OBJECT_STRUCTURALFEATURE);
 	
 }

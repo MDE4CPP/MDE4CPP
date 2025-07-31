@@ -20,6 +20,7 @@ namespace PSCS::MDE4CPP_Extensions
 {
 	class MDE4CPP_ConstructStrategy;
 	class PSCS_Link;
+	class PSCS_LinkEnd;
 	class PSCS_Object;}
 
 namespace ecore
@@ -57,23 +58,45 @@ namespace PSCS::MDE4CPP_Extensions
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_retrieveLinkKind_FUML_Object() const ;
 			
 			// End Class PSCS_Link
+
+			// Begin Class PSCS_LinkEnd
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getPSCS_LinkEnd_Class() const ;
+			
+			virtual const std::shared_ptr<ecore::EAttribute>& getPSCS_LinkEnd_Attribute_kind() const ;
+			
+			
+			
+			// End Class PSCS_LinkEnd
 
 			// Begin Class PSCS_Object
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getPSCS_Object_Class() const ;
 			
 			
-			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_compositeOwner() const ;
 			virtual const std::shared_ptr<ecore::EReference>& getPSCS_Object_Attribute_definingPort() const ;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_constructObject_Class() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_contains_FUML_Object() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_directlyContains_FUML_Object() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallInByPort_Operation_Port_EJavaObject_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallInOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOutByPort_Operation_Port_EJavaObject_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_dispatchCallOutOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_getCompositeOwner() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isInteractionPoint() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationProvided_PSCS_Object_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationProvided_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationRequired_PSCS_Object_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationRequired_Operation() const ;
 			
 			// End Class PSCS_Object
 
@@ -82,11 +105,11 @@ namespace PSCS::MDE4CPP_Extensions
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_mDE4CPP_ConstructStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_Link_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_Object_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_mDE4CPP_ConstructStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_Link_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_LinkEnd_Class = nullptr;std::shared_ptr<ecore::EClass> m_pSCS_Object_Class = nullptr;
 			
-			
-			std::shared_ptr<ecore::EReference> m_pSCS_Object_Attribute_compositeOwner = nullptr;std::shared_ptr<ecore::EReference> m_pSCS_Object_Attribute_definingPort = nullptr;
-			std::shared_ptr<ecore::EOperation> m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_constructObject_Class = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_contains_FUML_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_directlyContains_FUML_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallIn_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallOut_Operation_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isInteractionPoint = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_pSCS_LinkEnd_Attribute_kind = nullptr;
+			std::shared_ptr<ecore::EReference> m_pSCS_Object_Attribute_definingPort = nullptr;
+			std::shared_ptr<ecore::EOperation> m_pSCS_Link_Operation_add_FUML_Object_Property = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Link_Operation_add_FUML_Object_Property_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_mDE4CPP_ConstructStrategy_Operation_construct_Operation_PSCS_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_constructObject_Class = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_contains_FUML_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_directlyContains_FUML_Object = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallInByPort_Operation_Port_EJavaObject_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallInOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallOutByPort_Operation_Port_EJavaObject_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_dispatchCallOutOnInteractionPoint_Operation_PSCS_Object_EJavaObject_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_getCompositeOwner = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isInteractionPoint = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isOperationProvided_PSCS_Object_Operation = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isOperationProvided_Operation = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isOperationRequired_PSCS_Object_Operation = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Object_Operation_isOperationRequired_Operation = nullptr;std::shared_ptr<ecore::EOperation> m_pSCS_Link_Operation_retrieveLinkKind_FUML_Object = nullptr;
 
 			friend class MDE4CPP_ExtensionsPackage;
 
@@ -104,11 +127,13 @@ namespace PSCS::MDE4CPP_Extensions
 		private:
 			void createMDE4CPP_ConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPSCS_LinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPSCS_LinkEndContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPSCS_ObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeMDE4CPP_ConstructStrategyContent();
 			void initializePSCS_LinkContent();
+			void initializePSCS_LinkEndContent();
 			void initializePSCS_ObjectContent();
 			void initializePackageEDataTypes();
 

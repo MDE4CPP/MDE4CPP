@@ -47,6 +47,7 @@
 #include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 //Factories and Package includes
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
