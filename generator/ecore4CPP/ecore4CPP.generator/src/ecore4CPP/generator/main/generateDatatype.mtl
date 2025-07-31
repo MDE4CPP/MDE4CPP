@@ -14,7 +14,9 @@
  */]
 [module generateDatatype('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::IDHelper /]
 
 [***###########################################################################################
  * Section for creating the Attribute elements in the metamodel package
@@ -29,10 +31,11 @@
 [adatatype.getClassMemberName()/]->setName("[adatatype.name/]");
 [if (not adatatype.oclIsKindOf(EEnum))]
 [adatatype.getClassMemberName()/]->setSerializable([adatatype.serializable.toString()/]);
+[adatatype.getClassMemberName()/]->_setID([adatatype.getStaticAttributeIDName()/]);
 [/if]
 [/template]
 
 [template public generateStaticDatatypeID(aEDatatype : EDataType)]
-static const int [aEDatatype.getStaticAttributeIDName()/] = [aEDatatype.getMyClassifierID()/];
+static const unsigned long [aEDatatype.getStaticAttributeIDName()/] = [aEDatatype.transformType().generatePolynomialRollingHash(false)/];
 
 [/template]
