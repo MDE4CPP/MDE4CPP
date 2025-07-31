@@ -47,7 +47,7 @@ m_[aProperty.name/]->constructObject([aProperty.type.generatePackageGetterCall()
 [elseif (aProperty.canInstantiate())]
 //instantiate [aProperty.eClass().name/] '[aProperty.name/]'
 [aProperty.generateContainerPropertyInit()/]
-	[if (aProperty.getUpper() = -1 and aProperty.getLower() > 0 and (not aProperty.type.oclIsTypeOf(Interface)))]
+	[if (aProperty.getUpper() <> 1 and aProperty.getLower() > 0 and (not aProperty.type.oclIsTypeOf(Interface)))]
 for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 {
 	[aProperty.generatePartInstantiation()/]
