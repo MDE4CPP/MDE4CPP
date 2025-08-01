@@ -41,6 +41,8 @@
 [for (memberEnd : Property | anAssociation.memberEnd)]
 [memberEnd.generatePackageGetterCall(anAssociation)/]->setAssociation([anAssociation.memberName()/]);
 [/for]
+[if (not isReflectionModel(anAssociation.getRootPackage()))]
 [anAssociation.memberName()/]->_setID([anAssociation.getMemberName().toUpperCase()/]);
+[/if]
 [anAssociation.generateStereotypeApplication()/]
 [/template]
