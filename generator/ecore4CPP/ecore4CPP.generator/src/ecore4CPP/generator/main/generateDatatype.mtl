@@ -36,6 +36,42 @@
 [/template]
 
 [template public generateStaticDatatypeID(aEDatatype : EDataType)]
-static const unsigned long [aEDatatype.getStaticAttributeIDName()/] = [aEDatatype.transformType().generatePolynomialRollingHash(false)/];
+static const unsigned long [aEDatatype.getStaticAttributeIDName()/] = [if(aEDatatype.isBuiltInType())][aEDatatype.name.generatePolynomialRollingHash(false)/][else][aEDatatype.transformType().generatePolynomialRollingHash(false)/][/if];
 
 [/template]
+
+[query private isBuiltInType(anEDataType : EDataType) : Boolean =  
+	anEDataType.name = 'EBigDecimal' or
+	anEDataType.name = 'EBigInteger' or
+	anEDataType.name = 'EBoolean' or
+	anEDataType.name = 'EBooleanObject' or
+	anEDataType.name = 'EByte' or
+	anEDataType.name = 'EByteArray' or
+	anEDataType.name = 'EByteObject' or
+	anEDataType.name = 'EChar' or
+	anEDataType.name = 'ECharacterObject' or
+	anEDataType.name = 'EDate' or
+	anEDataType.name = 'EDiagnosticChain' or
+	anEDataType.name = 'EDouble' or
+	anEDataType.name = 'EDoubleObject' or
+	anEDataType.name = 'EEList' or
+	anEDataType.name = 'EEnumerator' or
+	anEDataType.name = 'EFeatureMap' or
+	anEDataType.name = 'EFeatureMapEntry' or
+	anEDataType.name = 'EFloat' or
+	anEDataType.name = 'EFloatObject' or
+	anEDataType.name = 'EInt' or
+	anEDataType.name = 'EIntegerObject' or
+	anEDataType.name = 'EInvocationTargetException' or
+	anEDataType.name = 'EJavaClass' or
+	anEDataType.name = 'EJavaObject' or
+	anEDataType.name = 'ELong' or
+	anEDataType.name = 'ELongObject' or
+	anEDataType.name = 'EMap' or
+	anEDataType.name = 'EResource' or
+	anEDataType.name = 'EResourceSet' or
+	anEDataType.name = 'EShort' or
+	anEDataType.name = 'EShortObject' or
+	anEDataType.name = 'EString' or
+	anEDataType.name = 'ETreeIterator'
+/]
