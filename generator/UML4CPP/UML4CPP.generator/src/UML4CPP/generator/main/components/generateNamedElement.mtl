@@ -69,6 +69,11 @@ const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.getNearestPac
 {
 	return [anElement.oclAsType(ConnectorEnd).memberName()/];
 }
+[elseif (anElement.oclIsKindOf(LinkEndData))]
+const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.getNearestPackage().name/]PackageImpl::[anElement.oclAsType(LinkEndData).generatePackageGetterCall(anElement.oclAsType(LinkEndData))/]
+{
+	return [anElement.oclAsType(LinkEndData).memberName()/];
+}
 [else]
 [printError('Undefined Element found: ' + anElement.toString(), 'UML4CPP::generator::main::components::generateNamedElement')/]
 [/if]

@@ -612,7 +612,14 @@ std::shared_ptr<Any> [className/]::dispatchCallInOnInteractionPoint(const std::s
 		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
 		{
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> cS_Link = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Link>(link);
-			if(cS_Link->retrieveLinkKind(interactionPoint) == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOINTERNAL)
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind linkKind = cS_Link->retrieveLinkKind(interactionPoint);
+			if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN)
+			{
+				// LinkKind has to be calculated
+				linkKind = this->retrieveLinkKind(cS_Link, interactionPoint);
+				cS_Link->assignLinkKind(interactionPoint, linkKind);
+			}
+			if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOINTERNAL)
 			{
 				potentialTargets->add(cS_Link->retrieveOtherLinkEndValue(interactionPoint->getDefiningPort()));
 			}
@@ -676,7 +683,14 @@ std::shared_ptr<Any> [className/]::dispatchCallOutOnInteractionPoint(const std::
 	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
 	{
 		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> cS_Link = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Link>(link);
-		if(cS_Link->retrieveLinkKind(interactionPoint) == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOENVIRONMENT)
+		PSCS::Semantics::StructuredClassifiers::CS_LinkKind linkKind = cS_Link->retrieveLinkKind(interactionPoint);
+		if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN)
+		{
+			// LinkKind has to be calculated
+			linkKind = this->retrieveLinkKind(cS_Link, interactionPoint);
+			cS_Link->assignLinkKind(interactionPoint, linkKind);
+		}
+		if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOENVIRONMENT)
 		{
 			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> otherEndValue = cS_Link->retrieveOtherLinkEndValue(interactionPoint->getDefiningPort());
 			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(otherEndValue);

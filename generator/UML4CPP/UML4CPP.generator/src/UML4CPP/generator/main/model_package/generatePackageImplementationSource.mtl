@@ -256,6 +256,14 @@ void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aP
 [for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	//[anAssociation.name/]
 	[anAssociation.memberName()/] = factory->createAssociation_as_ownedType_in_Package([aPackage.memberName()/]);
+	[for (ownedEnd : Property | anAssociation.ownedEnd)]
+	//Member end [ownedEnd.name/]
+	[ownedEnd.memberName()/] = factory->createProperty_as_ownedEnd_in_Association([anAssociation.memberName()/]);
+	[/for]
+	[for (memberEnd : Property | anAssociation.memberEnd->removeAll(anAssociation.ownedEnd))]
+	//Member end [memberEnd.name/]
+	[memberEnd.memberName()/] = factory->createProperty_as_memberEnd_in_Association([anAssociation.memberName()/]);
+	[/for]
 [/for]
 }
 
@@ -662,6 +670,7 @@ void [packageName/]::initializePackageValueSpecifications()
 [comment Getter for ownedMember /]
 [(aPackage.getElementsBelongingToPackage()->filter(NamedElement)->reject(oclIsKindOf(ValueSpecification)))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 [(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[(aPackage.getElementsBelongingToPackage()->filter(LinkEndData))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 
 [for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
 [subPackage.generateSubPackageGetterImpl(aPackage)/]

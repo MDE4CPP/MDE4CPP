@@ -35,7 +35,7 @@
 
 namespace uml 
 {
-[for (nE : EClass | OrderedSet{(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
+[for (nE : EClass | OrderedSet{(aPackage.getElementsBelongingToPackage()-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
 	class [nE.name/];
 [/for]
 [if (aPackage.hasActivity())]

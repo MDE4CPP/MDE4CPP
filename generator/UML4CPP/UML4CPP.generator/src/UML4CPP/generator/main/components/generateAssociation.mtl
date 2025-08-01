@@ -39,7 +39,7 @@
 [/for]
 [/comment]
 [for (memberEnd : Property | anAssociation.memberEnd)]
-[anAssociation.memberName()/]->getMemberEnd()->add([memberEnd.generatePackageGetterCall(anAssociation)/]);
+[memberEnd.generatePackageGetterCall(anAssociation)/]->setAssociation([anAssociation.memberName()/]);
 [/for]
 [anAssociation.memberName()/]->_setID([anAssociation.getMemberName().toUpperCase()/]);
 [anAssociation.generateStereotypeApplication()/]
