@@ -116,6 +116,10 @@ const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_pSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind_EInt;
 }
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind() const
+{
+	return m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind;
+}
 const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Link_Operation_retrieveLinkKind_FUML_Object() const
 {
 	return m_pSCS_Link_Operation_retrieveLinkKind_FUML_Object;
@@ -205,6 +209,10 @@ const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_Exte
 const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_isOperationRequired_Operation() const
 {
 	return m_pSCS_Object_Operation_isOperationRequired_Operation;
+}
+const std::shared_ptr<ecore::EOperation>& PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getPSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object() const
+{
+	return m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object;
 }
 
 // End Class PSCS_Object

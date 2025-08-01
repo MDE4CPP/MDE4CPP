@@ -46,6 +46,10 @@ namespace fUML::MDE4CPP_Extensions
 {
 	class FUML_Link;
 }
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Link;
+}
 namespace ecore 
 {
 	class EAnnotation;
@@ -64,6 +68,8 @@ namespace uml
 // base class includes
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 
+// enum includes
+#include "PSCS/Semantics/StructuredClassifiers/CS_LinkKind.hpp"
 
 
 
@@ -102,6 +108,7 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual bool isOperationProvided(const std::shared_ptr<uml::Operation>& operation) = 0;
 			virtual bool isOperationRequired(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& object, const std::shared_ptr<uml::Operation>& operation) = 0;
 			virtual bool isOperationRequired(const std::shared_ptr<uml::Operation>& operation) = 0;
+			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind retrieveLinkKind(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link>& link, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& interactionPoint) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

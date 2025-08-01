@@ -174,7 +174,7 @@ void PSCS_LinkEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			PSCS::Semantics::StructuredClassifiers::CS_LinkKind value = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE;
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind value = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN;
 			std::string literal = iter->second;
 						if (literal == "ToEnvironment")
 			{
@@ -187,6 +187,10 @@ void PSCS_LinkEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 			else 			if (literal == "None")
 			{
 				value = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE;
+			}
+			else 			if (literal == "Unknown")
+			{
+				value = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN;
 			}
 			this->setKind(value);
 		}
@@ -246,6 +250,10 @@ void PSCS_LinkEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			{
 				literal = "None";
 			}
+			else if (value == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN)
+			{
+				literal = "Unknown";
+			}
 			saveHandler->addAttribute("kind", literal);
           }
 	}
@@ -278,7 +286,7 @@ bool PSCS_LinkEndImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::PSCS_LINKEND_ATTRIBUTE_KIND:
-			return m_kind != PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE;; //333
+			return m_kind != PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN;; //333
 	}
 	return fUML::MDE4CPP_Extensions::FUML_LinkEndImpl::internalEIsSet(featureID);
 }

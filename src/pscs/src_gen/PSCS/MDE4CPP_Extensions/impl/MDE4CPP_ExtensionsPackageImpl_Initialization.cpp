@@ -311,6 +311,41 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_LinkContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind->setName("assignLinkKind");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind->setEType(unknownClass);
+	}
+	m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind->setLowerBound(1);
+	m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind->setUpperBound(1);
+	m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind->setUnique(true);
+	m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind->setOrdered(true);
+	
+	m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind->_setID(PSCS_LINK_OPERATION_ASSIGNLINKKIND_FUML_OBJECT_CS_LINKKIND);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind);
+		parameter->setName("object");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind);
+		parameter->setName("kind");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_pSCS_Link_Operation_retrieveLinkKind_FUML_Object->setName("retrieveLinkKind");
 	m_pSCS_Link_Operation_retrieveLinkKind_FUML_Object->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_LinkKind_Class());
 	m_pSCS_Link_Operation_retrieveLinkKind_FUML_Object->setLowerBound(1);
@@ -357,7 +392,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_LinkEndContent()
 	m_pSCS_LinkEnd_Attribute_kind->setDerived(false);
 	m_pSCS_LinkEnd_Attribute_kind->setOrdered(true);
 	m_pSCS_LinkEnd_Attribute_kind->setID(false);
-	m_pSCS_LinkEnd_Attribute_kind->setDefaultValueLiteral("None");
+	m_pSCS_LinkEnd_Attribute_kind->setDefaultValueLiteral("Unknown");
 	
 	m_pSCS_LinkEnd_Attribute_kind->_setID(PSCS_LINKEND_ATTRIBUTE_KIND);
 	
@@ -814,6 +849,35 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_ObjectContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_isOperationRequired_Operation);
 		parameter->setName("operation");
 		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object->setName("retrieveLinkKind");
+	m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_LinkKind_Class());
+	m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object->setLowerBound(1);
+	m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object->setUpperBound(1);
+	m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object->setUnique(true);
+	m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object->setOrdered(true);
+	
+	m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object->_setID(PSCS_OBJECT_OPERATION_RETRIEVELINKKIND_PSCS_LINK_PSCS_OBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object);
+		parameter->setName("link");
+		parameter->setEType(getPSCS_Link_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_pSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object);
+		parameter->setName("interactionPoint");
+		parameter->setEType(getPSCS_Object_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

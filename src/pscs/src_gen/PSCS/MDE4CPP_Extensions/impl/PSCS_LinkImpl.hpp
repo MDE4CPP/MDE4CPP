@@ -47,6 +47,7 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, int position) ;
 			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind) ;
 			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, const std::shared_ptr<uml::Property>& end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind, int position) ;
+			virtual void assignLinkKind(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind) ;
 			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind retrieveLinkKind(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object) ;
 			
 			//*********************************

@@ -18,6 +18,9 @@ namespace PSCS::Semantics::StructuredClassifiers
 ,
 		
 		TOINTERNAL = 1
+,
+		
+		UNKNOWN = 3
 	};
 }
 #endif /* end of include guard: CS_LINKKIND_HPP */

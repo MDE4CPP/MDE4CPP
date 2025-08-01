@@ -57,6 +57,7 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual bool isOperationProvided(const std::shared_ptr<uml::Operation>& operation) ;
 			virtual bool isOperationRequired(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& object, const std::shared_ptr<uml::Operation>& operation) ;
 			virtual bool isOperationRequired(const std::shared_ptr<uml::Operation>& operation) ;
+			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind retrieveLinkKind(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link>& link, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& interactionPoint) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

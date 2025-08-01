@@ -79,13 +79,14 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_LINK_CLASS = 1393528252;
 			static const unsigned int PSCS_LINK_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 63;
+			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 64;
 			
 			
 			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY = 3349335570;
 			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_EINT = 2497370809;
 			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_CS_LINKKIND = 764209268;
 			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_CS_LINKKIND_EINT = 3276009815;
+			static const unsigned long PSCS_LINK_OPERATION_ASSIGNLINKKIND_FUML_OBJECT_CS_LINKKIND = 132318393;
 			static const unsigned long PSCS_LINK_OPERATION_RETRIEVELINKKIND_FUML_OBJECT = 1682992812;
 			
 			//Class and Feature Getter
@@ -97,6 +98,7 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_EInt() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_add_FUML_Object_Property_CS_LinkKind_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_assignLinkKind_FUML_Object_CS_LinkKind() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Link_Operation_retrieveLinkKind_FUML_Object() const = 0;
 			
 			// End Class PSCS_Link
@@ -125,7 +127,7 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_OBJECT_CLASS = 1088313541;
 			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 64;
+			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 65;
 			
 			static const unsigned long PSCS_OBJECT_ATTRIBUTE_DEFININGPORT = 1420013449;
 			
@@ -143,6 +145,7 @@ namespace PSCS::MDE4CPP_Extensions
 			static const unsigned long PSCS_OBJECT_OPERATION_ISOPERATIONPROVIDED_OPERATION = 3365822900;
 			static const unsigned long PSCS_OBJECT_OPERATION_ISOPERATIONREQUIRED_PSCS_OBJECT_OPERATION = 762532692;
 			static const unsigned long PSCS_OBJECT_OPERATION_ISOPERATIONREQUIRED_OPERATION = 612105872;
+			static const unsigned long PSCS_OBJECT_OPERATION_RETRIEVELINKKIND_PSCS_LINK_PSCS_OBJECT = 549157662;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getPSCS_Object_Class() const = 0;
@@ -164,6 +167,7 @@ namespace PSCS::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationProvided_Operation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationRequired_PSCS_Object_Operation() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_isOperationRequired_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPSCS_Object_Operation_retrieveLinkKind_PSCS_Link_PSCS_Object() const = 0;
 			
 			// End Class PSCS_Object
 

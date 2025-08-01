@@ -43,8 +43,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Association.hpp"
@@ -134,7 +134,7 @@ void PSCS_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Obj
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->add(object, end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE);
+	this->add(object, end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN);
 	//end of body
 }
 
@@ -142,7 +142,7 @@ void PSCS_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Obj
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->add(object, end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE, position);
+	this->add(object, end, PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN, position);
 	//end of body
 }
 
@@ -197,6 +197,22 @@ void PSCS_LinkImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Obj
 	}
 
 	object->getLinks()->add(this->getThisFUML_LinkPtr());
+	//end of body
+}
+
+void PSCS_LinkImpl::assignLinkKind(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object, PSCS::Semantics::StructuredClassifiers::CS_LinkKind kind)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();
+
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd : *linkEnds)
+	{
+		if(linkEnd->getEndValue() == object)
+		{
+			std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd>(linkEnd)->setKind(kind);
+		}
+	}
 	//end of body
 }
 
@@ -630,6 +646,52 @@ std::shared_ptr<Any> PSCS_LinkImpl::eInvoke(int operationID, const std::shared_p
 			}
 		
 			this->add(incoming_param_object,incoming_param_end,incoming_param_kind,incoming_param_position);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Link::assignLinkKind(fUML::MDE4CPP_Extensions::FUML_Object, PSCS::Semantics::StructuredClassifiers::CS_LinkKind): 132318393
+		case MDE4CPP_ExtensionsPackage::PSCS_LINK_OPERATION_ASSIGNLINKKIND_FUML_OBJECT_CS_LINKKIND:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_object;
+			Bag<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_object_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'assignLinkKind'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'object'. Failed to invoke operation 'assignLinkKind'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'kind'
+			//parameter 1
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind incoming_param_kind;
+			Bag<Any>::const_iterator incoming_param_kind_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_kind = (*incoming_param_kind_arguments_citer)->get<PSCS::Semantics::StructuredClassifiers::CS_LinkKind>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'kind'. Failed to invoke operation 'assignLinkKind'!")
+				return nullptr;
+			}
+		
+			this->assignLinkKind(incoming_param_object,incoming_param_kind);
 			break;
 		}
 		// PSCS::MDE4CPP_Extensions::PSCS_Link::retrieveLinkKind(fUML::MDE4CPP_Extensions::FUML_Object) : PSCS::Semantics::StructuredClassifiers::CS_LinkKind: 1682992812

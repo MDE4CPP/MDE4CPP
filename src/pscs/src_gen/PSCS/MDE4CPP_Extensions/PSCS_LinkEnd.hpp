@@ -104,7 +104,7 @@ namespace PSCS::MDE4CPP_Extensions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			PSCS::Semantics::StructuredClassifiers::CS_LinkKind m_kind= PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE;
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind m_kind= PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN;
 			
 			//*********************************
 			// Reference Members

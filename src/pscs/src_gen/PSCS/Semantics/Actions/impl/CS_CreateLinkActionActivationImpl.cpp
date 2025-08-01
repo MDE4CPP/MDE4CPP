@@ -153,56 +153,69 @@ void CS_CreateLinkActionActivationImpl::doAction()
 	// fUML semantics is extended in the sense that a CS_Link is created instead of
 	// a Link
 
-	const std::shared_ptr<uml::CreateLinkAction>& action = std::dynamic_pointer_cast<uml::CreateLinkAction>(this->getNode());
-	std::shared_ptr<Bag<uml::LinkEndCreationData>> endDataList = std::dynamic_pointer_cast<Bag<uml::LinkEndCreationData>>(action->getEndData());
+	const std::shared_ptr<uml::CreateLinkAction>& action = this->getCreateLinkAction();
+	const std::shared_ptr<Bag<uml::LinkEndData>>& endDataList = action->getEndData();
+	std::shared_ptr<Bag<uml::LinkEndCreationData>> endCreationDataList(new Bag<uml::LinkEndCreationData>());
 	
-	std::shared_ptr<uml::Association> linkAssociation = this->getAssociation();
-	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> extent = this->getExecutionLocus()->retrieveExtent(linkAssociation);
-	
-	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> oldLink = nullptr;
-	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value : *extent) {
-		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> link = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Link>(value);
-		
-		bool noMatch = true;
-		unsigned int j = 1, endDataListSize = endDataList->size();
-		while ((noMatch) && (j <= endDataListSize)) {
-			const std::shared_ptr<uml::LinkEndCreationData>& endData = endDataList->at(j-1);
-			if((endData->getIsReplaceAll()) && (this->endMatchesEndData(link, endData))) {
-				oldLink = link;
-				link->destroy();
-				noMatch = false;
-			}
-			j += 1;
-		}
+	for(const std::shared_ptr<uml::LinkEndData>& endData : *endDataList)
+	{
+		endCreationDataList->add(std::dynamic_pointer_cast<uml::LinkEndCreationData>(endData));
 	}
-	
-	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
-	newLink->setType(linkAssociation);
-	// This is necessary when setting a feature value with an insertAt position
-	newLink->setLocus(this->getExecutionLocus());
-	
-	for(const std::shared_ptr<uml::LinkEndCreationData>& endData : *endDataList) {
+
+	if(endCreationDataList->size() != 2)
+	{
+		DEBUG_ERROR("Only binary links are allowed! Link will not be created!")
+	}
+	else
+	{
+		std::shared_ptr<uml::Association> linkAssociation = this->getAssociation();
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> extent = this->getExecutionLocus()->retrieveExtent(linkAssociation);
 		
-		int insertAt;
-		if (endData->getInsertAt() == nullptr) {
-			insertAt = 0;
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> oldLink = nullptr;
+		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value : *extent) {
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> link = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Link>(value);
+
+			bool noMatch = true;
+			unsigned int j = 1, endCreationDataListSize = endCreationDataList->size();
+			while ((noMatch) && (j <= endCreationDataListSize)) {
+				const std::shared_ptr<uml::LinkEndCreationData>& endData = endCreationDataList->at(j-1);
+				if((endData->getIsReplaceAll()) && (this->endMatchesEndData(link, endData))) {
+					oldLink = link;
+					link->destroy();
+					noMatch = false;
+				}
+				j += 1;
+			}
 		}
-		else {
-			insertAt = (this->takeTokens(endData->getInsertAt())->at(0))->get<int>();
-			if(oldLink != nullptr) {
-				if(oldLink->retrieveLinkEnd(endData->getEnd())->getPosition() < insertAt) {
-					insertAt = insertAt - 1;
+
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> newLink = PSCS::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactory::eInstance()->createPSCS_Link();
+		newLink->setType(linkAssociation);
+		// This is necessary when setting a feature value with an insertAt position
+		newLink->setLocus(this->getExecutionLocus());
+
+		for(const std::shared_ptr<uml::LinkEndCreationData>& endData : *endCreationDataList) {
+
+			int insertAt;
+			if (endData->getInsertAt() == nullptr) {
+				insertAt = 0;
+			}
+			else {
+				insertAt = (this->takeTokens(endData->getInsertAt())->at(0))->get<int>();
+				if(oldLink != nullptr) {
+					if(oldLink->retrieveLinkEnd(endData->getEnd())->getPosition() < insertAt) {
+						insertAt = insertAt - 1;
+					}
 				}
 			}
+
+			std::shared_ptr<uml::Element> firstTokenElement = retrieveAnyValueAsUMLElement(this->takeTokens(endData->getValue())->at(0));
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> endValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(firstTokenElement);
+
+			newLink->add(endValue, endData->getEnd(), insertAt);
 		}
 
-		std::shared_ptr<uml::Element> firstTokenElement = retrieveAnyValueAsUMLElement(this->takeTokens(endData->getValue())->at(0));
-		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> endValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(firstTokenElement);
-
-		newLink->add(endValue, endData->getEnd(), insertAt);
+		this->getExecutionLocus()->add(newLink);
 	}
-	
-	this->getExecutionLocus()->add(newLink);
 	//end of body
 }
 

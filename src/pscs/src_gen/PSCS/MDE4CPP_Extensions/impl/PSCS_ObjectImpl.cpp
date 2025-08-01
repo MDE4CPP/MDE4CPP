@@ -40,9 +40,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
@@ -54,11 +54,13 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "uml/Operation.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
 #include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 #include "uml/Port.hpp"
 //Factories and Package includes
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -291,6 +293,50 @@ else
 bool PSCS_ObjectImpl::isOperationRequired(const std::shared_ptr<uml::Operation>& operation)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+PSCS::Semantics::StructuredClassifiers::CS_LinkKind PSCS_ObjectImpl::retrieveLinkKind(const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link>& link, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& interactionPoint)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	PSCS::Semantics::StructuredClassifiers::CS_LinkKind linkKind = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOINTERNAL;
+	
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> otherEndValue = link->retrieveOtherLinkEndValue(interactionPoint->getDefiningPort());
+
+	if(otherEndValue == nullptr)
+	{
+		linkKind = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::NONE;
+	}
+	else
+	{
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(otherEndValue);
+		if(cS_Object->isInteractionPoint())
+		{
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> compositeOwner = cS_Object->getCompositeOwner();
+			if(this->directlyContains(compositeOwner))
+			{
+				linkKind = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOINTERNAL;
+			}
+			else
+			{
+				linkKind = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOENVIRONMENT;
+			}
+		}
+		else
+		{
+			if(this->directlyContains(cS_Object))
+			{
+				linkKind = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOINTERNAL;
+			}
+			else
+			{
+				linkKind = PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOENVIRONMENT;
+			}
+		}
+	}
+
+	return linkKind;
+	//end of body
 }
 
 //*********************************
@@ -1190,6 +1236,64 @@ std::shared_ptr<Any> PSCS_ObjectImpl::eInvoke(int operationID, const std::shared
 			}
 		
 			result = eAny(this->isOperationRequired(incoming_param_operation), 0, false);
+			break;
+		}
+		// PSCS::MDE4CPP_Extensions::PSCS_Object::retrieveLinkKind(PSCS::MDE4CPP_Extensions::PSCS_Link, PSCS::MDE4CPP_Extensions::PSCS_Object) : PSCS::Semantics::StructuredClassifiers::CS_LinkKind: 549157662
+		case MDE4CPP_ExtensionsPackage::PSCS_OBJECT_OPERATION_RETRIEVELINKKIND_PSCS_LINK_PSCS_OBJECT:
+		{
+			//Retrieve input parameter 'link'
+			//parameter 0
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> incoming_param_link;
+			Bag<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_link_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_link = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Link>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'retrieveLinkKind'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'link'. Failed to invoke operation 'retrieveLinkKind'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'interactionPoint'
+			//parameter 1
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> incoming_param_interactionPoint;
+			Bag<Any>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_interactionPoint_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_interactionPoint = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'interactionPoint'. Failed to invoke operation 'retrieveLinkKind'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'interactionPoint'. Failed to invoke operation 'retrieveLinkKind'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->retrieveLinkKind(incoming_param_link,incoming_param_interactionPoint), 0, false);
 			break;
 		}
 
