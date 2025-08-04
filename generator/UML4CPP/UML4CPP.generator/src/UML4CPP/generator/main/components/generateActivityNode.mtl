@@ -307,9 +307,9 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AcceptEventAction))]
 [let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
 [for (trigger : Trigger | action.trigger) ]
-[let signalEvent : SignalEvent = trigger.event.oclAsType(SignalEvent)]
-	[trigger.memberName()/]->setEvent([signalEvent.generatePackageGetterCall()/]);
-[/let]
+[if (not trigger.event.oclIsUndefined())]
+	[trigger.memberName()/]->setEvent([event.generatePackageGetterCall()/]);
+[/if]
 [/for]
 	[action.output.initializePin()/]
 	[action.memberName()/]->setIsUnmarshall([action.isUnmarshall/]);
