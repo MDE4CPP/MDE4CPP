@@ -397,12 +397,21 @@ PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation
 fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation
 [/if]
 [/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReplyAction)) post(trim())]
+fUML::Semantics::Actions::ReplyActionActivation
+[/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(SendSignalAction)) post(trim())]
 [if (isPSCSExecutable())]
 PSCS::Semantics::Actions::CS_SendSignalActionActivation
 [else]
 fUML::Semantics::Actions::SendSignalActionActivation
 [/if]
+[/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(StartClassifierBehaviorAction)) post(trim())]
+fUML::Semantics::Actions::StartClassifierBehaviorActionActivation
+[/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(StartObjectBehaviorAction)) post(trim())]
+fUML::Semantics::Actions::StartObjectBehaviorActionActivation
 [/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ValueSpecificationAction)) post(trim())]
 fUML::Semantics::Actions::ValueSpecificationActionActivation
