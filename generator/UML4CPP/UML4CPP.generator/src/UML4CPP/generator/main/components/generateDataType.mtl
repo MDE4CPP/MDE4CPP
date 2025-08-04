@@ -208,7 +208,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, co
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
-				return true;
+				return false;
 			}
 			[else]
 			[comment aProperty is a bag value /]
@@ -237,7 +237,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, co
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
-				return true;
+				return false;
 			}
 			[/if]
 		[comment aProperty is typed by an a PrimitiveType or Enumeration /]
@@ -253,7 +253,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, co
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
-				return true;
+				return false;
 			}
 			[else]
 			[comment aProperty is a bag value /]
@@ -282,7 +282,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, co
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
-				return true;
+				return false;
 			}
 			[/if]	
 		[comment aProperty is typed by a Class or an Interface /]
@@ -309,13 +309,13 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, co
 				catch(...)
 				{
 					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!")
-					return true;
+					return false;
 				}
 			}
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!")
-				return;
+				return false;
 			}
 			[comment aProperty is a bag value /]
 			[else]
@@ -353,13 +353,13 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, co
 				catch(...)
 				{
 					DEBUG_ERROR("Invalid type stored in 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!")
-					return true;
+					return false;
 				}
 			}
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!")
-				return true;
+				return false;
 			}
 			[/if]
 		[/if]
@@ -497,11 +497,10 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 			[else]
 			m_[aProperty.name/] = [aProperty.type.generateDefaultValue()/];
 			[/if]
-			return true;
 			[else]
 			this->[aProperty.getterName()/]()->clear();
-			return true;
 			[/if]
+						return true;
 		}
 		[/for]
 	}
