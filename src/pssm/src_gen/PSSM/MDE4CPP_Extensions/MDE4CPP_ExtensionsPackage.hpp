@@ -14,12 +14,12 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EParameter;
 	class EClass;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EParameter;
 	class EGenericType;
+	class EAnnotation;
+	class EStringToStringMapEntry;
 }
 
 namespace PSSM::MDE4CPP_Extensions 
@@ -53,7 +53,7 @@ namespace PSSM::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSSM_OBJECT_CLASS = 1028184399;
 			static const unsigned int PSSM_OBJECT_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int PSSM_OBJECT_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int PSSM_OBJECT_CLASS_OPERATION_COUNT = 52;
 			
 			
 			static const unsigned long PSSM_OBJECT_OPERATION_DESTROY = 959255311;

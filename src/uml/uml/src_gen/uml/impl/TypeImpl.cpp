@@ -53,6 +53,7 @@
 #include "uml/Type.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace uml;
 
@@ -413,7 +414,7 @@ std::shared_ptr<Any> TypeImpl::eInvoke(int operationID, const std::shared_ptr<Ba
 			break;
 		}
 		// uml::Type::createAssociation(bool, uml::AggregationKind, std::string, int, int, uml::Type, bool, uml::AggregationKind, std::string, int, int) : uml::Association: 1855728755
-		case umlPackage::TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL:
+		case umlPackage::TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_TYPE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
 			//parameter 0

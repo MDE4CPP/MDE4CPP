@@ -60,8 +60,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
@@ -76,6 +76,7 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -1368,7 +1369,7 @@ std::shared_ptr<Any> StateActivationImpl::eInvoke(int operationID, const std::sh
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateActivation::enter(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation): 2281369893
-		case StateMachinesPackage::STATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_REGIONACTIVATION:
+		case StateMachinesPackage::STATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_EVENTOCCURRENCE_REGIONACTIVATION:
 		{
 			//Retrieve input parameter 'enteringTransition'
 			//parameter 0
@@ -1510,7 +1511,7 @@ std::shared_ptr<Any> StateActivationImpl::eInvoke(int operationID, const std::sh
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateActivation::exit(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation): 2035618913
-		case StateMachinesPackage::STATEACTIVATION_OPERATION_EXIT_TRANSITIONACTIVATION_REGIONACTIVATION:
+		case StateMachinesPackage::STATEACTIVATION_OPERATION_EXIT_TRANSITIONACTIVATION_EVENTOCCURRENCE_REGIONACTIVATION:
 		{
 			//Retrieve input parameter 'exitingTransition'
 			//parameter 0

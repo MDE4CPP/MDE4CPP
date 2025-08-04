@@ -62,6 +62,7 @@
 #include "uml/Property.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -785,7 +786,7 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::dispatchCall(uml::Operation, Any[*], Any[*]) : Any: 2639705452
-		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_DISPATCHCALL_OPERATION_EJAVAOBJECT:
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_DISPATCHCALL_OPERATION_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'operation'
 			//parameter 0
@@ -852,7 +853,7 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOpaqueBehavior(std::string, Any[*], Any[*]) : Any: 738288422
-		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT:
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_qualifiedName'
 			//parameter 0
@@ -900,7 +901,7 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOpaqueBehavior(int, Any[*], Any[*]) : Any: 960883863
-		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT:
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_uID'
 			//parameter 0
@@ -948,7 +949,7 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOperation(std::string, Any[*], Any[*]) : Any: 3231998528
-		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPERATION_ESTRING_EJAVAOBJECT:
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPERATION_ESTRING_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_qualifiedName'
 			//parameter 0
@@ -996,7 +997,7 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOperation(int, Any[*], Any[*]) : Any: 3453044381
-		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPERATION_EINT_EJAVAOBJECT:
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPERATION_EINT_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_uID'
 			//parameter 0

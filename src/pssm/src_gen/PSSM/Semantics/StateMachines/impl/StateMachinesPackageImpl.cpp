@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
@@ -259,9 +259,9 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getEntryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getEntryPointPseudostateActivation_Operation__enter_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_RegionActivation;
+	return m_entryPointPseudostateActivation_Operation__enter_TransitionActivation_EventOccurrence_RegionActivation;
 }
 
 // End Class EntryPointPseudostateActivation
@@ -304,9 +304,9 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getFinalStateActivation_Operation_enter_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getFinalStateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_finalStateActivation_Operation_enter_TransitionActivation_RegionActivation;
+	return m_finalStateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation;
 }
 
 // End Class FinalStateActivation
@@ -319,9 +319,9 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getForkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getForkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation;
+	return m_forkPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_EventOccurrence_RegionActivation;
 }
 
 // End Class ForkPseudostateActivation
@@ -345,9 +345,9 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getInitialPseudostateActivation_Operation_enter_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getInitialPseudostateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_initialPseudostateActivation_Operation_enter_TransitionActivation_RegionActivation;
+	return m_initialPseudostateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation;
 }
 
 // End Class InitialPseudostateActivation
@@ -379,9 +379,9 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getJoinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getJoinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation;
+	return m_joinPseudostateActivation_Operation_canPropagateExecution_TransitionActivation_EventOccurrence_RegionActivation;
 }
 
 // End Class JoinPseudostateActivation
@@ -527,17 +527,17 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_stateActivation_Operation_defer_EventOccurrence;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_enter_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_stateActivation_Operation_enter_TransitionActivation_RegionActivation;
+	return m_stateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation;
 }
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_enterRegions_TransitionActivation_EventOccurrence() const
 {
 	return m_stateActivation_Operation_enterRegions_TransitionActivation_EventOccurrence;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_exit_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_exit_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_stateActivation_Operation_exit_TransitionActivation_RegionActivation;
+	return m_stateActivation_Operation_exit_TransitionActivation_EventOccurrence_RegionActivation;
 }
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateActivation_Operation_getConnectionPointActivation_Vertex() const
 {
@@ -830,9 +830,9 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_stateMachineSemanticVisitor_Operation_getExecutionContext;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence_FUML_Object() const
 {
-	return m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_FUML_Object;
+	return m_stateMachineSemanticVisitor_Operation_getExecutionFor_Behavior_EventOccurrence_FUML_Object;
 }
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineSemanticVisitor_Operation_getExecutionLocus() const
 {
@@ -861,9 +861,9 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 
 
 
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getTerminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getTerminatePseudostateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_terminatePseudostateActivation_Operation_enter_TransitionActivation_RegionActivation;
+	return m_terminatePseudostateActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation;
 }
 
 // End Class TerminatePseudostateActivation
@@ -999,17 +999,17 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateM
 {
 	return m_vertexActivation_Operation_addOutgoingTransition_TransitionActivation;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getVertexActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getVertexActivation_Operation_canPropagateExecution_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_vertexActivation_Operation_canPropagateExecution_TransitionActivation_RegionActivation;
+	return m_vertexActivation_Operation_canPropagateExecution_TransitionActivation_EventOccurrence_RegionActivation;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getVertexActivation_Operation_enter_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getVertexActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_vertexActivation_Operation_enter_TransitionActivation_RegionActivation;
+	return m_vertexActivation_Operation_enter_TransitionActivation_EventOccurrence_RegionActivation;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getVertexActivation_Operation_exit_TransitionActivation_RegionActivation() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getVertexActivation_Operation_exit_TransitionActivation_EventOccurrence_RegionActivation() const
 {
-	return m_vertexActivation_Operation_exit_TransitionActivation_RegionActivation;
+	return m_vertexActivation_Operation_exit_TransitionActivation_EventOccurrence_RegionActivation;
 }
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getVertexActivation_Operation_getAscendingHierarchy() const
 {

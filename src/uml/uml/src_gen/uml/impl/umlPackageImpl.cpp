@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "uml/umlFactory.hpp"
@@ -566,13 +566,13 @@ const std::shared_ptr<ecore::EReference>& uml::umlPackageImpl::getArtifact_Attri
 	return m_artifact_Attribute_ownedOperation;
 }
 
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getArtifact_Operation_createOwnedAttribute_String_UnlimitedNatural() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getArtifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const
 {
-	return m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural;
+	return m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getArtifact_Operation_createOwnedOperation_String_Type() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getArtifact_Operation_createOwnedOperation_String_String_Type_Type() const
 {
-	return m_artifact_Operation_createOwnedOperation_String_Type;
+	return m_artifact_Operation_createOwnedOperation_String_String_Type_Type;
 }
 
 // End Class Artifact
@@ -1071,13 +1071,13 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getClassifier_Ope
 {
 	return m_classifier_Operation_getInheritedMembers;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getClassifier_Operation_getOperation_String_Type() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getClassifier_Operation_getOperation_String_String_Type() const
 {
-	return m_classifier_Operation_getOperation_String_Type;
+	return m_classifier_Operation_getOperation_String_String_Type;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getClassifier_Operation_getOperation_String_Boolean() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getClassifier_Operation_getOperation_String_String_Type_Boolean() const
 {
-	return m_classifier_Operation_getOperation_String_Boolean;
+	return m_classifier_Operation_getOperation_String_String_Type_Boolean;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getClassifier_Operation_getOperations() const
 {
@@ -1675,13 +1675,13 @@ const std::shared_ptr<ecore::EReference>& uml::umlPackageImpl::getDataType_Attri
 	return m_dataType_Attribute_ownedOperation;
 }
 
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getDataType_Operation_createOwnedAttribute_String_UnlimitedNatural() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getDataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const
 {
-	return m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural;
+	return m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getDataType_Operation_createOwnedOperation_String_Type() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getDataType_Operation_createOwnedOperation_String_String_Type_Type() const
 {
-	return m_dataType_Operation_createOwnedOperation_String_Type;
+	return m_dataType_Operation_createOwnedOperation_String_String_Type_Type;
 }
 
 // End Class DataType
@@ -2099,9 +2099,9 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getElement_Operat
 {
 	return m_element_Operation_removeKeyword_String;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getElement_Operation_setValue_Stereotype_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getElement_Operation_setValue_Stereotype_String_EJavaObject() const
 {
-	return m_element_Operation_setValue_Stereotype_EJavaObject;
+	return m_element_Operation_setValue_Stereotype_String_EJavaObject;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getElement_Operation_unapplyStereotype_Stereotype() const
 {
@@ -3001,13 +3001,13 @@ const std::shared_ptr<ecore::EReference>& uml::umlPackageImpl::getInterface_Attr
 	return m_interface_Attribute_redefinedInterface;
 }
 
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getInterface_Operation_createOwnedAttribute_String_UnlimitedNatural() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getInterface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const
 {
-	return m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural;
+	return m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getInterface_Operation_createOwnedOperation_String_Type() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getInterface_Operation_createOwnedOperation_String_String_Type_Type() const
 {
-	return m_interface_Operation_createOwnedOperation_String_Type;
+	return m_interface_Operation_createOwnedOperation_String_String_Type_Type;
 }
 
 // End Class Interface
@@ -3799,9 +3799,9 @@ const std::shared_ptr<ecore::EReference>& uml::umlPackageImpl::getNode_Attribute
 	return m_node_Attribute_nestedNode;
 }
 
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getNode_Operation_createCommunicationPath_Boolean_UnlimitedNatural() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getNode_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural() const
 {
-	return m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural;
+	return m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getNode_Operation_getCommunicationPaths() const
 {
@@ -3822,9 +3822,9 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operati
 {
 	return m_object_Operation_add_Property_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_add_Property_EInt() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_add_Property_EJavaObject_EInt() const
 {
-	return m_object_Operation_add_Property_EInt;
+	return m_object_Operation_add_Property_EJavaObject_EInt;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_destroy() const
 {
@@ -3834,17 +3834,17 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operati
 {
 	return m_object_Operation_get_Property;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_invoke_Operation_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_invoke_Operation_EJavaObject_EJavaObject() const
 {
-	return m_object_Operation_invoke_Operation_EJavaObject;
+	return m_object_Operation_invoke_Operation_EJavaObject_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_invoke_OpaqueBehavior_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject() const
 {
-	return m_object_Operation_invoke_OpaqueBehavior_EJavaObject;
+	return m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_remove_Property_EBoolean() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_remove_Property_EJavaObject_EInt_EBoolean() const
 {
-	return m_object_Operation_remove_Property_EBoolean;
+	return m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_set_Property_EJavaObject() const
 {
@@ -4652,9 +4652,9 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getProfile_Operat
 {
 	return m_profile_Operation_define;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getProfile_Operation_define_EMap_EMap() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getProfile_Operation_define_EMap_EDiagnosticChain_EMap() const
 {
-	return m_profile_Operation_define_EMap_EMap;
+	return m_profile_Operation_define_EMap_EDiagnosticChain_EMap;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getProfile_Operation_getDefinition() const
 {
@@ -5449,9 +5449,9 @@ const std::shared_ptr<ecore::EReference>& uml::umlPackageImpl::getSignal_Attribu
 	return m_signal_Attribute_ownedAttribute;
 }
 
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getSignal_Operation_createOwnedAttribute_String_UnlimitedNatural() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getSignal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const
 {
-	return m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural;
+	return m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural;
 }
 
 // End Class Signal
@@ -5836,9 +5836,9 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getStructuredClas
 {
 	return m_structuredClassifier_Operation_allRoles;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getStructuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getStructuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const
 {
-	return m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural;
+	return m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getStructuredClassifier_Operation_getParts() const
 {
@@ -6189,9 +6189,9 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getType_Operation
 {
 	return m_type_Operation_conformsTo_Type;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getType_Operation_createAssociation_Boolean_UnlimitedNatural() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getType_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural() const
 {
-	return m_type_Operation_createAssociation_Boolean_UnlimitedNatural;
+	return m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getType_Operation_getAssociations() const
 {

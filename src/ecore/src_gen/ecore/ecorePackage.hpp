@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EAnnotation;
-	class EParameter;
-	class EAttribute;
 	class EClass;
-	class EDataType;
 	class EOperation;
-	class EStringToStringMapEntry;
 	class ETypeParameter;
+	class EReference;
+	class EParameter;
 	class EGenericType;
+	class EAnnotation;
+	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace ecore 
@@ -701,40 +701,40 @@ namespace ecore
 			
 			// End Class ETypedElement
 
-			static const int ANY_CLASS = 1;
-			static const int EBIGDECIMAL_CLASS = 4;
-			static const int EBIGINTEGER_CLASS = 5;
-			static const int EBOOLEAN_CLASS = 6;
-			static const int EBOOLEANOBJECT_CLASS = 7;
-			static const int EBYTE_CLASS = 8;
-			static const int EBYTEARRAY_CLASS = 9;
-			static const int EBYTEOBJECT_CLASS = 10;
-			static const int ECHAR_CLASS = 11;
-			static const int ECHARACTEROBJECT_CLASS = 12;
-			static const int EDATE_CLASS = 16;
-			static const int EDIAGNOSTICCHAIN_CLASS = 17;
-			static const int EDOUBLE_CLASS = 18;
-			static const int EDOUBLEOBJECT_CLASS = 19;
-			static const int EELIST_CLASS = 20;
-			static const int EENUMERATOR_CLASS = 23;
-			static const int EFEATUREMAP_CLASS = 25;
-			static const int EFEATUREMAPENTRY_CLASS = 26;
-			static const int EFLOAT_CLASS = 27;
-			static const int EFLOATOBJECT_CLASS = 28;
-			static const int EINT_CLASS = 30;
-			static const int EINTEGEROBJECT_CLASS = 31;
-			static const int EINVOCATIONTARGETEXCEPTION_CLASS = 32;
-			static const int EJAVACLASS_CLASS = 33;
-			static const int EJAVAOBJECT_CLASS = 34;
-			static const int ELONG_CLASS = 35;
-			static const int ELONGOBJECT_CLASS = 36;
-			static const int EMAP_CLASS = 37;
-			static const int ERESOURCE_CLASS = 47;
-			static const int ERESOURCESET_CLASS = 48;
-			static const int ESHORT_CLASS = 49;
-			static const int ESHORTOBJECT_CLASS = 50;
-			static const int ESTRING_CLASS = 51;
-			static const int ETREEITERATOR_CLASS = 54;
+			static const unsigned long ANY_CLASS = 0;
+			static const unsigned long EBIGDECIMAL_CLASS = 1396051963;
+			static const unsigned long EBIGINTEGER_CLASS = 1349943032;
+			static const unsigned long EBOOLEAN_CLASS = 308358166;
+			static const unsigned long EBOOLEANOBJECT_CLASS = 1276538101;
+			static const unsigned long EBYTE_CLASS = 814551769;
+			static const unsigned long EBYTEARRAY_CLASS = 640049342;
+			static const unsigned long EBYTEOBJECT_CLASS = 145201480;
+			static const unsigned long ECHAR_CLASS = 914251659;
+			static const unsigned long ECHARACTEROBJECT_CLASS = 1689967097;
+			static const unsigned long EDATE_CLASS = 814484459;
+			static const unsigned long EDIAGNOSTICCHAIN_CLASS = 600856025;
+			static const unsigned long EDOUBLE_CLASS = 1781471731;
+			static const unsigned long EDOUBLEOBJECT_CLASS = 624701055;
+			static const unsigned long EELIST_CLASS = 41807917;
+			static const unsigned long EENUMERATOR_CLASS = 2110286128;
+			static const unsigned long EFEATUREMAP_CLASS = 1061401915;
+			static const unsigned long EFEATUREMAPENTRY_CLASS = 1975892276;
+			static const unsigned long EFLOAT_CLASS = 2048246109;
+			static const unsigned long EFLOATOBJECT_CLASS = 932419144;
+			static const unsigned long EINT_CLASS = 17582660;
+			static const unsigned long EINTEGEROBJECT_CLASS = 671908721;
+			static const unsigned long EINVOCATIONTARGETEXCEPTION_CLASS = 80085039;
+			static const unsigned long EJAVACLASS_CLASS = 364083396;
+			static const unsigned long EJAVAOBJECT_CLASS = 113870318;
+			static const unsigned long ELONG_CLASS = 829411909;
+			static const unsigned long ELONGOBJECT_CLASS = 160061620;
+			static const unsigned long EMAP_CLASS = 16950847;
+			static const unsigned long ERESOURCE_CLASS = 480998348;
+			static const unsigned long ERESOURCESET_CLASS = 1319479650;
+			static const unsigned long ESHORT_CLASS = 34890092;
+			static const unsigned long ESHORTOBJECT_CLASS = 1066546774;
+			static const unsigned long ESTRING_CLASS = 1904229964;
+			static const unsigned long ETREEITERATOR_CLASS = 2131204943;
 			
 			virtual const std::shared_ptr<ecore::EDataType>& getAny_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EDataType>& getEBigDecimal_Class() const = 0;

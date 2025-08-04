@@ -48,6 +48,7 @@
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 
 using namespace PSSM::Semantics::StateMachines;
 

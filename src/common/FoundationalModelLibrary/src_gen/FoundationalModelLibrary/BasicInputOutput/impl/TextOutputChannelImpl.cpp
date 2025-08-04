@@ -51,6 +51,7 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "PSCS/MDE4CPP_Extensions/PSCS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_LinkKind.hpp"
 #include "uml/Port.hpp"
 
 using namespace FoundationalModelLibrary::BasicInputOutput;
@@ -190,10 +191,10 @@ const std::shared_ptr<Bag<uml::Classifier>>& TextOutputChannelImpl::getTypes() c
 		types.reset(new Bag<uml::Classifier>());
 		// Add type of self 'TextOutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
-		// Add base type 'Channel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 		// Add base type 'OutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
+		// Add base type 'Channel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 	}
 
 	return types;
@@ -220,14 +221,14 @@ void TextOutputChannelImpl::constructObject(const std::shared_ptr<uml::Class>& t
 			this->construct();
 			break;
 		}
-		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::CHANNEL_CLASS:
-		{
-			ChannelImpl::construct();
-			break;
-		}
 		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::OUTPUTCHANNEL_CLASS:
 		{
 			OutputChannelImpl::construct();
+			break;
+		}
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::CHANNEL_CLASS:
+		{
+			ChannelImpl::construct();
 			break;
 		}
 		default:
@@ -254,14 +255,176 @@ bool TextOutputChannelImpl::directlyContains(const std::shared_ptr<fUML::MDE4CPP
 	return false;
 }
 
-std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallIn(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallInByPort(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	std::shared_ptr<Any> result;
+	//Call dispatchCallIn() for base class OutputChannel
+	result = FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::dispatchCallInByPort(_operation, onPort, inputArguments, outputArguments);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	return result;
 }
 
-std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallOut(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallInOnInteractionPoint(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& interactionPoint, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	if(interactionPoint->getDefiningPort()->getIsBehavior())
+	{
+		return this->dispatchCall(_operation, inputArguments, outputArguments);
+	}
+	else
+	{
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> potentialTargets(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>);
+		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinks = interactionPoint->getLinks();
+		
+		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
+		{
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> cS_Link = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Link>(link);
+			PSCS::Semantics::StructuredClassifiers::CS_LinkKind linkKind = cS_Link->retrieveLinkKind(interactionPoint);
+			if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN)
+			{
+				// LinkKind has to be calculated
+				linkKind = this->retrieveLinkKind(cS_Link, interactionPoint);
+				cS_Link->assignLinkKind(interactionPoint, linkKind);
+			}
+			if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOINTERNAL)
+			{
+				potentialTargets->add(cS_Link->retrieveOtherLinkEndValue(interactionPoint->getDefiningPort()));
+			}
+		}
+		if(!(potentialTargets->size() == 0))
+		{
+			const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& target = potentialTargets->at(0); // TODO RequestPropagationStrategy should be invoked here
+			return target->dispatchCall(_operation, inputArguments, outputArguments);
+		}
+		
+		return nullptr;
+	}
+}
+
+std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallOutByPort(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<uml::Port>& onPort, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	std::shared_ptr<Any> result;
+	//Call dispatchCallOut() for base class OutputChannel
+	result = FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::dispatchCallOutByPort(_operation, onPort, inputArguments, outputArguments);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	return result;
+}
+
+std::shared_ptr<Any> TextOutputChannelImpl::dispatchCallOutOnInteractionPoint(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>& interactionPoint, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> targetsForDispatchingIn(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> targetsForDispatchingOut(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
+	
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Link>>& allLinks = interactionPoint->getLinks();
+	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link>& link : *allLinks)
+	{
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> cS_Link = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Link>(link);
+		PSCS::Semantics::StructuredClassifiers::CS_LinkKind linkKind = cS_Link->retrieveLinkKind(interactionPoint);
+		if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::UNKNOWN)
+		{
+			// LinkKind has to be calculated
+			linkKind = this->retrieveLinkKind(cS_Link, interactionPoint);
+			cS_Link->assignLinkKind(interactionPoint, linkKind);
+		}
+		if(linkKind == PSCS::Semantics::StructuredClassifiers::CS_LinkKind::TOENVIRONMENT)
+		{
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> otherEndValue = cS_Link->retrieveOtherLinkEndValue(interactionPoint->getDefiningPort());
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(otherEndValue);
+
+			if(!(cS_Object->isInteractionPoint()))
+			{
+				if(PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::isOperationProvided(cS_Object, _operation))
+				{
+					targetsForDispatchingIn->add(cS_Object);
+				}
+			}
+			else
+			{
+				bool isAssembly = true, isDelegation = false;
+				
+				switch(cS_Object->getDefiningPort()->_getID())
+				{
+				}
+				
+				if(isAssembly)
+				{
+					if(PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::isOperationProvided(cS_Object, _operation))
+					{
+						targetsForDispatchingIn->add(cS_Object);
+					}
+				}
+				if(isDelegation)
+				{
+					if(PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::isOperationRequired(cS_Object, _operation))
+					{
+						targetsForDispatchingOut->add(cS_Object);
+					}
+				}
+			}
+		}
+	}
+
+	unsigned int numOfTargetsToDispatchInTo = targetsForDispatchingIn->size();
+	unsigned int numOfTargetsToDispatchOutTo = targetsForDispatchingOut->size();
+
+	std::shared_ptr<Any> result = nullptr;
+	
+	for(unsigned int i = 0; i < numOfTargetsToDispatchInTo && result == nullptr; i++)
+	{
+		result = targetsForDispatchingIn->at(i)->dispatchCall(_operation, inputArguments, outputArguments);
+	}
+	for(unsigned int i = 0; i < numOfTargetsToDispatchOutTo && result == nullptr; i++)
+	{
+		std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> cS_Object = std::dynamic_pointer_cast<PSCS::MDE4CPP_Extensions::PSCS_Object>(targetsForDispatchingOut->at(i));
+		if(cS_Object->isInteractionPoint())
+		{
+			std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> compositeOwner = cS_Object->getCompositeOwner();
+			result = compositeOwner->dispatchCallOutOnInteractionPoint(_operation, cS_Object, inputArguments, outputArguments);
+		}
+	}
+	
+	return result;
+}
+
+std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> TextOutputChannelImpl::getCompositeOwner()
+{
+	std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> compositeOwner = nullptr;
+
+	return nullptr;
+}
+
+bool TextOutputChannelImpl::isOperationProvided(const std::shared_ptr<uml::Operation>& operation)
+{
+	bool isProvided = false;
+	if(this->isInteractionPoint()) // For interaction points, only realized interfaces are taken into account
+	{
+	}
+	else
+	{
+		throw std::runtime_error("Now we are here...: " + std::string(__PRETTY_FUNCTION__));
+	}
+	if(!isProvided)
+	{
+		//Call isOperationProvided() for base class OutputChannel
+		isProvided = FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::isOperationProvided(operation);
+	}
+	return isProvided;
+}
+
+bool TextOutputChannelImpl::isOperationRequired(const std::shared_ptr<uml::Operation>& operation)
+{
+	bool isRequired = false;
+	if(!isRequired)
+	{
+		//Call isOperationRequired() for base class OutputChannel
+		isRequired = FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::isOperationRequired(operation);
+	}
+	return isRequired;
 }
 //**************************************
 // StructuralFeature Getter & Setter

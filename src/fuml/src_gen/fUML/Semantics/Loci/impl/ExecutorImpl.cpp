@@ -57,8 +57,9 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -457,7 +458,7 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, const std::shared_pt
 			break;
 		}
 		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, fUML::MDE4CPP_Extensions::FUML_Object, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1550418063
-		case LociPackage::EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE:
+		case LociPackage::EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_FUML_OBJECT_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'behavior'
 			//parameter 0

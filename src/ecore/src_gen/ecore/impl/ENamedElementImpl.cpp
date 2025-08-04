@@ -46,6 +46,7 @@
 #include "ecore/EObject.hpp"
 //Factories and Package includes
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ecore;
 

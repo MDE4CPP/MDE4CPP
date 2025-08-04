@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -2124,17 +2124,17 @@ void umlPackageImpl::initializeArtifactContent()
 	/*
 	 * EOperations
 	 */
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setEType(getProperty_Class());
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setLowerBound(1);
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUpperBound(1);
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUnique(true);
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setOrdered(false);
 	
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->_setID(ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->_setID(ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -2144,7 +2144,7 @@ void umlPackageImpl::initializeArtifactContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("type");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -2154,7 +2154,7 @@ void umlPackageImpl::initializeArtifactContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -2164,7 +2164,7 @@ void umlPackageImpl::initializeArtifactContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -2173,17 +2173,17 @@ void umlPackageImpl::initializeArtifactContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_artifact_Operation_createOwnedOperation_String_Type->setName("createOwnedOperation");
-	m_artifact_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
-	m_artifact_Operation_createOwnedOperation_String_Type->setLowerBound(1);
-	m_artifact_Operation_createOwnedOperation_String_Type->setUpperBound(1);
-	m_artifact_Operation_createOwnedOperation_String_Type->setUnique(true);
-	m_artifact_Operation_createOwnedOperation_String_Type->setOrdered(false);
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type->setName("createOwnedOperation");
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type->setEType(getOperation_Class());
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type->setLowerBound(1);
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type->setUpperBound(1);
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type->setUnique(true);
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type->setOrdered(false);
 	
-	m_artifact_Operation_createOwnedOperation_String_Type->_setID(ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE);
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type->_setID(ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -2193,7 +2193,7 @@ void umlPackageImpl::initializeArtifactContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("parameterNames");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -2203,7 +2203,7 @@ void umlPackageImpl::initializeArtifactContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("parameterTypes");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -2213,7 +2213,7 @@ void umlPackageImpl::initializeArtifactContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_artifact_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("returnType");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -3746,17 +3746,17 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Operation_getInheritedMembers->_setID(CLASSIFIER_OPERATION_GETINHERITEDMEMBERS);
 	
 	
-	m_classifier_Operation_getOperation_String_Type->setName("getOperation");
-	m_classifier_Operation_getOperation_String_Type->setEType(getOperation_Class());
-	m_classifier_Operation_getOperation_String_Type->setLowerBound(0);
-	m_classifier_Operation_getOperation_String_Type->setUpperBound(1);
-	m_classifier_Operation_getOperation_String_Type->setUnique(true);
-	m_classifier_Operation_getOperation_String_Type->setOrdered(false);
+	m_classifier_Operation_getOperation_String_String_Type->setName("getOperation");
+	m_classifier_Operation_getOperation_String_String_Type->setEType(getOperation_Class());
+	m_classifier_Operation_getOperation_String_String_Type->setLowerBound(0);
+	m_classifier_Operation_getOperation_String_String_Type->setUpperBound(1);
+	m_classifier_Operation_getOperation_String_String_Type->setUnique(true);
+	m_classifier_Operation_getOperation_String_String_Type->setOrdered(false);
 	
-	m_classifier_Operation_getOperation_String_Type->_setID(CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE);
+	m_classifier_Operation_getOperation_String_String_Type->_setID(CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_String_Type);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -3766,7 +3766,7 @@ void umlPackageImpl::initializeClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_String_Type);
 		parameter->setName("parameterNames");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -3776,7 +3776,7 @@ void umlPackageImpl::initializeClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_String_Type);
 		parameter->setName("parameterTypes");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -3785,17 +3785,17 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_getOperation_String_Boolean->setName("getOperation");
-	m_classifier_Operation_getOperation_String_Boolean->setEType(getOperation_Class());
-	m_classifier_Operation_getOperation_String_Boolean->setLowerBound(0);
-	m_classifier_Operation_getOperation_String_Boolean->setUpperBound(1);
-	m_classifier_Operation_getOperation_String_Boolean->setUnique(true);
-	m_classifier_Operation_getOperation_String_Boolean->setOrdered(false);
+	m_classifier_Operation_getOperation_String_String_Type_Boolean->setName("getOperation");
+	m_classifier_Operation_getOperation_String_String_Type_Boolean->setEType(getOperation_Class());
+	m_classifier_Operation_getOperation_String_String_Type_Boolean->setLowerBound(0);
+	m_classifier_Operation_getOperation_String_String_Type_Boolean->setUpperBound(1);
+	m_classifier_Operation_getOperation_String_String_Type_Boolean->setUnique(true);
+	m_classifier_Operation_getOperation_String_String_Type_Boolean->setOrdered(false);
 	
-	m_classifier_Operation_getOperation_String_Boolean->_setID(CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN);
+	m_classifier_Operation_getOperation_String_String_Type_Boolean->_setID(CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE_BOOLEAN);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_Boolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_String_Type_Boolean);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -3805,7 +3805,7 @@ void umlPackageImpl::initializeClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_Boolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_String_Type_Boolean);
 		parameter->setName("parameterNames");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -3815,7 +3815,7 @@ void umlPackageImpl::initializeClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_Boolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_String_Type_Boolean);
 		parameter->setName("parameterTypes");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -3825,7 +3825,7 @@ void umlPackageImpl::initializeClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_Boolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifier_Operation_getOperation_String_String_Type_Boolean);
 		parameter->setName("ignoreCase");
 		parameter->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 		parameter->setLowerBound(0);
@@ -5607,17 +5607,17 @@ void umlPackageImpl::initializeDataTypeContent()
 	/*
 	 * EOperations
 	 */
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setEType(getProperty_Class());
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setLowerBound(1);
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUpperBound(1);
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUnique(true);
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setOrdered(false);
 	
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->_setID(DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->_setID(DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -5627,7 +5627,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("type");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -5637,7 +5637,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -5647,7 +5647,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -5656,17 +5656,17 @@ void umlPackageImpl::initializeDataTypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_dataType_Operation_createOwnedOperation_String_Type->setName("createOwnedOperation");
-	m_dataType_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
-	m_dataType_Operation_createOwnedOperation_String_Type->setLowerBound(1);
-	m_dataType_Operation_createOwnedOperation_String_Type->setUpperBound(1);
-	m_dataType_Operation_createOwnedOperation_String_Type->setUnique(true);
-	m_dataType_Operation_createOwnedOperation_String_Type->setOrdered(false);
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type->setName("createOwnedOperation");
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type->setEType(getOperation_Class());
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type->setLowerBound(1);
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type->setUpperBound(1);
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type->setUnique(true);
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type->setOrdered(false);
 	
-	m_dataType_Operation_createOwnedOperation_String_Type->_setID(DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE);
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type->_setID(DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -5676,7 +5676,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("parameterNames");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -5686,7 +5686,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("parameterTypes");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -5696,7 +5696,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_dataType_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("returnType");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -7021,23 +7021,23 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_setValue_Stereotype_EJavaObject->setName("setValue");
+	m_element_Operation_setValue_Stereotype_String_EJavaObject->setName("setValue");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_element_Operation_setValue_Stereotype_EJavaObject->setEType(unknownClass);
+		m_element_Operation_setValue_Stereotype_String_EJavaObject->setEType(unknownClass);
 	}
-	m_element_Operation_setValue_Stereotype_EJavaObject->setLowerBound(1);
-	m_element_Operation_setValue_Stereotype_EJavaObject->setUpperBound(1);
-	m_element_Operation_setValue_Stereotype_EJavaObject->setUnique(true);
-	m_element_Operation_setValue_Stereotype_EJavaObject->setOrdered(false);
+	m_element_Operation_setValue_Stereotype_String_EJavaObject->setLowerBound(1);
+	m_element_Operation_setValue_Stereotype_String_EJavaObject->setUpperBound(1);
+	m_element_Operation_setValue_Stereotype_String_EJavaObject->setUnique(true);
+	m_element_Operation_setValue_Stereotype_String_EJavaObject->setOrdered(false);
 	
-	m_element_Operation_setValue_Stereotype_EJavaObject->_setID(ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT);
+	m_element_Operation_setValue_Stereotype_String_EJavaObject->_setID(ELEMENT_OPERATION_SETVALUE_STEREOTYPE_STRING_EJAVAOBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_element_Operation_setValue_Stereotype_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_element_Operation_setValue_Stereotype_String_EJavaObject);
 		parameter->setName("stereotype");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -7047,7 +7047,7 @@ void umlPackageImpl::initializeElementContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_element_Operation_setValue_Stereotype_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_element_Operation_setValue_Stereotype_String_EJavaObject);
 		parameter->setName("propertyName");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -7057,7 +7057,7 @@ void umlPackageImpl::initializeElementContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_element_Operation_setValue_Stereotype_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_element_Operation_setValue_Stereotype_String_EJavaObject);
 		parameter->setName("newValue");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -9694,17 +9694,17 @@ void umlPackageImpl::initializeInterfaceContent()
 	/*
 	 * EOperations
 	 */
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setEType(getProperty_Class());
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setLowerBound(1);
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUpperBound(1);
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUnique(true);
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setOrdered(false);
 	
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->_setID(INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->_setID(INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -9714,7 +9714,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("type");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -9724,7 +9724,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -9734,7 +9734,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -9743,17 +9743,17 @@ void umlPackageImpl::initializeInterfaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interface_Operation_createOwnedOperation_String_Type->setName("createOwnedOperation");
-	m_interface_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
-	m_interface_Operation_createOwnedOperation_String_Type->setLowerBound(1);
-	m_interface_Operation_createOwnedOperation_String_Type->setUpperBound(1);
-	m_interface_Operation_createOwnedOperation_String_Type->setUnique(true);
-	m_interface_Operation_createOwnedOperation_String_Type->setOrdered(false);
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type->setName("createOwnedOperation");
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type->setEType(getOperation_Class());
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type->setLowerBound(1);
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type->setUpperBound(1);
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type->setUnique(true);
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type->setOrdered(false);
 	
-	m_interface_Operation_createOwnedOperation_String_Type->_setID(INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE);
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type->_setID(INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -9763,7 +9763,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("parameterNames");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -9773,7 +9773,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("parameterTypes");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -9783,7 +9783,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_Type);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_interface_Operation_createOwnedOperation_String_String_Type_Type);
 		parameter->setName("returnType");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -12170,17 +12170,17 @@ void umlPackageImpl::initializeNodeContent()
 	/*
 	 * EOperations
 	 */
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setName("createCommunicationPath");
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setEType(getCommunicationPath_Class());
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setLowerBound(1);
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setUpperBound(1);
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setUnique(true);
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setOrdered(false);
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setName("createCommunicationPath");
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setEType(getCommunicationPath_Class());
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setLowerBound(1);
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setUpperBound(1);
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setUnique(true);
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setOrdered(false);
 	
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->_setID(NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL);
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->_setID(NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_NODE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1IsNavigable");
 		parameter->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 		parameter->setLowerBound(0);
@@ -12190,7 +12190,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Aggregation");
 		parameter->setEType(getAggregationKind_Class());
 		parameter->setLowerBound(0);
@@ -12200,7 +12200,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -12210,7 +12210,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -12220,7 +12220,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -12230,7 +12230,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Node");
 		parameter->setEType(getNode_Class());
 		parameter->setLowerBound(0);
@@ -12240,7 +12240,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2IsNavigable");
 		parameter->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 		parameter->setLowerBound(0);
@@ -12250,7 +12250,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Aggregation");
 		parameter->setEType(getAggregationKind_Class());
 		parameter->setLowerBound(0);
@@ -12260,7 +12260,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -12270,7 +12270,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -12280,7 +12280,7 @@ void umlPackageImpl::initializeNodeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -12350,17 +12350,17 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_add_Property_EInt->setName("add");
-	m_object_Operation_add_Property_EInt->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_object_Operation_add_Property_EInt->setLowerBound(0);
-	m_object_Operation_add_Property_EInt->setUpperBound(1);
-	m_object_Operation_add_Property_EInt->setUnique(true);
-	m_object_Operation_add_Property_EInt->setOrdered(true);
+	m_object_Operation_add_Property_EJavaObject_EInt->setName("add");
+	m_object_Operation_add_Property_EJavaObject_EInt->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_object_Operation_add_Property_EJavaObject_EInt->setLowerBound(0);
+	m_object_Operation_add_Property_EJavaObject_EInt->setUpperBound(1);
+	m_object_Operation_add_Property_EJavaObject_EInt->setUnique(true);
+	m_object_Operation_add_Property_EJavaObject_EInt->setOrdered(true);
 	
-	m_object_Operation_add_Property_EInt->_setID(OBJECT_OPERATION_ADD_PROPERTY_EINT);
+	m_object_Operation_add_Property_EJavaObject_EInt->_setID(OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT_EINT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EJavaObject_EInt);
 		parameter->setName("_property");
 		parameter->setEType(getProperty_Class());
 		parameter->setLowerBound(0);
@@ -12370,7 +12370,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EJavaObject_EInt);
 		parameter->setName("value");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -12380,7 +12380,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EJavaObject_EInt);
 		parameter->setName("insertAt");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 		parameter->setLowerBound(0);
@@ -12424,17 +12424,17 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_invoke_Operation_EJavaObject->setName("invoke");
-	m_object_Operation_invoke_Operation_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
-	m_object_Operation_invoke_Operation_EJavaObject->setLowerBound(0);
-	m_object_Operation_invoke_Operation_EJavaObject->setUpperBound(1);
-	m_object_Operation_invoke_Operation_EJavaObject->setUnique(true);
-	m_object_Operation_invoke_Operation_EJavaObject->setOrdered(true);
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject->setName("invoke");
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject->setLowerBound(0);
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject->setUpperBound(1);
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject->setUnique(true);
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject->setOrdered(true);
 	
-	m_object_Operation_invoke_Operation_EJavaObject->_setID(OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT);
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject->_setID(OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT_EJAVAOBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject_EJavaObject);
 		parameter->setName("_operation");
 		parameter->setEType(getOperation_Class());
 		parameter->setLowerBound(0);
@@ -12444,7 +12444,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject_EJavaObject);
 		parameter->setName("inputArguments");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -12454,7 +12454,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_Operation_EJavaObject_EJavaObject);
 		parameter->setName("outputArguments");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -12463,17 +12463,17 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject->setName("invoke");
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject->setLowerBound(0);
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject->setUpperBound(1);
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject->setUnique(true);
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject->setOrdered(true);
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject->setName("invoke");
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject->setLowerBound(0);
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject->setUpperBound(1);
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject->setUnique(true);
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject->setOrdered(true);
 	
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject->_setID(OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT);
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject->_setID(OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject);
 		parameter->setName("_opaqueBehavior");
 		parameter->setEType(getOpaqueBehavior_Class());
 		parameter->setLowerBound(0);
@@ -12483,7 +12483,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject);
 		parameter->setName("inputArguments");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -12493,7 +12493,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject);
 		parameter->setName("outputArguments");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -12502,17 +12502,17 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_remove_Property_EBoolean->setName("remove");
-	m_object_Operation_remove_Property_EBoolean->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
-	m_object_Operation_remove_Property_EBoolean->setLowerBound(0);
-	m_object_Operation_remove_Property_EBoolean->setUpperBound(1);
-	m_object_Operation_remove_Property_EBoolean->setUnique(true);
-	m_object_Operation_remove_Property_EBoolean->setOrdered(true);
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean->setName("remove");
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean->setLowerBound(0);
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean->setUpperBound(1);
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean->setUnique(true);
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean->setOrdered(true);
 	
-	m_object_Operation_remove_Property_EBoolean->_setID(OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN);
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean->_setID(OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT_EINT_EBOOLEAN);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean);
 		parameter->setName("_property");
 		parameter->setEType(getProperty_Class());
 		parameter->setLowerBound(0);
@@ -12522,7 +12522,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean);
 		parameter->setName("value");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -12532,7 +12532,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean);
 		parameter->setName("removeAt");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 		parameter->setLowerBound(0);
@@ -12542,7 +12542,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean);
 		parameter->setName("isRemoveDuplicates");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 		parameter->setLowerBound(0);
@@ -15343,17 +15343,17 @@ void umlPackageImpl::initializeProfileContent()
 	m_profile_Operation_define->_setID(PROFILE_OPERATION_DEFINE);
 	
 	
-	m_profile_Operation_define_EMap_EMap->setName("define");
-	m_profile_Operation_define_EMap_EMap->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
-	m_profile_Operation_define_EMap_EMap->setLowerBound(1);
-	m_profile_Operation_define_EMap_EMap->setUpperBound(1);
-	m_profile_Operation_define_EMap_EMap->setUnique(true);
-	m_profile_Operation_define_EMap_EMap->setOrdered(false);
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap->setName("define");
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap->setLowerBound(1);
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap->setUpperBound(1);
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap->setUnique(true);
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap->setOrdered(false);
 	
-	m_profile_Operation_define_EMap_EMap->_setID(PROFILE_OPERATION_DEFINE_EMAP_EMAP);
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap->_setID(PROFILE_OPERATION_DEFINE_EMAP_EDIAGNOSTICCHAIN_EMAP);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_profile_Operation_define_EMap_EMap);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_profile_Operation_define_EMap_EDiagnosticChain_EMap);
 		parameter->setName("options");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEMap_Class());
 		parameter->setLowerBound(0);
@@ -15363,7 +15363,7 @@ void umlPackageImpl::initializeProfileContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_profile_Operation_define_EMap_EMap);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_profile_Operation_define_EMap_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEDiagnosticChain_Class());
 		parameter->setLowerBound(0);
@@ -15373,7 +15373,7 @@ void umlPackageImpl::initializeProfileContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_profile_Operation_define_EMap_EMap);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_profile_Operation_define_EMap_EDiagnosticChain_EMap);
 		parameter->setName("context");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEMap_Class());
 		parameter->setLowerBound(0);
@@ -17852,17 +17852,17 @@ void umlPackageImpl::initializeSignalContent()
 	/*
 	 * EOperations
 	 */
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setEType(getProperty_Class());
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setLowerBound(1);
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUpperBound(1);
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUnique(true);
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setOrdered(false);
 	
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->_setID(SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->_setID(SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -17872,7 +17872,7 @@ void umlPackageImpl::initializeSignalContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("type");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -17882,7 +17882,7 @@ void umlPackageImpl::initializeSignalContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -17892,7 +17892,7 @@ void umlPackageImpl::initializeSignalContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -19144,17 +19144,17 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	m_structuredClassifier_Operation_allRoles->_setID(STRUCTUREDCLASSIFIER_OPERATION_ALLROLES);
 	
 	
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setEType(getProperty_Class());
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setLowerBound(1);
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUpperBound(1);
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setUnique(true);
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->setOrdered(false);
 	
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->_setID(STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural->_setID(STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -19164,7 +19164,7 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("type");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -19174,7 +19174,7 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -19184,7 +19184,7 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural);
 		parameter->setName("upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -20245,17 +20245,17 @@ void umlPackageImpl::initializeTypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setName("createAssociation");
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setEType(getAssociation_Class());
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setLowerBound(1);
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setUpperBound(1);
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setUnique(true);
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setOrdered(false);
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setName("createAssociation");
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setEType(getAssociation_Class());
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setLowerBound(1);
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setUpperBound(1);
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setUnique(true);
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setOrdered(false);
 	
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->_setID(TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL);
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->_setID(TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_TYPE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1IsNavigable");
 		parameter->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 		parameter->setLowerBound(0);
@@ -20265,7 +20265,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Aggregation");
 		parameter->setEType(getAggregationKind_Class());
 		parameter->setLowerBound(0);
@@ -20275,7 +20275,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -20285,7 +20285,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -20295,7 +20295,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);
@@ -20305,7 +20305,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end1Type");
 		parameter->setEType(getType_Class());
 		parameter->setLowerBound(0);
@@ -20315,7 +20315,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2IsNavigable");
 		parameter->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 		parameter->setLowerBound(0);
@@ -20325,7 +20325,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Aggregation");
 		parameter->setEType(getAggregationKind_Class());
 		parameter->setLowerBound(0);
@@ -20335,7 +20335,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -20345,7 +20345,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Lower");
 		parameter->setEType(types::typesPackage::eInstance()->getInteger_Class());
 		parameter->setLowerBound(0);
@@ -20355,7 +20355,7 @@ void umlPackageImpl::initializeTypeContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 		parameter->setName("end2Upper");
 		parameter->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 		parameter->setLowerBound(0);

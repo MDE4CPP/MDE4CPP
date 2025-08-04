@@ -95,9 +95,9 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Link_Operation_add_FUML_Object_Property;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_add_FUML_Object_EInt() const
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_add_FUML_Object_Property_EInt() const
 {
-	return m_fUML_Link_Operation_add_FUML_Object_EInt;
+	return m_fUML_Link_Operation_add_FUML_Object_Property_EInt;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Link_Operation_contains_FUML_Object() const
 {
@@ -185,29 +185,29 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Object_Operation_destroy_EBoolean_EBoolean;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_dispatchCall_Operation_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject() const
 {
-	return m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject;
+	return m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_getTypes() const
 {
 	return m_fUML_Object_Operation_getTypes;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject_EJavaObject() const
 {
-	return m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject;
+	return m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject_EJavaObject() const
 {
-	return m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject;
+	return m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOperation_EString_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOperation_EString_EJavaObject_EJavaObject() const
 {
-	return m_fUML_Object_Operation_invokeOperation_EString_EJavaObject;
+	return m_fUML_Object_Operation_invokeOperation_EString_EJavaObject_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOperation_EInt_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOperation_EInt_EJavaObject_EJavaObject() const
 {
-	return m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject;
+	return m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject_EJavaObject;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_send_EventOccurrence() const
 {

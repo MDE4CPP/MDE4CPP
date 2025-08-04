@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EEnum;
-	class EStringToStringMapEntry;
-	class EGenericType;
+	class EClass;
+	class EOperation;
+	class EEnumLiteral;
 	class EReference;
-	class EDataType;
+	class EParameter;
+	class EEnum;
+	class EGenericType;
 	class EAnnotation;
 	class EAttribute;
-	class EClass;
-	class EEnumLiteral;
-	class EParameter;
-	class EOperation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace uml 
@@ -748,8 +748,8 @@ namespace uml
 			static const unsigned long ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE = 1399712355;
 			static const unsigned long ARTIFACT_ATTRIBUTE_OWNEDOPERATION = 1990451269;
 			
-			static const unsigned long ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2148983055;
-			static const unsigned long ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 153390480;
+			static const unsigned long ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL = 2148983055;
+			static const unsigned long ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE = 153390480;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getArtifact_Class() const = 0;
@@ -761,8 +761,8 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EReference>& getArtifact_Attribute_ownedAttribute() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getArtifact_Attribute_ownedOperation() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getArtifact_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getArtifact_Operation_createOwnedOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getArtifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getArtifact_Operation_createOwnedOperation_String_String_Type_Type() const = 0;
 			
 			// End Class Artifact
 
@@ -1151,8 +1151,8 @@ namespace uml
 			static const unsigned long CLASSIFIER_OPERATION_GETALLUSEDINTERFACES = 1284650005;
 			static const unsigned long CLASSIFIER_OPERATION_GETGENERALS = 3949457156;
 			static const unsigned long CLASSIFIER_OPERATION_GETINHERITEDMEMBERS = 4185121864;
-			static const unsigned long CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE = 119886986;
-			static const unsigned long CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN = 3635929158;
+			static const unsigned long CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE = 119886986;
+			static const unsigned long CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE_BOOLEAN = 3635929158;
 			static const unsigned long CLASSIFIER_OPERATION_GETOPERATIONS = 1789810819;
 			static const unsigned long CLASSIFIER_OPERATION_GETPROPERTYVALUE_STRING = 1124921106;
 			static const unsigned long CLASSIFIER_OPERATION_GETUSEDINTERFACES = 2875330752;
@@ -1195,8 +1195,8 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getAllUsedInterfaces() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getGenerals() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getInheritedMembers() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperation_String_Type() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperation_String_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperation_String_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperation_String_String_Type_Boolean() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperations() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getPropertyValue_String() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getUsedInterfaces() const = 0;
@@ -1800,8 +1800,8 @@ namespace uml
 			static const unsigned long DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE = 1339735686;
 			static const unsigned long DATATYPE_ATTRIBUTE_OWNEDOPERATION = 1930474600;
 			
-			static const unsigned long DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 1758368293;
-			static const unsigned long DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 4057743014;
+			static const unsigned long DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL = 1758368293;
+			static const unsigned long DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE = 4057743014;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getDataType_Class() const = 0;
@@ -1810,8 +1810,8 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EReference>& getDataType_Attribute_ownedAttribute() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getDataType_Attribute_ownedOperation() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getDataType_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getDataType_Operation_createOwnedOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataType_Operation_createOwnedOperation_String_String_Type_Type() const = 0;
 			
 			// End Class DataType
 
@@ -2161,7 +2161,7 @@ namespace uml
 			static const unsigned long ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE = 1281257946;
 			static const unsigned long ELEMENT_OPERATION_MUSTBEOWNED = 3952176544;
 			static const unsigned long ELEMENT_OPERATION_REMOVEKEYWORD_STRING = 1157618568;
-			static const unsigned long ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT = 813757714;
+			static const unsigned long ELEMENT_OPERATION_SETVALUE_STEREOTYPE_STRING_EJAVAOBJECT = 813757714;
 			static const unsigned long ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE = 3541463368;
 			
 			//Class and Feature Getter
@@ -2206,7 +2206,7 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_isStereotypeRequired_Stereotype() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_mustBeOwned() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_removeKeyword_String() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_setValue_Stereotype_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_setValue_Stereotype_String_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_unapplyStereotype_Stereotype() const = 0;
 			
 			// End Class Element
@@ -3126,8 +3126,8 @@ namespace uml
 			static const unsigned long INTERFACE_ATTRIBUTE_PROTOCOL = 635086941;
 			static const unsigned long INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE = 463033915;
 			
-			static const unsigned long INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 3523817730;
-			static const unsigned long INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 836626359;
+			static const unsigned long INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL = 3523817730;
+			static const unsigned long INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE = 836626359;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getInterface_Class() const = 0;
@@ -3140,8 +3140,8 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_protocol() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_redefinedInterface() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getInterface_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getInterface_Operation_createOwnedOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInterface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInterface_Operation_createOwnedOperation_String_String_Type_Type() const = 0;
 			
 			// End Class Interface
 
@@ -3875,7 +3875,7 @@ namespace uml
 			
 			static const unsigned long NODE_ATTRIBUTE_NESTEDNODE = 2122983149;
 			
-			static const unsigned long NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL = 2087191607;
+			static const unsigned long NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_NODE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL = 2087191607;
 			static const unsigned long NODE_OPERATION_GETCOMMUNICATIONPATHS = 810632424;
 			
 			//Class and Feature Getter
@@ -3884,7 +3884,7 @@ namespace uml
 			
 			virtual const std::shared_ptr<ecore::EReference>& getNode_Attribute_nestedNode() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getNode_Operation_createCommunicationPath_Boolean_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNode_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getNode_Operation_getCommunicationPaths() const = 0;
 			
 			// End Class Node
@@ -3898,12 +3898,12 @@ namespace uml
 			
 			
 			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT = 1398402360;
-			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EINT = 3415478911;
+			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT_EINT = 3415478911;
 			static const unsigned long OBJECT_OPERATION_DESTROY = 2359110280;
 			static const unsigned long OBJECT_OPERATION_GET_PROPERTY = 511579154;
-			static const unsigned long OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT = 2370151843;
-			static const unsigned long OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT = 1414710241;
-			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN = 3074312916;
+			static const unsigned long OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT_EJAVAOBJECT = 2370151843;
+			static const unsigned long OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT = 1414710241;
+			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT_EINT_EBOOLEAN = 3074312916;
 			static const unsigned long OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 944063851;
 			static const unsigned long OBJECT_OPERATION_UNSET_PROPERTY = 2448223378;
 			
@@ -3913,12 +3913,12 @@ namespace uml
 			
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_add_Property_EJavaObject() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_add_Property_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_add_Property_EJavaObject_EInt() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_destroy() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_get_Property() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_invoke_Operation_EJavaObject() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_invoke_OpaqueBehavior_EJavaObject() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_remove_Property_EBoolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_invoke_Operation_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_remove_Property_EJavaObject_EInt_EBoolean() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_set_Property_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_unset_Property() const = 0;
 			
@@ -4563,7 +4563,7 @@ namespace uml
 			
 			static const unsigned long PROFILE_OPERATION_CREATE_CLASSIFIER = 2317940279;
 			static const unsigned long PROFILE_OPERATION_DEFINE = 1369026160;
-			static const unsigned long PROFILE_OPERATION_DEFINE_EMAP_EMAP = 1280241598;
+			static const unsigned long PROFILE_OPERATION_DEFINE_EMAP_EDIAGNOSTICCHAIN_EMAP = 1280241598;
 			static const unsigned long PROFILE_OPERATION_GETDEFINITION = 3919615722;
 			static const unsigned long PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT = 230708030;
 			static const unsigned long PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN = 1345091052;
@@ -4580,7 +4580,7 @@ namespace uml
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_create_Classifier() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_define() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_define_EMap_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_define_EMap_EDiagnosticChain_EMap() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getDefinition() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getDefinition_NamedElement() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getOwnedExtensions_Boolean() const = 0;
@@ -5321,7 +5321,7 @@ namespace uml
 			
 			static const unsigned long SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE = 424599147;
 			
-			static const unsigned long SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2958211947;
+			static const unsigned long SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL = 2958211947;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getSignal_Class() const = 0;
@@ -5329,7 +5329,7 @@ namespace uml
 			
 			virtual const std::shared_ptr<ecore::EReference>& getSignal_Attribute_ownedAttribute() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getSignal_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const = 0;
 			
 			// End Class Signal
 
@@ -5660,7 +5660,7 @@ namespace uml
 			static const unsigned long STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE = 1070141206;
 			
 			static const unsigned long STRUCTUREDCLASSIFIER_OPERATION_ALLROLES = 3047328929;
-			static const unsigned long STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2674132819;
+			static const unsigned long STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL = 2674132819;
 			static const unsigned long STRUCTUREDCLASSIFIER_OPERATION_GETPARTS = 2304451414;
 			
 			//Class and Feature Getter
@@ -5673,7 +5673,7 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EReference>& getStructuredClassifier_Attribute_role() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getStructuredClassifier_Operation_allRoles() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getStructuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStructuredClassifier_Operation_getParts() const = 0;
 			
 			// End Class StructuredClassifier
@@ -6012,7 +6012,7 @@ namespace uml
 			static const unsigned long TYPE_ATTRIBUTE_PACKAGE = 1093190655;
 			
 			static const unsigned long TYPE_OPERATION_CONFORMSTO_TYPE = 2823302737;
-			static const unsigned long TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL = 1855728755;
+			static const unsigned long TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_TYPE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL = 1855728755;
 			static const unsigned long TYPE_OPERATION_GETASSOCIATIONS = 831147640;
 			
 			//Class and Feature Getter
@@ -6022,7 +6022,7 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EReference>& getType_Attribute_package() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getType_Operation_conformsTo_Type() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getType_Operation_createAssociation_Boolean_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getType_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getType_Operation_getAssociations() const = 0;
 			
 			// End Class Type
@@ -6320,19 +6320,19 @@ namespace uml
 			
 			// End Class WriteVariableAction
 
-			static const int AGGREGATIONKIND_CLASS = 17;
-			static const int CALLCONCURRENCYKIND_CLASS = 30;
-			static const int CONNECTORKIND_CLASS = 55;
-			static const int EXPANSIONKIND_CLASS = 92;
-			static const int INTERACTIONOPERATORKIND_CLASS = 123;
-			static const int MESSAGEKIND_CLASS = 150;
-			static const int MESSAGESORT_CLASS = 152;
-			static const int OBJECTNODEORDERINGKIND_CLASS = 161;
-			static const int PARAMETERDIRECTIONKIND_CLASS = 175;
-			static const int PARAMETEREFFECTKIND_CLASS = 176;
-			static const int PSEUDOSTATEKIND_CLASS = 190;
-			static const int TRANSITIONKIND_CLASS = 242;
-			static const int VISIBILITYKIND_CLASS = 255;
+			static const unsigned long AGGREGATIONKIND_CLASS = 1440258132;
+			static const unsigned long CALLCONCURRENCYKIND_CLASS = 1173158917;
+			static const unsigned long CONNECTORKIND_CLASS = 982586695;
+			static const unsigned long EXPANSIONKIND_CLASS = 1804031768;
+			static const unsigned long INTERACTIONOPERATORKIND_CLASS = 1342527443;
+			static const unsigned long MESSAGEKIND_CLASS = 985352104;
+			static const unsigned long MESSAGESORT_CLASS = 197238196;
+			static const unsigned long OBJECTNODEORDERINGKIND_CLASS = 954708203;
+			static const unsigned long PARAMETERDIRECTIONKIND_CLASS = 581991585;
+			static const unsigned long PARAMETEREFFECTKIND_CLASS = 787423100;
+			static const unsigned long PSEUDOSTATEKIND_CLASS = 1936017980;
+			static const unsigned long TRANSITIONKIND_CLASS = 1232983771;
+			static const unsigned long VISIBILITYKIND_CLASS = 1710585137;
 			
 			virtual const std::shared_ptr<ecore::EEnum>& getAggregationKind_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EEnum>& getCallConcurrencyKind_Class() const = 0;

@@ -10,7 +10,9 @@
 
 namespace uml 
 {
+	class Comment;
 	class PrimitiveType;
+	class ProfileApplication;
 }
 
 

@@ -46,12 +46,12 @@ namespace types
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
-			static const int ANY_CLASS = 1;
-			static const int BOOLEAN_CLASS = 2;
-			static const int INTEGER_CLASS = 3;
-			static const int REAL_CLASS = 4;
-			static const int STRING_CLASS = 5;
-			static const int UNLIMITEDNATURAL_CLASS = 6;
+			static const unsigned long ANY_CLASS = 0;
+			static const unsigned long BOOLEAN_CLASS = 16396496;
+			static const unsigned long INTEGER_CLASS = 331779;
+			static const unsigned long REAL_CLASS = 155168383;
+			static const unsigned long STRING_CLASS = 527023004;
+			static const unsigned long UNLIMITEDNATURAL_CLASS = 331779;
 			
 			virtual const std::shared_ptr<ecore::EDataType>& getAny_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EDataType>& getBoolean_Class() const = 0;

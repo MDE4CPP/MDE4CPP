@@ -79,6 +79,7 @@
 #include "uml/UseCase.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace uml;
 
@@ -528,7 +529,7 @@ std::shared_ptr<Any> NodeImpl::eInvoke(int operationID, const std::shared_ptr<Ba
   	switch(operationID)
 	{
 		// uml::Node::createCommunicationPath(bool, uml::AggregationKind, std::string, int, int, uml::Node, bool, uml::AggregationKind, std::string, int, int) : uml::CommunicationPath: 2087191607
-		case umlPackage::NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL:
+		case umlPackage::NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_NODE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
 			//parameter 0

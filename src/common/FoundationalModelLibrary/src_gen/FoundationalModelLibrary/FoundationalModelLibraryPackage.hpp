@@ -10,6 +10,7 @@
 
 namespace uml 
 {
+	class PackageImport;
 	class ConnectorEnd;
 }
 

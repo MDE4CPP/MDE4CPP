@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/ETypeParameter.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -2681,72 +2681,106 @@ void ecorePackageImpl::initializePackageEDataTypes()
 {
 	m_any_Class->setName("Any");
 	m_any_Class->setSerializable(true);
+	m_any_Class->_setID(ANY_CLASS);
 	m_eBigDecimal_Class->setName("EBigDecimal");
 	m_eBigDecimal_Class->setSerializable(true);
+	m_eBigDecimal_Class->_setID(EBIGDECIMAL_CLASS);
 	m_eBigInteger_Class->setName("EBigInteger");
 	m_eBigInteger_Class->setSerializable(true);
+	m_eBigInteger_Class->_setID(EBIGINTEGER_CLASS);
 	m_eBoolean_Class->setName("EBoolean");
 	m_eBoolean_Class->setSerializable(true);
+	m_eBoolean_Class->_setID(EBOOLEAN_CLASS);
 	m_eBooleanObject_Class->setName("EBooleanObject");
 	m_eBooleanObject_Class->setSerializable(true);
+	m_eBooleanObject_Class->_setID(EBOOLEANOBJECT_CLASS);
 	m_eByte_Class->setName("EByte");
 	m_eByte_Class->setSerializable(true);
+	m_eByte_Class->_setID(EBYTE_CLASS);
 	m_eByteArray_Class->setName("EByteArray");
 	m_eByteArray_Class->setSerializable(true);
+	m_eByteArray_Class->_setID(EBYTEARRAY_CLASS);
 	m_eByteObject_Class->setName("EByteObject");
 	m_eByteObject_Class->setSerializable(true);
+	m_eByteObject_Class->_setID(EBYTEOBJECT_CLASS);
 	m_eChar_Class->setName("EChar");
 	m_eChar_Class->setSerializable(true);
+	m_eChar_Class->_setID(ECHAR_CLASS);
 	m_eCharacterObject_Class->setName("ECharacterObject");
 	m_eCharacterObject_Class->setSerializable(true);
+	m_eCharacterObject_Class->_setID(ECHARACTEROBJECT_CLASS);
 	m_eDate_Class->setName("EDate");
 	m_eDate_Class->setSerializable(true);
+	m_eDate_Class->_setID(EDATE_CLASS);
 	m_eDiagnosticChain_Class->setName("EDiagnosticChain");
 	m_eDiagnosticChain_Class->setSerializable(false);
+	m_eDiagnosticChain_Class->_setID(EDIAGNOSTICCHAIN_CLASS);
 	m_eDouble_Class->setName("EDouble");
 	m_eDouble_Class->setSerializable(true);
+	m_eDouble_Class->_setID(EDOUBLE_CLASS);
 	m_eDoubleObject_Class->setName("EDoubleObject");
 	m_eDoubleObject_Class->setSerializable(true);
+	m_eDoubleObject_Class->_setID(EDOUBLEOBJECT_CLASS);
 	m_eEList_Class->setName("EEList");
 	m_eEList_Class->setSerializable(false);
+	m_eEList_Class->_setID(EELIST_CLASS);
 	m_eEnumerator_Class->setName("EEnumerator");
 	m_eEnumerator_Class->setSerializable(false);
+	m_eEnumerator_Class->_setID(EENUMERATOR_CLASS);
 	m_eFeatureMap_Class->setName("EFeatureMap");
 	m_eFeatureMap_Class->setSerializable(false);
+	m_eFeatureMap_Class->_setID(EFEATUREMAP_CLASS);
 	m_eFeatureMapEntry_Class->setName("EFeatureMapEntry");
 	m_eFeatureMapEntry_Class->setSerializable(false);
+	m_eFeatureMapEntry_Class->_setID(EFEATUREMAPENTRY_CLASS);
 	m_eFloat_Class->setName("EFloat");
 	m_eFloat_Class->setSerializable(true);
+	m_eFloat_Class->_setID(EFLOAT_CLASS);
 	m_eFloatObject_Class->setName("EFloatObject");
 	m_eFloatObject_Class->setSerializable(true);
+	m_eFloatObject_Class->_setID(EFLOATOBJECT_CLASS);
 	m_eInt_Class->setName("EInt");
 	m_eInt_Class->setSerializable(true);
+	m_eInt_Class->_setID(EINT_CLASS);
 	m_eIntegerObject_Class->setName("EIntegerObject");
 	m_eIntegerObject_Class->setSerializable(true);
+	m_eIntegerObject_Class->_setID(EINTEGEROBJECT_CLASS);
 	m_eInvocationTargetException_Class->setName("EInvocationTargetException");
 	m_eInvocationTargetException_Class->setSerializable(false);
+	m_eInvocationTargetException_Class->_setID(EINVOCATIONTARGETEXCEPTION_CLASS);
 	m_eJavaClass_Class->setName("EJavaClass");
 	m_eJavaClass_Class->setSerializable(true);
+	m_eJavaClass_Class->_setID(EJAVACLASS_CLASS);
 	m_eJavaObject_Class->setName("EJavaObject");
 	m_eJavaObject_Class->setSerializable(true);
+	m_eJavaObject_Class->_setID(EJAVAOBJECT_CLASS);
 	m_eLong_Class->setName("ELong");
 	m_eLong_Class->setSerializable(true);
+	m_eLong_Class->_setID(ELONG_CLASS);
 	m_eLongObject_Class->setName("ELongObject");
 	m_eLongObject_Class->setSerializable(true);
+	m_eLongObject_Class->_setID(ELONGOBJECT_CLASS);
 	m_eMap_Class->setName("EMap");
 	m_eMap_Class->setSerializable(false);
+	m_eMap_Class->_setID(EMAP_CLASS);
 	m_eResource_Class->setName("EResource");
 	m_eResource_Class->setSerializable(false);
+	m_eResource_Class->_setID(ERESOURCE_CLASS);
 	m_eResourceSet_Class->setName("EResourceSet");
 	m_eResourceSet_Class->setSerializable(false);
+	m_eResourceSet_Class->_setID(ERESOURCESET_CLASS);
 	m_eShort_Class->setName("EShort");
 	m_eShort_Class->setSerializable(true);
+	m_eShort_Class->_setID(ESHORT_CLASS);
 	m_eShortObject_Class->setName("EShortObject");
 	m_eShortObject_Class->setSerializable(true);
+	m_eShortObject_Class->_setID(ESHORTOBJECT_CLASS);
 	m_eString_Class->setName("EString");
 	m_eString_Class->setSerializable(true);
+	m_eString_Class->_setID(ESTRING_CLASS);
 	m_eTreeIterator_Class->setName("ETreeIterator");
 	m_eTreeIterator_Class->setSerializable(false);
+	m_eTreeIterator_Class->_setID(ETREEITERATOR_CLASS);
 	
 }
 

@@ -42,8 +42,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
 #include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
@@ -56,6 +56,7 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -279,7 +280,7 @@ std::shared_ptr<Any> FinalStateActivationImpl::eInvoke(int operationID, const st
   	switch(operationID)
 	{
 		// PSSM::Semantics::StateMachines::FinalStateActivation::enter(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation): 1278826391
-		case StateMachinesPackage::FINALSTATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_REGIONACTIVATION:
+		case StateMachinesPackage::FINALSTATEACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_EVENTOCCURRENCE_REGIONACTIVATION:
 		{
 			//Retrieve input parameter 'enteringTransition'
 			//parameter 0

@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -81,7 +81,7 @@ void LociPackageImpl::createExecutorContent(std::shared_ptr<ecore::EPackage> pac
 	m_executor_Attribute_locus = factory->createEReference_as_eReferences_in_EClass(m_executor_Class, EXECUTOR_ATTRIBUTE_LOCUS);
 	
 	m_executor_Operation_evaluate_ValueSpecification = factory->createEOperation_as_eOperations_in_EClass(m_executor_Class, EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION);
-	m_executor_Operation_execute_Behavior_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_executor_Class, EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE);
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_executor_Class, EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_FUML_OBJECT_PARAMETERVALUE);
 	m_executor_Operation_start_Class_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_executor_Class, EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE);
 	
 }

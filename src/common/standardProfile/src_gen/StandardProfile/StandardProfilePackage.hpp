@@ -12,6 +12,8 @@ namespace uml
 {
 	class Extension;
 	class ExtensionEnd;
+	class Generalization;
+	class PackageImport;
 	class Property;
 	class Stereotype;
 }

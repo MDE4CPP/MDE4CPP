@@ -14,13 +14,13 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EEnumLiteral;
-	class EAttribute;
 	class EClass;
-	class EDataType;
+	class EEnumLiteral;
+	class EReference;
 	class EEnum;
 	class EGenericType;
+	class EAttribute;
+	class EDataType;
 }
 
 namespace ocl::Expressions 
@@ -1300,9 +1300,9 @@ namespace ocl::Expressions
 			
 			// End Class VariableExp
 
-			static const int COLLECTIONKIND_CLASS = 11;
-			static const int PREPOSTBODY_CLASS = 68;
-			static const int SURROUNDINGTYPE_CLASS = 82;
+			static const unsigned long COLLECTIONKIND_CLASS = 1509503199;
+			static const unsigned long PREPOSTBODY_CLASS = 726271812;
+			static const unsigned long SURROUNDINGTYPE_CLASS = 844364332;
 			
 			virtual const std::shared_ptr<ecore::EEnum>& getCollectionKind_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EEnum>& getPrePostBody_Class() const = 0;

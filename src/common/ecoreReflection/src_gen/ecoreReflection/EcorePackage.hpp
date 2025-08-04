@@ -12,11 +12,16 @@ namespace uml
 {
 	class Association;
 	class Class;
+	class ClassifierTemplateParameter;
+	class Generalization;
 	class Operation;
 	class Parameter;
 	class PrimitiveType;
+	class ProfileApplication;
 	class Property;
 	class RedefinableTemplateSignature;
+	class TemplateBinding;
+	class TemplateParameterSubstitution;
 }
 
 
@@ -151,8 +156,8 @@ namespace Ecore
 			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EClass_getEStructuralFeature_EString_EString() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClass_getEStructuralFeature_EString_EString_featureName() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClass_getEStructuralFeature_EString_EStringreturn() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EClass_getFeatureCount__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClass_getFeatureCount__return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EClass_getFeatureCount_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClass_getFeatureCount_return() = 0;  
 			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature_feature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn() = 0;  
@@ -166,8 +171,8 @@ namespace Ecore
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EClassifier_defaultValue() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EClassifier_ePackage() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EClassifier_eTypeParameters() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EClassifier_getClassifierID__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClassifier_getClassifierID__return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EClassifier_getClassifierID_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EClassifier_getClassifierID_return() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EClassifier_instanceClass() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EClassifier_instanceClassName() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EClassifier_instanceTypeName() = 0;  
@@ -247,20 +252,20 @@ namespace Ecore
 			virtual const std::shared_ptr<uml::Class>& get_Ecore_EObject() = 0;  
 			virtual const std::shared_ptr<uml::PrimitiveType>& get_Ecore_EObject_EEList_EObject() = 0;  
 			virtual const std::shared_ptr<uml::PrimitiveType>& get_Ecore_EObject_ETreeIterator_EObject() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eAllContents__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eAllContents__return() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eClass__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eClass__return() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContainer__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContainer__return() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContainingFeature__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContainingFeature__return() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContainmentFeature__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContainmentFeature__return() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContents__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContents__return() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eCrossReferences__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eCrossReferences__return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eAllContents_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eAllContents_return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eClass_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eClass_return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContainer_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContainer_return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContainingFeature_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContainingFeature_return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContainmentFeature_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContainmentFeature_return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eContents_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eContents_return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eCrossReferences_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eCrossReferences_return() = 0;  
 			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_feature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_resolve() = 0;  
@@ -268,13 +273,13 @@ namespace Ecore
 			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeature_feature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eIsProxy__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eIsProxy__return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eIsProxy_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eIsProxy_return() = 0;  
 			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature_feature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eResource__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eResource__return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eResource_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eResource_return() = 0;  
 			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_feature() = 0;  
 			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_newValue() = 0;  
@@ -323,10 +328,10 @@ namespace Ecore
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EStructuralFeature_defaultValueLiteral() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EStructuralFeature_derived() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EStructuralFeature_eContainingClass() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EStructuralFeature_getContainerClass__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EStructuralFeature_getContainerClass__return() = 0;  
-			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EStructuralFeature_getFeatureID__() = 0;  
-			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EStructuralFeature_getFeatureID__return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EStructuralFeature_getContainerClass_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EStructuralFeature_getContainerClass_return() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_Ecore_EStructuralFeature_getFeatureID_() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_Ecore_EStructuralFeature_getFeatureID_return() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EStructuralFeature_transient() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EStructuralFeature_unsettable() = 0;  
 			virtual const std::shared_ptr<uml::Property>& get_Ecore_EStructuralFeature_volatile() = 0;  

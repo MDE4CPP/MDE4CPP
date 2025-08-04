@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EGenericType;
+	class EClass;
+	class EOperation;
 	class EReference;
-	class EDataType;
+	class EParameter;
+	class EGenericType;
 	class EAnnotation;
 	class EAttribute;
-	class EClass;
-	class EParameter;
-	class EOperation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace fUML::Semantics::Actions 
@@ -166,8 +166,8 @@ namespace fUML::Semantics::Actions
 			static const unsigned long ACTIONACTIVATION_OPERATION_DOACTION = 700884178;
 			static const unsigned long ACTIONACTIVATION_OPERATION_FIRE_TOKEN = 1791268998;
 			static const unsigned long ACTIONACTIVATION_OPERATION_GETASSOCIATION_STRUCTURALFEATURE = 2442191042;
-			static const unsigned long ACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_FUML_OBJECT = 3701998150;
-			static const unsigned long ACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_FUML_OBJECT = 2567840507;
+			static const unsigned long ACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_STRUCTURALFEATURE_FUML_OBJECT = 3701998150;
+			static const unsigned long ACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_STRUCTURALFEATURE_FUML_OBJECT_FUML_OBJECT = 2567840507;
 			static const unsigned long ACTIONACTIVATION_OPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE = 2375095834;
 			static const unsigned long ACTIONACTIVATION_OPERATION_GETTOKENS_INPUTPIN = 4209096250;
 			static const unsigned long ACTIONACTIVATION_OPERATION_ISFIRNG = 392760869;
@@ -200,8 +200,8 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_doAction() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_fire_Token() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getAssociation_StructuralFeature() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getMatchingLinks_Association_FUML_Object() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getMatchingLinksForEndValue_Association_FUML_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getMatchingLinks_Association_StructuralFeature_FUML_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getMatchingLinksForEndValue_Association_StructuralFeature_FUML_Object_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getTokens_InputPin() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_isFirng() const = 0;
@@ -431,7 +431,7 @@ namespace fUML::Semantics::Actions
 			
 			static const unsigned long DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION = 445795804;
 			
-			static const unsigned long DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_EJAVAOBJECT_EBOOLEAN = 3697661383;
+			static const unsigned long DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_EJAVAOBJECT_EBOOLEAN_EBOOLEAN = 3697661383;
 			static const unsigned long DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION = 393014891;
 			
 			//Class and Feature Getter
@@ -440,7 +440,7 @@ namespace fUML::Semantics::Actions
 			
 			virtual const std::shared_ptr<ecore::EReference>& getDestroyObjectActionActivation_Attribute_destroyObjectAction() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean_EBoolean() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_doAction() const = 0;
 			
 			// End Class DestroyObjectActionActivation
@@ -945,14 +945,14 @@ namespace fUML::Semantics::Actions
 			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
 			
-			static const unsigned long WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_EJAVAOBJECT_EINT = 455262104;
+			static const unsigned long WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_EJAVAOBJECT_EJAVAOBJECT_EINT = 455262104;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getWriteStructuralFeatureActionActivation_Class() const = 0;
 			
 			
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getWriteStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteStructuralFeatureActionActivation_Operation_position_EJavaObject_EJavaObject_EInt() const = 0;
 			
 			// End Class WriteStructuralFeatureActionActivation
 

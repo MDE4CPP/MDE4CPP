@@ -46,8 +46,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -59,6 +59,7 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -927,7 +928,7 @@ std::shared_ptr<Any> VertexActivationImpl::eInvoke(int operationID, const std::s
 			break;
 		}
 		// PSSM::Semantics::StateMachines::VertexActivation::canPropagateExecution(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation) : bool: 924847871
-		case StateMachinesPackage::VERTEXACTIVATION_OPERATION_CANPROPAGATEEXECUTION_TRANSITIONACTIVATION_REGIONACTIVATION:
+		case StateMachinesPackage::VERTEXACTIVATION_OPERATION_CANPROPAGATEEXECUTION_TRANSITIONACTIVATION_EVENTOCCURRENCE_REGIONACTIVATION:
 		{
 			//Retrieve input parameter 'enteringTransition'
 			//parameter 0
@@ -1011,7 +1012,7 @@ std::shared_ptr<Any> VertexActivationImpl::eInvoke(int operationID, const std::s
 			break;
 		}
 		// PSSM::Semantics::StateMachines::VertexActivation::enter(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation): 1125310418
-		case StateMachinesPackage::VERTEXACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_REGIONACTIVATION:
+		case StateMachinesPackage::VERTEXACTIVATION_OPERATION_ENTER_TRANSITIONACTIVATION_EVENTOCCURRENCE_REGIONACTIVATION:
 		{
 			//Retrieve input parameter 'enteringTransition'
 			//parameter 0
@@ -1095,7 +1096,7 @@ std::shared_ptr<Any> VertexActivationImpl::eInvoke(int operationID, const std::s
 			break;
 		}
 		// PSSM::Semantics::StateMachines::VertexActivation::exit(PSSM::Semantics::StateMachines::TransitionActivation, fUML::Semantics::CommonBehavior::EventOccurrence, PSSM::Semantics::StateMachines::RegionActivation): 985410366
-		case StateMachinesPackage::VERTEXACTIVATION_OPERATION_EXIT_TRANSITIONACTIVATION_REGIONACTIVATION:
+		case StateMachinesPackage::VERTEXACTIVATION_OPERATION_EXIT_TRANSITIONACTIVATION_EVENTOCCURRENCE_REGIONACTIVATION:
 		{
 			//Retrieve input parameter 'exitingTransition'
 			//parameter 0

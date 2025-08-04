@@ -279,6 +279,7 @@ void PrimitiveBehaviorsPackageImpl::initializePackageValueSpecifications()
 
 
 
+
 std::shared_ptr<BooleanFunctions::BooleanFunctionsPackage> PrimitiveBehaviorsPackageImpl::getBooleanFunctions_Package() const
 {
 	return BooleanFunctions::BooleanFunctionsPackage::eInstance();

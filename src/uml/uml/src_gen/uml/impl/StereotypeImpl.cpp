@@ -77,6 +77,7 @@
 #include "uml/TemplateSignature.hpp"
 #include "uml/UseCase.hpp"
 //Factories and Package includes
+#include "uml/umlPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 

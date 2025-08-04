@@ -41,10 +41,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Association.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -57,6 +57,7 @@
 #include "uml/Property.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -672,7 +673,7 @@ std::shared_ptr<Any> FUML_LinkImpl::eInvoke(int operationID, const std::shared_p
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Link::add(fUML::MDE4CPP_Extensions::FUML_Object, uml::Property, int): 1930469695
-		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_ADD_FUML_OBJECT_EINT:
+		case MDE4CPP_ExtensionsPackage::FUML_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY_EINT:
 		{
 			//Retrieve input parameter 'object'
 			//parameter 0

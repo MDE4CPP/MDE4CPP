@@ -7,17 +7,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -506,8 +506,8 @@ void umlPackageImpl::createArtifactContent(std::shared_ptr<ecore::EPackage> pack
 	m_artifact_Attribute_ownedAttribute = factory->createEReference_as_eReferences_in_EClass(m_artifact_Class, ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE);
 	m_artifact_Attribute_ownedOperation = factory->createEReference_as_eReferences_in_EClass(m_artifact_Class, ARTIFACT_ATTRIBUTE_OWNEDOPERATION);
 	
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_artifact_Class, ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
-	m_artifact_Operation_createOwnedOperation_String_Type = factory->createEOperation_as_eOperations_in_EClass(m_artifact_Class, ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE);
+	m_artifact_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_artifact_Class, ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
+	m_artifact_Operation_createOwnedOperation_String_String_Type_Type = factory->createEOperation_as_eOperations_in_EClass(m_artifact_Class, ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE);
 	
 }
 
@@ -711,8 +711,8 @@ void umlPackageImpl::createClassifierContent(std::shared_ptr<ecore::EPackage> pa
 	m_classifier_Operation_getAllUsedInterfaces = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETALLUSEDINTERFACES);
 	m_classifier_Operation_getGenerals = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETGENERALS);
 	m_classifier_Operation_getInheritedMembers = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETINHERITEDMEMBERS);
-	m_classifier_Operation_getOperation_String_Type = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE);
-	m_classifier_Operation_getOperation_String_Boolean = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN);
+	m_classifier_Operation_getOperation_String_String_Type = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE);
+	m_classifier_Operation_getOperation_String_String_Type_Boolean = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE_BOOLEAN);
 	m_classifier_Operation_getOperations = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETOPERATIONS);
 	m_classifier_Operation_getPropertyValue_String = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETPROPERTYVALUE_STRING);
 	m_classifier_Operation_getUsedInterfaces = factory->createEOperation_as_eOperations_in_EClass(m_classifier_Class, CLASSIFIER_OPERATION_GETUSEDINTERFACES);
@@ -1009,8 +1009,8 @@ void umlPackageImpl::createDataTypeContent(std::shared_ptr<ecore::EPackage> pack
 	m_dataType_Attribute_ownedAttribute = factory->createEReference_as_eReferences_in_EClass(m_dataType_Class, DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE);
 	m_dataType_Attribute_ownedOperation = factory->createEReference_as_eReferences_in_EClass(m_dataType_Class, DATATYPE_ATTRIBUTE_OWNEDOPERATION);
 	
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_dataType_Class, DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
-	m_dataType_Operation_createOwnedOperation_String_Type = factory->createEOperation_as_eOperations_in_EClass(m_dataType_Class, DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE);
+	m_dataType_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_dataType_Class, DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
+	m_dataType_Operation_createOwnedOperation_String_String_Type_Type = factory->createEOperation_as_eOperations_in_EClass(m_dataType_Class, DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE);
 	
 }
 
@@ -1199,7 +1199,7 @@ void umlPackageImpl::createElementContent(std::shared_ptr<ecore::EPackage> packa
 	m_element_Operation_isStereotypeRequired_Stereotype = factory->createEOperation_as_eOperations_in_EClass(m_element_Class, ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE);
 	m_element_Operation_mustBeOwned = factory->createEOperation_as_eOperations_in_EClass(m_element_Class, ELEMENT_OPERATION_MUSTBEOWNED);
 	m_element_Operation_removeKeyword_String = factory->createEOperation_as_eOperations_in_EClass(m_element_Class, ELEMENT_OPERATION_REMOVEKEYWORD_STRING);
-	m_element_Operation_setValue_Stereotype_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_element_Class, ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT);
+	m_element_Operation_setValue_Stereotype_String_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_element_Class, ELEMENT_OPERATION_SETVALUE_STEREOTYPE_STRING_EJAVAOBJECT);
 	m_element_Operation_unapplyStereotype_Stereotype = factory->createEOperation_as_eOperations_in_EClass(m_element_Class, ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE);
 	
 }
@@ -1645,8 +1645,8 @@ void umlPackageImpl::createInterfaceContent(std::shared_ptr<ecore::EPackage> pac
 	m_interface_Attribute_protocol = factory->createEReference_as_eReferences_in_EClass(m_interface_Class, INTERFACE_ATTRIBUTE_PROTOCOL);
 	m_interface_Attribute_redefinedInterface = factory->createEReference_as_eReferences_in_EClass(m_interface_Class, INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE);
 	
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_interface_Class, INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
-	m_interface_Operation_createOwnedOperation_String_Type = factory->createEOperation_as_eOperations_in_EClass(m_interface_Class, INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE);
+	m_interface_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_interface_Class, INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
+	m_interface_Operation_createOwnedOperation_String_String_Type_Type = factory->createEOperation_as_eOperations_in_EClass(m_interface_Class, INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE);
 	
 }
 
@@ -2002,7 +2002,7 @@ void umlPackageImpl::createNodeContent(std::shared_ptr<ecore::EPackage> package,
 	
 	m_node_Attribute_nestedNode = factory->createEReference_as_eReferences_in_EClass(m_node_Class, NODE_ATTRIBUTE_NESTEDNODE);
 	
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_node_Class, NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL);
+	m_node_Operation_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_node_Class, NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_NODE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL);
 	m_node_Operation_getCommunicationPaths = factory->createEOperation_as_eOperations_in_EClass(m_node_Class, NODE_OPERATION_GETCOMMUNICATIONPATHS);
 	
 }
@@ -2013,12 +2013,12 @@ void umlPackageImpl::createObjectContent(std::shared_ptr<ecore::EPackage> packag
 	
 	
 	m_object_Operation_add_Property_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT);
-	m_object_Operation_add_Property_EInt = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_ADD_PROPERTY_EINT);
+	m_object_Operation_add_Property_EJavaObject_EInt = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT_EINT);
 	m_object_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_DESTROY);
 	m_object_Operation_get_Property = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_GET_PROPERTY);
-	m_object_Operation_invoke_Operation_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT);
-	m_object_Operation_invoke_OpaqueBehavior_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT);
-	m_object_Operation_remove_Property_EBoolean = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN);
+	m_object_Operation_invoke_Operation_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT_EJAVAOBJECT);
+	m_object_Operation_invoke_OpaqueBehavior_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT);
+	m_object_Operation_remove_Property_EJavaObject_EInt_EBoolean = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT_EINT_EBOOLEAN);
 	m_object_Operation_set_Property_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT);
 	m_object_Operation_unset_Property = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_UNSET_PROPERTY);
 	
@@ -2336,7 +2336,7 @@ void umlPackageImpl::createProfileContent(std::shared_ptr<ecore::EPackage> packa
 	
 	m_profile_Operation_create_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_profile_Class, PROFILE_OPERATION_CREATE_CLASSIFIER);
 	m_profile_Operation_define = factory->createEOperation_as_eOperations_in_EClass(m_profile_Class, PROFILE_OPERATION_DEFINE);
-	m_profile_Operation_define_EMap_EMap = factory->createEOperation_as_eOperations_in_EClass(m_profile_Class, PROFILE_OPERATION_DEFINE_EMAP_EMAP);
+	m_profile_Operation_define_EMap_EDiagnosticChain_EMap = factory->createEOperation_as_eOperations_in_EClass(m_profile_Class, PROFILE_OPERATION_DEFINE_EMAP_EDIAGNOSTICCHAIN_EMAP);
 	m_profile_Operation_getDefinition = factory->createEOperation_as_eOperations_in_EClass(m_profile_Class, PROFILE_OPERATION_GETDEFINITION);
 	m_profile_Operation_getDefinition_NamedElement = factory->createEOperation_as_eOperations_in_EClass(m_profile_Class, PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT);
 	m_profile_Operation_getOwnedExtensions_Boolean = factory->createEOperation_as_eOperations_in_EClass(m_profile_Class, PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN);
@@ -2698,7 +2698,7 @@ void umlPackageImpl::createSignalContent(std::shared_ptr<ecore::EPackage> packag
 	
 	m_signal_Attribute_ownedAttribute = factory->createEReference_as_eReferences_in_EClass(m_signal_Class, SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE);
 	
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_signal_Class, SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
+	m_signal_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_signal_Class, SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
 	
 }
 
@@ -2863,7 +2863,7 @@ void umlPackageImpl::createStructuredClassifierContent(std::shared_ptr<ecore::EP
 	m_structuredClassifier_Attribute_role = factory->createEReference_as_eReferences_in_EClass(m_structuredClassifier_Class, STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE);
 	
 	m_structuredClassifier_Operation_allRoles = factory->createEOperation_as_eOperations_in_EClass(m_structuredClassifier_Class, STRUCTUREDCLASSIFIER_OPERATION_ALLROLES);
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_structuredClassifier_Class, STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL);
+	m_structuredClassifier_Operation_createOwnedAttribute_String_Type_Integer_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_structuredClassifier_Class, STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL);
 	m_structuredClassifier_Operation_getParts = factory->createEOperation_as_eOperations_in_EClass(m_structuredClassifier_Class, STRUCTUREDCLASSIFIER_OPERATION_GETPARTS);
 	
 }
@@ -3030,7 +3030,7 @@ void umlPackageImpl::createTypeContent(std::shared_ptr<ecore::EPackage> package,
 	m_type_Attribute_package = factory->createEReference_as_eReferences_in_EClass(m_type_Class, TYPE_ATTRIBUTE_PACKAGE);
 	
 	m_type_Operation_conformsTo_Type = factory->createEOperation_as_eOperations_in_EClass(m_type_Class, TYPE_OPERATION_CONFORMSTO_TYPE);
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_type_Class, TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL);
+	m_type_Operation_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createEOperation_as_eOperations_in_EClass(m_type_Class, TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL_TYPE_BOOLEAN_AGGREGATIONKIND_STRING_INTEGER_UNLIMITEDNATURAL);
 	m_type_Operation_getAssociations = factory->createEOperation_as_eOperations_in_EClass(m_type_Class, TYPE_OPERATION_GETASSOCIATIONS);
 	
 }

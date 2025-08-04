@@ -71,6 +71,7 @@
 #include "uml/UseCase.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace uml;
 
@@ -970,7 +971,7 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, const std::shared_pt
   	switch(operationID)
 	{
 		// uml::Artifact::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 2148983055
-		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
+		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
@@ -1044,7 +1045,7 @@ std::shared_ptr<Any> ArtifactImpl::eInvoke(int operationID, const std::shared_pt
 			break;
 		}
 		// uml::Artifact::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 153390480
-		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
+		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_STRING_TYPE_TYPE:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0

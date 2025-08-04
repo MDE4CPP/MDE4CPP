@@ -66,6 +66,7 @@
 //Factories and Package includes
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -665,7 +666,7 @@ std::shared_ptr<Any> StateMachineSemanticVisitorImpl::eInvoke(int operationID, c
 			break;
 		}
 		// PSSM::Semantics::StateMachines::StateMachineSemanticVisitor::getExecutionFor(uml::Behavior, fUML::Semantics::CommonBehavior::EventOccurrence, fUML::MDE4CPP_Extensions::FUML_Object) : fUML::Semantics::CommonBehavior::Execution: 3510213574
-		case StateMachinesPackage::STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_FUML_OBJECT:
+		case StateMachinesPackage::STATEMACHINESEMANTICVISITOR_OPERATION_GETEXECUTIONFOR_BEHAVIOR_EVENTOCCURRENCE_FUML_OBJECT:
 		{
 			//Retrieve input parameter 'behavior'
 			//parameter 0

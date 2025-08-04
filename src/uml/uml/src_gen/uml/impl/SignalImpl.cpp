@@ -67,6 +67,7 @@
 #include "uml/UseCase.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace uml;
 
@@ -478,7 +479,7 @@ std::shared_ptr<Any> SignalImpl::eInvoke(int operationID, const std::shared_ptr<
   	switch(operationID)
 	{
 		// uml::Signal::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 2958211947
-		case umlPackage::SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
+		case umlPackage::SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0

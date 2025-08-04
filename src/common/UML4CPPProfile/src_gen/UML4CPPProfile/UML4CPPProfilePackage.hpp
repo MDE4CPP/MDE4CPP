@@ -10,8 +10,10 @@
 
 namespace uml 
 {
+	class Comment;
 	class Extension;
 	class ExtensionEnd;
+	class PackageImport;
 	class Property;
 	class Stereotype;
 }

@@ -50,6 +50,7 @@
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
+#include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Expressions;

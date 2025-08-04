@@ -55,8 +55,13 @@ namespace FoundationalModelLibrary::Common
 			virtual void constructObject(const std::shared_ptr<uml::Class>&);
 			virtual bool contains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
 			virtual bool directlyContains(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
-			virtual std::shared_ptr<Any> dispatchCallIn(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
-			virtual std::shared_ptr<Any> dispatchCallOut(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+			virtual std::shared_ptr<Any> dispatchCallInByPort(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+			virtual std::shared_ptr<Any> dispatchCallInOnInteractionPoint(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+			virtual std::shared_ptr<Any> dispatchCallOutByPort(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<uml::Port>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+			virtual std::shared_ptr<Any> dispatchCallOutOnInteractionPoint(const std::shared_ptr<uml::Operation>&, const std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+			virtual std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> getCompositeOwner();
+			virtual bool isOperationProvided(const std::shared_ptr<uml::Operation>&);
+			virtual bool isOperationRequired(const std::shared_ptr<uml::Operation>&);
 
 			//*********************************
 			// Attributes Getter Setter

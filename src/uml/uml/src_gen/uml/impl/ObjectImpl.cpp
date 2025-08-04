@@ -45,6 +45,7 @@
 #include "uml/Property.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace uml;
 
@@ -320,7 +321,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 			break;
 		}
 		// uml::Object::add(uml::Property, Any, int) : bool: 3415478911
-		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EINT:
+		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT_EINT:
 		{
 			//Retrieve input parameter '_property'
 			//parameter 0
@@ -418,7 +419,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 			break;
 		}
 		// uml::Object::invoke(uml::Operation, Any[*], Any[*]) : Any: 2370151843
-		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT:
+		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_operation'
 			//parameter 0
@@ -478,7 +479,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 			break;
 		}
 		// uml::Object::invoke(uml::OpaqueBehavior, Any[*], Any[*]) : Any: 1414710241
-		case umlPackage::OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT:
+		case umlPackage::OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_opaqueBehavior'
 			//parameter 0
@@ -538,7 +539,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 			break;
 		}
 		// uml::Object::remove(uml::Property, Any, int, bool) : Any: 3074312916
-		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN:
+		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT_EINT_EBOOLEAN:
 		{
 			//Retrieve input parameter '_property'
 			//parameter 0

@@ -49,6 +49,7 @@
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;

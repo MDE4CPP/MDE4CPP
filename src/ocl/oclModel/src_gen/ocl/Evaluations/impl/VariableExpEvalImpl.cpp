@@ -41,8 +41,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -52,6 +52,7 @@
 #include "ocl/Expressions/OclExpression.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
+#include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"

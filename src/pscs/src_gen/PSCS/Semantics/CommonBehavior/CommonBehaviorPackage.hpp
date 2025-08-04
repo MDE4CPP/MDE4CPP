@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EGenericType;
+	class EClass;
+	class EOperation;
 	class EReference;
-	class EDataType;
+	class EParameter;
+	class EGenericType;
 	class EAnnotation;
 	class EAttribute;
-	class EClass;
-	class EParameter;
-	class EOperation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSCS::Semantics::CommonBehavior 

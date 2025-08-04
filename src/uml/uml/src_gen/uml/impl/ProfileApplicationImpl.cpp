@@ -50,6 +50,7 @@
 #include "uml/Package.hpp"
 #include "uml/Profile.hpp"
 //Factories and Package includes
+#include "uml/umlPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 

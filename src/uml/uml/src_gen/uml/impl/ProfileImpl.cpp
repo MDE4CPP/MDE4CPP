@@ -67,6 +67,7 @@
 #include "uml/TemplateSignature.hpp"
 #include "uml/Type.hpp"
 //Factories and Package includes
+#include "uml/umlPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -671,7 +672,7 @@ std::shared_ptr<Any> ProfileImpl::eInvoke(int operationID, const std::shared_ptr
 			break;
 		}
 		// uml::Profile::define(std::map, Any, std::map) : ecore::EPackage: 1280241598
-		case umlPackage::PROFILE_OPERATION_DEFINE_EMAP_EMAP:
+		case umlPackage::PROFILE_OPERATION_DEFINE_EMAP_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'options'
 			//parameter 0

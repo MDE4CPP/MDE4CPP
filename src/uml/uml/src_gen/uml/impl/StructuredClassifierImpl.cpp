@@ -69,6 +69,7 @@
 #include "uml/UseCase.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace uml;
 
@@ -678,7 +679,7 @@ std::shared_ptr<Any> StructuredClassifierImpl::eInvoke(int operationID, const st
 			break;
 		}
 		// uml::StructuredClassifier::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 2674132819
-		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
+		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_TYPE_INTEGER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0

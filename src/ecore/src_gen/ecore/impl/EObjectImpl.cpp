@@ -52,6 +52,7 @@
 #include "ecore/EStructuralFeature.hpp"
 //Factories and Package includes
 #include "ecore/ecorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ecore;
 
@@ -453,7 +454,7 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		// TODO 'org.eclipse.emf.ecore.impl.EDataTypeImpl@2c16fadb (name: EInt) (instanceClassName: int) (serializable: true)' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
+		// TODO 'org.eclipse.emf.ecore.impl.EDataTypeImpl@72fe8a4f (name: EInt) (instanceClassName: int) (serializable: true)' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
 		//
 		// Add new tags (from references)
 		//

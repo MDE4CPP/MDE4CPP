@@ -44,6 +44,7 @@
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/Actions/ActionsPackage.hpp"
+#include "PSSM/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 
 using namespace PSSM::Semantics::Actions;

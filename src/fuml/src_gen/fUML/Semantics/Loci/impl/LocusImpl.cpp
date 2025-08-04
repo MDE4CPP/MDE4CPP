@@ -37,9 +37,11 @@
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include <algorithm>
+#include "uml/Association.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
@@ -60,16 +62,15 @@
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
-#include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
-#include "uml/Association.hpp"
 
 using namespace fUML::Semantics::Loci;
 

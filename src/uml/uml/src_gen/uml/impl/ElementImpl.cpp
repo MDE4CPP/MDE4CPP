@@ -56,6 +56,7 @@
 #include "uml/Relationship.hpp"
 #include "uml/Stereotype.hpp"
 //Factories and Package includes
+#include "uml/umlPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -1352,7 +1353,7 @@ std::shared_ptr<Any> ElementImpl::eInvoke(int operationID, const std::shared_ptr
 			break;
 		}
 		// uml::Element::setValue(uml::Stereotype, std::string, Any): 813757714
-		case umlPackage::ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT:
+		case umlPackage::ELEMENT_OPERATION_SETVALUE_STEREOTYPE_STRING_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'stereotype'
 			//parameter 0

@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -390,17 +390,17 @@ void LociPackageImpl::initializeExecutorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_executor_Operation_execute_Behavior_ParameterValue->setName("execute");
-	m_executor_Operation_execute_Behavior_ParameterValue->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
-	m_executor_Operation_execute_Behavior_ParameterValue->setLowerBound(0);
-	m_executor_Operation_execute_Behavior_ParameterValue->setUpperBound(-1);
-	m_executor_Operation_execute_Behavior_ParameterValue->setUnique(true);
-	m_executor_Operation_execute_Behavior_ParameterValue->setOrdered(false);
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue->setName("execute");
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue->setLowerBound(0);
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue->setUpperBound(-1);
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue->setUnique(true);
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue->setOrdered(false);
 	
-	m_executor_Operation_execute_Behavior_ParameterValue->_setID(EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE);
+	m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue->_setID(EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_FUML_OBJECT_PARAMETERVALUE);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue);
 		parameter->setName("behavior");
 		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 		parameter->setLowerBound(0);
@@ -410,7 +410,7 @@ void LociPackageImpl::initializeExecutorContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue);
 		parameter->setName("context");
 		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);
@@ -420,7 +420,7 @@ void LociPackageImpl::initializeExecutorContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue);
 		parameter->setName("inputs");
 		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
 		parameter->setLowerBound(0);

@@ -58,6 +58,7 @@
 #include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
+#include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"

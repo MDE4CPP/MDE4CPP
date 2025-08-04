@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EDataType;
-	class EAnnotation;
 	class EClass;
-	class EParameter;
 	class EOperation;
+	class EReference;
+	class EParameter;
+	class EGenericType;
+	class EAnnotation;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace fUML::Semantics::Loci 
@@ -124,7 +124,7 @@ namespace fUML::Semantics::Loci
 			static const unsigned long EXECUTOR_ATTRIBUTE_LOCUS = 32912316;
 			
 			static const unsigned long EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 321446891;
-			static const unsigned long EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 1550418063;
+			static const unsigned long EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_FUML_OBJECT_PARAMETERVALUE = 1550418063;
 			static const unsigned long EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 2158458358;
 			
 			//Class and Feature Getter
@@ -134,7 +134,7 @@ namespace fUML::Semantics::Loci
 			virtual const std::shared_ptr<ecore::EReference>& getExecutor_Attribute_locus() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getExecutor_Operation_evaluate_ValueSpecification() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getExecutor_Operation_execute_Behavior_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutor_Operation_execute_Behavior_FUML_Object_ParameterValue() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getExecutor_Operation_start_Class_ParameterValue() const = 0;
 			
 			// End Class Executor

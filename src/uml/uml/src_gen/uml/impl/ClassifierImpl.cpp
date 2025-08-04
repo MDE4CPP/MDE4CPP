@@ -77,6 +77,7 @@
 #include "uml/UseCase.hpp"
 //Factories and Package includes
 #include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace uml;
 
@@ -1968,7 +1969,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, const std::shared_
 			break;
 		}
 		// uml::Classifier::getOperation(std::string, std::string[*], uml::Type[*]) : uml::Operation: 119886986
-		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE:
+		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
@@ -2037,7 +2038,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, const std::shared_
 			break;
 		}
 		// uml::Classifier::getOperation(std::string, std::string[*], uml::Type[*], bool) : uml::Operation: 3635929158
-		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN:
+		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_STRING_TYPE_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0

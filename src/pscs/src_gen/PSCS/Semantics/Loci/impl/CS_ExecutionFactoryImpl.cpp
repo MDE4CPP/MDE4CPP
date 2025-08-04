@@ -92,8 +92,8 @@
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Loci;

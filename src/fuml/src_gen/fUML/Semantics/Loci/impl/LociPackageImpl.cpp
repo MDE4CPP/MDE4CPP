@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Loci/LociFactory.hpp"
@@ -160,9 +160,9 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl
 {
 	return m_executor_Operation_evaluate_ValueSpecification;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getExecutor_Operation_execute_Behavior_ParameterValue() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getExecutor_Operation_execute_Behavior_FUML_Object_ParameterValue() const
 {
-	return m_executor_Operation_execute_Behavior_ParameterValue;
+	return m_executor_Operation_execute_Behavior_FUML_Object_ParameterValue;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getExecutor_Operation_start_Class_ParameterValue() const
 {
