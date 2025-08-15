@@ -51,7 +51,6 @@ task buildEcoreModels() {
 	dependsOn 'pssm:buildPSSM'
 }
 
-
 task buildReflectionModels() {
 	group 'Source'
 	description 'generate and compile reflection models'
@@ -141,7 +140,6 @@ task generateEcoreModels() {
 	dependsOn 'pssm:generatePSSM'
 	dependsOn 'ocl:oclModel:generateOcl'
 }
-
 
 task generateReflectionModels() {
 	group 'Source'

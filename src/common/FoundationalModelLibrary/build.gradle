@@ -35,6 +35,7 @@ task generateFoundationalModelLibrary() {
 	{
 		dependsOn 'model:generateFoundationalModelLibraryModel'
 	}
+
 }
 
 task compileFoundationalModelLibrary {

@@ -29,6 +29,7 @@ task generateEcore() {
 	{
 		dependsOn 'model:generateEcoreModel'
 	}
+	
 }
 
 task compileEcore() {

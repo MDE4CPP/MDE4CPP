@@ -15,4 +15,5 @@ task generateOclModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
         exclude '.cmake/**'
     })
 
+	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
 }

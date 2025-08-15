@@ -58,6 +58,12 @@ task compileAll() {
 	dependsOn 'src:common:persistence:compilePersistence'
 }
 
+//dependencies {
+    //task 'buildGenerator_ecore4CPP'
+	//task 'buildGenerator_UML4CPP'
+    //task 'buildGenerator_fUML4CPP'
+//}
+
 task buildAll() {
 	group 'MDE4CPP'
 	description 'build generators and all models'
@@ -178,7 +184,6 @@ task startCPPEclipse(type:Exec){
 			commandLine 'bash' , System.getenv('CPP_IDE_EXECUTABLE')+'/eclipse'
 		}
 }
-
 
 task checkEnvironment(){
 	dependsOn 'setEnvironment'

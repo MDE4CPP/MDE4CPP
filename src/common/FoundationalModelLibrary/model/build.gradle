@@ -12,5 +12,7 @@ task generateFoundationalModelLibraryModel(type: tui.sse.mde4cpp.MDE4CPPGenerate
 	structureOnly = false
 
 	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']
+	
+	dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:fUML4CPP.generator:deliverfUML4CPP')
 
 }

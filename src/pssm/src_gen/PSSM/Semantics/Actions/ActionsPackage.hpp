@@ -14,11 +14,11 @@
 
 namespace ecore 
 {
-	class EClass;
-	class EOperation;
-	class EGenericType;
 	class EAnnotation;
+	class EGenericType;
+	class EOperation;
 	class EStringToStringMapEntry;
+	class EClass;
 }
 
 namespace PSSM::Semantics::Actions 

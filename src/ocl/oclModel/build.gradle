@@ -30,6 +30,7 @@ task generateOcl() {
 	{
 		dependsOn 'model:generateOclModel'
 	}
+	
 }
 
 task compileOcl() {

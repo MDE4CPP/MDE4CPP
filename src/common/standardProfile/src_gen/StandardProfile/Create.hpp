@@ -13,13 +13,13 @@
 //Forward declarations for used types
 namespace uml 
 {
-	class Usage;
 	class BehavioralFeature;
+	class Usage;
 }
 namespace uml 
 {
-	class Usage;
 	class BehavioralFeature;
+	class Usage;
 }
 
 // base class includes

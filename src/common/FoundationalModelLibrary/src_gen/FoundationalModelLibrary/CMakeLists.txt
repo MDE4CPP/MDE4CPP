@@ -42,13 +42,13 @@ SET(SOURCE_FILES
 	PrimitiveBehaviors/impl/PrimitiveBehaviorsFactoryImpl.cpp
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors
 	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	PrimitiveBehaviors/RealFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
 	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
@@ -60,22 +60,13 @@ SET(SOURCE_FILES
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 	
 	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
-	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
-	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
-	PrimitiveBehaviors/RealFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 	
 	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
@@ -87,14 +78,14 @@ SET(SOURCE_FILES
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
 	
 	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 	
-	# Package of FoundationalModelLibrary::Common
-	Common/impl/CommonPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::Common
-	Common/impl/CommonFactoryImpl.cpp
-	# Contents of FoundationalModelLibrary::Common
-	Common/impl/ListenerImpl.cpp
-	Common/impl/StatusImpl.cpp
 	
 	
 	# Package of FoundationalModelLibrary::BasicInputOutput
@@ -110,6 +101,15 @@ SET(SOURCE_FILES
 	BasicInputOutput/impl/StandardOutputChannelImpl.cpp
 	BasicInputOutput/impl/TextInputChannelImpl.cpp
 	BasicInputOutput/impl/TextOutputChannelImpl.cpp
+	
+	
+	# Package of FoundationalModelLibrary::Common
+	Common/impl/CommonPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::Common
+	Common/impl/CommonFactoryImpl.cpp
+	# Contents of FoundationalModelLibrary::Common
+	Common/impl/ListenerImpl.cpp
+	Common/impl/StatusImpl.cpp
 	
 	
 	

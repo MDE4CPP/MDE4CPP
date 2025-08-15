@@ -130,7 +130,8 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
 	structureOnly = true
 
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
-
+	
+	dependsOn rootProject.tasks.getByPath(':generator:UML4CPP:UML4CPP.generator:deliverUML4CPP')
 	[comment dependsOn rootProject.tasks.getByPath(':generator:UML4CPP:buildGenerator_UML4CPP')/]
 }
 [/file]

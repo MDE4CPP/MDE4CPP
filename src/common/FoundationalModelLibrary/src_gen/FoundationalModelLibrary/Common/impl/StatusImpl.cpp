@@ -183,7 +183,7 @@ bool StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'code'. Failed to set property!")
-				return true;
+				return false;
 			}
 		break;
 		}
@@ -198,7 +198,7 @@ bool StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'context'. Failed to set property!")
-				return true;
+				return false;
 			}
 		break;
 		}
@@ -213,7 +213,7 @@ bool StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'description'. Failed to set property!")
-				return true;
+				return false;
 			}
 		break;
 		}
@@ -257,17 +257,17 @@ bool StatusImpl::unset(unsigned long _uID)
 		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CODE:
 		{
 			m_code = 0;
-			return true;
+						return true;
 		}
 		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CONTEXT:
 		{
 			m_context = "";
-			return true;
+						return true;
 		}
 		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_DESCRIPTION:
 		{
 			m_description = "";
-			return true;
+						return true;
 		}
 	}
 

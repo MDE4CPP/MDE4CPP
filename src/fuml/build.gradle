@@ -8,9 +8,9 @@ task runCommandCompileFUML(type:Exec) {
 	mustRunAfter =  [
 		'generateFUML'
 	
+		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -32,6 +32,7 @@ task generateFUML() {
 	{
 		dependsOn 'model:generateFUMLModel'
 	}
+	
 }
 
 task compileFUML() {
@@ -52,9 +53,9 @@ task compileFUML() {
 	mustRunAfter =  [
 		'generateFUML'
 	
+		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -65,7 +66,7 @@ task buildFUML() {
 	dependsOn 'generateFUML'
 	dependsOn 'compileFUML'
 
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }

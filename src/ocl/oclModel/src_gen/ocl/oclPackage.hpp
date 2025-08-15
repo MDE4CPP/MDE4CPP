@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EClass;
+	class EGenericType;
 	class EOperation;
-	class EEnumLiteral;
 	class EReference;
 	class EParameter;
-	class EEnum;
-	class EGenericType;
-	class EAttribute;
-	class EDataType;
+	class EClass;
 	class EPackage;
+	class EAttribute;
+	class EEnumLiteral;
+	class EDataType;
+	class EEnum;
 }
 
 namespace ocl 
