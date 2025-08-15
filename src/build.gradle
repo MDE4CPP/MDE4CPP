@@ -68,13 +68,12 @@ task buildUMLProfiles() {
 	dependsOn 'common:UML4CPPProfile:buildUML4CPPProfile'
 }
 
-task buildOCL() { 
+task buildOCLAll() { 
 	group 'Source'
-	description 'generate and compile OCL meta-model and parser'
+	description 'generate and compile All OCL components meta-model and parser'
 	
 	dependsOn 'ocl:oclModel:buildOcl'
 	dependsOn 'ocl:oclParser:buildOclParser'
-	dependsOn 'compileOCL'
 }	
 
 task compileEcoreModels(){
@@ -94,7 +93,7 @@ task compileEcoreModels(){
 		, 'fuml:generateFUML'
 		, 'pscs:generatePSCS'
 		, 'pssm:generatePSSM'
-		,'ocl:oclModel:generateOcl'
+		, 'ocl:oclModel:generateOcl'
 		]	
 }
 
@@ -120,7 +119,7 @@ task compileUMLProfiles() {
 	dependsOn 'common:UML4CPPProfile:compileUML4CPPProfile'
 }
 
-task compileOCL() {
+task compileOCLAll() {
 	group 'Source'
 	description 'compile OCL meta-model and parser'
 

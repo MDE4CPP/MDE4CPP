@@ -81,22 +81,15 @@ generateGrammarSource {
 }
 
 task generateOclParser() {
-	group 'Source'
+	group 'ocl'
 	description 'generate ocl model and grammar sources'
 	
 	dependsOn getRootProject().getTasksByName('generateGrammarSource', true)
 	dependsOn getRootProject().getTasksByName('generateOcl', true)
 }
 
-task generateOclModel() {
-	group 'Source'
-	description 'generate ocl model'
-	
-	dependsOn getRootProject().getTasksByName('generateOcl', true)
-}
-
 task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'Source'
+	group 'ocl'
 	description 'compile the Ocl parser'
 	
 	projectFolder = file('.')
@@ -128,9 +121,10 @@ task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.dir([rootDir,'application','include','oclParser'].join(File.separator))
 	
 	// dependency to 'ocl model'
-	def model = getRootProject().getTasksByName('compileOcl', true)
-	dependsOn model
-	inputs.files(model.outputs)
+											
+	dependsOn rootProject.tasks.getByPath('src:ocl:oclModel:model:generateOclModel')
+	dependsOn getRootProject().getTasksByName('compileOcl', true)	
+	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
 	
 	// dependency to 'antlr4'
 	def antlr4 = getRootProject().getTasksByName('compileAntlr4', true)
@@ -141,10 +135,17 @@ task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def pluginFramwork = getRootProject().getTasksByName('compilePluginFramework', true)
 	dependsOn pluginFramwork
 	inputs.files(pluginFramwork.outputs)
+
+	// depends on UML because pluginFramwork has demendency to UML
+	mustRunAfter =  [
+		  getRootProject().getTasksByName('compileOcl', true)
+		, getRootProject().getTasksByName('compileUml', true)
+	]
+
 }
 
 task buildOclParser() {
-	group 'Source'
+	group 'ocl'
 	description 'generate ocl model and grammar sources and compile all together'
 	
 	dependsOn tasks.getByPath('generateOclParser')

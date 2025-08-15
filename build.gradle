@@ -51,7 +51,7 @@ task compileAll() {
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:compileUMLProfiles'
-	dependsOn 'src:compileOCL'
+	dependsOn 'src:compileOCLAll'
 	dependsOn 'src:common:FoundationalModelLibrary:compileFoundationalModelLibrary'
 	
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
@@ -70,7 +70,7 @@ task buildAll() {
 
 	dependsOn 'generateAll'
 	dependsOn 'compileAll'
-	dependsOn 'src:buildOCL'
+	dependsOn 'src:buildOCLAll'
 		
 	tasks.getByPath('compileAll').mustRunAfter tasks.getByPath('generateAll')
 }
