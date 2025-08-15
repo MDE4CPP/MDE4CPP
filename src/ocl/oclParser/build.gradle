@@ -140,7 +140,7 @@ task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	mustRunAfter =  [
 		  getRootProject().getTasksByName('compileOcl', true)
 		, getRootProject().getTasksByName('compileUml', true)
-	]
+ 	]
 
 }
 
