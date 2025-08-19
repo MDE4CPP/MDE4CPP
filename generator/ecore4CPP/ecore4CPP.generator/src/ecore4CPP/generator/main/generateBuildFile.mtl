@@ -230,7 +230,14 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
         exclude '.cmake/**'
     })
 	
-	dependsOn getRootProject().getTasksByName('deliverEcore4CPP',true)
+	def dependencyTask = rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
+	if (!dependencyTask.isEmpty()){
+		dependsOn dependencyTask
+	}
+	else [comment depends if build from root or from local directory /]
+	{
+		dependsOn getRootProject().getTasksByName('deliverEcore4CPP',true)
+	}	
 	[comment dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')/]
 	[comment dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:buildGenerator_ecore4CPP') /]
 }

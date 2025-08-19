@@ -112,7 +112,15 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
 	[comment dependsOn rootProject.tasks.getByPath(':generator:UML4CPP:UML4CPP.generator:deliverUML4CPP')/]
 	[comment dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:buildGenerator_fUML4CPP')/]
 	[comment dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:fUML4CPP.generator:deliverfUML4CPP')/]
-	dependsOn getRootProject().getTasksByName('deliverfUML4CPP',true)
+	def dependencyTask = rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverfUML4CPP')
+	if (!dependencyTask.isEmpty()){
+		dependsOn dependencyTask
+	}
+	else [comment depends if build from root or from local directory /]
+	{
+		dependsOn getRootProject().getTasksByName('deliverfUML4CPP',true)
+	}	
+
 }
 [/file]
 
