@@ -12,9 +12,9 @@ rootProject.name = 'MDE4CPP'
 fileTree('.') {
 	include '**/build.gradle'
 	exclude 'build.gradle' // Exclude root build file
-	exclude '**/examples/' // Exclude examples directory
-	exclude '**/.cmake/' // Exclude examples directory
-	exclude '**/gradlePlugins'
+	exclude '**/gradlePlugins'	
+//	exclude '**/examples/' // Exclude examples directory
+	exclude '**/.cmake/' // Exclude cmake directory
 	//exclude '**/src_gen'
 }.collect { 
 	relativePath(it.parent).replace(File.separator, ':') 
@@ -23,7 +23,7 @@ fileTree('.') {
 //   println it
 }
 
-//includeBuild './src/examples/'
-includeBuild './gradlePlugins'
+includeBuild 'gradlePlugins'
+//includeBuild 'src/examples/'
+//includeBuild 'generator'
 //includeBuild './src_gen'
-//includeBuild './generator'

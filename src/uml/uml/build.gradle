@@ -31,7 +31,6 @@ task generateUml() {
 	{
 		dependsOn 'model:generateUmlModel'
 	}
-	
 }
 
 task compileUml() {

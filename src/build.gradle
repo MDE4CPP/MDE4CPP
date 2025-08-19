@@ -106,9 +106,6 @@ task compileReflectionModels() {
 	dependsOn 'common:primitivetypesReflection:compilePrimitivetypesReflection'
 	dependsOn 'common:umlReflection:compileUmlReflection'
 	
-	/*dependsOn 'ocl:oclParser:compileOclParser'
-	rootProject.tasks.getByPath(':src:common:umlReflection:src_gen:compileUmlReflection')
-		.mustRunAfter rootProject.tasks.getByPath(':src:ocl:oclParser:compileOclParser')*/
 }
 
 task compileUMLProfiles() {

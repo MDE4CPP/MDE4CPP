@@ -44,7 +44,8 @@ task compileSimpleOCLExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'simpleOCL_Example.exe')
 	
 	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('buildEcore', true)
+	
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
 
@@ -58,10 +59,16 @@ task compileSimpleOCLExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	//dependsOn uml
 	//inputs.files(uml.outputs)
 
-	// dependency to model 'persistence'
-	def ocl = getRootProject().getTasksByName('buildUml', true)
-	dependsOn ocl
-	inputs.files(ocl.outputs)
+	//dependency to model 'persistence' 
+	//def ocl = getRootProject().getTasksByName('buildUml', true)
+	//dependsOn ocl
+	//inputs.files(ocl.outputs)
+	
+	mustRunAfter =  [
+		'compileUML'
+		,getRootProject().getTasksByName('compileEcore', true)
+	]
+	
 }
 
 task clean {

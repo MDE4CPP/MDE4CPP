@@ -33,7 +33,6 @@ task generatePSSM() {
 	{
 		dependsOn 'model:generatePSSMModel'
 	}
-	
 }
 
 task compilePSSM() {

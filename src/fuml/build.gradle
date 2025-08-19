@@ -32,7 +32,6 @@ task generateFUML() {
 	{
 		dependsOn 'model:generateFUMLModel'
 	}
-	
 }
 
 task compileFUML() {

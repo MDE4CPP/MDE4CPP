@@ -30,7 +30,6 @@ task generateTypes() {
 	{
 		dependsOn 'model:generateTypesModel'
 	}
-	
 }
 
 task compileTypes() {

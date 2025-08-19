@@ -124,7 +124,8 @@ task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 											
 	dependsOn rootProject.tasks.getByPath('src:ocl:oclModel:model:generateOclModel')
 	dependsOn getRootProject().getTasksByName('compileOcl', true)	
-	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
+//	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
+//	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
 	
 	// dependency to 'antlr4'
 	def antlr4 = getRootProject().getTasksByName('compileAntlr4', true)

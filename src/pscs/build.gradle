@@ -33,7 +33,6 @@ task generatePSCS() {
 	{
 		dependsOn 'model:generatePSCSModel'
 	}
-	
 }
 
 task compilePSCS() {
