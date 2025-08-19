@@ -47,7 +47,7 @@ task generateAllExamples() {
 		
 		def examples = []
 		// common examples --------------------------------
-			
+					
 		// ecore examples ---------------------------------
 	
 		examples.add('./ecoreExamples/TestSuite/eInvokeTest/')
@@ -65,9 +65,9 @@ task generateAllExamples() {
 		examples.add('./fUMLExamples/Calculator/')
 		examples.add('./fUMLExamples/ThreePhilosophers/')
 	
-		// ocl examples -----------------------------------
-		examples.add('./oclExamples/oclEcoreModelExample/')
-		examples.add('./oclExamples/oclQueryEcoreModelExample/')
+		// ocl examples ----------------------------------- toDo update OCL Examples
+		//examples.add('./oclExamples/oclEcoreModelExample/')
+		//examples.add('./oclExamples/oclQueryEcoreModelExample/')
 		//examples.add('./oclExamples/Connect4/')
 		//examples.add('./oclExamples/oclFumlModelExample/')
 	
@@ -136,13 +136,13 @@ task compileAllExamples() {
 		//fUMLExamples/ThreePhilosophers
 		dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
 	
-	// OCL examples ---------------------------------------
+	// OCL examples --------------------------------------- //Todo fix OCL-Examples
 		//oclExamples/oclEcoreModelExample
-		dependsOn getRootProject().getTasksByName('compileLibrary_ecore', true)
-		dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_ecore',true)
+		//dependsOn getRootProject().getTasksByName('compileLibrary_ecore', true)
+		//dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_ecore',true)
 		//oclExamples/oclQueryEcoreModelExample
-		dependsOn getRootProject().getTasksByName('compileLibrary_QueryEcore', true)
-		dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_QueryEcore', true)
+		//dependsOn getRootProject().getTasksByName('compileLibrary_QueryEcore', true)
+		//dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_QueryEcore', true)
 		//oclExamples/Connect4
 		//oclExamples/applications/oclUmlExample
 		// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
@@ -357,6 +357,7 @@ task buildOCLTestSuite() {
 TODO
 These tasks are currently not executable since the amount of produced tasks (around 100)
 causes gradlew to crash
+*/
 
 task generatePSCSTestSuite() {
 	group 'Tests'
@@ -467,7 +468,7 @@ task buildPSCSTestSuite() {
 	dependsOn getRootProject().getTasksByName('buildDestructionPort', true)
 	dependsOn getRootProject().getTasksByName('buildDestructionInstances', true)
 }
-*/
+
 
 task generateAllTests() {
 	group 'Tests'
@@ -475,7 +476,7 @@ task generateAllTests() {
 	
 	dependsOn getRootProject().getTasksByName('generateEcoreTestSuite', true)
 	dependsOn getRootProject().getTasksByName('generateFUMLTestSuite', true)
-	//dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
 }
 
 task compileAllTests() {
@@ -484,13 +485,13 @@ task compileAllTests() {
 	
 	dependsOn getRootProject().getTasksByName('compileEcoreTestSuite', true)
 	dependsOn getRootProject().getTasksByName('compileFUMLTestSuite', true)
-	//dependsOn getRootProject().getTasksByName('compilePSCSTestSuite', true)
+	dependsOn getRootProject().getTasksByName('compilePSCSTestSuite', true)
 }
 
 task buildAllTests() {
 	group 'Tests'
 	description 'generate and compile applictions for all test suites (currently only fUML test suite can be built automatically)'
-	
+	dependsOn getRootProject().getTasksByName('buildEcoreTestSuite',true)
 	dependsOn getRootProject().getTasksByName('buildFUMLTestSuite', true)
-	//dependsOn getRootProject().getTasksByName('buildPSCSTestSuite', true)
+	dependsOn getRootProject().getTasksByName('buildPSCSTestSuite', true)
 }

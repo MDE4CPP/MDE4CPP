@@ -107,12 +107,12 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
 	modelFilePath = file('.' + File.separator + '[packageName/].uml')
 	structureOnly = false
 
-	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
-	
+	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]	
 	[comment dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP') /]
 	[comment dependsOn rootProject.tasks.getByPath(':generator:UML4CPP:UML4CPP.generator:deliverUML4CPP')/]
-	dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:fUML4CPP.generator:deliverfUML4CPP')
 	[comment dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:buildGenerator_fUML4CPP')/]
+	[comment dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:fUML4CPP.generator:deliverfUML4CPP')/]
+	dependsOn getRootProject().getTasksByName('deliverfUML4CPP',true)
 }
 [/file]
 

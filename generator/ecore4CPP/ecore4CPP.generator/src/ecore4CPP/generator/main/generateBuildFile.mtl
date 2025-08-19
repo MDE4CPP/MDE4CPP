@@ -229,8 +229,9 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
 	outputs.files(fileTree('../src_gen/[packageName/]') {
         exclude '.cmake/**'
     })
-
-	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
+	
+	dependsOn getRootProject().getTasksByName('deliverEcore4CPP',true)
+	[comment dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')/]
 	[comment dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:buildGenerator_ecore4CPP') /]
 }
 [/file]
