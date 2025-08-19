@@ -216,6 +216,11 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 	if (![packageName/].isEmpty()){
 		dependsOn [packageName/]
 		inputs.files([packageName/].outputs)
+		mustRunAfter = ['['/][packageName/][']'/]
+	}
+	else
+	{
+		println "Task compile[packageName.toUpperFirst()/] not found. Please generate and run again."
 	}
 }
 

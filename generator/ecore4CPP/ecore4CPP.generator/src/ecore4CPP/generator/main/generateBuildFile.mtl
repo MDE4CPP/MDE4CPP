@@ -338,6 +338,12 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 	inputs.files([libName/].outputs)
 [/if]
 [/for]
+	mustRunAfter = ['['/]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet()) separator (', ')]
+[if (not (libName.oclIsUndefined() or libName = ''))] [libName/]
+[/if][libName/]
+[/for][']'/]
+
 }
 
 task clean {
