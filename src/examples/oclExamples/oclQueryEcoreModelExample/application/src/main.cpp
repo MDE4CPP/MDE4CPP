@@ -18,8 +18,8 @@
 #include <oclParser/Utilities/OclEcore.h>
 #include <ecore/EObject.hpp>
 #include <ecore/EObjectAny.hpp>
-#include "abstractDataTypes/EcoreAny.hpp"
-#include "abstractDataTypes/EcoreContainerAny.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include <ecore/EFactory.hpp>
 #include <ecore/EPackage.hpp>
 #include <ecore/ecorePackage.hpp>
@@ -50,13 +50,15 @@ Helper functions
 
 Any queryValue(const std::string& query, std::shared_ptr<ecore::EObject> context)
 {
-	Utilities::Ocl ocl;
+	Utilities::OclEcore ocl;
     try {
-        if(ocl.query(query, context)) {
-            return ocl.getResultValue();
+        std::shared_ptr<Any> anyContext = eEcoreAny(context,context->getMetaElementID());
+        return  ocl.query(query, anyContext);
+/*        if(result) {
+            return result;
         } else {
             std::cout << ocl.getError() << std::endl;
-        }
+        }*/
     } catch (std::exception &e) {
         std::cout << "exception : " << e.what() << std::endl;
     }
@@ -107,11 +109,9 @@ std::string printEClassifier(std::shared_ptr<ecore::EClass> anEClass)
 		returnStringStream << "<EClass>:" << anEClass->getName() << ":"<< anEClass->getName()<<std::endl;
 
 		std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> attributes = anEClass->getEAttributes();
-		Any eAnyValue= eAnyBag(attributes,ecore::ecorePackage::EATTRIBUTE_CLASS);
-		returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr,  eAnyValue);
+		returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr, eEcoreContainerAny(attributes,ecore::ecorePackage::EATTRIBUTE_CLASS));
 		std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> references = anEClass->getEReferences();
-		eAnyValue =eAnyBag(references,ecore::ecorePackage::EREFERENCE_CLASS);
-		returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr, eAnyValue);
+		returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr, eEcoreContainerAny(references,ecore::ecorePackage::EREFERENCE_CLASS));
 	}
 	return returnStringStream.str();
 }
@@ -119,10 +119,10 @@ std::string printEClassifier(std::shared_ptr<ecore::EClass> anEClass)
 
 std::string print(Any value);
 
-std::string printEObject(std::shared_ptr<ecore::EObject> eobj) 
+std::string printEObject(std::shared_ptr<ecore::EObject> eobj)
 {
 	std::ostringstream returnStringStream;
-    if(eobj!= nullptr) 
+    if(eobj!= nullptr)
     {
 		std::shared_ptr<ecore::EClass> anEClass= std::dynamic_pointer_cast<ecore::EClass>(eobj);
 		if(nullptr !=anEClass) // It's an meta-clas description! print MetaClass
@@ -164,7 +164,7 @@ std::string printEObject(std::shared_ptr<ecore::EObject> eobj)
 				case ecore::ecorePackage::EENUMERATOR_CLASS:
 				case ecore::ecorePackage::EDIAGNOSTICCHAIN_CLASS:
 				{
-					returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr, eAnyObject(eobj,eobj->getMetaElementID()));
+					returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr, eEcoreAny(eobj,eobj->getMetaElementID()));
 					break;
 				}
 				case ecore::ecorePackage::ANY_CLASS:
@@ -250,36 +250,36 @@ std::string print(Any value)
 {
 	std::ostringstream returnStringStream;
 	bool handled=false;
-	if(nullptr==value )
+	if(value.isEmpty()  )
 	{
 		return "";
 	}
-	if(value->isContainer())
+	if(value.isContainer())
 	{
 		try
 		{
-			switch (value->getTypeId())
+			switch (value.getTypeId())
 			{
 				case ecore::ecorePackage::EOBJECT_CLASS:
 				{
 					std::shared_ptr<Bag<ecore::EObject>> eObjectBag;
 					try
 					{
-						eObjectBag= value->get<std::shared_ptr<Bag<ecore::EObject>>>(); //throws exception
+						eObjectBag= value.get<std::shared_ptr<Bag<ecore::EObject>>>(); //throws exception
 						returnStringStream << "<Bag<EObject>> size: " << eObjectBag->size() <<std::endl;
 					}
 					catch(...)
 					{
-						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
-						if(nullptr!=anyObjectBag)// AnyEobjectBag?
+/*						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
+//						if(nullptr!=anyObjectBag)// AnyEobjectBag?
 						{
-							eObjectBag=anyObjectBag->getBag();
+//							eObjectBag=anyObjectBag->getBag();
 							returnStringStream << "<AnyEObjectBag<EObject>> size: " << eObjectBag->size() <<std::endl;
 						}
 						else
-						{
+						{*/
 							returnStringStream << "An EObject Container";
-						}
+//						}
 					}
 					if(nullptr!=eObjectBag)
 					{
@@ -292,7 +292,7 @@ std::string print(Any value)
 				}
 				case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
 				{
-					std::shared_ptr<ecore::EObjectContainer> eObjectContainer = value->get<std::shared_ptr<ecore::EObjectContainer>>();
+					std::shared_ptr<ecore::EObjectContainer> eObjectContainer = value.get<std::shared_ptr<ecore::EObjectContainer>>();
 					std::shared_ptr<Bag<ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();
 					returnStringStream << "<EObjectContainer> size: " << eObjectBag->size() <<std::endl;
 					for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
@@ -303,7 +303,7 @@ std::string print(Any value)
 				}
 				default:
 				{
-					std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
+/*					std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
 					if(nullptr!=anyObjectBag)// AnyEObjectBag?
 					{
 						std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getBag();
@@ -326,6 +326,7 @@ std::string print(Any value)
 						returnStringStream << std::endl;
 						handled = true; break;
 					}
+*/
 				}
 			}
 		}
@@ -337,11 +338,11 @@ std::string print(Any value)
 	else
 	{
 		try{
-			switch(value->getTypeId())
+			switch(value.getTypeId())
 			{
 				case ecore::ecorePackage::EOBJECT_CLASS: // unknown or primitive type
 				{
-					std::shared_ptr<ecore::EObject> eobj = value->get<std::shared_ptr<ecore::EObject>>();
+					std::shared_ptr<ecore::EObject> eobj = value.get<std::shared_ptr<ecore::EObject>>();
 					return printEObject(eobj );
 					handled=true;
 					break;
@@ -351,11 +352,11 @@ std::string print(Any value)
 					std::shared_ptr<ecore::EObjectContainer> eObjectContainer= nullptr;
 					try
 					{
-						eObjectContainer= value->get<std::shared_ptr<ecore::EObjectContainer>>();
+						eObjectContainer= value.get<std::shared_ptr<ecore::EObjectContainer>>();
 					}
 					catch(...)
 					{
-						std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> object= value.get<std::shared_ptr<ecore::EObject>>();
 						eObjectContainer= std::dynamic_pointer_cast<ecore::EObjectContainer>(object);
 					}
 					std::shared_ptr<Bag<ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();
@@ -397,7 +398,8 @@ std::string print(Any value)
 				case ecore::ecorePackage::EENUMERATOR_CLASS:
 				case ecore::ecorePackage::EDIAGNOSTICCHAIN_CLASS:
 				{
-					returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr, value);
+//					returnStringStream << Library_QueryEcore::Library_QueryEcoreFactory::eInstance()->convertToString(nullptr, value);
+					returnStringStream << "simple Any";
 					handled=true;
 					break;
 				}
@@ -406,12 +408,12 @@ std::string print(Any value)
 					std::shared_ptr<ecore::EObjectAny> eObjectAny=nullptr;
 					try
 					{
-						std::shared_ptr<ecore::EObject> aObject = value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> aObject = value.get<std::shared_ptr<ecore::EObject>>();
 						eObjectAny = std::dynamic_pointer_cast<ecore::EObjectAny>(aObject);
 					}
 					catch(...) // 2. try
 					{
-						eObjectAny= value->get<std::shared_ptr<ecore::EObjectAny>>();
+						eObjectAny= value.get<std::shared_ptr<ecore::EObjectAny>>();
 					}
 					// recursive Call of convertToString via new Any EObject Value
 					if(nullptr!=eObjectAny)
@@ -426,18 +428,18 @@ std::string print(Any value)
 					std::shared_ptr<ecore::EObjectAny> eObjectAny=nullptr;
 					try
 					{
-						std::shared_ptr<ecore::EObject> aObject = value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> aObject = value.get<std::shared_ptr<ecore::EObject>>();
 						eObjectAny = std::dynamic_pointer_cast<ecore::EObjectAny>(aObject);
 					}
 					catch(...) // 2. try
 					{
 						try
 						{
-							eObjectAny= value->get<std::shared_ptr<ecore::EObjectAny>>();
+							eObjectAny= value.get<std::shared_ptr<ecore::EObjectAny>>();
 						}
 						catch(...) // 2. last try
 						{
-							Any anAny= value->get<Any>();
+							Any anAny= value.get<Any>();
 							returnStringStream << "Any: " << print(anAny);
 							handled = true;
 						}
@@ -456,7 +458,7 @@ std::string print(Any value)
 					std::shared_ptr<Library_QueryEcore::LibraryModel> model= nullptr;
 					try
 					{
-						model= value->get<std::shared_ptr<Library_QueryEcore::LibraryModel>>();
+						model= value.get<std::shared_ptr<Library_QueryEcore::LibraryModel>>();
 						if(nullptr !=model)
 						{
 							returnStringStream<<printLibraryModel(model);
@@ -464,7 +466,7 @@ std::string print(Any value)
 					}
 					catch(...)
 					{
-						std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> object= value.get<std::shared_ptr<ecore::EObject>>();
 						returnStringStream<<printEObject(object);
 						handled=true;
 					}
@@ -475,7 +477,7 @@ std::string print(Any value)
 					std::shared_ptr<Library_QueryEcore::Book> book= nullptr;
 					try
 					{
-						book= value->get<std::shared_ptr<Library_QueryEcore::Book>>();
+						book= value.get<std::shared_ptr<Library_QueryEcore::Book>>();
 						if(nullptr !=book)
 						{
 							returnStringStream << printBook(book);
@@ -484,7 +486,7 @@ std::string print(Any value)
 					}
 					catch(...)
 					{
-						std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> object= value.get<std::shared_ptr<ecore::EObject>>();
 						returnStringStream<<printEObject(object);
 						handled=true;
 					}
@@ -495,7 +497,7 @@ std::string print(Any value)
 					std::shared_ptr<Library_QueryEcore::Library> library= nullptr;
 					try
 					{
-						library= value->get<std::shared_ptr<Library_QueryEcore::Library>>();
+						library= value.get<std::shared_ptr<Library_QueryEcore::Library>>();
 						if(nullptr !=library)
 						{
 							returnStringStream << printLibrary(library);
@@ -504,7 +506,7 @@ std::string print(Any value)
 					}
 					catch(...)
 					{
-						std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> object= value.get<std::shared_ptr<ecore::EObject>>();
 						returnStringStream<<printEObject(object);
 						handled=true;
 					}
@@ -515,7 +517,7 @@ std::string print(Any value)
 					std::shared_ptr<Library_QueryEcore::Member> member=nullptr;
 					try
 					{
-						member = value->get<std::shared_ptr<Library_QueryEcore::Member>>();
+						member = value.get<std::shared_ptr<Library_QueryEcore::Member>>();
 						if(nullptr !=member)
 						{
 							returnStringStream <<"Member: "<< member->getName() << std::endl;
@@ -524,7 +526,7 @@ std::string print(Any value)
 					}
 					catch(...)
 					{
-						std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> object= value.get<std::shared_ptr<ecore::EObject>>();
 						returnStringStream<<printEObject(object);
 					}
 					break;
@@ -534,7 +536,7 @@ std::string print(Any value)
 					std::shared_ptr<Library_QueryEcore::Loan> loan = nullptr;
 					try
 					{
-						loan = value->get<std::shared_ptr<Library_QueryEcore::Loan>>();
+						loan = value.get<std::shared_ptr<Library_QueryEcore::Loan>>();
 						if(nullptr !=loan)
 						{
 							returnStringStream <<"Loan: "<< loan->getDate()<< std::endl;
@@ -543,7 +545,7 @@ std::string print(Any value)
 					}
 					catch(...)
 					{
-						std::shared_ptr<ecore::EObject> object= value->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::EObject> object= value.get<std::shared_ptr<ecore::EObject>>();
 						returnStringStream<<printEObject(object);
 					}
 					break;
@@ -554,32 +556,32 @@ std::string print(Any value)
 		if(!handled)
 		{
 			try {
-				std::shared_ptr<ecore::EEnumLiteral> liter = value->get<std::shared_ptr<ecore::EEnumLiteral>>();
+				std::shared_ptr<ecore::EEnumLiteral> liter = value.get<std::shared_ptr<ecore::EEnumLiteral>>();
 				returnStringStream << liter->getName() << std::endl;
 				return returnStringStream.str();
 			} catch (...) { }
 
 			try {
-				bool result = value->get<bool>();
+				bool result = value.get<bool>();
 				returnStringStream << result << std::endl;
 				return returnStringStream.str();
 			} catch (...) { }
 			try {
-				std::string result = value->get<std::string>();
+				std::string result = value.get<std::string>();
 				returnStringStream << result << std::endl;
 				return returnStringStream.str();
 			} catch (...) { }
 			try {
-				int result = value->get<int>();
+				int result = value.get<int>();
 				returnStringStream << result << std::endl;
 				return returnStringStream.str();
 			} catch (...) { }
 			try {
-				double result = value->get<double>();
+				double result = value.get<double>();
 				returnStringStream << result << std::endl;
 				return returnStringStream.str();
 			} catch (...) { }
-			returnStringStream << "Any (typeId: " << value->getTypeId() <<")";
+			returnStringStream << "Any (typeId: " << value.getTypeId() <<")";
 		}
 	}
 	return returnStringStream.str();

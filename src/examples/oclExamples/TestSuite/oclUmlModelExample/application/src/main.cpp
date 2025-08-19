@@ -60,7 +60,8 @@ Helper functions
 void validate(std::shared_ptr<ecore::EObject> context,const std::string& query) {
     try {
         Utilities::Ocl ocl;
-        ocl.validate(query, context);
+        std::shared_ptr<Any> anyContext = eEcoreAny(context,ecore::ecorePackage::EOBJECT_CLASS);
+        ocl.validate(query, anyContext );
         if(ocl.getErrors().size() > 0) {
             std::cout << ocl.getError() << std::endl;
         } else {
@@ -74,7 +75,8 @@ void validate(std::shared_ptr<ecore::EObject> context,const std::string& query) 
 void query( std::shared_ptr<ecore::EObject> context, const std::string& query) {
     try {
         Utilities::Ocl ocl;
-        if(ocl.query(query, context)) {
+        std::shared_ptr<Any> anyContext = eEcoreAny(context,ecore::ecorePackage::EOBJECT_CLASS);
+        if(ocl.query(query, anyContext)) {
             std::cout << ocl.getResult() << std::endl;
         } else {
             std::cout << ocl.getError() << std::endl;
