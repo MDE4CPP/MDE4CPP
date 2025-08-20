@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EGenericType;
+	class EClass;
 	class EOperation;
 	class EReference;
 	class EParameter;
-	class EStringToStringMapEntry;
-	class EClass;
+	class EGenericType;
+	class EAnnotation;
 	class EAttribute;
 	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace fUML::MDE4CPP_Extensions 
@@ -59,7 +59,7 @@ namespace fUML::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long FUML_LINK_CLASS = 1317507267;
 			static const unsigned int FUML_LINK_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int FUML_LINK_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int FUML_LINK_CLASS_OPERATION_COUNT = 59;
 			
 			static const unsigned long FUML_LINK_ATTRIBUTE_LINKENDS = 487915139;
 			static const unsigned long FUML_LINK_ATTRIBUTE_TYPE = 894190498;
@@ -119,7 +119,7 @@ namespace fUML::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long FUML_OBJECT_CLASS = 1012292556;
 			static const unsigned int FUML_OBJECT_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 50;
+			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 51;
 			
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_LINKS = 376392934;
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_LOCUS = 121078438;
@@ -130,6 +130,7 @@ namespace fUML::MDE4CPP_Extensions
 			static const unsigned long FUML_OBJECT_OPERATION_DESTROY = 4089641697;
 			static const unsigned long FUML_OBJECT_OPERATION_DESTROY_EBOOLEAN_EBOOLEAN = 709810581;
 			static const unsigned long FUML_OBJECT_OPERATION_DISPATCHCALL_OPERATION_EJAVAOBJECT_EJAVAOBJECT = 2639705452;
+			static const unsigned long FUML_OBJECT_OPERATION_EQUALS_FUML_OBJECT = 4265400010;
 			static const unsigned long FUML_OBJECT_OPERATION_GETTYPES = 1742598842;
 			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT_EJAVAOBJECT = 738288422;
 			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT_EJAVAOBJECT = 960883863;
@@ -152,6 +153,7 @@ namespace fUML::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy_EBoolean_EBoolean() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_equals_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_getTypes() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject_EJavaObject() const = 0;
@@ -168,9 +170,10 @@ namespace fUML::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long FUML_SIGNALINSTANCE_CLASS = 1484913340;
 			static const unsigned int FUML_SIGNALINSTANCE_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int FUML_SIGNALINSTANCE_CLASS_OPERATION_COUNT = 38;
+			static const unsigned int FUML_SIGNALINSTANCE_CLASS_OPERATION_COUNT = 39;
 			
 			
+			static const unsigned long FUML_SIGNALINSTANCE_OPERATION_EQUALS_FUML_SIGNALINSTANCE = 3553377034;
 			static const unsigned long FUML_SIGNALINSTANCE_OPERATION_GETTYPE = 486596182;
 			
 			//Class and Feature Getter
@@ -178,6 +181,7 @@ namespace fUML::MDE4CPP_Extensions
 			
 			
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_SignalInstance_Operation_equals_FUML_SignalInstance() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_SignalInstance_Operation_getType() const = 0;
 			
 			// End Class FUML_SignalInstance

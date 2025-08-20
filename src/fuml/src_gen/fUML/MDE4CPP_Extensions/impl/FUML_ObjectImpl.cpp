@@ -42,11 +42,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -55,6 +55,7 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Link.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "uml/Operation.hpp"
@@ -192,6 +193,14 @@ std::shared_ptr<Any> FUML_ObjectImpl::dispatchCall(const std::shared_ptr<uml::Op
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->invoke(operation, inputArguments, outputArguments);
+	//end of body
+}
+
+bool FUML_ObjectImpl::equals(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& otherValue)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return (this->getThisFUML_ObjectPtr() == otherValue);
 	//end of body
 }
 
@@ -843,6 +852,38 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			}
 		
 			result = eAny(this->dispatchCall(incoming_param_operation,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::equals(fUML::MDE4CPP_Extensions::FUML_Object) : bool: 4265400010
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_EQUALS_FUML_OBJECT:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_otherValue;
+			Bag<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_otherValue_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_otherValue = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'otherValue'. Failed to invoke operation 'equals'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'otherValue'. Failed to invoke operation 'equals'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->equals(incoming_param_otherValue), 0, false);
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::getTypes() : uml::Classifier[*] {const}: 1742598842

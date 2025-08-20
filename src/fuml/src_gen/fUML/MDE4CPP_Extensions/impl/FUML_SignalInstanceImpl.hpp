@@ -43,6 +43,7 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Operations
 			//*********************************
+			virtual bool equals(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& otherSignalInstance) ;
 			virtual const std::shared_ptr<uml::Signal>& getType() const ;
 			
 			//*********************************
