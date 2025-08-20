@@ -3577,6 +3577,12 @@
         <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
       </eOperations>
+      <eOperations name="equals" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="return (this->getThisFUML_ObjectPtr() == otherValue);"/>
+        </eAnnotations>
+        <eParameters name="otherValue" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="locus" ordered="false"
           eType="#//Semantics/Loci/Locus">
         <eAnnotations source="MDE4CPP_Substitutes" references="#//Semantics/StructuredClassifiers/ExtensionalValue/locus">
@@ -3599,6 +3605,12 @@
           <details key="const"/>
           <details key="forceConstRefReturn"/>
         </eAnnotations>
+      </eOperations>
+      <eOperations name="equals" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+          <details key="body" value="return (this->getThisFUML_SignalInstancePtr() == otherSignalInstance);"/>
+        </eAnnotations>
+        <eParameters name="otherSignalInstance" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_SignalInstance"/>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FUML_Link" eSuperTypes="#//MDE4CPP_Extensions/FUML_Object">
