@@ -266,7 +266,6 @@ task checkEnvironment(){
 		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++/" + delivery)
 		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include-fixed")
 		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include")
-		checkAndPrintPath(System.getenv('MDE4CPP_HOME') + "/application/include")
 	}
 
 	ext.checkMyVariablePath = { variable_name, should_fail ->
@@ -322,7 +321,6 @@ task checkEnvironment(){
 		checkVariableExists('ORG_GRADLE_PROJECT_RELEASE', false);
 		checkVariableExists('ORG_GRADLE_PROJECT_DEBUG', false);
 		checkVariableExists('ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML', false);
-		checkVariableExists('ORG_GRADLE_PROJECT_ACTIVITY_DEBUG_ON', false);
 		checkVariableExists('COMPILER_DELIVERY_NAME', false);
 		checkVariableExists('COMPILER_VERSION', false);
 
