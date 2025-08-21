@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -86,6 +86,7 @@ void MDE4CPP_ExtensionsPackageImpl::createFUML_ObjectContent(std::shared_ptr<eco
 	m_fUML_Object_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_DESTROY);
 	m_fUML_Object_Operation_destroy_EBoolean_EBoolean = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_DESTROY_EBOOLEAN_EBOOLEAN);
 	m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_DISPATCHCALL_OPERATION_EJAVAOBJECT_EJAVAOBJECT);
+	m_fUML_Object_Operation_equals_FUML_Object = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_EQUALS_FUML_OBJECT);
 	m_fUML_Object_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_GETTYPES);
 	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT_EJAVAOBJECT);
 	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT_EJAVAOBJECT);
@@ -102,6 +103,7 @@ void MDE4CPP_ExtensionsPackageImpl::createFUML_SignalInstanceContent(std::shared
 	m_fUML_SignalInstance_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FUML_SIGNALINSTANCE_CLASS);
 	
 	
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance = factory->createEOperation_as_eOperations_in_EClass(m_fUML_SignalInstance_Class, FUML_SIGNALINSTANCE_OPERATION_EQUALS_FUML_SIGNALINSTANCE);
 	m_fUML_SignalInstance_Operation_getType = factory->createEOperation_as_eOperations_in_EClass(m_fUML_SignalInstance_Class, FUML_SIGNALINSTANCE_OPERATION_GETTYPE);
 	
 }

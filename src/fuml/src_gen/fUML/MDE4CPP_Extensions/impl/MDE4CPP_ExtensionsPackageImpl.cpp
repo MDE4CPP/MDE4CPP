@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
@@ -189,6 +189,10 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Object_Operation_dispatchCall_Operation_EJavaObject_EJavaObject;
 }
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_equals_FUML_Object() const
+{
+	return m_fUML_Object_Operation_equals_FUML_Object;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_getTypes() const
 {
 	return m_fUML_Object_Operation_getTypes;
@@ -232,6 +236,10 @@ const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_Extensio
 
 
 
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_SignalInstance_Operation_equals_FUML_SignalInstance() const
+{
+	return m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_SignalInstance_Operation_getType() const
 {
 	return m_fUML_SignalInstance_Operation_getType;

@@ -40,11 +40,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
@@ -107,6 +108,14 @@ FUML_SignalInstanceImpl& FUML_SignalInstanceImpl::operator=(const FUML_SignalIns
 //*********************************
 // Operations
 //*********************************
+bool FUML_SignalInstanceImpl::equals(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& otherSignalInstance)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return (this->getThisFUML_SignalInstancePtr() == otherSignalInstance);
+	//end of body
+}
+
 const std::shared_ptr<uml::Signal>& FUML_SignalInstanceImpl::getType() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -239,6 +248,38 @@ std::shared_ptr<Any> FUML_SignalInstanceImpl::eInvoke(int operationID, const std
  
   	switch(operationID)
 	{
+		// fUML::MDE4CPP_Extensions::FUML_SignalInstance::equals(fUML::MDE4CPP_Extensions::FUML_SignalInstance) : bool: 3553377034
+		case MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_OPERATION_EQUALS_FUML_SIGNALINSTANCE:
+		{
+			//Retrieve input parameter 'otherSignalInstance'
+			//parameter 0
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> incoming_param_otherSignalInstance;
+			Bag<Any>::const_iterator incoming_param_otherSignalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_otherSignalInstance_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_otherSignalInstance = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_SignalInstance>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'otherSignalInstance'. Failed to invoke operation 'equals'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'otherSignalInstance'. Failed to invoke operation 'equals'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->equals(incoming_param_otherSignalInstance), 0, false);
+			break;
+		}
 		// fUML::MDE4CPP_Extensions::FUML_SignalInstance::getType() : uml::Signal {const}: 486596182
 		case MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_OPERATION_GETTYPE:
 		{

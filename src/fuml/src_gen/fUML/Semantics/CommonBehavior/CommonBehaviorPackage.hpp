@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EGenericType;
+	class EClass;
 	class EOperation;
 	class EReference;
 	class EParameter;
-	class EStringToStringMapEntry;
-	class EClass;
+	class EGenericType;
+	class EAnnotation;
 	class EAttribute;
 	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace fUML::Semantics::CommonBehavior 
@@ -143,7 +143,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long EXECUTION_CLASS = 921905715;
 			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 60;
+			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 61;
 			
 			static const unsigned long EXECUTION_ATTRIBUTE_BEHAVIOR = 106545659;
 			static const unsigned long EXECUTION_ATTRIBUTE_CONTEXT = 646122967;

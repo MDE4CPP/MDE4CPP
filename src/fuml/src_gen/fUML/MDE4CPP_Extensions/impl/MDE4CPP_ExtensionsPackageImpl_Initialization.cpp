@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -589,6 +589,25 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_fUML_Object_Operation_equals_FUML_Object->setName("equals");
+	m_fUML_Object_Operation_equals_FUML_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_fUML_Object_Operation_equals_FUML_Object->setLowerBound(1);
+	m_fUML_Object_Operation_equals_FUML_Object->setUpperBound(1);
+	m_fUML_Object_Operation_equals_FUML_Object->setUnique(true);
+	m_fUML_Object_Operation_equals_FUML_Object->setOrdered(true);
+	
+	m_fUML_Object_Operation_equals_FUML_Object->_setID(FUML_OBJECT_OPERATION_EQUALS_FUML_OBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_equals_FUML_Object);
+		parameter->setName("otherValue");
+		parameter->setEType(getFUML_Object_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_fUML_Object_Operation_getTypes->setName("getTypes");
 	m_fUML_Object_Operation_getTypes->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 	m_fUML_Object_Operation_getTypes->setLowerBound(0);
@@ -862,6 +881,25 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_SignalInstanceContent()
 	/*
 	 * EOperations
 	 */
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance->setName("equals");
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance->setLowerBound(1);
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance->setUpperBound(1);
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance->setUnique(true);
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance->setOrdered(true);
+	
+	m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance->_setID(FUML_SIGNALINSTANCE_OPERATION_EQUALS_FUML_SIGNALINSTANCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_SignalInstance_Operation_equals_FUML_SignalInstance);
+		parameter->setName("otherSignalInstance");
+		parameter->setEType(getFUML_SignalInstance_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_fUML_SignalInstance_Operation_getType->setName("getType");
 	m_fUML_SignalInstance_Operation_getType->setEType(uml::umlPackage::eInstance()->getSignal_Class());
 	m_fUML_SignalInstance_Operation_getType->setLowerBound(1);

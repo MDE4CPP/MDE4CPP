@@ -21,6 +21,8 @@
 [import UML4CPP::generator::main::components::generateOperation /]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateDataType /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 [template public generateDataTypeImplementationHeader(aDataType : DataType) {dataTypeName : String = aDataType.name.toUpperFirst() + 'Impl'; containingPackage : Package = aDataType.ancestors()->filter(Package)->first()}]
 [file (containingPackage.generateNamespacePath(false) + '/impl/' + dataTypeName + '.hpp', false, 'UTF-8')]
@@ -65,6 +67,8 @@ virtual public [general.getClassifierName(aDataType, false, general.getNearestPa
 			//constructor
 			[dataTypeName/]();
 
+			virtual bool internal_equals(const std::shared_ptr<[aDataType.transformType()/]>&) const;
+
 		public:
 
 			//destructor
@@ -76,6 +80,11 @@ virtual public [general.getClassifierName(aDataType, false, general.getNearestPa
 			[for (anOperation : Operation | aDataType.ownedOperation->sortedBy(name)) before('\t\t\t//Methods defined by Operations\n') after('\n')]
 			[anOperation.generateOperationDecl(true)/]
 			[/for]
+			[if (isFUMLExecutable())]
+			// fUML-specific Operations
+			virtual bool equals(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
+
+			[/if]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

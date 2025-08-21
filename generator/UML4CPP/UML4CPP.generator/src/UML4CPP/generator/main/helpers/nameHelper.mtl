@@ -316,7 +316,14 @@ endif
 
 [query public getStaticClassID_Name(aNamedElement : NamedElement) : String = if ((aNamedElement.oclIsUndefined()) or (aNamedElement.name.oclIsUndefined())) then '' else ', '.concat(aNamedElement.myQualifiedTypeName(true)) endif/]
 
-[query public getGeneralSuperClassName(aDataType : DataType) : String = 'uml::Element'/]
+[query public getGeneralSuperClassName(aDataType : DataType) : String = 
+	if(isFUMLExecutable())
+	then
+		'fUML::MDE4CPP_Extensions::FUML_Object'
+	else
+		'uml::Element'
+	endif
+/]
 [query public getGeneralSuperClassName(anInterface : Interface) : String = 'uml::Element'/]
 [query public getGeneralSuperClassName(aSignal : Signal) : String =
 	if(isFUMLExecutable())
@@ -350,7 +357,14 @@ endif
 	endif
 /]
 
-[query public getGeneralSuperClassInterfaceInclude(aDataType : DataType) : String = 'uml/Element.hpp'/]
+[query public getGeneralSuperClassInterfaceInclude(aDataType : DataType) : String =
+	if(isFUMLExecutable())
+	then
+		'fUML/MDE4CPP_Extensions/FUML_Object.hpp'
+	else
+		'uml/Element.hpp'
+	endif
+/]
 [query public getGeneralSuperClassInterfaceInclude(anInterface : Interface) : String = 'uml/Element.hpp'/]
 [query public getGeneralSuperClassInterfaceInclude(aSignal : Signal) : String = 
 	if(isFUMLExecutable())
@@ -384,7 +398,14 @@ endif
 	endif
 /]
 
-[query public getGeneralSuperClassImplInclude(aDataType : DataType) : String = 'uml/impl/ElementImpl.hpp'/]
+[query public getGeneralSuperClassImplInclude(aDataType : DataType) : String = 
+	if(isFUMLExecutable())
+	then
+		'fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp'
+	else
+		'uml/impl/ElementImpl.hpp'
+	endif
+/]
 [query public getGeneralSuperClassImplInclude(anInterface : Interface) : String = 'uml/impl/ElementImpl.hpp'/]
 [query public getGeneralSuperClassImplInclude(aSignal : Signal) : String =
 	if(isFUMLExecutable())

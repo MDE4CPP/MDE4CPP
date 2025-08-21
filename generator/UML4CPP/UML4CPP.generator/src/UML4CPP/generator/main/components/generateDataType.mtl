@@ -399,7 +399,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, co
 			[if (aProperty.type.oclIsUndefined())]
 			std::shared_ptr<Any> valueToAdd;
 			[else]
-			[aProperty.type.generateCppRawType(false)/] valueToAdd;
+			std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> valueToAdd;
 			[/if]
 			if(value->isContainer())
 			{
@@ -415,7 +415,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, co
 				if(container && !(container->empty()))
 				{
 						// If a non-empty container is passed, the first value of the container will be added to the property
-						valueToAdd = [if(not aProperty.type.isComplex())]*([/if]container->at(0)[if(not aProperty.type.isComplex())])[/if];
+						valueToAdd = container->at(0);
 				}
 				[else]
 				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
@@ -436,7 +436,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, co
 				[if (aProperty.type.oclIsUndefined())]
 				valueToAdd = value->get<std::shared_ptr<Any>>();
 				[elseif (not aProperty.type.isComplex())]
-				valueToAdd = value->get<[aProperty.type.generateCppRawType(false)/]>();
+				valueToAdd = std::make_shared<int>(value->get<[aProperty.type.generateCppRawType(false)/]>());
 				[else]
 				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
 				if(umlAny)
@@ -685,7 +685,7 @@ std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(std
 
 std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	std::shared_ptr<Any> result = nullptr;
 [if (not aDataType.getOperationsForInvoke()->isEmpty())]
 	switch(_uID)
 	{
@@ -836,7 +836,6 @@ std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::invoke(uns
 [/if]	
 [let classifierList : OrderedSet(Classifier) = aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
 	[if (classifierList->size() > 0)]
-	std::shared_ptr<Any> result;
 		[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call invoke() for base class [general.name/]
 	result = [general.generateNamespaceName(true)/]Impl::invoke(_uID, inputArguments, outputArguments);
