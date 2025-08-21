@@ -20,6 +20,7 @@ task runCommandGeneratePSCS(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
+
 task generatePSCS() {
 	group 'PSCS'	
 	description 'generate C++ code of PSCS.ecore model PSCS' 
@@ -42,11 +43,13 @@ task compilePSCS() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
+		dependsOn 'generatePSCS'
 		mustRunAfter = ["generatePSCS"]
 		dependsOn 'runCommandCompilePSCS'
 	}
 	else
 	{
+		dependsOn 'generatePSCS'
 		mustRunAfter = ["generatePSCS"]
 		dependsOn 'src_gen:compilePSCSSrc'
 	} 
@@ -59,6 +62,7 @@ task compilePSCS() {
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
+
 
 task buildPSCS() {
 	group 'PSCS'

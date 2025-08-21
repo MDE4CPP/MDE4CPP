@@ -43,10 +43,12 @@ task compileFUMLSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGenerateFUML', true)
 		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateFUML', true)]
 	}
 	else
 	{
+		dependsOn  getRootProject().getTasksByName('generateFUMLModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateFUMLModel', true)]
 	}	
 

@@ -43,10 +43,12 @@ task compilePSSMSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGeneratePSSM', true)
 		mustRunAfter = [getRootProject().getTasksByName('runCommandGeneratePSSM', true)]
 	}
 	else
 	{
+		dependsOn  getRootProject().getTasksByName('generatePSSMModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generatePSSMModel', true)]
 	}	
 

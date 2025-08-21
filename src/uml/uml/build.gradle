@@ -18,6 +18,7 @@ task runCommandGenerateUml(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
+
 task generateUml() {
 	group 'uml'	
 	description 'generate C++ code of uml.ecore model uml' 
@@ -40,11 +41,13 @@ task compileUml() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
+		dependsOn 'generateUml'
 		mustRunAfter = ["generateUml"]
 		dependsOn 'runCommandCompileUml'
 	}
 	else
 	{
+		dependsOn 'generateUml'
 		mustRunAfter = ["generateUml"]
 		dependsOn 'src_gen:compileUmlSrc'
 	} 
@@ -55,6 +58,7 @@ task compileUml() {
 		, getRootProject().getTasksByName('compileTypes', true)
 	]
 }
+
 
 task buildUml() {
 	group 'uml'

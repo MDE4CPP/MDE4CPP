@@ -42,10 +42,12 @@ task compilePrimitivetypesReflectionSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGeneratePrimitivetypesReflection', true)
 		mustRunAfter = [getRootProject().getTasksByName('runCommandGeneratePrimitivetypesReflection', true)]
 	}
 	else
 	{
+		dependsOn getRootProject().getTasksByName('generatePrimitivetypesReflectionModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generatePrimitivetypesReflectionModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

@@ -6,7 +6,7 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'PSCSExamples'
+rootProject.name = 'Examples_PSCSExamples'
 
 //Search recursivly for all build.gradle file and add the imports
 fileTree('.') {
@@ -21,4 +21,4 @@ fileTree('.') {
   println it
 }
 
-includeBuild '../../..'
+includeBuild '../../../'

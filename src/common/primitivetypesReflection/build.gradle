@@ -17,6 +17,7 @@ task runCommandGeneratePrimitivetypesReflection(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
 }
 
+
 task generatePrimitivetypesReflection() {
 	group 'primitivetypesReflection'	
 	description 'generate C++ code of primitivetypesReflection.uml model primitivetypesReflection' 
@@ -38,11 +39,13 @@ task compilePrimitivetypesReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
+		dependsOn 'generatePrimitivetypesReflection'
 		mustRunAfter = ["generatePrimitivetypesReflection"]
 		dependsOn 'runCommandCompilePrimitivetypesReflection'
 	}
 	else
 	{
+		dependsOn 'generatePrimitivetypesReflection'
 		mustRunAfter = ["generatePrimitivetypesReflection"]
 		dependsOn 'src_gen:compilePrimitivetypesReflectionSrc'
 	}
@@ -52,6 +55,7 @@ task compilePrimitivetypesReflection() {
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
+
 
 task buildPrimitivetypesReflection() {
 	group 'primitivetypesReflection'

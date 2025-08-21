@@ -19,6 +19,7 @@ task runCommandGenerateFUML(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
+
 task generateFUML() {
 	group 'fUML'	
 	description 'generate C++ code of fUML.ecore model fUML' 
@@ -41,11 +42,13 @@ task compileFUML() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
+		dependsOn 'generateFUML'
 		mustRunAfter = ["generateFUML"]
 		dependsOn 'runCommandCompileFUML'
 	}
 	else
 	{
+		dependsOn 'generateFUML'
 		mustRunAfter = ["generateFUML"]
 		dependsOn 'src_gen:compileFUMLSrc'
 	} 
@@ -57,6 +60,7 @@ task compileFUML() {
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
+
 
 task buildFUML() {
 	group 'fUML'

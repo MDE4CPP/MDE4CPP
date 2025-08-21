@@ -12,6 +12,12 @@ task generateUML4CPPProfileModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	structureOnly = true
 
 	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
-	
-	dependsOn rootProject.tasks.getByPath(':generator:UML4CPP:UML4CPP.generator:deliverUML4CPP')
+		
+	def dependencyTask = getRootProject().getTasksByName('deliverUML4CPP',true)
+	if (dependencyTask)
+	{
+		dependsOn dependencyTask
+	}
+
+
 }

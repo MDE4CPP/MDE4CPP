@@ -20,6 +20,7 @@ task runCommandGeneratePSSM(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
+
 task generatePSSM() {
 	group 'PSSM'	
 	description 'generate C++ code of PSSM.ecore model PSSM' 
@@ -42,11 +43,13 @@ task compilePSSM() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
+		dependsOn 'generatePSSM'
 		mustRunAfter = ["generatePSSM"]
 		dependsOn 'runCommandCompilePSSM'
 	}
 	else
 	{
+		dependsOn 'generatePSSM'
 		mustRunAfter = ["generatePSSM"]
 		dependsOn 'src_gen:compilePSSMSrc'
 	} 
@@ -59,6 +62,7 @@ task compilePSSM() {
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
+
 
 task buildPSSM() {
 	group 'PSSM'

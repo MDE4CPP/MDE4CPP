@@ -43,10 +43,12 @@ task compilePSCSSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGeneratePSCS', true)
 		mustRunAfter = [getRootProject().getTasksByName('runCommandGeneratePSCS', true)]
 	}
 	else
 	{
+		dependsOn  getRootProject().getTasksByName('generatePSCSModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generatePSCSModel', true)]
 	}	
 

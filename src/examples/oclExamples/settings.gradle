@@ -6,7 +6,7 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'oclExamples'
+rootProject.name = 'Examples_oclExamples'
 
 //Search recursivly for all build.gradle file and add the imports
 //ToDo Update OCL-Examples
@@ -22,4 +22,4 @@ rootProject.name = 'oclExamples'
 //  println it
 //}
 
-includeBuild '../../..'
+includeBuild '../../../'

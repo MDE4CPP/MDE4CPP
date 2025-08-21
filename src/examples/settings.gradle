@@ -23,6 +23,13 @@ rootProject.name = 'MDE4CPPExamples'
 //}
 
 includeBuild '../../'
+//includeBuild 'benchmarks'
+//includeBuild 'commonExamples'
+//includeBuild 'ecoreExamples'
+//include 'fUMLExamples', 'PSCSExamples', 'PSSMExamples', 'strategiesExamples', 'UMLExamples'
+
+
+includeBuild '../../'
 includeBuild 'benchmarks'
 includeBuild 'commonExamples'
 includeBuild 'ecoreExamples'

@@ -20,6 +20,7 @@ task runCommandGenerateStandardProfile(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
 }
 
+
 task generateStandardProfile() {
 	group 'StandardProfile'	
 	description 'generate C++ code of StandardProfile.uml model StandardProfile' 
@@ -41,11 +42,13 @@ task compileStandardProfile() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
+		dependsOn 'generateStandardProfile'
 		mustRunAfter = ["generateStandardProfile"]
 		dependsOn 'runCommandCompileStandardProfile'
 	}
 	else
 	{
+		dependsOn 'generateStandardProfile'
 		mustRunAfter = ["generateStandardProfile"]
 		dependsOn 'src_gen:compileStandardProfileSrc'
 	}
@@ -58,6 +61,7 @@ task compileStandardProfile() {
 		, getRootProject().getTasksByName('compileUmlReflection', true)
 	]
 }
+
 
 task buildStandardProfile() {
 	group 'StandardProfile'

@@ -37,17 +37,20 @@ task generateFoundationalModelLibrary() {
 	}
 }
 
+
 task compileFoundationalModelLibrary {
 	group 'FoundationalModelLibrary'
 	description 'compile FoundationalModelLibrary'
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
+		dependsOn 'generateFoundationalModelLibrary'
 		mustRunAfter = ["generateFoundationalModelLibrary"]
 		dependsOn 'runCommandCompileFoundationalModelLibrary'
 	}
 	else
 	{
+		dependsOn 'generateFoundationalModelLibrary'
 		mustRunAfter = ["generateFoundationalModelLibrary"]
 		dependsOn 'src_gen:compileFoundationalModelLibrarySrc'
 	}
@@ -62,6 +65,7 @@ task compileFoundationalModelLibrary {
 		, getRootProject().getTasksByName('compileUmlReflection', true)
 	]
 }
+
 
 task buildFoundationalModelLibrary() {
 	group 'FoundationalModelLibrary'

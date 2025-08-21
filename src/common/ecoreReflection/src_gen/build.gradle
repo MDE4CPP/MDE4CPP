@@ -42,10 +42,12 @@ task compileEcoreReflectionSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGenerateEcoreReflection', true)
 		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateEcoreReflection', true)]
 	}
 	else
 	{
+		dependsOn getRootProject().getTasksByName('generateEcoreReflectionModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateEcoreReflectionModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

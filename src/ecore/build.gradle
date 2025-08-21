@@ -16,6 +16,7 @@ task runCommandGenerateEcore(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
+
 task generateEcore() {
 	group 'ecore'	
 	description 'generate C++ code of ecore.ecore model ecore' 
@@ -38,11 +39,13 @@ task compileEcore() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
+		dependsOn 'generateEcore'
 		mustRunAfter = ["generateEcore"]
 		dependsOn 'runCommandCompileEcore'
 	}
 	else
 	{
+		dependsOn 'generateEcore'
 		mustRunAfter = ["generateEcore"]
 		dependsOn 'src_gen:compileEcoreSrc'
 	} 
@@ -51,6 +54,7 @@ task compileEcore() {
 	
 	]
 }
+
 
 task buildEcore() {
 	group 'ecore'

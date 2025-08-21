@@ -19,6 +19,7 @@ task runCommandGenerateUmlReflection(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
 }
 
+
 task generateUmlReflection() {
 	group 'umlReflection'	
 	description 'generate C++ code of umlReflection.uml model umlReflection' 
@@ -40,11 +41,13 @@ task compileUmlReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
+		dependsOn 'generateUmlReflection'
 		mustRunAfter = ["generateUmlReflection"]
 		dependsOn 'runCommandCompileUmlReflection'
 	}
 	else
 	{
+		dependsOn 'generateUmlReflection'
 		mustRunAfter = ["generateUmlReflection"]
 		dependsOn 'src_gen:compileUmlReflectionSrc'
 	}
@@ -56,6 +59,7 @@ task compileUmlReflection() {
 		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 	]
 }
+
 
 task buildUmlReflection() {
 	group 'umlReflection'

@@ -17,6 +17,7 @@ task runCommandGenerateEcoreReflection(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath
 }
 
+
 task generateEcoreReflection() {
 	group 'ecoreReflection'	
 	description 'generate C++ code of ecoreReflection.uml model ecoreReflection' 
@@ -38,11 +39,13 @@ task compileEcoreReflection() {
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
+		dependsOn 'generateEcoreReflection'
 		mustRunAfter = ["generateEcoreReflection"]
 		dependsOn 'runCommandCompileEcoreReflection'
 	}
 	else
 	{
+		dependsOn 'generateEcoreReflection'
 		mustRunAfter = ["generateEcoreReflection"]
 		dependsOn 'src_gen:compileEcoreReflectionSrc'
 	}
@@ -52,6 +55,7 @@ task compileEcoreReflection() {
 		, getRootProject().getTasksByName('compileUml', true)
 	]
 }
+
 
 task buildEcoreReflection() {
 	group 'ecoreReflection'

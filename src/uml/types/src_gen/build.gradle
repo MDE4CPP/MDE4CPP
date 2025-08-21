@@ -43,10 +43,12 @@ task compileTypesSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGenerateTypes', true)
 		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateTypes', true)]
 	}
 	else
 	{
+		dependsOn  getRootProject().getTasksByName('generateTypesModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateTypesModel', true)]
 	}	
 

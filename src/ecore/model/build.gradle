@@ -14,6 +14,10 @@ task generateEcoreModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	outputs.files(fileTree('../src_gen/ecore') {
         exclude '.cmake/**'
     })
-
-	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
+	
+	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
+	if (dependencyTask)
+	{
+		dependsOn dependencyTask
+	}
 }

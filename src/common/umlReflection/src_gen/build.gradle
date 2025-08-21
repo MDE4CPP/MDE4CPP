@@ -42,10 +42,12 @@ task compileUmlReflectionSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGenerateUmlReflection', true)
 		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateUmlReflection', true)]
 	}
 	else
 	{
+		dependsOn getRootProject().getTasksByName('generateUmlReflectionModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateUmlReflectionModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

@@ -6,7 +6,7 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'ecoreExamples'
+rootProject.name = 'Examples_ecoreExamples'
 
 //Search recursivly for all build.gradle file and add the imports
 fileTree('.') {
@@ -18,7 +18,7 @@ fileTree('.') {
 	relativePath(it.parent).replace(File.separator, ':') 
 }.each {
   include(it)
-  println it
+  //println it
 }
 
-includeBuild '../../..'
+includeBuild '../../../'

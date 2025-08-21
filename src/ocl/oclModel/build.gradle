@@ -17,6 +17,7 @@ task runCommandGenerateOcl(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew :src:common:universalGradleTasks:generateModel -PModel='+modelPath.absolutePath	
 }
 
+
 task generateOcl() {
 	group 'ocl'	
 	description 'generate C++ code of ocl.ecore model ocl' 
@@ -39,11 +40,13 @@ task compileOcl() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
+		dependsOn 'generateOcl'
 		mustRunAfter = ["generateOcl"]
 		dependsOn 'runCommandCompileOcl'
 	}
 	else
 	{
+		dependsOn 'generateOcl'
 		mustRunAfter = ["generateOcl"]
 		dependsOn 'src_gen:compileOclSrc'
 	} 
@@ -53,6 +56,7 @@ task compileOcl() {
 		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
+
 
 task buildOcl() {
 	group 'ocl'

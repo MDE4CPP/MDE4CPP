@@ -27,10 +27,6 @@ description 'Example collection'
 
 import org.gradle.internal.os.OperatingSystem;
 
-// global variables
-//project.ext.gradle_mde4cpp_compile_plugin_version  = '0.6.0-rc1'
-//project.ext.gradle_mde4cpp_generate_plugin_version = '0.6.0-rc1'
-
 task generateAllExamples() {
 	group 'Examples'
 	description 'generate all examples'	
@@ -204,6 +200,7 @@ task compileAllBenchmarks() {
 task generateEcoreTestSuite() {
 	group 'Tests'
 	description 'generate test suite for ecore'	
+	
 	doLast {	
 		def tool = '/bin/sh'
 		def command = '-c'
@@ -215,11 +212,11 @@ task generateEcoreTestSuite() {
 			prefix = ''
 		}
 	
-		[  	 './ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/'
-			,'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/'
-			,'./ecoreExamples/TestSuite/SubPackagetest'						
-			,'./ecoreExamples/TestSuite/copyTest/'
-			,'./ecoreExamples/templateTest'
+		[  	 './ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/model'
+			,'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/model'
+//			,'./ecoreExamples/TestSuite/SubPackagetest/model'						
+			,'./ecoreExamples/TestSuite/copyTest/model'
+			,'./ecoreExamples/TestSuite/templateTest/model'
 		].each { path ->
 			def buildModelFile = file(path+'model'+ File.separator +'build.gradle')
 			def buildSrcFile = file(path+'src_gen'+ File.separator +'build.gradle')
@@ -227,7 +224,7 @@ task generateEcoreTestSuite() {
 			{
 				exec
 				{
-					workingDir = file("${path}"+ File.separator)
+					workingDir = file("${path}"+ File.separator)					
 					commandLine = [tool, command, prefix + 'generate']
 				}
 			}
