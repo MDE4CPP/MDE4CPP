@@ -55,23 +55,43 @@ task generate[packageName.toUpperFirst()/]() {
 	}
 }
 
+[if(aPackage.hasMainBehavior())]
+task runCommandCompileApplicationFor[packageName.toUpperFirst()/](type:Exec) {
+	commandLine 'cmd', '/c', 'gradlew application:compileApplicationFor[packageName.toUpperFirst()/]Src'
+	dependsOn 'compile[packageName.toUpperFirst()/]'
+}
+[/if]
+
 task compile[packageName.toUpperFirst()/] {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
+		dependsOn 'generate[packageName.toUpperFirst()/]'
 		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
 	}
 	else
 	{
 	[comment if(buildFile.exists()){ only if src_gen folder is removed, regenerate src_gen folder and compile external/]
+		dependsOn 'generate[packageName.toUpperFirst()/]'
 		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
 	}
 	[aPackage.generateMustRunAfter()/]
 }
+
+[if(aPackage.hasMainBehavior())]
+task compileApplicationFor[packageName.toUpperFirst()/]{
+	group '[packageName/]'
+	description 'compile ['ApplicationFor'.concat(packageName)/]'
+
+	dependsOn 'runCommandCompileApplicationFor[packageName.toUpperFirst()/]'
+	dependsOn 'compile[packageName.toUpperFirst()/]'
+	mustRunAfter = ['['/]"compile[packageName.toUpperFirst()/]"[']'/]
+}
+[/if]
 
 task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
@@ -80,7 +100,7 @@ task build[packageName.toUpperFirst()/]() {
 	dependsOn 'generate[packageName.toUpperFirst()/]'
 	dependsOn 'compile[packageName.toUpperFirst()/]'
 [if(aPackage.hasMainBehavior())]
-	dependsOn project.tasks.getByPath('application:compileApplicationFor[packageName.toUpperFirst()/]')
+	dependsOn 'compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
 [for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name))) ? (not(packName = aPackage.getPackageName()))]
 	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
@@ -112,15 +132,16 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
 	[comment dependsOn rootProject.tasks.getByPath(':generator:UML4CPP:UML4CPP.generator:deliverUML4CPP')/]
 	[comment dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:buildGenerator_fUML4CPP')/]
 	[comment dependsOn rootProject.tasks.getByPath(':generator:fUML4CPP:fUML4CPP.generator:deliverfUML4CPP')/]
-	def dependencyTask = rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverfUML4CPP')
-	if (!dependencyTask.isEmpty()){
-		dependsOn dependencyTask
-	}
-	else [comment depends if build from root or from local directory /]
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn getRootProject().getTasksByName('deliverfUML4CPP',true)
-	}	
-
+		dependsOn dependencyTask
+	} 
+	[comment To Debug missing dependencies
+	else
+	{
+		println "local build: Please make sure that fUML4CPP has been created correctly."
+	} /]
 }
 [/file]
 
@@ -187,10 +208,12 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) [comment In case of model build file was deleted /]
 	{
+		dependsOn getRootProject().getTasksByName('runCommandGenerate[packageName.toUpperFirst()/]', true)
 		mustRunAfter = ['['/]getRootProject().getTasksByName('runCommandGenerate[packageName.toUpperFirst()/]', true)[']'/]
 	}
 	else
 	{
+		dependsOn getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)
 		mustRunAfter = ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)[']'/]
 	}	
 
@@ -252,9 +275,6 @@ task clean {
 [template private generateMustRunAfter(aPackage : Package) {packageName : String = getPackageName();}]
 mustRunAfter =  ['['/]
 	"generate[packageName.toUpperFirst()/]" 
-[if(aPackage.hasMainBehavior())]
-	, project.tasks.getByPath('application:compileApplicationFor[packageName.toUpperFirst()/]')
-[/if]
 [for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name))) ? (not(packName = aPackage.getPackageName()))]
 	, getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
 [/for] [']'/]

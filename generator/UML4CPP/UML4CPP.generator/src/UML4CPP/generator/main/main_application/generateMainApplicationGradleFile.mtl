@@ -37,8 +37,8 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'Compile task for project: App_[packageName/]'
 
-task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group '[packageName/]'
+task compileApplicationFor[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	[comment hide group '[packageName/' /]
 	description 'compile ['ApplicationFor'.concat(packageName)/]'
 
 	projectFolder = file('.' + File.separator + 'src')
@@ -58,13 +58,6 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 	else if(OperatingSystem.current().isLinux() || OperatingSystem.current().isMacOsX()){
 		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file(['['/]rootDir,'application','bin','App_' + '[packageName/]'      [']'/].join(File.separator))}
 		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file(['['/]rootDir,'application','bin','App_' + '[packageName/]' + 'd'[']'/].join(File.separator))}
-	}
-
-	// dependency to model '[packageName/]'
-	def [packageName/] = getRootProject().getTasksByName('compile[packageName.toUpperFirst()/]Src', true)
-	if (![packageName/].isEmpty()){
-		dependsOn [packageName/]
-		inputs.files([packageName/].outputs)
 	}
 }
 
