@@ -75,7 +75,7 @@ task compile[packageName.toUpperFirst()/] {
 	else
 	{
 	[comment if(buildFile.exists()){ only if src_gen folder is removed, regenerate src_gen folder and compile external/]
-		dependsOn 'generate[packageName.toUpperFirst()/]'
+		[comment dependsOn 'generate[packageName.toUpperFirst()/?' /]
 		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
 	}

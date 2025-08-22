@@ -178,13 +178,13 @@ task compile[packageName.toUpperFirst()/]() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
-		dependsOn 'generate[packageName.toUpperFirst()/]'
+		dependsOn 'generate[packageName.toUpperFirst()/]' [comment without an build file you have to generate first./]
 		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
 	}
 	else
 	{
-		dependsOn 'generate[packageName.toUpperFirst()/]'
+		[comment dependsOn 'generate[packageName.toUpperFirst()/?' /]
 		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
 	} 
@@ -250,6 +250,7 @@ task generate[packageName.toUpperFirst()/]Model(type: tui.sse.mde4cpp.MDE4CPPGen
         exclude '.cmake/**'
     })
 	
+	[comment dependency is used to enshure that a generator is existing and updated. But /]	
 	[comment getTasksByName is used because it throws no exception. This dependecy is only useful for root tasks /]  
 	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
 	if (dependencyTask)
