@@ -45,7 +45,6 @@ task compileEcoreReflection() {
 	}
 	else
 	{
-		dependsOn 'generateEcoreReflection'
 		mustRunAfter = ["generateEcoreReflection"]
 		dependsOn 'src_gen:compileEcoreReflectionSrc'
 	}

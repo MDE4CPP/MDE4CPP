@@ -48,7 +48,6 @@ task compileStandardProfile() {
 	}
 	else
 	{
-		dependsOn 'generateStandardProfile'
 		mustRunAfter = ["generateStandardProfile"]
 		dependsOn 'src_gen:compileStandardProfileSrc'
 	}

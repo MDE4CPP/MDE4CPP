@@ -50,7 +50,6 @@ task compileFoundationalModelLibrary {
 	}
 	else
 	{
-		dependsOn 'generateFoundationalModelLibrary'
 		mustRunAfter = ["generateFoundationalModelLibrary"]
 		dependsOn 'src_gen:compileFoundationalModelLibrarySrc'
 	}

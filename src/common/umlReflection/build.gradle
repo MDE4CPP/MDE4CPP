@@ -47,7 +47,6 @@ task compileUmlReflection() {
 	}
 	else
 	{
-		dependsOn 'generateUmlReflection'
 		mustRunAfter = ["generateUmlReflection"]
 		dependsOn 'src_gen:compileUmlReflectionSrc'
 	}

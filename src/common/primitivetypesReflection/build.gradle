@@ -45,7 +45,6 @@ task compilePrimitivetypesReflection() {
 	}
 	else
 	{
-		dependsOn 'generatePrimitivetypesReflection'
 		mustRunAfter = ["generatePrimitivetypesReflection"]
 		dependsOn 'src_gen:compilePrimitivetypesReflectionSrc'
 	}

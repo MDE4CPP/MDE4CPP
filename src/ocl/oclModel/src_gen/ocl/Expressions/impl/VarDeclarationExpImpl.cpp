@@ -10,12 +10,6 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //#include "util/ProfileCallCount.hpp"
 
 #include <cassert>
@@ -255,6 +249,8 @@ std::weak_ptr<ocl::Expressions::OclExpression> VarDeclarationExpImpl::getInitExp
 void VarDeclarationExpImpl::setInitExpression(std::weak_ptr<ocl::Expressions::OclExpression> _initExpression)
 {
     m_initExpression = _initExpression;
+	//Setter call to implicedly redefined eContainer from eObject
+	setEContainer(_initExpression);
 	
 }
 

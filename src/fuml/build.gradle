@@ -42,13 +42,12 @@ task compileFUML() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generateFUML'
+		dependsOn 'generateFUML' 
 		mustRunAfter = ["generateFUML"]
 		dependsOn 'runCommandCompileFUML'
 	}
 	else
 	{
-		dependsOn 'generateFUML'
 		mustRunAfter = ["generateFUML"]
 		dependsOn 'src_gen:compileFUMLSrc'
 	} 

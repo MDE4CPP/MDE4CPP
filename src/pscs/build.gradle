@@ -43,13 +43,12 @@ task compilePSCS() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generatePSCS'
+		dependsOn 'generatePSCS' 
 		mustRunAfter = ["generatePSCS"]
 		dependsOn 'runCommandCompilePSCS'
 	}
 	else
 	{
-		dependsOn 'generatePSCS'
 		mustRunAfter = ["generatePSCS"]
 		dependsOn 'src_gen:compilePSCSSrc'
 	} 

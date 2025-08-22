@@ -52,8 +52,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -62,8 +62,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -607,6 +607,8 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityNodeActiva
 void ActivityNodeActivationGroupImpl::setActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> _activityExecution)
 {
     m_activityExecution = _activityExecution;
+	//Setter call to implicedly redefined eContainer from eObject
+	setEContainer(_activityExecution);
 	
 }
 
@@ -618,6 +620,8 @@ std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> Activi
 void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation)
 {
     m_containingNodeActivation = _containingNodeActivation;
+	//Setter call to implicedly redefined eContainer from eObject
+	setEContainer(_containingNodeActivation);
 	
 }
 

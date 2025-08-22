@@ -10,12 +10,6 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //#include "util/ProfileCallCount.hpp"
 
 #include <cassert>
@@ -221,6 +215,8 @@ std::weak_ptr<ecore::EModelElement> EAnnotationImpl::getEModelElement() const
 void EAnnotationImpl::setEModelElement(std::weak_ptr<ecore::EModelElement> _eModelElement)
 {
     m_eModelElement = _eModelElement;
+	//Setter call to implicedly redefined eContainer from eObject
+	setEContainer(_eModelElement);
 	
 }
 

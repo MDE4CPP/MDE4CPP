@@ -63,7 +63,7 @@ std::shared_ptr<ecore::EObject>  StatusImpl::copy() const
 StatusImpl& StatusImpl::operator=(const StatusImpl & obj)
 {
 	//call overloaded =Operator for each base class
-	uml::ElementImpl::operator=(obj);
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::operator=(obj);
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Status "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,6 +126,30 @@ std::string StatusImpl::getDescription() const
 // Operations
 //*********************************
 
+// fUML-specific Method Overrides
+bool StatusImpl::equals(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& otherValue)
+{
+	bool equals = false;
+
+	if(std::shared_ptr<FoundationalModelLibrary::Common::Status> otherStatus = std::dynamic_pointer_cast<FoundationalModelLibrary::Common::Status>(otherValue); otherStatus != nullptr)
+	{
+		equals = this->internal_equals(otherStatus);
+	}
+
+	return equals;
+}
+
+bool StatusImpl::internal_equals(const std::shared_ptr<FoundationalModelLibrary::Common::Status>& other) const
+{
+	// Check equality of property m_context
+	if(!(this->getContext() == other->getContext())) return false;
+	// Check equality of property m_code
+	if(!(this->getCode() == other->getCode())) return false;
+	// Check equality of property m_description
+	if(!(this->getDescription() == other->getDescription())) return false;
+
+	return true;
+}
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************
@@ -424,7 +448,7 @@ std::shared_ptr<Any> StatusImpl::invoke(std::string _qualifiedName, const std::s
 
 std::shared_ptr<Any> StatusImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	std::shared_ptr<Any> result = nullptr;
 	return result;
 }
 

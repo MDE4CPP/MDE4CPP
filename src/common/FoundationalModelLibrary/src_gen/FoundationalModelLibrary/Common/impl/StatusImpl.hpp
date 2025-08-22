@@ -9,7 +9,7 @@
 
 //Model includes
 #include "../Status.hpp"
-#include "uml/impl/ElementImpl.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
 
 class Any;
 
@@ -22,7 +22,7 @@ namespace uml
 //*********************************
 namespace FoundationalModelLibrary::Common
 {
-	struct StatusImpl : virtual public uml::ElementImpl, virtual public Status
+	struct StatusImpl : virtual public fUML::MDE4CPP_Extensions::FUML_ObjectImpl, virtual public Status
 	{
 		public: 
 			StatusImpl(const StatusImpl & obj);
@@ -35,6 +35,8 @@ namespace FoundationalModelLibrary::Common
 			//constructor
 			StatusImpl();
 
+			virtual bool internal_equals(const std::shared_ptr<FoundationalModelLibrary::Common::Status>&) const;
+
 		public:
 
 			//destructor
@@ -43,6 +45,9 @@ namespace FoundationalModelLibrary::Common
 			//*********************************
 			// Operations
 			//*********************************
+			// fUML-specific Operations
+			virtual bool equals(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
+
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

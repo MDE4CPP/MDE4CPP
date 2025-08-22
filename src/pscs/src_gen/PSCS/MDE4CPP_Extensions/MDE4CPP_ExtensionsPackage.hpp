@@ -79,7 +79,7 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_LINK_CLASS = 1393528252;
 			static const unsigned int PSCS_LINK_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 64;
+			static const unsigned int PSCS_LINK_CLASS_OPERATION_COUNT = 65;
 			
 			
 			static const unsigned long PSCS_LINK_OPERATION_ADD_FUML_OBJECT_PROPERTY = 3349335570;
@@ -127,7 +127,7 @@ namespace PSCS::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long PSCS_OBJECT_CLASS = 1088313541;
 			static const unsigned int PSCS_OBJECT_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int PSCS_OBJECT_CLASS_OPERATION_COUNT = 66;
 			
 			static const unsigned long PSCS_OBJECT_ATTRIBUTE_DEFININGPORT = 1420013449;
 			

@@ -151,8 +151,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -643,6 +643,8 @@ std::weak_ptr<fUML::Semantics::Loci::Locus> ExecutionFactoryImpl::getLocus() con
 void ExecutionFactoryImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
+	//Setter call to implicedly redefined eContainer from eObject
+	setEContainer(_locus);
 	
 }
 

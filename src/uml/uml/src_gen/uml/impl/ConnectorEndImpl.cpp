@@ -10,12 +10,6 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //#include "util/ProfileCallCount.hpp"
 
 #include <cassert>
@@ -148,6 +142,8 @@ std::weak_ptr<uml::Connector> ConnectorEndImpl::getConnector() const
 void ConnectorEndImpl::setConnector(std::weak_ptr<uml::Connector> _connector)
 {
     m_connector = _connector;
+	//Setter call to implicedly redefined eContainer from eObject
+	setEContainer(_connector);
 	
 }
 

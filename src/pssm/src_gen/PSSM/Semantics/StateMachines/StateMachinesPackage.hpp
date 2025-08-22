@@ -185,7 +185,7 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_CLASS = 324637086;
 			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 59;
+			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 60;
 			
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT = 1627726340;
 			
@@ -700,7 +700,7 @@ namespace PSSM::Semantics::StateMachines
 			//Class and Feature IDs 
 			static const unsigned long STATEMACHINEEXECUTION_CLASS = 1411054300;
 			static const unsigned int STATEMACHINEEXECUTION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int STATEMACHINEEXECUTION_CLASS_OPERATION_COUNT = 64;
+			static const unsigned int STATEMACHINEEXECUTION_CLASS_OPERATION_COUNT = 65;
 			
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE = 1048116379;
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION = 1936731267;

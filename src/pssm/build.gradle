@@ -43,13 +43,12 @@ task compilePSSM() {
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
-		dependsOn 'generatePSSM'
+		dependsOn 'generatePSSM' 
 		mustRunAfter = ["generatePSSM"]
 		dependsOn 'runCommandCompilePSSM'
 	}
 	else
 	{
-		dependsOn 'generatePSSM'
 		mustRunAfter = ["generatePSSM"]
 		dependsOn 'src_gen:compilePSSMSrc'
 	} 

@@ -10,12 +10,6 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //#include "util/ProfileCallCount.hpp"
 
 #include <cassert>
@@ -141,7 +135,12 @@ std::shared_ptr<ecore::EObject> EReferenceImpl::copy() const
 /* Getter & Setter for attribute container */
 bool EReferenceImpl::isContainer() const 
 {
-	return m_container;
+	//generated from getterBody annotation
+	if(getEOpposite() != nullptr && getEOpposite()->isContainment()){
+	return true;
+}
+return false;
+	//end of body
 }
 
 /* Getter & Setter for attribute containment */

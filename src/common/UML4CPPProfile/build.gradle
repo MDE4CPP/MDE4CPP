@@ -48,7 +48,6 @@ task compileUML4CPPProfile() {
 	}
 	else
 	{
-		dependsOn 'generateUML4CPPProfile'
 		mustRunAfter = ["generateUML4CPPProfile"]
 		dependsOn 'src_gen:compileUML4CPPProfileSrc'
 	}
