@@ -36,6 +36,7 @@ task generateAll() {
 	group 'MDE4CPP'
 	description 'Generate all models without compilation of generated source code'
 
+	dependsOn 'generator:createAllGenerators'
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
 	dependsOn 'src:generateUMLProfiles'
