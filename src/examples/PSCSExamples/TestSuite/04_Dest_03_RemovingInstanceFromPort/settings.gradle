@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '04_Dest_03_RemovingInstanceFromPort'
+
+include ':model'
+include ':src_gen'
+include ':application'

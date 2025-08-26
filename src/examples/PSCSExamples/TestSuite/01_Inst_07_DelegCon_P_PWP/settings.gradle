@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '01_Inst_07_DelegCon_P_PWP'
+
+include ':model'
+include ':src_gen'
+include ':application'

@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '01_Inst_06_DelegCon_P_P'
+
+include ':model'
+include ':src_gen'
+include ':application'

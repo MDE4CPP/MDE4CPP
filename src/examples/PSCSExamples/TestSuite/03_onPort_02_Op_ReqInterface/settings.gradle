@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '03_onPort_02_Op_ReqInterface'
+
+include ':model'
+include ':src_gen'
+include ':application'

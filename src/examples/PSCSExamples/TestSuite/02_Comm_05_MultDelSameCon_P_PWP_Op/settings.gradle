@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '02_Comm_05_MultDelSameCon_P_PWP_Op'
+
+include ':model'
+include ':src_gen'
+include ':application'

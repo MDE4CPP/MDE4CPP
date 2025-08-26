@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '04_Dest_04_DestructionInstances'
+
+include ':model'
+include ':src_gen'
+include ':application'

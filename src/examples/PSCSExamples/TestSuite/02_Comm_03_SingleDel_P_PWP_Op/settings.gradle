@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '02_Comm_03_SingleDel_P_PWP_Op'
+
+include ':model'
+include ':src_gen'
+include ':application'

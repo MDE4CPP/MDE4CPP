@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+	}
+}
+
+rootProject.name = '01_Inst_05_DefaultValue_Structures'
+
+include ':model'
+include ':src_gen'
+include ':application'
