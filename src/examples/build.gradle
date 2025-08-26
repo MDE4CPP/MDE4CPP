@@ -27,6 +27,34 @@ description 'Example collection'
 
 import org.gradle.internal.os.OperatingSystem;
 
+def allPSCSTestSuiteModels = 
+[
+//	[{Model project directory}, {Model name}]
+	['./PSCSExamples/TestSuite/01_Inst_01_AssemCon_P_P/', 'AssemCon_P_P'],
+	['./PSCSExamples/TestSuite/01_Inst_02_AssemCon_PWP_P/', 'AssemCon_PWP_P'],
+	['./PSCSExamples/TestSuite/01_Inst_03_AssemCon_PWP_PWP/', 'AssemCon_PWP_PWP'],
+	['./PSCSExamples/TestSuite/01_Inst_04_DefaultValue_BasicTypes/', 'DefaultValue_BasicTypes'],
+	['./PSCSExamples/TestSuite/01_Inst_05_DefaultValue_Structures/', 'DefaultValue_Structures'],
+	['./PSCSExamples/TestSuite/01_Inst_06_DelegCon_P_P/', 'DelegCon_P_P'],
+	['./PSCSExamples/TestSuite/01_Inst_07_DelegCon_P_PWP/', 'DelegCon_P_PWP'],
+	['./PSCSExamples/TestSuite/01_Inst_08_Hierarchy/' , 'Hierarchy'],
+	['./PSCSExamples/TestSuite/02_Comm_01_LossOfMessages_Op/', 'LossOfMessages_Op'],
+	['./PSCSExamples/TestSuite/02_Comm_02_SingleDel_P_P_Op/', 'SingleDel_P_P_Op'],
+	['./PSCSExamples/TestSuite/02_Comm_03_SingleDel_P_PWP_Op/', 'SingleDel_P_PWP_Op'],
+	['./PSCSExamples/TestSuite/02_Comm_04_MultDelSameCon_P_P_Op/', 'MultDelSameCon_P_P_Op'],
+	['./PSCSExamples/TestSuite/02_Comm_05_MultDelSameCon_P_PWP_Op/', 'MultDelSameCon_P_PWP_Op'],
+	['./PSCSExamples/TestSuite/02_Comm_06_MultDelMultCon_P_P_Op/', 'MultDelMultCon_P_P_Op'],
+	['./PSCSExamples/TestSuite/02_Comm_07_MultDelMultCon_P_PWP_Op/', 'MultDelMultCon_P_PWP_Op'],
+	['./PSCSExamples/TestSuite/03_onPort_01_Op_ProvInterface/', 'Op_ProvInterface'],
+	['./PSCSExamples/TestSuite/03_onPort_02_Op_ReqInterface/', 'Op_ReqInterface'],
+	['./PSCSExamples/TestSuite/03_onPort_03_Op_Prov_Req_Interface/', 'Op_Prov_Req_Interface'],
+	['./PSCSExamples/TestSuite/03_onPort_04_Op_Req_DelegChain/', 'Op_Req_DelegChain'],
+	['./PSCSExamples/TestSuite/04_Dest_01_RecursiveDestruction/', 'RecursiveDestruction'],
+	['./PSCSExamples/TestSuite/04_Dest_02_RemovingInstanceFromPart/', 'RemovingInstanceFromPart'],
+	['./PSCSExamples/TestSuite/04_Dest_03_RemovingInstanceFromPort/', 'RemovingInstanceFromPort'],
+	['./PSCSExamples/TestSuite/04_Dest_04_DestructionInstances/', 'DestructionInstances']
+]
+
 task generateAllExamples() {
 	group 'Examples'
 	description 'generate all examples'	
@@ -73,8 +101,8 @@ task generateAllExamples() {
 		//}
 	
 		examples.each { String path -> 
-			def buildModelFile = file(path+'model'+ File.separator +'build.gradle')
-			def buildSrcFile = file(path+'src_gen'+ File.separator +'build.gradle')
+			def buildModelFile = file(path + File.separator +'build.gradle')
+			def buildSrcFile = file(path+'../src_gen'+ File.separator +'build.gradle')
 			println "\n\n----- Generating example: $buildSrcFile\n"
 			if(!(buildFile.exists() && buildSrcFile.exists()))
 			{
@@ -218,8 +246,8 @@ task generateEcoreTestSuite() {
 			,'./ecoreExamples/TestSuite/copyTest/model'
 			,'./ecoreExamples/TestSuite/templateTest/model'
 		].each { path ->
-			def buildModelFile = file(path+'model'+ File.separator +'build.gradle')
-			def buildSrcFile = file(path+'src_gen'+ File.separator +'build.gradle')
+			def buildModelFile = file(path + File.separator +'build.gradle')
+			def buildSrcFile = file(path+'../src_gen'+ File.separator +'build.gradle')
 			if(!(buildFile.exists() && buildSrcFile.exists()))
 			{
 				exec
@@ -256,8 +284,8 @@ task generateFUMLTestSuite() {
 			'./fUMLExamples/TestSuite/TestModelImport/model/',
 			'./fUMLExamples/TestSuite/TestModelMain/model/'
 		].each { path ->
-			def buildModelFile = file(path+'model'+ File.separator +'build.gradle')
-			def buildSrcFile = file(path+'src_gen'+ File.separator +'build.gradle')
+			def buildModelFile = file(path + File.separator +'build.gradle')
+			def buildSrcFile = file(path+'../src_gen'+ File.separator +'build.gradle')
 			if(!(buildFile.exists() && buildSrcFile.exists()))
 			{
 				exec
@@ -350,12 +378,6 @@ task buildOCLTestSuite() {
 	//examples.add('./oclExamples/TestSuite/oclUmlModelExample/model')	
 }
 
-/*
-TODO
-These tasks are currently not executable since the amount of produced tasks (around 100)
-causes gradlew to crash
-*/
-
 task generatePSCSTestSuite() {
 	group 'Tests'
 	description 'generate test suite for PSCS'	
@@ -373,34 +395,26 @@ task generatePSCSTestSuite() {
 			prefix = ''
 		}
 	
-		[  	'./PSCSExamples/TestSuite/01_Inst_01_AssemblyConnectors_P_P/model/',
-			'./PSCSExamples/TestSuite/01_Inst_02_AssemblyConnectors_PWP_P/model/',
-			'./PSCSExamples/TestSuite/01_Inst_03_AssemblyConnectors_PWP_PWP/model/',
-			'./PSCSExamples/TestSuite/01_Inst_04_DefaultPrimitives/model/',
-			'./PSCSExamples/TestSuite/01_Inst_05_DefaultStructures/model/',
-			'./PSCSExamples/TestSuite/01_Inst_06_DelegationPort_P/model/',
-			'./PSCSExamples/TestSuite/01_Inst_07_DelegationPort_PWP/model/',
-			'./PSCSExamples/TestSuite/01_Inst_08_Hierarchy/model/',
-			'./PSCSExamples/TestSuite/02_Comm_01_MessageLoss/model/',
-			'./PSCSExamples/TestSuite/02_Comm_02_SingleDeleg_P_P_Op/model/',
-			'./PSCSExamples/TestSuite/02_Comm_03_SingleDeleg_PWP_P_Op/model/',
-			'./PSCSExamples/TestSuite/02_Comm_04_MultDelegSameCon_P_P_Op/model/',
-			'./PSCSExamples/TestSuite/02_Comm_05_MultDelegSameCon_PWP_P_Op/model/',
-			'./PSCSExamples/TestSuite/02_Comm_06_MultDelegMultCon_P_P_Op/model/',
-			'./PSCSExamples/TestSuite/02_Comm_07_MultDelegMultCon_PWP_P_Op/model/',
-			'./PSCSExamples/TestSuite/03_onPort_01_Op_ProvInterface/model/',
-			'./PSCSExamples/TestSuite/03_onPort_02_Op_ReqInterface/model/',
-			'./PSCSExamples/TestSuite/03_onPort_03_Op_Prov_Req_Interface/model/',
-			'./PSCSExamples/TestSuite/03_onPort_04_Op_Req_Deleg/model/',
-			'./PSCSExamples/TestSuite/04_Dest_01_RecursiveDestruction/model/',
-			'./PSCSExamples/TestSuite/04_Dest_02_DestructionPart/model/',
-			'./PSCSExamples/TestSuite/04_Dest_03_DestructionPort/model/',
-			'./PSCSExamples/TestSuite/04_Dest_04_DestructionInstances/model/'
-		].each { path ->
-			exec
+		allPSCSTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
 			{
-				workingDir = file("${path}")
-				commandLine = [tool, command, prefix + 'generate']
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
 			}
 		} 		
     }
@@ -408,62 +422,57 @@ task generatePSCSTestSuite() {
 
 task compilePSCSTestSuite() {
 	group 'Tests'
-	description 'compile applications for PSCS test suite'
-	
-	// PSCS tests
-	dependsOn getRootProject().getTasksByName('compileApplicationForAssemblyConnectors_P_P', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForAssemblyConnectors_PWP_P', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForAssemblyConnectors_PWP_PWP', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForDefaultPrimitives', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForDefaultStructures', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForDelegationPort_P', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForDelegationPort_PWP', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForHierarchy', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForMessageLoss', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForSingleDeleg_P_P_Op', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForSingleDeleg_PWP_P_Op', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegSameCon_P_P_Op', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegSameCon_PWP_P_Op', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegMultCon_P_P_Op', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegMultCon_PWP_P_Op', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForOp_ProvInterface', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForOp_ReqInterface', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForOp_Prov_Req_Interface', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForOp_Req_Deleg', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForRecursiveDestruction', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForDestructionPart', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForDestructionPort', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForDestructionInstances', true)
+	description 'compile applications for PSCS test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSCSTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
 }
 
-task buildPSCSTestSuite() {
+task buildPSCSTestSuite() 
+{
 	group 'Tests'
 	description 'generate and compile applications for PSCS test suite'
 	
-	// PSCS tests
-	dependsOn getRootProject().getTasksByName('buildAssemblyConnectors_P_P', true)
-	dependsOn getRootProject().getTasksByName('buildAssemblyConnectors_PWP_P', true)
-	dependsOn getRootProject().getTasksByName('buildAssemblyConnectors_PWP_PWP', true)
-	dependsOn getRootProject().getTasksByName('buildDefaultPrimitives', true)
-	dependsOn getRootProject().getTasksByName('buildDefaultStructures', true)
-	dependsOn getRootProject().getTasksByName('buildDelegationPort_P', true)
-	dependsOn getRootProject().getTasksByName('buildDelegationPort_PWP', true)
-	dependsOn getRootProject().getTasksByName('buildHierarchy', true)
-	dependsOn getRootProject().getTasksByName('buildMessageLoss', true)
-	dependsOn getRootProject().getTasksByName('buildSingleDeleg_P_P_Op', true)
-	dependsOn getRootProject().getTasksByName('buildSingleDeleg_PWP_P_Op', true)
-	dependsOn getRootProject().getTasksByName('buildMultDelegSameCon_P_P_Op', true)
-	dependsOn getRootProject().getTasksByName('buildMultDelegSameCon_PWP_P_Op', true)
-	dependsOn getRootProject().getTasksByName('buildMultDelegMultCon_P_P_Op', true)
-	dependsOn getRootProject().getTasksByName('buildMultDelegMultCon_PWP_P_Op', true)
-	dependsOn getRootProject().getTasksByName('buildOp_ProvInterface', true)
-	dependsOn getRootProject().getTasksByName('buildOp_ReqInterface', true)
-	dependsOn getRootProject().getTasksByName('buildOp_Prov_Req_Interface', true)
-	dependsOn getRootProject().getTasksByName('buildOp_Req_Deleg', true)
-	dependsOn getRootProject().getTasksByName('buildRecursiveDestruction', true)
-	dependsOn getRootProject().getTasksByName('buildDestructionPart', true)
-	dependsOn getRootProject().getTasksByName('buildDestructionPort', true)
-	dependsOn getRootProject().getTasksByName('buildDestructionInstances', true)
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSCSTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
 }
 
 
