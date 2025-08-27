@@ -202,11 +202,11 @@ m_[redefinedEAttribute.name/] = this->[if(anEAttribute.hasGetter())][anEAttribut
 [/template]
 
 [template private _generateRedefinedAttributeSetterImplementation(redefinedEAttribute : EAttribute, anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly()))) post(trim())]
-void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] _[anEAttribute.name/])
+void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] _[redefinedEAttribute.name/])
 {
-	std::shared_ptr<[anEAttribute.eGenericType.generateCppType(true)/]> _[anEAttribute.name/] = std::dynamic_pointer_cast<[anEAttribute.eGenericType.generateCppType(true)/]>(_[redefinedEAttribute.name/]);
-	if(_[anEAttribute.name/])
-	{
+	[anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/] = [if(anEAttribute.isSharedPtr())]std::dynamic_pointer_cast<[anEAttribute.eGenericType.generateCppType(true)/]>[else][anEAttribute.eGenericType.generateCppType(true)/][/if](_[redefinedEAttribute.name/]);
+	[if(anEAttribute.isSharedPtr())]if(_[anEAttribute.name/])
+	{[/if]
 		m_[anEAttribute.name/] = _[anEAttribute.name/];
 
 		[if (not anEAttribute.getDirectlyRedefinedElements()->select(redefines(redefinedEAttribute.oclAsType(EObject)))->isEmpty())]
@@ -222,11 +222,11 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 		//additional setter call for redefined reference [redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]
 		[redefinedEAttribute.eContainingClass.transformType()/]Impl::set[redefinedEAttribute.name.toUpperFirst()/](_[redefinedEAttribute.name/]);
 		[/if]
-	}
+	[if(anEAttribute.isSharedPtr())]}
 	else
 	{
 		std::cerr<<"['['/][anEAttribute.eContainingClass.name.toUpperFirst()/]::[redefinedEAttribute.SetterName()/][']'/] : Could not set node because provided node was not of type '[anEAttribute.eGenericType.generateCppType(true)/]'"<<std::endl;
-	}
+	}[/if]
 }
 [/template]
 
