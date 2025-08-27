@@ -319,7 +319,8 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 [anEReference.getClassMemberName()/]->setOrdered([anEReference.ordered.toString()/]);
 [anEReference.getClassMemberName()/]->setContainment([anEReference.containment.toString()/]);
 [anEReference.getClassMemberName()/]->setResolveProxies([anEReference.resolveProxies.toString()/]);
-[anEReference.getClassMemberName()/]->setDefaultValueLiteral("[anEReference.defaultValueLiteral/]");	
+[anEReference.getClassMemberName()/]->setDefaultValueLiteral("[anEReference.defaultValueLiteral/]");
+[comment if toDo consider DoNot generate for opposite/]
 [if not anEReference.eOpposite.oclIsUndefined()]						
 [anEReference.getClassMemberName()/]->setEOpposite([anEReference.eOpposite.eContainingClass.getPackage_eInstance()/]->[anEReference.eOpposite.packageGetter()/]);
 [/if]
