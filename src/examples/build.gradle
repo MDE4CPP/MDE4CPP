@@ -33,9 +33,15 @@ import org.gradle.internal.os.OperatingSystem;
 
 task generateAllExamples() {
 	group 'Examples'
+	description 'generate All model examples'
 	
-	dependsOn 'generateEcoreModelExamples'
-	dependsOn 'generateUMLModelExamples'
+	dependsOn getRootProject().getTasksByName('generateEcoreModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generateUMLModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generatefUMLModelExamples', true)
+//	dependsOn getRootProject().getTasksByName('generatePSCSModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generatePSSMModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generateOCLModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generateStradegiesModelExamples', true)
 	// ToDo ...
 }
 
@@ -43,14 +49,24 @@ task compileAllExamples() {
 	group 'Examples'
 	description 'compile applications for all examples without generating the models'
 	
-	dependsOn 'compileCommonExamples'
+	dependsOn getRootProject().getTasksByName('compileCommonExamples', true)
 
-	dependsOn 'compileEcoreExamples'
-	dependsOn 'compileEcoreModelExamples'
+	dependsOn getRootProject().getTasksByName('compileEcoreExamples', true)
+	dependsOn getRootProject().getTasksByName('compileEcoreModelExamples', true)
 
-	dependsOn 'compileUMLExamples'
-	dependsOn 'compileUMLModelExamples'
+	dependsOn getRootProject().getTasksByName('compileUMLExamples', true)
+	dependsOn getRootProject().getTasksByName('compileUMLModelExamples', true)
+	
+	dependsOn getRootProject().getTasksByName('compilefUMLModelExamples', true)
+	
+//	dependsOn getRootProject().getTasksByName('compilePSCSModelExamples', true)
 
+	dependsOn getRootProject().getTasksByName('compilePSSMModelExamples', true)
+	
+	dependsOn getRootProject().getTasksByName('compileOCLExamples', true)
+	dependsOn getRootProject().getTasksByName('compileOCLModelExamples', true)
+
+	dependsOn getRootProject().getTasksByName('compileStradegiesModelExamples', true)
 }
 
 task buildAllExamples(){
@@ -88,8 +104,11 @@ task generateAllTests() {
 	
 	dependsOn getRootProject().getTasksByName('generateEcoreTestSuite', true)
 	dependsOn getRootProject().getTasksByName('generateUMLTestSuite', true)
-	dependsOn 'generateFUMLTestSuite'
+	dependsOn getRootProject().getTasksByName('generatefUMLTestSuite', true)
 	dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generatePSSMTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generateOCLTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generateStrategiesTestSuite', true)
 }
 
 task compileAllTests() {
@@ -98,8 +117,11 @@ task compileAllTests() {
 	
 	dependsOn getRootProject().getTasksByName('compileEcoreTestSuite',true)
 	dependsOn getRootProject().getTasksByName('compileUMLTestSuite',true)
-	dependsOn 'compileFUMLTestSuite'
+	dependsOn getRootProject().getTasksByName('compilefUMLTestSuite',true)
 	dependsOn getRootProject().getTasksByName('compilePSCSTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compilePSSMTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compileOCLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compileStrategiesTestSuite', true)
 }
 
 task buildAllTests() {
@@ -107,149 +129,16 @@ task buildAllTests() {
 	description 'generate and compile applictions for all test suites (currently only fUML test suite can be built automatically)'
 	dependsOn getRootProject().getTasksByName('buildEcoreTestSuite',true)
 	dependsOn getRootProject().getTasksByName('buildUMLTestSuite',true)
-//	dependsOn 'buildFUMLTestSuite'
+	dependsOn getRootProject().getTasksByName('buildfUMLTestSuite',true)
 	dependsOn getRootProject().getTasksByName('buildPSCSTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildPSSMTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildOCLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildStrategiesTestSuite',true)
 }
 
-//-----------  old ------------
-
-
-/*
-
-task generateAllExamples() {
-	group 'Examples'
-	description 'generate all examples'	
-	doLast {	
-		def generate_file = './generate'
-		def generate_interp = '/bin/sh' 
-		def generate_interp_option = '-c'
-		
-		if(OperatingSystem.current().isWindows()){
-			generate_file = 'generate.bat'
-			generate_interp = 'cmd'
-			generate_interp_option = '/C'
-		}
-		
-		def examples = []
-		// common examples --------------------------------
-					
-		// ecore examples ---------------------------------
-	
-		examples.add('./ecoreExamples/TestSuite/eInvokeTest/')
-		//examples.add('./ecoreExamples/TestSuite/templateTest/')
-
-		// UML examples -----------------------------------
-			//UMLExamples/TestSuite/copyTestUML
-			examples.add('./UMLExamples/TestSuite/copyTestUML/')
-			//UMLExamples/UMLModelExample
-			examples.add('./UMLExamples/UMLModelExample/')
-	
-	
-		// fUML examples ----------------------------------
-		examples.add('./fUMLExamples/Calculator/')
-		examples.add('./fUMLExamples/ThreePhilosophers/')
-	
-		// ocl examples ----------------------------------- toDo update OCL Examples
-		//examples.add('./oclExamples/oclEcoreModelExample/')
-		//examples.add('./oclExamples/oclQueryEcoreModelExample/')
-		//examples.add('./oclExamples/Connect4/')
-		//examples.add('./oclExamples/oclFumlModelExample/')
-	
-		// PSCS examples ----------------------------------
-		//if(OperatingSystem.current().isWindows()){
-		//	examples.add('./PSCSExamples/Ampelsteuerung_Example/model')
-		//}
-	
-		examples.each { String path -> 
-			def buildModelFile = file(path + File.separator +'build.gradle')
-			def buildSrcFile = file(path+'../src_gen'+ File.separator +'build.gradle')
-			println "\n\n----- Generating example: $buildSrcFile\n"
-			if(!(buildFile.exists() && buildSrcFile.exists()))
-			{
-				exec {
-					println "\n\n----- Generating example: $path\n"
-					workingDir = file("${path}"+'model'+ File.separator)
-					commandLine = [
-						generate_interp, 
-						generate_interp_option,
-						generate_file
-					]
-				}
-			}		
-		}
-	}
-}
-
-task compileAllExamples() {
-	group 'Examples'
-	description 'compile applications for all examples without generating the models'
-
-	// common examples ------------------------------------
-		//commonExamples/persistenceExample
-		dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
-		//commonExamples/pluginFrameworkExample
-		dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
-	
-	// ecore examples -------------------------------------
-		//ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion
-		dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnion', true)
-		//ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth
-		dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnionDepth', true)
-		//ecoreExamples/TestSuite/copyTest
-		dependsOn getRootProject().getTasksByName('compileApplicationForCopyTest', true)
-		//ecoreExamples/TestSuite/eInvokeTest
-		dependsOn getRootProject().getTasksByName('compileApplicationForEInvokeTest', true)
-		//ecoreExamples/ecoreExample
-		dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
-		//ecoreExamples/ecoreModelExample/application
-		dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_ecore', true) 
-		//ecoreExamples/TestSuite/templateTest
-		//dependsOn getRootProject().getTasksByName('compileApplicationForTemplateTest', true)
-
-	// UML examples ---------------------------------------
-		//UMLExamples/TestSuite/copyTestUML
-		dependsOn getRootProject().getTasksByName('compileApplicationForCopyTestUML', true)
-		//UMLExamples/UMLExample
-		dependsOn getRootProject().getTasksByName('compileUMLExample', true)
-		//UMLExamples/UMLModelExample
-		dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_uml', true)
-	
-	// fUML examples --------------------------------------
-		//fUMLExamples/Calculator
-		dependsOn getRootProject().getTasksByName('compileApplicationForCalcModel', true)
-		//fUMLExamples/ThreePhilosophers
-		dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
-	
-	// OCL examples --------------------------------------- //Todo fix OCL-Examples
-		//oclExamples/oclEcoreModelExample
-		//dependsOn getRootProject().getTasksByName('compileLibrary_ecore', true)
-		//dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_ecore',true)
-		//oclExamples/oclQueryEcoreModelExample
-		//dependsOn getRootProject().getTasksByName('compileLibrary_QueryEcore', true)
-		//dependsOn getRootProject().getTasksByName('compileApplicationForLibrary_QueryEcore', true)
-		//oclExamples/Connect4
-		//oclExamples/applications/oclUmlExample
-		// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
-
-		//oclExamples/oclModelExample/oclFumlModelExample
-		// dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
-		
-		//examples.add('./oclExamples/oclModelExample/oclFumlModelExample/model')
-
-		// PSCS examples ----------------------------------
-		
-	
-	// PSCS examples --------------------------------------
-		//if(OperatingSystem.current().isWindows()){
-		//	dependsOn getRootProject().getTasksByName('compileApplicationForAmpelsteuerung_Example', true)
-		//}
-
-}
-*/
-
-// ----------------------  old! ---------------
 
 //########################   ExampleBenchmarks   ########################
+
 
 def allExampleBenchmarks = 
 [
@@ -820,55 +709,37 @@ task buildUMLTestSuite()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //########################   fUML   ########################
 
 
-task generateFUMLTestSuite() {
-	group 'Tests'
-	description 'generate test suite for fUML'	
-	doLast {	
+def allfUMLModelExamples = 
+[
+//	[{Model project directory}, {Model name}]
+	 ['./fUMLExamples/Calculator/', 'Calculator']
+	,['./fUMLExamples/ThreePhilosophers/', 'ThreePhilosophers']
+]
+
+def allfUMLTestSuiteModels =
+[
+//	[{Model project directory}, {Model name}]
+	  ['./fUMLExamples/TestSuite/ActionTest', 'ActionTest']
+	 ,['./fUMLExamples/TestSuite/ForkNodeTest', 'ForkNodeTest']
+	 ,['./fUMLExamples/TestSuite/JoinNodeTest', 'JoinNodeTest']
+	 ,['./fUMLExamples/TestSuite/MultiplePins', 'JoinNodeTest']
+	 ,['./fUMLExamples/TestSuite/RegionTest', 'RegionTest']
+	 ,['./fUMLExamples/TestSuite/SimpleBehaviorTest', 'SimpleBehaviorTest']
+	 ,['./fUMLExamples/TestSuite/TargetPinTest', 'TargetPinTest']
+	 ,['./fUMLExamples/TestSuite/TestModelImport', 'TestModelImport']
+	 ,['./fUMLExamples/TestSuite/TestModelMain', 'TestModelMain']
+]
+
+task generatefUMLModelExamples() {
+	group 'Examples'
+	description 'generate fUML Model Examples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
 		def tool = '/bin/sh'
 		def command = '-c'
 		def prefix = './'
@@ -879,92 +750,430 @@ task generateFUMLTestSuite() {
 			prefix = ''
 		}
 	
-		[  	'./fUMLExamples/TestSuite/ActionTest/model/',
-			'./fUMLExamples/TestSuite/ForkNodeTest/model/',
-			'./fUMLExamples/TestSuite/JoinNodeTest/model/',	
-			'./fUMLExamples/TestSuite/MultiplePins/model/',
-			'./fUMLExamples/TestSuite/RegionTest/model/',
-			'./fUMLExamples/TestSuite/SimpleBehaviorTest/model/',
-			'./fUMLExamples/TestSuite/TargetPinTest/model/',
-			'./fUMLExamples/TestSuite/TestModelImport/model/',
-			'./fUMLExamples/TestSuite/TestModelMain/model/'
-		].each { path ->
-			def buildModelFile = file(path + File.separator +'build.gradle')
-			def buildSrcFile = file(path+'../src_gen'+ File.separator +'build.gradle')
-			if(!(buildFile.exists() && buildSrcFile.exists()))
+		allfUMLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
 			{
 				exec
 				{
-					workingDir = file("${path}"+ File.separator)
+					workingDir = file("${model[0]}/model")
 					commandLine = [tool, command, prefix + 'generate']
 				}
 			}
-		}
-	} 		
-}
-	
-task compileFUMLTestSuite() {
-	group 'Tests'
-	description 'compile applications for fUML test suite'
-	
-	// fUML tests
-	dependsOn getRootProject().getTasksByName('compileApplicationForActionTest', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForForkNodeTest', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForJoinNodeTest', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForFUMLMultiplePins', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForRegionTest', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForSimpleBehaviorTest', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForTargetPinTest', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForTestModelMain', true)	
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
 }
 
-task buildFUMLTestSuite() {
-	group 'Tests'
-	description 'generate and compile applications for fUML test suite'
+task compilefUMLModelExamples() {
+	group 'Examples'
+	description 'compile applications for fUML Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allfUMLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildfUMLModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for fUML Model Examples'
 	
-	// fUML tests
-	dependsOn getRootProject().getTasksByName('buildActionTest', true)
-	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
-	dependsOn getRootProject().getTasksByName('buildJoinNodeTest', true)
-	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
-	dependsOn getRootProject().getTasksByName('buildRegionTest', true)
-	dependsOn getRootProject().getTasksByName('buildSimpleBehaviorTest', true)
-	dependsOn getRootProject().getTasksByName('buildTargetPinTest', true)
-	dependsOn getRootProject().getTasksByName('buildTestModelMain', true)	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allfUMLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
+
+task generatefUMLTestSuite() {
+	group 'Tests'
+	description 'generate test suite for fUMLExamples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allfUMLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
+}
+
+task compilefUMLTestSuite() {
+	group 'Tests'
+	description 'compile applications for fUMLExamples test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allfUMLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildfUMLTestSuite() 
+{
+	group 'Tests'
+	description 'generate and compile applications for fUMLExamples test suite'
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allfUMLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
+
+
+//########################   OCL   ########################
+
+
+def allOCLExamples = 
+[
+//	[{project directory}, {task name}]
+	['./oclExamples/oclExample/', 'oclExample']
+]
+
+def allOCLModelExamples = 
+[
+//	[{Model project directory}, {Model name}]
+	['./oclExamples/Connect4/', 'Connect4']
+	,['./oclExamples/oclEcoreModelExample/', 'oclEcoreModelExample']
+	,['./oclExamples/oclQueryEcoreModelExample/', 'oclQueryEcoreModelExample']
+]
+
+def allOCLTestSuiteModels = 
+[
+//	[{Model project directory}, {Model name}]
+	['./PSCSExamples/TestSuite/oclUmlModelExample/', 'oclUmlModelExample']
+]
+
+task compileOCLExamples() {
+	group 'Examples'
+	description 'compile OCL examples.'	
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allOCLExamples.each { taskVar ->
+		// taskVar[0] = task project root directoy, taskVar[1] = task name
+			exec
+			{
+				workingDir = file("${taskVar[0]}")
+				commandLine = [tool, command, prefix + 'gradlew ' + taskVar[1]]
+			}
+		}
+	}
+}
+
+task generateOCLModelExamples() {
+	group 'Examples'
+	description 'generate OCL Model Examples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allOCLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
+}
+
+task compileOCLModelExamples() {
+	group 'Examples'
+	description 'compile applications for OCL Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allOCLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildOCLModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for OCL Model Examples'
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allOCLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
+
+task generateOCLTestSuite() {
+	group 'Tests'
+	description 'generate test suite for OCL'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allOCLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
 }
 
 task compileOCLTestSuite() {
 	group 'Tests'
-	description 'compile applications for OCL test suite'
-	
-	dependsOn getRootProject().getTasksByName('compileSimpleOCLExample', true)
-	//oclExamples/applications/oclUmlExample
-	// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
-	// dependsOn getRootProject().getTasksByName('compileApplicationForOCLModelExample', true)
+	description 'compile applications for OCL test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allOCLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
 }
 
-task buildOCLTestSuite() {
+task buildOCLTestSuite() 
+{
 	group 'Tests'
-	description 'generate and compile applications for fUML test suite'
+	description 'generate and compile applications for OCL test suite'
 	
-	//examples.add('./oclExamples/TestSuite/oclUmlModelExample/model')	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allOCLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //########################   PSCS   ########################
-
 
 
 def allPSCSTestSuiteModels = 
@@ -1084,6 +1293,433 @@ task buildPSCSTestSuite()
 		}
 		
 		allPSCSTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
+
+
+//########################   PSSM   ########################
+
+
+def allPSSMModelExamples = 
+[
+//	[{Model project directory}, {Model name}]	 
+	 ['./PSSMExamples/PSSM_ComplexBehavior/', 'PSSM_ComplexBehavior']
+	,['./PSSMExamples/PSSM_Composite/', 'PSSM_Composite']	
+	,['./PSSMExamples/PSSM_HelloWorld/', 'PSSM_HelloWorld']
+	,['./PSSMExamples/PSSM_InternalTransition/', 'PSSM_InternalTransition']	
+	,['./PSSMExamples/PSSM_Triggers/', 'PSSM_Triggers']
+	,['./PSSMExamples/VendingMachine/', 'VendingMachine']
+]
+
+def allPSSMTestSuiteModels =
+[
+//	[{Model project directory}, {Model name}]
+	 ['./PSSMExamples/TestSuite/Test_Behavior_001', 'Test_Behavior_001']
+]
+
+task generatePSSMModelExamples() {
+	group 'Examples'
+	description 'generate PSSM Model Examples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allPSSMModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
+}
+
+task compilePSSMModelExamples() {
+	group 'Examples'
+	description 'compile applications for PSSM Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSSMModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildPSSMModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for PSSM Model Examples'
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSSMModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
+
+task generatePSSMTestSuite() {
+	group 'Tests'
+	description 'generate test suite for PSSMExamples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allPSSMTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
+}
+
+task compilePSSMTestSuite() {
+	group 'Tests'
+	description 'compile applications for PSSMExamples test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSSMTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildPSSMTestSuite() 
+{
+	group 'Tests'
+	description 'generate and compile applications for PSSMExamples test suite'
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSSMTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
+
+
+//########################   strategiesExamples   ########################
+
+
+def allStrategiesExamplesModelExamples = 
+[
+//	[{Model project directory}, {Model name}]	 
+	 ['./strategiesExamples/fUMLStrategiesExample/', 'fUMLStrategiesExample']
+	,['./strategiesExamples/PSCSRandomizedRequestPropagation/', 'PSCSRandomizedRequestPropagation']		
+	,['./strategiesExamples/PSCSWeightedRequestPropagation/', 'PSCSWeightedRequestPropagation']
+]
+
+def allStrategiesExamplesTestSuiteModels =
+[
+//	[{Model project directory}, {Model name}]
+//	 ['./strategiesExamples/TestSuite/Test_Behavior_001', 'Test_Behavior_001']
+]
+
+task generateStrategiesExamplesModelExamples() {
+	group 'Examples'
+	description 'generate strategiesExamples Model Examples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allStrategiesExamplesModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
+}
+
+task compileStrategiesExamplesModelExamples() {
+	group 'Examples'
+	description 'compile applications for strategiesExamples Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allStrategiesExamplesModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildStrategiesExamplesModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for strategiesExamples Model Examples'
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allStrategiesExamplesModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
+
+task generateStrategiesExamplesTestSuite() {
+	group 'Tests'
+	description 'generate test suite for strategiesExamples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allStrategiesExamplesTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
+}
+
+task compileStrategiesExamplesTestSuite() {
+	group 'Tests'
+	description 'compile applications for strategiesExamples test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allStrategiesExamplesTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildStrategiesExamplesTestSuite() 
+{
+	group 'Tests'
+	description 'generate and compile applications for strategiesExamples test suite'
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allStrategiesExamplesTestSuiteModels.each { model ->
 		// model[0] = model project root directoy, model[1] = model name
 			exec
 			{
