@@ -505,11 +505,11 @@ bool [aSignal.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, cons
 			// [aProperty.name/] is unique
 			if(!(this->[aProperty.getterName()/]()->includes(valueToAdd)))
 			{
-				this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
+				this->[aProperty.getterName()/]()->add(valueToAdd[if (not( (aProperty.isSubset()) or (aProperty.isUnion())) )], insertAt[/if]);
 				return true;
 			}
 			[else]
-			this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
+			this->[aProperty.getterName()/]()->add(valueToAdd[if (not( (aProperty.isSubset()) or (aProperty.isUnion())) )], insertAt[/if]);
 			return true;
 			[/if]
 		}
