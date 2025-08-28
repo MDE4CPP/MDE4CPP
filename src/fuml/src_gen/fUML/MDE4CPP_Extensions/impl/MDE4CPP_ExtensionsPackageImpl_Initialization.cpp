@@ -85,7 +85,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 	m_fUML_Link_Attribute_linkEnds->setOrdered(true);
 	m_fUML_Link_Attribute_linkEnds->setContainment(true);
 	m_fUML_Link_Attribute_linkEnds->setResolveProxies(true);
-	m_fUML_Link_Attribute_linkEnds->setDefaultValueLiteral("");	
+	m_fUML_Link_Attribute_linkEnds->setDefaultValueLiteral("");
 	
 	m_fUML_Link_Attribute_linkEnds->_setID(FUML_LINK_ATTRIBUTE_LINKENDS);
 	m_fUML_Link_Attribute_type->setName("type");
@@ -101,7 +101,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkContent()
 	m_fUML_Link_Attribute_type->setOrdered(true);
 	m_fUML_Link_Attribute_type->setContainment(false);
 	m_fUML_Link_Attribute_type->setResolveProxies(true);
-	m_fUML_Link_Attribute_type->setDefaultValueLiteral("");	
+	m_fUML_Link_Attribute_type->setDefaultValueLiteral("");
 	
 	m_fUML_Link_Attribute_type->_setID(FUML_LINK_ATTRIBUTE_TYPE);
 	
@@ -346,7 +346,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkEndContent()
 	m_fUML_LinkEnd_Attribute_end->setOrdered(true);
 	m_fUML_LinkEnd_Attribute_end->setContainment(false);
 	m_fUML_LinkEnd_Attribute_end->setResolveProxies(true);
-	m_fUML_LinkEnd_Attribute_end->setDefaultValueLiteral("");	
+	m_fUML_LinkEnd_Attribute_end->setDefaultValueLiteral("");
 	
 	m_fUML_LinkEnd_Attribute_end->_setID(FUML_LINKEND_ATTRIBUTE_END);
 	m_fUML_LinkEnd_Attribute_endValue->setName("endValue");
@@ -362,7 +362,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_LinkEndContent()
 	m_fUML_LinkEnd_Attribute_endValue->setOrdered(true);
 	m_fUML_LinkEnd_Attribute_endValue->setContainment(false);
 	m_fUML_LinkEnd_Attribute_endValue->setResolveProxies(true);
-	m_fUML_LinkEnd_Attribute_endValue->setDefaultValueLiteral("");	
+	m_fUML_LinkEnd_Attribute_endValue->setDefaultValueLiteral("");
 	
 	m_fUML_LinkEnd_Attribute_endValue->_setID(FUML_LINKEND_ATTRIBUTE_ENDVALUE);
 	
@@ -400,7 +400,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 	m_fUML_Object_Attribute_links->setOrdered(true);
 	m_fUML_Object_Attribute_links->setContainment(false);
 	m_fUML_Object_Attribute_links->setResolveProxies(true);
-	m_fUML_Object_Attribute_links->setDefaultValueLiteral("");	
+	m_fUML_Object_Attribute_links->setDefaultValueLiteral("");
 	
 	m_fUML_Object_Attribute_links->_setID(FUML_OBJECT_ATTRIBUTE_LINKS);
 	m_fUML_Object_Attribute_locus->setName("locus");
@@ -416,7 +416,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 	m_fUML_Object_Attribute_locus->setOrdered(false);
 	m_fUML_Object_Attribute_locus->setContainment(false);
 	m_fUML_Object_Attribute_locus->setResolveProxies(true);
-	m_fUML_Object_Attribute_locus->setDefaultValueLiteral("");	
+	m_fUML_Object_Attribute_locus->setDefaultValueLiteral("");
 	
 	m_fUML_Object_Attribute_locus->_setID(FUML_OBJECT_ATTRIBUTE_LOCUS);
 	m_fUML_Object_Attribute_objectActivation->setName("objectActivation");
@@ -432,7 +432,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 	m_fUML_Object_Attribute_objectActivation->setOrdered(false);
 	m_fUML_Object_Attribute_objectActivation->setContainment(true);
 	m_fUML_Object_Attribute_objectActivation->setResolveProxies(true);
-	m_fUML_Object_Attribute_objectActivation->setDefaultValueLiteral("");	
+	m_fUML_Object_Attribute_objectActivation->setDefaultValueLiteral("");
 	
 	m_fUML_Object_Attribute_objectActivation->_setID(FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION);
 	

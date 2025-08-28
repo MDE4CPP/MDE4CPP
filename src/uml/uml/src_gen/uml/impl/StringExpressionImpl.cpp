@@ -328,7 +328,7 @@ void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "uml::StringExpression";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

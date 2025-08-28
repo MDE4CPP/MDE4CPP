@@ -360,14 +360,14 @@ void IfExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ocl::Expressions/]"))
 				{
 					typeName = "ocl::Expressions::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getCondition()); 
+			loadHandler->handleChild(this->getCondition());
 
 			return; 
 		}
@@ -380,14 +380,14 @@ void IfExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ocl::Expressions/]"))
 				{
 					typeName = "ocl::Expressions::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getElseExpression()); 
+			loadHandler->handleChild(this->getElseExpression());
 
 			return; 
 		}
@@ -400,14 +400,14 @@ void IfExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ocl::Expressions/]"))
 				{
 					typeName = "ocl::Expressions::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getThenExpression()); 
+			loadHandler->handleChild(this->getThenExpression());
 
 			return; 
 		}

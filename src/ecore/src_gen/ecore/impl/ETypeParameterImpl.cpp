@@ -202,7 +202,7 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "ecore::EGenericType";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{

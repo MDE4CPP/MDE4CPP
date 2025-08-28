@@ -288,7 +288,7 @@ void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "uml::TemplateParameterSubstitution";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

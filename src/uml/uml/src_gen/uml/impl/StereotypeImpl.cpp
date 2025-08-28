@@ -367,7 +367,7 @@ void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "uml::Image";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

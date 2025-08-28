@@ -304,7 +304,7 @@ void EnumerationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "uml::EnumerationLiteral";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

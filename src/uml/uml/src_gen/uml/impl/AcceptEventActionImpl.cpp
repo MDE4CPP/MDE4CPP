@@ -366,7 +366,7 @@ void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -391,7 +391,7 @@ void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "uml::Trigger";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

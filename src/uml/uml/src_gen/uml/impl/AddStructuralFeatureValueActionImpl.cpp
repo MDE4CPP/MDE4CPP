@@ -276,14 +276,14 @@ void AddStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::sh
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getInsertAt()); 
+			loadHandler->handleChild(this->getInsertAt());
 
 			return; 
 		}

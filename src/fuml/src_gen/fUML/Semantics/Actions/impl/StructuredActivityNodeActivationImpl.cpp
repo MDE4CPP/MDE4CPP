@@ -498,14 +498,14 @@ void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::s
 			{
 				typeName = "fUML::Semantics::Activities::ActivityNodeActivationGroup";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
 				{
 					typeName = "fUML::Semantics::Activities::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getActivationGroup()); 
+			loadHandler->handleChild(this->getActivationGroup());
 
 			return; 
 		}

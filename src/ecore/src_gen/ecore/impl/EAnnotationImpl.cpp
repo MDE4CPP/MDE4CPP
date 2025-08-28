@@ -318,7 +318,7 @@ void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "ecore::EObject";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{

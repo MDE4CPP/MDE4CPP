@@ -229,7 +229,7 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "ecore::EAnnotation";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{

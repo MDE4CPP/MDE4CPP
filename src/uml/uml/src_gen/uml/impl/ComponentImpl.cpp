@@ -456,7 +456,7 @@ void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -481,7 +481,7 @@ void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "uml::ComponentRealization";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

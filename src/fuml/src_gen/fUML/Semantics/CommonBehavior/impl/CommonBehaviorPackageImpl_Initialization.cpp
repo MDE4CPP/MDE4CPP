@@ -94,7 +94,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorExecutionContent()
 	m_classifierBehaviorExecution_Attribute_classifier->setOrdered(false);
 	m_classifierBehaviorExecution_Attribute_classifier->setContainment(false);
 	m_classifierBehaviorExecution_Attribute_classifier->setResolveProxies(true);
-	m_classifierBehaviorExecution_Attribute_classifier->setDefaultValueLiteral("");	
+	m_classifierBehaviorExecution_Attribute_classifier->setDefaultValueLiteral("");
 	
 	m_classifierBehaviorExecution_Attribute_classifier->_setID(CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER);
 	m_classifierBehaviorExecution_Attribute_execution->setName("execution");
@@ -110,7 +110,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorExecutionContent()
 	m_classifierBehaviorExecution_Attribute_execution->setOrdered(false);
 	m_classifierBehaviorExecution_Attribute_execution->setContainment(false);
 	m_classifierBehaviorExecution_Attribute_execution->setResolveProxies(true);
-	m_classifierBehaviorExecution_Attribute_execution->setDefaultValueLiteral("");	
+	m_classifierBehaviorExecution_Attribute_execution->setDefaultValueLiteral("");
 	
 	m_classifierBehaviorExecution_Attribute_execution->_setID(CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION);
 	m_classifierBehaviorExecution_Attribute_objectActivation->setName("objectActivation");
@@ -126,7 +126,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorExecutionContent()
 	m_classifierBehaviorExecution_Attribute_objectActivation->setOrdered(false);
 	m_classifierBehaviorExecution_Attribute_objectActivation->setContainment(false);
 	m_classifierBehaviorExecution_Attribute_objectActivation->setResolveProxies(true);
-	m_classifierBehaviorExecution_Attribute_objectActivation->setDefaultValueLiteral("");	
+	m_classifierBehaviorExecution_Attribute_objectActivation->setDefaultValueLiteral("");
 	
 	m_classifierBehaviorExecution_Attribute_objectActivation->_setID(CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION);
 	
@@ -297,7 +297,7 @@ void CommonBehaviorPackageImpl::initializeEventOccurrenceContent()
 	m_eventOccurrence_Attribute_target->setOrdered(true);
 	m_eventOccurrence_Attribute_target->setContainment(false);
 	m_eventOccurrence_Attribute_target->setResolveProxies(true);
-	m_eventOccurrence_Attribute_target->setDefaultValueLiteral("");	
+	m_eventOccurrence_Attribute_target->setDefaultValueLiteral("");
 	
 	m_eventOccurrence_Attribute_target->_setID(EVENTOCCURRENCE_ATTRIBUTE_TARGET);
 	
@@ -433,7 +433,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_behavior->setOrdered(true);
 	m_execution_Attribute_behavior->setContainment(false);
 	m_execution_Attribute_behavior->setResolveProxies(true);
-	m_execution_Attribute_behavior->setDefaultValueLiteral("");	
+	m_execution_Attribute_behavior->setDefaultValueLiteral("");
 	
 	m_execution_Attribute_behavior->_setID(EXECUTION_ATTRIBUTE_BEHAVIOR);
 	m_execution_Attribute_context->setName("context");
@@ -449,7 +449,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_context->setOrdered(false);
 	m_execution_Attribute_context->setContainment(false);
 	m_execution_Attribute_context->setResolveProxies(true);
-	m_execution_Attribute_context->setDefaultValueLiteral("");	
+	m_execution_Attribute_context->setDefaultValueLiteral("");
 	
 	m_execution_Attribute_context->_setID(EXECUTION_ATTRIBUTE_CONTEXT);
 	m_execution_Attribute_locus->setName("locus");
@@ -465,7 +465,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_locus->setOrdered(false);
 	m_execution_Attribute_locus->setContainment(false);
 	m_execution_Attribute_locus->setResolveProxies(true);
-	m_execution_Attribute_locus->setDefaultValueLiteral("");	
+	m_execution_Attribute_locus->setDefaultValueLiteral("");
 	
 	m_execution_Attribute_locus->_setID(EXECUTION_ATTRIBUTE_LOCUS);
 	m_execution_Attribute_parameterValues->setName("parameterValues");
@@ -481,7 +481,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_parameterValues->setOrdered(false);
 	m_execution_Attribute_parameterValues->setContainment(true);
 	m_execution_Attribute_parameterValues->setResolveProxies(true);
-	m_execution_Attribute_parameterValues->setDefaultValueLiteral("");	
+	m_execution_Attribute_parameterValues->setDefaultValueLiteral("");
 	
 	m_execution_Attribute_parameterValues->_setID(EXECUTION_ATTRIBUTE_PARAMETERVALUES);
 	m_execution_Attribute_types->setName("types");
@@ -497,7 +497,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Attribute_types->setOrdered(false);
 	m_execution_Attribute_types->setContainment(false);
 	m_execution_Attribute_types->setResolveProxies(true);
-	m_execution_Attribute_types->setDefaultValueLiteral("");	
+	m_execution_Attribute_types->setDefaultValueLiteral("");
 	
 	m_execution_Attribute_types->_setID(EXECUTION_ATTRIBUTE_TYPES);
 	
@@ -749,7 +749,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_classifierBehaviorExecutions->setOrdered(false);
 	m_objectActivation_Attribute_classifierBehaviorExecutions->setContainment(true);
 	m_objectActivation_Attribute_classifierBehaviorExecutions->setResolveProxies(true);
-	m_objectActivation_Attribute_classifierBehaviorExecutions->setDefaultValueLiteral("");	
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setDefaultValueLiteral("");
 	
 	m_objectActivation_Attribute_classifierBehaviorExecutions->_setID(OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS);
 	m_objectActivation_Attribute_conditionVariable->setName("conditionVariable");
@@ -772,7 +772,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_conditionVariable->setOrdered(true);
 	m_objectActivation_Attribute_conditionVariable->setContainment(false);
 	m_objectActivation_Attribute_conditionVariable->setResolveProxies(true);
-	m_objectActivation_Attribute_conditionVariable->setDefaultValueLiteral("");	
+	m_objectActivation_Attribute_conditionVariable->setDefaultValueLiteral("");
 	
 	m_objectActivation_Attribute_conditionVariable->_setID(OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE);
 	m_objectActivation_Attribute_eventPool->setName("eventPool");
@@ -788,7 +788,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_eventPool->setOrdered(false);
 	m_objectActivation_Attribute_eventPool->setContainment(true);
 	m_objectActivation_Attribute_eventPool->setResolveProxies(true);
-	m_objectActivation_Attribute_eventPool->setDefaultValueLiteral("");	
+	m_objectActivation_Attribute_eventPool->setDefaultValueLiteral("");
 	
 	m_objectActivation_Attribute_eventPool->_setID(OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL);
 	m_objectActivation_Attribute_memberThread->setName("memberThread");
@@ -811,7 +811,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_memberThread->setOrdered(true);
 	m_objectActivation_Attribute_memberThread->setContainment(false);
 	m_objectActivation_Attribute_memberThread->setResolveProxies(true);
-	m_objectActivation_Attribute_memberThread->setDefaultValueLiteral("");	
+	m_objectActivation_Attribute_memberThread->setDefaultValueLiteral("");
 	
 	m_objectActivation_Attribute_memberThread->_setID(OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD);
 	m_objectActivation_Attribute_mutex->setName("mutex");
@@ -834,7 +834,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_mutex->setOrdered(true);
 	m_objectActivation_Attribute_mutex->setContainment(false);
 	m_objectActivation_Attribute_mutex->setResolveProxies(true);
-	m_objectActivation_Attribute_mutex->setDefaultValueLiteral("");	
+	m_objectActivation_Attribute_mutex->setDefaultValueLiteral("");
 	
 	m_objectActivation_Attribute_mutex->_setID(OBJECTACTIVATION_ATTRIBUTE_MUTEX);
 	m_objectActivation_Attribute_object->setName("object");
@@ -850,7 +850,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_object->setOrdered(false);
 	m_objectActivation_Attribute_object->setContainment(false);
 	m_objectActivation_Attribute_object->setResolveProxies(true);
-	m_objectActivation_Attribute_object->setDefaultValueLiteral("");	
+	m_objectActivation_Attribute_object->setDefaultValueLiteral("");
 	
 	m_objectActivation_Attribute_object->_setID(OBJECTACTIVATION_ATTRIBUTE_OBJECT);
 	m_objectActivation_Attribute_waitingEventAccepters->setName("waitingEventAccepters");
@@ -866,7 +866,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_waitingEventAccepters->setOrdered(false);
 	m_objectActivation_Attribute_waitingEventAccepters->setContainment(false);
 	m_objectActivation_Attribute_waitingEventAccepters->setResolveProxies(true);
-	m_objectActivation_Attribute_waitingEventAccepters->setDefaultValueLiteral("");	
+	m_objectActivation_Attribute_waitingEventAccepters->setDefaultValueLiteral("");
 	
 	m_objectActivation_Attribute_waitingEventAccepters->_setID(OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS);
 	
@@ -1088,7 +1088,7 @@ void CommonBehaviorPackageImpl::initializeParameterValueContent()
 	m_parameterValue_Attribute_parameter->setOrdered(false);
 	m_parameterValue_Attribute_parameter->setContainment(false);
 	m_parameterValue_Attribute_parameter->setResolveProxies(true);
-	m_parameterValue_Attribute_parameter->setDefaultValueLiteral("");	
+	m_parameterValue_Attribute_parameter->setDefaultValueLiteral("");
 	
 	m_parameterValue_Attribute_parameter->_setID(PARAMETERVALUE_ATTRIBUTE_PARAMETER);
 	
@@ -1136,7 +1136,7 @@ void CommonBehaviorPackageImpl::initializeSignalEventOccurrenceContent()
 	m_signalEventOccurrence_Attribute_signalInstance->setOrdered(true);
 	m_signalEventOccurrence_Attribute_signalInstance->setContainment(false);
 	m_signalEventOccurrence_Attribute_signalInstance->setResolveProxies(true);
-	m_signalEventOccurrence_Attribute_signalInstance->setDefaultValueLiteral("");	
+	m_signalEventOccurrence_Attribute_signalInstance->setDefaultValueLiteral("");
 	
 	m_signalEventOccurrence_Attribute_signalInstance->_setID(SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE);
 	

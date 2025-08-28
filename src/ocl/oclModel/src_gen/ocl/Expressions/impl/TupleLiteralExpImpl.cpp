@@ -336,7 +336,7 @@ void TupleLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "ocl::Expressions::VarDeclarationExp";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ocl::Expressions/]"))
 				{

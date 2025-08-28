@@ -754,7 +754,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "ecore::EGenericType";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{
@@ -779,7 +779,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "ecore::EOperation";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{
@@ -805,7 +805,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{

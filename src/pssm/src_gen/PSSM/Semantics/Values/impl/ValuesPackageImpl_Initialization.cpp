@@ -77,7 +77,7 @@ void ValuesPackageImpl::initializeSM_OpaqueExpressionEvaluationContent()
 	m_sM_OpaqueExpressionEvaluation_Attribute_context->setOrdered(false);
 	m_sM_OpaqueExpressionEvaluation_Attribute_context->setContainment(false);
 	m_sM_OpaqueExpressionEvaluation_Attribute_context->setResolveProxies(true);
-	m_sM_OpaqueExpressionEvaluation_Attribute_context->setDefaultValueLiteral("");	
+	m_sM_OpaqueExpressionEvaluation_Attribute_context->setDefaultValueLiteral("");
 	
 	m_sM_OpaqueExpressionEvaluation_Attribute_context->_setID(SM_OPAQUEEXPRESSIONEVALUATION_ATTRIBUTE_CONTEXT);
 	m_sM_OpaqueExpressionEvaluation_Attribute_parameterValues->setName("parameterValues");
@@ -93,7 +93,7 @@ void ValuesPackageImpl::initializeSM_OpaqueExpressionEvaluationContent()
 	m_sM_OpaqueExpressionEvaluation_Attribute_parameterValues->setOrdered(false);
 	m_sM_OpaqueExpressionEvaluation_Attribute_parameterValues->setContainment(false);
 	m_sM_OpaqueExpressionEvaluation_Attribute_parameterValues->setResolveProxies(true);
-	m_sM_OpaqueExpressionEvaluation_Attribute_parameterValues->setDefaultValueLiteral("");	
+	m_sM_OpaqueExpressionEvaluation_Attribute_parameterValues->setDefaultValueLiteral("");
 	
 	m_sM_OpaqueExpressionEvaluation_Attribute_parameterValues->_setID(SM_OPAQUEEXPRESSIONEVALUATION_ATTRIBUTE_PARAMETERVALUES);
 	

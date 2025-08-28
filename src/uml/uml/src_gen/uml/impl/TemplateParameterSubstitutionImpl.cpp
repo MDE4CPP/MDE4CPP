@@ -266,14 +266,14 @@ void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shar
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getOwnedActual()); 
+			loadHandler->handleChild(this->getOwnedActual());
 
 			return; 
 		}

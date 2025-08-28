@@ -141,7 +141,7 @@ void StateMachinesPackageImpl::initializeCompletionEventOccurrenceContent()
 	m_completionEventOccurrence_Attribute_stateActivation->setOrdered(false);
 	m_completionEventOccurrence_Attribute_stateActivation->setContainment(false);
 	m_completionEventOccurrence_Attribute_stateActivation->setResolveProxies(true);
-	m_completionEventOccurrence_Attribute_stateActivation->setDefaultValueLiteral("");	
+	m_completionEventOccurrence_Attribute_stateActivation->setDefaultValueLiteral("");
 	
 	m_completionEventOccurrence_Attribute_stateActivation->_setID(COMPLETIONEVENTOCCURRENCE_ATTRIBUTE_STATEACTIVATION);
 	
@@ -327,7 +327,7 @@ void StateMachinesPackageImpl::initializeDeferredEventOccurrenceContent()
 	m_deferredEventOccurrence_Attribute_constrainingStateActivation->setOrdered(false);
 	m_deferredEventOccurrence_Attribute_constrainingStateActivation->setContainment(false);
 	m_deferredEventOccurrence_Attribute_constrainingStateActivation->setResolveProxies(true);
-	m_deferredEventOccurrence_Attribute_constrainingStateActivation->setDefaultValueLiteral("");	
+	m_deferredEventOccurrence_Attribute_constrainingStateActivation->setDefaultValueLiteral("");
 	
 	m_deferredEventOccurrence_Attribute_constrainingStateActivation->_setID(DEFERREDEVENTOCCURRENCE_ATTRIBUTE_CONSTRAININGSTATEACTIVATION);
 	m_deferredEventOccurrence_Attribute_deferredEventOccurrence->setName("deferredEventOccurrence");
@@ -343,7 +343,7 @@ void StateMachinesPackageImpl::initializeDeferredEventOccurrenceContent()
 	m_deferredEventOccurrence_Attribute_deferredEventOccurrence->setOrdered(false);
 	m_deferredEventOccurrence_Attribute_deferredEventOccurrence->setContainment(false);
 	m_deferredEventOccurrence_Attribute_deferredEventOccurrence->setResolveProxies(true);
-	m_deferredEventOccurrence_Attribute_deferredEventOccurrence->setDefaultValueLiteral("");	
+	m_deferredEventOccurrence_Attribute_deferredEventOccurrence->setDefaultValueLiteral("");
 	
 	m_deferredEventOccurrence_Attribute_deferredEventOccurrence->_setID(DEFERREDEVENTOCCURRENCE_ATTRIBUTE_DEFERREDEVENTOCCURRENCE);
 	
@@ -381,7 +381,7 @@ void StateMachinesPackageImpl::initializeDoActivityContextObjectContent()
 	m_doActivityContextObject_Attribute_context->setOrdered(false);
 	m_doActivityContextObject_Attribute_context->setContainment(false);
 	m_doActivityContextObject_Attribute_context->setResolveProxies(true);
-	m_doActivityContextObject_Attribute_context->setDefaultValueLiteral("");	
+	m_doActivityContextObject_Attribute_context->setDefaultValueLiteral("");
 	
 	m_doActivityContextObject_Attribute_context->_setID(DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT);
 	
@@ -668,7 +668,7 @@ void StateMachinesPackageImpl::initializeDoActivityExecutionEventAccepterContent
 	m_doActivityExecutionEventAccepter_Attribute_context->setOrdered(false);
 	m_doActivityExecutionEventAccepter_Attribute_context->setContainment(false);
 	m_doActivityExecutionEventAccepter_Attribute_context->setResolveProxies(true);
-	m_doActivityExecutionEventAccepter_Attribute_context->setDefaultValueLiteral("");	
+	m_doActivityExecutionEventAccepter_Attribute_context->setDefaultValueLiteral("");
 	
 	m_doActivityExecutionEventAccepter_Attribute_context->_setID(DOACTIVITYEXECUTIONEVENTACCEPTER_ATTRIBUTE_CONTEXT);
 	m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter->setName("encapsulatedAccepter");
@@ -684,7 +684,7 @@ void StateMachinesPackageImpl::initializeDoActivityExecutionEventAccepterContent
 	m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter->setOrdered(false);
 	m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter->setContainment(true);
 	m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter->setResolveProxies(true);
-	m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter->setDefaultValueLiteral("");	
+	m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter->setDefaultValueLiteral("");
 	
 	m_doActivityExecutionEventAccepter_Attribute_encapsulatedAccepter->_setID(DOACTIVITYEXECUTIONEVENTACCEPTER_ATTRIBUTE_ENCAPSULATEDACCEPTER);
 	
@@ -1359,7 +1359,7 @@ void StateMachinesPackageImpl::initializePseudostateActivationContent()
 	m_pseudostateActivation_Attribute_fireableTransitions->setOrdered(false);
 	m_pseudostateActivation_Attribute_fireableTransitions->setContainment(false);
 	m_pseudostateActivation_Attribute_fireableTransitions->setResolveProxies(true);
-	m_pseudostateActivation_Attribute_fireableTransitions->setDefaultValueLiteral("");	
+	m_pseudostateActivation_Attribute_fireableTransitions->setDefaultValueLiteral("");
 	
 	m_pseudostateActivation_Attribute_fireableTransitions->_setID(PSEUDOSTATEACTIVATION_ATTRIBUTE_FIREABLETRANSITIONS);
 	
@@ -1438,7 +1438,7 @@ void StateMachinesPackageImpl::initializeRegionActivationContent()
 	m_regionActivation_Attribute_history->setOrdered(false);
 	m_regionActivation_Attribute_history->setContainment(false);
 	m_regionActivation_Attribute_history->setResolveProxies(true);
-	m_regionActivation_Attribute_history->setDefaultValueLiteral("");	
+	m_regionActivation_Attribute_history->setDefaultValueLiteral("");
 	
 	m_regionActivation_Attribute_history->_setID(REGIONACTIVATION_ATTRIBUTE_HISTORY);
 	m_regionActivation_Attribute_transitionActivations->setName("transitionActivations");
@@ -1454,7 +1454,7 @@ void StateMachinesPackageImpl::initializeRegionActivationContent()
 	m_regionActivation_Attribute_transitionActivations->setOrdered(false);
 	m_regionActivation_Attribute_transitionActivations->setContainment(true);
 	m_regionActivation_Attribute_transitionActivations->setResolveProxies(true);
-	m_regionActivation_Attribute_transitionActivations->setDefaultValueLiteral("");	
+	m_regionActivation_Attribute_transitionActivations->setDefaultValueLiteral("");
 	
 	m_regionActivation_Attribute_transitionActivations->_setID(REGIONACTIVATION_ATTRIBUTE_TRANSITIONACTIVATIONS);
 	m_regionActivation_Attribute_vertexActivations->setName("vertexActivations");
@@ -1470,7 +1470,7 @@ void StateMachinesPackageImpl::initializeRegionActivationContent()
 	m_regionActivation_Attribute_vertexActivations->setOrdered(false);
 	m_regionActivation_Attribute_vertexActivations->setContainment(true);
 	m_regionActivation_Attribute_vertexActivations->setResolveProxies(true);
-	m_regionActivation_Attribute_vertexActivations->setDefaultValueLiteral("");	
+	m_regionActivation_Attribute_vertexActivations->setDefaultValueLiteral("");
 	
 	m_regionActivation_Attribute_vertexActivations->_setID(REGIONACTIVATION_ATTRIBUTE_VERTEXACTIVATIONS);
 	
@@ -1758,7 +1758,7 @@ void StateMachinesPackageImpl::initializeStateActivationContent()
 	m_stateActivation_Attribute_connectionPointActivations->setOrdered(false);
 	m_stateActivation_Attribute_connectionPointActivations->setContainment(true);
 	m_stateActivation_Attribute_connectionPointActivations->setResolveProxies(true);
-	m_stateActivation_Attribute_connectionPointActivations->setDefaultValueLiteral("");	
+	m_stateActivation_Attribute_connectionPointActivations->setDefaultValueLiteral("");
 	
 	m_stateActivation_Attribute_connectionPointActivations->_setID(STATEACTIVATION_ATTRIBUTE_CONNECTIONPOINTACTIVATIONS);
 	m_stateActivation_Attribute_doActivityContextObject->setName("doActivityContextObject");
@@ -1774,7 +1774,7 @@ void StateMachinesPackageImpl::initializeStateActivationContent()
 	m_stateActivation_Attribute_doActivityContextObject->setOrdered(false);
 	m_stateActivation_Attribute_doActivityContextObject->setContainment(false);
 	m_stateActivation_Attribute_doActivityContextObject->setResolveProxies(true);
-	m_stateActivation_Attribute_doActivityContextObject->setDefaultValueLiteral("");	
+	m_stateActivation_Attribute_doActivityContextObject->setDefaultValueLiteral("");
 	
 	m_stateActivation_Attribute_doActivityContextObject->_setID(STATEACTIVATION_ATTRIBUTE_DOACTIVITYCONTEXTOBJECT);
 	m_stateActivation_Attribute_regionActivations->setName("regionActivations");
@@ -1790,7 +1790,7 @@ void StateMachinesPackageImpl::initializeStateActivationContent()
 	m_stateActivation_Attribute_regionActivations->setOrdered(false);
 	m_stateActivation_Attribute_regionActivations->setContainment(true);
 	m_stateActivation_Attribute_regionActivations->setResolveProxies(true);
-	m_stateActivation_Attribute_regionActivations->setDefaultValueLiteral("");	
+	m_stateActivation_Attribute_regionActivations->setDefaultValueLiteral("");
 	
 	m_stateActivation_Attribute_regionActivations->_setID(STATEACTIVATION_ATTRIBUTE_REGIONACTIVATIONS);
 	
@@ -2243,7 +2243,7 @@ void StateMachinesPackageImpl::initializeStateConfigurationContent()
 	m_stateConfiguration_Attribute_children->setOrdered(false);
 	m_stateConfiguration_Attribute_children->setContainment(true);
 	m_stateConfiguration_Attribute_children->setResolveProxies(true);
-	m_stateConfiguration_Attribute_children->setDefaultValueLiteral("");	
+	m_stateConfiguration_Attribute_children->setDefaultValueLiteral("");
 	
 	m_stateConfiguration_Attribute_children->_setID(STATECONFIGURATION_ATTRIBUTE_CHILDREN);
 	m_stateConfiguration_Attribute_completeConfiguration->setName("completeConfiguration");
@@ -2259,7 +2259,7 @@ void StateMachinesPackageImpl::initializeStateConfigurationContent()
 	m_stateConfiguration_Attribute_completeConfiguration->setOrdered(false);
 	m_stateConfiguration_Attribute_completeConfiguration->setContainment(false);
 	m_stateConfiguration_Attribute_completeConfiguration->setResolveProxies(true);
-	m_stateConfiguration_Attribute_completeConfiguration->setDefaultValueLiteral("");	
+	m_stateConfiguration_Attribute_completeConfiguration->setDefaultValueLiteral("");
 	
 	m_stateConfiguration_Attribute_completeConfiguration->_setID(STATECONFIGURATION_ATTRIBUTE_COMPLETECONFIGURATION);
 	m_stateConfiguration_Attribute_parent->setName("parent");
@@ -2275,7 +2275,7 @@ void StateMachinesPackageImpl::initializeStateConfigurationContent()
 	m_stateConfiguration_Attribute_parent->setOrdered(false);
 	m_stateConfiguration_Attribute_parent->setContainment(false);
 	m_stateConfiguration_Attribute_parent->setResolveProxies(true);
-	m_stateConfiguration_Attribute_parent->setDefaultValueLiteral("");	
+	m_stateConfiguration_Attribute_parent->setDefaultValueLiteral("");
 	
 	m_stateConfiguration_Attribute_parent->_setID(STATECONFIGURATION_ATTRIBUTE_PARENT);
 	m_stateConfiguration_Attribute_vertexActivation->setName("vertexActivation");
@@ -2291,7 +2291,7 @@ void StateMachinesPackageImpl::initializeStateConfigurationContent()
 	m_stateConfiguration_Attribute_vertexActivation->setOrdered(false);
 	m_stateConfiguration_Attribute_vertexActivation->setContainment(false);
 	m_stateConfiguration_Attribute_vertexActivation->setResolveProxies(true);
-	m_stateConfiguration_Attribute_vertexActivation->setDefaultValueLiteral("");	
+	m_stateConfiguration_Attribute_vertexActivation->setDefaultValueLiteral("");
 	
 	m_stateConfiguration_Attribute_vertexActivation->_setID(STATECONFIGURATION_ATTRIBUTE_VERTEXACTIVATION);
 	
@@ -2463,7 +2463,7 @@ void StateMachinesPackageImpl::initializeStateMachineConfigurationContent()
 	m_stateMachineConfiguration_Attribute_execution->setOrdered(false);
 	m_stateMachineConfiguration_Attribute_execution->setContainment(false);
 	m_stateMachineConfiguration_Attribute_execution->setResolveProxies(true);
-	m_stateMachineConfiguration_Attribute_execution->setDefaultValueLiteral("");	
+	m_stateMachineConfiguration_Attribute_execution->setDefaultValueLiteral("");
 	m_stateMachineConfiguration_Attribute_execution->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateMachineExecution_Attribute_configuration());
 	
 	m_stateMachineConfiguration_Attribute_execution->_setID(STATEMACHINECONFIGURATION_ATTRIBUTE_EXECUTION);
@@ -2480,7 +2480,7 @@ void StateMachinesPackageImpl::initializeStateMachineConfigurationContent()
 	m_stateMachineConfiguration_Attribute_rootConfiguration->setOrdered(false);
 	m_stateMachineConfiguration_Attribute_rootConfiguration->setContainment(false);
 	m_stateMachineConfiguration_Attribute_rootConfiguration->setResolveProxies(true);
-	m_stateMachineConfiguration_Attribute_rootConfiguration->setDefaultValueLiteral("");	
+	m_stateMachineConfiguration_Attribute_rootConfiguration->setDefaultValueLiteral("");
 	
 	m_stateMachineConfiguration_Attribute_rootConfiguration->_setID(STATEMACHINECONFIGURATION_ATTRIBUTE_ROOTCONFIGURATION);
 	
@@ -2658,7 +2658,7 @@ void StateMachinesPackageImpl::initializeStateMachineEventAccepterContent()
 	m_stateMachineEventAccepter_Attribute_registrationContext->setOrdered(false);
 	m_stateMachineEventAccepter_Attribute_registrationContext->setContainment(false);
 	m_stateMachineEventAccepter_Attribute_registrationContext->setResolveProxies(true);
-	m_stateMachineEventAccepter_Attribute_registrationContext->setDefaultValueLiteral("");	
+	m_stateMachineEventAccepter_Attribute_registrationContext->setDefaultValueLiteral("");
 	
 	m_stateMachineEventAccepter_Attribute_registrationContext->_setID(STATEMACHINEEVENTACCEPTER_ATTRIBUTE_REGISTRATIONCONTEXT);
 	
@@ -2910,7 +2910,7 @@ void StateMachinesPackageImpl::initializeStateMachineExecutionContent()
 	m_stateMachineExecution_Attribute_conditionVariable->setOrdered(true);
 	m_stateMachineExecution_Attribute_conditionVariable->setContainment(false);
 	m_stateMachineExecution_Attribute_conditionVariable->setResolveProxies(true);
-	m_stateMachineExecution_Attribute_conditionVariable->setDefaultValueLiteral("");	
+	m_stateMachineExecution_Attribute_conditionVariable->setDefaultValueLiteral("");
 	
 	m_stateMachineExecution_Attribute_conditionVariable->_setID(STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE);
 	m_stateMachineExecution_Attribute_configuration->setName("configuration");
@@ -2926,7 +2926,7 @@ void StateMachinesPackageImpl::initializeStateMachineExecutionContent()
 	m_stateMachineExecution_Attribute_configuration->setOrdered(false);
 	m_stateMachineExecution_Attribute_configuration->setContainment(true);
 	m_stateMachineExecution_Attribute_configuration->setResolveProxies(true);
-	m_stateMachineExecution_Attribute_configuration->setDefaultValueLiteral("");	
+	m_stateMachineExecution_Attribute_configuration->setDefaultValueLiteral("");
 	m_stateMachineExecution_Attribute_configuration->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateMachineConfiguration_Attribute_execution());
 	
 	m_stateMachineExecution_Attribute_configuration->_setID(STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION);
@@ -2950,7 +2950,7 @@ void StateMachinesPackageImpl::initializeStateMachineExecutionContent()
 	m_stateMachineExecution_Attribute_mutex->setOrdered(true);
 	m_stateMachineExecution_Attribute_mutex->setContainment(false);
 	m_stateMachineExecution_Attribute_mutex->setResolveProxies(true);
-	m_stateMachineExecution_Attribute_mutex->setDefaultValueLiteral("");	
+	m_stateMachineExecution_Attribute_mutex->setDefaultValueLiteral("");
 	
 	m_stateMachineExecution_Attribute_mutex->_setID(STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX);
 	m_stateMachineExecution_Attribute_regionActivations->setName("regionActivations");
@@ -2966,7 +2966,7 @@ void StateMachinesPackageImpl::initializeStateMachineExecutionContent()
 	m_stateMachineExecution_Attribute_regionActivations->setOrdered(false);
 	m_stateMachineExecution_Attribute_regionActivations->setContainment(true);
 	m_stateMachineExecution_Attribute_regionActivations->setResolveProxies(true);
-	m_stateMachineExecution_Attribute_regionActivations->setDefaultValueLiteral("");	
+	m_stateMachineExecution_Attribute_regionActivations->setDefaultValueLiteral("");
 	
 	m_stateMachineExecution_Attribute_regionActivations->_setID(STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS);
 	
@@ -3090,7 +3090,7 @@ void StateMachinesPackageImpl::initializeStateMachineSemanticVisitorContent()
 	m_stateMachineSemanticVisitor_Attribute_node->setOrdered(false);
 	m_stateMachineSemanticVisitor_Attribute_node->setContainment(false);
 	m_stateMachineSemanticVisitor_Attribute_node->setResolveProxies(true);
-	m_stateMachineSemanticVisitor_Attribute_node->setDefaultValueLiteral("");	
+	m_stateMachineSemanticVisitor_Attribute_node->setDefaultValueLiteral("");
 	
 	m_stateMachineSemanticVisitor_Attribute_node->_setID(STATEMACHINESEMANTICVISITOR_ATTRIBUTE_NODE);
 	m_stateMachineSemanticVisitor_Attribute_parent->setName("parent");
@@ -3106,7 +3106,7 @@ void StateMachinesPackageImpl::initializeStateMachineSemanticVisitorContent()
 	m_stateMachineSemanticVisitor_Attribute_parent->setOrdered(false);
 	m_stateMachineSemanticVisitor_Attribute_parent->setContainment(false);
 	m_stateMachineSemanticVisitor_Attribute_parent->setResolveProxies(true);
-	m_stateMachineSemanticVisitor_Attribute_parent->setDefaultValueLiteral("");	
+	m_stateMachineSemanticVisitor_Attribute_parent->setDefaultValueLiteral("");
 	
 	m_stateMachineSemanticVisitor_Attribute_parent->_setID(STATEMACHINESEMANTICVISITOR_ATTRIBUTE_PARENT);
 	
@@ -3418,7 +3418,7 @@ void StateMachinesPackageImpl::initializeTransitionActivationContent()
 	m_transitionActivation_Attribute_lastTriggeringEventOccurrence->setOrdered(false);
 	m_transitionActivation_Attribute_lastTriggeringEventOccurrence->setContainment(false);
 	m_transitionActivation_Attribute_lastTriggeringEventOccurrence->setResolveProxies(true);
-	m_transitionActivation_Attribute_lastTriggeringEventOccurrence->setDefaultValueLiteral("");	
+	m_transitionActivation_Attribute_lastTriggeringEventOccurrence->setDefaultValueLiteral("");
 	
 	m_transitionActivation_Attribute_lastTriggeringEventOccurrence->_setID(TRANSITIONACTIVATION_ATTRIBUTE_LASTTRIGGERINGEVENTOCCURRENCE);
 	m_transitionActivation_Attribute_leastCommonAncestor->setName("leastCommonAncestor");
@@ -3434,7 +3434,7 @@ void StateMachinesPackageImpl::initializeTransitionActivationContent()
 	m_transitionActivation_Attribute_leastCommonAncestor->setOrdered(false);
 	m_transitionActivation_Attribute_leastCommonAncestor->setContainment(false);
 	m_transitionActivation_Attribute_leastCommonAncestor->setResolveProxies(true);
-	m_transitionActivation_Attribute_leastCommonAncestor->setDefaultValueLiteral("");	
+	m_transitionActivation_Attribute_leastCommonAncestor->setDefaultValueLiteral("");
 	
 	m_transitionActivation_Attribute_leastCommonAncestor->_setID(TRANSITIONACTIVATION_ATTRIBUTE_LEASTCOMMONANCESTOR);
 	m_transitionActivation_Attribute_sourceVertexActivation->setName("sourceVertexActivation");
@@ -3450,7 +3450,7 @@ void StateMachinesPackageImpl::initializeTransitionActivationContent()
 	m_transitionActivation_Attribute_sourceVertexActivation->setOrdered(false);
 	m_transitionActivation_Attribute_sourceVertexActivation->setContainment(false);
 	m_transitionActivation_Attribute_sourceVertexActivation->setResolveProxies(true);
-	m_transitionActivation_Attribute_sourceVertexActivation->setDefaultValueLiteral("");	
+	m_transitionActivation_Attribute_sourceVertexActivation->setDefaultValueLiteral("");
 	m_transitionActivation_Attribute_sourceVertexActivation->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getVertexActivation_Attribute_outgoingTransitionActivations());
 	
 	m_transitionActivation_Attribute_sourceVertexActivation->_setID(TRANSITIONACTIVATION_ATTRIBUTE_SOURCEVERTEXACTIVATION);
@@ -3467,7 +3467,7 @@ void StateMachinesPackageImpl::initializeTransitionActivationContent()
 	m_transitionActivation_Attribute_targetVertexActivation->setOrdered(false);
 	m_transitionActivation_Attribute_targetVertexActivation->setContainment(false);
 	m_transitionActivation_Attribute_targetVertexActivation->setResolveProxies(true);
-	m_transitionActivation_Attribute_targetVertexActivation->setDefaultValueLiteral("");	
+	m_transitionActivation_Attribute_targetVertexActivation->setDefaultValueLiteral("");
 	m_transitionActivation_Attribute_targetVertexActivation->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getVertexActivation_Attribute_incomingTransitionActivations());
 	
 	m_transitionActivation_Attribute_targetVertexActivation->_setID(TRANSITIONACTIVATION_ATTRIBUTE_TARGETVERTEXACTIVATION);
@@ -3826,7 +3826,7 @@ void StateMachinesPackageImpl::initializeVertexActivationContent()
 	m_vertexActivation_Attribute_incomingTransitionActivations->setOrdered(false);
 	m_vertexActivation_Attribute_incomingTransitionActivations->setContainment(false);
 	m_vertexActivation_Attribute_incomingTransitionActivations->setResolveProxies(true);
-	m_vertexActivation_Attribute_incomingTransitionActivations->setDefaultValueLiteral("");	
+	m_vertexActivation_Attribute_incomingTransitionActivations->setDefaultValueLiteral("");
 	m_vertexActivation_Attribute_incomingTransitionActivations->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getTransitionActivation_Attribute_targetVertexActivation());
 	
 	m_vertexActivation_Attribute_incomingTransitionActivations->_setID(VERTEXACTIVATION_ATTRIBUTE_INCOMINGTRANSITIONACTIVATIONS);
@@ -3843,7 +3843,7 @@ void StateMachinesPackageImpl::initializeVertexActivationContent()
 	m_vertexActivation_Attribute_outgoingTransitionActivations->setOrdered(false);
 	m_vertexActivation_Attribute_outgoingTransitionActivations->setContainment(false);
 	m_vertexActivation_Attribute_outgoingTransitionActivations->setResolveProxies(true);
-	m_vertexActivation_Attribute_outgoingTransitionActivations->setDefaultValueLiteral("");	
+	m_vertexActivation_Attribute_outgoingTransitionActivations->setDefaultValueLiteral("");
 	m_vertexActivation_Attribute_outgoingTransitionActivations->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getTransitionActivation_Attribute_sourceVertexActivation());
 	
 	m_vertexActivation_Attribute_outgoingTransitionActivations->_setID(VERTEXACTIVATION_ATTRIBUTE_OUTGOINGTRANSITIONACTIVATIONS);

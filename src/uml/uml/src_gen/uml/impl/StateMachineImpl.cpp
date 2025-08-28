@@ -461,7 +461,7 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::Pseudostate";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -486,7 +486,7 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::Region";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

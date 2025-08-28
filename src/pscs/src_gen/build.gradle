@@ -48,7 +48,6 @@ task compilePSCSSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn  getRootProject().getTasksByName('generatePSCSModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generatePSCSModel', true)]
 	}	
 

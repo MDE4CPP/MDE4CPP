@@ -462,7 +462,7 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -487,7 +487,7 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -512,7 +512,7 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

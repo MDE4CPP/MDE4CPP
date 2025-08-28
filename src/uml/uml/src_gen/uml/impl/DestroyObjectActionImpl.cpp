@@ -296,14 +296,14 @@ void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getTarget()); 
+			loadHandler->handleChild(this->getTarget());
 
 			return; 
 		}

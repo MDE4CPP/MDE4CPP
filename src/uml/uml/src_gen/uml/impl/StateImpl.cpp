@@ -610,7 +610,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "uml::ConnectionPointReference";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -635,7 +635,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "uml::Pseudostate";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -660,7 +660,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "uml::Trigger";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -686,14 +686,14 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getDoActivity()); 
+			loadHandler->handleChild(this->getDoActivity());
 
 			return; 
 		}
@@ -706,14 +706,14 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getEntry()); 
+			loadHandler->handleChild(this->getEntry());
 
 			return; 
 		}
@@ -726,14 +726,14 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getExit()); 
+			loadHandler->handleChild(this->getExit());
 
 			return; 
 		}
@@ -745,7 +745,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "uml::Region";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

@@ -163,7 +163,7 @@ void ActionsPackageImpl::initializeAcceptEventActionActivationContent()
 	m_acceptEventActionActivation_Attribute_acceptEventAction->setOrdered(true);
 	m_acceptEventActionActivation_Attribute_acceptEventAction->setContainment(false);
 	m_acceptEventActionActivation_Attribute_acceptEventAction->setResolveProxies(true);
-	m_acceptEventActionActivation_Attribute_acceptEventAction->setDefaultValueLiteral("");	
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setDefaultValueLiteral("");
 	
 	m_acceptEventActionActivation_Attribute_acceptEventAction->_setID(ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION);
 	m_acceptEventActionActivation_Attribute_eventAccepter->setName("eventAccepter");
@@ -179,7 +179,7 @@ void ActionsPackageImpl::initializeAcceptEventActionActivationContent()
 	m_acceptEventActionActivation_Attribute_eventAccepter->setOrdered(false);
 	m_acceptEventActionActivation_Attribute_eventAccepter->setContainment(false);
 	m_acceptEventActionActivation_Attribute_eventAccepter->setResolveProxies(true);
-	m_acceptEventActionActivation_Attribute_eventAccepter->setDefaultValueLiteral("");	
+	m_acceptEventActionActivation_Attribute_eventAccepter->setDefaultValueLiteral("");
 	
 	m_acceptEventActionActivation_Attribute_eventAccepter->_setID(ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER);
 	
@@ -379,7 +379,7 @@ void ActionsPackageImpl::initializeAcceptEventActionEventAccepterContent()
 	m_acceptEventActionEventAccepter_Attribute_actionActivation->setOrdered(false);
 	m_acceptEventActionEventAccepter_Attribute_actionActivation->setContainment(false);
 	m_acceptEventActionEventAccepter_Attribute_actionActivation->setResolveProxies(true);
-	m_acceptEventActionEventAccepter_Attribute_actionActivation->setDefaultValueLiteral("");	
+	m_acceptEventActionEventAccepter_Attribute_actionActivation->setDefaultValueLiteral("");
 	
 	m_acceptEventActionEventAccepter_Attribute_actionActivation->_setID(ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION);
 	
@@ -477,7 +477,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	m_actionActivation_Attribute_action->setOrdered(true);
 	m_actionActivation_Attribute_action->setContainment(false);
 	m_actionActivation_Attribute_action->setResolveProxies(true);
-	m_actionActivation_Attribute_action->setDefaultValueLiteral("");	
+	m_actionActivation_Attribute_action->setDefaultValueLiteral("");
 	
 	m_actionActivation_Attribute_action->_setID(ACTIONACTIVATION_ATTRIBUTE_ACTION);
 	m_actionActivation_Attribute_inputPinActivation->setName("inputPinActivation");
@@ -493,7 +493,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	m_actionActivation_Attribute_inputPinActivation->setOrdered(false);
 	m_actionActivation_Attribute_inputPinActivation->setContainment(false);
 	m_actionActivation_Attribute_inputPinActivation->setResolveProxies(true);
-	m_actionActivation_Attribute_inputPinActivation->setDefaultValueLiteral("");	
+	m_actionActivation_Attribute_inputPinActivation->setDefaultValueLiteral("");
 	
 	m_actionActivation_Attribute_inputPinActivation->_setID(ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION);
 	m_actionActivation_Attribute_outputPinActivation->setName("outputPinActivation");
@@ -509,7 +509,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	m_actionActivation_Attribute_outputPinActivation->setOrdered(false);
 	m_actionActivation_Attribute_outputPinActivation->setContainment(false);
 	m_actionActivation_Attribute_outputPinActivation->setResolveProxies(true);
-	m_actionActivation_Attribute_outputPinActivation->setDefaultValueLiteral("");	
+	m_actionActivation_Attribute_outputPinActivation->setDefaultValueLiteral("");
 	
 	m_actionActivation_Attribute_outputPinActivation->_setID(ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION);
 	m_actionActivation_Attribute_pinActivation->setName("pinActivation");
@@ -525,7 +525,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	m_actionActivation_Attribute_pinActivation->setOrdered(false);
 	m_actionActivation_Attribute_pinActivation->setContainment(false);
 	m_actionActivation_Attribute_pinActivation->setResolveProxies(true);
-	m_actionActivation_Attribute_pinActivation->setDefaultValueLiteral("");	
+	m_actionActivation_Attribute_pinActivation->setDefaultValueLiteral("");
 	m_actionActivation_Attribute_pinActivation->setEOpposite(fUML::Semantics::Actions::ActionsPackage::eInstance()->getPinActivation_Attribute_actionActivation());
 	
 	m_actionActivation_Attribute_pinActivation->_setID(ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION);
@@ -1070,7 +1070,7 @@ void ActionsPackageImpl::initializeAddStructuralFeatureValueActionActivationCont
 	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setOrdered(true);
 	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setContainment(false);
 	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setResolveProxies(true);
-	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setDefaultValueLiteral("");	
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setDefaultValueLiteral("");
 	
 	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->_setID(ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION);
 	
@@ -1124,7 +1124,7 @@ void ActionsPackageImpl::initializeCallActionActivationContent()
 	m_callActionActivation_Attribute_callAction->setOrdered(true);
 	m_callActionActivation_Attribute_callAction->setContainment(false);
 	m_callActionActivation_Attribute_callAction->setResolveProxies(true);
-	m_callActionActivation_Attribute_callAction->setDefaultValueLiteral("");	
+	m_callActionActivation_Attribute_callAction->setDefaultValueLiteral("");
 	
 	m_callActionActivation_Attribute_callAction->_setID(CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION);
 	
@@ -1223,7 +1223,7 @@ void ActionsPackageImpl::initializeCallBehaviorActionActivationContent()
 	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setOrdered(true);
 	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setContainment(false);
 	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setResolveProxies(true);
-	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setDefaultValueLiteral("");	
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setDefaultValueLiteral("");
 	
 	m_callBehaviorActionActivation_Attribute_callBehaviorAction->_setID(CALLBEHAVIORACTIONACTIVATION_ATTRIBUTE_CALLBEHAVIORACTION);
 	
@@ -1300,7 +1300,7 @@ void ActionsPackageImpl::initializeCallOperationActionActivationContent()
 	m_callOperationActionActivation_Attribute_callOperationAction->setOrdered(true);
 	m_callOperationActionActivation_Attribute_callOperationAction->setContainment(false);
 	m_callOperationActionActivation_Attribute_callOperationAction->setResolveProxies(true);
-	m_callOperationActionActivation_Attribute_callOperationAction->setDefaultValueLiteral("");	
+	m_callOperationActionActivation_Attribute_callOperationAction->setDefaultValueLiteral("");
 	
 	m_callOperationActionActivation_Attribute_callOperationAction->_setID(CALLOPERATIONACTIONACTIVATION_ATTRIBUTE_CALLOPERATIONACTION);
 	
@@ -1377,7 +1377,7 @@ void ActionsPackageImpl::initializeClearAssociationActionActivationContent()
 	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setOrdered(true);
 	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setContainment(false);
 	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setResolveProxies(true);
-	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setDefaultValueLiteral("");	
+	m_clearAssociationActionActivation_Attribute_clearAssociationAction->setDefaultValueLiteral("");
 	
 	m_clearAssociationActionActivation_Attribute_clearAssociationAction->_setID(CLEARASSOCIATIONACTIONACTIVATION_ATTRIBUTE_CLEARASSOCIATIONACTION);
 	
@@ -1431,7 +1431,7 @@ void ActionsPackageImpl::initializeClearStructuralFeatureActionActivationContent
 	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setOrdered(true);
 	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setContainment(false);
 	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setResolveProxies(true);
-	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setDefaultValueLiteral("");	
+	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->setDefaultValueLiteral("");
 	
 	m_clearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction->_setID(CLEARSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION);
 	
@@ -1485,7 +1485,7 @@ void ActionsPackageImpl::initializeCreateLinkActionActivationContent()
 	m_createLinkActionActivation_Attribute_createLinkAction->setOrdered(true);
 	m_createLinkActionActivation_Attribute_createLinkAction->setContainment(false);
 	m_createLinkActionActivation_Attribute_createLinkAction->setResolveProxies(true);
-	m_createLinkActionActivation_Attribute_createLinkAction->setDefaultValueLiteral("");	
+	m_createLinkActionActivation_Attribute_createLinkAction->setDefaultValueLiteral("");
 	
 	m_createLinkActionActivation_Attribute_createLinkAction->_setID(CREATELINKACTIONACTIVATION_ATTRIBUTE_CREATELINKACTION);
 	
@@ -1539,7 +1539,7 @@ void ActionsPackageImpl::initializeCreateObjectActionActivationContent()
 	m_createObjectActionActivation_Attribute_createObjectAction->setOrdered(true);
 	m_createObjectActionActivation_Attribute_createObjectAction->setContainment(false);
 	m_createObjectActionActivation_Attribute_createObjectAction->setResolveProxies(true);
-	m_createObjectActionActivation_Attribute_createObjectAction->setDefaultValueLiteral("");	
+	m_createObjectActionActivation_Attribute_createObjectAction->setDefaultValueLiteral("");
 	
 	m_createObjectActionActivation_Attribute_createObjectAction->_setID(CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION);
 	
@@ -1593,7 +1593,7 @@ void ActionsPackageImpl::initializeDestroyLinkActionActivationContent()
 	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setOrdered(true);
 	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setContainment(false);
 	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setResolveProxies(true);
-	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setDefaultValueLiteral("");	
+	m_destroyLinkActionActivation_Attribute_destroyLinkAction->setDefaultValueLiteral("");
 	
 	m_destroyLinkActionActivation_Attribute_destroyLinkAction->_setID(DESTROYLINKACTIONACTIVATION_ATTRIBUTE_DESTROYLINKACTION);
 	
@@ -1647,7 +1647,7 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setOrdered(true);
 	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setContainment(false);
 	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setResolveProxies(true);
-	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setDefaultValueLiteral("");	
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setDefaultValueLiteral("");
 	
 	m_destroyObjectActionActivation_Attribute_destroyObjectAction->_setID(DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION);
 	
@@ -1762,7 +1762,7 @@ void ActionsPackageImpl::initializeExpansionActivationGroupContent()
 	m_expansionActivationGroup_Attribute_groupInputs->setOrdered(true);
 	m_expansionActivationGroup_Attribute_groupInputs->setContainment(false);
 	m_expansionActivationGroup_Attribute_groupInputs->setResolveProxies(true);
-	m_expansionActivationGroup_Attribute_groupInputs->setDefaultValueLiteral("");	
+	m_expansionActivationGroup_Attribute_groupInputs->setDefaultValueLiteral("");
 	
 	m_expansionActivationGroup_Attribute_groupInputs->_setID(EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS);
 	m_expansionActivationGroup_Attribute_groupOutputs->setName("groupOutputs");
@@ -1778,7 +1778,7 @@ void ActionsPackageImpl::initializeExpansionActivationGroupContent()
 	m_expansionActivationGroup_Attribute_groupOutputs->setOrdered(true);
 	m_expansionActivationGroup_Attribute_groupOutputs->setContainment(false);
 	m_expansionActivationGroup_Attribute_groupOutputs->setResolveProxies(true);
-	m_expansionActivationGroup_Attribute_groupOutputs->setDefaultValueLiteral("");	
+	m_expansionActivationGroup_Attribute_groupOutputs->setDefaultValueLiteral("");
 	
 	m_expansionActivationGroup_Attribute_groupOutputs->_setID(EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS);
 	m_expansionActivationGroup_Attribute_regionActivation->setName("regionActivation");
@@ -1794,7 +1794,7 @@ void ActionsPackageImpl::initializeExpansionActivationGroupContent()
 	m_expansionActivationGroup_Attribute_regionActivation->setOrdered(false);
 	m_expansionActivationGroup_Attribute_regionActivation->setContainment(false);
 	m_expansionActivationGroup_Attribute_regionActivation->setResolveProxies(true);
-	m_expansionActivationGroup_Attribute_regionActivation->setDefaultValueLiteral("");	
+	m_expansionActivationGroup_Attribute_regionActivation->setDefaultValueLiteral("");
 	
 	m_expansionActivationGroup_Attribute_regionActivation->_setID(EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION);
 	m_expansionActivationGroup_Attribute_regionInputs->setName("regionInputs");
@@ -1810,7 +1810,7 @@ void ActionsPackageImpl::initializeExpansionActivationGroupContent()
 	m_expansionActivationGroup_Attribute_regionInputs->setOrdered(true);
 	m_expansionActivationGroup_Attribute_regionInputs->setContainment(false);
 	m_expansionActivationGroup_Attribute_regionInputs->setResolveProxies(true);
-	m_expansionActivationGroup_Attribute_regionInputs->setDefaultValueLiteral("");	
+	m_expansionActivationGroup_Attribute_regionInputs->setDefaultValueLiteral("");
 	
 	m_expansionActivationGroup_Attribute_regionInputs->_setID(EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS);
 	
@@ -1927,7 +1927,7 @@ void ActionsPackageImpl::initializeExpansionNodeActivationContent()
 	m_expansionNodeActivation_Attribute_expansionNode->setOrdered(true);
 	m_expansionNodeActivation_Attribute_expansionNode->setContainment(false);
 	m_expansionNodeActivation_Attribute_expansionNode->setResolveProxies(true);
-	m_expansionNodeActivation_Attribute_expansionNode->setDefaultValueLiteral("");	
+	m_expansionNodeActivation_Attribute_expansionNode->setDefaultValueLiteral("");
 	
 	m_expansionNodeActivation_Attribute_expansionNode->_setID(EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE);
 	
@@ -2042,7 +2042,7 @@ void ActionsPackageImpl::initializeExpansionRegionActivationContent()
 	m_expansionRegionActivation_Attribute_activationGroups->setOrdered(false);
 	m_expansionRegionActivation_Attribute_activationGroups->setContainment(false);
 	m_expansionRegionActivation_Attribute_activationGroups->setResolveProxies(true);
-	m_expansionRegionActivation_Attribute_activationGroups->setDefaultValueLiteral("");	
+	m_expansionRegionActivation_Attribute_activationGroups->setDefaultValueLiteral("");
 	
 	m_expansionRegionActivation_Attribute_activationGroups->_setID(EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS);
 	m_expansionRegionActivation_Attribute_expansionRegion->setName("expansionRegion");
@@ -2058,7 +2058,7 @@ void ActionsPackageImpl::initializeExpansionRegionActivationContent()
 	m_expansionRegionActivation_Attribute_expansionRegion->setOrdered(true);
 	m_expansionRegionActivation_Attribute_expansionRegion->setContainment(false);
 	m_expansionRegionActivation_Attribute_expansionRegion->setResolveProxies(true);
-	m_expansionRegionActivation_Attribute_expansionRegion->setDefaultValueLiteral("");	
+	m_expansionRegionActivation_Attribute_expansionRegion->setDefaultValueLiteral("");
 	
 	m_expansionRegionActivation_Attribute_expansionRegion->_setID(EXPANSIONREGIONACTIVATION_ATTRIBUTE_EXPANSIONREGION);
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->setName("inputExpansionTokens");
@@ -2074,7 +2074,7 @@ void ActionsPackageImpl::initializeExpansionRegionActivationContent()
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->setOrdered(false);
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->setContainment(false);
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->setResolveProxies(true);
-	m_expansionRegionActivation_Attribute_inputExpansionTokens->setDefaultValueLiteral("");	
+	m_expansionRegionActivation_Attribute_inputExpansionTokens->setDefaultValueLiteral("");
 	
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->_setID(EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS);
 	m_expansionRegionActivation_Attribute_inputTokens->setName("inputTokens");
@@ -2090,7 +2090,7 @@ void ActionsPackageImpl::initializeExpansionRegionActivationContent()
 	m_expansionRegionActivation_Attribute_inputTokens->setOrdered(false);
 	m_expansionRegionActivation_Attribute_inputTokens->setContainment(false);
 	m_expansionRegionActivation_Attribute_inputTokens->setResolveProxies(true);
-	m_expansionRegionActivation_Attribute_inputTokens->setDefaultValueLiteral("");	
+	m_expansionRegionActivation_Attribute_inputTokens->setDefaultValueLiteral("");
 	
 	m_expansionRegionActivation_Attribute_inputTokens->_setID(EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS);
 	
@@ -2434,7 +2434,7 @@ void ActionsPackageImpl::initializeLinkActionActivationContent()
 	m_linkActionActivation_Attribute_linkAction->setOrdered(true);
 	m_linkActionActivation_Attribute_linkAction->setContainment(false);
 	m_linkActionActivation_Attribute_linkAction->setResolveProxies(true);
-	m_linkActionActivation_Attribute_linkAction->setDefaultValueLiteral("");	
+	m_linkActionActivation_Attribute_linkAction->setDefaultValueLiteral("");
 	
 	m_linkActionActivation_Attribute_linkAction->_setID(LINKACTIONACTIVATION_ATTRIBUTE_LINKACTION);
 	
@@ -2562,7 +2562,7 @@ void ActionsPackageImpl::initializePinActivationContent()
 	m_pinActivation_Attribute_actionActivation->setOrdered(false);
 	m_pinActivation_Attribute_actionActivation->setContainment(false);
 	m_pinActivation_Attribute_actionActivation->setResolveProxies(true);
-	m_pinActivation_Attribute_actionActivation->setDefaultValueLiteral("");	
+	m_pinActivation_Attribute_actionActivation->setDefaultValueLiteral("");
 	m_pinActivation_Attribute_actionActivation->setEOpposite(fUML::Semantics::Actions::ActionsPackage::eInstance()->getActionActivation_Attribute_pinActivation());
 	
 	m_pinActivation_Attribute_actionActivation->_setID(PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION);
@@ -2579,7 +2579,7 @@ void ActionsPackageImpl::initializePinActivationContent()
 	m_pinActivation_Attribute_pin->setOrdered(true);
 	m_pinActivation_Attribute_pin->setContainment(false);
 	m_pinActivation_Attribute_pin->setResolveProxies(true);
-	m_pinActivation_Attribute_pin->setDefaultValueLiteral("");	
+	m_pinActivation_Attribute_pin->setDefaultValueLiteral("");
 	
 	m_pinActivation_Attribute_pin->_setID(PINACTIVATION_ATTRIBUTE_PIN);
 	
@@ -2652,7 +2652,7 @@ void ActionsPackageImpl::initializeReadExtentActionActivationContent()
 	m_readExtentActionActivation_Attribute_readExtentAction->setOrdered(true);
 	m_readExtentActionActivation_Attribute_readExtentAction->setContainment(false);
 	m_readExtentActionActivation_Attribute_readExtentAction->setResolveProxies(true);
-	m_readExtentActionActivation_Attribute_readExtentAction->setDefaultValueLiteral("");	
+	m_readExtentActionActivation_Attribute_readExtentAction->setDefaultValueLiteral("");
 	
 	m_readExtentActionActivation_Attribute_readExtentAction->_setID(READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION);
 	
@@ -2706,7 +2706,7 @@ void ActionsPackageImpl::initializeReadIsClassifiedObjectActionActivationContent
 	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setOrdered(true);
 	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setContainment(false);
 	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setResolveProxies(true);
-	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setDefaultValueLiteral("");	
+	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->setDefaultValueLiteral("");
 	
 	m_readIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction->_setID(READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION);
 	
@@ -2760,7 +2760,7 @@ void ActionsPackageImpl::initializeReadLinkActionActivationContent()
 	m_readLinkActionActivation_Attribute_readLinkAction->setOrdered(true);
 	m_readLinkActionActivation_Attribute_readLinkAction->setContainment(false);
 	m_readLinkActionActivation_Attribute_readLinkAction->setResolveProxies(true);
-	m_readLinkActionActivation_Attribute_readLinkAction->setDefaultValueLiteral("");	
+	m_readLinkActionActivation_Attribute_readLinkAction->setDefaultValueLiteral("");
 	
 	m_readLinkActionActivation_Attribute_readLinkAction->_setID(READLINKACTIONACTIVATION_ATTRIBUTE_READLINKACTION);
 	
@@ -2814,7 +2814,7 @@ void ActionsPackageImpl::initializeReadSelfActionActivationContent()
 	m_readSelfActionActivation_Attribute_readSelfAction->setOrdered(true);
 	m_readSelfActionActivation_Attribute_readSelfAction->setContainment(false);
 	m_readSelfActionActivation_Attribute_readSelfAction->setResolveProxies(true);
-	m_readSelfActionActivation_Attribute_readSelfAction->setDefaultValueLiteral("");	
+	m_readSelfActionActivation_Attribute_readSelfAction->setDefaultValueLiteral("");
 	
 	m_readSelfActionActivation_Attribute_readSelfAction->_setID(READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION);
 	
@@ -2868,7 +2868,7 @@ void ActionsPackageImpl::initializeReadStructuralFeatureActionActivationContent(
 	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setOrdered(true);
 	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setContainment(false);
 	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setResolveProxies(true);
-	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setDefaultValueLiteral("");	
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setDefaultValueLiteral("");
 	
 	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->_setID(READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION);
 	
@@ -2922,7 +2922,7 @@ void ActionsPackageImpl::initializeRemoveStructuralFeatureValueActionActivationC
 	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setOrdered(true);
 	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setContainment(false);
 	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setResolveProxies(true);
-	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral("");	
+	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral("");
 	
 	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction->_setID(REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
 	
@@ -2976,7 +2976,7 @@ void ActionsPackageImpl::initializeSendSignalActionActivationContent()
 	m_sendSignalActionActivation_Attribute_sendSignalAction->setOrdered(true);
 	m_sendSignalActionActivation_Attribute_sendSignalAction->setContainment(false);
 	m_sendSignalActionActivation_Attribute_sendSignalAction->setResolveProxies(true);
-	m_sendSignalActionActivation_Attribute_sendSignalAction->setDefaultValueLiteral("");	
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setDefaultValueLiteral("");
 	
 	m_sendSignalActionActivation_Attribute_sendSignalAction->_setID(SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION);
 	
@@ -3052,7 +3052,7 @@ void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
 	m_structuredActivityNodeActivation_Attribute_activationGroup->setOrdered(false);
 	m_structuredActivityNodeActivation_Attribute_activationGroup->setContainment(true);
 	m_structuredActivityNodeActivation_Attribute_activationGroup->setResolveProxies(true);
-	m_structuredActivityNodeActivation_Attribute_activationGroup->setDefaultValueLiteral("");	
+	m_structuredActivityNodeActivation_Attribute_activationGroup->setDefaultValueLiteral("");
 	m_structuredActivityNodeActivation_Attribute_activationGroup->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_containingNodeActivation());
 	
 	m_structuredActivityNodeActivation_Attribute_activationGroup->_setID(STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP);
@@ -3069,7 +3069,7 @@ void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
 	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setOrdered(true);
 	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setContainment(false);
 	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setResolveProxies(true);
-	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setDefaultValueLiteral("");	
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setDefaultValueLiteral("");
 	
 	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->_setID(STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE);
 	
@@ -3350,7 +3350,7 @@ void ActionsPackageImpl::initializeValueSpecificationActionActivationContent()
 	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setOrdered(true);
 	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setContainment(false);
 	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setResolveProxies(true);
-	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setDefaultValueLiteral("");	
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setDefaultValueLiteral("");
 	
 	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->_setID(VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION);
 	

@@ -137,7 +137,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Attribute_builtInTypes->setOrdered(false);
 	m_executionFactory_Attribute_builtInTypes->setContainment(false);
 	m_executionFactory_Attribute_builtInTypes->setResolveProxies(true);
-	m_executionFactory_Attribute_builtInTypes->setDefaultValueLiteral("");	
+	m_executionFactory_Attribute_builtInTypes->setDefaultValueLiteral("");
 	
 	m_executionFactory_Attribute_builtInTypes->_setID(EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES);
 	m_executionFactory_Attribute_locus->setName("locus");
@@ -153,7 +153,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Attribute_locus->setOrdered(false);
 	m_executionFactory_Attribute_locus->setContainment(false);
 	m_executionFactory_Attribute_locus->setResolveProxies(true);
-	m_executionFactory_Attribute_locus->setDefaultValueLiteral("");	
+	m_executionFactory_Attribute_locus->setDefaultValueLiteral("");
 	m_executionFactory_Attribute_locus->setEOpposite(fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Attribute_factory());
 	
 	m_executionFactory_Attribute_locus->_setID(EXECUTIONFACTORY_ATTRIBUTE_LOCUS);
@@ -170,7 +170,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Attribute_strategies->setOrdered(false);
 	m_executionFactory_Attribute_strategies->setContainment(false);
 	m_executionFactory_Attribute_strategies->setResolveProxies(true);
-	m_executionFactory_Attribute_strategies->setDefaultValueLiteral("");	
+	m_executionFactory_Attribute_strategies->setDefaultValueLiteral("");
 	
 	m_executionFactory_Attribute_strategies->_setID(EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES);
 	
@@ -363,7 +363,7 @@ void LociPackageImpl::initializeExecutorContent()
 	m_executor_Attribute_locus->setOrdered(false);
 	m_executor_Attribute_locus->setContainment(false);
 	m_executor_Attribute_locus->setResolveProxies(true);
-	m_executor_Attribute_locus->setDefaultValueLiteral("");	
+	m_executor_Attribute_locus->setDefaultValueLiteral("");
 	m_executor_Attribute_locus->setEOpposite(fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Attribute_executor());
 	
 	m_executor_Attribute_locus->_setID(EXECUTOR_ATTRIBUTE_LOCUS);
@@ -530,7 +530,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Attribute_executor->setOrdered(false);
 	m_locus_Attribute_executor->setContainment(true);
 	m_locus_Attribute_executor->setResolveProxies(true);
-	m_locus_Attribute_executor->setDefaultValueLiteral("");	
+	m_locus_Attribute_executor->setDefaultValueLiteral("");
 	m_locus_Attribute_executor->setEOpposite(fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Attribute_locus());
 	
 	m_locus_Attribute_executor->_setID(LOCUS_ATTRIBUTE_EXECUTOR);
@@ -547,7 +547,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Attribute_extensionalValues->setOrdered(false);
 	m_locus_Attribute_extensionalValues->setContainment(true);
 	m_locus_Attribute_extensionalValues->setResolveProxies(true);
-	m_locus_Attribute_extensionalValues->setDefaultValueLiteral("");	
+	m_locus_Attribute_extensionalValues->setDefaultValueLiteral("");
 	
 	m_locus_Attribute_extensionalValues->_setID(LOCUS_ATTRIBUTE_EXTENSIONALVALUES);
 	m_locus_Attribute_factory->setName("factory");
@@ -563,7 +563,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Attribute_factory->setOrdered(true);
 	m_locus_Attribute_factory->setContainment(true);
 	m_locus_Attribute_factory->setResolveProxies(true);
-	m_locus_Attribute_factory->setDefaultValueLiteral("");	
+	m_locus_Attribute_factory->setDefaultValueLiteral("");
 	m_locus_Attribute_factory->setEOpposite(fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Attribute_locus());
 	
 	m_locus_Attribute_factory->_setID(LOCUS_ATTRIBUTE_FACTORY);

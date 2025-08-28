@@ -365,14 +365,14 @@ void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "fUML::Semantics::Activities::ActivityNodeActivationGroup";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
 				{
 					typeName = "fUML::Semantics::Activities::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getActivationGroup()); 
+			loadHandler->handleChild(this->getActivationGroup());
 
 			return; 
 		}

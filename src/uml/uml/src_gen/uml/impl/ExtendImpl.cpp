@@ -291,14 +291,14 @@ void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "uml::Constraint";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getCondition()); 
+			loadHandler->handleChild(this->getCondition());
 
 			return; 
 		}

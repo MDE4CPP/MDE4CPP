@@ -313,14 +313,14 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getCollection()); 
+			loadHandler->handleChild(this->getCollection());
 
 			return; 
 		}
@@ -332,14 +332,14 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getResult()); 
+			loadHandler->handleChild(this->getResult());
 
 			return; 
 		}

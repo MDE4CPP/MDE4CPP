@@ -366,7 +366,7 @@ void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "uml::Property";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -391,7 +391,7 @@ void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "uml::Operation";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

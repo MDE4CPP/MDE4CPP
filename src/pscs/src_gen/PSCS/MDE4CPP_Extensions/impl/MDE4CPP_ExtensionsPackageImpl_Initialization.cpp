@@ -434,7 +434,7 @@ void MDE4CPP_ExtensionsPackageImpl::initializePSCS_ObjectContent()
 	m_pSCS_Object_Attribute_definingPort->setOrdered(true);
 	m_pSCS_Object_Attribute_definingPort->setContainment(false);
 	m_pSCS_Object_Attribute_definingPort->setResolveProxies(true);
-	m_pSCS_Object_Attribute_definingPort->setDefaultValueLiteral("");	
+	m_pSCS_Object_Attribute_definingPort->setDefaultValueLiteral("");
 	
 	m_pSCS_Object_Attribute_definingPort->_setID(PSCS_OBJECT_ATTRIBUTE_DEFININGPORT);
 	

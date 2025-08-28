@@ -236,14 +236,14 @@ void WriteVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getValue()); 
+			loadHandler->handleChild(this->getValue());
 
 			return; 
 		}

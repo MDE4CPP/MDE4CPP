@@ -284,7 +284,7 @@ void EvaluationsPackageImpl::initializeCollectionItemEvalContent()
 	m_collectionItemEval_Attribute_item->setOrdered(true);
 	m_collectionItemEval_Attribute_item->setContainment(false);
 	m_collectionItemEval_Attribute_item->setResolveProxies(true);
-	m_collectionItemEval_Attribute_item->setDefaultValueLiteral("");	
+	m_collectionItemEval_Attribute_item->setDefaultValueLiteral("");
 	
 	m_collectionItemEval_Attribute_item->_setID(COLLECTIONITEMEVAL_ATTRIBUTE_ITEM);
 	
@@ -322,7 +322,7 @@ void EvaluationsPackageImpl::initializeCollectionLiteralExpEvalContent()
 	m_collectionLiteralExpEval_Attribute_parts->setOrdered(true);
 	m_collectionLiteralExpEval_Attribute_parts->setContainment(false);
 	m_collectionLiteralExpEval_Attribute_parts->setResolveProxies(true);
-	m_collectionLiteralExpEval_Attribute_parts->setDefaultValueLiteral("");	
+	m_collectionLiteralExpEval_Attribute_parts->setDefaultValueLiteral("");
 	
 	m_collectionLiteralExpEval_Attribute_parts->_setID(COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS);
 	
@@ -360,7 +360,7 @@ void EvaluationsPackageImpl::initializeCollectionLiteralPartEvalContent()
 	m_collectionLiteralPartEval_Attribute_element->setOrdered(true);
 	m_collectionLiteralPartEval_Attribute_element->setContainment(false);
 	m_collectionLiteralPartEval_Attribute_element->setResolveProxies(true);
-	m_collectionLiteralPartEval_Attribute_element->setDefaultValueLiteral("");	
+	m_collectionLiteralPartEval_Attribute_element->setDefaultValueLiteral("");
 	
 	m_collectionLiteralPartEval_Attribute_element->_setID(COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT);
 	
@@ -398,7 +398,7 @@ void EvaluationsPackageImpl::initializeCollectionRangeEvalContent()
 	m_collectionRangeEval_Attribute_first->setOrdered(true);
 	m_collectionRangeEval_Attribute_first->setContainment(false);
 	m_collectionRangeEval_Attribute_first->setResolveProxies(true);
-	m_collectionRangeEval_Attribute_first->setDefaultValueLiteral("");	
+	m_collectionRangeEval_Attribute_first->setDefaultValueLiteral("");
 	
 	m_collectionRangeEval_Attribute_first->_setID(COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST);
 	m_collectionRangeEval_Attribute_last->setName("last");
@@ -414,7 +414,7 @@ void EvaluationsPackageImpl::initializeCollectionRangeEvalContent()
 	m_collectionRangeEval_Attribute_last->setOrdered(true);
 	m_collectionRangeEval_Attribute_last->setContainment(false);
 	m_collectionRangeEval_Attribute_last->setResolveProxies(true);
-	m_collectionRangeEval_Attribute_last->setDefaultValueLiteral("");	
+	m_collectionRangeEval_Attribute_last->setDefaultValueLiteral("");
 	
 	m_collectionRangeEval_Attribute_last->_setID(COLLECTIONRANGEEVAL_ATTRIBUTE_LAST);
 	
@@ -474,7 +474,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Attribute_bindings->setOrdered(true);
 	m_evalEnvironment_Attribute_bindings->setContainment(false);
 	m_evalEnvironment_Attribute_bindings->setResolveProxies(true);
-	m_evalEnvironment_Attribute_bindings->setDefaultValueLiteral("");	
+	m_evalEnvironment_Attribute_bindings->setDefaultValueLiteral("");
 	
 	m_evalEnvironment_Attribute_bindings->_setID(EVALENVIRONMENT_ATTRIBUTE_BINDINGS);
 	
@@ -647,7 +647,7 @@ void EvaluationsPackageImpl::initializeExpressionInOclEvalContent()
 	m_expressionInOclEval_Attribute_context->setOrdered(true);
 	m_expressionInOclEval_Attribute_context->setContainment(false);
 	m_expressionInOclEval_Attribute_context->setResolveProxies(true);
-	m_expressionInOclEval_Attribute_context->setDefaultValueLiteral("");	
+	m_expressionInOclEval_Attribute_context->setDefaultValueLiteral("");
 	
 	m_expressionInOclEval_Attribute_context->_setID(EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT);
 	m_expressionInOclEval_Attribute_environment->setName("environment");
@@ -663,7 +663,7 @@ void EvaluationsPackageImpl::initializeExpressionInOclEvalContent()
 	m_expressionInOclEval_Attribute_environment->setOrdered(true);
 	m_expressionInOclEval_Attribute_environment->setContainment(false);
 	m_expressionInOclEval_Attribute_environment->setResolveProxies(true);
-	m_expressionInOclEval_Attribute_environment->setDefaultValueLiteral("");	
+	m_expressionInOclEval_Attribute_environment->setDefaultValueLiteral("");
 	
 	m_expressionInOclEval_Attribute_environment->_setID(EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT);
 	
@@ -701,7 +701,7 @@ void EvaluationsPackageImpl::initializeIfExpEvalContent()
 	m_ifExpEval_Attribute_condition->setOrdered(true);
 	m_ifExpEval_Attribute_condition->setContainment(false);
 	m_ifExpEval_Attribute_condition->setResolveProxies(true);
-	m_ifExpEval_Attribute_condition->setDefaultValueLiteral("");	
+	m_ifExpEval_Attribute_condition->setDefaultValueLiteral("");
 	
 	m_ifExpEval_Attribute_condition->_setID(IFEXPEVAL_ATTRIBUTE_CONDITION);
 	m_ifExpEval_Attribute_elseExpression->setName("elseExpression");
@@ -717,7 +717,7 @@ void EvaluationsPackageImpl::initializeIfExpEvalContent()
 	m_ifExpEval_Attribute_elseExpression->setOrdered(true);
 	m_ifExpEval_Attribute_elseExpression->setContainment(false);
 	m_ifExpEval_Attribute_elseExpression->setResolveProxies(true);
-	m_ifExpEval_Attribute_elseExpression->setDefaultValueLiteral("");	
+	m_ifExpEval_Attribute_elseExpression->setDefaultValueLiteral("");
 	
 	m_ifExpEval_Attribute_elseExpression->_setID(IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION);
 	m_ifExpEval_Attribute_thenExpression->setName("thenExpression");
@@ -733,7 +733,7 @@ void EvaluationsPackageImpl::initializeIfExpEvalContent()
 	m_ifExpEval_Attribute_thenExpression->setOrdered(true);
 	m_ifExpEval_Attribute_thenExpression->setContainment(false);
 	m_ifExpEval_Attribute_thenExpression->setResolveProxies(true);
-	m_ifExpEval_Attribute_thenExpression->setDefaultValueLiteral("");	
+	m_ifExpEval_Attribute_thenExpression->setDefaultValueLiteral("");
 	
 	m_ifExpEval_Attribute_thenExpression->_setID(IFEXPEVAL_ATTRIBUTE_THENEXPRESSION);
 	
@@ -793,7 +793,7 @@ void EvaluationsPackageImpl::initializeIterateExpEvalContent()
 	m_iterateExpEval_Attribute_result->setOrdered(true);
 	m_iterateExpEval_Attribute_result->setContainment(false);
 	m_iterateExpEval_Attribute_result->setResolveProxies(true);
-	m_iterateExpEval_Attribute_result->setDefaultValueLiteral("");	
+	m_iterateExpEval_Attribute_result->setDefaultValueLiteral("");
 	
 	m_iterateExpEval_Attribute_result->_setID(ITERATEEXPEVAL_ATTRIBUTE_RESULT);
 	
@@ -869,7 +869,7 @@ void EvaluationsPackageImpl::initializeLetExpEvalContent()
 	m_letExpEval_Attribute_in->setOrdered(true);
 	m_letExpEval_Attribute_in->setContainment(false);
 	m_letExpEval_Attribute_in->setResolveProxies(true);
-	m_letExpEval_Attribute_in->setDefaultValueLiteral("");	
+	m_letExpEval_Attribute_in->setDefaultValueLiteral("");
 	
 	m_letExpEval_Attribute_in->_setID(LETEXPEVAL_ATTRIBUTE_IN);
 	m_letExpEval_Attribute_initExpression->setName("initExpression");
@@ -885,7 +885,7 @@ void EvaluationsPackageImpl::initializeLetExpEvalContent()
 	m_letExpEval_Attribute_initExpression->setOrdered(true);
 	m_letExpEval_Attribute_initExpression->setContainment(false);
 	m_letExpEval_Attribute_initExpression->setResolveProxies(true);
-	m_letExpEval_Attribute_initExpression->setDefaultValueLiteral("");	
+	m_letExpEval_Attribute_initExpression->setDefaultValueLiteral("");
 	
 	m_letExpEval_Attribute_initExpression->_setID(LETEXPEVAL_ATTRIBUTE_INITEXPRESSION);
 	
@@ -961,7 +961,7 @@ void EvaluationsPackageImpl::initializeLoopExpEvalContent()
 	m_loopExpEval_Attribute_bodyEvals->setOrdered(true);
 	m_loopExpEval_Attribute_bodyEvals->setContainment(false);
 	m_loopExpEval_Attribute_bodyEvals->setResolveProxies(true);
-	m_loopExpEval_Attribute_bodyEvals->setDefaultValueLiteral("");	
+	m_loopExpEval_Attribute_bodyEvals->setDefaultValueLiteral("");
 	
 	m_loopExpEval_Attribute_bodyEvals->_setID(LOOPEXPEVAL_ATTRIBUTE_BODYEVALS);
 	
@@ -1047,7 +1047,7 @@ void EvaluationsPackageImpl::initializeNameValueBindingContent()
 	m_nameValueBinding_Attribute_value->setOrdered(true);
 	m_nameValueBinding_Attribute_value->setContainment(false);
 	m_nameValueBinding_Attribute_value->setResolveProxies(true);
-	m_nameValueBinding_Attribute_value->setDefaultValueLiteral("");	
+	m_nameValueBinding_Attribute_value->setDefaultValueLiteral("");
 	
 	m_nameValueBinding_Attribute_value->_setID(NAMEVALUEBINDING_ATTRIBUTE_VALUE);
 	
@@ -1101,7 +1101,7 @@ void EvaluationsPackageImpl::initializeNavigationCallExpEvalContent()
 	m_navigationCallExpEval_Attribute_qualifiers->setOrdered(true);
 	m_navigationCallExpEval_Attribute_qualifiers->setContainment(false);
 	m_navigationCallExpEval_Attribute_qualifiers->setResolveProxies(true);
-	m_navigationCallExpEval_Attribute_qualifiers->setDefaultValueLiteral("");	
+	m_navigationCallExpEval_Attribute_qualifiers->setDefaultValueLiteral("");
 	
 	m_navigationCallExpEval_Attribute_qualifiers->_setID(NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS);
 	
@@ -1161,7 +1161,7 @@ void EvaluationsPackageImpl::initializeOclExpEvalContent()
 	m_oclExpEval_Attribute_beforeEnvironment->setOrdered(true);
 	m_oclExpEval_Attribute_beforeEnvironment->setContainment(false);
 	m_oclExpEval_Attribute_beforeEnvironment->setResolveProxies(true);
-	m_oclExpEval_Attribute_beforeEnvironment->setDefaultValueLiteral("");	
+	m_oclExpEval_Attribute_beforeEnvironment->setDefaultValueLiteral("");
 	
 	m_oclExpEval_Attribute_beforeEnvironment->_setID(OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT);
 	m_oclExpEval_Attribute_environment->setName("environment");
@@ -1177,7 +1177,7 @@ void EvaluationsPackageImpl::initializeOclExpEvalContent()
 	m_oclExpEval_Attribute_environment->setOrdered(true);
 	m_oclExpEval_Attribute_environment->setContainment(false);
 	m_oclExpEval_Attribute_environment->setResolveProxies(true);
-	m_oclExpEval_Attribute_environment->setDefaultValueLiteral("");	
+	m_oclExpEval_Attribute_environment->setDefaultValueLiteral("");
 	
 	m_oclExpEval_Attribute_environment->_setID(OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT);
 	m_oclExpEval_Attribute_model->setName("model");
@@ -1193,7 +1193,7 @@ void EvaluationsPackageImpl::initializeOclExpEvalContent()
 	m_oclExpEval_Attribute_model->setOrdered(true);
 	m_oclExpEval_Attribute_model->setContainment(false);
 	m_oclExpEval_Attribute_model->setResolveProxies(true);
-	m_oclExpEval_Attribute_model->setDefaultValueLiteral("");	
+	m_oclExpEval_Attribute_model->setDefaultValueLiteral("");
 	m_oclExpEval_Attribute_model->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_instance());
 	
 	m_oclExpEval_Attribute_model->_setID(OCLEXPEVAL_ATTRIBUTE_MODEL);
@@ -1210,7 +1210,7 @@ void EvaluationsPackageImpl::initializeOclExpEvalContent()
 	m_oclExpEval_Attribute_resultValue->setOrdered(true);
 	m_oclExpEval_Attribute_resultValue->setContainment(false);
 	m_oclExpEval_Attribute_resultValue->setResolveProxies(true);
-	m_oclExpEval_Attribute_resultValue->setDefaultValueLiteral("");	
+	m_oclExpEval_Attribute_resultValue->setDefaultValueLiteral("");
 	
 	m_oclExpEval_Attribute_resultValue->_setID(OCLEXPEVAL_ATTRIBUTE_RESULTVALUE);
 	
@@ -1248,7 +1248,7 @@ void EvaluationsPackageImpl::initializeOclMessageArgEvalContent()
 	m_oclMessageArgEval_Attribute_expression->setOrdered(true);
 	m_oclMessageArgEval_Attribute_expression->setContainment(false);
 	m_oclMessageArgEval_Attribute_expression->setResolveProxies(true);
-	m_oclMessageArgEval_Attribute_expression->setDefaultValueLiteral("");	
+	m_oclMessageArgEval_Attribute_expression->setDefaultValueLiteral("");
 	
 	m_oclMessageArgEval_Attribute_expression->_setID(OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION);
 	m_oclMessageArgEval_Attribute_unspecified->setName("unspecified");
@@ -1264,7 +1264,7 @@ void EvaluationsPackageImpl::initializeOclMessageArgEvalContent()
 	m_oclMessageArgEval_Attribute_unspecified->setOrdered(true);
 	m_oclMessageArgEval_Attribute_unspecified->setContainment(false);
 	m_oclMessageArgEval_Attribute_unspecified->setResolveProxies(true);
-	m_oclMessageArgEval_Attribute_unspecified->setDefaultValueLiteral("");	
+	m_oclMessageArgEval_Attribute_unspecified->setDefaultValueLiteral("");
 	
 	m_oclMessageArgEval_Attribute_unspecified->_setID(OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED);
 	m_oclMessageArgEval_Attribute_variable->setName("variable");
@@ -1280,7 +1280,7 @@ void EvaluationsPackageImpl::initializeOclMessageArgEvalContent()
 	m_oclMessageArgEval_Attribute_variable->setOrdered(true);
 	m_oclMessageArgEval_Attribute_variable->setContainment(false);
 	m_oclMessageArgEval_Attribute_variable->setResolveProxies(true);
-	m_oclMessageArgEval_Attribute_variable->setDefaultValueLiteral("");	
+	m_oclMessageArgEval_Attribute_variable->setDefaultValueLiteral("");
 	
 	m_oclMessageArgEval_Attribute_variable->_setID(OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE);
 	
@@ -1334,7 +1334,7 @@ void EvaluationsPackageImpl::initializeOclMessageExpEvalContent()
 	m_oclMessageExpEval_Attribute_arguments->setOrdered(true);
 	m_oclMessageExpEval_Attribute_arguments->setContainment(false);
 	m_oclMessageExpEval_Attribute_arguments->setResolveProxies(true);
-	m_oclMessageExpEval_Attribute_arguments->setDefaultValueLiteral("");	
+	m_oclMessageExpEval_Attribute_arguments->setDefaultValueLiteral("");
 	
 	m_oclMessageExpEval_Attribute_arguments->_setID(OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS);
 	m_oclMessageExpEval_Attribute_target->setName("target");
@@ -1350,7 +1350,7 @@ void EvaluationsPackageImpl::initializeOclMessageExpEvalContent()
 	m_oclMessageExpEval_Attribute_target->setOrdered(true);
 	m_oclMessageExpEval_Attribute_target->setContainment(false);
 	m_oclMessageExpEval_Attribute_target->setResolveProxies(true);
-	m_oclMessageExpEval_Attribute_target->setDefaultValueLiteral("");	
+	m_oclMessageExpEval_Attribute_target->setDefaultValueLiteral("");
 	
 	m_oclMessageExpEval_Attribute_target->_setID(OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET);
 	
@@ -1404,7 +1404,7 @@ void EvaluationsPackageImpl::initializeOperationCallExpEvalContent()
 	m_operationCallExpEval_Attribute_arguments->setOrdered(false);
 	m_operationCallExpEval_Attribute_arguments->setContainment(false);
 	m_operationCallExpEval_Attribute_arguments->setResolveProxies(true);
-	m_operationCallExpEval_Attribute_arguments->setDefaultValueLiteral("");	
+	m_operationCallExpEval_Attribute_arguments->setDefaultValueLiteral("");
 	
 	m_operationCallExpEval_Attribute_arguments->_setID(OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS);
 	
@@ -1464,7 +1464,7 @@ void EvaluationsPackageImpl::initializePropertyCallExpEvalContent()
 	m_propertyCallExpEval_Attribute_source->setOrdered(true);
 	m_propertyCallExpEval_Attribute_source->setContainment(false);
 	m_propertyCallExpEval_Attribute_source->setResolveProxies(true);
-	m_propertyCallExpEval_Attribute_source->setDefaultValueLiteral("");	
+	m_propertyCallExpEval_Attribute_source->setDefaultValueLiteral("");
 	
 	m_propertyCallExpEval_Attribute_source->_setID(PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE);
 	
@@ -1546,7 +1546,7 @@ void EvaluationsPackageImpl::initializeTupleLiteralExpEvalContent()
 	m_tupleLiteralExpEval_Attribute_tuplePart->setOrdered(false);
 	m_tupleLiteralExpEval_Attribute_tuplePart->setContainment(false);
 	m_tupleLiteralExpEval_Attribute_tuplePart->setResolveProxies(true);
-	m_tupleLiteralExpEval_Attribute_tuplePart->setDefaultValueLiteral("");	
+	m_tupleLiteralExpEval_Attribute_tuplePart->setDefaultValueLiteral("");
 	
 	m_tupleLiteralExpEval_Attribute_tuplePart->_setID(TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART);
 	
@@ -1666,7 +1666,7 @@ void EvaluationsPackageImpl::initializeVariableDeclEvalContent()
 	m_variableDeclEval_Attribute_initExp->setOrdered(true);
 	m_variableDeclEval_Attribute_initExp->setContainment(false);
 	m_variableDeclEval_Attribute_initExp->setResolveProxies(true);
-	m_variableDeclEval_Attribute_initExp->setDefaultValueLiteral("");	
+	m_variableDeclEval_Attribute_initExp->setDefaultValueLiteral("");
 	
 	m_variableDeclEval_Attribute_initExp->_setID(VARIABLEDECLEVAL_ATTRIBUTE_INITEXP);
 	

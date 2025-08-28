@@ -677,7 +677,7 @@ void OperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "uml::Parameter";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

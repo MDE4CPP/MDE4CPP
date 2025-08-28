@@ -58,8 +58,8 @@
 #include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSSM::Semantics::Loci;

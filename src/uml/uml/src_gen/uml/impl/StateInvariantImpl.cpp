@@ -235,14 +235,14 @@ void StateInvariantImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "uml::Constraint";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getInvariant()); 
+			loadHandler->handleChild(this->getInvariant());
 
 			return; 
 		}

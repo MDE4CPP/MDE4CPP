@@ -442,7 +442,7 @@ void ExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "fUML::Semantics::CommonBehavior::ParameterValue";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
 				{

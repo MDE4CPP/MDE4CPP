@@ -394,7 +394,7 @@ void FUML_LinkImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "fUML::MDE4CPP_Extensions::FUML_LinkEnd";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::MDE4CPP_Extensions/]"))
 				{

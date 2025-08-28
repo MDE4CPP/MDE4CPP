@@ -119,7 +119,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_edge->setOrdered(false);
 	m_activityEdgeInstance_Attribute_edge->setContainment(false);
 	m_activityEdgeInstance_Attribute_edge->setResolveProxies(true);
-	m_activityEdgeInstance_Attribute_edge->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_edge->setDefaultValueLiteral("");
 	
 	m_activityEdgeInstance_Attribute_edge->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE);
 	m_activityEdgeInstance_Attribute_group->setName("group");
@@ -135,7 +135,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_group->setOrdered(false);
 	m_activityEdgeInstance_Attribute_group->setContainment(false);
 	m_activityEdgeInstance_Attribute_group->setResolveProxies(true);
-	m_activityEdgeInstance_Attribute_group->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_group->setDefaultValueLiteral("");
 	m_activityEdgeInstance_Attribute_group->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_edgeInstances());
 	
 	m_activityEdgeInstance_Attribute_group->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP);
@@ -152,7 +152,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_offers->setOrdered(false);
 	m_activityEdgeInstance_Attribute_offers->setContainment(false);
 	m_activityEdgeInstance_Attribute_offers->setResolveProxies(true);
-	m_activityEdgeInstance_Attribute_offers->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_offers->setDefaultValueLiteral("");
 	
 	m_activityEdgeInstance_Attribute_offers->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS);
 	m_activityEdgeInstance_Attribute_source->setName("source");
@@ -168,7 +168,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_source->setOrdered(false);
 	m_activityEdgeInstance_Attribute_source->setContainment(false);
 	m_activityEdgeInstance_Attribute_source->setResolveProxies(true);
-	m_activityEdgeInstance_Attribute_source->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_source->setDefaultValueLiteral("");
 	m_activityEdgeInstance_Attribute_source->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_outgoingEdges());
 	
 	m_activityEdgeInstance_Attribute_source->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE);
@@ -185,7 +185,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 	m_activityEdgeInstance_Attribute_target->setOrdered(false);
 	m_activityEdgeInstance_Attribute_target->setContainment(false);
 	m_activityEdgeInstance_Attribute_target->setResolveProxies(true);
-	m_activityEdgeInstance_Attribute_target->setDefaultValueLiteral("");	
+	m_activityEdgeInstance_Attribute_target->setDefaultValueLiteral("");
 	m_activityEdgeInstance_Attribute_target->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_incomingEdges());
 	
 	m_activityEdgeInstance_Attribute_target->_setID(ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET);
@@ -308,7 +308,7 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Attribute_activationGroup->setOrdered(false);
 	m_activityExecution_Attribute_activationGroup->setContainment(true);
 	m_activityExecution_Attribute_activationGroup->setResolveProxies(true);
-	m_activityExecution_Attribute_activationGroup->setDefaultValueLiteral("");	
+	m_activityExecution_Attribute_activationGroup->setDefaultValueLiteral("");
 	m_activityExecution_Attribute_activationGroup->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_activityExecution());
 	
 	m_activityExecution_Attribute_activationGroup->_setID(ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP);
@@ -325,7 +325,7 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	m_activityExecution_Attribute_activity->setOrdered(true);
 	m_activityExecution_Attribute_activity->setContainment(false);
 	m_activityExecution_Attribute_activity->setResolveProxies(true);
-	m_activityExecution_Attribute_activity->setDefaultValueLiteral("");	
+	m_activityExecution_Attribute_activity->setDefaultValueLiteral("");
 	
 	m_activityExecution_Attribute_activity->_setID(ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY);
 	
@@ -478,7 +478,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_group->setOrdered(false);
 	m_activityNodeActivation_Attribute_group->setContainment(false);
 	m_activityNodeActivation_Attribute_group->setResolveProxies(true);
-	m_activityNodeActivation_Attribute_group->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_group->setDefaultValueLiteral("");
 	m_activityNodeActivation_Attribute_group->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_nodeActivations());
 	
 	m_activityNodeActivation_Attribute_group->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP);
@@ -495,7 +495,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_heldTokens->setOrdered(false);
 	m_activityNodeActivation_Attribute_heldTokens->setContainment(true);
 	m_activityNodeActivation_Attribute_heldTokens->setResolveProxies(true);
-	m_activityNodeActivation_Attribute_heldTokens->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_heldTokens->setDefaultValueLiteral("");
 	m_activityNodeActivation_Attribute_heldTokens->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Attribute_holder());
 	
 	m_activityNodeActivation_Attribute_heldTokens->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS);
@@ -512,7 +512,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_incomingEdges->setOrdered(false);
 	m_activityNodeActivation_Attribute_incomingEdges->setContainment(false);
 	m_activityNodeActivation_Attribute_incomingEdges->setResolveProxies(true);
-	m_activityNodeActivation_Attribute_incomingEdges->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_incomingEdges->setDefaultValueLiteral("");
 	m_activityNodeActivation_Attribute_incomingEdges->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_target());
 	
 	m_activityNodeActivation_Attribute_incomingEdges->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES);
@@ -529,7 +529,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_node->setOrdered(false);
 	m_activityNodeActivation_Attribute_node->setContainment(false);
 	m_activityNodeActivation_Attribute_node->setResolveProxies(true);
-	m_activityNodeActivation_Attribute_node->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_node->setDefaultValueLiteral("");
 	
 	m_activityNodeActivation_Attribute_node->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE);
 	m_activityNodeActivation_Attribute_outgoingEdges->setName("outgoingEdges");
@@ -545,7 +545,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Attribute_outgoingEdges->setOrdered(false);
 	m_activityNodeActivation_Attribute_outgoingEdges->setContainment(false);
 	m_activityNodeActivation_Attribute_outgoingEdges->setResolveProxies(true);
-	m_activityNodeActivation_Attribute_outgoingEdges->setDefaultValueLiteral("");	
+	m_activityNodeActivation_Attribute_outgoingEdges->setDefaultValueLiteral("");
 	m_activityNodeActivation_Attribute_outgoingEdges->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_source());
 	
 	m_activityNodeActivation_Attribute_outgoingEdges->_setID(ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES);
@@ -999,7 +999,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_activityExecution->setOrdered(true);
 	m_activityNodeActivationGroup_Attribute_activityExecution->setContainment(false);
 	m_activityNodeActivationGroup_Attribute_activityExecution->setResolveProxies(true);
-	m_activityNodeActivationGroup_Attribute_activityExecution->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_activityExecution->setDefaultValueLiteral("");
 	m_activityNodeActivationGroup_Attribute_activityExecution->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Attribute_activationGroup());
 	
 	m_activityNodeActivationGroup_Attribute_activityExecution->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION);
@@ -1016,7 +1016,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setContainment(false);
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setResolveProxies(true);
-	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setDefaultValueLiteral("");
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->setEOpposite(fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Attribute_activationGroup());
 	
 	m_activityNodeActivationGroup_Attribute_containingNodeActivation->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION);
@@ -1033,7 +1033,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setContainment(true);
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setResolveProxies(true);
-	m_activityNodeActivationGroup_Attribute_edgeInstances->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_edgeInstances->setDefaultValueLiteral("");
 	m_activityNodeActivationGroup_Attribute_edgeInstances->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_group());
 	
 	m_activityNodeActivationGroup_Attribute_edgeInstances->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES);
@@ -1050,7 +1050,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setContainment(true);
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setResolveProxies(true);
-	m_activityNodeActivationGroup_Attribute_nodeActivations->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_nodeActivations->setDefaultValueLiteral("");
 	m_activityNodeActivationGroup_Attribute_nodeActivations->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_group());
 	
 	m_activityNodeActivationGroup_Attribute_nodeActivations->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS);
@@ -1067,7 +1067,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setOrdered(false);
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setContainment(false);
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->setResolveProxies(true);
-	m_activityNodeActivationGroup_Attribute_suspendedActivations->setDefaultValueLiteral("");	
+	m_activityNodeActivationGroup_Attribute_suspendedActivations->setDefaultValueLiteral("");
 	
 	m_activityNodeActivationGroup_Attribute_suspendedActivations->_setID(ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS);
 	
@@ -1472,7 +1472,7 @@ void ActivitiesPackageImpl::initializeActivityParameterNodeActivationContent()
 	m_activityParameterNodeActivation_Attribute_activityParameterNode->setOrdered(true);
 	m_activityParameterNodeActivation_Attribute_activityParameterNode->setContainment(false);
 	m_activityParameterNodeActivation_Attribute_activityParameterNode->setResolveProxies(true);
-	m_activityParameterNodeActivation_Attribute_activityParameterNode->setDefaultValueLiteral("");	
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setDefaultValueLiteral("");
 	
 	m_activityParameterNodeActivation_Attribute_activityParameterNode->_setID(ACTIVITYPARAMETERNODEACTIVATION_ATTRIBUTE_ACTIVITYPARAMETERNODE);
 	
@@ -1772,7 +1772,7 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 	m_decisionNodeActivation_Attribute_decisionNode->setOrdered(true);
 	m_decisionNodeActivation_Attribute_decisionNode->setContainment(false);
 	m_decisionNodeActivation_Attribute_decisionNode->setResolveProxies(true);
-	m_decisionNodeActivation_Attribute_decisionNode->setDefaultValueLiteral("");	
+	m_decisionNodeActivation_Attribute_decisionNode->setDefaultValueLiteral("");
 	
 	m_decisionNodeActivation_Attribute_decisionNode->_setID(DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE);
 	
@@ -2098,7 +2098,7 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	m_forkedToken_Attribute_baseToken->setOrdered(false);
 	m_forkedToken_Attribute_baseToken->setContainment(false);
 	m_forkedToken_Attribute_baseToken->setResolveProxies(true);
-	m_forkedToken_Attribute_baseToken->setDefaultValueLiteral("");	
+	m_forkedToken_Attribute_baseToken->setDefaultValueLiteral("");
 	
 	m_forkedToken_Attribute_baseToken->_setID(FORKEDTOKEN_ATTRIBUTE_BASETOKEN);
 	
@@ -2615,7 +2615,7 @@ void ActivitiesPackageImpl::initializeOfferContent()
 	m_offer_Attribute_offeredTokens->setOrdered(false);
 	m_offer_Attribute_offeredTokens->setContainment(false);
 	m_offer_Attribute_offeredTokens->setResolveProxies(true);
-	m_offer_Attribute_offeredTokens->setDefaultValueLiteral("");	
+	m_offer_Attribute_offeredTokens->setDefaultValueLiteral("");
 	
 	m_offer_Attribute_offeredTokens->_setID(OFFER_ATTRIBUTE_OFFEREDTOKENS);
 	
@@ -2740,7 +2740,7 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	m_token_Attribute_holder->setOrdered(false);
 	m_token_Attribute_holder->setContainment(false);
 	m_token_Attribute_holder->setResolveProxies(true);
-	m_token_Attribute_holder->setDefaultValueLiteral("");	
+	m_token_Attribute_holder->setDefaultValueLiteral("");
 	m_token_Attribute_holder->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_heldTokens());
 	
 	m_token_Attribute_holder->_setID(TOKEN_ATTRIBUTE_HOLDER);
@@ -2863,7 +2863,7 @@ void ActivitiesPackageImpl::initializeTokenSetContent()
 	m_tokenSet_Attribute_tokens->setOrdered(false);
 	m_tokenSet_Attribute_tokens->setContainment(false);
 	m_tokenSet_Attribute_tokens->setResolveProxies(true);
-	m_tokenSet_Attribute_tokens->setDefaultValueLiteral("");	
+	m_tokenSet_Attribute_tokens->setDefaultValueLiteral("");
 	
 	m_tokenSet_Attribute_tokens->_setID(TOKENSET_ATTRIBUTE_TOKENS);
 	

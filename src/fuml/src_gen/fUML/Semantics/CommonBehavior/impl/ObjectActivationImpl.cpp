@@ -571,7 +571,7 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
 				{
@@ -596,7 +596,7 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "fUML::Semantics::CommonBehavior::EventOccurrence";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
 				{

@@ -399,14 +399,14 @@ void FUML_ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "fUML::Semantics::CommonBehavior::ObjectActivation";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::CommonBehavior/]"))
 				{
 					typeName = "fUML::Semantics::CommonBehavior::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getObjectActivation()); 
+			loadHandler->handleChild(this->getObjectActivation());
 
 			return; 
 		}

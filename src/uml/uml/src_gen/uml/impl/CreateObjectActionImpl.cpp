@@ -274,14 +274,14 @@ void CreateObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getResult()); 
+			loadHandler->handleChild(this->getResult());
 
 			return; 
 		}

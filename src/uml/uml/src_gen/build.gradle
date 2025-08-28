@@ -48,7 +48,6 @@ task compileUmlSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn  getRootProject().getTasksByName('generateUmlModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateUmlModel', true)]
 	}	
 

@@ -331,7 +331,7 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "uml::LinkEndData";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -356,7 +356,7 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

@@ -262,14 +262,14 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getRequest()); 
+			loadHandler->handleChild(this->getRequest());
 
 			return; 
 		}
@@ -281,14 +281,14 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getTarget()); 
+			loadHandler->handleChild(this->getTarget());
 
 			return; 
 		}

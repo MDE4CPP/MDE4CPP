@@ -518,7 +518,7 @@ void OclExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "ocl::Expressions::VarDeclarationExp";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ocl::Expressions/]"))
 				{

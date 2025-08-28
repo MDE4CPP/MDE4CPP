@@ -425,7 +425,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -450,7 +450,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "uml::Constraint";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -475,7 +475,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "uml::Constraint";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -500,7 +500,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

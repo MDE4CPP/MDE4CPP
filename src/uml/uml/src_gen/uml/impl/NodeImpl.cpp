@@ -325,7 +325,7 @@ void NodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 			{
 				typeName = "uml::Node";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

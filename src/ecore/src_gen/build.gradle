@@ -48,7 +48,6 @@ task compileEcoreSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn  getRootProject().getTasksByName('generateEcoreModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateEcoreModel', true)]
 	}	
 

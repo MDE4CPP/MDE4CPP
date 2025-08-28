@@ -328,7 +328,7 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 			{
 				typeName = "uml::Slot";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -354,14 +354,14 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getSpecification()); 
+			loadHandler->handleChild(this->getSpecification());
 
 			return; 
 		}

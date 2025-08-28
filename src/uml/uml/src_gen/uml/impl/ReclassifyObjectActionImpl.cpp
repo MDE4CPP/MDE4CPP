@@ -315,14 +315,14 @@ void ReclassifyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getObject()); 
+			loadHandler->handleChild(this->getObject());
 
 			return; 
 		}

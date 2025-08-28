@@ -274,7 +274,7 @@ void ParameterSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::Constraint";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

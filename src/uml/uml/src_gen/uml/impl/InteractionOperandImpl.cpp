@@ -297,7 +297,7 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -322,14 +322,14 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 			{
 				typeName = "uml::InteractionConstraint";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getGuard()); 
+			loadHandler->handleChild(this->getGuard());
 
 			return; 
 		}

@@ -48,7 +48,6 @@ task compileTypesSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn  getRootProject().getTasksByName('generateTypesModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateTypesModel', true)]
 	}	
 

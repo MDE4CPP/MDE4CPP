@@ -276,14 +276,14 @@ void RemoveVariableValueActionImpl::loadNode(std::string nodeName, std::shared_p
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getRemoveAt()); 
+			loadHandler->handleChild(this->getRemoveAt());
 
 			return; 
 		}

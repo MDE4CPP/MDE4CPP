@@ -306,14 +306,14 @@ void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getLowerValue()); 
+			loadHandler->handleChild(this->getLowerValue());
 
 			return; 
 		}
@@ -326,14 +326,14 @@ void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getUpperValue()); 
+			loadHandler->handleChild(this->getUpperValue());
 
 			return; 
 		}

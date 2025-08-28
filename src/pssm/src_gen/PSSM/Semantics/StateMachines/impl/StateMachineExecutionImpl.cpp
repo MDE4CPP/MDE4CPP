@@ -46,8 +46,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
@@ -433,14 +433,14 @@ void StateMachineExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<p
 			{
 				typeName = "PSSM::Semantics::StateMachines::StateMachineConfiguration";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
 				{
 					typeName = "PSSM::Semantics::StateMachines::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getConfiguration()); 
+			loadHandler->handleChild(this->getConfiguration());
 
 			return; 
 		}
@@ -452,7 +452,7 @@ void StateMachineExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<p
 			{
 				typeName = "PSSM::Semantics::StateMachines::RegionActivation";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
 				{

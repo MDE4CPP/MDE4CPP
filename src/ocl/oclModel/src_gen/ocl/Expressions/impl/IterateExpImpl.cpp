@@ -325,14 +325,14 @@ void IterateExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{
 					typeName = "ecore::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getResult()); 
+			loadHandler->handleChild(this->getResult());
 
 			return; 
 		}

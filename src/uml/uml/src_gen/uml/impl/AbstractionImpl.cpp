@@ -233,14 +233,14 @@ void AbstractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "uml::OpaqueExpression";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getMapping()); 
+			loadHandler->handleChild(this->getMapping());
 
 			return; 
 		}

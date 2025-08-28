@@ -48,7 +48,6 @@ task compileOclSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn  getRootProject().getTasksByName('generateOclModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateOclModel', true)]
 	}	
 

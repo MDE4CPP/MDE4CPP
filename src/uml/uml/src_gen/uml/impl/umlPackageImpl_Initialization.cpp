@@ -607,7 +607,7 @@ void umlPackageImpl::initializeAbstractionContent()
 	m_abstraction_Attribute_mapping->setOrdered(false);
 	m_abstraction_Attribute_mapping->setContainment(true);
 	m_abstraction_Attribute_mapping->setResolveProxies(true);
-	m_abstraction_Attribute_mapping->setDefaultValueLiteral("");	
+	m_abstraction_Attribute_mapping->setDefaultValueLiteral("");
 	
 	m_abstraction_Attribute_mapping->_setID(ABSTRACTION_ATTRIBUTE_MAPPING);
 	
@@ -645,7 +645,7 @@ void umlPackageImpl::initializeAcceptCallActionContent()
 	m_acceptCallAction_Attribute_returnInformation->setOrdered(false);
 	m_acceptCallAction_Attribute_returnInformation->setContainment(true);
 	m_acceptCallAction_Attribute_returnInformation->setResolveProxies(true);
-	m_acceptCallAction_Attribute_returnInformation->setDefaultValueLiteral("");	
+	m_acceptCallAction_Attribute_returnInformation->setDefaultValueLiteral("");
 	
 	m_acceptCallAction_Attribute_returnInformation->_setID(ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION);
 	
@@ -699,7 +699,7 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 	m_acceptEventAction_Attribute_result->setOrdered(true);
 	m_acceptEventAction_Attribute_result->setContainment(true);
 	m_acceptEventAction_Attribute_result->setResolveProxies(true);
-	m_acceptEventAction_Attribute_result->setDefaultValueLiteral("");	
+	m_acceptEventAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_acceptEventAction_Attribute_result->_setID(ACCEPTEVENTACTION_ATTRIBUTE_RESULT);
 	m_acceptEventAction_Attribute_trigger->setName("trigger");
@@ -715,7 +715,7 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 	m_acceptEventAction_Attribute_trigger->setOrdered(false);
 	m_acceptEventAction_Attribute_trigger->setContainment(true);
 	m_acceptEventAction_Attribute_trigger->setResolveProxies(true);
-	m_acceptEventAction_Attribute_trigger->setDefaultValueLiteral("");	
+	m_acceptEventAction_Attribute_trigger->setDefaultValueLiteral("");
 	
 	m_acceptEventAction_Attribute_trigger->_setID(ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER);
 	
@@ -769,7 +769,7 @@ void umlPackageImpl::initializeActionContent()
 	m_action_Attribute_context->setOrdered(false);
 	m_action_Attribute_context->setContainment(false);
 	m_action_Attribute_context->setResolveProxies(true);
-	m_action_Attribute_context->setDefaultValueLiteral("");	
+	m_action_Attribute_context->setDefaultValueLiteral("");
 	
 	m_action_Attribute_context->_setID(ACTION_ATTRIBUTE_CONTEXT);
 	m_action_Attribute_input->setName("input");
@@ -785,7 +785,7 @@ void umlPackageImpl::initializeActionContent()
 	m_action_Attribute_input->setOrdered(true);
 	m_action_Attribute_input->setContainment(true);
 	m_action_Attribute_input->setResolveProxies(true);
-	m_action_Attribute_input->setDefaultValueLiteral("");	
+	m_action_Attribute_input->setDefaultValueLiteral("");
 	m_action_Attribute_input->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_action());
 	
 	m_action_Attribute_input->_setID(ACTION_ATTRIBUTE_INPUT);
@@ -802,7 +802,7 @@ void umlPackageImpl::initializeActionContent()
 	m_action_Attribute_localPostcondition->setOrdered(false);
 	m_action_Attribute_localPostcondition->setContainment(true);
 	m_action_Attribute_localPostcondition->setResolveProxies(true);
-	m_action_Attribute_localPostcondition->setDefaultValueLiteral("");	
+	m_action_Attribute_localPostcondition->setDefaultValueLiteral("");
 	
 	m_action_Attribute_localPostcondition->_setID(ACTION_ATTRIBUTE_LOCALPOSTCONDITION);
 	m_action_Attribute_localPrecondition->setName("localPrecondition");
@@ -818,7 +818,7 @@ void umlPackageImpl::initializeActionContent()
 	m_action_Attribute_localPrecondition->setOrdered(false);
 	m_action_Attribute_localPrecondition->setContainment(true);
 	m_action_Attribute_localPrecondition->setResolveProxies(true);
-	m_action_Attribute_localPrecondition->setDefaultValueLiteral("");	
+	m_action_Attribute_localPrecondition->setDefaultValueLiteral("");
 	
 	m_action_Attribute_localPrecondition->_setID(ACTION_ATTRIBUTE_LOCALPRECONDITION);
 	m_action_Attribute_output->setName("output");
@@ -834,7 +834,7 @@ void umlPackageImpl::initializeActionContent()
 	m_action_Attribute_output->setOrdered(true);
 	m_action_Attribute_output->setContainment(true);
 	m_action_Attribute_output->setResolveProxies(true);
-	m_action_Attribute_output->setDefaultValueLiteral("");	
+	m_action_Attribute_output->setDefaultValueLiteral("");
 	m_action_Attribute_output->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_action());
 	
 	m_action_Attribute_output->_setID(ACTION_ATTRIBUTE_OUTPUT);
@@ -913,7 +913,7 @@ void umlPackageImpl::initializeActionExecutionSpecificationContent()
 	m_actionExecutionSpecification_Attribute_action->setOrdered(false);
 	m_actionExecutionSpecification_Attribute_action->setContainment(false);
 	m_actionExecutionSpecification_Attribute_action->setResolveProxies(true);
-	m_actionExecutionSpecification_Attribute_action->setDefaultValueLiteral("");	
+	m_actionExecutionSpecification_Attribute_action->setDefaultValueLiteral("");
 	
 	m_actionExecutionSpecification_Attribute_action->_setID(ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION);
 	
@@ -951,7 +951,7 @@ void umlPackageImpl::initializeActionInputPinContent()
 	m_actionInputPin_Attribute_fromAction->setOrdered(false);
 	m_actionInputPin_Attribute_fromAction->setContainment(true);
 	m_actionInputPin_Attribute_fromAction->setResolveProxies(true);
-	m_actionInputPin_Attribute_fromAction->setDefaultValueLiteral("");	
+	m_actionInputPin_Attribute_fromAction->setDefaultValueLiteral("");
 	
 	m_actionInputPin_Attribute_fromAction->_setID(ACTIONINPUTPIN_ATTRIBUTE_FROMACTION);
 	
@@ -1021,7 +1021,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_edge->setOrdered(false);
 	m_activity_Attribute_edge->setContainment(true);
 	m_activity_Attribute_edge->setResolveProxies(true);
-	m_activity_Attribute_edge->setDefaultValueLiteral("");	
+	m_activity_Attribute_edge->setDefaultValueLiteral("");
 	m_activity_Attribute_edge->setEOpposite(uml::umlPackage::eInstance()->getActivityEdge_Attribute_activity());
 	
 	m_activity_Attribute_edge->_setID(ACTIVITY_ATTRIBUTE_EDGE);
@@ -1038,7 +1038,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_group->setOrdered(false);
 	m_activity_Attribute_group->setContainment(true);
 	m_activity_Attribute_group->setResolveProxies(true);
-	m_activity_Attribute_group->setDefaultValueLiteral("");	
+	m_activity_Attribute_group->setDefaultValueLiteral("");
 	m_activity_Attribute_group->setEOpposite(uml::umlPackage::eInstance()->getActivityGroup_Attribute_inActivity());
 	
 	m_activity_Attribute_group->_setID(ACTIVITY_ATTRIBUTE_GROUP);
@@ -1055,7 +1055,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_node->setOrdered(false);
 	m_activity_Attribute_node->setContainment(true);
 	m_activity_Attribute_node->setResolveProxies(true);
-	m_activity_Attribute_node->setDefaultValueLiteral("");	
+	m_activity_Attribute_node->setDefaultValueLiteral("");
 	m_activity_Attribute_node->setEOpposite(uml::umlPackage::eInstance()->getActivityNode_Attribute_activity());
 	
 	m_activity_Attribute_node->_setID(ACTIVITY_ATTRIBUTE_NODE);
@@ -1072,7 +1072,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_ownedGroup->setOrdered(false);
 	m_activity_Attribute_ownedGroup->setContainment(true);
 	m_activity_Attribute_ownedGroup->setResolveProxies(true);
-	m_activity_Attribute_ownedGroup->setDefaultValueLiteral("");	
+	m_activity_Attribute_ownedGroup->setDefaultValueLiteral("");
 	
 	m_activity_Attribute_ownedGroup->_setID(ACTIVITY_ATTRIBUTE_OWNEDGROUP);
 	m_activity_Attribute_ownedNode->setName("ownedNode");
@@ -1088,7 +1088,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_ownedNode->setOrdered(false);
 	m_activity_Attribute_ownedNode->setContainment(true);
 	m_activity_Attribute_ownedNode->setResolveProxies(true);
-	m_activity_Attribute_ownedNode->setDefaultValueLiteral("");	
+	m_activity_Attribute_ownedNode->setDefaultValueLiteral("");
 	
 	m_activity_Attribute_ownedNode->_setID(ACTIVITY_ATTRIBUTE_OWNEDNODE);
 	m_activity_Attribute_partition->setName("partition");
@@ -1104,7 +1104,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_partition->setOrdered(false);
 	m_activity_Attribute_partition->setContainment(false);
 	m_activity_Attribute_partition->setResolveProxies(true);
-	m_activity_Attribute_partition->setDefaultValueLiteral("");	
+	m_activity_Attribute_partition->setDefaultValueLiteral("");
 	
 	m_activity_Attribute_partition->_setID(ACTIVITY_ATTRIBUTE_PARTITION);
 	m_activity_Attribute_structuredNode->setName("structuredNode");
@@ -1120,7 +1120,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_structuredNode->setOrdered(false);
 	m_activity_Attribute_structuredNode->setContainment(true);
 	m_activity_Attribute_structuredNode->setResolveProxies(true);
-	m_activity_Attribute_structuredNode->setDefaultValueLiteral("");	
+	m_activity_Attribute_structuredNode->setDefaultValueLiteral("");
 	
 	m_activity_Attribute_structuredNode->_setID(ACTIVITY_ATTRIBUTE_STRUCTUREDNODE);
 	m_activity_Attribute_variable->setName("variable");
@@ -1136,7 +1136,7 @@ void umlPackageImpl::initializeActivityContent()
 	m_activity_Attribute_variable->setOrdered(false);
 	m_activity_Attribute_variable->setContainment(true);
 	m_activity_Attribute_variable->setResolveProxies(true);
-	m_activity_Attribute_variable->setDefaultValueLiteral("");	
+	m_activity_Attribute_variable->setDefaultValueLiteral("");
 	m_activity_Attribute_variable->setEOpposite(uml::umlPackage::eInstance()->getVariable_Attribute_activityScope());
 	
 	m_activity_Attribute_variable->_setID(ACTIVITY_ATTRIBUTE_VARIABLE);
@@ -1175,7 +1175,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_activity->setOrdered(false);
 	m_activityEdge_Attribute_activity->setContainment(false);
 	m_activityEdge_Attribute_activity->setResolveProxies(true);
-	m_activityEdge_Attribute_activity->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_activity->setDefaultValueLiteral("");
 	m_activityEdge_Attribute_activity->setEOpposite(uml::umlPackage::eInstance()->getActivity_Attribute_edge());
 	
 	m_activityEdge_Attribute_activity->_setID(ACTIVITYEDGE_ATTRIBUTE_ACTIVITY);
@@ -1192,7 +1192,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_guard->setOrdered(false);
 	m_activityEdge_Attribute_guard->setContainment(true);
 	m_activityEdge_Attribute_guard->setResolveProxies(true);
-	m_activityEdge_Attribute_guard->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_guard->setDefaultValueLiteral("");
 	
 	m_activityEdge_Attribute_guard->_setID(ACTIVITYEDGE_ATTRIBUTE_GUARD);
 	m_activityEdge_Attribute_inGroup->setName("inGroup");
@@ -1208,7 +1208,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_inGroup->setOrdered(false);
 	m_activityEdge_Attribute_inGroup->setContainment(false);
 	m_activityEdge_Attribute_inGroup->setResolveProxies(true);
-	m_activityEdge_Attribute_inGroup->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_inGroup->setDefaultValueLiteral("");
 	m_activityEdge_Attribute_inGroup->setEOpposite(uml::umlPackage::eInstance()->getActivityGroup_Attribute_containedEdge());
 	
 	m_activityEdge_Attribute_inGroup->_setID(ACTIVITYEDGE_ATTRIBUTE_INGROUP);
@@ -1225,7 +1225,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_inPartition->setOrdered(false);
 	m_activityEdge_Attribute_inPartition->setContainment(false);
 	m_activityEdge_Attribute_inPartition->setResolveProxies(true);
-	m_activityEdge_Attribute_inPartition->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_inPartition->setDefaultValueLiteral("");
 	m_activityEdge_Attribute_inPartition->setEOpposite(uml::umlPackage::eInstance()->getActivityPartition_Attribute_edge());
 	
 	m_activityEdge_Attribute_inPartition->_setID(ACTIVITYEDGE_ATTRIBUTE_INPARTITION);
@@ -1242,7 +1242,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_inStructuredNode->setOrdered(false);
 	m_activityEdge_Attribute_inStructuredNode->setContainment(false);
 	m_activityEdge_Attribute_inStructuredNode->setResolveProxies(true);
-	m_activityEdge_Attribute_inStructuredNode->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_inStructuredNode->setDefaultValueLiteral("");
 	m_activityEdge_Attribute_inStructuredNode->setEOpposite(uml::umlPackage::eInstance()->getStructuredActivityNode_Attribute_edge());
 	
 	m_activityEdge_Attribute_inStructuredNode->_setID(ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE);
@@ -1259,7 +1259,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_interrupts->setOrdered(false);
 	m_activityEdge_Attribute_interrupts->setContainment(false);
 	m_activityEdge_Attribute_interrupts->setResolveProxies(true);
-	m_activityEdge_Attribute_interrupts->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_interrupts->setDefaultValueLiteral("");
 	m_activityEdge_Attribute_interrupts->setEOpposite(uml::umlPackage::eInstance()->getInterruptibleActivityRegion_Attribute_interruptingEdge());
 	
 	m_activityEdge_Attribute_interrupts->_setID(ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS);
@@ -1276,7 +1276,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_redefinedEdge->setOrdered(false);
 	m_activityEdge_Attribute_redefinedEdge->setContainment(false);
 	m_activityEdge_Attribute_redefinedEdge->setResolveProxies(true);
-	m_activityEdge_Attribute_redefinedEdge->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_redefinedEdge->setDefaultValueLiteral("");
 	
 	m_activityEdge_Attribute_redefinedEdge->_setID(ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE);
 	m_activityEdge_Attribute_source->setName("source");
@@ -1292,7 +1292,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_source->setOrdered(false);
 	m_activityEdge_Attribute_source->setContainment(false);
 	m_activityEdge_Attribute_source->setResolveProxies(true);
-	m_activityEdge_Attribute_source->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_source->setDefaultValueLiteral("");
 	m_activityEdge_Attribute_source->setEOpposite(uml::umlPackage::eInstance()->getActivityNode_Attribute_outgoing());
 	
 	m_activityEdge_Attribute_source->_setID(ACTIVITYEDGE_ATTRIBUTE_SOURCE);
@@ -1309,7 +1309,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_target->setOrdered(false);
 	m_activityEdge_Attribute_target->setContainment(false);
 	m_activityEdge_Attribute_target->setResolveProxies(true);
-	m_activityEdge_Attribute_target->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_target->setDefaultValueLiteral("");
 	m_activityEdge_Attribute_target->setEOpposite(uml::umlPackage::eInstance()->getActivityNode_Attribute_incoming());
 	
 	m_activityEdge_Attribute_target->_setID(ACTIVITYEDGE_ATTRIBUTE_TARGET);
@@ -1326,7 +1326,7 @@ void umlPackageImpl::initializeActivityEdgeContent()
 	m_activityEdge_Attribute_weight->setOrdered(false);
 	m_activityEdge_Attribute_weight->setContainment(true);
 	m_activityEdge_Attribute_weight->setResolveProxies(true);
-	m_activityEdge_Attribute_weight->setDefaultValueLiteral("");	
+	m_activityEdge_Attribute_weight->setDefaultValueLiteral("");
 	
 	m_activityEdge_Attribute_weight->_setID(ACTIVITYEDGE_ATTRIBUTE_WEIGHT);
 	
@@ -1386,7 +1386,7 @@ void umlPackageImpl::initializeActivityGroupContent()
 	m_activityGroup_Attribute_containedEdge->setOrdered(false);
 	m_activityGroup_Attribute_containedEdge->setContainment(false);
 	m_activityGroup_Attribute_containedEdge->setResolveProxies(true);
-	m_activityGroup_Attribute_containedEdge->setDefaultValueLiteral("");	
+	m_activityGroup_Attribute_containedEdge->setDefaultValueLiteral("");
 	m_activityGroup_Attribute_containedEdge->setEOpposite(uml::umlPackage::eInstance()->getActivityEdge_Attribute_inGroup());
 	
 	m_activityGroup_Attribute_containedEdge->_setID(ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE);
@@ -1403,7 +1403,7 @@ void umlPackageImpl::initializeActivityGroupContent()
 	m_activityGroup_Attribute_containedNode->setOrdered(false);
 	m_activityGroup_Attribute_containedNode->setContainment(false);
 	m_activityGroup_Attribute_containedNode->setResolveProxies(true);
-	m_activityGroup_Attribute_containedNode->setDefaultValueLiteral("");	
+	m_activityGroup_Attribute_containedNode->setDefaultValueLiteral("");
 	m_activityGroup_Attribute_containedNode->setEOpposite(uml::umlPackage::eInstance()->getActivityNode_Attribute_inGroup());
 	
 	m_activityGroup_Attribute_containedNode->_setID(ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE);
@@ -1420,7 +1420,7 @@ void umlPackageImpl::initializeActivityGroupContent()
 	m_activityGroup_Attribute_inActivity->setOrdered(false);
 	m_activityGroup_Attribute_inActivity->setContainment(false);
 	m_activityGroup_Attribute_inActivity->setResolveProxies(true);
-	m_activityGroup_Attribute_inActivity->setDefaultValueLiteral("");	
+	m_activityGroup_Attribute_inActivity->setDefaultValueLiteral("");
 	m_activityGroup_Attribute_inActivity->setEOpposite(uml::umlPackage::eInstance()->getActivity_Attribute_group());
 	
 	m_activityGroup_Attribute_inActivity->_setID(ACTIVITYGROUP_ATTRIBUTE_INACTIVITY);
@@ -1437,7 +1437,7 @@ void umlPackageImpl::initializeActivityGroupContent()
 	m_activityGroup_Attribute_subgroup->setOrdered(false);
 	m_activityGroup_Attribute_subgroup->setContainment(true);
 	m_activityGroup_Attribute_subgroup->setResolveProxies(true);
-	m_activityGroup_Attribute_subgroup->setDefaultValueLiteral("");	
+	m_activityGroup_Attribute_subgroup->setDefaultValueLiteral("");
 	m_activityGroup_Attribute_subgroup->setEOpposite(uml::umlPackage::eInstance()->getActivityGroup_Attribute_superGroup());
 	
 	m_activityGroup_Attribute_subgroup->_setID(ACTIVITYGROUP_ATTRIBUTE_SUBGROUP);
@@ -1454,7 +1454,7 @@ void umlPackageImpl::initializeActivityGroupContent()
 	m_activityGroup_Attribute_superGroup->setOrdered(false);
 	m_activityGroup_Attribute_superGroup->setContainment(false);
 	m_activityGroup_Attribute_superGroup->setResolveProxies(true);
-	m_activityGroup_Attribute_superGroup->setDefaultValueLiteral("");	
+	m_activityGroup_Attribute_superGroup->setDefaultValueLiteral("");
 	m_activityGroup_Attribute_superGroup->setEOpposite(uml::umlPackage::eInstance()->getActivityGroup_Attribute_subgroup());
 	
 	m_activityGroup_Attribute_superGroup->_setID(ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP);
@@ -1503,7 +1503,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_activity->setOrdered(false);
 	m_activityNode_Attribute_activity->setContainment(false);
 	m_activityNode_Attribute_activity->setResolveProxies(true);
-	m_activityNode_Attribute_activity->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_activity->setDefaultValueLiteral("");
 	m_activityNode_Attribute_activity->setEOpposite(uml::umlPackage::eInstance()->getActivity_Attribute_node());
 	
 	m_activityNode_Attribute_activity->_setID(ACTIVITYNODE_ATTRIBUTE_ACTIVITY);
@@ -1520,7 +1520,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_inGroup->setOrdered(false);
 	m_activityNode_Attribute_inGroup->setContainment(false);
 	m_activityNode_Attribute_inGroup->setResolveProxies(true);
-	m_activityNode_Attribute_inGroup->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_inGroup->setDefaultValueLiteral("");
 	m_activityNode_Attribute_inGroup->setEOpposite(uml::umlPackage::eInstance()->getActivityGroup_Attribute_containedNode());
 	
 	m_activityNode_Attribute_inGroup->_setID(ACTIVITYNODE_ATTRIBUTE_INGROUP);
@@ -1537,7 +1537,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_inInterruptibleRegion->setOrdered(false);
 	m_activityNode_Attribute_inInterruptibleRegion->setContainment(false);
 	m_activityNode_Attribute_inInterruptibleRegion->setResolveProxies(true);
-	m_activityNode_Attribute_inInterruptibleRegion->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_inInterruptibleRegion->setDefaultValueLiteral("");
 	m_activityNode_Attribute_inInterruptibleRegion->setEOpposite(uml::umlPackage::eInstance()->getInterruptibleActivityRegion_Attribute_node());
 	
 	m_activityNode_Attribute_inInterruptibleRegion->_setID(ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION);
@@ -1554,7 +1554,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_inPartition->setOrdered(false);
 	m_activityNode_Attribute_inPartition->setContainment(false);
 	m_activityNode_Attribute_inPartition->setResolveProxies(true);
-	m_activityNode_Attribute_inPartition->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_inPartition->setDefaultValueLiteral("");
 	m_activityNode_Attribute_inPartition->setEOpposite(uml::umlPackage::eInstance()->getActivityPartition_Attribute_node());
 	
 	m_activityNode_Attribute_inPartition->_setID(ACTIVITYNODE_ATTRIBUTE_INPARTITION);
@@ -1571,7 +1571,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_inStructuredNode->setOrdered(false);
 	m_activityNode_Attribute_inStructuredNode->setContainment(false);
 	m_activityNode_Attribute_inStructuredNode->setResolveProxies(true);
-	m_activityNode_Attribute_inStructuredNode->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_inStructuredNode->setDefaultValueLiteral("");
 	m_activityNode_Attribute_inStructuredNode->setEOpposite(uml::umlPackage::eInstance()->getStructuredActivityNode_Attribute_node());
 	
 	m_activityNode_Attribute_inStructuredNode->_setID(ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE);
@@ -1588,7 +1588,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_incoming->setOrdered(false);
 	m_activityNode_Attribute_incoming->setContainment(false);
 	m_activityNode_Attribute_incoming->setResolveProxies(true);
-	m_activityNode_Attribute_incoming->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_incoming->setDefaultValueLiteral("");
 	m_activityNode_Attribute_incoming->setEOpposite(uml::umlPackage::eInstance()->getActivityEdge_Attribute_target());
 	
 	m_activityNode_Attribute_incoming->_setID(ACTIVITYNODE_ATTRIBUTE_INCOMING);
@@ -1605,7 +1605,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_outgoing->setOrdered(false);
 	m_activityNode_Attribute_outgoing->setContainment(false);
 	m_activityNode_Attribute_outgoing->setResolveProxies(true);
-	m_activityNode_Attribute_outgoing->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_outgoing->setDefaultValueLiteral("");
 	m_activityNode_Attribute_outgoing->setEOpposite(uml::umlPackage::eInstance()->getActivityEdge_Attribute_source());
 	
 	m_activityNode_Attribute_outgoing->_setID(ACTIVITYNODE_ATTRIBUTE_OUTGOING);
@@ -1622,7 +1622,7 @@ void umlPackageImpl::initializeActivityNodeContent()
 	m_activityNode_Attribute_redefinedNode->setOrdered(false);
 	m_activityNode_Attribute_redefinedNode->setContainment(false);
 	m_activityNode_Attribute_redefinedNode->setResolveProxies(true);
-	m_activityNode_Attribute_redefinedNode->setDefaultValueLiteral("");	
+	m_activityNode_Attribute_redefinedNode->setDefaultValueLiteral("");
 	
 	m_activityNode_Attribute_redefinedNode->_setID(ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE);
 	
@@ -1670,7 +1670,7 @@ void umlPackageImpl::initializeActivityParameterNodeContent()
 	m_activityParameterNode_Attribute_parameter->setOrdered(false);
 	m_activityParameterNode_Attribute_parameter->setContainment(false);
 	m_activityParameterNode_Attribute_parameter->setResolveProxies(true);
-	m_activityParameterNode_Attribute_parameter->setDefaultValueLiteral("");	
+	m_activityParameterNode_Attribute_parameter->setDefaultValueLiteral("");
 	
 	m_activityParameterNode_Attribute_parameter->_setID(ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER);
 	
@@ -1740,7 +1740,7 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	m_activityPartition_Attribute_edge->setOrdered(false);
 	m_activityPartition_Attribute_edge->setContainment(false);
 	m_activityPartition_Attribute_edge->setResolveProxies(true);
-	m_activityPartition_Attribute_edge->setDefaultValueLiteral("");	
+	m_activityPartition_Attribute_edge->setDefaultValueLiteral("");
 	m_activityPartition_Attribute_edge->setEOpposite(uml::umlPackage::eInstance()->getActivityEdge_Attribute_inPartition());
 	
 	m_activityPartition_Attribute_edge->_setID(ACTIVITYPARTITION_ATTRIBUTE_EDGE);
@@ -1757,7 +1757,7 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	m_activityPartition_Attribute_node->setOrdered(false);
 	m_activityPartition_Attribute_node->setContainment(false);
 	m_activityPartition_Attribute_node->setResolveProxies(true);
-	m_activityPartition_Attribute_node->setDefaultValueLiteral("");	
+	m_activityPartition_Attribute_node->setDefaultValueLiteral("");
 	m_activityPartition_Attribute_node->setEOpposite(uml::umlPackage::eInstance()->getActivityNode_Attribute_inPartition());
 	
 	m_activityPartition_Attribute_node->_setID(ACTIVITYPARTITION_ATTRIBUTE_NODE);
@@ -1774,7 +1774,7 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	m_activityPartition_Attribute_represents->setOrdered(false);
 	m_activityPartition_Attribute_represents->setContainment(false);
 	m_activityPartition_Attribute_represents->setResolveProxies(true);
-	m_activityPartition_Attribute_represents->setDefaultValueLiteral("");	
+	m_activityPartition_Attribute_represents->setDefaultValueLiteral("");
 	
 	m_activityPartition_Attribute_represents->_setID(ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS);
 	m_activityPartition_Attribute_subpartition->setName("subpartition");
@@ -1790,7 +1790,7 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	m_activityPartition_Attribute_subpartition->setOrdered(false);
 	m_activityPartition_Attribute_subpartition->setContainment(true);
 	m_activityPartition_Attribute_subpartition->setResolveProxies(true);
-	m_activityPartition_Attribute_subpartition->setDefaultValueLiteral("");	
+	m_activityPartition_Attribute_subpartition->setDefaultValueLiteral("");
 	m_activityPartition_Attribute_subpartition->setEOpposite(uml::umlPackage::eInstance()->getActivityPartition_Attribute_superPartition());
 	
 	m_activityPartition_Attribute_subpartition->_setID(ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION);
@@ -1807,7 +1807,7 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	m_activityPartition_Attribute_superPartition->setOrdered(false);
 	m_activityPartition_Attribute_superPartition->setContainment(false);
 	m_activityPartition_Attribute_superPartition->setResolveProxies(true);
-	m_activityPartition_Attribute_superPartition->setDefaultValueLiteral("");	
+	m_activityPartition_Attribute_superPartition->setDefaultValueLiteral("");
 	m_activityPartition_Attribute_superPartition->setEOpposite(uml::umlPackage::eInstance()->getActivityPartition_Attribute_subpartition());
 	
 	m_activityPartition_Attribute_superPartition->_setID(ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION);
@@ -1884,7 +1884,7 @@ void umlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 	m_addStructuralFeatureValueAction_Attribute_insertAt->setOrdered(false);
 	m_addStructuralFeatureValueAction_Attribute_insertAt->setContainment(true);
 	m_addStructuralFeatureValueAction_Attribute_insertAt->setResolveProxies(true);
-	m_addStructuralFeatureValueAction_Attribute_insertAt->setDefaultValueLiteral("");	
+	m_addStructuralFeatureValueAction_Attribute_insertAt->setDefaultValueLiteral("");
 	m_addStructuralFeatureValueAction_Attribute_insertAt->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_addStructuralFeatureValueAction());
 	
 	m_addStructuralFeatureValueAction_Attribute_insertAt->_setID(ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT);
@@ -1939,7 +1939,7 @@ void umlPackageImpl::initializeAddVariableValueActionContent()
 	m_addVariableValueAction_Attribute_insertAt->setOrdered(false);
 	m_addVariableValueAction_Attribute_insertAt->setContainment(true);
 	m_addVariableValueAction_Attribute_insertAt->setResolveProxies(true);
-	m_addVariableValueAction_Attribute_insertAt->setDefaultValueLiteral("");	
+	m_addVariableValueAction_Attribute_insertAt->setDefaultValueLiteral("");
 	
 	m_addVariableValueAction_Attribute_insertAt->_setID(ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT);
 	
@@ -2015,7 +2015,7 @@ void umlPackageImpl::initializeArgumentContent()
 	m_argument_Attribute_value->setOrdered(true);
 	m_argument_Attribute_value->setContainment(false);
 	m_argument_Attribute_value->setResolveProxies(true);
-	m_argument_Attribute_value->setDefaultValueLiteral("");	
+	m_argument_Attribute_value->setDefaultValueLiteral("");
 	
 	m_argument_Attribute_value->_setID(ARGUMENT_ATTRIBUTE_VALUE);
 	
@@ -2069,7 +2069,7 @@ void umlPackageImpl::initializeArtifactContent()
 	m_artifact_Attribute_manifestation->setOrdered(false);
 	m_artifact_Attribute_manifestation->setContainment(true);
 	m_artifact_Attribute_manifestation->setResolveProxies(true);
-	m_artifact_Attribute_manifestation->setDefaultValueLiteral("");	
+	m_artifact_Attribute_manifestation->setDefaultValueLiteral("");
 	
 	m_artifact_Attribute_manifestation->_setID(ARTIFACT_ATTRIBUTE_MANIFESTATION);
 	m_artifact_Attribute_nestedArtifact->setName("nestedArtifact");
@@ -2085,7 +2085,7 @@ void umlPackageImpl::initializeArtifactContent()
 	m_artifact_Attribute_nestedArtifact->setOrdered(false);
 	m_artifact_Attribute_nestedArtifact->setContainment(true);
 	m_artifact_Attribute_nestedArtifact->setResolveProxies(true);
-	m_artifact_Attribute_nestedArtifact->setDefaultValueLiteral("");	
+	m_artifact_Attribute_nestedArtifact->setDefaultValueLiteral("");
 	
 	m_artifact_Attribute_nestedArtifact->_setID(ARTIFACT_ATTRIBUTE_NESTEDARTIFACT);
 	m_artifact_Attribute_ownedAttribute->setName("ownedAttribute");
@@ -2101,7 +2101,7 @@ void umlPackageImpl::initializeArtifactContent()
 	m_artifact_Attribute_ownedAttribute->setOrdered(true);
 	m_artifact_Attribute_ownedAttribute->setContainment(true);
 	m_artifact_Attribute_ownedAttribute->setResolveProxies(true);
-	m_artifact_Attribute_ownedAttribute->setDefaultValueLiteral("");	
+	m_artifact_Attribute_ownedAttribute->setDefaultValueLiteral("");
 	
 	m_artifact_Attribute_ownedAttribute->_setID(ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE);
 	m_artifact_Attribute_ownedOperation->setName("ownedOperation");
@@ -2117,7 +2117,7 @@ void umlPackageImpl::initializeArtifactContent()
 	m_artifact_Attribute_ownedOperation->setOrdered(true);
 	m_artifact_Attribute_ownedOperation->setContainment(true);
 	m_artifact_Attribute_ownedOperation->setResolveProxies(true);
-	m_artifact_Attribute_ownedOperation->setDefaultValueLiteral("");	
+	m_artifact_Attribute_ownedOperation->setDefaultValueLiteral("");
 	
 	m_artifact_Attribute_ownedOperation->_setID(ARTIFACT_ATTRIBUTE_OWNEDOPERATION);
 	
@@ -2269,7 +2269,7 @@ void umlPackageImpl::initializeAssociationContent()
 	m_association_Attribute_endType->setOrdered(false);
 	m_association_Attribute_endType->setContainment(false);
 	m_association_Attribute_endType->setResolveProxies(true);
-	m_association_Attribute_endType->setDefaultValueLiteral("");	
+	m_association_Attribute_endType->setDefaultValueLiteral("");
 	
 	m_association_Attribute_endType->_setID(ASSOCIATION_ATTRIBUTE_ENDTYPE);
 	m_association_Attribute_memberEnd->setName("memberEnd");
@@ -2285,7 +2285,7 @@ void umlPackageImpl::initializeAssociationContent()
 	m_association_Attribute_memberEnd->setOrdered(true);
 	m_association_Attribute_memberEnd->setContainment(false);
 	m_association_Attribute_memberEnd->setResolveProxies(true);
-	m_association_Attribute_memberEnd->setDefaultValueLiteral("");	
+	m_association_Attribute_memberEnd->setDefaultValueLiteral("");
 	m_association_Attribute_memberEnd->setEOpposite(uml::umlPackage::eInstance()->getProperty_Attribute_association());
 	
 	m_association_Attribute_memberEnd->_setID(ASSOCIATION_ATTRIBUTE_MEMBEREND);
@@ -2302,7 +2302,7 @@ void umlPackageImpl::initializeAssociationContent()
 	m_association_Attribute_navigableOwnedEnd->setOrdered(false);
 	m_association_Attribute_navigableOwnedEnd->setContainment(false);
 	m_association_Attribute_navigableOwnedEnd->setResolveProxies(true);
-	m_association_Attribute_navigableOwnedEnd->setDefaultValueLiteral("");	
+	m_association_Attribute_navigableOwnedEnd->setDefaultValueLiteral("");
 	
 	m_association_Attribute_navigableOwnedEnd->_setID(ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND);
 	m_association_Attribute_ownedEnd->setName("ownedEnd");
@@ -2318,7 +2318,7 @@ void umlPackageImpl::initializeAssociationContent()
 	m_association_Attribute_ownedEnd->setOrdered(true);
 	m_association_Attribute_ownedEnd->setContainment(true);
 	m_association_Attribute_ownedEnd->setResolveProxies(true);
-	m_association_Attribute_ownedEnd->setDefaultValueLiteral("");	
+	m_association_Attribute_ownedEnd->setDefaultValueLiteral("");
 	m_association_Attribute_ownedEnd->setEOpposite(uml::umlPackage::eInstance()->getProperty_Attribute_owningAssociation());
 	
 	m_association_Attribute_ownedEnd->_setID(ASSOCIATION_ATTRIBUTE_OWNEDEND);
@@ -2415,7 +2415,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_behavioredClassifier->setOrdered(true);
 	m_behavior_Attribute_behavioredClassifier->setContainment(false);
 	m_behavior_Attribute_behavioredClassifier->setResolveProxies(true);
-	m_behavior_Attribute_behavioredClassifier->setDefaultValueLiteral("");	
+	m_behavior_Attribute_behavioredClassifier->setDefaultValueLiteral("");
 	m_behavior_Attribute_behavioredClassifier->setEOpposite(uml::umlPackage::eInstance()->getBehavioredClassifier_Attribute_ownedBehavior());
 	
 	m_behavior_Attribute_behavioredClassifier->_setID(BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER);
@@ -2432,7 +2432,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_context->setOrdered(false);
 	m_behavior_Attribute_context->setContainment(false);
 	m_behavior_Attribute_context->setResolveProxies(true);
-	m_behavior_Attribute_context->setDefaultValueLiteral("");	
+	m_behavior_Attribute_context->setDefaultValueLiteral("");
 	
 	m_behavior_Attribute_context->_setID(BEHAVIOR_ATTRIBUTE_CONTEXT);
 	m_behavior_Attribute_ownedParameter->setName("ownedParameter");
@@ -2448,7 +2448,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_ownedParameter->setOrdered(true);
 	m_behavior_Attribute_ownedParameter->setContainment(true);
 	m_behavior_Attribute_ownedParameter->setResolveProxies(true);
-	m_behavior_Attribute_ownedParameter->setDefaultValueLiteral("");	
+	m_behavior_Attribute_ownedParameter->setDefaultValueLiteral("");
 	m_behavior_Attribute_ownedParameter->setEOpposite(uml::umlPackage::eInstance()->getParameter_Attribute_behavior());
 	
 	m_behavior_Attribute_ownedParameter->_setID(BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER);
@@ -2465,7 +2465,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_ownedParameterSet->setOrdered(false);
 	m_behavior_Attribute_ownedParameterSet->setContainment(true);
 	m_behavior_Attribute_ownedParameterSet->setResolveProxies(true);
-	m_behavior_Attribute_ownedParameterSet->setDefaultValueLiteral("");	
+	m_behavior_Attribute_ownedParameterSet->setDefaultValueLiteral("");
 	
 	m_behavior_Attribute_ownedParameterSet->_setID(BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET);
 	m_behavior_Attribute_postcondition->setName("postcondition");
@@ -2481,7 +2481,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_postcondition->setOrdered(false);
 	m_behavior_Attribute_postcondition->setContainment(false);
 	m_behavior_Attribute_postcondition->setResolveProxies(true);
-	m_behavior_Attribute_postcondition->setDefaultValueLiteral("");	
+	m_behavior_Attribute_postcondition->setDefaultValueLiteral("");
 	
 	m_behavior_Attribute_postcondition->_setID(BEHAVIOR_ATTRIBUTE_POSTCONDITION);
 	m_behavior_Attribute_precondition->setName("precondition");
@@ -2497,7 +2497,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_precondition->setOrdered(false);
 	m_behavior_Attribute_precondition->setContainment(false);
 	m_behavior_Attribute_precondition->setResolveProxies(true);
-	m_behavior_Attribute_precondition->setDefaultValueLiteral("");	
+	m_behavior_Attribute_precondition->setDefaultValueLiteral("");
 	
 	m_behavior_Attribute_precondition->_setID(BEHAVIOR_ATTRIBUTE_PRECONDITION);
 	m_behavior_Attribute_redefinedBehavior->setName("redefinedBehavior");
@@ -2513,7 +2513,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_redefinedBehavior->setOrdered(false);
 	m_behavior_Attribute_redefinedBehavior->setContainment(false);
 	m_behavior_Attribute_redefinedBehavior->setResolveProxies(true);
-	m_behavior_Attribute_redefinedBehavior->setDefaultValueLiteral("");	
+	m_behavior_Attribute_redefinedBehavior->setDefaultValueLiteral("");
 	
 	m_behavior_Attribute_redefinedBehavior->_setID(BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR);
 	m_behavior_Attribute_specification->setName("specification");
@@ -2529,7 +2529,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	m_behavior_Attribute_specification->setOrdered(false);
 	m_behavior_Attribute_specification->setContainment(false);
 	m_behavior_Attribute_specification->setResolveProxies(true);
-	m_behavior_Attribute_specification->setDefaultValueLiteral("");	
+	m_behavior_Attribute_specification->setDefaultValueLiteral("");
 	m_behavior_Attribute_specification->setEOpposite(uml::umlPackage::eInstance()->getBehavioralFeature_Attribute_method());
 	
 	m_behavior_Attribute_specification->_setID(BEHAVIOR_ATTRIBUTE_SPECIFICATION);
@@ -2617,7 +2617,7 @@ void umlPackageImpl::initializeBehaviorExecutionSpecificationContent()
 	m_behaviorExecutionSpecification_Attribute_behavior->setOrdered(false);
 	m_behaviorExecutionSpecification_Attribute_behavior->setContainment(false);
 	m_behaviorExecutionSpecification_Attribute_behavior->setResolveProxies(true);
-	m_behaviorExecutionSpecification_Attribute_behavior->setDefaultValueLiteral("");	
+	m_behaviorExecutionSpecification_Attribute_behavior->setDefaultValueLiteral("");
 	
 	m_behaviorExecutionSpecification_Attribute_behavior->_setID(BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR);
 	
@@ -2687,7 +2687,7 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	m_behavioralFeature_Attribute_method->setOrdered(false);
 	m_behavioralFeature_Attribute_method->setContainment(false);
 	m_behavioralFeature_Attribute_method->setResolveProxies(true);
-	m_behavioralFeature_Attribute_method->setDefaultValueLiteral("");	
+	m_behavioralFeature_Attribute_method->setDefaultValueLiteral("");
 	m_behavioralFeature_Attribute_method->setEOpposite(uml::umlPackage::eInstance()->getBehavior_Attribute_specification());
 	
 	m_behavioralFeature_Attribute_method->_setID(BEHAVIORALFEATURE_ATTRIBUTE_METHOD);
@@ -2704,7 +2704,7 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	m_behavioralFeature_Attribute_ownedParameter->setOrdered(true);
 	m_behavioralFeature_Attribute_ownedParameter->setContainment(true);
 	m_behavioralFeature_Attribute_ownedParameter->setResolveProxies(true);
-	m_behavioralFeature_Attribute_ownedParameter->setDefaultValueLiteral("");	
+	m_behavioralFeature_Attribute_ownedParameter->setDefaultValueLiteral("");
 	
 	m_behavioralFeature_Attribute_ownedParameter->_setID(BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER);
 	m_behavioralFeature_Attribute_ownedParameterSet->setName("ownedParameterSet");
@@ -2720,7 +2720,7 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	m_behavioralFeature_Attribute_ownedParameterSet->setOrdered(false);
 	m_behavioralFeature_Attribute_ownedParameterSet->setContainment(true);
 	m_behavioralFeature_Attribute_ownedParameterSet->setResolveProxies(true);
-	m_behavioralFeature_Attribute_ownedParameterSet->setDefaultValueLiteral("");	
+	m_behavioralFeature_Attribute_ownedParameterSet->setDefaultValueLiteral("");
 	
 	m_behavioralFeature_Attribute_ownedParameterSet->_setID(BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET);
 	m_behavioralFeature_Attribute_raisedException->setName("raisedException");
@@ -2736,7 +2736,7 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	m_behavioralFeature_Attribute_raisedException->setOrdered(false);
 	m_behavioralFeature_Attribute_raisedException->setContainment(false);
 	m_behavioralFeature_Attribute_raisedException->setResolveProxies(true);
-	m_behavioralFeature_Attribute_raisedException->setDefaultValueLiteral("");	
+	m_behavioralFeature_Attribute_raisedException->setDefaultValueLiteral("");
 	
 	m_behavioralFeature_Attribute_raisedException->_setID(BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION);
 	
@@ -2823,7 +2823,7 @@ void umlPackageImpl::initializeBehavioredClassifierContent()
 	m_behavioredClassifier_Attribute_classifierBehavior->setOrdered(false);
 	m_behavioredClassifier_Attribute_classifierBehavior->setContainment(false);
 	m_behavioredClassifier_Attribute_classifierBehavior->setResolveProxies(true);
-	m_behavioredClassifier_Attribute_classifierBehavior->setDefaultValueLiteral("");	
+	m_behavioredClassifier_Attribute_classifierBehavior->setDefaultValueLiteral("");
 	
 	m_behavioredClassifier_Attribute_classifierBehavior->_setID(BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR);
 	m_behavioredClassifier_Attribute_interfaceRealization->setName("interfaceRealization");
@@ -2839,7 +2839,7 @@ void umlPackageImpl::initializeBehavioredClassifierContent()
 	m_behavioredClassifier_Attribute_interfaceRealization->setOrdered(false);
 	m_behavioredClassifier_Attribute_interfaceRealization->setContainment(true);
 	m_behavioredClassifier_Attribute_interfaceRealization->setResolveProxies(true);
-	m_behavioredClassifier_Attribute_interfaceRealization->setDefaultValueLiteral("");	
+	m_behavioredClassifier_Attribute_interfaceRealization->setDefaultValueLiteral("");
 	m_behavioredClassifier_Attribute_interfaceRealization->setEOpposite(uml::umlPackage::eInstance()->getInterfaceRealization_Attribute_implementingClassifier());
 	
 	m_behavioredClassifier_Attribute_interfaceRealization->_setID(BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION);
@@ -2856,7 +2856,7 @@ void umlPackageImpl::initializeBehavioredClassifierContent()
 	m_behavioredClassifier_Attribute_ownedBehavior->setOrdered(false);
 	m_behavioredClassifier_Attribute_ownedBehavior->setContainment(true);
 	m_behavioredClassifier_Attribute_ownedBehavior->setResolveProxies(true);
-	m_behavioredClassifier_Attribute_ownedBehavior->setDefaultValueLiteral("");	
+	m_behavioredClassifier_Attribute_ownedBehavior->setDefaultValueLiteral("");
 	m_behavioredClassifier_Attribute_ownedBehavior->setEOpposite(uml::umlPackage::eInstance()->getBehavior_Attribute_behavioredClassifier());
 	
 	m_behavioredClassifier_Attribute_ownedBehavior->_setID(BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR);
@@ -2915,7 +2915,7 @@ void umlPackageImpl::initializeBroadcastSignalActionContent()
 	m_broadcastSignalAction_Attribute_signal->setOrdered(false);
 	m_broadcastSignalAction_Attribute_signal->setContainment(false);
 	m_broadcastSignalAction_Attribute_signal->setResolveProxies(true);
-	m_broadcastSignalAction_Attribute_signal->setDefaultValueLiteral("");	
+	m_broadcastSignalAction_Attribute_signal->setDefaultValueLiteral("");
 	
 	m_broadcastSignalAction_Attribute_signal->_setID(BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL);
 	
@@ -2969,7 +2969,7 @@ void umlPackageImpl::initializeCallActionContent()
 	m_callAction_Attribute_result->setOrdered(true);
 	m_callAction_Attribute_result->setContainment(true);
 	m_callAction_Attribute_result->setResolveProxies(true);
-	m_callAction_Attribute_result->setDefaultValueLiteral("");	
+	m_callAction_Attribute_result->setDefaultValueLiteral("");
 	m_callAction_Attribute_result->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_callAction());
 	
 	m_callAction_Attribute_result->_setID(CALLACTION_ATTRIBUTE_RESULT);
@@ -3028,7 +3028,7 @@ void umlPackageImpl::initializeCallBehaviorActionContent()
 	m_callBehaviorAction_Attribute_behavior->setOrdered(false);
 	m_callBehaviorAction_Attribute_behavior->setContainment(false);
 	m_callBehaviorAction_Attribute_behavior->setResolveProxies(true);
-	m_callBehaviorAction_Attribute_behavior->setDefaultValueLiteral("");	
+	m_callBehaviorAction_Attribute_behavior->setDefaultValueLiteral("");
 	
 	m_callBehaviorAction_Attribute_behavior->_setID(CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR);
 	
@@ -3066,7 +3066,7 @@ void umlPackageImpl::initializeCallEventContent()
 	m_callEvent_Attribute_operation->setOrdered(false);
 	m_callEvent_Attribute_operation->setContainment(false);
 	m_callEvent_Attribute_operation->setResolveProxies(true);
-	m_callEvent_Attribute_operation->setDefaultValueLiteral("");	
+	m_callEvent_Attribute_operation->setDefaultValueLiteral("");
 	
 	m_callEvent_Attribute_operation->_setID(CALLEVENT_ATTRIBUTE_OPERATION);
 	
@@ -3104,7 +3104,7 @@ void umlPackageImpl::initializeCallOperationActionContent()
 	m_callOperationAction_Attribute_operation->setOrdered(false);
 	m_callOperationAction_Attribute_operation->setContainment(false);
 	m_callOperationAction_Attribute_operation->setResolveProxies(true);
-	m_callOperationAction_Attribute_operation->setDefaultValueLiteral("");	
+	m_callOperationAction_Attribute_operation->setDefaultValueLiteral("");
 	
 	m_callOperationAction_Attribute_operation->_setID(CALLOPERATIONACTION_ATTRIBUTE_OPERATION);
 	m_callOperationAction_Attribute_target->setName("target");
@@ -3120,7 +3120,7 @@ void umlPackageImpl::initializeCallOperationActionContent()
 	m_callOperationAction_Attribute_target->setOrdered(false);
 	m_callOperationAction_Attribute_target->setContainment(true);
 	m_callOperationAction_Attribute_target->setResolveProxies(true);
-	m_callOperationAction_Attribute_target->setDefaultValueLiteral("");	
+	m_callOperationAction_Attribute_target->setDefaultValueLiteral("");
 	m_callOperationAction_Attribute_target->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_callOperationAction());
 	
 	m_callOperationAction_Attribute_target->_setID(CALLOPERATIONACTION_ATTRIBUTE_TARGET);
@@ -3181,7 +3181,7 @@ void umlPackageImpl::initializeChangeEventContent()
 	m_changeEvent_Attribute_changeExpression->setOrdered(false);
 	m_changeEvent_Attribute_changeExpression->setContainment(true);
 	m_changeEvent_Attribute_changeExpression->setResolveProxies(true);
-	m_changeEvent_Attribute_changeExpression->setDefaultValueLiteral("");	
+	m_changeEvent_Attribute_changeExpression->setDefaultValueLiteral("");
 	
 	m_changeEvent_Attribute_changeExpression->_setID(CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION);
 	
@@ -3235,7 +3235,7 @@ void umlPackageImpl::initializeClassContent()
 	m_class_Attribute_extension->setOrdered(false);
 	m_class_Attribute_extension->setContainment(false);
 	m_class_Attribute_extension->setResolveProxies(true);
-	m_class_Attribute_extension->setDefaultValueLiteral("");	
+	m_class_Attribute_extension->setDefaultValueLiteral("");
 	m_class_Attribute_extension->setEOpposite(uml::umlPackage::eInstance()->getExtension_Attribute_metaclass());
 	
 	m_class_Attribute_extension->_setID(CLASS_ATTRIBUTE_EXTENSION);
@@ -3252,7 +3252,7 @@ void umlPackageImpl::initializeClassContent()
 	m_class_Attribute_nestedClassifier->setOrdered(true);
 	m_class_Attribute_nestedClassifier->setContainment(true);
 	m_class_Attribute_nestedClassifier->setResolveProxies(true);
-	m_class_Attribute_nestedClassifier->setDefaultValueLiteral("");	
+	m_class_Attribute_nestedClassifier->setDefaultValueLiteral("");
 	
 	m_class_Attribute_nestedClassifier->_setID(CLASS_ATTRIBUTE_NESTEDCLASSIFIER);
 	m_class_Attribute_ownedAttribute->setName("ownedAttribute");
@@ -3268,7 +3268,7 @@ void umlPackageImpl::initializeClassContent()
 	m_class_Attribute_ownedAttribute->setOrdered(true);
 	m_class_Attribute_ownedAttribute->setContainment(true);
 	m_class_Attribute_ownedAttribute->setResolveProxies(true);
-	m_class_Attribute_ownedAttribute->setDefaultValueLiteral("");	
+	m_class_Attribute_ownedAttribute->setDefaultValueLiteral("");
 	m_class_Attribute_ownedAttribute->setEOpposite(uml::umlPackage::eInstance()->getProperty_Attribute_class());
 	
 	m_class_Attribute_ownedAttribute->_setID(CLASS_ATTRIBUTE_OWNEDATTRIBUTE);
@@ -3285,7 +3285,7 @@ void umlPackageImpl::initializeClassContent()
 	m_class_Attribute_ownedOperation->setOrdered(true);
 	m_class_Attribute_ownedOperation->setContainment(true);
 	m_class_Attribute_ownedOperation->setResolveProxies(true);
-	m_class_Attribute_ownedOperation->setDefaultValueLiteral("");	
+	m_class_Attribute_ownedOperation->setDefaultValueLiteral("");
 	m_class_Attribute_ownedOperation->setEOpposite(uml::umlPackage::eInstance()->getOperation_Attribute_class());
 	
 	m_class_Attribute_ownedOperation->_setID(CLASS_ATTRIBUTE_OWNEDOPERATION);
@@ -3302,7 +3302,7 @@ void umlPackageImpl::initializeClassContent()
 	m_class_Attribute_ownedReception->setOrdered(false);
 	m_class_Attribute_ownedReception->setContainment(true);
 	m_class_Attribute_ownedReception->setResolveProxies(true);
-	m_class_Attribute_ownedReception->setDefaultValueLiteral("");	
+	m_class_Attribute_ownedReception->setDefaultValueLiteral("");
 	
 	m_class_Attribute_ownedReception->_setID(CLASS_ATTRIBUTE_OWNEDRECEPTION);
 	m_class_Attribute_superClass->setName("superClass");
@@ -3318,7 +3318,7 @@ void umlPackageImpl::initializeClassContent()
 	m_class_Attribute_superClass->setOrdered(false);
 	m_class_Attribute_superClass->setContainment(false);
 	m_class_Attribute_superClass->setResolveProxies(true);
-	m_class_Attribute_superClass->setDefaultValueLiteral("");	
+	m_class_Attribute_superClass->setDefaultValueLiteral("");
 	
 	m_class_Attribute_superClass->_setID(CLASS_ATTRIBUTE_SUPERCLASS);
 	
@@ -3428,7 +3428,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_attribute->setOrdered(true);
 	m_classifier_Attribute_attribute->setContainment(false);
 	m_classifier_Attribute_attribute->setResolveProxies(true);
-	m_classifier_Attribute_attribute->setDefaultValueLiteral("");	
+	m_classifier_Attribute_attribute->setDefaultValueLiteral("");
 	
 	m_classifier_Attribute_attribute->_setID(CLASSIFIER_ATTRIBUTE_ATTRIBUTE);
 	m_classifier_Attribute_collaborationUse->setName("collaborationUse");
@@ -3444,7 +3444,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_collaborationUse->setOrdered(false);
 	m_classifier_Attribute_collaborationUse->setContainment(true);
 	m_classifier_Attribute_collaborationUse->setResolveProxies(true);
-	m_classifier_Attribute_collaborationUse->setDefaultValueLiteral("");	
+	m_classifier_Attribute_collaborationUse->setDefaultValueLiteral("");
 	
 	m_classifier_Attribute_collaborationUse->_setID(CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE);
 	m_classifier_Attribute_feature->setName("feature");
@@ -3460,7 +3460,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_feature->setOrdered(false);
 	m_classifier_Attribute_feature->setContainment(false);
 	m_classifier_Attribute_feature->setResolveProxies(true);
-	m_classifier_Attribute_feature->setDefaultValueLiteral("");	
+	m_classifier_Attribute_feature->setDefaultValueLiteral("");
 	m_classifier_Attribute_feature->setEOpposite(uml::umlPackage::eInstance()->getFeature_Attribute_featuringClassifier());
 	
 	m_classifier_Attribute_feature->_setID(CLASSIFIER_ATTRIBUTE_FEATURE);
@@ -3477,7 +3477,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_general->setOrdered(false);
 	m_classifier_Attribute_general->setContainment(false);
 	m_classifier_Attribute_general->setResolveProxies(true);
-	m_classifier_Attribute_general->setDefaultValueLiteral("");	
+	m_classifier_Attribute_general->setDefaultValueLiteral("");
 	
 	m_classifier_Attribute_general->_setID(CLASSIFIER_ATTRIBUTE_GENERAL);
 	m_classifier_Attribute_generalization->setName("generalization");
@@ -3493,7 +3493,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_generalization->setOrdered(false);
 	m_classifier_Attribute_generalization->setContainment(true);
 	m_classifier_Attribute_generalization->setResolveProxies(true);
-	m_classifier_Attribute_generalization->setDefaultValueLiteral("");	
+	m_classifier_Attribute_generalization->setDefaultValueLiteral("");
 	m_classifier_Attribute_generalization->setEOpposite(uml::umlPackage::eInstance()->getGeneralization_Attribute_specific());
 	
 	m_classifier_Attribute_generalization->_setID(CLASSIFIER_ATTRIBUTE_GENERALIZATION);
@@ -3510,7 +3510,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_inheritedMember->setOrdered(false);
 	m_classifier_Attribute_inheritedMember->setContainment(false);
 	m_classifier_Attribute_inheritedMember->setResolveProxies(true);
-	m_classifier_Attribute_inheritedMember->setDefaultValueLiteral("");	
+	m_classifier_Attribute_inheritedMember->setDefaultValueLiteral("");
 	
 	m_classifier_Attribute_inheritedMember->_setID(CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER);
 	m_classifier_Attribute_ownedUseCase->setName("ownedUseCase");
@@ -3526,7 +3526,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_ownedUseCase->setOrdered(false);
 	m_classifier_Attribute_ownedUseCase->setContainment(true);
 	m_classifier_Attribute_ownedUseCase->setResolveProxies(true);
-	m_classifier_Attribute_ownedUseCase->setDefaultValueLiteral("");	
+	m_classifier_Attribute_ownedUseCase->setDefaultValueLiteral("");
 	
 	m_classifier_Attribute_ownedUseCase->_setID(CLASSIFIER_ATTRIBUTE_OWNEDUSECASE);
 	m_classifier_Attribute_powertypeExtent->setName("powertypeExtent");
@@ -3542,7 +3542,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_powertypeExtent->setOrdered(false);
 	m_classifier_Attribute_powertypeExtent->setContainment(false);
 	m_classifier_Attribute_powertypeExtent->setResolveProxies(true);
-	m_classifier_Attribute_powertypeExtent->setDefaultValueLiteral("");	
+	m_classifier_Attribute_powertypeExtent->setDefaultValueLiteral("");
 	m_classifier_Attribute_powertypeExtent->setEOpposite(uml::umlPackage::eInstance()->getGeneralizationSet_Attribute_powertype());
 	
 	m_classifier_Attribute_powertypeExtent->_setID(CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT);
@@ -3559,7 +3559,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_redefinedClassifier->setOrdered(false);
 	m_classifier_Attribute_redefinedClassifier->setContainment(false);
 	m_classifier_Attribute_redefinedClassifier->setResolveProxies(true);
-	m_classifier_Attribute_redefinedClassifier->setDefaultValueLiteral("");	
+	m_classifier_Attribute_redefinedClassifier->setDefaultValueLiteral("");
 	
 	m_classifier_Attribute_redefinedClassifier->_setID(CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER);
 	m_classifier_Attribute_representation->setName("representation");
@@ -3575,7 +3575,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_representation->setOrdered(false);
 	m_classifier_Attribute_representation->setContainment(false);
 	m_classifier_Attribute_representation->setResolveProxies(true);
-	m_classifier_Attribute_representation->setDefaultValueLiteral("");	
+	m_classifier_Attribute_representation->setDefaultValueLiteral("");
 	
 	m_classifier_Attribute_representation->_setID(CLASSIFIER_ATTRIBUTE_REPRESENTATION);
 	m_classifier_Attribute_substitution->setName("substitution");
@@ -3591,7 +3591,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_substitution->setOrdered(false);
 	m_classifier_Attribute_substitution->setContainment(true);
 	m_classifier_Attribute_substitution->setResolveProxies(true);
-	m_classifier_Attribute_substitution->setDefaultValueLiteral("");	
+	m_classifier_Attribute_substitution->setDefaultValueLiteral("");
 	m_classifier_Attribute_substitution->setEOpposite(uml::umlPackage::eInstance()->getSubstitution_Attribute_substitutingClassifier());
 	
 	m_classifier_Attribute_substitution->_setID(CLASSIFIER_ATTRIBUTE_SUBSTITUTION);
@@ -3608,7 +3608,7 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Attribute_useCase->setOrdered(false);
 	m_classifier_Attribute_useCase->setContainment(false);
 	m_classifier_Attribute_useCase->setResolveProxies(true);
-	m_classifier_Attribute_useCase->setDefaultValueLiteral("");	
+	m_classifier_Attribute_useCase->setDefaultValueLiteral("");
 	m_classifier_Attribute_useCase->setEOpposite(uml::umlPackage::eInstance()->getUseCase_Attribute_subject());
 	
 	m_classifier_Attribute_useCase->_setID(CLASSIFIER_ATTRIBUTE_USECASE);
@@ -4025,7 +4025,7 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 	m_classifierTemplateParameter_Attribute_constrainingClassifier->setOrdered(false);
 	m_classifierTemplateParameter_Attribute_constrainingClassifier->setContainment(false);
 	m_classifierTemplateParameter_Attribute_constrainingClassifier->setResolveProxies(true);
-	m_classifierTemplateParameter_Attribute_constrainingClassifier->setDefaultValueLiteral("");	
+	m_classifierTemplateParameter_Attribute_constrainingClassifier->setDefaultValueLiteral("");
 	
 	m_classifierTemplateParameter_Attribute_constrainingClassifier->_setID(CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER);
 	
@@ -4063,7 +4063,7 @@ void umlPackageImpl::initializeClauseContent()
 	m_clause_Attribute_body->setOrdered(false);
 	m_clause_Attribute_body->setContainment(false);
 	m_clause_Attribute_body->setResolveProxies(true);
-	m_clause_Attribute_body->setDefaultValueLiteral("");	
+	m_clause_Attribute_body->setDefaultValueLiteral("");
 	
 	m_clause_Attribute_body->_setID(CLAUSE_ATTRIBUTE_BODY);
 	m_clause_Attribute_bodyOutput->setName("bodyOutput");
@@ -4079,7 +4079,7 @@ void umlPackageImpl::initializeClauseContent()
 	m_clause_Attribute_bodyOutput->setOrdered(true);
 	m_clause_Attribute_bodyOutput->setContainment(false);
 	m_clause_Attribute_bodyOutput->setResolveProxies(true);
-	m_clause_Attribute_bodyOutput->setDefaultValueLiteral("");	
+	m_clause_Attribute_bodyOutput->setDefaultValueLiteral("");
 	
 	m_clause_Attribute_bodyOutput->_setID(CLAUSE_ATTRIBUTE_BODYOUTPUT);
 	m_clause_Attribute_decider->setName("decider");
@@ -4095,7 +4095,7 @@ void umlPackageImpl::initializeClauseContent()
 	m_clause_Attribute_decider->setOrdered(false);
 	m_clause_Attribute_decider->setContainment(false);
 	m_clause_Attribute_decider->setResolveProxies(true);
-	m_clause_Attribute_decider->setDefaultValueLiteral("");	
+	m_clause_Attribute_decider->setDefaultValueLiteral("");
 	
 	m_clause_Attribute_decider->_setID(CLAUSE_ATTRIBUTE_DECIDER);
 	m_clause_Attribute_predecessorClause->setName("predecessorClause");
@@ -4111,7 +4111,7 @@ void umlPackageImpl::initializeClauseContent()
 	m_clause_Attribute_predecessorClause->setOrdered(false);
 	m_clause_Attribute_predecessorClause->setContainment(false);
 	m_clause_Attribute_predecessorClause->setResolveProxies(true);
-	m_clause_Attribute_predecessorClause->setDefaultValueLiteral("");	
+	m_clause_Attribute_predecessorClause->setDefaultValueLiteral("");
 	m_clause_Attribute_predecessorClause->setEOpposite(uml::umlPackage::eInstance()->getClause_Attribute_successorClause());
 	
 	m_clause_Attribute_predecessorClause->_setID(CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE);
@@ -4128,7 +4128,7 @@ void umlPackageImpl::initializeClauseContent()
 	m_clause_Attribute_successorClause->setOrdered(false);
 	m_clause_Attribute_successorClause->setContainment(false);
 	m_clause_Attribute_successorClause->setResolveProxies(true);
-	m_clause_Attribute_successorClause->setDefaultValueLiteral("");	
+	m_clause_Attribute_successorClause->setDefaultValueLiteral("");
 	m_clause_Attribute_successorClause->setEOpposite(uml::umlPackage::eInstance()->getClause_Attribute_predecessorClause());
 	
 	m_clause_Attribute_successorClause->_setID(CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE);
@@ -4145,7 +4145,7 @@ void umlPackageImpl::initializeClauseContent()
 	m_clause_Attribute_test->setOrdered(false);
 	m_clause_Attribute_test->setContainment(false);
 	m_clause_Attribute_test->setResolveProxies(true);
-	m_clause_Attribute_test->setDefaultValueLiteral("");	
+	m_clause_Attribute_test->setDefaultValueLiteral("");
 	
 	m_clause_Attribute_test->_setID(CLAUSE_ATTRIBUTE_TEST);
 	
@@ -4183,7 +4183,7 @@ void umlPackageImpl::initializeClearAssociationActionContent()
 	m_clearAssociationAction_Attribute_association->setOrdered(false);
 	m_clearAssociationAction_Attribute_association->setContainment(false);
 	m_clearAssociationAction_Attribute_association->setResolveProxies(true);
-	m_clearAssociationAction_Attribute_association->setDefaultValueLiteral("");	
+	m_clearAssociationAction_Attribute_association->setDefaultValueLiteral("");
 	
 	m_clearAssociationAction_Attribute_association->_setID(CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION);
 	m_clearAssociationAction_Attribute_object->setName("object");
@@ -4199,7 +4199,7 @@ void umlPackageImpl::initializeClearAssociationActionContent()
 	m_clearAssociationAction_Attribute_object->setOrdered(false);
 	m_clearAssociationAction_Attribute_object->setContainment(true);
 	m_clearAssociationAction_Attribute_object->setResolveProxies(true);
-	m_clearAssociationAction_Attribute_object->setDefaultValueLiteral("");	
+	m_clearAssociationAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_clearAssociationAction_Attribute_object->_setID(CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT);
 	
@@ -4237,7 +4237,7 @@ void umlPackageImpl::initializeClearStructuralFeatureActionContent()
 	m_clearStructuralFeatureAction_Attribute_result->setOrdered(false);
 	m_clearStructuralFeatureAction_Attribute_result->setContainment(true);
 	m_clearStructuralFeatureAction_Attribute_result->setResolveProxies(true);
-	m_clearStructuralFeatureAction_Attribute_result->setDefaultValueLiteral("");	
+	m_clearStructuralFeatureAction_Attribute_result->setDefaultValueLiteral("");
 	m_clearStructuralFeatureAction_Attribute_result->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_clearStructuralFeatureAction());
 	
 	m_clearStructuralFeatureAction_Attribute_result->_setID(CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT);
@@ -4298,7 +4298,7 @@ void umlPackageImpl::initializeCollaborationContent()
 	m_collaboration_Attribute_collaborationRole->setOrdered(false);
 	m_collaboration_Attribute_collaborationRole->setContainment(false);
 	m_collaboration_Attribute_collaborationRole->setResolveProxies(true);
-	m_collaboration_Attribute_collaborationRole->setDefaultValueLiteral("");	
+	m_collaboration_Attribute_collaborationRole->setDefaultValueLiteral("");
 	
 	m_collaboration_Attribute_collaborationRole->_setID(COLLABORATION_ATTRIBUTE_COLLABORATIONROLE);
 	
@@ -4336,7 +4336,7 @@ void umlPackageImpl::initializeCollaborationUseContent()
 	m_collaborationUse_Attribute_roleBinding->setOrdered(false);
 	m_collaborationUse_Attribute_roleBinding->setContainment(true);
 	m_collaborationUse_Attribute_roleBinding->setResolveProxies(true);
-	m_collaborationUse_Attribute_roleBinding->setDefaultValueLiteral("");	
+	m_collaborationUse_Attribute_roleBinding->setDefaultValueLiteral("");
 	
 	m_collaborationUse_Attribute_roleBinding->_setID(COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING);
 	m_collaborationUse_Attribute_type->setName("type");
@@ -4352,7 +4352,7 @@ void umlPackageImpl::initializeCollaborationUseContent()
 	m_collaborationUse_Attribute_type->setOrdered(false);
 	m_collaborationUse_Attribute_type->setContainment(false);
 	m_collaborationUse_Attribute_type->setResolveProxies(true);
-	m_collaborationUse_Attribute_type->setDefaultValueLiteral("");	
+	m_collaborationUse_Attribute_type->setDefaultValueLiteral("");
 	
 	m_collaborationUse_Attribute_type->_setID(COLLABORATIONUSE_ATTRIBUTE_TYPE);
 	
@@ -4406,7 +4406,7 @@ void umlPackageImpl::initializeCombinedFragmentContent()
 	m_combinedFragment_Attribute_cfragmentGate->setOrdered(false);
 	m_combinedFragment_Attribute_cfragmentGate->setContainment(true);
 	m_combinedFragment_Attribute_cfragmentGate->setResolveProxies(true);
-	m_combinedFragment_Attribute_cfragmentGate->setDefaultValueLiteral("");	
+	m_combinedFragment_Attribute_cfragmentGate->setDefaultValueLiteral("");
 	
 	m_combinedFragment_Attribute_cfragmentGate->_setID(COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE);
 	m_combinedFragment_Attribute_operand->setName("operand");
@@ -4422,7 +4422,7 @@ void umlPackageImpl::initializeCombinedFragmentContent()
 	m_combinedFragment_Attribute_operand->setOrdered(true);
 	m_combinedFragment_Attribute_operand->setContainment(true);
 	m_combinedFragment_Attribute_operand->setResolveProxies(true);
-	m_combinedFragment_Attribute_operand->setDefaultValueLiteral("");	
+	m_combinedFragment_Attribute_operand->setDefaultValueLiteral("");
 	
 	m_combinedFragment_Attribute_operand->_setID(COMBINEDFRAGMENT_ATTRIBUTE_OPERAND);
 	
@@ -4476,7 +4476,7 @@ void umlPackageImpl::initializeCommentContent()
 	m_comment_Attribute_annotatedElement->setOrdered(false);
 	m_comment_Attribute_annotatedElement->setContainment(false);
 	m_comment_Attribute_annotatedElement->setResolveProxies(true);
-	m_comment_Attribute_annotatedElement->setDefaultValueLiteral("");	
+	m_comment_Attribute_annotatedElement->setDefaultValueLiteral("");
 	
 	m_comment_Attribute_annotatedElement->_setID(COMMENT_ATTRIBUTE_ANNOTATEDELEMENT);
 	
@@ -4552,7 +4552,7 @@ void umlPackageImpl::initializeComponentContent()
 	m_component_Attribute_packagedElement->setOrdered(false);
 	m_component_Attribute_packagedElement->setContainment(true);
 	m_component_Attribute_packagedElement->setResolveProxies(true);
-	m_component_Attribute_packagedElement->setDefaultValueLiteral("");	
+	m_component_Attribute_packagedElement->setDefaultValueLiteral("");
 	
 	m_component_Attribute_packagedElement->_setID(COMPONENT_ATTRIBUTE_PACKAGEDELEMENT);
 	m_component_Attribute_provided->setName("provided");
@@ -4568,7 +4568,7 @@ void umlPackageImpl::initializeComponentContent()
 	m_component_Attribute_provided->setOrdered(false);
 	m_component_Attribute_provided->setContainment(false);
 	m_component_Attribute_provided->setResolveProxies(true);
-	m_component_Attribute_provided->setDefaultValueLiteral("");	
+	m_component_Attribute_provided->setDefaultValueLiteral("");
 	
 	m_component_Attribute_provided->_setID(COMPONENT_ATTRIBUTE_PROVIDED);
 	m_component_Attribute_realization->setName("realization");
@@ -4584,7 +4584,7 @@ void umlPackageImpl::initializeComponentContent()
 	m_component_Attribute_realization->setOrdered(false);
 	m_component_Attribute_realization->setContainment(true);
 	m_component_Attribute_realization->setResolveProxies(true);
-	m_component_Attribute_realization->setDefaultValueLiteral("");	
+	m_component_Attribute_realization->setDefaultValueLiteral("");
 	m_component_Attribute_realization->setEOpposite(uml::umlPackage::eInstance()->getComponentRealization_Attribute_abstraction());
 	
 	m_component_Attribute_realization->_setID(COMPONENT_ATTRIBUTE_REALIZATION);
@@ -4601,7 +4601,7 @@ void umlPackageImpl::initializeComponentContent()
 	m_component_Attribute_required->setOrdered(false);
 	m_component_Attribute_required->setContainment(false);
 	m_component_Attribute_required->setResolveProxies(true);
-	m_component_Attribute_required->setDefaultValueLiteral("");	
+	m_component_Attribute_required->setDefaultValueLiteral("");
 	
 	m_component_Attribute_required->_setID(COMPONENT_ATTRIBUTE_REQUIRED);
 	
@@ -4745,7 +4745,7 @@ void umlPackageImpl::initializeComponentRealizationContent()
 	m_componentRealization_Attribute_abstraction->setOrdered(false);
 	m_componentRealization_Attribute_abstraction->setContainment(false);
 	m_componentRealization_Attribute_abstraction->setResolveProxies(true);
-	m_componentRealization_Attribute_abstraction->setDefaultValueLiteral("");	
+	m_componentRealization_Attribute_abstraction->setDefaultValueLiteral("");
 	m_componentRealization_Attribute_abstraction->setEOpposite(uml::umlPackage::eInstance()->getComponent_Attribute_realization());
 	
 	m_componentRealization_Attribute_abstraction->_setID(COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION);
@@ -4762,7 +4762,7 @@ void umlPackageImpl::initializeComponentRealizationContent()
 	m_componentRealization_Attribute_realizingClassifier->setOrdered(false);
 	m_componentRealization_Attribute_realizingClassifier->setContainment(false);
 	m_componentRealization_Attribute_realizingClassifier->setResolveProxies(true);
-	m_componentRealization_Attribute_realizingClassifier->setDefaultValueLiteral("");	
+	m_componentRealization_Attribute_realizingClassifier->setDefaultValueLiteral("");
 	
 	m_componentRealization_Attribute_realizingClassifier->_setID(COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER);
 	
@@ -4832,7 +4832,7 @@ void umlPackageImpl::initializeConditionalNodeContent()
 	m_conditionalNode_Attribute_clause->setOrdered(false);
 	m_conditionalNode_Attribute_clause->setContainment(true);
 	m_conditionalNode_Attribute_clause->setResolveProxies(true);
-	m_conditionalNode_Attribute_clause->setDefaultValueLiteral("");	
+	m_conditionalNode_Attribute_clause->setDefaultValueLiteral("");
 	
 	m_conditionalNode_Attribute_clause->_setID(CONDITIONALNODE_ATTRIBUTE_CLAUSE);
 	m_conditionalNode_Attribute_result->setName("result");
@@ -4848,7 +4848,7 @@ void umlPackageImpl::initializeConditionalNodeContent()
 	m_conditionalNode_Attribute_result->setOrdered(true);
 	m_conditionalNode_Attribute_result->setContainment(true);
 	m_conditionalNode_Attribute_result->setResolveProxies(true);
-	m_conditionalNode_Attribute_result->setDefaultValueLiteral("");	
+	m_conditionalNode_Attribute_result->setDefaultValueLiteral("");
 	
 	m_conditionalNode_Attribute_result->_setID(CONDITIONALNODE_ATTRIBUTE_RESULT);
 	
@@ -4886,7 +4886,7 @@ void umlPackageImpl::initializeConnectableElementContent()
 	m_connectableElement_Attribute_end->setOrdered(false);
 	m_connectableElement_Attribute_end->setContainment(false);
 	m_connectableElement_Attribute_end->setResolveProxies(true);
-	m_connectableElement_Attribute_end->setDefaultValueLiteral("");	
+	m_connectableElement_Attribute_end->setDefaultValueLiteral("");
 	
 	m_connectableElement_Attribute_end->_setID(CONNECTABLEELEMENT_ATTRIBUTE_END);
 	
@@ -4956,7 +4956,7 @@ void umlPackageImpl::initializeConnectionPointReferenceContent()
 	m_connectionPointReference_Attribute_entry->setOrdered(false);
 	m_connectionPointReference_Attribute_entry->setContainment(false);
 	m_connectionPointReference_Attribute_entry->setResolveProxies(true);
-	m_connectionPointReference_Attribute_entry->setDefaultValueLiteral("");	
+	m_connectionPointReference_Attribute_entry->setDefaultValueLiteral("");
 	
 	m_connectionPointReference_Attribute_entry->_setID(CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY);
 	m_connectionPointReference_Attribute_exit->setName("exit");
@@ -4972,7 +4972,7 @@ void umlPackageImpl::initializeConnectionPointReferenceContent()
 	m_connectionPointReference_Attribute_exit->setOrdered(false);
 	m_connectionPointReference_Attribute_exit->setContainment(false);
 	m_connectionPointReference_Attribute_exit->setResolveProxies(true);
-	m_connectionPointReference_Attribute_exit->setDefaultValueLiteral("");	
+	m_connectionPointReference_Attribute_exit->setDefaultValueLiteral("");
 	
 	m_connectionPointReference_Attribute_exit->_setID(CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT);
 	m_connectionPointReference_Attribute_state->setName("state");
@@ -4988,7 +4988,7 @@ void umlPackageImpl::initializeConnectionPointReferenceContent()
 	m_connectionPointReference_Attribute_state->setOrdered(false);
 	m_connectionPointReference_Attribute_state->setContainment(false);
 	m_connectionPointReference_Attribute_state->setResolveProxies(true);
-	m_connectionPointReference_Attribute_state->setDefaultValueLiteral("");	
+	m_connectionPointReference_Attribute_state->setDefaultValueLiteral("");
 	m_connectionPointReference_Attribute_state->setEOpposite(uml::umlPackage::eInstance()->getState_Attribute_connection());
 	
 	m_connectionPointReference_Attribute_state->_setID(CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE);
@@ -5043,7 +5043,7 @@ void umlPackageImpl::initializeConnectorContent()
 	m_connector_Attribute_contract->setOrdered(false);
 	m_connector_Attribute_contract->setContainment(false);
 	m_connector_Attribute_contract->setResolveProxies(true);
-	m_connector_Attribute_contract->setDefaultValueLiteral("");	
+	m_connector_Attribute_contract->setDefaultValueLiteral("");
 	
 	m_connector_Attribute_contract->_setID(CONNECTOR_ATTRIBUTE_CONTRACT);
 	m_connector_Attribute_end->setName("end");
@@ -5059,7 +5059,7 @@ void umlPackageImpl::initializeConnectorContent()
 	m_connector_Attribute_end->setOrdered(true);
 	m_connector_Attribute_end->setContainment(true);
 	m_connector_Attribute_end->setResolveProxies(true);
-	m_connector_Attribute_end->setDefaultValueLiteral("");	
+	m_connector_Attribute_end->setDefaultValueLiteral("");
 	m_connector_Attribute_end->setEOpposite(uml::umlPackage::eInstance()->getConnectorEnd_Attribute_connector());
 	
 	m_connector_Attribute_end->_setID(CONNECTOR_ATTRIBUTE_END);
@@ -5076,7 +5076,7 @@ void umlPackageImpl::initializeConnectorContent()
 	m_connector_Attribute_redefinedConnector->setOrdered(false);
 	m_connector_Attribute_redefinedConnector->setContainment(false);
 	m_connector_Attribute_redefinedConnector->setResolveProxies(true);
-	m_connector_Attribute_redefinedConnector->setDefaultValueLiteral("");	
+	m_connector_Attribute_redefinedConnector->setDefaultValueLiteral("");
 	
 	m_connector_Attribute_redefinedConnector->_setID(CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR);
 	m_connector_Attribute_structuredClassifier->setName("structuredClassifier");
@@ -5092,7 +5092,7 @@ void umlPackageImpl::initializeConnectorContent()
 	m_connector_Attribute_structuredClassifier->setOrdered(true);
 	m_connector_Attribute_structuredClassifier->setContainment(false);
 	m_connector_Attribute_structuredClassifier->setResolveProxies(true);
-	m_connector_Attribute_structuredClassifier->setDefaultValueLiteral("");	
+	m_connector_Attribute_structuredClassifier->setDefaultValueLiteral("");
 	m_connector_Attribute_structuredClassifier->setEOpposite(uml::umlPackage::eInstance()->getStructuredClassifier_Attribute_ownedConnector());
 	
 	m_connector_Attribute_structuredClassifier->_setID(CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER);
@@ -5109,7 +5109,7 @@ void umlPackageImpl::initializeConnectorContent()
 	m_connector_Attribute_type->setOrdered(false);
 	m_connector_Attribute_type->setContainment(false);
 	m_connector_Attribute_type->setResolveProxies(true);
-	m_connector_Attribute_type->setDefaultValueLiteral("");	
+	m_connector_Attribute_type->setDefaultValueLiteral("");
 	
 	m_connector_Attribute_type->_setID(CONNECTOR_ATTRIBUTE_TYPE);
 	
@@ -5157,7 +5157,7 @@ void umlPackageImpl::initializeConnectorEndContent()
 	m_connectorEnd_Attribute_connector->setOrdered(true);
 	m_connectorEnd_Attribute_connector->setContainment(false);
 	m_connectorEnd_Attribute_connector->setResolveProxies(true);
-	m_connectorEnd_Attribute_connector->setDefaultValueLiteral("");	
+	m_connectorEnd_Attribute_connector->setDefaultValueLiteral("");
 	m_connectorEnd_Attribute_connector->setEOpposite(uml::umlPackage::eInstance()->getConnector_Attribute_end());
 	
 	m_connectorEnd_Attribute_connector->_setID(CONNECTOREND_ATTRIBUTE_CONNECTOR);
@@ -5174,7 +5174,7 @@ void umlPackageImpl::initializeConnectorEndContent()
 	m_connectorEnd_Attribute_definingEnd->setOrdered(false);
 	m_connectorEnd_Attribute_definingEnd->setContainment(false);
 	m_connectorEnd_Attribute_definingEnd->setResolveProxies(true);
-	m_connectorEnd_Attribute_definingEnd->setDefaultValueLiteral("");	
+	m_connectorEnd_Attribute_definingEnd->setDefaultValueLiteral("");
 	
 	m_connectorEnd_Attribute_definingEnd->_setID(CONNECTOREND_ATTRIBUTE_DEFININGEND);
 	m_connectorEnd_Attribute_partWithPort->setName("partWithPort");
@@ -5190,7 +5190,7 @@ void umlPackageImpl::initializeConnectorEndContent()
 	m_connectorEnd_Attribute_partWithPort->setOrdered(false);
 	m_connectorEnd_Attribute_partWithPort->setContainment(false);
 	m_connectorEnd_Attribute_partWithPort->setResolveProxies(true);
-	m_connectorEnd_Attribute_partWithPort->setDefaultValueLiteral("");	
+	m_connectorEnd_Attribute_partWithPort->setDefaultValueLiteral("");
 	
 	m_connectorEnd_Attribute_partWithPort->_setID(CONNECTOREND_ATTRIBUTE_PARTWITHPORT);
 	m_connectorEnd_Attribute_role->setName("role");
@@ -5206,7 +5206,7 @@ void umlPackageImpl::initializeConnectorEndContent()
 	m_connectorEnd_Attribute_role->setOrdered(false);
 	m_connectorEnd_Attribute_role->setContainment(false);
 	m_connectorEnd_Attribute_role->setResolveProxies(true);
-	m_connectorEnd_Attribute_role->setDefaultValueLiteral("");	
+	m_connectorEnd_Attribute_role->setDefaultValueLiteral("");
 	
 	m_connectorEnd_Attribute_role->_setID(CONNECTOREND_ATTRIBUTE_ROLE);
 	
@@ -5254,7 +5254,7 @@ void umlPackageImpl::initializeConsiderIgnoreFragmentContent()
 	m_considerIgnoreFragment_Attribute_message->setOrdered(false);
 	m_considerIgnoreFragment_Attribute_message->setContainment(false);
 	m_considerIgnoreFragment_Attribute_message->setResolveProxies(true);
-	m_considerIgnoreFragment_Attribute_message->setDefaultValueLiteral("");	
+	m_considerIgnoreFragment_Attribute_message->setDefaultValueLiteral("");
 	
 	m_considerIgnoreFragment_Attribute_message->_setID(CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE);
 	
@@ -5292,7 +5292,7 @@ void umlPackageImpl::initializeConstraintContent()
 	m_constraint_Attribute_constrainedElement->setOrdered(true);
 	m_constraint_Attribute_constrainedElement->setContainment(false);
 	m_constraint_Attribute_constrainedElement->setResolveProxies(true);
-	m_constraint_Attribute_constrainedElement->setDefaultValueLiteral("");	
+	m_constraint_Attribute_constrainedElement->setDefaultValueLiteral("");
 	
 	m_constraint_Attribute_constrainedElement->_setID(CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT);
 	m_constraint_Attribute_context->setName("context");
@@ -5308,7 +5308,7 @@ void umlPackageImpl::initializeConstraintContent()
 	m_constraint_Attribute_context->setOrdered(false);
 	m_constraint_Attribute_context->setContainment(false);
 	m_constraint_Attribute_context->setResolveProxies(true);
-	m_constraint_Attribute_context->setDefaultValueLiteral("");	
+	m_constraint_Attribute_context->setDefaultValueLiteral("");
 	m_constraint_Attribute_context->setEOpposite(uml::umlPackage::eInstance()->getNamespace_Attribute_ownedRule());
 	
 	m_constraint_Attribute_context->_setID(CONSTRAINT_ATTRIBUTE_CONTEXT);
@@ -5325,7 +5325,7 @@ void umlPackageImpl::initializeConstraintContent()
 	m_constraint_Attribute_specification->setOrdered(false);
 	m_constraint_Attribute_specification->setContainment(true);
 	m_constraint_Attribute_specification->setResolveProxies(true);
-	m_constraint_Attribute_specification->setDefaultValueLiteral("");	
+	m_constraint_Attribute_specification->setDefaultValueLiteral("");
 	
 	m_constraint_Attribute_specification->_setID(CONSTRAINT_ATTRIBUTE_SPECIFICATION);
 	
@@ -5467,7 +5467,7 @@ void umlPackageImpl::initializeCreateLinkObjectActionContent()
 	m_createLinkObjectAction_Attribute_result->setOrdered(false);
 	m_createLinkObjectAction_Attribute_result->setContainment(true);
 	m_createLinkObjectAction_Attribute_result->setResolveProxies(true);
-	m_createLinkObjectAction_Attribute_result->setDefaultValueLiteral("");	
+	m_createLinkObjectAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_createLinkObjectAction_Attribute_result->_setID(CREATELINKOBJECTACTION_ATTRIBUTE_RESULT);
 	
@@ -5505,7 +5505,7 @@ void umlPackageImpl::initializeCreateObjectActionContent()
 	m_createObjectAction_Attribute_classifier->setOrdered(false);
 	m_createObjectAction_Attribute_classifier->setContainment(false);
 	m_createObjectAction_Attribute_classifier->setResolveProxies(true);
-	m_createObjectAction_Attribute_classifier->setDefaultValueLiteral("");	
+	m_createObjectAction_Attribute_classifier->setDefaultValueLiteral("");
 	
 	m_createObjectAction_Attribute_classifier->_setID(CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER);
 	m_createObjectAction_Attribute_result->setName("result");
@@ -5521,7 +5521,7 @@ void umlPackageImpl::initializeCreateObjectActionContent()
 	m_createObjectAction_Attribute_result->setOrdered(false);
 	m_createObjectAction_Attribute_result->setContainment(true);
 	m_createObjectAction_Attribute_result->setResolveProxies(true);
-	m_createObjectAction_Attribute_result->setDefaultValueLiteral("");	
+	m_createObjectAction_Attribute_result->setDefaultValueLiteral("");
 	m_createObjectAction_Attribute_result->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_createObjectAction());
 	
 	m_createObjectAction_Attribute_result->_setID(CREATEOBJECTACTION_ATTRIBUTE_RESULT);
@@ -5582,7 +5582,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	m_dataType_Attribute_ownedAttribute->setOrdered(true);
 	m_dataType_Attribute_ownedAttribute->setContainment(true);
 	m_dataType_Attribute_ownedAttribute->setResolveProxies(true);
-	m_dataType_Attribute_ownedAttribute->setDefaultValueLiteral("");	
+	m_dataType_Attribute_ownedAttribute->setDefaultValueLiteral("");
 	m_dataType_Attribute_ownedAttribute->setEOpposite(uml::umlPackage::eInstance()->getProperty_Attribute_datatype());
 	
 	m_dataType_Attribute_ownedAttribute->_setID(DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE);
@@ -5599,7 +5599,7 @@ void umlPackageImpl::initializeDataTypeContent()
 	m_dataType_Attribute_ownedOperation->setOrdered(true);
 	m_dataType_Attribute_ownedOperation->setContainment(true);
 	m_dataType_Attribute_ownedOperation->setResolveProxies(true);
-	m_dataType_Attribute_ownedOperation->setDefaultValueLiteral("");	
+	m_dataType_Attribute_ownedOperation->setDefaultValueLiteral("");
 	m_dataType_Attribute_ownedOperation->setEOpposite(uml::umlPackage::eInstance()->getOperation_Attribute_datatype());
 	
 	m_dataType_Attribute_ownedOperation->_setID(DATATYPE_ATTRIBUTE_OWNEDOPERATION);
@@ -5736,7 +5736,7 @@ void umlPackageImpl::initializeDecisionNodeContent()
 	m_decisionNode_Attribute_decisionInput->setOrdered(false);
 	m_decisionNode_Attribute_decisionInput->setContainment(false);
 	m_decisionNode_Attribute_decisionInput->setResolveProxies(true);
-	m_decisionNode_Attribute_decisionInput->setDefaultValueLiteral("");	
+	m_decisionNode_Attribute_decisionInput->setDefaultValueLiteral("");
 	
 	m_decisionNode_Attribute_decisionInput->_setID(DECISIONNODE_ATTRIBUTE_DECISIONINPUT);
 	m_decisionNode_Attribute_decisionInputFlow->setName("decisionInputFlow");
@@ -5752,7 +5752,7 @@ void umlPackageImpl::initializeDecisionNodeContent()
 	m_decisionNode_Attribute_decisionInputFlow->setOrdered(false);
 	m_decisionNode_Attribute_decisionInputFlow->setContainment(false);
 	m_decisionNode_Attribute_decisionInputFlow->setResolveProxies(true);
-	m_decisionNode_Attribute_decisionInputFlow->setDefaultValueLiteral("");	
+	m_decisionNode_Attribute_decisionInputFlow->setDefaultValueLiteral("");
 	
 	m_decisionNode_Attribute_decisionInputFlow->_setID(DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW);
 	
@@ -5790,7 +5790,7 @@ void umlPackageImpl::initializeDependencyContent()
 	m_dependency_Attribute_client->setOrdered(false);
 	m_dependency_Attribute_client->setContainment(false);
 	m_dependency_Attribute_client->setResolveProxies(true);
-	m_dependency_Attribute_client->setDefaultValueLiteral("");	
+	m_dependency_Attribute_client->setDefaultValueLiteral("");
 	
 	m_dependency_Attribute_client->_setID(DEPENDENCY_ATTRIBUTE_CLIENT);
 	m_dependency_Attribute_supplier->setName("supplier");
@@ -5806,7 +5806,7 @@ void umlPackageImpl::initializeDependencyContent()
 	m_dependency_Attribute_supplier->setOrdered(false);
 	m_dependency_Attribute_supplier->setContainment(false);
 	m_dependency_Attribute_supplier->setResolveProxies(true);
-	m_dependency_Attribute_supplier->setDefaultValueLiteral("");	
+	m_dependency_Attribute_supplier->setDefaultValueLiteral("");
 	
 	m_dependency_Attribute_supplier->_setID(DEPENDENCY_ATTRIBUTE_SUPPLIER);
 	
@@ -5866,7 +5866,7 @@ void umlPackageImpl::initializeDeploymentContent()
 	m_deployment_Attribute_configuration->setOrdered(false);
 	m_deployment_Attribute_configuration->setContainment(true);
 	m_deployment_Attribute_configuration->setResolveProxies(true);
-	m_deployment_Attribute_configuration->setDefaultValueLiteral("");	
+	m_deployment_Attribute_configuration->setDefaultValueLiteral("");
 	m_deployment_Attribute_configuration->setEOpposite(uml::umlPackage::eInstance()->getDeploymentSpecification_Attribute_deployment());
 	
 	m_deployment_Attribute_configuration->_setID(DEPLOYMENT_ATTRIBUTE_CONFIGURATION);
@@ -5883,7 +5883,7 @@ void umlPackageImpl::initializeDeploymentContent()
 	m_deployment_Attribute_deployedArtifact->setOrdered(false);
 	m_deployment_Attribute_deployedArtifact->setContainment(false);
 	m_deployment_Attribute_deployedArtifact->setResolveProxies(true);
-	m_deployment_Attribute_deployedArtifact->setDefaultValueLiteral("");	
+	m_deployment_Attribute_deployedArtifact->setDefaultValueLiteral("");
 	
 	m_deployment_Attribute_deployedArtifact->_setID(DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT);
 	m_deployment_Attribute_location->setName("location");
@@ -5899,7 +5899,7 @@ void umlPackageImpl::initializeDeploymentContent()
 	m_deployment_Attribute_location->setOrdered(false);
 	m_deployment_Attribute_location->setContainment(false);
 	m_deployment_Attribute_location->setResolveProxies(true);
-	m_deployment_Attribute_location->setDefaultValueLiteral("");	
+	m_deployment_Attribute_location->setDefaultValueLiteral("");
 	m_deployment_Attribute_location->setEOpposite(uml::umlPackage::eInstance()->getDeploymentTarget_Attribute_deployment());
 	
 	m_deployment_Attribute_location->_setID(DEPLOYMENT_ATTRIBUTE_LOCATION);
@@ -5970,7 +5970,7 @@ void umlPackageImpl::initializeDeploymentSpecificationContent()
 	m_deploymentSpecification_Attribute_deployment->setOrdered(false);
 	m_deploymentSpecification_Attribute_deployment->setContainment(false);
 	m_deploymentSpecification_Attribute_deployment->setResolveProxies(true);
-	m_deploymentSpecification_Attribute_deployment->setDefaultValueLiteral("");	
+	m_deploymentSpecification_Attribute_deployment->setDefaultValueLiteral("");
 	m_deploymentSpecification_Attribute_deployment->setEOpposite(uml::umlPackage::eInstance()->getDeployment_Attribute_configuration());
 	
 	m_deploymentSpecification_Attribute_deployment->_setID(DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT);
@@ -6009,7 +6009,7 @@ void umlPackageImpl::initializeDeploymentTargetContent()
 	m_deploymentTarget_Attribute_deployedElement->setOrdered(false);
 	m_deploymentTarget_Attribute_deployedElement->setContainment(false);
 	m_deploymentTarget_Attribute_deployedElement->setResolveProxies(true);
-	m_deploymentTarget_Attribute_deployedElement->setDefaultValueLiteral("");	
+	m_deploymentTarget_Attribute_deployedElement->setDefaultValueLiteral("");
 	
 	m_deploymentTarget_Attribute_deployedElement->_setID(DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT);
 	m_deploymentTarget_Attribute_deployment->setName("deployment");
@@ -6025,7 +6025,7 @@ void umlPackageImpl::initializeDeploymentTargetContent()
 	m_deploymentTarget_Attribute_deployment->setOrdered(false);
 	m_deploymentTarget_Attribute_deployment->setContainment(true);
 	m_deploymentTarget_Attribute_deployment->setResolveProxies(true);
-	m_deploymentTarget_Attribute_deployment->setDefaultValueLiteral("");	
+	m_deploymentTarget_Attribute_deployment->setDefaultValueLiteral("");
 	m_deploymentTarget_Attribute_deployment->setEOpposite(uml::umlPackage::eInstance()->getDeployment_Attribute_location());
 	
 	m_deploymentTarget_Attribute_deployment->_setID(DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT);
@@ -6128,7 +6128,7 @@ void umlPackageImpl::initializeDestroyObjectActionContent()
 	m_destroyObjectAction_Attribute_target->setOrdered(false);
 	m_destroyObjectAction_Attribute_target->setContainment(true);
 	m_destroyObjectAction_Attribute_target->setResolveProxies(true);
-	m_destroyObjectAction_Attribute_target->setDefaultValueLiteral("");	
+	m_destroyObjectAction_Attribute_target->setDefaultValueLiteral("");
 	m_destroyObjectAction_Attribute_target->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_destroyObjectAction());
 	
 	m_destroyObjectAction_Attribute_target->_setID(DESTROYOBJECTACTION_ATTRIBUTE_TARGET);
@@ -6211,7 +6211,7 @@ void umlPackageImpl::initializeDirectedRelationshipContent()
 	m_directedRelationship_Attribute_source->setOrdered(false);
 	m_directedRelationship_Attribute_source->setContainment(false);
 	m_directedRelationship_Attribute_source->setResolveProxies(true);
-	m_directedRelationship_Attribute_source->setDefaultValueLiteral("");	
+	m_directedRelationship_Attribute_source->setDefaultValueLiteral("");
 	
 	m_directedRelationship_Attribute_source->_setID(DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE);
 	m_directedRelationship_Attribute_target->setName("target");
@@ -6227,7 +6227,7 @@ void umlPackageImpl::initializeDirectedRelationshipContent()
 	m_directedRelationship_Attribute_target->setOrdered(false);
 	m_directedRelationship_Attribute_target->setContainment(false);
 	m_directedRelationship_Attribute_target->setResolveProxies(true);
-	m_directedRelationship_Attribute_target->setDefaultValueLiteral("");	
+	m_directedRelationship_Attribute_target->setDefaultValueLiteral("");
 	
 	m_directedRelationship_Attribute_target->_setID(DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET);
 	
@@ -6265,7 +6265,7 @@ void umlPackageImpl::initializeDurationContent()
 	m_duration_Attribute_expr->setOrdered(false);
 	m_duration_Attribute_expr->setContainment(true);
 	m_duration_Attribute_expr->setResolveProxies(true);
-	m_duration_Attribute_expr->setDefaultValueLiteral("");	
+	m_duration_Attribute_expr->setDefaultValueLiteral("");
 	
 	m_duration_Attribute_expr->_setID(DURATION_ATTRIBUTE_EXPR);
 	m_duration_Attribute_observation->setName("observation");
@@ -6281,7 +6281,7 @@ void umlPackageImpl::initializeDurationContent()
 	m_duration_Attribute_observation->setOrdered(false);
 	m_duration_Attribute_observation->setContainment(false);
 	m_duration_Attribute_observation->setResolveProxies(true);
-	m_duration_Attribute_observation->setDefaultValueLiteral("");	
+	m_duration_Attribute_observation->setDefaultValueLiteral("");
 	
 	m_duration_Attribute_observation->_setID(DURATION_ATTRIBUTE_OBSERVATION);
 	
@@ -6395,7 +6395,7 @@ void umlPackageImpl::initializeDurationObservationContent()
 	m_durationObservation_Attribute_event->setOrdered(true);
 	m_durationObservation_Attribute_event->setContainment(false);
 	m_durationObservation_Attribute_event->setResolveProxies(true);
-	m_durationObservation_Attribute_event->setDefaultValueLiteral("");	
+	m_durationObservation_Attribute_event->setDefaultValueLiteral("");
 	
 	m_durationObservation_Attribute_event->_setID(DURATIONOBSERVATION_ATTRIBUTE_EVENT);
 	
@@ -6433,7 +6433,7 @@ void umlPackageImpl::initializeElementContent()
 	m_element_Attribute_ownedComment->setOrdered(false);
 	m_element_Attribute_ownedComment->setContainment(true);
 	m_element_Attribute_ownedComment->setResolveProxies(true);
-	m_element_Attribute_ownedComment->setDefaultValueLiteral("");	
+	m_element_Attribute_ownedComment->setDefaultValueLiteral("");
 	
 	m_element_Attribute_ownedComment->_setID(ELEMENT_ATTRIBUTE_OWNEDCOMMENT);
 	m_element_Attribute_ownedElement->setName("ownedElement");
@@ -6449,7 +6449,7 @@ void umlPackageImpl::initializeElementContent()
 	m_element_Attribute_ownedElement->setOrdered(false);
 	m_element_Attribute_ownedElement->setContainment(true);
 	m_element_Attribute_ownedElement->setResolveProxies(true);
-	m_element_Attribute_ownedElement->setDefaultValueLiteral("");	
+	m_element_Attribute_ownedElement->setDefaultValueLiteral("");
 	m_element_Attribute_ownedElement->setEOpposite(uml::umlPackage::eInstance()->getElement_Attribute_owner());
 	
 	m_element_Attribute_ownedElement->_setID(ELEMENT_ATTRIBUTE_OWNEDELEMENT);
@@ -6466,7 +6466,7 @@ void umlPackageImpl::initializeElementContent()
 	m_element_Attribute_owner->setOrdered(false);
 	m_element_Attribute_owner->setContainment(false);
 	m_element_Attribute_owner->setResolveProxies(true);
-	m_element_Attribute_owner->setDefaultValueLiteral("");	
+	m_element_Attribute_owner->setDefaultValueLiteral("");
 	m_element_Attribute_owner->setEOpposite(uml::umlPackage::eInstance()->getElement_Attribute_ownedElement());
 	
 	m_element_Attribute_owner->_setID(ELEMENT_ATTRIBUTE_OWNER);
@@ -7148,7 +7148,7 @@ void umlPackageImpl::initializeElementImportContent()
 	m_elementImport_Attribute_importedElement->setOrdered(false);
 	m_elementImport_Attribute_importedElement->setContainment(false);
 	m_elementImport_Attribute_importedElement->setResolveProxies(true);
-	m_elementImport_Attribute_importedElement->setDefaultValueLiteral("");	
+	m_elementImport_Attribute_importedElement->setDefaultValueLiteral("");
 	
 	m_elementImport_Attribute_importedElement->_setID(ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT);
 	m_elementImport_Attribute_importingNamespace->setName("importingNamespace");
@@ -7164,7 +7164,7 @@ void umlPackageImpl::initializeElementImportContent()
 	m_elementImport_Attribute_importingNamespace->setOrdered(false);
 	m_elementImport_Attribute_importingNamespace->setContainment(false);
 	m_elementImport_Attribute_importingNamespace->setResolveProxies(true);
-	m_elementImport_Attribute_importingNamespace->setDefaultValueLiteral("");	
+	m_elementImport_Attribute_importingNamespace->setDefaultValueLiteral("");
 	m_elementImport_Attribute_importingNamespace->setEOpposite(uml::umlPackage::eInstance()->getNamespace_Attribute_elementImport());
 	
 	m_elementImport_Attribute_importingNamespace->_setID(ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
@@ -7213,7 +7213,7 @@ void umlPackageImpl::initializeEncapsulatedClassifierContent()
 	m_encapsulatedClassifier_Attribute_ownedPort->setOrdered(false);
 	m_encapsulatedClassifier_Attribute_ownedPort->setContainment(true);
 	m_encapsulatedClassifier_Attribute_ownedPort->setResolveProxies(true);
-	m_encapsulatedClassifier_Attribute_ownedPort->setDefaultValueLiteral("");	
+	m_encapsulatedClassifier_Attribute_ownedPort->setDefaultValueLiteral("");
 	
 	m_encapsulatedClassifier_Attribute_ownedPort->_setID(ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT);
 	
@@ -7261,7 +7261,7 @@ void umlPackageImpl::initializeEnumerationContent()
 	m_enumeration_Attribute_ownedLiteral->setOrdered(true);
 	m_enumeration_Attribute_ownedLiteral->setContainment(true);
 	m_enumeration_Attribute_ownedLiteral->setResolveProxies(true);
-	m_enumeration_Attribute_ownedLiteral->setDefaultValueLiteral("");	
+	m_enumeration_Attribute_ownedLiteral->setDefaultValueLiteral("");
 	m_enumeration_Attribute_ownedLiteral->setEOpposite(uml::umlPackage::eInstance()->getEnumerationLiteral_Attribute_enumeration());
 	
 	m_enumeration_Attribute_ownedLiteral->_setID(ENUMERATION_ATTRIBUTE_OWNEDLITERAL);
@@ -7300,7 +7300,7 @@ void umlPackageImpl::initializeEnumerationLiteralContent()
 	m_enumerationLiteral_Attribute_enumeration->setOrdered(false);
 	m_enumerationLiteral_Attribute_enumeration->setContainment(false);
 	m_enumerationLiteral_Attribute_enumeration->setResolveProxies(true);
-	m_enumerationLiteral_Attribute_enumeration->setDefaultValueLiteral("");	
+	m_enumerationLiteral_Attribute_enumeration->setDefaultValueLiteral("");
 	m_enumerationLiteral_Attribute_enumeration->setEOpposite(uml::umlPackage::eInstance()->getEnumeration_Attribute_ownedLiteral());
 	
 	m_enumerationLiteral_Attribute_enumeration->_setID(ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION);
@@ -7381,7 +7381,7 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 	m_exceptionHandler_Attribute_exceptionInput->setOrdered(false);
 	m_exceptionHandler_Attribute_exceptionInput->setContainment(false);
 	m_exceptionHandler_Attribute_exceptionInput->setResolveProxies(true);
-	m_exceptionHandler_Attribute_exceptionInput->setDefaultValueLiteral("");	
+	m_exceptionHandler_Attribute_exceptionInput->setDefaultValueLiteral("");
 	
 	m_exceptionHandler_Attribute_exceptionInput->_setID(EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT);
 	m_exceptionHandler_Attribute_exceptionType->setName("exceptionType");
@@ -7397,7 +7397,7 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 	m_exceptionHandler_Attribute_exceptionType->setOrdered(false);
 	m_exceptionHandler_Attribute_exceptionType->setContainment(false);
 	m_exceptionHandler_Attribute_exceptionType->setResolveProxies(true);
-	m_exceptionHandler_Attribute_exceptionType->setDefaultValueLiteral("");	
+	m_exceptionHandler_Attribute_exceptionType->setDefaultValueLiteral("");
 	
 	m_exceptionHandler_Attribute_exceptionType->_setID(EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE);
 	m_exceptionHandler_Attribute_handlerBody->setName("handlerBody");
@@ -7413,7 +7413,7 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 	m_exceptionHandler_Attribute_handlerBody->setOrdered(false);
 	m_exceptionHandler_Attribute_handlerBody->setContainment(false);
 	m_exceptionHandler_Attribute_handlerBody->setResolveProxies(true);
-	m_exceptionHandler_Attribute_handlerBody->setDefaultValueLiteral("");	
+	m_exceptionHandler_Attribute_handlerBody->setDefaultValueLiteral("");
 	
 	m_exceptionHandler_Attribute_handlerBody->_setID(EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY);
 	m_exceptionHandler_Attribute_protectedNode->setName("protectedNode");
@@ -7429,7 +7429,7 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 	m_exceptionHandler_Attribute_protectedNode->setOrdered(false);
 	m_exceptionHandler_Attribute_protectedNode->setContainment(false);
 	m_exceptionHandler_Attribute_protectedNode->setResolveProxies(true);
-	m_exceptionHandler_Attribute_protectedNode->setDefaultValueLiteral("");	
+	m_exceptionHandler_Attribute_protectedNode->setDefaultValueLiteral("");
 	m_exceptionHandler_Attribute_protectedNode->setEOpposite(uml::umlPackage::eInstance()->getExecutableNode_Attribute_handler());
 	
 	m_exceptionHandler_Attribute_protectedNode->_setID(EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE);
@@ -7468,7 +7468,7 @@ void umlPackageImpl::initializeExecutableNodeContent()
 	m_executableNode_Attribute_handler->setOrdered(false);
 	m_executableNode_Attribute_handler->setContainment(true);
 	m_executableNode_Attribute_handler->setResolveProxies(true);
-	m_executableNode_Attribute_handler->setDefaultValueLiteral("");	
+	m_executableNode_Attribute_handler->setDefaultValueLiteral("");
 	m_executableNode_Attribute_handler->setEOpposite(uml::umlPackage::eInstance()->getExceptionHandler_Attribute_protectedNode());
 	
 	m_executableNode_Attribute_handler->_setID(EXECUTABLENODE_ATTRIBUTE_HANDLER);
@@ -7529,7 +7529,7 @@ void umlPackageImpl::initializeExecutionOccurrenceSpecificationContent()
 	m_executionOccurrenceSpecification_Attribute_execution->setOrdered(false);
 	m_executionOccurrenceSpecification_Attribute_execution->setContainment(false);
 	m_executionOccurrenceSpecification_Attribute_execution->setResolveProxies(true);
-	m_executionOccurrenceSpecification_Attribute_execution->setDefaultValueLiteral("");	
+	m_executionOccurrenceSpecification_Attribute_execution->setDefaultValueLiteral("");
 	
 	m_executionOccurrenceSpecification_Attribute_execution->_setID(EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION);
 	
@@ -7567,7 +7567,7 @@ void umlPackageImpl::initializeExecutionSpecificationContent()
 	m_executionSpecification_Attribute_finish->setOrdered(false);
 	m_executionSpecification_Attribute_finish->setContainment(false);
 	m_executionSpecification_Attribute_finish->setResolveProxies(true);
-	m_executionSpecification_Attribute_finish->setDefaultValueLiteral("");	
+	m_executionSpecification_Attribute_finish->setDefaultValueLiteral("");
 	
 	m_executionSpecification_Attribute_finish->_setID(EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH);
 	m_executionSpecification_Attribute_start->setName("start");
@@ -7583,7 +7583,7 @@ void umlPackageImpl::initializeExecutionSpecificationContent()
 	m_executionSpecification_Attribute_start->setOrdered(false);
 	m_executionSpecification_Attribute_start->setContainment(false);
 	m_executionSpecification_Attribute_start->setResolveProxies(true);
-	m_executionSpecification_Attribute_start->setDefaultValueLiteral("");	
+	m_executionSpecification_Attribute_start->setDefaultValueLiteral("");
 	
 	m_executionSpecification_Attribute_start->_setID(EXECUTIONSPECIFICATION_ATTRIBUTE_START);
 	
@@ -7621,7 +7621,7 @@ void umlPackageImpl::initializeExpansionNodeContent()
 	m_expansionNode_Attribute_regionAsInput->setOrdered(false);
 	m_expansionNode_Attribute_regionAsInput->setContainment(false);
 	m_expansionNode_Attribute_regionAsInput->setResolveProxies(true);
-	m_expansionNode_Attribute_regionAsInput->setDefaultValueLiteral("");	
+	m_expansionNode_Attribute_regionAsInput->setDefaultValueLiteral("");
 	m_expansionNode_Attribute_regionAsInput->setEOpposite(uml::umlPackage::eInstance()->getExpansionRegion_Attribute_inputElement());
 	
 	m_expansionNode_Attribute_regionAsInput->_setID(EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT);
@@ -7638,7 +7638,7 @@ void umlPackageImpl::initializeExpansionNodeContent()
 	m_expansionNode_Attribute_regionAsOutput->setOrdered(false);
 	m_expansionNode_Attribute_regionAsOutput->setContainment(false);
 	m_expansionNode_Attribute_regionAsOutput->setResolveProxies(true);
-	m_expansionNode_Attribute_regionAsOutput->setDefaultValueLiteral("");	
+	m_expansionNode_Attribute_regionAsOutput->setDefaultValueLiteral("");
 	m_expansionNode_Attribute_regionAsOutput->setEOpposite(uml::umlPackage::eInstance()->getExpansionRegion_Attribute_outputElement());
 	
 	m_expansionNode_Attribute_regionAsOutput->_setID(EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT);
@@ -7693,7 +7693,7 @@ void umlPackageImpl::initializeExpansionRegionContent()
 	m_expansionRegion_Attribute_inputElement->setOrdered(false);
 	m_expansionRegion_Attribute_inputElement->setContainment(false);
 	m_expansionRegion_Attribute_inputElement->setResolveProxies(true);
-	m_expansionRegion_Attribute_inputElement->setDefaultValueLiteral("");	
+	m_expansionRegion_Attribute_inputElement->setDefaultValueLiteral("");
 	m_expansionRegion_Attribute_inputElement->setEOpposite(uml::umlPackage::eInstance()->getExpansionNode_Attribute_regionAsInput());
 	
 	m_expansionRegion_Attribute_inputElement->_setID(EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT);
@@ -7710,7 +7710,7 @@ void umlPackageImpl::initializeExpansionRegionContent()
 	m_expansionRegion_Attribute_outputElement->setOrdered(false);
 	m_expansionRegion_Attribute_outputElement->setContainment(false);
 	m_expansionRegion_Attribute_outputElement->setResolveProxies(true);
-	m_expansionRegion_Attribute_outputElement->setDefaultValueLiteral("");	
+	m_expansionRegion_Attribute_outputElement->setDefaultValueLiteral("");
 	m_expansionRegion_Attribute_outputElement->setEOpposite(uml::umlPackage::eInstance()->getExpansionNode_Attribute_regionAsOutput());
 	
 	m_expansionRegion_Attribute_outputElement->_setID(EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT);
@@ -7765,7 +7765,7 @@ void umlPackageImpl::initializeExpressionContent()
 	m_expression_Attribute_operand->setOrdered(true);
 	m_expression_Attribute_operand->setContainment(true);
 	m_expression_Attribute_operand->setResolveProxies(true);
-	m_expression_Attribute_operand->setDefaultValueLiteral("");	
+	m_expression_Attribute_operand->setDefaultValueLiteral("");
 	
 	m_expression_Attribute_operand->_setID(EXPRESSION_ATTRIBUTE_OPERAND);
 	
@@ -7803,7 +7803,7 @@ void umlPackageImpl::initializeExtendContent()
 	m_extend_Attribute_condition->setOrdered(false);
 	m_extend_Attribute_condition->setContainment(true);
 	m_extend_Attribute_condition->setResolveProxies(true);
-	m_extend_Attribute_condition->setDefaultValueLiteral("");	
+	m_extend_Attribute_condition->setDefaultValueLiteral("");
 	
 	m_extend_Attribute_condition->_setID(EXTEND_ATTRIBUTE_CONDITION);
 	m_extend_Attribute_extendedCase->setName("extendedCase");
@@ -7819,7 +7819,7 @@ void umlPackageImpl::initializeExtendContent()
 	m_extend_Attribute_extendedCase->setOrdered(false);
 	m_extend_Attribute_extendedCase->setContainment(false);
 	m_extend_Attribute_extendedCase->setResolveProxies(true);
-	m_extend_Attribute_extendedCase->setDefaultValueLiteral("");	
+	m_extend_Attribute_extendedCase->setDefaultValueLiteral("");
 	
 	m_extend_Attribute_extendedCase->_setID(EXTEND_ATTRIBUTE_EXTENDEDCASE);
 	m_extend_Attribute_extension->setName("extension");
@@ -7835,7 +7835,7 @@ void umlPackageImpl::initializeExtendContent()
 	m_extend_Attribute_extension->setOrdered(false);
 	m_extend_Attribute_extension->setContainment(false);
 	m_extend_Attribute_extension->setResolveProxies(true);
-	m_extend_Attribute_extension->setDefaultValueLiteral("");	
+	m_extend_Attribute_extension->setDefaultValueLiteral("");
 	m_extend_Attribute_extension->setEOpposite(uml::umlPackage::eInstance()->getUseCase_Attribute_extend());
 	
 	m_extend_Attribute_extension->_setID(EXTEND_ATTRIBUTE_EXTENSION);
@@ -7852,7 +7852,7 @@ void umlPackageImpl::initializeExtendContent()
 	m_extend_Attribute_extensionLocation->setOrdered(true);
 	m_extend_Attribute_extensionLocation->setContainment(false);
 	m_extend_Attribute_extensionLocation->setResolveProxies(true);
-	m_extend_Attribute_extensionLocation->setDefaultValueLiteral("");	
+	m_extend_Attribute_extensionLocation->setDefaultValueLiteral("");
 	
 	m_extend_Attribute_extensionLocation->_setID(EXTEND_ATTRIBUTE_EXTENSIONLOCATION);
 	
@@ -7906,7 +7906,7 @@ void umlPackageImpl::initializeExtensionContent()
 	m_extension_Attribute_metaclass->setOrdered(false);
 	m_extension_Attribute_metaclass->setContainment(false);
 	m_extension_Attribute_metaclass->setResolveProxies(true);
-	m_extension_Attribute_metaclass->setDefaultValueLiteral("");	
+	m_extension_Attribute_metaclass->setDefaultValueLiteral("");
 	m_extension_Attribute_metaclass->setEOpposite(uml::umlPackage::eInstance()->getClass_Attribute_extension());
 	
 	m_extension_Attribute_metaclass->_setID(EXTENSION_ATTRIBUTE_METACLASS);
@@ -8017,7 +8017,7 @@ void umlPackageImpl::initializeExtensionPointContent()
 	m_extensionPoint_Attribute_useCase->setOrdered(false);
 	m_extensionPoint_Attribute_useCase->setContainment(false);
 	m_extensionPoint_Attribute_useCase->setResolveProxies(true);
-	m_extensionPoint_Attribute_useCase->setDefaultValueLiteral("");	
+	m_extensionPoint_Attribute_useCase->setDefaultValueLiteral("");
 	m_extensionPoint_Attribute_useCase->setEOpposite(uml::umlPackage::eInstance()->getUseCase_Attribute_extensionPoint());
 	
 	m_extensionPoint_Attribute_useCase->_setID(EXTENSIONPOINT_ATTRIBUTE_USECASE);
@@ -8113,7 +8113,7 @@ void umlPackageImpl::initializeFeatureContent()
 	m_feature_Attribute_featuringClassifier->setOrdered(false);
 	m_feature_Attribute_featuringClassifier->setContainment(false);
 	m_feature_Attribute_featuringClassifier->setResolveProxies(true);
-	m_feature_Attribute_featuringClassifier->setDefaultValueLiteral("");	
+	m_feature_Attribute_featuringClassifier->setDefaultValueLiteral("");
 	m_feature_Attribute_featuringClassifier->setEOpposite(uml::umlPackage::eInstance()->getClassifier_Attribute_feature());
 	
 	m_feature_Attribute_featuringClassifier->_setID(FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER);
@@ -8382,7 +8382,7 @@ void umlPackageImpl::initializeGeneralOrderingContent()
 	m_generalOrdering_Attribute_after->setOrdered(false);
 	m_generalOrdering_Attribute_after->setContainment(false);
 	m_generalOrdering_Attribute_after->setResolveProxies(true);
-	m_generalOrdering_Attribute_after->setDefaultValueLiteral("");	
+	m_generalOrdering_Attribute_after->setDefaultValueLiteral("");
 	m_generalOrdering_Attribute_after->setEOpposite(uml::umlPackage::eInstance()->getOccurrenceSpecification_Attribute_toBefore());
 	
 	m_generalOrdering_Attribute_after->_setID(GENERALORDERING_ATTRIBUTE_AFTER);
@@ -8399,7 +8399,7 @@ void umlPackageImpl::initializeGeneralOrderingContent()
 	m_generalOrdering_Attribute_before->setOrdered(false);
 	m_generalOrdering_Attribute_before->setContainment(false);
 	m_generalOrdering_Attribute_before->setResolveProxies(true);
-	m_generalOrdering_Attribute_before->setDefaultValueLiteral("");	
+	m_generalOrdering_Attribute_before->setDefaultValueLiteral("");
 	m_generalOrdering_Attribute_before->setEOpposite(uml::umlPackage::eInstance()->getOccurrenceSpecification_Attribute_toAfter());
 	
 	m_generalOrdering_Attribute_before->_setID(GENERALORDERING_ATTRIBUTE_BEFORE);
@@ -8454,7 +8454,7 @@ void umlPackageImpl::initializeGeneralizationContent()
 	m_generalization_Attribute_general->setOrdered(false);
 	m_generalization_Attribute_general->setContainment(false);
 	m_generalization_Attribute_general->setResolveProxies(true);
-	m_generalization_Attribute_general->setDefaultValueLiteral("");	
+	m_generalization_Attribute_general->setDefaultValueLiteral("");
 	
 	m_generalization_Attribute_general->_setID(GENERALIZATION_ATTRIBUTE_GENERAL);
 	m_generalization_Attribute_generalizationSet->setName("generalizationSet");
@@ -8470,7 +8470,7 @@ void umlPackageImpl::initializeGeneralizationContent()
 	m_generalization_Attribute_generalizationSet->setOrdered(false);
 	m_generalization_Attribute_generalizationSet->setContainment(false);
 	m_generalization_Attribute_generalizationSet->setResolveProxies(true);
-	m_generalization_Attribute_generalizationSet->setDefaultValueLiteral("");	
+	m_generalization_Attribute_generalizationSet->setDefaultValueLiteral("");
 	m_generalization_Attribute_generalizationSet->setEOpposite(uml::umlPackage::eInstance()->getGeneralizationSet_Attribute_generalization());
 	
 	m_generalization_Attribute_generalizationSet->_setID(GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET);
@@ -8487,7 +8487,7 @@ void umlPackageImpl::initializeGeneralizationContent()
 	m_generalization_Attribute_specific->setOrdered(false);
 	m_generalization_Attribute_specific->setContainment(false);
 	m_generalization_Attribute_specific->setResolveProxies(true);
-	m_generalization_Attribute_specific->setDefaultValueLiteral("");	
+	m_generalization_Attribute_specific->setDefaultValueLiteral("");
 	m_generalization_Attribute_specific->setEOpposite(uml::umlPackage::eInstance()->getClassifier_Attribute_generalization());
 	
 	m_generalization_Attribute_specific->_setID(GENERALIZATION_ATTRIBUTE_SPECIFIC);
@@ -8558,7 +8558,7 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 	m_generalizationSet_Attribute_generalization->setOrdered(false);
 	m_generalizationSet_Attribute_generalization->setContainment(false);
 	m_generalizationSet_Attribute_generalization->setResolveProxies(true);
-	m_generalizationSet_Attribute_generalization->setDefaultValueLiteral("");	
+	m_generalizationSet_Attribute_generalization->setDefaultValueLiteral("");
 	m_generalizationSet_Attribute_generalization->setEOpposite(uml::umlPackage::eInstance()->getGeneralization_Attribute_generalizationSet());
 	
 	m_generalizationSet_Attribute_generalization->_setID(GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION);
@@ -8575,7 +8575,7 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 	m_generalizationSet_Attribute_powertype->setOrdered(false);
 	m_generalizationSet_Attribute_powertype->setContainment(false);
 	m_generalizationSet_Attribute_powertype->setResolveProxies(true);
-	m_generalizationSet_Attribute_powertype->setDefaultValueLiteral("");	
+	m_generalizationSet_Attribute_powertype->setDefaultValueLiteral("");
 	m_generalizationSet_Attribute_powertype->setEOpposite(uml::umlPackage::eInstance()->getClassifier_Attribute_powertypeExtent());
 	
 	m_generalizationSet_Attribute_powertype->_setID(GENERALIZATIONSET_ATTRIBUTE_POWERTYPE);
@@ -8684,7 +8684,7 @@ void umlPackageImpl::initializeIncludeContent()
 	m_include_Attribute_addition->setOrdered(false);
 	m_include_Attribute_addition->setContainment(false);
 	m_include_Attribute_addition->setResolveProxies(true);
-	m_include_Attribute_addition->setDefaultValueLiteral("");	
+	m_include_Attribute_addition->setDefaultValueLiteral("");
 	
 	m_include_Attribute_addition->_setID(INCLUDE_ATTRIBUTE_ADDITION);
 	m_include_Attribute_includingCase->setName("includingCase");
@@ -8700,7 +8700,7 @@ void umlPackageImpl::initializeIncludeContent()
 	m_include_Attribute_includingCase->setOrdered(false);
 	m_include_Attribute_includingCase->setContainment(false);
 	m_include_Attribute_includingCase->setResolveProxies(true);
-	m_include_Attribute_includingCase->setDefaultValueLiteral("");	
+	m_include_Attribute_includingCase->setDefaultValueLiteral("");
 	m_include_Attribute_includingCase->setEOpposite(uml::umlPackage::eInstance()->getUseCase_Attribute_include());
 	
 	m_include_Attribute_includingCase->_setID(INCLUDE_ATTRIBUTE_INCLUDINGCASE);
@@ -8739,7 +8739,7 @@ void umlPackageImpl::initializeInformationFlowContent()
 	m_informationFlow_Attribute_conveyed->setOrdered(false);
 	m_informationFlow_Attribute_conveyed->setContainment(false);
 	m_informationFlow_Attribute_conveyed->setResolveProxies(true);
-	m_informationFlow_Attribute_conveyed->setDefaultValueLiteral("");	
+	m_informationFlow_Attribute_conveyed->setDefaultValueLiteral("");
 	
 	m_informationFlow_Attribute_conveyed->_setID(INFORMATIONFLOW_ATTRIBUTE_CONVEYED);
 	m_informationFlow_Attribute_informationSource->setName("informationSource");
@@ -8755,7 +8755,7 @@ void umlPackageImpl::initializeInformationFlowContent()
 	m_informationFlow_Attribute_informationSource->setOrdered(false);
 	m_informationFlow_Attribute_informationSource->setContainment(false);
 	m_informationFlow_Attribute_informationSource->setResolveProxies(true);
-	m_informationFlow_Attribute_informationSource->setDefaultValueLiteral("");	
+	m_informationFlow_Attribute_informationSource->setDefaultValueLiteral("");
 	
 	m_informationFlow_Attribute_informationSource->_setID(INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE);
 	m_informationFlow_Attribute_informationTarget->setName("informationTarget");
@@ -8771,7 +8771,7 @@ void umlPackageImpl::initializeInformationFlowContent()
 	m_informationFlow_Attribute_informationTarget->setOrdered(false);
 	m_informationFlow_Attribute_informationTarget->setContainment(false);
 	m_informationFlow_Attribute_informationTarget->setResolveProxies(true);
-	m_informationFlow_Attribute_informationTarget->setDefaultValueLiteral("");	
+	m_informationFlow_Attribute_informationTarget->setDefaultValueLiteral("");
 	
 	m_informationFlow_Attribute_informationTarget->_setID(INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET);
 	m_informationFlow_Attribute_realization->setName("realization");
@@ -8787,7 +8787,7 @@ void umlPackageImpl::initializeInformationFlowContent()
 	m_informationFlow_Attribute_realization->setOrdered(false);
 	m_informationFlow_Attribute_realization->setContainment(false);
 	m_informationFlow_Attribute_realization->setResolveProxies(true);
-	m_informationFlow_Attribute_realization->setDefaultValueLiteral("");	
+	m_informationFlow_Attribute_realization->setDefaultValueLiteral("");
 	
 	m_informationFlow_Attribute_realization->_setID(INFORMATIONFLOW_ATTRIBUTE_REALIZATION);
 	m_informationFlow_Attribute_realizingActivityEdge->setName("realizingActivityEdge");
@@ -8803,7 +8803,7 @@ void umlPackageImpl::initializeInformationFlowContent()
 	m_informationFlow_Attribute_realizingActivityEdge->setOrdered(false);
 	m_informationFlow_Attribute_realizingActivityEdge->setContainment(false);
 	m_informationFlow_Attribute_realizingActivityEdge->setResolveProxies(true);
-	m_informationFlow_Attribute_realizingActivityEdge->setDefaultValueLiteral("");	
+	m_informationFlow_Attribute_realizingActivityEdge->setDefaultValueLiteral("");
 	
 	m_informationFlow_Attribute_realizingActivityEdge->_setID(INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE);
 	m_informationFlow_Attribute_realizingConnector->setName("realizingConnector");
@@ -8819,7 +8819,7 @@ void umlPackageImpl::initializeInformationFlowContent()
 	m_informationFlow_Attribute_realizingConnector->setOrdered(false);
 	m_informationFlow_Attribute_realizingConnector->setContainment(false);
 	m_informationFlow_Attribute_realizingConnector->setResolveProxies(true);
-	m_informationFlow_Attribute_realizingConnector->setDefaultValueLiteral("");	
+	m_informationFlow_Attribute_realizingConnector->setDefaultValueLiteral("");
 	
 	m_informationFlow_Attribute_realizingConnector->_setID(INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR);
 	m_informationFlow_Attribute_realizingMessage->setName("realizingMessage");
@@ -8835,7 +8835,7 @@ void umlPackageImpl::initializeInformationFlowContent()
 	m_informationFlow_Attribute_realizingMessage->setOrdered(false);
 	m_informationFlow_Attribute_realizingMessage->setContainment(false);
 	m_informationFlow_Attribute_realizingMessage->setResolveProxies(true);
-	m_informationFlow_Attribute_realizingMessage->setDefaultValueLiteral("");	
+	m_informationFlow_Attribute_realizingMessage->setDefaultValueLiteral("");
 	
 	m_informationFlow_Attribute_realizingMessage->_setID(INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE);
 	
@@ -8873,7 +8873,7 @@ void umlPackageImpl::initializeInformationItemContent()
 	m_informationItem_Attribute_represented->setOrdered(false);
 	m_informationItem_Attribute_represented->setContainment(false);
 	m_informationItem_Attribute_represented->setResolveProxies(true);
-	m_informationItem_Attribute_represented->setDefaultValueLiteral("");	
+	m_informationItem_Attribute_represented->setDefaultValueLiteral("");
 	
 	m_informationItem_Attribute_represented->_setID(INFORMATIONITEM_ATTRIBUTE_REPRESENTED);
 	
@@ -8933,7 +8933,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_action->setOrdered(true);
 	m_inputPin_Attribute_action->setContainment(false);
 	m_inputPin_Attribute_action->setResolveProxies(true);
-	m_inputPin_Attribute_action->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_action->setDefaultValueLiteral("");
 	m_inputPin_Attribute_action->setEOpposite(uml::umlPackage::eInstance()->getAction_Attribute_input());
 	
 	m_inputPin_Attribute_action->_setID(INPUTPIN_ATTRIBUTE_ACTION);
@@ -8950,7 +8950,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_addStructuralFeatureValueAction->setOrdered(true);
 	m_inputPin_Attribute_addStructuralFeatureValueAction->setContainment(false);
 	m_inputPin_Attribute_addStructuralFeatureValueAction->setResolveProxies(true);
-	m_inputPin_Attribute_addStructuralFeatureValueAction->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setDefaultValueLiteral("");
 	m_inputPin_Attribute_addStructuralFeatureValueAction->setEOpposite(uml::umlPackage::eInstance()->getAddStructuralFeatureValueAction_Attribute_insertAt());
 	
 	m_inputPin_Attribute_addStructuralFeatureValueAction->_setID(INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION);
@@ -8967,7 +8967,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_callOperationAction->setOrdered(true);
 	m_inputPin_Attribute_callOperationAction->setContainment(false);
 	m_inputPin_Attribute_callOperationAction->setResolveProxies(true);
-	m_inputPin_Attribute_callOperationAction->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_callOperationAction->setDefaultValueLiteral("");
 	m_inputPin_Attribute_callOperationAction->setEOpposite(uml::umlPackage::eInstance()->getCallOperationAction_Attribute_target());
 	
 	m_inputPin_Attribute_callOperationAction->_setID(INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION);
@@ -8984,7 +8984,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_destroyObjectAction->setOrdered(true);
 	m_inputPin_Attribute_destroyObjectAction->setContainment(false);
 	m_inputPin_Attribute_destroyObjectAction->setResolveProxies(true);
-	m_inputPin_Attribute_destroyObjectAction->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_destroyObjectAction->setDefaultValueLiteral("");
 	m_inputPin_Attribute_destroyObjectAction->setEOpposite(uml::umlPackage::eInstance()->getDestroyObjectAction_Attribute_target());
 	
 	m_inputPin_Attribute_destroyObjectAction->_setID(INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION);
@@ -9001,7 +9001,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_invocationAction->setOrdered(true);
 	m_inputPin_Attribute_invocationAction->setContainment(false);
 	m_inputPin_Attribute_invocationAction->setResolveProxies(true);
-	m_inputPin_Attribute_invocationAction->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_invocationAction->setDefaultValueLiteral("");
 	m_inputPin_Attribute_invocationAction->setEOpposite(uml::umlPackage::eInstance()->getInvocationAction_Attribute_argument());
 	
 	m_inputPin_Attribute_invocationAction->_setID(INPUTPIN_ATTRIBUTE_INVOCATIONACTION);
@@ -9018,7 +9018,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_removeStructuralFeatureValueAction->setOrdered(true);
 	m_inputPin_Attribute_removeStructuralFeatureValueAction->setContainment(false);
 	m_inputPin_Attribute_removeStructuralFeatureValueAction->setResolveProxies(true);
-	m_inputPin_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral("");
 	m_inputPin_Attribute_removeStructuralFeatureValueAction->setEOpposite(uml::umlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Attribute_removeAt());
 	
 	m_inputPin_Attribute_removeStructuralFeatureValueAction->_setID(INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
@@ -9035,7 +9035,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_structuralFeatureAction->setOrdered(true);
 	m_inputPin_Attribute_structuralFeatureAction->setContainment(false);
 	m_inputPin_Attribute_structuralFeatureAction->setResolveProxies(true);
-	m_inputPin_Attribute_structuralFeatureAction->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_structuralFeatureAction->setDefaultValueLiteral("");
 	m_inputPin_Attribute_structuralFeatureAction->setEOpposite(uml::umlPackage::eInstance()->getStructuralFeatureAction_Attribute_object());
 	
 	m_inputPin_Attribute_structuralFeatureAction->_setID(INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION);
@@ -9052,7 +9052,7 @@ void umlPackageImpl::initializeInputPinContent()
 	m_inputPin_Attribute_writeStructuralFeatureAction->setOrdered(true);
 	m_inputPin_Attribute_writeStructuralFeatureAction->setContainment(false);
 	m_inputPin_Attribute_writeStructuralFeatureAction->setResolveProxies(true);
-	m_inputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral("");	
+	m_inputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral("");
 	m_inputPin_Attribute_writeStructuralFeatureAction->setEOpposite(uml::umlPackage::eInstance()->getWriteStructuralFeatureAction_Attribute_value());
 	
 	m_inputPin_Attribute_writeStructuralFeatureAction->_setID(INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
@@ -9091,7 +9091,7 @@ void umlPackageImpl::initializeInstanceSpecificationContent()
 	m_instanceSpecification_Attribute_classifier->setOrdered(false);
 	m_instanceSpecification_Attribute_classifier->setContainment(false);
 	m_instanceSpecification_Attribute_classifier->setResolveProxies(true);
-	m_instanceSpecification_Attribute_classifier->setDefaultValueLiteral("");	
+	m_instanceSpecification_Attribute_classifier->setDefaultValueLiteral("");
 	
 	m_instanceSpecification_Attribute_classifier->_setID(INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER);
 	m_instanceSpecification_Attribute_slot->setName("slot");
@@ -9107,7 +9107,7 @@ void umlPackageImpl::initializeInstanceSpecificationContent()
 	m_instanceSpecification_Attribute_slot->setOrdered(false);
 	m_instanceSpecification_Attribute_slot->setContainment(true);
 	m_instanceSpecification_Attribute_slot->setResolveProxies(true);
-	m_instanceSpecification_Attribute_slot->setDefaultValueLiteral("");	
+	m_instanceSpecification_Attribute_slot->setDefaultValueLiteral("");
 	m_instanceSpecification_Attribute_slot->setEOpposite(uml::umlPackage::eInstance()->getSlot_Attribute_owningInstance());
 	
 	m_instanceSpecification_Attribute_slot->_setID(INSTANCESPECIFICATION_ATTRIBUTE_SLOT);
@@ -9124,7 +9124,7 @@ void umlPackageImpl::initializeInstanceSpecificationContent()
 	m_instanceSpecification_Attribute_specification->setOrdered(false);
 	m_instanceSpecification_Attribute_specification->setContainment(true);
 	m_instanceSpecification_Attribute_specification->setResolveProxies(true);
-	m_instanceSpecification_Attribute_specification->setDefaultValueLiteral("");	
+	m_instanceSpecification_Attribute_specification->setDefaultValueLiteral("");
 	
 	m_instanceSpecification_Attribute_specification->_setID(INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION);
 	
@@ -9162,7 +9162,7 @@ void umlPackageImpl::initializeInstanceValueContent()
 	m_instanceValue_Attribute_instance->setOrdered(false);
 	m_instanceValue_Attribute_instance->setContainment(false);
 	m_instanceValue_Attribute_instance->setResolveProxies(true);
-	m_instanceValue_Attribute_instance->setDefaultValueLiteral("");	
+	m_instanceValue_Attribute_instance->setDefaultValueLiteral("");
 	
 	m_instanceValue_Attribute_instance->_setID(INSTANCEVALUE_ATTRIBUTE_INSTANCE);
 	
@@ -9200,7 +9200,7 @@ void umlPackageImpl::initializeInteractionContent()
 	m_interaction_Attribute_action->setOrdered(false);
 	m_interaction_Attribute_action->setContainment(true);
 	m_interaction_Attribute_action->setResolveProxies(true);
-	m_interaction_Attribute_action->setDefaultValueLiteral("");	
+	m_interaction_Attribute_action->setDefaultValueLiteral("");
 	
 	m_interaction_Attribute_action->_setID(INTERACTION_ATTRIBUTE_ACTION);
 	m_interaction_Attribute_formalGate->setName("formalGate");
@@ -9216,7 +9216,7 @@ void umlPackageImpl::initializeInteractionContent()
 	m_interaction_Attribute_formalGate->setOrdered(false);
 	m_interaction_Attribute_formalGate->setContainment(true);
 	m_interaction_Attribute_formalGate->setResolveProxies(true);
-	m_interaction_Attribute_formalGate->setDefaultValueLiteral("");	
+	m_interaction_Attribute_formalGate->setDefaultValueLiteral("");
 	
 	m_interaction_Attribute_formalGate->_setID(INTERACTION_ATTRIBUTE_FORMALGATE);
 	m_interaction_Attribute_fragment->setName("fragment");
@@ -9232,7 +9232,7 @@ void umlPackageImpl::initializeInteractionContent()
 	m_interaction_Attribute_fragment->setOrdered(true);
 	m_interaction_Attribute_fragment->setContainment(true);
 	m_interaction_Attribute_fragment->setResolveProxies(true);
-	m_interaction_Attribute_fragment->setDefaultValueLiteral("");	
+	m_interaction_Attribute_fragment->setDefaultValueLiteral("");
 	m_interaction_Attribute_fragment->setEOpposite(uml::umlPackage::eInstance()->getInteractionFragment_Attribute_enclosingInteraction());
 	
 	m_interaction_Attribute_fragment->_setID(INTERACTION_ATTRIBUTE_FRAGMENT);
@@ -9249,7 +9249,7 @@ void umlPackageImpl::initializeInteractionContent()
 	m_interaction_Attribute_lifeline->setOrdered(false);
 	m_interaction_Attribute_lifeline->setContainment(true);
 	m_interaction_Attribute_lifeline->setResolveProxies(true);
-	m_interaction_Attribute_lifeline->setDefaultValueLiteral("");	
+	m_interaction_Attribute_lifeline->setDefaultValueLiteral("");
 	m_interaction_Attribute_lifeline->setEOpposite(uml::umlPackage::eInstance()->getLifeline_Attribute_interaction());
 	
 	m_interaction_Attribute_lifeline->_setID(INTERACTION_ATTRIBUTE_LIFELINE);
@@ -9266,7 +9266,7 @@ void umlPackageImpl::initializeInteractionContent()
 	m_interaction_Attribute_message->setOrdered(false);
 	m_interaction_Attribute_message->setContainment(true);
 	m_interaction_Attribute_message->setResolveProxies(true);
-	m_interaction_Attribute_message->setDefaultValueLiteral("");	
+	m_interaction_Attribute_message->setDefaultValueLiteral("");
 	m_interaction_Attribute_message->setEOpposite(uml::umlPackage::eInstance()->getMessage_Attribute_interaction());
 	
 	m_interaction_Attribute_message->_setID(INTERACTION_ATTRIBUTE_MESSAGE);
@@ -9305,7 +9305,7 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 	m_interactionConstraint_Attribute_maxint->setOrdered(false);
 	m_interactionConstraint_Attribute_maxint->setContainment(true);
 	m_interactionConstraint_Attribute_maxint->setResolveProxies(true);
-	m_interactionConstraint_Attribute_maxint->setDefaultValueLiteral("");	
+	m_interactionConstraint_Attribute_maxint->setDefaultValueLiteral("");
 	
 	m_interactionConstraint_Attribute_maxint->_setID(INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT);
 	m_interactionConstraint_Attribute_minint->setName("minint");
@@ -9321,7 +9321,7 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 	m_interactionConstraint_Attribute_minint->setOrdered(false);
 	m_interactionConstraint_Attribute_minint->setContainment(true);
 	m_interactionConstraint_Attribute_minint->setResolveProxies(true);
-	m_interactionConstraint_Attribute_minint->setDefaultValueLiteral("");	
+	m_interactionConstraint_Attribute_minint->setDefaultValueLiteral("");
 	
 	m_interactionConstraint_Attribute_minint->_setID(INTERACTIONCONSTRAINT_ATTRIBUTE_MININT);
 	
@@ -9359,7 +9359,7 @@ void umlPackageImpl::initializeInteractionFragmentContent()
 	m_interactionFragment_Attribute_covered->setOrdered(false);
 	m_interactionFragment_Attribute_covered->setContainment(false);
 	m_interactionFragment_Attribute_covered->setResolveProxies(true);
-	m_interactionFragment_Attribute_covered->setDefaultValueLiteral("");	
+	m_interactionFragment_Attribute_covered->setDefaultValueLiteral("");
 	m_interactionFragment_Attribute_covered->setEOpposite(uml::umlPackage::eInstance()->getLifeline_Attribute_coveredBy());
 	
 	m_interactionFragment_Attribute_covered->_setID(INTERACTIONFRAGMENT_ATTRIBUTE_COVERED);
@@ -9376,7 +9376,7 @@ void umlPackageImpl::initializeInteractionFragmentContent()
 	m_interactionFragment_Attribute_enclosingInteraction->setOrdered(false);
 	m_interactionFragment_Attribute_enclosingInteraction->setContainment(false);
 	m_interactionFragment_Attribute_enclosingInteraction->setResolveProxies(true);
-	m_interactionFragment_Attribute_enclosingInteraction->setDefaultValueLiteral("");	
+	m_interactionFragment_Attribute_enclosingInteraction->setDefaultValueLiteral("");
 	m_interactionFragment_Attribute_enclosingInteraction->setEOpposite(uml::umlPackage::eInstance()->getInteraction_Attribute_fragment());
 	
 	m_interactionFragment_Attribute_enclosingInteraction->_setID(INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION);
@@ -9393,7 +9393,7 @@ void umlPackageImpl::initializeInteractionFragmentContent()
 	m_interactionFragment_Attribute_enclosingOperand->setOrdered(false);
 	m_interactionFragment_Attribute_enclosingOperand->setContainment(false);
 	m_interactionFragment_Attribute_enclosingOperand->setResolveProxies(true);
-	m_interactionFragment_Attribute_enclosingOperand->setDefaultValueLiteral("");	
+	m_interactionFragment_Attribute_enclosingOperand->setDefaultValueLiteral("");
 	m_interactionFragment_Attribute_enclosingOperand->setEOpposite(uml::umlPackage::eInstance()->getInteractionOperand_Attribute_fragment());
 	
 	m_interactionFragment_Attribute_enclosingOperand->_setID(INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND);
@@ -9410,7 +9410,7 @@ void umlPackageImpl::initializeInteractionFragmentContent()
 	m_interactionFragment_Attribute_generalOrdering->setOrdered(false);
 	m_interactionFragment_Attribute_generalOrdering->setContainment(true);
 	m_interactionFragment_Attribute_generalOrdering->setResolveProxies(true);
-	m_interactionFragment_Attribute_generalOrdering->setDefaultValueLiteral("");	
+	m_interactionFragment_Attribute_generalOrdering->setDefaultValueLiteral("");
 	
 	m_interactionFragment_Attribute_generalOrdering->_setID(INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING);
 	
@@ -9448,7 +9448,7 @@ void umlPackageImpl::initializeInteractionOperandContent()
 	m_interactionOperand_Attribute_fragment->setOrdered(true);
 	m_interactionOperand_Attribute_fragment->setContainment(true);
 	m_interactionOperand_Attribute_fragment->setResolveProxies(true);
-	m_interactionOperand_Attribute_fragment->setDefaultValueLiteral("");	
+	m_interactionOperand_Attribute_fragment->setDefaultValueLiteral("");
 	m_interactionOperand_Attribute_fragment->setEOpposite(uml::umlPackage::eInstance()->getInteractionFragment_Attribute_enclosingOperand());
 	
 	m_interactionOperand_Attribute_fragment->_setID(INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT);
@@ -9465,7 +9465,7 @@ void umlPackageImpl::initializeInteractionOperandContent()
 	m_interactionOperand_Attribute_guard->setOrdered(false);
 	m_interactionOperand_Attribute_guard->setContainment(true);
 	m_interactionOperand_Attribute_guard->setResolveProxies(true);
-	m_interactionOperand_Attribute_guard->setDefaultValueLiteral("");	
+	m_interactionOperand_Attribute_guard->setDefaultValueLiteral("");
 	
 	m_interactionOperand_Attribute_guard->_setID(INTERACTIONOPERAND_ATTRIBUTE_GUARD);
 	
@@ -9503,7 +9503,7 @@ void umlPackageImpl::initializeInteractionUseContent()
 	m_interactionUse_Attribute_actualGate->setOrdered(false);
 	m_interactionUse_Attribute_actualGate->setContainment(true);
 	m_interactionUse_Attribute_actualGate->setResolveProxies(true);
-	m_interactionUse_Attribute_actualGate->setDefaultValueLiteral("");	
+	m_interactionUse_Attribute_actualGate->setDefaultValueLiteral("");
 	
 	m_interactionUse_Attribute_actualGate->_setID(INTERACTIONUSE_ATTRIBUTE_ACTUALGATE);
 	m_interactionUse_Attribute_argument->setName("argument");
@@ -9519,7 +9519,7 @@ void umlPackageImpl::initializeInteractionUseContent()
 	m_interactionUse_Attribute_argument->setOrdered(true);
 	m_interactionUse_Attribute_argument->setContainment(true);
 	m_interactionUse_Attribute_argument->setResolveProxies(true);
-	m_interactionUse_Attribute_argument->setDefaultValueLiteral("");	
+	m_interactionUse_Attribute_argument->setDefaultValueLiteral("");
 	
 	m_interactionUse_Attribute_argument->_setID(INTERACTIONUSE_ATTRIBUTE_ARGUMENT);
 	m_interactionUse_Attribute_refersTo->setName("refersTo");
@@ -9535,7 +9535,7 @@ void umlPackageImpl::initializeInteractionUseContent()
 	m_interactionUse_Attribute_refersTo->setOrdered(false);
 	m_interactionUse_Attribute_refersTo->setContainment(false);
 	m_interactionUse_Attribute_refersTo->setResolveProxies(true);
-	m_interactionUse_Attribute_refersTo->setDefaultValueLiteral("");	
+	m_interactionUse_Attribute_refersTo->setDefaultValueLiteral("");
 	
 	m_interactionUse_Attribute_refersTo->_setID(INTERACTIONUSE_ATTRIBUTE_REFERSTO);
 	m_interactionUse_Attribute_returnValue->setName("returnValue");
@@ -9551,7 +9551,7 @@ void umlPackageImpl::initializeInteractionUseContent()
 	m_interactionUse_Attribute_returnValue->setOrdered(false);
 	m_interactionUse_Attribute_returnValue->setContainment(true);
 	m_interactionUse_Attribute_returnValue->setResolveProxies(true);
-	m_interactionUse_Attribute_returnValue->setDefaultValueLiteral("");	
+	m_interactionUse_Attribute_returnValue->setDefaultValueLiteral("");
 	
 	m_interactionUse_Attribute_returnValue->_setID(INTERACTIONUSE_ATTRIBUTE_RETURNVALUE);
 	m_interactionUse_Attribute_returnValueRecipient->setName("returnValueRecipient");
@@ -9567,7 +9567,7 @@ void umlPackageImpl::initializeInteractionUseContent()
 	m_interactionUse_Attribute_returnValueRecipient->setOrdered(false);
 	m_interactionUse_Attribute_returnValueRecipient->setContainment(false);
 	m_interactionUse_Attribute_returnValueRecipient->setResolveProxies(true);
-	m_interactionUse_Attribute_returnValueRecipient->setDefaultValueLiteral("");	
+	m_interactionUse_Attribute_returnValueRecipient->setDefaultValueLiteral("");
 	
 	m_interactionUse_Attribute_returnValueRecipient->_setID(INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT);
 	
@@ -9605,7 +9605,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	m_interface_Attribute_nestedClassifier->setOrdered(true);
 	m_interface_Attribute_nestedClassifier->setContainment(true);
 	m_interface_Attribute_nestedClassifier->setResolveProxies(true);
-	m_interface_Attribute_nestedClassifier->setDefaultValueLiteral("");	
+	m_interface_Attribute_nestedClassifier->setDefaultValueLiteral("");
 	
 	m_interface_Attribute_nestedClassifier->_setID(INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER);
 	m_interface_Attribute_ownedAttribute->setName("ownedAttribute");
@@ -9621,7 +9621,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	m_interface_Attribute_ownedAttribute->setOrdered(true);
 	m_interface_Attribute_ownedAttribute->setContainment(true);
 	m_interface_Attribute_ownedAttribute->setResolveProxies(true);
-	m_interface_Attribute_ownedAttribute->setDefaultValueLiteral("");	
+	m_interface_Attribute_ownedAttribute->setDefaultValueLiteral("");
 	m_interface_Attribute_ownedAttribute->setEOpposite(uml::umlPackage::eInstance()->getProperty_Attribute_interface());
 	
 	m_interface_Attribute_ownedAttribute->_setID(INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE);
@@ -9638,7 +9638,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	m_interface_Attribute_ownedOperation->setOrdered(true);
 	m_interface_Attribute_ownedOperation->setContainment(true);
 	m_interface_Attribute_ownedOperation->setResolveProxies(true);
-	m_interface_Attribute_ownedOperation->setDefaultValueLiteral("");	
+	m_interface_Attribute_ownedOperation->setDefaultValueLiteral("");
 	m_interface_Attribute_ownedOperation->setEOpposite(uml::umlPackage::eInstance()->getOperation_Attribute_interface());
 	
 	m_interface_Attribute_ownedOperation->_setID(INTERFACE_ATTRIBUTE_OWNEDOPERATION);
@@ -9655,7 +9655,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	m_interface_Attribute_ownedReception->setOrdered(false);
 	m_interface_Attribute_ownedReception->setContainment(true);
 	m_interface_Attribute_ownedReception->setResolveProxies(true);
-	m_interface_Attribute_ownedReception->setDefaultValueLiteral("");	
+	m_interface_Attribute_ownedReception->setDefaultValueLiteral("");
 	
 	m_interface_Attribute_ownedReception->_setID(INTERFACE_ATTRIBUTE_OWNEDRECEPTION);
 	m_interface_Attribute_protocol->setName("protocol");
@@ -9671,7 +9671,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	m_interface_Attribute_protocol->setOrdered(false);
 	m_interface_Attribute_protocol->setContainment(true);
 	m_interface_Attribute_protocol->setResolveProxies(true);
-	m_interface_Attribute_protocol->setDefaultValueLiteral("");	
+	m_interface_Attribute_protocol->setDefaultValueLiteral("");
 	
 	m_interface_Attribute_protocol->_setID(INTERFACE_ATTRIBUTE_PROTOCOL);
 	m_interface_Attribute_redefinedInterface->setName("redefinedInterface");
@@ -9687,7 +9687,7 @@ void umlPackageImpl::initializeInterfaceContent()
 	m_interface_Attribute_redefinedInterface->setOrdered(false);
 	m_interface_Attribute_redefinedInterface->setContainment(false);
 	m_interface_Attribute_redefinedInterface->setResolveProxies(true);
-	m_interface_Attribute_redefinedInterface->setDefaultValueLiteral("");	
+	m_interface_Attribute_redefinedInterface->setDefaultValueLiteral("");
 	
 	m_interface_Attribute_redefinedInterface->_setID(INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE);
 	
@@ -9823,7 +9823,7 @@ void umlPackageImpl::initializeInterfaceRealizationContent()
 	m_interfaceRealization_Attribute_contract->setOrdered(false);
 	m_interfaceRealization_Attribute_contract->setContainment(false);
 	m_interfaceRealization_Attribute_contract->setResolveProxies(true);
-	m_interfaceRealization_Attribute_contract->setDefaultValueLiteral("");	
+	m_interfaceRealization_Attribute_contract->setDefaultValueLiteral("");
 	
 	m_interfaceRealization_Attribute_contract->_setID(INTERFACEREALIZATION_ATTRIBUTE_CONTRACT);
 	m_interfaceRealization_Attribute_implementingClassifier->setName("implementingClassifier");
@@ -9839,7 +9839,7 @@ void umlPackageImpl::initializeInterfaceRealizationContent()
 	m_interfaceRealization_Attribute_implementingClassifier->setOrdered(false);
 	m_interfaceRealization_Attribute_implementingClassifier->setContainment(false);
 	m_interfaceRealization_Attribute_implementingClassifier->setResolveProxies(true);
-	m_interfaceRealization_Attribute_implementingClassifier->setDefaultValueLiteral("");	
+	m_interfaceRealization_Attribute_implementingClassifier->setDefaultValueLiteral("");
 	m_interfaceRealization_Attribute_implementingClassifier->setEOpposite(uml::umlPackage::eInstance()->getBehavioredClassifier_Attribute_interfaceRealization());
 	
 	m_interfaceRealization_Attribute_implementingClassifier->_setID(INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER);
@@ -9878,7 +9878,7 @@ void umlPackageImpl::initializeInterruptibleActivityRegionContent()
 	m_interruptibleActivityRegion_Attribute_interruptingEdge->setOrdered(false);
 	m_interruptibleActivityRegion_Attribute_interruptingEdge->setContainment(false);
 	m_interruptibleActivityRegion_Attribute_interruptingEdge->setResolveProxies(true);
-	m_interruptibleActivityRegion_Attribute_interruptingEdge->setDefaultValueLiteral("");	
+	m_interruptibleActivityRegion_Attribute_interruptingEdge->setDefaultValueLiteral("");
 	m_interruptibleActivityRegion_Attribute_interruptingEdge->setEOpposite(uml::umlPackage::eInstance()->getActivityEdge_Attribute_interrupts());
 	
 	m_interruptibleActivityRegion_Attribute_interruptingEdge->_setID(INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE);
@@ -9895,7 +9895,7 @@ void umlPackageImpl::initializeInterruptibleActivityRegionContent()
 	m_interruptibleActivityRegion_Attribute_node->setOrdered(false);
 	m_interruptibleActivityRegion_Attribute_node->setContainment(false);
 	m_interruptibleActivityRegion_Attribute_node->setResolveProxies(true);
-	m_interruptibleActivityRegion_Attribute_node->setDefaultValueLiteral("");	
+	m_interruptibleActivityRegion_Attribute_node->setDefaultValueLiteral("");
 	m_interruptibleActivityRegion_Attribute_node->setEOpposite(uml::umlPackage::eInstance()->getActivityNode_Attribute_inInterruptibleRegion());
 	
 	m_interruptibleActivityRegion_Attribute_node->_setID(INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE);
@@ -9934,7 +9934,7 @@ void umlPackageImpl::initializeIntervalContent()
 	m_interval_Attribute_max->setOrdered(false);
 	m_interval_Attribute_max->setContainment(false);
 	m_interval_Attribute_max->setResolveProxies(true);
-	m_interval_Attribute_max->setDefaultValueLiteral("");	
+	m_interval_Attribute_max->setDefaultValueLiteral("");
 	
 	m_interval_Attribute_max->_setID(INTERVAL_ATTRIBUTE_MAX);
 	m_interval_Attribute_min->setName("min");
@@ -9950,7 +9950,7 @@ void umlPackageImpl::initializeIntervalContent()
 	m_interval_Attribute_min->setOrdered(false);
 	m_interval_Attribute_min->setContainment(false);
 	m_interval_Attribute_min->setResolveProxies(true);
-	m_interval_Attribute_min->setDefaultValueLiteral("");	
+	m_interval_Attribute_min->setDefaultValueLiteral("");
 	
 	m_interval_Attribute_min->_setID(INTERVAL_ATTRIBUTE_MIN);
 	
@@ -10010,7 +10010,7 @@ void umlPackageImpl::initializeInvocationActionContent()
 	m_invocationAction_Attribute_argument->setOrdered(true);
 	m_invocationAction_Attribute_argument->setContainment(true);
 	m_invocationAction_Attribute_argument->setResolveProxies(true);
-	m_invocationAction_Attribute_argument->setDefaultValueLiteral("");	
+	m_invocationAction_Attribute_argument->setDefaultValueLiteral("");
 	m_invocationAction_Attribute_argument->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_invocationAction());
 	
 	m_invocationAction_Attribute_argument->_setID(INVOCATIONACTION_ATTRIBUTE_ARGUMENT);
@@ -10027,7 +10027,7 @@ void umlPackageImpl::initializeInvocationActionContent()
 	m_invocationAction_Attribute_onPort->setOrdered(false);
 	m_invocationAction_Attribute_onPort->setContainment(false);
 	m_invocationAction_Attribute_onPort->setResolveProxies(true);
-	m_invocationAction_Attribute_onPort->setDefaultValueLiteral("");	
+	m_invocationAction_Attribute_onPort->setDefaultValueLiteral("");
 	
 	m_invocationAction_Attribute_onPort->_setID(INVOCATIONACTION_ATTRIBUTE_ONPORT);
 	
@@ -10081,7 +10081,7 @@ void umlPackageImpl::initializeJoinNodeContent()
 	m_joinNode_Attribute_joinSpec->setOrdered(false);
 	m_joinNode_Attribute_joinSpec->setContainment(true);
 	m_joinNode_Attribute_joinSpec->setResolveProxies(true);
-	m_joinNode_Attribute_joinSpec->setDefaultValueLiteral("");	
+	m_joinNode_Attribute_joinSpec->setDefaultValueLiteral("");
 	
 	m_joinNode_Attribute_joinSpec->_setID(JOINNODE_ATTRIBUTE_JOINSPEC);
 	
@@ -10119,7 +10119,7 @@ void umlPackageImpl::initializeLifelineContent()
 	m_lifeline_Attribute_coveredBy->setOrdered(false);
 	m_lifeline_Attribute_coveredBy->setContainment(false);
 	m_lifeline_Attribute_coveredBy->setResolveProxies(true);
-	m_lifeline_Attribute_coveredBy->setDefaultValueLiteral("");	
+	m_lifeline_Attribute_coveredBy->setDefaultValueLiteral("");
 	m_lifeline_Attribute_coveredBy->setEOpposite(uml::umlPackage::eInstance()->getInteractionFragment_Attribute_covered());
 	
 	m_lifeline_Attribute_coveredBy->_setID(LIFELINE_ATTRIBUTE_COVEREDBY);
@@ -10136,7 +10136,7 @@ void umlPackageImpl::initializeLifelineContent()
 	m_lifeline_Attribute_decomposedAs->setOrdered(false);
 	m_lifeline_Attribute_decomposedAs->setContainment(false);
 	m_lifeline_Attribute_decomposedAs->setResolveProxies(true);
-	m_lifeline_Attribute_decomposedAs->setDefaultValueLiteral("");	
+	m_lifeline_Attribute_decomposedAs->setDefaultValueLiteral("");
 	
 	m_lifeline_Attribute_decomposedAs->_setID(LIFELINE_ATTRIBUTE_DECOMPOSEDAS);
 	m_lifeline_Attribute_interaction->setName("interaction");
@@ -10152,7 +10152,7 @@ void umlPackageImpl::initializeLifelineContent()
 	m_lifeline_Attribute_interaction->setOrdered(false);
 	m_lifeline_Attribute_interaction->setContainment(false);
 	m_lifeline_Attribute_interaction->setResolveProxies(true);
-	m_lifeline_Attribute_interaction->setDefaultValueLiteral("");	
+	m_lifeline_Attribute_interaction->setDefaultValueLiteral("");
 	m_lifeline_Attribute_interaction->setEOpposite(uml::umlPackage::eInstance()->getInteraction_Attribute_lifeline());
 	
 	m_lifeline_Attribute_interaction->_setID(LIFELINE_ATTRIBUTE_INTERACTION);
@@ -10169,7 +10169,7 @@ void umlPackageImpl::initializeLifelineContent()
 	m_lifeline_Attribute_represents->setOrdered(false);
 	m_lifeline_Attribute_represents->setContainment(false);
 	m_lifeline_Attribute_represents->setResolveProxies(true);
-	m_lifeline_Attribute_represents->setDefaultValueLiteral("");	
+	m_lifeline_Attribute_represents->setDefaultValueLiteral("");
 	
 	m_lifeline_Attribute_represents->_setID(LIFELINE_ATTRIBUTE_REPRESENTS);
 	m_lifeline_Attribute_selector->setName("selector");
@@ -10185,7 +10185,7 @@ void umlPackageImpl::initializeLifelineContent()
 	m_lifeline_Attribute_selector->setOrdered(false);
 	m_lifeline_Attribute_selector->setContainment(true);
 	m_lifeline_Attribute_selector->setResolveProxies(true);
-	m_lifeline_Attribute_selector->setDefaultValueLiteral("");	
+	m_lifeline_Attribute_selector->setDefaultValueLiteral("");
 	
 	m_lifeline_Attribute_selector->_setID(LIFELINE_ATTRIBUTE_SELECTOR);
 	
@@ -10223,7 +10223,7 @@ void umlPackageImpl::initializeLinkActionContent()
 	m_linkAction_Attribute_endData->setOrdered(false);
 	m_linkAction_Attribute_endData->setContainment(true);
 	m_linkAction_Attribute_endData->setResolveProxies(true);
-	m_linkAction_Attribute_endData->setDefaultValueLiteral("");	
+	m_linkAction_Attribute_endData->setDefaultValueLiteral("");
 	
 	m_linkAction_Attribute_endData->_setID(LINKACTION_ATTRIBUTE_ENDDATA);
 	m_linkAction_Attribute_inputValue->setName("inputValue");
@@ -10239,7 +10239,7 @@ void umlPackageImpl::initializeLinkActionContent()
 	m_linkAction_Attribute_inputValue->setOrdered(false);
 	m_linkAction_Attribute_inputValue->setContainment(true);
 	m_linkAction_Attribute_inputValue->setResolveProxies(true);
-	m_linkAction_Attribute_inputValue->setDefaultValueLiteral("");	
+	m_linkAction_Attribute_inputValue->setDefaultValueLiteral("");
 	
 	m_linkAction_Attribute_inputValue->_setID(LINKACTION_ATTRIBUTE_INPUTVALUE);
 	
@@ -10303,7 +10303,7 @@ void umlPackageImpl::initializeLinkEndCreationDataContent()
 	m_linkEndCreationData_Attribute_insertAt->setOrdered(false);
 	m_linkEndCreationData_Attribute_insertAt->setContainment(false);
 	m_linkEndCreationData_Attribute_insertAt->setResolveProxies(true);
-	m_linkEndCreationData_Attribute_insertAt->setDefaultValueLiteral("");	
+	m_linkEndCreationData_Attribute_insertAt->setDefaultValueLiteral("");
 	
 	m_linkEndCreationData_Attribute_insertAt->_setID(LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT);
 	
@@ -10341,7 +10341,7 @@ void umlPackageImpl::initializeLinkEndDataContent()
 	m_linkEndData_Attribute_end->setOrdered(false);
 	m_linkEndData_Attribute_end->setContainment(false);
 	m_linkEndData_Attribute_end->setResolveProxies(true);
-	m_linkEndData_Attribute_end->setDefaultValueLiteral("");	
+	m_linkEndData_Attribute_end->setDefaultValueLiteral("");
 	
 	m_linkEndData_Attribute_end->_setID(LINKENDDATA_ATTRIBUTE_END);
 	m_linkEndData_Attribute_qualifier->setName("qualifier");
@@ -10357,7 +10357,7 @@ void umlPackageImpl::initializeLinkEndDataContent()
 	m_linkEndData_Attribute_qualifier->setOrdered(false);
 	m_linkEndData_Attribute_qualifier->setContainment(true);
 	m_linkEndData_Attribute_qualifier->setResolveProxies(true);
-	m_linkEndData_Attribute_qualifier->setDefaultValueLiteral("");	
+	m_linkEndData_Attribute_qualifier->setDefaultValueLiteral("");
 	
 	m_linkEndData_Attribute_qualifier->_setID(LINKENDDATA_ATTRIBUTE_QUALIFIER);
 	m_linkEndData_Attribute_value->setName("value");
@@ -10373,7 +10373,7 @@ void umlPackageImpl::initializeLinkEndDataContent()
 	m_linkEndData_Attribute_value->setOrdered(false);
 	m_linkEndData_Attribute_value->setContainment(false);
 	m_linkEndData_Attribute_value->setResolveProxies(true);
-	m_linkEndData_Attribute_value->setDefaultValueLiteral("");	
+	m_linkEndData_Attribute_value->setDefaultValueLiteral("");
 	
 	m_linkEndData_Attribute_value->_setID(LINKENDDATA_ATTRIBUTE_VALUE);
 	
@@ -10437,7 +10437,7 @@ void umlPackageImpl::initializeLinkEndDestructionDataContent()
 	m_linkEndDestructionData_Attribute_destroyAt->setOrdered(false);
 	m_linkEndDestructionData_Attribute_destroyAt->setContainment(false);
 	m_linkEndDestructionData_Attribute_destroyAt->setResolveProxies(true);
-	m_linkEndDestructionData_Attribute_destroyAt->setDefaultValueLiteral("");	
+	m_linkEndDestructionData_Attribute_destroyAt->setDefaultValueLiteral("");
 	
 	m_linkEndDestructionData_Attribute_destroyAt->_setID(LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT);
 	
@@ -10845,7 +10845,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_bodyOutput->setOrdered(true);
 	m_loopNode_Attribute_bodyOutput->setContainment(false);
 	m_loopNode_Attribute_bodyOutput->setResolveProxies(true);
-	m_loopNode_Attribute_bodyOutput->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_bodyOutput->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_bodyOutput->_setID(LOOPNODE_ATTRIBUTE_BODYOUTPUT);
 	m_loopNode_Attribute_bodyPart->setName("bodyPart");
@@ -10861,7 +10861,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_bodyPart->setOrdered(false);
 	m_loopNode_Attribute_bodyPart->setContainment(false);
 	m_loopNode_Attribute_bodyPart->setResolveProxies(true);
-	m_loopNode_Attribute_bodyPart->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_bodyPart->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_bodyPart->_setID(LOOPNODE_ATTRIBUTE_BODYPART);
 	m_loopNode_Attribute_decider->setName("decider");
@@ -10877,7 +10877,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_decider->setOrdered(false);
 	m_loopNode_Attribute_decider->setContainment(false);
 	m_loopNode_Attribute_decider->setResolveProxies(true);
-	m_loopNode_Attribute_decider->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_decider->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_decider->_setID(LOOPNODE_ATTRIBUTE_DECIDER);
 	m_loopNode_Attribute_loopVariable->setName("loopVariable");
@@ -10893,7 +10893,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_loopVariable->setOrdered(true);
 	m_loopNode_Attribute_loopVariable->setContainment(true);
 	m_loopNode_Attribute_loopVariable->setResolveProxies(true);
-	m_loopNode_Attribute_loopVariable->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_loopVariable->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_loopVariable->_setID(LOOPNODE_ATTRIBUTE_LOOPVARIABLE);
 	m_loopNode_Attribute_loopVariableInput->setName("loopVariableInput");
@@ -10909,7 +10909,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_loopVariableInput->setOrdered(true);
 	m_loopNode_Attribute_loopVariableInput->setContainment(true);
 	m_loopNode_Attribute_loopVariableInput->setResolveProxies(true);
-	m_loopNode_Attribute_loopVariableInput->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_loopVariableInput->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_loopVariableInput->_setID(LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT);
 	m_loopNode_Attribute_result->setName("result");
@@ -10925,7 +10925,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_result->setOrdered(true);
 	m_loopNode_Attribute_result->setContainment(true);
 	m_loopNode_Attribute_result->setResolveProxies(true);
-	m_loopNode_Attribute_result->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_result->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_result->_setID(LOOPNODE_ATTRIBUTE_RESULT);
 	m_loopNode_Attribute_setupPart->setName("setupPart");
@@ -10941,7 +10941,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_setupPart->setOrdered(false);
 	m_loopNode_Attribute_setupPart->setContainment(false);
 	m_loopNode_Attribute_setupPart->setResolveProxies(true);
-	m_loopNode_Attribute_setupPart->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_setupPart->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_setupPart->_setID(LOOPNODE_ATTRIBUTE_SETUPPART);
 	m_loopNode_Attribute_test->setName("test");
@@ -10957,7 +10957,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	m_loopNode_Attribute_test->setOrdered(false);
 	m_loopNode_Attribute_test->setContainment(false);
 	m_loopNode_Attribute_test->setResolveProxies(true);
-	m_loopNode_Attribute_test->setDefaultValueLiteral("");	
+	m_loopNode_Attribute_test->setDefaultValueLiteral("");
 	
 	m_loopNode_Attribute_test->_setID(LOOPNODE_ATTRIBUTE_TEST);
 	
@@ -10995,7 +10995,7 @@ void umlPackageImpl::initializeManifestationContent()
 	m_manifestation_Attribute_utilizedElement->setOrdered(false);
 	m_manifestation_Attribute_utilizedElement->setContainment(false);
 	m_manifestation_Attribute_utilizedElement->setResolveProxies(true);
-	m_manifestation_Attribute_utilizedElement->setDefaultValueLiteral("");	
+	m_manifestation_Attribute_utilizedElement->setDefaultValueLiteral("");
 	
 	m_manifestation_Attribute_utilizedElement->_setID(MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT);
 	
@@ -11087,7 +11087,7 @@ void umlPackageImpl::initializeMessageContent()
 	m_message_Attribute_argument->setOrdered(true);
 	m_message_Attribute_argument->setContainment(true);
 	m_message_Attribute_argument->setResolveProxies(true);
-	m_message_Attribute_argument->setDefaultValueLiteral("");	
+	m_message_Attribute_argument->setDefaultValueLiteral("");
 	
 	m_message_Attribute_argument->_setID(MESSAGE_ATTRIBUTE_ARGUMENT);
 	m_message_Attribute_connector->setName("connector");
@@ -11103,7 +11103,7 @@ void umlPackageImpl::initializeMessageContent()
 	m_message_Attribute_connector->setOrdered(false);
 	m_message_Attribute_connector->setContainment(false);
 	m_message_Attribute_connector->setResolveProxies(true);
-	m_message_Attribute_connector->setDefaultValueLiteral("");	
+	m_message_Attribute_connector->setDefaultValueLiteral("");
 	
 	m_message_Attribute_connector->_setID(MESSAGE_ATTRIBUTE_CONNECTOR);
 	m_message_Attribute_interaction->setName("interaction");
@@ -11119,7 +11119,7 @@ void umlPackageImpl::initializeMessageContent()
 	m_message_Attribute_interaction->setOrdered(false);
 	m_message_Attribute_interaction->setContainment(false);
 	m_message_Attribute_interaction->setResolveProxies(true);
-	m_message_Attribute_interaction->setDefaultValueLiteral("");	
+	m_message_Attribute_interaction->setDefaultValueLiteral("");
 	m_message_Attribute_interaction->setEOpposite(uml::umlPackage::eInstance()->getInteraction_Attribute_message());
 	
 	m_message_Attribute_interaction->_setID(MESSAGE_ATTRIBUTE_INTERACTION);
@@ -11136,7 +11136,7 @@ void umlPackageImpl::initializeMessageContent()
 	m_message_Attribute_receiveEvent->setOrdered(false);
 	m_message_Attribute_receiveEvent->setContainment(false);
 	m_message_Attribute_receiveEvent->setResolveProxies(true);
-	m_message_Attribute_receiveEvent->setDefaultValueLiteral("");	
+	m_message_Attribute_receiveEvent->setDefaultValueLiteral("");
 	
 	m_message_Attribute_receiveEvent->_setID(MESSAGE_ATTRIBUTE_RECEIVEEVENT);
 	m_message_Attribute_sendEvent->setName("sendEvent");
@@ -11152,7 +11152,7 @@ void umlPackageImpl::initializeMessageContent()
 	m_message_Attribute_sendEvent->setOrdered(false);
 	m_message_Attribute_sendEvent->setContainment(false);
 	m_message_Attribute_sendEvent->setResolveProxies(true);
-	m_message_Attribute_sendEvent->setDefaultValueLiteral("");	
+	m_message_Attribute_sendEvent->setDefaultValueLiteral("");
 	
 	m_message_Attribute_sendEvent->_setID(MESSAGE_ATTRIBUTE_SENDEVENT);
 	m_message_Attribute_signature->setName("signature");
@@ -11168,7 +11168,7 @@ void umlPackageImpl::initializeMessageContent()
 	m_message_Attribute_signature->setOrdered(false);
 	m_message_Attribute_signature->setContainment(false);
 	m_message_Attribute_signature->setResolveProxies(true);
-	m_message_Attribute_signature->setDefaultValueLiteral("");	
+	m_message_Attribute_signature->setDefaultValueLiteral("");
 	
 	m_message_Attribute_signature->_setID(MESSAGE_ATTRIBUTE_SIGNATURE);
 	
@@ -11216,7 +11216,7 @@ void umlPackageImpl::initializeMessageEndContent()
 	m_messageEnd_Attribute_message->setOrdered(false);
 	m_messageEnd_Attribute_message->setContainment(false);
 	m_messageEnd_Attribute_message->setResolveProxies(true);
-	m_messageEnd_Attribute_message->setDefaultValueLiteral("");	
+	m_messageEnd_Attribute_message->setDefaultValueLiteral("");
 	
 	m_messageEnd_Attribute_message->_setID(MESSAGEEND_ATTRIBUTE_MESSAGE);
 	
@@ -11450,7 +11450,7 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	m_multiplicityElement_Attribute_lowerValue->setOrdered(false);
 	m_multiplicityElement_Attribute_lowerValue->setContainment(true);
 	m_multiplicityElement_Attribute_lowerValue->setResolveProxies(true);
-	m_multiplicityElement_Attribute_lowerValue->setDefaultValueLiteral("");	
+	m_multiplicityElement_Attribute_lowerValue->setDefaultValueLiteral("");
 	
 	m_multiplicityElement_Attribute_lowerValue->_setID(MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE);
 	m_multiplicityElement_Attribute_upperValue->setName("upperValue");
@@ -11466,7 +11466,7 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	m_multiplicityElement_Attribute_upperValue->setOrdered(false);
 	m_multiplicityElement_Attribute_upperValue->setContainment(true);
 	m_multiplicityElement_Attribute_upperValue->setResolveProxies(true);
-	m_multiplicityElement_Attribute_upperValue->setDefaultValueLiteral("");	
+	m_multiplicityElement_Attribute_upperValue->setDefaultValueLiteral("");
 	
 	m_multiplicityElement_Attribute_upperValue->_setID(MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE);
 	
@@ -11649,7 +11649,7 @@ void umlPackageImpl::initializeNamedElementContent()
 	m_namedElement_Attribute_clientDependency->setOrdered(false);
 	m_namedElement_Attribute_clientDependency->setContainment(false);
 	m_namedElement_Attribute_clientDependency->setResolveProxies(true);
-	m_namedElement_Attribute_clientDependency->setDefaultValueLiteral("");	
+	m_namedElement_Attribute_clientDependency->setDefaultValueLiteral("");
 	
 	m_namedElement_Attribute_clientDependency->_setID(NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY);
 	m_namedElement_Attribute_nameExpression->setName("nameExpression");
@@ -11665,7 +11665,7 @@ void umlPackageImpl::initializeNamedElementContent()
 	m_namedElement_Attribute_nameExpression->setOrdered(false);
 	m_namedElement_Attribute_nameExpression->setContainment(true);
 	m_namedElement_Attribute_nameExpression->setResolveProxies(true);
-	m_namedElement_Attribute_nameExpression->setDefaultValueLiteral("");	
+	m_namedElement_Attribute_nameExpression->setDefaultValueLiteral("");
 	
 	m_namedElement_Attribute_nameExpression->_setID(NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION);
 	m_namedElement_Attribute_namespace->setName("namespace");
@@ -11681,7 +11681,7 @@ void umlPackageImpl::initializeNamedElementContent()
 	m_namedElement_Attribute_namespace->setOrdered(false);
 	m_namedElement_Attribute_namespace->setContainment(false);
 	m_namedElement_Attribute_namespace->setResolveProxies(true);
-	m_namedElement_Attribute_namespace->setDefaultValueLiteral("");	
+	m_namedElement_Attribute_namespace->setDefaultValueLiteral("");
 	m_namedElement_Attribute_namespace->setEOpposite(uml::umlPackage::eInstance()->getNamespace_Attribute_ownedMember());
 	
 	m_namedElement_Attribute_namespace->_setID(NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
@@ -11876,7 +11876,7 @@ void umlPackageImpl::initializeNamespaceContent()
 	m_namespace_Attribute_elementImport->setOrdered(false);
 	m_namespace_Attribute_elementImport->setContainment(true);
 	m_namespace_Attribute_elementImport->setResolveProxies(true);
-	m_namespace_Attribute_elementImport->setDefaultValueLiteral("");	
+	m_namespace_Attribute_elementImport->setDefaultValueLiteral("");
 	m_namespace_Attribute_elementImport->setEOpposite(uml::umlPackage::eInstance()->getElementImport_Attribute_importingNamespace());
 	
 	m_namespace_Attribute_elementImport->_setID(NAMESPACE_ATTRIBUTE_ELEMENTIMPORT);
@@ -11893,7 +11893,7 @@ void umlPackageImpl::initializeNamespaceContent()
 	m_namespace_Attribute_importedMember->setOrdered(false);
 	m_namespace_Attribute_importedMember->setContainment(false);
 	m_namespace_Attribute_importedMember->setResolveProxies(true);
-	m_namespace_Attribute_importedMember->setDefaultValueLiteral("");	
+	m_namespace_Attribute_importedMember->setDefaultValueLiteral("");
 	
 	m_namespace_Attribute_importedMember->_setID(NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER);
 	m_namespace_Attribute_member->setName("member");
@@ -11909,7 +11909,7 @@ void umlPackageImpl::initializeNamespaceContent()
 	m_namespace_Attribute_member->setOrdered(false);
 	m_namespace_Attribute_member->setContainment(false);
 	m_namespace_Attribute_member->setResolveProxies(true);
-	m_namespace_Attribute_member->setDefaultValueLiteral("");	
+	m_namespace_Attribute_member->setDefaultValueLiteral("");
 	
 	m_namespace_Attribute_member->_setID(NAMESPACE_ATTRIBUTE_MEMBER);
 	m_namespace_Attribute_ownedMember->setName("ownedMember");
@@ -11925,7 +11925,7 @@ void umlPackageImpl::initializeNamespaceContent()
 	m_namespace_Attribute_ownedMember->setOrdered(false);
 	m_namespace_Attribute_ownedMember->setContainment(true);
 	m_namespace_Attribute_ownedMember->setResolveProxies(true);
-	m_namespace_Attribute_ownedMember->setDefaultValueLiteral("");	
+	m_namespace_Attribute_ownedMember->setDefaultValueLiteral("");
 	m_namespace_Attribute_ownedMember->setEOpposite(uml::umlPackage::eInstance()->getNamedElement_Attribute_namespace());
 	
 	m_namespace_Attribute_ownedMember->_setID(NAMESPACE_ATTRIBUTE_OWNEDMEMBER);
@@ -11942,7 +11942,7 @@ void umlPackageImpl::initializeNamespaceContent()
 	m_namespace_Attribute_ownedRule->setOrdered(false);
 	m_namespace_Attribute_ownedRule->setContainment(true);
 	m_namespace_Attribute_ownedRule->setResolveProxies(true);
-	m_namespace_Attribute_ownedRule->setDefaultValueLiteral("");	
+	m_namespace_Attribute_ownedRule->setDefaultValueLiteral("");
 	m_namespace_Attribute_ownedRule->setEOpposite(uml::umlPackage::eInstance()->getConstraint_Attribute_context());
 	
 	m_namespace_Attribute_ownedRule->_setID(NAMESPACE_ATTRIBUTE_OWNEDRULE);
@@ -11959,7 +11959,7 @@ void umlPackageImpl::initializeNamespaceContent()
 	m_namespace_Attribute_packageImport->setOrdered(false);
 	m_namespace_Attribute_packageImport->setContainment(true);
 	m_namespace_Attribute_packageImport->setResolveProxies(true);
-	m_namespace_Attribute_packageImport->setDefaultValueLiteral("");	
+	m_namespace_Attribute_packageImport->setDefaultValueLiteral("");
 	m_namespace_Attribute_packageImport->setEOpposite(uml::umlPackage::eInstance()->getPackageImport_Attribute_importingNamespace());
 	
 	m_namespace_Attribute_packageImport->_setID(NAMESPACE_ATTRIBUTE_PACKAGEIMPORT);
@@ -12163,7 +12163,7 @@ void umlPackageImpl::initializeNodeContent()
 	m_node_Attribute_nestedNode->setOrdered(false);
 	m_node_Attribute_nestedNode->setContainment(true);
 	m_node_Attribute_nestedNode->setResolveProxies(true);
-	m_node_Attribute_nestedNode->setDefaultValueLiteral("");	
+	m_node_Attribute_nestedNode->setDefaultValueLiteral("");
 	
 	m_node_Attribute_nestedNode->_setID(NODE_ATTRIBUTE_NESTEDNODE);
 	
@@ -12662,7 +12662,7 @@ void umlPackageImpl::initializeObjectFlowContent()
 	m_objectFlow_Attribute_selection->setOrdered(false);
 	m_objectFlow_Attribute_selection->setContainment(false);
 	m_objectFlow_Attribute_selection->setResolveProxies(true);
-	m_objectFlow_Attribute_selection->setDefaultValueLiteral("");	
+	m_objectFlow_Attribute_selection->setDefaultValueLiteral("");
 	
 	m_objectFlow_Attribute_selection->_setID(OBJECTFLOW_ATTRIBUTE_SELECTION);
 	m_objectFlow_Attribute_transformation->setName("transformation");
@@ -12678,7 +12678,7 @@ void umlPackageImpl::initializeObjectFlowContent()
 	m_objectFlow_Attribute_transformation->setOrdered(false);
 	m_objectFlow_Attribute_transformation->setContainment(false);
 	m_objectFlow_Attribute_transformation->setResolveProxies(true);
-	m_objectFlow_Attribute_transformation->setDefaultValueLiteral("");	
+	m_objectFlow_Attribute_transformation->setDefaultValueLiteral("");
 	
 	m_objectFlow_Attribute_transformation->_setID(OBJECTFLOW_ATTRIBUTE_TRANSFORMATION);
 	
@@ -12748,7 +12748,7 @@ void umlPackageImpl::initializeObjectNodeContent()
 	m_objectNode_Attribute_inState->setOrdered(false);
 	m_objectNode_Attribute_inState->setContainment(false);
 	m_objectNode_Attribute_inState->setResolveProxies(true);
-	m_objectNode_Attribute_inState->setDefaultValueLiteral("");	
+	m_objectNode_Attribute_inState->setDefaultValueLiteral("");
 	
 	m_objectNode_Attribute_inState->_setID(OBJECTNODE_ATTRIBUTE_INSTATE);
 	m_objectNode_Attribute_selection->setName("selection");
@@ -12764,7 +12764,7 @@ void umlPackageImpl::initializeObjectNodeContent()
 	m_objectNode_Attribute_selection->setOrdered(false);
 	m_objectNode_Attribute_selection->setContainment(false);
 	m_objectNode_Attribute_selection->setResolveProxies(true);
-	m_objectNode_Attribute_selection->setDefaultValueLiteral("");	
+	m_objectNode_Attribute_selection->setDefaultValueLiteral("");
 	
 	m_objectNode_Attribute_selection->_setID(OBJECTNODE_ATTRIBUTE_SELECTION);
 	m_objectNode_Attribute_upperBound->setName("upperBound");
@@ -12780,7 +12780,7 @@ void umlPackageImpl::initializeObjectNodeContent()
 	m_objectNode_Attribute_upperBound->setOrdered(false);
 	m_objectNode_Attribute_upperBound->setContainment(true);
 	m_objectNode_Attribute_upperBound->setResolveProxies(true);
-	m_objectNode_Attribute_upperBound->setDefaultValueLiteral("");	
+	m_objectNode_Attribute_upperBound->setDefaultValueLiteral("");
 	
 	m_objectNode_Attribute_upperBound->_setID(OBJECTNODE_ATTRIBUTE_UPPERBOUND);
 	
@@ -12840,7 +12840,7 @@ void umlPackageImpl::initializeOccurrenceSpecificationContent()
 	m_occurrenceSpecification_Attribute_toAfter->setOrdered(false);
 	m_occurrenceSpecification_Attribute_toAfter->setContainment(false);
 	m_occurrenceSpecification_Attribute_toAfter->setResolveProxies(true);
-	m_occurrenceSpecification_Attribute_toAfter->setDefaultValueLiteral("");	
+	m_occurrenceSpecification_Attribute_toAfter->setDefaultValueLiteral("");
 	m_occurrenceSpecification_Attribute_toAfter->setEOpposite(uml::umlPackage::eInstance()->getGeneralOrdering_Attribute_before());
 	
 	m_occurrenceSpecification_Attribute_toAfter->_setID(OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER);
@@ -12857,7 +12857,7 @@ void umlPackageImpl::initializeOccurrenceSpecificationContent()
 	m_occurrenceSpecification_Attribute_toBefore->setOrdered(false);
 	m_occurrenceSpecification_Attribute_toBefore->setContainment(false);
 	m_occurrenceSpecification_Attribute_toBefore->setResolveProxies(true);
-	m_occurrenceSpecification_Attribute_toBefore->setDefaultValueLiteral("");	
+	m_occurrenceSpecification_Attribute_toBefore->setDefaultValueLiteral("");
 	m_occurrenceSpecification_Attribute_toBefore->setEOpposite(uml::umlPackage::eInstance()->getGeneralOrdering_Attribute_after());
 	
 	m_occurrenceSpecification_Attribute_toBefore->_setID(OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE);
@@ -12963,7 +12963,7 @@ void umlPackageImpl::initializeOpaqueActionContent()
 	m_opaqueAction_Attribute_inputValue->setOrdered(false);
 	m_opaqueAction_Attribute_inputValue->setContainment(true);
 	m_opaqueAction_Attribute_inputValue->setResolveProxies(true);
-	m_opaqueAction_Attribute_inputValue->setDefaultValueLiteral("");	
+	m_opaqueAction_Attribute_inputValue->setDefaultValueLiteral("");
 	
 	m_opaqueAction_Attribute_inputValue->_setID(OPAQUEACTION_ATTRIBUTE_INPUTVALUE);
 	m_opaqueAction_Attribute_outputValue->setName("outputValue");
@@ -12979,7 +12979,7 @@ void umlPackageImpl::initializeOpaqueActionContent()
 	m_opaqueAction_Attribute_outputValue->setOrdered(false);
 	m_opaqueAction_Attribute_outputValue->setContainment(true);
 	m_opaqueAction_Attribute_outputValue->setResolveProxies(true);
-	m_opaqueAction_Attribute_outputValue->setDefaultValueLiteral("");	
+	m_opaqueAction_Attribute_outputValue->setDefaultValueLiteral("");
 	
 	m_opaqueAction_Attribute_outputValue->_setID(OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE);
 	
@@ -13103,7 +13103,7 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 	m_opaqueExpression_Attribute_behavior->setOrdered(false);
 	m_opaqueExpression_Attribute_behavior->setContainment(false);
 	m_opaqueExpression_Attribute_behavior->setResolveProxies(true);
-	m_opaqueExpression_Attribute_behavior->setDefaultValueLiteral("");	
+	m_opaqueExpression_Attribute_behavior->setDefaultValueLiteral("");
 	
 	m_opaqueExpression_Attribute_behavior->_setID(OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR);
 	m_opaqueExpression_Attribute_result->setName("result");
@@ -13119,7 +13119,7 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 	m_opaqueExpression_Attribute_result->setOrdered(false);
 	m_opaqueExpression_Attribute_result->setContainment(false);
 	m_opaqueExpression_Attribute_result->setResolveProxies(true);
-	m_opaqueExpression_Attribute_result->setDefaultValueLiteral("");	
+	m_opaqueExpression_Attribute_result->setDefaultValueLiteral("");
 	
 	m_opaqueExpression_Attribute_result->_setID(OPAQUEEXPRESSION_ATTRIBUTE_RESULT);
 	
@@ -13287,7 +13287,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_bodyCondition->setOrdered(false);
 	m_operation_Attribute_bodyCondition->setContainment(false);
 	m_operation_Attribute_bodyCondition->setResolveProxies(true);
-	m_operation_Attribute_bodyCondition->setDefaultValueLiteral("");	
+	m_operation_Attribute_bodyCondition->setDefaultValueLiteral("");
 	
 	m_operation_Attribute_bodyCondition->_setID(OPERATION_ATTRIBUTE_BODYCONDITION);
 	m_operation_Attribute_class->setName("class");
@@ -13303,7 +13303,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_class->setOrdered(false);
 	m_operation_Attribute_class->setContainment(false);
 	m_operation_Attribute_class->setResolveProxies(true);
-	m_operation_Attribute_class->setDefaultValueLiteral("");	
+	m_operation_Attribute_class->setDefaultValueLiteral("");
 	m_operation_Attribute_class->setEOpposite(uml::umlPackage::eInstance()->getClass_Attribute_ownedOperation());
 	
 	m_operation_Attribute_class->_setID(OPERATION_ATTRIBUTE_CLASS);
@@ -13320,7 +13320,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_datatype->setOrdered(false);
 	m_operation_Attribute_datatype->setContainment(false);
 	m_operation_Attribute_datatype->setResolveProxies(true);
-	m_operation_Attribute_datatype->setDefaultValueLiteral("");	
+	m_operation_Attribute_datatype->setDefaultValueLiteral("");
 	m_operation_Attribute_datatype->setEOpposite(uml::umlPackage::eInstance()->getDataType_Attribute_ownedOperation());
 	
 	m_operation_Attribute_datatype->_setID(OPERATION_ATTRIBUTE_DATATYPE);
@@ -13337,7 +13337,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_interface->setOrdered(false);
 	m_operation_Attribute_interface->setContainment(false);
 	m_operation_Attribute_interface->setResolveProxies(true);
-	m_operation_Attribute_interface->setDefaultValueLiteral("");	
+	m_operation_Attribute_interface->setDefaultValueLiteral("");
 	m_operation_Attribute_interface->setEOpposite(uml::umlPackage::eInstance()->getInterface_Attribute_ownedOperation());
 	
 	m_operation_Attribute_interface->_setID(OPERATION_ATTRIBUTE_INTERFACE);
@@ -13354,7 +13354,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_ownedParameter->setOrdered(true);
 	m_operation_Attribute_ownedParameter->setContainment(true);
 	m_operation_Attribute_ownedParameter->setResolveProxies(true);
-	m_operation_Attribute_ownedParameter->setDefaultValueLiteral("");	
+	m_operation_Attribute_ownedParameter->setDefaultValueLiteral("");
 	m_operation_Attribute_ownedParameter->setEOpposite(uml::umlPackage::eInstance()->getParameter_Attribute_operation());
 	
 	m_operation_Attribute_ownedParameter->_setID(OPERATION_ATTRIBUTE_OWNEDPARAMETER);
@@ -13371,7 +13371,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_postcondition->setOrdered(false);
 	m_operation_Attribute_postcondition->setContainment(false);
 	m_operation_Attribute_postcondition->setResolveProxies(true);
-	m_operation_Attribute_postcondition->setDefaultValueLiteral("");	
+	m_operation_Attribute_postcondition->setDefaultValueLiteral("");
 	
 	m_operation_Attribute_postcondition->_setID(OPERATION_ATTRIBUTE_POSTCONDITION);
 	m_operation_Attribute_precondition->setName("precondition");
@@ -13387,7 +13387,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_precondition->setOrdered(false);
 	m_operation_Attribute_precondition->setContainment(false);
 	m_operation_Attribute_precondition->setResolveProxies(true);
-	m_operation_Attribute_precondition->setDefaultValueLiteral("");	
+	m_operation_Attribute_precondition->setDefaultValueLiteral("");
 	
 	m_operation_Attribute_precondition->_setID(OPERATION_ATTRIBUTE_PRECONDITION);
 	m_operation_Attribute_redefinedOperation->setName("redefinedOperation");
@@ -13403,7 +13403,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_redefinedOperation->setOrdered(false);
 	m_operation_Attribute_redefinedOperation->setContainment(false);
 	m_operation_Attribute_redefinedOperation->setResolveProxies(true);
-	m_operation_Attribute_redefinedOperation->setDefaultValueLiteral("");	
+	m_operation_Attribute_redefinedOperation->setDefaultValueLiteral("");
 	
 	m_operation_Attribute_redefinedOperation->_setID(OPERATION_ATTRIBUTE_REDEFINEDOPERATION);
 	m_operation_Attribute_type->setName("type");
@@ -13419,7 +13419,7 @@ void umlPackageImpl::initializeOperationContent()
 	m_operation_Attribute_type->setOrdered(false);
 	m_operation_Attribute_type->setContainment(false);
 	m_operation_Attribute_type->setResolveProxies(true);
-	m_operation_Attribute_type->setDefaultValueLiteral("");	
+	m_operation_Attribute_type->setDefaultValueLiteral("");
 	
 	m_operation_Attribute_type->_setID(OPERATION_ATTRIBUTE_TYPE);
 	
@@ -13693,7 +13693,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_action->setOrdered(true);
 	m_outputPin_Attribute_action->setContainment(false);
 	m_outputPin_Attribute_action->setResolveProxies(true);
-	m_outputPin_Attribute_action->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_action->setDefaultValueLiteral("");
 	m_outputPin_Attribute_action->setEOpposite(uml::umlPackage::eInstance()->getAction_Attribute_output());
 	
 	m_outputPin_Attribute_action->_setID(OUTPUTPIN_ATTRIBUTE_ACTION);
@@ -13710,7 +13710,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_callAction->setOrdered(true);
 	m_outputPin_Attribute_callAction->setContainment(false);
 	m_outputPin_Attribute_callAction->setResolveProxies(true);
-	m_outputPin_Attribute_callAction->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_callAction->setDefaultValueLiteral("");
 	m_outputPin_Attribute_callAction->setEOpposite(uml::umlPackage::eInstance()->getCallAction_Attribute_result());
 	
 	m_outputPin_Attribute_callAction->_setID(OUTPUTPIN_ATTRIBUTE_CALLACTION);
@@ -13727,7 +13727,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_clearStructuralFeatureAction->setOrdered(true);
 	m_outputPin_Attribute_clearStructuralFeatureAction->setContainment(false);
 	m_outputPin_Attribute_clearStructuralFeatureAction->setResolveProxies(true);
-	m_outputPin_Attribute_clearStructuralFeatureAction->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_clearStructuralFeatureAction->setDefaultValueLiteral("");
 	m_outputPin_Attribute_clearStructuralFeatureAction->setEOpposite(uml::umlPackage::eInstance()->getClearStructuralFeatureAction_Attribute_result());
 	
 	m_outputPin_Attribute_clearStructuralFeatureAction->_setID(OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION);
@@ -13744,7 +13744,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_createObjectAction->setOrdered(true);
 	m_outputPin_Attribute_createObjectAction->setContainment(false);
 	m_outputPin_Attribute_createObjectAction->setResolveProxies(true);
-	m_outputPin_Attribute_createObjectAction->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_createObjectAction->setDefaultValueLiteral("");
 	m_outputPin_Attribute_createObjectAction->setEOpposite(uml::umlPackage::eInstance()->getCreateObjectAction_Attribute_result());
 	
 	m_outputPin_Attribute_createObjectAction->_setID(OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION);
@@ -13761,7 +13761,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_readSelfAction->setOrdered(true);
 	m_outputPin_Attribute_readSelfAction->setContainment(false);
 	m_outputPin_Attribute_readSelfAction->setResolveProxies(true);
-	m_outputPin_Attribute_readSelfAction->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_readSelfAction->setDefaultValueLiteral("");
 	m_outputPin_Attribute_readSelfAction->setEOpposite(uml::umlPackage::eInstance()->getReadSelfAction_Attribute_result());
 	
 	m_outputPin_Attribute_readSelfAction->_setID(OUTPUTPIN_ATTRIBUTE_READSELFACTION);
@@ -13778,7 +13778,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_readStructuralFeatureAction->setOrdered(true);
 	m_outputPin_Attribute_readStructuralFeatureAction->setContainment(false);
 	m_outputPin_Attribute_readStructuralFeatureAction->setResolveProxies(true);
-	m_outputPin_Attribute_readStructuralFeatureAction->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_readStructuralFeatureAction->setDefaultValueLiteral("");
 	m_outputPin_Attribute_readStructuralFeatureAction->setEOpposite(uml::umlPackage::eInstance()->getReadStructuralFeatureAction_Attribute_result());
 	
 	m_outputPin_Attribute_readStructuralFeatureAction->_setID(OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION);
@@ -13795,7 +13795,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_valueSpecificationAction->setOrdered(true);
 	m_outputPin_Attribute_valueSpecificationAction->setContainment(false);
 	m_outputPin_Attribute_valueSpecificationAction->setResolveProxies(true);
-	m_outputPin_Attribute_valueSpecificationAction->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_valueSpecificationAction->setDefaultValueLiteral("");
 	m_outputPin_Attribute_valueSpecificationAction->setEOpposite(uml::umlPackage::eInstance()->getValueSpecificationAction_Attribute_result());
 	
 	m_outputPin_Attribute_valueSpecificationAction->_setID(OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION);
@@ -13812,7 +13812,7 @@ void umlPackageImpl::initializeOutputPinContent()
 	m_outputPin_Attribute_writeStructuralFeatureAction->setOrdered(true);
 	m_outputPin_Attribute_writeStructuralFeatureAction->setContainment(false);
 	m_outputPin_Attribute_writeStructuralFeatureAction->setResolveProxies(true);
-	m_outputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral("");	
+	m_outputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral("");
 	m_outputPin_Attribute_writeStructuralFeatureAction->setEOpposite(uml::umlPackage::eInstance()->getWriteStructuralFeatureAction_Attribute_result());
 	
 	m_outputPin_Attribute_writeStructuralFeatureAction->_setID(OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
@@ -13867,7 +13867,7 @@ void umlPackageImpl::initializePackageContent()
 	m_package_Attribute_nestedPackage->setOrdered(false);
 	m_package_Attribute_nestedPackage->setContainment(true);
 	m_package_Attribute_nestedPackage->setResolveProxies(true);
-	m_package_Attribute_nestedPackage->setDefaultValueLiteral("");	
+	m_package_Attribute_nestedPackage->setDefaultValueLiteral("");
 	m_package_Attribute_nestedPackage->setEOpposite(uml::umlPackage::eInstance()->getPackage_Attribute_nestingPackage());
 	
 	m_package_Attribute_nestedPackage->_setID(PACKAGE_ATTRIBUTE_NESTEDPACKAGE);
@@ -13884,7 +13884,7 @@ void umlPackageImpl::initializePackageContent()
 	m_package_Attribute_nestingPackage->setOrdered(false);
 	m_package_Attribute_nestingPackage->setContainment(false);
 	m_package_Attribute_nestingPackage->setResolveProxies(true);
-	m_package_Attribute_nestingPackage->setDefaultValueLiteral("");	
+	m_package_Attribute_nestingPackage->setDefaultValueLiteral("");
 	m_package_Attribute_nestingPackage->setEOpposite(uml::umlPackage::eInstance()->getPackage_Attribute_nestedPackage());
 	
 	m_package_Attribute_nestingPackage->_setID(PACKAGE_ATTRIBUTE_NESTINGPACKAGE);
@@ -13901,7 +13901,7 @@ void umlPackageImpl::initializePackageContent()
 	m_package_Attribute_ownedStereotype->setOrdered(false);
 	m_package_Attribute_ownedStereotype->setContainment(true);
 	m_package_Attribute_ownedStereotype->setResolveProxies(true);
-	m_package_Attribute_ownedStereotype->setDefaultValueLiteral("");	
+	m_package_Attribute_ownedStereotype->setDefaultValueLiteral("");
 	
 	m_package_Attribute_ownedStereotype->_setID(PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE);
 	m_package_Attribute_ownedType->setName("ownedType");
@@ -13917,7 +13917,7 @@ void umlPackageImpl::initializePackageContent()
 	m_package_Attribute_ownedType->setOrdered(false);
 	m_package_Attribute_ownedType->setContainment(true);
 	m_package_Attribute_ownedType->setResolveProxies(true);
-	m_package_Attribute_ownedType->setDefaultValueLiteral("");	
+	m_package_Attribute_ownedType->setDefaultValueLiteral("");
 	m_package_Attribute_ownedType->setEOpposite(uml::umlPackage::eInstance()->getType_Attribute_package());
 	
 	m_package_Attribute_ownedType->_setID(PACKAGE_ATTRIBUTE_OWNEDTYPE);
@@ -13934,7 +13934,7 @@ void umlPackageImpl::initializePackageContent()
 	m_package_Attribute_packageMerge->setOrdered(false);
 	m_package_Attribute_packageMerge->setContainment(true);
 	m_package_Attribute_packageMerge->setResolveProxies(true);
-	m_package_Attribute_packageMerge->setDefaultValueLiteral("");	
+	m_package_Attribute_packageMerge->setDefaultValueLiteral("");
 	m_package_Attribute_packageMerge->setEOpposite(uml::umlPackage::eInstance()->getPackageMerge_Attribute_receivingPackage());
 	
 	m_package_Attribute_packageMerge->_setID(PACKAGE_ATTRIBUTE_PACKAGEMERGE);
@@ -13951,7 +13951,7 @@ void umlPackageImpl::initializePackageContent()
 	m_package_Attribute_packagedElement->setOrdered(false);
 	m_package_Attribute_packagedElement->setContainment(true);
 	m_package_Attribute_packagedElement->setResolveProxies(true);
-	m_package_Attribute_packagedElement->setDefaultValueLiteral("");	
+	m_package_Attribute_packagedElement->setDefaultValueLiteral("");
 	m_package_Attribute_packagedElement->setEOpposite(uml::umlPackage::eInstance()->getPackageableElement_Attribute_owningPackage());
 	
 	m_package_Attribute_packagedElement->_setID(PACKAGE_ATTRIBUTE_PACKAGEDELEMENT);
@@ -13968,7 +13968,7 @@ void umlPackageImpl::initializePackageContent()
 	m_package_Attribute_profileApplication->setOrdered(false);
 	m_package_Attribute_profileApplication->setContainment(true);
 	m_package_Attribute_profileApplication->setResolveProxies(true);
-	m_package_Attribute_profileApplication->setDefaultValueLiteral("");	
+	m_package_Attribute_profileApplication->setDefaultValueLiteral("");
 	m_package_Attribute_profileApplication->setEOpposite(uml::umlPackage::eInstance()->getProfileApplication_Attribute_applyingPackage());
 	
 	m_package_Attribute_profileApplication->_setID(PACKAGE_ATTRIBUTE_PROFILEAPPLICATION);
@@ -14410,7 +14410,7 @@ void umlPackageImpl::initializePackageImportContent()
 	m_packageImport_Attribute_importedPackage->setOrdered(false);
 	m_packageImport_Attribute_importedPackage->setContainment(false);
 	m_packageImport_Attribute_importedPackage->setResolveProxies(true);
-	m_packageImport_Attribute_importedPackage->setDefaultValueLiteral("");	
+	m_packageImport_Attribute_importedPackage->setDefaultValueLiteral("");
 	
 	m_packageImport_Attribute_importedPackage->_setID(PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE);
 	m_packageImport_Attribute_importingNamespace->setName("importingNamespace");
@@ -14426,7 +14426,7 @@ void umlPackageImpl::initializePackageImportContent()
 	m_packageImport_Attribute_importingNamespace->setOrdered(false);
 	m_packageImport_Attribute_importingNamespace->setContainment(false);
 	m_packageImport_Attribute_importingNamespace->setResolveProxies(true);
-	m_packageImport_Attribute_importingNamespace->setDefaultValueLiteral("");	
+	m_packageImport_Attribute_importingNamespace->setDefaultValueLiteral("");
 	m_packageImport_Attribute_importingNamespace->setEOpposite(uml::umlPackage::eInstance()->getNamespace_Attribute_packageImport());
 	
 	m_packageImport_Attribute_importingNamespace->_setID(PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
@@ -14465,7 +14465,7 @@ void umlPackageImpl::initializePackageMergeContent()
 	m_packageMerge_Attribute_mergedPackage->setOrdered(false);
 	m_packageMerge_Attribute_mergedPackage->setContainment(false);
 	m_packageMerge_Attribute_mergedPackage->setResolveProxies(true);
-	m_packageMerge_Attribute_mergedPackage->setDefaultValueLiteral("");	
+	m_packageMerge_Attribute_mergedPackage->setDefaultValueLiteral("");
 	
 	m_packageMerge_Attribute_mergedPackage->_setID(PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE);
 	m_packageMerge_Attribute_receivingPackage->setName("receivingPackage");
@@ -14481,7 +14481,7 @@ void umlPackageImpl::initializePackageMergeContent()
 	m_packageMerge_Attribute_receivingPackage->setOrdered(false);
 	m_packageMerge_Attribute_receivingPackage->setContainment(false);
 	m_packageMerge_Attribute_receivingPackage->setResolveProxies(true);
-	m_packageMerge_Attribute_receivingPackage->setDefaultValueLiteral("");	
+	m_packageMerge_Attribute_receivingPackage->setDefaultValueLiteral("");
 	m_packageMerge_Attribute_receivingPackage->setEOpposite(uml::umlPackage::eInstance()->getPackage_Attribute_packageMerge());
 	
 	m_packageMerge_Attribute_receivingPackage->_setID(PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE);
@@ -14520,7 +14520,7 @@ void umlPackageImpl::initializePackageableElementContent()
 	m_packageableElement_Attribute_owningPackage->setOrdered(true);
 	m_packageableElement_Attribute_owningPackage->setContainment(false);
 	m_packageableElement_Attribute_owningPackage->setResolveProxies(true);
-	m_packageableElement_Attribute_owningPackage->setDefaultValueLiteral("");	
+	m_packageableElement_Attribute_owningPackage->setDefaultValueLiteral("");
 	m_packageableElement_Attribute_owningPackage->setEOpposite(uml::umlPackage::eInstance()->getPackage_Attribute_packagedElement());
 	
 	m_packageableElement_Attribute_owningPackage->_setID(PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
@@ -14639,7 +14639,7 @@ void umlPackageImpl::initializeParameterContent()
 	m_parameter_Attribute_behavior->setOrdered(true);
 	m_parameter_Attribute_behavior->setContainment(false);
 	m_parameter_Attribute_behavior->setResolveProxies(true);
-	m_parameter_Attribute_behavior->setDefaultValueLiteral("");	
+	m_parameter_Attribute_behavior->setDefaultValueLiteral("");
 	m_parameter_Attribute_behavior->setEOpposite(uml::umlPackage::eInstance()->getBehavior_Attribute_ownedParameter());
 	
 	m_parameter_Attribute_behavior->_setID(PARAMETER_ATTRIBUTE_BEHAVIOR);
@@ -14656,7 +14656,7 @@ void umlPackageImpl::initializeParameterContent()
 	m_parameter_Attribute_defaultValue->setOrdered(false);
 	m_parameter_Attribute_defaultValue->setContainment(true);
 	m_parameter_Attribute_defaultValue->setResolveProxies(true);
-	m_parameter_Attribute_defaultValue->setDefaultValueLiteral("");	
+	m_parameter_Attribute_defaultValue->setDefaultValueLiteral("");
 	
 	m_parameter_Attribute_defaultValue->_setID(PARAMETER_ATTRIBUTE_DEFAULTVALUE);
 	m_parameter_Attribute_operation->setName("operation");
@@ -14672,7 +14672,7 @@ void umlPackageImpl::initializeParameterContent()
 	m_parameter_Attribute_operation->setOrdered(false);
 	m_parameter_Attribute_operation->setContainment(false);
 	m_parameter_Attribute_operation->setResolveProxies(true);
-	m_parameter_Attribute_operation->setDefaultValueLiteral("");	
+	m_parameter_Attribute_operation->setDefaultValueLiteral("");
 	m_parameter_Attribute_operation->setEOpposite(uml::umlPackage::eInstance()->getOperation_Attribute_ownedParameter());
 	
 	m_parameter_Attribute_operation->_setID(PARAMETER_ATTRIBUTE_OPERATION);
@@ -14689,7 +14689,7 @@ void umlPackageImpl::initializeParameterContent()
 	m_parameter_Attribute_parameterSet->setOrdered(false);
 	m_parameter_Attribute_parameterSet->setContainment(false);
 	m_parameter_Attribute_parameterSet->setResolveProxies(true);
-	m_parameter_Attribute_parameterSet->setDefaultValueLiteral("");	
+	m_parameter_Attribute_parameterSet->setDefaultValueLiteral("");
 	m_parameter_Attribute_parameterSet->setEOpposite(uml::umlPackage::eInstance()->getParameterSet_Attribute_parameter());
 	
 	m_parameter_Attribute_parameterSet->_setID(PARAMETER_ATTRIBUTE_PARAMETERSET);
@@ -14895,7 +14895,7 @@ void umlPackageImpl::initializeParameterSetContent()
 	m_parameterSet_Attribute_condition->setOrdered(false);
 	m_parameterSet_Attribute_condition->setContainment(true);
 	m_parameterSet_Attribute_condition->setResolveProxies(true);
-	m_parameterSet_Attribute_condition->setDefaultValueLiteral("");	
+	m_parameterSet_Attribute_condition->setDefaultValueLiteral("");
 	
 	m_parameterSet_Attribute_condition->_setID(PARAMETERSET_ATTRIBUTE_CONDITION);
 	m_parameterSet_Attribute_parameter->setName("parameter");
@@ -14911,7 +14911,7 @@ void umlPackageImpl::initializeParameterSetContent()
 	m_parameterSet_Attribute_parameter->setOrdered(false);
 	m_parameterSet_Attribute_parameter->setContainment(false);
 	m_parameterSet_Attribute_parameter->setResolveProxies(true);
-	m_parameterSet_Attribute_parameter->setDefaultValueLiteral("");	
+	m_parameterSet_Attribute_parameter->setDefaultValueLiteral("");
 	m_parameterSet_Attribute_parameter->setEOpposite(uml::umlPackage::eInstance()->getParameter_Attribute_parameterSet());
 	
 	m_parameterSet_Attribute_parameter->_setID(PARAMETERSET_ATTRIBUTE_PARAMETER);
@@ -14950,7 +14950,7 @@ void umlPackageImpl::initializeParameterableElementContent()
 	m_parameterableElement_Attribute_owningTemplateParameter->setOrdered(false);
 	m_parameterableElement_Attribute_owningTemplateParameter->setContainment(false);
 	m_parameterableElement_Attribute_owningTemplateParameter->setResolveProxies(true);
-	m_parameterableElement_Attribute_owningTemplateParameter->setDefaultValueLiteral("");	
+	m_parameterableElement_Attribute_owningTemplateParameter->setDefaultValueLiteral("");
 	m_parameterableElement_Attribute_owningTemplateParameter->setEOpposite(uml::umlPackage::eInstance()->getTemplateParameter_Attribute_ownedParameteredElement());
 	
 	m_parameterableElement_Attribute_owningTemplateParameter->_setID(PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER);
@@ -14967,7 +14967,7 @@ void umlPackageImpl::initializeParameterableElementContent()
 	m_parameterableElement_Attribute_templateParameter->setOrdered(false);
 	m_parameterableElement_Attribute_templateParameter->setContainment(false);
 	m_parameterableElement_Attribute_templateParameter->setResolveProxies(true);
-	m_parameterableElement_Attribute_templateParameter->setDefaultValueLiteral("");	
+	m_parameterableElement_Attribute_templateParameter->setDefaultValueLiteral("");
 	m_parameterableElement_Attribute_templateParameter->setEOpposite(uml::umlPackage::eInstance()->getTemplateParameter_Attribute_parameteredElement());
 	
 	m_parameterableElement_Attribute_templateParameter->_setID(PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER);
@@ -15143,7 +15143,7 @@ void umlPackageImpl::initializePortContent()
 	m_port_Attribute_protocol->setOrdered(false);
 	m_port_Attribute_protocol->setContainment(false);
 	m_port_Attribute_protocol->setResolveProxies(true);
-	m_port_Attribute_protocol->setDefaultValueLiteral("");	
+	m_port_Attribute_protocol->setDefaultValueLiteral("");
 	
 	m_port_Attribute_protocol->_setID(PORT_ATTRIBUTE_PROTOCOL);
 	m_port_Attribute_provided->setName("provided");
@@ -15159,7 +15159,7 @@ void umlPackageImpl::initializePortContent()
 	m_port_Attribute_provided->setOrdered(false);
 	m_port_Attribute_provided->setContainment(false);
 	m_port_Attribute_provided->setResolveProxies(true);
-	m_port_Attribute_provided->setDefaultValueLiteral("");	
+	m_port_Attribute_provided->setDefaultValueLiteral("");
 	
 	m_port_Attribute_provided->_setID(PORT_ATTRIBUTE_PROVIDED);
 	m_port_Attribute_redefinedPort->setName("redefinedPort");
@@ -15175,7 +15175,7 @@ void umlPackageImpl::initializePortContent()
 	m_port_Attribute_redefinedPort->setOrdered(false);
 	m_port_Attribute_redefinedPort->setContainment(false);
 	m_port_Attribute_redefinedPort->setResolveProxies(true);
-	m_port_Attribute_redefinedPort->setDefaultValueLiteral("");	
+	m_port_Attribute_redefinedPort->setDefaultValueLiteral("");
 	
 	m_port_Attribute_redefinedPort->_setID(PORT_ATTRIBUTE_REDEFINEDPORT);
 	m_port_Attribute_required->setName("required");
@@ -15191,7 +15191,7 @@ void umlPackageImpl::initializePortContent()
 	m_port_Attribute_required->setOrdered(false);
 	m_port_Attribute_required->setContainment(false);
 	m_port_Attribute_required->setResolveProxies(true);
-	m_port_Attribute_required->setDefaultValueLiteral("");	
+	m_port_Attribute_required->setDefaultValueLiteral("");
 	
 	m_port_Attribute_required->_setID(PORT_ATTRIBUTE_REQUIRED);
 	
@@ -15291,7 +15291,7 @@ void umlPackageImpl::initializeProfileContent()
 	m_profile_Attribute_metaclassReference->setOrdered(false);
 	m_profile_Attribute_metaclassReference->setContainment(false);
 	m_profile_Attribute_metaclassReference->setResolveProxies(true);
-	m_profile_Attribute_metaclassReference->setDefaultValueLiteral("");	
+	m_profile_Attribute_metaclassReference->setDefaultValueLiteral("");
 	
 	m_profile_Attribute_metaclassReference->_setID(PROFILE_ATTRIBUTE_METACLASSREFERENCE);
 	m_profile_Attribute_metamodelReference->setName("metamodelReference");
@@ -15307,7 +15307,7 @@ void umlPackageImpl::initializeProfileContent()
 	m_profile_Attribute_metamodelReference->setOrdered(false);
 	m_profile_Attribute_metamodelReference->setContainment(false);
 	m_profile_Attribute_metamodelReference->setResolveProxies(true);
-	m_profile_Attribute_metamodelReference->setDefaultValueLiteral("");	
+	m_profile_Attribute_metamodelReference->setDefaultValueLiteral("");
 	
 	m_profile_Attribute_metamodelReference->_setID(PROFILE_ATTRIBUTE_METAMODELREFERENCE);
 	
@@ -15507,7 +15507,7 @@ void umlPackageImpl::initializeProfileApplicationContent()
 	m_profileApplication_Attribute_appliedProfile->setOrdered(false);
 	m_profileApplication_Attribute_appliedProfile->setContainment(false);
 	m_profileApplication_Attribute_appliedProfile->setResolveProxies(true);
-	m_profileApplication_Attribute_appliedProfile->setDefaultValueLiteral("");	
+	m_profileApplication_Attribute_appliedProfile->setDefaultValueLiteral("");
 	
 	m_profileApplication_Attribute_appliedProfile->_setID(PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE);
 	m_profileApplication_Attribute_applyingPackage->setName("applyingPackage");
@@ -15523,7 +15523,7 @@ void umlPackageImpl::initializeProfileApplicationContent()
 	m_profileApplication_Attribute_applyingPackage->setOrdered(false);
 	m_profileApplication_Attribute_applyingPackage->setContainment(false);
 	m_profileApplication_Attribute_applyingPackage->setResolveProxies(true);
-	m_profileApplication_Attribute_applyingPackage->setDefaultValueLiteral("");	
+	m_profileApplication_Attribute_applyingPackage->setDefaultValueLiteral("");
 	m_profileApplication_Attribute_applyingPackage->setEOpposite(uml::umlPackage::eInstance()->getPackage_Attribute_profileApplication());
 	
 	m_profileApplication_Attribute_applyingPackage->_setID(PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE);
@@ -15687,7 +15687,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_association->setOrdered(false);
 	m_property_Attribute_association->setContainment(false);
 	m_property_Attribute_association->setResolveProxies(true);
-	m_property_Attribute_association->setDefaultValueLiteral("");	
+	m_property_Attribute_association->setDefaultValueLiteral("");
 	m_property_Attribute_association->setEOpposite(uml::umlPackage::eInstance()->getAssociation_Attribute_memberEnd());
 	
 	m_property_Attribute_association->_setID(PROPERTY_ATTRIBUTE_ASSOCIATION);
@@ -15704,7 +15704,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_associationEnd->setOrdered(false);
 	m_property_Attribute_associationEnd->setContainment(false);
 	m_property_Attribute_associationEnd->setResolveProxies(true);
-	m_property_Attribute_associationEnd->setDefaultValueLiteral("");	
+	m_property_Attribute_associationEnd->setDefaultValueLiteral("");
 	m_property_Attribute_associationEnd->setEOpposite(uml::umlPackage::eInstance()->getProperty_Attribute_qualifier());
 	
 	m_property_Attribute_associationEnd->_setID(PROPERTY_ATTRIBUTE_ASSOCIATIONEND);
@@ -15721,7 +15721,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_class->setOrdered(false);
 	m_property_Attribute_class->setContainment(false);
 	m_property_Attribute_class->setResolveProxies(true);
-	m_property_Attribute_class->setDefaultValueLiteral("");	
+	m_property_Attribute_class->setDefaultValueLiteral("");
 	m_property_Attribute_class->setEOpposite(uml::umlPackage::eInstance()->getClass_Attribute_ownedAttribute());
 	
 	m_property_Attribute_class->_setID(PROPERTY_ATTRIBUTE_CLASS);
@@ -15738,7 +15738,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_datatype->setOrdered(false);
 	m_property_Attribute_datatype->setContainment(false);
 	m_property_Attribute_datatype->setResolveProxies(true);
-	m_property_Attribute_datatype->setDefaultValueLiteral("");	
+	m_property_Attribute_datatype->setDefaultValueLiteral("");
 	m_property_Attribute_datatype->setEOpposite(uml::umlPackage::eInstance()->getDataType_Attribute_ownedAttribute());
 	
 	m_property_Attribute_datatype->_setID(PROPERTY_ATTRIBUTE_DATATYPE);
@@ -15755,7 +15755,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_defaultValue->setOrdered(false);
 	m_property_Attribute_defaultValue->setContainment(true);
 	m_property_Attribute_defaultValue->setResolveProxies(true);
-	m_property_Attribute_defaultValue->setDefaultValueLiteral("");	
+	m_property_Attribute_defaultValue->setDefaultValueLiteral("");
 	
 	m_property_Attribute_defaultValue->_setID(PROPERTY_ATTRIBUTE_DEFAULTVALUE);
 	m_property_Attribute_interface->setName("interface");
@@ -15771,7 +15771,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_interface->setOrdered(false);
 	m_property_Attribute_interface->setContainment(false);
 	m_property_Attribute_interface->setResolveProxies(true);
-	m_property_Attribute_interface->setDefaultValueLiteral("");	
+	m_property_Attribute_interface->setDefaultValueLiteral("");
 	m_property_Attribute_interface->setEOpposite(uml::umlPackage::eInstance()->getInterface_Attribute_ownedAttribute());
 	
 	m_property_Attribute_interface->_setID(PROPERTY_ATTRIBUTE_INTERFACE);
@@ -15788,7 +15788,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_opposite->setOrdered(false);
 	m_property_Attribute_opposite->setContainment(false);
 	m_property_Attribute_opposite->setResolveProxies(true);
-	m_property_Attribute_opposite->setDefaultValueLiteral("");	
+	m_property_Attribute_opposite->setDefaultValueLiteral("");
 	
 	m_property_Attribute_opposite->_setID(PROPERTY_ATTRIBUTE_OPPOSITE);
 	m_property_Attribute_owningAssociation->setName("owningAssociation");
@@ -15804,7 +15804,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_owningAssociation->setOrdered(false);
 	m_property_Attribute_owningAssociation->setContainment(false);
 	m_property_Attribute_owningAssociation->setResolveProxies(true);
-	m_property_Attribute_owningAssociation->setDefaultValueLiteral("");	
+	m_property_Attribute_owningAssociation->setDefaultValueLiteral("");
 	m_property_Attribute_owningAssociation->setEOpposite(uml::umlPackage::eInstance()->getAssociation_Attribute_ownedEnd());
 	
 	m_property_Attribute_owningAssociation->_setID(PROPERTY_ATTRIBUTE_OWNINGASSOCIATION);
@@ -15821,7 +15821,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_qualifier->setOrdered(true);
 	m_property_Attribute_qualifier->setContainment(true);
 	m_property_Attribute_qualifier->setResolveProxies(true);
-	m_property_Attribute_qualifier->setDefaultValueLiteral("");	
+	m_property_Attribute_qualifier->setDefaultValueLiteral("");
 	m_property_Attribute_qualifier->setEOpposite(uml::umlPackage::eInstance()->getProperty_Attribute_associationEnd());
 	
 	m_property_Attribute_qualifier->_setID(PROPERTY_ATTRIBUTE_QUALIFIER);
@@ -15838,7 +15838,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_redefinedProperty->setOrdered(false);
 	m_property_Attribute_redefinedProperty->setContainment(false);
 	m_property_Attribute_redefinedProperty->setResolveProxies(true);
-	m_property_Attribute_redefinedProperty->setDefaultValueLiteral("");	
+	m_property_Attribute_redefinedProperty->setDefaultValueLiteral("");
 	
 	m_property_Attribute_redefinedProperty->_setID(PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY);
 	m_property_Attribute_subsettedProperty->setName("subsettedProperty");
@@ -15854,7 +15854,7 @@ void umlPackageImpl::initializePropertyContent()
 	m_property_Attribute_subsettedProperty->setOrdered(false);
 	m_property_Attribute_subsettedProperty->setContainment(false);
 	m_property_Attribute_subsettedProperty->setResolveProxies(true);
-	m_property_Attribute_subsettedProperty->setDefaultValueLiteral("");	
+	m_property_Attribute_subsettedProperty->setDefaultValueLiteral("");
 	
 	m_property_Attribute_subsettedProperty->_setID(PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY);
 	
@@ -16144,7 +16144,7 @@ void umlPackageImpl::initializeProtocolConformanceContent()
 	m_protocolConformance_Attribute_generalMachine->setOrdered(false);
 	m_protocolConformance_Attribute_generalMachine->setContainment(false);
 	m_protocolConformance_Attribute_generalMachine->setResolveProxies(true);
-	m_protocolConformance_Attribute_generalMachine->setDefaultValueLiteral("");	
+	m_protocolConformance_Attribute_generalMachine->setDefaultValueLiteral("");
 	
 	m_protocolConformance_Attribute_generalMachine->_setID(PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE);
 	m_protocolConformance_Attribute_specificMachine->setName("specificMachine");
@@ -16160,7 +16160,7 @@ void umlPackageImpl::initializeProtocolConformanceContent()
 	m_protocolConformance_Attribute_specificMachine->setOrdered(false);
 	m_protocolConformance_Attribute_specificMachine->setContainment(false);
 	m_protocolConformance_Attribute_specificMachine->setResolveProxies(true);
-	m_protocolConformance_Attribute_specificMachine->setDefaultValueLiteral("");	
+	m_protocolConformance_Attribute_specificMachine->setDefaultValueLiteral("");
 	m_protocolConformance_Attribute_specificMachine->setEOpposite(uml::umlPackage::eInstance()->getProtocolStateMachine_Attribute_conformance());
 	
 	m_protocolConformance_Attribute_specificMachine->_setID(PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE);
@@ -16199,7 +16199,7 @@ void umlPackageImpl::initializeProtocolStateMachineContent()
 	m_protocolStateMachine_Attribute_conformance->setOrdered(false);
 	m_protocolStateMachine_Attribute_conformance->setContainment(true);
 	m_protocolStateMachine_Attribute_conformance->setResolveProxies(true);
-	m_protocolStateMachine_Attribute_conformance->setDefaultValueLiteral("");	
+	m_protocolStateMachine_Attribute_conformance->setDefaultValueLiteral("");
 	m_protocolStateMachine_Attribute_conformance->setEOpposite(uml::umlPackage::eInstance()->getProtocolConformance_Attribute_specificMachine());
 	
 	m_protocolStateMachine_Attribute_conformance->_setID(PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE);
@@ -16238,7 +16238,7 @@ void umlPackageImpl::initializeProtocolTransitionContent()
 	m_protocolTransition_Attribute_postCondition->setOrdered(false);
 	m_protocolTransition_Attribute_postCondition->setContainment(false);
 	m_protocolTransition_Attribute_postCondition->setResolveProxies(true);
-	m_protocolTransition_Attribute_postCondition->setDefaultValueLiteral("");	
+	m_protocolTransition_Attribute_postCondition->setDefaultValueLiteral("");
 	
 	m_protocolTransition_Attribute_postCondition->_setID(PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION);
 	m_protocolTransition_Attribute_preCondition->setName("preCondition");
@@ -16254,7 +16254,7 @@ void umlPackageImpl::initializeProtocolTransitionContent()
 	m_protocolTransition_Attribute_preCondition->setOrdered(false);
 	m_protocolTransition_Attribute_preCondition->setContainment(false);
 	m_protocolTransition_Attribute_preCondition->setResolveProxies(true);
-	m_protocolTransition_Attribute_preCondition->setDefaultValueLiteral("");	
+	m_protocolTransition_Attribute_preCondition->setDefaultValueLiteral("");
 	
 	m_protocolTransition_Attribute_preCondition->_setID(PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION);
 	m_protocolTransition_Attribute_referred->setName("referred");
@@ -16270,7 +16270,7 @@ void umlPackageImpl::initializeProtocolTransitionContent()
 	m_protocolTransition_Attribute_referred->setOrdered(false);
 	m_protocolTransition_Attribute_referred->setContainment(false);
 	m_protocolTransition_Attribute_referred->setResolveProxies(true);
-	m_protocolTransition_Attribute_referred->setDefaultValueLiteral("");	
+	m_protocolTransition_Attribute_referred->setDefaultValueLiteral("");
 	
 	m_protocolTransition_Attribute_referred->_setID(PROTOCOLTRANSITION_ATTRIBUTE_REFERRED);
 	
@@ -16334,7 +16334,7 @@ void umlPackageImpl::initializePseudostateContent()
 	m_pseudostate_Attribute_state->setOrdered(false);
 	m_pseudostate_Attribute_state->setContainment(false);
 	m_pseudostate_Attribute_state->setResolveProxies(true);
-	m_pseudostate_Attribute_state->setDefaultValueLiteral("");	
+	m_pseudostate_Attribute_state->setDefaultValueLiteral("");
 	m_pseudostate_Attribute_state->setEOpposite(uml::umlPackage::eInstance()->getState_Attribute_connectionPoint());
 	
 	m_pseudostate_Attribute_state->_setID(PSEUDOSTATE_ATTRIBUTE_STATE);
@@ -16351,7 +16351,7 @@ void umlPackageImpl::initializePseudostateContent()
 	m_pseudostate_Attribute_stateMachine->setOrdered(false);
 	m_pseudostate_Attribute_stateMachine->setContainment(false);
 	m_pseudostate_Attribute_stateMachine->setResolveProxies(true);
-	m_pseudostate_Attribute_stateMachine->setDefaultValueLiteral("");	
+	m_pseudostate_Attribute_stateMachine->setDefaultValueLiteral("");
 	m_pseudostate_Attribute_stateMachine->setEOpposite(uml::umlPackage::eInstance()->getStateMachine_Attribute_connectionPoint());
 	
 	m_pseudostate_Attribute_stateMachine->_setID(PSEUDOSTATE_ATTRIBUTE_STATEMACHINE);
@@ -16390,7 +16390,7 @@ void umlPackageImpl::initializeQualifierValueContent()
 	m_qualifierValue_Attribute_qualifier->setOrdered(false);
 	m_qualifierValue_Attribute_qualifier->setContainment(false);
 	m_qualifierValue_Attribute_qualifier->setResolveProxies(true);
-	m_qualifierValue_Attribute_qualifier->setDefaultValueLiteral("");	
+	m_qualifierValue_Attribute_qualifier->setDefaultValueLiteral("");
 	
 	m_qualifierValue_Attribute_qualifier->_setID(QUALIFIERVALUE_ATTRIBUTE_QUALIFIER);
 	m_qualifierValue_Attribute_value->setName("value");
@@ -16406,7 +16406,7 @@ void umlPackageImpl::initializeQualifierValueContent()
 	m_qualifierValue_Attribute_value->setOrdered(false);
 	m_qualifierValue_Attribute_value->setContainment(false);
 	m_qualifierValue_Attribute_value->setResolveProxies(true);
-	m_qualifierValue_Attribute_value->setDefaultValueLiteral("");	
+	m_qualifierValue_Attribute_value->setDefaultValueLiteral("");
 	
 	m_qualifierValue_Attribute_value->_setID(QUALIFIERVALUE_ATTRIBUTE_VALUE);
 	
@@ -16444,7 +16444,7 @@ void umlPackageImpl::initializeRaiseExceptionActionContent()
 	m_raiseExceptionAction_Attribute_exception->setOrdered(false);
 	m_raiseExceptionAction_Attribute_exception->setContainment(true);
 	m_raiseExceptionAction_Attribute_exception->setResolveProxies(true);
-	m_raiseExceptionAction_Attribute_exception->setDefaultValueLiteral("");	
+	m_raiseExceptionAction_Attribute_exception->setDefaultValueLiteral("");
 	
 	m_raiseExceptionAction_Attribute_exception->_setID(RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION);
 	
@@ -16482,7 +16482,7 @@ void umlPackageImpl::initializeReadExtentActionContent()
 	m_readExtentAction_Attribute_classifier->setOrdered(false);
 	m_readExtentAction_Attribute_classifier->setContainment(false);
 	m_readExtentAction_Attribute_classifier->setResolveProxies(true);
-	m_readExtentAction_Attribute_classifier->setDefaultValueLiteral("");	
+	m_readExtentAction_Attribute_classifier->setDefaultValueLiteral("");
 	
 	m_readExtentAction_Attribute_classifier->_setID(READEXTENTACTION_ATTRIBUTE_CLASSIFIER);
 	m_readExtentAction_Attribute_result->setName("result");
@@ -16498,7 +16498,7 @@ void umlPackageImpl::initializeReadExtentActionContent()
 	m_readExtentAction_Attribute_result->setOrdered(false);
 	m_readExtentAction_Attribute_result->setContainment(true);
 	m_readExtentAction_Attribute_result->setResolveProxies(true);
-	m_readExtentAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readExtentAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_readExtentAction_Attribute_result->_setID(READEXTENTACTION_ATTRIBUTE_RESULT);
 	
@@ -16552,7 +16552,7 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 	m_readIsClassifiedObjectAction_Attribute_classifier->setOrdered(false);
 	m_readIsClassifiedObjectAction_Attribute_classifier->setContainment(false);
 	m_readIsClassifiedObjectAction_Attribute_classifier->setResolveProxies(true);
-	m_readIsClassifiedObjectAction_Attribute_classifier->setDefaultValueLiteral("");	
+	m_readIsClassifiedObjectAction_Attribute_classifier->setDefaultValueLiteral("");
 	
 	m_readIsClassifiedObjectAction_Attribute_classifier->_setID(READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER);
 	m_readIsClassifiedObjectAction_Attribute_object->setName("object");
@@ -16568,7 +16568,7 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 	m_readIsClassifiedObjectAction_Attribute_object->setOrdered(false);
 	m_readIsClassifiedObjectAction_Attribute_object->setContainment(true);
 	m_readIsClassifiedObjectAction_Attribute_object->setResolveProxies(true);
-	m_readIsClassifiedObjectAction_Attribute_object->setDefaultValueLiteral("");	
+	m_readIsClassifiedObjectAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_readIsClassifiedObjectAction_Attribute_object->_setID(READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT);
 	m_readIsClassifiedObjectAction_Attribute_result->setName("result");
@@ -16584,7 +16584,7 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 	m_readIsClassifiedObjectAction_Attribute_result->setOrdered(false);
 	m_readIsClassifiedObjectAction_Attribute_result->setContainment(true);
 	m_readIsClassifiedObjectAction_Attribute_result->setResolveProxies(true);
-	m_readIsClassifiedObjectAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readIsClassifiedObjectAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_readIsClassifiedObjectAction_Attribute_result->_setID(READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT);
 	
@@ -16622,7 +16622,7 @@ void umlPackageImpl::initializeReadLinkActionContent()
 	m_readLinkAction_Attribute_result->setOrdered(false);
 	m_readLinkAction_Attribute_result->setContainment(true);
 	m_readLinkAction_Attribute_result->setResolveProxies(true);
-	m_readLinkAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readLinkAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_readLinkAction_Attribute_result->_setID(READLINKACTION_ATTRIBUTE_RESULT);
 	
@@ -16670,7 +16670,7 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 	m_readLinkObjectEndAction_Attribute_end->setOrdered(false);
 	m_readLinkObjectEndAction_Attribute_end->setContainment(false);
 	m_readLinkObjectEndAction_Attribute_end->setResolveProxies(true);
-	m_readLinkObjectEndAction_Attribute_end->setDefaultValueLiteral("");	
+	m_readLinkObjectEndAction_Attribute_end->setDefaultValueLiteral("");
 	
 	m_readLinkObjectEndAction_Attribute_end->_setID(READLINKOBJECTENDACTION_ATTRIBUTE_END);
 	m_readLinkObjectEndAction_Attribute_object->setName("object");
@@ -16686,7 +16686,7 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 	m_readLinkObjectEndAction_Attribute_object->setOrdered(false);
 	m_readLinkObjectEndAction_Attribute_object->setContainment(true);
 	m_readLinkObjectEndAction_Attribute_object->setResolveProxies(true);
-	m_readLinkObjectEndAction_Attribute_object->setDefaultValueLiteral("");	
+	m_readLinkObjectEndAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_readLinkObjectEndAction_Attribute_object->_setID(READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT);
 	m_readLinkObjectEndAction_Attribute_result->setName("result");
@@ -16702,7 +16702,7 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 	m_readLinkObjectEndAction_Attribute_result->setOrdered(false);
 	m_readLinkObjectEndAction_Attribute_result->setContainment(true);
 	m_readLinkObjectEndAction_Attribute_result->setResolveProxies(true);
-	m_readLinkObjectEndAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readLinkObjectEndAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_readLinkObjectEndAction_Attribute_result->_setID(READLINKOBJECTENDACTION_ATTRIBUTE_RESULT);
 	
@@ -16740,7 +16740,7 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 	m_readLinkObjectEndQualifierAction_Attribute_object->setOrdered(false);
 	m_readLinkObjectEndQualifierAction_Attribute_object->setContainment(true);
 	m_readLinkObjectEndQualifierAction_Attribute_object->setResolveProxies(true);
-	m_readLinkObjectEndQualifierAction_Attribute_object->setDefaultValueLiteral("");	
+	m_readLinkObjectEndQualifierAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_readLinkObjectEndQualifierAction_Attribute_object->_setID(READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT);
 	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setName("qualifier");
@@ -16756,7 +16756,7 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setOrdered(false);
 	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setContainment(false);
 	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setResolveProxies(true);
-	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setDefaultValueLiteral("");	
+	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setDefaultValueLiteral("");
 	
 	m_readLinkObjectEndQualifierAction_Attribute_qualifier->_setID(READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER);
 	m_readLinkObjectEndQualifierAction_Attribute_result->setName("result");
@@ -16772,7 +16772,7 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 	m_readLinkObjectEndQualifierAction_Attribute_result->setOrdered(false);
 	m_readLinkObjectEndQualifierAction_Attribute_result->setContainment(true);
 	m_readLinkObjectEndQualifierAction_Attribute_result->setResolveProxies(true);
-	m_readLinkObjectEndQualifierAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readLinkObjectEndQualifierAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_readLinkObjectEndQualifierAction_Attribute_result->_setID(READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT);
 	
@@ -16810,7 +16810,7 @@ void umlPackageImpl::initializeReadSelfActionContent()
 	m_readSelfAction_Attribute_result->setOrdered(false);
 	m_readSelfAction_Attribute_result->setContainment(true);
 	m_readSelfAction_Attribute_result->setResolveProxies(true);
-	m_readSelfAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readSelfAction_Attribute_result->setDefaultValueLiteral("");
 	m_readSelfAction_Attribute_result->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_readSelfAction());
 	
 	m_readSelfAction_Attribute_result->_setID(READSELFACTION_ATTRIBUTE_RESULT);
@@ -16849,7 +16849,7 @@ void umlPackageImpl::initializeReadStructuralFeatureActionContent()
 	m_readStructuralFeatureAction_Attribute_result->setOrdered(false);
 	m_readStructuralFeatureAction_Attribute_result->setContainment(true);
 	m_readStructuralFeatureAction_Attribute_result->setResolveProxies(true);
-	m_readStructuralFeatureAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readStructuralFeatureAction_Attribute_result->setDefaultValueLiteral("");
 	m_readStructuralFeatureAction_Attribute_result->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_readStructuralFeatureAction());
 	
 	m_readStructuralFeatureAction_Attribute_result->_setID(READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT);
@@ -16888,7 +16888,7 @@ void umlPackageImpl::initializeReadVariableActionContent()
 	m_readVariableAction_Attribute_result->setOrdered(false);
 	m_readVariableAction_Attribute_result->setContainment(true);
 	m_readVariableAction_Attribute_result->setResolveProxies(true);
-	m_readVariableAction_Attribute_result->setDefaultValueLiteral("");	
+	m_readVariableAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_readVariableAction_Attribute_result->_setID(READVARIABLEACTION_ATTRIBUTE_RESULT);
 	
@@ -16948,7 +16948,7 @@ void umlPackageImpl::initializeReceptionContent()
 	m_reception_Attribute_signal->setOrdered(false);
 	m_reception_Attribute_signal->setContainment(false);
 	m_reception_Attribute_signal->setResolveProxies(true);
-	m_reception_Attribute_signal->setDefaultValueLiteral("");	
+	m_reception_Attribute_signal->setDefaultValueLiteral("");
 	
 	m_reception_Attribute_signal->_setID(RECEPTION_ATTRIBUTE_SIGNAL);
 	
@@ -17002,7 +17002,7 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 	m_reclassifyObjectAction_Attribute_newClassifier->setOrdered(false);
 	m_reclassifyObjectAction_Attribute_newClassifier->setContainment(false);
 	m_reclassifyObjectAction_Attribute_newClassifier->setResolveProxies(true);
-	m_reclassifyObjectAction_Attribute_newClassifier->setDefaultValueLiteral("");	
+	m_reclassifyObjectAction_Attribute_newClassifier->setDefaultValueLiteral("");
 	
 	m_reclassifyObjectAction_Attribute_newClassifier->_setID(RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER);
 	m_reclassifyObjectAction_Attribute_object->setName("object");
@@ -17018,7 +17018,7 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 	m_reclassifyObjectAction_Attribute_object->setOrdered(false);
 	m_reclassifyObjectAction_Attribute_object->setContainment(true);
 	m_reclassifyObjectAction_Attribute_object->setResolveProxies(true);
-	m_reclassifyObjectAction_Attribute_object->setDefaultValueLiteral("");	
+	m_reclassifyObjectAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_reclassifyObjectAction_Attribute_object->_setID(RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT);
 	m_reclassifyObjectAction_Attribute_oldClassifier->setName("oldClassifier");
@@ -17034,7 +17034,7 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 	m_reclassifyObjectAction_Attribute_oldClassifier->setOrdered(false);
 	m_reclassifyObjectAction_Attribute_oldClassifier->setContainment(false);
 	m_reclassifyObjectAction_Attribute_oldClassifier->setResolveProxies(true);
-	m_reclassifyObjectAction_Attribute_oldClassifier->setDefaultValueLiteral("");	
+	m_reclassifyObjectAction_Attribute_oldClassifier->setDefaultValueLiteral("");
 	
 	m_reclassifyObjectAction_Attribute_oldClassifier->_setID(RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER);
 	
@@ -17088,7 +17088,7 @@ void umlPackageImpl::initializeRedefinableElementContent()
 	m_redefinableElement_Attribute_redefinedElement->setOrdered(false);
 	m_redefinableElement_Attribute_redefinedElement->setContainment(false);
 	m_redefinableElement_Attribute_redefinedElement->setResolveProxies(true);
-	m_redefinableElement_Attribute_redefinedElement->setDefaultValueLiteral("");	
+	m_redefinableElement_Attribute_redefinedElement->setDefaultValueLiteral("");
 	
 	m_redefinableElement_Attribute_redefinedElement->_setID(REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT);
 	m_redefinableElement_Attribute_redefinitionContext->setName("redefinitionContext");
@@ -17104,7 +17104,7 @@ void umlPackageImpl::initializeRedefinableElementContent()
 	m_redefinableElement_Attribute_redefinitionContext->setOrdered(false);
 	m_redefinableElement_Attribute_redefinitionContext->setContainment(false);
 	m_redefinableElement_Attribute_redefinitionContext->setResolveProxies(true);
-	m_redefinableElement_Attribute_redefinitionContext->setDefaultValueLiteral("");	
+	m_redefinableElement_Attribute_redefinitionContext->setDefaultValueLiteral("");
 	
 	m_redefinableElement_Attribute_redefinitionContext->_setID(REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT);
 	
@@ -17180,7 +17180,7 @@ void umlPackageImpl::initializeRedefinableTemplateSignatureContent()
 	m_redefinableTemplateSignature_Attribute_classifier->setOrdered(false);
 	m_redefinableTemplateSignature_Attribute_classifier->setContainment(false);
 	m_redefinableTemplateSignature_Attribute_classifier->setResolveProxies(true);
-	m_redefinableTemplateSignature_Attribute_classifier->setDefaultValueLiteral("");	
+	m_redefinableTemplateSignature_Attribute_classifier->setDefaultValueLiteral("");
 	
 	m_redefinableTemplateSignature_Attribute_classifier->_setID(REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER);
 	m_redefinableTemplateSignature_Attribute_extendedSignature->setName("extendedSignature");
@@ -17196,7 +17196,7 @@ void umlPackageImpl::initializeRedefinableTemplateSignatureContent()
 	m_redefinableTemplateSignature_Attribute_extendedSignature->setOrdered(false);
 	m_redefinableTemplateSignature_Attribute_extendedSignature->setContainment(false);
 	m_redefinableTemplateSignature_Attribute_extendedSignature->setResolveProxies(true);
-	m_redefinableTemplateSignature_Attribute_extendedSignature->setDefaultValueLiteral("");	
+	m_redefinableTemplateSignature_Attribute_extendedSignature->setDefaultValueLiteral("");
 	
 	m_redefinableTemplateSignature_Attribute_extendedSignature->_setID(REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE);
 	m_redefinableTemplateSignature_Attribute_inheritedParameter->setName("inheritedParameter");
@@ -17212,7 +17212,7 @@ void umlPackageImpl::initializeRedefinableTemplateSignatureContent()
 	m_redefinableTemplateSignature_Attribute_inheritedParameter->setOrdered(false);
 	m_redefinableTemplateSignature_Attribute_inheritedParameter->setContainment(false);
 	m_redefinableTemplateSignature_Attribute_inheritedParameter->setResolveProxies(true);
-	m_redefinableTemplateSignature_Attribute_inheritedParameter->setDefaultValueLiteral("");	
+	m_redefinableTemplateSignature_Attribute_inheritedParameter->setDefaultValueLiteral("");
 	
 	m_redefinableTemplateSignature_Attribute_inheritedParameter->_setID(REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER);
 	
@@ -17276,7 +17276,7 @@ void umlPackageImpl::initializeReduceActionContent()
 	m_reduceAction_Attribute_collection->setOrdered(false);
 	m_reduceAction_Attribute_collection->setContainment(true);
 	m_reduceAction_Attribute_collection->setResolveProxies(true);
-	m_reduceAction_Attribute_collection->setDefaultValueLiteral("");	
+	m_reduceAction_Attribute_collection->setDefaultValueLiteral("");
 	
 	m_reduceAction_Attribute_collection->_setID(REDUCEACTION_ATTRIBUTE_COLLECTION);
 	m_reduceAction_Attribute_reducer->setName("reducer");
@@ -17292,7 +17292,7 @@ void umlPackageImpl::initializeReduceActionContent()
 	m_reduceAction_Attribute_reducer->setOrdered(false);
 	m_reduceAction_Attribute_reducer->setContainment(false);
 	m_reduceAction_Attribute_reducer->setResolveProxies(true);
-	m_reduceAction_Attribute_reducer->setDefaultValueLiteral("");	
+	m_reduceAction_Attribute_reducer->setDefaultValueLiteral("");
 	
 	m_reduceAction_Attribute_reducer->_setID(REDUCEACTION_ATTRIBUTE_REDUCER);
 	m_reduceAction_Attribute_result->setName("result");
@@ -17308,7 +17308,7 @@ void umlPackageImpl::initializeReduceActionContent()
 	m_reduceAction_Attribute_result->setOrdered(false);
 	m_reduceAction_Attribute_result->setContainment(true);
 	m_reduceAction_Attribute_result->setResolveProxies(true);
-	m_reduceAction_Attribute_result->setDefaultValueLiteral("");	
+	m_reduceAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_reduceAction_Attribute_result->_setID(REDUCEACTION_ATTRIBUTE_RESULT);
 	
@@ -17346,7 +17346,7 @@ void umlPackageImpl::initializeRegionContent()
 	m_region_Attribute_extendedRegion->setOrdered(false);
 	m_region_Attribute_extendedRegion->setContainment(false);
 	m_region_Attribute_extendedRegion->setResolveProxies(true);
-	m_region_Attribute_extendedRegion->setDefaultValueLiteral("");	
+	m_region_Attribute_extendedRegion->setDefaultValueLiteral("");
 	
 	m_region_Attribute_extendedRegion->_setID(REGION_ATTRIBUTE_EXTENDEDREGION);
 	m_region_Attribute_state->setName("state");
@@ -17362,7 +17362,7 @@ void umlPackageImpl::initializeRegionContent()
 	m_region_Attribute_state->setOrdered(false);
 	m_region_Attribute_state->setContainment(false);
 	m_region_Attribute_state->setResolveProxies(true);
-	m_region_Attribute_state->setDefaultValueLiteral("");	
+	m_region_Attribute_state->setDefaultValueLiteral("");
 	m_region_Attribute_state->setEOpposite(uml::umlPackage::eInstance()->getState_Attribute_region());
 	
 	m_region_Attribute_state->_setID(REGION_ATTRIBUTE_STATE);
@@ -17379,7 +17379,7 @@ void umlPackageImpl::initializeRegionContent()
 	m_region_Attribute_stateMachine->setOrdered(false);
 	m_region_Attribute_stateMachine->setContainment(false);
 	m_region_Attribute_stateMachine->setResolveProxies(true);
-	m_region_Attribute_stateMachine->setDefaultValueLiteral("");	
+	m_region_Attribute_stateMachine->setDefaultValueLiteral("");
 	m_region_Attribute_stateMachine->setEOpposite(uml::umlPackage::eInstance()->getStateMachine_Attribute_region());
 	
 	m_region_Attribute_stateMachine->_setID(REGION_ATTRIBUTE_STATEMACHINE);
@@ -17396,7 +17396,7 @@ void umlPackageImpl::initializeRegionContent()
 	m_region_Attribute_subvertex->setOrdered(false);
 	m_region_Attribute_subvertex->setContainment(true);
 	m_region_Attribute_subvertex->setResolveProxies(true);
-	m_region_Attribute_subvertex->setDefaultValueLiteral("");	
+	m_region_Attribute_subvertex->setDefaultValueLiteral("");
 	m_region_Attribute_subvertex->setEOpposite(uml::umlPackage::eInstance()->getVertex_Attribute_container());
 	
 	m_region_Attribute_subvertex->_setID(REGION_ATTRIBUTE_SUBVERTEX);
@@ -17413,7 +17413,7 @@ void umlPackageImpl::initializeRegionContent()
 	m_region_Attribute_transition->setOrdered(false);
 	m_region_Attribute_transition->setContainment(true);
 	m_region_Attribute_transition->setResolveProxies(true);
-	m_region_Attribute_transition->setDefaultValueLiteral("");	
+	m_region_Attribute_transition->setDefaultValueLiteral("");
 	m_region_Attribute_transition->setEOpposite(uml::umlPackage::eInstance()->getTransition_Attribute_container());
 	
 	m_region_Attribute_transition->_setID(REGION_ATTRIBUTE_TRANSITION);
@@ -17482,7 +17482,7 @@ void umlPackageImpl::initializeRelationshipContent()
 	m_relationship_Attribute_relatedElement->setOrdered(false);
 	m_relationship_Attribute_relatedElement->setContainment(false);
 	m_relationship_Attribute_relatedElement->setResolveProxies(true);
-	m_relationship_Attribute_relatedElement->setDefaultValueLiteral("");	
+	m_relationship_Attribute_relatedElement->setDefaultValueLiteral("");
 	
 	m_relationship_Attribute_relatedElement->_setID(RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT);
 	
@@ -17536,7 +17536,7 @@ void umlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 	m_removeStructuralFeatureValueAction_Attribute_removeAt->setOrdered(false);
 	m_removeStructuralFeatureValueAction_Attribute_removeAt->setContainment(true);
 	m_removeStructuralFeatureValueAction_Attribute_removeAt->setResolveProxies(true);
-	m_removeStructuralFeatureValueAction_Attribute_removeAt->setDefaultValueLiteral("");	
+	m_removeStructuralFeatureValueAction_Attribute_removeAt->setDefaultValueLiteral("");
 	m_removeStructuralFeatureValueAction_Attribute_removeAt->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_removeStructuralFeatureValueAction());
 	
 	m_removeStructuralFeatureValueAction_Attribute_removeAt->_setID(REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT);
@@ -17591,7 +17591,7 @@ void umlPackageImpl::initializeRemoveVariableValueActionContent()
 	m_removeVariableValueAction_Attribute_removeAt->setOrdered(false);
 	m_removeVariableValueAction_Attribute_removeAt->setContainment(true);
 	m_removeVariableValueAction_Attribute_removeAt->setResolveProxies(true);
-	m_removeVariableValueAction_Attribute_removeAt->setDefaultValueLiteral("");	
+	m_removeVariableValueAction_Attribute_removeAt->setDefaultValueLiteral("");
 	
 	m_removeVariableValueAction_Attribute_removeAt->_setID(REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT);
 	
@@ -17629,7 +17629,7 @@ void umlPackageImpl::initializeReplyActionContent()
 	m_replyAction_Attribute_replyToCall->setOrdered(false);
 	m_replyAction_Attribute_replyToCall->setContainment(false);
 	m_replyAction_Attribute_replyToCall->setResolveProxies(true);
-	m_replyAction_Attribute_replyToCall->setDefaultValueLiteral("");	
+	m_replyAction_Attribute_replyToCall->setDefaultValueLiteral("");
 	
 	m_replyAction_Attribute_replyToCall->_setID(REPLYACTION_ATTRIBUTE_REPLYTOCALL);
 	m_replyAction_Attribute_replyValue->setName("replyValue");
@@ -17645,7 +17645,7 @@ void umlPackageImpl::initializeReplyActionContent()
 	m_replyAction_Attribute_replyValue->setOrdered(true);
 	m_replyAction_Attribute_replyValue->setContainment(true);
 	m_replyAction_Attribute_replyValue->setResolveProxies(true);
-	m_replyAction_Attribute_replyValue->setDefaultValueLiteral("");	
+	m_replyAction_Attribute_replyValue->setDefaultValueLiteral("");
 	
 	m_replyAction_Attribute_replyValue->_setID(REPLYACTION_ATTRIBUTE_REPLYVALUE);
 	m_replyAction_Attribute_returnInformation->setName("returnInformation");
@@ -17661,7 +17661,7 @@ void umlPackageImpl::initializeReplyActionContent()
 	m_replyAction_Attribute_returnInformation->setOrdered(false);
 	m_replyAction_Attribute_returnInformation->setContainment(true);
 	m_replyAction_Attribute_returnInformation->setResolveProxies(true);
-	m_replyAction_Attribute_returnInformation->setDefaultValueLiteral("");	
+	m_replyAction_Attribute_returnInformation->setDefaultValueLiteral("");
 	
 	m_replyAction_Attribute_returnInformation->_setID(REPLYACTION_ATTRIBUTE_RETURNINFORMATION);
 	
@@ -17699,7 +17699,7 @@ void umlPackageImpl::initializeSendObjectActionContent()
 	m_sendObjectAction_Attribute_request->setOrdered(false);
 	m_sendObjectAction_Attribute_request->setContainment(true);
 	m_sendObjectAction_Attribute_request->setResolveProxies(true);
-	m_sendObjectAction_Attribute_request->setDefaultValueLiteral("");	
+	m_sendObjectAction_Attribute_request->setDefaultValueLiteral("");
 	
 	m_sendObjectAction_Attribute_request->_setID(SENDOBJECTACTION_ATTRIBUTE_REQUEST);
 	m_sendObjectAction_Attribute_target->setName("target");
@@ -17715,7 +17715,7 @@ void umlPackageImpl::initializeSendObjectActionContent()
 	m_sendObjectAction_Attribute_target->setOrdered(false);
 	m_sendObjectAction_Attribute_target->setContainment(true);
 	m_sendObjectAction_Attribute_target->setResolveProxies(true);
-	m_sendObjectAction_Attribute_target->setDefaultValueLiteral("");	
+	m_sendObjectAction_Attribute_target->setDefaultValueLiteral("");
 	
 	m_sendObjectAction_Attribute_target->_setID(SENDOBJECTACTION_ATTRIBUTE_TARGET);
 	
@@ -17753,7 +17753,7 @@ void umlPackageImpl::initializeSendSignalActionContent()
 	m_sendSignalAction_Attribute_signal->setOrdered(false);
 	m_sendSignalAction_Attribute_signal->setContainment(false);
 	m_sendSignalAction_Attribute_signal->setResolveProxies(true);
-	m_sendSignalAction_Attribute_signal->setDefaultValueLiteral("");	
+	m_sendSignalAction_Attribute_signal->setDefaultValueLiteral("");
 	
 	m_sendSignalAction_Attribute_signal->_setID(SENDSIGNALACTION_ATTRIBUTE_SIGNAL);
 	m_sendSignalAction_Attribute_target->setName("target");
@@ -17769,7 +17769,7 @@ void umlPackageImpl::initializeSendSignalActionContent()
 	m_sendSignalAction_Attribute_target->setOrdered(false);
 	m_sendSignalAction_Attribute_target->setContainment(true);
 	m_sendSignalAction_Attribute_target->setResolveProxies(true);
-	m_sendSignalAction_Attribute_target->setDefaultValueLiteral("");	
+	m_sendSignalAction_Attribute_target->setDefaultValueLiteral("");
 	
 	m_sendSignalAction_Attribute_target->_setID(SENDSIGNALACTION_ATTRIBUTE_TARGET);
 	
@@ -17807,7 +17807,7 @@ void umlPackageImpl::initializeSequenceNodeContent()
 	m_sequenceNode_Attribute_executableNode->setOrdered(true);
 	m_sequenceNode_Attribute_executableNode->setContainment(true);
 	m_sequenceNode_Attribute_executableNode->setResolveProxies(true);
-	m_sequenceNode_Attribute_executableNode->setDefaultValueLiteral("");	
+	m_sequenceNode_Attribute_executableNode->setDefaultValueLiteral("");
 	
 	m_sequenceNode_Attribute_executableNode->_setID(SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE);
 	
@@ -17845,7 +17845,7 @@ void umlPackageImpl::initializeSignalContent()
 	m_signal_Attribute_ownedAttribute->setOrdered(true);
 	m_signal_Attribute_ownedAttribute->setContainment(true);
 	m_signal_Attribute_ownedAttribute->setResolveProxies(true);
-	m_signal_Attribute_ownedAttribute->setDefaultValueLiteral("");	
+	m_signal_Attribute_ownedAttribute->setDefaultValueLiteral("");
 	
 	m_signal_Attribute_ownedAttribute->_setID(SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE);
 	
@@ -17932,7 +17932,7 @@ void umlPackageImpl::initializeSignalEventContent()
 	m_signalEvent_Attribute_signal->setOrdered(false);
 	m_signalEvent_Attribute_signal->setContainment(false);
 	m_signalEvent_Attribute_signal->setResolveProxies(true);
-	m_signalEvent_Attribute_signal->setDefaultValueLiteral("");	
+	m_signalEvent_Attribute_signal->setDefaultValueLiteral("");
 	
 	m_signalEvent_Attribute_signal->_setID(SIGNALEVENT_ATTRIBUTE_SIGNAL);
 	
@@ -17970,7 +17970,7 @@ void umlPackageImpl::initializeSlotContent()
 	m_slot_Attribute_definingFeature->setOrdered(false);
 	m_slot_Attribute_definingFeature->setContainment(false);
 	m_slot_Attribute_definingFeature->setResolveProxies(true);
-	m_slot_Attribute_definingFeature->setDefaultValueLiteral("");	
+	m_slot_Attribute_definingFeature->setDefaultValueLiteral("");
 	
 	m_slot_Attribute_definingFeature->_setID(SLOT_ATTRIBUTE_DEFININGFEATURE);
 	m_slot_Attribute_owningInstance->setName("owningInstance");
@@ -17986,7 +17986,7 @@ void umlPackageImpl::initializeSlotContent()
 	m_slot_Attribute_owningInstance->setOrdered(false);
 	m_slot_Attribute_owningInstance->setContainment(false);
 	m_slot_Attribute_owningInstance->setResolveProxies(true);
-	m_slot_Attribute_owningInstance->setDefaultValueLiteral("");	
+	m_slot_Attribute_owningInstance->setDefaultValueLiteral("");
 	m_slot_Attribute_owningInstance->setEOpposite(uml::umlPackage::eInstance()->getInstanceSpecification_Attribute_slot());
 	
 	m_slot_Attribute_owningInstance->_setID(SLOT_ATTRIBUTE_OWNINGINSTANCE);
@@ -18003,7 +18003,7 @@ void umlPackageImpl::initializeSlotContent()
 	m_slot_Attribute_value->setOrdered(true);
 	m_slot_Attribute_value->setContainment(true);
 	m_slot_Attribute_value->setResolveProxies(true);
-	m_slot_Attribute_value->setDefaultValueLiteral("");	
+	m_slot_Attribute_value->setDefaultValueLiteral("");
 	m_slot_Attribute_value->setEOpposite(uml::umlPackage::eInstance()->getValueSpecification_Attribute_owningSlot());
 	
 	m_slot_Attribute_value->_setID(SLOT_ATTRIBUTE_VALUE);
@@ -18042,7 +18042,7 @@ void umlPackageImpl::initializeStartClassifierBehaviorActionContent()
 	m_startClassifierBehaviorAction_Attribute_object->setOrdered(false);
 	m_startClassifierBehaviorAction_Attribute_object->setContainment(true);
 	m_startClassifierBehaviorAction_Attribute_object->setResolveProxies(true);
-	m_startClassifierBehaviorAction_Attribute_object->setDefaultValueLiteral("");	
+	m_startClassifierBehaviorAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_startClassifierBehaviorAction_Attribute_object->_setID(STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT);
 	
@@ -18080,7 +18080,7 @@ void umlPackageImpl::initializeStartObjectBehaviorActionContent()
 	m_startObjectBehaviorAction_Attribute_object->setOrdered(false);
 	m_startObjectBehaviorAction_Attribute_object->setContainment(true);
 	m_startObjectBehaviorAction_Attribute_object->setResolveProxies(true);
-	m_startObjectBehaviorAction_Attribute_object->setDefaultValueLiteral("");	
+	m_startObjectBehaviorAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_startObjectBehaviorAction_Attribute_object->_setID(STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT);
 	
@@ -18128,7 +18128,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_connection->setOrdered(false);
 	m_state_Attribute_connection->setContainment(true);
 	m_state_Attribute_connection->setResolveProxies(true);
-	m_state_Attribute_connection->setDefaultValueLiteral("");	
+	m_state_Attribute_connection->setDefaultValueLiteral("");
 	m_state_Attribute_connection->setEOpposite(uml::umlPackage::eInstance()->getConnectionPointReference_Attribute_state());
 	
 	m_state_Attribute_connection->_setID(STATE_ATTRIBUTE_CONNECTION);
@@ -18145,7 +18145,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_connectionPoint->setOrdered(false);
 	m_state_Attribute_connectionPoint->setContainment(true);
 	m_state_Attribute_connectionPoint->setResolveProxies(true);
-	m_state_Attribute_connectionPoint->setDefaultValueLiteral("");	
+	m_state_Attribute_connectionPoint->setDefaultValueLiteral("");
 	m_state_Attribute_connectionPoint->setEOpposite(uml::umlPackage::eInstance()->getPseudostate_Attribute_state());
 	
 	m_state_Attribute_connectionPoint->_setID(STATE_ATTRIBUTE_CONNECTIONPOINT);
@@ -18162,7 +18162,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_deferrableTrigger->setOrdered(false);
 	m_state_Attribute_deferrableTrigger->setContainment(true);
 	m_state_Attribute_deferrableTrigger->setResolveProxies(true);
-	m_state_Attribute_deferrableTrigger->setDefaultValueLiteral("");	
+	m_state_Attribute_deferrableTrigger->setDefaultValueLiteral("");
 	
 	m_state_Attribute_deferrableTrigger->_setID(STATE_ATTRIBUTE_DEFERRABLETRIGGER);
 	m_state_Attribute_doActivity->setName("doActivity");
@@ -18178,7 +18178,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_doActivity->setOrdered(false);
 	m_state_Attribute_doActivity->setContainment(true);
 	m_state_Attribute_doActivity->setResolveProxies(true);
-	m_state_Attribute_doActivity->setDefaultValueLiteral("");	
+	m_state_Attribute_doActivity->setDefaultValueLiteral("");
 	
 	m_state_Attribute_doActivity->_setID(STATE_ATTRIBUTE_DOACTIVITY);
 	m_state_Attribute_entry->setName("entry");
@@ -18194,7 +18194,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_entry->setOrdered(false);
 	m_state_Attribute_entry->setContainment(true);
 	m_state_Attribute_entry->setResolveProxies(true);
-	m_state_Attribute_entry->setDefaultValueLiteral("");	
+	m_state_Attribute_entry->setDefaultValueLiteral("");
 	
 	m_state_Attribute_entry->_setID(STATE_ATTRIBUTE_ENTRY);
 	m_state_Attribute_exit->setName("exit");
@@ -18210,7 +18210,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_exit->setOrdered(false);
 	m_state_Attribute_exit->setContainment(true);
 	m_state_Attribute_exit->setResolveProxies(true);
-	m_state_Attribute_exit->setDefaultValueLiteral("");	
+	m_state_Attribute_exit->setDefaultValueLiteral("");
 	
 	m_state_Attribute_exit->_setID(STATE_ATTRIBUTE_EXIT);
 	m_state_Attribute_redefinedState->setName("redefinedState");
@@ -18226,7 +18226,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_redefinedState->setOrdered(false);
 	m_state_Attribute_redefinedState->setContainment(false);
 	m_state_Attribute_redefinedState->setResolveProxies(true);
-	m_state_Attribute_redefinedState->setDefaultValueLiteral("");	
+	m_state_Attribute_redefinedState->setDefaultValueLiteral("");
 	
 	m_state_Attribute_redefinedState->_setID(STATE_ATTRIBUTE_REDEFINEDSTATE);
 	m_state_Attribute_region->setName("region");
@@ -18242,7 +18242,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_region->setOrdered(false);
 	m_state_Attribute_region->setContainment(true);
 	m_state_Attribute_region->setResolveProxies(true);
-	m_state_Attribute_region->setDefaultValueLiteral("");	
+	m_state_Attribute_region->setDefaultValueLiteral("");
 	m_state_Attribute_region->setEOpposite(uml::umlPackage::eInstance()->getRegion_Attribute_state());
 	
 	m_state_Attribute_region->_setID(STATE_ATTRIBUTE_REGION);
@@ -18259,7 +18259,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_stateInvariant->setOrdered(false);
 	m_state_Attribute_stateInvariant->setContainment(false);
 	m_state_Attribute_stateInvariant->setResolveProxies(true);
-	m_state_Attribute_stateInvariant->setDefaultValueLiteral("");	
+	m_state_Attribute_stateInvariant->setDefaultValueLiteral("");
 	
 	m_state_Attribute_stateInvariant->_setID(STATE_ATTRIBUTE_STATEINVARIANT);
 	m_state_Attribute_submachine->setName("submachine");
@@ -18275,7 +18275,7 @@ void umlPackageImpl::initializeStateContent()
 	m_state_Attribute_submachine->setOrdered(false);
 	m_state_Attribute_submachine->setContainment(false);
 	m_state_Attribute_submachine->setResolveProxies(true);
-	m_state_Attribute_submachine->setDefaultValueLiteral("");	
+	m_state_Attribute_submachine->setDefaultValueLiteral("");
 	m_state_Attribute_submachine->setEOpposite(uml::umlPackage::eInstance()->getStateMachine_Attribute_submachineState());
 	
 	m_state_Attribute_submachine->_setID(STATE_ATTRIBUTE_SUBMACHINE);
@@ -18364,7 +18364,7 @@ void umlPackageImpl::initializeStateInvariantContent()
 	m_stateInvariant_Attribute_invariant->setOrdered(false);
 	m_stateInvariant_Attribute_invariant->setContainment(true);
 	m_stateInvariant_Attribute_invariant->setResolveProxies(true);
-	m_stateInvariant_Attribute_invariant->setDefaultValueLiteral("");	
+	m_stateInvariant_Attribute_invariant->setDefaultValueLiteral("");
 	
 	m_stateInvariant_Attribute_invariant->_setID(STATEINVARIANT_ATTRIBUTE_INVARIANT);
 	
@@ -18402,7 +18402,7 @@ void umlPackageImpl::initializeStateMachineContent()
 	m_stateMachine_Attribute_connectionPoint->setOrdered(false);
 	m_stateMachine_Attribute_connectionPoint->setContainment(true);
 	m_stateMachine_Attribute_connectionPoint->setResolveProxies(true);
-	m_stateMachine_Attribute_connectionPoint->setDefaultValueLiteral("");	
+	m_stateMachine_Attribute_connectionPoint->setDefaultValueLiteral("");
 	m_stateMachine_Attribute_connectionPoint->setEOpposite(uml::umlPackage::eInstance()->getPseudostate_Attribute_stateMachine());
 	
 	m_stateMachine_Attribute_connectionPoint->_setID(STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT);
@@ -18419,7 +18419,7 @@ void umlPackageImpl::initializeStateMachineContent()
 	m_stateMachine_Attribute_extendedStateMachine->setOrdered(false);
 	m_stateMachine_Attribute_extendedStateMachine->setContainment(false);
 	m_stateMachine_Attribute_extendedStateMachine->setResolveProxies(true);
-	m_stateMachine_Attribute_extendedStateMachine->setDefaultValueLiteral("");	
+	m_stateMachine_Attribute_extendedStateMachine->setDefaultValueLiteral("");
 	
 	m_stateMachine_Attribute_extendedStateMachine->_setID(STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE);
 	m_stateMachine_Attribute_region->setName("region");
@@ -18435,7 +18435,7 @@ void umlPackageImpl::initializeStateMachineContent()
 	m_stateMachine_Attribute_region->setOrdered(false);
 	m_stateMachine_Attribute_region->setContainment(true);
 	m_stateMachine_Attribute_region->setResolveProxies(true);
-	m_stateMachine_Attribute_region->setDefaultValueLiteral("");	
+	m_stateMachine_Attribute_region->setDefaultValueLiteral("");
 	m_stateMachine_Attribute_region->setEOpposite(uml::umlPackage::eInstance()->getRegion_Attribute_stateMachine());
 	
 	m_stateMachine_Attribute_region->_setID(STATEMACHINE_ATTRIBUTE_REGION);
@@ -18452,7 +18452,7 @@ void umlPackageImpl::initializeStateMachineContent()
 	m_stateMachine_Attribute_submachineState->setOrdered(false);
 	m_stateMachine_Attribute_submachineState->setContainment(false);
 	m_stateMachine_Attribute_submachineState->setResolveProxies(true);
-	m_stateMachine_Attribute_submachineState->setDefaultValueLiteral("");	
+	m_stateMachine_Attribute_submachineState->setDefaultValueLiteral("");
 	m_stateMachine_Attribute_submachineState->setEOpposite(uml::umlPackage::eInstance()->getState_Attribute_submachine());
 	
 	m_stateMachine_Attribute_submachineState->_setID(STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE);
@@ -18578,7 +18578,7 @@ void umlPackageImpl::initializeStereotypeContent()
 	m_stereotype_Attribute_icon->setOrdered(false);
 	m_stereotype_Attribute_icon->setContainment(true);
 	m_stereotype_Attribute_icon->setResolveProxies(true);
-	m_stereotype_Attribute_icon->setDefaultValueLiteral("");	
+	m_stereotype_Attribute_icon->setDefaultValueLiteral("");
 	
 	m_stereotype_Attribute_icon->_setID(STEREOTYPE_ATTRIBUTE_ICON);
 	m_stereotype_Attribute_profile->setName("profile");
@@ -18594,7 +18594,7 @@ void umlPackageImpl::initializeStereotypeContent()
 	m_stereotype_Attribute_profile->setOrdered(false);
 	m_stereotype_Attribute_profile->setContainment(false);
 	m_stereotype_Attribute_profile->setResolveProxies(true);
-	m_stereotype_Attribute_profile->setDefaultValueLiteral("");	
+	m_stereotype_Attribute_profile->setDefaultValueLiteral("");
 	
 	m_stereotype_Attribute_profile->_setID(STEREOTYPE_ATTRIBUTE_PROFILE);
 	
@@ -18788,7 +18788,7 @@ void umlPackageImpl::initializeStringExpressionContent()
 	m_stringExpression_Attribute_owningExpression->setOrdered(false);
 	m_stringExpression_Attribute_owningExpression->setContainment(false);
 	m_stringExpression_Attribute_owningExpression->setResolveProxies(true);
-	m_stringExpression_Attribute_owningExpression->setDefaultValueLiteral("");	
+	m_stringExpression_Attribute_owningExpression->setDefaultValueLiteral("");
 	m_stringExpression_Attribute_owningExpression->setEOpposite(uml::umlPackage::eInstance()->getStringExpression_Attribute_subExpression());
 	
 	m_stringExpression_Attribute_owningExpression->_setID(STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION);
@@ -18805,7 +18805,7 @@ void umlPackageImpl::initializeStringExpressionContent()
 	m_stringExpression_Attribute_subExpression->setOrdered(true);
 	m_stringExpression_Attribute_subExpression->setContainment(true);
 	m_stringExpression_Attribute_subExpression->setResolveProxies(true);
-	m_stringExpression_Attribute_subExpression->setDefaultValueLiteral("");	
+	m_stringExpression_Attribute_subExpression->setDefaultValueLiteral("");
 	m_stringExpression_Attribute_subExpression->setEOpposite(uml::umlPackage::eInstance()->getStringExpression_Attribute_owningExpression());
 	
 	m_stringExpression_Attribute_subExpression->_setID(STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION);
@@ -18882,7 +18882,7 @@ void umlPackageImpl::initializeStructuralFeatureActionContent()
 	m_structuralFeatureAction_Attribute_object->setOrdered(false);
 	m_structuralFeatureAction_Attribute_object->setContainment(true);
 	m_structuralFeatureAction_Attribute_object->setResolveProxies(true);
-	m_structuralFeatureAction_Attribute_object->setDefaultValueLiteral("");	
+	m_structuralFeatureAction_Attribute_object->setDefaultValueLiteral("");
 	m_structuralFeatureAction_Attribute_object->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_structuralFeatureAction());
 	
 	m_structuralFeatureAction_Attribute_object->_setID(STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT);
@@ -18899,7 +18899,7 @@ void umlPackageImpl::initializeStructuralFeatureActionContent()
 	m_structuralFeatureAction_Attribute_structuralFeature->setOrdered(false);
 	m_structuralFeatureAction_Attribute_structuralFeature->setContainment(false);
 	m_structuralFeatureAction_Attribute_structuralFeature->setResolveProxies(true);
-	m_structuralFeatureAction_Attribute_structuralFeature->setDefaultValueLiteral("");	
+	m_structuralFeatureAction_Attribute_structuralFeature->setDefaultValueLiteral("");
 	
 	m_structuralFeatureAction_Attribute_structuralFeature->_setID(STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE);
 	
@@ -18953,7 +18953,7 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	m_structuredActivityNode_Attribute_edge->setOrdered(false);
 	m_structuredActivityNode_Attribute_edge->setContainment(true);
 	m_structuredActivityNode_Attribute_edge->setResolveProxies(true);
-	m_structuredActivityNode_Attribute_edge->setDefaultValueLiteral("");	
+	m_structuredActivityNode_Attribute_edge->setDefaultValueLiteral("");
 	m_structuredActivityNode_Attribute_edge->setEOpposite(uml::umlPackage::eInstance()->getActivityEdge_Attribute_inStructuredNode());
 	
 	m_structuredActivityNode_Attribute_edge->_setID(STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE);
@@ -18970,7 +18970,7 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	m_structuredActivityNode_Attribute_node->setOrdered(false);
 	m_structuredActivityNode_Attribute_node->setContainment(true);
 	m_structuredActivityNode_Attribute_node->setResolveProxies(true);
-	m_structuredActivityNode_Attribute_node->setDefaultValueLiteral("");	
+	m_structuredActivityNode_Attribute_node->setDefaultValueLiteral("");
 	m_structuredActivityNode_Attribute_node->setEOpposite(uml::umlPackage::eInstance()->getActivityNode_Attribute_inStructuredNode());
 	
 	m_structuredActivityNode_Attribute_node->_setID(STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE);
@@ -18987,7 +18987,7 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	m_structuredActivityNode_Attribute_structuredNodeInput->setOrdered(false);
 	m_structuredActivityNode_Attribute_structuredNodeInput->setContainment(true);
 	m_structuredActivityNode_Attribute_structuredNodeInput->setResolveProxies(true);
-	m_structuredActivityNode_Attribute_structuredNodeInput->setDefaultValueLiteral("");	
+	m_structuredActivityNode_Attribute_structuredNodeInput->setDefaultValueLiteral("");
 	
 	m_structuredActivityNode_Attribute_structuredNodeInput->_setID(STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT);
 	m_structuredActivityNode_Attribute_structuredNodeOutput->setName("structuredNodeOutput");
@@ -19003,7 +19003,7 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	m_structuredActivityNode_Attribute_structuredNodeOutput->setOrdered(false);
 	m_structuredActivityNode_Attribute_structuredNodeOutput->setContainment(true);
 	m_structuredActivityNode_Attribute_structuredNodeOutput->setResolveProxies(true);
-	m_structuredActivityNode_Attribute_structuredNodeOutput->setDefaultValueLiteral("");	
+	m_structuredActivityNode_Attribute_structuredNodeOutput->setDefaultValueLiteral("");
 	
 	m_structuredActivityNode_Attribute_structuredNodeOutput->_setID(STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT);
 	m_structuredActivityNode_Attribute_variable->setName("variable");
@@ -19019,7 +19019,7 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	m_structuredActivityNode_Attribute_variable->setOrdered(false);
 	m_structuredActivityNode_Attribute_variable->setContainment(true);
 	m_structuredActivityNode_Attribute_variable->setResolveProxies(true);
-	m_structuredActivityNode_Attribute_variable->setDefaultValueLiteral("");	
+	m_structuredActivityNode_Attribute_variable->setDefaultValueLiteral("");
 	m_structuredActivityNode_Attribute_variable->setEOpposite(uml::umlPackage::eInstance()->getVariable_Attribute_scope());
 	
 	m_structuredActivityNode_Attribute_variable->_setID(STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE);
@@ -19078,7 +19078,7 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	m_structuredClassifier_Attribute_ownedAttribute->setOrdered(true);
 	m_structuredClassifier_Attribute_ownedAttribute->setContainment(true);
 	m_structuredClassifier_Attribute_ownedAttribute->setResolveProxies(true);
-	m_structuredClassifier_Attribute_ownedAttribute->setDefaultValueLiteral("");	
+	m_structuredClassifier_Attribute_ownedAttribute->setDefaultValueLiteral("");
 	
 	m_structuredClassifier_Attribute_ownedAttribute->_setID(STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE);
 	m_structuredClassifier_Attribute_ownedConnector->setName("ownedConnector");
@@ -19094,7 +19094,7 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	m_structuredClassifier_Attribute_ownedConnector->setOrdered(false);
 	m_structuredClassifier_Attribute_ownedConnector->setContainment(true);
 	m_structuredClassifier_Attribute_ownedConnector->setResolveProxies(true);
-	m_structuredClassifier_Attribute_ownedConnector->setDefaultValueLiteral("");	
+	m_structuredClassifier_Attribute_ownedConnector->setDefaultValueLiteral("");
 	m_structuredClassifier_Attribute_ownedConnector->setEOpposite(uml::umlPackage::eInstance()->getConnector_Attribute_structuredClassifier());
 	
 	m_structuredClassifier_Attribute_ownedConnector->_setID(STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR);
@@ -19111,7 +19111,7 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	m_structuredClassifier_Attribute_part->setOrdered(false);
 	m_structuredClassifier_Attribute_part->setContainment(false);
 	m_structuredClassifier_Attribute_part->setResolveProxies(true);
-	m_structuredClassifier_Attribute_part->setDefaultValueLiteral("");	
+	m_structuredClassifier_Attribute_part->setDefaultValueLiteral("");
 	
 	m_structuredClassifier_Attribute_part->_setID(STRUCTUREDCLASSIFIER_ATTRIBUTE_PART);
 	m_structuredClassifier_Attribute_role->setName("role");
@@ -19127,7 +19127,7 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 	m_structuredClassifier_Attribute_role->setOrdered(false);
 	m_structuredClassifier_Attribute_role->setContainment(false);
 	m_structuredClassifier_Attribute_role->setResolveProxies(true);
-	m_structuredClassifier_Attribute_role->setDefaultValueLiteral("");	
+	m_structuredClassifier_Attribute_role->setDefaultValueLiteral("");
 	
 	m_structuredClassifier_Attribute_role->_setID(STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE);
 	
@@ -19234,7 +19234,7 @@ void umlPackageImpl::initializeSubstitutionContent()
 	m_substitution_Attribute_contract->setOrdered(false);
 	m_substitution_Attribute_contract->setContainment(false);
 	m_substitution_Attribute_contract->setResolveProxies(true);
-	m_substitution_Attribute_contract->setDefaultValueLiteral("");	
+	m_substitution_Attribute_contract->setDefaultValueLiteral("");
 	
 	m_substitution_Attribute_contract->_setID(SUBSTITUTION_ATTRIBUTE_CONTRACT);
 	m_substitution_Attribute_substitutingClassifier->setName("substitutingClassifier");
@@ -19250,7 +19250,7 @@ void umlPackageImpl::initializeSubstitutionContent()
 	m_substitution_Attribute_substitutingClassifier->setOrdered(false);
 	m_substitution_Attribute_substitutingClassifier->setContainment(false);
 	m_substitution_Attribute_substitutingClassifier->setResolveProxies(true);
-	m_substitution_Attribute_substitutingClassifier->setDefaultValueLiteral("");	
+	m_substitution_Attribute_substitutingClassifier->setDefaultValueLiteral("");
 	m_substitution_Attribute_substitutingClassifier->setEOpposite(uml::umlPackage::eInstance()->getClassifier_Attribute_substitution());
 	
 	m_substitution_Attribute_substitutingClassifier->_setID(SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER);
@@ -19289,7 +19289,7 @@ void umlPackageImpl::initializeTemplateBindingContent()
 	m_templateBinding_Attribute_boundElement->setOrdered(false);
 	m_templateBinding_Attribute_boundElement->setContainment(false);
 	m_templateBinding_Attribute_boundElement->setResolveProxies(true);
-	m_templateBinding_Attribute_boundElement->setDefaultValueLiteral("");	
+	m_templateBinding_Attribute_boundElement->setDefaultValueLiteral("");
 	m_templateBinding_Attribute_boundElement->setEOpposite(uml::umlPackage::eInstance()->getTemplateableElement_Attribute_templateBinding());
 	
 	m_templateBinding_Attribute_boundElement->_setID(TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT);
@@ -19306,7 +19306,7 @@ void umlPackageImpl::initializeTemplateBindingContent()
 	m_templateBinding_Attribute_parameterSubstitution->setOrdered(false);
 	m_templateBinding_Attribute_parameterSubstitution->setContainment(true);
 	m_templateBinding_Attribute_parameterSubstitution->setResolveProxies(true);
-	m_templateBinding_Attribute_parameterSubstitution->setDefaultValueLiteral("");	
+	m_templateBinding_Attribute_parameterSubstitution->setDefaultValueLiteral("");
 	m_templateBinding_Attribute_parameterSubstitution->setEOpposite(uml::umlPackage::eInstance()->getTemplateParameterSubstitution_Attribute_templateBinding());
 	
 	m_templateBinding_Attribute_parameterSubstitution->_setID(TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION);
@@ -19323,7 +19323,7 @@ void umlPackageImpl::initializeTemplateBindingContent()
 	m_templateBinding_Attribute_signature->setOrdered(false);
 	m_templateBinding_Attribute_signature->setContainment(false);
 	m_templateBinding_Attribute_signature->setResolveProxies(true);
-	m_templateBinding_Attribute_signature->setDefaultValueLiteral("");	
+	m_templateBinding_Attribute_signature->setDefaultValueLiteral("");
 	
 	m_templateBinding_Attribute_signature->_setID(TEMPLATEBINDING_ATTRIBUTE_SIGNATURE);
 	
@@ -19361,7 +19361,7 @@ void umlPackageImpl::initializeTemplateParameterContent()
 	m_templateParameter_Attribute_default->setOrdered(false);
 	m_templateParameter_Attribute_default->setContainment(false);
 	m_templateParameter_Attribute_default->setResolveProxies(true);
-	m_templateParameter_Attribute_default->setDefaultValueLiteral("");	
+	m_templateParameter_Attribute_default->setDefaultValueLiteral("");
 	
 	m_templateParameter_Attribute_default->_setID(TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT);
 	m_templateParameter_Attribute_ownedDefault->setName("ownedDefault");
@@ -19377,7 +19377,7 @@ void umlPackageImpl::initializeTemplateParameterContent()
 	m_templateParameter_Attribute_ownedDefault->setOrdered(false);
 	m_templateParameter_Attribute_ownedDefault->setContainment(true);
 	m_templateParameter_Attribute_ownedDefault->setResolveProxies(true);
-	m_templateParameter_Attribute_ownedDefault->setDefaultValueLiteral("");	
+	m_templateParameter_Attribute_ownedDefault->setDefaultValueLiteral("");
 	
 	m_templateParameter_Attribute_ownedDefault->_setID(TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT);
 	m_templateParameter_Attribute_ownedParameteredElement->setName("ownedParameteredElement");
@@ -19393,7 +19393,7 @@ void umlPackageImpl::initializeTemplateParameterContent()
 	m_templateParameter_Attribute_ownedParameteredElement->setOrdered(false);
 	m_templateParameter_Attribute_ownedParameteredElement->setContainment(true);
 	m_templateParameter_Attribute_ownedParameteredElement->setResolveProxies(true);
-	m_templateParameter_Attribute_ownedParameteredElement->setDefaultValueLiteral("");	
+	m_templateParameter_Attribute_ownedParameteredElement->setDefaultValueLiteral("");
 	m_templateParameter_Attribute_ownedParameteredElement->setEOpposite(uml::umlPackage::eInstance()->getParameterableElement_Attribute_owningTemplateParameter());
 	
 	m_templateParameter_Attribute_ownedParameteredElement->_setID(TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT);
@@ -19410,7 +19410,7 @@ void umlPackageImpl::initializeTemplateParameterContent()
 	m_templateParameter_Attribute_parameteredElement->setOrdered(false);
 	m_templateParameter_Attribute_parameteredElement->setContainment(false);
 	m_templateParameter_Attribute_parameteredElement->setResolveProxies(true);
-	m_templateParameter_Attribute_parameteredElement->setDefaultValueLiteral("");	
+	m_templateParameter_Attribute_parameteredElement->setDefaultValueLiteral("");
 	m_templateParameter_Attribute_parameteredElement->setEOpposite(uml::umlPackage::eInstance()->getParameterableElement_Attribute_templateParameter());
 	
 	m_templateParameter_Attribute_parameteredElement->_setID(TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT);
@@ -19427,7 +19427,7 @@ void umlPackageImpl::initializeTemplateParameterContent()
 	m_templateParameter_Attribute_signature->setOrdered(false);
 	m_templateParameter_Attribute_signature->setContainment(false);
 	m_templateParameter_Attribute_signature->setResolveProxies(true);
-	m_templateParameter_Attribute_signature->setDefaultValueLiteral("");	
+	m_templateParameter_Attribute_signature->setDefaultValueLiteral("");
 	m_templateParameter_Attribute_signature->setEOpposite(uml::umlPackage::eInstance()->getTemplateSignature_Attribute_ownedParameter());
 	
 	m_templateParameter_Attribute_signature->_setID(TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE);
@@ -19466,7 +19466,7 @@ void umlPackageImpl::initializeTemplateParameterSubstitutionContent()
 	m_templateParameterSubstitution_Attribute_actual->setOrdered(false);
 	m_templateParameterSubstitution_Attribute_actual->setContainment(false);
 	m_templateParameterSubstitution_Attribute_actual->setResolveProxies(true);
-	m_templateParameterSubstitution_Attribute_actual->setDefaultValueLiteral("");	
+	m_templateParameterSubstitution_Attribute_actual->setDefaultValueLiteral("");
 	
 	m_templateParameterSubstitution_Attribute_actual->_setID(TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL);
 	m_templateParameterSubstitution_Attribute_formal->setName("formal");
@@ -19482,7 +19482,7 @@ void umlPackageImpl::initializeTemplateParameterSubstitutionContent()
 	m_templateParameterSubstitution_Attribute_formal->setOrdered(false);
 	m_templateParameterSubstitution_Attribute_formal->setContainment(false);
 	m_templateParameterSubstitution_Attribute_formal->setResolveProxies(true);
-	m_templateParameterSubstitution_Attribute_formal->setDefaultValueLiteral("");	
+	m_templateParameterSubstitution_Attribute_formal->setDefaultValueLiteral("");
 	
 	m_templateParameterSubstitution_Attribute_formal->_setID(TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL);
 	m_templateParameterSubstitution_Attribute_ownedActual->setName("ownedActual");
@@ -19498,7 +19498,7 @@ void umlPackageImpl::initializeTemplateParameterSubstitutionContent()
 	m_templateParameterSubstitution_Attribute_ownedActual->setOrdered(false);
 	m_templateParameterSubstitution_Attribute_ownedActual->setContainment(true);
 	m_templateParameterSubstitution_Attribute_ownedActual->setResolveProxies(true);
-	m_templateParameterSubstitution_Attribute_ownedActual->setDefaultValueLiteral("");	
+	m_templateParameterSubstitution_Attribute_ownedActual->setDefaultValueLiteral("");
 	
 	m_templateParameterSubstitution_Attribute_ownedActual->_setID(TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL);
 	m_templateParameterSubstitution_Attribute_templateBinding->setName("templateBinding");
@@ -19514,7 +19514,7 @@ void umlPackageImpl::initializeTemplateParameterSubstitutionContent()
 	m_templateParameterSubstitution_Attribute_templateBinding->setOrdered(false);
 	m_templateParameterSubstitution_Attribute_templateBinding->setContainment(false);
 	m_templateParameterSubstitution_Attribute_templateBinding->setResolveProxies(true);
-	m_templateParameterSubstitution_Attribute_templateBinding->setDefaultValueLiteral("");	
+	m_templateParameterSubstitution_Attribute_templateBinding->setDefaultValueLiteral("");
 	m_templateParameterSubstitution_Attribute_templateBinding->setEOpposite(uml::umlPackage::eInstance()->getTemplateBinding_Attribute_parameterSubstitution());
 	
 	m_templateParameterSubstitution_Attribute_templateBinding->_setID(TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING);
@@ -19553,7 +19553,7 @@ void umlPackageImpl::initializeTemplateSignatureContent()
 	m_templateSignature_Attribute_ownedParameter->setOrdered(true);
 	m_templateSignature_Attribute_ownedParameter->setContainment(true);
 	m_templateSignature_Attribute_ownedParameter->setResolveProxies(true);
-	m_templateSignature_Attribute_ownedParameter->setDefaultValueLiteral("");	
+	m_templateSignature_Attribute_ownedParameter->setDefaultValueLiteral("");
 	m_templateSignature_Attribute_ownedParameter->setEOpposite(uml::umlPackage::eInstance()->getTemplateParameter_Attribute_signature());
 	
 	m_templateSignature_Attribute_ownedParameter->_setID(TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER);
@@ -19570,7 +19570,7 @@ void umlPackageImpl::initializeTemplateSignatureContent()
 	m_templateSignature_Attribute_parameter->setOrdered(true);
 	m_templateSignature_Attribute_parameter->setContainment(false);
 	m_templateSignature_Attribute_parameter->setResolveProxies(true);
-	m_templateSignature_Attribute_parameter->setDefaultValueLiteral("");	
+	m_templateSignature_Attribute_parameter->setDefaultValueLiteral("");
 	
 	m_templateSignature_Attribute_parameter->_setID(TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER);
 	m_templateSignature_Attribute_template->setName("template");
@@ -19586,7 +19586,7 @@ void umlPackageImpl::initializeTemplateSignatureContent()
 	m_templateSignature_Attribute_template->setOrdered(false);
 	m_templateSignature_Attribute_template->setContainment(false);
 	m_templateSignature_Attribute_template->setResolveProxies(true);
-	m_templateSignature_Attribute_template->setDefaultValueLiteral("");	
+	m_templateSignature_Attribute_template->setDefaultValueLiteral("");
 	m_templateSignature_Attribute_template->setEOpposite(uml::umlPackage::eInstance()->getTemplateableElement_Attribute_ownedTemplateSignature());
 	
 	m_templateSignature_Attribute_template->_setID(TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE);
@@ -19625,7 +19625,7 @@ void umlPackageImpl::initializeTemplateableElementContent()
 	m_templateableElement_Attribute_ownedTemplateSignature->setOrdered(false);
 	m_templateableElement_Attribute_ownedTemplateSignature->setContainment(true);
 	m_templateableElement_Attribute_ownedTemplateSignature->setResolveProxies(true);
-	m_templateableElement_Attribute_ownedTemplateSignature->setDefaultValueLiteral("");	
+	m_templateableElement_Attribute_ownedTemplateSignature->setDefaultValueLiteral("");
 	m_templateableElement_Attribute_ownedTemplateSignature->setEOpposite(uml::umlPackage::eInstance()->getTemplateSignature_Attribute_template());
 	
 	m_templateableElement_Attribute_ownedTemplateSignature->_setID(TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE);
@@ -19642,7 +19642,7 @@ void umlPackageImpl::initializeTemplateableElementContent()
 	m_templateableElement_Attribute_templateBinding->setOrdered(false);
 	m_templateableElement_Attribute_templateBinding->setContainment(true);
 	m_templateableElement_Attribute_templateBinding->setResolveProxies(true);
-	m_templateableElement_Attribute_templateBinding->setDefaultValueLiteral("");	
+	m_templateableElement_Attribute_templateBinding->setDefaultValueLiteral("");
 	m_templateableElement_Attribute_templateBinding->setEOpposite(uml::umlPackage::eInstance()->getTemplateBinding_Attribute_boundElement());
 	
 	m_templateableElement_Attribute_templateBinding->_setID(TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING);
@@ -19701,7 +19701,7 @@ void umlPackageImpl::initializeTestIdentityActionContent()
 	m_testIdentityAction_Attribute_first->setOrdered(false);
 	m_testIdentityAction_Attribute_first->setContainment(true);
 	m_testIdentityAction_Attribute_first->setResolveProxies(true);
-	m_testIdentityAction_Attribute_first->setDefaultValueLiteral("");	
+	m_testIdentityAction_Attribute_first->setDefaultValueLiteral("");
 	
 	m_testIdentityAction_Attribute_first->_setID(TESTIDENTITYACTION_ATTRIBUTE_FIRST);
 	m_testIdentityAction_Attribute_result->setName("result");
@@ -19717,7 +19717,7 @@ void umlPackageImpl::initializeTestIdentityActionContent()
 	m_testIdentityAction_Attribute_result->setOrdered(false);
 	m_testIdentityAction_Attribute_result->setContainment(true);
 	m_testIdentityAction_Attribute_result->setResolveProxies(true);
-	m_testIdentityAction_Attribute_result->setDefaultValueLiteral("");	
+	m_testIdentityAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_testIdentityAction_Attribute_result->_setID(TESTIDENTITYACTION_ATTRIBUTE_RESULT);
 	m_testIdentityAction_Attribute_second->setName("second");
@@ -19733,7 +19733,7 @@ void umlPackageImpl::initializeTestIdentityActionContent()
 	m_testIdentityAction_Attribute_second->setOrdered(false);
 	m_testIdentityAction_Attribute_second->setContainment(true);
 	m_testIdentityAction_Attribute_second->setResolveProxies(true);
-	m_testIdentityAction_Attribute_second->setDefaultValueLiteral("");	
+	m_testIdentityAction_Attribute_second->setDefaultValueLiteral("");
 	
 	m_testIdentityAction_Attribute_second->_setID(TESTIDENTITYACTION_ATTRIBUTE_SECOND);
 	
@@ -19825,7 +19825,7 @@ void umlPackageImpl::initializeTimeEventContent()
 	m_timeEvent_Attribute_when->setOrdered(false);
 	m_timeEvent_Attribute_when->setContainment(true);
 	m_timeEvent_Attribute_when->setResolveProxies(true);
-	m_timeEvent_Attribute_when->setDefaultValueLiteral("");	
+	m_timeEvent_Attribute_when->setDefaultValueLiteral("");
 	
 	m_timeEvent_Attribute_when->_setID(TIMEEVENT_ATTRIBUTE_WHEN);
 	
@@ -19863,7 +19863,7 @@ void umlPackageImpl::initializeTimeExpressionContent()
 	m_timeExpression_Attribute_expr->setOrdered(false);
 	m_timeExpression_Attribute_expr->setContainment(true);
 	m_timeExpression_Attribute_expr->setResolveProxies(true);
-	m_timeExpression_Attribute_expr->setDefaultValueLiteral("");	
+	m_timeExpression_Attribute_expr->setDefaultValueLiteral("");
 	
 	m_timeExpression_Attribute_expr->_setID(TIMEEXPRESSION_ATTRIBUTE_EXPR);
 	m_timeExpression_Attribute_observation->setName("observation");
@@ -19879,7 +19879,7 @@ void umlPackageImpl::initializeTimeExpressionContent()
 	m_timeExpression_Attribute_observation->setOrdered(false);
 	m_timeExpression_Attribute_observation->setContainment(false);
 	m_timeExpression_Attribute_observation->setResolveProxies(true);
-	m_timeExpression_Attribute_observation->setDefaultValueLiteral("");	
+	m_timeExpression_Attribute_observation->setDefaultValueLiteral("");
 	
 	m_timeExpression_Attribute_observation->_setID(TIMEEXPRESSION_ATTRIBUTE_OBSERVATION);
 	
@@ -19955,7 +19955,7 @@ void umlPackageImpl::initializeTimeObservationContent()
 	m_timeObservation_Attribute_event->setOrdered(false);
 	m_timeObservation_Attribute_event->setContainment(false);
 	m_timeObservation_Attribute_event->setResolveProxies(true);
-	m_timeObservation_Attribute_event->setDefaultValueLiteral("");	
+	m_timeObservation_Attribute_event->setDefaultValueLiteral("");
 	
 	m_timeObservation_Attribute_event->_setID(TIMEOBSERVATION_ATTRIBUTE_EVENT);
 	
@@ -20009,7 +20009,7 @@ void umlPackageImpl::initializeTransitionContent()
 	m_transition_Attribute_container->setOrdered(false);
 	m_transition_Attribute_container->setContainment(false);
 	m_transition_Attribute_container->setResolveProxies(true);
-	m_transition_Attribute_container->setDefaultValueLiteral("");	
+	m_transition_Attribute_container->setDefaultValueLiteral("");
 	m_transition_Attribute_container->setEOpposite(uml::umlPackage::eInstance()->getRegion_Attribute_transition());
 	
 	m_transition_Attribute_container->_setID(TRANSITION_ATTRIBUTE_CONTAINER);
@@ -20026,7 +20026,7 @@ void umlPackageImpl::initializeTransitionContent()
 	m_transition_Attribute_effect->setOrdered(false);
 	m_transition_Attribute_effect->setContainment(true);
 	m_transition_Attribute_effect->setResolveProxies(true);
-	m_transition_Attribute_effect->setDefaultValueLiteral("");	
+	m_transition_Attribute_effect->setDefaultValueLiteral("");
 	
 	m_transition_Attribute_effect->_setID(TRANSITION_ATTRIBUTE_EFFECT);
 	m_transition_Attribute_guard->setName("guard");
@@ -20042,7 +20042,7 @@ void umlPackageImpl::initializeTransitionContent()
 	m_transition_Attribute_guard->setOrdered(false);
 	m_transition_Attribute_guard->setContainment(false);
 	m_transition_Attribute_guard->setResolveProxies(true);
-	m_transition_Attribute_guard->setDefaultValueLiteral("");	
+	m_transition_Attribute_guard->setDefaultValueLiteral("");
 	
 	m_transition_Attribute_guard->_setID(TRANSITION_ATTRIBUTE_GUARD);
 	m_transition_Attribute_redefinedTransition->setName("redefinedTransition");
@@ -20058,7 +20058,7 @@ void umlPackageImpl::initializeTransitionContent()
 	m_transition_Attribute_redefinedTransition->setOrdered(false);
 	m_transition_Attribute_redefinedTransition->setContainment(false);
 	m_transition_Attribute_redefinedTransition->setResolveProxies(true);
-	m_transition_Attribute_redefinedTransition->setDefaultValueLiteral("");	
+	m_transition_Attribute_redefinedTransition->setDefaultValueLiteral("");
 	
 	m_transition_Attribute_redefinedTransition->_setID(TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION);
 	m_transition_Attribute_source->setName("source");
@@ -20074,7 +20074,7 @@ void umlPackageImpl::initializeTransitionContent()
 	m_transition_Attribute_source->setOrdered(false);
 	m_transition_Attribute_source->setContainment(false);
 	m_transition_Attribute_source->setResolveProxies(true);
-	m_transition_Attribute_source->setDefaultValueLiteral("");	
+	m_transition_Attribute_source->setDefaultValueLiteral("");
 	
 	m_transition_Attribute_source->_setID(TRANSITION_ATTRIBUTE_SOURCE);
 	m_transition_Attribute_target->setName("target");
@@ -20090,7 +20090,7 @@ void umlPackageImpl::initializeTransitionContent()
 	m_transition_Attribute_target->setOrdered(false);
 	m_transition_Attribute_target->setContainment(false);
 	m_transition_Attribute_target->setResolveProxies(true);
-	m_transition_Attribute_target->setDefaultValueLiteral("");	
+	m_transition_Attribute_target->setDefaultValueLiteral("");
 	
 	m_transition_Attribute_target->_setID(TRANSITION_ATTRIBUTE_TARGET);
 	m_transition_Attribute_trigger->setName("trigger");
@@ -20106,7 +20106,7 @@ void umlPackageImpl::initializeTransitionContent()
 	m_transition_Attribute_trigger->setOrdered(false);
 	m_transition_Attribute_trigger->setContainment(true);
 	m_transition_Attribute_trigger->setResolveProxies(true);
-	m_transition_Attribute_trigger->setDefaultValueLiteral("");	
+	m_transition_Attribute_trigger->setDefaultValueLiteral("");
 	
 	m_transition_Attribute_trigger->_setID(TRANSITION_ATTRIBUTE_TRIGGER);
 	
@@ -20164,7 +20164,7 @@ void umlPackageImpl::initializeTriggerContent()
 	m_trigger_Attribute_event->setOrdered(false);
 	m_trigger_Attribute_event->setContainment(false);
 	m_trigger_Attribute_event->setResolveProxies(true);
-	m_trigger_Attribute_event->setDefaultValueLiteral("");	
+	m_trigger_Attribute_event->setDefaultValueLiteral("");
 	
 	m_trigger_Attribute_event->_setID(TRIGGER_ATTRIBUTE_EVENT);
 	m_trigger_Attribute_port->setName("port");
@@ -20180,7 +20180,7 @@ void umlPackageImpl::initializeTriggerContent()
 	m_trigger_Attribute_port->setOrdered(false);
 	m_trigger_Attribute_port->setContainment(false);
 	m_trigger_Attribute_port->setResolveProxies(true);
-	m_trigger_Attribute_port->setDefaultValueLiteral("");	
+	m_trigger_Attribute_port->setDefaultValueLiteral("");
 	
 	m_trigger_Attribute_port->_setID(TRIGGER_ATTRIBUTE_PORT);
 	
@@ -20218,7 +20218,7 @@ void umlPackageImpl::initializeTypeContent()
 	m_type_Attribute_package->setOrdered(false);
 	m_type_Attribute_package->setContainment(false);
 	m_type_Attribute_package->setResolveProxies(true);
-	m_type_Attribute_package->setDefaultValueLiteral("");	
+	m_type_Attribute_package->setDefaultValueLiteral("");
 	m_type_Attribute_package->setEOpposite(uml::umlPackage::eInstance()->getPackage_Attribute_ownedType());
 	
 	m_type_Attribute_package->_setID(TYPE_ATTRIBUTE_PACKAGE);
@@ -20405,7 +20405,7 @@ void umlPackageImpl::initializeTypedElementContent()
 	m_typedElement_Attribute_type->setOrdered(false);
 	m_typedElement_Attribute_type->setContainment(false);
 	m_typedElement_Attribute_type->setResolveProxies(true);
-	m_typedElement_Attribute_type->setDefaultValueLiteral("");	
+	m_typedElement_Attribute_type->setDefaultValueLiteral("");
 	
 	m_typedElement_Attribute_type->_setID(TYPEDELEMENT_ATTRIBUTE_TYPE);
 	
@@ -20443,7 +20443,7 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 	m_unmarshallAction_Attribute_object->setOrdered(false);
 	m_unmarshallAction_Attribute_object->setContainment(true);
 	m_unmarshallAction_Attribute_object->setResolveProxies(true);
-	m_unmarshallAction_Attribute_object->setDefaultValueLiteral("");	
+	m_unmarshallAction_Attribute_object->setDefaultValueLiteral("");
 	
 	m_unmarshallAction_Attribute_object->_setID(UNMARSHALLACTION_ATTRIBUTE_OBJECT);
 	m_unmarshallAction_Attribute_result->setName("result");
@@ -20459,7 +20459,7 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 	m_unmarshallAction_Attribute_result->setOrdered(true);
 	m_unmarshallAction_Attribute_result->setContainment(true);
 	m_unmarshallAction_Attribute_result->setResolveProxies(true);
-	m_unmarshallAction_Attribute_result->setDefaultValueLiteral("");	
+	m_unmarshallAction_Attribute_result->setDefaultValueLiteral("");
 	
 	m_unmarshallAction_Attribute_result->_setID(UNMARSHALLACTION_ATTRIBUTE_RESULT);
 	m_unmarshallAction_Attribute_unmarshallType->setName("unmarshallType");
@@ -20475,7 +20475,7 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 	m_unmarshallAction_Attribute_unmarshallType->setOrdered(false);
 	m_unmarshallAction_Attribute_unmarshallType->setContainment(false);
 	m_unmarshallAction_Attribute_unmarshallType->setResolveProxies(true);
-	m_unmarshallAction_Attribute_unmarshallType->setDefaultValueLiteral("");	
+	m_unmarshallAction_Attribute_unmarshallType->setDefaultValueLiteral("");
 	
 	m_unmarshallAction_Attribute_unmarshallType->_setID(UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE);
 	
@@ -20535,7 +20535,7 @@ void umlPackageImpl::initializeUseCaseContent()
 	m_useCase_Attribute_extend->setOrdered(false);
 	m_useCase_Attribute_extend->setContainment(true);
 	m_useCase_Attribute_extend->setResolveProxies(true);
-	m_useCase_Attribute_extend->setDefaultValueLiteral("");	
+	m_useCase_Attribute_extend->setDefaultValueLiteral("");
 	m_useCase_Attribute_extend->setEOpposite(uml::umlPackage::eInstance()->getExtend_Attribute_extension());
 	
 	m_useCase_Attribute_extend->_setID(USECASE_ATTRIBUTE_EXTEND);
@@ -20552,7 +20552,7 @@ void umlPackageImpl::initializeUseCaseContent()
 	m_useCase_Attribute_extensionPoint->setOrdered(false);
 	m_useCase_Attribute_extensionPoint->setContainment(true);
 	m_useCase_Attribute_extensionPoint->setResolveProxies(true);
-	m_useCase_Attribute_extensionPoint->setDefaultValueLiteral("");	
+	m_useCase_Attribute_extensionPoint->setDefaultValueLiteral("");
 	m_useCase_Attribute_extensionPoint->setEOpposite(uml::umlPackage::eInstance()->getExtensionPoint_Attribute_useCase());
 	
 	m_useCase_Attribute_extensionPoint->_setID(USECASE_ATTRIBUTE_EXTENSIONPOINT);
@@ -20569,7 +20569,7 @@ void umlPackageImpl::initializeUseCaseContent()
 	m_useCase_Attribute_include->setOrdered(false);
 	m_useCase_Attribute_include->setContainment(true);
 	m_useCase_Attribute_include->setResolveProxies(true);
-	m_useCase_Attribute_include->setDefaultValueLiteral("");	
+	m_useCase_Attribute_include->setDefaultValueLiteral("");
 	m_useCase_Attribute_include->setEOpposite(uml::umlPackage::eInstance()->getInclude_Attribute_includingCase());
 	
 	m_useCase_Attribute_include->_setID(USECASE_ATTRIBUTE_INCLUDE);
@@ -20586,7 +20586,7 @@ void umlPackageImpl::initializeUseCaseContent()
 	m_useCase_Attribute_subject->setOrdered(false);
 	m_useCase_Attribute_subject->setContainment(false);
 	m_useCase_Attribute_subject->setResolveProxies(true);
-	m_useCase_Attribute_subject->setDefaultValueLiteral("");	
+	m_useCase_Attribute_subject->setDefaultValueLiteral("");
 	m_useCase_Attribute_subject->setEOpposite(uml::umlPackage::eInstance()->getClassifier_Attribute_useCase());
 	
 	m_useCase_Attribute_subject->_setID(USECASE_ATTRIBUTE_SUBJECT);
@@ -20635,7 +20635,7 @@ void umlPackageImpl::initializeValuePinContent()
 	m_valuePin_Attribute_value->setOrdered(false);
 	m_valuePin_Attribute_value->setContainment(true);
 	m_valuePin_Attribute_value->setResolveProxies(true);
-	m_valuePin_Attribute_value->setDefaultValueLiteral("");	
+	m_valuePin_Attribute_value->setDefaultValueLiteral("");
 	
 	m_valuePin_Attribute_value->_setID(VALUEPIN_ATTRIBUTE_VALUE);
 	
@@ -20673,7 +20673,7 @@ void umlPackageImpl::initializeValueSpecificationContent()
 	m_valueSpecification_Attribute_owningSlot->setOrdered(true);
 	m_valueSpecification_Attribute_owningSlot->setContainment(false);
 	m_valueSpecification_Attribute_owningSlot->setResolveProxies(true);
-	m_valueSpecification_Attribute_owningSlot->setDefaultValueLiteral("");	
+	m_valueSpecification_Attribute_owningSlot->setDefaultValueLiteral("");
 	m_valueSpecification_Attribute_owningSlot->setEOpposite(uml::umlPackage::eInstance()->getSlot_Attribute_value());
 	
 	m_valueSpecification_Attribute_owningSlot->_setID(VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT);
@@ -20690,7 +20690,7 @@ void umlPackageImpl::initializeValueSpecificationContent()
 	m_valueSpecification_Attribute_valueSpecificationAction->setOrdered(true);
 	m_valueSpecification_Attribute_valueSpecificationAction->setContainment(false);
 	m_valueSpecification_Attribute_valueSpecificationAction->setResolveProxies(true);
-	m_valueSpecification_Attribute_valueSpecificationAction->setDefaultValueLiteral("");	
+	m_valueSpecification_Attribute_valueSpecificationAction->setDefaultValueLiteral("");
 	m_valueSpecification_Attribute_valueSpecificationAction->setEOpposite(uml::umlPackage::eInstance()->getValueSpecificationAction_Attribute_value());
 	
 	m_valueSpecification_Attribute_valueSpecificationAction->_setID(VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION);
@@ -20799,7 +20799,7 @@ void umlPackageImpl::initializeValueSpecificationActionContent()
 	m_valueSpecificationAction_Attribute_result->setOrdered(false);
 	m_valueSpecificationAction_Attribute_result->setContainment(true);
 	m_valueSpecificationAction_Attribute_result->setResolveProxies(true);
-	m_valueSpecificationAction_Attribute_result->setDefaultValueLiteral("");	
+	m_valueSpecificationAction_Attribute_result->setDefaultValueLiteral("");
 	m_valueSpecificationAction_Attribute_result->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_valueSpecificationAction());
 	
 	m_valueSpecificationAction_Attribute_result->_setID(VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT);
@@ -20816,7 +20816,7 @@ void umlPackageImpl::initializeValueSpecificationActionContent()
 	m_valueSpecificationAction_Attribute_value->setOrdered(false);
 	m_valueSpecificationAction_Attribute_value->setContainment(true);
 	m_valueSpecificationAction_Attribute_value->setResolveProxies(true);
-	m_valueSpecificationAction_Attribute_value->setDefaultValueLiteral("");	
+	m_valueSpecificationAction_Attribute_value->setDefaultValueLiteral("");
 	m_valueSpecificationAction_Attribute_value->setEOpposite(uml::umlPackage::eInstance()->getValueSpecification_Attribute_valueSpecificationAction());
 	
 	m_valueSpecificationAction_Attribute_value->_setID(VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE);
@@ -20855,7 +20855,7 @@ void umlPackageImpl::initializeVariableContent()
 	m_variable_Attribute_activityScope->setOrdered(false);
 	m_variable_Attribute_activityScope->setContainment(false);
 	m_variable_Attribute_activityScope->setResolveProxies(true);
-	m_variable_Attribute_activityScope->setDefaultValueLiteral("");	
+	m_variable_Attribute_activityScope->setDefaultValueLiteral("");
 	m_variable_Attribute_activityScope->setEOpposite(uml::umlPackage::eInstance()->getActivity_Attribute_variable());
 	
 	m_variable_Attribute_activityScope->_setID(VARIABLE_ATTRIBUTE_ACTIVITYSCOPE);
@@ -20872,7 +20872,7 @@ void umlPackageImpl::initializeVariableContent()
 	m_variable_Attribute_scope->setOrdered(false);
 	m_variable_Attribute_scope->setContainment(false);
 	m_variable_Attribute_scope->setResolveProxies(true);
-	m_variable_Attribute_scope->setDefaultValueLiteral("");	
+	m_variable_Attribute_scope->setDefaultValueLiteral("");
 	m_variable_Attribute_scope->setEOpposite(uml::umlPackage::eInstance()->getStructuredActivityNode_Attribute_variable());
 	
 	m_variable_Attribute_scope->_setID(VARIABLE_ATTRIBUTE_SCOPE);
@@ -20930,7 +20930,7 @@ void umlPackageImpl::initializeVariableActionContent()
 	m_variableAction_Attribute_variable->setOrdered(false);
 	m_variableAction_Attribute_variable->setContainment(false);
 	m_variableAction_Attribute_variable->setResolveProxies(true);
-	m_variableAction_Attribute_variable->setDefaultValueLiteral("");	
+	m_variableAction_Attribute_variable->setDefaultValueLiteral("");
 	
 	m_variableAction_Attribute_variable->_setID(VARIABLEACTION_ATTRIBUTE_VARIABLE);
 	
@@ -20968,7 +20968,7 @@ void umlPackageImpl::initializeVertexContent()
 	m_vertex_Attribute_container->setOrdered(false);
 	m_vertex_Attribute_container->setContainment(false);
 	m_vertex_Attribute_container->setResolveProxies(true);
-	m_vertex_Attribute_container->setDefaultValueLiteral("");	
+	m_vertex_Attribute_container->setDefaultValueLiteral("");
 	m_vertex_Attribute_container->setEOpposite(uml::umlPackage::eInstance()->getRegion_Attribute_subvertex());
 	
 	m_vertex_Attribute_container->_setID(VERTEX_ATTRIBUTE_CONTAINER);
@@ -20985,7 +20985,7 @@ void umlPackageImpl::initializeVertexContent()
 	m_vertex_Attribute_incoming->setOrdered(false);
 	m_vertex_Attribute_incoming->setContainment(false);
 	m_vertex_Attribute_incoming->setResolveProxies(true);
-	m_vertex_Attribute_incoming->setDefaultValueLiteral("");	
+	m_vertex_Attribute_incoming->setDefaultValueLiteral("");
 	
 	m_vertex_Attribute_incoming->_setID(VERTEX_ATTRIBUTE_INCOMING);
 	m_vertex_Attribute_outgoing->setName("outgoing");
@@ -21001,7 +21001,7 @@ void umlPackageImpl::initializeVertexContent()
 	m_vertex_Attribute_outgoing->setOrdered(false);
 	m_vertex_Attribute_outgoing->setContainment(false);
 	m_vertex_Attribute_outgoing->setResolveProxies(true);
-	m_vertex_Attribute_outgoing->setDefaultValueLiteral("");	
+	m_vertex_Attribute_outgoing->setDefaultValueLiteral("");
 	
 	m_vertex_Attribute_outgoing->_setID(VERTEX_ATTRIBUTE_OUTGOING);
 	
@@ -21129,7 +21129,7 @@ void umlPackageImpl::initializeWriteStructuralFeatureActionContent()
 	m_writeStructuralFeatureAction_Attribute_result->setOrdered(false);
 	m_writeStructuralFeatureAction_Attribute_result->setContainment(true);
 	m_writeStructuralFeatureAction_Attribute_result->setResolveProxies(true);
-	m_writeStructuralFeatureAction_Attribute_result->setDefaultValueLiteral("");	
+	m_writeStructuralFeatureAction_Attribute_result->setDefaultValueLiteral("");
 	m_writeStructuralFeatureAction_Attribute_result->setEOpposite(uml::umlPackage::eInstance()->getOutputPin_Attribute_writeStructuralFeatureAction());
 	
 	m_writeStructuralFeatureAction_Attribute_result->_setID(WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT);
@@ -21146,7 +21146,7 @@ void umlPackageImpl::initializeWriteStructuralFeatureActionContent()
 	m_writeStructuralFeatureAction_Attribute_value->setOrdered(false);
 	m_writeStructuralFeatureAction_Attribute_value->setContainment(true);
 	m_writeStructuralFeatureAction_Attribute_value->setResolveProxies(true);
-	m_writeStructuralFeatureAction_Attribute_value->setDefaultValueLiteral("");	
+	m_writeStructuralFeatureAction_Attribute_value->setDefaultValueLiteral("");
 	m_writeStructuralFeatureAction_Attribute_value->setEOpposite(uml::umlPackage::eInstance()->getInputPin_Attribute_writeStructuralFeatureAction());
 	
 	m_writeStructuralFeatureAction_Attribute_value->_setID(WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE);
@@ -21185,7 +21185,7 @@ void umlPackageImpl::initializeWriteVariableActionContent()
 	m_writeVariableAction_Attribute_value->setOrdered(false);
 	m_writeVariableAction_Attribute_value->setContainment(true);
 	m_writeVariableAction_Attribute_value->setResolveProxies(true);
-	m_writeVariableAction_Attribute_value->setDefaultValueLiteral("");	
+	m_writeVariableAction_Attribute_value->setDefaultValueLiteral("");
 	
 	m_writeVariableAction_Attribute_value->_setID(WRITEVARIABLEACTION_ATTRIBUTE_VALUE);
 	

@@ -315,14 +315,14 @@ void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "ecore::EGenericType";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{
 					typeName = "ecore::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getEGenericType()); 
+			loadHandler->handleChild(this->getEGenericType());
 
 			return; 
 		}

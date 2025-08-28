@@ -286,7 +286,7 @@ void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

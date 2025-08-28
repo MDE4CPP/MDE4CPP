@@ -470,7 +470,7 @@ void RegionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
 				{
@@ -496,7 +496,7 @@ void RegionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
 				{

@@ -267,7 +267,7 @@ void ExecutableNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "uml::ExceptionHandler";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

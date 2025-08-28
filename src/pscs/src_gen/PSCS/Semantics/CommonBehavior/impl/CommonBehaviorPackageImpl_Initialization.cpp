@@ -97,7 +97,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	m_cS_EventOccurrence_Attribute_interactionPoint->setOrdered(false);
 	m_cS_EventOccurrence_Attribute_interactionPoint->setContainment(false);
 	m_cS_EventOccurrence_Attribute_interactionPoint->setResolveProxies(true);
-	m_cS_EventOccurrence_Attribute_interactionPoint->setDefaultValueLiteral("");	
+	m_cS_EventOccurrence_Attribute_interactionPoint->setDefaultValueLiteral("");
 	
 	m_cS_EventOccurrence_Attribute_interactionPoint->_setID(CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT);
 	m_cS_EventOccurrence_Attribute_onPort->setName("onPort");
@@ -113,7 +113,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	m_cS_EventOccurrence_Attribute_onPort->setOrdered(false);
 	m_cS_EventOccurrence_Attribute_onPort->setContainment(false);
 	m_cS_EventOccurrence_Attribute_onPort->setResolveProxies(true);
-	m_cS_EventOccurrence_Attribute_onPort->setDefaultValueLiteral("");	
+	m_cS_EventOccurrence_Attribute_onPort->setDefaultValueLiteral("");
 	
 	m_cS_EventOccurrence_Attribute_onPort->_setID(CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT);
 	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence->setName("wrappedEventOccurrence");
@@ -129,7 +129,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence->setOrdered(false);
 	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence->setContainment(false);
 	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence->setResolveProxies(true);
-	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence->setDefaultValueLiteral("");	
+	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence->setDefaultValueLiteral("");
 	
 	m_cS_EventOccurrence_Attribute_wrappedEventOccurrence->_setID(CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE);
 	

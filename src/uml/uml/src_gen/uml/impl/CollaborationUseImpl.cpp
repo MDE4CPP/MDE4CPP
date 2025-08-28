@@ -272,7 +272,7 @@ void CollaborationUseImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "uml::Dependency";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

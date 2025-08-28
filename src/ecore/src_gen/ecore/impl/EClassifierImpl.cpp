@@ -298,7 +298,7 @@ void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "ecore::ETypeParameter";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{

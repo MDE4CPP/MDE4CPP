@@ -105,7 +105,7 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	m_callEventExecution_Attribute_behavior->setOrdered(false);
 	m_callEventExecution_Attribute_behavior->setContainment(false);
 	m_callEventExecution_Attribute_behavior->setResolveProxies(true);
-	m_callEventExecution_Attribute_behavior->setDefaultValueLiteral("");	
+	m_callEventExecution_Attribute_behavior->setDefaultValueLiteral("");
 	
 	m_callEventExecution_Attribute_behavior->_setID(CALLEVENTEXECUTION_ATTRIBUTE_BEHAVIOR);
 	m_callEventExecution_Attribute_callerContext->setName("callerContext");
@@ -121,7 +121,7 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	m_callEventExecution_Attribute_callerContext->setOrdered(false);
 	m_callEventExecution_Attribute_callerContext->setContainment(false);
 	m_callEventExecution_Attribute_callerContext->setResolveProxies(true);
-	m_callEventExecution_Attribute_callerContext->setDefaultValueLiteral("");	
+	m_callEventExecution_Attribute_callerContext->setDefaultValueLiteral("");
 	
 	m_callEventExecution_Attribute_callerContext->_setID(CALLEVENTEXECUTION_ATTRIBUTE_CALLERCONTEXT);
 	m_callEventExecution_Attribute_operation->setName("operation");
@@ -137,7 +137,7 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	m_callEventExecution_Attribute_operation->setOrdered(false);
 	m_callEventExecution_Attribute_operation->setContainment(false);
 	m_callEventExecution_Attribute_operation->setResolveProxies(true);
-	m_callEventExecution_Attribute_operation->setDefaultValueLiteral("");	
+	m_callEventExecution_Attribute_operation->setDefaultValueLiteral("");
 	
 	m_callEventExecution_Attribute_operation->_setID(CALLEVENTEXECUTION_ATTRIBUTE_OPERATION);
 	
@@ -258,7 +258,7 @@ void CommonBehaviorPackageImpl::initializeCallEventOccurrenceContent()
 	m_callEventOccurrence_Attribute_execution->setOrdered(false);
 	m_callEventOccurrence_Attribute_execution->setContainment(false);
 	m_callEventOccurrence_Attribute_execution->setResolveProxies(true);
-	m_callEventOccurrence_Attribute_execution->setDefaultValueLiteral("");	
+	m_callEventOccurrence_Attribute_execution->setDefaultValueLiteral("");
 	
 	m_callEventOccurrence_Attribute_execution->_setID(CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION);
 	
@@ -296,7 +296,7 @@ void CommonBehaviorPackageImpl::initializeEventTriggeredExecutionContent()
 	m_eventTriggeredExecution_Attribute_triggeringEventOccurrence->setOrdered(false);
 	m_eventTriggeredExecution_Attribute_triggeringEventOccurrence->setContainment(false);
 	m_eventTriggeredExecution_Attribute_triggeringEventOccurrence->setResolveProxies(true);
-	m_eventTriggeredExecution_Attribute_triggeringEventOccurrence->setDefaultValueLiteral("");	
+	m_eventTriggeredExecution_Attribute_triggeringEventOccurrence->setDefaultValueLiteral("");
 	
 	m_eventTriggeredExecution_Attribute_triggeringEventOccurrence->_setID(EVENTTRIGGEREDEXECUTION_ATTRIBUTE_TRIGGERINGEVENTOCCURRENCE);
 	m_eventTriggeredExecution_Attribute_wrappedExecution->setName("wrappedExecution");
@@ -312,7 +312,7 @@ void CommonBehaviorPackageImpl::initializeEventTriggeredExecutionContent()
 	m_eventTriggeredExecution_Attribute_wrappedExecution->setOrdered(false);
 	m_eventTriggeredExecution_Attribute_wrappedExecution->setContainment(false);
 	m_eventTriggeredExecution_Attribute_wrappedExecution->setResolveProxies(true);
-	m_eventTriggeredExecution_Attribute_wrappedExecution->setDefaultValueLiteral("");	
+	m_eventTriggeredExecution_Attribute_wrappedExecution->setDefaultValueLiteral("");
 	
 	m_eventTriggeredExecution_Attribute_wrappedExecution->_setID(EVENTTRIGGEREDEXECUTION_ATTRIBUTE_WRAPPEDEXECUTION);
 	
@@ -401,7 +401,7 @@ void CommonBehaviorPackageImpl::initializeSM_ObjectActivationContent()
 	m_sM_ObjectActivation_Attribute_deferredEventPool->setOrdered(false);
 	m_sM_ObjectActivation_Attribute_deferredEventPool->setContainment(false);
 	m_sM_ObjectActivation_Attribute_deferredEventPool->setResolveProxies(true);
-	m_sM_ObjectActivation_Attribute_deferredEventPool->setDefaultValueLiteral("");	
+	m_sM_ObjectActivation_Attribute_deferredEventPool->setDefaultValueLiteral("");
 	
 	m_sM_ObjectActivation_Attribute_deferredEventPool->_setID(SM_OBJECTACTIVATION_ATTRIBUTE_DEFERREDEVENTPOOL);
 	

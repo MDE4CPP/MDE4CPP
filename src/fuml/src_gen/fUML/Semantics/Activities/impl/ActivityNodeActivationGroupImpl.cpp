@@ -738,7 +738,7 @@ void ActivityNodeActivationGroupImpl::loadNode(std::string nodeName, std::shared
 			{
 				typeName = "fUML::Semantics::Activities::ActivityEdgeInstance";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
 				{
@@ -764,7 +764,7 @@ void ActivityNodeActivationGroupImpl::loadNode(std::string nodeName, std::shared
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::Activities/]"))
 				{

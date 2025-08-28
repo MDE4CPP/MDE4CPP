@@ -383,14 +383,14 @@ void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::StringExpression";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getNameExpression()); 
+			loadHandler->handleChild(this->getNameExpression());
 
 			return; 
 		}

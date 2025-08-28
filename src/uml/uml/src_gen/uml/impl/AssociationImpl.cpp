@@ -504,7 +504,7 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "uml::Property";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

@@ -641,7 +641,7 @@ void BehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "uml::Parameter";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -666,7 +666,7 @@ void BehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "uml::ParameterSet";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

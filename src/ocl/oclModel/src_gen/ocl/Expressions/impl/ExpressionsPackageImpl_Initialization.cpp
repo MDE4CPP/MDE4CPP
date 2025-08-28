@@ -264,7 +264,7 @@ void ExpressionsPackageImpl::initializeCallExpContent()
 	m_callExp_Attribute_source->setOrdered(false);
 	m_callExp_Attribute_source->setContainment(true);
 	m_callExp_Attribute_source->setResolveProxies(true);
-	m_callExp_Attribute_source->setDefaultValueLiteral("");	
+	m_callExp_Attribute_source->setDefaultValueLiteral("");
 	
 	m_callExp_Attribute_source->_setID(CALLEXP_ATTRIBUTE_SOURCE);
 	
@@ -318,7 +318,7 @@ void ExpressionsPackageImpl::initializeClassifierContextDeclExpContent()
 	m_classifierContextDeclExp_Attribute_invOrDevExp->setOrdered(true);
 	m_classifierContextDeclExp_Attribute_invOrDevExp->setContainment(false);
 	m_classifierContextDeclExp_Attribute_invOrDevExp->setResolveProxies(true);
-	m_classifierContextDeclExp_Attribute_invOrDevExp->setDefaultValueLiteral("");	
+	m_classifierContextDeclExp_Attribute_invOrDevExp->setDefaultValueLiteral("");
 	
 	m_classifierContextDeclExp_Attribute_invOrDevExp->_setID(CLASSIFIERCONTEXTDECLEXP_ATTRIBUTE_INVORDEVEXP);
 	
@@ -356,7 +356,7 @@ void ExpressionsPackageImpl::initializeCollectionItemContent()
 	m_collectionItem_Attribute_item->setOrdered(false);
 	m_collectionItem_Attribute_item->setContainment(true);
 	m_collectionItem_Attribute_item->setResolveProxies(true);
-	m_collectionItem_Attribute_item->setDefaultValueLiteral("");	
+	m_collectionItem_Attribute_item->setDefaultValueLiteral("");
 	
 	m_collectionItem_Attribute_item->_setID(COLLECTIONITEM_ATTRIBUTE_ITEM);
 	
@@ -410,7 +410,7 @@ void ExpressionsPackageImpl::initializeCollectionLiteralExpContent()
 	m_collectionLiteralExp_Attribute_part->setOrdered(true);
 	m_collectionLiteralExp_Attribute_part->setContainment(true);
 	m_collectionLiteralExp_Attribute_part->setResolveProxies(true);
-	m_collectionLiteralExp_Attribute_part->setDefaultValueLiteral("");	
+	m_collectionLiteralExp_Attribute_part->setDefaultValueLiteral("");
 	
 	m_collectionLiteralExp_Attribute_part->_setID(COLLECTIONLITERALEXP_ATTRIBUTE_PART);
 	
@@ -470,7 +470,7 @@ void ExpressionsPackageImpl::initializeCollectionLiteralPartsContent()
 	m_collectionLiteralParts_Attribute_literalParts->setOrdered(true);
 	m_collectionLiteralParts_Attribute_literalParts->setContainment(false);
 	m_collectionLiteralParts_Attribute_literalParts->setResolveProxies(true);
-	m_collectionLiteralParts_Attribute_literalParts->setDefaultValueLiteral("");	
+	m_collectionLiteralParts_Attribute_literalParts->setDefaultValueLiteral("");
 	
 	m_collectionLiteralParts_Attribute_literalParts->_setID(COLLECTIONLITERALPARTS_ATTRIBUTE_LITERALPARTS);
 	
@@ -508,7 +508,7 @@ void ExpressionsPackageImpl::initializeCollectionRangeContent()
 	m_collectionRange_Attribute_first->setOrdered(false);
 	m_collectionRange_Attribute_first->setContainment(true);
 	m_collectionRange_Attribute_first->setResolveProxies(true);
-	m_collectionRange_Attribute_first->setDefaultValueLiteral("");	
+	m_collectionRange_Attribute_first->setDefaultValueLiteral("");
 	m_collectionRange_Attribute_first->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_firstOwner());
 	
 	m_collectionRange_Attribute_first->_setID(COLLECTIONRANGE_ATTRIBUTE_FIRST);
@@ -525,7 +525,7 @@ void ExpressionsPackageImpl::initializeCollectionRangeContent()
 	m_collectionRange_Attribute_last->setOrdered(false);
 	m_collectionRange_Attribute_last->setContainment(true);
 	m_collectionRange_Attribute_last->setResolveProxies(true);
-	m_collectionRange_Attribute_last->setDefaultValueLiteral("");	
+	m_collectionRange_Attribute_last->setDefaultValueLiteral("");
 	m_collectionRange_Attribute_last->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_lastOwner());
 	
 	m_collectionRange_Attribute_last->_setID(COLLECTIONRANGE_ATTRIBUTE_LAST);
@@ -564,7 +564,7 @@ void ExpressionsPackageImpl::initializeCollectionTypeExpContent()
 	m_collectionTypeExp_Attribute_innerType->setOrdered(true);
 	m_collectionTypeExp_Attribute_innerType->setContainment(false);
 	m_collectionTypeExp_Attribute_innerType->setResolveProxies(true);
-	m_collectionTypeExp_Attribute_innerType->setDefaultValueLiteral("");	
+	m_collectionTypeExp_Attribute_innerType->setDefaultValueLiteral("");
 	
 	m_collectionTypeExp_Attribute_innerType->_setID(COLLECTIONTYPEEXP_ATTRIBUTE_INNERTYPE);
 	
@@ -624,7 +624,7 @@ void ExpressionsPackageImpl::initializeDefExpContent()
 	m_defExp_Attribute_bodyExp->setOrdered(true);
 	m_defExp_Attribute_bodyExp->setContainment(false);
 	m_defExp_Attribute_bodyExp->setResolveProxies(true);
-	m_defExp_Attribute_bodyExp->setDefaultValueLiteral("");	
+	m_defExp_Attribute_bodyExp->setDefaultValueLiteral("");
 	
 	m_defExp_Attribute_bodyExp->_setID(DEFEXP_ATTRIBUTE_BODYEXP);
 	m_defExp_Attribute_frontExp->setName("frontExp");
@@ -640,7 +640,7 @@ void ExpressionsPackageImpl::initializeDefExpContent()
 	m_defExp_Attribute_frontExp->setOrdered(true);
 	m_defExp_Attribute_frontExp->setContainment(false);
 	m_defExp_Attribute_frontExp->setResolveProxies(true);
-	m_defExp_Attribute_frontExp->setDefaultValueLiteral("");	
+	m_defExp_Attribute_frontExp->setDefaultValueLiteral("");
 	
 	m_defExp_Attribute_frontExp->_setID(DEFEXP_ATTRIBUTE_FRONTEXP);
 	
@@ -694,7 +694,7 @@ void ExpressionsPackageImpl::initializeEnumLiteralExpContent()
 	m_enumLiteralExp_Attribute_referredEnumLiteral->setOrdered(false);
 	m_enumLiteralExp_Attribute_referredEnumLiteral->setContainment(false);
 	m_enumLiteralExp_Attribute_referredEnumLiteral->setResolveProxies(true);
-	m_enumLiteralExp_Attribute_referredEnumLiteral->setDefaultValueLiteral("");	
+	m_enumLiteralExp_Attribute_referredEnumLiteral->setDefaultValueLiteral("");
 	
 	m_enumLiteralExp_Attribute_referredEnumLiteral->_setID(ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL);
 	
@@ -732,7 +732,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 	m_expressionInOcl_Attribute_bodyExpression->setOrdered(false);
 	m_expressionInOcl_Attribute_bodyExpression->setContainment(true);
 	m_expressionInOcl_Attribute_bodyExpression->setResolveProxies(true);
-	m_expressionInOcl_Attribute_bodyExpression->setDefaultValueLiteral("");	
+	m_expressionInOcl_Attribute_bodyExpression->setDefaultValueLiteral("");
 	m_expressionInOcl_Attribute_bodyExpression->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_topExpression());
 	
 	m_expressionInOcl_Attribute_bodyExpression->_setID(EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION);
@@ -749,7 +749,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 	m_expressionInOcl_Attribute_contextVariable->setOrdered(false);
 	m_expressionInOcl_Attribute_contextVariable->setContainment(true);
 	m_expressionInOcl_Attribute_contextVariable->setResolveProxies(true);
-	m_expressionInOcl_Attribute_contextVariable->setDefaultValueLiteral("");	
+	m_expressionInOcl_Attribute_contextVariable->setDefaultValueLiteral("");
 	
 	m_expressionInOcl_Attribute_contextVariable->_setID(EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE);
 	m_expressionInOcl_Attribute_parameterVariable->setName("parameterVariable");
@@ -765,7 +765,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 	m_expressionInOcl_Attribute_parameterVariable->setOrdered(true);
 	m_expressionInOcl_Attribute_parameterVariable->setContainment(true);
 	m_expressionInOcl_Attribute_parameterVariable->setResolveProxies(true);
-	m_expressionInOcl_Attribute_parameterVariable->setDefaultValueLiteral("");	
+	m_expressionInOcl_Attribute_parameterVariable->setDefaultValueLiteral("");
 	
 	m_expressionInOcl_Attribute_parameterVariable->_setID(EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE);
 	m_expressionInOcl_Attribute_resultVariable->setName("resultVariable");
@@ -781,7 +781,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 	m_expressionInOcl_Attribute_resultVariable->setOrdered(false);
 	m_expressionInOcl_Attribute_resultVariable->setContainment(true);
 	m_expressionInOcl_Attribute_resultVariable->setResolveProxies(true);
-	m_expressionInOcl_Attribute_resultVariable->setDefaultValueLiteral("");	
+	m_expressionInOcl_Attribute_resultVariable->setDefaultValueLiteral("");
 	
 	m_expressionInOcl_Attribute_resultVariable->_setID(EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE);
 	
@@ -857,7 +857,7 @@ void ExpressionsPackageImpl::initializeIfExpContent()
 	m_ifExp_Attribute_condition->setOrdered(false);
 	m_ifExp_Attribute_condition->setContainment(true);
 	m_ifExp_Attribute_condition->setResolveProxies(true);
-	m_ifExp_Attribute_condition->setDefaultValueLiteral("");	
+	m_ifExp_Attribute_condition->setDefaultValueLiteral("");
 	m_ifExp_Attribute_condition->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_ifOwner());
 	
 	m_ifExp_Attribute_condition->_setID(IFEXP_ATTRIBUTE_CONDITION);
@@ -874,7 +874,7 @@ void ExpressionsPackageImpl::initializeIfExpContent()
 	m_ifExp_Attribute_elseExpression->setOrdered(false);
 	m_ifExp_Attribute_elseExpression->setContainment(true);
 	m_ifExp_Attribute_elseExpression->setResolveProxies(true);
-	m_ifExp_Attribute_elseExpression->setDefaultValueLiteral("");	
+	m_ifExp_Attribute_elseExpression->setDefaultValueLiteral("");
 	m_ifExp_Attribute_elseExpression->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_elseOwner());
 	
 	m_ifExp_Attribute_elseExpression->_setID(IFEXP_ATTRIBUTE_ELSEEXPRESSION);
@@ -891,7 +891,7 @@ void ExpressionsPackageImpl::initializeIfExpContent()
 	m_ifExp_Attribute_thenExpression->setOrdered(false);
 	m_ifExp_Attribute_thenExpression->setContainment(true);
 	m_ifExp_Attribute_thenExpression->setResolveProxies(true);
-	m_ifExp_Attribute_thenExpression->setDefaultValueLiteral("");	
+	m_ifExp_Attribute_thenExpression->setDefaultValueLiteral("");
 	m_ifExp_Attribute_thenExpression->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_thenOwner());
 	
 	m_ifExp_Attribute_thenExpression->_setID(IFEXP_ATTRIBUTE_THENEXPRESSION);
@@ -930,7 +930,7 @@ void ExpressionsPackageImpl::initializeInfixedExpContent()
 	m_infixedExp_Attribute_source->setOrdered(true);
 	m_infixedExp_Attribute_source->setContainment(false);
 	m_infixedExp_Attribute_source->setResolveProxies(true);
-	m_infixedExp_Attribute_source->setDefaultValueLiteral("");	
+	m_infixedExp_Attribute_source->setDefaultValueLiteral("");
 	
 	m_infixedExp_Attribute_source->_setID(INFIXEDEXP_ATTRIBUTE_SOURCE);
 	
@@ -984,7 +984,7 @@ void ExpressionsPackageImpl::initializeInitOrDerValueExpContent()
 	m_initOrDerValueExp_Attribute_bodyExpression->setOrdered(true);
 	m_initOrDerValueExp_Attribute_bodyExpression->setContainment(false);
 	m_initOrDerValueExp_Attribute_bodyExpression->setResolveProxies(true);
-	m_initOrDerValueExp_Attribute_bodyExpression->setDefaultValueLiteral("");	
+	m_initOrDerValueExp_Attribute_bodyExpression->setDefaultValueLiteral("");
 	
 	m_initOrDerValueExp_Attribute_bodyExpression->_setID(INITORDERVALUEEXP_ATTRIBUTE_BODYEXPRESSION);
 	
@@ -1022,7 +1022,7 @@ void ExpressionsPackageImpl::initializeInitOrDerValueListExpContent()
 	m_initOrDerValueListExp_Attribute_derExpressionList->setOrdered(true);
 	m_initOrDerValueListExp_Attribute_derExpressionList->setContainment(false);
 	m_initOrDerValueListExp_Attribute_derExpressionList->setResolveProxies(true);
-	m_initOrDerValueListExp_Attribute_derExpressionList->setDefaultValueLiteral("");	
+	m_initOrDerValueListExp_Attribute_derExpressionList->setDefaultValueLiteral("");
 	
 	m_initOrDerValueListExp_Attribute_derExpressionList->_setID(INITORDERVALUELISTEXP_ATTRIBUTE_DEREXPRESSIONLIST);
 	m_initOrDerValueListExp_Attribute_initExpressionList->setName("initExpressionList");
@@ -1038,7 +1038,7 @@ void ExpressionsPackageImpl::initializeInitOrDerValueListExpContent()
 	m_initOrDerValueListExp_Attribute_initExpressionList->setOrdered(true);
 	m_initOrDerValueListExp_Attribute_initExpressionList->setContainment(false);
 	m_initOrDerValueListExp_Attribute_initExpressionList->setResolveProxies(true);
-	m_initOrDerValueListExp_Attribute_initExpressionList->setDefaultValueLiteral("");	
+	m_initOrDerValueListExp_Attribute_initExpressionList->setDefaultValueLiteral("");
 	
 	m_initOrDerValueListExp_Attribute_initExpressionList->_setID(INITORDERVALUELISTEXP_ATTRIBUTE_INITEXPRESSIONLIST);
 	
@@ -1146,7 +1146,7 @@ void ExpressionsPackageImpl::initializeInvOrDefExpContent()
 	m_invOrDefExp_Attribute_referredExpression->setOrdered(true);
 	m_invOrDefExp_Attribute_referredExpression->setContainment(false);
 	m_invOrDefExp_Attribute_referredExpression->setResolveProxies(true);
-	m_invOrDefExp_Attribute_referredExpression->setDefaultValueLiteral("");	
+	m_invOrDefExp_Attribute_referredExpression->setDefaultValueLiteral("");
 	
 	m_invOrDefExp_Attribute_referredExpression->_setID(INVORDEFEXP_ATTRIBUTE_REFERREDEXPRESSION);
 	
@@ -1206,7 +1206,7 @@ void ExpressionsPackageImpl::initializeIterateExpContent()
 	m_iterateExp_Attribute_result->setOrdered(false);
 	m_iterateExp_Attribute_result->setContainment(true);
 	m_iterateExp_Attribute_result->setResolveProxies(true);
-	m_iterateExp_Attribute_result->setDefaultValueLiteral("");	
+	m_iterateExp_Attribute_result->setDefaultValueLiteral("");
 	
 	m_iterateExp_Attribute_result->_setID(ITERATEEXP_ATTRIBUTE_RESULT);
 	
@@ -1282,7 +1282,7 @@ void ExpressionsPackageImpl::initializeLetExpContent()
 	m_letExp_Attribute_in->setOrdered(false);
 	m_letExp_Attribute_in->setContainment(true);
 	m_letExp_Attribute_in->setResolveProxies(true);
-	m_letExp_Attribute_in->setDefaultValueLiteral("");	
+	m_letExp_Attribute_in->setDefaultValueLiteral("");
 	
 	m_letExp_Attribute_in->_setID(LETEXP_ATTRIBUTE_IN);
 	m_letExp_Attribute_variables->setName("variables");
@@ -1298,7 +1298,7 @@ void ExpressionsPackageImpl::initializeLetExpContent()
 	m_letExp_Attribute_variables->setOrdered(true);
 	m_letExp_Attribute_variables->setContainment(true);
 	m_letExp_Attribute_variables->setResolveProxies(true);
-	m_letExp_Attribute_variables->setDefaultValueLiteral("");	
+	m_letExp_Attribute_variables->setDefaultValueLiteral("");
 	
 	m_letExp_Attribute_variables->_setID(LETEXP_ATTRIBUTE_VARIABLES);
 	
@@ -1406,7 +1406,7 @@ void ExpressionsPackageImpl::initializeLoopExpContent()
 	m_loopExp_Attribute_body->setOrdered(false);
 	m_loopExp_Attribute_body->setContainment(true);
 	m_loopExp_Attribute_body->setResolveProxies(true);
-	m_loopExp_Attribute_body->setDefaultValueLiteral("");	
+	m_loopExp_Attribute_body->setDefaultValueLiteral("");
 	m_loopExp_Attribute_body->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_loopBodyOwner());
 	
 	m_loopExp_Attribute_body->_setID(LOOPEXP_ATTRIBUTE_BODY);
@@ -1423,7 +1423,7 @@ void ExpressionsPackageImpl::initializeLoopExpContent()
 	m_loopExp_Attribute_iterator->setOrdered(true);
 	m_loopExp_Attribute_iterator->setContainment(true);
 	m_loopExp_Attribute_iterator->setResolveProxies(true);
-	m_loopExp_Attribute_iterator->setDefaultValueLiteral("");	
+	m_loopExp_Attribute_iterator->setDefaultValueLiteral("");
 	m_loopExp_Attribute_iterator->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_loopExp());
 	
 	m_loopExp_Attribute_iterator->_setID(LOOPEXP_ATTRIBUTE_ITERATOR);
@@ -1462,7 +1462,7 @@ void ExpressionsPackageImpl::initializeMessageArgumentsContent()
 	m_messageArguments_Attribute_referredOclExpressions->setOrdered(true);
 	m_messageArguments_Attribute_referredOclExpressions->setContainment(false);
 	m_messageArguments_Attribute_referredOclExpressions->setResolveProxies(true);
-	m_messageArguments_Attribute_referredOclExpressions->setDefaultValueLiteral("");	
+	m_messageArguments_Attribute_referredOclExpressions->setDefaultValueLiteral("");
 	
 	m_messageArguments_Attribute_referredOclExpressions->_setID(MESSAGEARGUMENTS_ATTRIBUTE_REFERREDOCLEXPRESSIONS);
 	
@@ -1532,7 +1532,7 @@ void ExpressionsPackageImpl::initializeMessageExpContent()
 	m_messageExp_Attribute_argument->setOrdered(true);
 	m_messageExp_Attribute_argument->setContainment(false);
 	m_messageExp_Attribute_argument->setResolveProxies(true);
-	m_messageExp_Attribute_argument->setDefaultValueLiteral("");	
+	m_messageExp_Attribute_argument->setDefaultValueLiteral("");
 	
 	m_messageExp_Attribute_argument->_setID(MESSAGEEXP_ATTRIBUTE_ARGUMENT);
 	m_messageExp_Attribute_target->setName("target");
@@ -1548,7 +1548,7 @@ void ExpressionsPackageImpl::initializeMessageExpContent()
 	m_messageExp_Attribute_target->setOrdered(true);
 	m_messageExp_Attribute_target->setContainment(false);
 	m_messageExp_Attribute_target->setResolveProxies(true);
-	m_messageExp_Attribute_target->setDefaultValueLiteral("");	
+	m_messageExp_Attribute_target->setDefaultValueLiteral("");
 	
 	m_messageExp_Attribute_target->_setID(MESSAGEEXP_ATTRIBUTE_TARGET);
 	
@@ -1602,7 +1602,7 @@ void ExpressionsPackageImpl::initializeNavigationCallExpContent()
 	m_navigationCallExp_Attribute_qualifier->setOrdered(true);
 	m_navigationCallExp_Attribute_qualifier->setContainment(true);
 	m_navigationCallExp_Attribute_qualifier->setResolveProxies(true);
-	m_navigationCallExp_Attribute_qualifier->setDefaultValueLiteral("");	
+	m_navigationCallExp_Attribute_qualifier->setDefaultValueLiteral("");
 	m_navigationCallExp_Attribute_qualifier->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_parentNav());
 	
 	m_navigationCallExp_Attribute_qualifier->_setID(NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER);
@@ -1685,7 +1685,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_appliedElement->setOrdered(true);
 	m_oclExpression_Attribute_appliedElement->setContainment(false);
 	m_oclExpression_Attribute_appliedElement->setResolveProxies(true);
-	m_oclExpression_Attribute_appliedElement->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_appliedElement->setDefaultValueLiteral("");
 	
 	m_oclExpression_Attribute_appliedElement->_setID(OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT);
 	m_oclExpression_Attribute_elseOwner->setName("elseOwner");
@@ -1701,7 +1701,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_elseOwner->setOrdered(true);
 	m_oclExpression_Attribute_elseOwner->setContainment(false);
 	m_oclExpression_Attribute_elseOwner->setResolveProxies(true);
-	m_oclExpression_Attribute_elseOwner->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_elseOwner->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_elseOwner->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_elseExpression());
 	
 	m_oclExpression_Attribute_elseOwner->_setID(OCLEXPRESSION_ATTRIBUTE_ELSEOWNER);
@@ -1718,7 +1718,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_firstOwner->setOrdered(true);
 	m_oclExpression_Attribute_firstOwner->setContainment(false);
 	m_oclExpression_Attribute_firstOwner->setResolveProxies(true);
-	m_oclExpression_Attribute_firstOwner->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_firstOwner->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_firstOwner->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Attribute_first());
 	
 	m_oclExpression_Attribute_firstOwner->_setID(OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER);
@@ -1735,7 +1735,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_ifOwner->setOrdered(true);
 	m_oclExpression_Attribute_ifOwner->setContainment(false);
 	m_oclExpression_Attribute_ifOwner->setResolveProxies(true);
-	m_oclExpression_Attribute_ifOwner->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_ifOwner->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_ifOwner->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_condition());
 	
 	m_oclExpression_Attribute_ifOwner->_setID(OCLEXPRESSION_ATTRIBUTE_IFOWNER);
@@ -1752,7 +1752,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_initializedElement->setOrdered(true);
 	m_oclExpression_Attribute_initializedElement->setContainment(true);
 	m_oclExpression_Attribute_initializedElement->setResolveProxies(true);
-	m_oclExpression_Attribute_initializedElement->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_initializedElement->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_initializedElement->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getVarDeclarationExp_Attribute_initExpression());
 	
 	m_oclExpression_Attribute_initializedElement->_setID(OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT);
@@ -1769,7 +1769,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_instance->setOrdered(true);
 	m_oclExpression_Attribute_instance->setContainment(false);
 	m_oclExpression_Attribute_instance->setResolveProxies(true);
-	m_oclExpression_Attribute_instance->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_instance->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_instance->setEOpposite(ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Attribute_model());
 	
 	m_oclExpression_Attribute_instance->_setID(OCLEXPRESSION_ATTRIBUTE_INSTANCE);
@@ -1786,7 +1786,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_lastOwner->setOrdered(true);
 	m_oclExpression_Attribute_lastOwner->setContainment(false);
 	m_oclExpression_Attribute_lastOwner->setResolveProxies(true);
-	m_oclExpression_Attribute_lastOwner->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_lastOwner->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_lastOwner->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Attribute_last());
 	
 	m_oclExpression_Attribute_lastOwner->_setID(OCLEXPRESSION_ATTRIBUTE_LASTOWNER);
@@ -1803,7 +1803,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_loopBodyOwner->setOrdered(true);
 	m_oclExpression_Attribute_loopBodyOwner->setContainment(false);
 	m_oclExpression_Attribute_loopBodyOwner->setResolveProxies(true);
-	m_oclExpression_Attribute_loopBodyOwner->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_loopBodyOwner->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_loopBodyOwner->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Attribute_body());
 	
 	m_oclExpression_Attribute_loopBodyOwner->_setID(OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER);
@@ -1820,7 +1820,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_loopExp->setOrdered(true);
 	m_oclExpression_Attribute_loopExp->setContainment(false);
 	m_oclExpression_Attribute_loopExp->setResolveProxies(true);
-	m_oclExpression_Attribute_loopExp->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_loopExp->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_loopExp->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Attribute_iterator());
 	
 	m_oclExpression_Attribute_loopExp->_setID(OCLEXPRESSION_ATTRIBUTE_LOOPEXP);
@@ -1837,7 +1837,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_parentCall->setOrdered(true);
 	m_oclExpression_Attribute_parentCall->setContainment(false);
 	m_oclExpression_Attribute_parentCall->setResolveProxies(true);
-	m_oclExpression_Attribute_parentCall->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_parentCall->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_parentCall->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOperationCallExp_Attribute_argument());
 	
 	m_oclExpression_Attribute_parentCall->_setID(OCLEXPRESSION_ATTRIBUTE_PARENTCALL);
@@ -1854,7 +1854,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_parentNav->setOrdered(true);
 	m_oclExpression_Attribute_parentNav->setContainment(false);
 	m_oclExpression_Attribute_parentNav->setResolveProxies(true);
-	m_oclExpression_Attribute_parentNav->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_parentNav->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_parentNav->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getNavigationCallExp_Attribute_qualifier());
 	
 	m_oclExpression_Attribute_parentNav->_setID(OCLEXPRESSION_ATTRIBUTE_PARENTNAV);
@@ -1871,7 +1871,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_thenOwner->setOrdered(true);
 	m_oclExpression_Attribute_thenOwner->setContainment(false);
 	m_oclExpression_Attribute_thenOwner->setResolveProxies(true);
-	m_oclExpression_Attribute_thenOwner->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_thenOwner->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_thenOwner->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_thenExpression());
 	
 	m_oclExpression_Attribute_thenOwner->_setID(OCLEXPRESSION_ATTRIBUTE_THENOWNER);
@@ -1888,7 +1888,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 	m_oclExpression_Attribute_topExpression->setOrdered(true);
 	m_oclExpression_Attribute_topExpression->setContainment(false);
 	m_oclExpression_Attribute_topExpression->setResolveProxies(true);
-	m_oclExpression_Attribute_topExpression->setDefaultValueLiteral("");	
+	m_oclExpression_Attribute_topExpression->setDefaultValueLiteral("");
 	m_oclExpression_Attribute_topExpression->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_bodyExpression());
 	
 	m_oclExpression_Attribute_topExpression->_setID(OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION);
@@ -1959,7 +1959,7 @@ void ExpressionsPackageImpl::initializeOperationCallExpContent()
 	m_operationCallExp_Attribute_argument->setOrdered(true);
 	m_operationCallExp_Attribute_argument->setContainment(true);
 	m_operationCallExp_Attribute_argument->setResolveProxies(true);
-	m_operationCallExp_Attribute_argument->setDefaultValueLiteral("");	
+	m_operationCallExp_Attribute_argument->setDefaultValueLiteral("");
 	m_operationCallExp_Attribute_argument->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_parentCall());
 	
 	m_operationCallExp_Attribute_argument->_setID(OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT);
@@ -1998,7 +1998,7 @@ void ExpressionsPackageImpl::initializeOperationContextDeclExpContent()
 	m_operationContextDeclExp_Attribute_operationContext->setOrdered(true);
 	m_operationContextDeclExp_Attribute_operationContext->setContainment(false);
 	m_operationContextDeclExp_Attribute_operationContext->setResolveProxies(true);
-	m_operationContextDeclExp_Attribute_operationContext->setDefaultValueLiteral("");	
+	m_operationContextDeclExp_Attribute_operationContext->setDefaultValueLiteral("");
 	
 	m_operationContextDeclExp_Attribute_operationContext->_setID(OPERATIONCONTEXTDECLEXP_ATTRIBUTE_OPERATIONCONTEXT);
 	m_operationContextDeclExp_Attribute_prePostBodyExpressions->setName("prePostBodyExpressions");
@@ -2014,7 +2014,7 @@ void ExpressionsPackageImpl::initializeOperationContextDeclExpContent()
 	m_operationContextDeclExp_Attribute_prePostBodyExpressions->setOrdered(true);
 	m_operationContextDeclExp_Attribute_prePostBodyExpressions->setContainment(false);
 	m_operationContextDeclExp_Attribute_prePostBodyExpressions->setResolveProxies(true);
-	m_operationContextDeclExp_Attribute_prePostBodyExpressions->setDefaultValueLiteral("");	
+	m_operationContextDeclExp_Attribute_prePostBodyExpressions->setDefaultValueLiteral("");
 	
 	m_operationContextDeclExp_Attribute_prePostBodyExpressions->_setID(OPERATIONCONTEXTDECLEXP_ATTRIBUTE_PREPOSTBODYEXPRESSIONS);
 	
@@ -2068,7 +2068,7 @@ void ExpressionsPackageImpl::initializeOperationContextExpContent()
 	m_operationContextExp_Attribute_inputParameters->setOrdered(true);
 	m_operationContextExp_Attribute_inputParameters->setContainment(false);
 	m_operationContextExp_Attribute_inputParameters->setResolveProxies(true);
-	m_operationContextExp_Attribute_inputParameters->setDefaultValueLiteral("");	
+	m_operationContextExp_Attribute_inputParameters->setDefaultValueLiteral("");
 	
 	m_operationContextExp_Attribute_inputParameters->_setID(OPERATIONCONTEXTEXP_ATTRIBUTE_INPUTPARAMETERS);
 	m_operationContextExp_Attribute_returnType->setName("returnType");
@@ -2084,7 +2084,7 @@ void ExpressionsPackageImpl::initializeOperationContextExpContent()
 	m_operationContextExp_Attribute_returnType->setOrdered(true);
 	m_operationContextExp_Attribute_returnType->setContainment(false);
 	m_operationContextExp_Attribute_returnType->setResolveProxies(true);
-	m_operationContextExp_Attribute_returnType->setDefaultValueLiteral("");	
+	m_operationContextExp_Attribute_returnType->setDefaultValueLiteral("");
 	
 	m_operationContextExp_Attribute_returnType->_setID(OPERATIONCONTEXTEXP_ATTRIBUTE_RETURNTYPE);
 	
@@ -2138,7 +2138,7 @@ void ExpressionsPackageImpl::initializeOperatorExpContent()
 	m_operatorExp_Attribute_leftHandOperand->setOrdered(true);
 	m_operatorExp_Attribute_leftHandOperand->setContainment(false);
 	m_operatorExp_Attribute_leftHandOperand->setResolveProxies(true);
-	m_operatorExp_Attribute_leftHandOperand->setDefaultValueLiteral("");	
+	m_operatorExp_Attribute_leftHandOperand->setDefaultValueLiteral("");
 	
 	m_operatorExp_Attribute_leftHandOperand->_setID(OPERATOREXP_ATTRIBUTE_LEFTHANDOPERAND);
 	m_operatorExp_Attribute_rightHandOperand->setName("rightHandOperand");
@@ -2154,7 +2154,7 @@ void ExpressionsPackageImpl::initializeOperatorExpContent()
 	m_operatorExp_Attribute_rightHandOperand->setOrdered(true);
 	m_operatorExp_Attribute_rightHandOperand->setContainment(false);
 	m_operatorExp_Attribute_rightHandOperand->setResolveProxies(true);
-	m_operatorExp_Attribute_rightHandOperand->setDefaultValueLiteral("");	
+	m_operatorExp_Attribute_rightHandOperand->setDefaultValueLiteral("");
 	
 	m_operatorExp_Attribute_rightHandOperand->_setID(OPERATOREXP_ATTRIBUTE_RIGHTHANDOPERAND);
 	
@@ -2208,7 +2208,7 @@ void ExpressionsPackageImpl::initializePackageDeclarationExpContent()
 	m_packageDeclarationExp_Attribute_contextDeclarations->setOrdered(true);
 	m_packageDeclarationExp_Attribute_contextDeclarations->setContainment(false);
 	m_packageDeclarationExp_Attribute_contextDeclarations->setResolveProxies(true);
-	m_packageDeclarationExp_Attribute_contextDeclarations->setDefaultValueLiteral("");	
+	m_packageDeclarationExp_Attribute_contextDeclarations->setDefaultValueLiteral("");
 	
 	m_packageDeclarationExp_Attribute_contextDeclarations->_setID(PACKAGEDECLARATIONEXP_ATTRIBUTE_CONTEXTDECLARATIONS);
 	
@@ -2246,7 +2246,7 @@ void ExpressionsPackageImpl::initializeParentedExpContent()
 	m_parentedExp_Attribute_innerExp->setOrdered(true);
 	m_parentedExp_Attribute_innerExp->setContainment(false);
 	m_parentedExp_Attribute_innerExp->setResolveProxies(true);
-	m_parentedExp_Attribute_innerExp->setDefaultValueLiteral("");	
+	m_parentedExp_Attribute_innerExp->setDefaultValueLiteral("");
 	
 	m_parentedExp_Attribute_innerExp->_setID(PARENTEDEXP_ATTRIBUTE_INNEREXP);
 	
@@ -2316,7 +2316,7 @@ void ExpressionsPackageImpl::initializePrePostBodyExpContent()
 	m_prePostBodyExp_Attribute_bodyExpression->setOrdered(true);
 	m_prePostBodyExp_Attribute_bodyExpression->setContainment(false);
 	m_prePostBodyExp_Attribute_bodyExpression->setResolveProxies(true);
-	m_prePostBodyExp_Attribute_bodyExpression->setDefaultValueLiteral("");	
+	m_prePostBodyExp_Attribute_bodyExpression->setDefaultValueLiteral("");
 	
 	m_prePostBodyExp_Attribute_bodyExpression->_setID(PREPOSTBODYEXP_ATTRIBUTE_BODYEXPRESSION);
 	
@@ -2354,7 +2354,7 @@ void ExpressionsPackageImpl::initializePrePostBodyListExpContent()
 	m_prePostBodyListExp_Attribute_bodyExpressionList->setOrdered(true);
 	m_prePostBodyListExp_Attribute_bodyExpressionList->setContainment(false);
 	m_prePostBodyListExp_Attribute_bodyExpressionList->setResolveProxies(true);
-	m_prePostBodyListExp_Attribute_bodyExpressionList->setDefaultValueLiteral("");	
+	m_prePostBodyListExp_Attribute_bodyExpressionList->setDefaultValueLiteral("");
 	
 	m_prePostBodyListExp_Attribute_bodyExpressionList->_setID(PREPOSTBODYLISTEXP_ATTRIBUTE_BODYEXPRESSIONLIST);
 	m_prePostBodyListExp_Attribute_postExpressionList->setName("postExpressionList");
@@ -2370,7 +2370,7 @@ void ExpressionsPackageImpl::initializePrePostBodyListExpContent()
 	m_prePostBodyListExp_Attribute_postExpressionList->setOrdered(true);
 	m_prePostBodyListExp_Attribute_postExpressionList->setContainment(false);
 	m_prePostBodyListExp_Attribute_postExpressionList->setResolveProxies(true);
-	m_prePostBodyListExp_Attribute_postExpressionList->setDefaultValueLiteral("");	
+	m_prePostBodyListExp_Attribute_postExpressionList->setDefaultValueLiteral("");
 	
 	m_prePostBodyListExp_Attribute_postExpressionList->_setID(PREPOSTBODYLISTEXP_ATTRIBUTE_POSTEXPRESSIONLIST);
 	m_prePostBodyListExp_Attribute_preExpressionList->setName("preExpressionList");
@@ -2386,7 +2386,7 @@ void ExpressionsPackageImpl::initializePrePostBodyListExpContent()
 	m_prePostBodyListExp_Attribute_preExpressionList->setOrdered(true);
 	m_prePostBodyListExp_Attribute_preExpressionList->setContainment(false);
 	m_prePostBodyListExp_Attribute_preExpressionList->setResolveProxies(true);
-	m_prePostBodyListExp_Attribute_preExpressionList->setDefaultValueLiteral("");	
+	m_prePostBodyListExp_Attribute_preExpressionList->setDefaultValueLiteral("");
 	
 	m_prePostBodyListExp_Attribute_preExpressionList->_setID(PREPOSTBODYLISTEXP_ATTRIBUTE_PREEXPRESSIONLIST);
 	
@@ -2440,7 +2440,7 @@ void ExpressionsPackageImpl::initializePrefixedExpContent()
 	m_prefixedExp_Attribute_referredExpression->setOrdered(true);
 	m_prefixedExp_Attribute_referredExpression->setContainment(false);
 	m_prefixedExp_Attribute_referredExpression->setResolveProxies(true);
-	m_prefixedExp_Attribute_referredExpression->setDefaultValueLiteral("");	
+	m_prefixedExp_Attribute_referredExpression->setDefaultValueLiteral("");
 	
 	m_prefixedExp_Attribute_referredExpression->_setID(PREFIXEDEXP_ATTRIBUTE_REFERREDEXPRESSION);
 	
@@ -2570,7 +2570,7 @@ void ExpressionsPackageImpl::initializePropertyContextDeclExpContent()
 	m_propertyContextDeclExp_Attribute_initOrDerValues->setOrdered(true);
 	m_propertyContextDeclExp_Attribute_initOrDerValues->setContainment(false);
 	m_propertyContextDeclExp_Attribute_initOrDerValues->setResolveProxies(true);
-	m_propertyContextDeclExp_Attribute_initOrDerValues->setDefaultValueLiteral("");	
+	m_propertyContextDeclExp_Attribute_initOrDerValues->setDefaultValueLiteral("");
 	
 	m_propertyContextDeclExp_Attribute_initOrDerValues->_setID(PROPERTYCONTEXTDECLEXP_ATTRIBUTE_INITORDERVALUES);
 	m_propertyContextDeclExp_Attribute_propType->setName("propType");
@@ -2586,7 +2586,7 @@ void ExpressionsPackageImpl::initializePropertyContextDeclExpContent()
 	m_propertyContextDeclExp_Attribute_propType->setOrdered(true);
 	m_propertyContextDeclExp_Attribute_propType->setContainment(false);
 	m_propertyContextDeclExp_Attribute_propType->setResolveProxies(true);
-	m_propertyContextDeclExp_Attribute_propType->setDefaultValueLiteral("");	
+	m_propertyContextDeclExp_Attribute_propType->setDefaultValueLiteral("");
 	
 	m_propertyContextDeclExp_Attribute_propType->_setID(PROPERTYCONTEXTDECLEXP_ATTRIBUTE_PROPTYPE);
 	
@@ -2662,7 +2662,7 @@ void ExpressionsPackageImpl::initializeStateExpContent()
 	m_stateExp_Attribute_referredState->setOrdered(true);
 	m_stateExp_Attribute_referredState->setContainment(false);
 	m_stateExp_Attribute_referredState->setResolveProxies(true);
-	m_stateExp_Attribute_referredState->setDefaultValueLiteral("");	
+	m_stateExp_Attribute_referredState->setDefaultValueLiteral("");
 	
 	m_stateExp_Attribute_referredState->_setID(STATEEXP_ATTRIBUTE_REFERREDSTATE);
 	
@@ -2738,7 +2738,7 @@ void ExpressionsPackageImpl::initializeTupleLiteralExpContent()
 	m_tupleLiteralExp_Attribute_part->setOrdered(true);
 	m_tupleLiteralExp_Attribute_part->setContainment(true);
 	m_tupleLiteralExp_Attribute_part->setResolveProxies(true);
-	m_tupleLiteralExp_Attribute_part->setDefaultValueLiteral("");	
+	m_tupleLiteralExp_Attribute_part->setDefaultValueLiteral("");
 	
 	m_tupleLiteralExp_Attribute_part->_setID(TUPLELITERALEXP_ATTRIBUTE_PART);
 	
@@ -2808,7 +2808,7 @@ void ExpressionsPackageImpl::initializeTupleLiteralPartContent()
 	m_tupleLiteralPart_Attribute_assignedOclExpression->setOrdered(true);
 	m_tupleLiteralPart_Attribute_assignedOclExpression->setContainment(false);
 	m_tupleLiteralPart_Attribute_assignedOclExpression->setResolveProxies(true);
-	m_tupleLiteralPart_Attribute_assignedOclExpression->setDefaultValueLiteral("");	
+	m_tupleLiteralPart_Attribute_assignedOclExpression->setDefaultValueLiteral("");
 	
 	m_tupleLiteralPart_Attribute_assignedOclExpression->_setID(TUPLELITERALPART_ATTRIBUTE_ASSIGNEDOCLEXPRESSION);
 	
@@ -2846,7 +2846,7 @@ void ExpressionsPackageImpl::initializeTupleTypeExpContent()
 	m_tupleTypeExp_Attribute_part->setOrdered(true);
 	m_tupleTypeExp_Attribute_part->setContainment(false);
 	m_tupleTypeExp_Attribute_part->setResolveProxies(true);
-	m_tupleTypeExp_Attribute_part->setDefaultValueLiteral("");	
+	m_tupleTypeExp_Attribute_part->setDefaultValueLiteral("");
 	
 	m_tupleTypeExp_Attribute_part->_setID(TUPLETYPEEXP_ATTRIBUTE_PART);
 	
@@ -2998,7 +2998,7 @@ void ExpressionsPackageImpl::initializeVarDeclarationExpContent()
 	m_varDeclarationExp_Attribute_assignedOclExp->setOrdered(true);
 	m_varDeclarationExp_Attribute_assignedOclExp->setContainment(false);
 	m_varDeclarationExp_Attribute_assignedOclExp->setResolveProxies(true);
-	m_varDeclarationExp_Attribute_assignedOclExp->setDefaultValueLiteral("");	
+	m_varDeclarationExp_Attribute_assignedOclExp->setDefaultValueLiteral("");
 	
 	m_varDeclarationExp_Attribute_assignedOclExp->_setID(VARDECLARATIONEXP_ATTRIBUTE_ASSIGNEDOCLEXP);
 	m_varDeclarationExp_Attribute_initExpression->setName("initExpression");
@@ -3014,7 +3014,7 @@ void ExpressionsPackageImpl::initializeVarDeclarationExpContent()
 	m_varDeclarationExp_Attribute_initExpression->setOrdered(true);
 	m_varDeclarationExp_Attribute_initExpression->setContainment(false);
 	m_varDeclarationExp_Attribute_initExpression->setResolveProxies(true);
-	m_varDeclarationExp_Attribute_initExpression->setDefaultValueLiteral("");	
+	m_varDeclarationExp_Attribute_initExpression->setDefaultValueLiteral("");
 	m_varDeclarationExp_Attribute_initExpression->setEOpposite(ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_initializedElement());
 	
 	m_varDeclarationExp_Attribute_initExpression->_setID(VARDECLARATIONEXP_ATTRIBUTE_INITEXPRESSION);
@@ -3031,7 +3031,7 @@ void ExpressionsPackageImpl::initializeVarDeclarationExpContent()
 	m_varDeclarationExp_Attribute_varType->setOrdered(true);
 	m_varDeclarationExp_Attribute_varType->setContainment(false);
 	m_varDeclarationExp_Attribute_varType->setResolveProxies(true);
-	m_varDeclarationExp_Attribute_varType->setDefaultValueLiteral("");	
+	m_varDeclarationExp_Attribute_varType->setDefaultValueLiteral("");
 	
 	m_varDeclarationExp_Attribute_varType->_setID(VARDECLARATIONEXP_ATTRIBUTE_VARTYPE);
 	
@@ -3069,7 +3069,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_baseExp->setOrdered(true);
 	m_variable_Attribute_baseExp->setContainment(false);
 	m_variable_Attribute_baseExp->setResolveProxies(true);
-	m_variable_Attribute_baseExp->setDefaultValueLiteral("");	
+	m_variable_Attribute_baseExp->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_baseExp->_setID(VARIABLE_ATTRIBUTE_BASEEXP);
 	m_variable_Attribute_initExpression->setName("initExpression");
@@ -3085,7 +3085,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_initExpression->setOrdered(false);
 	m_variable_Attribute_initExpression->setContainment(true);
 	m_variable_Attribute_initExpression->setResolveProxies(true);
-	m_variable_Attribute_initExpression->setDefaultValueLiteral("");	
+	m_variable_Attribute_initExpression->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_initExpression->_setID(VARIABLE_ATTRIBUTE_INITEXPRESSION);
 	m_variable_Attribute_loopExp->setName("loopExp");
@@ -3101,7 +3101,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_loopExp->setOrdered(true);
 	m_variable_Attribute_loopExp->setContainment(false);
 	m_variable_Attribute_loopExp->setResolveProxies(true);
-	m_variable_Attribute_loopExp->setDefaultValueLiteral("");	
+	m_variable_Attribute_loopExp->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_loopExp->_setID(VARIABLE_ATTRIBUTE_LOOPEXP);
 	m_variable_Attribute_referringExp->setName("referringExp");
@@ -3117,7 +3117,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_referringExp->setOrdered(true);
 	m_variable_Attribute_referringExp->setContainment(false);
 	m_variable_Attribute_referringExp->setResolveProxies(true);
-	m_variable_Attribute_referringExp->setDefaultValueLiteral("");	
+	m_variable_Attribute_referringExp->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_referringExp->_setID(VARIABLE_ATTRIBUTE_REFERRINGEXP);
 	m_variable_Attribute_representedParameter->setName("representedParameter");
@@ -3133,7 +3133,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_representedParameter->setOrdered(false);
 	m_variable_Attribute_representedParameter->setContainment(false);
 	m_variable_Attribute_representedParameter->setResolveProxies(true);
-	m_variable_Attribute_representedParameter->setDefaultValueLiteral("");	
+	m_variable_Attribute_representedParameter->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_representedParameter->_setID(VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER);
 	m_variable_Attribute_resultOwner->setName("resultOwner");
@@ -3149,7 +3149,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_resultOwner->setOrdered(true);
 	m_variable_Attribute_resultOwner->setContainment(false);
 	m_variable_Attribute_resultOwner->setResolveProxies(true);
-	m_variable_Attribute_resultOwner->setDefaultValueLiteral("");	
+	m_variable_Attribute_resultOwner->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_resultOwner->_setID(VARIABLE_ATTRIBUTE_RESULTOWNER);
 	m_variable_Attribute_selfOwner->setName("selfOwner");
@@ -3165,7 +3165,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_selfOwner->setOrdered(true);
 	m_variable_Attribute_selfOwner->setContainment(false);
 	m_variable_Attribute_selfOwner->setResolveProxies(true);
-	m_variable_Attribute_selfOwner->setDefaultValueLiteral("");	
+	m_variable_Attribute_selfOwner->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_selfOwner->_setID(VARIABLE_ATTRIBUTE_SELFOWNER);
 	m_variable_Attribute_value->setName("value");
@@ -3181,7 +3181,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_value->setOrdered(true);
 	m_variable_Attribute_value->setContainment(false);
 	m_variable_Attribute_value->setResolveProxies(true);
-	m_variable_Attribute_value->setDefaultValueLiteral("");	
+	m_variable_Attribute_value->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_value->_setID(VARIABLE_ATTRIBUTE_VALUE);
 	m_variable_Attribute_varOwner->setName("varOwner");
@@ -3197,7 +3197,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	m_variable_Attribute_varOwner->setOrdered(true);
 	m_variable_Attribute_varOwner->setContainment(false);
 	m_variable_Attribute_varOwner->setResolveProxies(true);
-	m_variable_Attribute_varOwner->setDefaultValueLiteral("");	
+	m_variable_Attribute_varOwner->setDefaultValueLiteral("");
 	
 	m_variable_Attribute_varOwner->_setID(VARIABLE_ATTRIBUTE_VAROWNER);
 	

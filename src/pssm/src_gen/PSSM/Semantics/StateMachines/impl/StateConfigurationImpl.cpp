@@ -416,7 +416,7 @@ void StateConfigurationImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 			{
 				typeName = "PSSM::Semantics::StateMachines::StateConfiguration";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("PSSM::Semantics::StateMachines/]"))
 				{

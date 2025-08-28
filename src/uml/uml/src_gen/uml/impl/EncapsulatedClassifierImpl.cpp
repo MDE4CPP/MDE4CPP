@@ -304,7 +304,7 @@ void EncapsulatedClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<
 			{
 				typeName = "uml::Port";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

@@ -318,7 +318,7 @@ void InteractionFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "uml::GeneralOrdering";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

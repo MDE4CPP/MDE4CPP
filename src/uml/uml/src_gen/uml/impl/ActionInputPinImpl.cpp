@@ -356,14 +356,14 @@ void ActionInputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
 					typeName = "uml::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getFromAction()); 
+			loadHandler->handleChild(this->getFromAction());
 
 			return; 
 		}

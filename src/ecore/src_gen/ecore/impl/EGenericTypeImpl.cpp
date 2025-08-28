@@ -300,14 +300,14 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "ecore::EGenericType";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{
 					typeName = "ecore::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getELowerBound()); 
+			loadHandler->handleChild(this->getELowerBound());
 
 			return; 
 		}
@@ -319,7 +319,7 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "ecore::EGenericType";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{
@@ -344,14 +344,14 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "ecore::EGenericType";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("ecore/]"))
 				{
 					typeName = "ecore::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getEUpperBound()); 
+			loadHandler->handleChild(this->getEUpperBound());
 
 			return; 
 		}

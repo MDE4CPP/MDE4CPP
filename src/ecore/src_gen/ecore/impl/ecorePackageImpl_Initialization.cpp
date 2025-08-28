@@ -147,7 +147,7 @@ void ecorePackageImpl::initializeEAnnotationContent()
 	m_eAnnotation_Attribute_contents->setOrdered(true);
 	m_eAnnotation_Attribute_contents->setContainment(true);
 	m_eAnnotation_Attribute_contents->setResolveProxies(false);
-	m_eAnnotation_Attribute_contents->setDefaultValueLiteral("");	
+	m_eAnnotation_Attribute_contents->setDefaultValueLiteral("");
 	
 	m_eAnnotation_Attribute_contents->_setID(EANNOTATION_ATTRIBUTE_CONTENTS);
 	m_eAnnotation_Attribute_eModelElement->setName("eModelElement");
@@ -163,7 +163,7 @@ void ecorePackageImpl::initializeEAnnotationContent()
 	m_eAnnotation_Attribute_eModelElement->setOrdered(true);
 	m_eAnnotation_Attribute_eModelElement->setContainment(false);
 	m_eAnnotation_Attribute_eModelElement->setResolveProxies(false);
-	m_eAnnotation_Attribute_eModelElement->setDefaultValueLiteral("");	
+	m_eAnnotation_Attribute_eModelElement->setDefaultValueLiteral("");
 	m_eAnnotation_Attribute_eModelElement->setEOpposite(ecore::ecorePackage::eInstance()->getEModelElement_Attribute_eAnnotations());
 	
 	m_eAnnotation_Attribute_eModelElement->_setID(EANNOTATION_ATTRIBUTE_EMODELELEMENT);
@@ -180,7 +180,7 @@ void ecorePackageImpl::initializeEAnnotationContent()
 	m_eAnnotation_Attribute_references->setOrdered(true);
 	m_eAnnotation_Attribute_references->setContainment(false);
 	m_eAnnotation_Attribute_references->setResolveProxies(true);
-	m_eAnnotation_Attribute_references->setDefaultValueLiteral("");	
+	m_eAnnotation_Attribute_references->setDefaultValueLiteral("");
 	
 	m_eAnnotation_Attribute_references->_setID(EANNOTATION_ATTRIBUTE_REFERENCES);
 	
@@ -234,7 +234,7 @@ void ecorePackageImpl::initializeEAttributeContent()
 	m_eAttribute_Attribute_eAttributeType->setOrdered(true);
 	m_eAttribute_Attribute_eAttributeType->setContainment(false);
 	m_eAttribute_Attribute_eAttributeType->setResolveProxies(true);
-	m_eAttribute_Attribute_eAttributeType->setDefaultValueLiteral("");	
+	m_eAttribute_Attribute_eAttributeType->setDefaultValueLiteral("");
 	
 	m_eAttribute_Attribute_eAttributeType->_setID(EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE);
 	
@@ -304,7 +304,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAllAttributes->setOrdered(true);
 	m_eClass_Attribute_eAllAttributes->setContainment(false);
 	m_eClass_Attribute_eAllAttributes->setResolveProxies(true);
-	m_eClass_Attribute_eAllAttributes->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAllAttributes->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAllAttributes->_setID(ECLASS_ATTRIBUTE_EALLATTRIBUTES);
 	m_eClass_Attribute_eAllContainments->setName("eAllContainments");
@@ -320,7 +320,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAllContainments->setOrdered(true);
 	m_eClass_Attribute_eAllContainments->setContainment(false);
 	m_eClass_Attribute_eAllContainments->setResolveProxies(true);
-	m_eClass_Attribute_eAllContainments->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAllContainments->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAllContainments->_setID(ECLASS_ATTRIBUTE_EALLCONTAINMENTS);
 	m_eClass_Attribute_eAllGenericSuperTypes->setName("eAllGenericSuperTypes");
@@ -336,7 +336,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAllGenericSuperTypes->setOrdered(true);
 	m_eClass_Attribute_eAllGenericSuperTypes->setContainment(false);
 	m_eClass_Attribute_eAllGenericSuperTypes->setResolveProxies(true);
-	m_eClass_Attribute_eAllGenericSuperTypes->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAllGenericSuperTypes->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAllGenericSuperTypes->_setID(ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES);
 	m_eClass_Attribute_eAllOperations->setName("eAllOperations");
@@ -352,7 +352,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAllOperations->setOrdered(true);
 	m_eClass_Attribute_eAllOperations->setContainment(false);
 	m_eClass_Attribute_eAllOperations->setResolveProxies(true);
-	m_eClass_Attribute_eAllOperations->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAllOperations->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAllOperations->_setID(ECLASS_ATTRIBUTE_EALLOPERATIONS);
 	m_eClass_Attribute_eAllReferences->setName("eAllReferences");
@@ -368,7 +368,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAllReferences->setOrdered(true);
 	m_eClass_Attribute_eAllReferences->setContainment(false);
 	m_eClass_Attribute_eAllReferences->setResolveProxies(true);
-	m_eClass_Attribute_eAllReferences->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAllReferences->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAllReferences->_setID(ECLASS_ATTRIBUTE_EALLREFERENCES);
 	m_eClass_Attribute_eAllStructuralFeatures->setName("eAllStructuralFeatures");
@@ -384,7 +384,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAllStructuralFeatures->setOrdered(true);
 	m_eClass_Attribute_eAllStructuralFeatures->setContainment(false);
 	m_eClass_Attribute_eAllStructuralFeatures->setResolveProxies(true);
-	m_eClass_Attribute_eAllStructuralFeatures->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAllStructuralFeatures->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAllStructuralFeatures->_setID(ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES);
 	m_eClass_Attribute_eAllSuperTypes->setName("eAllSuperTypes");
@@ -400,7 +400,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAllSuperTypes->setOrdered(true);
 	m_eClass_Attribute_eAllSuperTypes->setContainment(false);
 	m_eClass_Attribute_eAllSuperTypes->setResolveProxies(true);
-	m_eClass_Attribute_eAllSuperTypes->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAllSuperTypes->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAllSuperTypes->_setID(ECLASS_ATTRIBUTE_EALLSUPERTYPES);
 	m_eClass_Attribute_eAttributes->setName("eAttributes");
@@ -416,7 +416,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAttributes->setOrdered(true);
 	m_eClass_Attribute_eAttributes->setContainment(false);
 	m_eClass_Attribute_eAttributes->setResolveProxies(true);
-	m_eClass_Attribute_eAttributes->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eAttributes->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eAttributes->_setID(ECLASS_ATTRIBUTE_EATTRIBUTES);
 	m_eClass_Attribute_eGenericSuperTypes->setName("eGenericSuperTypes");
@@ -432,7 +432,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eGenericSuperTypes->setOrdered(true);
 	m_eClass_Attribute_eGenericSuperTypes->setContainment(true);
 	m_eClass_Attribute_eGenericSuperTypes->setResolveProxies(false);
-	m_eClass_Attribute_eGenericSuperTypes->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eGenericSuperTypes->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eGenericSuperTypes->_setID(ECLASS_ATTRIBUTE_EGENERICSUPERTYPES);
 	m_eClass_Attribute_eIDAttribute->setName("eIDAttribute");
@@ -448,7 +448,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eIDAttribute->setOrdered(true);
 	m_eClass_Attribute_eIDAttribute->setContainment(false);
 	m_eClass_Attribute_eIDAttribute->setResolveProxies(false);
-	m_eClass_Attribute_eIDAttribute->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eIDAttribute->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eIDAttribute->_setID(ECLASS_ATTRIBUTE_EIDATTRIBUTE);
 	m_eClass_Attribute_eOperations->setName("eOperations");
@@ -464,7 +464,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eOperations->setOrdered(true);
 	m_eClass_Attribute_eOperations->setContainment(true);
 	m_eClass_Attribute_eOperations->setResolveProxies(false);
-	m_eClass_Attribute_eOperations->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eOperations->setDefaultValueLiteral("");
 	m_eClass_Attribute_eOperations->setEOpposite(ecore::ecorePackage::eInstance()->getEOperation_Attribute_eContainingClass());
 	
 	m_eClass_Attribute_eOperations->_setID(ECLASS_ATTRIBUTE_EOPERATIONS);
@@ -481,7 +481,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eReferences->setOrdered(true);
 	m_eClass_Attribute_eReferences->setContainment(false);
 	m_eClass_Attribute_eReferences->setResolveProxies(true);
-	m_eClass_Attribute_eReferences->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eReferences->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eReferences->_setID(ECLASS_ATTRIBUTE_EREFERENCES);
 	m_eClass_Attribute_eStructuralFeatures->setName("eStructuralFeatures");
@@ -497,7 +497,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eStructuralFeatures->setOrdered(true);
 	m_eClass_Attribute_eStructuralFeatures->setContainment(true);
 	m_eClass_Attribute_eStructuralFeatures->setResolveProxies(false);
-	m_eClass_Attribute_eStructuralFeatures->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eStructuralFeatures->setDefaultValueLiteral("");
 	m_eClass_Attribute_eStructuralFeatures->setEOpposite(ecore::ecorePackage::eInstance()->getEStructuralFeature_Attribute_eContainingClass());
 	
 	m_eClass_Attribute_eStructuralFeatures->_setID(ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES);
@@ -514,7 +514,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eSuperTypes->setOrdered(true);
 	m_eClass_Attribute_eSuperTypes->setContainment(false);
 	m_eClass_Attribute_eSuperTypes->setResolveProxies(true);
-	m_eClass_Attribute_eSuperTypes->setDefaultValueLiteral("");	
+	m_eClass_Attribute_eSuperTypes->setDefaultValueLiteral("");
 	
 	m_eClass_Attribute_eSuperTypes->_setID(ECLASS_ATTRIBUTE_ESUPERTYPES);
 	
@@ -788,7 +788,7 @@ void ecorePackageImpl::initializeEClassifierContent()
 	m_eClassifier_Attribute_ePackage->setOrdered(true);
 	m_eClassifier_Attribute_ePackage->setContainment(false);
 	m_eClassifier_Attribute_ePackage->setResolveProxies(true);
-	m_eClassifier_Attribute_ePackage->setDefaultValueLiteral("");	
+	m_eClassifier_Attribute_ePackage->setDefaultValueLiteral("");
 	m_eClassifier_Attribute_ePackage->setEOpposite(ecore::ecorePackage::eInstance()->getEPackage_Attribute_eClassifiers());
 	
 	m_eClassifier_Attribute_ePackage->_setID(ECLASSIFIER_ATTRIBUTE_EPACKAGE);
@@ -805,7 +805,7 @@ void ecorePackageImpl::initializeEClassifierContent()
 	m_eClassifier_Attribute_eTypeParameters->setOrdered(true);
 	m_eClassifier_Attribute_eTypeParameters->setContainment(true);
 	m_eClassifier_Attribute_eTypeParameters->setResolveProxies(true);
-	m_eClassifier_Attribute_eTypeParameters->setDefaultValueLiteral("");	
+	m_eClassifier_Attribute_eTypeParameters->setDefaultValueLiteral("");
 	
 	m_eClassifier_Attribute_eTypeParameters->_setID(ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS);
 	
@@ -910,7 +910,7 @@ void ecorePackageImpl::initializeEEnumContent()
 	m_eEnum_Attribute_eLiterals->setOrdered(true);
 	m_eEnum_Attribute_eLiterals->setContainment(true);
 	m_eEnum_Attribute_eLiterals->setResolveProxies(false);
-	m_eEnum_Attribute_eLiterals->setDefaultValueLiteral("");	
+	m_eEnum_Attribute_eLiterals->setDefaultValueLiteral("");
 	m_eEnum_Attribute_eLiterals->setEOpposite(ecore::ecorePackage::eInstance()->getEEnumLiteral_Attribute_eEnum());
 	
 	m_eEnum_Attribute_eLiterals->_setID(EENUM_ATTRIBUTE_ELITERALS);
@@ -1054,7 +1054,7 @@ void ecorePackageImpl::initializeEEnumLiteralContent()
 	m_eEnumLiteral_Attribute_eEnum->setOrdered(true);
 	m_eEnumLiteral_Attribute_eEnum->setContainment(false);
 	m_eEnumLiteral_Attribute_eEnum->setResolveProxies(false);
-	m_eEnumLiteral_Attribute_eEnum->setDefaultValueLiteral("");	
+	m_eEnumLiteral_Attribute_eEnum->setDefaultValueLiteral("");
 	m_eEnumLiteral_Attribute_eEnum->setEOpposite(ecore::ecorePackage::eInstance()->getEEnum_Attribute_eLiterals());
 	
 	m_eEnumLiteral_Attribute_eEnum->_setID(EENUMLITERAL_ATTRIBUTE_EENUM);
@@ -1093,7 +1093,7 @@ void ecorePackageImpl::initializeEFactoryContent()
 	m_eFactory_Attribute_ePackage->setOrdered(true);
 	m_eFactory_Attribute_ePackage->setContainment(false);
 	m_eFactory_Attribute_ePackage->setResolveProxies(false);
-	m_eFactory_Attribute_ePackage->setDefaultValueLiteral("");	
+	m_eFactory_Attribute_ePackage->setDefaultValueLiteral("");
 	m_eFactory_Attribute_ePackage->setEOpposite(ecore::ecorePackage::eInstance()->getEPackage_Attribute_eFactoryInstance());
 	
 	m_eFactory_Attribute_ePackage->_setID(EFACTORY_ATTRIBUTE_EPACKAGE);
@@ -1209,7 +1209,7 @@ void ecorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Attribute_eClassifier->setOrdered(true);
 	m_eGenericType_Attribute_eClassifier->setContainment(false);
 	m_eGenericType_Attribute_eClassifier->setResolveProxies(true);
-	m_eGenericType_Attribute_eClassifier->setDefaultValueLiteral("");	
+	m_eGenericType_Attribute_eClassifier->setDefaultValueLiteral("");
 	
 	m_eGenericType_Attribute_eClassifier->_setID(EGENERICTYPE_ATTRIBUTE_ECLASSIFIER);
 	m_eGenericType_Attribute_eLowerBound->setName("eLowerBound");
@@ -1225,7 +1225,7 @@ void ecorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Attribute_eLowerBound->setOrdered(true);
 	m_eGenericType_Attribute_eLowerBound->setContainment(true);
 	m_eGenericType_Attribute_eLowerBound->setResolveProxies(false);
-	m_eGenericType_Attribute_eLowerBound->setDefaultValueLiteral("");	
+	m_eGenericType_Attribute_eLowerBound->setDefaultValueLiteral("");
 	
 	m_eGenericType_Attribute_eLowerBound->_setID(EGENERICTYPE_ATTRIBUTE_ELOWERBOUND);
 	m_eGenericType_Attribute_eRawType->setName("eRawType");
@@ -1241,7 +1241,7 @@ void ecorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Attribute_eRawType->setOrdered(true);
 	m_eGenericType_Attribute_eRawType->setContainment(false);
 	m_eGenericType_Attribute_eRawType->setResolveProxies(true);
-	m_eGenericType_Attribute_eRawType->setDefaultValueLiteral("");	
+	m_eGenericType_Attribute_eRawType->setDefaultValueLiteral("");
 	
 	m_eGenericType_Attribute_eRawType->_setID(EGENERICTYPE_ATTRIBUTE_ERAWTYPE);
 	m_eGenericType_Attribute_eTypeArguments->setName("eTypeArguments");
@@ -1257,7 +1257,7 @@ void ecorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Attribute_eTypeArguments->setOrdered(true);
 	m_eGenericType_Attribute_eTypeArguments->setContainment(true);
 	m_eGenericType_Attribute_eTypeArguments->setResolveProxies(false);
-	m_eGenericType_Attribute_eTypeArguments->setDefaultValueLiteral("");	
+	m_eGenericType_Attribute_eTypeArguments->setDefaultValueLiteral("");
 	
 	m_eGenericType_Attribute_eTypeArguments->_setID(EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS);
 	m_eGenericType_Attribute_eTypeParameter->setName("eTypeParameter");
@@ -1273,7 +1273,7 @@ void ecorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Attribute_eTypeParameter->setOrdered(true);
 	m_eGenericType_Attribute_eTypeParameter->setContainment(false);
 	m_eGenericType_Attribute_eTypeParameter->setResolveProxies(false);
-	m_eGenericType_Attribute_eTypeParameter->setDefaultValueLiteral("");	
+	m_eGenericType_Attribute_eTypeParameter->setDefaultValueLiteral("");
 	
 	m_eGenericType_Attribute_eTypeParameter->_setID(EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER);
 	m_eGenericType_Attribute_eUpperBound->setName("eUpperBound");
@@ -1289,7 +1289,7 @@ void ecorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Attribute_eUpperBound->setOrdered(true);
 	m_eGenericType_Attribute_eUpperBound->setContainment(true);
 	m_eGenericType_Attribute_eUpperBound->setResolveProxies(false);
-	m_eGenericType_Attribute_eUpperBound->setDefaultValueLiteral("");	
+	m_eGenericType_Attribute_eUpperBound->setDefaultValueLiteral("");
 	
 	m_eGenericType_Attribute_eUpperBound->_setID(EGENERICTYPE_ATTRIBUTE_EUPPERBOUND);
 	
@@ -1346,7 +1346,7 @@ void ecorePackageImpl::initializeEModelElementContent()
 	m_eModelElement_Attribute_eAnnotations->setOrdered(true);
 	m_eModelElement_Attribute_eAnnotations->setContainment(true);
 	m_eModelElement_Attribute_eAnnotations->setResolveProxies(false);
-	m_eModelElement_Attribute_eAnnotations->setDefaultValueLiteral("");	
+	m_eModelElement_Attribute_eAnnotations->setDefaultValueLiteral("");
 	m_eModelElement_Attribute_eAnnotations->setEOpposite(ecore::ecorePackage::eInstance()->getEAnnotation_Attribute_eModelElement());
 	
 	m_eModelElement_Attribute_eAnnotations->_setID(EMODELELEMENT_ATTRIBUTE_EANNOTATIONS);
@@ -1458,7 +1458,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Attribute_eContainer->setOrdered(true);
 	m_eObject_Attribute_eContainer->setContainment(false);
 	m_eObject_Attribute_eContainer->setResolveProxies(true);
-	m_eObject_Attribute_eContainer->setDefaultValueLiteral("");	
+	m_eObject_Attribute_eContainer->setDefaultValueLiteral("");
 	m_eObject_Attribute_eContainer->setEOpposite(ecore::ecorePackage::eInstance()->getEObject_Attribute_eContentUnion());
 	
 	m_eObject_Attribute_eContainer->_setID(EOBJECT_ATTRIBUTE_ECONTAINER);
@@ -1475,7 +1475,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Attribute_eContentUnion->setOrdered(true);
 	m_eObject_Attribute_eContentUnion->setContainment(true);
 	m_eObject_Attribute_eContentUnion->setResolveProxies(true);
-	m_eObject_Attribute_eContentUnion->setDefaultValueLiteral("");	
+	m_eObject_Attribute_eContentUnion->setDefaultValueLiteral("");
 	m_eObject_Attribute_eContentUnion->setEOpposite(ecore::ecorePackage::eInstance()->getEObject_Attribute_eContainer());
 	
 	m_eObject_Attribute_eContentUnion->_setID(EOBJECT_ATTRIBUTE_ECONTENTUNION);
@@ -1798,7 +1798,7 @@ void ecorePackageImpl::initializeEObjectContainerContent()
 	m_eObjectContainer_Attribute_container->setOrdered(true);
 	m_eObjectContainer_Attribute_container->setContainment(false);
 	m_eObjectContainer_Attribute_container->setResolveProxies(true);
-	m_eObjectContainer_Attribute_container->setDefaultValueLiteral("");	
+	m_eObjectContainer_Attribute_container->setDefaultValueLiteral("");
 	
 	m_eObjectContainer_Attribute_container->_setID(EOBJECTCONTAINER_ATTRIBUTE_CONTAINER);
 	
@@ -1861,7 +1861,7 @@ void ecorePackageImpl::initializeEOperationContent()
 	m_eOperation_Attribute_eContainingClass->setOrdered(true);
 	m_eOperation_Attribute_eContainingClass->setContainment(false);
 	m_eOperation_Attribute_eContainingClass->setResolveProxies(false);
-	m_eOperation_Attribute_eContainingClass->setDefaultValueLiteral("");	
+	m_eOperation_Attribute_eContainingClass->setDefaultValueLiteral("");
 	m_eOperation_Attribute_eContainingClass->setEOpposite(ecore::ecorePackage::eInstance()->getEClass_Attribute_eOperations());
 	
 	m_eOperation_Attribute_eContainingClass->_setID(EOPERATION_ATTRIBUTE_ECONTAININGCLASS);
@@ -1878,7 +1878,7 @@ void ecorePackageImpl::initializeEOperationContent()
 	m_eOperation_Attribute_eExceptions->setOrdered(true);
 	m_eOperation_Attribute_eExceptions->setContainment(false);
 	m_eOperation_Attribute_eExceptions->setResolveProxies(true);
-	m_eOperation_Attribute_eExceptions->setDefaultValueLiteral("");	
+	m_eOperation_Attribute_eExceptions->setDefaultValueLiteral("");
 	
 	m_eOperation_Attribute_eExceptions->_setID(EOPERATION_ATTRIBUTE_EEXCEPTIONS);
 	m_eOperation_Attribute_eGenericExceptions->setName("eGenericExceptions");
@@ -1894,7 +1894,7 @@ void ecorePackageImpl::initializeEOperationContent()
 	m_eOperation_Attribute_eGenericExceptions->setOrdered(true);
 	m_eOperation_Attribute_eGenericExceptions->setContainment(true);
 	m_eOperation_Attribute_eGenericExceptions->setResolveProxies(false);
-	m_eOperation_Attribute_eGenericExceptions->setDefaultValueLiteral("");	
+	m_eOperation_Attribute_eGenericExceptions->setDefaultValueLiteral("");
 	
 	m_eOperation_Attribute_eGenericExceptions->_setID(EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS);
 	m_eOperation_Attribute_eParameters->setName("eParameters");
@@ -1910,7 +1910,7 @@ void ecorePackageImpl::initializeEOperationContent()
 	m_eOperation_Attribute_eParameters->setOrdered(true);
 	m_eOperation_Attribute_eParameters->setContainment(true);
 	m_eOperation_Attribute_eParameters->setResolveProxies(false);
-	m_eOperation_Attribute_eParameters->setDefaultValueLiteral("");	
+	m_eOperation_Attribute_eParameters->setDefaultValueLiteral("");
 	m_eOperation_Attribute_eParameters->setEOpposite(ecore::ecorePackage::eInstance()->getEParameter_Attribute_eOperation());
 	
 	m_eOperation_Attribute_eParameters->_setID(EOPERATION_ATTRIBUTE_EPARAMETERS);
@@ -1927,7 +1927,7 @@ void ecorePackageImpl::initializeEOperationContent()
 	m_eOperation_Attribute_eTypeParameters->setOrdered(true);
 	m_eOperation_Attribute_eTypeParameters->setContainment(true);
 	m_eOperation_Attribute_eTypeParameters->setResolveProxies(true);
-	m_eOperation_Attribute_eTypeParameters->setDefaultValueLiteral("");	
+	m_eOperation_Attribute_eTypeParameters->setDefaultValueLiteral("");
 	
 	m_eOperation_Attribute_eTypeParameters->_setID(EOPERATION_ATTRIBUTE_ETYPEPARAMETERS);
 	
@@ -2026,7 +2026,7 @@ void ecorePackageImpl::initializeEPackageContent()
 	m_ePackage_Attribute_eClassifiers->setOrdered(true);
 	m_ePackage_Attribute_eClassifiers->setContainment(true);
 	m_ePackage_Attribute_eClassifiers->setResolveProxies(true);
-	m_ePackage_Attribute_eClassifiers->setDefaultValueLiteral("");	
+	m_ePackage_Attribute_eClassifiers->setDefaultValueLiteral("");
 	m_ePackage_Attribute_eClassifiers->setEOpposite(ecore::ecorePackage::eInstance()->getEClassifier_Attribute_ePackage());
 	
 	m_ePackage_Attribute_eClassifiers->_setID(EPACKAGE_ATTRIBUTE_ECLASSIFIERS);
@@ -2043,7 +2043,7 @@ void ecorePackageImpl::initializeEPackageContent()
 	m_ePackage_Attribute_eFactoryInstance->setOrdered(true);
 	m_ePackage_Attribute_eFactoryInstance->setContainment(false);
 	m_ePackage_Attribute_eFactoryInstance->setResolveProxies(false);
-	m_ePackage_Attribute_eFactoryInstance->setDefaultValueLiteral("");	
+	m_ePackage_Attribute_eFactoryInstance->setDefaultValueLiteral("");
 	m_ePackage_Attribute_eFactoryInstance->setEOpposite(ecore::ecorePackage::eInstance()->getEFactory_Attribute_ePackage());
 	
 	m_ePackage_Attribute_eFactoryInstance->_setID(EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE);
@@ -2060,7 +2060,7 @@ void ecorePackageImpl::initializeEPackageContent()
 	m_ePackage_Attribute_eSubpackages->setOrdered(true);
 	m_ePackage_Attribute_eSubpackages->setContainment(true);
 	m_ePackage_Attribute_eSubpackages->setResolveProxies(true);
-	m_ePackage_Attribute_eSubpackages->setDefaultValueLiteral("");	
+	m_ePackage_Attribute_eSubpackages->setDefaultValueLiteral("");
 	m_ePackage_Attribute_eSubpackages->setEOpposite(ecore::ecorePackage::eInstance()->getEPackage_Attribute_eSuperPackage());
 	
 	m_ePackage_Attribute_eSubpackages->_setID(EPACKAGE_ATTRIBUTE_ESUBPACKAGES);
@@ -2077,7 +2077,7 @@ void ecorePackageImpl::initializeEPackageContent()
 	m_ePackage_Attribute_eSuperPackage->setOrdered(true);
 	m_ePackage_Attribute_eSuperPackage->setContainment(false);
 	m_ePackage_Attribute_eSuperPackage->setResolveProxies(true);
-	m_ePackage_Attribute_eSuperPackage->setDefaultValueLiteral("");	
+	m_ePackage_Attribute_eSuperPackage->setDefaultValueLiteral("");
 	m_ePackage_Attribute_eSuperPackage->setEOpposite(ecore::ecorePackage::eInstance()->getEPackage_Attribute_eSubpackages());
 	
 	m_ePackage_Attribute_eSuperPackage->_setID(EPACKAGE_ATTRIBUTE_ESUPERPACKAGE);
@@ -2135,7 +2135,7 @@ void ecorePackageImpl::initializeEParameterContent()
 	m_eParameter_Attribute_eOperation->setOrdered(true);
 	m_eParameter_Attribute_eOperation->setContainment(false);
 	m_eParameter_Attribute_eOperation->setResolveProxies(false);
-	m_eParameter_Attribute_eOperation->setDefaultValueLiteral("");	
+	m_eParameter_Attribute_eOperation->setDefaultValueLiteral("");
 	m_eParameter_Attribute_eOperation->setEOpposite(ecore::ecorePackage::eInstance()->getEOperation_Attribute_eParameters());
 	
 	m_eParameter_Attribute_eOperation->_setID(EPARAMETER_ATTRIBUTE_EOPERATION);
@@ -2222,7 +2222,7 @@ void ecorePackageImpl::initializeEReferenceContent()
 	m_eReference_Attribute_eKeys->setOrdered(true);
 	m_eReference_Attribute_eKeys->setContainment(false);
 	m_eReference_Attribute_eKeys->setResolveProxies(true);
-	m_eReference_Attribute_eKeys->setDefaultValueLiteral("");	
+	m_eReference_Attribute_eKeys->setDefaultValueLiteral("");
 	
 	m_eReference_Attribute_eKeys->_setID(EREFERENCE_ATTRIBUTE_EKEYS);
 	m_eReference_Attribute_eOpposite->setName("eOpposite");
@@ -2238,7 +2238,7 @@ void ecorePackageImpl::initializeEReferenceContent()
 	m_eReference_Attribute_eOpposite->setOrdered(true);
 	m_eReference_Attribute_eOpposite->setContainment(false);
 	m_eReference_Attribute_eOpposite->setResolveProxies(true);
-	m_eReference_Attribute_eOpposite->setDefaultValueLiteral("");	
+	m_eReference_Attribute_eOpposite->setDefaultValueLiteral("");
 	
 	m_eReference_Attribute_eOpposite->_setID(EREFERENCE_ATTRIBUTE_EOPPOSITE);
 	m_eReference_Attribute_eReferenceType->setName("eReferenceType");
@@ -2254,7 +2254,7 @@ void ecorePackageImpl::initializeEReferenceContent()
 	m_eReference_Attribute_eReferenceType->setOrdered(true);
 	m_eReference_Attribute_eReferenceType->setContainment(false);
 	m_eReference_Attribute_eReferenceType->setResolveProxies(true);
-	m_eReference_Attribute_eReferenceType->setDefaultValueLiteral("");	
+	m_eReference_Attribute_eReferenceType->setDefaultValueLiteral("");
 	
 	m_eReference_Attribute_eReferenceType->_setID(EREFERENCE_ATTRIBUTE_EREFERENCETYPE);
 	
@@ -2458,7 +2458,7 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	m_eStructuralFeature_Attribute_eContainingClass->setOrdered(true);
 	m_eStructuralFeature_Attribute_eContainingClass->setContainment(false);
 	m_eStructuralFeature_Attribute_eContainingClass->setResolveProxies(false);
-	m_eStructuralFeature_Attribute_eContainingClass->setDefaultValueLiteral("");	
+	m_eStructuralFeature_Attribute_eContainingClass->setDefaultValueLiteral("");
 	m_eStructuralFeature_Attribute_eContainingClass->setEOpposite(ecore::ecorePackage::eInstance()->getEClass_Attribute_eStructuralFeatures());
 	
 	m_eStructuralFeature_Attribute_eContainingClass->_setID(ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS);
@@ -2517,7 +2517,7 @@ void ecorePackageImpl::initializeETypeParameterContent()
 	m_eTypeParameter_Attribute_eBounds->setOrdered(true);
 	m_eTypeParameter_Attribute_eBounds->setContainment(true);
 	m_eTypeParameter_Attribute_eBounds->setResolveProxies(false);
-	m_eTypeParameter_Attribute_eBounds->setDefaultValueLiteral("");	
+	m_eTypeParameter_Attribute_eBounds->setDefaultValueLiteral("");
 	
 	m_eTypeParameter_Attribute_eBounds->_setID(ETYPEPARAMETER_ATTRIBUTE_EBOUNDS);
 	
@@ -2651,7 +2651,7 @@ void ecorePackageImpl::initializeETypedElementContent()
 	m_eTypedElement_Attribute_eGenericType->setOrdered(true);
 	m_eTypedElement_Attribute_eGenericType->setContainment(true);
 	m_eTypedElement_Attribute_eGenericType->setResolveProxies(false);
-	m_eTypedElement_Attribute_eGenericType->setDefaultValueLiteral("");	
+	m_eTypedElement_Attribute_eGenericType->setDefaultValueLiteral("");
 	
 	m_eTypedElement_Attribute_eGenericType->_setID(ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE);
 	m_eTypedElement_Attribute_eType->setName("eType");
@@ -2667,7 +2667,7 @@ void ecorePackageImpl::initializeETypedElementContent()
 	m_eTypedElement_Attribute_eType->setOrdered(true);
 	m_eTypedElement_Attribute_eType->setContainment(false);
 	m_eTypedElement_Attribute_eType->setResolveProxies(true);
-	m_eTypedElement_Attribute_eType->setDefaultValueLiteral("");	
+	m_eTypedElement_Attribute_eType->setDefaultValueLiteral("");
 	
 	m_eTypedElement_Attribute_eType->_setID(ETYPEDELEMENT_ATTRIBUTE_ETYPE);
 	

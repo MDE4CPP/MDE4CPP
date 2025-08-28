@@ -387,14 +387,14 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "fUML::Semantics::Loci::Executor";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::Loci/]"))
 				{
 					typeName = "fUML::Semantics::Loci::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getExecutor()); 
+			loadHandler->handleChild(this->getExecutor());
 
 			return; 
 		}
@@ -407,7 +407,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type of an eClassifiers node is empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::MDE4CPP_Extensions/]"))
 				{
@@ -432,14 +432,14 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "fUML::Semantics::Loci::ExecutionFactory";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("fUML::Semantics::Loci/]"))
 				{
 					typeName = "fUML::Semantics::Loci::"+typeName;
 				}
 			}
-			loadHandler->handleChild(this->getFactory()); 
+			loadHandler->handleChild(this->getFactory());
 
 			return; 
 		}

@@ -49,6 +49,7 @@ int main()
     std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
     std::shared_ptr<uml::Model> p = factory->createModel();
+
     p->setName("Model");
 
     std::shared_ptr<uml::Class> c = factory->createClass_as_ownedType_in_Package(p);
@@ -59,12 +60,14 @@ int main()
     o->setName("do");
 
     //use a string to create a class in a Package
-    std::shared_ptr<ecore::EObject> a = factory->create("Class", p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
-    c = std::dynamic_pointer_cast<uml::Class>(a);
+    /*
+    std::shared_ptr<ecore::EObject> eo = factory->create("Class", p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
+    c = std::dynamic_pointer_cast<uml::Class>(eo);
     c->setName("Class2");
-
+*/
     //use a Package::MetaElement-ID to create a class
-    a = factory->create(uml::umlPackage::CLASS_CLASS, p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
+    std::shared_ptr<ecore::EObject> a = factory->create(uml::umlPackage::CLASS_CLASS, p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
+
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class3");
 

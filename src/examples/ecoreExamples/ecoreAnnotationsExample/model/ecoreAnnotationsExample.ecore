@@ -8,8 +8,8 @@
   </eAnnotations>
   <eAnnotations source="http://tu-ilmenau.de/see/prepareApplication">
     <details key="description" value="The &quot;prepareApplication&quot; EAnnotation (source: http://tu-ilmenau.de/see/prepareApplication) is used to specify &#xA;an application (i.e. main.cpp) that shall be generated for an ecore model. This main application can be executed once compiled.&#xA;&quot;prepareApplication&quot; can be placed under (child) the root package of an ecore model. Subpackages will not be taken into account&#xA;as there can only be one main application.&#xA;&#xA;Possible details entries: &#xA;&quot;body&quot;&#xA;&quot;includes&quot;"/>
-    <details key="body" value="This DetailsEntry can be used to define the body of the applications main function.&#xA;&#xA;Example:&#xA;&#xA;std::string hw = &quot;Hello World&quot;;&#xA;std::cout&lt;&lt;hw&lt;&lt;std::endl;"/>
-    <details key="includes" value="This DetailsEntry can be used to define additional include statements for labraries &#xA;to be included in the main application.&#xA;&#xA;NOTE: The include statements should be listed, a new line&#xA;for each statement (as the value of this DetailsEntry will be generated into the final code&#xA;as is).&#xA;&#xA;Example:&#xA;&#xA;#include &lt;cmath>&#xA;#include &lt;string>&#xA;"/>
+    <details key="body" value="/*This DetailsEntry can be used to define the body of the applications main function.&#xA;&#xA;Example:&#xA;*/&#xA;std::string hw = &quot;Hello World&quot;;&#xA;std::cout&lt;&lt;hw&lt;&lt;std::endl;"/>
+    <details key="includes" value="/*This DetailsEntry can be used to define additional include statements for labraries &#xA;to be included in the main application.&#xA;&#xA;NOTE: The include statements should be listed, a new line&#xA;for each statement (as the value of this DetailsEntry will be generated into the final code&#xA;as is).&#xA;&#xA;Example:&#xA;&#xA;#include &lt;cmath>&#xA;#include &lt;string>&#xA;*/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="ADescriptionClass">
     <eAnnotations source="http://tu-ilmenau.de/see/codegen">

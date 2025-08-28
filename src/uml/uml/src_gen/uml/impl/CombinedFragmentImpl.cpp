@@ -404,7 +404,7 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "uml::Gate";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -429,7 +429,7 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "uml::InteractionOperand";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

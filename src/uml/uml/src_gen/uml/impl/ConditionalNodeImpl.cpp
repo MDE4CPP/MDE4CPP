@@ -376,7 +376,7 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "uml::Clause";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -401,7 +401,7 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{

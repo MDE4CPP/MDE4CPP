@@ -84,7 +84,7 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setOrdered(false);
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setContainment(false);
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setResolveProxies(true);
-	m_cS_ExecutionFactory_Attribute_appliedProfiles->setDefaultValueLiteral("");	
+	m_cS_ExecutionFactory_Attribute_appliedProfiles->setDefaultValueLiteral("");
 	
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->_setID(CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES);
 	

@@ -404,7 +404,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::InputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
@@ -429,7 +429,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "uml::OutputPin";
 			}
-			else
+			else 
 			{
 				if (std::string::npos == typeName.find("uml/]"))
 				{
