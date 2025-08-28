@@ -184,7 +184,7 @@ def commonExamples =
 //	[{example project directory}, {task name}]
 	['./commonExamples/persistenceExample/', 'compileExamplePersistence'],
 	['./commonExamples/pluginFrameworkExample/', 'compileExamplePluginFramework'],	
-// todo create gradle compile tast for SimpleUML	['./commonExamples/SimpleUML/', 'SimpleUML']
+	['./commonExamples/SimpleUML/', 'compileExampleSimpleUML']
 ]
 
 task compileCommonExamples() {
