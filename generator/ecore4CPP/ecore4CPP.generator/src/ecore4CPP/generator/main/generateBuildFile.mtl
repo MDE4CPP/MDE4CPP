@@ -326,7 +326,7 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 	}
 	else
 	{
-		dependsOn  getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)
+		[comment wenn dies einkommentiert wird, wird bei jeder Quellcodänderung compiliert! dependsOn  getRootProject().getTasksByName('generate[packageName.toUpperFirst()/? Model', true) /]
 		mustRunAfter = ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)[']'/]
 	}	
 	[comment
