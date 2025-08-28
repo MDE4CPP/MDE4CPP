@@ -3,9 +3,8 @@ application/
 
 **/model/build.gradle
 
-**/*Model*/.cproject
+**/.cproject
 **/*Model*/.project
-**/*Model*/build.gradle
 
 /commonExamples/SubsetUnionExample/**/.cproject
 /commonExamples/SubsetUnionExample/**/.project
