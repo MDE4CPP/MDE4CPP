@@ -1493,7 +1493,7 @@
       </eClassifiers>
     </eSubpackages>
     <eSubpackages name="Loci" nsURI="http:///PSSM/Semantics/Loci.ecore" nsPrefix="PSSM.Semantics.Loci">
-      <eClassifiers xsi:type="ecore:EClass" name="SM_ExecutionFactory" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/Loci/ExecutionFactory">
+      <eClassifiers xsi:type="ecore:EClass" name="SM_ExecutionFactory" eSuperTypes="../../pscs/model/PSCS.ecore#//Semantics/Loci/CS_ExecutionFactory">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;uml/StateMachine.hpp&quot;&#xA;#include &quot;uml/Pseudostate.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/StateMachineExecution.hpp&quot;&#xA;#include &quot;uml/State.hpp&quot;&#xA;#include &quot;uml/FinalState.hpp&quot;&#xA;#include &quot;uml/OpaqueExpression.hpp&quot;&#xA;#include &quot;uml/ReadSelfAction.hpp&quot;&#xA;#include &quot;uml/Transition.hpp&quot;&#xA;#include &quot;uml/Region.hpp&quot;"/>
         </eAnnotations>
@@ -1504,7 +1504,7 @@
           <eParameters name="element" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="SM_Locus" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/Loci/Locus">
+      <eClassifiers xsi:type="ecore:EClass" name="SM_Locus" eSuperTypes="../../pscs/model/PSCS.ecore#//Semantics/Loci/CS_Locus">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="&#xA;#include &lt;algorithm>&#xA;#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;PSSM/MDE4CPP_Extensions/PSSM_Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;"/>
         </eAnnotations>
@@ -1528,7 +1528,7 @@
     </eSubpackages>
   </eSubpackages>
   <eSubpackages name="MDE4CPP_Extensions" nsPrefix="PSSM_Semantics.Semantics.MDE4CPP_Extensions">
-    <eClassifiers xsi:type="ecore:EClass" name="PSSM_Object" abstract="true" eSuperTypes="../../fuml/model/fUML.ecore#//MDE4CPP_Extensions/FUML_Object">
+    <eClassifiers xsi:type="ecore:EClass" name="PSSM_Object" abstract="true" eSuperTypes="../../pscs/model/PSCS.ecore#//MDE4CPP_Extensions/PSCS_Object">
       <eAnnotations source="MDE4CPP_Substitutes" references="../../fuml/model/fUML.ecore#//Semantics/StructuredClassifiers/Object">
         <details key="doc" value="This class provides an interface defining fUML-specific functionality of PSSM::Semantics::StructuredClassifiers::SM_Object&#xD;&#xA;to generated UML model classes within MDE4CPP. Thus, it can be understood as a substitution of PSSM::Semantics::StructuredClassifiers::SM_Object"/>
       </eAnnotations>
@@ -1544,7 +1544,7 @@
       </eOperations>
       <eOperations name="destroy" ordered="false" lowerBound="1">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="body" value="// In addition to realize the normal process of stopping the object activation&#xD;&#xA;// as well as removing the current object from the locus, this destruction phase&#xD;&#xA;// also implies removal of all events remaining in the pool. This prevents the&#xD;&#xA;// dispatch loop to actually get the next event (even if at this step there is no&#xD;&#xA;// chance to match an accepter) whereas the current object is not anymore registered.&#xD;&#xA;// in the Locus.&#xD;&#xA;if(this->getObjectActivation() != nullptr)&#xD;&#xA;    {&#xD;&#xA;    &#x9;this->getObjectActivation()->stop();&#xD;&#xA;    &#x9;this->getObjectActivation()->getEventPool()->clear();&#xD;&#xA;    &#x9;this->setObjectActivation(nullptr);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    this->getTypes()->clear();&#xD;&#xA;    //ExtensionalValueImpl::destroy();"/>
+          <details key="body" value="// In addition to realize the normal process of stopping the object activation&#xA;// as well as removing the current object from the locus, this destruction phase&#xA;// also implies removal of all events remaining in the pool. This prevents the&#xA;// dispatch loop to actually get the next event (even if at this step there is no&#xA;// chance to match an accepter) whereas the current object is not anymore registered.&#xA;// in the Locus.&#xA;if(this->getObjectActivation() != nullptr)&#xA;   {&#xA;    &#x9;this->getObjectActivation()->stop();&#xA;    &#x9;this->getObjectActivation()->getEventPool()->clear();&#xA;    &#x9;this->setObjectActivation(nullptr);&#xA;    }&#xA;&#xA;    this->getTypes()->clear();&#xA;    fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();"/>
         </eAnnotations>
       </eOperations>
     </eClassifiers>
