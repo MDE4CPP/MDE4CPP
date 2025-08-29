@@ -38,7 +38,7 @@ task generateAllExamples() {
 	dependsOn getRootProject().getTasksByName('generateEcoreModelExamples', true)
 	dependsOn getRootProject().getTasksByName('generateUMLModelExamples', true)
 	dependsOn getRootProject().getTasksByName('generatefUMLModelExamples', true)
-//	dependsOn getRootProject().getTasksByName('generatePSCSModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generatePSCSModelExamples', true)
 	dependsOn getRootProject().getTasksByName('generatePSSMModelExamples', true)
 	dependsOn getRootProject().getTasksByName('generateOCLModelExamples', true)
 	dependsOn getRootProject().getTasksByName('generateStradegiesModelExamples', true)
@@ -59,7 +59,7 @@ task compileAllExamples() {
 	
 	dependsOn getRootProject().getTasksByName('compilefUMLModelExamples', true)
 	
-//	dependsOn getRootProject().getTasksByName('compilePSCSModelExamples', true)
+	dependsOn getRootProject().getTasksByName('compilePSCSModelExamples', true)
 
 	dependsOn getRootProject().getTasksByName('compilePSSMModelExamples', true)
 	
@@ -1187,6 +1187,14 @@ task buildOCLTestSuite()
 
 //########################   PSCS   ########################
 
+def allPSCSModelExamples =
+[
+//	[{Model project directory}, {Model name}]
+	 ['./PSCSExamples/Ampelsteuerung_Example/', 'Ampelsteuerung_Example']
+//	,['./PSCSExamples/LoadBalance/', 'LoadBalance']	
+	,['./PSCSExamples/PingModel/', 'PingModel']
+
+]
 
 def allPSCSTestSuiteModels = 
 [
@@ -1217,6 +1225,102 @@ def allPSCSTestSuiteModels =
 ]
 
 
+task generatePSCSModelExamples() {
+	group 'Examples'
+	description 'generate PSCS Model Examples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		allPSCSModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			def buildModelFile = file("${model[0]}/model/build.gradle")
+			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+			
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+					workingDir = file("${model[0]}")
+					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
+				}
+			}
+		} 		
+    }
+}
+
+task compilePSCSModelExamples() {
+	group 'Examples'
+	description 'compile applications for PSCS Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSCSModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildPSCSModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for PSCS Model Examples'
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+		
+		allPSCSModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, prefix + 'gradlew build' + model[1]]
+			}
+		}
+	}
+}
 
 task generatePSCSTestSuite() {
 	group 'Tests'
