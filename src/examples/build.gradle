@@ -715,22 +715,25 @@ task buildUMLTestSuite()
 def allfUMLModelExamples = 
 [
 //	[{Model project directory}, {Model name}]
-	 ['./fUMLExamples/Calculator/', 'Calculator']
-	,['./fUMLExamples/ThreePhilosophers/', 'ThreePhilosophers']
+	 ['./fUMLExamples/Calculator/', 'CalcModel']
+	,['./fUMLExamples/ThreePhilosophers/', 'Philosophers']
 ]
 
 def allfUMLTestSuiteModels =
 [
 //	[{Model project directory}, {Model name}]
 	  ['./fUMLExamples/TestSuite/ActionTest', 'ActionTest']
+// build manually!	 ,['./fUMLExamples/TestSuite/UsageTest/PrimitiveLibrary', 'PrimitiveLibrary']
+// build manually!	 ,['./fUMLExamples/TestSuite/UsageTest/ExternalModelUsage', 'ExternalModelUsage']
 	 ,['./fUMLExamples/TestSuite/ForkNodeTest', 'ForkNodeTest']
 	 ,['./fUMLExamples/TestSuite/JoinNodeTest', 'JoinNodeTest']
-	 ,['./fUMLExamples/TestSuite/MultiplePins', 'JoinNodeTest']
-	 ,['./fUMLExamples/TestSuite/RegionTest', 'RegionTest']
+	 ,['./fUMLExamples/TestSuite/MultiplePins', 'FUMLMultiplePins']
+//	 ,['./fUMLExamples/TestSuite/RegionTest', 'RegionTest'] handle Expension region in name 
+	 ,['./fUMLExamples/TestSuite/SignalExample', 'SignalExample']
 	 ,['./fUMLExamples/TestSuite/SimpleBehaviorTest', 'SimpleBehaviorTest']
-	 ,['./fUMLExamples/TestSuite/TargetPinTest', 'TargetPinTest']
-	 ,['./fUMLExamples/TestSuite/TestModelImport', 'TestModelImport']
-	 ,['./fUMLExamples/TestSuite/TestModelMain', 'TestModelMain']
+// 	 ,['./fUMLExamples/TestSuite/TargetPinTest', 'TargetPinTest']
+//	 ,['./fUMLExamples/TestSuite/TestModelImport', 'TestModelImport']
+//	 ,['./fUMLExamples/TestSuite/TestModelMain', 'TestModelMain']
 ]
 
 task generatefUMLModelExamples() {
@@ -934,21 +937,21 @@ task buildfUMLTestSuite()
 def allOCLExamples = 
 [
 //	[{project directory}, {task name}]
-	['./oclExamples/oclExample/', 'oclExample']
+	['./oclExamples/oclExample/', 'compileSimpleOCLExample']
 ]
 
 def allOCLModelExamples = 
 [
 //	[{Model project directory}, {Model name}]
-	['./oclExamples/Connect4/', 'Connect4']
-	,['./oclExamples/oclEcoreModelExample/', 'oclEcoreModelExample']
-	,['./oclExamples/oclQueryEcoreModelExample/', 'oclQueryEcoreModelExample']
+//	['./oclExamples/Connect4/', 'Connect4']
+//	,['./oclExamples/oclEcoreModelExample/', 'Library_ecore']
+//	,['./oclExamples/oclQueryEcoreModelExample/', 'Library_QueryEcore']
 ]
 
 def allOCLTestSuiteModels = 
 [
 //	[{Model project directory}, {Model name}]
-	['./PSCSExamples/TestSuite/oclUmlModelExample/', 'oclUmlModelExample']
+//	['./oclExamples/TestSuite/oclUmlModelExample/', 'Library_uml']
 ]
 
 task compileOCLExamples() {
@@ -965,12 +968,21 @@ task compileOCLExamples() {
 			tool = 'cmd'
 			command = '/C'
 			prefix = ''
-		}
+		} 
+		
+		println '_____________________________________________________________________________________'
+		
+		println allOCLExamples.toString()
 		
 		allOCLExamples.each { taskVar ->
-		// taskVar[0] = task project root directoy, taskVar[1] = task name
+		// taskVar[0] = task project root directoy, taskVar[1] = task name			
 			exec
 			{
+				println '_____________________________________________________________________________________'
+		
+				println taskVar[0]
+				println 'gradlew ' + taskVar[1]
+				
 				workingDir = file("${taskVar[0]}")
 				commandLine = [tool, command, prefix + 'gradlew ' + taskVar[1]]
 			}
