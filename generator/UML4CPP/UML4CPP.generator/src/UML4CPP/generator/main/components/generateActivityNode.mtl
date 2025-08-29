@@ -37,6 +37,7 @@
 */]
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
 //ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
+[comment todo handle expansion Region [anActivityNode.activity.memberName() Example: fUML RegionTest/]
 [anActivityNode.memberName()/] = factory->create[anActivityNode.eClass().name/]_as_node_in_[anActivityNode.getOwnerPropertyName()/]([anActivityNode.activity.memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
 
