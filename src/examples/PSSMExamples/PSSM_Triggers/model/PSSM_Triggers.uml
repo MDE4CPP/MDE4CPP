@@ -21,9 +21,9 @@
           <subvertex xmi:type="uml:FinalState" xmi:id="_GpaZUK-2Ee6lWP9vaoPwEQ" name="FinalState"/>
         </region>
       </ownedBehavior>
-      <nestedClassifier xmi:type="uml:Signal" xmi:id="_a79sgK-2Ee6lWP9vaoPwEQ" name="Signal"/>
     </packagedElement>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_bDpB0K-2Ee6lWP9vaoPwEQ" name="SignalEvent" signal="_a79sgK-2Ee6lWP9vaoPwEQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_a79sgK-2Ee6lWP9vaoPwEQ" name="Signal"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_JyJ3wJ-jEe6R884eeposdg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_JyKe0J-jEe6R884eeposdg" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
