@@ -4,12 +4,12 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -17,7 +17,9 @@
 //depending model packages
 
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -38,8 +40,8 @@ void LociPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
-	m_sM_ExecutionFactory_Class->getESuperTypes()->push_back(fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class());
-	m_sM_Locus_Class->getESuperTypes()->push_back(fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class());
+	m_sM_ExecutionFactory_Class->getESuperTypes()->push_back(PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_ExecutionFactory_Class());
+	m_sM_Locus_Class->getESuperTypes()->push_back(PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class());
 	
 
  	// Initialize classes and features; add operations and parameters

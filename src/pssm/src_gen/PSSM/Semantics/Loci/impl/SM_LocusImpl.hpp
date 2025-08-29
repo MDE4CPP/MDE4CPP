@@ -17,12 +17,12 @@
 #include "../SM_Locus.hpp"
 
 #include "PSSM/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
 
 //*********************************
 namespace PSSM::Semantics::Loci 
 {
-	class PSSM_API SM_LocusImpl : virtual public fUML::Semantics::Loci::LocusImpl, virtual public SM_Locus 
+	class PSSM_API SM_LocusImpl : virtual public PSCS::Semantics::Loci::CS_LocusImpl, virtual public SM_Locus 
 	{
 		public: 
 			SM_LocusImpl(const SM_LocusImpl & obj);

@@ -59,6 +59,7 @@ namespace uml
 	class Class;
 	class Comment;
 	class Operation;
+	class Port;
 	class StructuralFeature;
 }
 

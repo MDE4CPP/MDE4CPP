@@ -54,13 +54,14 @@ namespace uml
 {
 	class Class;
 	class Comment;
+	class Port;
 }
 
 // namespace macro header include
 #include "PSSM/PSSM.hpp"
 
 // base class includes
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "PSCS/MDE4CPP_Extensions/PSCS_Object.hpp"
 
 
 
@@ -69,7 +70,7 @@ namespace uml
 namespace PSSM::MDE4CPP_Extensions 
 {
 	
-	class PSSM_API PSSM_Object : virtual public fUML::MDE4CPP_Extensions::FUML_Object
+	class PSSM_API PSSM_Object : virtual public PSCS::MDE4CPP_Extensions::PSCS_Object
 	{
 		public:
  			PSSM_Object(const PSSM_Object &) {}

@@ -17,12 +17,12 @@
 #include "../PSSM_Object.hpp"
 
 #include "PSSM/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
-#include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
+#include "PSCS/MDE4CPP_Extensions/impl/PSCS_ObjectImpl.hpp"
 
 //*********************************
 namespace PSSM::MDE4CPP_Extensions 
 {
-	class PSSM_API PSSM_ObjectImpl : virtual public fUML::MDE4CPP_Extensions::FUML_ObjectImpl, virtual public PSSM_Object 
+	class PSSM_API PSSM_ObjectImpl : virtual public PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl, virtual public PSSM_Object 
 	{
 		public: 
 			PSSM_ObjectImpl(const PSSM_ObjectImpl & obj);

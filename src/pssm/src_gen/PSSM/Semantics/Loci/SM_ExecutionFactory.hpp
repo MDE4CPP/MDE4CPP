@@ -41,6 +41,7 @@ namespace fUML::Semantics::Loci
 namespace uml 
 {
 	class Element;
+	class Package;
 	class PrimitiveType;
 }
 
@@ -48,7 +49,7 @@ namespace uml
 #include "PSSM/PSSM.hpp"
 
 // base class includes
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
 
 
 
@@ -57,7 +58,7 @@ namespace uml
 namespace PSSM::Semantics::Loci 
 {
 	
-	class PSSM_API SM_ExecutionFactory : virtual public fUML::Semantics::Loci::ExecutionFactory
+	class PSSM_API SM_ExecutionFactory : virtual public PSCS::Semantics::Loci::CS_ExecutionFactory
 	{
 		public:
  			SM_ExecutionFactory(const SM_ExecutionFactory &) {}

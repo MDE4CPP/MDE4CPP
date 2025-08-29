@@ -17,12 +17,12 @@
 #include "../SM_ExecutionFactory.hpp"
 
 #include "PSSM/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
 
 //*********************************
 namespace PSSM::Semantics::Loci 
 {
-	class PSSM_API SM_ExecutionFactoryImpl : virtual public fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public SM_ExecutionFactory 
+	class PSSM_API SM_ExecutionFactoryImpl : virtual public PSCS::Semantics::Loci::CS_ExecutionFactoryImpl, virtual public SM_ExecutionFactory 
 	{
 		public: 
 			SM_ExecutionFactoryImpl(const SM_ExecutionFactoryImpl & obj);

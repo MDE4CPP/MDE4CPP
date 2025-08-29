@@ -14,12 +14,12 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EGenericType;
+	class EClass;
 	class EOperation;
 	class EParameter;
+	class EGenericType;
+	class EAnnotation;
 	class EStringToStringMapEntry;
-	class EClass;
 }
 
 namespace PSSM::Semantics::Loci 
@@ -53,8 +53,8 @@ namespace PSSM::Semantics::Loci
 			// Begin Class SM_ExecutionFactory
 			//Class and Feature IDs 
 			static const unsigned long SM_EXECUTIONFACTORY_CLASS = 822647455;
-			static const unsigned int SM_EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int SM_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 8;
+			static const unsigned int SM_EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int SM_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 11;
 			
 			
 			static const unsigned long SM_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 3011345813;
@@ -73,7 +73,7 @@ namespace PSSM::Semantics::Loci
 			//Class and Feature IDs 
 			static const unsigned long SM_LOCUS_CLASS = 1389520797;
 			static const unsigned int SM_LOCUS_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int SM_LOCUS_CLASS_OPERATION_COUNT = 9;
+			static const unsigned int SM_LOCUS_CLASS_OPERATION_COUNT = 10;
 			
 			
 			static const unsigned long SM_LOCUS_OPERATION_INSTANTIATE_CLASS = 2872116083;

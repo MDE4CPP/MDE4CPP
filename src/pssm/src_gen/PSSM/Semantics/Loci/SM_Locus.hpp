@@ -50,7 +50,7 @@ namespace uml
 #include "PSSM/PSSM.hpp"
 
 // base class includes
-#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/Semantics/Loci/CS_Locus.hpp"
 
 
 
@@ -59,7 +59,7 @@ namespace uml
 namespace PSSM::Semantics::Loci 
 {
 	
-	class PSSM_API SM_Locus : virtual public fUML::Semantics::Loci::Locus
+	class PSSM_API SM_Locus : virtual public PSCS::Semantics::Loci::CS_Locus
 	{
 		public:
  			SM_Locus(const SM_Locus &) {}

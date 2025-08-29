@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EGenericType;
+	class EClass;
 	class EOperation;
 	class EReference;
 	class EParameter;
-	class EStringToStringMapEntry;
-	class EClass;
+	class EGenericType;
+	class EAnnotation;
 	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSSM::Semantics::Values 

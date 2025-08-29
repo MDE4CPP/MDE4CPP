@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EEnum.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EPackage.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -25,6 +25,7 @@
 
 #include "PSSM/Semantics/impl/SemanticsPackageImpl.hpp"
 
+#include "PSCS/PSCSPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"

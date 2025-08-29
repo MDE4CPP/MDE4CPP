@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EGenericType;
+	class EClass;
 	class EOperation;
+	class EEnumLiteral;
 	class EReference;
 	class EParameter;
-	class EStringToStringMapEntry;
-	class EClass;
-	class EAttribute;
-	class EEnumLiteral;
-	class EDataType;
 	class EEnum;
+	class EGenericType;
+	class EAnnotation;
+	class EAttribute;
+	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace PSSM::Semantics::StateMachines 
@@ -184,8 +184,8 @@ namespace PSSM::Semantics::StateMachines
 			// Begin Class DoActivityContextObject
 			//Class and Feature IDs 
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_CLASS = 324637086;
-			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 60;
+			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int DOACTIVITYCONTEXTOBJECT_CLASS_OPERATION_COUNT = 75;
 			
 			static const unsigned long DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT = 1627726340;
 			

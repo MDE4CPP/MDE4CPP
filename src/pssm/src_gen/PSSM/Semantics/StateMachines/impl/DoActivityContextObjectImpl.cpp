@@ -42,11 +42,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -61,15 +61,16 @@
 #include "uml/Operation.hpp"
 #include "PSSM/MDE4CPP_Extensions/PSSM_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "uml/Port.hpp"
 #include "uml/StructuralFeature.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -387,6 +388,8 @@ void DoActivityContextObjectImpl::save(std::shared_ptr<persistence::interfaces::
 
 	PSSM::MDE4CPP_Extensions::PSSM_ObjectImpl::saveContent(saveHandler);
 	
+	PSCS::MDE4CPP_Extensions::PSCS_ObjectImpl::saveContent(saveHandler);
+	
 	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::saveContent(saveHandler);
 	
 	uml::ElementImpl::saveContent(saveHandler);
@@ -426,7 +429,7 @@ std::shared_ptr<Any> DoActivityContextObjectImpl::eGet(int featureID, bool resol
 	switch(featureID)
 	{
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT:
-			return eAny(getContext(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //97
+			return eAny(getContext(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //98
 	}
 	return PSSM::MDE4CPP_Extensions::PSSM_ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,7 +439,7 @@ bool DoActivityContextObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::DOACTIVITYCONTEXTOBJECT_ATTRIBUTE_CONTEXT:
-			return getContext() != nullptr; //97
+			return getContext() != nullptr; //98
 	}
 	return PSSM::MDE4CPP_Extensions::PSSM_ObjectImpl::internalEIsSet(featureID);
 }
@@ -456,7 +459,7 @@ bool DoActivityContextObjectImpl::eSet(int featureID,  const std::shared_ptr<Any
 					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(eObject);
 					if(_context)
 					{
-						setContext(_context); //97
+						setContext(_context); //98
 					}
 					else
 					{
