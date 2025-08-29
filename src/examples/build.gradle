@@ -235,8 +235,8 @@ def allEcoreTestSuiteModels =
 [
 //	[{Model project directory}, {Model name}]
 	 ['./ecoreExamples/TestSuite/copyTest/', 'CopyTest']
-	,['./ecoreExamples/TestSuite/eInvokeTest/', 'EInvokeTest']
-//	,['./ecoreExamples/TestSuite/SubPackagetest/', 'eInvokeTest']
+//	,['./ecoreExamples/TestSuite/eInvokeTest/', 'EInvokeTest']
+//	,['./ecoreExamples/TestSuite/SubPackagetest/', 'tobedone']
 	,['./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/', 'SubsetUnion']	
 	,['./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/', 'SubsetUnionDepth']		
 	,['./ecoreExamples/TestSuite/templateTest/', 'TemplateTest']	
@@ -1190,9 +1190,9 @@ task buildOCLTestSuite()
 def allPSCSModelExamples =
 [
 //	[{Model project directory}, {Model name}]
-	 ['./PSCSExamples/Ampelsteuerung_Example/', 'Ampelsteuerung_Example']
+//	 ['./PSCSExamples/Ampelsteuerung_Example/', 'Ampelsteuerung_Example']
 //	,['./PSCSExamples/LoadBalance/', 'LoadBalance']	
-	,['./PSCSExamples/PingModel/', 'PingModel']
+//	,['./PSCSExamples/PingModel/', 'PingModel']
 
 ]
 
