@@ -50,7 +50,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::components::generateParameter /]
 [import UML4CPP::generator::main::model_execution::model_execution /]
-
+[import UML4CPP::generator::main::validation::validation/]
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
 								aPackage.getElementsBelongingToPackage().getGeneratableAppliedStereotypes(),
@@ -97,7 +97,6 @@
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl');}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.generateNamespacePath(false)/]/impl/[packageName/].hpp"
-
 //meta meta model classes
 [for (nE : EClass | aPackage.getMetaMetaModelIncludes())]
 #include "[nE.ePackage.name/]/[nE.name/].hpp"
@@ -158,7 +157,6 @@
 const std::string [aPackage.name + 'Package'/]::eNAME ="[aPackage.name/]";
 const std::string [aPackage.name + 'Package'/]::eNS_URI ="[aPackage.URI/]";
 const std::string [aPackage.name + 'Package'/]::eNS_PREFIX ="[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
-
 [packageName/]::[packageName/]()
 {
 }
@@ -434,7 +432,6 @@ void [packageName/]::createStateMachine_[aStateMachine.memberName()/](std::share
 [/for]
 [/if]
 
-
 void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aPackage.memberName()/])
 {
 	if (isInitialized)
@@ -498,11 +495,16 @@ void [packageName/]::initializeActivity_[anActivity.memberName()/]()
 [comment]Only Associations[/comment]
 void [packageName/]::initializePackageAssociations()
 {
-	[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+[let selectedAssociatons : Association = aPackage.ownedMember->filter(Association)]
+	[if(selectedAssociatons->size()>0)]
+		[for (anAssociation : Association | selectedAssociatons->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	//[anAssociation.name/]
 	[anAssociation.generateAssociationInitialization()/]
-	[/for]
+		[/for]
+	[/if]
+[/let]
 }
+
 
 [comment]Only Classes[/comment]
 void [packageName/]::initializePackageClasses()
