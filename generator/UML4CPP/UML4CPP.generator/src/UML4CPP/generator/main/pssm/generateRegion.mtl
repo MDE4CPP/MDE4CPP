@@ -82,9 +82,9 @@
 		[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
 		[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
 		[/comment]
-		[for (aTrigger : Trigger | (aTransition.trigger)) before('create Triggers for this Transition')]
+		[for (aTrigger : Trigger | (aTransition.trigger)) before('// create Triggers for this Transition')]
 		[aTrigger.memberName()/] = factory->createTrigger_as_trigger_in_Transition();
-		[aTrigger.memberName()/]->setEvent([aTrigger.event/]);
+		[aTrigger.memberName()/]->setEvent([aTrigger.event.memberName()/]);
 		[/for]
 			[if (not aTransition.effect.oclIsUndefined())]
 			[if (aTransition.effect.oclIsKindOf(OpaqueBehavior))]
@@ -141,7 +141,7 @@
 	// create State [aState.name/] in Region [aRegion.name/]
 	[aState.memberName()/] = factory->create[aState.eClass().name/]_as_subvertex_in_Region([aRegion.memberName()/]);
 	[if (not aState.oclIsKindOf(FinalState))]
-		[comment falls komplexer wird, über getStateBehaviorMemberName vereinheitlichen und auslagern/]
+		[comment falls komplexer wird, ï¿½ber getStateBehaviorMemberName vereinheitlichen und auslagern/]
 		[if (not aState.entry.oclIsUndefined())]
 		[if (aState.entry.oclIsKindOf(OpaqueBehavior))]
 		// create Entry Behavior of State [aState.name/]
