@@ -1,3 +1,6 @@
 rootProject.name = 'Examples_PSCSExamples'
 
+includeBuild 'Ampelsteuerung_Example'
+includeBuild 'LoadBalance'
+includeBuild 'PingModel'
 includeBuild 'TestSuite'
