@@ -95,7 +95,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 				if(eObjectList)
 				{
 					incoming_param_[anEParameter.name/].reset();
-					for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+					for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 					{
 						std::shared_ptr<[anEParameter.eType.generateType(false)/]> _temp = std::dynamic_pointer_cast<[anEParameter.eType.generateType(false)/]>(anEObject);
 						incoming_param_[anEParameter.name/]->add(_temp);
