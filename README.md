@@ -13,13 +13,14 @@ Further information can be found on the [project site](https://www.tu-ilmenau.de
 - **Eclipse Modeling Tools**  
   - Install *Eclipse Modeling Tools 2025-06*  
   - Add plugin [Acceleo 3.7.15](https://www.eclipse.org/acceleo/)  
-  - Add plugin [Amalgam 1.11](https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20191007/capella/)  
   - Add plugin [Sirius 7.4](https://www.eclipse.org/sirius/)  
   - Add plugin [Papyrus 7.0.0](https://download.eclipse.org/modeling/mdt/papyrus/papyrus-desktop/updates/releases/2025-06/)  
 - **MinGW-w64**  
   - [MinGW-w64 v13.0.0](https://mingw-w64.org), select architecture = `x86_64` during installation  
 - **CMake**  
   - [CMake 4.1.1](https://cmake.org/download)  
+
+There are no recommendations for a specific software version. The specified versions were used for testing MDE4CPP. 
 
 ### 2. Clone the Repository
 Clone the [MDE4CPP Git repository](https://github.com/MDE4CPP/MDE4CPP).
@@ -55,7 +56,8 @@ chmod +x application/tools/gradlew
   - `createAllGenerators` … create executables of all generators  
   - `create<GeneratorProjectName>` … create executable for the specified generator (e.g. `createUML4CPP`)  
 - Examples are located in `src/examples`.  
-  - Build all examples by navigating to this directory and running `buildAllExamples`.  
+  - Navigate to this directory and explore existing examples and tests using `gradlew tasks`. Start a specific task with `gradlew <taskName>`
+  - Alternatively: Navigate to a specific example directory and run the generate script.
 - Universal generation task:  
   ```bash
   generateModel -PModel=<path-to-model-file>
@@ -68,7 +70,7 @@ chmod +x application/tools/gradlew
 - `ecore4CPP` is used for `.ecore` models.  
 - `fUML4CPP` is used for `.uml` models.  
 - To use UML4CPP (structural part only, no fUML-specific executions), add `-PStructureOnly` or `-PSO`.  
-- To generate a REST API for the model, add: `-PGenerateApi`.
+- (experimental) To generate a REST API for the model, enable it in MDE4CPP_Generator.properties.
 
 #### 4.2 Task Dependencies
 There are dependencies between tasks, projects, and models which are currently not built automatically:
