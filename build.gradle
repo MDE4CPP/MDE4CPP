@@ -163,20 +163,22 @@ task startCPPEclipse(type:Exec){
 
 		if(System.getenv('CPP_IDE_EXECUTABLE') == null)
 		{
-			throw new GradleException("The required variable CPP_IDE_EXECUTABLE has not been set in your setEnv file.")
-		}
-
-		if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows'))
-		{
-			//on windows:
-			 Thread.start {
-			commandLine 'cmd', '/c', (System.getenv('CPP_IDE_EXECUTABLE') + '/eclipse.exe')
-			}
+			println 'The required variable CPP_IDE_EXECUTABLE has not been set in your setEnv file.'
 		}
 		else
 		{
-			//on linux
-			commandLine 'bash' , System.getenv('CPP_IDE_EXECUTABLE')+'/eclipse'
+			if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows'))
+			{
+				//on windows:
+				 Thread.start {
+				commandLine 'cmd', '/c', (System.getenv('CPP_IDE_EXECUTABLE') + '/eclipse.exe')
+				}
+			}
+			else
+			{
+				//on linux
+				commandLine 'bash' , System.getenv('CPP_IDE_EXECUTABLE')+'/eclipse'
+			}
 		}
 }
 
