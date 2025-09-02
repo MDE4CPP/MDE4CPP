@@ -57,7 +57,7 @@ chmod +x application/tools/gradlew
   - `create<GeneratorProjectName>` … create executable for the specified generator (e.g. `createUML4CPP`)  
 - Examples are located in `src/examples`.  
   - Navigate to this directory and explore existing examples and tests using `gradlew tasks`. Start a specific task with `gradlew <taskName>`
-  - Alternatively: Navigate to a specific example directory and run the generate script.
+  - Alternatively: Navigate to a specific example model directory and run the generate script.
 - Universal generation task:  
   ```bash
   generateModel -PModel=<path-to-model-file>
