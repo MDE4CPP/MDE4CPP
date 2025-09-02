@@ -1,105 +1,139 @@
 # MDE4CPP
-**Welcome to MDE4CPP project**
 
-## Content
-Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4cpp)
+**Welcome to the MDE4CPP Project**
 
-## Installation instructions (find detailed instructions [here](https://www.tu-ilmenau.de/fileadmin/Bereiche/IA/sse/Software/MDE4CPP/Tutorials/MDE4CPP_Setup_Installation_Guide.pdf))
-1. Install following software:
-  * Java Development Kit (JDK) version 16
-  * Eclipse Modeling Tool
-    * install Eclipse 2021-12 
-    * add plugin [Acceleo 3.7.11](https://www.eclipse.org/acceleo/)
-    * add plugin [Amalgam 1.11](https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20191007/capella/)
-    * add plugin [Sirius 6.6](https://www.eclipse.org/sirius/)
-  * MinGW 64 bit:
-    * [mingw-w64](https://mingw-w64.org), select architecture = x86_64 during installation
-  * CMake
+## Contents
+Further information can be found on the [project site](https://www.tu-ilmenau.de/sse/software/mde4cpp).
 
-2. Checkout the [MDE4CPP respository](https://github.com/MDE4CPP/MDE4CPP)
+## Installation Instructions  
+(Find detailed instructions [here](https://www.tu-ilmenau.de/fileadmin/Bereiche/IA/sse/Software/MDE4CPP/Tutorials/MDE4CPP_Setup_Installation_Guide.pdf))
 
-3. Configure environment
-  * Copy the prepared environment settings file and remove the extension `default`
-	* for Windows systems: `setenv.bat.default`
-	* for Unix systems: `setenv.default`
-  * Open this file and configure the variables:
-    * `MDE4CPP_HOME` ... path to MDE4CPP home folder
-    * variables for compiler and Gradle tasks configuration
-    * tool path configuration
-  * Note for Unix users; you must call the bash like this: `. ./setenv` to allow the script change the variables inside your shell.
+### 1. Install the following software
+- **Java Development Kit (JDK)** version 21  
+- **Eclipse Modeling Tools**  
+  - Install *Eclipse Modeling Tools 2025-06*  
+  - Add plugin [Acceleo 3.7.15](https://www.eclipse.org/acceleo/)  
+  - Add plugin [Amalgam 1.11](https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20191007/capella/)  
+  - Add plugin [Sirius 7.4](https://www.eclipse.org/sirius/)  
+  - Add plugin [Papyrus 7.0.0](https://download.eclipse.org/modeling/mdt/papyrus/papyrus-desktop/updates/releases/2025-06/)  
+- **MinGW-w64**  
+  - [MinGW-w64 v13.0.0](https://mingw-w64.org), select architecture = `x86_64` during installation  
+- **CMake**  
+  - [CMake 4.1.1](https://cmake.org/download)  
 
-4. If you want to use Prebuild libraries, packages are downloadable on github. Package with all libraries and header files are available at MDE4CPP repository. All C++ libraries are avaiable in
-  * debug version (compiler flag -ggdb)
-  * release version (mostly with compiler flag O3, no debug messages).
-Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
+### 2. Clone the Repository
+Clone the [MDE4CPP Git repository](https://github.com/MDE4CPP/MDE4CPP).
 
-5. If you want to build by yourself, be familar with gradle. Some basics are described below. Basic gradle tasks:
-  * `gradlew tasks` ... list of available tasks is available.
-  * `gradlew projects` ... package overview is available
-  * `gradlew help` ... gradle help
-  * `gradlew <task name>` ... run task <task name>
-Note for Unix users; first you have to give execution permission to the script gradlew with: `chmod +x application/tools/gradlew`
+### 3. Configure the Environment
+- Copy the prepared environment settings file and remove the `.default` extension:  
+  - Windows: `setenv.bat.default`  
+  - Unix: `setenv.default`  
+- Open this file and configure the variables:  
+  - `MDE4CPP_HOME` … path to the MDE4CPP home folder  
+  - Compiler and Gradle task configuration variables  
+  - Tool path configuration  
+- **Note for Unix users:**  
+  You must call the script with `. ./setenv` so that the variables are applied to your shell.
 
-6. List of top level tasks (group MDE4CPP):
-  * `buildAll` ... create executables of all generators and build all base models
-  * use `gradlew tasks` to find all top level commands under `MDE4CPP tasks`
-  * generator tasks:
-    * `createAllGenerators` ... create executables of all generators
-    * `create<Generator project name>` ... creates executable of corresponding generator, e.g. createUML4CPP
-  * examples can be found in [example](https://github.com/MDE4CPP/examples) or after cloning the repositories in src/examples. Collection of examples can be build with task *buildAllExamples* (most projects are includes).
-  * `generateModel -PModel=<path to model file>`...  universal task to generate C++ projects for ecore or UML models
-  **Note:**
-  	* The model file should be located in `<project folder>/model`
-  	* C++ project will be generated in `<project folder>/src_gen`
-  	* ecore4CPP will be used for .ecore models.
-  	* fUML4CPP will be used for .uml models
-  	* To use UML4CPP (no fUML specific executions, only the structural part), `-PStructureOnly` or `-PSO` has to be added to the command.
-	* To generate a rest api for the model just add the following flag to the command: `-PGenerateApi`
+### 4. Build with Gradle
+MDE4CPP uses Gradle for builds. Some basic commands:  
+- `gradlew tasks` … list available tasks  
+- `gradlew projects` … show package overview  
+- `gradlew help` … Gradle help  
+- `gradlew <taskName>` … run task `<taskName>`  
 
-7. There are various dependencies between tasks as well as projects and models. For instance, a generator has to be compiled before source code of a model can be generated or the meta model has to be compiled before model can be compiled.
-All dependencies of a task are specified. It is not necessary to start or perform all dependencies manually. Gradle is able to performed this tasks automatically. Thus, it is sufficient to perform a desired task.
-For instance, to compile the example project `ecoreExample`, just call `gradlew compileEcoreExample` on command line and all dependencies like delivering basing interfaces, generating and compiling ecore model and creating generator file are performed by gradle.
+**Note for Unix users:**  
+First, give the script execution permissions:  
+```bash
+chmod +x application/tools/gradlew
+```
 
-8. Model tasks are names using following schema: `<command><modelName> <buildMode>`
-  * commands:
-    * `build` ... execute commands generate and compile
-    * `generate` ... generate C++ code using our generator (independent of build mode)
-    * `compile` ... compile generated files
-  * `modelName` ... name of the model, starting with capital letter
-  * `buildMode`
-    * not specified ... build debug and release version
-    * `-PDEBUG` or `-PD` ... debug version -> compiler flags -g -ggdb is used
-    * `-PRELEASE` or `-PR` ... release version -> mostly with compiler flag O3, debug messages are disabled
-	* The build mode can be preconfigured in environment settings files by configuring
-		* ORG_GRADLE_PROJECT_DEBUG=1 ... build debug version
-		* ORG_GRADLE_PROJECT_RELEASE=1 ... build release version
-		* This build mode is always used when compiling.
-	* A build mode can be disabled by setting the variable to `0`. For instance, the debug version is not built if `ORG_GRADLE_PROJECT_RELEASE=0` is defined in environment settings files or `-PDEBUG=0` is defined in a gradle command.
-  * examples:
-	* no preconfigured build mode inside gradle.properies:
-		* `buildEcore` - generate and compile ecore.ecore in debug and release
-		* `generateEcore` - generate C++ code for ecore.ecore
-		* `compileEcore -PRELEASE` - compile generated code of ecore.ecore in release version
-	* environment settings files defines ORG_GRADLE_PROJECT_DEBUG=1
-		* `buildEcore` - generate and compile ecore.ecore in debug
-		* `generateEcore` - generate C++ code for ecore.ecore
-		* `compileEcore -PRELEASE` - compile generated code of ecore.ecore in release and debug version
-		* `compileEcore -PRELEASE -PDEBUG=0` - compile generated code of ecore.ecore in release version (debug is disabled)
+#### 4.1 Top-Level Tasks (Group: MDE4CPP)
+- `buildAll` … generate and compile all metamodels (Ecore, UML, fUML, …)  
+- Use `gradlew tasks` to see all top-level commands under *MDE4CPP tasks*  
+- Generator tasks:  
+  - `createAllGenerators` … create executables of all generators  
+  - `create<GeneratorProjectName>` … create executable for the specified generator (e.g. `createUML4CPP`)  
+- Examples are located in `src/examples`.  
+  - Build all examples by navigating to this directory and running `buildAllExamples`.  
+- Universal generation task:  
+  ```bash
+  generateModel -PModel=<path-to-model-file>
+  ```
+  Generates C++ projects for Ecore or UML models.  
 
-  All binaries and header files are delivered to `${MDE4CPP_HOME}/application` using the tasks.
+**Notes:**  
+- The model file must be located in `<project-folder>/model`.  
+- Generated C++ projects are placed in `<project-folder>/src_gen`.  
+- `ecore4CPP` is used for `.ecore` models.  
+- `fUML4CPP` is used for `.uml` models.  
+- To use UML4CPP (structural part only, no fUML-specific executions), add `-PStructureOnly` or `-PSO`.  
+- To generate a REST API for the model, add: `-PGenerateApi`.
 
-9. Tutorials
-  * Please find an ecore tutorial [here](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/ecore-tutorial)
-  * Please find a UML tutorial [here](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/uml-tutorial)
+#### 4.2 Task Dependencies
+There are dependencies between tasks, projects, and models which are currently not built automatically:
+
+**In general:**  
+- Generators must be compiled before model source code can be generated.  
+- Metamodels must be built before models can be built.
+- Dependent models must be built before depending model can be built.
+
+#### 4.3 Model Task Naming Convention
+Schema:  
+```text
+<command><ModelName> <buildMode>
+```
+
+- **Commands:**  
+  - `build` … generate and compile  
+  - `generate` … generate C++ code using the generator (independent of build mode)  
+  - `compile` … compile generated files  
+
+- **Model name:** Starts with a capital letter.  
+
+- **Build modes:**  
+  - Not specified … build debug and release versions  
+  - `-PDEBUG` or `-PD` … debug version (compiler flags `-g -ggdb`)  
+  - `-PRELEASE` or `-PR` … release version (compiler flag `-O3`, debug disabled)  
+
+Build modes can be preconfigured in environment settings:  
+```text
+ORG_GRADLE_PROJECT_DEBUG=1    # Build debug version  
+ORG_GRADLE_PROJECT_RELEASE=1  # Build release version  
+```
+
+To disable a build mode, set the variable to `0`, e.g.:  
+```text
+-PDEBUG=0
+```
+
+**Examples:**  
+- No preconfigured build mode in `gradle.properties`:  
+  - `buildEcore` … generate and compile `ecore.ecore` in debug and release  
+  - `generateEcore` … generate C++ code for `ecore.ecore`  
+  - `compileEcore -PRELEASE` … compile in release mode  
+
+- Preconfigured `ORG_GRADLE_PROJECT_DEBUG=1`:  
+  - `buildEcore` … generate and compile in debug  
+  - `compileEcore -PRELEASE` … compile in debug and release  
+  - `compileEcore -PRELEASE -PDEBUG=0` … compile in release only  
+
+All binaries and header files are delivered to:  
+```
+${MDE4CPP_HOME}/application
+```
+
+### 5. Tutorials
+- [Ecore tutorial](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/ecore-tutorial)  
+- [UML tutorial](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/uml-tutorial)  
 
 ## License
+This project is generally licensed under the **MIT License**.  
 
-The projects is generally subjected to the **MIT** license.
-
-Excluded from this license are the following folders, which are subjected to **Eclipse Public License - v 1.0**:
-- src/common/ecoreReflection/model
-- src/common/primitivetypesReflection/model
-- src/common/umlReflection/model
-- src/ecore/model
-- src/uml/types/model
-- src/uml/uml/model
+The following folders are excluded and are subject to the **Eclipse Public License v1.0**:  
+- `src/common/ecoreReflection/model`  
+- `src/common/primitivetypesReflection/model`  
+- `src/common/umlReflection/model`  
+- `src/ecore/model`  
+- `src/uml/types/model`  
+- `src/uml/uml/model`  
