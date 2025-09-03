@@ -27,116 +27,6 @@ description 'Example collection'
 
 import org.gradle.internal.os.OperatingSystem;
 
-
-//########################   general   ########################
-
-
-task generateAllExamples() {
-	group 'Examples'
-	description 'generate All model examples'
-	
-	dependsOn getRootProject().getTasksByName('generateEcoreModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generateUMLModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generatefUMLModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generatePSCSModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generatePSSMModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generateOCLModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generateStradegiesModelExamples', true)
-	// ToDo ...
-}
-
-task compileAllExamples() {
-	group 'Examples'
-	description 'compile applications for all examples without generating the models'
-	
-	dependsOn getRootProject().getTasksByName('compileCommonExamples', true)
-
-	dependsOn getRootProject().getTasksByName('compileEcoreExamples', true)
-	dependsOn getRootProject().getTasksByName('compileEcoreModelExamples', true)
-
-	dependsOn getRootProject().getTasksByName('compileUMLExamples', true)
-	dependsOn getRootProject().getTasksByName('compileUMLModelExamples', true)
-	
-	dependsOn getRootProject().getTasksByName('compilefUMLModelExamples', true)
-	
-	dependsOn getRootProject().getTasksByName('compilePSCSModelExamples', true)
-
-	dependsOn getRootProject().getTasksByName('compilePSSMModelExamples', true)
-	
-	dependsOn getRootProject().getTasksByName('compileOCLExamples', true)
-	dependsOn getRootProject().getTasksByName('compileOCLModelExamples', true)
-
-	dependsOn getRootProject().getTasksByName('compileStradegiesModelExamples', true)
-}
-
-task buildAllExamples(){
-	group 'Examples'
-	description 'generate and compile all example applications'
-	
-	def tasks = [
-		generateAllExamples,
-		compileAllExamples
-	]
-	
-	for (int i = 0; i < tasks.size() - 1; i++) {
-        tasks[i + 1].mustRunAfter(tasks[i])
-    }
-    
-    dependsOn(tasks)
-}
-
-task cleanAllExamples(type: Exec){
-	group 'Examples'
-	description 'Removes all generated files in examples directory'
-	
-    workingDir System.env.MDE4CPP_HOME
-    
-    if(OperatingSystem.current().isWindows()){
-    	commandLine 'cmd', '/c', 'git clean -d -f -X', 'src\\examples'
-	} else if(OperatingSystem.current().isLinux() || OperatingSystem.current().isMacOsX()){
-		commandLine '/bin/sh', '-c', 'git clean -d -f -X src/examples'
-	}
-}
-
-task generateAllTests() {
-	group 'Tests'
-	description 'generate all test suites (currently only fUML test suite can be generated automatically)'
-	
-	dependsOn getRootProject().getTasksByName('generateEcoreTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generateUMLTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generatefUMLTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generatePSSMTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generateOCLTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generateStrategiesTestSuite', true)
-}
-
-task compileAllTests() {
-	group 'Tests'
-	description 'compile applications for all test suites (currently only fUML test suite can be compiled automatically)'
-	
-	dependsOn getRootProject().getTasksByName('compileEcoreTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compileUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compilefUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compilePSCSTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compilePSSMTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compileOCLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compileStrategiesTestSuite', true)
-}
-
-task buildAllTests() {
-	group 'Tests'
-	description 'generate and compile applictions for all test suites (currently only fUML test suite can be built automatically)'
-	dependsOn getRootProject().getTasksByName('buildEcoreTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildfUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildPSCSTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildPSSMTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildOCLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildStrategiesTestSuite',true)
-}
-
-
 //########################   ExampleBenchmarks   ########################
 
 
@@ -1844,4 +1734,114 @@ task buildStrategiesExamplesTestSuite()
 			}
 		}
 	}
+}
+
+
+
+//########################   general   ########################
+
+
+task generateAllExamples() {
+	group 'Examples'
+	description 'generate All model examples'
+	
+	dependsOn getRootProject().getTasksByName('generateEcoreModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generateUMLModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generatefUMLModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generatePSCSModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generatePSSMModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generateOCLModelExamples', true)
+	dependsOn getRootProject().getTasksByName('generateStradegiesModelExamples', true)
+	// ToDo ...
+}
+
+task compileAllExamples() {
+	group 'Examples'
+	description 'compile applications for all examples without generating the models'
+	
+	dependsOn getRootProject().getTasksByName('compileCommonExamples', true)
+
+	dependsOn getRootProject().getTasksByName('compileEcoreExamples', true)
+	dependsOn getRootProject().getTasksByName('compileEcoreModelExamples', true)
+
+	dependsOn getRootProject().getTasksByName('compileUMLExamples', true)
+	dependsOn getRootProject().getTasksByName('compileUMLModelExamples', true)
+	
+	dependsOn getRootProject().getTasksByName('compilefUMLModelExamples', true)
+	
+	dependsOn getRootProject().getTasksByName('compilePSCSModelExamples', true)
+
+	dependsOn getRootProject().getTasksByName('compilePSSMModelExamples', true)
+	
+	dependsOn getRootProject().getTasksByName('compileOCLExamples', true)
+	dependsOn getRootProject().getTasksByName('compileOCLModelExamples', true)
+
+	dependsOn getRootProject().getTasksByName('compileStradegiesModelExamples', true)
+}
+
+task buildAllExamples(){
+	group 'Examples'
+	description 'generate and compile all example applications'
+	
+	def tasks = [
+		generateAllExamples,
+		compileAllExamples
+	]
+	
+	for (int i = 0; i < tasks.size() - 1; i++) {
+        tasks[i + 1].mustRunAfter(tasks[i])
+    }
+    
+    dependsOn(tasks)
+}
+
+task cleanAllExamples(type: Exec){
+	group 'Examples'
+	description 'Removes all generated files in examples directory'
+	
+    workingDir System.env.MDE4CPP_HOME
+    
+    if(OperatingSystem.current().isWindows()){
+    	commandLine 'cmd', '/c', 'git clean -d -f -X', 'src\\examples'
+	} else if(OperatingSystem.current().isLinux() || OperatingSystem.current().isMacOsX()){
+		commandLine '/bin/sh', '-c', 'git clean -d -f -X src/examples'
+	}
+}
+
+task generateAllTests() {
+	group 'Tests'
+	description 'generate all test suites (currently only fUML test suite can be generated automatically)'
+	
+	dependsOn getRootProject().getTasksByName('generateEcoreTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generateUMLTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generatefUMLTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generatePSSMTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generateOCLTestSuite', true)
+	dependsOn getRootProject().getTasksByName('generateStrategiesTestSuite', true)
+}
+
+task compileAllTests() {
+	group 'Tests'
+	description 'compile applications for all test suites (currently only fUML test suite can be compiled automatically)'
+	
+	dependsOn getRootProject().getTasksByName('compileEcoreTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compileUMLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compilefUMLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compilePSCSTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compilePSSMTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compileOCLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('compileStrategiesTestSuite', true)
+}
+
+task buildAllTests() {
+	group 'Tests'
+	description 'generate and compile applictions for all test suites (currently only fUML test suite can be built automatically)'
+	dependsOn getRootProject().getTasksByName('buildEcoreTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildUMLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildfUMLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildPSCSTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildPSSMTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildOCLTestSuite',true)
+	dependsOn getRootProject().getTasksByName('buildStrategiesTestSuite',true)
 }
