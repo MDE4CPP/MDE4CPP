@@ -9,7 +9,7 @@ export MDE4CPP_HOME=$PWD
 
 # path to eclipse home folder including Acceleo plugins
 # required for creating the generators
-export MDE4CPP_ECLIPSE_HOME=~/eclipse_modeling
+export MDE4CPP_ECLIPSE_HOME=~/<PATH to eclipse_modeling>
 
 
 # ##################################################
@@ -51,6 +51,8 @@ export CLASSPATH=$MDE4CPP_ECLIPSE_HOME/plugins
 # # configure compiler information for include path setting inside cpp eclipse #
 # ##############################################################################
 
+export CPP_IDE_EXECUTABLE=$MDE4CPP_ECLIPSE_HOME
+
 # The generators create eclipse cpp projects files including include path.
 # Estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
 # Configuration is only necessary for eclipse use.
@@ -67,4 +69,5 @@ export CLASSPATH=$MDE4CPP_ECLIPSE_HOME/plugins
 cd ./gradlePlugins
 gradlew publishMDE4CPPPluginsToMavenLocal
 
-cd %MDE4CPP_HOME%
+cd $MDE4CPP_HOME
+bash
