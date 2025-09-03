@@ -71,9 +71,21 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "PSSM/Semantics/StateMachines/ExternalTransitionActivation.hpp"
 #include "PSSM/Semantics/StateMachines/LocalTransitionActivation.hpp"
 #include "PSSM/Semantics/StateMachines/InternalTransitionActivation.hpp"
-[for (pseudostateKind : String | PseudostateKind.allInstances().toString())]
-#include "PSSM/Semantics/StateMachines/[pseudostateKind.toUpperFirst()/]PseudostateActivation.hpp"
-[/for]
+
+#include "PSSM/Semantics/StateMachines/ForkPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/DeepHistoryPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/InitialPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/ExitPointPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/EntryPointPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/TerminatePseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/JoinPseudostateActivation.hpp"
+[comment]
+#include "PSSM/Semantics/StateMachines/JunctionPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/ShallowHistoryPseudostateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/ChoicePseudostateActivation.hpp"
+
+[/comment]
+
 [/if]
 
 [if (aPackage.getRootPackage().allOwnedElements()->filter(ActivityEdge)->reject(isDoNotGenerateElement())->size() > 0)]
