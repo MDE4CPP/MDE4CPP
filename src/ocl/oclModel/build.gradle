@@ -54,8 +54,10 @@ task compileOcl() {
 	} 
 	mustRunAfter =  [
 		'generateOcl'
-	
+		
 		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileUML', true)
+		, getRootProject().getTasksByName('compileTypes', true)
 	]
 }
 
