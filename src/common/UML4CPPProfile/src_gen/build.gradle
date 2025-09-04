@@ -47,7 +47,6 @@ task compileUML4CPPProfileSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn getRootProject().getTasksByName('generateUML4CPPProfileModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateUML4CPPProfileModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

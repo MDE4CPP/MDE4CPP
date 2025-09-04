@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EClass;
-	class EOperation;
-	class EEnumLiteral;
-	class EReference;
 	class EParameter;
-	class EEnum;
-	class EGenericType;
-	class EAnnotation;
 	class EAttribute;
-	class EDataType;
+	class EClass;
+	class EEnumLiteral;
+	class EGenericType;
+	class EOperation;
+	class EReference;
 	class EStringToStringMapEntry;
+	class EEnum;
+	class EAnnotation;
+	class EDataType;
 }
 
 namespace PSSM::Semantics::StateMachines 

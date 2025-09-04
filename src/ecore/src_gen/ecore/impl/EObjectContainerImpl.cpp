@@ -359,7 +359,7 @@ std::shared_ptr<Any> EObjectContainerImpl::eInvoke(int operationID, const std::s
 						if(eObjectList)
 						{
 							incoming_param_container.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<ecore::EObject> _temp = std::dynamic_pointer_cast<ecore::EObject>(anEObject);
 								incoming_param_container->add(_temp);

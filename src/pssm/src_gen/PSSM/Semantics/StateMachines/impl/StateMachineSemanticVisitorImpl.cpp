@@ -46,8 +46,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -831,7 +831,7 @@ std::shared_ptr<Any> StateMachineSemanticVisitorImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_triggers.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::Trigger> _temp = std::dynamic_pointer_cast<uml::Trigger>(anEObject);
 								incoming_param_triggers->add(_temp);

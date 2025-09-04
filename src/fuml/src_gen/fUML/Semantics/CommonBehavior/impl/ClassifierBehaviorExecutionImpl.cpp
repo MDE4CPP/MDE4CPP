@@ -34,15 +34,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -489,7 +489,7 @@ std::shared_ptr<Any> ClassifierBehaviorExecutionImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_classifier.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::Class> _temp = std::dynamic_pointer_cast<uml::Class>(anEObject);
 								incoming_param_classifier->add(_temp);
@@ -524,7 +524,7 @@ std::shared_ptr<Any> ClassifierBehaviorExecutionImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_inputs.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
 								incoming_param_inputs->add(_temp);

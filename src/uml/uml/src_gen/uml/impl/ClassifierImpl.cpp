@@ -2008,7 +2008,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, const std::shared_
 						if(eObjectList)
 						{
 							incoming_param_parameterTypes.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::Type> _temp = std::dynamic_pointer_cast<uml::Type>(anEObject);
 								incoming_param_parameterTypes->add(_temp);
@@ -2077,7 +2077,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, const std::shared_
 						if(eObjectList)
 						{
 							incoming_param_parameterTypes.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::Type> _temp = std::dynamic_pointer_cast<uml::Type>(anEObject);
 								incoming_param_parameterTypes->add(_temp);
@@ -2198,7 +2198,7 @@ std::shared_ptr<Any> ClassifierImpl::eInvoke(int operationID, const std::shared_
 						if(eObjectList)
 						{
 							incoming_param_inhs.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::NamedElement> _temp = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
 								incoming_param_inhs->add(_temp);

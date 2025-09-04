@@ -47,7 +47,6 @@ task compilePrimitivetypesReflectionSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn getRootProject().getTasksByName('generatePrimitivetypesReflectionModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generatePrimitivetypesReflectionModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

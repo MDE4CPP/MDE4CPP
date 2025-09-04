@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
+	class EParameter;
+	class EAttribute;
 	class EClass;
+	class EGenericType;
 	class EOperation;
 	class EReference;
-	class EParameter;
-	class EGenericType;
-	class EAnnotation;
-	class EAttribute;
-	class EDataType;
 	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EDataType;
 }
 
 namespace PSSM::Semantics::CommonBehavior 

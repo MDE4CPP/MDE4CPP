@@ -1,5 +1,4 @@
 #include "FoundationalModelLibrary/Common/impl/CommonPackageImpl.hpp"
-
 //meta meta model classes
 #include "uml/Class.hpp"
 #include "uml/DataType.hpp"
@@ -40,7 +39,6 @@ std::shared_ptr<CommonPackage> CommonPackage::eInstance()
 const std::string CommonPackage::eNAME ="Common";
 const std::string CommonPackage::eNS_URI ="";
 const std::string CommonPackage::eNS_PREFIX ="FoundationalModelLibrary";
-
 CommonPackageImpl::CommonPackageImpl()
 {
 }
@@ -183,7 +181,6 @@ void CommonPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Pa
 }
 
 
-
 void CommonPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_Common)
 {
 	if (isInitialized)
@@ -222,6 +219,7 @@ void CommonPackageImpl::initializePackageActivities()
 void CommonPackageImpl::initializePackageAssociations()
 {
 }
+
 
 void CommonPackageImpl::initializePackageClasses()
 {

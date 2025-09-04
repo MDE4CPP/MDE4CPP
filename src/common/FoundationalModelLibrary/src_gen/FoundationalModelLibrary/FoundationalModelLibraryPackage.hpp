@@ -72,7 +72,6 @@ namespace FoundationalModelLibrary
 				static const unsigned long STATUS_PROPERTY_CODE = 1409115705;
 				static const unsigned long STATUS_PROPERTY_DESCRIPTION = 2094589277;
 			
-			
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_METAMODELPACKAGE_HPP */

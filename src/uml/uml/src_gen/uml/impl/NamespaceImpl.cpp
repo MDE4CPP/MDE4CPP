@@ -955,7 +955,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, const std::shared_p
 						if(eObjectList)
 						{
 							incoming_param_imps.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::PackageableElement> _temp = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
 								incoming_param_imps->add(_temp);
@@ -1057,7 +1057,7 @@ std::shared_ptr<Any> NamespaceImpl::eInvoke(int operationID, const std::shared_p
 						if(eObjectList)
 						{
 							incoming_param_imps.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::PackageableElement> _temp = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
 								incoming_param_imps->add(_temp);

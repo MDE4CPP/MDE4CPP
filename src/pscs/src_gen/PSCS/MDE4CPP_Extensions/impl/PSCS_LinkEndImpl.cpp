@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_LinkEnd.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "uml/Property.hpp"
@@ -42,8 +42,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "PSCS/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::MDE4CPP_Extensions;

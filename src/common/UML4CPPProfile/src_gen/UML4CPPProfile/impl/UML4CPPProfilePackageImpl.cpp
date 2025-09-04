@@ -1,5 +1,4 @@
 #include "UML4CPPProfile/impl/UML4CPPProfilePackageImpl.hpp"
-
 //meta meta model classes
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
@@ -45,7 +44,6 @@ std::shared_ptr<UML4CPPProfilePackage> UML4CPPProfilePackage::eInstance()
 const std::string UML4CPPProfilePackage::eNAME ="UML4CPPProfile";
 const std::string UML4CPPProfilePackage::eNS_URI ="http://www.tu-ilmenau.de/sse/UML4CPPProfile";
 const std::string UML4CPPProfilePackage::eNS_PREFIX ="";
-
 UML4CPPProfilePackageImpl::UML4CPPProfilePackageImpl()
 {
 }
@@ -227,7 +225,6 @@ void UML4CPPProfilePackageImpl::createPackageValueSpecifications(std::shared_ptr
 }
 
 
-
 void UML4CPPProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML4CPPProfile)
 {
 	if (isInitialized)
@@ -265,6 +262,7 @@ void UML4CPPProfilePackageImpl::initializePackageActivities()
 void UML4CPPProfilePackageImpl::initializePackageAssociations()
 {
 }
+
 
 void UML4CPPProfilePackageImpl::initializePackageClasses()
 {

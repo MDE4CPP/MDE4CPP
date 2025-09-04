@@ -44,13 +44,13 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 	class Token;
 }
-namespace PSCS::MDE4CPP_Extensions 
-{
-	class PSCS_Object;
-}
 namespace fUML::MDE4CPP_Extensions 
 {
 	class FUML_Link;
+}
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Object;
 }
 namespace uml 
 {

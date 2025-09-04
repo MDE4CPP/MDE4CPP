@@ -154,7 +154,6 @@ namespace UML4CPPProfile
 			static const unsigned long UML4CPPPACKAGE_PROPERTY_PACKAGEONLY = 262131715;
 			
 			
-			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_METAMODELPACKAGE_HPP */

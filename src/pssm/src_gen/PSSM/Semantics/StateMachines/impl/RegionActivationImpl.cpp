@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/InitialPseudostateActivation.hpp"
 #include "uml/NamedElement.hpp"
@@ -1016,7 +1016,7 @@ std::shared_ptr<Any> RegionActivationImpl::eInvoke(int operationID, const std::s
 						if(eObjectList)
 						{
 							incoming_param_vertices.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::Vertex> _temp = std::dynamic_pointer_cast<uml::Vertex>(anEObject);
 								incoming_param_vertices->add(_temp);
@@ -1083,7 +1083,7 @@ std::shared_ptr<Any> RegionActivationImpl::eInvoke(int operationID, const std::s
 						if(eObjectList)
 						{
 							incoming_param_transitions.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::Transition> _temp = std::dynamic_pointer_cast<uml::Transition>(anEObject);
 								incoming_param_transitions->add(_temp);

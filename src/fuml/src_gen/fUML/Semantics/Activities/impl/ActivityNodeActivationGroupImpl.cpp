@@ -52,8 +52,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -62,8 +62,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -1160,7 +1160,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_nodes.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::ActivityNode> _temp = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 								incoming_param_nodes->add(_temp);
@@ -1195,7 +1195,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_edges.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::ActivityEdge> _temp = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 								incoming_param_edges->add(_temp);
@@ -1300,7 +1300,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_incomingEdges.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(anEObject);
 								incoming_param_incomingEdges->add(_temp);
@@ -1335,7 +1335,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_activations.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(anEObject);
 								incoming_param_activations->add(_temp);
@@ -1376,7 +1376,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_edges.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::ActivityEdge> _temp = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 								incoming_param_edges->add(_temp);
@@ -1449,7 +1449,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_nodes.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::ActivityNode> _temp = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 								incoming_param_nodes->add(_temp);
@@ -1605,7 +1605,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_activations.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(anEObject);
 								incoming_param_activations->add(_temp);
@@ -1646,7 +1646,7 @@ std::shared_ptr<Any> ActivityNodeActivationGroupImpl::eInvoke(int operationID, c
 						if(eObjectList)
 						{
 							incoming_param_nodes.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::ActivityNode> _temp = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 								incoming_param_nodes->add(_temp);

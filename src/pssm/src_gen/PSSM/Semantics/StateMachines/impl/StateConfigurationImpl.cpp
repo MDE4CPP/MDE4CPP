@@ -792,7 +792,7 @@ std::shared_ptr<Any> StateConfigurationImpl::eInvoke(int operationID, const std:
 						if(eObjectList)
 						{
 							incoming_param_context.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> _temp = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(anEObject);
 								incoming_param_context->add(_temp);
@@ -956,7 +956,7 @@ std::shared_ptr<Any> StateConfigurationImpl::eInvoke(int operationID, const std:
 						if(eObjectList)
 						{
 							incoming_param_context.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> _temp = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(anEObject);
 								incoming_param_context->add(_temp);

@@ -1,5 +1,4 @@
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
-
 //meta meta model classes
 #include "uml/Class.hpp"
 #include "uml/Extension.hpp"
@@ -43,7 +42,6 @@ std::shared_ptr<StandardProfilePackage> StandardProfilePackage::eInstance()
 const std::string StandardProfilePackage::eNAME ="StandardProfile";
 const std::string StandardProfilePackage::eNS_URI ="http://www.omg.org/spec/UML/20161101/StandardProfile";
 const std::string StandardProfilePackage::eNS_PREFIX ="";
-
 StandardProfilePackageImpl::StandardProfilePackageImpl()
 {
 }
@@ -439,7 +437,6 @@ void StandardProfilePackageImpl::createPackageValueSpecifications(std::shared_pt
 }
 
 
-
 void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> standardProfile)
 {
 	if (isInitialized)
@@ -477,6 +474,7 @@ void StandardProfilePackageImpl::initializePackageActivities()
 void StandardProfilePackageImpl::initializePackageAssociations()
 {
 }
+
 
 void StandardProfilePackageImpl::initializePackageClasses()
 {

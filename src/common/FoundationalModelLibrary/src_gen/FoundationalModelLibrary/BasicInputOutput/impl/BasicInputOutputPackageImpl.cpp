@@ -1,5 +1,4 @@
 #include "FoundationalModelLibrary/BasicInputOutput/impl/BasicInputOutputPackageImpl.hpp"
-
 //meta meta model classes
 #include "uml/Activity.hpp"
 #include "uml/ActivityParameterNode.hpp"
@@ -56,7 +55,6 @@ std::shared_ptr<BasicInputOutputPackage> BasicInputOutputPackage::eInstance()
 const std::string BasicInputOutputPackage::eNAME ="BasicInputOutput";
 const std::string BasicInputOutputPackage::eNS_URI ="";
 const std::string BasicInputOutputPackage::eNS_PREFIX ="FoundationalModelLibrary";
-
 BasicInputOutputPackageImpl::BasicInputOutputPackageImpl()
 {
 }
@@ -556,7 +554,6 @@ void BasicInputOutputPackageImpl::createPackageValueSpecifications(std::shared_p
 }
 
 
-
 void BasicInputOutputPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_BasicInputOutput)
 {
 	if (isInitialized)
@@ -751,6 +748,7 @@ void BasicInputOutputPackageImpl::initializeActivity_foundationalModelLibrary_Ba
 void BasicInputOutputPackageImpl::initializePackageAssociations()
 {
 }
+
 
 void BasicInputOutputPackageImpl::initializePackageClasses()
 {

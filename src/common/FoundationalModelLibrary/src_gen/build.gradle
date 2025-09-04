@@ -61,7 +61,6 @@ task compileFoundationalModelLibrarySrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn getRootProject().getTasksByName('generateFoundationalModelLibraryModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateFoundationalModelLibraryModel', true)]
 	}	
 

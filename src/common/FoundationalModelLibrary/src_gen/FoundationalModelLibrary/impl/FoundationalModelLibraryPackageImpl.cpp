@@ -1,5 +1,4 @@
 #include "FoundationalModelLibrary/impl/FoundationalModelLibraryPackageImpl.hpp"
-
 //meta meta model classes
 #include "uml/PackageImport.hpp"
 
@@ -38,7 +37,6 @@ std::shared_ptr<FoundationalModelLibraryPackage> FoundationalModelLibraryPackage
 const std::string FoundationalModelLibraryPackage::eNAME ="FoundationalModelLibrary";
 const std::string FoundationalModelLibraryPackage::eNS_URI ="https://www.omg.org/spec/FUML/20150801";
 const std::string FoundationalModelLibraryPackage::eNS_PREFIX ="";
-
 FoundationalModelLibraryPackageImpl::FoundationalModelLibraryPackageImpl()
 {
 }
@@ -169,7 +167,6 @@ void FoundationalModelLibraryPackageImpl::createPackageValueSpecifications(std::
 }
 
 
-
 void FoundationalModelLibraryPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary)
 {
 	if (isInitialized)
@@ -207,6 +204,7 @@ void FoundationalModelLibraryPackageImpl::initializePackageActivities()
 void FoundationalModelLibraryPackageImpl::initializePackageAssociations()
 {
 }
+
 
 void FoundationalModelLibraryPackageImpl::initializePackageClasses()
 {

@@ -1,5 +1,4 @@
 #include "primitivetypesReflection/impl/PrimitiveTypesPackageImpl.hpp"
-
 //meta meta model classes
 #include "uml/Comment.hpp"
 #include "uml/PrimitiveType.hpp"
@@ -37,7 +36,6 @@ std::shared_ptr<PrimitiveTypesPackage> PrimitiveTypesPackage::eInstance()
 const std::string PrimitiveTypesPackage::eNAME ="PrimitiveTypes";
 const std::string PrimitiveTypesPackage::eNS_URI ="http://www.omg.org/spec/PrimitiveTypes/20131001";
 const std::string PrimitiveTypesPackage::eNS_PREFIX ="";
-
 PrimitiveTypesPackageImpl::PrimitiveTypesPackageImpl()
 {
 }
@@ -182,7 +180,6 @@ void PrimitiveTypesPackageImpl::createPackageValueSpecifications(std::shared_ptr
 }
 
 
-
 void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> primitiveTypes)
 {
 	if (isInitialized)
@@ -220,6 +217,7 @@ void PrimitiveTypesPackageImpl::initializePackageActivities()
 void PrimitiveTypesPackageImpl::initializePackageAssociations()
 {
 }
+
 
 void PrimitiveTypesPackageImpl::initializePackageClasses()
 {

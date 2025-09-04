@@ -417,7 +417,6 @@ namespace StandardProfile
 			static const unsigned long UTILITY_PROPERTY_BASE_CLASS = 605150396;
 			
 			
-			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_METAMODELPACKAGE_HPP */

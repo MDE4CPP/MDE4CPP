@@ -357,7 +357,7 @@ std::shared_ptr<Any> DoActivityContextObjectActivationImpl::eInvoke(int operatio
 						if(eObjectList)
 						{
 							incoming_param_inputs.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
 								incoming_param_inputs->add(_temp);

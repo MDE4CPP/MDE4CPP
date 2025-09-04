@@ -203,7 +203,6 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 			static const unsigned int INTEGERFUNCTIONS_FUNCTIONBEHAVIOR_TIMES_OPERATION_COUNT = 0;
 			
 			
-			
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_INTEGERFUNCTIONS_METAMODELPACKAGE_HPP */

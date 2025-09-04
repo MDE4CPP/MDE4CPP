@@ -42,13 +42,13 @@ namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
-namespace PSCS::MDE4CPP_Extensions 
-{
-	class PSCS_Link;
-}
 namespace fUML::MDE4CPP_Extensions 
 {
 	class FUML_Link;
+}
+namespace PSCS::MDE4CPP_Extensions 
+{
+	class PSCS_Link;
 }
 namespace ecore 
 {

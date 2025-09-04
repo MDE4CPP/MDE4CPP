@@ -40,8 +40,8 @@
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -259,7 +259,7 @@ std::shared_ptr<Any> CS_RequestPropagationStrategyImpl::eInvoke(int operationID,
 						if(eObjectList)
 						{
 							incoming_param_potentialTargets.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _temp = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(anEObject);
 								incoming_param_potentialTargets->add(_temp);

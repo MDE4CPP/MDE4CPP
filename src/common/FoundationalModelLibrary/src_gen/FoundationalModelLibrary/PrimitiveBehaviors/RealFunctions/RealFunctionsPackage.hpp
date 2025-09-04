@@ -200,7 +200,6 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			static const unsigned int REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES_OPERATION_COUNT = 0;
 			
 			
-			
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_REALFUNCTIONS_METAMODELPACKAGE_HPP */

@@ -364,7 +364,7 @@ std::shared_ptr<Any> CompletionEventOccurrenceImpl::eInvoke(int operationID, con
 						if(eObjectList)
 						{
 							incoming_param_triggers.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<uml::Trigger> _temp = std::dynamic_pointer_cast<uml::Trigger>(anEObject);
 								incoming_param_triggers->add(_temp);

@@ -14,12 +14,12 @@
 
 namespace ecore 
 {
+	class EParameter;
+	class EAttribute;
+	class EClass;
 	class EGenericType;
 	class EOperation;
 	class EReference;
-	class EParameter;
-	class EClass;
-	class EAttribute;
 	class EDataType;
 }
 

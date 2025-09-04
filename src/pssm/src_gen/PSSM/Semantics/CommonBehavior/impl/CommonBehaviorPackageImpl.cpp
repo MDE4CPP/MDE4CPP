@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EParameter.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"

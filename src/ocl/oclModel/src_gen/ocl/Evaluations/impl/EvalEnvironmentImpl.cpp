@@ -410,7 +410,7 @@ std::shared_ptr<Any> EvalEnvironmentImpl::eInvoke(int operationID, const std::sh
 						if(eObjectList)
 						{
 							incoming_param_nvbs.reset();
-							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 							{
 								std::shared_ptr<ocl::Evaluations::NameValueBinding> _temp = std::dynamic_pointer_cast<ocl::Evaluations::NameValueBinding>(anEObject);
 								incoming_param_nvbs->add(_temp);

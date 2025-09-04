@@ -73,7 +73,6 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors
 
 			//Static IDs
 			
-			
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_METAMODELPACKAGE_HPP */

@@ -1,5 +1,4 @@
 #include "FoundationalModelLibrary/PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.hpp"
-
 //meta meta model classes
 #include "uml/FunctionBehavior.hpp"
 #include "uml/LiteralInteger.hpp"
@@ -40,7 +39,6 @@ std::shared_ptr<StringFunctionsPackage> StringFunctionsPackage::eInstance()
 const std::string StringFunctionsPackage::eNAME ="StringFunctions";
 const std::string StringFunctionsPackage::eNS_URI ="";
 const std::string StringFunctionsPackage::eNS_PREFIX ="PrimitiveBehaviors";
-
 StringFunctionsPackageImpl::StringFunctionsPackageImpl()
 {
 }
@@ -191,7 +189,6 @@ void StringFunctionsPackageImpl::createPackageValueSpecifications(std::shared_pt
 }
 
 
-
 void StringFunctionsPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions)
 {
 	if (isInitialized)
@@ -230,6 +227,7 @@ void StringFunctionsPackageImpl::initializePackageActivities()
 void StringFunctionsPackageImpl::initializePackageAssociations()
 {
 }
+
 
 void StringFunctionsPackageImpl::initializePackageClasses()
 {

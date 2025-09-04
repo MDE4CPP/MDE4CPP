@@ -73,7 +73,6 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 			static const unsigned int STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SUBSTRING_OPERATION_COUNT = 0;
 			
 			
-			
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_STRINGFUNCTIONS_METAMODELPACKAGE_HPP */

@@ -1,5 +1,4 @@
 #include "FoundationalModelLibrary/PrimitiveBehaviors/impl/PrimitiveBehaviorsPackageImpl.hpp"
-
 //meta meta model classes
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -41,7 +40,6 @@ std::shared_ptr<PrimitiveBehaviorsPackage> PrimitiveBehaviorsPackage::eInstance(
 const std::string PrimitiveBehaviorsPackage::eNAME ="PrimitiveBehaviors";
 const std::string PrimitiveBehaviorsPackage::eNS_URI ="";
 const std::string PrimitiveBehaviorsPackage::eNS_PREFIX ="FoundationalModelLibrary";
-
 PrimitiveBehaviorsPackageImpl::PrimitiveBehaviorsPackageImpl()
 {
 }
@@ -172,7 +170,6 @@ void PrimitiveBehaviorsPackageImpl::createPackageValueSpecifications(std::shared
 }
 
 
-
 void PrimitiveBehaviorsPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors)
 {
 	if (isInitialized)
@@ -211,6 +208,7 @@ void PrimitiveBehaviorsPackageImpl::initializePackageActivities()
 void PrimitiveBehaviorsPackageImpl::initializePackageAssociations()
 {
 }
+
 
 void PrimitiveBehaviorsPackageImpl::initializePackageClasses()
 {

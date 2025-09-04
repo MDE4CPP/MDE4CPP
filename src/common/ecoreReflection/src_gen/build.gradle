@@ -47,7 +47,6 @@ task compileEcoreReflectionSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn getRootProject().getTasksByName('generateEcoreReflectionModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateEcoreReflectionModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

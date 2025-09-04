@@ -47,7 +47,6 @@ task compileStandardProfileSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	else
 	{
-		dependsOn getRootProject().getTasksByName('generateStandardProfileModel', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateStandardProfileModel', true)]
 	}	
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

@@ -106,7 +106,6 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 			static const unsigned int BOOLEANFUNCTIONS_FUNCTIONBEHAVIOR_XOR_OPERATION_COUNT = 0;
 			
 			
-			
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_BOOLEANFUNCTIONS_METAMODELPACKAGE_HPP */

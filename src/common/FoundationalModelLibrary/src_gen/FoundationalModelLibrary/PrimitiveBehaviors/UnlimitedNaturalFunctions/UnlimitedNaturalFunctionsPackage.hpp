@@ -124,7 +124,6 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunction
 			static const unsigned int UNLIMITEDNATURALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN_OPERATION_COUNT = 0;
 			
 			
-			
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_UNLIMITEDNATURALFUNCTIONS_METAMODELPACKAGE_HPP */
