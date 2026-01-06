@@ -171,22 +171,29 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 		// Copy shared libraries - check for both .dll (Windows/cross-compiled) and .so/.dylib (Linux/Mac)
 		if (isWindows || isCrossCompiling) {
 			// Windows or cross-compiled: look for .dll files
+			// Try bin/bin first (common MinGW structure) - flatten structure
 			copy {
-				from "xerces/bin"
+				from "xerces/bin/bin"
 				into System.getenv('MDE4CPP_HOME')+"/application/bin"
-				include "**/*.dll"
-				exclude "cmake"
-				exclude "lib/cmake"
-				exclude "lib/pkgconfig"
-				exclude "share"
+				include "*.dll"
+				includeEmptyDirs = false
 			}
-			// Also check in bin/lib for Windows installations
+			// Also try bin/lib - flatten structure
 			copy {
 				from "xerces/bin/lib"
 				into System.getenv('MDE4CPP_HOME')+"/application/bin"
-				include "**/*.dll"
+				include "*.dll"
+				includeEmptyDirs = false
+			}
+			// Also try directly in bin (if DLLs are at root level) - flatten structure
+			copy {
+				from "xerces/bin"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
 				exclude "cmake"
-				exclude "pkgconfig"
+				exclude "lib"
+				exclude "bin"
+				includeEmptyDirs = false
 			}
 		} else {
 			// Linux/Mac: look for .so/.dylib files

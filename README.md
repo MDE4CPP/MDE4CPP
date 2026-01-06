@@ -262,6 +262,17 @@ docker compose up clean
 - **Eclipse not found**: Run `docker compose up install-eclipse` first
 - **Component build fails**: Check dependencies - some components require others to be built first
 - **Cross-compilation issues**: Verify `CROSS_COMPILE_WINDOWS` setting in `MDE4CPP_Generator.properties`
+- **Build crashes on systems with 8GB RAM**: If Docker builds crash due to memory issues (especially on Windows), edit `docker/scripts/setup-setenv.sh` and modify the following configuration values:
+  ```bash
+  # For 8GB RAM systems, change these values:
+  WORKER_COUNT=1              # Line 18: Set to 1 for single-threaded compilation
+  GRADLE_PARALLEL=false       # Line 22: Set to false to disable parallel Gradle tasks
+  ```
+  After making these changes, try running the build again:
+  ```bash
+  docker compose up build-full
+  ```
+  **Note**: For systems with 16GB+ RAM, you can use `WORKER_COUNT=2` or `3` and `GRADLE_PARALLEL=true` for faster builds.
 
 ## License
 This project is generally licensed under the **MIT License**.  
