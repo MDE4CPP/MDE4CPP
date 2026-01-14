@@ -1,5 +1,6 @@
 # MDE4CPP Model Build and Compile Automation Script
 # This script automates the build and compile process for any model file (.ecore, .uml)
+# The script automatically detects and cleans existing build artifacts before rebuilding
 # Usage: .\build-model.ps1 -ModelFilePath "<path-to-model-file>"
 # Example: .\build-model.ps1 -ModelFilePath "D:\DEV\test2\MDE4CPP\src\examples\ecoreExamples\ecoreModelExample\model\libraryModel_ecore.ecore"
 
@@ -42,6 +43,85 @@ function Write-Error-Custom {
 function Write-Warning-Custom {
     param([string]$Message)
     Write-Host $Message -ForegroundColor Yellow
+}
+
+# Function to check if model has been built before
+function Test-ModelBuilt {
+    param(
+        [string]$ModelName,
+        [string]$MDE4CPPHome,
+        [string]$ProjectDir
+    )
+    
+    $binDir = Join-Path $MDE4CPPHome "application\bin"
+    $includeDir = Join-Path $MDE4CPPHome "application\include"
+    
+    # Check for DLL files
+    $dllRelease = Join-Path $binDir "${ModelName}.dll"
+    $dllDebug = Join-Path $binDir "${ModelName}d.dll"
+    
+    # Check for executable files
+    $exeRelease = Join-Path $binDir "App_${ModelName}.exe"
+    $exeDebug = Join-Path $binDir "App_${ModelName}d.exe"
+    
+    # Check for header directory
+    $headerDir = Join-Path $includeDir $ModelName
+    
+    # Check for .cmake directories
+    $srcGenCmake = Join-Path $ProjectDir "src_gen\${ModelName}\.cmake"
+    $appCmake = Join-Path $ProjectDir "application\src\.cmake"
+    
+    $hasArtifacts = $false
+    if ((Test-Path $dllRelease) -or (Test-Path $dllDebug) -or 
+        (Test-Path $exeRelease) -or (Test-Path $exeDebug) -or 
+        (Test-Path $headerDir) -or (Test-Path $srcGenCmake) -or (Test-Path $appCmake)) {
+        $hasArtifacts = $true
+    }
+    
+    return $hasArtifacts
+}
+
+# Function to clean build artifacts for the model
+function Clean-ModelBuild {
+    param(
+        [string]$ProjectDir,
+        [string]$ModelName,
+        [string]$GradlewPath,
+        [string]$MDE4CPPHome
+    )
+    
+    Write-Info "Cleaning existing build artifacts for $ModelName..."
+    
+    Push-Location $ProjectDir
+    try {
+        # Clean src_gen (removes .cmake, DLLs, headers)
+        Write-Info "  Cleaning src_gen (library build artifacts)..."
+        & $GradlewPath src_gen:clean 2>&1 | Out-Null
+        
+        # Clean application (removes .cmake cache)
+        Write-Info "  Cleaning application (CMake cache)..."
+        & $GradlewPath application:clean 2>&1 | Out-Null
+        
+        # Remove executables
+        $binDir = Join-Path $MDE4CPPHome "application\bin"
+        $executables = @(
+            "App_${ModelName}.exe",
+            "App_${ModelName}d.exe"
+        )
+        
+        foreach ($exe in $executables) {
+            $exePath = Join-Path $binDir $exe
+            if (Test-Path $exePath) {
+                Remove-Item $exePath -Force -ErrorAction SilentlyContinue
+            }
+        }
+        
+        Write-Success "[OK] Clean completed"
+        Write-Info ""
+    }
+    finally {
+        Pop-Location
+    }
 }
 
 # Function to find MDE4CPP_HOME automatically
@@ -190,6 +270,12 @@ if ($PublishPlugins) {
         Pop-Location
     }
     Write-Info ""
+}
+
+# Step 1.5: Automatically clean if model has been built before
+if (Test-ModelBuilt -ModelName $modelName -MDE4CPPHome $MDE4CPP_HOME -ProjectDir $projectDir) {
+    Write-Info "Detected existing build artifacts for $modelName"
+    Clean-ModelBuild -ProjectDir $projectDir -ModelName $modelName -GradlewPath $gradlewPath -MDE4CPPHome $MDE4CPP_HOME
 }
 
 # Step 2: Navigate to project directory
