@@ -24,6 +24,8 @@ async function findOutputFiles(modelName) {
     try {
         const files = await fs.readdir(binDir);
         
+        logger.debug(`Scanning ${files.length} files in ${binDir} for model: ${modelName}`);
+        
         for (const file of files) {
             const filePath = path.join(binDir, file);
             const stats = await fs.stat(filePath);
@@ -42,6 +44,7 @@ async function findOutputFiles(modelName) {
                     sizeFormatted: formatFileSize(stats.size),
                     createdAt: stats.birthtime.toISOString()
                 });
+                logger.debug(`Found DLL: ${file}`);
             }
             
             // Check for executable files matching model name
@@ -54,10 +57,15 @@ async function findOutputFiles(modelName) {
                     sizeFormatted: formatFileSize(stats.size),
                     createdAt: stats.birthtime.toISOString()
                 });
+                logger.debug(`Found executable: ${file}`);
             }
         }
+        
+        logger.info(`Found ${outputFiles.dlls.length} DLLs and ${outputFiles.executables.length} executables for ${modelName}`);
     } catch (error) {
         logger.error('Error finding output files:', error);
+        logger.error('Error stack:', error.stack);
+        // Don't throw - return empty result instead
     }
     
     return outputFiles;

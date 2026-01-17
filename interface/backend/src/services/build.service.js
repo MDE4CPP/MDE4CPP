@@ -70,7 +70,7 @@ async function executeBuild(buildId, modelFilePath, modelName) {
     
     try {
         // Execute PowerShell script
-        await scriptService.executeBuildScript(
+        const scriptResult = await scriptService.executeBuildScript(
             modelFilePath,
             path.dirname(modelFilePath),
             (output) => {
@@ -85,6 +85,13 @@ async function executeBuild(buildId, modelFilePath, modelName) {
             }
         );
         
+        logger.info(`Build script completed with exit code: ${scriptResult.exitCode}`);
+        
+        // Check if script actually succeeded (exit code 0)
+        if (!scriptResult.success) {
+            throw new Error(`Build script failed with exit code ${scriptResult.exitCode}: ${scriptResult.stderr}`);
+        }
+        
         buildModel.updateBuild(buildId, {
             stage: 'collecting',
             message: 'Build completed, collecting output files...',
@@ -94,9 +101,13 @@ async function executeBuild(buildId, modelFilePath, modelName) {
         buildModel.addBuildLog(buildId, 'info', 'Build script completed, collecting output files...', 'collecting');
         
         // Find output files
+        logger.info(`Finding output files for model: ${modelName}`);
         const outputFiles = await fileService.findOutputFiles(modelName);
         
+        logger.info(`Found ${outputFiles.dlls.length} DLLs and ${outputFiles.executables.length} executables`);
+        
         // Copy output files to storage
+        logger.info(`Copying output files to storage for build: ${buildId}`);
         const copiedFiles = await fileService.copyOutputFiles(buildId, outputFiles);
         
         // Update build record
@@ -117,6 +128,7 @@ async function executeBuild(buildId, modelFilePath, modelName) {
         
     } catch (error) {
         logger.error(`Build ${buildId} failed:`, error);
+        logger.error(`Error stack:`, error.stack);
         
         buildModel.updateBuild(buildId, {
             status: 'failed',
@@ -132,7 +144,8 @@ async function executeBuild(buildId, modelFilePath, modelName) {
         
         buildModel.addBuildLog(buildId, 'error', `Build failed: ${error.message}`, 'failed');
         
-        throw error;
+        // Don't throw to prevent unhandled rejection, but log it
+        // The status is already updated to 'failed' above
     }
 }
 

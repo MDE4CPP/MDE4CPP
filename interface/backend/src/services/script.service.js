@@ -88,12 +88,16 @@ async function executeBuildScript(modelFilePath, workspacePath, onOutput, onErro
                 success: code === 0
             };
             
+            logger.info(`PowerShell script exited with code: ${code}`);
+            
             if (code === 0) {
                 logger.info('Build script completed successfully');
+                logger.debug(`Stdout length: ${stdout.length}, Stderr length: ${stderr.length}`);
                 resolve(result);
             } else {
                 logger.error(`Build script failed with exit code ${code}`);
-                reject(new Error(`Build failed with exit code ${code}: ${stderr}`));
+                logger.error(`Stderr output: ${stderr.substring(0, 1000)}`); // Log first 1000 chars
+                reject(new Error(`Build failed with exit code ${code}: ${stderr.substring(0, 500)}`));
             }
         });
         

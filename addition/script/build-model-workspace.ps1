@@ -172,3 +172,6 @@ if ($exitCode -ne 0) {
 Write-Info "`n=========================================="
 Write-Success "Workspace build process completed!"
 Write-Info "=========================================="
+
+# Explicitly exit with success code
+exit 0
