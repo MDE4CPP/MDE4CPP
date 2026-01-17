@@ -27,7 +27,7 @@ const config = {
     },
     
     cors: {
-        origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['http://localhost:3000']
+        origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : (process.env.NODE_ENV === 'production' ? ['http://localhost:3000'] : '*')
     },
     
     logging: {
