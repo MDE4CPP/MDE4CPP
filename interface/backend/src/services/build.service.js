@@ -5,6 +5,7 @@ const buildModel = require('../models/build.model');
 const storageService = require('./storage.service');
 const fileService = require('./file.service');
 const scriptService = require('./script.service');
+const config = require('../config');
 
 /**
  * Create a new build from uploaded file
@@ -69,10 +70,18 @@ async function executeBuild(buildId, modelFilePath, modelName) {
     buildModel.addBuildLog(buildId, 'info', 'Starting build process...', 'initialization');
     
     try {
+        // Calculate actual workspace path from buildId (parent of model directory)
+        // modelFilePath = storage/builds/{buildId}/model/filename
+        // workspacePath should be = storage/builds/{buildId}
+        const actualWorkspacePath = path.join(config.storage.root, 'builds', buildId);
+        
+        logger.debug(`Model file path: ${modelFilePath}`);
+        logger.debug(`Actual workspace path: ${actualWorkspacePath}`);
+        
         // Execute PowerShell script
         const scriptResult = await scriptService.executeBuildScript(
             modelFilePath,
-            path.dirname(modelFilePath),
+            actualWorkspacePath,  // Use actual workspace path, not model directory
             (output) => {
                 // Handle stdout
                 buildModel.addBuildLog(buildId, 'info', output.trim(), 'building');
