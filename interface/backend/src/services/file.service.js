@@ -33,31 +33,41 @@ async function findOutputFiles(modelName) {
             if (!stats.isFile()) continue;
             
             const lowerName = file.toLowerCase();
+            const modelLower = modelName.toLowerCase();
             
-            // Check for DLL files matching model name
-            if ((lowerName.endsWith('.dll')) && 
-                (file.includes(modelName) || file.includes(modelName.toLowerCase()))) {
-                outputFiles.dlls.push({
-                    name: file,
-                    path: filePath,
-                    size: stats.size,
-                    sizeFormatted: formatFileSize(stats.size),
-                    createdAt: stats.birthtime.toISOString()
-                });
-                logger.debug(`Found DLL: ${file}`);
+            // Check for DLL files matching model name (case-insensitive)
+            // Exclude Exec DLLs to avoid false positives with fUML execution libraries
+            if (lowerName.endsWith('.dll')) {
+                if (lowerName.includes(modelLower) && !lowerName.includes(`${modelLower}exec`)) {
+                    outputFiles.dlls.push({
+                        name: file,
+                        path: filePath,
+                        size: stats.size,
+                        sizeFormatted: formatFileSize(stats.size),
+                        createdAt: stats.birthtime.toISOString()
+                    });
+                    logger.debug(`Found DLL: ${file}`);
+                }
             }
             
-            // Check for executable files matching model name
-            if ((lowerName.endsWith('.exe')) && 
-                (file.startsWith(`App_${modelName}`) || file.startsWith(`App_${modelName.toLowerCase()}`))) {
-                outputFiles.executables.push({
-                    name: file,
-                    path: filePath,
-                    size: stats.size,
-                    sizeFormatted: formatFileSize(stats.size),
-                    createdAt: stats.birthtime.toISOString()
-                });
-                logger.debug(`Found executable: ${file}`);
+            // Check for executable files matching model name (case-insensitive)
+            // Support multiple patterns: App_ModelName, App_modelName, App_ModelNamed, or files containing model name (excluding Exec files)
+            if (lowerName.endsWith('.exe')) {
+                const modelPascal = modelName.charAt(0).toUpperCase() + modelName.slice(1);
+                if (lowerName.startsWith(`app_${modelLower}`) || 
+                    lowerName.startsWith(`app_${modelLower}d`) ||
+                    lowerName.startsWith(`app_${modelName.toLowerCase()}`) ||
+                    lowerName.startsWith(`app_${modelPascal.toLowerCase()}`) ||
+                    (lowerName.includes(modelLower) && !lowerName.includes('exec'))) {
+                    outputFiles.executables.push({
+                        name: file,
+                        path: filePath,
+                        size: stats.size,
+                        sizeFormatted: formatFileSize(stats.size),
+                        createdAt: stats.birthtime.toISOString()
+                    });
+                    logger.debug(`Found executable: ${file}`);
+                }
             }
         }
         

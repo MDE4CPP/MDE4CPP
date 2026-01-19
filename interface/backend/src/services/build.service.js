@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs-extra');
 const logger = require('../utils/logger');
 const { generateBuildId } = require('../utils/buildIdGenerator');
 const buildModel = require('../models/build.model');
@@ -109,9 +110,29 @@ async function executeBuild(buildId, modelFilePath, modelName) {
         
         buildModel.addBuildLog(buildId, 'info', 'Build script completed, collecting output files...', 'collecting');
         
-        // Find output files
-        logger.info(`Finding output files for model: ${modelName}`);
-        const outputFiles = await fileService.findOutputFiles(modelName);
+        // Extract actual model name from settings.gradle (after script has run)
+        // The script may rename the model file to match the XML model name
+        const workspacePath = path.join(config.storage.root, 'builds', buildId);
+        const settingsGradlePath = path.join(workspacePath, 'settings.gradle');
+        let actualModelName = modelName; // fallback to filename-based name
+        
+        try {
+            if (await fs.pathExists(settingsGradlePath)) {
+                const settingsContent = await fs.readFile(settingsGradlePath, 'utf8');
+                const match = settingsContent.match(/rootProject\.name\s*=\s*['"]([^'"]+)['"]/);
+                if (match && match[1]) {
+                    actualModelName = match[1];
+                    logger.info(`Extracted model name from settings.gradle: ${actualModelName} (was: ${modelName})`);
+                    buildModel.addBuildLog(buildId, 'info', `Using model name from settings.gradle: ${actualModelName}`, 'collecting');
+                }
+            }
+        } catch (error) {
+            logger.warn(`Could not read settings.gradle, using filename-based model name: ${modelName}`, error);
+        }
+        
+        // Find output files using the actual model name
+        logger.info(`Finding output files for model: ${actualModelName}`);
+        const outputFiles = await fileService.findOutputFiles(actualModelName);
         
         logger.info(`Found ${outputFiles.dlls.length} DLLs and ${outputFiles.executables.length} executables`);
         
