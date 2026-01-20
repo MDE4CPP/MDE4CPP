@@ -6,10 +6,14 @@ const config = require('../config');
 
 /**
  * Create workspace directory structure for a build
+ * 
+ * Workspace location: {STORAGE_ROOT}/builds/{buildId}/
+ * 
  * @param {string} buildId - Build ID
- * @returns {Promise<string>} Workspace path
+ * @returns {Promise<string>} Workspace path (absolute)
  */
 async function createWorkspace(buildId) {
+    // config.storage.root is already resolved to absolute path in config
     const workspacePath = path.join(config.storage.root, 'builds', buildId);
     const modelDir = path.join(workspacePath, 'model');
     const srcGenDir = path.join(workspacePath, 'src_gen');
@@ -25,9 +29,12 @@ async function createWorkspace(buildId) {
 
 /**
  * Save uploaded file to workspace
- * @param {string} workspacePath - Workspace path
+ * 
+ * File location: {STORAGE_ROOT}/builds/{buildId}/model/{filename}
+ * 
+ * @param {string} workspacePath - Workspace path (absolute)
  * @param {object} file - Multer file object
- * @returns {Promise<string>} Path to saved file
+ * @returns {Promise<string>} Path to saved file (absolute)
  */
 async function saveUploadedFile(workspacePath, file) {
     const modelDir = path.join(workspacePath, 'model');
@@ -42,6 +49,9 @@ async function saveUploadedFile(workspacePath, file) {
 
 /**
  * Clean up workspace (optional, for cleanup jobs)
+ * 
+ * Removes: {STORAGE_ROOT}/builds/{buildId}/
+ * 
  * @param {string} buildId - Build ID
  * @returns {Promise<void>}
  */
@@ -56,6 +66,9 @@ async function cleanupWorkspace(buildId) {
 
 /**
  * Clean up output files (for cleanup jobs)
+ * 
+ * Removes: {STORAGE_ROOT}/outputs/{buildId}/
+ * 
  * @param {string} buildId - Build ID
  * @returns {Promise<void>}
  */

@@ -1,0 +1,101 @@
+{
+  "startTime": "2026-01-20T15:10:15.775Z",
+  "totalTests": 1,
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "tests": [
+    {
+      "type": "ECORE",
+      "name": "LibraryModel_ecore",
+      "category": "Example",
+      "file": "src/examples/ecoreExamples/ecoreModelExample/model/libraryModel_ecore.ecore",
+      "status": "passed",
+      "buildId": "077f8f6e-3a0e-497f-97b8-08ff8af0a5bd",
+      "duration": 227,
+      "outputFiles": {
+        "dlls": [
+          {
+            "name": "libraryModel_ecore.dll",
+            "size": 1079147,
+            "path": "D:\\DEV\\test2\\MDE4CPP\\interface\\backend\\storage\\outputs\\077f8f6e-3a0e-497f-97b8-08ff8af0a5bd\\dlls\\libraryModel_ecore.dll"
+          },
+          {
+            "name": "libraryModel_ecored.dll",
+            "size": 8263952,
+            "path": "D:\\DEV\\test2\\MDE4CPP\\interface\\backend\\storage\\outputs\\077f8f6e-3a0e-497f-97b8-08ff8af0a5bd\\dlls\\libraryModel_ecored.dll"
+          }
+        ],
+        "executables": [
+          {
+            "name": "App_libraryModel_ecore.exe",
+            "size": 211862,
+            "path": "D:\\DEV\\test2\\MDE4CPP\\interface\\backend\\storage\\outputs\\077f8f6e-3a0e-497f-97b8-08ff8af0a5bd\\executables\\App_libraryModel_ecore.exe"
+          },
+          {
+            "name": "App_libraryModel_ecored.exe",
+            "size": 849787,
+            "path": "D:\\DEV\\test2\\MDE4CPP\\interface\\backend\\storage\\outputs\\077f8f6e-3a0e-497f-97b8-08ff8af0a5bd\\executables\\App_libraryModel_ecored.exe"
+          }
+        ]
+      },
+      "errors": [],
+      "logs": [
+        "==========================================",
+        "",
+        "[OK] Found output files in d:\\DEV\\test2\\MDE4CPP\\application\\bin:",
+        "",
+        "- App_libraryModel_ecore.exe (0.2 MB)",
+        "",
+        "- App_libraryModel_ecored.exe (0.81 MB)",
+        "",
+        "- libraryModel_ecore.dll (1.03 MB)",
+        "",
+        "- libraryModel_ecored.dll (7.88 MB)",
+        "",
+        "==========================================",
+        "",
+        "Workspace build process completed!",
+        "",
+        "==========================================",
+        "",
+        "Build script completed, collecting output files...",
+        "Build completed successfully"
+      ],
+      "issues": []
+    }
+  ],
+  "summary": {
+    "ECORE": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "UML": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0
+    },
+    "fUML": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0
+    },
+    "PSSM": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0
+    },
+    "PSCS": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0
+    },
+    "OCL": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0
+    }
+  },
+  "endTime": "2026-01-20T15:14:02.973Z"
+}

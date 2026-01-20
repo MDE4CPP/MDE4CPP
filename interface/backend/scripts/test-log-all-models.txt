@@ -1,0 +1,59 @@
+MDE4CPP Model Type Testing
+Started: 2026-01-20T15:10:21.202Z
+MDE4CPP_HOME: d:\DEV\test2\MDE4CPP
+API URL: http://localhost:8000/api/v1
+================================================================================
+
+[2026-01-20T15:10:21.206Z] Starting comprehensive model type testing...
+[2026-01-20T15:10:21.208Z] MDE4CPP_HOME: d:\DEV\test2\MDE4CPP
+[2026-01-20T15:10:21.209Z] API URL: http://localhost:8000/api/v1
+[2026-01-20T15:10:21.209Z] Total models to test: 20
+[2026-01-20T15:10:21.210Z] 
+################################################################################
+[2026-01-20T15:10:21.211Z] Testing ECORE Models (4 models)
+[2026-01-20T15:10:21.212Z] ################################################################################
+[2026-01-20T15:10:21.213Z] 
+================================================================================
+[2026-01-20T15:10:21.214Z] Testing ECORE - LibraryModel_ecore (Example)
+[2026-01-20T15:10:21.215Z] File: src/examples/ecoreExamples/ecoreModelExample/model/libraryModel_ecore.ecore
+[2026-01-20T15:10:21.216Z] ================================================================================
+[2026-01-20T15:10:21.217Z] Uploading file...
+[2026-01-20T15:10:21.325Z] Build started: a1d6fa37-c5ab-4f42-ac5e-d00d2d487c68
+[2026-01-20T15:10:21.326Z] Waiting for build to complete...
+[2026-01-20T15:10:35.664Z] ✓ PASSED in 72s
+[2026-01-20T15:10:35.664Z]   DLLs: 2
+[2026-01-20T15:10:35.665Z]   Executables: 2
+[2026-01-20T15:10:35.670Z] 
+================================================================================
+[2026-01-20T15:10:35.670Z] Testing ECORE - SubsetUnion (TestSuite)
+[2026-01-20T15:10:35.671Z] File: src/examples/ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/model/subsetUnion.ecore
+[2026-01-20T15:10:35.672Z] ================================================================================
+[2026-01-20T15:10:35.673Z] Uploading file...
+[2026-01-20T15:10:35.728Z] Build started: 50ca4463-8dfb-42c9-819c-9c9b49f8711f
+[2026-01-20T15:10:35.728Z] Waiting for build to complete...
+[2026-01-20T15:13:38.625Z] ✓ PASSED in 183s
+[2026-01-20T15:13:38.626Z]   DLLs: 2
+[2026-01-20T15:13:38.627Z]   Executables: 2
+[2026-01-20T15:13:38.632Z] 
+################################################################################
+[2026-01-20T15:13:38.633Z] Testing UML Models (2 models)
+[2026-01-20T15:13:38.634Z] ################################################################################
+[2026-01-20T15:13:38.634Z] 
+================================================================================
+[2026-01-20T15:13:38.635Z] Testing UML - LibraryModel_uml (Example)
+[2026-01-20T15:13:38.636Z] File: src/examples/UMLExamples/UMLModelExample/model/LibraryModel_uml.uml
+[2026-01-20T15:13:38.636Z] ================================================================================
+[2026-01-20T15:13:38.638Z] Uploading file...
+[2026-01-20T15:13:38.778Z] Build started: 61e17f2a-cbbc-4331-bee6-491c2d9f6f6d
+[2026-01-20T15:13:38.778Z] Waiting for build to complete...
+[2026-01-20T15:14:02.966Z] ✓ PASSED in 227s
+[2026-01-20T15:14:02.966Z]   DLLs: 2
+[2026-01-20T15:14:02.967Z]   Executables: 2
+[2026-01-20T15:14:02.973Z] 
+================================================================================
+[2026-01-20T15:14:02.974Z] Testing ECORE - EcoreAnnotationsExample (Example)
+[2026-01-20T15:14:02.975Z] File: src/examples/ecoreExamples/ecoreAnnotationsExample/model/ecoreAnnotationsExample.ecore
+[2026-01-20T15:14:02.975Z] ================================================================================
+[2026-01-20T15:14:02.976Z] Uploading file...
+[2026-01-20T15:14:03.046Z] Build started: 44e2abf5-5c2a-48b4-88d3-f928b07efb1c
+[2026-01-20T15:14:03.047Z] Waiting for build to complete...
