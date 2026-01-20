@@ -255,6 +255,15 @@ docker compose up clean
 
 ### Docker Issues
 - **Permission denied**: On Linux, add your user to the docker group: `sudo usermod -aG docker $USER` (requires logout/login)
+- **Docker Engine without admin rights on Windows**: On Windows docker client must be run with elevated privileges to connect - Error "//./pipe/docker_engine:" not found. Add user to docker-users group in Computer management. Additional in Admin Powershell:
+   ```bash
+   Install-Module -Name dockeraccesshelper
+   Import-Module dockeraccesshelpe 
+   ```
+   start docker
+  ```bash
+  Add-AccountToDockerAccess "<user name>"
+   ```
 - **Port conflicts**: Ensure no other services are using required ports
 - **Out of disk space**: Clean up Docker images: `docker system prune -a`
 
