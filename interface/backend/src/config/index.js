@@ -26,12 +26,14 @@ const config = {
     
     mde4cpp: {
         // MDE4CPP_HOME should be absolute path in production
-        // Default: resolve from backend directory (assumes interface/backend structure)
+        // Default: resolve from backend directory (assumes interface/backend/src/config structure)
+        // __dirname is at: interface/backend/src/config
+        // Need to go up 4 levels: config -> src -> backend -> interface -> MDE4CPP root
         home: process.env.MDE4CPP_HOME 
             ? (path.isAbsolute(process.env.MDE4CPP_HOME) 
                 ? process.env.MDE4CPP_HOME 
                 : path.resolve(process.env.MDE4CPP_HOME))
-            : path.resolve(__dirname, '../../..'),
+            : path.resolve(__dirname, '../../../../'),
         // Workspace root is relative to storage root, not used directly
         workspaceRoot: process.env.MDE4CPP_WORKSPACE_ROOT || 'builds'
     },
@@ -65,6 +67,36 @@ const config = {
         file: process.env.LOG_FILE 
             ? resolvePath(process.env.LOG_FILE, '')
             : path.resolve(__dirname, '../../logs/app.log')
+    },
+    
+    // Secure terminal configuration
+    terminal: {
+        // Use containerized execution (REQUIRED for security)
+        useContainers: process.env.TERMINAL_USE_CONTAINERS !== 'false', // Default: true
+        // Docker configuration
+        docker: {
+            socketPath: process.env.DOCKER_SOCKET_PATH || (process.platform === 'win32' ? '//./pipe/docker_engine' : '/var/run/docker.sock'),
+            image: process.env.TERMINAL_DOCKER_IMAGE || 'mde4cpp-terminal:latest',
+            // Container resource limits
+            memory: parseInt(process.env.TERMINAL_MEMORY_LIMIT_MB, 10) || 512, // 512MB per container
+            cpuShares: parseInt(process.env.TERMINAL_CPU_SHARES, 10) || 512, // 50% of one CPU
+            // Container timeout (auto-destroy after inactivity)
+            idleTimeoutMs: parseInt(process.env.TERMINAL_IDLE_TIMEOUT_MS, 10) || 3600000, // 1 hour
+            // Command execution timeout
+            commandTimeoutMs: parseInt(process.env.TERMINAL_COMMAND_TIMEOUT_MS, 10) || 600000, // 10 minutes
+            // Network isolation
+            networkDisabled: process.env.TERMINAL_NETWORK_DISABLED !== 'false', // Default: true (no network)
+            // Read-only filesystem for MDE4CPP_HOME (prevents modifications)
+            readOnlyMDE4CPP: process.env.TERMINAL_READONLY_MDE4CPP !== 'false', // Default: true
+            // User namespace (runs as non-root in container)
+            user: process.env.TERMINAL_DOCKER_USER || '1000:1000', // UID:GID
+            // Working directory in container
+            workingDir: process.env.TERMINAL_WORKING_DIR || '/workspace'
+        },
+        // Maximum concurrent terminal sessions
+        maxSessions: parseInt(process.env.TERMINAL_MAX_SESSIONS, 10) || 10,
+        // Cleanup interval for orphaned containers
+        cleanupIntervalMs: parseInt(process.env.TERMINAL_CLEANUP_INTERVAL_MS, 10) || 300000 // 5 minutes
     }
 };
 
@@ -102,6 +134,27 @@ const binDir = path.join(config.mde4cpp.home, 'application', 'bin');
 if (!fs.pathExistsSync(binDir)) {
     console.warn(`Warning: Application bin directory not found: ${binDir}`);
     console.warn('Output files will not be found if this directory does not exist.');
+}
+
+// Validate Docker is available if containers are enabled (async check, don't block)
+if (config.terminal.useContainers) {
+    try {
+        const Docker = require('dockerode');
+        const docker = new Docker({ socketPath: config.terminal.docker.socketPath });
+        docker.ping((err) => {
+            if (err) {
+                console.error('ERROR: Docker is not available. Secure terminal requires Docker.');
+                console.error('Please install Docker or set TERMINAL_USE_CONTAINERS=false (NOT RECOMMENDED)');
+                console.error('Docker error:', err.message);
+            } else {
+                console.log('✓ Docker connection verified for secure terminal');
+            }
+        });
+    } catch (error) {
+        console.error('ERROR: Cannot initialize Docker client. Secure terminal requires Docker.');
+        console.error('Please install Docker or set TERMINAL_USE_CONTAINERS=false (NOT RECOMMENDED)');
+        console.error('Error:', error.message);
+    }
 }
 
 module.exports = config;

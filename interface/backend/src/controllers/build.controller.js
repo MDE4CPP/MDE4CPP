@@ -7,8 +7,7 @@ const { formatFileSize } = require('../utils/pathUtils');
  * POST /api/v1/build
  */
 const createBuild = asyncHandler(async (req, res) => {
-    const options = req.body.options ? JSON.parse(req.body.options) : {};
-    const build = await buildService.createBuild(req.file, options);
+    const build = await buildService.createBuild(req.file);
     
     res.status(202).json({
         status: 'accepted',

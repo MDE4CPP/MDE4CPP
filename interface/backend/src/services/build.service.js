@@ -11,10 +11,9 @@ const config = require('../config');
 /**
  * Create a new build from uploaded file
  * @param {object} file - Multer file object
- * @param {object} options - Build options
  * @returns {Promise<object>} Build record
  */
-async function createBuild(file, options = {}) {
+async function createBuild(file) {
     const buildId = generateBuildId();
     logger.info(`Creating new build: ${buildId}`);
     

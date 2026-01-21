@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDE4CPP Terminal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/terminal.css">
+    <!-- xterm.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>💻 MDE4CPP Terminal</h1>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">🔧 Build Service</a>
+                    <a href="terminal.html" class="nav-link active">💻 Terminal</a>
+                </nav>
+            </div>
+            <p class="subtitle">Traditional MDE4CPP command-line interface</p>
+        </header>
+
+        <main>
+            <!-- Terminal Section -->
+            <section id="terminal-section" class="terminal-section">
+                <div class="terminal-card">
+                    <div class="terminal-header">
+                        <h2>Terminal</h2>
+                        <div class="terminal-status">
+                            <span id="connection-status" class="status-indicator">Connecting...</span>
+                        </div>
+                    </div>
+                    <div id="terminal-container" class="terminal-container"></div>
+                    <div class="terminal-footer">
+                        <div class="terminal-info">
+                            <span id="working-dir" class="info-item">Working Directory: -</span>
+                            <span id="session-id" class="info-item">Session: -</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Help Section -->
+            <section id="help-section" class="help-section">
+                <div class="help-card">
+                    <h2>📖 Available Commands</h2>
+                    <div class="help-content">
+                        <div class="help-group">
+                            <h3>Gradle Commands</h3>
+                            <ul>
+                                <li><code>gradlew build&lt;ModelName&gt;</code> - Build a model</li>
+                                <li><code>gradlew generate&lt;ModelName&gt;</code> - Generate code only</li>
+                                <li><code>gradlew compile&lt;ModelName&gt;</code> - Compile only</li>
+                            </ul>
+                        </div>
+                        <div class="help-group">
+                            <h3>Navigation</h3>
+                            <ul>
+                                <li><code>cd &lt;path&gt;</code> - Change directory</li>
+                                <li><code>dir</code> or <code>ls</code> - List directory contents</li>
+                                <li><code>pwd</code> or <code>get-location</code> - Show current directory</li>
+                            </ul>
+                        </div>
+                        <div class="help-group">
+                            <h3>File Viewing</h3>
+                            <ul>
+                                <li><code>cat &lt;file&gt;</code> - Display entire file</li>
+                                <li><code>head &lt;file&gt;</code> - Display first 10 lines</li>
+                                <li><code>head -n &lt;num&gt; &lt;file&gt;</code> - Display first N lines</li>
+                                <li><code>tail &lt;file&gt;</code> - Display last 10 lines</li>
+                                <li><code>tail -n &lt;num&gt; &lt;file&gt;</code> - Display last N lines</li>
+                                <li><code>type &lt;file&gt;</code> - Display file (Windows style)</li>
+                                <li><code>get-content &lt;file&gt;</code> - Display file (PowerShell style)</li>
+                                <li><code>more &lt;file&gt;</code> - Display file page by page</li>
+                                <li><code>less &lt;file&gt;</code> - Display file with navigation</li>
+                            </ul>
+                        </div>
+                        <div class="help-group">
+                            <h3>Search Commands</h3>
+                            <ul>
+                                <li><code>find . -name "*.txt"</code> - Find files by name</li>
+                                <li><code>grep "pattern" &lt;file&gt;</code> - Search for pattern in file</li>
+                                <li><code>grep -r "pattern" &lt;dir&gt;</code> - Recursive search</li>
+                                <li><code>select-string "pattern" &lt;file&gt;</code> - PowerShell search</li>
+                            </ul>
+                        </div>
+                        <div class="help-group">
+                            <h3>Environment Variables</h3>
+                            <ul>
+                                <li><code>set VAR=value</code> - Set environment variable</li>
+                                <li><code>$env:VAR = "value"</code> - PowerShell env var</li>
+                                <li><code>echo $VAR</code> - Display variable value</li>
+                            </ul>
+                        </div>
+                        <div class="help-group">
+                            <h3>Utilities</h3>
+                            <ul>
+                                <li><code>clear</code> or <code>cls</code> - Clear terminal</li>
+                                <li><code>help</code> - Show this help</li>
+                                <li><code>Ctrl+R</code> - Reverse history search</li>
+                                <li><code>Ctrl+C</code> - Cancel current command</li>
+                                <li><code>Ctrl+L</code> - Clear screen</li>
+                            </ul>
+                        </div>
+                        <div class="help-note">
+                            <p><strong>Security Note:</strong> Only MDE4CPP-related commands are allowed for security. Commands are restricted to the MDE4CPP directory structure. Access to sensitive folders (like <code>.git</code>, <code>node_modules</code>, <code>interface/backend</code>, etc.) is blocked.</p>
+                        </div>
+                        <div class="help-note" style="background: rgba(13, 188, 121, 0.1); border-left-color: #0dbc79; margin-top: 1rem;">
+                            <p><strong>Common MDE4CPP Workflows:</strong></p>
+                            <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0;">
+                                <li>Navigate to example: <code>cd src/examples/ecoreExamples/ecoreModelExample</code></li>
+                                <li>Build a model: <code>gradlew buildLibraryModel_ecore</code></li>
+                                <li>View build output: <code>cat build.log</code></li>
+                                <li>Search for errors: <code>grep -i "error" build.log</code></li>
+                                <li>List generated files: <code>ls application/bin</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>MDE4CPP Terminal v1.0.0</p>
+        </footer>
+    </div>
+
+    <!-- xterm.js and addons -->
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-web-links@0.9.0/lib/xterm-addon-web-links.js"></script>
+    
+    <!-- Set API base URL for terminal -->
+    <script>
+        window.API_BASE_URL = 'http://localhost:8000/api/v1';
+    </script>
+    <script src="js/terminal.js"></script>
+</body>
+</html>

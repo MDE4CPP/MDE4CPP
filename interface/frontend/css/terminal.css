@@ -1,0 +1,495 @@
+/* Terminal Page Styles */
+
+/* Header with navigation */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--card-bg);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Terminal Section */
+.terminal-section {
+    margin-bottom: 2rem;
+}
+
+.terminal-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.terminal-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.terminal-header h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.terminal-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-indicator {
+    padding: 0.35rem 0.9rem;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.status-indicator.connected {
+    background: linear-gradient(135deg, #0dbc79 0%, #0aa86a 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(13, 188, 121, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-indicator.connecting {
+    background: linear-gradient(135deg, #e5e510 0%, #d4d40f 100%);
+    color: #1e1e1e;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.status-indicator.disconnected {
+    background: #666666;
+    color: white;
+    opacity: 0.7;
+}
+
+.status-indicator.error {
+    background: linear-gradient(135deg, #cd3131 0%, #b82a2a 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(205, 49, 49, 0.3);
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Status indicator animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.85;
+        transform: scale(0.98);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px);
+    }
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+/* Terminal Container */
+.terminal-container {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 1rem;
+    padding-bottom: 3.5rem !important;
+    min-height: 400px;
+    height: 500px;
+    max-height: 500px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Add visual indicator space at bottom for prompt - but don't use pseudo-element as it interferes */
+
+/* Ensure terminal fills container properly but leaves space for 2 lines */
+.terminal-container > .xterm {
+    position: absolute !important;
+    top: 1rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    bottom: 3.5rem !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Improve terminal font rendering - CRITICAL: Must be monospace and properly sized */
+.terminal-container .xterm {
+    font-family: 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace !important;
+    font-feature-settings: 'liga' 0;
+    font-variant-ligatures: none;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Terminal DOM structure - ensure proper sizing */
+.terminal-container .xterm-screen {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.terminal-container .xterm-viewport {
+    background-color: #1e1e1e !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Custom scrollbar styling - thin and non-intrusive */
+.terminal-container .xterm-viewport::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-container .xterm-viewport::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.terminal-container .xterm-viewport::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.terminal-container .xterm-viewport::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+    background-clip: padding-box;
+}
+
+/* Canvas rendering - CRITICAL for alignment */
+.terminal-container .xterm-screen canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+/* Text layer - ensure proper alignment */
+.terminal-container .xterm-text-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* Cursor layer */
+.terminal-container .xterm-cursor-layer {
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Ensure no transforms or positioning issues */
+.terminal-container .xterm-rows {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.terminal-container .xterm-row {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Text area for input */
+.terminal-container .xterm-textarea {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    outline: none !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: 0;
+}
+
+/* Terminal Footer */
+.terminal-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.terminal-info {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.info-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Help Section */
+.help-section {
+    margin-bottom: 2rem;
+}
+
+.help-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.help-card h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+}
+
+.help-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.help-group h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem 0;
+    font-weight: 600;
+}
+
+.help-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.help-group li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.help-group code {
+    background: var(--bg-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+.help-note {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(37, 114, 200, 0.1);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 4px;
+}
+
+.help-note p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.help-note strong {
+    color: var(--primary-color);
+}
+
+/* Help section improvements */
+.help-group code {
+    background: rgba(37, 114, 200, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    border: 1px solid rgba(37, 114, 200, 0.2);
+    transition: all 0.2s ease;
+}
+
+.help-group code:hover {
+    background: rgba(37, 114, 200, 0.15);
+    border-color: rgba(37, 114, 200, 0.3);
+}
+
+.help-group li {
+    transition: color 0.2s ease;
+}
+
+.help-group li:hover {
+    color: var(--text-primary);
+}
+
+/* Terminal header improvements */
+.terminal-header h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .terminal-container {
+        height: 400px;
+        min-height: 300px;
+        padding: 0.75rem;
+    }
+    
+    .terminal-container .xterm {
+        font-size: 13px;
+        padding: 0.25rem;
+    }
+    
+    .help-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .terminal-info {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .info-item {
+        width: 100%;
+    }
+    
+    .terminal-card {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-container {
+        height: 350px;
+        min-height: 250px;
+        padding: 0.5rem;
+    }
+    
+    .terminal-container .xterm {
+        font-size: 12px;
+        padding: 0.25rem;
+    }
+    
+    .terminal-container .xterm-screen {
+        padding: 0.25rem;
+    }
+    
+    .status-indicator {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.7rem;
+    }
+}
