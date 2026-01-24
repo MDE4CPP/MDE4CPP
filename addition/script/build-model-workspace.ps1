@@ -437,7 +437,7 @@ Write-Info "Using task model name: $taskModelName"
 $env:MDE4CPP_HOME = $MDE4CPP_HOME
 $env:MDE4CPP_ECLIPSE_HOME = Join-Path $MDE4CPP_HOME "eclipse"
 if ([string]::IsNullOrWhiteSpace($env:ORG_GRADLE_PROJECT_DEBUG)) {
-    $env:ORG_GRADLE_PROJECT_DEBUG = "1"
+$env:ORG_GRADLE_PROJECT_DEBUG = "1"
 }
 if ([string]::IsNullOrWhiteSpace($env:ORG_GRADLE_PROJECT_RELEASE)) {
     $env:ORG_GRADLE_PROJECT_RELEASE = "1"

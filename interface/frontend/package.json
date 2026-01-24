@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "MDE4CPP Build Service Frontend",
   "scripts": {
-    "dev": "npx http-server -p 3000 -c-1",
-    "start": "npx http-server -p 3000 -c-1"
+    "dev": "npx http-server -p 3001 -c-1",
+    "start": "npx http-server -p 3001 -c-1"
   },
   "keywords": [
     "mde4cpp",

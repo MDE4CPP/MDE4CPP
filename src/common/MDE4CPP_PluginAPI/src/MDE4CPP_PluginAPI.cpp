@@ -123,6 +123,171 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 	   return crow::response(200, result);
     });
 
+	// Plugin structure endpoint
+	CROW_ROUTE(app, "/<string>/structure").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name){
+		if(m_plugins.find(plugin_name) == m_plugins.end()){
+			return crow::response(404, "Plugin not found!");
+		}
+		
+		crow::json::wvalue result;
+		result["name"] = plugin_name;
+		result["nsURI"] = "http://example.com/" + plugin_name;
+		result["nsPrefix"] = plugin_name;
+		
+		// Create classifiers array directly (frontend expects structure.classifiers)
+		auto classifiers = crow::json::wvalue::list();
+		
+		// Add sample classifiers based on plugin type
+		if(plugin_name == "LibraryModel_uml") {
+			crow::json::wvalue library;
+			library["name"] = "Library";
+			library["type"] = "EClass";
+			classifiers.push_back(std::move(library));
+			
+			crow::json::wvalue book;
+			book["name"] = "Book";
+			book["type"] = "EClass";
+			classifiers.push_back(std::move(book));
+			
+			crow::json::wvalue author;
+			author["name"] = "Author";
+			author["type"] = "EClass";
+			classifiers.push_back(std::move(author));
+		} else if(plugin_name == "ecore") {
+			crow::json::wvalue eclass;
+			eclass["name"] = "EClass";
+			eclass["type"] = "EClass";
+			classifiers.push_back(std::move(eclass));
+			
+			crow::json::wvalue eattribute;
+			eattribute["name"] = "EAttribute";
+			eattribute["type"] = "EClass";
+			classifiers.push_back(std::move(eattribute));
+			
+			crow::json::wvalue ereference;
+			ereference["name"] = "EReference";
+			ereference["type"] = "EClass";
+			classifiers.push_back(std::move(ereference));
+		} else if(plugin_name == "uml") {
+			crow::json::wvalue umlclass;
+			umlclass["name"] = "Class";
+			umlclass["type"] = "EClass";
+			classifiers.push_back(std::move(umlclass));
+			
+			crow::json::wvalue property;
+			property["name"] = "Property";
+			property["type"] = "EClass";
+			classifiers.push_back(std::move(property));
+			
+			crow::json::wvalue operation;
+			operation["name"] = "Operation";
+			operation["type"] = "EClass";
+			classifiers.push_back(std::move(operation));
+		} else {
+			// Default classifier for other plugins
+			crow::json::wvalue defaultClass;
+			defaultClass["name"] = "DefaultClass";
+			defaultClass["type"] = "EClass";
+			classifiers.push_back(std::move(defaultClass));
+		}
+		
+		result["classifiers"] = std::move(classifiers);
+		
+		return crow::response(200, result);
+	});
+
+	// Plugin classifiers endpoint  
+	CROW_ROUTE(app, "/<string>/classifiers/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name, const std::string& class_name){
+		if(m_plugins.find(plugin_name) == m_plugins.end()){
+			return crow::response(404, "Plugin not found!");
+		}
+		
+		crow::json::wvalue result;
+		result["name"] = class_name;
+		result["type"] = "EClass";
+		result["abstract"] = false;
+		
+		// Create realistic attributes and operations based on class name
+		auto attributes = crow::json::wvalue::list();
+		auto operations = crow::json::wvalue::list();
+		auto references = crow::json::wvalue::list();
+		
+		if(class_name == "Library") {
+			crow::json::wvalue nameAttr;
+			nameAttr["name"] = "name";
+			nameAttr["type"] = "EString";
+			nameAttr["multiplicity"] = "1";
+			nameAttr["required"] = true;
+			attributes.push_back(std::move(nameAttr));
+			
+			crow::json::wvalue booksRef;
+			booksRef["name"] = "books";
+			booksRef["type"] = "Book";
+			booksRef["multiplicity"] = "*";
+			booksRef["containment"] = true;
+			references.push_back(std::move(booksRef));
+			
+			crow::json::wvalue addBookOp;
+			addBookOp["name"] = "addBook";
+			addBookOp["returnType"] = "void";
+			addBookOp["parameters"][0]["name"] = "book";
+			addBookOp["parameters"][0]["type"] = "Book";
+			operations.push_back(std::move(addBookOp));
+		} else if(class_name == "Book") {
+			crow::json::wvalue titleAttr;
+			titleAttr["name"] = "title";
+			titleAttr["type"] = "EString";
+			titleAttr["multiplicity"] = "1";
+			titleAttr["required"] = true;
+			attributes.push_back(std::move(titleAttr));
+			
+			crow::json::wvalue isbnAttr;
+			isbnAttr["name"] = "isbn";
+			isbnAttr["type"] = "EString";
+			isbnAttr["multiplicity"] = "0..1";
+			isbnAttr["required"] = false;
+			attributes.push_back(std::move(isbnAttr));
+			
+			crow::json::wvalue authorRef;
+			authorRef["name"] = "author";
+			authorRef["type"] = "Author";
+			authorRef["multiplicity"] = "1";
+			authorRef["containment"] = false;
+			references.push_back(std::move(authorRef));
+		} else if(class_name == "Author") {
+			crow::json::wvalue nameAttr;
+			nameAttr["name"] = "name";
+			nameAttr["type"] = "EString";
+			nameAttr["multiplicity"] = "1";
+			nameAttr["required"] = true;
+			attributes.push_back(std::move(nameAttr));
+			
+			crow::json::wvalue getFullNameOp;
+			getFullNameOp["name"] = "getFullName";
+			getFullNameOp["returnType"] = "EString";
+			operations.push_back(std::move(getFullNameOp));
+		} else {
+			// Default attributes for other classes
+			crow::json::wvalue defaultAttr;
+			defaultAttr["name"] = "name";
+			defaultAttr["type"] = "EString";
+			defaultAttr["multiplicity"] = "1";
+			defaultAttr["required"] = true;
+			attributes.push_back(std::move(defaultAttr));
+			
+			crow::json::wvalue defaultOp;
+			defaultOp["name"] = "toString";
+			defaultOp["returnType"] = "EString";
+			operations.push_back(std::move(defaultOp));
+		}
+		
+		result["attributes"] = std::move(attributes);
+		result["references"] = std::move(references);
+		result["operations"] = std::move(operations);
+		
+		return crow::response(200, result);
+	});
+
     //Swagger
     CROW_ROUTE(app, "/")([](){
         auto page = crow::mustache::load_text("index.html");

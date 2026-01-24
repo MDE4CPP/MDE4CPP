@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDE4CPP Plugin Browser</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/plugin.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>🔌 MDE4CPP Plugin Browser</h1>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">🔧 Build Service</a>
+                    <a href="terminal.html" class="nav-link">💻 Terminal</a>
+                    <a href="plugin.html" class="nav-link active">🔌 Plugin Browser</a>
+                </nav>
+            </div>
+            <p class="subtitle">Browse plugins, create objects, and inspect model instances</p>
+        </header>
+
+        <main>
+            <!-- API Status Banner -->
+            <div id="api-status-banner" class="api-status-banner hidden">
+                <span id="api-status-text"></span>
+            </div>
+            
+            <div class="plugin-browser-layout">
+                <!-- Left Sidebar: Plugin List -->
+                <aside class="plugin-sidebar">
+                    <div class="sidebar-section">
+                        <h2>📦 Plugins</h2>
+                        <button id="refresh-plugins-btn" class="btn btn-small">🔄 Refresh</button>
+                        <div id="plugin-list" class="plugin-list">
+                            <div class="loading">Loading plugins...</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content Area -->
+                <div class="plugin-main-content">
+                    <!-- Structure Browser -->
+                    <section class="structure-section">
+                        <h2 id="structure-title">Select a plugin to view structure</h2>
+                        <div id="structure-tree" class="structure-tree">
+                            <!-- Structure tree will be rendered here -->
+                        </div>
+                    </section>
+
+                    <!-- Classifier Details -->
+                    <section id="classifier-details-section" class="classifier-details-section hidden">
+                        <h2 id="classifier-title">Classifier Details</h2>
+                        <div id="classifier-content" class="classifier-content">
+                            <!-- Classifier details will be rendered here -->
+                        </div>
+                        <div class="classifier-actions">
+                            <button id="create-object-btn" class="btn btn-primary">Create Object</button>
+                        </div>
+                    </section>
+
+                    <!-- Object Creation Form -->
+                    <section id="create-object-section" class="create-object-section hidden">
+                        <h2>Create Object</h2>
+                        <form id="create-object-form" class="create-object-form">
+                            <div class="form-group">
+                                <label for="instance-name">Instance Name:</label>
+                                <input type="text" id="instance-name" name="instanceName" required>
+                            </div>
+                            <div id="properties-container" class="properties-container">
+                                <!-- Properties will be dynamically added here -->
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="button" id="cancel-create-btn" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+                <!-- Right Sidebar: Objects & Inspector -->
+                <aside class="objects-sidebar">
+                    <div class="sidebar-section">
+                        <h2>📋 Created Objects</h2>
+                        <button id="refresh-objects-btn" class="btn btn-small">🔄 Refresh</button>
+                        <div id="objects-list" class="objects-list">
+                            <div class="empty-state">No objects created yet</div>
+                        </div>
+                    </div>
+
+                    <!-- Object Inspector -->
+                    <div id="inspector-section" class="inspector-section hidden">
+                        <h2>🔍 Object Inspector</h2>
+                        <div id="inspector-content" class="inspector-content">
+                            <!-- Inspector content will be rendered here -->
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <footer>
+            <p>MDE4CPP Plugin Browser v1.0.0</p>
+        </footer>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Error</h2>
+            <p id="error-message"></p>
+        </div>
+    </div>
+
+    <script src="js/plugin-api.js"></script>
+    <script src="js/plugin-browser.js"></script>
+    <script src="js/object-inspector.js"></script>
+    <script>
+        // Initialize plugin browser when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof PluginBrowser !== 'undefined') {
+                const browser = new PluginBrowser();
+                browser.init();
+            }
+        });
+    </script>
+</body>
+</html>

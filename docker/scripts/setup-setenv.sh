@@ -15,7 +15,7 @@ MDE4CPP_ECLIPSE_HOME_VALUE="/home/mde4cpp/eclipse"
 
 # Number of parallel make jobs (1 = single-threaded, 2+ = parallel)
 # Lower values use less memory. Recommended: 1 for 8GB RAM, 2-3 for 16GB+ RAM
-WORKER_COUNT=1
+WORKER_COUNT=3
 
 # Enable Gradle parallel execution (true/false)
 # Set to false for low-memory systems (8GB RAM or less)

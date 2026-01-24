@@ -69,6 +69,14 @@ const config = {
             : path.resolve(__dirname, '../../logs/app.log')
     },
     
+    // Plugin API configuration (MDE4CPP_PluginAPI C++ service)
+    pluginAPI: {
+        enabled: process.env.PLUGIN_API_ENABLED !== 'false',
+        host: process.env.PLUGIN_API_HOST || '127.0.0.1',
+        port: parseInt(process.env.PLUGIN_API_PORT, 10) || 8080,
+        timeout: parseInt(process.env.PLUGIN_API_TIMEOUT, 10) || 5000
+    },
+    
     // Secure terminal configuration
     terminal: {
         // Use containerized execution (REQUIRED for security)
