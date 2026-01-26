@@ -219,9 +219,9 @@ class ObjectInspector {
         if (!this.currentObjectId) return;
 
         try {
-            // Note: The actual invoke endpoint might need to be implemented
-            // For now, we'll use a placeholder
-            this.showMessage(`Operation ${operationName} invoked (implementation pending)`, 'info');
+            const result = await pluginAPI.invokeOperation(this.currentObjectId, operationName, arguments_ || []);
+            const msg = result?.result !== undefined ? `Result: ${this.formatValue(result.result)}` : 'Invoked.';
+            this.showMessage(`Invoked ${operationName}. ${msg}`, result?.fallback ? 'info' : 'success');
         } catch (error) {
             this.showMessage(`Failed to invoke operation: ${error.message}`, 'error');
         }

@@ -20,18 +20,21 @@ class PluginBrowser {
         if (!banner || !statusText) return;
 
         try {
-            // Try to get plugins - if it works, API is connected
-            const plugins = await pluginAPI.getPlugins();
-            if (plugins && plugins.length > 0 && typeof plugins[0] === 'object' && plugins[0].name) {
-                // Real API response
+            // Backend can respond even in fallback mode, so also check for real classifiers.
+            await pluginAPI.getPlugins();
+
+            const structure = await pluginAPI.getPluginStructure('ecore').catch(() => null);
+            const hasClassifiers = !!(structure && Array.isArray(structure.classifiers) && structure.classifiers.length > 0);
+
+            if (hasClassifiers) {
                 banner.classList.remove('hidden', 'disconnected', 'warning');
                 banner.classList.add('connected');
-                statusText.innerHTML = '✅ Connected to MDE4CPP_PluginAPI - Full functionality available';
+                statusText.innerHTML = '✅ Connected to MDE4CPP_PluginAPI (via backend) - Full functionality available';
             } else {
-                // Fallback mode
+                // Backend up, but C++ API not reachable (or no plugins loaded)
                 banner.classList.remove('hidden', 'connected', 'disconnected');
                 banner.classList.add('warning');
-                statusText.innerHTML = '⚠️ C++ API not connected - Using fallback mode. <strong>To enable full features:</strong> Run MDE4CPP_PluginAPI.exe on port 8080';
+                statusText.innerHTML = '⚠️ C++ API not connected (or no classifiers). <strong>To enable full features:</strong> Run MDE4CPP_PluginAPI.exe on port 8080 and refresh.';
             }
         } catch (error) {
             banner.classList.remove('hidden', 'connected', 'warning');
@@ -256,10 +259,14 @@ class PluginBrowser {
         if (details.attributes && details.attributes.length > 0) {
             html += '<div class="details-section"><h3>Attributes:</h3><ul class="feature-list">';
             details.attributes.forEach(attr => {
+                const lower = attr.lower ?? attr.lowerBound;
+                const upper = attr.upper ?? attr.upperBound;
                 html += `
                     <li>
                         <strong>${attr.name}</strong>: ${attr.type || 'unknown'}
-                        ${attr.lowerBound !== undefined ? ` [${attr.lowerBound}..${attr.upperBound === -1 ? '*' : attr.upperBound}]` : ''}
+                        ${lower !== undefined ? ` [${lower}..${upper === -1 ? '*' : upper}]` : ''}
+                        ${attr.required ? ' (required)' : ''}
+                        ${attr.id ? ' (id)' : ''}
                     </li>
                 `;
             });
@@ -269,13 +276,23 @@ class PluginBrowser {
         if (details.references && details.references.length > 0) {
             html += '<div class="details-section"><h3>References:</h3><ul class="feature-list">';
             details.references.forEach(ref => {
+                const lower = ref.lower ?? ref.lowerBound;
+                const upper = ref.upper ?? ref.upperBound;
                 html += `
                     <li>
                         <strong>${ref.name}</strong>: ${ref.type || 'unknown'}
                         ${ref.containment ? ' (containment)' : ''}
-                        ${ref.lowerBound !== undefined ? ` [${ref.lowerBound}..${ref.upperBound === -1 ? '*' : ref.upperBound}]` : ''}
+                        ${lower !== undefined ? ` [${lower}..${upper === -1 ? '*' : upper}]` : ''}
                     </li>
                 `;
+            });
+            html += '</ul></div>';
+        }
+
+        if (details.type === 'EEnum' && details.literals && details.literals.length > 0) {
+            html += '<div class="details-section"><h3>Literals:</h3><ul class="feature-list">';
+            details.literals.forEach(lit => {
+                html += `<li><strong>${lit.name}</strong>${lit.literal ? ` = "${lit.literal}"` : ''}${lit.value !== undefined ? ` (${lit.value})` : ''}</li>`;
             });
             html += '</ul></div>';
         }
@@ -315,11 +332,14 @@ class PluginBrowser {
                 
                 if (details.attributes && details.attributes.length > 0) {
                     details.attributes.forEach(attr => {
+                        const isRequired = !!(attr.required || (attr.lower !== undefined && attr.lower > 0) || (attr.lowerBound !== undefined && attr.lowerBound > 0));
+                        const isBool = (attr.type === 'EBoolean' || attr.type === 'EBooleanObject' || attr.type === 'bool' || attr.type === 'boolean');
+                        const inputType = isBool ? 'checkbox' : 'text';
                         html += `
                             <div class="form-group">
                                 <label for="prop-${attr.name}">${attr.name} (${attr.type || 'unknown'}):</label>
-                                <input type="text" id="prop-${attr.name}" name="${attr.name}" 
-                                       ${attr.lowerBound > 0 ? 'required' : ''}>
+                                <input type="${inputType}" id="prop-${attr.name}" name="${attr.name}"
+                                       ${isRequired ? 'required' : ''}>
                             </div>
                         `;
                     });
@@ -355,7 +375,12 @@ class PluginBrowser {
         // Collect property values
         formData.forEach((value, key) => {
             if (key !== 'instanceName' && value) {
-                properties[key] = value;
+                // Handle checkboxes (FormData stores "on" when checked)
+                if (value === 'on') {
+                    properties[key] = true;
+                } else {
+                    properties[key] = value;
+                }
             }
         });
 

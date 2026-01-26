@@ -5,11 +5,30 @@
 #include "ecore/EClass.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EEnumLiteral.hpp"
+#include "ecore/EFactory.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EcoreContainerAny.hpp"
 #include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/MDE4CPPPlugin.hpp"
+#include "pluginFramework/EcoreModelPlugin.hpp"
+#include "pluginFramework/UMLModelPlugin.hpp"
 #include "ecore/ecorePackage.hpp"
 
 using namespace ecore;
+
+struct StoredObject
+{
+	std::string pluginName;
+	std::string className;
+	std::shared_ptr<ecore::EObject> object;
+};
 
 class GenericApi{
 public:
@@ -25,6 +44,6 @@ private:
     std::shared_ptr<MDE4CPPPlugin> getPlugin(std::string name);
 	void mapPlugins();
     std::shared_ptr<PluginFramework> m_pluginFramework;
-    std::map<std::string,std::shared_ptr<ecore::EObject>> m_objects{};
+    std::map<std::string, StoredObject> m_objects{};
 	std::map<std::string,std::shared_ptr<MDE4CPPPlugin>> m_plugins{};
 };

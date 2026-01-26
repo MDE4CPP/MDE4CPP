@@ -121,8 +121,7 @@
         // Initialize plugin browser when page loads
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof PluginBrowser !== 'undefined') {
-                const browser = new PluginBrowser();
-                browser.init();
+                new PluginBrowser();
             }
         });
     </script>
