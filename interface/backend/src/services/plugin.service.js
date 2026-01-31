@@ -76,6 +76,7 @@ async function callPluginAPI(endpoint, method = 'GET', body = null) {
 
         req.on('error', (error) => {
             clearTimeout(timeoutId);
+            logger.error(`[DEBUG] API request failed to ${options.path}: ${error.message}`);
             reject(new Error(`API request error: ${error.message}`));
         });
 
@@ -423,6 +424,41 @@ async function listObjects() {
 }
 
 /**
+ * Export all objects with their current feature values.
+ * This is intended for download (e.g. JSON export) and will
+ * try to enrich objects with data from MDE4CPP_PluginAPI when available.
+ */
+async function exportObjects() {
+    // Start from the logical object list (merged API + local)
+    const objects = await listObjects();
+    const result = [];
+
+    for (const obj of objects) {
+        // Clone to avoid mutating internal store
+        let detailed = { ...obj };
+
+        try {
+            // Reuse existing helper which already talks to the C++ API
+            // and updates features when possible.
+            detailed = await getObjectDetails(obj.id);
+        } catch (error) {
+            logger.debug(`Failed to enrich object ${obj.id} during export: ${error.message}`);
+        }
+
+        result.push({
+            id: detailed.id,
+            pluginName: detailed.pluginName,
+            className: detailed.className,
+            type: detailed.type,
+            features: detailed.features || {},
+            createdAt: detailed.createdAt,
+        });
+    }
+
+    return result;
+}
+
+/**
  * Delete an object
  */
 async function deleteObject(objectId) {
@@ -674,9 +710,15 @@ async function getObjectFeatures(objectId) {
 async function createFromClassifier(pluginName, className, instanceName, properties = {}) {
     const objectId = instanceName || `obj_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
+    logger.info(`[DEBUG] createFromClassifier called: plugin=${pluginName}, class=${className}, name=${objectId}`);
+    
     try {
-        if (await isPluginAPIAvailable()) {
+        const apiAvailable = await isPluginAPIAvailable();
+        logger.info(`[DEBUG] Plugin API available: ${apiAvailable}`);
+        
+        if (apiAvailable) {
             const endpoint = `/${pluginName}/objects/${encodeURIComponent(className)}/${objectId}`;
+            logger.info(`[DEBUG] Calling C++ API: POST ${endpoint}`);
             await callPluginAPI(endpoint, 'POST', properties);
             
             logger.info(`Created object ${objectId} via MDE4CPP_PluginAPI from classifier ${className}`);
@@ -712,6 +754,52 @@ async function createFromClassifier(pluginName, className, instanceName, propert
     return object;
 }
 
+/**
+ * Get hierarchical tree structure for a plugin's objects
+ */
+async function getObjectTree(pluginName) {
+    logger.info(`[DEBUG] getObjectTree called for plugin: ${pluginName}`);
+    try {
+        if (await isPluginAPIAvailable()) {
+            const endpoint = `/${encodeURIComponent(pluginName)}/objects/tree`;
+            logger.info(`[DEBUG] Calling C++ API: GET ${endpoint}`);
+            const tree = await callPluginAPI(endpoint, 'GET');
+            logger.info(`[DEBUG] C++ API returned tree: ${JSON.stringify(tree)}`);
+            logger.info(`Retrieved object tree for plugin ${pluginName} from MDE4CPP_PluginAPI`);
+            return tree;
+        }
+    } catch (error) {
+        logger.warn(`Failed to get object tree for plugin ${pluginName}:`, error.message);
+    }
+    
+    // Fallback: return empty tree
+    logger.debug(`FALLBACK MODE: Returning empty tree for plugin ${pluginName}`);
+    return { roots: [] };
+}
+
+/**
+ * Create a child object within a parent via containment reference
+ */
+async function createChildObject(pluginName, parentName, className, childName, referenceID) {
+    if (!referenceID && referenceID !== 0) {
+        throw new Error('referenceID is required');
+    }
+    
+    try {
+        if (await isPluginAPIAvailable()) {
+            const endpoint = `/${encodeURIComponent(pluginName)}/objects/${encodeURIComponent(parentName)}/children/${encodeURIComponent(className)}/${encodeURIComponent(childName)}`;
+            await callPluginAPI(endpoint, 'POST', { referenceID });
+            logger.info(`Created child object ${childName} of type ${className} under parent ${parentName} via MDE4CPP_PluginAPI`);
+            return { success: true };
+        }
+    } catch (error) {
+        logger.error(`Failed to create child object:`, error.message);
+        throw new Error(`Failed to create child object: ${error.message}`);
+    }
+    
+    throw new Error('Plugin API not available');
+}
+
 module.exports = {
     getAllPlugins,
     createObject,
@@ -728,5 +816,8 @@ module.exports = {
     getObjectAttributes,
     getObjectOperations,
     getObjectFeatures,
-    createFromClassifier
+    createFromClassifier,
+    exportObjects,
+    getObjectTree,
+    createChildObject
 };

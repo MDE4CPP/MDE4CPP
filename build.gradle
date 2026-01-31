@@ -234,6 +234,68 @@ task startModelingEclipse(type:Exec){
 	}
 }
 
+/**
+ * Deliver Boost headers for PluginAPI (Crow dependency).
+ * 1. If application/include/boost already has headers, skip.
+ * 2. If BOOST_ROOT is set, copy from there to application/include/boost.
+ * 3. Else download Boost 1.82.0 and extract the boost/ folder to application/include/boost.
+ */
+task deliverBoostLibray {
+	group 'pluginAPI'
+	description 'Deliver Boost headers to application/include/boost for Crow/PluginAPI'
+
+	def boostIncludeDir = file("${rootDir}/application/include/boost")
+	def requiredHeader = file("${rootDir}/application/include/boost/algorithm/string/predicate.hpp")
+	def requiredIpp = file("${rootDir}/application/include/boost/asio/execution/impl/receiver_invocation_error.ipp")
+	def toolsDir = file("${rootDir}/application/tools")
+	def boostZip = file("${toolsDir}/boost_1_82_0.zip")
+	def boostUrl = "https://archives.boost.io/release/1.82.0/source/boost_1_82_0.zip"
+
+	outputs.dir(boostIncludeDir)
+	outputs.upToDateWhen { requiredHeader.exists() && requiredIpp.exists() }
+
+	doFirst {
+		if (requiredHeader.exists() && requiredIpp.exists()) {
+			return
+		}
+		def boostRoot = System.getenv('BOOST_ROOT')
+		if (boostRoot != null && !boostRoot.isEmpty()) {
+			def boostSrc = file("${boostRoot}/boost")
+			if (!boostSrc.exists() || !boostSrc.isDirectory()) {
+				throw new GradleException("BOOST_ROOT (${boostRoot}) must contain a 'boost' subdirectory.")
+			}
+			copy {
+				from(boostSrc)
+				into(boostIncludeDir)
+				include('**/*.hpp')
+				include('**/*.h')
+				include('**/*.ipp')
+			}
+			println "Delivered Boost headers from ${boostRoot} to application/include/boost"
+			return
+		}
+		// Download Boost and extract boost/ into application/include
+		toolsDir.mkdirs()
+		if (!boostZip.exists()) {
+			println "Downloading Boost 1.82.0 (required for PluginAPI)..."
+			boostZip.withOutputStream { os ->
+				new URL(boostUrl).withInputStream { is -> os << is }
+			}
+		}
+		println "Extracting Boost headers to application/include/boost..."
+		copy {
+			from(zipTree(boostZip))
+			into(file("${rootDir}/application/include"))
+			include("boost_1_82_0/boost/**/*.hpp")
+			include("boost_1_82_0/boost/**/*.h")
+			include("boost_1_82_0/boost/**/*.ipp")
+			eachFile { fcd -> fcd.path = fcd.path.replaceFirst("boost_1_82_0/", "") }
+			includeEmptyDirs = false
+		}
+		println "Boost headers delivered to application/include/boost"
+	}
+}
+
 task startCPPEclipse(type:Exec){
 	group 'Utilities'
 	description 'sets and checks the environment variables and starts the C++ IDE specified in the setenv file'

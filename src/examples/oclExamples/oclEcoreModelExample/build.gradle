@@ -23,8 +23,9 @@ task runCommandCompileLibrary_ecore(type:Exec) {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileLibrary_ecoreSrc'
 	}
 	dependsOn 'generateLibrary_ecore'
-	dependsOn ':src:ecore:buildEcore'
-	dependsOn ':src:uml:types:buildTypes'
+	// These dependencies exist only when this project is built as part of the full MDE4CPP build.
+	if (rootProject.findProject(':src:ecore') != null) { dependsOn ':src:ecore:buildEcore' }
+	if (rootProject.findProject(':src:uml:types') != null) { dependsOn ':src:uml:types:buildTypes' }
 		def allDepOutputs = files()
 		getRootProject().getTasksByName('buildEcore', true).each { task ->
 			allDepOutputs.from(task.outputs.files)

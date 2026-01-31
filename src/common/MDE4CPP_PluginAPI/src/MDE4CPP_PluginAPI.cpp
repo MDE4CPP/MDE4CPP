@@ -1,13 +1,17 @@
 #define CROW_JSON_USE_MAP
 #include "MDE4CPP_PluginAPI.hpp"
 
+#include <cstdint>
 #include <functional>
 
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"
+#include "pluginFramework/OperationInvokerPlugin.hpp"
 #include "abstractDataTypes/Bag.hpp"
+
+#include "ecore/EAnnotation.hpp"
 
 // Windows headers (pulled in via crow/boost) define macros like IN / DELETE
 // which break some generated UML enum names. Undef them before including UML headers.
@@ -120,6 +124,650 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
         auto result = writeValue(it->second.object, plugin);
         return crow::response(200, result);
     });
+
+	// List operations available on an object instance (generic for all plugins)
+	// GET /{plugin}/objects/{class}/{objectName}/operations
+	CROW_ROUTE(app, "/<string>/objects/<string>/<string>/operations").methods(crow::HTTPMethod::Get)(
+		[this](const std::string& plugin_name, const std::string& className, const std::string& objectName){
+			auto it = m_objects.find(objectName);
+			if(it == m_objects.end() || it->second.pluginName != plugin_name){
+				return crow::response(404);
+			}
+
+			const auto obj = it->second.object;
+			if(!obj){
+				return crow::response(404);
+			}
+
+			auto ops = crow::json::wvalue::list();
+			try
+			{
+				// Prefer metamodel-declared operations for the classifier (matches what UI shows in classifier details).
+				const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+				const auto invoker = plugin ? std::dynamic_pointer_cast<OperationInvokerPlugin>(plugin) : nullptr;
+				if(plugin)
+				{
+					if(const auto ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin))
+					{
+						const auto pkg = ecorePlugin->getEPackage();
+						if(pkg)
+						{
+							std::shared_ptr<ecore::EClass> meta = nullptr;
+							const auto eClassifiers = pkg->getEClassifiers();
+							if(eClassifiers)
+							{
+								for(auto cit = eClassifiers->cbegin(); cit != eClassifiers->cend(); ++cit)
+								{
+									const auto c = *cit;
+									if(!c) continue;
+									if(c->getName() != className) continue;
+									meta = std::dynamic_pointer_cast<ecore::EClass>(c);
+									break;
+								}
+							}
+							if(meta)
+							{
+								const auto opList = meta->getEOperations();
+								if(opList)
+								{
+									for(auto oit = opList->cbegin(); oit != opList->cend(); ++oit)
+									{
+										const auto op = *oit;
+										if(!op) continue;
+										crow::json::wvalue oitem;
+										oitem["name"] = op->getName();
+										const auto rt = op->getEType();
+										oitem["returnType"] = rt ? rt->getName() : "";
+
+										auto params = crow::json::wvalue::list();
+										const auto ps = op->getEParameters();
+										if(ps)
+										{
+											for(auto pit = ps->cbegin(); pit != ps->cend(); ++pit)
+											{
+												const auto p = *pit;
+												if(!p) continue;
+												crow::json::wvalue pitem;
+												pitem["name"] = p->getName();
+												pitem["lower"] = p->getLowerBound();
+												pitem["upper"] = p->getUpperBound();
+												const auto pt = p->getEType();
+												pitem["type"] = pt ? pt->getName() : "";
+												params.push_back(std::move(pitem));
+											}
+										}
+										oitem["parameters"] = crow::json::wvalue(std::move(params));
+										bool invokable = invoker ? invoker->canInvoke(obj, op->getName()) : false;
+										if(!invokable)
+										{
+											try
+											{
+												const auto ann = op->getEAnnotation("http://tu-ilmenau.de/see/codegen");
+												const auto details = ann ? ann->getDetails() : nullptr;
+												if(details && details->find("doNotGenerate") == details->end())
+												{
+													const auto itBody = details->find("body");
+													if(itBody != details->end() && !itBody->second.empty()) invokable = true;
+												}
+											}
+											catch(...)
+											{
+												// ignore
+											}
+										}
+										oitem["invokable"] = invokable;
+										oitem["invocationVia"] = invoker ? "native_plugin" : (invokable ? "ecore_codegen" : "none");
+										ops.push_back(std::move(oitem));
+									}
+									crow::json::wvalue result = crow::json::wvalue(ops);
+									return crow::response(200, result);
+								}
+							}
+						}
+					}
+					else if(const auto umlPlugin = std::dynamic_pointer_cast<UMLModelPlugin>(plugin))
+					{
+						const auto rootPkg = umlPlugin->getPackage();
+						if(rootPkg)
+						{
+							std::shared_ptr<uml::NamedElement> found;
+							std::function<void(const std::shared_ptr<uml::Namespace>&)> findInNamespace;
+							findInNamespace = [&](const std::shared_ptr<uml::Namespace>& ns){
+								if(found || !ns) return;
+								const auto owned = ns->getOwnedMember();
+								if(!owned) return;
+								for(auto it2 = owned->cbegin(); it2 != owned->cend(); ++it2)
+								{
+									const auto member = *it2;
+									if(!member) continue;
+									if(member->getName() == className){ found = member; return; }
+									if(const auto pkg2 = std::dynamic_pointer_cast<uml::Package>(member))
+									{
+										findInNamespace(pkg2);
+										if(found) return;
+									}
+								}
+							};
+							findInNamespace(rootPkg);
+
+							if(const auto cls2 = std::dynamic_pointer_cast<uml::Class>(found))
+							{
+								auto outOps = crow::json::wvalue::list();
+								const auto ownedOps = cls2->getOwnedOperation();
+								if(ownedOps)
+								{
+									for(auto oit = ownedOps->cbegin(); oit != ownedOps->cend(); ++oit)
+									{
+										const auto op = *oit;
+										if(!op) continue;
+										crow::json::wvalue oitem;
+										oitem["name"] = op->getName();
+										const auto ret = op->returnResult();
+										oitem["returnType"] = (ret && ret->getType()) ? ret->getType()->getName() : "";
+
+										auto params = crow::json::wvalue::list();
+										const auto ps = op->getProperty_OwnedParameter();
+										if(ps)
+										{
+											for(auto pit = ps->cbegin(); pit != ps->cend(); ++pit)
+											{
+												const auto p = *pit;
+												if(!p) continue;
+												crow::json::wvalue pitem;
+												pitem["name"] = p->getName();
+												pitem["lower"] = p->getLower();
+												pitem["upper"] = p->getUpper();
+												pitem["type"] = p->getType() ? p->getType()->getName() : "";
+												params.push_back(std::move(pitem));
+											}
+										}
+										oitem["parameters"] = crow::json::wvalue(std::move(params));
+										const bool invokable = invoker ? invoker->canInvoke(obj, op->getName()) : false;
+										oitem["invokable"] = invokable;
+										oitem["invocationVia"] = invoker ? "native_plugin" : "none";
+										outOps.push_back(std::move(oitem));
+									}
+								}
+								crow::json::wvalue result = crow::json::wvalue(outOps);
+								return crow::response(200, result);
+							}
+						}
+					}
+				}
+
+				// Fallback: reflect on instance EClass
+				const auto cls = obj->eClass();
+				if(cls)
+				{
+					// Prefer declared operations first (less noisy, and some plugins don't populate EAllOperations correctly).
+					const auto directOps = cls->getEOperations();
+					const auto allOps = cls->getEAllOperations();
+					const auto opList = (directOps && directOps->size() > 0) ? directOps : allOps;
+
+					if(opList)
+					{
+						for(auto oit = opList->cbegin(); oit != opList->cend(); ++oit)
+						{
+							const auto op = *oit;
+							if(!op) continue;
+
+							crow::json::wvalue oitem;
+							oitem["name"] = op->getName();
+							const auto rt = op->getEType();
+							oitem["returnType"] = rt ? rt->getName() : "";
+
+							auto params = crow::json::wvalue::list();
+							const auto ps = op->getEParameters();
+							if(ps)
+							{
+								for(auto pit = ps->cbegin(); pit != ps->cend(); ++pit)
+								{
+									const auto p = *pit;
+									if(!p) continue;
+									crow::json::wvalue pitem;
+									pitem["name"] = p->getName();
+									pitem["lower"] = p->getLowerBound();
+									pitem["upper"] = p->getUpperBound();
+									const auto pt = p->getEType();
+									pitem["type"] = pt ? pt->getName() : "";
+									params.push_back(std::move(pitem));
+								}
+							}
+							oitem["parameters"] = crow::json::wvalue(std::move(params));
+							bool invokable = invoker ? invoker->canInvoke(obj, op->getName()) : false;
+							if(!invokable)
+							{
+								try
+								{
+									const auto ann = op->getEAnnotation("http://tu-ilmenau.de/see/codegen");
+									const auto details = ann ? ann->getDetails() : nullptr;
+									if(details && details->find("doNotGenerate") == details->end())
+									{
+										const auto itBody = details->find("body");
+										if(itBody != details->end() && !itBody->second.empty()) invokable = true;
+									}
+								}
+								catch(...)
+								{
+									// ignore
+								}
+							}
+							oitem["invokable"] = invokable;
+							oitem["invocationVia"] = invoker ? "native_plugin" : (invokable ? "ecore_codegen" : "none");
+							ops.push_back(std::move(oitem));
+						}
+					}
+				}
+			}
+			catch(...)
+			{
+				// If reflection fails, return empty list rather than crashing.
+			}
+
+			crow::json::wvalue result = crow::json::wvalue(ops);
+			return crow::response(200, result);
+		}
+	);
+
+	// Invoke operation on an object instance (generic for all plugins)
+	// POST /{plugin}/objects/{class}/{objectName}/invoke/{operationName}
+	// Body: { "arguments": [ ... ] }
+	CROW_ROUTE(app, "/<string>/objects/<string>/<string>/invoke/<string>").methods(crow::HTTPMethod::Post)(
+		[this](const crow::request& request, const std::string& plugin_name, const std::string& className, const std::string& objectName, const std::string& operationName){
+			auto it = m_objects.find(objectName);
+			if(it == m_objects.end() || it->second.pluginName != plugin_name){
+				return crow::response(404);
+			}
+
+			const auto obj = it->second.object;
+			if(!obj){
+				return crow::response(404);
+			}
+
+			const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+			if(!plugin){
+				return crow::response(404, "Plugin not found!");
+			}
+
+			const auto body = crow::json::load(request.body);
+			auto argsJson = body ? body["arguments"] : crow::json::rvalue();
+
+			std::shared_ptr<ecore::EOperation> targetOp = nullptr;
+			try
+			{
+				// Prefer metamodel classifier operation (works across plugins and matches UI)
+				if(const auto ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin))
+				{
+						const auto pkg = ecorePlugin->getEPackage();
+						if(pkg)
+						{
+							std::shared_ptr<ecore::EClass> meta = nullptr;
+							const auto eClassifiers = pkg->getEClassifiers();
+							if(eClassifiers)
+							{
+								for(auto cit = eClassifiers->cbegin(); cit != eClassifiers->cend(); ++cit)
+								{
+									const auto c = *cit;
+									if(!c) continue;
+									if(c->getName() != className) continue;
+									meta = std::dynamic_pointer_cast<ecore::EClass>(c);
+									break;
+								}
+							}
+							if(meta)
+							{
+								const auto opList = meta->getEOperations();
+								if(opList)
+								{
+									for(auto oit = opList->cbegin(); oit != opList->cend(); ++oit)
+									{
+										const auto op = *oit;
+										if(!op) continue;
+										if(op->getName() != operationName) continue;
+
+										if(body && argsJson.t() == crow::json::type::List)
+										{
+											const auto ps = op->getEParameters();
+											const size_t pCount = ps ? static_cast<size_t>(ps->size()) : 0;
+											const size_t aCount = static_cast<size_t>(argsJson.size());
+											if(pCount == aCount) { targetOp = op; break; }
+										}
+										if(!targetOp) targetOp = op;
+									}
+								}
+							}
+						}
+				}
+
+				// Fallback: look on instance EClass
+				if(!targetOp)
+				{
+					const auto cls = obj->eClass();
+					if(cls)
+					{
+						const auto directOps = cls->getEOperations();
+						const auto allOps = cls->getEAllOperations();
+						const auto opList = (directOps && directOps->size() > 0) ? directOps : allOps;
+
+						if(opList)
+						{
+							for(auto oit = opList->cbegin(); oit != opList->cend(); ++oit)
+							{
+								const auto op = *oit;
+								if(!op) continue;
+								if(op->getName() != operationName) continue;
+								targetOp = op;
+								break;
+							}
+						}
+					}
+				}
+			}
+			catch(...)
+			{
+				// ignored
+			}
+
+			if(!targetOp){
+				// If this is a UML model plugin, we can list operations but cannot generically execute them via eInvoke.
+				if(std::dynamic_pointer_cast<UMLModelPlugin>(plugin))
+				{
+					return crow::response(501, "Invoke not supported for UML-only plugins via eInvoke()");
+				}
+				return crow::response(404, "Operation not found!");
+			}
+
+			// IMPORTANT: eInvoke() typically expects an operation instance from the object's own EClass,
+			// not the metamodel operation pointer (mixing those can crash). Try to map by signature.
+			std::shared_ptr<ecore::EOperation> invokeOp = nullptr;
+			try
+			{
+				const auto cls = obj->eClass();
+				if(cls)
+				{
+					const auto directOps = cls->getEOperations();
+					const auto allOps = cls->getEAllOperations();
+					const auto opList = (directOps && directOps->size() > 0) ? directOps : allOps;
+					if(opList)
+					{
+						const auto wantedParams = targetOp->getEParameters();
+						const size_t wantedCount = wantedParams ? static_cast<size_t>(wantedParams->size()) : 0;
+
+						for(auto oit = opList->cbegin(); oit != opList->cend(); ++oit)
+						{
+							const auto op = *oit;
+							if(!op) continue;
+							if(op->getName() != targetOp->getName()) continue;
+
+							const auto ps = op->getEParameters();
+							const size_t pCount = ps ? static_cast<size_t>(ps->size()) : 0;
+							if(pCount != wantedCount) continue;
+
+							// Best-effort type match by parameter type name
+							bool typeMatch = true;
+							if(wantedParams && ps)
+							{
+								auto wp = wantedParams->cbegin();
+								auto cp = ps->cbegin();
+								for(; wp != wantedParams->cend() && cp != ps->cend(); ++wp, ++cp)
+								{
+									const auto a = *wp;
+									const auto b = *cp;
+									if(!a || !b) continue;
+									const auto at = a->getEType();
+									const auto bt = b->getEType();
+									const std::string an = at ? at->getName() : "";
+									const std::string bn = bt ? bt->getName() : "";
+									if(!an.empty() && !bn.empty() && an != bn)
+									{
+										typeMatch = false;
+										break;
+									}
+								}
+							}
+
+							if(typeMatch)
+							{
+								invokeOp = op;
+								break;
+							}
+						}
+					}
+				}
+			}
+			catch(...)
+			{
+				// ignore; handled below
+			}
+
+			if(!invokeOp)
+			{
+				// Don't attempt to call eInvoke with an incompatible operation pointer.
+				return crow::response(501, "Operation found, but not invokable via EObject::eInvoke() for this object.");
+			}
+
+			// Build arguments bag (best-effort conversions)
+			auto argsBag = std::make_shared<Bag<Any>>();
+			try
+			{
+				const auto ps = targetOp->getEParameters();
+				if(ps && body && argsJson.t() == crow::json::type::List)
+				{
+					size_t idx = 0;
+					for(auto pit = ps->cbegin(); pit != ps->cend() && idx < static_cast<size_t>(argsJson.size()); ++pit, ++idx)
+					{
+						const auto p = *pit;
+						const auto v = argsJson[idx];
+						if(!p) { argsBag->push_back(eAny(std::string(""), 0, false)); continue; }
+
+						std::string typeName;
+						try { typeName = p->getEType() ? p->getEType()->getName() : ""; } catch(...) { typeName = ""; }
+
+						// Primitive conversions by JSON type + expected type name.
+						if(v.t() == crow::json::type::True || v.t() == crow::json::type::False)
+						{
+							argsBag->push_back(eAny(v.b(), ecore::ecorePackage::EBOOLEAN_CLASS, false));
+							continue;
+						}
+						if(v.t() == crow::json::type::Number)
+						{
+							// Crow stores numbers as double.
+							const double d = v.d();
+							if(typeName == "Integer" || typeName == "EInt" || typeName == "int")
+								argsBag->push_back(eAny(static_cast<int>(d), ecore::ecorePackage::EINT_CLASS, false));
+							else if(typeName == "Long" || typeName == "ELong" || typeName == "long")
+								argsBag->push_back(eAny(static_cast<long>(d), ecore::ecorePackage::ELONG_CLASS, false));
+							else if(typeName == "Boolean" || typeName == "EBoolean")
+								argsBag->push_back(eAny(d != 0.0, ecore::ecorePackage::EBOOLEAN_CLASS, false));
+							else
+								argsBag->push_back(eAny(d, ecore::ecorePackage::EDOUBLE_CLASS, false));
+							continue;
+						}
+						if(v.t() == crow::json::type::String)
+						{
+							const std::string s = v.s();
+							if(typeName == "Boolean" || typeName == "EBoolean")
+							{
+								const bool b = (s == "true" || s == "True" || s == "1");
+								argsBag->push_back(eAny(b, ecore::ecorePackage::EBOOLEAN_CLASS, false));
+							}
+							else if(typeName == "Integer" || typeName == "EInt" || typeName == "int")
+							{
+								argsBag->push_back(eAny(std::stoi(s), ecore::ecorePackage::EINT_CLASS, false));
+							}
+							else
+							{
+								// If this looks like an object reference, pass EObject pointer when available
+								auto itObjRef = m_objects.find(s);
+								if(itObjRef != m_objects.end())
+								{
+									argsBag->push_back(eAny(itObjRef->second.object, 0, false));
+								}
+								else
+								{
+									argsBag->push_back(eAny(s, ecore::ecorePackage::ESTRING_CLASS, false));
+								}
+							}
+							continue;
+						}
+
+						// Default: null/unknown
+						argsBag->push_back(eAny(std::string(""), 0, false));
+					}
+				}
+			}
+			catch(...)
+			{
+				// best-effort only
+			}
+
+			// Preferred long-term path: let the plugin execute with real semantics.
+			if(const auto invoker = std::dynamic_pointer_cast<OperationInvokerPlugin>(plugin))
+			{
+				if(!invoker->canInvoke(obj, operationName))
+				{
+					return crow::response(501, "Operation not invokable by this plugin (no execution semantics available).");
+				}
+
+				OperationInvokerPlugin::InvokeRequest invReq;
+				invReq.operationName = operationName;
+				invReq.operation = invokeOp;
+				invReq.arguments = argsBag;
+
+				OperationInvokerPlugin::InvokeResult invRes;
+				try
+				{
+					invRes = invoker->invoke(obj, invReq);
+				}
+				catch(const std::exception& e)
+				{
+					return crow::response(500, std::string("Invoke failed: ") + e.what());
+				}
+				catch(...)
+				{
+					return crow::response(500, "Invoke failed: unknown error");
+				}
+
+				if(!invRes.success)
+				{
+					return crow::response(500, invRes.error.empty() ? "Invoke failed" : invRes.error);
+				}
+
+				crow::json::wvalue out;
+				out["success"] = true;
+				out["via"] = "native_plugin";
+
+				const auto ret = invRes.result;
+				if(!ret || ret->isEmpty())
+				{
+					out["result"] = nullptr;
+				}
+				else
+				{
+					// Best-effort serialization
+					try { out["result"] = ret->get<std::string>(); }
+					catch(...) {
+						try { out["result"] = ret->get<int>(); }
+						catch(...) {
+							try { out["result"] = ret->get<double>(); }
+							catch(...) {
+								try { out["result"] = ret->get<bool>(); }
+								catch(...) {
+									// EObject result
+									try {
+										const std::shared_ptr<ecore::EObject> robj = ret->get<std::shared_ptr<ecore::EObject>>();
+										if(robj)
+										{
+											out["result"] = writeValue(robj, plugin);
+										}
+										else out["result"] = nullptr;
+									} catch(...) {
+										out["result"] = ret->toString();
+									}
+								}
+							}
+						}
+					}
+				}
+
+				return crow::response(200, out);
+			}
+
+			// Back-compat fallback: avoid invoking model-defined operations unless explicitly supported.
+			if(operationName.empty() || operationName[0] != 'e')
+			{
+				bool codegen = false;
+				try
+				{
+					// IMPORTANT: the "codegen body" annotation lives on the metamodel operation,
+					// not necessarily on the instance EOperation used for eInvoke.
+					const auto ann = targetOp ? targetOp->getEAnnotation("http://tu-ilmenau.de/see/codegen") : nullptr;
+					const auto details = ann ? ann->getDetails() : nullptr;
+					if(details && details->find("doNotGenerate") == details->end())
+					{
+						const auto itBody = details->find("body");
+						if(itBody != details->end() && !itBody->second.empty()) codegen = true;
+					}
+				}
+				catch(...)
+				{
+					// ignore
+				}
+
+				if(!codegen)
+				{
+					return crow::response(501, "Invoke not supported: operation has no executable semantics (no plugin invoker, no codegen body).");
+				}
+			}
+
+			try
+			{
+				const auto ret = obj->eInvoke(invokeOp, argsBag);
+				crow::json::wvalue out;
+				out["success"] = true;
+				if(!ret || ret->isEmpty())
+				{
+					out["result"] = nullptr;
+				}
+				else
+				{
+					// Best-effort serialization
+					try { out["result"] = ret->get<std::string>(); }
+					catch(...) {
+						try { out["result"] = ret->get<int>(); }
+						catch(...) {
+							try { out["result"] = ret->get<double>(); }
+							catch(...) {
+								try { out["result"] = ret->get<bool>(); }
+								catch(...) {
+									// EObject result
+									try {
+										const std::shared_ptr<ecore::EObject> robj = ret->get<std::shared_ptr<ecore::EObject>>();
+										if(robj)
+										{
+											out["result"] = writeValue(robj, plugin);
+										}
+										else out["result"] = nullptr;
+									} catch(...) {
+										out["result"] = ret->toString();
+									}
+								}
+							}
+						}
+					}
+				}
+				return crow::response(200, out);
+			}
+			catch(const std::exception& e)
+			{
+				return crow::response(500, std::string("Invoke failed: ") + e.what());
+			}
+			catch(...)
+			{
+				return crow::response(500, "Invoke failed: unknown error");
+			}
+		}
+	);
 
     //Update function
     CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& plugin_name, const std::string& className, const std::string& objectName){
@@ -251,7 +899,187 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 		crow::json::wvalue result = crow::json::wvalue(list);
 		return crow::response(200, result);
 	});
-	
+
+
+
+	// Get containment tree for a plugin
+	// Returns objects organized by containment relationships (parent -> children)
+	// GET /{plugin}/objects/tree
+	CROW_ROUTE(app, "/<string>/objects/tree").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name){
+		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+		if(plugin == nullptr){
+			return crow::response(404, "Plugin not found!");
+		}
+
+		// Build map: object pointer -> object name
+		std::map<std::shared_ptr<ecore::EObject>, std::string> objectToName;
+		std::map<std::shared_ptr<ecore::EObject>, std::string> objectToType;
+		for(const auto& entry : m_objects){
+			if(entry.second.pluginName == plugin_name){
+				objectToName[entry.second.object] = entry.first;
+				objectToType[entry.second.object] = entry.second.className;
+			}
+		}
+
+		// Helper function to build tree node recursively
+		std::function<crow::json::wvalue(const std::shared_ptr<ecore::EObject>&)> buildNode =
+			[&](const std::shared_ptr<ecore::EObject>& obj) -> crow::json::wvalue {
+				crow::json::wvalue node;
+				auto it = objectToName.find(obj);
+				if(it != objectToName.end()){
+					node["name"] = it->second;
+					node["type"] = objectToType[obj];
+				} else {
+					node["name"] = "unknown";
+					node["type"] = obj->eClass() ? obj->eClass()->getName() : "unknown";
+				}
+
+				// Get children via eContents()
+				try {
+					auto contents = obj->eContents();
+					if(contents && contents->size() > 0){
+						auto children = crow::json::wvalue::list();
+						int idx = 0;
+						for(auto childIt = contents->cbegin(); childIt != contents->cend(); ++childIt){
+							const auto& child = *childIt;
+							if(objectToName.find(child) != objectToName.end() ||
+							   std::find_if(
+								   m_objects.begin(),
+								   m_objects.end(),
+								   [&](const auto& e){
+									   return e.second.object == child && e.second.pluginName == plugin_name;
+								   }) != m_objects.end()){
+								children[idx] = buildNode(child);
+								idx++;
+							}
+						}
+						if(idx > 0){
+							node["children"] = std::move(children);
+						}
+					}
+				} catch(...) {
+					// If eContents() fails, no children
+				}
+
+				return node;
+			};
+
+		// Find root objects (no container)
+		auto roots = crow::json::wvalue::list();
+		int rootIdx = 0;
+		for(const auto& entry : m_objects){
+			if(entry.second.pluginName != plugin_name) continue;
+
+			try {
+				auto container = entry.second.object->eContainer();
+				if(!container){
+					// This is a root object
+					roots[rootIdx] = buildNode(entry.second.object);
+					rootIdx++;
+				}
+			} catch(...) {
+				// If eContainer() fails, treat as root
+				roots[rootIdx] = buildNode(entry.second.object);
+				rootIdx++;
+			}
+		}
+
+		crow::json::wvalue result;
+		result["roots"] = std::move(roots);
+		return crow::response(200, result);
+	});
+
+	// Create child object within a parent via containment reference
+	// POST /{plugin}/objects/{parentName}/children/{className}/{childName}
+	// Body: { "referenceID": <int> }
+	CROW_ROUTE(app, "/<string>/objects/<string>/children/<string>/<string>").methods(crow::HTTPMethod::Post)(
+		[this](
+			const crow::request& request,
+			const std::string& plugin_name,
+			const std::string& parentName,
+			const std::string& className,
+			const std::string& childName){
+			try
+			{
+				// Child name must be unique
+				if(m_objects.find(childName) != m_objects.end()){
+					return crow::response(400, "Object already exists!");
+				}
+
+				const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+				if(!plugin){
+					return crow::response(404, "Plugin not found!");
+				}
+
+				// Locate parent object
+				auto parentIt = m_objects.find(parentName);
+				if(parentIt == m_objects.end() || parentIt->second.pluginName != plugin_name){
+					return crow::response(404, "Parent object not found!");
+				}
+				auto parentObj = parentIt->second.object;
+				if(!parentObj){
+					return crow::response(404, "Parent object not found!");
+				}
+
+				// Read referenceID from body
+				auto body = crow::json::load(request.body);
+				if(!body){
+					return crow::response(400, "Missing JSON body (expected referenceID)");
+				}
+
+				int referenceID = -1;
+				try {
+					auto refVal = body["referenceID"];
+					if(refVal.t() == crow::json::type::Number){
+						referenceID = static_cast<int>(refVal.i());
+					}
+				} catch(...) {
+					// fall through
+				}
+				if(referenceID < 0){
+					return crow::response(400, "referenceID is required and must be a non-negative integer");
+				}
+
+				// Create child via plugin API with containment
+				std::shared_ptr<ecore::EObject> child;
+				try
+				{
+					child = plugin->create(className, parentObj, static_cast<unsigned int>(referenceID));
+					// Fallback: qualified name "plugin::Class"
+					if(!child && className.find("::") == std::string::npos){
+						const std::string qualified = plugin->eNAME() + "::" + className;
+						child = plugin->create(qualified, parentObj, static_cast<unsigned int>(referenceID));
+					}
+				}
+				catch(...)
+				{
+					// fall through; handled below
+				}
+
+				if(!child){
+					// For UML-only plugins, container-based create is intentionally not implemented
+					if(std::dynamic_pointer_cast<UMLModelPlugin>(plugin)){
+						return crow::response(501, "Containment-based create is not supported for UML plugins via this endpoint.");
+					}
+					return crow::response(400, "Failed to create child object (unknown class or invalid referenceID?)");
+				}
+
+				// Register new child object
+				m_objects[childName] = StoredObject{plugin_name, className, child};
+				return crow::response(201);
+			}
+			catch(const std::exception& e)
+			{
+				CROW_LOG_ERROR << "Create child object failed: " << e.what();
+				return crow::response(500, std::string("Create child object failed: ") + e.what());
+			}
+			catch(...)
+			{
+				CROW_LOG_ERROR << "Create child object failed: unknown error";
+				return crow::response(500, "Create child object failed: unknown error");
+			}
+		});
+
 	//Get name of all plugins found and currently in m_plugins 
 	CROW_ROUTE(app, "/plugins").methods(crow::HTTPMethod::Get)([this](){
 		
@@ -262,6 +1090,34 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 	   crow::json::wvalue result = crow::json::wvalue(list);
 	   return crow::response(200, result);
     });
+
+	// Plugin capabilities endpoint (for UI decision-making)
+	// GET /{plugin}/capabilities
+	CROW_ROUTE(app, "/<string>/capabilities").methods(crow::HTTPMethod::Get)(
+		[this](const std::string& plugin_name){
+			const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+			if(plugin == nullptr){
+				return crow::response(404, "Plugin not found!");
+			}
+
+			crow::json::wvalue caps;
+			caps["name"] = plugin_name;
+			caps["eNAME"] = plugin->eNAME();
+			caps["nsURI"] = plugin->eNS_URI();
+			caps["nsPrefix"] = plugin->eNS_PREFIX();
+
+			const bool hasNativeInvoker = (std::dynamic_pointer_cast<OperationInvokerPlugin>(plugin) != nullptr);
+			caps["invoke"] = crow::json::wvalue();
+			caps["invoke"]["supported"] = hasNativeInvoker;
+			caps["invoke"]["via"] = hasNativeInvoker ? "native_plugin" : "none";
+
+			caps["kind"] = "unknown";
+			if(std::dynamic_pointer_cast<EcoreModelPlugin>(plugin)) caps["kind"] = "ecore";
+			else if(std::dynamic_pointer_cast<UMLModelPlugin>(plugin)) caps["kind"] = "uml";
+
+			return crow::response(200, caps);
+		}
+	);
 
 	// Plugin structure endpoint (real reflection)
 	CROW_ROUTE(app, "/<string>/structure").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name){
@@ -486,6 +1342,15 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 								// Prefer ETypedElement::getEType() (more reliable than getEAttributeType() here)
 								const auto t = a->getEType();
 								aitem["type"] = t ? t->getName() : "";
+								// Add featureID for attribute (used for eGet/eSet operations)
+								try {
+									const int featureID = eCls->getFeatureID(a);
+									if(featureID >= 0) {
+										aitem["featureID"] = featureID;
+									}
+								} catch(...) {
+									// If getFeatureID fails, leave featureID unset (frontend can use index fallback)
+								}
 								attrs.push_back(std::move(aitem));
 								continue;
 							}
@@ -502,6 +1367,16 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 								ritem["type"] = rt ? rt->getName() : "";
 								const auto opp = r->getEOpposite();
 								ritem["opposite"] = opp ? opp->getName() : "";
+								// Add featureID for reference (critical for child creation via containment)
+								// This is the ID used in plugin->create(className, parent, featureID)
+								try {
+									const int featureID = eCls->getFeatureID(r);
+									if(featureID >= 0) {
+										ritem["featureID"] = featureID;
+									}
+								} catch(...) {
+									// If getFeatureID fails, leave featureID unset (frontend can use index fallback)
+								}
 								refs.push_back(std::move(ritem));
 								continue;
 							}
@@ -772,65 +1647,74 @@ crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>&
         if(object == nullptr){
             continue;
         }
-        auto attributeTypeId = object->eGet(feature)->getTypeId();
-        auto reference = std::dynamic_pointer_cast<EReference>(feature);
-        if(reference != nullptr && reference->getEOpposite() != nullptr && !reference->isContainment()){
-            continue;
-        }
-        switch (attributeTypeId) {
-            case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
-            case ecore::ecorePackage::EBOOLEAN_CLASS:
-                result[feature->getName()] = writeFeature<bool>(object, feature);
-                break;
-            case ecore::ecorePackage::EBYTE_CLASS:
-            case ecore::ecorePackage::EBYTEARRAY_CLASS:
-            case ecore::ecorePackage::EBYTEOBJECT_CLASS:
-            case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
-            case ecore::ecorePackage::ECHAR_CLASS:
-                result[feature->getName()] = writeFeature<char>(object, feature);
-                break;
-            case ecore::ecorePackage::EDATE_CLASS:
-            case ecore::ecorePackage::ERESOURCE_CLASS:
-            case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
-            case ecore::ecorePackage::EBIGINTEGER_CLASS:
-            case ecore::ecorePackage::ESHORT_CLASS:
-            case ecore::ecorePackage::ESHORTOBJECT_CLASS:
-            case ecore::ecorePackage::EINT_CLASS:
-                result[feature->getName()] = writeFeature<int>(object, feature);
-                break;
-            case ecore::ecorePackage::ELONGOBJECT_CLASS:
-            case ecore::ecorePackage::ELONG_CLASS:
-                result[feature->getName()] = writeFeature<int>(object, feature);
-                break;
-            case ecore::ecorePackage::EFLOATOBJECT_CLASS:
-            case ecore::ecorePackage::EFLOAT_CLASS:
-                result[feature->getName()] = writeFeature<float>(object, feature);
-                break;
-            case ecore::ecorePackage::EBIGDECIMAL_CLASS:
-            case ecore::ecorePackage::EDOUBLE_CLASS:
-            case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
-                result[feature->getName()] = writeFeature<bool>(object, feature);
-                break;
-            case ecore::ecorePackage::ESTRING_CLASS:
-            {
-                result[feature->getName()] = writeFeature<std::string>(object, feature);
-                break;
+        try
+        {
+            auto attributeTypeId = object->eGet(feature)->getTypeId();
+            auto reference = std::dynamic_pointer_cast<EReference>(feature);
+            if(reference != nullptr && reference->getEOpposite() != nullptr && !reference->isContainment()){
+                continue;
             }
-            default:
-            {
-                if(object->eGet(feature)->isContainer()){
-                    auto list = crow::json::wvalue();
-                    auto bag = std::dynamic_pointer_cast<EcoreContainerAny>(object->eGet(feature))->getAsEObjectContainer();
-                    for(int j=0;j<bag->size();j++){
-                        list[j] = writeValue(bag->at(j),plugin);
-                    }
-                    result[feature->getName()] = std::move(list);
+            switch (attributeTypeId) {
+                case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
+                case ecore::ecorePackage::EBOOLEAN_CLASS:
+                    result[feature->getName()] = writeFeature<bool>(object, feature);
+                    break;
+                case ecore::ecorePackage::EBYTE_CLASS:
+                case ecore::ecorePackage::EBYTEARRAY_CLASS:
+                case ecore::ecorePackage::EBYTEOBJECT_CLASS:
+                case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
+                case ecore::ecorePackage::ECHAR_CLASS:
+                    result[feature->getName()] = writeFeature<char>(object, feature);
+                    break;
+                case ecore::ecorePackage::EDATE_CLASS:
+                case ecore::ecorePackage::ERESOURCE_CLASS:
+                case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
+                case ecore::ecorePackage::EBIGINTEGER_CLASS:
+                case ecore::ecorePackage::ESHORT_CLASS:
+                case ecore::ecorePackage::ESHORTOBJECT_CLASS:
+                case ecore::ecorePackage::EINT_CLASS:
+                    result[feature->getName()] = writeFeature<int>(object, feature);
+                    break;
+                case ecore::ecorePackage::ELONGOBJECT_CLASS:
+                case ecore::ecorePackage::ELONG_CLASS:
+                    result[feature->getName()] = writeFeature<std::int64_t>(object, feature);
+                    break;
+                case ecore::ecorePackage::EFLOATOBJECT_CLASS:
+                case ecore::ecorePackage::EFLOAT_CLASS:
+                    result[feature->getName()] = writeFeature<float>(object, feature);
+                    break;
+                case ecore::ecorePackage::EBIGDECIMAL_CLASS:
+                case ecore::ecorePackage::EDOUBLE_CLASS:
+                case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
+                    result[feature->getName()] = writeFeature<double>(object, feature);
+                    break;
+                case ecore::ecorePackage::ESTRING_CLASS:
+                {
+                    result[feature->getName()] = writeFeature<std::string>(object, feature);
                     break;
                 }
-                auto value = writeValue(object->eGet(feature)->get<std::shared_ptr<EObject>>(),plugin);
-                result[feature->getName()] = std::move(value);
-                break;
+                default:
+                {
+                    if(object->eGet(feature)->isContainer()){
+                        auto list = crow::json::wvalue();
+                        auto bag = std::dynamic_pointer_cast<EcoreContainerAny>(object->eGet(feature))->getAsEObjectContainer();
+                        for(int j=0;j<bag->size();j++){
+                            list[j] = writeValue(bag->at(j),plugin);
+                        }
+                        result[feature->getName()] = std::move(list);
+                        break;
+                    }
+                    auto value = writeValue(object->eGet(feature)->get<std::shared_ptr<EObject>>(),plugin);
+                    result[feature->getName()] = std::move(value);
+                    break;
+                }
             }
+        }
+        catch(...)
+        {
+            // Never crash the whole request because of one bad feature cast.
+            result[feature->getName()] = nullptr;
+            continue;
         }
     }
     return result;
@@ -848,14 +1732,44 @@ crow::json::wvalue GenericApi::writeFeature(const std::shared_ptr<EObject> &obje
         }
         return list;
     }
-    return crow::json::wvalue(object->eGet(feature)->get<T>());
+	// Scalar: be defensive about Any's stored type.
+	const auto any = object->eGet(feature);
+	if(!any || any->isEmpty())
+	{
+		return crow::json::wvalue();
+	}
+	try
+	{
+		return crow::json::wvalue(any->get<T>());
+	}
+	catch(...)
+	{
+		// Try common numeric fallbacks
+		try { return crow::json::wvalue(static_cast<std::int64_t>(any->get<std::int64_t>())); } catch(...) {}
+		try { return crow::json::wvalue(static_cast<std::int64_t>(any->get<int>())); } catch(...) {}
+		try { return crow::json::wvalue(static_cast<double>(any->get<double>())); } catch(...) {}
+		try { return crow::json::wvalue(static_cast<double>(any->get<float>())); } catch(...) {}
+		try { return crow::json::wvalue(static_cast<bool>(any->get<bool>())); } catch(...) {}
+		try { return crow::json::wvalue(any->get<std::string>()); } catch(...) {}
+		return crow::json::wvalue(any->toString());
+	}
 }
 
 std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& content, const std::string& eClass, const std::shared_ptr<MDE4CPPPlugin>& plugin){
 	std::shared_ptr<ecore::EObject> result = nullptr;
 
-	// Prefer Ecore factory creation (plugin->create() appears to return nullptr for some plugins)
-	if(const auto ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin))
+	// Prefer plugin-provided creation (often returns generated class with real behavior).
+	// Some plugins return nullptr here, so we fall back to Ecore factory creation.
+	result = plugin->create(eClass);
+
+	if(!result)
+	{
+		// Fallback: Ecore factory creation
+		const std::string simpleClassName = (eClass.find("::") == std::string::npos)
+			? eClass
+			: eClass.substr(eClass.rfind("::") + 2);
+
+		if(const auto ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin))
 	{
 		try
 		{
@@ -873,7 +1787,7 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
 					{
 						const auto c = *it;
 						if(!c) continue;
-						if(c->getName() != eClass) continue;
+						if(c->getName() != simpleClassName) continue;
 						metaClass = std::dynamic_pointer_cast<ecore::EClass>(c);
 						break;
 					}
@@ -889,10 +1803,6 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
 			// fall back below
 		}
 	}
-
-	if(!result)
-	{
-		result = plugin->create(eClass);
 	}
 	if(!result){
 		throw std::runtime_error(std::string("create failed for class: ") + eClass);
@@ -943,7 +1853,7 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
                 break;
             case ecore::ecorePackage::ELONGOBJECT_CLASS:
             case ecore::ecorePackage::ELONG_CLASS:
-                result->eSet(feature, readFeature<long>(result, feature, content));
+                result->eSet(feature, readFeature<std::int64_t>(result, feature, content));
                 break;
             case ecore::ecorePackage::EFLOATOBJECT_CLASS:
             case ecore::ecorePackage::EFLOAT_CLASS:

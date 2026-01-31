@@ -57,6 +57,15 @@
     font-size: 0.85em;
 }
 
+/* Objects sidebar toolbar */
+.objects-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
 /* Plugin List */
 .plugin-list {
     margin-top: 15px;
@@ -289,6 +298,43 @@
     gap: 5px;
 }
 
+/* Object tree: plugin → class → instance */
+.object-plugin-group {
+    margin-bottom: 10px;
+}
+
+.object-plugin-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    margin: 6px 0;
+}
+
+.object-plugin-icon {
+    font-size: 1em;
+}
+
+.object-class-group {
+    margin-left: 12px;
+    margin-top: 4px;
+    padding-left: 8px;
+    border-left: 2px solid #ddd;
+}
+
+.object-class-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95em;
+    font-weight: 500;
+    margin: 4px 0;
+}
+
+.object-class-icon {
+    font-size: 0.95em;
+}
+
 /* Object Inspector */
 .inspector-section {
     margin-top: 20px;
@@ -499,6 +545,160 @@
     .plugin-browser-layout {
         grid-template-columns: 200px 1fr 250px;
     }
+}
+
+/* Model Tree Styles */
+.model-tree {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.tree-node {
+    user-select: none;
+}
+
+.tree-node-content {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tree-node-content:hover {
+    background: #f0f0f0;
+}
+
+.tree-node-selected .tree-node-content {
+    background: #e3f2fd;
+    font-weight: bold;
+}
+
+.tree-node-icon {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    font-size: 0.8em;
+    color: #666;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+.tree-node-icon:hover {
+    color: #333;
+}
+
+.tree-node-spacer {
+    display: inline-block;
+    width: 16px;
+    margin-right: 4px;
+}
+
+.tree-node-label {
+    flex: 1;
+    color: #333;
+}
+
+.tree-node-children {
+    margin-left: 0;
+}
+
+.tree-node-leaf {
+    /* Leaf nodes have no special styling */
+}
+
+.tree-node-expanded .tree-node-icon {
+    transform: rotate(0deg);
+}
+
+.tree-node-collapsed .tree-node-icon {
+    transform: rotate(-90deg);
+}
+
+/* Context Menu Styles */
+.context-menu {
+    position: fixed;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    min-width: 180px;
+    padding: 4px 0;
+}
+
+.context-menu.hidden {
+    display: none;
+}
+
+.context-menu-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s;
+    position: relative;
+}
+
+.context-menu-item:hover {
+    background: #f0f0f0;
+}
+
+.context-menu-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.context-menu-item.disabled:hover {
+    background: transparent;
+}
+
+.context-menu-separator {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 4px 0;
+    padding: 0;
+    cursor: default;
+}
+
+.context-menu-separator:hover {
+    background: #e0e0e0;
+}
+
+.context-menu-label {
+    flex: 1;
+}
+
+.context-menu-icon {
+    font-size: 0.9em;
+}
+
+.context-menu-submenu-icon {
+    margin-left: auto;
+    font-size: 0.8em;
+    color: #999;
+}
+
+.context-menu-item.has-submenu {
+    position: relative;
+}
+
+.context-menu-submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    padding: 4px 0;
+    display: none;
+}
+
+.context-menu-item:hover .context-menu-submenu {
+    display: block;
 }
 
 @media (max-width: 768px) {

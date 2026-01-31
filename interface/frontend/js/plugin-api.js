@@ -107,6 +107,23 @@ class PluginAPI {
         return data.operations || [];
     }
 
+    async invokeOperation(objectId, operationName, args = []) {
+        const response = await fetch(
+            `${API_BASE_URL}/plugins/objects/${encodeURIComponent(objectId)}/invoke/${encodeURIComponent(operationName)}`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ arguments: args })
+            }
+        );
+        if (!response.ok) {
+            const error = await safeJsonParse(response);
+            throw new Error(error.error?.message || `HTTP ${response.status}: Failed to invoke operation`);
+        }
+        const data = await response.json();
+        return data;
+    }
+
     async getObjectFeatures(objectId) {
         const response = await fetch(`${API_BASE_URL}/plugins/objects/${encodeURIComponent(objectId)}/features`);
         if (!response.ok) {
@@ -172,6 +189,41 @@ class PluginAPI {
             throw new Error(error.error?.message || `HTTP ${response.status}: Failed to delete object`);
         }
         return { success: true };
+    }
+
+    async exportObjects() {
+        const response = await fetch(`${API_BASE_URL}/plugins/objects/export`);
+        if (!response.ok) {
+            const error = await safeJsonParse(response);
+            throw new Error(error.error?.message || `HTTP ${response.status}: Failed to export objects`);
+        }
+        const data = await response.json();
+        return data.objects || [];
+    }
+
+    async getObjectTree(pluginName) {
+        const response = await fetch(`${API_BASE_URL}/plugins/${encodeURIComponent(pluginName)}/objects/tree`);
+        if (!response.ok) {
+            const error = await safeJsonParse(response);
+            throw new Error(error.error?.message || `HTTP ${response.status}: Failed to get object tree`);
+        }
+        return await response.json();
+    }
+
+    async createChildObject(pluginName, parentName, className, childName, referenceID) {
+        const response = await fetch(
+            `${API_BASE_URL}/plugins/${encodeURIComponent(pluginName)}/objects/${encodeURIComponent(parentName)}/children/${encodeURIComponent(className)}/${encodeURIComponent(childName)}`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ referenceID })
+            }
+        );
+        if (!response.ok) {
+            const error = await safeJsonParse(response);
+            throw new Error(error.error?.message || `HTTP ${response.status}: Failed to create child object`);
+        }
+        return await response.json();
     }
 }
 

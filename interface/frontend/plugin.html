@@ -83,7 +83,10 @@
                 <aside class="objects-sidebar">
                     <div class="sidebar-section">
                         <h2>📋 Created Objects</h2>
-                        <button id="refresh-objects-btn" class="btn btn-small">🔄 Refresh</button>
+                        <div class="objects-toolbar">
+                            <button id="refresh-objects-btn" class="btn btn-small">🔄 Refresh</button>
+                            <button id="export-objects-btn" class="btn btn-small">⬇️ Download JSON</button>
+                        </div>
                         <div id="objects-list" class="objects-list">
                             <div class="empty-state">No objects created yet</div>
                         </div>
@@ -115,6 +118,8 @@
     </div>
 
     <script src="js/plugin-api.js"></script>
+    <script src="js/model-tree.js"></script>
+    <script src="js/context-menu.js"></script>
     <script src="js/plugin-browser.js"></script>
     <script src="js/object-inspector.js"></script>
     <script>

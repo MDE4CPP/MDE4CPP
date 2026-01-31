@@ -4,6 +4,8 @@ class PluginBrowser {
         this.currentClassifier = null;
         this.plugins = [];
         this.objects = [];
+        this.treeView = null;
+        this.contextMenu = null;
         this.init();
     }
 
@@ -11,7 +13,25 @@ class PluginBrowser {
         this.setupEventListeners();
         this.checkAPIStatus();
         this.loadPlugins();
+        this.initializeTreeView();
         this.loadObjects();
+    }
+
+    initializeTreeView() {
+        const containerId = 'objects-list';
+        this.treeView = new ModelTreeView(containerId, {
+            onNodeSelect: (node, nodeId) => {
+                this.inspectObject(node.name);
+            },
+            onNodeRightClick: (e, node, nodeId) => {
+                this.handleTreeContextMenu(e, node, nodeId);
+            }
+        });
+        
+        // Initialize context menu
+        if (typeof ContextMenu !== 'undefined') {
+            this.contextMenu = new ContextMenu();
+        }
     }
 
     async checkAPIStatus() {
@@ -47,6 +67,7 @@ class PluginBrowser {
         // Refresh buttons
         document.getElementById('refresh-plugins-btn')?.addEventListener('click', () => this.loadPlugins());
         document.getElementById('refresh-objects-btn')?.addEventListener('click', () => this.loadObjects());
+        document.getElementById('export-objects-btn')?.addEventListener('click', () => this.exportObjects());
 
         // Create object button
         document.getElementById('create-object-btn')?.addEventListener('click', () => this.showCreateForm());
@@ -119,6 +140,9 @@ class PluginBrowser {
 
         // Load structure
         await this.loadPluginStructure(pluginName);
+        
+        // Reload objects tree for this plugin
+        await this.loadObjects();
     }
 
     async loadPluginStructure(pluginName) {
@@ -405,11 +429,31 @@ class PluginBrowser {
         if (!objectsList) return;
 
         try {
+            // If a plugin is selected, try to load hierarchical tree
+            if (this.currentPlugin) {
+                try {
+                    const treeData = await pluginAPI.getObjectTree(this.currentPlugin);
+                    this.renderHierarchicalTree(treeData);
+                    return;
+                } catch (treeError) {
+                    // Fall back to flat list if tree fails
+                    console.warn('Failed to load tree, falling back to flat list:', treeError);
+                }
+            }
+            
+            // Fallback to flat list
             this.objects = await pluginAPI.listObjects();
             this.renderObjectsList();
         } catch (error) {
             objectsList.innerHTML = `<div class="error">Error loading objects: ${error.message}</div>`;
         }
+    }
+
+    renderHierarchicalTree(treeData) {
+        if (!this.treeView) {
+            this.initializeTreeView();
+        }
+        this.treeView.renderTree(treeData);
     }
 
     renderObjectsList() {
@@ -421,25 +465,64 @@ class PluginBrowser {
             return;
         }
 
-        objectsList.innerHTML = this.objects.map(obj => {
-            const objId = obj.id || obj.name || 'unknown';
+        // Build a tree: plugin -> class -> instances
+        const byPlugin = new Map();
+        this.objects.forEach(obj => {
+            const pluginName = obj.pluginName || 'unknown';
             const className = obj.className || obj.type || 'unknown';
-            return `
-                <div class="object-item" data-object-id="${objId}">
-                    <div class="object-header">
-                        <span class="object-icon">📦</span>
-                        <span class="object-name">${objId}</span>
+            const objId = obj.id || obj.name || 'unknown';
+
+            if (!byPlugin.has(pluginName)) {
+                byPlugin.set(pluginName, new Map());
+            }
+            const byClass = byPlugin.get(pluginName);
+            if (!byClass.has(className)) {
+                byClass.set(className, []);
+            }
+            byClass.get(className).push({ ...obj, objId });
+        });
+
+        let html = '';
+        byPlugin.forEach((classMap, pluginName) => {
+            html += `
+                <div class="object-plugin-group">
+                    <div class="object-plugin-header">
+                        <span class="object-plugin-icon">🧩</span>
+                        <span class="object-plugin-name">${pluginName}</span>
                     </div>
-                    <div class="object-meta">
-                        <span class="object-class">${className}</span>
-                    </div>
-                    <div class="object-actions">
-                        <button class="btn btn-small inspect-btn" data-object-id="${objId}">Inspect</button>
-                        <button class="btn btn-small delete-btn" data-object-id="${objId}">Delete</button>
-                    </div>
-                </div>
             `;
-        }).join('');
+            classMap.forEach((instances, className) => {
+                html += `
+                    <div class="object-class-group">
+                        <div class="object-class-header">
+                            <span class="object-class-icon">📦</span>
+                            <span class="object-class-name">${className}</span>
+                        </div>
+                `;
+                instances.forEach(obj => {
+                    const objId = obj.objId;
+                    html += `
+                        <div class="object-item" data-object-id="${objId}">
+                            <div class="object-header">
+                                <span class="object-icon">🔹</span>
+                                <span class="object-name">${objId}</span>
+                            </div>
+                            <div class="object-meta">
+                                <span class="object-class">${className}</span>
+                            </div>
+                            <div class="object-actions">
+                                <button class="btn btn-small inspect-btn" data-object-id="${objId}">Inspect</button>
+                                <button class="btn btn-small delete-btn" data-object-id="${objId}">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>`; // end class group
+            });
+            html += `</div>`; // end plugin group
+        });
+
+        objectsList.innerHTML = html;
 
         // Add click handlers
         objectsList.querySelectorAll('.inspect-btn').forEach(btn => {
@@ -482,6 +565,23 @@ class PluginBrowser {
         }
     }
 
+    async exportObjects() {
+        try {
+            const objects = await pluginAPI.exportObjects();
+            const blob = new Blob([JSON.stringify({ objects }, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'mde4cpp-objects.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            this.showError(`Failed to export objects: ${error.message}`);
+        }
+    }
+
     showError(message) {
         const errorModal = document.getElementById('error-modal');
         const errorMessage = document.getElementById('error-message');
@@ -496,5 +596,127 @@ class PluginBrowser {
     showSuccess(message) {
         // Simple success notification
         alert(message);
+    }
+
+    async getValidChildTypes(pluginName, parentClassName) {
+        try {
+            const classifierDetails = await pluginAPI.getClassifierDetails(pluginName, parentClassName);
+            if (!classifierDetails || !classifierDetails.references) {
+                return [];
+            }
+            
+            // Filter for containment references
+            const containmentRefs = classifierDetails.references.filter(ref => ref.containment === true);
+            
+            // Map to format needed for context menu
+            // Note: referenceID is the feature ID from EStructuralFeature.getFeatureID()
+            // The backend classifier details endpoint now returns featureID for each reference.
+            // We use index as a fallback only if featureID is not present (shouldn't happen normally).
+            return containmentRefs.map((ref, index) => ({
+                name: ref.name,
+                type: ref.type,
+                referenceID: ref.featureID !== undefined && ref.featureID !== null ? ref.featureID : index,
+                label: `${ref.name} (${ref.type})`
+            }));
+        } catch (error) {
+            console.error('Failed to get valid child types:', error);
+            return [];
+        }
+    }
+
+    async handleTreeContextMenu(e, node, nodeId) {
+        if (!this.contextMenu || !this.currentPlugin) return;
+        
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const menuOptions = [
+            {
+                label: 'Create Child...',
+                icon: '➕',
+                callback: async () => {
+                    await this.showCreateChildDialog(node);
+                }
+            },
+            {
+                label: 'Properties',
+                icon: '⚙️',
+                callback: () => {
+                    this.inspectObject(node.name);
+                }
+            },
+            {
+                separator: true
+            },
+            {
+                label: 'Delete',
+                icon: '🗑️',
+                callback: () => {
+                    this.deleteObject(node.name);
+                }
+            }
+        ];
+        
+        this.contextMenu.show(e.clientX, e.clientY, menuOptions);
+    }
+
+    async showCreateChildDialog(parentNode) {
+        if (!this.currentPlugin) {
+            this.showError('Please select a plugin first');
+            return;
+        }
+        
+        try {
+            // Get valid child types for this parent
+            const childTypes = await this.getValidChildTypes(this.currentPlugin, parentNode.type);
+            
+            if (childTypes.length === 0) {
+                this.showError(`No valid child types found for ${parentNode.type}`);
+                return;
+            }
+            
+            // If only one child type, use it directly
+            if (childTypes.length === 1) {
+                await this.createChildObject(parentNode, childTypes[0]);
+                return;
+            }
+            
+            // Show dialog to select child type
+            const childTypeName = prompt(
+                `Select child type for ${parentNode.name}:\n\n${childTypes.map((ct, i) => `${i + 1}. ${ct.label}`).join('\n')}\n\nEnter number:`,
+                '1'
+            );
+            
+            if (!childTypeName) return;
+            
+            const index = parseInt(childTypeName) - 1;
+            if (index >= 0 && index < childTypes.length) {
+                await this.createChildObject(parentNode, childTypes[index]);
+            } else {
+                this.showError('Invalid selection');
+            }
+        } catch (error) {
+            this.showError(`Failed to get child types: ${error.message}`);
+        }
+    }
+
+    async createChildObject(parentNode, childType) {
+        const childName = prompt(`Enter name for new ${childType.type} child:`, `child_${Date.now()}`);
+        if (!childName) return;
+        
+        try {
+            await pluginAPI.createChildObject(
+                this.currentPlugin,
+                parentNode.name,
+                childType.type,
+                childName,
+                childType.referenceID
+            );
+            
+            this.showSuccess(`Child object ${childName} created successfully`);
+            await this.loadObjects(); // Refresh tree
+        } catch (error) {
+            this.showError(`Failed to create child object: ${error.message}`);
+        }
     }
 }

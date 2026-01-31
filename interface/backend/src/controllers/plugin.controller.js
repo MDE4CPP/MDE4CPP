@@ -185,6 +185,46 @@ const getObjectFeatures = asyncHandler(async (req, res) => {
     res.json({ features });
 });
 
+/**
+ * Export all objects (for download)
+ * GET /api/v1/plugins/objects/export
+ */
+const exportObjects = asyncHandler(async (req, res) => {
+    const objects = await pluginService.exportObjects();
+    res.json({ objects });
+});
+
+/**
+ * Get hierarchical tree structure for a plugin's objects
+ * GET /api/v1/plugins/:pluginName/objects/tree
+ */
+const getObjectTree = asyncHandler(async (req, res) => {
+    const { pluginName } = req.params;
+    const tree = await pluginService.getObjectTree(pluginName);
+    res.json(tree);
+});
+
+/**
+ * Create a child object within a parent via containment reference
+ * POST /api/v1/plugins/:pluginName/objects/:parentName/children/:className/:childName
+ */
+const createChildObject = asyncHandler(async (req, res) => {
+    const { pluginName, parentName, className, childName } = req.params;
+    const { referenceID } = req.body;
+    
+    if (referenceID === undefined || referenceID === null) {
+        return res.status(400).json({
+            error: {
+                code: 'MISSING_REFERENCE_ID',
+                message: 'referenceID is required in request body'
+            }
+        });
+    }
+    
+    await pluginService.createChildObject(pluginName, parentName, className, childName, referenceID);
+    res.status(201).json({ success: true });
+});
+
 module.exports = {
     getPlugins,
     getPluginStructure,
@@ -201,5 +241,8 @@ module.exports = {
     getObjectOperations,
     getObjectFeatures,
     listObjects,
-    deleteObject
+    deleteObject,
+    exportObjects,
+    getObjectTree,
+    createChildObject
 };
