@@ -210,7 +210,7 @@ const getObjectTree = asyncHandler(async (req, res) => {
  */
 const createChildObject = asyncHandler(async (req, res) => {
     const { pluginName, parentName, className, childName } = req.params;
-    const { referenceID } = req.body;
+    const { referenceID, properties } = req.body;
     
     if (referenceID === undefined || referenceID === null) {
         return res.status(400).json({
@@ -221,7 +221,7 @@ const createChildObject = asyncHandler(async (req, res) => {
         });
     }
     
-    await pluginService.createChildObject(pluginName, parentName, className, childName, referenceID);
+    await pluginService.createChildObject(pluginName, parentName, className, childName, referenceID, properties || {});
     res.status(201).json({ success: true });
 });
 

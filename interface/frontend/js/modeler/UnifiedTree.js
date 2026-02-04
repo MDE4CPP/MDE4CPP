@@ -72,6 +72,9 @@ class UnifiedTree {
         }
     }
 
+    _refreshDebounceTimer = null;
+    _refreshDebounceMs = 350;
+
     /**
      * Reload tree data without clearing expansion state (used by refresh after create/delete)
      */
@@ -722,15 +725,22 @@ class UnifiedTree {
     }
 
     /**
-     * Refresh tree data (preserves expansion state)
+     * Refresh tree data (preserves expansion state). Debounced to avoid rapid consecutive API calls.
      */
     async refresh() {
         if (!this.currentPlugin) return;
-        // Keep top-level open so tree doesn't collapse after create/delete
         this.expandedNodes.add('plugin');
         this.expandedNodes.add('metamodel');
         this.expandedNodes.add('instances');
-        await this.reloadData();
-        this.renderTree();
+        if (this._refreshDebounceTimer) clearTimeout(this._refreshDebounceTimer);
+        this._refreshDebounceTimer = setTimeout(async () => {
+            this._refreshDebounceTimer = null;
+            try {
+                await this.reloadData();
+                this.renderTree();
+            } catch (e) {
+                console.error('Tree refresh failed:', e);
+            }
+        }, this._refreshDebounceMs);
     }
 }

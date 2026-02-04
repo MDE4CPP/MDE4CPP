@@ -50,9 +50,9 @@ class ModelService {
      * @param {number} referenceID 
      * @returns {Promise<Object>} Success result
      */
-    async createChildInstance(pluginName, parentName, className, childName, referenceID) {
+    async createChildInstance(pluginName, parentName, className, childName, referenceID, properties = {}) {
         try {
-            const result = await pluginAPI.createChildObject(pluginName, parentName, className, childName, referenceID);
+            const result = await pluginAPI.createChildObject(pluginName, parentName, className, childName, referenceID, properties);
             // Clear cache for this plugin
             this.cache.delete(pluginName);
             return result;

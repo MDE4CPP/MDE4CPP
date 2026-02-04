@@ -24,22 +24,29 @@ function initPluginAPI() {
 // Initialize on module load
 initPluginAPI();
 
+/** Transient errors that may succeed on retry (e.g. server restarting, brief disconnect) */
+const TRANSIENT_ERROR_PATTERNS = [
+    'ECONNRESET', 'ECONNREFUSED', 'ETIMEDOUT', 'EHOSTUNREACH', 'EPIPE',
+    'socket hang up', 'network', 'timeout'
+];
+
+function isTransientError(err) {
+    const msg = (err && err.message) ? String(err.message) : '';
+    return TRANSIENT_ERROR_PATTERNS.some(p => msg.includes(p));
+}
+
 /**
- * Make HTTP request to MDE4CPP_PluginAPI
+ * Make HTTP request to MDE4CPP_PluginAPI (single attempt)
  */
-async function callPluginAPI(endpoint, method = 'GET', body = null) {
+function callPluginAPIOnce(endpoint, method = 'GET', body = null) {
     if (!PLUGIN_API_URL) {
         throw new Error('Plugin API is not enabled');
     }
-    
+
     return new Promise((resolve, reject) => {
         const url = new URL(endpoint, PLUGIN_API_URL);
         const timeout = config.pluginAPI.timeout || 5000;
-        
-        const timeoutId = setTimeout(() => {
-            req.destroy();
-            reject(new Error(`API request timeout after ${timeout}ms`));
-        }, timeout);
+
         const options = {
             hostname: url.hostname,
             port: url.port,
@@ -74,9 +81,14 @@ async function callPluginAPI(endpoint, method = 'GET', body = null) {
             });
         });
 
+        const timeoutId = setTimeout(() => {
+            req.destroy();
+            reject(new Error(`API request timeout after ${timeout}ms`));
+        }, timeout);
+
         req.on('error', (error) => {
             clearTimeout(timeoutId);
-            logger.error(`[DEBUG] API request failed to ${options.path}: ${error.message}`);
+            logger.debug(`API request failed to ${options.path}: ${error.message}`);
             reject(new Error(`API request error: ${error.message}`));
         });
 
@@ -88,17 +100,50 @@ async function callPluginAPI(endpoint, method = 'GET', body = null) {
 }
 
 /**
- * Check if MDE4CPP_PluginAPI is available
+ * Make HTTP request to MDE4CPP_PluginAPI with retry on transient errors
+ */
+async function callPluginAPI(endpoint, method = 'GET', body = null, options = {}) {
+    const maxRetries = options.maxRetries ?? 2;
+    const retryDelayMs = options.retryDelayMs ?? 300;
+
+    let lastError;
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+            return await callPluginAPIOnce(endpoint, method, body);
+        } catch (err) {
+            lastError = err;
+            if (attempt < maxRetries && isTransientError(err)) {
+                logger.info(`Plugin API transient error (attempt ${attempt + 1}/${maxRetries + 1}), retrying in ${retryDelayMs}ms: ${err.message}`);
+                await new Promise(r => setTimeout(r, retryDelayMs));
+            } else {
+                throw err;
+            }
+        }
+    }
+    throw lastError;
+}
+
+// Cache for API availability to avoid hammering a recovering server
+let pluginAPIAvailableCache = { value: false, expiresAt: 0 };
+const PLUGIN_API_CACHE_TTL_MS = 5000; // 5 seconds when available
+
+/**
+ * Check if MDE4CPP_PluginAPI is available (with short cache when available)
  */
 async function isPluginAPIAvailable() {
     if (!PLUGIN_API_URL) {
         return false;
     }
-    
+    const now = Date.now();
+    if (pluginAPIAvailableCache.value && pluginAPIAvailableCache.expiresAt > now) {
+        return true;
+    }
     try {
-        await callPluginAPI('/plugins');
+        await callPluginAPI('/plugins', 'GET', null, { maxRetries: 1 });
+        pluginAPIAvailableCache = { value: true, expiresAt: now + PLUGIN_API_CACHE_TTL_MS };
         return true;
     } catch (error) {
+        pluginAPIAvailableCache = { value: false, expiresAt: 0 }; // Don't cache false
         logger.debug('MDE4CPP_PluginAPI not available:', error.message);
         return false;
     }
@@ -756,31 +801,56 @@ async function createFromClassifier(pluginName, className, instanceName, propert
 
 /**
  * Get hierarchical tree structure for a plugin's objects
+ * Tries: (1) C++ API GET /{plugin}/tree, (2) C++ API GET /{plugin}/objects/tree (legacy), (3) build from listObjects
  */
 async function getObjectTree(pluginName) {
     logger.info(`[DEBUG] getObjectTree called for plugin: ${pluginName}`);
     try {
         if (await isPluginAPIAvailable()) {
-            const endpoint = `/${encodeURIComponent(pluginName)}/objects/tree`;
-            logger.info(`[DEBUG] Calling C++ API: GET ${endpoint}`);
-            const tree = await callPluginAPI(endpoint, 'GET');
-            logger.info(`[DEBUG] C++ API returned tree: ${JSON.stringify(tree)}`);
-            logger.info(`Retrieved object tree for plugin ${pluginName} from MDE4CPP_PluginAPI`);
-            return tree;
+            // Prefer new unambiguous path /{plugin}/tree
+            for (const endpoint of [
+                `/${encodeURIComponent(pluginName)}/tree`,
+                `/${encodeURIComponent(pluginName)}/objects/tree`
+            ]) {
+                try {
+                    logger.info(`[DEBUG] Calling C++ API: GET ${endpoint}`);
+                    const tree = await callPluginAPI(endpoint, 'GET');
+                    if (tree && (tree.roots !== undefined || Array.isArray(tree))) {
+                        const result = tree.roots !== undefined ? tree : { roots: tree };
+                        logger.info(`Retrieved object tree for plugin ${pluginName} from MDE4CPP_PluginAPI (${endpoint})`);
+                        return result;
+                    }
+                } catch (e) {
+                    logger.debug(`Tree endpoint ${endpoint} failed: ${e.message}`);
+                    continue;
+                }
+            }
+            // Fallback: build tree from flat object list
+            const objects = await listObjects();
+            const pluginObjects = (Array.isArray(objects) ? objects : []).filter(
+                o => (o.pluginName || o.plugin || '').toString() === pluginName.toString()
+            );
+            if (pluginObjects.length > 0) {
+                const roots = pluginObjects.map(o => ({
+                    name: o.name || o.id,
+                    type: o.className || o.type || 'unknown',
+                    children: []
+                }));
+                logger.info(`Built tree from listObjects for plugin ${pluginName}: ${roots.length} roots`);
+                return { roots };
+            }
         }
     } catch (error) {
         logger.warn(`Failed to get object tree for plugin ${pluginName}:`, error.message);
     }
     
-    // Fallback: return empty tree
-    logger.debug(`FALLBACK MODE: Returning empty tree for plugin ${pluginName}`);
     return { roots: [] };
 }
 
 /**
  * Create a child object within a parent via containment reference
  */
-async function createChildObject(pluginName, parentName, className, childName, referenceID) {
+async function createChildObject(pluginName, parentName, className, childName, referenceID, properties = {}) {
     if (!referenceID && referenceID !== 0) {
         throw new Error('referenceID is required');
     }
@@ -788,7 +858,11 @@ async function createChildObject(pluginName, parentName, className, childName, r
     try {
         if (await isPluginAPIAvailable()) {
             const endpoint = `/${encodeURIComponent(pluginName)}/objects/${encodeURIComponent(parentName)}/children/${encodeURIComponent(className)}/${encodeURIComponent(childName)}`;
-            await callPluginAPI(endpoint, 'POST', { referenceID });
+            const body = { referenceID };
+            if (properties && Object.keys(properties).length > 0) {
+                body.properties = properties;
+            }
+            await callPluginAPI(endpoint, 'POST', body);
             logger.info(`Created child object ${childName} of type ${className} under parent ${parentName} via MDE4CPP_PluginAPI`);
             return { success: true };
         }

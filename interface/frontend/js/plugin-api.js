@@ -210,13 +210,17 @@ class PluginAPI {
         return await response.json();
     }
 
-    async createChildObject(pluginName, parentName, className, childName, referenceID) {
+    async createChildObject(pluginName, parentName, className, childName, referenceID, properties = {}) {
+        const body = { referenceID };
+        if (properties && Object.keys(properties).length > 0) {
+            body.properties = properties;
+        }
         const response = await fetch(
             `${API_BASE_URL}/plugins/${encodeURIComponent(pluginName)}/objects/${encodeURIComponent(parentName)}/children/${encodeURIComponent(className)}/${encodeURIComponent(childName)}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ referenceID })
+                body: JSON.stringify(body)
             }
         );
         if (!response.ok) {

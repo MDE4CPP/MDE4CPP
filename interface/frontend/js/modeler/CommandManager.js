@@ -46,7 +46,8 @@ class CreateInstanceCommand extends Command {
                     this.parentName,
                     this.className,
                     this.instanceName,
-                    this.referenceID
+                    this.referenceID,
+                    this.properties
                 );
             } else {
                 await this.app.modelService.createRootInstance(

@@ -119,6 +119,7 @@ class CreateInstanceDialog {
         const input = this.createInputForType(attr, isRequired);
         input.id = `attr-${attr.name}`;
         input.name = attr.name;
+        input.dataset.attrType = (attr.type || '').toLowerCase();
 
         group.appendChild(label);
         group.appendChild(input);
@@ -138,16 +139,14 @@ class CreateInstanceDialog {
             input.required = true;
         }
 
-        // Determine input type
-        if (type === 'EBoolean' || type === 'EBooleanObject' || type === 'bool' || type === 'boolean') {
+        // Determine input type (Types.ecore uses Boolean, Integer; Ecore uses EBoolean, EInt, etc.)
+        const typeLower = type.toLowerCase();
+        if (typeLower.includes('boolean') || typeLower === 'bool') {
             input.type = 'checkbox';
-        } else if (type === 'EInt' || type === 'EIntegerObject' || type === 'int' || type === 'Integer') {
+        } else if (typeLower.includes('int') || typeLower === 'integer' || typeLower === 'long') {
             input.type = 'number';
             input.step = '1';
-        } else if (type === 'ELong' || type === 'long' || type === 'Long') {
-            input.type = 'number';
-            input.step = '1';
-        } else if (type === 'EFloat' || type === 'EDouble' || type === 'float' || type === 'double') {
+        } else if (typeLower.includes('float') || typeLower.includes('double')) {
             input.type = 'number';
             input.step = 'any';
         } else {
@@ -158,11 +157,18 @@ class CreateInstanceDialog {
         input.placeholder = `Enter ${attr.name}...`;
 
         // Set default value if available
-        if (attr.defaultValue !== undefined && attr.defaultValue !== null) {
+        let defaultValue = attr.defaultValue;
+        if (defaultValue === undefined || defaultValue === null) {
+            // Book.copies has OCL "copies > 0" - default to 1
+            if (attr.name === 'copies' && (input.type === 'number' || attr.type?.toLowerCase().includes('int'))) {
+                defaultValue = 1;
+            }
+        }
+        if (defaultValue !== undefined && defaultValue !== null) {
             if (input.type === 'checkbox') {
-                input.checked = attr.defaultValue === true || attr.defaultValue === 'true';
+                input.checked = defaultValue === true || defaultValue === 'true';
             } else {
-                input.value = attr.defaultValue;
+                input.value = defaultValue;
             }
         }
 
@@ -183,22 +189,36 @@ class CreateInstanceDialog {
             return;
         }
 
-        // Collect attribute values
+        // Collect attribute values with proper type conversion
         const properties = {};
         const inputs = this.form.querySelectorAll('input[name]');
         inputs.forEach(input => {
             if (input.name === 'instanceName') return;
             
             let value = null;
+            const attrType = (input.dataset.attrType || '').toLowerCase();
+            
             if (input.type === 'checkbox') {
                 value = input.checked;
             } else if (input.type === 'number') {
                 const numValue = parseFloat(input.value);
                 if (!isNaN(numValue)) {
-                    value = numValue;
+                    value = Number.isInteger(numValue) ? Math.floor(numValue) : numValue;
                 }
             } else if (input.value.trim() !== '') {
-                value = input.value.trim();
+                const raw = input.value.trim();
+                // Coerce string to boolean when attribute type indicates boolean
+                if (attrType.includes('boolean') && (raw === 'true' || raw === 'false')) {
+                    value = raw === 'true';
+                } else if (attrType.includes('int') || attrType === 'integer' || attrType.includes('long')) {
+                    const n = parseInt(raw, 10);
+                    value = isNaN(n) ? raw : n;
+                } else if (attrType.includes('float') || attrType.includes('double')) {
+                    const n = parseFloat(raw);
+                    value = isNaN(n) ? raw : n;
+                } else {
+                    value = raw;
+                }
             }
 
             // Only include non-empty values

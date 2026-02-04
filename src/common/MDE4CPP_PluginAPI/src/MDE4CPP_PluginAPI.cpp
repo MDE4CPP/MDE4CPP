@@ -3,6 +3,9 @@
 
 #include <cstdint>
 #include <functional>
+#include <mutex>
+#include <set>
+#include <vector>
 
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -42,7 +45,7 @@
 #include "uml/Parameter.hpp"
 
 std::shared_ptr<GenericApi> GenericApi::eInstance(std::shared_ptr<PluginFramework> &pluginFramework) {
-    static std::shared_ptr<GenericApi> instance = std::make_shared<GenericApi>(GenericApi(pluginFramework));
+    static std::shared_ptr<GenericApi> instance(new GenericApi(pluginFramework));
     return instance;
 }
 
@@ -55,10 +58,12 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
     CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& plugin_name, const std::string& className, const std::string& objectName){
 		try
 		{
-			if(m_objects.find(objectName) != m_objects.end()){
-				return crow::response(400, "Object already exists!");
+			{
+				std::lock_guard<std::mutex> lock(m_objectsMutex);
+				if(m_objects.find(objectName) != m_objects.end()){
+					return crow::response(400, "Object already exists!");
+				}
 			}
-
 			const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
 			if(plugin == nullptr){
 				return crow::response(404, "Plugin not found!");
@@ -91,7 +96,10 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 			if(!object){
 				return crow::response(400, "Failed to create object (unknown class?)");
 			}
-			m_objects[objectName] = StoredObject{plugin_name, className, object};
+			{
+				std::lock_guard<std::mutex> lock(m_objectsMutex);
+				m_objects[objectName] = StoredObject{plugin_name, className, object, ""};
+			}
 			return crow::response(201);
 		}
 		catch(const std::exception& e)
@@ -106,35 +114,162 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 		}
     });
 
+	// Get containment tree for a plugin - use /{plugin}/tree to avoid any route conflict with objects/...
+	// Uses parent map (no Ecore eContainer/eContents) to avoid crashes.
+	CROW_ROUTE(app, "/<string>/tree").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name){
+		try {
+			const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+			if(plugin == nullptr){
+				return crow::response(404, "Plugin not found!");
+			}
+
+			// Build name->{className,parentName} and parent->[children] under lock
+			std::map<std::string, std::pair<std::string, std::string>> nameToInfo;
+			std::map<std::string, std::vector<std::string>> parentToChildren;
+			std::vector<std::string> rootNames;
+			{
+				std::lock_guard<std::mutex> lock(m_objectsMutex);
+				std::set<std::string> pluginObjectNames;
+				for(const auto& entry : m_objects){
+					if(entry.second.pluginName != plugin_name) continue;
+					const std::string& name = entry.first;
+					const std::string& className = entry.second.className;
+					const std::string& parentName = entry.second.parentName;
+					pluginObjectNames.insert(name);
+					nameToInfo[name] = {className, parentName};
+				}
+				for(const auto& entry : nameToInfo){
+					const std::string& name = entry.first;
+					const std::string& parentName = entry.second.second;
+					if(parentName.empty() || pluginObjectNames.count(parentName) == 0){
+						rootNames.push_back(name);
+						if(rootNames.size() >= 1000) break;
+					} else {
+						parentToChildren[parentName].push_back(name);
+					}
+				}
+			}
+
+			// Build tree from name (no Ecore calls)
+			std::set<std::string> visited;
+			const size_t maxDepth = 100;
+			size_t nodeCount = 0;
+			std::function<crow::json::wvalue(const std::string&, size_t)> buildNode =
+				[&](const std::string& objName, size_t depth) -> crow::json::wvalue {
+				crow::json::wvalue node;
+				if(depth >= maxDepth || nodeCount >= 10000) {
+					node["name"] = objName;
+					node["type"] = "unknown";
+					return node;
+				}
+				if(visited.count(objName)) {
+					node["name"] = objName;
+					node["type"] = "cycle";
+					return node;
+				}
+				visited.insert(objName);
+				nodeCount++;
+
+				auto it = nameToInfo.find(objName);
+				if(it != nameToInfo.end()){
+					node["name"] = objName;
+					node["type"] = it->second.first;
+				} else {
+					node["name"] = objName;
+					node["type"] = "unknown";
+				}
+
+				auto cit = parentToChildren.find(objName);
+				if(cit != parentToChildren.end() && !cit->second.empty()){
+					auto children = crow::json::wvalue::list();
+					int idx = 0;
+					for(const auto& cname : cit->second){
+						if(idx >= 500) break;
+						children[idx] = buildNode(cname, depth + 1);
+						idx++;
+					}
+					node["children"] = std::move(children);
+				}
+
+				return node;
+			};
+
+			auto roots = crow::json::wvalue::list();
+			int rootIdx = 0;
+			for(const auto& rname : rootNames){
+				try {
+					roots[rootIdx] = buildNode(rname, 0);
+					rootIdx++;
+					if(rootIdx >= 1000) break;
+				} catch(const std::exception& e) {
+					CROW_LOG_WARNING << "Tree buildNode failed for root " << rname << ": " << e.what();
+				} catch(...) {}
+			}
+
+			crow::json::wvalue result;
+			result["roots"] = std::move(roots);
+			return crow::response(200, result);
+		} catch(const std::exception& e) {
+			CROW_LOG_ERROR << "Tree handler exception: " << e.what();
+			return crow::response(500, std::string("Tree error: ") + e.what());
+		} catch(...) {
+			CROW_LOG_ERROR << "Tree handler unknown exception";
+			return crow::response(500, "Tree error: unknown");
+		}
+	});
+
     //Read function
     CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name, const std::string& className, const std::string& objectName){
-        auto it = m_objects.find(objectName);
-        if(it == m_objects.end()){
-            return crow::response(404);
+        try {
+            std::shared_ptr<ecore::EObject> objCopy;
+            {
+                std::lock_guard<std::mutex> lock(m_objectsMutex);
+                auto it = m_objects.find(objectName);
+                if(it == m_objects.end()){
+                    return crow::response(404);
+                }
+                if(it->second.pluginName != plugin_name){
+                    return crow::response(404);
+                }
+                if(!it->second.object){
+                    return crow::response(404, "Object is null");
+                }
+                objCopy = it->second.object;
+            }
+            const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
+            if(plugin == nullptr){
+                return crow::response(404, "Plugin not found!");
+            }
+            crow::json::wvalue result;
+            try { result = writeValue(objCopy, plugin); } catch(const std::exception& e) {
+                CROW_LOG_ERROR << "Get object serialization failed: " << e.what();
+                return crow::response(500, std::string("Serialization failed: ") + e.what());
+            } catch(...) {
+                return crow::response(500, "Serialization failed: unknown error");
+            }
+            return crow::response(200, result);
+        } catch(const std::exception& e) {
+            CROW_LOG_ERROR << "Get object failed: " << e.what();
+            return crow::response(500, std::string("Get object failed: ") + e.what());
+        } catch(...) {
+            CROW_LOG_ERROR << "Get object failed: unknown error";
+            return crow::response(500, "Get object failed: unknown error");
         }
-		if(it->second.pluginName != plugin_name){
-			return crow::response(404);
-		}
-		
-		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
-		if(plugin == nullptr){
-			return crow::response(404, "Plugin not found!");
-		}
-		
-        auto result = writeValue(it->second.object, plugin);
-        return crow::response(200, result);
     });
 
 	// List operations available on an object instance (generic for all plugins)
 	// GET /{plugin}/objects/{class}/{objectName}/operations
 	CROW_ROUTE(app, "/<string>/objects/<string>/<string>/operations").methods(crow::HTTPMethod::Get)(
 		[this](const std::string& plugin_name, const std::string& className, const std::string& objectName){
-			auto it = m_objects.find(objectName);
-			if(it == m_objects.end() || it->second.pluginName != plugin_name){
-				return crow::response(404);
+			std::shared_ptr<ecore::EObject> obj;
+			{
+				std::lock_guard<std::mutex> lock(m_objectsMutex);
+				auto it = m_objects.find(objectName);
+				if(it == m_objects.end() || it->second.pluginName != plugin_name){
+					return crow::response(404);
+				}
+				obj = it->second.object;
 			}
-
-			const auto obj = it->second.object;
 			if(!obj){
 				return crow::response(404);
 			}
@@ -374,12 +509,15 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 	// Body: { "arguments": [ ... ] }
 	CROW_ROUTE(app, "/<string>/objects/<string>/<string>/invoke/<string>").methods(crow::HTTPMethod::Post)(
 		[this](const crow::request& request, const std::string& plugin_name, const std::string& className, const std::string& objectName, const std::string& operationName){
-			auto it = m_objects.find(objectName);
-			if(it == m_objects.end() || it->second.pluginName != plugin_name){
-				return crow::response(404);
+			std::shared_ptr<ecore::EObject> obj;
+			{
+				std::lock_guard<std::mutex> lock(m_objectsMutex);
+				auto it = m_objects.find(objectName);
+				if(it == m_objects.end() || it->second.pluginName != plugin_name){
+					return crow::response(404);
+				}
+				obj = it->second.object;
 			}
-
-			const auto obj = it->second.object;
 			if(!obj){
 				return crow::response(404);
 			}
@@ -598,15 +736,17 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 							else
 							{
 								// If this looks like an object reference, pass EObject pointer when available
-								auto itObjRef = m_objects.find(s);
-								if(itObjRef != m_objects.end())
+								std::shared_ptr<ecore::EObject> refObj;
 								{
-									argsBag->push_back(eAny(itObjRef->second.object, 0, false));
+									std::lock_guard<std::mutex> lock(m_objectsMutex);
+									auto itObjRef = m_objects.find(s);
+									if(itObjRef != m_objects.end())
+										refObj = itObjRef->second.object;
 								}
+								if(refObj)
+									argsBag->push_back(eAny(refObj, 0, false));
 								else
-								{
 									argsBag->push_back(eAny(s, ecore::ecorePackage::ESTRING_CLASS, false));
-								}
 							}
 							continue;
 						}
@@ -773,14 +913,18 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
     CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Put)([this](const crow::request& request, const std::string& plugin_name, const std::string& className, const std::string& objectName){
 		try
 		{
-			auto it = m_objects.find(objectName);
-			if(it == m_objects.end()){
-				return crow::response(404);
+			std::string existingParent;
+			{
+				std::lock_guard<std::mutex> lock(m_objectsMutex);
+				auto it = m_objects.find(objectName);
+				if(it == m_objects.end()){
+					return crow::response(404);
+				}
+				if(it->second.pluginName != plugin_name){
+					return crow::response(404);
+				}
+				existingParent = it->second.parentName;
 			}
-			if(it->second.pluginName != plugin_name){
-				return crow::response(404);
-			}
-
 			const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
 			if(plugin == nullptr){
 				return crow::response(404, "Plugin not found!");
@@ -810,7 +954,10 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 			if(!object){
 				return crow::response(400, "Failed to update object (unknown class?)");
 			}
-			m_objects[objectName] = StoredObject{plugin_name, className, object};
+			{
+				std::lock_guard<std::mutex> lock(m_objectsMutex);
+				m_objects[objectName] = StoredObject{plugin_name, className, object, existingParent};
+			}
 			return crow::response(200);
 		}
 		catch(const std::exception& e)
@@ -827,6 +974,7 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 
     //Delete function
     CROW_ROUTE(app, "/<string>/objects/<string>/<string>").methods(crow::HTTPMethod::Delete)([this](const std::string& plugin_name, const std::string& className, const std::string& objectName){
+        std::lock_guard<std::mutex> lock(m_objectsMutex);
         auto it = m_objects.find(objectName);
         if(it == m_objects.end()){
             return crow::response(404);
@@ -834,50 +982,52 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 		if(it->second.pluginName != plugin_name){
 			return crow::response(404);
 		}
-		
-		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
-		if(plugin == nullptr){
-			return crow::response(404, "Plugin not found!");
-		}
-		
         m_objects.erase(it);
         return crow::response(204);
     });
 
     //Create instance model
     CROW_ROUTE(app, "/<string>/objects").methods(crow::HTTPMethod::Post)([this](const crow::request& request, const std::string& plugin_name){
-		
 		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
 		if(plugin == nullptr){
 			return crow::response(404, "Plugin not found!");
 		}
-		
-        for(const auto & entry : crow::json::load(request.body)){
-			const auto id = entry["ecore_identifier"].s();
-			const auto type = entry["ecore_type"].s();
-            auto object = readValue(entry, type, plugin);
-            m_objects[id] = StoredObject{plugin_name, type, object};
-        }
-        return crow::response(201);
+		auto body = crow::json::load(request.body);
+		if(!body) return crow::response(400, "Invalid JSON body");
+		for(const auto & entry : body){
+			try {
+				const auto id = entry["ecore_identifier"].s();
+				const auto type = entry["ecore_type"].s();
+				auto object = readValue(entry, type, plugin);
+				if(object){
+					std::lock_guard<std::mutex> lock(m_objectsMutex);
+					m_objects[id] = StoredObject{plugin_name, type, object, ""};
+				}
+			} catch(...) { /* skip bad entry */ }
+		}
+		return crow::response(201);
     });
 
     //Get instance model
     CROW_ROUTE(app, "/<string>/objects/").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name){
-		
 		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
 		if(plugin == nullptr){
 			return crow::response(404, "Plugin not found!");
 		}
-		
+		std::vector<std::pair<std::string, StoredObject>> snapshot;
+		{
+			std::lock_guard<std::mutex> lock(m_objectsMutex);
+			for(const auto & entry : m_objects){
+				if(entry.second.pluginName != plugin_name) continue;
+				snapshot.push_back(entry);
+			}
+		}
         crow::json::wvalue result;
         int i = 0;
-        for(const auto & entry : m_objects){
-			if(entry.second.pluginName != plugin_name){
-				continue;
-			}
+        for(const auto & entry : snapshot){
             auto wvalue = writeValue(entry.second.object, plugin);
             wvalue["ecore_identifier"] = entry.first;
-            wvalue["ecore_type"] = entry.second.object->eClass()->getName();
+            try { wvalue["ecore_type"] = entry.second.object && entry.second.object->eClass() ? entry.second.object->eClass()->getName() : entry.second.className; } catch(...) { wvalue["ecore_type"] = entry.second.className; }
             result[i] = std::move(wvalue);
             i++;
         }
@@ -887,9 +1037,13 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 	// Global object list (for backend aggregation)
 	// Returns: [{ "name": "<objectName>", "plugin": "<pluginName>", "type": "<className>" }, ...]
 	CROW_ROUTE(app, "/objects").methods(crow::HTTPMethod::Get)([this](){
-		auto list = crow::json::wvalue::list();
-		for(const auto& entry : m_objects)
+		std::vector<std::pair<std::string, StoredObject>> snapshot;
 		{
+			std::lock_guard<std::mutex> lock(m_objectsMutex);
+			snapshot.assign(m_objects.begin(), m_objects.end());
+		}
+		auto list = crow::json::wvalue::list();
+		for(const auto& entry : snapshot){
 			crow::json::wvalue item;
 			item["name"] = entry.first;
 			item["plugin"] = entry.second.pluginName;
@@ -897,95 +1051,6 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 			list.push_back(std::move(item));
 		}
 		crow::json::wvalue result = crow::json::wvalue(list);
-		return crow::response(200, result);
-	});
-
-
-
-	// Get containment tree for a plugin
-	// Returns objects organized by containment relationships (parent -> children)
-	// GET /{plugin}/objects/tree
-	CROW_ROUTE(app, "/<string>/objects/tree").methods(crow::HTTPMethod::Get)([this](const std::string& plugin_name){
-		const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
-		if(plugin == nullptr){
-			return crow::response(404, "Plugin not found!");
-		}
-
-		// Build map: object pointer -> object name
-		std::map<std::shared_ptr<ecore::EObject>, std::string> objectToName;
-		std::map<std::shared_ptr<ecore::EObject>, std::string> objectToType;
-		for(const auto& entry : m_objects){
-			if(entry.second.pluginName == plugin_name){
-				objectToName[entry.second.object] = entry.first;
-				objectToType[entry.second.object] = entry.second.className;
-			}
-		}
-
-		// Helper function to build tree node recursively
-		std::function<crow::json::wvalue(const std::shared_ptr<ecore::EObject>&)> buildNode =
-			[&](const std::shared_ptr<ecore::EObject>& obj) -> crow::json::wvalue {
-				crow::json::wvalue node;
-				auto it = objectToName.find(obj);
-				if(it != objectToName.end()){
-					node["name"] = it->second;
-					node["type"] = objectToType[obj];
-				} else {
-					node["name"] = "unknown";
-					node["type"] = obj->eClass() ? obj->eClass()->getName() : "unknown";
-				}
-
-				// Get children via eContents()
-				try {
-					auto contents = obj->eContents();
-					if(contents && contents->size() > 0){
-						auto children = crow::json::wvalue::list();
-						int idx = 0;
-						for(auto childIt = contents->cbegin(); childIt != contents->cend(); ++childIt){
-							const auto& child = *childIt;
-							if(objectToName.find(child) != objectToName.end() ||
-							   std::find_if(
-								   m_objects.begin(),
-								   m_objects.end(),
-								   [&](const auto& e){
-									   return e.second.object == child && e.second.pluginName == plugin_name;
-								   }) != m_objects.end()){
-								children[idx] = buildNode(child);
-								idx++;
-							}
-						}
-						if(idx > 0){
-							node["children"] = std::move(children);
-						}
-					}
-				} catch(...) {
-					// If eContents() fails, no children
-				}
-
-				return node;
-			};
-
-		// Find root objects (no container)
-		auto roots = crow::json::wvalue::list();
-		int rootIdx = 0;
-		for(const auto& entry : m_objects){
-			if(entry.second.pluginName != plugin_name) continue;
-
-			try {
-				auto container = entry.second.object->eContainer();
-				if(!container){
-					// This is a root object
-					roots[rootIdx] = buildNode(entry.second.object);
-					rootIdx++;
-				}
-			} catch(...) {
-				// If eContainer() fails, treat as root
-				roots[rootIdx] = buildNode(entry.second.object);
-				rootIdx++;
-			}
-		}
-
-		crow::json::wvalue result;
-		result["roots"] = std::move(roots);
 		return crow::response(200, result);
 	});
 
@@ -1001,24 +1066,25 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 			const std::string& childName){
 			try
 			{
-				// Child name must be unique
-				if(m_objects.find(childName) != m_objects.end()){
-					return crow::response(400, "Object already exists!");
+				std::shared_ptr<ecore::EObject> parentObj;
+				{
+					std::lock_guard<std::mutex> lock(m_objectsMutex);
+					if(m_objects.find(childName) != m_objects.end()){
+						return crow::response(400, "Object already exists!");
+					}
+					auto parentIt = m_objects.find(parentName);
+					if(parentIt == m_objects.end() || parentIt->second.pluginName != plugin_name){
+						return crow::response(404, "Parent object not found!");
+					}
+					parentObj = parentIt->second.object;
+				}
+				if(!parentObj){
+					return crow::response(404, "Parent object not found!");
 				}
 
 				const std::shared_ptr<MDE4CPPPlugin>& plugin = getPlugin(plugin_name);
 				if(!plugin){
 					return crow::response(404, "Plugin not found!");
-				}
-
-				// Locate parent object
-				auto parentIt = m_objects.find(parentName);
-				if(parentIt == m_objects.end() || parentIt->second.pluginName != plugin_name){
-					return crow::response(404, "Parent object not found!");
-				}
-				auto parentObj = parentIt->second.object;
-				if(!parentObj){
-					return crow::response(404, "Parent object not found!");
 				}
 
 				// Read referenceID from body
@@ -1064,8 +1130,19 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 					return crow::response(400, "Failed to create child object (unknown class or invalid referenceID?)");
 				}
 
-				// Register new child object
-				m_objects[childName] = StoredObject{plugin_name, className, child};
+				// Apply optional properties (title, copies, available, etc.)
+				try {
+					auto propsJson = body["properties"];
+					if(propsJson && propsJson.t() == crow::json::type::Object){
+						applyPropertiesToObject(child, propsJson, plugin);
+					}
+				} catch(...) { /* best-effort; ignore property apply errors */ }
+
+				// Register new child object with parent link for tree hierarchy
+				{
+					std::lock_guard<std::mutex> lock(m_objectsMutex);
+					m_objects[childName] = StoredObject{plugin_name, className, child, parentName};
+				}
 				return crow::response(201);
 			}
 			catch(const std::exception& e)
@@ -1637,19 +1714,28 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
         return crow::response(page);
     });
 
-    app.bindaddr("127.0.0.1").port(8080).multithreaded().run(); //sets address and port  //TODO let user assign adress and port 
+    // Use minimum concurrency; Crow enforces min 2 threads - m_objects protected by mutex
+    app.bindaddr("127.0.0.1").port(8080).concurrency(1).run(); // TODO let user assign address and port 
 }
 
 crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<MDE4CPPPlugin>& plugin){
     auto result = crow::json::wvalue();
-    auto features = object->eClass()->getEAllStructuralFeatures();
+    if(!object || !plugin) return result;
+    std::shared_ptr<ecore::EClass> eCls;
+    try { eCls = object->eClass(); } catch(...) { return result; }
+    if(!eCls) return result;
+    auto features = eCls->getEAllStructuralFeatures();
+    if(!features) return result;
     for(const auto & feature : *features){
         if(object == nullptr){
             continue;
         }
         try
         {
-            auto attributeTypeId = object->eGet(feature)->getTypeId();
+            std::shared_ptr<Any> anyVal;
+            try { anyVal = object->eGet(feature); } catch(...) { continue; }
+            if(!anyVal) continue;
+            auto attributeTypeId = anyVal->getTypeId();
             auto reference = std::dynamic_pointer_cast<EReference>(feature);
             if(reference != nullptr && reference->getEOpposite() != nullptr && !reference->isContainment()){
                 continue;
@@ -1695,17 +1781,48 @@ crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>&
                 }
                 default:
                 {
-                    if(object->eGet(feature)->isContainer()){
-                        auto list = crow::json::wvalue();
-                        auto bag = std::dynamic_pointer_cast<EcoreContainerAny>(object->eGet(feature))->getAsEObjectContainer();
-                        for(int j=0;j<bag->size();j++){
-                            list[j] = writeValue(bag->at(j),plugin);
-                        }
-                        result[feature->getName()] = std::move(list);
+                    const auto anyVal = object->eGet(feature);
+                    if(!anyVal) { result[feature->getName()] = nullptr; break; }
+                    if(anyVal->isContainer()){
+                        try {
+                            auto bagPtr = std::dynamic_pointer_cast<EcoreContainerAny>(anyVal);
+                            if(!bagPtr) { result[feature->getName()] = nullptr; break; }
+                            auto bag = bagPtr->getAsEObjectContainer();
+                            if(!bag) { result[feature->getName()] = crow::json::wvalue::list(); break; }
+                            auto list = crow::json::wvalue::list();
+                            for(size_t j=0; j<static_cast<size_t>(bag->size()) && j<500; j++){
+                                try { list[j] = writeValue(bag->at(j), plugin); } catch(...) {}
+                            }
+                            result[feature->getName()] = std::move(list);
+                        } catch(...) { result[feature->getName()] = crow::json::wvalue::list(); }
                         break;
                     }
-                    auto value = writeValue(object->eGet(feature)->get<std::shared_ptr<EObject>>(),plugin);
-                    result[feature->getName()] = std::move(value);
+                    // Handle primitive types from external packages (e.g. Types.ecore Boolean, Integer)
+                    std::string typeName;
+                    try {
+                        const auto eType = feature->getEType();
+                        typeName = (eType && eType->getName().size() > 0) ? eType->getName() : "";
+                    } catch(...) {}
+                    try {
+                        if(!typeName.empty() && (typeName.find("Boolean") != std::string::npos || typeName == "EBoolean"))
+                            { result[feature->getName()] = writeFeature<bool>(object, feature); break; }
+                        if(!typeName.empty() && (typeName.find("Int") != std::string::npos || typeName == "Integer" || typeName == "EInt"))
+                            { result[feature->getName()] = writeFeature<int>(object, feature); break; }
+                        if(!typeName.empty() && (typeName.find("Long") != std::string::npos || typeName == "ELong"))
+                            { result[feature->getName()] = writeFeature<std::int64_t>(object, feature); break; }
+                        if(!typeName.empty() && (typeName.find("Float") != std::string::npos || typeName == "Double" || typeName == "EFloat" || typeName == "EDouble"))
+                            { result[feature->getName()] = writeFeature<double>(object, feature); break; }
+                        if(!typeName.empty() && (typeName.find("String") != std::string::npos || typeName == "EString"))
+                            { result[feature->getName()] = writeFeature<std::string>(object, feature); break; }
+                    } catch(...) {}
+                    // EObject reference
+                    try {
+                        auto refObj = anyVal->get<std::shared_ptr<EObject>>();
+                        if(refObj) { result[feature->getName()] = writeValue(refObj, plugin); }
+                        else { result[feature->getName()] = nullptr; }
+                    } catch(...) {
+                        result[feature->getName()] = nullptr;
+                    }
                     break;
                 }
             }
@@ -1722,18 +1839,24 @@ crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>&
 
 template<typename T>
 crow::json::wvalue GenericApi::writeFeature(const std::shared_ptr<EObject> &object, const std::shared_ptr<EStructuralFeature> &feature) {
-    auto isContainer = object->eGet(feature)->isContainer();
+    if(!object || !feature) return crow::json::wvalue();
+    std::shared_ptr<Any> anyVal;
+    try { anyVal = object->eGet(feature); } catch(...) { return crow::json::wvalue(); }
+    if(!anyVal) return crow::json::wvalue();
+    auto isContainer = anyVal->isContainer();
     if(isContainer){
-        auto list = crow::json::wvalue();
-        auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
-        for (int j=0;j<bag->size();j++) {
-            auto value = bag->at(j).get();
-            list[j] = value;
-        }
-        return list;
+        try {
+            auto bag = anyVal->get<std::shared_ptr<Bag<T>>>();
+            if(!bag) return crow::json::wvalue::list();
+            auto list = crow::json::wvalue::list();
+            for (size_t j=0; j<static_cast<size_t>(bag->size()) && j<500; j++) {
+                try { list[j] = bag->at(j).get(); } catch(...) {}
+            }
+            return list;
+        } catch(...) { return crow::json::wvalue::list(); }
     }
 	// Scalar: be defensive about Any's stored type.
-	const auto any = object->eGet(feature);
+	const auto any = anyVal;
 	if(!any || any->isEmpty())
 	{
 		return crow::json::wvalue();
@@ -1886,9 +2009,111 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
     return result;
 }
 
+void GenericApi::applyPropertiesToObject(const std::shared_ptr<ecore::EObject>& object, const crow::json::rvalue& content, const std::shared_ptr<MDE4CPPPlugin>& plugin){
+    if(!object || !plugin || !content || content.t() != crow::json::type::Object) return;
+    std::shared_ptr<ecore::EClass> eCls;
+    try { eCls = object->eClass(); } catch(...) { return; }
+    if(!eCls) return;
+    auto features = eCls->getEAllStructuralFeatures();
+    if(!features) return;
+    for(const auto& feature : *features){
+        try {
+            auto value = content[feature->getName()];
+            if(value.t() == crow::json::type::Null) continue;
+        } catch(...) { continue; }
+        auto attributeTypeId = object->eGet(feature)->getTypeId();
+        auto reference = std::dynamic_pointer_cast<EReference>(feature);
+        if(reference && reference->getEOpposite() && !reference->isContainment()) continue;
+        try {
+            switch(attributeTypeId){
+                case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
+                case ecore::ecorePackage::EBOOLEAN_CLASS:
+                    object->eSet(feature, readFeature<bool>(object, feature, content)); break;
+                case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
+                case ecore::ecorePackage::EBIGINTEGER_CLASS:
+                case ecore::ecorePackage::ESHORT_CLASS:
+                case ecore::ecorePackage::ESHORTOBJECT_CLASS:
+                case ecore::ecorePackage::EINT_CLASS:
+                    object->eSet(feature, readFeature<int>(object, feature, content)); break;
+                case ecore::ecorePackage::ELONGOBJECT_CLASS:
+                case ecore::ecorePackage::ELONG_CLASS:
+                    object->eSet(feature, readFeature<std::int64_t>(object, feature, content)); break;
+                case ecore::ecorePackage::EFLOATOBJECT_CLASS:
+                case ecore::ecorePackage::EFLOAT_CLASS:
+                    object->eSet(feature, readFeature<float>(object, feature, content)); break;
+                case ecore::ecorePackage::EDOUBLE_CLASS:
+                case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
+                    object->eSet(feature, readFeature<double>(object, feature, content)); break;
+                case ecore::ecorePackage::ESTRING_CLASS:
+                    object->eSet(feature, readFeature<std::string>(object, feature, content)); break;
+                default:{
+                    std::string typeName;
+                    try {
+                        auto eType = feature->getEType();
+                        typeName = (eType && !eType->getName().empty()) ? eType->getName() : "";
+                    } catch(...) {}
+                    if(!typeName.empty()){
+                        if(typeName.find("Boolean") != std::string::npos || typeName == "EBoolean"){
+                            object->eSet(feature, readFeature<bool>(object, feature, content)); break;
+                        }
+                        if(typeName.find("Int") != std::string::npos || typeName == "Integer" || typeName == "EInt"){
+                            object->eSet(feature, readFeature<int>(object, feature, content)); break;
+                        }
+                        if(typeName.find("Long") != std::string::npos || typeName == "ELong"){
+                            object->eSet(feature, readFeature<std::int64_t>(object, feature, content)); break;
+                        }
+                        if(typeName.find("Float") != std::string::npos || typeName.find("Double") != std::string::npos){
+                            object->eSet(feature, readFeature<double>(object, feature, content)); break;
+                        }
+                        if(typeName.find("String") != std::string::npos || typeName == "EString"){
+                            object->eSet(feature, readFeature<std::string>(object, feature, content)); break;
+                        }
+                    }
+                    if(object->eGet(feature)->isContainer()){
+                        try {
+                            auto bag = std::make_shared<Bag<EObject>>();
+                            for(const auto& entry : content[feature->getName()]){
+                                bag->add(readValue(entry, feature->getEType()->getName(), plugin));
+                            }
+                            object->eSet(feature, eEcoreContainerAny(bag, attributeTypeId));
+                        } catch(...) {}
+                    } else {
+                        try {
+                            auto val = content[feature->getName()];
+                            if(val.t() == crow::json::type::String){
+                                std::string s = val.s();
+                                std::shared_ptr<ecore::EObject> refObj;
+                                { std::lock_guard<std::mutex> lock(m_objectsMutex);
+                                    auto it = m_objects.find(s);
+                                    if(it != m_objects.end()) refObj = it->second.object;
+                                }
+                                if(refObj) object->eSet(feature, eAny(refObj, attributeTypeId, false));
+                            } else {
+                                auto v = readValue(content[feature->getName()], feature->getEType()->getName(), plugin);
+                                if(v) object->eSet(feature, eAny(v, attributeTypeId, false));
+                            }
+                        } catch(...) {}
+                    }
+                    break;
+                }
+            }
+        } catch(...) {}
+    }
+}
+
 //generic conversion methods for json
 template<> bool GenericApi::convert_to<bool>(const crow::json::rvalue& value){
-    return value.b();
+    switch(value.t()){
+        case crow::json::type::True:  return true;
+        case crow::json::type::False: return false;
+        case crow::json::type::Null:  return false;
+        case crow::json::type::Number: return value.d() != 0.0;
+        case crow::json::type::String: {
+            const std::string s = value.s();
+            return (s == "true" || s == "True" || s == "1");
+        }
+        default: return false;
+    }
 }
 template <typename T> T GenericApi::convert_to(const crow::json::rvalue& value){
     std::istringstream ss(value.operator std::string());
@@ -1901,15 +2126,23 @@ template<typename T>
 std::shared_ptr<Any> GenericApi::readFeature(const std::shared_ptr<EObject>& object, const std::shared_ptr<EStructuralFeature>& feature, const crow::json::rvalue& content){
     auto attributeTypeId = object->eGet(feature)->getTypeId();
     auto isContainer = object->eGet(feature)->isContainer();
-    if(isContainer){
-        auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
-        for(const auto & entry : content[feature->getName()]){
-            auto value = std::make_shared<T>(convert_to<T>(entry));
-            bag->add(value);
+    try {
+        auto val = content[feature->getName()];
+        if(val.t() == crow::json::type::Null) {
+            return object->eGet(feature);
         }
-        return eAny(bag, attributeTypeId, true);
+        if(isContainer){
+            auto bag = object->eGet(feature)->get<std::shared_ptr<Bag<T>>>();
+            for(const auto & entry : val){
+                auto value = std::make_shared<T>(convert_to<T>(entry));
+                bag->add(value);
+            }
+            return eAny(bag, attributeTypeId, true);
+        }
+        return eAny(convert_to<T>(val), attributeTypeId, false);
+    } catch(...) {
+        return object->eGet(feature);
     }
-    return eAny(convert_to<T>(content[feature->getName()]), attributeTypeId, false);
 }
 
 /*getter for single MDE4CPPPlugin from m_plugins

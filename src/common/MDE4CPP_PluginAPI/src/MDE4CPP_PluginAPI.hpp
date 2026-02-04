@@ -20,6 +20,7 @@
 #include "pluginFramework/EcoreModelPlugin.hpp"
 #include "pluginFramework/UMLModelPlugin.hpp"
 #include "ecore/ecorePackage.hpp"
+#include <mutex>
 
 using namespace ecore;
 
@@ -28,6 +29,7 @@ struct StoredObject
 	std::string pluginName;
 	std::string className;
 	std::shared_ptr<ecore::EObject> object;
+	std::string parentName;  // empty = root; non-empty = child of this object name
 };
 
 class GenericApi{
@@ -35,6 +37,7 @@ public:
     static std::shared_ptr<GenericApi> eInstance(std::shared_ptr<PluginFramework>& pluginFramework);
     crow::json::wvalue writeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<MDE4CPPPlugin>& plugin);
     std::shared_ptr<ecore::EObject> readValue(const crow::json::rvalue& content, const std::string& eClass, const std::shared_ptr<MDE4CPPPlugin>& plugin);
+    void applyPropertiesToObject(const std::shared_ptr<ecore::EObject>& object, const crow::json::rvalue& content, const std::shared_ptr<MDE4CPPPlugin>& plugin);
 
 private:
     explicit GenericApi(std::shared_ptr<PluginFramework>& pluginFramework);
@@ -44,6 +47,7 @@ private:
     std::shared_ptr<MDE4CPPPlugin> getPlugin(std::string name);
 	void mapPlugins();
     std::shared_ptr<PluginFramework> m_pluginFramework;
+    mutable std::mutex m_objectsMutex;
     std::map<std::string, StoredObject> m_objects{};
 	std::map<std::string,std::shared_ptr<MDE4CPPPlugin>> m_plugins{};
 };
