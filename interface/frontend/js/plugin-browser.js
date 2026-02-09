@@ -433,8 +433,11 @@ class PluginBrowser {
             if (this.currentPlugin) {
                 try {
                     const treeData = await pluginAPI.getObjectTree(this.currentPlugin);
-                    this.renderHierarchicalTree(treeData);
-                    return;
+                    // Only use tree if it actually has data; otherwise fall through to flat list
+                    if (treeData && treeData.roots && treeData.roots.length > 0) {
+                        this.renderHierarchicalTree(treeData);
+                        return;
+                    }
                 } catch (treeError) {
                     // Fall back to flat list if tree fails
                     console.warn('Failed to load tree, falling back to flat list:', treeError);

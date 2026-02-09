@@ -1,0 +1,23 @@
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'D:\DEV\test2\MDE4CPP\src\build.gradle' line: 272
+
+* What went wrong:
+Could not compile build file 'D:\DEV\test2\MDE4CPP\src\build.gradle'.
+> startup failed:
+  build file 'D:\DEV\test2\MDE4CPP\src\build.gradle': 272: Unexpected input: 'compileOCLAll() {\n\tgroup 'Source'\n\tdescription 'compile OCL meta-model and parser'\n\n\tdependsOn 'ecore:buildEcore'\n\t// OCL tasks are optional - skip if not available\n\tproject.afterEvaluate {\n\t\tdef compileOclTask = getRootProject().tasks.findByPath(':src:ocl:oclModel:compileOcl')\n\t\tdef compileOclParserTask = getRootProject().tasks.findByPath(':src:ocl:oclParser:compileOclParser')\n\t\tif (compileOclTask) {\n\t\t\tdependsOn compileOclTask\n\t\t}\n\t\tif (compileOclParserTask) {\n\t\t\tdependsOn compileOclParserTask\n\t\t}\n\t\tdef buildEcoreTask = getRootProject().tasks.findByPath(':src:ecore:buildEcore')\n\t\tif (buildEcoreTask && compileOclTask) {\n\t\t\tcompileOclTask.mustRunAfter buildEcoreTask\n\t\t}\n\t\tif (buildEcoreTask && compileOclParserTask) {\n\t\t\tcompileOclParserTask.mustRunAfter buildEcoreTask\n\t\t}\n\t\t\t\n\t\t\t// Also ensure runCommandCompile tasks wait for buildEcore (if they exist)\n\t\t\tdef oclRunCommandTasks = ['ocl:oclModel:runCommandCompileOcl']\n\t\t\toclRunCommandTasks.each { taskPath ->\n\t\t\t\tdef tasks = getRootProject().getTasksByName(taskPath, true)\n\t\t\t\tif (!tasks.isEmpty()) {\n\t\t\t\t\ttasks.each { task -> task.mustRunAfter buildEcoreTask }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}' @ line 272, column 1.
+     }
+     ^
+  
+  1 error
+
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 7s

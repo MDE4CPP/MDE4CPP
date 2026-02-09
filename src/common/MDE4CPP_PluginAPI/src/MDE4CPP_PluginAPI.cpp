@@ -6,6 +6,8 @@
 #include <mutex>
 #include <set>
 #include <vector>
+#include <fstream>
+#include <chrono>
 
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -98,9 +100,29 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 			}
 			{
 				std::lock_guard<std::mutex> lock(m_objectsMutex);
-				m_objects[objectName] = StoredObject{plugin_name, className, object, ""};
+				try {
+					m_objects[objectName] = StoredObject{plugin_name, className, object, ""};
+				} catch(const std::exception& e) {
+					std::cerr << "ERROR: Failed to store object '" << objectName << "': " << e.what() << std::endl;
+					std::cerr.flush();
+					return crow::response(500, std::string("Failed to store object: ") + e.what());
+				} catch(...) {
+					std::cerr << "ERROR: Failed to store object '" << objectName << "': unknown error" << std::endl;
+					std::cerr.flush();
+					return crow::response(500, "Failed to store object: unknown error");
+				}
 			}
-			return crow::response(201);
+			try {
+				return crow::response(201);
+			} catch(const std::exception& e) {
+				std::cerr << "ERROR: Failed to create response: " << e.what() << std::endl;
+				std::cerr.flush();
+				return crow::response(500, "Internal server error");
+			} catch(...) {
+				std::cerr << "ERROR: Failed to create response: unknown error" << std::endl;
+				std::cerr.flush();
+				return crow::response(500, "Internal server error");
+			}
 		}
 		catch(const std::exception& e)
 		{
@@ -243,11 +265,33 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
             crow::json::wvalue result;
             try { result = writeValue(objCopy, plugin); } catch(const std::exception& e) {
                 CROW_LOG_ERROR << "Get object serialization failed: " << e.what();
+                // #region agent log
+                { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"D\",\"location\":\"GET:writeValue_exception\",\"message\":\"Exception from writeValue\",\"data\":{\"error\":\"" << e.what() << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                // #endregion
                 return crow::response(500, std::string("Serialization failed: ") + e.what());
             } catch(...) {
+                // #region agent log
+                { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"D\",\"location\":\"GET:writeValue_unknown\",\"message\":\"Unknown exception from writeValue\",\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                // #endregion
                 return crow::response(500, "Serialization failed: unknown error");
             }
-            return crow::response(200, result);
+            // Wrap response return in try-catch - Crow's JSON serialization might crash
+            try {
+                // #region agent log
+                { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"E\",\"location\":\"GET:before_crow_response\",\"message\":\"Before Crow response creation\",\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                // #endregion
+                return crow::response(200, result);
+            } catch(const std::exception& e) {
+                CROW_LOG_ERROR << "Crow response serialization failed: " << e.what();
+                std::cerr << "Crow response serialization failed: " << e.what() << std::endl;
+                std::cerr.flush();
+                return crow::response(500, std::string("Response serialization failed: ") + e.what());
+            } catch(...) {
+                CROW_LOG_ERROR << "Crow response serialization failed: unknown error";
+                std::cerr << "Crow response serialization failed: unknown error" << std::endl;
+                std::cerr.flush();
+                return crow::response(500, "Response serialization failed: unknown error");
+            }
         } catch(const std::exception& e) {
             CROW_LOG_ERROR << "Get object failed: " << e.what();
             return crow::response(500, std::string("Get object failed: ") + e.what());
@@ -1715,23 +1759,69 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
     });
 
     // Use minimum concurrency; Crow enforces min 2 threads - m_objects protected by mutex
-    app.bindaddr("127.0.0.1").port(8080).concurrency(1).run(); // TODO let user assign address and port 
+    try {
+        std::cerr << "Starting Crow HTTP server on 127.0.0.1:8080..." << std::endl;
+        std::cerr.flush();
+        app.bindaddr("127.0.0.1").port(8080).concurrency(1).run(); // TODO let user assign address and port 
+    } catch(const std::exception& e) {
+        std::cerr << "FATAL: Crow server crashed with exception: " << e.what() << std::endl;
+        std::cerr.flush();
+        throw;
+    } catch(...) {
+        std::cerr << "FATAL: Crow server crashed with unknown exception" << std::endl;
+        std::cerr.flush();
+        throw;
+    }
 }
 
 crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>& object, const std::shared_ptr<MDE4CPPPlugin>& plugin){
+    // #region agent log
+    { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"A\",\"location\":\"writeValue:entry\",\"message\":\"writeValue entry\",\"data\":{\"object\":\"" << (object ? "valid" : "null") << "\",\"plugin\":\"" << (plugin ? "valid" : "null") << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+    // #endregion
     auto result = crow::json::wvalue();
     if(!object || !plugin) return result;
     std::shared_ptr<ecore::EClass> eCls;
-    try { eCls = object->eClass(); } catch(...) { return result; }
+    try { 
+        eCls = object->eClass(); 
+    } catch(const std::exception& e) {
+        std::cerr << "writeValue: Failed to get eClass: " << e.what() << std::endl;
+        std::cerr.flush();
+        return result; 
+    } catch(...) { 
+        std::cerr << "writeValue: Failed to get eClass: unknown error" << std::endl;
+        std::cerr.flush();
+        return result; 
+    }
     if(!eCls) return result;
-    auto features = eCls->getEAllStructuralFeatures();
+    std::shared_ptr<Bag<ecore::EStructuralFeature>> features;
+    try {
+        features = eCls->getEAllStructuralFeatures();
+    } catch(const std::exception& e) {
+        std::cerr << "writeValue: Failed to get features: " << e.what() << std::endl;
+        std::cerr.flush();
+        return result;
+    } catch(...) {
+        std::cerr << "writeValue: Failed to get features: unknown error" << std::endl;
+        std::cerr.flush();
+        return result;
+    }
     if(!features) return result;
-    for(const auto & feature : *features){
-        if(object == nullptr){
-            continue;
-        }
-        try
-        {
+    try {
+        for(const auto & feature : *features){
+            if(object == nullptr){
+                continue;
+            }
+            std::string featureName; // Declare outside try so catch can access it
+            try
+            {
+            if(!feature) continue;
+            try {
+                featureName = feature->getName();
+            } catch(...) {
+                continue; // Skip if we can't get feature name
+            }
+            if(featureName.empty()) continue;
+            
             std::shared_ptr<Any> anyVal;
             try { anyVal = object->eGet(feature); } catch(...) { continue; }
             if(!anyVal) continue;
@@ -1743,14 +1833,14 @@ crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>&
             switch (attributeTypeId) {
                 case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
                 case ecore::ecorePackage::EBOOLEAN_CLASS:
-                    result[feature->getName()] = writeFeature<bool>(object, feature);
+                    try { result[featureName] = writeFeature<bool>(object, feature); } catch(...) { result[featureName] = nullptr; }
                     break;
                 case ecore::ecorePackage::EBYTE_CLASS:
                 case ecore::ecorePackage::EBYTEARRAY_CLASS:
                 case ecore::ecorePackage::EBYTEOBJECT_CLASS:
                 case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
                 case ecore::ecorePackage::ECHAR_CLASS:
-                    result[feature->getName()] = writeFeature<char>(object, feature);
+                    try { result[featureName] = writeFeature<char>(object, feature); } catch(...) { result[featureName] = nullptr; }
                     break;
                 case ecore::ecorePackage::EDATE_CLASS:
                 case ecore::ecorePackage::ERESOURCE_CLASS:
@@ -1759,42 +1849,95 @@ crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>&
                 case ecore::ecorePackage::ESHORT_CLASS:
                 case ecore::ecorePackage::ESHORTOBJECT_CLASS:
                 case ecore::ecorePackage::EINT_CLASS:
-                    result[feature->getName()] = writeFeature<int>(object, feature);
+                    try { result[featureName] = writeFeature<int>(object, feature); } catch(...) { result[featureName] = nullptr; }
                     break;
                 case ecore::ecorePackage::ELONGOBJECT_CLASS:
                 case ecore::ecorePackage::ELONG_CLASS:
-                    result[feature->getName()] = writeFeature<std::int64_t>(object, feature);
+                    try { result[featureName] = writeFeature<std::int64_t>(object, feature); } catch(...) { result[featureName] = nullptr; }
                     break;
                 case ecore::ecorePackage::EFLOATOBJECT_CLASS:
                 case ecore::ecorePackage::EFLOAT_CLASS:
-                    result[feature->getName()] = writeFeature<float>(object, feature);
+                    try { result[featureName] = writeFeature<float>(object, feature); } catch(...) { result[featureName] = nullptr; }
                     break;
                 case ecore::ecorePackage::EBIGDECIMAL_CLASS:
                 case ecore::ecorePackage::EDOUBLE_CLASS:
                 case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
-                    result[feature->getName()] = writeFeature<double>(object, feature);
+                    try { result[featureName] = writeFeature<double>(object, feature); } catch(...) { result[featureName] = nullptr; }
                     break;
                 case ecore::ecorePackage::ESTRING_CLASS:
                 {
-                    result[feature->getName()] = writeFeature<std::string>(object, feature);
+                    try { result[featureName] = writeFeature<std::string>(object, feature); } catch(...) { result[featureName] = nullptr; }
                     break;
                 }
                 default:
                 {
-                    const auto anyVal = object->eGet(feature);
-                    if(!anyVal) { result[feature->getName()] = nullptr; break; }
-                    if(anyVal->isContainer()){
-                        try {
-                            auto bagPtr = std::dynamic_pointer_cast<EcoreContainerAny>(anyVal);
-                            if(!bagPtr) { result[feature->getName()] = nullptr; break; }
-                            auto bag = bagPtr->getAsEObjectContainer();
-                            if(!bag) { result[feature->getName()] = crow::json::wvalue::list(); break; }
-                            auto list = crow::json::wvalue::list();
-                            for(size_t j=0; j<static_cast<size_t>(bag->size()) && j<500; j++){
-                                try { list[j] = writeValue(bag->at(j), plugin); } catch(...) {}
+                    // Wrap entire default case in try-catch to prevent any crash
+                    try {
+                    std::shared_ptr<Any> anyValDefault;
+                    try {
+                        anyValDefault = object->eGet(feature);
+                    } catch(...) {
+                        // Skip this feature entirely
+                        break;
+                    }
+                    if(!anyValDefault) { break; }
+                    try {
+                        if(anyValDefault->isContainer()){
+                            try {
+                                auto bagPtr = std::dynamic_pointer_cast<EcoreContainerAny>(anyValDefault);
+                                if(!bagPtr) { result[featureName] = nullptr; break; }
+                                auto bag = bagPtr->getAsEObjectContainer();
+                                if(!bag) { result[featureName] = crow::json::wvalue::list(); break; }
+                                auto list = crow::json::wvalue::list();
+                                size_t bagSize = 0;
+                                try {
+                                    bagSize = static_cast<size_t>(bag->size());
+                                } catch(...) {
+                                    bagSize = 0;
+                                }
+                                for(size_t j=0; j<bagSize && j<500; j++){
+                                    try {
+                                        if(j < bagSize) {
+                                            auto childObj = bag->at(j);
+                                            if(childObj) {
+                                                list[j] = writeValue(childObj, plugin);
+                                            }
+                                        }
+                                    } catch(const std::exception& e) {
+                                        std::cerr << "writeValue: Error serializing container item " << j << ": " << e.what() << std::endl;
+                                        std::cerr.flush();
+                                        // Continue with next item
+                                    } catch(...) {
+                                        std::cerr << "writeValue: Unknown error serializing container item " << j << std::endl;
+                                        std::cerr.flush();
+                                        // Continue with next item
+                                    }
+                                }
+                                if(!featureName.empty()) {
+                                    try {
+                                        result[featureName] = std::move(list);
+                                    } catch(...) {
+                                        // Ignore errors setting result
+                                    }
+                                }
+                            } catch(const std::exception& e) {
+                                std::cerr << "writeValue: Error processing container feature '" << featureName << "': " << e.what() << std::endl;
+                                std::cerr.flush();
+                                if(!featureName.empty()) {
+                                    try { result[featureName] = crow::json::wvalue::list(); } catch(...) {}
+                                }
+                            } catch(...) {
+                                std::cerr << "writeValue: Unknown error processing container feature '" << featureName << "'" << std::endl;
+                                std::cerr.flush();
+                                if(!featureName.empty()) {
+                                    try { result[featureName] = crow::json::wvalue::list(); } catch(...) {}
+                                }
                             }
-                            result[feature->getName()] = std::move(list);
-                        } catch(...) { result[feature->getName()] = crow::json::wvalue::list(); }
+                            break;
+                        }
+                    } catch(...) {
+                        // If isContainer() itself throws, treat as non-container
+                        result[featureName] = nullptr;
                         break;
                     }
                     // Handle primitive types from external packages (e.g. Types.ecore Boolean, Integer)
@@ -1805,35 +1948,99 @@ crow::json::wvalue GenericApi::writeValue(const std::shared_ptr<ecore::EObject>&
                     } catch(...) {}
                     try {
                         if(!typeName.empty() && (typeName.find("Boolean") != std::string::npos || typeName == "EBoolean"))
-                            { result[feature->getName()] = writeFeature<bool>(object, feature); break; }
+                            { try { result[featureName] = writeFeature<bool>(object, feature); } catch(...) { result[featureName] = nullptr; } break; }
                         if(!typeName.empty() && (typeName.find("Int") != std::string::npos || typeName == "Integer" || typeName == "EInt"))
-                            { result[feature->getName()] = writeFeature<int>(object, feature); break; }
+                            { try { result[featureName] = writeFeature<int>(object, feature); } catch(...) { result[featureName] = nullptr; } break; }
                         if(!typeName.empty() && (typeName.find("Long") != std::string::npos || typeName == "ELong"))
-                            { result[feature->getName()] = writeFeature<std::int64_t>(object, feature); break; }
+                            { try { result[featureName] = writeFeature<std::int64_t>(object, feature); } catch(...) { result[featureName] = nullptr; } break; }
                         if(!typeName.empty() && (typeName.find("Float") != std::string::npos || typeName == "Double" || typeName == "EFloat" || typeName == "EDouble"))
-                            { result[feature->getName()] = writeFeature<double>(object, feature); break; }
+                            { try { result[featureName] = writeFeature<double>(object, feature); } catch(...) { result[featureName] = nullptr; } break; }
                         if(!typeName.empty() && (typeName.find("String") != std::string::npos || typeName == "EString"))
-                            { result[feature->getName()] = writeFeature<std::string>(object, feature); break; }
+                            { try { result[featureName] = writeFeature<std::string>(object, feature); } catch(...) { result[featureName] = nullptr; } break; }
                     } catch(...) {}
-                    // EObject reference
+                    // EObject reference - check if feature is actually an EObject reference before casting
+                    bool refHandled = false;
                     try {
-                        auto refObj = anyVal->get<std::shared_ptr<EObject>>();
-                        if(refObj) { result[feature->getName()] = writeValue(refObj, plugin); }
-                        else { result[feature->getName()] = nullptr; }
+                        // Check if this is an EReference and if its type is EObject or EObject subclass
+                        auto ref = std::dynamic_pointer_cast<EReference>(feature);
+                        if(ref && ref->getEType()) {
+                            auto eType = ref->getEType();
+                            std::string refTypeName;
+                            try {
+                                refTypeName = eType->getName();
+                            } catch(...) {}
+                            // Only try to get as EObject if it's actually an EObject type (not enum/primitive)
+                            if(!refTypeName.empty() && (refTypeName == "EObject" || refTypeName.find("::") != std::string::npos)) {
+                                // #region agent log
+                                { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"B\",\"location\":\"writeValue:before_cast\",\"message\":\"Before bad cast attempt\",\"data\":{\"featureName\":\"" << featureName << "\",\"refTypeName\":\"" << refTypeName << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                                // #endregion
+                                auto refObj = anyValDefault->get<std::shared_ptr<EObject>>();
+                                // #region agent log
+                                { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"B\",\"location\":\"writeValue:after_cast\",\"message\":\"After cast attempt\",\"data\":{\"featureName\":\"" << featureName << "\",\"refObj\":\"" << (refObj ? "valid" : "null") << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                                // #endregion
+                                if(refObj) { 
+                                    try {
+                                        if(!featureName.empty()) {
+                                            // #region agent log
+                                            { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"C\",\"location\":\"writeValue:before_recursive\",\"message\":\"Before recursive writeValue\",\"data\":{\"featureName\":\"" << featureName << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                                            // #endregion
+                                            result[featureName] = writeValue(refObj, plugin); 
+                                            // #region agent log
+                                            { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"C\",\"location\":\"writeValue:after_recursive\",\"message\":\"After recursive writeValue\",\"data\":{\"featureName\":\"" << featureName << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                                            // #endregion
+                                            refHandled = true;
+                                        }
+                                    } catch(...) {
+                                        // #region agent log
+                                        { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"D\",\"location\":\"writeValue:recursive_exception\",\"message\":\"Exception in recursive writeValue\",\"data\":{\"featureName\":\"" << featureName << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                                        // #endregion
+                                        // Skip this feature - serialization failed
+                                    }
+                                }
+                            }
+                        }
                     } catch(...) {
-                        result[feature->getName()] = nullptr;
+                        // #region agent log
+                        { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"B\",\"location\":\"writeValue:cast_exception\",\"message\":\"Bad cast exception caught\",\"data\":{\"featureName\":\"" << featureName << "\"},\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+                        // #endregion
+                        // Not an EObject reference or cast failed - skip this feature entirely
+                    }
+                    if(!refHandled) {
+                        // Feature was not an EObject reference or failed to serialize - skip it
+                        break;
                     }
                     break;
+                    } catch(...) {
+                        // If anything fails in default case, skip the feature entirely
+                        break;
+                    }
                 }
             }
         }
-        catch(...)
-        {
-            // Never crash the whole request because of one bad feature cast.
-            result[feature->getName()] = nullptr;
-            continue;
+            catch(...)
+            {
+                // Never crash the whole request because of one bad feature cast.
+                if(!featureName.empty()) {
+                    try { result[featureName] = nullptr; } catch(...) {}
+                }
+                continue;
+            }
         }
+    } catch(const std::exception& e) {
+        std::cerr << "writeValue: Exception during feature iteration: " << e.what() << std::endl;
+        std::cerr.flush();
+        // Return partial result rather than crashing
+    } catch(...) {
+        std::cerr << "writeValue: Unknown exception during feature iteration" << std::endl;
+        std::cerr.flush();
+        // #region agent log
+        { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"D\",\"location\":\"writeValue:outer_exception\",\"message\":\"Outer exception caught\",\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+        // #endregion
+        // Return partial result rather than crashing
     }
+    // #region agent log
+    { std::ofstream log("d:\\DEV\\test2\\MDE4CPP\\.cursor\\debug.log", std::ios::app); log << "{\"sessionId\":\"debug-session\",\"runId\":\"run1\",\"hypothesisId\":\"E\",\"location\":\"writeValue:exit\",\"message\":\"writeValue exit\",\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() << "}\n"; }
+    // #endregion
     return result;
 }
 
@@ -1948,7 +2155,16 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
         } catch (std::runtime_error& error){
             continue;
         }
-        auto attributeTypeId = result->eGet(feature)->getTypeId();
+        std::shared_ptr<Any> featureValue;
+        try {
+            featureValue = result->eGet(feature);
+        } catch(...) {
+            continue;
+        }
+        if(!featureValue) {
+            continue;
+        }
+        auto attributeTypeId = featureValue->getTypeId();
         auto reference = std::dynamic_pointer_cast<EReference>(feature);
         if(reference != nullptr && reference->getEOpposite() != nullptr && !reference->isContainment()){
             continue;
@@ -1956,14 +2172,14 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
         switch (attributeTypeId) {
             case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
             case ecore::ecorePackage::EBOOLEAN_CLASS:
-                result->eSet(feature, readFeature<bool>(result, feature, content));
+                try { result->eSet(feature, readFeature<bool>(result, feature, content)); } catch(...) {}
                 break;
             case ecore::ecorePackage::EBYTE_CLASS:
             case ecore::ecorePackage::EBYTEARRAY_CLASS:
             case ecore::ecorePackage::EBYTEOBJECT_CLASS:
             case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
             case ecore::ecorePackage::ECHAR_CLASS:
-                result->eSet(feature, readFeature<char>(result, feature, content));
+                try { result->eSet(feature, readFeature<char>(result, feature, content)); } catch(...) {}
                 break;
             case ecore::ecorePackage::EDATE_CLASS:
             case ecore::ecorePackage::ERESOURCE_CLASS:
@@ -1972,36 +2188,52 @@ std::shared_ptr<ecore::EObject> GenericApi::readValue(const crow::json::rvalue& 
             case ecore::ecorePackage::ESHORT_CLASS:
             case ecore::ecorePackage::ESHORTOBJECT_CLASS:
             case ecore::ecorePackage::EINT_CLASS:
-                result->eSet(feature, readFeature<int>(result, feature, content));
+                try { result->eSet(feature, readFeature<int>(result, feature, content)); } catch(...) {}
                 break;
             case ecore::ecorePackage::ELONGOBJECT_CLASS:
             case ecore::ecorePackage::ELONG_CLASS:
-                result->eSet(feature, readFeature<std::int64_t>(result, feature, content));
+                try { result->eSet(feature, readFeature<std::int64_t>(result, feature, content)); } catch(...) {}
                 break;
             case ecore::ecorePackage::EFLOATOBJECT_CLASS:
             case ecore::ecorePackage::EFLOAT_CLASS:
-                result->eSet(feature, readFeature<float>(result, feature, content));
+                try { result->eSet(feature, readFeature<float>(result, feature, content)); } catch(...) {}
                 break;
             case ecore::ecorePackage::EBIGDECIMAL_CLASS:
             case ecore::ecorePackage::EDOUBLE_CLASS:
             case ecore::ecorePackage::EDOUBLEOBJECT_CLASS:
-                result->eSet(feature, readFeature<double>(result, feature, content));
+                try { result->eSet(feature, readFeature<double>(result, feature, content)); } catch(...) {}
                 break;
             case ecore::ecorePackage::ESTRING_CLASS:
-                result->eSet(feature, readFeature<std::string>(result, feature, content));
+                try { result->eSet(feature, readFeature<std::string>(result, feature, content)); } catch(...) {}
                 break;
             default:
             {
-                if(result->eGet(feature)->isContainer()){
+                if(featureValue->isContainer()){
                     auto bag = std::make_shared<Bag<EObject>>();
-                    for(const auto & entry : content[feature->getName()]){
-                        bag->add(readValue(entry, feature->getEType()->getName(), plugin));
-                    }
-                    result->eSet(feature, eEcoreContainerAny(bag, attributeTypeId));
+                    try {
+                        for(const auto & entry : content[feature->getName()]){
+                            try {
+                                auto eType = feature->getEType();
+                                if(eType) {
+                                    bag->add(readValue(entry, eType->getName(), plugin));
+                                }
+                            } catch(...) {}
+                        }
+                    } catch(...) {}
+                    try {
+                        result->eSet(feature, eEcoreContainerAny(bag, attributeTypeId));
+                    } catch(...) {}
                     break;
                 }
-                auto value = readValue(content[feature->getName()], feature->getEType()->getName(), plugin);
-                result->eSet(feature, eAny(value, attributeTypeId, false));
+                try {
+                    auto eType = feature->getEType();
+                    if(eType) {
+                        auto value = readValue(content[feature->getName()], eType->getName(), plugin);
+                        if(value) {
+                            result->eSet(feature, eAny(value, attributeTypeId, false));
+                        }
+                    }
+                } catch(...) {}
                 break;
             }
         }
@@ -2021,7 +2253,12 @@ void GenericApi::applyPropertiesToObject(const std::shared_ptr<ecore::EObject>& 
             auto value = content[feature->getName()];
             if(value.t() == crow::json::type::Null) continue;
         } catch(...) { continue; }
-        auto attributeTypeId = object->eGet(feature)->getTypeId();
+        std::shared_ptr<Any> featureValue;
+        try {
+            featureValue = object->eGet(feature);
+        } catch(...) { continue; }
+        if(!featureValue) continue;
+        auto attributeTypeId = featureValue->getTypeId();
         auto reference = std::dynamic_pointer_cast<EReference>(feature);
         if(reference && reference->getEOpposite() && !reference->isContainment()) continue;
         try {
