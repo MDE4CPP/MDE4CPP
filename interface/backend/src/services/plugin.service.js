@@ -345,28 +345,10 @@ async function getObjectDetails(objectId) {
         throw new Error('Object not found');
     }
     
-    try {
-        // Try to use MDE4CPP_PluginAPI to get full object data
-        if (object.apiManaged && await isPluginAPIAvailable()) {
-            const endpoint = `/${object.pluginName}/objects/${encodeURIComponent(object.className)}/${objectId}`;
-            const response = await callPluginAPI(endpoint, 'GET');
-            
-            // Update object with API data
-            if (response) {
-                object.features = response;
-                logger.debug(`Refreshed object ${objectId} from MDE4CPP_PluginAPI`);
-            }
-        }
-    } catch (error) {
-        if (object.apiManaged) {
-            logger.warn('Failed to get object details via API, using fallback:', error.message);
-        }
-    }
-    
-    if (!object.apiManaged) {
-        logger.debug(`FALLBACK MODE: Getting object ${objectId} details from in-memory store`);
-    }
-    
+    // Return from local objectStore directly.
+    // NOTE: The C++ GET /{plugin}/objects/{class}/{name} endpoint can crash the
+    // C++ API process (segfault during EObject serialization). Using local data
+    // is safe and contains all info stored at creation time.
     return object;
 }
 
@@ -604,29 +586,27 @@ async function getObjectAttributes(objectId) {
         throw new Error('Object not found');
     }
     
+    // Get attributes from the CLASSIFIER endpoint (safe) instead of the
+    // instance-level /{plugin}/objects/{class}/{name}/attributes endpoint
+    // which the C++ API doesn't support (404) and wastes an HTTP call.
     try {
-        if (object.apiManaged && await isPluginAPIAvailable()) {
-            const endpoint = `/${object.pluginName}/objects/${encodeURIComponent(object.className)}/${objectId}/attributes`;
-            const response = await callPluginAPI(endpoint, 'GET');
-            if (Array.isArray(response)) {
-                return response;
+        if (await isPluginAPIAvailable()) {
+            const className = object.className || object.type;
+            if (className && object.pluginName) {
+                const details = await getClassifierDetails(object.pluginName, className);
+                if (details && Array.isArray(details.attributes)) {
+                    return details.attributes;
+                }
             }
         }
     } catch (error) {
-        if (object.apiManaged) {
-            logger.warn('Failed to get object attributes via API, using fallback:', error.message);
-        }
+        logger.warn(`Failed to get attributes for ${objectId} via classifier:`, error.message);
     }
     
-    // Fallback: return from object features
-    logger.debug(`FALLBACK MODE: Getting attributes for ${objectId} from local store`);
+    // Fallback: return from local object features
     const attributes = [];
-    for (const [name, value] of Object.entries(object.features)) {
-        attributes.push({
-            name,
-            value,
-            type: typeof value
-        });
+    for (const [name, value] of Object.entries(object.features || {})) {
+        attributes.push({ name, value, type: typeof value });
     }
     return attributes;
 }
@@ -640,22 +620,24 @@ async function getObjectOperations(objectId) {
         throw new Error('Object not found');
     }
     
+    // Get operations from the CLASSIFIER endpoint (safe) instead of the
+    // instance-level /{plugin}/objects/{class}/{name}/operations endpoint
+    // which can crash the C++ API process (segfault).
+    // Operations are class-level metadata, same data either way.
     try {
-        if (object.apiManaged && await isPluginAPIAvailable()) {
-            const endpoint = `/${object.pluginName}/objects/${encodeURIComponent(object.className)}/${objectId}/operations`;
-            const response = await callPluginAPI(endpoint, 'GET');
-            if (Array.isArray(response)) {
-                return response;
+        if (await isPluginAPIAvailable()) {
+            const className = object.className || object.type;
+            if (className && object.pluginName) {
+                const details = await getClassifierDetails(object.pluginName, className);
+                if (details && Array.isArray(details.operations)) {
+                    return details.operations;
+                }
             }
         }
     } catch (error) {
-        if (object.apiManaged) {
-            logger.warn('Failed to get object operations via API, using fallback:', error.message);
-        }
+        logger.warn(`Failed to get operations for ${objectId} via classifier:`, error.message);
     }
     
-    // Fallback: return empty list
-    logger.debug(`FALLBACK MODE: Getting operations for ${objectId} (empty list)`);
     return [];
 }
 
@@ -668,24 +650,54 @@ async function getObjectFeatures(objectId) {
         throw new Error('Object not found');
     }
     
+    // Get structural features from the CLASSIFIER endpoint (safe).
+    // The C++ API has no /features endpoint for instances (always 404),
+    // so we use the classifier which returns attributes + references.
     try {
-        if (object.apiManaged && await isPluginAPIAvailable()) {
-            const endpoint = `/${object.pluginName}/objects/${encodeURIComponent(object.className)}/${objectId}/features`;
-            const response = await callPluginAPI(endpoint, 'GET');
-            if (Array.isArray(response)) {
-                return response;
+        if (await isPluginAPIAvailable()) {
+            const className = object.className || object.type;
+            if (className && object.pluginName) {
+                const details = await getClassifierDetails(object.pluginName, className);
+                if (details) {
+                    const features = [];
+                    if (Array.isArray(details.attributes)) {
+                        details.attributes.forEach(attr => {
+                            features.push({
+                                name: attr.name,
+                                value: (object.features && object.features[attr.name]) || null,
+                                featureType: 'EAttribute',
+                                type: attr.type || 'String',
+                                lowerBound: attr.lower || 0,
+                                upperBound: attr.upper || 1,
+                                featureID: attr.featureID
+                            });
+                        });
+                    }
+                    if (Array.isArray(details.references)) {
+                        details.references.forEach(ref => {
+                            features.push({
+                                name: ref.name,
+                                value: (object.features && object.features[ref.name]) || null,
+                                featureType: ref.containment ? 'EReference (containment)' : 'EReference',
+                                type: ref.type || 'unknown',
+                                lowerBound: ref.lower || 0,
+                                upperBound: ref.upper || -1,
+                                featureID: ref.featureID,
+                                containment: ref.containment
+                            });
+                        });
+                    }
+                    return features;
+                }
             }
         }
     } catch (error) {
-        if (object.apiManaged) {
-            logger.warn('Failed to get object features via API, using fallback:', error.message);
-        }
+        logger.warn(`Failed to get features for ${objectId} via classifier:`, error.message);
     }
     
-    // Fallback: return from object features
-    logger.debug(`FALLBACK MODE: Getting features for ${objectId} from local store`);
+    // Fallback: return from local object features
     const features = [];
-    for (const [name, value] of Object.entries(object.features)) {
+    for (const [name, value] of Object.entries(object.features || {})) {
         features.push({
             name,
             value,
