@@ -21,6 +21,10 @@ class ModelerApp {
         this.createInstanceDialog = null;
         this.commandManager = new CommandManager();
 
+        // Center panel view state
+        this.jsonViewer = null;
+        this.centerView = 'diagram'; // 'diagram' | 'json'
+
         // Setup command manager listener
         this.commandManager.addListener((state) => {
             this.updateUndoRedoButtons(state);
@@ -46,9 +50,13 @@ class ModelerApp {
         this.mainEditor = new MainEditor(editorContainer, this); // Children list in bottom
         this.diagramCanvas = new DiagramCanvas(diagramContainer, this); // Diagram in center
         this.createInstanceDialog = new CreateInstanceDialog(this);
+        this.jsonViewer = new ModelJsonViewer(diagramContainer, this);
 
         // Setup event listeners
         this.setupEventListeners();
+
+        // Setup center view toggle (diagram / JSON)
+        this.setupViewToggle();
 
         // Load plugins
         await this.loadPlugins();
@@ -86,6 +94,55 @@ class ModelerApp {
         document.addEventListener('keydown', (e) => {
             this.handleKeyboard(e);
         });
+    }
+
+    /**
+     * Setup center view toggle (Diagram / JSON)
+     */
+    setupViewToggle() {
+        const diagramBtn = document.getElementById('view-diagram-btn');
+        const jsonBtn = document.getElementById('view-json-btn');
+
+        if (diagramBtn) {
+            diagramBtn.addEventListener('click', () => this.switchCenterView('diagram'));
+        }
+        if (jsonBtn) {
+            jsonBtn.addEventListener('click', () => this.switchCenterView('json'));
+        }
+    }
+
+    /**
+     * Switch what is shown in the center panel
+     * @param {'diagram'|'json'} view
+     */
+    async switchCenterView(view) {
+        if (view !== 'diagram' && view !== 'json') return;
+        this.centerView = view;
+
+        const diagramBtn = document.getElementById('view-diagram-btn');
+        const jsonBtn = document.getElementById('view-json-btn');
+
+        if (diagramBtn) {
+            diagramBtn.classList.toggle('active', view === 'diagram');
+        }
+        if (jsonBtn) {
+            jsonBtn.classList.toggle('active', view === 'json');
+        }
+
+        if (view === 'json') {
+            if (this.jsonViewer) {
+                await this.jsonViewer.show();
+            }
+        } else {
+            if (this.jsonViewer) {
+                this.jsonViewer.hide();
+            }
+            if (this.selectedNode && this.diagramCanvas) {
+                await this.diagramCanvas.showNode(this.selectedNode);
+            } else if (this.diagramCanvas && this.diagramCanvas.container) {
+                this.diagramCanvas.container.innerHTML = '<div class="empty-state">Select an element to view diagram</div>';
+            }
+        }
     }
 
     /**
@@ -139,8 +196,12 @@ class ModelerApp {
         // Update properties panel
         await this.propertiesPanel.showNode(node);
 
-        // Update diagram canvas (center)
-        await this.diagramCanvas.showNode(node);
+        // Update center panel based on current view
+        if (this.centerView === 'json' && this.jsonViewer) {
+            await this.jsonViewer.refresh();
+        } else {
+            await this.diagramCanvas.showNode(node);
+        }
 
         // Update main editor (bottom children list)
         await this.mainEditor.showNode(node);
@@ -277,6 +338,9 @@ class ModelerApp {
     async refresh() {
         if (this.currentPlugin) {
             await this.unifiedTree.refresh();
+            if (this.centerView === 'json' && this.jsonViewer) {
+                await this.jsonViewer.refresh();
+            }
         } else {
             await this.loadPlugins();
         }

@@ -109,9 +109,9 @@ bool [packageName/]::canInvoke(const std::shared_ptr<ecore::EObject>& object, co
 {
 	if(!object) return false;
 	if(operationName.empty()) return false;
-
+	
 	// Always allow core EObject-style operations
-	if(operationName[0] == 'e') return true;
+	if(!operationName.empty() && operationName.at(0) == 'e') return true;
 
 	const auto cls = object->eClass();
 	if(!cls) return false;

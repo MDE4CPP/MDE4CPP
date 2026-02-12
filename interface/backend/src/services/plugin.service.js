@@ -586,16 +586,25 @@ async function getObjectAttributes(objectId) {
         throw new Error('Object not found');
     }
     
-    // Get attributes from the CLASSIFIER endpoint (safe) instead of the
-    // instance-level /{plugin}/objects/{class}/{name}/attributes endpoint
-    // which the C++ API doesn't support (404) and wastes an HTTP call.
+    // Get attributes from the CLASSIFIER endpoint (safe) and enrich them with
+    // the current instance values from object.features. This avoids calling
+    // any instance-level C++ endpoints that are missing/unstable.
     try {
         if (await isPluginAPIAvailable()) {
             const className = object.className || object.type;
             if (className && object.pluginName) {
                 const details = await getClassifierDetails(object.pluginName, className);
                 if (details && Array.isArray(details.attributes)) {
-                    return details.attributes;
+                    return details.attributes.map(attr => {
+                        const name = attr.name;
+                        const value = (object.features && name in object.features)
+                            ? object.features[name]
+                            : null;
+                        return {
+                            ...attr,
+                            value
+                        };
+                    });
                 }
             }
         }
@@ -603,10 +612,14 @@ async function getObjectAttributes(objectId) {
         logger.warn(`Failed to get attributes for ${objectId} via classifier:`, error.message);
     }
     
-    // Fallback: return from local object features
+    // Fallback: synthesize attributes purely from local object features
     const attributes = [];
     for (const [name, value] of Object.entries(object.features || {})) {
-        attributes.push({ name, value, type: typeof value });
+        attributes.push({
+            name,
+            value,
+            type: typeof value
+        });
     }
     return attributes;
 }
@@ -766,49 +779,122 @@ async function createFromClassifier(pluginName, className, instanceName, propert
 async function getObjectTree(pluginName) {
     logger.info(`[DEBUG] getObjectTree called for plugin: ${pluginName}`);
     try {
-        if (await isPluginAPIAvailable()) {
-            // Try the C++ tree endpoint first
+        // Always build the instance hierarchy from containment references
+        // rather than relying on the C++ tree endpoint. This ensures that
+        // roots and children follow the metamodel's containment semantics.
+
+        const objects = await listObjects();
+        const pluginObjects = (Array.isArray(objects) ? objects : []).filter(
+            o => (o.pluginName || o.plugin || '').toString() === pluginName.toString()
+        );
+
+        if (pluginObjects.length === 0) {
+            logger.debug(`No objects found for plugin ${pluginName}, returning empty tree`);
+            return { roots: [] };
+        }
+
+        // Build a quick lookup: id -> object metadata
+        const byId = new Map();
+        for (const obj of pluginObjects) {
+            const id = obj.id || obj.name;
+            if (!id) continue;
+            byId.set(id, obj);
+        }
+
+        // Map of parentId -> array of childIds derived from containment references
+        const childrenMap = new Map();
+        // Set of all ids that are targets of a containment reference
+        const containedIds = new Set();
+
+        // Helper to normalize a feature value (single id or array of ids)
+        const normalizeTargets = (value) => {
+            if (Array.isArray(value)) {
+                return value.filter(v => v !== null && v !== undefined);
+            }
+            return value !== null && value !== undefined ? [value] : [];
+        };
+
+        // For each object, inspect containment references via getObjectFeatures()
+        for (const obj of pluginObjects) {
+            const id = obj.id || obj.name;
+            if (!id) continue;
+
             try {
-                const endpoint = `/${encodeURIComponent(pluginName)}/objects/tree`;
-                logger.info(`[DEBUG] Calling C++ API: GET ${endpoint}`);
-                const tree = await callPluginAPI(endpoint, 'GET');
-                if (tree && (tree.roots !== undefined || Array.isArray(tree))) {
-                    const result = tree.roots !== undefined ? tree : { roots: tree };
-                    if (result.roots && result.roots.length > 0) {
-                        logger.info(`Retrieved object tree for plugin ${pluginName} from MDE4CPP_PluginAPI`);
-                        return result;
+                const features = await getObjectFeatures(id);
+                if (!Array.isArray(features)) continue;
+
+                for (const f of features) {
+                    const isContainmentRef =
+                        f &&
+                        (f.featureType === 'EReference (containment)' || f.containment === true);
+                    if (!isContainmentRef) continue;
+
+                    const targets = normalizeTargets(f.value);
+                    if (targets.length === 0) continue;
+
+                    let list = childrenMap.get(id);
+                    if (!list) {
+                        list = [];
+                        childrenMap.set(id, list);
+                    }
+                    for (const targetId of targets) {
+                        // Only link to known objects from this plugin
+                        if (!byId.has(targetId)) continue;
+                        list.push(targetId);
+                        containedIds.add(targetId);
                     }
                 }
             } catch (e) {
-                logger.debug(`Tree endpoint failed for ${pluginName}: ${e.message}`);
-            }
-            
-            // Fallback: build tree from flat object list
-            try {
-                const objects = await listObjects();
-                const pluginObjects = (Array.isArray(objects) ? objects : []).filter(
-                    o => (o.pluginName || o.plugin || '').toString() === pluginName.toString()
-                );
-                if (pluginObjects.length > 0) {
-                    const roots = pluginObjects.map(o => ({
-                        name: o.name || o.id,
-                        type: o.className || o.type || 'unknown',
-                        children: []
-                    }));
-                    logger.info(`Built tree from listObjects for plugin ${pluginName}: ${roots.length} roots`);
-                    return { roots };
-                }
-            } catch (listErr) {
-                logger.debug(`listObjects fallback failed: ${listErr.message}`);
+                logger.debug(`Failed to load features for ${id} while building tree: ${e.message}`);
             }
         }
+
+        // Compute roots: all object ids minus those that are contained
+        const rootIds = [];
+        for (const obj of pluginObjects) {
+            const id = obj.id || obj.name;
+            if (!id) continue;
+            if (!containedIds.has(id)) {
+                rootIds.push(id);
+            }
+        }
+
+        // Recursive builder to materialize the tree
+        const buildNode = (objectId, visited = new Set()) => {
+            if (visited.has(objectId)) {
+                return {
+                    name: objectId,
+                    type: (byId.get(objectId) && (byId.get(objectId).className || byId.get(objectId).type)) || 'cycle',
+                    children: []
+                };
+            }
+            visited.add(objectId);
+
+            const obj = byId.get(objectId);
+            const type = obj ? (obj.className || obj.type || 'unknown') : 'unknown';
+            const node = {
+                name: objectId,
+                type,
+                children: []
+            };
+
+            const childIds = childrenMap.get(objectId) || [];
+            for (const cid of childIds) {
+                if (!byId.has(cid)) continue;
+                node.children.push(buildNode(cid, new Set(visited)));
+            }
+
+            return node;
+        };
+
+        const roots = rootIds.map(id => buildNode(id));
+        logger.info(`Built containment-based tree for plugin ${pluginName}: ${roots.length} roots`);
+        return { roots };
     } catch (error) {
         logger.warn(`Failed to get object tree for plugin ${pluginName}:`, error.message);
+        logger.debug(`Returning empty tree for plugin ${pluginName} due to error`);
+        return { roots: [] };
     }
-    
-    // Final fallback: return empty tree
-    logger.debug(`Returning empty tree for plugin ${pluginName}`);
-    return { roots: [] };
 }
 
 /**
@@ -829,7 +915,7 @@ async function createChildObject(pluginName, parentName, className, childName, r
             await callPluginAPI(endpoint, 'POST', body);
             logger.info(`Created child object ${childName} of type ${className} under parent ${parentName} via MDE4CPP_PluginAPI`);
             
-            // Store in objectStore for resilience
+            // Store child in objectStore for resilience
             const childObject = {
                 id: childName,
                 pluginName,
@@ -841,6 +927,49 @@ async function createChildObject(pluginName, parentName, className, childName, r
                 apiManaged: true
             };
             objectStore.set(childName, childObject);
+
+            // Also record the containment reference on the parent so that
+            // hierarchy can be derived purely from containment features.
+            try {
+                const parentObject = objectStore.get(parentName);
+                if (parentObject) {
+                    const details = await getClassifierDetails(pluginName, parentObject.className || parentObject.type);
+                    if (details && Array.isArray(details.references)) {
+                        const ref = details.references.find(r => r.featureID === referenceID);
+                        if (ref && ref.name) {
+                            const refName = ref.name;
+                            if (!parentObject.features) {
+                                parentObject.features = {};
+                            }
+                            const current = parentObject.features[refName];
+                            if (current === undefined || current === null) {
+                                // First child – choose array for multi-valued refs, single id otherwise
+                                if (ref.upper === undefined || ref.upper === -1 || ref.upper > 1) {
+                                    parentObject.features[refName] = [childName];
+                                } else {
+                                    parentObject.features[refName] = childName;
+                                }
+                            } else if (Array.isArray(current)) {
+                                if (!current.includes(childName)) {
+                                    current.push(childName);
+                                }
+                            } else {
+                                // Existing single value – promote to array
+                                if (current !== childName) {
+                                    parentObject.features[refName] = [current, childName];
+                                }
+                            }
+                            objectStore.set(parentName, parentObject);
+                        } else {
+                            logger.debug(`No matching containment reference for featureID ${referenceID} on parent ${parentName}`);
+                        }
+                    }
+                } else {
+                    logger.debug(`Parent object ${parentName} not found when recording containment feature`);
+                }
+            } catch (metaErr) {
+                logger.warn(`Failed to update parent containment feature for ${parentName}->${childName}: ${metaErr.message}`);
+            }
             
             return { success: true };
         }

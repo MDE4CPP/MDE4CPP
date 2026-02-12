@@ -368,6 +368,33 @@ class PropertiesPanel {
                 const field = await this.createAttributeField(attr);
                 content.appendChild(field);
             }
+
+            // Add explicit Save button so users can apply changes and
+            // immediately see them reflected in the tree / JSON view.
+            if (this.currentNode.type === 'instance') {
+                const actions = document.createElement('div');
+                actions.className = 'properties-actions';
+
+                const saveBtn = document.createElement('button');
+                saveBtn.className = 'btn btn-primary';
+                saveBtn.textContent = 'Save attributes';
+                saveBtn.addEventListener('click', async () => {
+                    try {
+                        // Attribute edits are already sent on change; Save
+                        // simply refreshes the model/tree and JSON so the
+                        // user immediately sees updated values everywhere.
+                        if (this.app && typeof this.app.refresh === 'function') {
+                            await this.app.refresh();
+                        }
+                    } catch (e) {
+                        console.error('Failed to refresh after saving attributes:', e);
+                        alert(`Failed to refresh after saving attributes: ${e.message}`);
+                    }
+                });
+
+                actions.appendChild(saveBtn);
+                content.appendChild(actions);
+            }
         } catch (error) {
             console.error('Failed to render attributes:', error);
             content.innerHTML = `<div class="empty-state">Error loading attributes: ${error.message}</div>`;

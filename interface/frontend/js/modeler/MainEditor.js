@@ -170,10 +170,32 @@ class MainEditor {
             const tree = document.createElement('div');
             tree.className = 'editor-tree';
 
-            for (const child of children) {
+            // Render full instance hierarchy (recursive)
+            const buildSubtree = (child) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'editor-tree-subtree';
+
+                // Current child node
                 const childNode = this.createInstanceChildNode(child);
-                tree.appendChild(childNode);
-            }
+                wrapper.appendChild(childNode);
+
+                // Nested children, if any
+                const grandChildren = Array.isArray(child.children) ? child.children : [];
+                if (grandChildren.length > 0) {
+                    const nested = document.createElement('div');
+                    nested.className = 'editor-tree-children';
+                    grandChildren.forEach(grandChild => {
+                        nested.appendChild(buildSubtree(grandChild));
+                    });
+                    wrapper.appendChild(nested);
+                }
+
+                return wrapper;
+            };
+
+            children.forEach(child => {
+                tree.appendChild(buildSubtree(child));
+            });
 
             this.container.appendChild(tree);
         } catch (error) {

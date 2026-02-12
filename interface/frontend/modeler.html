@@ -44,10 +44,14 @@
                     </div>
                 </aside>
 
-                <!-- Center Panel: Diagram Canvas -->
+                <!-- Center Panel: Diagram Canvas / JSON View -->
                 <main class="diagram-panel">
                     <div class="panel-header">
                         <div id="breadcrumbs" class="breadcrumbs"></div>
+                        <div class="view-toggle-group">
+                            <button id="view-diagram-btn" class="view-toggle-btn active" title="Diagram view">Diagram</button>
+                            <button id="view-json-btn" class="view-toggle-btn" title="JSON view">JSON</button>
+                        </div>
                     </div>
                     <div id="diagram-canvas" class="diagram-canvas">
                         <div class="empty-state">Select an element to view diagram</div>
@@ -150,6 +154,10 @@
     <script src="js/modeler/ContextMenu.js"></script>
     <script src="js/modeler/MainEditor.js"></script>
     <script src="js/modeler/CreateInstanceDialog.js"></script>
+    <!-- JSON/XMI serialization and viewer -->
+    <script src="js/utils/modelSerializer.js"></script>
+    <script src="js/utils/xmiSerializer.js"></script>
+    <script src="js/modeler/ModelJsonViewer.js"></script>
     <script src="js/modeler/ModelerApp.js"></script>
     <script>
         // Initialize modeler when page loads

@@ -179,6 +179,16 @@
     margin: 0;
 }
 
+/* Hierarchical instance children view */
+.editor-tree-subtree {
+    margin-left: 0;
+}
+.editor-tree-children {
+    margin-left: 1.25rem;
+    border-left: 1px dashed var(--modeler-border);
+    padding-left: 0.5rem;
+}
+
 .panel-header {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--modeler-border);
@@ -193,6 +203,154 @@
     font-size: 1rem;
     color: var(--modeler-text);
     font-weight: 600;
+}
+
+/* Center view toggle (Diagram / JSON) */
+.view-toggle-group {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+    background: var(--modeler-border);
+    border-radius: 6px;
+    padding: 2px;
+}
+.view-toggle-btn {
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--modeler-text-secondary);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+.view-toggle-btn:hover {
+    color: var(--modeler-text);
+    background: rgba(255, 255, 255, 0.5);
+}
+.view-toggle-btn.active {
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* JSON/XMI viewer */
+.json-viewer-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.json-viewer-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--modeler-border);
+    background: var(--modeler-bg);
+    flex-shrink: 0;
+}
+.json-viewer-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--modeler-text);
+    flex: 1;
+}
+
+.format-selector-group {
+    display: flex;
+    gap: 2px;
+    background: var(--modeler-border);
+    border-radius: 6px;
+    padding: 2px;
+    margin-right: 8px;
+}
+.format-selector-btn {
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--modeler-text-secondary);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+.format-selector-btn:hover {
+    color: var(--modeler-text);
+    background: rgba(255, 255, 255, 0.5);
+}
+.format-selector-btn.active {
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.json-download-btn,
+.json-copy-btn {
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid var(--modeler-border);
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-text);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.json-download-btn:hover,
+.json-copy-btn:hover {
+    background: var(--modeler-primary);
+    color: #ffffff;
+    border-color: var(--modeler-primary);
+}
+
+.json-code-viewer,
+.xmi-code-viewer {
+    flex: 1;
+    margin: 0;
+    padding: 16px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--modeler-text);
+    background: #f8f9fa;
+    overflow: auto;
+    white-space: pre;
+    tab-size: 2;
+    border: none;
+}
+.json-loading,
+.json-empty-state,
+.json-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 0.9rem;
+    color: var(--modeler-text-secondary);
+}
+.json-error {
+    color: #dc3545;
+}
+
+/* Compact instance hierarchy tree above JSON/XMI */
+.json-instance-tree {
+    max-height: 140px;
+    overflow: auto;
+    padding: 6px 16px 8px 16px;
+    border-bottom: 1px solid var(--modeler-border);
+    background: #fafafa;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--modeler-text-secondary);
+}
+.json-instance-tree ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+.json-instance-tree li {
+    list-style: none;
 }
 
 .tree-search {
