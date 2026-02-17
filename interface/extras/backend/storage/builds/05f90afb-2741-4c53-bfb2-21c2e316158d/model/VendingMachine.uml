@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Model xmi:id="_zqVKMN8KEe6i7LUfKAmYmQ" name="VendingMachine">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_zsftYN8KEe6i7LUfKAmYmQ">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_d43PsN8PEe6i7LUfKAmYmQ" name="C_VendingMachine">
+      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_joIfoN8PEe6i7LUfKAmYmQ" name="SM_VendingMachine">
+        <region xmi:type="uml:Region" xmi:id="_xKZx0N8PEe6i7LUfKAmYmQ" name="R1">
+          <transition xmi:type="uml:Transition" xmi:id="_CEXtsN8SEe6i7LUfKAmYmQ" name="T2" source="_zLjKMN8PEe6i7LUfKAmYmQ" target="_wDcXgN8UEe6i7LUfKAmYmQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_n1d5IN_HEe6i7LUfKAmYmQ" name="inputConstraint">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_x8a7AN_HEe6i7LUfKAmYmQ" name="greaterZero">
+                <language>CPP</language>
+                <body>productNr > 0</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QP-QwN8SEe6i7LUfKAmYmQ" name="T1" source="__-yzMN8PEe6i7LUfKAmYmQ" target="_zLjKMN8PEe6i7LUfKAmYmQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_XP53UN8SEe6i7LUfKAmYmQ" name="printStart">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; std::endl &lt;&lt; &quot;### T1 ###&quot; &lt;&lt; std::endl;&#xD;
+std::cout &lt;&lt; &quot;Starting Vending Machine&quot; &lt;&lt; std::endl;</body>
+            </effect>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_dqYAYN8SEe6i7LUfKAmYmQ" name="T4" source="_Uory4N8REe6i7LUfKAmYmQ" target="_zLjKMN8PEe6i7LUfKAmYmQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_wpIJYN8SEe6i7LUfKAmYmQ" name="printReturn">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; std::endl &lt;&lt; &quot;### T4 ###&quot; &lt;&lt; std::endl;&#xD;
+std::cout &lt;&lt; &quot;Returning to waiting State&quot; &lt;&lt; std::endl;</body>
+            </effect>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_rWx-oN8VEe6i7LUfKAmYmQ" name="T3" source="_wDcXgN8UEe6i7LUfKAmYmQ" target="_Uory4N8REe6i7LUfKAmYmQ"/>
+          <subvertex xmi:type="uml:State" xmi:id="_zLjKMN8PEe6i7LUfKAmYmQ" name="S1_Eingabe_erwarten">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_n9p48N8QEe6i7LUfKAmYmQ" name="expectInput">
+              <language>CPP</language>
+              <language>INCLUDE</language>
+              <body>auto package = VendingMachine::VendingMachinePackage::eInstance();&#xD;
+int input = 0;&#xD;
+	&#xD;
+while(true)&#xD;
+{&#xD;
+	std::cout &lt;&lt; std::endl &lt;&lt; &quot;### S1 ###&quot; &lt;&lt; std::endl;&#xD;
+	std::cout &lt;&lt; &quot;Please choose a Product&quot; &lt;&lt; std::endl;&#xD;
+	std::cin >> input;&#xD;
+	if (0 &lt; input &amp;&amp; input &lt;= 50)&#xD;
+	{&#xD;
+		std::cout &lt;&lt; &quot;You selected Product 31, which costs 0.42&quot; &lt;&lt; std::endl;&#xD;
+		break;&#xD;
+	}&#xD;
+	else&#xD;
+	{&#xD;
+		std::cout &lt;&lt; &quot;Invalid input&quot; &lt;&lt; std::endl;&#xD;
+	}&#xD;
+}</body>
+              <body>#include &lt;iostream></body>
+            </entry>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_-1kPYN8REe6i7LUfKAmYmQ" name="printReceived">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Input received&quot; &lt;&lt; std::endl;</body>
+            </exit>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="__-yzMN8PEe6i7LUfKAmYmQ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_Uory4N8REe6i7LUfKAmYmQ" name="S3_Produkt_ausgeben">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_pH3z4N8REe6i7LUfKAmYmQ" name="printBeginDispensing">
+              <language>CPP</language>
+              <language>INCLUDE</language>
+              <body>std::cout &lt;&lt; std::endl &lt;&lt; &quot;### S3 ###&quot; &lt;&lt; std::endl;&#xD;
+std::cout &lt;&lt; &quot;Dispensing Product&quot; &lt;&lt; std::endl;&#xD;
+std::this_thread::sleep_for(std::chrono::seconds(5));</body>
+              <body>#include &lt;chrono>&#xD;
+#include &lt;thread></body>
+            </entry>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_yrlB8N8VEe6i7LUfKAmYmQ" name="printEndDispensing">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Dispensing complete&quot; &lt;&lt; std::endl;</body>
+            </exit>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_wDcXgN8UEe6i7LUfKAmYmQ" name="S2_Geld_erwarten">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_gA5rgN8VEe6i7LUfKAmYmQ" name="expectMoney">
+              <language>CPP</language>
+              <language>INCLUDE</language>
+              <body>double insertedMoney = 0;&#xD;
+double cost = 0.42;&#xD;
+std::cout &lt;&lt; std::endl &lt;&lt; &quot;### S2 ###&quot; &lt;&lt; std::endl;&#xD;
+std::cout &lt;&lt; &quot;Please insert the correct amount of money (&quot; &lt;&lt; cost &lt;&lt; &quot;)&quot; &lt;&lt; std::endl;&#xD;
+&#xD;
+while(true)&#xD;
+{&#xD;
+	std::cin >> insertedMoney;&#xD;
+	if (insertedMoney > cost)&#xD;
+	{&#xD;
+		std::cout &lt;&lt; &quot;You inserted &quot; &lt;&lt; insertedMoney &lt;&lt; &quot;, therefore &quot; &lt;&lt; insertedMoney-cost &lt;&lt; &quot; will be returned&quot; &lt;&lt; std::endl;&#xD;
+		break;&#xD;
+	}&#xD;
+	else if (insertedMoney == cost)&#xD;
+	{&#xD;
+		std::cout &lt;&lt; &quot;You inserted &quot; &lt;&lt; insertedMoney &lt;&lt; std::endl;&#xD;
+		break;&#xD;
+	}&#xD;
+	else if (insertedMoney &lt; cost)&#xD;
+	{&#xD;
+		cost -=insertedMoney;&#xD;
+		std::cout &lt;&lt; &quot;You inserted &quot; &lt;&lt; insertedMoney &lt;&lt; &quot; which is insufficient. Please insert another &quot; &lt;&lt; cost &lt;&lt; std::endl;&#xD;
+	}&#xD;
+	else&#xD;
+	{&#xD;
+		std::cout &lt;&lt; &quot;Invalid input&quot; &lt;&lt; std::endl;&#xD;
+	}&#xD;
+}</body>
+              <body>#include &lt;iostream></body>
+            </entry>
+          </subvertex>
+        </region>
+      </ownedBehavior>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_sUmV8N8OEe6i7LUfKAmYmQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_sUqnYN8OEe6i7LUfKAmYmQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_SdXx4N8REe6i7LUfKAmYmQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_SdZAAN8REe6i7LUfKAmYmQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_paOrwN-sEe6i7LUfKAmYmQ" base_Behavior="_joIfoN8PEe6i7LUfKAmYmQ"/>
+</xmi:XMI>

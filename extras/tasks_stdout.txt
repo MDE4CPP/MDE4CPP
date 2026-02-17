@@ -1,0 +1,43 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.5/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :gradlePlugins:MDE4CPPGeneratePlugin:compileJava UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPGeneratePlugin:pluginDescriptors UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPGeneratePlugin:processResources UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPGeneratePlugin:classes UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPGeneratePlugin:jar UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPCompilePlugin:compileJava UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPCompilePlugin:pluginDescriptors UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPCompilePlugin:processResources UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPCompilePlugin:classes UP-TO-DATE
+> Task :gradlePlugins:MDE4CPPCompilePlugin:jar UP-TO-DATE
+
+> Task :src:common:MDE4CPP_PluginAPI:tasks
+
+------------------------------------------------------------
+Tasks runnable from project ':src:common:MDE4CPP_PluginAPI' - Build task for project: pluginAPI
+------------------------------------------------------------
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in project ':src:common:MDE4CPP_PluginAPI'.
+dependencies - Displays all dependencies declared in project ':src:common:MDE4CPP_PluginAPI'.
+dependencyInsight - Displays the insight into a specific dependency in project ':src:common:MDE4CPP_PluginAPI'.
+help - Displays a help message.
+javaToolchains - Displays the detected java toolchains.
+outgoingVariants - Displays the outgoing variants of project ':src:common:MDE4CPP_PluginAPI'.
+projects - Displays the sub-projects of project ':src:common:MDE4CPP_PluginAPI'.
+properties - Displays the properties of project ':src:common:MDE4CPP_PluginAPI'.
+resolvableConfigurations - Displays the configurations that can be resolved in project ':src:common:MDE4CPP_PluginAPI'.
+tasks - Displays the tasks runnable from project ':src:common:MDE4CPP_PluginAPI'.
+
+PluginAPI tasks
+---------------
+compilePluginAPI - compile pluginAPI
+deliverPluginAPIInterface - deliver pluginAPI interface header to %MDE4CPP_HOME%/application/include/pluginAPI
+
+To see all tasks and more detail, run gradlew tasks --all
+
+To see more detail about a task, run gradlew help --task <task>
+
+BUILD SUCCESSFUL in 15s
+9 actionable tasks: 1 executed, 8 up-to-date

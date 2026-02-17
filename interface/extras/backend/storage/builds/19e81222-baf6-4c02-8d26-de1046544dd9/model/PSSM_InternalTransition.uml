@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Model xmi:id="_45ktINTAEe6Pct_3Csc3rw" name="PSSM_InternalTransition">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_4_GtYNTAEe6Pct_3Csc3rw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_EDCU4NTBEe6Pct_3Csc3rw" name="C1">
+      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_VxIuUNTBEe6Pct_3Csc3rw" name="SM_InternalTransition">
+        <region xmi:type="uml:Region" xmi:id="_lBiWQNTBEe6Pct_3Csc3rw" name="R1">
+          <transition xmi:type="uml:Transition" xmi:id="_E3X0gNTEEe6Pct_3Csc3rw" name="T1" source="_79CBoNTBEe6Pct_3Csc3rw" target="_Di3KkNTCEe6Pct_3Csc3rw"/>
+          <transition xmi:type="uml:Transition" xmi:id="_Ga4OoNTEEe6Pct_3Csc3rw" name="T2" source="_Di3KkNTCEe6Pct_3Csc3rw" target="_Js0LYNTCEe6Pct_3Csc3rw">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_hRE1ANTEEe6Pct_3Csc3rw" name="printS1Finish">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;S1 finishing&quot;&lt;&lt; std::endl;</body>
+            </effect>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_UFMCgNTEEe6Pct_3Csc3rw" name="Tinternal" kind="internal" source="_Di3KkNTCEe6Pct_3Csc3rw" target="_Di3KkNTCEe6Pct_3Csc3rw">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_IxENcNTFEe6Pct_3Csc3rw" name="printTinternal">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Traversing Tinternal&quot;&lt;&lt; std::endl;</body>
+            </effect>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_79CBoNTBEe6Pct_3Csc3rw" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_Di3KkNTCEe6Pct_3Csc3rw" name="S1">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_6WlWUNTDEe6Pct_3Csc3rw" name="printS1_entry">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Hello from S1 entry&quot; &lt;&lt; std::endl;</body>
+            </entry>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_QcalANTEEe6Pct_3Csc3rw" name="printS1_exit">
+              <language>CPP</language>
+              <body>std::cout &lt;&lt; &quot;Hello from S1 exit&quot; &lt;&lt; std::endl;</body>
+            </exit>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_Js0LYNTCEe6Pct_3Csc3rw" name="FinalState"/>
+        </region>
+      </ownedBehavior>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_DIpwQNTBEe6Pct_3Csc3rw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_DIq-YNTBEe6Pct_3Csc3rw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_hWJpoNTBEe6Pct_3Csc3rw" base_Behavior="_VxIuUNTBEe6Pct_3Csc3rw"/>
+</xmi:XMI>
