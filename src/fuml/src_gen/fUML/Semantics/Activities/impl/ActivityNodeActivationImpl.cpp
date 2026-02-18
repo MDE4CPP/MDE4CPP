@@ -40,8 +40,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/ActivityNode.hpp"
@@ -491,10 +491,13 @@ void ActivityNodeActivationImpl::terminate()
 #endif
 
 this->setRunning(false);
+
+// This will lead to problems when tokens should be passed out of an activity via an output ActivityParameterNode
+// AND the activity is terminated by an ActivityFinalNode
+// --> because then the tokens of that output ActivityParameterNodeActivation will be cleared
+// when the ActivityFinalNodeActivation fires and thus BEFORE they can be accessed to be passed back to the caller of the current Activity.
+// Workaround is either to use a FlowFinalNode instead of an ActivityFinalNode or to comment out this line.
 this->getHeldTokens()->clear();
-
-
-
 	//end of body
 }
 

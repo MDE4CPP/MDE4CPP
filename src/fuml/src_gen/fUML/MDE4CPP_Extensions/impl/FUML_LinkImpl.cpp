@@ -35,9 +35,9 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "uml/Association.hpp"
 #include "uml/Comment.hpp"
@@ -212,7 +212,11 @@ void FUML_LinkImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();	
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_LinkEnd>>& linkEnds = this->getLinkEnds();	
+
+	// This has to be done because for some reasons if you don't do that
+	// in some cases 'linkEnds' will be NULL at line "linkEnds->clear()"
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> thisTemp = this->getThisFUML_LinkPtr(); 
 
 	for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd>& linkEnd : *linkEnds)
 	{
