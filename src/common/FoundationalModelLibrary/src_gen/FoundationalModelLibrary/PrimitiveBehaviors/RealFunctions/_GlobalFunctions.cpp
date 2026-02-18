@@ -11,12 +11,219 @@
 #include <cmath>
 #include <algorithm>
 
+std::string FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToString(double x)
+{
+	std::string result = "";
+
+	//Implemented as OpaqueBehaviour ToString
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	
+	result = std::to_string(x);
+	DEBUG_INFO("[doBody] Real ToString result = " << result)
+	
+
+	return result;
+}
 int FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToInteger(double x)
 {
 	int result = 0;
 
 	//Implemented as OpaqueBehaviour ToInteger
-	result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Floor(x);
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	
+	result = (x >= 0) ? std::floor(x) : -(std::floor(x));
+	DEBUG_INFO("[doBody] Real ToInteger result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToReal(std::string x)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour ToReal
+	DEBUG_INFO("[doBody] argument = " << x)
+	
+	result = std::stod(x);
+	DEBUG_INFO("[doBody] Real ToReal result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Max(double x,double y)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour Max
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = std::max(x, y);
+	DEBUG_INFO("[doBody] Real Max result = " << std::to_string(result))
+	
+
+	return result;
+}
+int FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Round(double x)
+{
+	int result = 0;
+
+	//Implemented as OpaqueBehaviour Round
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	
+	result = std::round(x);
+	DEBUG_INFO("[doBody] Real Round result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Abs(double x)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour Abs
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	
+	result = std::abs(x);
+	DEBUG_INFO("[doBody] Real Abs result = " << std::to_string(result))
+	
+
+	return result;
+}
+bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessOrEqual(double x,double y)
+{
+	bool result = 0;
+
+	//Implemented as OpaqueBehaviour lessOrEqual
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = (x <= y);
+	DEBUG_INFO("[doBody] Real Less Than or Equal result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::plus(double x,double y)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour plus
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = x + y;
+	DEBUG_INFO("[doBody] Real Plus result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::minus(double x,double y)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour minus
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = x - y;
+	DEBUG_INFO("[doBody] Real Minus result = " << std::to_string(result))
+	
+
+	return result;
+}
+bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessThan(double x,double y)
+{
+	bool result = 0;
+
+	//Implemented as OpaqueBehaviour lessThan
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = (x < y);
+	DEBUG_INFO("[doBody] Real Less Than result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Neg(double x)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour Neg
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	
+	result = x * (-1);
+	DEBUG_INFO("[doBody] Real Negate result = " << std::to_string(result))
+	
+
+	return result;
+}
+bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterOrEqual(double x,double y)
+{
+	bool result = 0;
+
+	//Implemented as OpaqueBehaviour greaterOrEqual
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = (x >= y);
+	DEBUG_INFO("[doBody] Real Greater Than or Equal result = " << std::to_string(result))
+	
+
+	return result;
+}
+int FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Floor(double x)
+{
+	int result = 0;
+
+	//Implemented as OpaqueBehaviour Floor
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	
+	result = std::floor(x);
+	DEBUG_INFO("[doBody] Real Floor result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::times(double x,double y)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour times
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = x * y;
+	DEBUG_INFO("[doBody] Real Multiply result = " << std::to_string(result))
+	
+
+	return result;
+}
+double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Min(double x,double y)
+{
+	double result = 0;
+
+	//Implemented as OpaqueBehaviour Min
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = std::min(x, y);
+	DEBUG_INFO("[doBody] Real Min result = " << std::to_string(result))
+	
+
+	return result;
+}
+bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterThan(double x,double y)
+{
+	bool result = 0;
+
+	//Implemented as OpaqueBehaviour greaterThan
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
+	result = (x > y);
+	DEBUG_INFO("[doBody] Real Greater Than result = " << std::to_string(result))
 	
 
 	return result;
@@ -37,157 +244,11 @@ double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::divide(doubl
 	double result = 0;
 
 	//Implemented as OpaqueBehaviour divide
+	DEBUG_INFO("[doBody] argument = " << std::to_string(x))
+	DEBUG_INFO("[doBody] argument = " << std::to_string(y))
+	
 	result = x / y;
-	
-
-	return result;
-}
-int FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Round(double x)
-{
-	int result = 0;
-
-	//Implemented as OpaqueBehaviour Round
-	result = std::round(x);
-	
-
-	return result;
-}
-std::string FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToString(double x)
-{
-	std::string result = "";
-
-	//Implemented as OpaqueBehaviour ToString
-	result = std::to_string(x);
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Neg(double x)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour Neg
-	result = x * (-1);
-	
-
-	return result;
-}
-bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessOrEqual(double x,double y)
-{
-	bool result = 0;
-
-	//Implemented as OpaqueBehaviour lessOrEqual
-	result = (x <= y);
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::plus(double x,double y)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour plus
-	result = x + y;
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::minus(double x,double y)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour minus
-	result = x - y;
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToReal(std::string x)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour ToReal
-	result = std::stod(x);
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Min(double x,double y)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour Min
-	result = std::min(x, y);
-	
-
-	return result;
-}
-bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterThan(double x,double y)
-{
-	bool result = 0;
-
-	//Implemented as OpaqueBehaviour greaterThan
-	result = (x > y);
-	
-
-	return result;
-}
-bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessThan(double x,double y)
-{
-	bool result = 0;
-
-	//Implemented as OpaqueBehaviour lessThan
-	result = (x < y);
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Max(double x,double y)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour Max
-	result = std::max(x, y);
-	
-
-	return result;
-}
-int FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Floor(double x)
-{
-	int result = 0;
-
-	//Implemented as OpaqueBehaviour Floor
-	result = std::floor(x);
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::times(double x,double y)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour times
-	result = x * y;
-	
-
-	return result;
-}
-bool FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterOrEqual(double x,double y)
-{
-	bool result = 0;
-
-	//Implemented as OpaqueBehaviour greaterOrEqual
-	result = (x >= y);
-	
-
-	return result;
-}
-double FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Abs(double x)
-{
-	double result = 0;
-
-	//Implemented as OpaqueBehaviour Abs
-	result = std::abs(x);
+	DEBUG_INFO("[doBody] Real Divide result = " << std::to_string(result))
 	
 
 	return result;
@@ -203,6 +264,28 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 {
 	switch(uID)
 	{
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
+		{
+		//Retrieve input parameters
+			//Retrieve in parameter 'x'
+			std::shared_ptr<Any> anyX =  inputArguments->at(0);
+			double x;
+			try
+			{
+				x = anyX->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+
+			//Invoke method
+			std::string result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToString(x);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::STRING_CLASS, false);
+	
+			return returnArgument;
+		}
 		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER:
 		{
 		//Retrieve input parameters
@@ -225,15 +308,15 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_INV:
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
 			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			double x;
+			std::string x;
 			try
 			{
-				x = anyX->get<double>();
+				x = anyX->get<std::string>();
 			}
 			catch(...)
 			{
@@ -242,12 +325,12 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			}
 
 			//Invoke method
-			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Inv(x);
+			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToReal(x);
 			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_DIVIDE:
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
@@ -276,7 +359,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			}
 
 			//Invoke method
-			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::divide(x, y);
+			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Max(x, y);
 			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
 	
 			return returnArgument;
@@ -303,7 +386,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING:
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
@@ -320,29 +403,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			}
 
 			//Invoke method
-			std::string result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToString(x);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::STRING_CLASS, false);
-	
-			return returnArgument;
-		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG:
-		{
-		//Retrieve input parameters
-			//Retrieve in parameter 'x'
-			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			double x;
-			try
-			{
-				x = anyX->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-
-			//Invoke method
-			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Neg(x);
+			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Abs(x);
 			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
 	
 			return returnArgument;
@@ -449,15 +510,49 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL:
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
 			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			std::string x;
+			double x;
 			try
 			{
-				x = anyX->get<std::string>();
+				x = anyX->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+			//Retrieve in parameter 'y'
+			std::shared_ptr<Any> anyY =  inputArguments->at(1);
+			double y;
+			try
+			{
+				y = anyY->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+
+			//Invoke method
+			bool result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessThan(x, y);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
+	
+			return returnArgument;
+		}
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG:
+		{
+		//Retrieve input parameters
+			//Retrieve in parameter 'x'
+			std::shared_ptr<Any> anyX =  inputArguments->at(0);
+			double x;
+			try
+			{
+				x = anyX->get<double>();
 			}
 			catch(...)
 			{
@@ -466,7 +561,97 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			}
 
 			//Invoke method
-			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::ToReal(x);
+			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Neg(x);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
+	
+			return returnArgument;
+		}
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
+		{
+		//Retrieve input parameters
+			//Retrieve in parameter 'x'
+			std::shared_ptr<Any> anyX =  inputArguments->at(0);
+			double x;
+			try
+			{
+				x = anyX->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+			//Retrieve in parameter 'y'
+			std::shared_ptr<Any> anyY =  inputArguments->at(1);
+			double y;
+			try
+			{
+				y = anyY->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+
+			//Invoke method
+			bool result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterOrEqual(x, y);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
+	
+			return returnArgument;
+		}
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR:
+		{
+		//Retrieve input parameters
+			//Retrieve in parameter 'x'
+			std::shared_ptr<Any> anyX =  inputArguments->at(0);
+			double x;
+			try
+			{
+				x = anyX->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+
+			//Invoke method
+			int result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Floor(x);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::INTEGER_CLASS, false);
+	
+			return returnArgument;
+		}
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES:
+		{
+		//Retrieve input parameters
+			//Retrieve in parameter 'x'
+			std::shared_ptr<Any> anyX =  inputArguments->at(0);
+			double x;
+			try
+			{
+				x = anyX->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+			//Retrieve in parameter 'y'
+			std::shared_ptr<Any> anyY =  inputArguments->at(1);
+			double y;
+			try
+			{
+				y = anyY->get<double>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
+
+			//Invoke method
+			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::times(x, y);
 			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
 	
 			return returnArgument;
@@ -539,7 +724,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN:
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_INV:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
@@ -554,82 +739,14 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
 				return nullptr;
 			}
-			//Retrieve in parameter 'y'
-			std::shared_ptr<Any> anyY =  inputArguments->at(1);
-			double y;
-			try
-			{
-				y = anyY->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
 
 			//Invoke method
-			bool result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::lessThan(x, y);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
-	
-			return returnArgument;
-		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX:
-		{
-		//Retrieve input parameters
-			//Retrieve in parameter 'x'
-			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			double x;
-			try
-			{
-				x = anyX->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-			//Retrieve in parameter 'y'
-			std::shared_ptr<Any> anyY =  inputArguments->at(1);
-			double y;
-			try
-			{
-				y = anyY->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-
-			//Invoke method
-			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Max(x, y);
+			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Inv(x);
 			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR:
-		{
-		//Retrieve input parameters
-			//Retrieve in parameter 'x'
-			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			double x;
-			try
-			{
-				x = anyX->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-
-			//Invoke method
-			int result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Floor(x);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::INTEGER_CLASS, false);
-	
-			return returnArgument;
-		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES:
+		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_DIVIDE:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
@@ -658,63 +775,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 			}
 
 			//Invoke method
-			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::times(x, y);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
-	
-			return returnArgument;
-		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL:
-		{
-		//Retrieve input parameters
-			//Retrieve in parameter 'x'
-			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			double x;
-			try
-			{
-				x = anyX->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-			//Retrieve in parameter 'y'
-			std::shared_ptr<Any> anyY =  inputArguments->at(1);
-			double y;
-			try
-			{
-				y = anyY->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-
-			//Invoke method
-			bool result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::greaterOrEqual(x, y);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::BOOLEAN_CLASS, false);
-	
-			return returnArgument;
-		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::RealFunctionsPackage::REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS:
-		{
-		//Retrieve input parameters
-			//Retrieve in parameter 'x'
-			std::shared_ptr<Any> anyX =  inputArguments->at(0);
-			double x;
-			try
-			{
-				x = anyX->get<double>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
-
-			//Invoke method
-			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::Abs(x);
+			double result = FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions::divide(x, y);
 			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::REAL_CLASS, false);
 	
 			return returnArgument;
