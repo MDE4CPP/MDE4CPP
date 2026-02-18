@@ -228,9 +228,10 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 //Model includes
 [for (act_SM_Package : Package | 
 	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName())
+	->union(aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).ownedParameter.type.getNearestPackage()->asSet()->sortedBy(myQualifiedName()))
 	->union(aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))
 )]
-#include "[act_SM_Package.generateNamespacePath(false)/]/[act_SM_Package.getPackageName()/]Package.hpp"
+#include "[act_SM_Package.generateNamespacePath(false)/]/[act_SM_Package.name.concat('Package')/].hpp"
 [/for]
 [/template]
 
