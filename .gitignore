@@ -54,3 +54,7 @@ ansible/*.retry
 ansible/.vault_pass
 ansible/vault_pass.txt
 ansible/inventory/*.vault
+
+# Vendor archives (too large for GitHub; download during build instead)
+application/tools/**/boost*.zip
+application/tools/**/boost_*.zip
