@@ -2,6 +2,7 @@
 #include "MDE4CPP_PluginAPI.hpp"
 
 #include <cstdint>
+#include <cstdlib>
 #include <functional>
 #include <mutex>
 #include <set>
@@ -1760,9 +1761,21 @@ GenericApi::GenericApi(std::shared_ptr<PluginFramework>& pluginFramework) {
 
     // Use minimum concurrency; Crow enforces min 2 threads - m_objects protected by mutex
     try {
-        std::cerr << "Starting Crow HTTP server on 127.0.0.1:8080..." << std::endl;
+        const char* bindEnv = std::getenv("MDE4CPP_PLUGINAPI_BIND");
+        std::string bindAddr = (bindEnv && bindEnv[0]) ? std::string(bindEnv) : std::string("127.0.0.1");
+        int port = 9080;
+        const char* portEnv = std::getenv("MDE4CPP_PLUGINAPI_PORT");
+        if (portEnv && portEnv[0]) {
+            char* end = nullptr;
+            long p = std::strtol(portEnv, &end, 10);
+            if (end != portEnv && p > 0 && p <= 65535) {
+                port = static_cast<int>(p);
+            }
+        }
+        std::cerr << "Starting Crow HTTP server on " << bindAddr << ":" << port << "..." << std::endl;
+        std::cerr << "(Set MDE4CPP_PLUGINAPI_BIND / MDE4CPP_PLUGINAPI_PORT to override; use another port if bind fails with 10013 on Windows.)" << std::endl;
         std::cerr.flush();
-        app.bindaddr("127.0.0.1").port(8080).concurrency(1).run(); // TODO let user assign address and port 
+        app.bindaddr(bindAddr).port(port).concurrency(1).run();
     } catch(const std::exception& e) {
         std::cerr << "FATAL: Crow server crashed with exception: " << e.what() << std::endl;
         std::cerr.flush();
