@@ -71,6 +71,38 @@ taskkill /F /IM "pluginAPI.exe" /T
 
 ## Troubleshooting
 
+### Docker Issues
+- **Permission denied**: On Linux, add your user to the docker group: `sudo usermod -aG docker $USER` (requires logout/login)
+- **Docker Engine without admin rights on Windows**: On Windows docker client must be run with elevated privileges to connect - Error "//./pipe/docker_engine:" not found. Add user to docker-users group in Computer management. Additional in Admin Powershell:
+   ```bash
+   Install-Module -Name dockeraccesshelper
+   Import-Module dockeraccesshelpe 
+   ```
+   start docker
+  ```bash
+  Add-AccountToDockerAccess "<user name>"
+   ```
+- **Port conflicts**: Ensure no other services are using required ports
+- **Out of disk space**: Clean up Docker images: `docker system prune -a`
+
+### Build Issues
+- **Eclipse not found**: Run `docker compose up install-eclipse` first
+- **Component build fails**: Check dependencies - some components require others to be built first
+- **Cross-compilation issues**: Verify `CROSS_COMPILE_WINDOWS` setting in `MDE4CPP_Generator.properties`
+- **Build crashes on systems with 8GB RAM**: If Docker builds crash due to memory issues (especially on Windows), edit `docker/scripts/setup-setenv.sh` and modify the following configuration values:
+  ```bash
+  # For 8GB RAM systems, change these values:
+  WORKER_COUNT=1              # Line 18: Set to 1 for single-threaded compilation
+  GRADLE_PARALLEL=false       # Line 22: Set to false to disable parallel Gradle tasks
+  ```
+  After making these changes, try running the build again:
+  ```bash
+  docker compose up build-full
+  ```
+  **Note**: For systems with 16GB+ RAM, you can use `WORKER_COUNT=2` or `3` and `GRADLE_PARALLEL=true` for faster builds.
+
+
+### web-interface Issues
 If frontend opens but plugins are missing:
 - Ensure PluginAPI is running
 - Ensure backend is running
@@ -79,3 +111,15 @@ If frontend opens but plugins are missing:
 If PluginAPI build fails with `Permission denied` while copying DLLs on Windows:
 - Stop any running `pluginAPI.exe`
 - Re-run the PluginAPI build command
+
+## License
+This project is generally licensed under the **MIT License**.  
+
+The following folders are excluded and are subject to the **Eclipse Public License v1.0**:  
+- `src/common/ecoreReflection/model`  
+- `src/common/primitivetypesReflection/model`  
+- `src/common/umlReflection/model`  
+- `src/ecore/model`  
+- `src/uml/types/model`  
+- `src/uml/uml/model`  
+
