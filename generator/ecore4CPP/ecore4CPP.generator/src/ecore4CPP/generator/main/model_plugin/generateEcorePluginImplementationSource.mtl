@@ -29,6 +29,10 @@
 #include "[aPackage.name/]/[aPackage.name/]Factory.hpp"
 #include "[aPackage.name/]/[aPackage.name/]Package.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace [aPackage.name/];
 
 //static initialisation
@@ -99,6 +103,118 @@ std::string [packageName/]::eNS_URI()
 std::string [packageName/]::eNS_PREFIX()
 {
 	return "[aPackage.nsPrefix/]";
+}
+
+bool [packageName/]::canInvoke(const std::shared_ptr<ecore::EObject>& object, const std::string& operationName) const
+{
+	if(!object) return false;
+	if(operationName.empty()) return false;
+	
+	// Always allow core EObject-style operations
+	if(!operationName.empty() && operationName.at(0) == 'e') return true;
+
+	const auto cls = object->eClass();
+	if(!cls) return false;
+
+	const auto directOps = cls->getEOperations();
+	const auto allOps = cls->getEAllOperations();
+	const auto opList = (directOps && directOps->size() > 0) ? directOps : allOps;
+	if(!opList) return false;
+
+	for(auto it = opList->cbegin(); it != opList->cend(); ++it)
+	{
+		const auto op = *it;
+		if(!op) continue;
+		if(op->getName() != operationName) continue;
+
+		// By default, only treat operations with explicit codegen bodies as invokable.
+		// This avoids attempting execution where no semantics exist.
+		const auto ann = op->getEAnnotation("http://tu-ilmenau.de/see/codegen");
+		if(!ann) return false;
+
+		const auto details = ann->getDetails();
+		if(!details) return false;
+
+		if(details->find("doNotGenerate") != details->end()) return false;
+
+		const auto itBody = details->find("body");
+		return (itBody != details->end()) && !itBody->second.empty();
+	}
+
+	return false;
+}
+
+OperationInvokerPlugin::InvokeResult [packageName/]::invoke(const std::shared_ptr<ecore::EObject>& object, const OperationInvokerPlugin::InvokeRequest& request)
+{
+	OperationInvokerPlugin::InvokeResult res;
+	if(!object)
+	{
+		res.success = false;
+		res.error = "Invoke failed: object is null";
+		return res;
+	}
+
+	const auto cls = object->eClass();
+	if(!cls)
+	{
+		res.success = false;
+		res.error = "Invoke failed: object has no eClass";
+		return res;
+	}
+
+	const auto directOps = cls->getEOperations();
+	const auto allOps = cls->getEAllOperations();
+	const auto opList = (directOps && directOps->size() > 0) ? directOps : allOps;
+	if(!opList)
+	{
+		res.success = false;
+		res.error = "Invoke failed: no operations available";
+		return res;
+	}
+
+	const unsigned int argCount = request.arguments ? request.arguments->size() : 0;
+
+	std::shared_ptr<ecore::EOperation> opToInvoke = nullptr;
+	for(auto it = opList->cbegin(); it != opList->cend(); ++it)
+	{
+		const auto op = *it;
+		if(!op) continue;
+		if(op->getName() != request.operationName) continue;
+		const auto ps = op->getEParameters();
+		const unsigned int pCount = ps ? ps->size() : 0;
+		if(pCount == argCount)
+		{
+			opToInvoke = op;
+			break;
+		}
+		if(!opToInvoke) opToInvoke = op;
+	}
+
+	if(!opToInvoke)
+	{
+		res.success = false;
+		res.error = "Invoke failed: operation not found";
+		return res;
+	}
+
+	try
+	{
+		res.result = object->eInvoke(opToInvoke, request.arguments);
+		res.success = true;
+		return res;
+	}
+	catch(const std::exception& e)
+	{
+		res.success = false;
+		res.error = std::string("Invoke failed: ") + e.what();
+		return res;
+	}
+	catch(...)
+	{
+		res.success = false;
+		res.error = "Invoke failed: unknown error";
+		return res;
+	}
 }
 [/file]
 [/template]

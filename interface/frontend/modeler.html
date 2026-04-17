@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDE4CPP Modeler</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modeler.css">
+</head>
+<body>
+    <div class="modeler-container">
+        <header class="modeler-header">
+            <div class="header-content">
+                <h1>MDE4CPP Modeler</h1>
+                <div class="header-controls">
+                    <select id="plugin-selector" class="plugin-selector">
+                        <option value="">Select a plugin...</option>
+                    </select>
+                    <div class="toolbar">
+                        <button id="undo-btn" class="toolbar-btn" title="Undo (Ctrl+Z)" disabled>
+                            ↶ Undo
+                        </button>
+                        <button id="redo-btn" class="toolbar-btn" title="Redo (Ctrl+Y)" disabled>
+                            ↷ Redo
+                        </button>
+                        <button id="refresh-btn" class="toolbar-btn" title="Refresh">
+                            ↻ Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="modeler-main-layout">
+            <div class="modeler-layout">
+                <!-- Left Panel: Unified Tree -->
+                <aside class="tree-panel">
+                    <div class="panel-header">
+                        <h2>Model Structure</h2>
+                        <input type="text" id="tree-search" class="tree-search" placeholder="Search...">
+                    </div>
+                    <div id="unified-tree" class="unified-tree">
+                        <div class="empty-state">Select a plugin to view structure</div>
+                    </div>
+                </aside>
+
+                <!-- Center Panel: Diagram Canvas / JSON View -->
+                <main class="diagram-panel">
+                    <div class="panel-header">
+                        <div id="breadcrumbs" class="breadcrumbs"></div>
+                        <div class="view-toggle-group">
+                            <button id="view-diagram-btn" class="view-toggle-btn active" title="Diagram view">Diagram</button>
+                            <button id="view-json-btn" class="view-toggle-btn" title="JSON view">JSON</button>
+                        </div>
+                    </div>
+                    <div id="diagram-canvas" class="diagram-canvas">
+                        <div class="empty-state">Select an element to view diagram</div>
+                    </div>
+                </main>
+
+                <!-- Right Panel: Properties -->
+                <aside class="properties-panel">
+                    <div class="panel-header">
+                        <h2>Properties</h2>
+                    </div>
+                    <div id="properties-content" class="properties-content">
+                        <div class="empty-state">Select an element to view properties</div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Bottom Panel: Children List -->
+            <div class="children-panel">
+                <div class="panel-header">
+                    <h2>Children</h2>
+                    <button id="toggle-children-panel" class="panel-toggle-btn" title="Toggle children panel">▼</button>
+                </div>
+                <div id="children-content" class="children-content">
+                    <div class="empty-state">Select an element to view its children</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Creation Palette -->
+        <div id="creation-palette" class="creation-palette hidden">
+            <div class="palette-header">Create New</div>
+            <div class="palette-items"></div>
+        </div>
+
+        <!-- Context Menu -->
+        <div id="context-menu" class="context-menu hidden">
+            <div class="context-menu-items"></div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="error-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Error</h2>
+                <p id="error-message"></p>
+            </div>
+        </div>
+
+        <!-- Invoke Operation Dialog -->
+        <div id="invoke-operation-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal" id="close-invoke-modal">&times;</span>
+                <h2 id="invoke-operation-title">Invoke Operation</h2>
+                <form id="invoke-operation-form">
+                    <div id="invoke-params-container" class="invoke-params-container">
+                        <!-- Parameter inputs added dynamically -->
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Execute</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-invoke-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Create Instance Dialog -->
+        <div id="create-instance-modal" class="modal hidden">
+            <div class="modal-content modal-large">
+                <span class="close-modal" id="close-create-modal">&times;</span>
+                <h2 id="create-instance-title">Create Instance</h2>
+                <form id="create-instance-form">
+                    <div class="form-group">
+                        <label for="instance-name-input">Instance Name: <span class="required">*</span></label>
+                        <input type="text" id="instance-name-input" name="instanceName" required 
+                               placeholder="Enter instance name...">
+                    </div>
+                    <div id="attributes-container" class="attributes-container">
+                        <!-- Attributes will be dynamically added here -->
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-create-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/plugin-api.js"></script>
+    <script src="js/services/MetamodelService.js"></script>
+    <script src="js/services/ModelService.js"></script>
+    <script src="js/services/ValidationService.js"></script>
+    <script src="js/modeler/CommandManager.js"></script>
+    <script src="js/modeler/UnifiedTree.js"></script>
+    <script src="js/modeler/DiagramCanvas.js"></script>
+    <script src="js/modeler/CreationPalette.js"></script>
+    <script src="js/modeler/PropertiesPanel.js"></script>
+    <script src="js/modeler/ContextMenu.js"></script>
+    <script src="js/modeler/MainEditor.js"></script>
+    <script src="js/modeler/CreateInstanceDialog.js"></script>
+    <!-- JSON/XMI serialization and viewer -->
+    <script src="js/utils/modelSerializer.js"></script>
+    <script src="js/utils/xmiSerializer.js"></script>
+    <script src="js/modeler/ModelJsonViewer.js"></script>
+    <script src="js/modeler/ModelerApp.js"></script>
+    <script>
+        // Initialize modeler when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof ModelerApp !== 'undefined') {
+                const app = new ModelerApp();
+                app.init();
+            }
+        });
+    </script>
+</body>
+</html>

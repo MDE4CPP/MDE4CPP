@@ -48,10 +48,16 @@ SET(SOURCE_FILES
 	MDE4CPP_PluginAPI_Main.cpp
 )
 
+# Crow (in util/crow_all.h) requires Boost headers. Either:
+# - BOOST_ROOT is set: add it so that #include <boost/...> finds $BOOST_ROOT/boost/...
+# - Else: deliverBoostLibray copies to application/include/boost, so application/include is enough
 INCLUDE_DIRECTORIES(
 	../
 	${MDE4CPP_HOME}/application/include
 )
+IF(DEFINED ENV{BOOST_ROOT})
+	INCLUDE_DIRECTORIES($ENV{BOOST_ROOT})
+ENDIF()
 # Apple specific stuff
 IF(APPLE)
   SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
