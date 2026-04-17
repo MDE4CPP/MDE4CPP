@@ -4,64 +4,16 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
-import org.gradle.internal.os.OperatingSystem;
-
 description 'Build task for project: Library_ecore'
 
-
 task runCommandCompileLibrary_ecore(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileLibrary_ecoreSrc'
-	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileLibrary_ecoreSrc'
-	}
-	dependsOn 'generateLibrary_ecore'
-	// These dependencies exist only when this project is built as part of the full MDE4CPP build.
-	if (rootProject.findProject(':src:ecore') != null) { dependsOn ':src:ecore:buildEcore' }
-	if (rootProject.findProject(':src:uml:types') != null) { dependsOn ':src:uml:types:buildTypes' }
-		def allDepOutputs = files()
-		getRootProject().getTasksByName('buildEcore', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildTypes', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		inputs.files(allDepOutputs)
-		mustRunAfter = [
-			'generateLibrary_ecore'
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
-			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('buildTypes', true)
-		]
-	doFirst {
-		def mde4cppHome = System.getenv('MDE4CPP_HOME')
-		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
-			if (!ecoreLibFile.exists()) {
-				sleep(2000)
-				if (!ecoreLibFile.exists()) {
-					def taskPath = ':src:ecore:buildEcore'
-					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-			def typesLibFile = new File(mde4cppHome, 'application/bin/types.so')
-			if (!typesLibFile.exists()) {
-				sleep(2000)
-				if (!typesLibFile.exists()) {
-					def taskPath = ':src:uml:types:buildTypes'
-					throw new GradleException("Dependency library file does not exist: " + typesLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-		}
-	}
+	commandLine 'cmd', '/c', 'gradlew src_gen:compileLibrary_ecoreSrc'
+	mustRunAfter =  [
+		'generateLibrary_ecore'
+	
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+	]
 }
 
 task runCommandGenerateLibrary_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -70,18 +22,7 @@ task runCommandGenerateLibrary_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 }
 
 task runCommandCompileApplicationForLibrary_ecore(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForLibrary_ecoreSrc'
-	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForLibrary_ecoreSrc'
-	}
+	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLibrary_ecoreSrc'
 	dependsOn 'compileLibrary_ecore'
 }
 
@@ -104,24 +45,24 @@ task compileLibrary_ecore() {
 	group 'Library_ecore'
 	description 'compile Library_ecore' 
 
-	dependsOn 'generateLibrary_ecore'
-	mustRunAfter = ["generateLibrary_ecore"]
-	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-	
-	if(buildFile.exists()) {
-		dependsOn 'src_gen:compileLibrary_ecoreSrc'
-	} else {
+
+	if(!buildFile.exists()){ 
+		dependsOn 'generateLibrary_ecore' 
+		mustRunAfter = ["generateLibrary_ecore"]
 		dependsOn 'runCommandCompileLibrary_ecore'
 	}
+	else
+	{
+		mustRunAfter = ["generateLibrary_ecore"]
+		dependsOn 'src_gen:compileLibrary_ecoreSrc'
+	} 
+	mustRunAfter =  [
+		'generateLibrary_ecore'
 	
-		mustRunAfter = [
-			'generateLibrary_ecore'
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
-			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('buildTypes', true)
-		]
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+	]
 }
 
 task compileApplicationForLibrary_ecore{

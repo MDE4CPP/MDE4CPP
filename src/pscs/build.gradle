@@ -23,46 +23,38 @@ task runCommandCompilePSCS(type:Exec) {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePSCSSrc'
 	}
 	dependsOn 'generatePSCS'
-	dependsOn ':src:ecore:buildEcore'
 	dependsOn ':src:uml:types:buildTypes'
-	dependsOn ':src:uml:buildUml'
 	dependsOn ':src:fuml:buildFUML'
+	dependsOn ':src:ecore:buildEcore'
+	dependsOn ':src:uml:buildUml'
 		def allDepOutputs = files()
-		getRootProject().getTasksByName('buildEcore', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
 		getRootProject().getTasksByName('buildTypes', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildUml', true).each { task ->
 			allDepOutputs.from(task.outputs.files)
 		}
 		getRootProject().getTasksByName('buildFUML', true).each { task ->
 			allDepOutputs.from(task.outputs.files)
 		}
+		getRootProject().getTasksByName('buildEcore', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		getRootProject().getTasksByName('buildUml', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
 		inputs.files(allDepOutputs)
 		mustRunAfter = [
 			'generatePSCS'
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileTypes', true)
 			, getRootProject().getTasksByName('buildTypes', true)
-			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 			, getRootProject().getTasksByName('compileFUML', true)
 			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
 		]
 	doFirst {
 		def mde4cppHome = System.getenv('MDE4CPP_HOME')
 		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
-			if (!ecoreLibFile.exists()) {
-				sleep(2000)
-				if (!ecoreLibFile.exists()) {
-					def taskPath = ':src:ecore:buildEcore'
-					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
 			def typesLibFile = new File(mde4cppHome, 'application/bin/types.so')
 			if (!typesLibFile.exists()) {
 				sleep(2000)
@@ -71,20 +63,28 @@ task runCommandCompilePSCS(type:Exec) {
 					throw new GradleException("Dependency library file does not exist: " + typesLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
 				}
 			}
-			def umlLibFile = new File(mde4cppHome, 'application/bin/uml.so')
-			if (!umlLibFile.exists()) {
-				sleep(2000)
-				if (!umlLibFile.exists()) {
-					def taskPath = ':src:uml:buildUml'
-					throw new GradleException("Dependency library file does not exist: " + umlLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
 			def fUMLLibFile = new File(mde4cppHome, 'application/bin/fUML.so')
 			if (!fUMLLibFile.exists()) {
 				sleep(2000)
 				if (!fUMLLibFile.exists()) {
 					def taskPath = ':src:fuml:buildFUML'
 					throw new GradleException("Dependency library file does not exist: " + fUMLLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
+				}
+			}
+			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
+			if (!ecoreLibFile.exists()) {
+				sleep(2000)
+				if (!ecoreLibFile.exists()) {
+					def taskPath = ':src:ecore:buildEcore'
+					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
+				}
+			}
+			def umlLibFile = new File(mde4cppHome, 'application/bin/uml.so')
+			if (!umlLibFile.exists()) {
+				sleep(2000)
+				if (!umlLibFile.exists()) {
+					def taskPath = ':src:uml:buildUml'
+					throw new GradleException("Dependency library file does not exist: " + umlLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
 				}
 			}
 		}
@@ -129,14 +129,14 @@ task compilePSCS() {
 	
 		mustRunAfter = [
 			'generatePSCS'
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileTypes', true)
 			, getRootProject().getTasksByName('buildTypes', true)
-			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 			, getRootProject().getTasksByName('compileFUML', true)
 			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
 		]
 }
 
@@ -148,8 +148,8 @@ task buildPSCS() {
 	dependsOn 'generatePSCS'
 	dependsOn 'compilePSCS'
 
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

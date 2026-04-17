@@ -23,40 +23,40 @@ task runCommandCompileUml(type:Exec) {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileUmlSrc'
 	}
 	dependsOn 'generateUml'
-	dependsOn ':src:ecore:buildEcore'
 	dependsOn ':src:uml:types:buildTypes'
+	dependsOn ':src:ecore:buildEcore'
 		def allDepOutputs = files()
-		getRootProject().getTasksByName('buildEcore', true).each { task ->
+		getRootProject().getTasksByName('buildTypes', true).each { task ->
 			allDepOutputs.from(task.outputs.files)
 		}
-		getRootProject().getTasksByName('buildTypes', true).each { task ->
+		getRootProject().getTasksByName('buildEcore', true).each { task ->
 			allDepOutputs.from(task.outputs.files)
 		}
 		inputs.files(allDepOutputs)
 		mustRunAfter = [
 			'generateUml'
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileTypes', true)
 			, getRootProject().getTasksByName('buildTypes', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
 		]
 	doFirst {
 		def mde4cppHome = System.getenv('MDE4CPP_HOME')
 		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
-			if (!ecoreLibFile.exists()) {
-				sleep(2000)
-				if (!ecoreLibFile.exists()) {
-					def taskPath = ':src:ecore:buildEcore'
-					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
 			def typesLibFile = new File(mde4cppHome, 'application/bin/types.so')
 			if (!typesLibFile.exists()) {
 				sleep(2000)
 				if (!typesLibFile.exists()) {
 					def taskPath = ':src:uml:types:buildTypes'
 					throw new GradleException("Dependency library file does not exist: " + typesLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
+				}
+			}
+			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
+			if (!ecoreLibFile.exists()) {
+				sleep(2000)
+				if (!ecoreLibFile.exists()) {
+					def taskPath = ':src:ecore:buildEcore'
+					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
 				}
 			}
 		}
@@ -101,10 +101,10 @@ task compileUml() {
 	
 		mustRunAfter = [
 			'generateUml'
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileTypes', true)
 			, getRootProject().getTasksByName('buildTypes', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
 		]
 }
 
@@ -116,6 +116,6 @@ task buildUml() {
 	dependsOn 'generateUml'
 	dependsOn 'compileUml'
 
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }

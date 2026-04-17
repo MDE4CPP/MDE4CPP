@@ -42,12 +42,12 @@ task compileUMLExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	}
 	if(OperatingSystem.current().isWindows()){
 		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'UMLExample.exe')
-		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0')){
+		if (project.DEBUG){
 			outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'UMLExampled.exe')
 		}
 	} else {
 		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'UMLExample')
-		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0')){
+		if (project.DEBUG){
 			outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'UMLExampled')
 		}
     }
