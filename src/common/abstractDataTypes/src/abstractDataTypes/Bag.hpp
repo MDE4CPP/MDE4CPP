@@ -34,7 +34,7 @@ class Bag
 		typedef typename std::vector<std::shared_ptr<T>>::iterator iterator;
 
 		Bag()
-		{
+		{ //;
 		}
 
 		Bag(const Bag<T>& b)

@@ -14,12 +14,12 @@
 
 namespace ecore 
 {
-	class EParameter;
 	class EClass;
-	class EGenericType;
-	class EOperation;
-	class EStringToStringMapEntry;
 	class EAnnotation;
+	class EGenericType;
+	class EStringToStringMapEntry;
+	class EOperation;
+	class EParameter;
 }
 
 namespace PSSM::Semantics::StructuredClassifiers 

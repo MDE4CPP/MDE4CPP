@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EParameter;
 	class EClass;
+	class EAnnotation;
 	class EGenericType;
+	class EStringToStringMapEntry;
 	class EOperation;
 	class EReference;
-	class EStringToStringMapEntry;
-	class EAnnotation;
 	class EDataType;
+	class EParameter;
 }
 
 namespace fUML::Semantics::StructuredClassifiers 

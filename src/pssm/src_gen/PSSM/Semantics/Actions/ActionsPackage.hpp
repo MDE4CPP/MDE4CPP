@@ -15,10 +15,10 @@
 namespace ecore 
 {
 	class EClass;
-	class EGenericType;
-	class EOperation;
-	class EStringToStringMapEntry;
 	class EAnnotation;
+	class EGenericType;
+	class EStringToStringMapEntry;
+	class EOperation;
 }
 
 namespace PSSM::Semantics::Actions 

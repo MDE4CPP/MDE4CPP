@@ -32,13 +32,13 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
-namespace fUML::MDE4CPP_Extensions 
-{
-	class FUML_Object;
-}
 namespace PSCS::MDE4CPP_Extensions 
 {
 	class PSCS_Object;
+}
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
 }
 namespace uml 
 {

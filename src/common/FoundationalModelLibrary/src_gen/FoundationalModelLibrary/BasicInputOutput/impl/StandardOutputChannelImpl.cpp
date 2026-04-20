@@ -109,12 +109,12 @@ const std::shared_ptr<Bag<uml::Classifier>>& StandardOutputChannelImpl::getTypes
 		types.reset(new Bag<uml::Classifier>());
 		// Add type of self 'StandardOutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_StandardOutputChannel());
-		// Add base type 'TextOutputChannel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
-		// Add base type 'Channel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 		// Add base type 'OutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
+		// Add base type 'Channel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
+		// Add base type 'TextOutputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
 	}
 
 	return types;
@@ -141,9 +141,9 @@ void StandardOutputChannelImpl::constructObject(const std::shared_ptr<uml::Class
 			this->construct();
 			break;
 		}
-		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_CLASS:
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::OUTPUTCHANNEL_CLASS:
 		{
-			TextOutputChannelImpl::construct();
+			OutputChannelImpl::construct();
 			break;
 		}
 		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::CHANNEL_CLASS:
@@ -151,9 +151,9 @@ void StandardOutputChannelImpl::constructObject(const std::shared_ptr<uml::Class
 			ChannelImpl::construct();
 			break;
 		}
-		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::OUTPUTCHANNEL_CLASS:
+		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::TEXTOUTPUTCHANNEL_CLASS:
 		{
-			OutputChannelImpl::construct();
+			TextOutputChannelImpl::construct();
 			break;
 		}
 		default:

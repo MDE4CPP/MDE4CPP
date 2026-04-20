@@ -11,8 +11,8 @@ task runCommandCompileUml(type:Exec) {
 	mustRunAfter =  [
 		'generateUml'
 	
-		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -56,8 +56,8 @@ task compileUml() {
 	mustRunAfter =  [
 		'generateUml'
 	
-		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
+		, getRootProject().getTasksByName('compileEcore', true)
 	]
 }
 
@@ -69,6 +69,6 @@ task buildUml() {
 	dependsOn 'generateUml'
 	dependsOn 'compileUml'
 
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }

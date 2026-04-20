@@ -1,5 +1,5 @@
 
-// Generated from OclLexer.g4 by ANTLR 4.12.0
+// Generated from OclLexer.g4 by ANTLR 4.13.2
 
 
 #include "OclLexer.h"
@@ -43,10 +43,19 @@ struct OclLexerStaticData final {
 };
 
 ::antlr4::internal::OnceFlag ocllexerLexerOnceFlag;
-OclLexerStaticData *ocllexerLexerStaticData = nullptr;
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+static thread_local
+#endif
+std::unique_ptr<OclLexerStaticData> ocllexerLexerStaticData = nullptr;
 
 void ocllexerLexerInitialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  if (ocllexerLexerStaticData != nullptr) {
+    return;
+  }
+#else
   assert(ocllexerLexerStaticData == nullptr);
+#endif
   auto staticData = std::make_unique<OclLexerStaticData>(
     std::vector<std::string>{
       "COMMENTS", "IF", "THEN", "ELSE", "ENDIF", "IN", "PRE", "LET", "ITERATE", 
@@ -589,7 +598,7 @@ void ocllexerLexerInitialize() {
   for (size_t i = 0; i < count; i++) { 
     staticData->decisionToDFA.emplace_back(staticData->atn->getDecisionState(i), i);
   }
-  ocllexerLexerStaticData = staticData.release();
+  ocllexerLexerStaticData = std::move(staticData);
 }
 
 }
@@ -635,5 +644,9 @@ const atn::ATN& OclLexer::getATN() const {
 
 
 void OclLexer::initialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  ocllexerLexerInitialize();
+#else
   ::antlr4::internal::call_once(ocllexerLexerOnceFlag, ocllexerLexerInitialize);
+#endif
 }

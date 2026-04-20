@@ -1,5 +1,5 @@
 
-// Generated from OclFragments.g4 by ANTLR 4.12.0
+// Generated from OclFragments.g4 by ANTLR 4.13.2
 
 
 #include "OclFragments.h"
@@ -43,10 +43,19 @@ struct OclFragmentsStaticData final {
 };
 
 ::antlr4::internal::OnceFlag oclfragmentsLexerOnceFlag;
-OclFragmentsStaticData *oclfragmentsLexerStaticData = nullptr;
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+static thread_local
+#endif
+std::unique_ptr<OclFragmentsStaticData> oclfragmentsLexerStaticData = nullptr;
 
 void oclfragmentsLexerInitialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  if (oclfragmentsLexerStaticData != nullptr) {
+    return;
+  }
+#else
   assert(oclfragmentsLexerStaticData == nullptr);
+#endif
   auto staticData = std::make_unique<OclFragmentsStaticData>(
     std::vector<std::string>{
       "Bol", "Ws", "Hws", "Vws", "DocComment", "BlockComment", "LineComment", 
@@ -432,7 +441,7 @@ void oclfragmentsLexerInitialize() {
   for (size_t i = 0; i < count; i++) { 
     staticData->decisionToDFA.emplace_back(staticData->atn->getDecisionState(i), i);
   }
-  oclfragmentsLexerStaticData = staticData.release();
+  oclfragmentsLexerStaticData = std::move(staticData);
 }
 
 }
@@ -478,5 +487,9 @@ const atn::ATN& OclFragments::getATN() const {
 
 
 void OclFragments::initialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  oclfragmentsLexerInitialize();
+#else
   ::antlr4::internal::call_once(oclfragmentsLexerOnceFlag, oclfragmentsLexerInitialize);
+#endif
 }
