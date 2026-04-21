@@ -21,7 +21,6 @@ using namespace ecore;
 int main()
 {
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
-<<<<<<< HEAD
     std::chrono::time_point<std::chrono::high_resolution_clock> start2, end2;
 
     {
@@ -31,13 +30,6 @@ int main()
 		{
 		std::shared_ptr<EPackage> package=factory->createEPackage();
 		
-=======
-
-    {
-		start = std::chrono::high_resolution_clock::now();
-		std::shared_ptr<ecorePackage> package=ecorePackage::eInstance();
-		std::shared_ptr<ecoreFactory> factory = ecoreFactory::eInstance();
->>>>>>> remotes/origin/ContinuousIntegration
 		end = std::chrono::high_resolution_clock::now();
 
 		std::cout << "setup time: " << std::chrono::duration_cast<std::chrono::microseconds>(end-start).count() << std::endl;
@@ -65,7 +57,6 @@ int main()
 		classifiers->clear();
 		end = std::chrono::high_resolution_clock::now();
 		std::cout << "time to delete " << NUM_ELEMENT << " classes: " <<  std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
-<<<<<<< HEAD
 		int n;
 		std::cin >> n;
 		// Delete All
@@ -78,15 +69,5 @@ int main()
 
 	std::cout << "time to delete package: " <<  std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
 	std::cout << "time to delete EPackage: " <<  std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
-
-=======
-
-		// Delete All
-		start = std::chrono::high_resolution_clock::now();
-    }
-	end = std::chrono::high_resolution_clock::now();
-
-	std::cout << "time to delete package: " <<  std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
->>>>>>> remotes/origin/ContinuousIntegration
     return 0;
 }

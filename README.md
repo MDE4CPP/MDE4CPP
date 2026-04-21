@@ -125,10 +125,8 @@ All binaries and header files are delivered to:
 ${MDE4CPP_HOME}/application
 ```
 
-### 5. Tutorials
-- [Ecore tutorial](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/ecore-tutorial)  
-- [UML tutorial](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/uml-tutorial)  
-=======
+# Docker based build
+
 ## Prerequisites
 
 ### 1. Install Docker
@@ -489,7 +487,6 @@ If frontend opens but plugins are missing:
 If PluginAPI build fails with `Permission denied` while copying DLLs on Windows:
 - Stop any running `pluginAPI.exe`
 - Re-run the PluginAPI build command
->>>>>>> remotes/origin/ContinuousIntegration
 
 ## License
 This project is generally licensed under the **MIT License**.  
@@ -501,12 +498,9 @@ The following folders are excluded and are subject to the **Eclipse Public Licen
 - `src/ecore/model`  
 - `src/uml/types/model`  
 - `src/uml/uml/model`  
-<<<<<<< HEAD
-=======
 
 ## Additional Resources
 - [Project Website](https://www.tu-ilmenau.de/sse/software/mde4cpp)
 - [Ecore Tutorial](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/ecore-tutorial)  
 - [UML Tutorial](https://www.tu-ilmenau.de/sse/software/mde4cpp/beispiele-und-tutorials/uml-tutorial)  
 - [Setup Installation Guide](https://www.tu-ilmenau.de/fileadmin/Bereiche/IA/sse/Software/MDE4CPP/Tutorials/MDE4CPP_Setup_Installation_Guide.pdf)
->>>>>>> remotes/origin/ContinuousIntegration

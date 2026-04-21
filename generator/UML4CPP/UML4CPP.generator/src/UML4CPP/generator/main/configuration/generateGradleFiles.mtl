@@ -42,12 +42,6 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
-<<<<<<< HEAD
-description 'Build tasks for project: [packageName/]'
-
-task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment internal task --> no group --> no visualisation in gradle tasks/]
-	commandLine 'cmd', '/c', 'gradlew src_gen:compile[packageName.toUpperFirst()/]Src'
-=======
 import org.gradle.internal.os.OperatingSystem;
 
 description 'Build tasks for project: [packageName/]'
@@ -68,7 +62,6 @@ task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment interna
 	dependsOn 'generate[packageName.toUpperFirst()/]'
 	[aPackage.generateDependsOnForRunCommand()/]
 	[aPackage.generateInputsFilesForRunCommand()/]
->>>>>>> remotes/origin/ContinuousIntegration
 	[aPackage.generateMustRunAfter()/]
 }
 
@@ -79,9 +72,6 @@ task runCommandGenerate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4C
 
 [if(aPackage.hasMainBehavior())]
 task runCommandCompileApplicationFor[packageName.toUpperFirst()/](type:Exec) {
-<<<<<<< HEAD
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationFor[packageName.toUpperFirst()/]Src'
-=======
 	workingDir project.projectDir
 	def rootPath = project.rootDir.toPath()
 	def projectPath = project.projectDir.toPath()
@@ -94,7 +84,6 @@ task runCommandCompileApplicationFor[packageName.toUpperFirst()/](type:Exec) {
 	} else {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationFor[packageName.toUpperFirst()/]Src'
 	}
->>>>>>> remotes/origin/ContinuousIntegration
 	dependsOn 'compile[packageName.toUpperFirst()/]'
 }
 [/if]
@@ -118,20 +107,6 @@ task compile[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-<<<<<<< HEAD
-	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
-		dependsOn 'generate[packageName.toUpperFirst()/]'
-		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
-		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
-	}
-	else
-	{
-		[comment dependsOn 'generate[packageName.toUpperFirst()/?' /]
-		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
-		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
-	}
-=======
 	[comment Always ensure generation runs first /]
 	dependsOn 'generate[packageName.toUpperFirst()/]'
 	mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
@@ -147,7 +122,6 @@ task compile[packageName.toUpperFirst()/]() {
 		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
 	}
 	
->>>>>>> remotes/origin/ContinuousIntegration
 	[aPackage.generateMustRunAfter()/]
 }
 
@@ -178,14 +152,6 @@ task build[packageName.toUpperFirst()/]() {
 [/file]
 [/template]
 
-<<<<<<< HEAD
-[template private generateMustRunAfter(aPackage : Package) {packageName : String = getPackageName();}]
-mustRunAfter =  ['['/]
-	"generate[packageName.toUpperFirst()/]" 
-[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
-	, getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
-[/for][']'/]
-=======
 [template private generateDependsOnForRunCommand(aPackage : Package) {packageName : String = getPackageName();}]
 [for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
 	getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true).each { task ->
@@ -212,7 +178,6 @@ mustRunAfter =  ['['/]
 		, getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
 [/for]
 	[']'/]
->>>>>>> remotes/origin/ContinuousIntegration
 [/template]
 
 

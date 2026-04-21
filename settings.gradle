@@ -10,14 +10,11 @@ rootProject.name = 'MDE4CPP'
 
 //Search recursivly for all build.gradle file and add the imports
 fileTree('.') {
-	exclude '**/interface/**' // Exclude interface directory (contains temporary build workspaces)
-	exclude '**/storage/**' // Exclude storage directories
-	exclude '**/test_workspace_*/**' // Exclude test workspace directories
-	exclude '**/test_manual_*/**' // Exclude manual test directories
-	exclude '**/userProjects/**' // Exclude user projects directory
-	//exclude '**/primitivetypesReflection/**' // Temporarily exclude problematic project
-	//exclude '**/ecoreReflection/**' // Temporarily exclude problematic project
-	//exclude '**/ocl/**' // Temporarily exclude problematic project
+	include '**/build.gradle'
+	exclude 'build.gradle' // Exclude root build file
+	exclude '**/gradlePlugins'	
+	exclude '**/examples/' // Exclude examples directory
+	exclude '**/.cmake/' // Exclude cmake directory
 	//exclude '**/src_gen'
 }.collect { 
 	relativePath(it.parent).replace(File.separator, ':') 
