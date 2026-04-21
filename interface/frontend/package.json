@@ -1,0 +1,16 @@
+{
+  "name": "mde4cpp-frontend",
+  "version": "1.0.0",
+  "description": "MDE4CPP Build Service Frontend",
+  "scripts": {
+    "dev": "npx http-server -p 3001 -c-1",
+    "start": "npx http-server -p 3001 -c-1"
+  },
+  "keywords": [
+    "mde4cpp",
+    "frontend",
+    "static"
+  ],
+  "author": "",
+  "license": "MIT"
+}

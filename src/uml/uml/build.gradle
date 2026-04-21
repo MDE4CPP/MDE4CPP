@@ -4,6 +4,7 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+<<<<<<< HEAD
 description 'Build task for project: uml'
 
 task runCommandCompileUml(type:Exec) {
@@ -14,6 +15,65 @@ task runCommandCompileUml(type:Exec) {
 		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 	]
+=======
+import org.gradle.internal.os.OperatingSystem;
+
+description 'Build task for project: uml'
+
+
+task runCommandCompileUml(type:Exec) {
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileUmlSrc'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileUmlSrc'
+	}
+	dependsOn 'generateUml'
+	dependsOn ':src:uml:types:buildTypes'
+	dependsOn ':src:ecore:buildEcore'
+		def allDepOutputs = files()
+		getRootProject().getTasksByName('buildTypes', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		getRootProject().getTasksByName('buildEcore', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		inputs.files(allDepOutputs)
+		mustRunAfter = [
+			'generateUml'
+			, getRootProject().getTasksByName('compileTypes', true)
+			, getRootProject().getTasksByName('buildTypes', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+		]
+	doFirst {
+		def mde4cppHome = System.getenv('MDE4CPP_HOME')
+		if (mde4cppHome && OperatingSystem.current().isLinux()) {
+			def typesLibFile = new File(mde4cppHome, 'application/bin/types.so')
+			if (!typesLibFile.exists()) {
+				sleep(2000)
+				if (!typesLibFile.exists()) {
+					def taskPath = ':src:uml:types:buildTypes'
+					throw new GradleException("Dependency library file does not exist: " + typesLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
+				}
+			}
+			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
+			if (!ecoreLibFile.exists()) {
+				sleep(2000)
+				if (!ecoreLibFile.exists()) {
+					def taskPath = ':src:ecore:buildEcore'
+					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
+				}
+			}
+		}
+	}
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task runCommandGenerateUml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -41,6 +101,7 @@ task compileUml() {
 	group 'uml'
 	description 'compile uml' 
 
+<<<<<<< HEAD
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
@@ -59,6 +120,26 @@ task compileUml() {
 		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileEcore', true)
 	]
+=======
+	dependsOn 'generateUml'
+	mustRunAfter = ["generateUml"]
+	
+	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileUmlSrc'
+	} else {
+		dependsOn 'runCommandCompileUml'
+	}
+	
+		mustRunAfter = [
+			'generateUml'
+			, getRootProject().getTasksByName('compileTypes', true)
+			, getRootProject().getTasksByName('buildTypes', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+		]
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 

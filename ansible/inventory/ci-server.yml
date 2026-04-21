@@ -1,0 +1,29 @@
+---
+# Inventory file for CI Server
+# Update ansible_host with your server's IP address or hostname
+# Update ansible_user with the SSH user (typically 'ubuntu' for Ubuntu or your username for Debian)
+
+all:
+  children:
+    ci-server:
+      hosts:
+        ci-server:
+          ansible_host: 141.24.205.111  # Replace with your server IP
+          ansible_user: krish          # Replace with your SSH user
+          ansible_ssh_private_key_file: ~/.ssh/id_ed25519_ansible  # Path to your SSH private key
+          # Alternative: Use password authentication (less secure)
+          # ansible_ssh_pass: your password here
+          ansible_python_interpreter: /usr/bin/python3
+          
+          # CI Server specific variables
+          install_github_runner: true  # Set to true to install GitHub Runner
+          github_runner_name: "mde4cpp-ci-linux"
+          github_runner_labels: "linux,self-hosted"
+          
+          # GitHub Runner token (use vault for security)
+          # github_runner_token: "{{ vault_github_runner_token }}"
+      
+  vars:
+    # Global variables for all hosts
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+

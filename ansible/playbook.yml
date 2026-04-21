@@ -1,0 +1,77 @@
+---
+# MDE4CPP Infrastructure Setup Playbook
+# This playbook configures a Linux server for MDE4CPP development and CI/CD
+#
+# Usage:
+#   ansible-playbook -i inventory/ci-server.yml playbook.yml
+#   ansible-playbook -i inventory/ci-server.yml playbook.yml --ask-vault-pass
+#
+# Prerequisites:
+#   - Ansible installed on control node
+#   - SSH access to managed node
+#   - Sudo access on managed node
+
+- name: Configure MDE4CPP Development Environment on Linux Server
+  hosts: all
+  become: yes  # Use sudo for system package installation
+  
+  vars:
+    # Repository configuration
+    github_repo_url: "https://github.com/KrishnamohanKapri/MDE4CPP_CICD.git"
+    github_repo_branch: "main"
+    
+    # Project directory (works for both Debian and Ubuntu)
+    project_dir: "/home/{{ ansible_user }}/Projects/MDE4CPP_CICD"
+    
+    # GitHub Runner configuration (optional)
+    # These variables are defined in group_vars/ci-server/vars.yml
+    # Do not redefine them here to avoid circular references
+    
+  roles:
+    # Install Git (required for cloning repository)
+    - role: git
+      tags: [git, prerequisites]
+      
+    # Install Docker (required for containerized builds)
+    - role: docker
+      tags: [docker, prerequisites]
+      
+    # Install Docker Compose (required for multi-container orchestration)
+    - role: docker-compose
+      tags: [docker-compose, prerequisites]
+      
+    # Clone MDE4CPP_CICD repository
+    - role: repository
+      tags: [repository, prerequisites]
+      vars:
+        repo_url: "{{ github_repo_url }}"
+        repo_branch: "{{ github_repo_branch }}"
+        project_path: "{{ project_dir }}"
+      
+    # Install GitHub Actions Runner (optional, only if install_github_runner is true)
+    - role: github-runner
+      tags: [github-runner, ci]
+      when: install_github_runner | default(false) | bool
+      vars:
+        runner_token: "{{ github_runner_token | default('') }}"
+        runner_name: "{{ github_runner_name | default('mde4cpp-ci-linux') }}"
+        runner_labels: "{{ github_runner_labels | default('linux,self-hosted') }}"
+        runner_version: "{{ github_runner_version | default('2.329.0') }}"
+        project_path: "{{ project_dir }}"
+        runner_path: "{{ github_runner_path | default(project_dir + '/actions-runner') }}"
+  
+  post_tasks:
+    - name: Display installation summary
+      debug:
+        msg:
+          - "✓ Git installed"
+          - "✓ Docker installed"
+          - "✓ Docker Compose installed"
+          - "✓ Repository cloned to {{ project_dir }}"
+          - "{% if install_github_runner | default(false) | bool %}✓ GitHub Runner installed{% else %}○ GitHub Runner skipped{% endif %}"
+          - ""
+          - "Next steps:"
+          - "  1. Verify Docker: ssh {{ ansible_user }}@{{ ansible_host }} 'docker --version'"
+          - "  2. Verify repository: ssh {{ ansible_user }}@{{ ansible_host }} 'ls {{ project_dir }}'"
+          - "{% if install_github_runner | default(false) | bool %}  3. Check runner status: ssh {{ ansible_user }}@{{ ansible_host }} 'systemctl status actions.runner.*'{% endif %}"
+

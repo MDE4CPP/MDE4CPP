@@ -84,17 +84,26 @@ IF(APPLE)
   SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 ENDIF(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	[generateCMakeFindLibraryCommands('.so', 'bin')/]
+IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
+    # Windows (native or cross-compiled)
+	[generateCMakeFindLibraryCommands('', 'lib')/]
 ELSEIF(APPLE)
 	[generateCMakeFindLibraryCommands('.dylib', 'bin')/]
+ELSEIF(UNIX)
+    # Linux, BSD, Solaris, Minix
+	[generateCMakeFindLibraryCommands('.so', 'bin')/]
 ELSE()
 	[generateCMakeFindLibraryCommands('', 'lib')/]
 ENDIF()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
+
+# Export all symbols for Windows DLLs (needed for cross-compilation)
+# This ensures virtual functions from base classes are visible when linking
+IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
+    SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+ENDIF()
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	[generateLibraryLinking(true)/]

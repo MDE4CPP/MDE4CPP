@@ -1,0 +1,4 @@
+---
+# Docker Compose role variables
+docker_compose_version: "latest"  # Use latest version
+

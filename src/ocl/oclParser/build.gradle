@@ -36,7 +36,11 @@ repositories {
 }
 
 dependencies {
+<<<<<<< HEAD
     antlr 'org.antlr:antlr4:4.13.2' // use ANTLR version 4
+=======
+    antlr 'org.antlr:antlr4:4.12.0' // use ANTLR version 4
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 ext.ocl = [
@@ -121,8 +125,13 @@ task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.dir([rootDir,'application','include','oclParser'].join(File.separator))
 	
 	// dependency to 'ocl model'
+<<<<<<< HEAD
 											
 	dependsOn rootProject.tasks.getByPath('src:ocl:oclModel:model:generateOclModel')
+=======
+	// Note: oclModel tasks use path 'ocl:oclModel:...' not 'src:ocl:oclModel:...'
+	dependsOn getRootProject().getTasksByName('ocl:oclModel:generateOcl', true)
+>>>>>>> remotes/origin/ContinuousIntegration
 	dependsOn getRootProject().getTasksByName('compileOcl', true)	
 //	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
 //	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')

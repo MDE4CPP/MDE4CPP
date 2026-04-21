@@ -24,6 +24,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateNamedElement /]
+[import UML4CPP::generator::main::components::generateStructuralFeature /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
@@ -71,7 +72,9 @@ virtual std::shared_ptr<Any> invokeOpaqueBehavior(std::string _qualifiedName, co
 virtual std::shared_ptr<Any> invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
 [/template]
 
-[query private getPropertiesForGetAndSet(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
+[query private getPropertiesForGetAndSet(aClass : Class) : OrderedSet(Property) = 
+	let props : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->reject(isDoNotGenerateElement()) in
+		props->select(p | not (p.type.oclIsUndefined() and p.upper.oclIsUndefined()))->sortedBy(p | if p.name.oclIsUndefined() then '' else p.myQualifiedName() endif)/]
 [query private getOperationsForInvoke(aClass : Class) : OrderedSet(Operation) = aClass.ownedOperation->addAll(aClass.interfaceRealization.contract.ownedOperation)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
 
 [**

@@ -1,0 +1,1319 @@
+/* MDE4CPP Modeler Styles - FIXED VERSION */
+
+:root {
+    --modeler-primary: #2563eb;
+    --modeler-primary-hover: #1d4ed8;
+    --modeler-bg: #f9fafb;
+    --modeler-panel-bg: #ffffff;
+    --modeler-border: #e5e7eb;
+    --modeler-text: #111827;
+    --modeler-text-secondary: #6b7280;
+    --modeler-selected: #e3f2fd;
+    --modeler-hover: #f0f0f0;
+    --modeler-metamodel-bg: #f5f5f5;
+    --modeler-error: #ef4444;
+    --modeler-success: #10b981;
+}
+
+.modeler-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--modeler-bg);
+}
+
+/* Header */
+.modeler-header {
+    background: var(--modeler-panel-bg);
+    border-bottom: 1px solid var(--modeler-border);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.modeler-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--modeler-text);
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.plugin-selector {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-text);
+    min-width: 200px;
+}
+
+.toolbar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.toolbar-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.toolbar-btn:hover:not(:disabled) {
+    background: var(--modeler-hover);
+    border-color: var(--modeler-primary);
+}
+
+.toolbar-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Main Layout with Bottom Panel */
+.modeler-main-layout {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Three-Panel Layout (Top) */
+.modeler-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.tree-panel,
+.properties-panel {
+    width: 300px;
+    background: var(--modeler-panel-bg);
+    border-right: 1px solid var(--modeler-border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.properties-panel {
+    border-right: none;
+    border-left: 1px solid var(--modeler-border);
+}
+
+.diagram-panel {
+    flex: 1;
+    background: var(--modeler-bg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Bottom Panel: Children List */
+.children-panel {
+    height: 200px;
+    min-height: 100px;
+    max-height: 400px;
+    background: var(--modeler-panel-bg);
+    border-top: 2px solid var(--modeler-border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.children-panel.collapsed {
+    height: 40px;
+    min-height: 40px;
+}
+
+.children-content {
+    flex: 1;
+    overflow: auto;
+    padding: 1rem;
+}
+
+.children-panel.collapsed .children-content {
+    display: none;
+}
+
+.panel-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--modeler-text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+
+.panel-toggle-btn:hover {
+    color: var(--modeler-primary);
+}
+
+.children-panel.collapsed .panel-toggle-btn {
+    transform: rotate(-90deg);
+}
+
+.children-panel .panel-header {
+    padding: 0.5rem 1rem;
+}
+
+.children-panel .panel-header h2 {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Hierarchical instance children view */
+.editor-tree-subtree {
+    margin-left: 0;
+}
+.editor-tree-children {
+    margin-left: 1.25rem;
+    border-left: 1px dashed var(--modeler-border);
+    padding-left: 0.5rem;
+}
+
+.panel-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--modeler-border);
+    background: var(--modeler-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--modeler-text);
+    font-weight: 600;
+}
+
+/* Center view toggle (Diagram / JSON) */
+.view-toggle-group {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+    background: var(--modeler-border);
+    border-radius: 6px;
+    padding: 2px;
+}
+.view-toggle-btn {
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--modeler-text-secondary);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+.view-toggle-btn:hover {
+    color: var(--modeler-text);
+    background: rgba(255, 255, 255, 0.5);
+}
+.view-toggle-btn.active {
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* JSON/XMI viewer */
+.json-viewer-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.json-viewer-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--modeler-border);
+    background: var(--modeler-bg);
+    flex-shrink: 0;
+}
+.json-viewer-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--modeler-text);
+    flex: 1;
+}
+
+.format-selector-group {
+    display: flex;
+    gap: 2px;
+    background: var(--modeler-border);
+    border-radius: 6px;
+    padding: 2px;
+    margin-right: 8px;
+}
+.format-selector-btn {
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--modeler-text-secondary);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+.format-selector-btn:hover {
+    color: var(--modeler-text);
+    background: rgba(255, 255, 255, 0.5);
+}
+.format-selector-btn.active {
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.json-download-btn,
+.json-copy-btn {
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid var(--modeler-border);
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-text);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.json-download-btn:hover,
+.json-copy-btn:hover {
+    background: var(--modeler-primary);
+    color: #ffffff;
+    border-color: var(--modeler-primary);
+}
+
+.json-code-viewer,
+.xmi-code-viewer {
+    flex: 1;
+    margin: 0;
+    padding: 16px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--modeler-text);
+    background: #f8f9fa;
+    overflow: auto;
+    white-space: pre;
+    tab-size: 2;
+    border: none;
+}
+.json-loading,
+.json-empty-state,
+.json-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 0.9rem;
+    color: var(--modeler-text-secondary);
+}
+.json-error {
+    color: #dc3545;
+}
+
+/* Compact instance hierarchy tree above JSON/XMI */
+.json-instance-tree {
+    max-height: 140px;
+    overflow: auto;
+    padding: 6px 16px 8px 16px;
+    border-bottom: 1px solid var(--modeler-border);
+    background: #fafafa;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--modeler-text-secondary);
+}
+.json-instance-tree ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+.json-instance-tree li {
+    list-style: none;
+}
+
+.tree-search {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* ============================================
+   FIXED: Unified Tree - Vertical Layout
+   ============================================ */
+.unified-tree {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.unified-tree-content {
+    width: 100%;
+    display: block;
+}
+
+.tree-node {
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 4px;
+    margin: 1px 0;
+    user-select: none;
+    position: relative;
+    width: 100%;
+    min-height: 24px;
+    box-sizing: border-box;
+}
+
+.tree-node:hover {
+    background: var(--modeler-hover);
+}
+
+.tree-node-selected {
+    background: var(--modeler-selected);
+    color: var(--modeler-primary);
+    font-weight: 500;
+}
+
+.tree-node-metamodel {
+    background: var(--modeler-metamodel-bg);
+    font-style: italic;
+    color: var(--modeler-text-secondary);
+}
+
+.tree-node-metamodel:hover {
+    background: #e8e8e8;
+}
+
+.tree-node-instance {
+    background: transparent;
+}
+
+.tree-node-expand {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--modeler-text-secondary);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    margin-right: 0.25rem;
+}
+
+.tree-node-expanded .tree-node-expand {
+    transform: rotate(90deg);
+}
+
+.tree-node-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.tree-node-label {
+    flex: 1;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.tree-node-badge {
+    font-size: 0.75rem;
+    color: var(--modeler-text-secondary);
+    padding: 0.125rem 0.375rem;
+    background: var(--modeler-bg);
+    border-radius: 3px;
+}
+
+/* CRITICAL FIX: Children must stack vertically below the node row */
+.tree-node-children {
+    flex-basis: 100%;
+    margin-left: 1.5rem;
+    border-left: 1px dashed var(--modeler-border);
+    padding-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 1.5rem);
+    box-sizing: border-box;
+}
+
+.tree-section {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+}
+
+/* CRITICAL FIX: Section content must stack vertically */
+.tree-section-content {
+    margin-left: 1.5rem;
+    padding-left: 0.5rem;
+    border-left: 1px dashed var(--modeler-border);
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 1.5rem);
+    box-sizing: border-box;
+}
+
+.tree-section-header {
+    padding: 0.25rem 0.5rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--modeler-text-secondary);
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0;
+}
+
+.tree-section-header:hover {
+    background: var(--modeler-hover);
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+    color: var(--modeler-text-secondary);
+    cursor: pointer;
+}
+
+.breadcrumb-item:hover {
+    color: var(--modeler-primary);
+}
+
+.breadcrumb-separator {
+    color: var(--modeler-text-secondary);
+}
+
+/* Diagram Canvas */
+.diagram-canvas {
+    flex: 1;
+    overflow: auto;
+    padding: 2rem;
+    position: relative;
+    background: var(--modeler-bg);
+}
+
+/* Diagram Cards */
+.diagram-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.instance-card {
+    background: white;
+    border: 2px solid var(--modeler-border);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.instance-card:hover {
+    border-color: var(--modeler-primary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.instance-card-main {
+    min-width: 300px;
+    border-width: 3px;
+    border-color: var(--modeler-primary);
+}
+
+.instance-card-child {
+    min-width: 200px;
+}
+
+.instance-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.instance-card-icon {
+    font-size: 2rem;
+}
+
+.instance-card-title {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--modeler-text);
+}
+
+.instance-card-type {
+    font-size: 0.85rem;
+    color: var(--modeler-text-secondary);
+    background: var(--modeler-bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.diagram-children-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.classifier-info-card {
+    background: white;
+    border: 2px solid var(--modeler-metamodel-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    max-width: 500px;
+}
+
+.classifier-info-card h3 {
+    margin: 0 0 1rem 0;
+    color: var(--modeler-primary);
+}
+
+.classifier-info-card h4 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--modeler-text-secondary);
+}
+
+.classifier-info-card ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.classifier-info-card li {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+/* Phase 3: Full Diagram with Boxes and Edges */
+.diagram-boxes-container {
+    min-width: 100%;
+    min-height: 100%;
+    position: relative;
+}
+
+.diagram-box {
+    position: absolute;
+    background: white;
+    border: 2px solid var(--modeler-border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    min-width: 150px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.diagram-box:hover {
+    border-color: var(--modeler-primary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
+}
+
+.diagram-box-selected {
+    border-color: var(--modeler-primary);
+    border-width: 3px;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.diagram-box-icon {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.diagram-box-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--modeler-text);
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.diagram-box-type {
+    font-size: 0.75rem;
+    color: var(--modeler-text-secondary);
+    text-align: center;
+    background: var(--modeler-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}
+
+.diagram-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.diagram-boxes-container {
+    min-width: 100%;
+    min-height: 100%;
+    position: relative;
+}
+
+.diagram-box {
+    position: absolute;
+    background: white;
+    border: 2px solid var(--modeler-border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    min-width: 140px;
+    max-width: 180px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.diagram-box:hover {
+    border-color: var(--modeler-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    z-index: 10;
+}
+
+.diagram-box-selected {
+    border-color: var(--modeler-primary);
+    border-width: 3px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.diagram-box-icon {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.diagram-box-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--modeler-text);
+    text-align: center;
+    margin-bottom: 0.25rem;
+    word-wrap: break-word;
+}
+
+.diagram-box-type {
+    font-size: 0.75rem;
+    color: var(--modeler-text-secondary);
+    text-align: center;
+    background: var(--modeler-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}
+
+.editor-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.editor-tree-node {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    background: var(--modeler-panel-bg);
+    transition: all 0.2s;
+}
+
+.editor-tree-node:hover {
+    background: var(--modeler-hover);
+    border-color: var(--modeler-primary);
+}
+
+/* Properties Panel */
+.properties-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.properties-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--modeler-border);
+    background: var(--modeler-bg);
+}
+
+.properties-tab {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--modeler-text-secondary);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.properties-tab:hover {
+    background: var(--modeler-hover);
+}
+
+.properties-tab-active {
+    color: var(--modeler-primary);
+    border-bottom-color: var(--modeler-primary);
+    font-weight: 500;
+}
+
+.properties-tab-content {
+    padding: 1rem;
+    display: none;
+}
+
+.properties-tab-content-active {
+    display: block;
+}
+
+.property-field {
+    margin-bottom: 1rem;
+}
+
+.property-field label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--modeler-text);
+}
+
+.property-field label .required {
+    color: var(--modeler-error);
+}
+
+.property-field input,
+.property-field select,
+.property-field textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.property-field input:focus,
+.property-field select:focus,
+.property-field textarea:focus {
+    outline: none;
+    border-color: var(--modeler-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.property-field input.error,
+.property-field select.error,
+.property-field textarea.error {
+    border-color: var(--modeler-error);
+}
+
+.property-field .error-message {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--modeler-error);
+}
+
+.property-field .help-text {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--modeler-text-secondary);
+}
+
+.property-field-value {
+    padding: 0.5rem;
+    background: var(--modeler-bg);
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--modeler-text-secondary);
+}
+
+.reference-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.reference-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: var(--modeler-bg);
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+}
+
+.reference-item button {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    background: var(--modeler-error);
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.operation-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--modeler-border);
+}
+
+.operation-item:last-child {
+    border-bottom: none;
+}
+
+.operation-name {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.operation-params {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--modeler-text-secondary);
+}
+
+/* Create Instance Button */
+.create-instance-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Add Child Section */
+.add-child-section {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--modeler-border);
+}
+
+.add-child-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--modeler-text);
+}
+
+.add-child-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.add-child-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.operation-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--modeler-primary);
+    background: var(--modeler-primary);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.operation-btn:hover {
+    background: var(--modeler-primary-hover);
+}
+
+/* Creation Palette */
+.creation-palette {
+    position: fixed;
+    background: var(--modeler-panel-bg);
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.creation-palette.hidden {
+    display: none;
+}
+
+.palette-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--modeler-border);
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: var(--modeler-bg);
+}
+
+.palette-items {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.palette-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: background 0.2s;
+}
+
+.palette-item:hover {
+    background: var(--modeler-hover);
+}
+
+.palette-item:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.palette-item-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.palette-item-label {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.palette-item-shortcut {
+    font-size: 0.75rem;
+    color: var(--modeler-text-secondary);
+    background: var(--modeler-bg);
+    padding: 0.125rem 0.375rem;
+    border-radius: 3px;
+}
+
+/* Context Menu */
+.context-menu {
+    position: fixed;
+    background: var(--modeler-panel-bg);
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.context-menu.hidden {
+    display: none;
+}
+
+.context-menu-items {
+    padding: 0.25rem 0;
+}
+
+.context-menu-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.context-menu-item:hover {
+    background: var(--modeler-hover);
+}
+
+.context-menu-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.context-menu-item-separator {
+    height: 1px;
+    background: var(--modeler-border);
+    margin: 0.25rem 0;
+}
+
+.context-menu-item-icon {
+    margin-right: 0.5rem;
+}
+
+.context-menu-item-shortcut {
+    font-size: 0.75rem;
+    color: var(--modeler-text-secondary);
+    margin-left: 1rem;
+}
+
+.context-submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    margin-left: 0.25rem;
+    background: var(--modeler-panel-bg);
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    display: none;
+}
+
+.context-menu-item:hover .context-submenu {
+    display: block;
+}
+
+/* Empty State */
+.empty-state {
+    padding: 2rem;
+    text-align: center;
+    color: var(--modeler-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--modeler-panel-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-large {
+    max-width: 600px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--modeler-text-secondary);
+}
+
+.close-modal:hover {
+    color: var(--modeler-text);
+}
+
+/* Loading State */
+.loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--modeler-text-secondary);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--modeler-text);
+}
+
+.form-group .required {
+    color: var(--modeler-error);
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="checkbox"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--modeler-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-section {
+    margin-bottom: 1.5rem;
+}
+
+.form-section h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    color: var(--modeler-text);
+    border-bottom: 1px solid var(--modeler-border);
+    padding-bottom: 0.5rem;
+}
+
+.attributes-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.info-text {
+    color: var(--modeler-text-secondary);
+    font-style: italic;
+    padding: 1rem;
+    text-align: center;
+}
+
+.invoke-params-container {
+    margin-bottom: 1rem;
+}
+
+.invoke-params-container .property-field {
+    margin-bottom: 0.75rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--modeler-border);
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--modeler-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--modeler-primary);
+    color: white;
+    border-color: var(--modeler-primary);
+}
+
+.btn-primary:hover {
+    background: var(--modeler-primary-hover);
+    border-color: var(--modeler-primary-hover);
+}
+
+.btn-secondary {
+    background: var(--modeler-panel-bg);
+    color: var(--modeler-text);
+}
+
+.btn-secondary:hover {
+    background: var(--modeler-hover);
+}
+
+/* Scrollbar Styling */
+.unified-tree::-webkit-scrollbar,
+.properties-content::-webkit-scrollbar,
+.diagram-canvas::-webkit-scrollbar,
+.children-content::-webkit-scrollbar,
+.attributes-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.unified-tree::-webkit-scrollbar-track,
+.properties-content::-webkit-scrollbar-track,
+.diagram-canvas::-webkit-scrollbar-track,
+.children-content::-webkit-scrollbar-track {
+    background: var(--modeler-bg);
+}
+
+.unified-tree::-webkit-scrollbar-thumb,
+.properties-content::-webkit-scrollbar-thumb,
+.diagram-canvas::-webkit-scrollbar-thumb,
+.children-content::-webkit-scrollbar-thumb {
+    background: var(--modeler-border);
+    border-radius: 4px;
+}
+
+.unified-tree::-webkit-scrollbar-thumb:hover,
+.properties-content::-webkit-scrollbar-thumb:hover,
+.diagram-canvas::-webkit-scrollbar-thumb:hover,
+.children-content::-webkit-scrollbar-thumb:hover {
+    background: var(--modeler-text-secondary);
+}

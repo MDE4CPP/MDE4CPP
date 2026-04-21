@@ -1,0 +1,4 @@
+---
+# Git role variables
+git_version: "latest"  # Use latest available version
+

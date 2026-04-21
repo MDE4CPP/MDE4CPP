@@ -58,6 +58,17 @@ task buildReflectionModels() {
 	dependsOn 'common:ecoreReflection:buildEcoreReflection'
 	dependsOn 'common:primitivetypesReflection:buildPrimitivetypesReflection'
 	dependsOn 'common:umlReflection:buildUmlReflection'
+
+// Reflection tasks are not optional - but skip if not available?
+//	project.afterEvaluate {
+//		def buildEcoreRefl = getRootProject().tasks.findByPath(':src:common:ecoreReflection:buildEcoreReflection')
+//		def buildPrimTypesRefl = getRootProject().tasks.findByPath(':src:common:primitivetypesReflection:buildPrimitivetypesReflection')
+//		def buildUmlRefl = getRootProject().tasks.findByPath(':src:common:umlReflection:buildUmlReflection')
+//		if (buildEcoreRefl) { tasks.buildReflectionModels.dependsOn buildEcoreRefl }
+//		if (buildPrimTypesRefl) { tasks.buildReflectionModels.dependsOn buildPrimTypesRefl }
+//		if (buildUmlRefl) { tasks.buildReflectionModels.dependsOn buildUmlRefl }
+//	}
+
 }
 
 task buildUMLProfiles() {
@@ -72,8 +83,25 @@ task buildOCLAll() {
 	group 'Source'
 	description 'generate and compile All OCL components meta-model and parser'
 	
-	dependsOn 'ocl:oclModel:buildOcl'
-	dependsOn 'ocl:oclParser:buildOclParser'
+	dependsOn 'ecore:buildEcore'
+	// OCL tasks are usually not optional - but skip if not available
+	project.afterEvaluate {
+		def buildOclTask = getRootProject().tasks.findByPath(':src:ocl:oclModel:buildOcl')
+		def buildOclParserTask = getRootProject().tasks.findByPath(':src:ocl:oclParser:buildOclParser')
+		if (buildOclTask) {
+			tasks.buildOCLAll.dependsOn buildOclTask
+		}
+		if (buildOclParserTask) {
+			tasks.buildOCLAll.dependsOn buildOclParserTask
+		}
+		def buildEcoreTask = getRootProject().tasks.findByPath(':src:ecore:buildEcore')
+		if (buildEcoreTask && buildOclTask) {
+			buildOclTask.mustRunAfter buildEcoreTask
+		}
+		if (buildEcoreTask && buildOclParserTask) {
+			buildOclParserTask.mustRunAfter buildEcoreTask
+		}
+	}
 }	
 
 task compileEcoreModels(){
@@ -94,7 +122,7 @@ task compileEcoreModels(){
 		, 'pscs:generatePSCS'
 		, 'pssm:generatePSSM'
 		, 'ocl:oclModel:generateOcl'
-		]	
+			]
 }
 
 // Compile all without generating the models
@@ -120,8 +148,33 @@ task compileOCLAll() {
 	group 'Source'
 	description 'compile OCL meta-model and parser'
 
-	dependsOn 'ocl:oclModel:compileOcl'
-	dependsOn 'ocl:oclParser:compileOclParser' 
+	dependsOn 'ecore:buildEcore'
+	// OCL tasks are not optional - but skip if not available
+	project.afterEvaluate {
+		def compileOclTask = getRootProject().tasks.findByPath(':src:ocl:oclModel:compileOcl')
+		def compileOclParserTask = getRootProject().tasks.findByPath(':src:ocl:oclParser:compileOclParser')
+		if (compileOclTask) {
+			tasks.compileOCLAll.dependsOn compileOclTask
+		}
+		if (compileOclParserTask) {
+			tasks.compileOCLAll.dependsOn compileOclParserTask
+		}
+		def buildEcoreTask = getRootProject().tasks.findByPath(':src:ecore:buildEcore')
+		if (buildEcoreTask && compileOclTask) {
+			compileOclTask.mustRunAfter buildEcoreTask
+		}
+		if (buildEcoreTask && compileOclParserTask) {
+			compileOclParserTask.mustRunAfter buildEcoreTask
+		}
+		// Also ensure runCommandCompile tasks wait for buildEcore (if they exist)
+		def oclRunCommandTasks = ['ocl:oclModel:runCommandCompileOcl']
+		oclRunCommandTasks.each { taskPath ->
+			def oclTasks = getRootProject().getTasksByName(taskPath, true)
+			if (!oclTasks.isEmpty() && buildEcoreTask) {
+				oclTasks.each { task -> task.mustRunAfter buildEcoreTask }
+			}
+		}
+	}
 }
 
 task generateEcoreModels() {

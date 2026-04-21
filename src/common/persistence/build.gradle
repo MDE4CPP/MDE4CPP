@@ -26,6 +26,10 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPCompile" version "0.6"	
 }
 import org.gradle.internal.os.OperatingSystem;
+<<<<<<< HEAD
+=======
+import java.util.Properties;
+>>>>>>> remotes/origin/ContinuousIntegration
 
 plugins {
 	id "de.undercouch.download" version "4.1.2"
@@ -84,6 +88,7 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 	}
 
 	doLast {
+<<<<<<< HEAD
 		exec {
 			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
@@ -105,17 +110,136 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 			from "xerces/bin"
 			into System.getenv('MDE4CPP_HOME')+"/application"
 			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c"
+=======
+		// Check if cross-compilation to Windows is enabled
+		def crossCompileWindows = false
+		def mde4CppRoot = System.getenv("MDE4CPP_HOME")
+		if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
+			def props = new Properties()
+			try {
+				def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+				if (configFile.exists()) {
+					configFile.withInputStream { stream ->
+						props.load(stream)
+					}
+					def value = props.getProperty("CROSS_COMPILE_WINDOWS")
+					if (value != null) {
+						crossCompileWindows = "true".equalsIgnoreCase(value.trim())
+					}
+				}
+			} catch (Exception e) {
+				// Silently fail
+			}
+		}
+		
+		def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
+		def isCrossCompiling = !isWindows && crossCompileWindows
+		
+		// Build CMake command
+		def cmakeCmd = 'cmake -G "'
+		if (isWindows) {
+			cmakeCmd += 'MinGW Makefiles'
+		} else {
+			cmakeCmd += 'Unix Makefiles'
+		}
+		cmakeCmd += '" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin").absolutePath
+		
+		// Add cross-compilation flag if needed
+		if (isCrossCompiling) {
+			cmakeCmd += ' -DCMAKE_SYSTEM_NAME=Windows'
+		}
+		
+		cmakeCmd += ' ' + file("./xerces/xerces-c-${xercesVersion}").absolutePath
+		
+		exec {
+			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
+			if (isWindows) {
+				commandLine 'cmd', '/c', cmakeCmd
+			} else {
+				commandLine '/bin/sh', '-c', cmakeCmd
+			}
+			// Pass environment variables for cross-compilation
+			if (isCrossCompiling) {
+				environment('CC', System.getenv('CC') ?: 'x86_64-w64-mingw32-gcc')
+				environment('CXX', System.getenv('CXX') ?: 'x86_64-w64-mingw32-g++')
+			}
+		}
+		
+		// Determine make tool
+		def makeTool = 'make'
+		if (isWindows) {
+			makeTool = 'mingw32-make'
+		} else if (isCrossCompiling) {
+			makeTool = System.getenv('MAKE') ?: 'make'
+		}
+		
+		exec {
+			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
+			def count = findProperty('WORKER') ?: 1
+			if (isWindows) {
+				commandLine 'cmd', '/c', "${makeTool} install -j${count}"
+			} else {
+				commandLine '/bin/sh', '-c', "${makeTool} install -j${count}"
+			}
+		}
+		
+		// Copy headers and static libraries
+		copy {
+			from "xerces/bin"
+			into System.getenv('MDE4CPP_HOME')+"/application"
+			include "**/*.hpp", "**/*.a", "**/*.c"
+>>>>>>> remotes/origin/ContinuousIntegration
 			exclude "cmake"
 			exclude "lib/cmake"
 			exclude "lib/pkgconfig"
 			exclude "share"
 		}
+<<<<<<< HEAD
 		copy {
 			from "xerces/bin/lib"
 			into System.getenv('MDE4CPP_HOME')+"/application/bin"
 			include "**/*.so", "**/*.dylib"
 			exclude "cmake"
 			exclude "pkgconfig"
+=======
+		
+		// Copy shared libraries - check for both .dll (Windows/cross-compiled) and .so/.dylib (Linux/Mac)
+		if (isWindows || isCrossCompiling) {
+			// Windows or cross-compiled: look for .dll files
+			// Try bin/bin first (common MinGW structure) - flatten structure
+			copy {
+				from "xerces/bin/bin"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
+				includeEmptyDirs = false
+			}
+			// Also try bin/lib - flatten structure
+			copy {
+				from "xerces/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
+				includeEmptyDirs = false
+			}
+			// Also try directly in bin (if DLLs are at root level) - flatten structure
+			copy {
+				from "xerces/bin"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
+				exclude "cmake"
+				exclude "lib"
+				exclude "bin"
+				includeEmptyDirs = false
+			}
+		} else {
+			// Linux/Mac: look for .so/.dylib files
+			copy {
+				from "xerces/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "**/*.so", "**/*.dylib"
+				exclude "cmake"
+				exclude "pkgconfig"
+			}
+>>>>>>> remotes/origin/ContinuousIntegration
 		}
 	}
 
@@ -127,7 +251,32 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 	//	outputs.upToDateWhen { false }
 	//}
 	
+<<<<<<< HEAD
 	if(OperatingSystem.current().isWindows()){
+=======
+	// Check cross-compilation setting for outputs
+	def crossCompileWindows = false
+	def mde4CppRoot = System.getenv("MDE4CPP_HOME")
+	if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
+		def props = new Properties()
+		try {
+			def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+			if (configFile.exists()) {
+				configFile.withInputStream { stream ->
+					props.load(stream)
+				}
+				def value = props.getProperty("CROSS_COMPILE_WINDOWS")
+				if (value != null) {
+					crossCompileWindows = "true".equalsIgnoreCase(value.trim())
+				}
+			}
+		} catch (Exception e) {
+			// Silently fail
+		}
+	}
+	
+	if(OperatingSystem.current().isWindows() || (!OperatingSystem.current().isWindows() && crossCompileWindows)){
+>>>>>>> remotes/origin/ContinuousIntegration
 		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libxerces-c' + '.dll'].join(File.separator))}
 	}
 	else if(OperatingSystem.current().isLinux()){
@@ -147,10 +296,17 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "Persistence"
 	description "compile Persistence"
 
+<<<<<<< HEAD
 	def xercesBuildFile = file('xerces'+File.separator+'bin')
 	if(!xercesBuildFile.exists()){ 
 		dependsOn 'compileXerces'
 	}
+=======
+	// Always depend on compileXerces to ensure xerces library is available
+	// This prevents race conditions when running with multiple workers
+	dependsOn 'compileXerces'
+	
+>>>>>>> remotes/origin/ContinuousIntegration
 	projectFolder = file('.')
 
 	inputs.files(fileTree('.') {
@@ -202,7 +358,12 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn pluginFramwork
 	inputs.files(pluginFramwork.outputs)
 	
+<<<<<<< HEAD
 	mustRunAfter = ["compileXerces"]
+=======
+	// Also add compileXerces outputs as inputs to ensure xerces is fully installed
+	inputs.files(compileXerces.outputs)
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task clean {

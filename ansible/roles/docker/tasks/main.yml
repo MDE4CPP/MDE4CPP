@@ -1,0 +1,125 @@
+---
+# Docker Installation Role
+# Installs Docker Engine on Debian Linux systems using docker.io package
+
+- name: Check if Docker binary exists
+  stat:
+    path: /usr/bin/docker
+  register: docker_binary
+  tags: docker
+
+- name: Check if Docker is already installed and working
+  command: docker --version
+  register: docker_check
+  failed_when: false
+  changed_when: false
+  when: docker_binary.stat.exists
+  tags: docker
+
+- name: Check if Docker daemon is running
+  command: docker info
+  register: docker_daemon_check
+  failed_when: false
+  changed_when: false
+  when: docker_binary.stat.exists
+  tags: docker
+
+- name: Set Docker installation status
+  set_fact:
+    docker_fully_installed: "{{ docker_binary.stat.exists and docker_check.rc == 0 and docker_daemon_check.rc == 0 }}"
+  tags: docker
+
+- name: Install prerequisites for Docker
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+    update_cache: yes
+  when: not docker_fully_installed
+  tags: docker
+
+- name: Install docker.io and docker-compose from Debian repositories
+  apt:
+    name:
+      - docker.io
+      - docker-compose
+    state: present
+    update_cache: yes
+  when: not docker_fully_installed
+  tags: docker
+
+- name: Check if docker group exists
+  command: getent group docker
+  register: docker_group_check
+  failed_when: false
+  changed_when: false
+  tags: docker
+
+- name: Check if user is in docker group
+  command: groups
+  register: user_groups
+  changed_when: false
+  when: docker_group_check.rc == 0
+  tags: docker
+
+- name: Add user to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  when: 
+    - not docker_fully_installed
+    - docker_group_check.rc == 0
+    - user_groups is defined
+    - user_groups.stdout is defined
+    - "'docker' not in user_groups.stdout"
+  ignore_errors: true
+  failed_when: false
+  tags: docker
+
+- name: Check if Docker service exists
+  command: systemctl list-unit-files docker.service
+  register: docker_service_check
+  failed_when: false
+  changed_when: false
+  tags: docker
+
+- name: Start and enable Docker service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  when: 
+    - not docker_fully_installed
+    - docker_service_check.rc == 0
+  ignore_errors: true
+  failed_when: false
+  tags: docker
+
+- name: Verify Docker installation
+  command: docker --version
+  register: docker_version
+  changed_when: false
+  failed_when: false
+  tags: docker
+
+- name: Display Docker version
+  debug:
+    msg: "Docker installed: {{ docker_version.stdout if docker_version.rc == 0 else 'Docker not found' }}"
+  tags: docker
+
+- name: Verify Docker daemon is running
+  command: docker info
+  register: docker_info
+  failed_when: false
+  changed_when: false
+  tags: docker
+
+- name: Display Docker daemon status
+  debug:
+    msg: "Docker daemon is running"
+  when: docker_info.rc == 0
+  tags: docker

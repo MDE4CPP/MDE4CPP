@@ -4,6 +4,7 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+<<<<<<< HEAD
 description 'Build task for project: ocl'
 
 task runCommandCompileOcl(type:Exec) {
@@ -13,6 +14,51 @@ task runCommandCompileOcl(type:Exec) {
 	
 		, getRootProject().getTasksByName('compileEcore', true)
 	]
+=======
+import org.gradle.internal.os.OperatingSystem;
+
+description 'Build task for project: ocl'
+
+
+task runCommandCompileOcl(type:Exec) {
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileOclSrc'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileOclSrc'
+	}
+	dependsOn 'generateOcl'
+	dependsOn ':src:ecore:buildEcore'
+		def allDepOutputs = files()
+		getRootProject().getTasksByName('buildEcore', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		inputs.files(allDepOutputs)
+		mustRunAfter = [
+			'generateOcl'
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+		]
+	doFirst {
+		def mde4cppHome = System.getenv('MDE4CPP_HOME')
+		if (mde4cppHome && OperatingSystem.current().isLinux()) {
+			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
+			if (!ecoreLibFile.exists()) {
+				sleep(2000)
+				if (!ecoreLibFile.exists()) {
+					def taskPath = ':src:ecore:buildEcore'
+					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
+				}
+			}
+		}
+	}
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task runCommandGenerateOcl(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -40,6 +86,7 @@ task compileOcl() {
 	group 'ocl'
 	description 'compile ocl' 
 
+<<<<<<< HEAD
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
 
 	if(!buildFile.exists()){ 
@@ -57,6 +104,24 @@ task compileOcl() {
 	
 		, getRootProject().getTasksByName('compileEcore', true)
 	]
+=======
+	dependsOn 'generateOcl'
+	mustRunAfter = ["generateOcl"]
+	
+	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileOclSrc'
+	} else {
+		dependsOn 'runCommandCompileOcl'
+	}
+	
+		mustRunAfter = [
+			'generateOcl'
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+		]
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 

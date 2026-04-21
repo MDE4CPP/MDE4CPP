@@ -1,0 +1,63 @@
+---
+# Docker Compose Installation Role
+# Docker Compose is installed as a plugin with Docker (docker-compose-plugin)
+# This role verifies installation and provides fallback if needed
+
+- name: Check if Docker Compose plugin is available
+  command: docker compose version
+  register: docker_compose_check
+  failed_when: false
+  changed_when: false
+  tags: docker-compose
+
+- name: Verify Docker Compose plugin installation
+  command: docker compose version
+  register: docker_compose_version
+  changed_when: false
+  when: docker_compose_check.rc == 0
+  tags: docker-compose
+
+- name: Display Docker Compose version
+  debug:
+    msg: "Docker Compose installed: {{ docker_compose_version.stdout }}"
+  when: docker_compose_check.rc == 0
+  tags: docker-compose
+
+- name: Check if standalone docker-compose is installed
+  command: docker-compose --version
+  register: docker_compose_standalone
+  failed_when: false
+  changed_when: false
+  when: docker_compose_check.rc != 0
+  tags: docker-compose
+
+- name: Install standalone docker-compose (fallback)
+  block:
+    - name: Download Docker Compose binary
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_version_fallback }}/docker-compose-linux-x86_64"
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+      vars:
+        docker_compose_version_fallback: "2.23.0"
+      tags: docker-compose
+
+    - name: Verify standalone Docker Compose
+      command: docker-compose --version
+      register: docker_compose_standalone_version
+      changed_when: false
+      tags: docker-compose
+
+    - name: Display standalone Docker Compose version
+      debug:
+        msg: "Standalone Docker Compose installed: {{ docker_compose_standalone_version.stdout }}"
+      tags: docker-compose
+  when: docker_compose_check.rc != 0 and docker_compose_standalone.rc != 0
+  tags: docker-compose
+
+- name: Warn if Docker Compose not available
+  debug:
+    msg: "WARNING: Docker Compose plugin not found. Please ensure Docker is properly installed."
+  when: docker_compose_check.rc != 0 and docker_compose_standalone.rc != 0
+  tags: docker-compose
+

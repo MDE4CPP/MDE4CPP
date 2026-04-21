@@ -71,12 +71,23 @@ class CommandBuilder
 	 *            build mode, which should be used for compiling
 	 * @param projectFolder
 	 *            the project folder containing CMakeLists.txt
+	 * @param project
+	 *            current project instance contains existing properties
 	 * @return full specified cmake command
 	 */
-	static List<String> getCMakeCommand(BUILD_MODE buildMode, File projectFolder)
+	static List<String> getCMakeCommand(BUILD_MODE buildMode, File projectFolder, Project project)
 	{
 		List<String> commandList = CommandBuilder.initialCommandList();
-		commandList.add("cmake -G \"" + getCMakeGenerator() + "\" -D CMAKE_BUILD_TYPE=" + buildMode.getName() + " " + projectFolder.getAbsolutePath());
+		String cmakeCmd = "cmake -G \"" + getCMakeGenerator() + "\" -DCMAKE_BUILD_TYPE=" + buildMode.getName();
+		
+		// Add cross-compilation flag if cross-compiling to Windows on Linux
+		if (!isWindowsSystem() && GradlePropertyAnalyser.isCrossCompileWindowsRequested(project))
+		{
+			cmakeCmd += " -DCMAKE_SYSTEM_NAME=Windows";
+		}
+		
+		cmakeCmd += " " + projectFolder.getAbsolutePath();
+		commandList.add(cmakeCmd);
 		return commandList;
 	}
 

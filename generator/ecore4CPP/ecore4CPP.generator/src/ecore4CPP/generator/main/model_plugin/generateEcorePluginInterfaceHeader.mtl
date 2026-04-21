@@ -29,10 +29,11 @@
 #include "[aPackage.getRootPackage().name/]/[aPackage.getRootPackage().name/].hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
+// #include "pluginFramework/OperationInvokerPlugin.hpp" // WebAPI - raus ???
 
 namespace [aPackage.name/]
 {
-	class [aPackage.getRootPackage().name.toUpper()/]_API [packageName/] : virtual public EcoreModelPlugin
+	class [aPackage.getRootPackage().name.toUpper()/]_API [packageName/] : virtual public EcoreModelPlugin // nötig WebAPI ??? , virtual public OperationInvokerPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

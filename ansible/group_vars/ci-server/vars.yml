@@ -1,0 +1,25 @@
+---
+# Variables for CI Server group
+# These variables are automatically loaded for hosts in the ci-server group
+
+# Repository configuration
+github_repo_url: "https://github.com/KrishnamohanKapri/MDE4CPP_CICD.git"
+github_repo_branch: "main"
+
+# Project directory
+project_dir: "/home/{{ ansible_user }}/Projects/MDE4CPP_CICD"
+
+# GitHub Runner configuration
+install_github_runner: true  # Set to true to enable GitHub Runner installation
+github_runner_version: "2.329.0"  # Updated to match current runner version
+github_runner_name: "mde4cpp-ci-linux"
+github_runner_labels: "linux,self-hosted"
+# Runner installation path (outside project directory to avoid Gradle conflicts)
+github_runner_path: "/home/{{ ansible_user }}/Projects/actions-runner"
+
+# Docker configuration
+docker_compose_version: "latest"  # Use latest or specific version
+
+# System configuration
+system_packages_update: true  # Update package cache before installing
+

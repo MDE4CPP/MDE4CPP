@@ -4,6 +4,7 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+<<<<<<< HEAD
 description 'Build tasks for project: StandardProfile'
 
 task runCommandCompileStandardProfile(type:Exec) {
@@ -16,6 +17,72 @@ task runCommandCompileStandardProfile(type:Exec) {
 		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 		, getRootProject().getTasksByName('compileUmlReflection', true)
 	]
+=======
+import org.gradle.internal.os.OperatingSystem;
+
+description 'Build tasks for project: StandardProfile'
+
+task runCommandCompileStandardProfile(type:Exec) {
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileStandardProfileSrc'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileStandardProfileSrc'
+	}
+	dependsOn 'generateStandardProfile'
+		getRootProject().getTasksByName('buildEcore', true).each { task ->
+			dependsOn task
+		}
+		getRootProject().getTasksByName('buildUml', true).each { task ->
+			dependsOn task
+		}
+		getRootProject().getTasksByName('buildEcoreReflection', true).each { task ->
+			dependsOn task
+		}
+		getRootProject().getTasksByName('buildPrimitivetypesReflection', true).each { task ->
+			dependsOn task
+		}
+		getRootProject().getTasksByName('buildUmlReflection', true).each { task ->
+			dependsOn task
+		}
+	
+		def allDepOutputs = files()
+		getRootProject().getTasksByName('buildEcore', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		getRootProject().getTasksByName('buildUml', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		getRootProject().getTasksByName('buildEcoreReflection', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		getRootProject().getTasksByName('buildPrimitivetypesReflection', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		getRootProject().getTasksByName('buildUmlReflection', true).each { task ->
+			allDepOutputs.from(task.outputs.files)
+		}
+		inputs.files(allDepOutputs)
+		mustRunAfter = [
+			"generateStandardProfile"
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task runCommandGenerateStandardProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -43,6 +110,7 @@ task compileStandardProfile() {
 	group 'StandardProfile'
 	description 'compile StandardProfile'
 
+<<<<<<< HEAD
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ 
 		dependsOn 'generateStandardProfile'
@@ -62,6 +130,26 @@ task compileStandardProfile() {
 		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 		, getRootProject().getTasksByName('compileUmlReflection', true)
 	]
+=======
+	dependsOn 'generateStandardProfile'
+	mustRunAfter = ["generateStandardProfile"]
+	
+	def buildFile = file('src_gen/build.gradle')
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileStandardProfileSrc'
+	} else {
+		dependsOn 'runCommandCompileStandardProfile'
+	}
+	
+		mustRunAfter = [
+			"generateStandardProfile"
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+		]
 }
 
 

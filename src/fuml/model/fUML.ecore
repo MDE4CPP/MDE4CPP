@@ -1242,7 +1242,11 @@
         </eOperations>
         <eOperations name="terminate" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+<<<<<<< HEAD
             <details key="body" value="#ifndef NDEBUG&#xA;&#x9;if (this->isRunning())&#xA;&#x9;{&#xA;     &#x9;&#x9;DEBUG_INFO(&quot;Terminating &quot; &lt;&lt; ((this->getNode() == nullptr) ? &quot;anonymous node.&quot; : (this->getNode()->eClass()->getName() + &quot; '&quot; + this->getNode()->getName() + &quot;'.&quot;)))  &#xA;&#x9;}&#xA;#endif&#xA;&#xA;this->setRunning(false);&#xA;&#xA;// This will lead to problems when tokens should be passed out of an activity via an output ActivityParameterNode&#xA;// AND the activity is terminated by an ActivityFinalNode&#xA;// --> because then the tokens of that output ActivityParameterNodeActivation will be cleared&#xA;// when the ActivityFinalNodeActivation fires and thus BEFORE they can be accessed to be passed back to the caller of the current Activity.&#xA;// Workaround is either to use a FlowFinalNode instead of an ActivityFinalNode or to comment out this line.&#xA;this->getHeldTokens()->clear();"/>
+=======
+            <details key="body" value="#ifndef NDEBUG&#xA;&#x9;if (this->isRunning())&#xA;&#x9;{&#xA;     &#x9;&#x9;DEBUG_INFO(&quot;Terminating &quot; &lt;&lt; ((this->getNode() == nullptr) ? &quot;anonymous node.&quot; : (this->getNode()->eClass()->getName() + &quot; '&quot; + this->getNode()->getName() + &quot;'.&quot;)))  &#xA;&#x9;}&#xA;#endif&#xA;&#xA;this->setRunning(false);&#xA;this->getHeldTokens()->clear();&#xA;&#xA;&#xA;"/>
+>>>>>>> remotes/origin/ContinuousIntegration
           </eAnnotations>
         </eOperations>
         <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -3634,7 +3638,11 @@
       </eOperations>
       <eOperations name="destroy" lowerBound="1">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+<<<<<<< HEAD
           <details key="body" value="const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = this->getLinkEnds();&#x9;&#xA;&#xA;&#x9;// This has to be done because for some reasons if you don't do that&#xA;&#x9;// in some cases 'linkEnds' will be NULL at line &quot;linkEnds->clear()&quot;&#xA;&#x9;std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Link> thisTemp = this->getThisFUML_LinkPtr(); &#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;&#x9;{&#xA;&#x9;&#x9;const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; endValue = linkEnd->getEndValue();&#xA;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; endValueLinks = endValue->getLinks();&#xA;&#x9;&#x9;endValueLinks->erase(this->getThisFUML_LinkPtr());&#xA;&#x9;}&#xA;&#x9;linkEnds->clear();&#xA;&#xA;&#x9;fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();"/>
+=======
+          <details key="body" value="&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>>&amp; linkEnds = this->getLinkEnds();&#x9;&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_LinkEnd>&amp; linkEnd : *linkEnds)&#xA;&#x9;{&#xA;&#x9;&#x9;const std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object>&amp; endValue = linkEnd->getEndValue();&#xA;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::MDE4CPP_Extensions::FUML_Link>>&amp; endValueLinks = endValue->getLinks();&#xA;&#x9;&#x9;endValueLinks->erase(this->getThisFUML_LinkPtr());&#xA;&#x9;}&#xA;&#x9;linkEnds->clear();&#xA;&#xA;&#x9;fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();"/>
+>>>>>>> remotes/origin/ContinuousIntegration
         </eAnnotations>
       </eOperations>
       <eOperations name="retrieveLinkEnd" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_LinkEnd">

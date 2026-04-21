@@ -32,6 +32,25 @@ export ORG_GRADLE_PROJECT_DEBUG=1
 # debug messages of fUML library will be enabled with value '1', this property has no effect on release compiling
 export ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML=0
 
+# Cross-compilation to Windows configuration
+# Read CROSS_COMPILE_WINDOWS from MDE4CPP_Generator.properties
+# Always read from file to ensure it matches the current configuration
+if [ -f "$MDE4CPP_HOME/MDE4CPP_Generator.properties" ]; then
+    CROSS_COMPILE_WINDOWS=$(grep -i "^CROSS_COMPILE_WINDOWS" "$MDE4CPP_HOME/MDE4CPP_Generator.properties" | cut -d'=' -f2 | tr -d ' ' | tr -d '\r')
+fi
+# Default to false if not found in file
+if [ -z "$CROSS_COMPILE_WINDOWS" ]; then
+    CROSS_COMPILE_WINDOWS=false
+fi
+# Set cross-compiler when cross-compilation is enabled
+if [ "$CROSS_COMPILE_WINDOWS" = "true" ]; then
+    export CC=x86_64-w64-mingw32-gcc
+    export CXX=x86_64-w64-mingw32-g++
+    # Note: We use regular 'make' even for cross-compilation (x86_64-w64-mingw32-make may not be installed)
+    # The important part is that CC and CXX point to the cross-compilers
+    export MAKE=make
+fi
+
 # update the PATH variable locally to be able to call the executable and scripts from all subfolders
 export PATH="$MDE4CPP_HOME/application/bin:$MDE4CPP_HOME/application/tools:$PATH"
 
@@ -70,4 +89,4 @@ cd ./gradlePlugins
 gradlew publishMDE4CPPPluginsToMavenLocal
 
 cd $MDE4CPP_HOME
-bash
+# bash

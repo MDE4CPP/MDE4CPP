@@ -1,0 +1,6 @@
+---
+# Repository role variables
+repo_url: "git@github.com:KrishnamohanKapri/MDE4CPP_CICD.git"
+repo_branch: "main"
+project_path: "/home/ubuntu/Projects/MDE4CPP_CICD"
+

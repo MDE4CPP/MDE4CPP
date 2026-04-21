@@ -1,0 +1,102 @@
+---
+# Repository Clone Role
+# Clones the MDE4CPP_CICD repository from GitHub
+
+- name: Create projects directory
+  file:
+    path: "{{ project_path | dirname }}"
+    state: directory
+    mode: '0755'
+  tags: repository
+
+- name: Check if repository already exists
+  stat:
+    path: "{{ project_path }}"
+  register: repo_exists
+  tags: repository
+
+- name: Check if repository is a git repository
+  stat:
+    path: "{{ project_path }}/.git"
+  register: git_repo_check
+  when: repo_exists.stat.exists
+  tags: repository
+
+- name: Check if Git is available
+  command: which git
+  register: git_available
+  failed_when: false
+  changed_when: false
+  check_mode: false  # Always check
+  tags: repository
+
+- name: Clone repository
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ project_path }}"
+    version: "{{ repo_branch }}"
+    update: yes
+    force: yes
+    accept_hostkey: yes
+  when: (not repo_exists.stat.exists or not git_repo_check.stat.exists) and (git_available.rc == 0 or not ansible_check_mode)
+  tags: repository
+
+- name: Update existing repository
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ project_path }}"
+    version: "{{ repo_branch }}"
+    update: yes
+    force: yes
+  when: repo_exists.stat.exists and git_repo_check.stat.exists and (git_available.rc == 0 or not ansible_check_mode)
+  tags: repository
+
+- name: Warn if Git not available in check mode
+  debug:
+    msg: "WARNING: Git not available in check mode. Repository clone will be skipped. Git will be installed when playbook runs without --check."
+  when: ansible_check_mode and git_available.rc != 0
+  tags: repository
+
+- name: Verify repository structure
+  stat:
+    path: "{{ project_path }}/docker/docker-compose.yml"
+  register: compose_file
+  tags: repository
+
+- name: Verify ansible folder exists
+  stat:
+    path: "{{ project_path }}/ansible/playbook.yml"
+  register: ansible_playbook
+  tags: repository
+
+- name: Display repository status
+  debug:
+    msg:
+      - "Repository cloned/updated at {{ project_path }}"
+      - "✓ Docker Compose file found: {{ compose_file.stat.exists }}"
+      - "✓ Ansible playbook found: {{ ansible_playbook.stat.exists }}"
+  tags: repository
+
+- name: Get current repository commit
+  command: git rev-parse HEAD
+  register: repo_commit
+  changed_when: false
+  failed_when: false
+  when: repo_exists.stat.exists and git_repo_check.stat.exists
+  tags: repository
+
+- name: Get current repository branch
+  command: git rev-parse --abbrev-ref HEAD
+  register: repo_branch_current
+  changed_when: false
+  failed_when: false
+  when: repo_exists.stat.exists and git_repo_check.stat.exists
+  tags: repository
+
+- name: Display repository information
+  debug:
+    msg:
+      - "Repository branch: {{ repo_branch_current.stdout if (repo_branch_current is defined and repo_branch_current.stdout is defined) else 'N/A' }}"
+      - "Repository commit: {{ repo_commit.stdout[:7] if (repo_commit is defined and repo_commit.stdout is defined and repo_commit.rc == 0) else 'N/A' }}"
+  tags: repository
+

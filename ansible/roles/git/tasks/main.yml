@@ -1,0 +1,37 @@
+---
+# Git Installation Role
+# Installs Git on Ubuntu/Debian Linux systems
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags: git
+
+- name: Check if Git binary exists
+  stat:
+    path: /usr/bin/git
+  register: git_binary
+  tags: git
+
+- name: Install Git
+  apt:
+    name: git
+    state: present
+    update_cache: yes
+  when: not git_binary.stat.exists
+  tags: git
+
+- name: Verify Git installation (always run)
+  command: git --version
+  register: git_version
+  changed_when: false
+  failed_when: false
+  check_mode: false  # Always run, even in check mode
+  tags: git
+
+- name: Display Git version
+  debug:
+    msg: "Git installed: {{ git_version.stdout if (git_version.rc == 0) else ('Git will be installed (check mode)' if ansible_check_mode else 'Git installation failed or not found') }}"
+  tags: git
+

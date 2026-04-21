@@ -93,11 +93,14 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	[generateCMakeFindLibraryCommands('.so', 'bin')/]
+IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
+    # Windows (native or cross-compiled)
+	[generateCMakeFindLibraryCommands('', 'lib')/]
 ELSEIF(APPLE)
 	[generateCMakeFindLibraryCommands('.dylib', 'bin')/]
+ELSEIF(UNIX)
+    # Linux, BSD, Solaris, Minix
+	[generateCMakeFindLibraryCommands('.so', 'bin')/]
 ELSE()
 	[generateCMakeFindLibraryCommands('', 'lib')/]
 ENDIF()
@@ -107,6 +110,12 @@ ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 ADD_DEFINITIONS(-DBUILD_[aPackage.getRootPackage().name.toUpper()/]=1)
 
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
+
+# Export all symbols for Windows DLLs (needed for cross-compilation)
+# This ensures virtual functions from base classes are visible when linking
+IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
+    SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+ENDIF()
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	[generateLibraryLinking(true)/]
@@ -140,11 +149,25 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build task for project: [packageName/]'
 
+[comment Ensure OperatingSystem is available in doFirst /]
+
 task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment internal task --> no group --> no visualisation in gradle tasks/]
-	commandLine 'cmd', '/c', 'gradlew src_gen:compile[packageName.toUpperFirst()/]Src'
-	[aPackage.generateMustRunAfter()/]
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compile[packageName.toUpperFirst()/]Src'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compile[packageName.toUpperFirst()/]Src'
+	}
 }
 
 task runCommandGenerate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -178,19 +201,25 @@ task compile[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'compile [packageName/]' 
 
+	[comment Always ensure generation runs first /]
+	dependsOn 'generate[packageName.toUpperFirst()/]'
+	mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
+[if (aPackage.name = 'ecore')]
+	[comment Ensure abstractDataTypes headers are available before compiling ecore /]
+	dependsOn ':src:deliverBasicInterfaces'
+[/if]
+	
+	[comment Check if src_gen/build.gradle exists - if not, use runCommandCompile which will work after generation /]
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
-		dependsOn 'generate[packageName.toUpperFirst()/]' [comment without an build file you have to generate first./]
-		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
+	
+	if(buildFile.exists()) {
+		[comment Use direct dependency if src_gen/build.gradle exists /]
+		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
+	} else {
+		[comment Use runCommandCompile if src_gen doesn't exist yet - generation will create it first /]
 		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
 	}
-	else
-	{
-		[comment dependsOn 'generate[packageName.toUpperFirst()/?' /]
-		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
-		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
-	} 
+	
 	[aPackage.generateMustRunAfter()/]
 }
 
@@ -441,23 +470,52 @@ and handle dependencies to other models
 [/file]
 [/template]
 
+[template private generateDependsOnForRunCommand(aPackage : EPackage) {packageName : String = aPackage.generatePackageName();}]
+[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) ? (not(pack.name = aPackage.name))]
+	getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true).each { task ->
+		dependsOn task
+	}
+[/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true).each { task ->
+		dependsOn task
+	}
+[/if]
+[/for]
+[/template]
+
+[template private generateInputsFilesForRunCommand(aPackage : EPackage) {packageName : String = aPackage.generatePackageName();}]
+	def allDepOutputs = files()
+[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) ? (not(pack.name = aPackage.name))]
+	getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true).each { task ->
+		allDepOutputs.from(task.outputs.files)
+	}
+[/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true).each { task ->
+		allDepOutputs.from(task.outputs.files)
+	}
+[/if]
+[/for]
+	inputs.files(allDepOutputs)
+[/template]
 
 [template private generateMustRunAfter(aPackage : EPackage) {packageName : String = aPackage.generatePackageName();}]
-mustRunAfter =  ['['/]
-	'generate[packageName.toUpperFirst()/]'
-[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) before ('\n') ? (not(pack.name = aPackage.name))]
-	, getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
+	mustRunAfter = ['['/]
+		'generate[packageName.toUpperFirst()/]'
+[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) ? (not(pack.name = aPackage.name))]
+		, getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
+		, getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true)
 [/for]
 [for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
-	, getRootProject().getTasksByName('compile[libName.toUpperFirst()/]', true)
+		, getRootProject().getTasksByName('compile[libName.toUpperFirst()/]', true)
+		, getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true)
 [/if]
 [/for]
-[for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
-[if (not (libName.oclIsUndefined() or libName = ''))]
-	, getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true)
-[/if]
-[/for] [']'/]
+	[']'/]
 [/template]
 
 [template private generatePackageAndFactory(aPackage : EPackage) { packageName : String = aPackage.name; }]	

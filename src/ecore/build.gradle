@@ -4,14 +4,36 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build task for project: ecore'
 
+
 task runCommandCompileEcore(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileEcoreSrc'
-	mustRunAfter =  [
-		'generateEcore'
-	
-	]
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileEcoreSrc'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileEcoreSrc'
+	}
+	dependsOn 'generateEcore'
+	dependsOn ':src:deliverBasicInterfaces'
+		def allDepOutputs = files()
+		inputs.files(allDepOutputs)
+		mustRunAfter = [
+			'generateEcore'
+		]
+	doFirst {
+		def mde4cppHome = System.getenv('MDE4CPP_HOME')
+		if (mde4cppHome && OperatingSystem.current().isLinux()) {
+		}
+	}
 }
 
 task runCommandGenerateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -39,22 +61,21 @@ task compileEcore() {
 	group 'ecore'
 	description 'compile ecore' 
 
+	dependsOn 'generateEcore'
+	mustRunAfter = ["generateEcore"]
+	dependsOn ':src:deliverBasicInterfaces'
+	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ 
-		dependsOn 'generateEcore' 
-		mustRunAfter = ["generateEcore"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileEcoreSrc'
+	} else {
 		dependsOn 'runCommandCompileEcore'
 	}
-	else
-	{
-		mustRunAfter = ["generateEcore"]
-		dependsOn 'src_gen:compileEcoreSrc'
-	} 
-	mustRunAfter =  [
-		'generateEcore'
 	
-	]
+		mustRunAfter = [
+			'generateEcore'
+		]
 }
 
 
@@ -64,5 +85,5 @@ task buildEcore() {
 
 	dependsOn 'generateEcore'
 	dependsOn 'compileEcore'
-
+	dependsOn ':src:deliverBasicInterfaces'
 }

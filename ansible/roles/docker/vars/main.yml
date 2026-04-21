@@ -1,0 +1,5 @@
+---
+# Docker role variables
+docker_version: "latest"  # Use latest stable version
+docker_compose_version: "latest"
+

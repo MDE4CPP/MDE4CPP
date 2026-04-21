@@ -11,8 +11,13 @@ task runCommandCompileLibraryModel_ecore(type:Exec) {
 	mustRunAfter =  [
 		'generateLibraryModel_ecore'
 	
+<<<<<<< HEAD
 		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileEcore', true)
+=======
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+>>>>>>> remotes/origin/ContinuousIntegration
 	]
 }
 
@@ -60,8 +65,13 @@ task compileLibraryModel_ecore() {
 	mustRunAfter =  [
 		'generateLibraryModel_ecore'
 	
+<<<<<<< HEAD
 		, getRootProject().getTasksByName('compileTypes', true)
 		, getRootProject().getTasksByName('compileEcore', true)
+=======
+		, getRootProject().getTasksByName('compileEcore', true)
+		, getRootProject().getTasksByName('compileTypes', true)
+>>>>>>> remotes/origin/ContinuousIntegration
 	]
 }
 
@@ -82,6 +92,11 @@ task buildLibraryModel_ecore() {
 	dependsOn 'compileLibraryModel_ecore'
 	dependsOn 'compileApplicationForLibraryModel_ecore'
 
+<<<<<<< HEAD
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
+=======
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+>>>>>>> remotes/origin/ContinuousIntegration
 }

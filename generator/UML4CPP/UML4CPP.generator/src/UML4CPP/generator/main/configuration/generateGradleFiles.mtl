@@ -42,10 +42,33 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+<<<<<<< HEAD
 description 'Build tasks for project: [packageName/]'
 
 task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment internal task --> no group --> no visualisation in gradle tasks/]
 	commandLine 'cmd', '/c', 'gradlew src_gen:compile[packageName.toUpperFirst()/]Src'
+=======
+import org.gradle.internal.os.OperatingSystem;
+
+description 'Build tasks for project: [packageName/]'
+
+task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment internal task --> no group --> no visualisation in gradle tasks/]
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compile[packageName.toUpperFirst()/]Src'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compile[packageName.toUpperFirst()/]Src'
+	}
+	dependsOn 'generate[packageName.toUpperFirst()/]'
+	[aPackage.generateDependsOnForRunCommand()/]
+	[aPackage.generateInputsFilesForRunCommand()/]
+>>>>>>> remotes/origin/ContinuousIntegration
 	[aPackage.generateMustRunAfter()/]
 }
 
@@ -56,7 +79,22 @@ task runCommandGenerate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4C
 
 [if(aPackage.hasMainBehavior())]
 task runCommandCompileApplicationFor[packageName.toUpperFirst()/](type:Exec) {
+<<<<<<< HEAD
 	commandLine 'cmd', '/c', 'gradlew application:compileApplicationFor[packageName.toUpperFirst()/]Src'
+=======
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationFor[packageName.toUpperFirst()/]Src'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationFor[packageName.toUpperFirst()/]Src'
+	}
+>>>>>>> remotes/origin/ContinuousIntegration
 	dependsOn 'compile[packageName.toUpperFirst()/]'
 }
 [/if]
@@ -80,6 +118,7 @@ task compile[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
+<<<<<<< HEAD
 	def buildFile = file('src_gen/build.gradle')
 	if(!buildFile.exists()){ [comment only if src_gen folder is removed, regenerate src_gen folder and compile external/]
 		dependsOn 'generate[packageName.toUpperFirst()/]'
@@ -92,6 +131,23 @@ task compile[packageName.toUpperFirst()/]() {
 		mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
 	}
+=======
+	[comment Always ensure generation runs first /]
+	dependsOn 'generate[packageName.toUpperFirst()/]'
+	mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
+	
+	[comment Check if src_gen/build.gradle exists - if not, use runCommandCompile which will work after generation /]
+	def buildFile = file('src_gen/build.gradle')
+	
+	if(buildFile.exists()) {
+		[comment Use direct dependency if src_gen/build.gradle exists /]
+		dependsOn 'src_gen:compile[packageName.toUpperFirst()/]Src'
+	} else {
+		[comment Use runCommandCompile if src_gen doesn't exist yet - generation will create it first /]
+		dependsOn 'runCommandCompile[packageName.toUpperFirst()/]'
+	}
+	
+>>>>>>> remotes/origin/ContinuousIntegration
 	[aPackage.generateMustRunAfter()/]
 }
 
@@ -122,12 +178,41 @@ task build[packageName.toUpperFirst()/]() {
 [/file]
 [/template]
 
+<<<<<<< HEAD
 [template private generateMustRunAfter(aPackage : Package) {packageName : String = getPackageName();}]
 mustRunAfter =  ['['/]
 	"generate[packageName.toUpperFirst()/]" 
 [for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
 	, getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
 [/for][']'/]
+=======
+[template private generateDependsOnForRunCommand(aPackage : Package) {packageName : String = getPackageName();}]
+[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
+	getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true).each { task ->
+		dependsOn task
+	}
+[/for]
+[/template]
+
+[template private generateInputsFilesForRunCommand(aPackage : Package) {packageName : String = getPackageName();}]
+	def allDepOutputs = files()
+[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
+	getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true).each { task ->
+		allDepOutputs.from(task.outputs.files)
+	}
+[/for]
+	inputs.files(allDepOutputs)
+[/template]
+
+[template private generateMustRunAfter(aPackage : Package) {packageName : String = getPackageName();}]
+	mustRunAfter = ['['/]
+		"generate[packageName.toUpperFirst()/]"
+[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
+		, getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
+		, getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
+[/for]
+	[']'/]
+>>>>>>> remotes/origin/ContinuousIntegration
 [/template]
 
 

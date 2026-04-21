@@ -1,0 +1,184 @@
+---
+# GitHub Actions Runner Installation Role
+# Installs and configures GitHub Actions self-hosted runner on Linux
+# Follows GitHub's official installation instructions:
+# https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners
+
+- name: Validate runner token is provided
+  fail:
+    msg: "GitHub Runner token is required. Set github_runner_token variable or use vault."
+  when: 
+    - not ansible_check_mode
+    - (runner_token | default('')) == ""
+  tags: github-runner
+
+- name: Warn if runner token is missing in check mode
+  debug:
+    msg: "WARNING: GitHub Runner token not provided. Token is required when running without --check."
+  when:
+    - ansible_check_mode
+    - (runner_token | default('')) == ""
+  tags: github-runner
+
+- name: Set runner path variable
+  set_fact:
+    runner_path: "{{ runner_path | default(project_path + '/actions-runner') }}"
+  tags: github-runner
+
+- name: Ensure runner parent directory exists
+  file:
+    path: "{{ runner_path | dirname }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  tags: github-runner
+
+- name: Create GitHub Runner directory
+  file:
+    path: "{{ runner_path }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  tags: github-runner
+
+- name: Check if GitHub Runner directory exists
+  stat:
+    path: "{{ runner_path }}"
+  register: runner_dir_exists
+  tags: github-runner
+
+- name: Check if GitHub Runner is already installed
+  stat:
+    path: "{{ runner_path }}/run.sh"
+  register: runner_installed
+  tags: github-runner
+
+- name: Set default runner version if not provided
+  set_fact:
+    runner_version: "{{ runner_version | default('2.311.0') }}"
+  tags: github-runner
+
+- name: Determine GitHub Runner download URL
+  set_fact:
+    runner_download_url: "https://github.com/actions/runner/releases/download/v{{ runner_version }}/actions-runner-linux-x64-{{ runner_version }}.tar.gz"
+  tags: github-runner
+
+- name: Download GitHub Runner
+  get_url:
+    url: "{{ runner_download_url }}"
+    dest: /tmp/actions-runner.tar.gz
+    mode: '0644'
+    timeout: 60
+  when: not runner_installed.stat.exists
+  tags: github-runner
+
+- name: Extract GitHub Runner
+  unarchive:
+    src: /tmp/actions-runner.tar.gz
+    dest: "{{ runner_path }}"
+    remote_src: yes
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    creates: "{{ runner_path }}/run.sh"
+    list_files: no
+  when: 
+    - not runner_installed.stat.exists
+    - runner_dir_exists.stat.exists or not ansible_check_mode
+  tags: github-runner
+
+- name: Warn about extraction in check mode
+  debug:
+    msg: "NOTE: In check mode, extraction will be skipped if directory doesn't exist. Directory will be created when running without --check."
+  when:
+    - ansible_check_mode
+    - not runner_dir_exists.stat.exists
+    - not runner_installed.stat.exists
+  tags: github-runner
+
+- name: Remove downloaded archive
+  file:
+    path: /tmp/actions-runner.tar.gz
+    state: absent
+  when: not runner_installed.stat.exists
+  tags: github-runner
+
+- name: Check if runner is already configured
+  stat:
+    path: "{{ runner_path }}/.runner"
+  register: runner_configured
+  tags: github-runner
+
+- name: Configure GitHub Runner
+  shell: |
+    cd {{ runner_path }}
+    ./config.sh \
+      --url https://github.com/KrishnamohanKapri/MDE4CPP_CICD \
+      --token {{ runner_token }} \
+      --name {{ runner_name }} \
+      --labels {{ runner_labels }} \
+      --work {{ runner_path }}/_work \
+      --unattended \
+      --replace
+  args:
+    creates: "{{ runner_path }}/.runner"
+  when: not runner_configured.stat.exists
+  become_user: "{{ ansible_user }}"
+  tags: github-runner
+
+- name: Check if runner service is installed
+  stat:
+    path: "/etc/systemd/system/actions.runner.{{ runner_name | replace(' ', '-') }}.{{ runner_name | replace(' ', '-') }}.service"
+  register: runner_service_installed
+  tags: github-runner
+
+- name: Install GitHub Runner service
+  shell: |
+    cd {{ runner_path }}
+    sudo ./svc.sh install
+  args:
+    creates: "/etc/systemd/system/actions.runner.{{ runner_name | replace(' ', '-') }}.{{ runner_name | replace(' ', '-') }}.service"
+  when: not runner_service_installed.stat.exists
+  become: yes
+  tags: github-runner
+
+- name: Check if runner service exists before starting
+  command: systemctl list-unit-files "actions.runner.{{ runner_name | replace(' ', '-') }}.{{ runner_name | replace(' ', '-') }}.service"
+  register: runner_service_exists
+  failed_when: false
+  changed_when: false
+  tags: github-runner
+
+- name: Start GitHub Runner service
+  systemd:
+    name: "actions.runner.{{ runner_name | replace(' ', '-') }}.{{ runner_name | replace(' ', '-') }}.service"
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  when: runner_service_exists.rc == 0
+  ignore_errors: true
+  failed_when: false
+  tags: github-runner
+
+- name: Verify GitHub Runner service status
+  systemd:
+    name: "actions.runner.{{ runner_name | replace(' ', '-') }}.{{ runner_name | replace(' ', '-') }}.service"
+  register: runner_service_status
+  failed_when: false
+  when: runner_service_exists.rc == 0
+  tags: github-runner
+
+- name: Display GitHub Runner status
+  debug:
+    msg:
+      - "GitHub Runner installed at {{ runner_path }}"
+      - "Runner name: {{ runner_name }}"
+      - "Runner labels: {{ runner_labels }}"
+      - "Service status: {{ runner_service_status.status.ActiveState if (runner_service_status is defined and runner_service_status.status is defined) else 'N/A (service not installed yet)' }}"
+      - ""
+      - "To check runner status:"
+      - "  systemctl status actions.runner.{{ runner_name | replace(' ', '-') }}.{{ runner_name | replace(' ', '-') }}.service"
+      - "  journalctl -u actions.runner.{{ runner_name | replace(' ', '-') }}.{{ runner_name | replace(' ', '-') }}.service -f"
+  tags: github-runner
+

@@ -142,7 +142,7 @@ public class MDE4CPPCompile extends DefaultTask
 			folder.mkdirs();
 		}
 
-		List<String> command = CommandBuilder.getCMakeCommand(buildMode, projectFolderFile);
+		List<String> command = CommandBuilder.getCMakeCommand(buildMode, projectFolderFile, getProject());
 		String startingMessage = "Compiling " + projectFolderFile.getName() + " with " + buildMode.getName() + " options";
 		if (!executeCompileProcess(command, folder, startingMessage))
 		{

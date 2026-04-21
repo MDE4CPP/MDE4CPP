@@ -134,6 +134,7 @@ def allEcoreTestSuiteModels =
 
 task compileEcoreExamples() {
 	group 'Examples'
+<<<<<<< HEAD
 	description 'compile ecore examples.'
 
 	doLast {
@@ -141,12 +142,26 @@ task compileEcoreExamples() {
 		def command = '-c'
 		def prefix = './'
 
+=======
+	description 'compile ecore examples.'	
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+>>>>>>> remotes/origin/ContinuousIntegration
 		if (System.properties['os.name'].toLowerCase().contains('windows')) {
 			tool = 'cmd'
 			command = '/C'
 			prefix = ''
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> remotes/origin/ContinuousIntegration
 		allEcoreExamples.each { taskVar ->
 		// taskVar[0] = task project root directoy, taskVar[1] = task name
 			exec
@@ -161,6 +176,10 @@ task compileEcoreExamples() {
 task generateEcoreModelExamples() {
 	group 'Examples'
 	description 'generate ecore Model Examples'	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> remotes/origin/ContinuousIntegration
 	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
 		
 	doLast {				
@@ -179,6 +198,7 @@ task generateEcoreModelExamples() {
 			def buildModelFile = file("${model[0]}/model/build.gradle")
 			def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
 			
+<<<<<<< HEAD
 			if(!(buildModelFile.exists() && buildSrcFile.exists())) {
 				exec {
 					workingDir = file("${model[0]}/model")
@@ -186,12 +206,31 @@ task generateEcoreModelExamples() {
 				}
 			} else {
 				exec {
+=======
+			if(!(buildModelFile.exists() && buildSrcFile.exists()))
+			{
+				exec
+				{
+					workingDir = file("${model[0]}/model")
+					commandLine = [tool, command, prefix + 'generate']
+				}
+			}
+			else
+			{
+				exec
+				{
+>>>>>>> remotes/origin/ContinuousIntegration
 					workingDir = file("${model[0]}")
 					commandLine = [tool, command, prefix + 'gradlew generate' + model[1]]
 				}
 			}
+<<<<<<< HEAD
 		}
 	}
+=======
+		} 		
+    }
+>>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task compileEcoreModelExamples() {

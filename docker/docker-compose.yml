@@ -1,0 +1,1308 @@
+
+# ## Usage Guide:
+#
+# ### 1. **Full Build** (only when `CROSS_COMPILE_WINDOWS` changes):
+#
+# docker compose up build-full
+# 
+# ### 2. **Install Eclipse** (if not already installed):
+#
+# docker compose up install-eclipse
+#
+# ### 3. **Clean Build Artifacts** (CMake cache, generated files):
+#
+# docker compose up clean
+#
+# ### 4. **Component-specific services**:
+#
+# # Generate a component (only the component itself)
+# docker compose up generate-ecore
+#
+# # Compile a component (only the component itself, assumes generation done)
+# docker compose up compile-ecore
+#
+# # Build a component (generate + compile for the component itself)
+# docker compose up build-ecore
+#
+# ### 5. **Interactive Shell** (detached mode):
+#
+# # Start container in background
+# docker compose up -d shell
+#
+# # Enter the container
+# docker compose exec shell bash
+#
+# ## Notes:
+#
+# 1. **Component services**: Each service builds only its own component (no downstream dependencies)
+# 2. **Generate services**: Generate source code for the component only
+# 3. **Compile services**: Compile generated code for the component only (assumes generation already done)
+# 4. **Build services**: Generate + compile for the component only
+# 5. **Dependency management**: GitHub Actions runner executes services in dependency order using bind mounts
+# 6. **All services share the same image**: They all use `mde4cpp:latest` to avoid rebuilding.
+# 7. **System packages** (cmake, gcc, etc.) are installed in the Docker image at build time.
+
+services:
+  # ============================================================================
+  # Infrastructure Services
+  # ============================================================================
+
+  # Full build service - Run this only when CROSS_COMPILE_WINDOWS changes in MDE4CPP_Generator.properties
+  # Usage: docker compose up build-full
+  build-full:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-full
+    working_dir: /home/mde4cpp
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/install-eclipse.sh &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./docker/scripts/build-full.sh &&
+      echo '✓ Build complete!'
+      "
+
+  # Install Eclipse and plugins (if not already installed)
+  # Usage: docker compose up install-eclipse
+  install-eclipse:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-install-eclipse
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/install-eclipse.sh &&
+      echo '✓ Eclipse installation complete!'
+      "
+
+  # Clean CMake cache files and build artifacts
+  # Preserves application/lib and application/bin directories
+  # Usage: docker compose up clean
+  clean:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-clean
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/clean-cmake.sh &&
+      echo '✓ Cleanup complete!'
+      "
+
+  # Publish Gradle plugins to Maven local
+  # Usage: docker compose up publish-plugins
+  publish-plugins:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-publish-plugins
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew gradlePlugins:publishMDE4CPPPluginsToMavenLocal --no-daemon
+      "
+
+  # Generate all models
+  # Usage: docker compose up generate
+  generate:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew generateAll --no-daemon
+      "
+
+  # Compile all generated code
+  # Usage: docker compose up compile
+  compile:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew compileAll --no-daemon
+      "
+
+  # Build OCL components
+  # Usage: docker compose up build-ocl
+  build-ocl:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-ocl
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:buildOCLAll --no-daemon
+      "
+
+  # Interactive shell service - runs in detached mode
+  # Usage: 
+  #   1. docker compose up -d shell
+  #   2. docker compose exec shell bash
+  shell:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-shell
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: /bin/bash -c "tail -f /dev/null"
+    # Keep container running indefinitely for exec access
+
+  # ============================================================================
+  # Infrastructure: Deliver Interfaces
+  # ============================================================================
+
+  # Build all infrastructure components (deliver all interfaces + compile plugin framework and persistence)
+  # Usage: docker compose up build-infrastructure
+  build-infrastructure:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-infrastructure
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:abstractDataTypes:deliverAbstractDataTypes --no-daemon &&
+      ./application/tools/gradlew src:util:deliverUtil --no-daemon &&
+      ./application/tools/gradlew src:common:pluginFramework:deliverPluginFrameworkInterface --no-daemon &&
+      ./application/tools/gradlew src:common:persistence:deliverPersistenceInterface --no-daemon &&
+      ./application/tools/gradlew src:deliverBasicInterfaces --no-daemon &&
+      ./application/tools/gradlew src:common:pluginFramework:compilePluginFramework --no-daemon &&
+      ./application/tools/gradlew src:common:persistence:compilePersistence --no-daemon
+      "
+
+  # Deliver abstract data types interface
+  # Usage: docker compose up deliver-abstract-data-types
+  deliver-abstract-data-types:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-deliver-abstract-data-types
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:abstractDataTypes:deliverAbstractDataTypes --no-daemon
+      "
+
+  # Deliver util interface
+  # Usage: docker compose up deliver-util
+  deliver-util:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-deliver-util
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:util:deliverUtil --no-daemon
+      "
+
+  # Deliver plugin framework interface
+  # Usage: docker compose up deliver-plugin-framework-interface
+  deliver-plugin-framework-interface:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-deliver-plugin-framework-interface
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:pluginFramework:deliverPluginFrameworkInterface --no-daemon
+      "
+
+  # Deliver persistence interface
+  # Usage: docker compose up deliver-persistence-interface
+  deliver-persistence-interface:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-deliver-persistence-interface
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:persistence:deliverPersistenceInterface --no-daemon
+      "
+
+  # Deliver basic interfaces (depends on all above)
+  # Usage: docker compose up deliver-basic-interfaces
+  deliver-basic-interfaces:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-deliver-basic-interfaces
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:deliverBasicInterfaces --no-daemon
+      "
+
+  # Compile plugin framework
+  # Usage: docker compose up compile-plugin-framework
+  compile-plugin-framework:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-plugin-framework
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:pluginFramework:compilePluginFramework --no-daemon
+      "
+
+  # Compile persistence
+  # Usage: docker compose up compile-persistence
+  compile-persistence:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-persistence
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:persistence:compilePersistence --no-daemon
+      "
+
+  # ============================================================================
+  # Generators
+  # ============================================================================
+
+  # Build all generators (ecore4CPP, UML4CPP, fUML4CPP)
+  # Usage: docker compose up build-generators
+  build-generators:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-generators
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew generator:ecore4CPP:buildGenerator_ecore4CPP --no-daemon &&
+      ./application/tools/gradlew generator:UML4CPP:buildGenerator_UML4CPP --no-daemon &&
+      ./application/tools/gradlew generator:fUML4CPP:buildGenerator_fUML4CPP --no-daemon
+      "
+
+  # Generate ecore4CPP generator
+  # Usage: docker compose up generate-ecore4cpp-generator
+  generate-ecore4cpp-generator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-ecore4cpp-generator
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew generator:ecore4CPP:buildGenerator_ecore4CPP --no-daemon
+      "
+
+  # Generate UML4CPP generator
+  # Usage: docker compose up generate-uml4cpp-generator
+  generate-uml4cpp-generator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-uml4cpp-generator
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew generator:UML4CPP:buildGenerator_UML4CPP --no-daemon
+      "
+
+  # Generate fUML4CPP generator
+  # Usage: docker compose up generate-fuml4cpp-generator
+  generate-fuml4cpp-generator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-fuml4cpp-generator
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew generator:fUML4CPP:buildGenerator_fUML4CPP --no-daemon
+      "
+
+  # ============================================================================
+  # Core Models: Ecore
+  # ============================================================================
+
+  # Build ecore model (generate + compile)
+  # Usage: docker compose up build-ecore
+  build-ecore:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-ecore
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ecore:generateEcore --no-daemon &&
+      ./application/tools/gradlew src:ecore:compileEcore --no-daemon
+      "
+
+  # Generate ecore model
+  # Usage: docker compose up generate-ecore
+  generate-ecore:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-ecore
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ecore:generateEcore --no-daemon
+      "
+
+  # Compile ecore model
+  # Usage: docker compose up compile-ecore
+  compile-ecore:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-ecore
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ecore:compileEcore --no-daemon
+      "
+
+  # ============================================================================
+  # Core Models: Types
+  # ============================================================================
+
+  # Build types model (generate + compile)
+  # Usage: docker compose up build-types
+  build-types:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-types
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:uml:types:generateTypes --no-daemon &&
+      ./application/tools/gradlew src:uml:types:compileTypes --no-daemon
+      "
+
+  # Generate types model
+  # Usage: docker compose up generate-types
+  generate-types:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-types
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:uml:types:generateTypes --no-daemon
+      "
+
+  # Compile types model
+  # Usage: docker compose up compile-types
+  compile-types:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-types
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:uml:types:compileTypes --no-daemon
+      "
+
+  # ============================================================================
+  # Core Models: UML
+  # ============================================================================
+
+  # Build uml model (generate + compile)
+  # Usage: docker compose up build-uml
+  build-uml:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-uml
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:uml:uml:generateUml --no-daemon &&
+      ./application/tools/gradlew src:uml:uml:compileUml --no-daemon
+      "
+
+  # Generate uml model
+  # Usage: docker compose up generate-uml
+  generate-uml:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-uml
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:uml:uml:generateUml --no-daemon
+      "
+
+  # Compile uml model
+  # Usage: docker compose up compile-uml
+  compile-uml:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-uml
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:uml:uml:compileUml --no-daemon
+      "
+
+  # ============================================================================
+  # Core Models: fUML
+  # ============================================================================
+
+  # Build fuml model (generate + compile)
+  # Usage: docker compose up build-fuml
+  build-fuml:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-fuml
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:fuml:generateFUML --no-daemon &&
+      ./application/tools/gradlew src:fuml:compileFUML --no-daemon
+      "
+
+  # Generate fuml model
+  # Usage: docker compose up generate-fuml
+  generate-fuml:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-fuml
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:fuml:generateFUML --no-daemon
+      "
+
+  # Compile fuml model
+  # Usage: docker compose up compile-fuml
+  compile-fuml:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-fuml
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:fuml:compileFUML --no-daemon
+      "
+
+  # ============================================================================
+  # Core Models: PSCS
+  # ============================================================================
+
+  # Build pscs model (generate + compile)
+  # Usage: docker compose up build-pscs
+  build-pscs:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-pscs
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:pscs:generatePSCS --no-daemon &&
+      ./application/tools/gradlew src:pscs:compilePSCS --no-daemon
+      "
+
+  # Generate pscs model
+  # Usage: docker compose up generate-pscs
+  generate-pscs:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-pscs
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:pscs:generatePSCS --no-daemon
+      "
+
+  # Compile pscs model
+  # Usage: docker compose up compile-pscs
+  compile-pscs:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-pscs
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:pscs:compilePSCS --no-daemon
+      "
+
+  # ============================================================================
+  # Core Models: PSSM
+  # ============================================================================
+
+  # Build pssm model (generate + compile)
+  # Usage: docker compose up build-pssm
+  build-pssm:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-pssm
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:pssm:generatePSSM --no-daemon &&
+      ./application/tools/gradlew src:pssm:compilePSSM --no-daemon
+      "
+
+  # Generate pssm model
+  # Usage: docker compose up generate-pssm
+  generate-pssm:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-pssm
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:pssm:generatePSSM --no-daemon
+      "
+
+  # Compile pssm model
+  # Usage: docker compose up compile-pssm
+  compile-pssm:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-pssm
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:pssm:compilePSSM --no-daemon
+      "
+
+  # ============================================================================
+  # OCL Models
+  # ============================================================================
+
+  # Build ocl model (generate + compile)
+  # Usage: docker compose up build-ocl-model
+  build-ocl-model:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-ocl-model
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon &&
+      ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon
+      "
+
+  # Generate ocl model
+  # Usage: docker compose up generate-ocl
+  generate-ocl:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-ocl
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon
+      "
+
+  # Compile ocl model
+  # Usage: docker compose up compile-ocl
+  compile-ocl:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-ocl
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon
+      "
+
+  # Build ocl parser (generate + compile)
+  # Usage: docker compose up build-ocl-parser
+  build-ocl-parser:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-ocl-parser
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon &&
+      ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon
+      "
+
+  # Generate ocl parser
+  # Usage: docker compose up generate-ocl-parser
+  generate-ocl-parser:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-ocl-parser
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon
+      "
+
+  # Compile ocl parser
+  # Usage: docker compose up compile-ocl-parser
+  compile-ocl-parser:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-ocl-parser
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon
+      "
+
+  # ============================================================================
+  # Reflection Models: EcoreReflection
+  # ============================================================================
+
+  # Build ecore reflection model (generate + compile)
+  # Usage: docker compose up build-ecore-reflection
+  build-ecore-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-ecore-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon &&
+      ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon
+      "
+
+  # Generate ecore reflection model
+  # Usage: docker compose up generate-ecore-reflection
+  generate-ecore-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-ecore-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon
+      "
+
+  # Compile ecore reflection model
+  # Usage: docker compose up compile-ecore-reflection
+  compile-ecore-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-ecore-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon
+      "
+
+  # ============================================================================
+  # Reflection Models: PrimitivetypesReflection
+  # ============================================================================
+
+  # Build primitivetypes reflection model (generate + compile)
+  # Usage: docker compose up build-primitivetypes-reflection
+  build-primitivetypes-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-primitivetypes-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon &&
+      ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon
+      "
+
+  # Generate primitivetypes reflection model
+  # Usage: docker compose up generate-primitivetypes-reflection
+  generate-primitivetypes-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-primitivetypes-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon
+      "
+
+  # Compile primitivetypes reflection model
+  # Usage: docker compose up compile-primitivetypes-reflection
+  compile-primitivetypes-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-primitivetypes-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon
+      "
+
+  # ============================================================================
+  # Reflection Models: UmlReflection
+  # ============================================================================
+
+  # Build uml reflection model (generate + compile)
+  # Usage: docker compose up build-uml-reflection
+  build-uml-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-uml-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon &&
+      ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon
+      "
+
+  # Generate uml reflection model
+  # Usage: docker compose up generate-uml-reflection
+  generate-uml-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-uml-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon
+      "
+
+  # Compile uml reflection model
+  # Usage: docker compose up compile-uml-reflection
+  compile-uml-reflection:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-uml-reflection
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon
+      "
+
+  # ============================================================================
+  # Profile Models: StandardProfile
+  # ============================================================================
+
+  # Build standard profile model (generate + compile)
+  # Usage: docker compose up build-standard-profile
+  build-standard-profile:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-standard-profile
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon &&
+      ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon
+      "
+
+  # Generate standard profile model
+  # Usage: docker compose up generate-standard-profile
+  generate-standard-profile:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-standard-profile
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon
+      "
+
+  # Compile standard profile model
+  # Usage: docker compose up compile-standard-profile
+  compile-standard-profile:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-standard-profile
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon
+      "
+
+  # ============================================================================
+  # Profile Models: UML4CPPProfile
+  # ============================================================================
+
+  # Build UML4CPP profile model (generate + compile)
+  # Usage: docker compose up build-uml4cpp-profile
+  build-uml4cpp-profile:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-uml4cpp-profile
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon &&
+      ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon
+      "
+
+  # Generate UML4CPP profile model
+  # Usage: docker compose up generate-uml4cpp-profile
+  generate-uml4cpp-profile:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-uml4cpp-profile
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon
+      "
+
+  # Compile UML4CPP profile model
+  # Usage: docker compose up compile-uml4cpp-profile
+  compile-uml4cpp-profile:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-uml4cpp-profile
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon
+      "
+
+  # ============================================================================
+  # Application Models: FoundationalModelLibrary
+  # ============================================================================
+
+  # Build foundational model library (generate + compile)
+  # Usage: docker compose up build-foundational-model-library
+  build-foundational-model-library:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-build-foundational-model-library
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:FoundationalModelLibrary:generateFoundationalModelLibrary --no-daemon &&
+      ./application/tools/gradlew src:common:FoundationalModelLibrary:compileFoundationalModelLibrary --no-daemon
+      "
+
+  # Generate foundational model library
+  # Usage: docker compose up generate-foundational-model-library
+  generate-foundational-model-library:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-generate-foundational-model-library
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:FoundationalModelLibrary:generateFoundationalModelLibrary --no-daemon
+      "
+
+  # Compile foundational model library
+  # Usage: docker compose up compile-foundational-model-library
+  compile-foundational-model-library:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: mde4cpp:latest
+    container_name: mde4cpp-compile-foundational-model-library
+    working_dir: /home/mde4cpp
+    volumes:
+      - ../:/home/mde4cpp
+    command: >
+      /bin/bash -c "
+      cd /home/mde4cpp &&
+      ./docker/scripts/setup-setenv.sh &&
+      . ./setenv &&
+      ./application/tools/gradlew src:common:FoundationalModelLibrary:compileFoundationalModelLibrary --no-daemon
+      "

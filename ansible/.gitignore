@@ -1,0 +1,36 @@
+# Ansible Vault files (encrypted secrets)
+group_vars/*/vault.yml
+*.vault
+.vault_pass
+vault_pass.txt
+
+# Ansible retry files
+*.retry
+
+# Ansible Galaxy
+roles/*/.galaxy_install_info
+.galaxy_install_info
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*.swo
+*~
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE files
+.vscode/
+.idea/
+
+# Ansible fact caching
+fact_cache/
+
+# Test files
+test_*.yml
+*.test.yml
+

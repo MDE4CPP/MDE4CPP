@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Directories/Files (top-level) -----------------------------------------------
 /.gradle/
 /.idea/
@@ -35,3 +36,66 @@
 # Refresh: 
 #git rm --cached -r .
 #git add .
+=======
+# Build outputs
+**/build/
+**/bin/
+**/.cmake/
+**/.gradle/
+application/bin/
+application/include/
+application/lib/
+application/generator/
+
+# Generated source code
+**/src_gen/
+
+# Compiled templates
+**/bin/**/*.emtl
+
+# User-specific configuration
+setenv
+setenv.bat
+gradle.properties
+
+# IDE files
+**/.idea/
+**/.vscode/
+**/.metadata/
+**/.settings/
+**/.project
+**/.classpath
+**/*.iml
+
+# System files
+**/.DS_Store
+**/Thumbs.db
+
+# Generated manifests
+**/META-INF/MANIFEST.MF
+
+# Third-party libraries (downloaded during build)
+src/common/parser/antlr4/
+src/common/persistence/xerces/
+src/util/boost/
+!src/util/boost/build.gradle
+
+# Temporary files
+*.bak
+*.tmp
+*.log
+
+/eclipse/
+
+# Ansible
+ansible/group_vars/*/vault.yml
+ansible/*.retry
+ansible/.vault_pass
+ansible/vault_pass.txt
+ansible/inventory/*.vault
+
+# Vendor archives (too large for GitHub; download during build instead)
+application/tools/**/boost*.zip
+application/tools/**/boost_*.zip
+>>>>>>> remotes/origin/ContinuousIntegration
+/.github

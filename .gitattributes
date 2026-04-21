@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # -----------------------------------------------------------------------------
 # Handle line endings
 # @see https://help.github.com/en/github/using-git/configuring-git-to-handle-line-endings
@@ -27,3 +28,18 @@
 
 # Explicit format of line endings on checkout
 *.sln text eol=crlf
+=======
+# Force LF line endings for shell scripts and Dockerfiles
+*.sh text eol=lf
+*.bash text eol=lf
+Dockerfile text eol=lf
+docker/Dockerfile text eol=lf
+*.properties text eol=lf
+*.gradle text eol=lf
+setenv text eol=lf
+setenv.* text eol=lf
+
+# Ensure all text files use LF
+* text=auto eol=lf
+
+>>>>>>> remotes/origin/ContinuousIntegration
