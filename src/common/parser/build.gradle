@@ -63,6 +63,7 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			folder.mkdirs()
 		}
 	}
+	
 	doLast {
 		// Check if cross-compilation to Windows is enabled
 		def crossCompileWindows = false
@@ -165,15 +166,46 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			into System.getenv('MDE4CPP_HOME')+"/application/include"
 			include "**/*.hpp", "**/*.h", "**/*.c"
 		}
-		copy {
-			from "antlr4/bin/bin"
-			into System.getenv('MDE4CPP_HOME')+"/application/bin"
-			include "**/*.dll", "**/*.so", "**/*.dylib"
-		}
-		copy {
-			from "antlr4/bin/lib"
-			into System.getenv('MDE4CPP_HOME')+"/application/lib"
-			include "**/*.a"
+		
+		// Copy libraries based on build type
+		if (isCrossCompiling) {
+			// Cross-compiling: only copy static library (.a)
+			copy {
+				from "antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/lib"
+				include "**/*.a"
+			}
+		} else if (isWindows) {
+			// Native Windows: look for .dll files
+			copy {
+				from "antlr4/bin/bin"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "**/*.dll"
+			}
+			copy {
+				from "antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "**/*.dll"
+			}
+			// Also copy static libraries
+			copy {
+				from "antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/lib"
+				include "**/*.a"
+			}
+		} else {
+			// Linux/Mac: look for .so/.dylib files
+			copy {
+				from "antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "**/*.so", "**/*.dylib"
+			}
+			// Also copy static libraries
+			copy {
+				from "antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/lib"
+				include "**/*.a"
+			}
 		}
 	}
 
@@ -185,10 +217,6 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 	// Define the outputs
 	outputs.dir([rootDir,'application','include','antlr4-runtime'].join(File.separator))
 	
-	if(OperatingSystem.current().isWindows()){
-		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libantlr4-runtime' +       '.dll'].join(File.separator))}
-		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.dll'].join(File.separator))}
-
 	// Check cross-compilation setting for outputs
 	def isWindows = OperatingSystem.current().isWindows()
 	def crossCompileWindows = false
