@@ -4,20 +4,6 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
-<<<<<<< HEAD
-description 'Build task for project: PSCS'
-
-task runCommandCompilePSCS(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compilePSCSSrc'
-	mustRunAfter =  [
-		'generatePSCS'
-	
-		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileFUML', true)
-	]
-=======
 import org.gradle.internal.os.OperatingSystem;
 
 description 'Build task for project: PSCS'
@@ -42,29 +28,13 @@ task runCommandCompilePSCS(type:Exec) {
 	dependsOn ':src:ecore:buildEcore'
 	dependsOn ':src:uml:buildUml'
 		def allDepOutputs = files()
-		getRootProject().getTasksByName('buildTypes', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildFUML', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildEcore', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildUml', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
 		inputs.files(allDepOutputs)
 		mustRunAfter = [
 			'generatePSCS'
 			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileFUML', true)
-			, getRootProject().getTasksByName('buildFUML', true)
 			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 		]
 	doFirst {
 		def mde4cppHome = System.getenv('MDE4CPP_HOME')
@@ -103,7 +73,6 @@ task runCommandCompilePSCS(type:Exec) {
 			}
 		}
 	}
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task runCommandGeneratePSCS(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -131,28 +100,6 @@ task compilePSCS() {
 	group 'PSCS'
 	description 'compile PSCS' 
 
-<<<<<<< HEAD
-	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ 
-		dependsOn 'generatePSCS' 
-		mustRunAfter = ["generatePSCS"]
-		dependsOn 'runCommandCompilePSCS'
-	}
-	else
-	{
-		mustRunAfter = ["generatePSCS"]
-		dependsOn 'src_gen:compilePSCSSrc'
-	} 
-	mustRunAfter =  [
-		'generatePSCS'
-	
-		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileFUML', true)
-	]
-=======
 	dependsOn 'generatePSCS'
 	mustRunAfter = ["generatePSCS"]
 	
@@ -167,15 +114,10 @@ task compilePSCS() {
 		mustRunAfter = [
 			'generatePSCS'
 			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileFUML', true)
-			, getRootProject().getTasksByName('buildFUML', true)
 			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 		]
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 
@@ -187,13 +129,7 @@ task buildPSCS() {
 	dependsOn 'compilePSCS'
 
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-<<<<<<< HEAD
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
-=======
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
->>>>>>> remotes/origin/ContinuousIntegration
 }

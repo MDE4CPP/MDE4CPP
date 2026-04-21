@@ -9,15 +9,9 @@ description 'Build task for project: libraryModel_ecore'
 task runCommandCompileLibraryModel_ecore(type:Exec) {
 	commandLine 'cmd', '/c', 'gradlew src_gen:compileLibraryModel_ecoreSrc'
 	mustRunAfter =  [
-		'generateLibraryModel_ecore'
-	
-<<<<<<< HEAD
-		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-=======
+		'generateLibraryModel_ecore'	
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
->>>>>>> remotes/origin/ContinuousIntegration
 	]
 }
 
@@ -63,15 +57,9 @@ task compileLibraryModel_ecore() {
 		dependsOn 'src_gen:compileLibraryModel_ecoreSrc'
 	} 
 	mustRunAfter =  [
-		'generateLibraryModel_ecore'
-	
-<<<<<<< HEAD
-		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-=======
+		'generateLibraryModel_ecore'	
 		, getRootProject().getTasksByName('compileEcore', true)
 		, getRootProject().getTasksByName('compileTypes', true)
->>>>>>> remotes/origin/ContinuousIntegration
 	]
 }
 
@@ -92,11 +80,6 @@ task buildLibraryModel_ecore() {
 	dependsOn 'compileLibraryModel_ecore'
 	dependsOn 'compileApplicationForLibraryModel_ecore'
 
-<<<<<<< HEAD
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-=======
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
->>>>>>> remotes/origin/ContinuousIntegration
 }

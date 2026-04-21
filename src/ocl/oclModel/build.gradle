@@ -3,18 +3,6 @@
 plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
-
-<<<<<<< HEAD
-description 'Build task for project: ocl'
-
-task runCommandCompileOcl(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileOclSrc'
-	mustRunAfter =  [
-		'generateOcl'
-	
-		, getRootProject().getTasksByName('compileEcore', true)
-	]
-=======
 import org.gradle.internal.os.OperatingSystem;
 
 description 'Build task for project: ocl'
@@ -43,7 +31,6 @@ task runCommandCompileOcl(type:Exec) {
 		mustRunAfter = [
 			'generateOcl'
 			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 		]
 	doFirst {
 		def mde4cppHome = System.getenv('MDE4CPP_HOME')
@@ -58,7 +45,6 @@ task runCommandCompileOcl(type:Exec) {
 			}
 		}
 	}
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task runCommandGenerateOcl(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -86,25 +72,6 @@ task compileOcl() {
 	group 'ocl'
 	description 'compile ocl' 
 
-<<<<<<< HEAD
-	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ 
-		dependsOn 'generateOcl' 
-		mustRunAfter = ["generateOcl"]
-		dependsOn 'runCommandCompileOcl'
-	}
-	else
-	{
-		mustRunAfter = ["generateOcl"]
-		dependsOn 'src_gen:compileOclSrc'
-	} 
-	mustRunAfter =  [
-		'generateOcl'
-	
-		, getRootProject().getTasksByName('compileEcore', true)
-	]
-=======
 	dependsOn 'generateOcl'
 	mustRunAfter = ["generateOcl"]
 	
@@ -121,7 +88,6 @@ task compileOcl() {
 			, getRootProject().getTasksByName('compileEcore', true)
 			, getRootProject().getTasksByName('buildEcore', true)
 		]
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 

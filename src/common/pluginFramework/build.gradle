@@ -51,12 +51,9 @@ task compilePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "pluginFramework"
 	description "compile pluginFramework"
 	
-<<<<<<< HEAD
-=======
 	dependsOn ':src:common:abstractDataTypes:deliverAbstractDataTypes'
 	mustRunAfter ':src:common:abstractDataTypes:deliverAbstractDataTypes'
 	
->>>>>>> remotes/origin/ContinuousIntegration
 	projectFolder = file('src/pluginFramework')
 	
 	inputs.files(fileTree('.') {

@@ -4,17 +4,6 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
-<<<<<<< HEAD
-description 'Build tasks for project: ecoreReflection'
-
-task runCommandCompileEcoreReflection(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileEcoreReflectionSrc'
-	mustRunAfter =  [
-		"generateEcoreReflection" 
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUml', true)
-	]
-=======
 import org.gradle.internal.os.OperatingSystem;
 
 description 'Build tasks for project: ecoreReflection'
@@ -33,12 +22,6 @@ task runCommandCompileEcoreReflection(type:Exec) {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileEcoreReflectionSrc'
 	}
 	dependsOn 'generateEcoreReflection'
-		getRootProject().getTasksByName('buildEcore', true).each { task ->
-			dependsOn task
-		}
-		getRootProject().getTasksByName('buildUml', true).each { task ->
-			dependsOn task
-		}
 	
 		def allDepOutputs = files()
 		getRootProject().getTasksByName('buildEcore', true).each { task ->
@@ -51,11 +34,8 @@ task runCommandCompileEcoreReflection(type:Exec) {
 		mustRunAfter = [
 			"generateEcoreReflection"
 			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 		]
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task runCommandGenerateEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -82,25 +62,6 @@ task generateEcoreReflection() {
 task compileEcoreReflection() {
 	group 'ecoreReflection'
 	description 'compile ecoreReflection'
-
-<<<<<<< HEAD
-	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateEcoreReflection'
-		mustRunAfter = ["generateEcoreReflection"]
-		dependsOn 'runCommandCompileEcoreReflection'
-	}
-	else
-	{
-		mustRunAfter = ["generateEcoreReflection"]
-		dependsOn 'src_gen:compileEcoreReflectionSrc'
-	}
-	mustRunAfter =  [
-		"generateEcoreReflection" 
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUml', true)
-	]
-=======
 	dependsOn 'generateEcoreReflection'
 	mustRunAfter = ["generateEcoreReflection"]
 	
@@ -115,11 +76,8 @@ task compileEcoreReflection() {
 		mustRunAfter = [
 			"generateEcoreReflection"
 			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 		]
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 

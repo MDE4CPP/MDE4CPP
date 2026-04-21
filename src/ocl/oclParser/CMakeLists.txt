@@ -4,11 +4,7 @@
 #																	        #
 #############################################################################
 
-<<<<<<< HEAD
 CMAKE_MINIMUM_REQUIRED(VERSION 4.0)
-=======
-CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
->>>>>>> remotes/origin/ContinuousIntegration
 
 PROJECT(oclParser)
 
@@ -66,28 +62,6 @@ if(APPLE)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 endif(APPLE)
 
-<<<<<<< HEAD
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(OCL_DEBUG ocld.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ANTLR_DEBUG libantlr4-runtime.so ${MDE4CPP_HOME}/application/bin)
-	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so ${MDE4CPP_HOME}/application/bin)
-		#FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(OCL_RELEASE ocl.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ANTLR_RELEASE libantlr4-runtime.so ${MDE4CPP_HOME}/application/bin)
-=======
 IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
     # Windows (native or cross-compiled)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -118,7 +92,6 @@ IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
 		if(NOT ANTLR_RELEASE)
 			FIND_LIBRARY(ANTLR_RELEASE libantlr4-runtime ${MDE4CPP_HOME}/application/lib)
 		endif()
->>>>>>> remotes/origin/ContinuousIntegration
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -140,8 +113,6 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(OCL_RELEASE ocl.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ANTLR_RELEASE libantlr4-runtime.dylib ${MDE4CPP_HOME}/application/bin)
 	ENDIF()
-<<<<<<< HEAD
-=======
 ELSEIF(UNIX)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -163,7 +134,6 @@ ELSEIF(UNIX)
 		FIND_LIBRARY(OCL_RELEASE ocl.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ANTLR_RELEASE libantlr4-runtime.so ${MDE4CPP_HOME}/application/bin)
 	ENDIF()
->>>>>>> remotes/origin/ContinuousIntegration
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
@@ -186,14 +156,11 @@ ELSE()
 	ENDIF()
 ENDIF()
 
-<<<<<<< HEAD
-=======
 # Define ANTLR4CPP_STATIC when using static library (cross-compilation)
 IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
 	ADD_DEFINITIONS(-DANTLR4CPP_STATIC)
 ENDIF()
 
->>>>>>> remotes/origin/ContinuousIntegration
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 

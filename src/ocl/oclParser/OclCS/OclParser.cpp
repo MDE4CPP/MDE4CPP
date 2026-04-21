@@ -1,10 +1,4 @@
-
-<<<<<<< HEAD
-// Generated from OclParser.g4 by ANTLR 4.13.2
-=======
 // Generated from OclParser.g4 by ANTLR 4.12.0
->>>>>>> remotes/origin/ContinuousIntegration
-
 
 #include "OclParserVisitor.h"
 
@@ -42,7 +36,6 @@ struct OclParserStaticData final {
 };
 
 ::antlr4::internal::OnceFlag oclparserParserOnceFlag;
-<<<<<<< HEAD
 #if ANTLR4_USE_THREAD_LOCAL_CACHE
 static thread_local
 #endif
@@ -56,12 +49,6 @@ void oclparserParserInitialize() {
 #else
   assert(oclparserParserStaticData == nullptr);
 #endif
-=======
-OclParserStaticData *oclparserParserStaticData = nullptr;
-
-void oclparserParserInitialize() {
-  assert(oclparserParserStaticData == nullptr);
->>>>>>> remotes/origin/ContinuousIntegration
   auto staticData = std::make_unique<OclParserStaticData>(
     std::vector<std::string>{
       "expressionInOclCS", "oclExpressionCS", "parentedExpCS", "variableExpCS", 
@@ -371,11 +358,7 @@ void oclparserParserInitialize() {
   for (size_t i = 0; i < count; i++) { 
     staticData->decisionToDFA.emplace_back(staticData->atn->getDecisionState(i), i);
   }
-<<<<<<< HEAD
   oclparserParserStaticData = std::move(staticData);
-=======
-  oclparserParserStaticData = staticData.release();
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 }
@@ -6152,13 +6135,9 @@ bool OclParser::pathNameCSSempred(PathNameCSContext *_localctx, size_t predicate
 }
 
 void OclParser::initialize() {
-<<<<<<< HEAD
 #if ANTLR4_USE_THREAD_LOCAL_CACHE
   oclparserParserInitialize();
 #else
   ::antlr4::internal::call_once(oclparserParserOnceFlag, oclparserParserInitialize);
 #endif
-=======
-  ::antlr4::internal::call_once(oclparserParserOnceFlag, oclparserParserInitialize);
->>>>>>> remotes/origin/ContinuousIntegration
 }

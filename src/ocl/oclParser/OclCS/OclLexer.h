@@ -1,9 +1,4 @@
-
-<<<<<<< HEAD
 // Generated from OclLexer.g4 by ANTLR 4.13.2
-=======
-// Generated from OclLexer.g4 by ANTLR 4.12.0
->>>>>>> remotes/origin/ContinuousIntegration
 
 #pragma once
 

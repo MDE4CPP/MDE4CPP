@@ -4,21 +4,6 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
-<<<<<<< HEAD
-description 'Build task for project: PSSM'
-
-task runCommandCompilePSSM(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSMSrc'
-	mustRunAfter =  [
-		'generatePSSM'
-	
-		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-	]
-=======
 import org.gradle.internal.os.OperatingSystem;
 
 description 'Build task for project: PSSM'
@@ -39,39 +24,17 @@ task runCommandCompilePSSM(type:Exec) {
 	}
 	dependsOn 'generatePSSM'
 	dependsOn ':src:uml:types:buildTypes'
-	dependsOn ':src:fuml:buildFUML'
 	dependsOn ':src:ecore:buildEcore'
-	dependsOn ':src:uml:buildUml'
 	dependsOn ':src:pscs:buildPSCS'
 		def allDepOutputs = files()
-		getRootProject().getTasksByName('buildTypes', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildFUML', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildEcore', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildUml', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		getRootProject().getTasksByName('buildPSCS', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
 		inputs.files(allDepOutputs)
 		mustRunAfter = [
 			'generatePSSM'
 			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileFUML', true)
-			, getRootProject().getTasksByName('buildFUML', true)
 			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 			, getRootProject().getTasksByName('compilePSCS', true)
-			, getRootProject().getTasksByName('buildPSCS', true)
 		]
 	doFirst {
 		def mde4cppHome = System.getenv('MDE4CPP_HOME')
@@ -118,7 +81,6 @@ task runCommandCompilePSSM(type:Exec) {
 			}
 		}
 	}
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 task runCommandGeneratePSSM(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -146,29 +108,6 @@ task compilePSSM() {
 	group 'PSSM'
 	description 'compile PSSM' 
 
-<<<<<<< HEAD
-	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ 
-		dependsOn 'generatePSSM' 
-		mustRunAfter = ["generatePSSM"]
-		dependsOn 'runCommandCompilePSSM'
-	}
-	else
-	{
-		mustRunAfter = ["generatePSSM"]
-		dependsOn 'src_gen:compilePSSMSrc'
-	} 
-	mustRunAfter =  [
-		'generatePSSM'
-	
-		, getRootProject().getTasksByName('compileTypes', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-	]
-=======
 	dependsOn 'generatePSSM'
 	mustRunAfter = ["generatePSSM"]
 	
@@ -183,17 +122,11 @@ task compilePSSM() {
 		mustRunAfter = [
 			'generatePSSM'
 			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileFUML', true)
-			, getRootProject().getTasksByName('buildFUML', true)
 			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 			, getRootProject().getTasksByName('compilePSCS', true)
-			, getRootProject().getTasksByName('buildPSCS', true)
 		]
->>>>>>> remotes/origin/ContinuousIntegration
 }
 
 
@@ -205,14 +138,8 @@ task buildPSSM() {
 	dependsOn 'compilePSSM'
 
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-<<<<<<< HEAD
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
-=======
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
->>>>>>> remotes/origin/ContinuousIntegration
 	dependsOn getRootProject().getTasksByName('buildPSCS', true)
 }
