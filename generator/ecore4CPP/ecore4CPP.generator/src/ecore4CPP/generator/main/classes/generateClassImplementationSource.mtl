@@ -113,6 +113,9 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) before(printInfo('Generating implementation of additional constructors for containments', 3)) separator('\n')]
 		[if(ref->select(eType = aReference.eType)->size()>1 )]
 			[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+[comment disable maybe-uninitialized for weakpointer which is safe to ignore — false positive? /]
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 [className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
 :[className/]()
@@ -133,8 +136,11 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	}
    
 }
+#pragma GCC diagnostic pop
 			[/if]
 		[else]
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 [className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
 :[className/]()
@@ -145,6 +151,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	m_[m.name/] = par_[aReference.name/];
 	[/for][/if]
 }
+#pragma GCC diagnostic pop
 		[/if]
 	[/for]
 [/let]
