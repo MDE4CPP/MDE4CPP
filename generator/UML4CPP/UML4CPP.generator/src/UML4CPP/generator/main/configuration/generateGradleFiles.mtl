@@ -60,9 +60,9 @@ task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment interna
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compile[packageName.toUpperFirst()/]Src'
 	}
 	dependsOn 'generate[packageName.toUpperFirst()/]'
-	[aPackage.generateDependsOnForRunCommand()/]
-	[aPackage.generateInputsFilesForRunCommand()/]
-	[aPackage.generateMustRunAfter()/]
+[comment	[aPackage.generateDependsOnForRunCommand()/]
+[comment	[aPackage.generateInputsFilesForRunCommand()/]
+[comment	[aPackage.generateMustRunAfter()/]
 }
 
 task runCommandGenerate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -107,8 +107,7 @@ task compile[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-	[comment Always ensure generation runs first /]
-	dependsOn 'generate[packageName.toUpperFirst()/]'
+	[comment Always ensure generation runs first. No dependency to generation (compile only task!) /]
 	mustRunAfter = ['['/]"generate[packageName.toUpperFirst()/]"[']'/]
 	
 	[comment Check if src_gen/build.gradle exists - if not, use runCommandCompile which will work after generation /]
