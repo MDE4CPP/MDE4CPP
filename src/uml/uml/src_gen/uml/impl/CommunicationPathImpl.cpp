@@ -83,6 +83,8 @@ CommunicationPathImpl::~CommunicationPathImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :CommunicationPathImpl()
@@ -90,14 +92,20 @@ CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Namespace> par_n
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Element> par_owner)
 :CommunicationPathImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :CommunicationPathImpl()
@@ -117,7 +125,10 @@ CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Package> par_Pac
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :CommunicationPathImpl()
@@ -125,6 +136,7 @@ CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::TemplateParamete
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 CommunicationPathImpl::CommunicationPathImpl(const CommunicationPathImpl & obj): CommunicationPathImpl()

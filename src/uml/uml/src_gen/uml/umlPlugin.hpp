@@ -11,10 +11,11 @@
 #include "uml/uml.hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
+// #include "pluginFramework/OperationInvokerPlugin.hpp" // WebAPI - raus ???
 
 namespace uml
 {
-	class UML_API umlPlugin : virtual public EcoreModelPlugin
+	class UML_API umlPlugin : virtual public EcoreModelPlugin // n�tig WebAPI ??? , virtual public OperationInvokerPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

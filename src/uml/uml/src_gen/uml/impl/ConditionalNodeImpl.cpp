@@ -82,6 +82,8 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id)
 :ConditionalNodeImpl()
@@ -101,8 +103,11 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity> par_Activi
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :ConditionalNodeImpl()
@@ -110,7 +115,10 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::StructuredActivityNo
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ConditionalNodeImpl()
@@ -118,14 +126,20 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Namespace> par_names
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Element> par_owner)
 :ConditionalNodeImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :ConditionalNodeImpl()
@@ -133,6 +147,7 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup> par_s
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
+#pragma GCC diagnostic pop
 
 ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj): ConditionalNodeImpl()
 {

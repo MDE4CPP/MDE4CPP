@@ -62,19 +62,25 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EEnumLiteralImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum> par_eEnum)
 :EEnumLiteralImpl()
 {
 	m_eEnum = par_eEnum;
 }
+#pragma GCC diagnostic pop
 
 EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj): EEnumLiteralImpl()
 {

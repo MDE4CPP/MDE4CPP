@@ -45,9 +45,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -86,12 +86,15 @@ CS_SendSignalActionActivationImpl::~CS_SendSignalActionActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CS_SendSignalActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(const CS_SendSignalActionActivationImpl & obj): CS_SendSignalActionActivationImpl()
 {

@@ -11,10 +11,11 @@
 #include "fUML/fUML.hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
+// #include "pluginFramework/OperationInvokerPlugin.hpp" // WebAPI - raus ???
 
 namespace fUML
 {
-	class FUML_API fUMLPlugin : virtual public EcoreModelPlugin
+	class FUML_API fUMLPlugin : virtual public EcoreModelPlugin // n�tig WebAPI ??? , virtual public OperationInvokerPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

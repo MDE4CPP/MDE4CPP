@@ -82,6 +82,8 @@ StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id)
 :StructuredActivityNodeImpl()
@@ -101,8 +103,11 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Activi
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :StructuredActivityNodeImpl()
@@ -110,7 +115,10 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Struct
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :StructuredActivityNodeImpl()
@@ -118,14 +126,20 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Namesp
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Element> par_owner)
 :StructuredActivityNodeImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :StructuredActivityNodeImpl()
@@ -133,6 +147,7 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Activi
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
+#pragma GCC diagnostic pop
 
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj): StructuredActivityNodeImpl()
 {

@@ -89,12 +89,15 @@ CallBehaviorActionActivationImpl::~CallBehaviorActionActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CallBehaviorActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBehaviorActionActivationImpl & obj): CallBehaviorActionActivationImpl()
 {

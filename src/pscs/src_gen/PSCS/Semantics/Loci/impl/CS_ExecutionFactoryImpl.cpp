@@ -70,9 +70,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -86,8 +86,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Loci;
@@ -109,12 +109,15 @@ CS_ExecutionFactoryImpl::~CS_ExecutionFactoryImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus)
 :CS_ExecutionFactoryImpl()
 {
 	m_locus = par_locus;
 }
+#pragma GCC diagnostic pop
 
 CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj): CS_ExecutionFactoryImpl()
 {

@@ -4,15 +4,24 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build task for project: libraryModel_ecore'
 
+
 task runCommandCompileLibraryModel_ecore(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileLibraryModel_ecoreSrc'
-	mustRunAfter =  [
-		'generateLibraryModel_ecore'	
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileTypes', true)
-	]
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileLibraryModel_ecoreSrc'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileLibraryModel_ecoreSrc'
+	}
 }
 
 task runCommandGenerateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -44,23 +53,24 @@ task compileLibraryModel_ecore() {
 	group 'libraryModel_ecore'
 	description 'compile libraryModel_ecore' 
 
+	dependsOn 'generateLibraryModel_ecore'
+	mustRunAfter = ["generateLibraryModel_ecore"]
+	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ 
-		dependsOn 'generateLibraryModel_ecore' 
-		mustRunAfter = ["generateLibraryModel_ecore"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileLibraryModel_ecoreSrc'
+	} else {
 		dependsOn 'runCommandCompileLibraryModel_ecore'
 	}
-	else
-	{
-		mustRunAfter = ["generateLibraryModel_ecore"]
-		dependsOn 'src_gen:compileLibraryModel_ecoreSrc'
-	} 
-	mustRunAfter =  [
-		'generateLibraryModel_ecore'	
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileTypes', true)
-	]
+	
+		mustRunAfter = [
+			'generateLibraryModel_ecore'
+			, getRootProject().getTasksByName('compileTypes', true)
+			, getRootProject().getTasksByName('buildTypes', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+		]
 }
 
 task compileApplicationForLibraryModel_ecore{
@@ -80,6 +90,6 @@ task buildLibraryModel_ecore() {
 	dependsOn 'compileLibraryModel_ecore'
 	dependsOn 'compileApplicationForLibraryModel_ecore'
 
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }

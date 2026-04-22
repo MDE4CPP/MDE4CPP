@@ -63,13 +63,18 @@ GeneralizationImpl::~GeneralizationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Element> par_owner)
 :GeneralizationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier> par_specific)
 :GeneralizationImpl()
@@ -77,6 +82,7 @@ GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier> par_specif
 	m_specific = par_specific;
 	m_owner = par_specific;
 }
+#pragma GCC diagnostic pop
 
 GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj): GeneralizationImpl()
 {

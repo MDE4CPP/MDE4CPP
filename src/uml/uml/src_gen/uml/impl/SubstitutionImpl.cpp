@@ -69,6 +69,8 @@ SubstitutionImpl::~SubstitutionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :SubstitutionImpl()
@@ -76,14 +78,20 @@ SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Element> par_owner)
 :SubstitutionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :SubstitutionImpl()
@@ -91,7 +99,10 @@ SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Package> par_owningPackage
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :SubstitutionImpl()
@@ -99,7 +110,10 @@ SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::TemplateParameter> par_own
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Classifier> par_substitutingClassifier)
 :SubstitutionImpl()
@@ -107,6 +121,7 @@ SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Classifier> par_substituti
 	m_substitutingClassifier = par_substitutingClassifier;
 	m_owner = par_substitutingClassifier;
 }
+#pragma GCC diagnostic pop
 
 SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj): SubstitutionImpl()
 {

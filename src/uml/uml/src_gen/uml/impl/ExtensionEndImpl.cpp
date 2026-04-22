@@ -76,6 +76,8 @@ ExtensionEndImpl::~ExtensionEndImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Property> par_associationEnd)
 :ExtensionEndImpl()
@@ -83,7 +85,10 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Property> par_associationE
 	m_associationEnd = par_associationEnd;
 	m_owner = par_associationEnd;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Class> par_class)
 :ExtensionEndImpl()
@@ -91,7 +96,10 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Class> par_class)
 	m_class = par_class;
 	m_namespace = par_class;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::DataType> par_datatype)
 :ExtensionEndImpl()
@@ -99,7 +107,10 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::DataType> par_datatype)
 	m_datatype = par_datatype;
 	m_namespace = par_datatype;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Interface> par_interface)
 :ExtensionEndImpl()
@@ -107,7 +118,10 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Interface> par_interface)
 	m_interface = par_interface;
 	m_namespace = par_interface;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExtensionEndImpl()
@@ -115,14 +129,20 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Element> par_owner)
 :ExtensionEndImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Association> par_owningAssociation)
 :ExtensionEndImpl()
@@ -130,7 +150,10 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Association> par_owningAss
 	m_owningAssociation = par_owningAssociation;
 	m_namespace = par_owningAssociation;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ExtensionEndImpl()
@@ -138,6 +161,7 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::TemplateParameter> par_own
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj): ExtensionEndImpl()
 {

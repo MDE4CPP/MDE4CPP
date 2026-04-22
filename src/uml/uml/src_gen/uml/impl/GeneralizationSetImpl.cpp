@@ -68,6 +68,8 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :GeneralizationSetImpl()
@@ -75,14 +77,20 @@ GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Namespace> par_n
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Element> par_owner)
 :GeneralizationSetImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :GeneralizationSetImpl()
@@ -90,7 +98,10 @@ GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Package> par_own
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :GeneralizationSetImpl()
@@ -98,6 +109,7 @@ GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParamete
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj): GeneralizationSetImpl()
 {

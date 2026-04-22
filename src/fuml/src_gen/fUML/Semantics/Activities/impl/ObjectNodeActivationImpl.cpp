@@ -71,12 +71,15 @@ ObjectNodeActivationImpl::~ObjectNodeActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ObjectNodeActivationImpl::ObjectNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :ObjectNodeActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImpl & obj): ObjectNodeActivationImpl()
 {

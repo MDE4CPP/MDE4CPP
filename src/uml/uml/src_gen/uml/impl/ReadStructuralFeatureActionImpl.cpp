@@ -78,6 +78,8 @@ ReadStructuralFeatureActionImpl::~ReadStructuralFeatureActionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :ReadStructuralFeatureActionImpl()
@@ -85,7 +87,10 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<u
 	m_activity = par_activity;
 	m_owner = par_activity;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :ReadStructuralFeatureActionImpl()
@@ -93,7 +98,10 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<u
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ReadStructuralFeatureActionImpl()
@@ -101,13 +109,17 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<u
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Element> par_owner)
 :ReadStructuralFeatureActionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStructuralFeatureActionImpl & obj): ReadStructuralFeatureActionImpl()
 {

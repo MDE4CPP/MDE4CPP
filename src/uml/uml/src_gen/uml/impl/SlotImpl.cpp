@@ -63,13 +63,18 @@ SlotImpl::~SlotImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 SlotImpl::SlotImpl(std::weak_ptr<uml::Element> par_owner)
 :SlotImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification> par_owningInstance)
 :SlotImpl()
@@ -77,6 +82,7 @@ SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification> par_owningInstance)
 	m_owningInstance = par_owningInstance;
 	m_owner = par_owningInstance;
 }
+#pragma GCC diagnostic pop
 
 SlotImpl::SlotImpl(const SlotImpl & obj): SlotImpl()
 {

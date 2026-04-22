@@ -3,6 +3,10 @@
 #include "ocl/oclFactory.hpp"
 #include "ocl/oclPackage.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace ocl;
 
 //static initialisation
@@ -74,3 +78,4 @@ std::string oclPluginImpl::eNS_PREFIX()
 {
 	return "ocl";
 }
+

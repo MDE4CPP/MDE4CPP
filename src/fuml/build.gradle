@@ -22,47 +22,6 @@ task runCommandCompileFUML(type:Exec) {
 	} else {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileFUMLSrc'
 	}
-	dependsOn 'generateFUML'
-	dependsOn ':src:uml:types:buildTypes'
-	dependsOn ':src:ecore:buildEcore'
-	dependsOn ':src:uml:buildUml'
-		def allDepOutputs = files()
-		inputs.files(allDepOutputs)
-		mustRunAfter = [
-			'generateFUML'
-			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('compileUml', true)
-		]
-	doFirst {
-		def mde4cppHome = System.getenv('MDE4CPP_HOME')
-		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-			def typesLibFile = new File(mde4cppHome, 'application/bin/types.so')
-			if (!typesLibFile.exists()) {
-				sleep(2000)
-				if (!typesLibFile.exists()) {
-					def taskPath = ':src:uml:types:buildTypes'
-					throw new GradleException("Dependency library file does not exist: " + typesLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
-			if (!ecoreLibFile.exists()) {
-				sleep(2000)
-				if (!ecoreLibFile.exists()) {
-					def taskPath = ':src:ecore:buildEcore'
-					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-			def umlLibFile = new File(mde4cppHome, 'application/bin/uml.so')
-			if (!umlLibFile.exists()) {
-				sleep(2000)
-				if (!umlLibFile.exists()) {
-					def taskPath = ':src:uml:buildUml'
-					throw new GradleException("Dependency library file does not exist: " + umlLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-		}
-	}
 }
 
 task runCommandGenerateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -90,7 +49,6 @@ task compileFUML() {
 	group 'fUML'
 	description 'compile fUML' 
 
-	dependsOn 'generateFUML'
 	mustRunAfter = ["generateFUML"]
 	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
@@ -104,8 +62,11 @@ task compileFUML() {
 		mustRunAfter = [
 			'generateFUML'
 			, getRootProject().getTasksByName('compileTypes', true)
+			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
 		]
 }
 

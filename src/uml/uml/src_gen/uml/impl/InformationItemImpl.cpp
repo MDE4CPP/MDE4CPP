@@ -81,6 +81,8 @@ InformationItemImpl::~InformationItemImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :InformationItemImpl()
@@ -88,14 +90,20 @@ InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Namespace> par_names
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Element> par_owner)
 :InformationItemImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :InformationItemImpl()
@@ -115,7 +123,10 @@ InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package> par_Package
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :InformationItemImpl()
@@ -123,6 +134,7 @@ InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::TemplateParameter> p
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj): InformationItemImpl()

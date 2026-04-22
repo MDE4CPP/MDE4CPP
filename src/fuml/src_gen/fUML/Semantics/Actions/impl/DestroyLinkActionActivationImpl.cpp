@@ -84,12 +84,15 @@ DestroyLinkActionActivationImpl::~DestroyLinkActionActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :DestroyLinkActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(const DestroyLinkActionActivationImpl & obj): DestroyLinkActionActivationImpl()
 {

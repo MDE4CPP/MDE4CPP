@@ -21,15 +21,7 @@ task runCommandCompileUML4CPPProfile(type:Exec) {
 	} else {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileUML4CPPProfileSrc'
 	}
-		mustRunAfter = [
-			"generateUML4CPPProfile"
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('compileEcoreReflection', true)
-			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
-			, getRootProject().getTasksByName('compileUmlReflection', true)
-		]
+	dependsOn 'generateUML4CPPProfile'
 }
 
 task runCommandGenerateUML4CPPProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -57,25 +49,29 @@ task compileUML4CPPProfile() {
 	group 'UML4CPPProfile'
 	description 'compile UML4CPPProfile'
 
+	mustRunAfter = ["generateUML4CPPProfile"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateUML4CPPProfile'
-		mustRunAfter = ["generateUML4CPPProfile"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileUML4CPPProfileSrc'
+	} else {
 		dependsOn 'runCommandCompileUML4CPPProfile'
 	}
-	else
-	{
-		mustRunAfter = ["generateUML4CPPProfile"]
-		dependsOn 'src_gen:compileUML4CPPProfileSrc'
-	}
-	mustRunAfter =  [
-		"generateUML4CPPProfile" 
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	
+		mustRunAfter = [
+			"generateUML4CPPProfile"
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 

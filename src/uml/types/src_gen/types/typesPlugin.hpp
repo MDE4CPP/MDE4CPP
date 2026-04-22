@@ -11,10 +11,11 @@
 #include "types/types.hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
+// #include "pluginFramework/OperationInvokerPlugin.hpp" // WebAPI - raus ???
 
 namespace types
 {
-	class TYPES_API typesPlugin : virtual public EcoreModelPlugin
+	class TYPES_API typesPlugin : virtual public EcoreModelPlugin // n�tig WebAPI ??? , virtual public OperationInvokerPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

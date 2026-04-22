@@ -94,6 +94,8 @@ NodeImpl::~NodeImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NodeImpl::NodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :NodeImpl()
@@ -101,14 +103,20 @@ NodeImpl::NodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NodeImpl::NodeImpl(std::weak_ptr<uml::Element> par_owner)
 :NodeImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NodeImpl::NodeImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :NodeImpl()
@@ -128,7 +136,10 @@ NodeImpl::NodeImpl(std::weak_ptr<uml::Package> par_Package, const int reference_
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NodeImpl::NodeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :NodeImpl()
@@ -136,6 +147,7 @@ NodeImpl::NodeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParam
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 NodeImpl::NodeImpl(const NodeImpl & obj): NodeImpl()

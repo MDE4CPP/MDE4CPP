@@ -49,6 +49,8 @@
 
 //Model includes
 #include "FoundationalModelLibrary/BasicInputOutput/BasicInputOutputPackage.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
+#include "FoundationalModelLibrary/Common/CommonPackage.hpp"
 
 
 using namespace FoundationalModelLibrary;

@@ -85,6 +85,8 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :EncapsulatedClassifierImpl()
@@ -92,14 +94,20 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Namesp
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Element> par_owner)
 :EncapsulatedClassifierImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :EncapsulatedClassifierImpl()
@@ -119,7 +127,10 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Packag
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :EncapsulatedClassifierImpl()
@@ -127,6 +138,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Templa
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassifierImpl & obj): EncapsulatedClassifierImpl()

@@ -63,12 +63,15 @@ ClauseImpl::~ClauseImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClauseImpl::ClauseImpl(std::weak_ptr<uml::Element> par_owner)
 :ClauseImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ClauseImpl::ClauseImpl(const ClauseImpl & obj): ClauseImpl()
 {

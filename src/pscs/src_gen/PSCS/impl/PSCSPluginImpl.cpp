@@ -3,6 +3,10 @@
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace PSCS;
 
 //static initialisation
@@ -74,3 +78,4 @@ std::string PSCSPluginImpl::eNS_PREFIX()
 {
 	return "PSCS_Semantics";
 }
+

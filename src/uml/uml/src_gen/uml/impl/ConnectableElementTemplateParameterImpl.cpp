@@ -63,13 +63,18 @@ ConnectableElementTemplateParameterImpl::~ConnectableElementTemplateParameterImp
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner)
 :ConnectableElementTemplateParameterImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature> par_signature)
 :ConnectableElementTemplateParameterImpl()
@@ -77,6 +82,7 @@ ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl
 	m_signature = par_signature;
 	m_owner = par_signature;
 }
+#pragma GCC diagnostic pop
 
 ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj): ConnectableElementTemplateParameterImpl()
 {

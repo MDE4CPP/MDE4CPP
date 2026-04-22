@@ -99,6 +99,8 @@ StateMachineImpl::~StateMachineImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier)
 :StateMachineImpl()
@@ -106,7 +108,10 @@ StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::BehavioredClassifier> par_
 	m_behavioredClassifier = par_behavioredClassifier;
 	m_namespace = par_behavioredClassifier;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :StateMachineImpl()
@@ -114,14 +119,20 @@ StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::Element> par_owner)
 :StateMachineImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :StateMachineImpl()
@@ -141,7 +152,10 @@ StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::Package> par_Package, cons
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :StateMachineImpl()
@@ -149,6 +163,7 @@ StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::TemplateParameter> par_own
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 StateMachineImpl::StateMachineImpl(const StateMachineImpl & obj): StateMachineImpl()

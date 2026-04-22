@@ -62,13 +62,18 @@ PackageMergeImpl::~PackageMergeImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Element> par_owner)
 :PackageMergeImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package> par_receivingPackage)
 :PackageMergeImpl()
@@ -76,6 +81,7 @@ PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package> par_receivingPack
 	m_receivingPackage = par_receivingPackage;
 	m_owner = par_receivingPackage;
 }
+#pragma GCC diagnostic pop
 
 PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj): PackageMergeImpl()
 {

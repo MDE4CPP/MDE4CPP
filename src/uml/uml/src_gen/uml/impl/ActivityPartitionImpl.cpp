@@ -68,6 +68,8 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Activity> par_inActivity)
 :ActivityPartitionImpl()
@@ -75,7 +77,10 @@ ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Activity> par_in
 	m_inActivity = par_inActivity;
 	m_owner = par_inActivity;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ActivityPartitionImpl()
@@ -83,14 +88,20 @@ ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Namespace> par_n
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Element> par_owner)
 :ActivityPartitionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :ActivityPartitionImpl()
@@ -98,7 +109,10 @@ ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityGroup> p
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartition> par_superPartition)
 :ActivityPartitionImpl()
@@ -106,6 +120,7 @@ ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartitio
 	m_superPartition = par_superPartition;
 	m_superGroup = par_superPartition;
 }
+#pragma GCC diagnostic pop
 
 ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj): ActivityPartitionImpl()
 {

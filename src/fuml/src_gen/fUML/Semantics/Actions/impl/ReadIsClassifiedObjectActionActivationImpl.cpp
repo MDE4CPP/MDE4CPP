@@ -79,12 +79,15 @@ ReadIsClassifiedObjectActionActivationImpl::~ReadIsClassifiedObjectActionActivat
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :ReadIsClassifiedObjectActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj): ReadIsClassifiedObjectActionActivationImpl()
 {

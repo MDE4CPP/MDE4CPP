@@ -73,12 +73,15 @@ ElementImpl::~ElementImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ElementImpl::ElementImpl(std::weak_ptr<uml::Element> par_owner)
 :ElementImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ElementImpl::ElementImpl(const ElementImpl & obj): ElementImpl()
 {
@@ -159,7 +162,7 @@ std::shared_ptr<Bag<uml::Element>> ElementImpl::allOwnedElements()
 		std::shared_ptr<Bag<uml::Element>> allOwnedElements(new Bag<uml::Element>());
 	allOwnedElements->insert(allOwnedElements->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());
 
-	for(const std::shared_ptr<uml::Element> ownedElement : *allOwnedElements)
+	for(const std::shared_ptr<uml::Element>& ownedElement : *allOwnedElements)
 	{
 		std::shared_ptr<Bag<uml::Element>> recursivelyOwnedElements = ownedElement->allOwnedElements();
 		allOwnedElements->insert(allOwnedElements->end(), recursivelyOwnedElements->begin(), recursivelyOwnedElements->end());

@@ -77,6 +77,8 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :DestroyObjectActionImpl()
@@ -84,7 +86,10 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::Activity> pa
 	m_activity = par_activity;
 	m_owner = par_activity;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :DestroyObjectActionImpl()
@@ -92,7 +97,10 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::StructuredAc
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DestroyObjectActionImpl()
@@ -100,13 +108,17 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::Namespace> p
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::Element> par_owner)
 :DestroyObjectActionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl & obj): DestroyObjectActionImpl()
 {

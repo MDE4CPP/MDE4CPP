@@ -62,12 +62,15 @@ MultiplicityElementImpl::~MultiplicityElementImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element> par_owner)
 :MultiplicityElementImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl & obj): MultiplicityElementImpl()
 {

@@ -67,6 +67,8 @@ ProfileApplicationImpl::~ProfileApplicationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Package> par_applyingPackage)
 :ProfileApplicationImpl()
@@ -74,13 +76,17 @@ ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Package> par_a
 	m_applyingPackage = par_applyingPackage;
 	m_owner = par_applyingPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Element> par_owner)
 :ProfileApplicationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj): ProfileApplicationImpl()
 {

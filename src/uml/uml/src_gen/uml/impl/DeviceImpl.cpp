@@ -92,6 +92,8 @@ DeviceImpl::~DeviceImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeviceImpl::DeviceImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DeviceImpl()
@@ -99,14 +101,20 @@ DeviceImpl::DeviceImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeviceImpl::DeviceImpl(std::weak_ptr<uml::Element> par_owner)
 :DeviceImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeviceImpl::DeviceImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :DeviceImpl()
@@ -126,7 +134,10 @@ DeviceImpl::DeviceImpl(std::weak_ptr<uml::Package> par_Package, const int refere
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeviceImpl::DeviceImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :DeviceImpl()
@@ -134,6 +145,7 @@ DeviceImpl::DeviceImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateP
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 DeviceImpl::DeviceImpl(const DeviceImpl & obj): DeviceImpl()

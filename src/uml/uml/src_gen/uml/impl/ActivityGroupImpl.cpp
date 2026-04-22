@@ -68,6 +68,8 @@ ActivityGroupImpl::~ActivityGroupImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Activity> par_inActivity)
 :ActivityGroupImpl()
@@ -75,7 +77,10 @@ ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Activity> par_inActivity
 	m_inActivity = par_inActivity;
 	m_owner = par_inActivity;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ActivityGroupImpl()
@@ -83,14 +88,20 @@ ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Namespace> par_namespace
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Element> par_owner)
 :ActivityGroupImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :ActivityGroupImpl()
@@ -98,6 +109,7 @@ ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup> par_super
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
+#pragma GCC diagnostic pop
 
 ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj): ActivityGroupImpl()
 {

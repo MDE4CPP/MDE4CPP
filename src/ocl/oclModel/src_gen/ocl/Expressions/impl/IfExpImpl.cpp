@@ -76,6 +76,8 @@ IfExpImpl::~IfExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :IfExpImpl()
@@ -96,7 +98,10 @@ IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :IfExpImpl()
@@ -114,9 +119,12 @@ IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_Collec
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :IfExpImpl()
@@ -134,29 +142,39 @@ IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :IfExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :IfExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IfExpImpl::IfExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :IfExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 IfExpImpl::IfExpImpl(const IfExpImpl & obj): IfExpImpl()
 {

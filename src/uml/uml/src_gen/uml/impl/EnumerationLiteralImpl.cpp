@@ -72,6 +72,8 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration> par_enumeration)
 :EnumerationLiteralImpl()
@@ -79,7 +81,10 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration> p
 	m_enumeration = par_enumeration;
 	m_namespace = par_enumeration;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :EnumerationLiteralImpl()
@@ -87,14 +92,20 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Namespace> par
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Element> par_owner)
 :EnumerationLiteralImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :EnumerationLiteralImpl()
@@ -102,7 +113,10 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Package> par_o
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :EnumerationLiteralImpl()
@@ -110,6 +124,7 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParame
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & obj): EnumerationLiteralImpl()
 {

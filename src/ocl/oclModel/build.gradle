@@ -3,6 +3,7 @@
 plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
+
 import org.gradle.internal.os.OperatingSystem;
 
 description 'Build task for project: ocl'
@@ -20,30 +21,6 @@ task runCommandCompileOcl(type:Exec) {
 		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileOclSrc'
 	} else {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileOclSrc'
-	}
-	dependsOn 'generateOcl'
-	dependsOn ':src:ecore:buildEcore'
-		def allDepOutputs = files()
-		getRootProject().getTasksByName('buildEcore', true).each { task ->
-			allDepOutputs.from(task.outputs.files)
-		}
-		inputs.files(allDepOutputs)
-		mustRunAfter = [
-			'generateOcl'
-			, getRootProject().getTasksByName('compileEcore', true)
-		]
-	doFirst {
-		def mde4cppHome = System.getenv('MDE4CPP_HOME')
-		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
-			if (!ecoreLibFile.exists()) {
-				sleep(2000)
-				if (!ecoreLibFile.exists()) {
-					def taskPath = ':src:ecore:buildEcore'
-					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-		}
 	}
 }
 
@@ -72,7 +49,6 @@ task compileOcl() {
 	group 'ocl'
 	description 'compile ocl' 
 
-	dependsOn 'generateOcl'
 	mustRunAfter = ["generateOcl"]
 	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')

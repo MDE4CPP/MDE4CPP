@@ -69,6 +69,8 @@ LiteralStringImpl::~LiteralStringImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :LiteralStringImpl()
@@ -76,14 +78,20 @@ LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Namespace> par_namespace
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Element> par_owner)
 :LiteralStringImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :LiteralStringImpl()
@@ -91,7 +99,10 @@ LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Package> par_owningPacka
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :LiteralStringImpl()
@@ -99,7 +110,10 @@ LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 	m_owningSlot = par_owningSlot;
 	m_owner = par_owningSlot;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :LiteralStringImpl()
@@ -107,7 +121,10 @@ LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::TemplateParameter> par_o
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :LiteralStringImpl()
@@ -115,6 +132,7 @@ LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
+#pragma GCC diagnostic pop
 
 LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj): LiteralStringImpl()
 {

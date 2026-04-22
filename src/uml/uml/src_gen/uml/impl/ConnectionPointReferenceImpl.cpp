@@ -68,6 +68,8 @@ ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Region> par_container)
 :ConnectionPointReferenceImpl()
@@ -75,7 +77,10 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Re
 	m_container = par_container;
 	m_namespace = par_container;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ConnectionPointReferenceImpl()
@@ -83,14 +88,20 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Na
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Element> par_owner)
 :ConnectionPointReferenceImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::State> par_state)
 :ConnectionPointReferenceImpl()
@@ -98,6 +109,7 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::St
 	m_state = par_state;
 	m_namespace = par_state;
 }
+#pragma GCC diagnostic pop
 
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj): ConnectionPointReferenceImpl()
 {

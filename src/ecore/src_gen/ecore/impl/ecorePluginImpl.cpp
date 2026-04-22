@@ -3,6 +3,10 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ecore/ecorePackage.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace ecore;
 
 //static initialisation
@@ -74,3 +78,4 @@ std::string ecorePluginImpl::eNS_PREFIX()
 {
 	return "ecore";
 }
+

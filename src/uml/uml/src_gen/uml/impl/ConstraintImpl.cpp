@@ -67,6 +67,8 @@ ConstraintImpl::~ConstraintImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id)
 :ConstraintImpl()
@@ -86,15 +88,21 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, cons
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Element> par_owner)
 :ConstraintImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :ConstraintImpl()
@@ -102,7 +110,10 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage)
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ConstraintImpl()
@@ -110,6 +121,7 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj): ConstraintImpl()
 {

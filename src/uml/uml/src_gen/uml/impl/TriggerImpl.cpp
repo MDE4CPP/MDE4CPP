@@ -66,6 +66,8 @@ TriggerImpl::~TriggerImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TriggerImpl::TriggerImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TriggerImpl()
@@ -73,13 +75,17 @@ TriggerImpl::TriggerImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TriggerImpl::TriggerImpl(std::weak_ptr<uml::Element> par_owner)
 :TriggerImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 TriggerImpl::TriggerImpl(const TriggerImpl & obj): TriggerImpl()
 {

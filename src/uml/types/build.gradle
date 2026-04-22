@@ -22,27 +22,6 @@ task runCommandCompileTypes(type:Exec) {
 	} else {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileTypesSrc'
 	}
-	dependsOn 'generateTypes'
-	dependsOn ':src:ecore:buildEcore'
-		def allDepOutputs = files()
-		inputs.files(allDepOutputs)
-		mustRunAfter = [
-			'generateTypes'
-			, getRootProject().getTasksByName('compileEcore', true)
-		]
-	doFirst {
-		def mde4cppHome = System.getenv('MDE4CPP_HOME')
-		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
-			if (!ecoreLibFile.exists()) {
-				sleep(2000)
-				if (!ecoreLibFile.exists()) {
-					def taskPath = ':src:ecore:buildEcore'
-					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-		}
-	}
 }
 
 task runCommandGenerateTypes(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -70,7 +49,6 @@ task compileTypes() {
 	group 'types'
 	description 'compile types' 
 
-	dependsOn 'generateTypes'
 	mustRunAfter = ["generateTypes"]
 	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
@@ -84,6 +62,7 @@ task compileTypes() {
 		mustRunAfter = [
 			'generateTypes'
 			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
 		]
 }
 

@@ -3,6 +3,10 @@
 #include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace fUML;
 
 //static initialisation
@@ -74,3 +78,4 @@ std::string fUMLPluginImpl::eNS_PREFIX()
 {
 	return "fUML_Semantics";
 }
+

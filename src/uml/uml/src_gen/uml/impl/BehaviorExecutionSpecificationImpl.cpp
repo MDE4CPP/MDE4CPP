@@ -70,6 +70,8 @@ BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :BehaviorExecutionSpecificationImpl()
@@ -77,7 +79,10 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 	m_enclosingInteraction = par_enclosingInteraction;
 	m_namespace = par_enclosingInteraction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :BehaviorExecutionSpecificationImpl()
@@ -85,7 +90,10 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 	m_enclosingOperand = par_enclosingOperand;
 	m_namespace = par_enclosingOperand;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :BehaviorExecutionSpecificationImpl()
@@ -93,13 +101,17 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element> par_owner)
 :BehaviorExecutionSpecificationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj): BehaviorExecutionSpecificationImpl()
 {

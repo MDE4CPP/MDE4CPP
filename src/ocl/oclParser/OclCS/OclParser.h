@@ -1,3 +1,4 @@
+
 // Generated from OclParser.g4 by ANTLR 4.13.2
 
 #pragma once

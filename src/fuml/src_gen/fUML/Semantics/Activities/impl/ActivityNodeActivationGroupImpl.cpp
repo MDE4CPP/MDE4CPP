@@ -88,19 +88,25 @@ ActivityNodeActivationGroupImpl::~ActivityNodeActivationGroupImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution)
 :ActivityNodeActivationGroupImpl()
 {
 	m_activityExecution = par_activityExecution;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation)
 :ActivityNodeActivationGroupImpl()
 {
 	m_containingNodeActivation = par_containingNodeActivation;
 }
+#pragma GCC diagnostic pop
 
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj): ActivityNodeActivationGroupImpl()
 {

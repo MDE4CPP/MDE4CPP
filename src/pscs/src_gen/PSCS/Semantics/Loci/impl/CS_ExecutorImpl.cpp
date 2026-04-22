@@ -53,8 +53,8 @@
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Loci;
@@ -76,12 +76,15 @@ CS_ExecutorImpl::~CS_ExecutorImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CS_ExecutorImpl::CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus)
 :CS_ExecutorImpl()
 {
 	m_locus = par_locus;
 }
+#pragma GCC diagnostic pop
 
 CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj): CS_ExecutorImpl()
 {

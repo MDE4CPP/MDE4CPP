@@ -63,6 +63,8 @@ ElementImportImpl::~ElementImportImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ElementImportImpl::ElementImportImpl(std::weak_ptr<uml::Namespace> par_importingNamespace)
 :ElementImportImpl()
@@ -70,13 +72,17 @@ ElementImportImpl::ElementImportImpl(std::weak_ptr<uml::Namespace> par_importing
 	m_importingNamespace = par_importingNamespace;
 	m_owner = par_importingNamespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ElementImportImpl::ElementImportImpl(std::weak_ptr<uml::Element> par_owner)
 :ElementImportImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ElementImportImpl::ElementImportImpl(const ElementImportImpl & obj): ElementImportImpl()
 {

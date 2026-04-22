@@ -43,9 +43,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -90,12 +90,15 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::~CS_RemoveStructuralFeature
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CS_RemoveStructuralFeatureValueActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj): CS_RemoveStructuralFeatureValueActionActivationImpl()
 {

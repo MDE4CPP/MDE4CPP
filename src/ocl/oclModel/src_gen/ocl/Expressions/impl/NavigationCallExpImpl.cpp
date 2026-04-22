@@ -77,6 +77,8 @@ NavigationCallExpImpl::~NavigationCallExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :NavigationCallExpImpl()
@@ -97,7 +99,10 @@ NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::IfE
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :NavigationCallExpImpl()
@@ -115,9 +120,12 @@ NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::Col
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :NavigationCallExpImpl()
@@ -135,29 +143,39 @@ NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::Loo
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :NavigationCallExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :NavigationCallExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :NavigationCallExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 NavigationCallExpImpl::NavigationCallExpImpl(const NavigationCallExpImpl & obj): NavigationCallExpImpl()
 {

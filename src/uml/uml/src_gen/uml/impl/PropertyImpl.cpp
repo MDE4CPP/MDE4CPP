@@ -81,6 +81,8 @@ PropertyImpl::~PropertyImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::Property> par_associationEnd)
 :PropertyImpl()
@@ -88,7 +90,10 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::Property> par_associationEnd)
 	m_associationEnd = par_associationEnd;
 	m_owner = par_associationEnd;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::Class> par_class)
 :PropertyImpl()
@@ -96,7 +101,10 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::Class> par_class)
 	m_class = par_class;
 	m_namespace = par_class;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::DataType> par_datatype)
 :PropertyImpl()
@@ -104,7 +112,10 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::DataType> par_datatype)
 	m_datatype = par_datatype;
 	m_namespace = par_datatype;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::Interface> par_interface)
 :PropertyImpl()
@@ -112,7 +123,10 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::Interface> par_interface)
 	m_interface = par_interface;
 	m_namespace = par_interface;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :PropertyImpl()
@@ -120,14 +134,20 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::Element> par_owner)
 :PropertyImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::Association> par_owningAssociation)
 :PropertyImpl()
@@ -135,7 +155,10 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::Association> par_owningAssociation
 	m_owningAssociation = par_owningAssociation;
 	m_namespace = par_owningAssociation;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyImpl::PropertyImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :PropertyImpl()
@@ -143,6 +166,7 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::TemplateParameter> par_owningTempl
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 PropertyImpl::PropertyImpl(const PropertyImpl & obj): PropertyImpl()
 {

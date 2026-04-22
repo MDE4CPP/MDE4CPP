@@ -62,12 +62,15 @@ ETypeParameterImpl::~ETypeParameterImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ETypeParameterImpl::ETypeParameterImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :ETypeParameterImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
 ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj): ETypeParameterImpl()
 {

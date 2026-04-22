@@ -72,6 +72,8 @@ VariableImpl::~VariableImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 VariableImpl::VariableImpl(std::weak_ptr<uml::Activity> par_activityScope)
 :VariableImpl()
@@ -79,7 +81,10 @@ VariableImpl::VariableImpl(std::weak_ptr<uml::Activity> par_activityScope)
 	m_activityScope = par_activityScope;
 	m_namespace = par_activityScope;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 VariableImpl::VariableImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :VariableImpl()
@@ -87,14 +92,20 @@ VariableImpl::VariableImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 VariableImpl::VariableImpl(std::weak_ptr<uml::Element> par_owner)
 :VariableImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 VariableImpl::VariableImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :VariableImpl()
@@ -102,7 +113,10 @@ VariableImpl::VariableImpl(std::weak_ptr<uml::TemplateParameter> par_owningTempl
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode> par_scope)
 :VariableImpl()
@@ -110,6 +124,7 @@ VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode> par_scope)
 	m_scope = par_scope;
 	m_namespace = par_scope;
 }
+#pragma GCC diagnostic pop
 
 VariableImpl::VariableImpl(const VariableImpl & obj): VariableImpl()
 {

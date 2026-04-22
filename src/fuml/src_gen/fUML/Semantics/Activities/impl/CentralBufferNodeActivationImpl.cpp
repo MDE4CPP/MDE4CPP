@@ -67,12 +67,15 @@ CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CentralBufferNodeActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj): CentralBufferNodeActivationImpl()
 {

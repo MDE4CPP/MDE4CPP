@@ -63,12 +63,15 @@ ETypedElementImpl::~ETypedElementImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :ETypedElementImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
 ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj): ETypedElementImpl()
 {

@@ -59,12 +59,15 @@ EObjectAnyImpl::~EObjectAnyImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EObjectAnyImpl::EObjectAnyImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EObjectAnyImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
 EObjectAnyImpl::EObjectAnyImpl(const EObjectAnyImpl & obj): EObjectAnyImpl()
 {
@@ -173,7 +176,7 @@ void EObjectAnyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@61799544 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@476ec9d0 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setAny(value);
 		}
 	}

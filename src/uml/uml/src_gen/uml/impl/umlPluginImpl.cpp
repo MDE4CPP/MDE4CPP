@@ -3,6 +3,10 @@
 #include "uml/umlFactory.hpp"
 #include "uml/umlPackage.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace uml;
 
 //static initialisation
@@ -74,3 +78,4 @@ std::string umlPluginImpl::eNS_PREFIX()
 {
 	return "uml";
 }
+

@@ -66,6 +66,8 @@ ParameterSetImpl::~ParameterSetImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ParameterSetImpl()
@@ -73,13 +75,17 @@ ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Element> par_owner)
 :ParameterSetImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj): ParameterSetImpl()
 {

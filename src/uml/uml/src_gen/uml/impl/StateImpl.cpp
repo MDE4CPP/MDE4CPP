@@ -79,6 +79,8 @@ StateImpl::~StateImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateImpl::StateImpl(std::weak_ptr<uml::Region> par_container)
 :StateImpl()
@@ -86,7 +88,10 @@ StateImpl::StateImpl(std::weak_ptr<uml::Region> par_container)
 	m_container = par_container;
 	m_namespace = par_container;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateImpl::StateImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :StateImpl()
@@ -94,13 +99,17 @@ StateImpl::StateImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateImpl::StateImpl(std::weak_ptr<uml::Element> par_owner)
 :StateImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 StateImpl::StateImpl(const StateImpl & obj): StateImpl()
 {

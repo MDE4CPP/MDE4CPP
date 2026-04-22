@@ -76,6 +76,8 @@ AssociationClassCallExpImpl::~AssociationClassCallExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :AssociationClassCallExpImpl()
@@ -96,7 +98,10 @@ AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expr
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :AssociationClassCallExpImpl()
@@ -114,9 +119,12 @@ AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expr
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :AssociationClassCallExpImpl()
@@ -134,29 +142,39 @@ AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expr
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :AssociationClassCallExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :AssociationClassCallExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 AssociationClassCallExpImpl::AssociationClassCallExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :AssociationClassCallExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 AssociationClassCallExpImpl::AssociationClassCallExpImpl(const AssociationClassCallExpImpl & obj): AssociationClassCallExpImpl()
 {

@@ -69,6 +69,8 @@ StateInvariantImpl::~StateInvariantImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :StateInvariantImpl()
@@ -76,7 +78,10 @@ StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Interaction> par_enclo
 	m_enclosingInteraction = par_enclosingInteraction;
 	m_namespace = par_enclosingInteraction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :StateInvariantImpl()
@@ -84,7 +89,10 @@ StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::InteractionOperand> pa
 	m_enclosingOperand = par_enclosingOperand;
 	m_namespace = par_enclosingOperand;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :StateInvariantImpl()
@@ -92,13 +100,17 @@ StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Namespace> par_namespa
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Element> par_owner)
 :StateInvariantImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj): StateInvariantImpl()
 {

@@ -61,12 +61,15 @@ DirectedRelationshipImpl::~DirectedRelationshipImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DirectedRelationshipImpl::DirectedRelationshipImpl(std::weak_ptr<uml::Element> par_owner)
 :DirectedRelationshipImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj): DirectedRelationshipImpl()
 {

@@ -78,6 +78,8 @@ ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :ReadLinkObjectEndActionImpl()
@@ -85,7 +87,10 @@ ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Acti
 	m_activity = par_activity;
 	m_owner = par_activity;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :ReadLinkObjectEndActionImpl()
@@ -93,7 +98,10 @@ ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Stru
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ReadLinkObjectEndActionImpl()
@@ -101,13 +109,17 @@ ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Name
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Element> par_owner)
 :ReadLinkObjectEndActionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(const ReadLinkObjectEndActionImpl & obj): ReadLinkObjectEndActionImpl()
 {

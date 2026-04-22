@@ -63,13 +63,18 @@ TemplateParameterSubstitutionImpl::~TemplateParameterSubstitutionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::Element> par_owner)
 :TemplateParameterSubstitutionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::TemplateBinding> par_templateBinding)
 :TemplateParameterSubstitutionImpl()
@@ -77,6 +82,7 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_p
 	m_templateBinding = par_templateBinding;
 	m_owner = par_templateBinding;
 }
+#pragma GCC diagnostic pop
 
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj): TemplateParameterSubstitutionImpl()
 {

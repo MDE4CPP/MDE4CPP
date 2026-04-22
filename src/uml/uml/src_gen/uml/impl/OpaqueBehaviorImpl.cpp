@@ -94,6 +94,8 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier)
 :OpaqueBehaviorImpl()
@@ -101,7 +103,10 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::BehavioredClassifier> 
 	m_behavioredClassifier = par_behavioredClassifier;
 	m_namespace = par_behavioredClassifier;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :OpaqueBehaviorImpl()
@@ -109,14 +114,20 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Namespace> par_namespa
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Element> par_owner)
 :OpaqueBehaviorImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :OpaqueBehaviorImpl()
@@ -136,7 +147,10 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Package> par_Package, 
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :OpaqueBehaviorImpl()
@@ -144,6 +158,7 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::TemplateParameter> par
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj): OpaqueBehaviorImpl()

@@ -84,6 +84,8 @@ PackageImpl::~PackageImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PackageImpl::PackageImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :PackageImpl()
@@ -91,7 +93,10 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PackageImpl::PackageImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :PackageImpl()
@@ -111,15 +116,21 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::Package> par_Package, const int refe
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PackageImpl::PackageImpl(std::weak_ptr<uml::Element> par_owner)
 :PackageImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PackageImpl::PackageImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :PackageImpl()
@@ -127,6 +138,7 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplat
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 PackageImpl::PackageImpl(const PackageImpl & obj): PackageImpl()
 {

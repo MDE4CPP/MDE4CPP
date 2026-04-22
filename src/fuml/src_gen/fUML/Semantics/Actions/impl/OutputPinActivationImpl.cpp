@@ -71,12 +71,15 @@ OutputPinActivationImpl::~OutputPinActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OutputPinActivationImpl::OutputPinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :OutputPinActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl & obj): OutputPinActivationImpl()
 {

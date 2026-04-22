@@ -80,12 +80,15 @@ ReadExtentActionActivationImpl::~ReadExtentActionActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :ReadExtentActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(const ReadExtentActionActivationImpl & obj): ReadExtentActionActivationImpl()
 {

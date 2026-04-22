@@ -78,6 +78,8 @@ OperationContextDeclExpImpl::~OperationContextDeclExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :OperationContextDeclExpImpl()
@@ -98,7 +100,10 @@ OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expr
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :OperationContextDeclExpImpl()
@@ -116,9 +121,12 @@ OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expr
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :OperationContextDeclExpImpl()
@@ -136,29 +144,39 @@ OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expr
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :OperationContextDeclExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :OperationContextDeclExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationContextDeclExpImpl::OperationContextDeclExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :OperationContextDeclExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 OperationContextDeclExpImpl::OperationContextDeclExpImpl(const OperationContextDeclExpImpl & obj): OperationContextDeclExpImpl()
 {

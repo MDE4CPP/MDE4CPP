@@ -38,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/AcceptEventAction.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
@@ -82,12 +82,15 @@ CS_AcceptEventActionActivationImpl::~CS_AcceptEventActionActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CS_AcceptEventActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj): CS_AcceptEventActionActivationImpl()
 {

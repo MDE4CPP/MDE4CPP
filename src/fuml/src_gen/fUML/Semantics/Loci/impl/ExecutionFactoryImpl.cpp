@@ -178,12 +178,15 @@ ExecutionFactoryImpl::~ExecutionFactoryImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionFactoryImpl::ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus)
 :ExecutionFactoryImpl()
 {
 	m_locus = par_locus;
 }
+#pragma GCC diagnostic pop
 
 ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj): ExecutionFactoryImpl()
 {

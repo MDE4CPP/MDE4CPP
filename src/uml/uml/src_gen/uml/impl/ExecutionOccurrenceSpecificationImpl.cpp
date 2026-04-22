@@ -69,6 +69,8 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :ExecutionOccurrenceSpecificationImpl()
@@ -76,7 +78,10 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::
 	m_enclosingInteraction = par_enclosingInteraction;
 	m_namespace = par_enclosingInteraction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :ExecutionOccurrenceSpecificationImpl()
@@ -84,7 +89,10 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::
 	m_enclosingOperand = par_enclosingOperand;
 	m_namespace = par_enclosingOperand;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExecutionOccurrenceSpecificationImpl()
@@ -92,13 +100,17 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::weak_ptr<uml::Element> par_owner)
 :ExecutionOccurrenceSpecificationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const ExecutionOccurrenceSpecificationImpl & obj): ExecutionOccurrenceSpecificationImpl()
 {

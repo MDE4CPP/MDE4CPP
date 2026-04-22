@@ -22,18 +22,6 @@ task runCommandCompileEcore(type:Exec) {
 	} else {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileEcoreSrc'
 	}
-	dependsOn 'generateEcore'
-	dependsOn ':src:deliverBasicInterfaces'
-		def allDepOutputs = files()
-		inputs.files(allDepOutputs)
-		mustRunAfter = [
-			'generateEcore'
-		]
-	doFirst {
-		def mde4cppHome = System.getenv('MDE4CPP_HOME')
-		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-		}
-	}
 }
 
 task runCommandGenerateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -61,7 +49,6 @@ task compileEcore() {
 	group 'ecore'
 	description 'compile ecore' 
 
-	dependsOn 'generateEcore'
 	mustRunAfter = ["generateEcore"]
 	dependsOn ':src:deliverBasicInterfaces'
 	
@@ -85,5 +72,5 @@ task buildEcore() {
 
 	dependsOn 'generateEcore'
 	dependsOn 'compileEcore'
-	dependsOn ':src:deliverBasicInterfaces'
+
 }

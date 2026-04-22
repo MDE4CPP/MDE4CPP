@@ -68,6 +68,8 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :OccurrenceSpecificationImpl()
@@ -75,7 +77,10 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Inte
 	m_enclosingInteraction = par_enclosingInteraction;
 	m_namespace = par_enclosingInteraction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :OccurrenceSpecificationImpl()
@@ -83,7 +88,10 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Inte
 	m_enclosingOperand = par_enclosingOperand;
 	m_namespace = par_enclosingOperand;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :OccurrenceSpecificationImpl()
@@ -91,13 +99,17 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Name
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Element> par_owner)
 :OccurrenceSpecificationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj): OccurrenceSpecificationImpl()
 {

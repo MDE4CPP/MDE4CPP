@@ -67,6 +67,8 @@ TimeObservationImpl::~TimeObservationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TimeObservationImpl()
@@ -74,14 +76,20 @@ TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Namespace> par_names
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Element> par_owner)
 :TimeObservationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :TimeObservationImpl()
@@ -89,7 +97,10 @@ TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Package> par_owningP
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :TimeObservationImpl()
@@ -97,6 +108,7 @@ TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter> p
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj): TimeObservationImpl()
 {

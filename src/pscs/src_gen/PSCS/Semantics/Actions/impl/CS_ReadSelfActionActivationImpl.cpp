@@ -34,9 +34,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -75,12 +75,15 @@ CS_ReadSelfActionActivationImpl::~CS_ReadSelfActionActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CS_ReadSelfActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(const CS_ReadSelfActionActivationImpl & obj): CS_ReadSelfActionActivationImpl()
 {

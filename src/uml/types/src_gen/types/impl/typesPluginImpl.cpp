@@ -3,6 +3,10 @@
 #include "types/typesFactory.hpp"
 #include "types/typesPackage.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace types;
 
 //static initialisation
@@ -74,3 +78,4 @@ std::string typesPluginImpl::eNS_PREFIX()
 {
 	return "types";
 }
+

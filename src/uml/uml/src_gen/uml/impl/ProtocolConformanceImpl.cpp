@@ -62,13 +62,18 @@ ProtocolConformanceImpl::~ProtocolConformanceImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::Element> par_owner)
 :ProtocolConformanceImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStateMachine> par_specificMachine)
 :ProtocolConformanceImpl()
@@ -76,6 +81,7 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStat
 	m_specificMachine = par_specificMachine;
 	m_owner = par_specificMachine;
 }
+#pragma GCC diagnostic pop
 
 ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl & obj): ProtocolConformanceImpl()
 {

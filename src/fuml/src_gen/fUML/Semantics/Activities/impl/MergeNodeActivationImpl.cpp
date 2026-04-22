@@ -67,12 +67,15 @@ MergeNodeActivationImpl::~MergeNodeActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 MergeNodeActivationImpl::MergeNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :MergeNodeActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 MergeNodeActivationImpl::MergeNodeActivationImpl(const MergeNodeActivationImpl & obj): MergeNodeActivationImpl()
 {

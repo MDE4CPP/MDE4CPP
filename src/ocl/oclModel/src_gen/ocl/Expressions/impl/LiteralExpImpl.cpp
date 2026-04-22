@@ -76,6 +76,8 @@ LiteralExpImpl::~LiteralExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :LiteralExpImpl()
@@ -96,7 +98,10 @@ LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp,
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :LiteralExpImpl()
@@ -114,9 +119,12 @@ LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> 
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :LiteralExpImpl()
@@ -134,29 +142,39 @@ LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_Loop
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :LiteralExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :LiteralExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :LiteralExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 LiteralExpImpl::LiteralExpImpl(const LiteralExpImpl & obj): LiteralExpImpl()
 {

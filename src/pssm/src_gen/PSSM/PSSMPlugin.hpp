@@ -11,10 +11,11 @@
 #include "PSSM/PSSM.hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
+// #include "pluginFramework/OperationInvokerPlugin.hpp" // WebAPI - raus ???
 
 namespace PSSM
 {
-	class PSSM_API PSSMPlugin : virtual public EcoreModelPlugin
+	class PSSM_API PSSMPlugin : virtual public EcoreModelPlugin // n�tig WebAPI ??? , virtual public OperationInvokerPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

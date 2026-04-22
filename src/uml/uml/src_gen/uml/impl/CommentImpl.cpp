@@ -60,12 +60,15 @@ CommentImpl::~CommentImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CommentImpl::CommentImpl(std::weak_ptr<uml::Element> par_owner)
 :CommentImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 CommentImpl::CommentImpl(const CommentImpl & obj): CommentImpl()
 {

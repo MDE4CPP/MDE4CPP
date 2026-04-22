@@ -67,12 +67,15 @@ TokenImpl::~TokenImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TokenImpl::TokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder)
 :TokenImpl()
 {
 	m_holder = par_holder;
 }
+#pragma GCC diagnostic pop
 
 TokenImpl::TokenImpl(const TokenImpl & obj): TokenImpl()
 {

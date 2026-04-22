@@ -4,21 +4,24 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: VendingMachine'
 
 task runCommandCompileVendingMachine(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileVendingMachineSrc'
-	mustRunAfter =  [
-		"generateVendingMachine" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compilePSSM', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileVendingMachineSrc'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileVendingMachineSrc'
+	}
+	dependsOn 'generateVendingMachine'
 }
 
 task runCommandGenerateVendingMachine(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -42,7 +45,18 @@ task generateVendingMachine() {
 }
 
 task runCommandCompileApplicationForVendingMachine(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForVendingMachineSrc'
+	workingDir project.projectDir
+	def rootPath = project.rootDir.toPath()
+	def projectPath = project.projectDir.toPath()
+	def relativeToRoot = rootPath.relativize(projectPath)
+	def depth = relativeToRoot.nameCount
+	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+	if (OperatingSystem.current().isWindows()) {
+		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
+		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForVendingMachineSrc'
+	} else {
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForVendingMachineSrc'
+	}
 	dependsOn 'compileVendingMachine'
 }
 
@@ -50,28 +64,35 @@ task compileVendingMachine {
 	group 'VendingMachine'
 	description 'compile VendingMachine'
 
+	dependsOn 'generateVendingMachine'
+	mustRunAfter = ["generateVendingMachine"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateVendingMachine'
-		mustRunAfter = ["generateVendingMachine"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileVendingMachineSrc'
+	} else {
 		dependsOn 'runCommandCompileVendingMachine'
 	}
-	else
-	{
-		mustRunAfter = ["generateVendingMachine"]
-		dependsOn 'src_gen:compileVendingMachineSrc'
-	}
-	mustRunAfter =  [
-		"generateVendingMachine" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compilePSSM', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateVendingMachine"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compilePSSM', true)
+			, getRootProject().getTasksByName('buildPSSM', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForVendingMachine{

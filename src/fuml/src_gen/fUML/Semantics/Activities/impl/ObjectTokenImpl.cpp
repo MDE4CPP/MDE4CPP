@@ -63,12 +63,15 @@ ObjectTokenImpl::~ObjectTokenImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ObjectTokenImpl::ObjectTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder)
 :ObjectTokenImpl()
 {
 	m_holder = par_holder;
 }
+#pragma GCC diagnostic pop
 
 ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj): ObjectTokenImpl()
 {
@@ -206,7 +209,7 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@53ed09e8 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@1daf3b44 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}

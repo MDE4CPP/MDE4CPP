@@ -3,6 +3,10 @@
 #include "PSSM/PSSMFactory.hpp"
 #include "PSSM/PSSMPackage.hpp"
 
+#include <ecore/EAnnotation.hpp>
+#include <ecore/EClass.hpp>
+#include <ecore/EOperation.hpp>
+
 using namespace PSSM;
 
 //static initialisation
@@ -74,3 +78,4 @@ std::string PSSMPluginImpl::eNS_PREFIX()
 {
 	return "PSSM";
 }
+

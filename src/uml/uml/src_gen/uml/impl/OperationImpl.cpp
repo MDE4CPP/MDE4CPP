@@ -84,6 +84,8 @@ OperationImpl::~OperationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationImpl::OperationImpl(std::weak_ptr<uml::Class> par_class)
 :OperationImpl()
@@ -91,7 +93,10 @@ OperationImpl::OperationImpl(std::weak_ptr<uml::Class> par_class)
 	m_class = par_class;
 	m_namespace = par_class;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationImpl::OperationImpl(std::weak_ptr<uml::DataType> par_datatype)
 :OperationImpl()
@@ -99,7 +104,10 @@ OperationImpl::OperationImpl(std::weak_ptr<uml::DataType> par_datatype)
 	m_datatype = par_datatype;
 	m_namespace = par_datatype;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationImpl::OperationImpl(std::weak_ptr<uml::Interface> par_interface)
 :OperationImpl()
@@ -107,7 +115,10 @@ OperationImpl::OperationImpl(std::weak_ptr<uml::Interface> par_interface)
 	m_interface = par_interface;
 	m_namespace = par_interface;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationImpl::OperationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :OperationImpl()
@@ -115,14 +126,20 @@ OperationImpl::OperationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationImpl::OperationImpl(std::weak_ptr<uml::Element> par_owner)
 :OperationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 OperationImpl::OperationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :OperationImpl()
@@ -130,6 +147,7 @@ OperationImpl::OperationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 OperationImpl::OperationImpl(const OperationImpl & obj): OperationImpl()
 {

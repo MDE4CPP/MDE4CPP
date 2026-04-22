@@ -63,13 +63,18 @@ ExceptionHandlerImpl::~ExceptionHandlerImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::Element> par_owner)
 :ExceptionHandlerImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode> par_protectedNode)
 :ExceptionHandlerImpl()
@@ -77,6 +82,7 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode> pa
 	m_protectedNode = par_protectedNode;
 	m_owner = par_protectedNode;
 }
+#pragma GCC diagnostic pop
 
 ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj): ExceptionHandlerImpl()
 {

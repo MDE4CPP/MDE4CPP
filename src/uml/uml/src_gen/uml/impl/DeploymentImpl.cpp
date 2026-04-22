@@ -69,6 +69,8 @@ DeploymentImpl::~DeploymentImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::DeploymentTarget> par_location)
 :DeploymentImpl()
@@ -76,7 +78,10 @@ DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::DeploymentTarget> par_location
 	m_location = par_location;
 	m_owner = par_location;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DeploymentImpl()
@@ -84,14 +89,20 @@ DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Element> par_owner)
 :DeploymentImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :DeploymentImpl()
@@ -99,7 +110,10 @@ DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Package> par_owningPackage)
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :DeploymentImpl()
@@ -107,6 +121,7 @@ DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj): DeploymentImpl()
 {

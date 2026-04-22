@@ -66,6 +66,8 @@ RedefinableElementImpl::~RedefinableElementImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :RedefinableElementImpl()
@@ -73,13 +75,17 @@ RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Namespace> par
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Element> par_owner)
 :RedefinableElementImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & obj): RedefinableElementImpl()
 {

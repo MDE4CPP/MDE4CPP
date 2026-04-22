@@ -69,19 +69,25 @@ EClassImpl::~EClassImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EClassImpl::EClassImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EClassImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EClassImpl::EClassImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 :EClassImpl()
 {
 	m_ePackage = par_ePackage;
 }
+#pragma GCC diagnostic pop
 
 EClassImpl::EClassImpl(const EClassImpl & obj): EClassImpl()
 {

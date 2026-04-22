@@ -86,12 +86,15 @@ StructuredActivityNodeActivationImpl::~StructuredActivityNodeActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :StructuredActivityNodeActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj): StructuredActivityNodeActivationImpl()
 {
@@ -205,7 +208,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
     assert(action != nullptr);
 
     // *** Concurrently send offers from all input pins. ***
-    std::shared_ptr<Bag<uml::InputPin>> inputPins = nullptr;//action->input;
+    std::shared_ptr<Bag<uml::InputPin>> inputPins = action->getInput();
     std::vector<std::shared_ptr<uml::InputPin>>::iterator i;
 
     for (i = inputPins->begin(); i!= inputPins->end();++i)

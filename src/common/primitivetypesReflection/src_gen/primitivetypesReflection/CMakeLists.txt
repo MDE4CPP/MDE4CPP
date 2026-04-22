@@ -15,7 +15,7 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
-SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_CXX_STANDARD 23)
 
 SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
 IF(APPLE)
@@ -46,15 +46,15 @@ IF(APPLE)
   SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 ENDIF(APPLE)
 
-IF(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
+IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
+    # Windows (native or cross-compiled)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
 		
 	ENDIF()
 ELSEIF(APPLE)
@@ -65,6 +65,17 @@ ELSEIF(APPLE)
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
+		
+	ENDIF()
+ELSEIF(UNIX)
+    # Linux, BSD, Solaris, Minix
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
+		
+	ELSE()
+		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSE()
@@ -81,6 +92,12 @@ ENDIF()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
+
+# Export all symbols for Windows DLLs (needed for cross-compilation)
+# This ensures virtual functions from base classes are visible when linking
+IF(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR (NOT CMAKE_SYSTEM_NAME AND WIN32))
+    SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+ENDIF()
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}

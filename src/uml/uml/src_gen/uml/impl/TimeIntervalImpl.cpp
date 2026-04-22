@@ -70,6 +70,8 @@ TimeIntervalImpl::~TimeIntervalImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TimeIntervalImpl()
@@ -77,14 +79,20 @@ TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::Element> par_owner)
 :TimeIntervalImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :TimeIntervalImpl()
@@ -92,7 +100,10 @@ TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::Package> par_owningPackage
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :TimeIntervalImpl()
@@ -100,7 +111,10 @@ TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 	m_owningSlot = par_owningSlot;
 	m_owner = par_owningSlot;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :TimeIntervalImpl()
@@ -108,7 +122,10 @@ TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::TemplateParameter> par_own
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :TimeIntervalImpl()
@@ -116,6 +133,7 @@ TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> 
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
+#pragma GCC diagnostic pop
 
 TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj): TimeIntervalImpl()
 {

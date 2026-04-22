@@ -92,6 +92,8 @@ ExecutionEnvironmentImpl::~ExecutionEnvironmentImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExecutionEnvironmentImpl()
@@ -99,14 +101,20 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Namespace>
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Element> par_owner)
 :ExecutionEnvironmentImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :ExecutionEnvironmentImpl()
@@ -126,7 +134,10 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Package> p
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ExecutionEnvironmentImpl()
@@ -134,6 +145,7 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::TemplatePa
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(const ExecutionEnvironmentImpl & obj): ExecutionEnvironmentImpl()

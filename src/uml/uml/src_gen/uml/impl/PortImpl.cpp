@@ -78,6 +78,8 @@ PortImpl::~PortImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::Property> par_associationEnd)
 :PortImpl()
@@ -85,7 +87,10 @@ PortImpl::PortImpl(std::weak_ptr<uml::Property> par_associationEnd)
 	m_associationEnd = par_associationEnd;
 	m_owner = par_associationEnd;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::Class> par_class)
 :PortImpl()
@@ -93,7 +98,10 @@ PortImpl::PortImpl(std::weak_ptr<uml::Class> par_class)
 	m_class = par_class;
 	m_namespace = par_class;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::DataType> par_datatype)
 :PortImpl()
@@ -101,7 +109,10 @@ PortImpl::PortImpl(std::weak_ptr<uml::DataType> par_datatype)
 	m_datatype = par_datatype;
 	m_namespace = par_datatype;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::Interface> par_interface)
 :PortImpl()
@@ -109,7 +120,10 @@ PortImpl::PortImpl(std::weak_ptr<uml::Interface> par_interface)
 	m_interface = par_interface;
 	m_namespace = par_interface;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :PortImpl()
@@ -117,14 +131,20 @@ PortImpl::PortImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::Element> par_owner)
 :PortImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::Association> par_owningAssociation)
 :PortImpl()
@@ -132,7 +152,10 @@ PortImpl::PortImpl(std::weak_ptr<uml::Association> par_owningAssociation)
 	m_owningAssociation = par_owningAssociation;
 	m_namespace = par_owningAssociation;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :PortImpl()
@@ -140,6 +163,7 @@ PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParam
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 PortImpl::PortImpl(const PortImpl & obj): PortImpl()
 {

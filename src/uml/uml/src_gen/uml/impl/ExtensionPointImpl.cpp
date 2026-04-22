@@ -66,6 +66,8 @@ ExtensionPointImpl::~ExtensionPointImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExtensionPointImpl()
@@ -73,14 +75,20 @@ ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Namespace> par_namespa
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Element> par_owner)
 :ExtensionPointImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::UseCase> par_useCase)
 :ExtensionPointImpl()
@@ -88,6 +96,7 @@ ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::UseCase> par_useCase)
 	m_useCase = par_useCase;
 	m_namespace = par_useCase;
 }
+#pragma GCC diagnostic pop
 
 ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj): ExtensionPointImpl()
 {

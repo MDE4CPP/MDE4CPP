@@ -77,6 +77,8 @@ ClassifierContextDeclExpImpl::~ClassifierContextDeclExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :ClassifierContextDeclExpImpl()
@@ -97,7 +99,10 @@ ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Ex
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :ClassifierContextDeclExpImpl()
@@ -115,9 +120,12 @@ ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Ex
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :ClassifierContextDeclExpImpl()
@@ -135,29 +143,39 @@ ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Ex
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :ClassifierContextDeclExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :ClassifierContextDeclExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :ClassifierContextDeclExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 ClassifierContextDeclExpImpl::ClassifierContextDeclExpImpl(const ClassifierContextDeclExpImpl & obj): ClassifierContextDeclExpImpl()
 {

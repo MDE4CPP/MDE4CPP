@@ -66,6 +66,8 @@ IncludeImpl::~IncludeImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase> par_includingCase)
 :IncludeImpl()
@@ -73,7 +75,10 @@ IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase> par_includingCase)
 	m_includingCase = par_includingCase;
 	m_namespace = par_includingCase;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :IncludeImpl()
@@ -81,13 +86,17 @@ IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element> par_owner)
 :IncludeImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 IncludeImpl::IncludeImpl(const IncludeImpl & obj): IncludeImpl()
 {

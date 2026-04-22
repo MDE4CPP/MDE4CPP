@@ -11,10 +11,11 @@
 #include "ecore/ecore.hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
+// #include "pluginFramework/OperationInvokerPlugin.hpp" // WebAPI - raus ???
 
 namespace ecore
 {
-	class ECORE_API ecorePlugin : virtual public EcoreModelPlugin
+	class ECORE_API ecorePlugin : virtual public EcoreModelPlugin // n�tig WebAPI ??? , virtual public OperationInvokerPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

@@ -67,6 +67,8 @@ CallEventImpl::~CallEventImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CallEventImpl::CallEventImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :CallEventImpl()
@@ -74,14 +76,20 @@ CallEventImpl::CallEventImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CallEventImpl::CallEventImpl(std::weak_ptr<uml::Element> par_owner)
 :CallEventImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CallEventImpl::CallEventImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :CallEventImpl()
@@ -89,7 +97,10 @@ CallEventImpl::CallEventImpl(std::weak_ptr<uml::Package> par_owningPackage)
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :CallEventImpl()
@@ -97,6 +108,7 @@ CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 CallEventImpl::CallEventImpl(const CallEventImpl & obj): CallEventImpl()
 {

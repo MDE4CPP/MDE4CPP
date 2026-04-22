@@ -11,10 +11,11 @@
 #include "ocl/ocl.hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
+// #include "pluginFramework/OperationInvokerPlugin.hpp" // WebAPI - raus ???
 
 namespace ocl
 {
-	class OCL_API oclPlugin : virtual public EcoreModelPlugin
+	class OCL_API oclPlugin : virtual public EcoreModelPlugin // n�tig WebAPI ??? , virtual public OperationInvokerPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

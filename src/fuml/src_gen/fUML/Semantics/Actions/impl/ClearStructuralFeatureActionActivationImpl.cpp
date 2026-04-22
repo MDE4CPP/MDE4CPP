@@ -80,12 +80,15 @@ ClearStructuralFeatureActionActivationImpl::~ClearStructuralFeatureActionActivat
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :ClearStructuralFeatureActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl(const ClearStructuralFeatureActionActivationImpl & obj): ClearStructuralFeatureActionActivationImpl()
 {

@@ -64,19 +64,25 @@ EEnumImpl::~EEnumImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EEnumImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 :EEnumImpl()
 {
 	m_ePackage = par_ePackage;
 }
+#pragma GCC diagnostic pop
 
 EEnumImpl::EEnumImpl(const EEnumImpl & obj): EEnumImpl()
 {

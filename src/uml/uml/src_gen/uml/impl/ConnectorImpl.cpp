@@ -71,6 +71,8 @@ ConnectorImpl::~ConnectorImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ConnectorImpl()
@@ -78,14 +80,20 @@ ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Element> par_owner)
 :ConnectorImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier> par_structuredClassifier)
 :ConnectorImpl()
@@ -93,6 +101,7 @@ ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier> par_struct
 	m_structuredClassifier = par_structuredClassifier;
 	m_namespace = par_structuredClassifier;
 }
+#pragma GCC diagnostic pop
 
 ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj): ConnectorImpl()
 {

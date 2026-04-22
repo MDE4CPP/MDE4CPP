@@ -72,6 +72,8 @@ ParameterImpl::~ParameterImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterImpl::ParameterImpl(std::weak_ptr<uml::Behavior> par_behavior)
 :ParameterImpl()
@@ -79,7 +81,10 @@ ParameterImpl::ParameterImpl(std::weak_ptr<uml::Behavior> par_behavior)
 	m_behavior = par_behavior;
 	m_namespace = par_behavior;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterImpl::ParameterImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ParameterImpl()
@@ -87,7 +92,10 @@ ParameterImpl::ParameterImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterImpl::ParameterImpl(std::weak_ptr<uml::Operation> par_operation)
 :ParameterImpl()
@@ -95,14 +103,20 @@ ParameterImpl::ParameterImpl(std::weak_ptr<uml::Operation> par_operation)
 	m_operation = par_operation;
 	m_namespace = par_operation;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterImpl::ParameterImpl(std::weak_ptr<uml::Element> par_owner)
 :ParameterImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ParameterImpl()
@@ -110,6 +124,7 @@ ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 ParameterImpl::ParameterImpl(const ParameterImpl & obj): ParameterImpl()
 {

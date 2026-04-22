@@ -76,6 +76,8 @@ LoopExpImpl::~LoopExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :LoopExpImpl()
@@ -96,7 +98,10 @@ LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :LoopExpImpl()
@@ -114,9 +119,12 @@ LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_Co
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :LoopExpImpl()
@@ -134,29 +142,39 @@ LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, c
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :LoopExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :LoopExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :LoopExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 LoopExpImpl::LoopExpImpl(const LoopExpImpl & obj): LoopExpImpl()
 {

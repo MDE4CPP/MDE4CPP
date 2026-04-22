@@ -69,6 +69,8 @@ RedefinableTemplateSignatureImpl::~RedefinableTemplateSignatureImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :RedefinableTemplateSignatureImpl()
@@ -76,14 +78,20 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Element> par_owner)
 :RedefinableTemplateSignatureImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement> par_template)
 :RedefinableTemplateSignatureImpl()
@@ -91,6 +99,7 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr
 	m_template = par_template;
 	m_owner = par_template;
 }
+#pragma GCC diagnostic pop
 
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj): RedefinableTemplateSignatureImpl()
 {

@@ -67,6 +67,8 @@ TimeConstraintImpl::~TimeConstraintImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id)
 :TimeConstraintImpl()
@@ -86,15 +88,21 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespa
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Element> par_owner)
 :TimeConstraintImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :TimeConstraintImpl()
@@ -102,7 +110,10 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Package> par_owningPac
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :TimeConstraintImpl()
@@ -110,6 +121,7 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter> par
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj): TimeConstraintImpl()
 {

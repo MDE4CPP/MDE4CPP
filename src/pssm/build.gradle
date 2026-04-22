@@ -22,65 +22,6 @@ task runCommandCompilePSSM(type:Exec) {
 	} else {
 		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePSSMSrc'
 	}
-	dependsOn 'generatePSSM'
-	dependsOn ':src:uml:types:buildTypes'
-	dependsOn ':src:ecore:buildEcore'
-	dependsOn ':src:pscs:buildPSCS'
-		def allDepOutputs = files()
-		inputs.files(allDepOutputs)
-		mustRunAfter = [
-			'generatePSSM'
-			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('compileFUML', true)
-			, getRootProject().getTasksByName('compileEcore', true)
-			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('compilePSCS', true)
-		]
-	doFirst {
-		def mde4cppHome = System.getenv('MDE4CPP_HOME')
-		if (mde4cppHome && OperatingSystem.current().isLinux()) {
-			def typesLibFile = new File(mde4cppHome, 'application/bin/types.so')
-			if (!typesLibFile.exists()) {
-				sleep(2000)
-				if (!typesLibFile.exists()) {
-					def taskPath = ':src:uml:types:buildTypes'
-					throw new GradleException("Dependency library file does not exist: " + typesLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-			def fUMLLibFile = new File(mde4cppHome, 'application/bin/fUML.so')
-			if (!fUMLLibFile.exists()) {
-				sleep(2000)
-				if (!fUMLLibFile.exists()) {
-					def taskPath = ':src:fuml:buildFUML'
-					throw new GradleException("Dependency library file does not exist: " + fUMLLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-			def ecoreLibFile = new File(mde4cppHome, 'application/bin/ecore.so')
-			if (!ecoreLibFile.exists()) {
-				sleep(2000)
-				if (!ecoreLibFile.exists()) {
-					def taskPath = ':src:ecore:buildEcore'
-					throw new GradleException("Dependency library file does not exist: " + ecoreLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-			def umlLibFile = new File(mde4cppHome, 'application/bin/uml.so')
-			if (!umlLibFile.exists()) {
-				sleep(2000)
-				if (!umlLibFile.exists()) {
-					def taskPath = ':src:uml:buildUml'
-					throw new GradleException("Dependency library file does not exist: " + umlLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-			def PSCSLibFile = new File(mde4cppHome, 'application/bin/PSCS.so')
-			if (!PSCSLibFile.exists()) {
-				sleep(2000)
-				if (!PSCSLibFile.exists()) {
-					def taskPath = ':src:pscs:buildPSCS'
-					throw new GradleException("Dependency library file does not exist: " + PSCSLibFile.absolutePath + ". Task " + taskPath + " must complete first.")
-				}
-			}
-		}
-	}
 }
 
 task runCommandGeneratePSSM(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -108,7 +49,6 @@ task compilePSSM() {
 	group 'PSSM'
 	description 'compile PSSM' 
 
-	dependsOn 'generatePSSM'
 	mustRunAfter = ["generatePSSM"]
 	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
@@ -122,10 +62,15 @@ task compilePSSM() {
 		mustRunAfter = [
 			'generatePSSM'
 			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
 			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
 			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
 		]
 }
 
@@ -138,8 +83,8 @@ task buildPSSM() {
 	dependsOn 'compilePSSM'
 
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildPSCS', true)
 }

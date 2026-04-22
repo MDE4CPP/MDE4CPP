@@ -63,12 +63,15 @@ StateMachineConfigurationImpl::~StateMachineConfigurationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StateMachineConfigurationImpl::StateMachineConfigurationImpl(std::weak_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> par_execution)
 :StateMachineConfigurationImpl()
 {
 	m_execution = par_execution;
 }
+#pragma GCC diagnostic pop
 
 StateMachineConfigurationImpl::StateMachineConfigurationImpl(const StateMachineConfigurationImpl & obj): StateMachineConfigurationImpl()
 {

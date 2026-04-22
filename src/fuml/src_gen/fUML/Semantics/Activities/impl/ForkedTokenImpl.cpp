@@ -64,12 +64,15 @@ ForkedTokenImpl::~ForkedTokenImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ForkedTokenImpl::ForkedTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder)
 :ForkedTokenImpl()
 {
 	m_holder = par_holder;
 }
+#pragma GCC diagnostic pop
 
 ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj): ForkedTokenImpl()
 {

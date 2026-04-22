@@ -70,12 +70,15 @@ InitialNodeActivationImpl::~InitialNodeActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InitialNodeActivationImpl::InitialNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :InitialNodeActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 InitialNodeActivationImpl::InitialNodeActivationImpl(const InitialNodeActivationImpl & obj): InitialNodeActivationImpl()
 {

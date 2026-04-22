@@ -64,12 +64,15 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element> par_owner)
 :LinkEndDestructionDataImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj): LinkEndDestructionDataImpl()
 {

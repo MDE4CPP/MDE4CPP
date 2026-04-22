@@ -63,12 +63,15 @@ TemplateableElementImpl::~TemplateableElementImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TemplateableElementImpl::TemplateableElementImpl(std::weak_ptr<uml::Element> par_owner)
 :TemplateableElementImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl & obj): TemplateableElementImpl()
 {

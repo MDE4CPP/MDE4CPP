@@ -65,6 +65,8 @@ CollaborationUseImpl::~CollaborationUseImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :CollaborationUseImpl()
@@ -72,13 +74,17 @@ CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Namespace> par_nam
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Element> par_owner)
 :CollaborationUseImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj): CollaborationUseImpl()
 {

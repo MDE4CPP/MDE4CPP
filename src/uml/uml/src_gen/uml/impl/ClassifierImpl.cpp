@@ -92,6 +92,8 @@ ClassifierImpl::~ClassifierImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ClassifierImpl()
@@ -99,14 +101,20 @@ ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::Element> par_owner)
 :ClassifierImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :ClassifierImpl()
@@ -126,7 +134,10 @@ ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::Package> par_Package, const in
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ClassifierImpl()
@@ -134,6 +145,7 @@ ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 ClassifierImpl::ClassifierImpl(const ClassifierImpl & obj): ClassifierImpl()

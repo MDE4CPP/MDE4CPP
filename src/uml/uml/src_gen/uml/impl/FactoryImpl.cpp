@@ -61,12 +61,15 @@ FactoryImpl::~FactoryImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 FactoryImpl::FactoryImpl(std::weak_ptr<uml::Element> par_owner)
 :FactoryImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 FactoryImpl::FactoryImpl(const FactoryImpl & obj): FactoryImpl()
 {

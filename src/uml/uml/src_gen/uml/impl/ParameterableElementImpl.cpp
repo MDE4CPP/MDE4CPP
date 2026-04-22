@@ -62,13 +62,18 @@ ParameterableElementImpl::~ParameterableElementImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::Element> par_owner)
 :ParameterableElementImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ParameterableElementImpl()
@@ -76,6 +81,7 @@ ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplatePa
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImpl & obj): ParameterableElementImpl()
 {

@@ -85,6 +85,8 @@ InputPinImpl::~InputPinImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::Action> par_action)
 :InputPinImpl()
@@ -92,7 +94,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::Action> par_action)
 	m_action = par_action;
 	m_owner = par_action;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::Activity> par_activity)
 :InputPinImpl()
@@ -100,7 +105,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::Activity> par_activity)
 	m_activity = par_activity;
 	m_owner = par_activity;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction)
 :InputPinImpl()
@@ -108,7 +116,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction> p
 	m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
 	m_action = par_addStructuralFeatureValueAction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::CallOperationAction> par_callOperationAction)
 :InputPinImpl()
@@ -116,7 +127,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::CallOperationAction> par_callOpera
 	m_callOperationAction = par_callOperationAction;
 	m_action = par_callOperationAction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction)
 :InputPinImpl()
@@ -124,7 +138,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::DestroyObjectAction> par_destroyOb
 	m_destroyObjectAction = par_destroyObjectAction;
 	m_action = par_destroyObjectAction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :InputPinImpl()
@@ -132,7 +149,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStru
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::InvocationAction> par_invocationAction)
 :InputPinImpl()
@@ -140,7 +160,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::InvocationAction> par_invocationAc
 	m_invocationAction = par_invocationAction;
 	m_action = par_invocationAction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :InputPinImpl()
@@ -148,14 +171,20 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::Element> par_owner)
 :InputPinImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction)
 :InputPinImpl()
@@ -163,7 +192,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction
 	m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
 	m_action = par_removeStructuralFeatureValueAction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction)
 :InputPinImpl()
@@ -171,7 +203,10 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::StructuralFeatureAction> par_struc
 	m_structuralFeatureAction = par_structuralFeatureAction;
 	m_action = par_structuralFeatureAction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InputPinImpl::InputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction)
 :InputPinImpl()
@@ -179,6 +214,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_
 	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
 	m_action = par_writeStructuralFeatureAction;
 }
+#pragma GCC diagnostic pop
 
 InputPinImpl::InputPinImpl(const InputPinImpl & obj): InputPinImpl()
 {

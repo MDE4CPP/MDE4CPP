@@ -67,6 +67,8 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::Activity> par_inActivity)
 :InterruptibleActivityRegionImpl()
@@ -74,7 +76,10 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<u
 	m_inActivity = par_inActivity;
 	m_owner = par_inActivity;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :InterruptibleActivityRegionImpl()
@@ -82,14 +87,20 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<u
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::Element> par_owner)
 :InterruptibleActivityRegionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :InterruptibleActivityRegionImpl()
@@ -97,6 +108,7 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<u
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
+#pragma GCC diagnostic pop
 
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj): InterruptibleActivityRegionImpl()
 {

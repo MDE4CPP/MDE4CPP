@@ -76,6 +76,8 @@ ReceptionImpl::~ReceptionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ReceptionImpl()
@@ -83,13 +85,17 @@ ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Element> par_owner)
 :ReceptionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj): ReceptionImpl()
 {

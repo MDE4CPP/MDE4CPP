@@ -85,6 +85,8 @@ ExtensionImpl::~ExtensionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExtensionImpl()
@@ -92,14 +94,20 @@ ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Element> par_owner)
 :ExtensionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :ExtensionImpl()
@@ -119,7 +127,10 @@ ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Package> par_Package, const int 
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ExtensionImpl()
@@ -127,6 +138,7 @@ ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
 
 ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj): ExtensionImpl()

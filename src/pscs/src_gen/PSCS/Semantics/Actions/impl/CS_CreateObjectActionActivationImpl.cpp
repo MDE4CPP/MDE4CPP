@@ -35,8 +35,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -75,12 +75,15 @@ CS_CreateObjectActionActivationImpl::~CS_CreateObjectActionActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CS_CreateObjectActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj): CS_CreateObjectActionActivationImpl()
 {

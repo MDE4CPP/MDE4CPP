@@ -70,6 +70,8 @@ TimeExpressionImpl::~TimeExpressionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TimeExpressionImpl()
@@ -77,14 +79,20 @@ TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Namespace> par_namespa
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Element> par_owner)
 :TimeExpressionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :TimeExpressionImpl()
@@ -92,7 +100,10 @@ TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Package> par_owningPac
 	m_owningPackage = par_owningPackage;
 	m_namespace = par_owningPackage;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :TimeExpressionImpl()
@@ -100,7 +111,10 @@ TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 	m_owningSlot = par_owningSlot;
 	m_owner = par_owningSlot;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :TimeExpressionImpl()
@@ -108,7 +122,10 @@ TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter> par
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :TimeExpressionImpl()
@@ -116,6 +133,7 @@ TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationActi
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
+#pragma GCC diagnostic pop
 
 TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj): TimeExpressionImpl()
 {

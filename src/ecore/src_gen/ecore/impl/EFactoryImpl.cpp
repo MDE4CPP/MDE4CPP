@@ -70,12 +70,15 @@ EFactoryImpl::~EFactoryImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EFactoryImpl::EFactoryImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EFactoryImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
 EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj): EFactoryImpl()
 {

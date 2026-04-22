@@ -85,12 +85,15 @@ ReadStructuralFeatureActionActivationImpl::~ReadStructuralFeatureActionActivatio
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :ReadStructuralFeatureActionActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivationImpl(const ReadStructuralFeatureActionActivationImpl & obj): ReadStructuralFeatureActionActivationImpl()
 {

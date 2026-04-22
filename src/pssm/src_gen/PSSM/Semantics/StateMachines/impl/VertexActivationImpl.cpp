@@ -70,8 +70,8 @@ VertexActivationImpl::VertexActivationImpl()
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
 	//generated from codegen annotation
-	this->m_incomingTransitionActivations = std::make_shared<Bag<PSSM::Semantics::StateMachines::TransitionActivation>>();
-	this->m_outgoingTransitionActivations = std::make_shared<Bag<PSSM::Semantics::StateMachines::TransitionActivation>>();
+	m_incomingTransitionActivations.reset(new Bag<PSSM::Semantics::StateMachines::TransitionActivation>());
+	m_outgoingTransitionActivations.reset(new Bag<PSSM::Semantics::StateMachines::TransitionActivation>());
 }
 
 VertexActivationImpl::~VertexActivationImpl()

@@ -69,6 +69,8 @@ DestructionOccurrenceSpecificationImpl::~DestructionOccurrenceSpecificationImpl(
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :DestructionOccurrenceSpecificationImpl()
@@ -76,7 +78,10 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(s
 	m_enclosingInteraction = par_enclosingInteraction;
 	m_namespace = par_enclosingInteraction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :DestructionOccurrenceSpecificationImpl()
@@ -84,7 +89,10 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(s
 	m_enclosingOperand = par_enclosingOperand;
 	m_namespace = par_enclosingOperand;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DestructionOccurrenceSpecificationImpl()
@@ -92,13 +100,17 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(s
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Element> par_owner)
 :DestructionOccurrenceSpecificationImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj): DestructionOccurrenceSpecificationImpl()
 {

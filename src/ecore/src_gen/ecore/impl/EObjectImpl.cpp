@@ -67,12 +67,15 @@ EObjectImpl::~EObjectImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EObjectImpl::EObjectImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EObjectImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
 EObjectImpl::EObjectImpl(const EObjectImpl & obj): EObjectImpl()
 {
@@ -448,7 +451,7 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Add attributes
-		// TODO 'org.eclipse.emf.ecore.impl.EDataTypeImpl@5e39850 (name: EInt) (instanceClassName: int) (serializable: true)' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
+		// TODO 'org.eclipse.emf.ecore.impl.EDataTypeImpl@78c1a023 (name: EInt) (instanceClassName: int) (serializable: true)' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
 		//
 		// Add new tags (from references)
 		//

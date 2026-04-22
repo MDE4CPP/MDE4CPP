@@ -74,6 +74,8 @@ InteractionOperandImpl::~InteractionOperandImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :InteractionOperandImpl()
@@ -81,7 +83,10 @@ InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Interaction> p
 	m_enclosingInteraction = par_enclosingInteraction;
 	m_namespace = par_enclosingInteraction;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :InteractionOperandImpl()
@@ -89,7 +94,10 @@ InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::InteractionOpe
 	m_enclosingOperand = par_enclosingOperand;
 	m_namespace = par_enclosingOperand;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :InteractionOperandImpl()
@@ -97,13 +105,17 @@ InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Namespace> par
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Element> par_owner)
 :InteractionOperandImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & obj): InteractionOperandImpl()
 {

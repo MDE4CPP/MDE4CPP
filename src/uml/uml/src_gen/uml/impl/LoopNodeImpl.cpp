@@ -82,6 +82,8 @@ LoopNodeImpl::~LoopNodeImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id)
 :LoopNodeImpl()
@@ -101,8 +103,11 @@ LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int 
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :LoopNodeImpl()
@@ -110,7 +115,10 @@ LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStru
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :LoopNodeImpl()
@@ -118,14 +126,20 @@ LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Element> par_owner)
 :LoopNodeImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :LoopNodeImpl()
@@ -133,6 +147,7 @@ LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
+#pragma GCC diagnostic pop
 
 LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj): LoopNodeImpl()
 {

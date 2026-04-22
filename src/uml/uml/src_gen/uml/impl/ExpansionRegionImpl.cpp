@@ -82,6 +82,8 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id)
 :ExpansionRegionImpl()
@@ -101,8 +103,11 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity> par_Activi
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :ExpansionRegionImpl()
@@ -110,7 +115,10 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::StructuredActivityNo
 	m_inStructuredNode = par_inStructuredNode;
 	m_owner = par_inStructuredNode;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExpansionRegionImpl()
@@ -118,14 +126,20 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Namespace> par_names
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Element> par_owner)
 :ExpansionRegionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :ExpansionRegionImpl()
@@ -133,6 +147,7 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::ActivityGroup> par_s
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
+#pragma GCC diagnostic pop
 
 ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj): ExpansionRegionImpl()
 {

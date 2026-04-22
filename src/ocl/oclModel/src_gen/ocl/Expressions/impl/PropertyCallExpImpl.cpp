@@ -76,6 +76,8 @@ PropertyCallExpImpl::~PropertyCallExpImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id)
 :PropertyCallExpImpl()
@@ -96,7 +98,10 @@ PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp> 
 	}
    
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id)
 :PropertyCallExpImpl()
@@ -114,9 +119,12 @@ PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::Collect
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :PropertyCallExpImpl()
@@ -134,29 +142,39 @@ PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp
 	}
    
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
 :PropertyCallExpImpl()
 {
 	m_parentCall = par_parentCall;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav)
 :PropertyCallExpImpl()
 {
 	m_parentNav = par_parentNav;
 }
+#pragma GCC diagnostic pop
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression)
 :PropertyCallExpImpl()
 {
 	m_topExpression = par_topExpression;
 }
+#pragma GCC diagnostic pop
 
 PropertyCallExpImpl::PropertyCallExpImpl(const PropertyCallExpImpl & obj): PropertyCallExpImpl()
 {

@@ -74,19 +74,25 @@ ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution)
 :ExpansionActivationGroupImpl()
 {
 	m_activityExecution = par_activityExecution;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation)
 :ExpansionActivationGroupImpl()
 {
 	m_containingNodeActivation = par_containingNodeActivation;
 }
+#pragma GCC diagnostic pop
 
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj): ExpansionActivationGroupImpl()
 {

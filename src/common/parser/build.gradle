@@ -96,7 +96,7 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 		} else {
 			cmakeCmd += 'Unix Makefiles'
 		}
-		cmakeCmd += '" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin").absolutePath
+		cmakeCmd += '" -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=4.0 -DBUILD_GMOCK:BOOL=OFF -DANTLR_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin").absolutePath
 		
 		// Add cross-compilation flags if needed
 		if (isCrossCompiling) {
@@ -173,25 +173,20 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			copy {
 				from "antlr4/bin/lib"
 				into System.getenv('MDE4CPP_HOME')+"/application/lib"
-				include "**/*.a"
+				include "*.a"
 			}
 		} else if (isWindows) {
 			// Native Windows: look for .dll files
 			copy {
 				from "antlr4/bin/bin"
 				into System.getenv('MDE4CPP_HOME')+"/application/bin"
-				include "**/*.dll"
-			}
-			copy {
-				from "antlr4/bin/lib"
-				into System.getenv('MDE4CPP_HOME')+"/application/bin"
-				include "**/*.dll"
+				include "*.dll"
 			}
 			// Also copy static libraries
 			copy {
 				from "antlr4/bin/lib"
 				into System.getenv('MDE4CPP_HOME')+"/application/lib"
-				include "**/*.a"
+				include "*.a"
 			}
 		} else {
 			// Linux/Mac: look for .so/.dylib files

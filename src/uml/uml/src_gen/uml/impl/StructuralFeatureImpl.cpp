@@ -70,6 +70,8 @@ StructuralFeatureImpl::~StructuralFeatureImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :StructuralFeatureImpl()
@@ -77,13 +79,17 @@ StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Namespace> par_n
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Element> par_owner)
 :StructuralFeatureImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj): StructuralFeatureImpl()
 {

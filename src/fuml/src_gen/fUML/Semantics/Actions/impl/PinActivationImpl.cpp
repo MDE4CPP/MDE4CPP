@@ -74,12 +74,15 @@ PinActivationImpl::~PinActivationImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 PinActivationImpl::PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :PinActivationImpl()
 {
 	m_group = par_group;
 }
+#pragma GCC diagnostic pop
 
 PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj): PinActivationImpl()
 {

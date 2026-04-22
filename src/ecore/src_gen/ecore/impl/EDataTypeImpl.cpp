@@ -63,19 +63,25 @@ EDataTypeImpl::~EDataTypeImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EDataTypeImpl()
 {
 	m_eContainer = par_eContainer;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 :EDataTypeImpl()
 {
 	m_ePackage = par_ePackage;
 }
+#pragma GCC diagnostic pop
 
 EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj): EDataTypeImpl()
 {

@@ -76,6 +76,8 @@ TransitionImpl::~TransitionImpl()
 #endif
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TransitionImpl::TransitionImpl(std::weak_ptr<uml::Region> par_container)
 :TransitionImpl()
@@ -83,7 +85,10 @@ TransitionImpl::TransitionImpl(std::weak_ptr<uml::Region> par_container)
 	m_container = par_container;
 	m_namespace = par_container;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TransitionImpl::TransitionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TransitionImpl()
@@ -91,13 +96,17 @@ TransitionImpl::TransitionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 	m_namespace = par_namespace;
 	m_owner = par_namespace;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 //Additional constructor for the containments back reference
 TransitionImpl::TransitionImpl(std::weak_ptr<uml::Element> par_owner)
 :TransitionImpl()
 {
 	m_owner = par_owner;
 }
+#pragma GCC diagnostic pop
 
 TransitionImpl::TransitionImpl(const TransitionImpl & obj): TransitionImpl()
 {
