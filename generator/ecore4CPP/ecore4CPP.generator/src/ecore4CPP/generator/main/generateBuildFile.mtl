@@ -156,17 +156,18 @@ description 'Build task for project: [packageName/]'
 [comment Ensure OperatingSystem is available in doFirst /]
 
 task runCommandCompile[packageName.toUpperFirst()/](type:Exec) {[comment internal task --> no group --> no visualisation in gradle tasks/]
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compile[packageName.toUpperFirst()/]Src'
+if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew src_gen:compile[packageName.toUpperFirst()/]Src'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compile[packageName.toUpperFirst()/]Src'
+[comment would not be necessary if gradlew were accessible in the path
+		workingDir project.projectDir
+		def rootPath = project.rootDir.toPath()
+		def projectPath = project.projectDir.toPath()
+		def relativeToRoot = rootPath.relativize(projectPath)
+		def depth = relativeToRoot.nameCount
+		def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
+		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compile[packageName.toUpperFirst()/)Src'/]
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compile[packageName.toUpperFirst()/]Src'
 	}
 }
 
