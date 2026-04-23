@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: ecoreReflection'
 
 task runCommandCompileEcoreReflection(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileEcoreReflectionSrc'
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileEcoreReflectionSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileEcoreReflectionSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileEcoreReflectionSrc'
 	}
 	dependsOn 'generateEcoreReflection'
 }

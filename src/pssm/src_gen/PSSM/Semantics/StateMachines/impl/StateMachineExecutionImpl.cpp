@@ -247,7 +247,7 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> StateMachineEx
 	std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> vertexActivation = nullptr;
 	for (auto regionActivation : *(this->getRegionActivations()))
 	{
-		if (vertexActivation = regionActivation->getVertexActivation(vertex)) break;
+		if (vertexActivation == regionActivation->getVertexActivation(vertex)){ break;}
 	}
 	return vertexActivation;
 	//end of body

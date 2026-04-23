@@ -4,20 +4,17 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: AssemCon_PWP_P'
 
 task runCommandCompileAssemCon_PWP_P(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileAssemCon_PWP_PSrc'
-	mustRunAfter =  [
-		"generateAssemCon_PWP_P" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileAssemCon_PWP_PSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileAssemCon_PWP_PSrc'
+	}
+	dependsOn 'generateAssemCon_PWP_P'
 }
 
 task runCommandGenerateAssemCon_PWP_P(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -41,7 +38,11 @@ task generateAssemCon_PWP_P() {
 }
 
 task runCommandCompileApplicationForAssemCon_PWP_P(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForAssemCon_PWP_PSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForAssemCon_PWP_PSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForAssemCon_PWP_PSrc'
+	}
 	dependsOn 'compileAssemCon_PWP_P'
 }
 
@@ -49,27 +50,32 @@ task compileAssemCon_PWP_P {
 	group 'AssemCon_PWP_P'
 	description 'compile AssemCon_PWP_P'
 
+	mustRunAfter = ["generateAssemCon_PWP_P"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateAssemCon_PWP_P'
-		mustRunAfter = ["generateAssemCon_PWP_P"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileAssemCon_PWP_PSrc'
+	} else {
 		dependsOn 'runCommandCompileAssemCon_PWP_P'
 	}
-	else
-	{
-		mustRunAfter = ["generateAssemCon_PWP_P"]
-		dependsOn 'src_gen:compileAssemCon_PWP_PSrc'
-	}
-	mustRunAfter =  [
-		"generateAssemCon_PWP_P" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateAssemCon_PWP_P"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForAssemCon_PWP_P{

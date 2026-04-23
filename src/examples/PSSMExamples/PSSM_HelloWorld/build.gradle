@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: PSSM_HelloWorld'
 
 task runCommandCompilePSSM_HelloWorld(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compilePSSM_HelloWorldSrc'
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSM_HelloWorldSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePSSM_HelloWorldSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compilePSSM_HelloWorldSrc'
 	}
 	dependsOn 'generatePSSM_HelloWorld'
 }
@@ -45,17 +38,10 @@ task generatePSSM_HelloWorld() {
 }
 
 task runCommandCompileApplicationForPSSM_HelloWorld(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForPSSM_HelloWorldSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForPSSM_HelloWorldSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForPSSM_HelloWorldSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForPSSM_HelloWorldSrc'
 	}
 	dependsOn 'compilePSSM_HelloWorld'
 }
@@ -64,7 +50,6 @@ task compilePSSM_HelloWorld {
 	group 'PSSM_HelloWorld'
 	description 'compile PSSM_HelloWorld'
 
-	dependsOn 'generatePSSM_HelloWorld'
 	mustRunAfter = ["generatePSSM_HelloWorld"]
 	
 	def buildFile = file('src_gen/build.gradle')

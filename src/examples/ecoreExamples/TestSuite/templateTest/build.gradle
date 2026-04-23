@@ -4,15 +4,17 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build task for project: templateTest'
 
+
 task runCommandCompileTemplateTest(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileTemplateTestSrc'
-	mustRunAfter =  [
-		'generateTemplateTest'
-	
-		, getRootProject().getTasksByName('compileEcore', true)
-	]
+if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileTemplateTestSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileTemplateTestSrc'
+	}
 }
 
 task runCommandGenerateTemplateTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -44,23 +46,21 @@ task compileTemplateTest() {
 	group 'templateTest'
 	description 'compile templateTest' 
 
+	mustRunAfter = ["generateTemplateTest"]
+	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ 
-		dependsOn 'generateTemplateTest' 
-		mustRunAfter = ["generateTemplateTest"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileTemplateTestSrc'
+	} else {
 		dependsOn 'runCommandCompileTemplateTest'
 	}
-	else
-	{
-		mustRunAfter = ["generateTemplateTest"]
-		dependsOn 'src_gen:compileTemplateTestSrc'
-	} 
-	mustRunAfter =  [
-		'generateTemplateTest'
 	
-		, getRootProject().getTasksByName('compileEcore', true)
-	]
+		mustRunAfter = [
+			'generateTemplateTest'
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+		]
 }
 
 task compileApplicationForTemplateTest{

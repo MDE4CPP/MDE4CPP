@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: CalcModel'
 
 task runCommandCompileCalcModel(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileCalcModelSrc'
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileCalcModelSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileCalcModelSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileCalcModelSrc'
 	}
 	dependsOn 'generateCalcModel'
 }
@@ -45,17 +38,10 @@ task generateCalcModel() {
 }
 
 task runCommandCompileApplicationForCalcModel(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForCalcModelSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForCalcModelSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForCalcModelSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForCalcModelSrc'
 	}
 	dependsOn 'compileCalcModel'
 }
@@ -64,7 +50,6 @@ task compileCalcModel {
 	group 'CalcModel'
 	description 'compile CalcModel'
 
-	dependsOn 'generateCalcModel'
 	mustRunAfter = ["generateCalcModel"]
 	
 	def buildFile = file('src_gen/build.gradle')

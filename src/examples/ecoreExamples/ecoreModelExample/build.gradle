@@ -10,17 +10,10 @@ description 'Build task for project: libraryModel_ecore'
 
 
 task runCommandCompileLibraryModel_ecore(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileLibraryModel_ecoreSrc'
+if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileLibraryModel_ecoreSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileLibraryModel_ecoreSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileLibraryModel_ecoreSrc'
 	}
 }
 
@@ -53,7 +46,6 @@ task compileLibraryModel_ecore() {
 	group 'libraryModel_ecore'
 	description 'compile libraryModel_ecore' 
 
-	dependsOn 'generateLibraryModel_ecore'
 	mustRunAfter = ["generateLibraryModel_ecore"]
 	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')

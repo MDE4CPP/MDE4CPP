@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: StandardProfile'
 
 task runCommandCompileStandardProfile(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileStandardProfileSrc'
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileStandardProfileSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileStandardProfileSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileStandardProfileSrc'
 	}
 	dependsOn 'generateStandardProfile'
 }

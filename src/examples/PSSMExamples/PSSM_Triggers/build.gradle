@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: PSSM_Triggers'
 
 task runCommandCompilePSSM_Triggers(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compilePSSM_TriggersSrc'
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSM_TriggersSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePSSM_TriggersSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compilePSSM_TriggersSrc'
 	}
 	dependsOn 'generatePSSM_Triggers'
 }
@@ -45,17 +38,10 @@ task generatePSSM_Triggers() {
 }
 
 task runCommandCompileApplicationForPSSM_Triggers(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForPSSM_TriggersSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForPSSM_TriggersSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForPSSM_TriggersSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForPSSM_TriggersSrc'
 	}
 	dependsOn 'compilePSSM_Triggers'
 }
@@ -64,7 +50,6 @@ task compilePSSM_Triggers {
 	group 'PSSM_Triggers'
 	description 'compile PSSM_Triggers'
 
-	dependsOn 'generatePSSM_Triggers'
 	mustRunAfter = ["generatePSSM_Triggers"]
 	
 	def buildFile = file('src_gen/build.gradle')

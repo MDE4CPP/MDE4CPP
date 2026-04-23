@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: PSSM_InternalTransition'
 
 task runCommandCompilePSSM_InternalTransition(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compilePSSM_InternalTransitionSrc'
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSM_InternalTransitionSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePSSM_InternalTransitionSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compilePSSM_InternalTransitionSrc'
 	}
 	dependsOn 'generatePSSM_InternalTransition'
 }
@@ -45,17 +38,10 @@ task generatePSSM_InternalTransition() {
 }
 
 task runCommandCompileApplicationForPSSM_InternalTransition(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForPSSM_InternalTransitionSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForPSSM_InternalTransitionSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForPSSM_InternalTransitionSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForPSSM_InternalTransitionSrc'
 	}
 	dependsOn 'compilePSSM_InternalTransition'
 }
@@ -64,7 +50,6 @@ task compilePSSM_InternalTransition {
 	group 'PSSM_InternalTransition'
 	description 'compile PSSM_InternalTransition'
 
-	dependsOn 'generatePSSM_InternalTransition'
 	mustRunAfter = ["generatePSSM_InternalTransition"]
 	
 	def buildFile = file('src_gen/build.gradle')

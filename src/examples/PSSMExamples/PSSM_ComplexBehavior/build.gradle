@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: PSSM_ComplexBehavior'
 
 task runCommandCompilePSSM_ComplexBehavior(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compilePSSM_ComplexBehaviorSrc'
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSM_ComplexBehaviorSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePSSM_ComplexBehaviorSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compilePSSM_ComplexBehaviorSrc'
 	}
 	dependsOn 'generatePSSM_ComplexBehavior'
 }
@@ -45,17 +38,10 @@ task generatePSSM_ComplexBehavior() {
 }
 
 task runCommandCompileApplicationForPSSM_ComplexBehavior(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForPSSM_ComplexBehaviorSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForPSSM_ComplexBehaviorSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForPSSM_ComplexBehaviorSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForPSSM_ComplexBehaviorSrc'
 	}
 	dependsOn 'compilePSSM_ComplexBehavior'
 }
@@ -64,7 +50,6 @@ task compilePSSM_ComplexBehavior {
 	group 'PSSM_ComplexBehavior'
 	description 'compile PSSM_ComplexBehavior'
 
-	dependsOn 'generatePSSM_ComplexBehavior'
 	mustRunAfter = ["generatePSSM_ComplexBehavior"]
 	
 	def buildFile = file('src_gen/build.gradle')

@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: LibraryModel_uml'
 
 task runCommandCompileLibraryModel_uml(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileLibraryModel_umlSrc'
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileLibraryModel_umlSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileLibraryModel_umlSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileLibraryModel_umlSrc'
 	}
 	dependsOn 'generateLibraryModel_uml'
 }
@@ -30,17 +23,10 @@ task runCommandGenerateLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 }
 
 task runCommandCompileApplicationForLibraryModel_uml(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForLibraryModel_umlSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLibraryModel_umlSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForLibraryModel_umlSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForLibraryModel_umlSrc'
 	}
 	dependsOn 'compileLibraryModel_uml'
 }
@@ -64,7 +50,6 @@ task compileLibraryModel_uml() {
 	group 'LibraryModel_uml'
 	description 'compile LibraryModel_uml'
 
-	dependsOn 'generateLibraryModel_uml'
 	mustRunAfter = ["generateLibraryModel_uml"]
 	
 	def buildFile = file('src_gen/build.gradle')

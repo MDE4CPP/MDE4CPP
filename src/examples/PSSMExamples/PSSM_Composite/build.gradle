@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: PSSM_Composite'
 
 task runCommandCompilePSSM_Composite(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compilePSSM_CompositeSrc'
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compilePSSM_CompositeSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePSSM_CompositeSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compilePSSM_CompositeSrc'
 	}
 	dependsOn 'generatePSSM_Composite'
 }
@@ -45,17 +38,10 @@ task generatePSSM_Composite() {
 }
 
 task runCommandCompileApplicationForPSSM_Composite(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForPSSM_CompositeSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForPSSM_CompositeSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForPSSM_CompositeSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForPSSM_CompositeSrc'
 	}
 	dependsOn 'compilePSSM_Composite'
 }
@@ -64,7 +50,6 @@ task compilePSSM_Composite {
 	group 'PSSM_Composite'
 	description 'compile PSSM_Composite'
 
-	dependsOn 'generatePSSM_Composite'
 	mustRunAfter = ["generatePSSM_Composite"]
 	
 	def buildFile = file('src_gen/build.gradle')

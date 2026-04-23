@@ -10,17 +10,10 @@ description 'Build task for project: ecoreAnnotationsExample'
 
 
 task runCommandCompileEcoreAnnotationsExample(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compileEcoreAnnotationsExampleSrc'
+if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileEcoreAnnotationsExampleSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compileEcoreAnnotationsExampleSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileEcoreAnnotationsExampleSrc'
 	}
 }
 
@@ -53,7 +46,6 @@ task compileEcoreAnnotationsExample() {
 	group 'ecoreAnnotationsExample'
 	description 'compile ecoreAnnotationsExample' 
 
-	dependsOn 'generateEcoreAnnotationsExample'
 	mustRunAfter = ["generateEcoreAnnotationsExample"]
 	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')

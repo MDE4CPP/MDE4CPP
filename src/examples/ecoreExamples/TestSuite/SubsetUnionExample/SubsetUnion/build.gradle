@@ -4,15 +4,17 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build task for project: subsetUnion'
 
+
 task runCommandCompileSubsetUnion(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileSubsetUnionSrc'
-	mustRunAfter =  [
-		'generateSubsetUnion'
-	
-		, getRootProject().getTasksByName('compileEcore', true)
-	]
+if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileSubsetUnionSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileSubsetUnionSrc'
+	}
 }
 
 task runCommandGenerateSubsetUnion(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -44,23 +46,21 @@ task compileSubsetUnion() {
 	group 'subsetUnion'
 	description 'compile subsetUnion' 
 
+	mustRunAfter = ["generateSubsetUnion"]
+	
 	def buildFile = file('src_gen'+ File.separator + 'build.gradle')
-
-	if(!buildFile.exists()){ 
-		dependsOn 'generateSubsetUnion' 
-		mustRunAfter = ["generateSubsetUnion"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileSubsetUnionSrc'
+	} else {
 		dependsOn 'runCommandCompileSubsetUnion'
 	}
-	else
-	{
-		mustRunAfter = ["generateSubsetUnion"]
-		dependsOn 'src_gen:compileSubsetUnionSrc'
-	} 
-	mustRunAfter =  [
-		'generateSubsetUnion'
 	
-		, getRootProject().getTasksByName('compileEcore', true)
-	]
+		mustRunAfter = [
+			'generateSubsetUnion'
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+		]
 }
 
 task compileApplicationForSubsetUnion{

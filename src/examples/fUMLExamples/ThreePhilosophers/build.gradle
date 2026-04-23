@@ -9,17 +9,10 @@ import org.gradle.internal.os.OperatingSystem;
 description 'Build tasks for project: philosophers'
 
 task runCommandCompilePhilosophers(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
-	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat src_gen:compilePhilosophersSrc'
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compilePhilosophersSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' src_gen:compilePhilosophersSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compilePhilosophersSrc'
 	}
 	dependsOn 'generatePhilosophers'
 }
@@ -45,17 +38,10 @@ task generatePhilosophers() {
 }
 
 task runCommandCompileApplicationForPhilosophers(type:Exec) {
-	workingDir project.projectDir
-	def rootPath = project.rootDir.toPath()
-	def projectPath = project.projectDir.toPath()
-	def relativeToRoot = rootPath.relativize(projectPath)
-	def depth = relativeToRoot.nameCount
-	def gradlewRelPath = '../' * depth + 'application/tools/gradlew'
 	if (OperatingSystem.current().isWindows()) {
-		def gradlewPathWin = gradlewRelPath.replace('/', '\\')
-		commandLine 'cmd', '/c', gradlewPathWin + '.bat application:compileApplicationForPhilosophersSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForPhilosophersSrc'
 	} else {
-		commandLine '/bin/sh', '-c', gradlewRelPath + ' application:compileApplicationForPhilosophersSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForPhilosophersSrc'
 	}
 	dependsOn 'compilePhilosophers'
 }
@@ -64,7 +50,6 @@ task compilePhilosophers {
 	group 'philosophers'
 	description 'compile philosophers'
 
-	dependsOn 'generatePhilosophers'
 	mustRunAfter = ["generatePhilosophers"]
 	
 	def buildFile = file('src_gen/build.gradle')
