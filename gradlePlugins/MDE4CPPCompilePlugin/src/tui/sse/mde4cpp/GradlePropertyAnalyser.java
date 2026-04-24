@@ -9,6 +9,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.gradle.api.Project;
+import org.gradle.api.logging.Logger;
 
 /**
  * Class for analyzing Gradle properties assigned to this task<br>
@@ -216,18 +217,28 @@ class GradlePropertyAnalyser
 	}
 	
 	/**
-	 * Checks if cross-compilation to Windows is requested
+	 * Checks if cross-compilation to Windows is requested.
+	 * Logs the detected configuration for debugging purposes.
 	 * 
 	 * @param project current project instance contains existing properties
 	 * @return {@code true} if cross-compilation to Windows is requested, otherwise {@code false}
 	 */
 	static boolean isCrossCompileWindowsRequested(Project project)
 	{
+		Logger logger = project.getLogger();
+		String osName = System.getProperty("os.name").toLowerCase();
+		boolean isWindows = osName.contains("windows");
+		
 		// First check Gradle property (from ORG_GRADLE_PROJECT_CROSS_COMPILE_WINDOWS environment variable)
 		if (project.hasProperty("CROSS_COMPILE_WINDOWS"))
 		{
 			String value = project.property("CROSS_COMPILE_WINDOWS").toString();
-			return "true".equalsIgnoreCase(value.trim());
+			boolean result = "true".equalsIgnoreCase(value.trim());
+			logger.info("CROSS_COMPILE_WINDOWS from Gradle property: {} (value: '{}')", result, value);
+			if (result && !isWindows) {
+				logger.warn("Cross-compilation to Windows requested, but running on {}. Make sure MinGW-w64 is installed for cross-compilation.", osName);
+			}
+			return result;
 		}
 		
 		// Fall back to reading MDE4CPP_Generator.properties file
@@ -247,16 +258,34 @@ class GradlePropertyAnalyser
 					String value = prop.getProperty("CROSS_COMPILE_WINDOWS");
 					if (value != null)
 					{
-						return "true".equalsIgnoreCase(value.trim());
+						boolean result = "true".equalsIgnoreCase(value.trim());
+						logger.info("CROSS_COMPILE_WINDOWS from MDE4CPP_Generator.properties: {} (value: '{}')", result, value);
+						if (result && !isWindows) {
+							logger.warn("Cross-compilation to Windows requested in {}, but running on {}. Make sure MinGW-w64 is installed for cross-compilation.", configFilePath, osName);
+						}
+						return result;
 					}
+					else
+					{
+						logger.info("CROSS_COMPILE_WINDOWS not set in MDE4CPP_Generator.properties, defaulting to false");
+					}
+				}
+				else
+				{
+					logger.info("MDE4CPP_Generator.properties not found at {}, using default", configFilePath);
 				}
 			}
 			catch (IOException e)
 			{
-				// Silently fail - properties file is optional
+				logger.warn("Failed to read MDE4CPP_Generator.properties: {}", e.getMessage());
 			}
 		}
+		else
+		{
+			logger.info("MDE4CPP_HOME environment variable not set, cannot read MDE4CPP_Generator.properties");
+		}
 		
+		logger.info("CROSS_COMPILE_WINDOWS not configured, defaulting to false");
 		return false;
 	}
 }
