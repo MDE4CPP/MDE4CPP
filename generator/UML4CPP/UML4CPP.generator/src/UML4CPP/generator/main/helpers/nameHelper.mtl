@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::model_execution::model_execution /]
+[import UML4CPP::generator::main::components::generateStructuralFeature/]
 
 [** 
  *  queries to generate qualified name, required for elements without defined name
