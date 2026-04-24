@@ -65,7 +65,7 @@
         nsPrefix="PSSM.Semantics.CommonBehavior">
       <eClassifiers xsi:type="ecore:EClass" name="SM_ObjectActivation" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/ObjectActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="getNextCompletionEvent" ordered="false" lowerBound="1"
             eType="#//Semantics/StateMachines/CompletionEventOccurrence">
@@ -108,7 +108,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EventTriggeredExecution" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/Execution">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventExecution.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventExecution.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="finalize" ordered="false">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -151,7 +151,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallEventExecution" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/Execution">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="_send" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -209,7 +209,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallEventOccurrence" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/CommonBehavior/EventOccurrence">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
         </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="execution" ordered="false"
             lowerBound="1" eType="#//Semantics/CommonBehavior/CallEventExecution"/>
@@ -311,7 +311,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="StateMachineSemanticVisitor" abstract="true"
           eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/Loci/SemanticVisitor">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/StateMachines/StateMachineExecution.hpp&quot;&#xD;&#xA;#include &quot;uml/CallEvent.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/StateMachines/ExitPointPseudostateActivation.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/StateMachines/EntryPointPseudostateActivation.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventExecution.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xD;&#xA;#include &quot;PSSM/PSSMFactory.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/StateMachines/StateMachineExecution.hpp&quot;&#xD;&#xA;#include &quot;uml/CallEvent.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/StateMachines/ExitPointPseudostateActivation.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/StateMachines/EntryPointPseudostateActivation.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventExecution.hpp&quot;&#xD;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xD;&#xA;#include &quot;PSSM/PSSMFactory.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="activate" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -401,7 +401,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="TransitionActivation" abstract="true"
           eSuperTypes="#//Semantics/StateMachines/StateMachineSemanticVisitor">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;uml/Transition.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/CompletionEventOccurrence.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/VertexActivation.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/StateActivation.hpp&quot;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;&#xA;#include &quot;uml/Constraint.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;uml/OpaqueExpression.hpp&quot;&#xA;#include &quot;PSSM/Semantics/Values/SM_OpaqueExpressionEvaluation.hpp&quot;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/TransitionMetadata.hpp&quot;&#xA;#include &quot;uml/OpaqueBehavior.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventExecution.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;uml/Transition.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/CompletionEventOccurrence.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/VertexActivation.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/StateActivation.hpp&quot;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;&#xA;#include &quot;uml/Constraint.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;uml/OpaqueExpression.hpp&quot;&#xA;#include &quot;PSSM/Semantics/Values/SM_OpaqueExpressionEvaluation.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/TransitionMetadata.hpp&quot;&#xA;#include &quot;uml/OpaqueBehavior.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CallEventExecution.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="isReached" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1495,7 +1495,7 @@
     <eSubpackages name="Loci" nsURI="http:///PSSM/Semantics/Loci.ecore" nsPrefix="PSSM.Semantics.Loci">
       <eClassifiers xsi:type="ecore:EClass" name="SM_ExecutionFactory" eSuperTypes="../../pscs/model/PSCS.ecore#//Semantics/Loci/CS_ExecutionFactory">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;uml/StateMachine.hpp&quot;&#xA;#include &quot;uml/Pseudostate.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/StateMachineExecution.hpp&quot;&#xA;#include &quot;uml/State.hpp&quot;&#xA;#include &quot;uml/FinalState.hpp&quot;&#xA;#include &quot;uml/OpaqueExpression.hpp&quot;&#xA;#include &quot;uml/ReadSelfAction.hpp&quot;&#xA;#include &quot;uml/Transition.hpp&quot;&#xA;#include &quot;uml/Region.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;uml/StateMachine.hpp&quot;&#xA;#include &quot;uml/Pseudostate.hpp&quot;&#xA;#include &quot;PSSM/Semantics/StateMachines/StateMachineExecution.hpp&quot;&#xA;#include &quot;uml/State.hpp&quot;&#xA;#include &quot;uml/FinalState.hpp&quot;&#xA;#include &quot;uml/OpaqueExpression.hpp&quot;&#xA;#include &quot;uml/ReadSelfAction.hpp&quot;&#xA;#include &quot;uml/Transition.hpp&quot;&#xA;#include &quot;uml/Region.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="instantiateVisitor" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Semantics/Loci/SemanticVisitor">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1506,7 +1506,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SM_Locus" eSuperTypes="../../pscs/model/PSCS.ecore#//Semantics/Loci/CS_Locus">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="&#xA;#include &lt;algorithm>&#xA;#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;PSSM/MDE4CPP_Extensions/PSSM_Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;"/>
+          <details key="implIncludes" value="&#xA;#include &lt;algorithm>&#xA;#include &quot;uml/Classifier.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Executor.hpp&quot;&#xA;#include &quot;PSSM/MDE4CPP_Extensions/PSSM_Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="instantiate" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//MDE4CPP_Extensions/FUML_Object">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -1533,7 +1533,7 @@
         <details key="doc" value="This class provides an interface defining fUML-specific functionality of PSSM::Semantics::StructuredClassifiers::SM_Object&#xD;&#xA;to generated UML model classes within MDE4CPP. Thus, it can be understood as a substitution of PSSM::Semantics::StructuredClassifiers::SM_Object"/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/SM_ObjectActivation.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;PSSM/Semantics/CommonBehavior/SM_ObjectActivation.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="startBehavior" ordered="false" lowerBound="1">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
