@@ -178,8 +178,13 @@ task runCommandGenerate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4C
 
 [if (aPackage.prepareApplication())]
 task runCommandCompileApplicationFor[packageName.toUpperFirst()/](type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationFor[packageName.toUpperFirst()/]Src'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationFor[packageName.toUpperFirst()/]Src'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationFor[packageName.toUpperFirst()/]Src'
+	}
 	dependsOn 'compile[packageName.toUpperFirst()/]'
+
 }
 [/if]
 
