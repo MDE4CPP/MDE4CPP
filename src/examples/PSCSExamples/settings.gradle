@@ -1,6 +1,28 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
 rootProject.name = 'Examples_PSCSExamples'
 
-includeBuild 'Ampelsteuerung_Example'
-includeBuild 'LoadBalance'
-includeBuild 'PingModel'
-includeBuild 'TestSuite'
+
+fileTree('.') {
+	include '**/build.gradle'
+	exclude 'build.gradle' // Exclude root build file
+	exclude '**/.cmake/' // Exclude examples directory
+//	exclude '**/src_gen/' // Exclude src_gen folder, use project gradle.build file only
+}.collect { 
+	relativePath(it.parent).replace(File.separator, ':') 
+}.each {
+  include(it)
+//  println it
+}
+
+
+//include ':Ampelsteuerung_Example'
+//include ':LoadBalance'
+//include ':PingModel'
+//include ':TestSuite'

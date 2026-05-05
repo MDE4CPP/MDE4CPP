@@ -20,5 +20,3 @@ fileTree('.') {
   include(it)
  // println it
 }
-
-includeBuild '../../../'
