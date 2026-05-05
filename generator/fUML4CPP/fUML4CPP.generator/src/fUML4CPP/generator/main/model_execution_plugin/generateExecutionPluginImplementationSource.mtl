@@ -226,13 +226,16 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 #include "uml/StateMachine.hpp"
 
 //Model includes
-[for (act_SM_Package : Package | 
+[let act_Packages : Set(Package) = 
 	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName())
-	->union(aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).ownedParameter.type.getNearestPackage()->asSet()->sortedBy(myQualifiedName()))
-	->union(aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))
-)]
+	->union(	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).ownedParameter.type.getNearestPackage()->asSet()->sortedBy(myQualifiedName())	)
+	->union(	aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName())	)]
+	[if (act_Packages->size() > 0)]
+		[for (act_SM_Package : Package |act_Packages )]
 #include "[act_SM_Package.generateNamespacePath(false)/]/[act_SM_Package.name.concat('Package')/].hpp"
-[/for]
+		[/for]
+	[/if]
+[/let]
 [/template]
 
 [template private generateConstructStrategyInclude(aPackage : Package) post(trim())]
