@@ -1,0 +1,235 @@
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+plugins{
+	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
+}
+
+description 'Example collection'
+
+import org.gradle.internal.os.OperatingSystem;
+
+
+// use MDE4CPP Generator Task as generateModel
+task generateModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	description 'generate C++ code of ecore.ecore model ecore'		
+}
+
+//########################   fUML   ########################
+
+
+def allfUMLModelExamples = 
+[
+//	[{Model project directory}, {Model name}, {taskName}]
+	 ['./Calculator/', 'CalcModel', 'CalcModel']
+	,['./ThreePhilosophers/', 'philosophers', 'Philosophers']
+]
+
+def allfUMLTestSuiteModels =
+[
+//	[{Model project directory}, {Model name}, {taskName}]
+	  ['./TestSuite/ActionTest', 'ActionTest', 'ActionTest']
+// build manually!	 ,['./TestSuite/UsageTest/PrimitiveLibrary', 'PrimitiveLibrary', 'PrimitiveLibrary']
+// build manually!	 ,['./TestSuite/UsageTest/ExternalModelUsage', 'ExternalModelUsage', 'ExternalModelUsage']
+	 ,['./TestSuite/ForkNodeTest', 'forkNodeTest', 'ForkNodeTest']
+	 ,['./TestSuite/JoinNodeTest', 'JoinNodeTest', 'JoinNodeTest']
+	 ,['./TestSuite/MultiplePins', 'fUMLMultiplePins', 'FUMLMultiplePins']
+//	 ,['./TestSuite/RegionTest', 'RegionTest'] handle Expension region in name 
+	 ,['./TestSuite/SignalExample', 'SignalExample', 'SignalExample']
+	 ,['./TestSuite/SimpleBehaviorTest', 'SimpleBehaviorTest', 'SimpleBehaviorTest']
+// 	 ,['./TestSuite/TargetPinTest', 'TargetPinTest']
+//	 ,['./TestSuite/TestModelImport', 'TestModelImport']
+//	 ,['./TestSuite/TestModelMain', 'TestModelMain']
+]
+
+task generatefUMLModelExamples() {
+	group 'Examples'
+	description 'generate fUML Model Examples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+
+	allfUMLModelExamples.each { model ->
+		def buildModelFile = file("${model[0]}/model/build.gradle")
+		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+		if(!(buildModelFile.exists() && buildSrcFile.exists()))
+		{
+			def generateTask = getRootProject().tasks.findByPath(':generateModel')
+			if (generateTask) 
+			{	
+				dependsOn generateTask.configure
+				{
+					modelFilePath = file("${model[0]}/model/${model[1]}.uml")
+				}
+				dependsOn generateTask
+			}	
+			else
+			{
+				println "No generateModel task found in example project for model: " + model[1]
+			}
+		}
+		else
+		{		
+			def projectPath = model[0].replace('./', '').replaceAll('/$', '')
+			def targetProject = findProject(projectPath)			
+			if (targetProject != null) 
+			{
+				dependsOn targetProject.tasks.getByName("generate${model[2]}")
+			}
+			else
+			{
+				println "No project found for model: " + projectPath + ":generate${model[2]}"
+			}
+		}
+	}
+}
+
+task compilefUMLModelExamples() {
+	group 'Examples'
+	description 'compile applications for fUML Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+
+		}
+		
+		allfUMLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildfUMLModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for fUML Model Examples'
+
+	def tasks = [
+		generatefUMLModelExamples,
+		compilefUMLModelExamples
+	]
+	
+	for (int i = 0; i < tasks.size() - 1; i++) {
+        tasks[i + 1].mustRunAfter(tasks[i])
+    }
+    
+    dependsOn(tasks)
+}
+
+task generatefUMLTestSuite() {
+	group 'Tests'
+	description 'generate test suite for fUMLExamples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+
+	allfUMLTestSuiteModels.each { model ->
+		def buildModelFile = file("${model[0]}/model/build.gradle")
+		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+		if(!(buildModelFile.exists() && buildSrcFile.exists()))
+		{
+			def generateTask = getRootProject().tasks.findByPath(':generateModel')
+			if (generateTask) 
+			{	
+				dependsOn generateTask.configure
+				{
+					modelFilePath = file("${model[0]}/model/${model[1]}.uml")
+				}
+				dependsOn generateTask
+			}	
+			else
+			{
+				println "No generateModel task found in example project for model: " + model[1]
+			}
+		}
+		else
+		{		
+			def projectPath = model[0].replace('./', '').replaceAll('/', ':')
+			def targetProject = findProject(projectPath)			
+			if (targetProject != null) 
+			{
+				dependsOn targetProject.tasks.getByName("generate${model[2]}")
+			}
+			else
+			{
+				println "No project found for model: " + projectPath + ":generate${model[2]}"
+			}
+		}
+	}	
+}	
+
+task compilefUMLTestSuite() {
+	group 'Tests'
+	description 'compile applications for fUMLExamples test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+
+		}
+		
+		allfUMLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildfUMLTestSuite() 
+{
+	group 'Tests'
+	description 'generate and compile applications for fUMLExamples test suite'
+	
+	def tasks = [
+		generatefUMLTestSuite,
+		compilefUMLTestSuite
+	]
+	
+	for (int i = 0; i < tasks.size() - 1; i++) {
+        tasks[i + 1].mustRunAfter(tasks[i])
+    }
+    
+    dependsOn(tasks)
+}
+
