@@ -4,44 +4,40 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: Hierarchy'
 
 task runCommandCompileHierarchy(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileHierarchySrc'
-	mustRunAfter =  [
-		"generateHierarchy" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileHierarchySrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileHierarchySrc'
+	}
+	dependsOn 'generateHierarchy'
 }
 
-task runCommandGenerateHierarchy(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'Hierarchy.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateHierarchy() {
+task generateHierarchy(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'Hierarchy'
 	description 'description generate C++ code of Hierarchy.uml model Hierarchy' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'Hierarchy.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateHierarchy'
-	}
-	else
-	{
-		dependsOn 'model:generateHierarchyModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForHierarchy(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForHierarchySrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForHierarchySrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForHierarchySrc'
+	}
 	dependsOn 'compileHierarchy'
 }
 
@@ -49,27 +45,32 @@ task compileHierarchy {
 	group 'Hierarchy'
 	description 'compile Hierarchy'
 
+	mustRunAfter = ["generateHierarchy"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateHierarchy'
-		mustRunAfter = ["generateHierarchy"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileHierarchySrc'
+	} else {
 		dependsOn 'runCommandCompileHierarchy'
 	}
-	else
-	{
-		mustRunAfter = ["generateHierarchy"]
-		dependsOn 'src_gen:compileHierarchySrc'
-	}
-	mustRunAfter =  [
-		"generateHierarchy" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateHierarchy"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForHierarchy{

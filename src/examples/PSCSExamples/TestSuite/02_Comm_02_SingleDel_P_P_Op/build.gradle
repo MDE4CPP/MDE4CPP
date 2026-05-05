@@ -4,44 +4,40 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: SingleDel_P_P_Op'
 
 task runCommandCompileSingleDel_P_P_Op(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileSingleDel_P_P_OpSrc'
-	mustRunAfter =  [
-		"generateSingleDel_P_P_Op" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileSingleDel_P_P_OpSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileSingleDel_P_P_OpSrc'
+	}
+	dependsOn 'generateSingleDel_P_P_Op'
 }
 
-task runCommandGenerateSingleDel_P_P_Op(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'SingleDel_P_P_Op.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateSingleDel_P_P_Op() {
+task generateSingleDel_P_P_Op(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'SingleDel_P_P_Op'
 	description 'description generate C++ code of SingleDel_P_P_Op.uml model SingleDel_P_P_Op' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'SingleDel_P_P_Op.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateSingleDel_P_P_Op'
-	}
-	else
-	{
-		dependsOn 'model:generateSingleDel_P_P_OpModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForSingleDel_P_P_Op(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForSingleDel_P_P_OpSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForSingleDel_P_P_OpSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForSingleDel_P_P_OpSrc'
+	}
 	dependsOn 'compileSingleDel_P_P_Op'
 }
 
@@ -49,27 +45,32 @@ task compileSingleDel_P_P_Op {
 	group 'SingleDel_P_P_Op'
 	description 'compile SingleDel_P_P_Op'
 
+	mustRunAfter = ["generateSingleDel_P_P_Op"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateSingleDel_P_P_Op'
-		mustRunAfter = ["generateSingleDel_P_P_Op"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileSingleDel_P_P_OpSrc'
+	} else {
 		dependsOn 'runCommandCompileSingleDel_P_P_Op'
 	}
-	else
-	{
-		mustRunAfter = ["generateSingleDel_P_P_Op"]
-		dependsOn 'src_gen:compileSingleDel_P_P_OpSrc'
-	}
-	mustRunAfter =  [
-		"generateSingleDel_P_P_Op" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateSingleDel_P_P_Op"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForSingleDel_P_P_Op{

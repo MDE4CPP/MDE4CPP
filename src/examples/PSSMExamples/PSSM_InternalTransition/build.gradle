@@ -17,24 +17,19 @@ task runCommandCompilePSSM_InternalTransition(type:Exec) {
 	dependsOn 'generatePSSM_InternalTransition'
 }
 
-task runCommandGeneratePSSM_InternalTransition(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSSM_InternalTransition.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generatePSSM_InternalTransition() {
+task generatePSSM_InternalTransition(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'PSSM_InternalTransition'
 	description 'description generate C++ code of PSSM_InternalTransition.uml model PSSM_InternalTransition' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'PSSM_InternalTransition.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'PSSM', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGeneratePSSM_InternalTransition'
-	}
-	else
-	{
-		dependsOn 'model:generatePSSM_InternalTransitionModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForPSSM_InternalTransition(type:Exec) {

@@ -7,8 +7,9 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'simpleUML'
+rootProject.name = 'Library_uml'
 
 include ':model'
 include ':src_gen'
+include ':application'
 

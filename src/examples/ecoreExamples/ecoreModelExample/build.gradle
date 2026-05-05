@@ -17,28 +17,31 @@ if (OperatingSystem.current().isWindows()) {
 	}
 }
 
-task runCommandGenerateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'libraryModel_ecore.ecore')
-	modelFilePath = modelPath.absolutePath
-}
 
 task runCommandCompileApplicationForLibraryModel_ecore(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLibraryModel_ecoreSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLibraryModel_ecoreSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForLibraryModel_ecoreSrc'
+	}
 	dependsOn 'compileLibraryModel_ecore'
+
 }
 
-task generateLibraryModel_ecore() {
+task generateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'libraryModel_ecore'	
 	description 'generate C++ code of libraryModel_ecore.ecore model libraryModel_ecore' 
- 
-	def buildFile = file('model'+ File.separator +'build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'libraryModel_ecore.ecore')
+	relatedModels = ['ecore', 'types']	
+	outputs.files(fileTree('./src_gen/libraryModel_ecore') {
+        exclude '.cmake/**'
+    })
+	
+	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateLibraryModel_ecore'
-	}
-	else
-	{
-		dependsOn 'model:generateLibraryModel_ecoreModel'
+		dependsOn dependencyTask
 	}
 }
 

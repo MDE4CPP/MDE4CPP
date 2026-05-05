@@ -17,24 +17,19 @@ task runCommandCompilePSSM_Triggers(type:Exec) {
 	dependsOn 'generatePSSM_Triggers'
 }
 
-task runCommandGeneratePSSM_Triggers(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSSM_Triggers.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generatePSSM_Triggers() {
+task generatePSSM_Triggers(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'PSSM_Triggers'
 	description 'description generate C++ code of PSSM_Triggers.uml model PSSM_Triggers' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'PSSM_Triggers.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'PSSM', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGeneratePSSM_Triggers'
-	}
-	else
-	{
-		dependsOn 'model:generatePSSM_TriggersModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForPSSM_Triggers(type:Exec) {

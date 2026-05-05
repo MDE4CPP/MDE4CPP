@@ -4,44 +4,40 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: RecursiveDestruction'
 
 task runCommandCompileRecursiveDestruction(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileRecursiveDestructionSrc'
-	mustRunAfter =  [
-		"generateRecursiveDestruction" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileRecursiveDestructionSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileRecursiveDestructionSrc'
+	}
+	dependsOn 'generateRecursiveDestruction'
 }
 
-task runCommandGenerateRecursiveDestruction(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'RecursiveDestruction.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateRecursiveDestruction() {
+task generateRecursiveDestruction(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'RecursiveDestruction'
 	description 'description generate C++ code of RecursiveDestruction.uml model RecursiveDestruction' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'RecursiveDestruction.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateRecursiveDestruction'
-	}
-	else
-	{
-		dependsOn 'model:generateRecursiveDestructionModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForRecursiveDestruction(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForRecursiveDestructionSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForRecursiveDestructionSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForRecursiveDestructionSrc'
+	}
 	dependsOn 'compileRecursiveDestruction'
 }
 
@@ -49,27 +45,32 @@ task compileRecursiveDestruction {
 	group 'RecursiveDestruction'
 	description 'compile RecursiveDestruction'
 
+	mustRunAfter = ["generateRecursiveDestruction"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateRecursiveDestruction'
-		mustRunAfter = ["generateRecursiveDestruction"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileRecursiveDestructionSrc'
+	} else {
 		dependsOn 'runCommandCompileRecursiveDestruction'
 	}
-	else
-	{
-		mustRunAfter = ["generateRecursiveDestruction"]
-		dependsOn 'src_gen:compileRecursiveDestructionSrc'
-	}
-	mustRunAfter =  [
-		"generateRecursiveDestruction" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateRecursiveDestruction"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForRecursiveDestruction{

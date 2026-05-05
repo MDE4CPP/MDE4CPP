@@ -1,0 +1,311 @@
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+plugins{
+	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
+}
+
+description 'Example collection'
+
+import org.gradle.internal.os.OperatingSystem;
+
+
+// use MDE4CPP Generator Task as generateModel
+task generateModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	description 'generate C++ code of ecore.ecore model ecore'		
+}
+
+
+def allOCLExamples = 
+[
+//	[{project directory}, {task name}]
+	['./oclExample/', 'compileSimpleOCLExample']
+]
+
+def allOCLEcoreModelExamples = 
+[
+//	[{Model project directory}, {Model name}, {taskName}]
+//	['./oclEcoreModelExample/', 'Library_ecore', 'Library_ecore']
+	['./oclQueryEcoreModelExample/', 'Library_QueryEcore', 'Library_QueryEcore']	
+]
+
+def allOCLUMLModelExamples = 
+[
+//	[{Model project directory}, {Model name}, {taskName}]
+//	['./oclEcoreModelExample/', 'Library_ecore', 'Library_ecore']
+	['./Connect4/', 'Connect4',	'Connect4']
+]
+
+
+def allOCLTestSuiteModels = 
+[
+//	[{Model project directory}, {Model name}, {taskName}]
+//	['./TestSuite/oclUmlModelExample/', 'Library_uml', 'Library_uml']
+]
+
+task compileOCLExamples() {
+	group 'Examples'
+	description 'compile OCL examples.'	
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+
+		} 
+		
+// Beispiel Debug Tasks		println '_____________________________________________________________________________________'	
+//		println allOCLExamples.toString()
+		
+		allOCLExamples.each { taskVar ->
+		// taskVar[0] = task project root directoy, taskVar[1] = task name			
+			exec
+			{
+//			println '_____________________________________________________________________________________'
+	
+//				println taskVar[0]
+//				println 'gradlew ' + taskVar[1]
+			
+				workingDir = file("${taskVar[0]}")
+				commandLine = [tool, command, 'gradlew ' + taskVar[1]]
+			}
+		}
+	}
+}
+
+task generateOCLModelExamples() {
+	group 'Examples'
+	description 'generate OCL Model Examples'	
+	
+// ecore Model Examples
+
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+
+	allOCLEcoreModelExamples.each { model ->
+		def buildModelFile = file("${model[0]}/model/build.gradle")
+		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+		if(!(buildModelFile.exists() && buildSrcFile.exists()))
+		{
+			def generateTask = getRootProject().tasks.findByPath(':generateModel')
+			if (generateTask) 
+			{	
+				dependsOn generateTask.configure
+				{
+					modelFilePath = file("${model[0]}/model/${model[1]}.ecore")
+				}
+				dependsOn generateTask
+			}	
+			else
+			{
+				println "No generateModel task found in example project for model: " + model[1]
+			}
+		}
+		else
+		{	
+			def projectPath = model[0].replace('./', '').replaceAll('/', ':')
+			def targetProject = findProject(projectPath)			
+			if (targetProject != null) 
+			{
+				dependsOn targetProject.tasks.getByName("generate${model[2]}")
+			}
+			else
+			{
+				println "No project found for model: " + projectPath + ":generate${model[2]}"
+			}
+		}
+	}	
+
+// UML Model Examples
+
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+
+	allOCLUMLModelExamples.each { model ->
+		def buildModelFile = file("${model[0]}/model/build.gradle")
+		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+		if(!(buildModelFile.exists() && buildSrcFile.exists()))
+		{
+			def generateTask = getRootProject().tasks.findByPath(':generateModel')
+			if (generateTask) 
+			{	
+				dependsOn generateTask.configure
+				{
+					modelFilePath = file("${model[0]}/model/${model[1]}.uml")
+				}
+				dependsOn generateTask
+			}	
+			else
+			{
+				println "No generateModel task found in example project for model: " + model[1]
+			}
+		}
+		else
+		{	
+			def projectPath = model[0].replace('./', '').replaceAll('/', ':')
+			def targetProject = findProject(projectPath)			
+			if (targetProject != null) 
+			{
+				dependsOn targetProject.tasks.getByName("generate${model[2]}")
+			}
+			else
+			{
+				println "No project found for model: " + projectPath + ":generate${model[2]}"
+			}
+		}
+	}	
+
+}	
+
+task compileOCLModelExamples() {
+	group 'Examples'
+	description 'compile applications for OCL Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+
+		}
+		
+		allOCLModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildOCLModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for OCL Model Examples'
+
+	def tasks = [
+		generateOCLModelExamples,
+		compileOCLModelExamples
+	]
+	
+	for (int i = 0; i < tasks.size() - 1; i++) {
+        tasks[i + 1].mustRunAfter(tasks[i])
+    }
+    
+    dependsOn(tasks)
+}
+
+task generateOCLTestSuite() {
+	group 'Tests'
+	description 'generate test suite for OCL'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+	allOCLTestSuiteModels.each { model ->
+		def buildModelFile = file("${model[0]}/model/build.gradle")
+		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+		if(!(buildModelFile.exists() && buildSrcFile.exists()))
+		{
+			def generateTask = getRootProject().tasks.findByPath(':generateModel')
+			if (generateTask) 
+			{	
+				dependsOn generateTask.configure
+				{
+					modelFilePath = file("${model[0]}/model/${model[1]}.uml")
+				}
+				dependsOn generateTask
+			}	
+			else
+			{
+				println "No generateModel task found in example project for model: " + model[1]
+			}
+		}
+		else
+		{	
+			def projectPath = model[0].replace('./', '').replaceAll('/', ':')
+			def targetProject = findProject(projectPath)			
+			if (targetProject != null) 
+			{
+				dependsOn targetProject.tasks.getByName("generate${model[2]}")
+			}
+			else
+			{
+				println "No project found for model: " + projectPath + ":generate${model[2]}"
+			}
+		}
+	}	
+}	
+
+task compileOCLTestSuite() {
+	group 'Tests'
+	description 'compile applications for OCL test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+
+		}
+		
+		allOCLTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildOCLTestSuite() 
+{
+	group 'Tests'
+	description 'generate and compile applications for OCL test suite'
+
+	def tasks = [
+		generateOCLTestSuite,
+		compileOCLTestSuite
+	]
+	
+	for (int i = 0; i < tasks.size() - 1; i++) {
+        tasks[i + 1].mustRunAfter(tasks[i])
+    }
+    
+    dependsOn(tasks)
+}
+

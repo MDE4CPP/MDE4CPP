@@ -4,44 +4,40 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: RemovingInstanceFromPart'
 
 task runCommandCompileRemovingInstanceFromPart(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileRemovingInstanceFromPartSrc'
-	mustRunAfter =  [
-		"generateRemovingInstanceFromPart" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileRemovingInstanceFromPartSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileRemovingInstanceFromPartSrc'
+	}
+	dependsOn 'generateRemovingInstanceFromPart'
 }
 
-task runCommandGenerateRemovingInstanceFromPart(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'RemovingInstanceFromPart.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateRemovingInstanceFromPart() {
+task generateRemovingInstanceFromPart(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'RemovingInstanceFromPart'
 	description 'description generate C++ code of RemovingInstanceFromPart.uml model RemovingInstanceFromPart' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'RemovingInstanceFromPart.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateRemovingInstanceFromPart'
-	}
-	else
-	{
-		dependsOn 'model:generateRemovingInstanceFromPartModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForRemovingInstanceFromPart(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForRemovingInstanceFromPartSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForRemovingInstanceFromPartSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForRemovingInstanceFromPartSrc'
+	}
 	dependsOn 'compileRemovingInstanceFromPart'
 }
 
@@ -49,27 +45,32 @@ task compileRemovingInstanceFromPart {
 	group 'RemovingInstanceFromPart'
 	description 'compile RemovingInstanceFromPart'
 
+	mustRunAfter = ["generateRemovingInstanceFromPart"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateRemovingInstanceFromPart'
-		mustRunAfter = ["generateRemovingInstanceFromPart"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileRemovingInstanceFromPartSrc'
+	} else {
 		dependsOn 'runCommandCompileRemovingInstanceFromPart'
 	}
-	else
-	{
-		mustRunAfter = ["generateRemovingInstanceFromPart"]
-		dependsOn 'src_gen:compileRemovingInstanceFromPartSrc'
-	}
-	mustRunAfter =  [
-		"generateRemovingInstanceFromPart" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateRemovingInstanceFromPart"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForRemovingInstanceFromPart{

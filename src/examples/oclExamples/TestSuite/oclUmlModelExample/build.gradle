@@ -6,22 +6,22 @@ plugins{
 
 import org.gradle.internal.os.OperatingSystem;
 
-description 'Build tasks for project: Op_Prov_Req_Interface'
+description 'Build tasks for project: Library_uml'
 
-task runCommandCompileOp_Prov_Req_Interface(type:Exec) {
+task runCommandCompileLibrary_uml(type:Exec) {
 	if (OperatingSystem.current().isWindows()) {		
-		commandLine 'cmd', '/c', 'gradlew src_gen:compileOp_Prov_Req_InterfaceSrc'
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileLibrary_umlSrc'
 	} else {
-		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileOp_Prov_Req_InterfaceSrc'
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileLibrary_umlSrc'
 	}
-	dependsOn 'generateOp_Prov_Req_Interface'
+	dependsOn 'generateLibrary_uml'
 }
 
-task generateOp_Prov_Req_Interface(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'Op_Prov_Req_Interface'
-	description 'description generate C++ code of Op_Prov_Req_Interface.uml model Op_Prov_Req_Interface' 
+task generateLibrary_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'Library_uml'
+	description 'description generate C++ code of Library_uml.uml model Library_uml' 
 
-	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'Op_Prov_Req_Interface.uml')
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'Library_uml.uml')
 	structureOnly = false
 
 	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
@@ -32,30 +32,30 @@ task generateOp_Prov_Req_Interface(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	} 
 }
 
-task runCommandCompileApplicationForOp_Prov_Req_Interface(type:Exec) {
+task runCommandCompileApplicationForLibrary_uml(type:Exec) {
 	if (OperatingSystem.current().isWindows()) {
-		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForOp_Prov_Req_InterfaceSrc'
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLibrary_umlSrc'
 	} else {
-		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForOp_Prov_Req_InterfaceSrc'
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForLibrary_umlSrc'
 	}
-	dependsOn 'compileOp_Prov_Req_Interface'
+	dependsOn 'compileLibrary_uml'
 }
 
-task compileOp_Prov_Req_Interface {
-	group 'Op_Prov_Req_Interface'
-	description 'compile Op_Prov_Req_Interface'
+task compileLibrary_uml {
+	group 'Library_uml'
+	description 'compile Library_uml'
 
-	mustRunAfter = ["generateOp_Prov_Req_Interface"]
+	mustRunAfter = ["generateLibrary_uml"]
 	
 	def buildFile = file('src_gen/build.gradle')
 	
 	if(buildFile.exists()) {
-		dependsOn 'src_gen:compileOp_Prov_Req_InterfaceSrc'
+		dependsOn 'src_gen:compileLibrary_umlSrc'
 	} else {
-		dependsOn 'runCommandCompileOp_Prov_Req_Interface'
+		dependsOn 'runCommandCompileLibrary_uml'
 	}
 		mustRunAfter = [
-			"generateOp_Prov_Req_Interface"
+			"generateLibrary_uml"
 			, getRootProject().getTasksByName('compileFUML', true)
 			, getRootProject().getTasksByName('buildFUML', true)
 			, getRootProject().getTasksByName('compileEcoreReflection', true)
@@ -73,22 +73,22 @@ task compileOp_Prov_Req_Interface {
 		]
 }
 
-task compileApplicationForOp_Prov_Req_Interface{
-	group 'Op_Prov_Req_Interface'
-	description 'compile ApplicationForOp_Prov_Req_Interface'
+task compileApplicationForLibrary_uml{
+	group 'Library_uml'
+	description 'compile ApplicationForLibrary_uml'
 
-	dependsOn 'runCommandCompileApplicationForOp_Prov_Req_Interface'
-	dependsOn 'compileOp_Prov_Req_Interface'
-	mustRunAfter = ["compileOp_Prov_Req_Interface"]
+	dependsOn 'runCommandCompileApplicationForLibrary_uml'
+	dependsOn 'compileLibrary_uml'
+	mustRunAfter = ["compileLibrary_uml"]
 }
 
-task buildOp_Prov_Req_Interface() {
-	group 'Op_Prov_Req_Interface'
-	description 'build Op_Prov_Req_Interface'
+task buildLibrary_uml() {
+	group 'Library_uml'
+	description 'build Library_uml'
 
-	dependsOn 'generateOp_Prov_Req_Interface'
-	dependsOn 'compileOp_Prov_Req_Interface'
-	dependsOn 'compileApplicationForOp_Prov_Req_Interface'
+	dependsOn 'generateLibrary_uml'
+	dependsOn 'compileLibrary_uml'
+	dependsOn 'compileApplicationForLibrary_uml'
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)

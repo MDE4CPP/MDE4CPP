@@ -4,44 +4,40 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: DestructionInstances'
 
 task runCommandCompileDestructionInstances(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileDestructionInstancesSrc'
-	mustRunAfter =  [
-		"generateDestructionInstances" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileDestructionInstancesSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileDestructionInstancesSrc'
+	}
+	dependsOn 'generateDestructionInstances'
 }
 
-task runCommandGenerateDestructionInstances(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'DestructionInstances.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateDestructionInstances() {
+task generateDestructionInstances(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'DestructionInstances'
 	description 'description generate C++ code of DestructionInstances.uml model DestructionInstances' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'DestructionInstances.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateDestructionInstances'
-	}
-	else
-	{
-		dependsOn 'model:generateDestructionInstancesModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForDestructionInstances(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForDestructionInstancesSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForDestructionInstancesSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForDestructionInstancesSrc'
+	}
 	dependsOn 'compileDestructionInstances'
 }
 
@@ -49,27 +45,32 @@ task compileDestructionInstances {
 	group 'DestructionInstances'
 	description 'compile DestructionInstances'
 
+	mustRunAfter = ["generateDestructionInstances"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateDestructionInstances'
-		mustRunAfter = ["generateDestructionInstances"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileDestructionInstancesSrc'
+	} else {
 		dependsOn 'runCommandCompileDestructionInstances'
 	}
-	else
-	{
-		mustRunAfter = ["generateDestructionInstances"]
-		dependsOn 'src_gen:compileDestructionInstancesSrc'
-	}
-	mustRunAfter =  [
-		"generateDestructionInstances" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateDestructionInstances"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForDestructionInstances{

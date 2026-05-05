@@ -17,24 +17,19 @@ task runCommandCompilePSSM_HelloWorld(type:Exec) {
 	dependsOn 'generatePSSM_HelloWorld'
 }
 
-task runCommandGeneratePSSM_HelloWorld(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSSM_HelloWorld.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generatePSSM_HelloWorld() {
+task generatePSSM_HelloWorld(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'PSSM_HelloWorld'
 	description 'description generate C++ code of PSSM_HelloWorld.uml model PSSM_HelloWorld' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'PSSM_HelloWorld.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'PSSM', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGeneratePSSM_HelloWorld'
-	}
-	else
-	{
-		dependsOn 'model:generatePSSM_HelloWorldModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForPSSM_HelloWorld(type:Exec) {

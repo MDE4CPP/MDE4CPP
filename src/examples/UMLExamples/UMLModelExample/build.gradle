@@ -17,11 +17,6 @@ task runCommandCompileLibraryModel_uml(type:Exec) {
 	dependsOn 'generateLibraryModel_uml'
 }
 
-task runCommandGenerateLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'LibraryModel_uml.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
 task runCommandCompileApplicationForLibraryModel_uml(type:Exec) {
 	if (OperatingSystem.current().isWindows()) {
 		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLibraryModel_umlSrc'
@@ -31,18 +26,19 @@ task runCommandCompileApplicationForLibraryModel_uml(type:Exec) {
 	dependsOn 'compileLibraryModel_uml'
 }
 
-task generateLibraryModel_uml() {
+task generateLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'LibraryModel_uml'	
 	description 'generate C++ code of LibraryModel_uml.uml model LibraryModel_uml' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'LibraryModel_uml.uml')
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', 'UML4CPPProfile']
+		
+	def dependencyTask = getRootProject().getTasksByName('deliverUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateLibraryModel_uml'
-	}
-	else
-	{
-		dependsOn 'model:generateLibraryModel_umlModel'
+		dependsOn dependencyTask
 	}
 }
 

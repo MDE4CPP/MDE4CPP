@@ -17,24 +17,19 @@ task runCommandCompilePSSM_Composite(type:Exec) {
 	dependsOn 'generatePSSM_Composite'
 }
 
-task runCommandGeneratePSSM_Composite(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSSM_Composite.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generatePSSM_Composite() {
+task generatePSSM_Composite(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'PSSM_Composite'
 	description 'description generate C++ code of PSSM_Composite.uml model PSSM_Composite' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'PSSM_Composite.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'PSSM', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGeneratePSSM_Composite'
-	}
-	else
-	{
-		dependsOn 'model:generatePSSM_CompositeModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForPSSM_Composite(type:Exec) {

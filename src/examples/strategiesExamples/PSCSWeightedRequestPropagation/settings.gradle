@@ -7,8 +7,9 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'simpleUML'
+rootProject.name = 'PSCSStrategiesExampleWeighted'
 
 include ':model'
 include ':src_gen'
+include ':application'
 

@@ -17,28 +17,31 @@ if (OperatingSystem.current().isWindows()) {
 	}
 }
 
-task runCommandGenerateSubsetUnionDepth(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'subsetUnionDepth.ecore')
-	modelFilePath = modelPath.absolutePath
-}
 
 task runCommandCompileApplicationForSubsetUnionDepth(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForSubsetUnionDepthSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForSubsetUnionDepthSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForSubsetUnionDepthSrc'
+	}
 	dependsOn 'compileSubsetUnionDepth'
+
 }
 
-task generateSubsetUnionDepth() {
+task generateSubsetUnionDepth(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'subsetUnionDepth'	
 	description 'generate C++ code of subsetUnionDepth.ecore model subsetUnionDepth' 
- 
-	def buildFile = file('model'+ File.separator +'build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'subsetUnionDepth.ecore')
+	relatedModels = ['ecore']	
+	outputs.files(fileTree('./src_gen/subsetUnionDepth') {
+        exclude '.cmake/**'
+    })
+	
+	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateSubsetUnionDepth'
-	}
-	else
-	{
-		dependsOn 'model:generateSubsetUnionDepthModel'
+		dependsOn dependencyTask
 	}
 }
 

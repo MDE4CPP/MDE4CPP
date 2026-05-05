@@ -17,24 +17,19 @@ task runCommandCompileDefaultValue_BasicTypes(type:Exec) {
 	dependsOn 'generateDefaultValue_BasicTypes'
 }
 
-task runCommandGenerateDefaultValue_BasicTypes(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'DefaultValue_BasicTypes.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateDefaultValue_BasicTypes() {
+task generateDefaultValue_BasicTypes(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'DefaultValue_BasicTypes'
 	description 'description generate C++ code of DefaultValue_BasicTypes.uml model DefaultValue_BasicTypes' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'DefaultValue_BasicTypes.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateDefaultValue_BasicTypes'
-	}
-	else
-	{
-		dependsOn 'model:generateDefaultValue_BasicTypesModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForDefaultValue_BasicTypes(type:Exec) {

@@ -1,0 +1,249 @@
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+plugins{
+	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
+}
+
+description 'Example collection'
+
+import org.gradle.internal.os.OperatingSystem;
+
+
+// use MDE4CPP Generator Task as generateModel
+task generateModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	description 'generate C++ code of ecore.ecore model ecore'		
+}
+
+def allEcoreExamples = 
+[
+//	[{project directory}, {task name}]
+	['./ecoreExample/', 'compileEcoreExample']
+]
+
+def allEcoreModelExamples = 
+[
+//	[{Model project directory}, {Model name}, {taskName}]
+	['./ecoreModelExample/', 'libraryModel_ecore', 'LibraryModel_ecore'],
+	['./ecoreAnnotationsExample/', 'ecoreAnnotationsExample', 'EcoreAnnotationsExample']
+]
+
+def allEcoreTestSuiteModels =
+[
+//	[{Model project directory}, {Model name}, {taskName}]
+	 ['./TestSuite/copyTest/', 'copyTest', 'CopyTest']
+//	,['./TestSuite/eInvokeTest/', 'EInvokeTest', 'EInvokeTest']
+//	,['./TestSuite/SubPackagetest/', 'tobedone', 'Tobedone']
+	,['./TestSuite/SubsetUnionExample/SubsetUnion/', 'subsetUnion', 'SubsetUnion']	
+	,['./TestSuite/SubsetUnionExample/SubsetUnionDepth/', 'subsetUnionDepth', 'SubsetUnionDepth']		
+	,['./TestSuite/templateTest/', 'templateTest', 'TemplateTest']	
+]
+
+task compileEcoreExamples() {
+	group 'Examples'
+	description 'compile ecore examples.'	
+	
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+		}
+		allEcoreExamples.each { taskVar ->
+		// taskVar[0] = task project root directoy, taskVar[1] = task name
+			exec
+			{
+				workingDir = file("${taskVar[0]}")
+				commandLine = [tool, command, 'gradlew ' + taskVar[1]]
+			}
+		}
+	}
+}
+
+task generateEcoreModelExamples() {
+	group 'Examples'
+	description 'generate ecore Model Examples'	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+
+	allEcoreModelExamples.each { model ->
+		def buildModelFile = file("${model[0]}/model/build.gradle")
+		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+		if(!(buildModelFile.exists() && buildSrcFile.exists()))
+		{
+			def generateTask = getRootProject().tasks.findByPath(':generateModel')
+			if (generateTask) 
+			{	
+				dependsOn generateTask.configure
+				{
+					modelFilePath = file("${model[0]}/model/${model[1]}.ecore")
+				}
+				dependsOn generateTask
+			}	
+			else
+			{
+				println "No generateModel task found in example project for model: " + model[1]
+			}
+		}
+		else
+		{		
+			def projectPath = model[0].replace('./', '').replaceAll('/$', '')
+			def targetProject = findProject(projectPath)			
+			if (targetProject != null) 
+			{
+				dependsOn targetProject.tasks.getByName("generate${model[2]}")
+			}
+			else
+			{
+				println "No project found for model: " + projectPath + ":generate${model[2]}"
+			}
+		}
+	}
+}
+
+task compileEcoreModelExamples() {
+	group 'Examples'
+	description 'compile applications for ecore Model Examples'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+		}
+		
+		allEcoreModelExamples.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, 'gradlew compileApplicationFor' + model[1]]
+			}
+		}
+	}
+}
+
+task buildEcoreModelExamples() 
+{
+	group 'Examples'
+	description 'generate and compile applications for ecore Model Examples'
+	
+	def tasks = [
+		generateEcoreModelExamples,
+		compileEcoreModelExamples
+	]
+	
+	for (int i = 0; i < tasks.size() - 1; i++) {
+        tasks[i + 1].mustRunAfter(tasks[i])
+    }
+    
+    dependsOn(tasks)
+}
+
+task generateEcoreTestSuite() {
+	group 'Tests'
+	description 'generate test suite for EcoreExamples'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+
+	allEcoreTestSuiteModels.each { model ->
+		def buildModelFile = file("${model[0]}/model/build.gradle")
+		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
+		if(!(buildModelFile.exists() && buildSrcFile.exists()))
+		{
+			def generateTask = getRootProject().tasks.findByPath(':generateModel')
+			if (generateTask) 
+			{	
+				dependsOn generateTask.configure
+				{
+					modelFilePath = file("${model[0]}/model/${model[1]}.ecore")
+				}
+				dependsOn generateTask
+			}	
+			else
+			{
+				println "No generateModel task found in example project for model: " + model[1]
+			}
+		}
+		else
+		{		
+			def projectPath = model[0].replace('./', '').replaceAll('/', ':')
+			def targetProject = findProject(projectPath)			
+			if (targetProject != null) 
+			{
+				dependsOn targetProject.tasks.getByName("generate${model[2]}")
+			}
+			else
+			{
+				println "No project found for model: " + projectPath + ":generate${model[2]}"
+			}
+		}
+	}	
+}
+
+task compileEcoreTestSuite() {
+	group 'Tests'
+	description 'compile applications for EcoreExamples test suite'	
+
+	doLast
+	{
+		def tool = '/bin/sh'
+		def command = '-c'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+		}
+		
+		allEcoreTestSuiteModels.each { model ->
+		// model[0] = model project root directoy, model[1] = model name
+			exec
+			{
+				workingDir = file("${model[0]}")
+				commandLine = [tool, command, 'gradlew compileApplicationFor' + model[2]]
+			}
+		}
+	}
+}
+
+task buildEcoreTestSuite() 
+{
+	group 'Tests'
+	description 'generate and compile applications for EcoreExamples test suite'
+
+	def tasks = [
+		generateEcoreTestSuite,
+		compileEcoreTestSuite
+	]
+	
+	for (int i = 0; i < tasks.size() - 1; i++) {
+        tasks[i + 1].mustRunAfter(tasks[i])
+    }
+    
+    dependsOn(tasks)
+}

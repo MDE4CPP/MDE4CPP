@@ -17,28 +17,31 @@ if (OperatingSystem.current().isWindows()) {
 	}
 }
 
-task runCommandGenerateTemplateTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'templateTest.ecore')
-	modelFilePath = modelPath.absolutePath
-}
 
 task runCommandCompileApplicationForTemplateTest(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForTemplateTestSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForTemplateTestSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForTemplateTestSrc'
+	}
 	dependsOn 'compileTemplateTest'
+
 }
 
-task generateTemplateTest() {
+task generateTemplateTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'templateTest'	
 	description 'generate C++ code of templateTest.ecore model templateTest' 
- 
-	def buildFile = file('model'+ File.separator +'build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'templateTest.ecore')
+	relatedModels = ['ecore']	
+	outputs.files(fileTree('./src_gen/templateTest') {
+        exclude '.cmake/**'
+    })
+	
+	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateTemplateTest'
-	}
-	else
-	{
-		dependsOn 'model:generateTemplateTestModel'
+		dependsOn dependencyTask
 	}
 }
 

@@ -17,28 +17,31 @@ if (OperatingSystem.current().isWindows()) {
 	}
 }
 
-task runCommandGenerateCopyTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'copyTest.ecore')
-	modelFilePath = modelPath.absolutePath
-}
 
 task runCommandCompileApplicationForCopyTest(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForCopyTestSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForCopyTestSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForCopyTestSrc'
+	}
 	dependsOn 'compileCopyTest'
+
 }
 
-task generateCopyTest() {
+task generateCopyTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'copyTest'	
 	description 'generate C++ code of copyTest.ecore model copyTest' 
- 
-	def buildFile = file('model'+ File.separator +'build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'copyTest.ecore')
+	relatedModels = ['ecore']	
+	outputs.files(fileTree('./src_gen/copyTest') {
+        exclude '.cmake/**'
+    })
+	
+	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateCopyTest'
-	}
-	else
-	{
-		dependsOn 'model:generateCopyTestModel'
+		dependsOn dependencyTask
 	}
 }
 

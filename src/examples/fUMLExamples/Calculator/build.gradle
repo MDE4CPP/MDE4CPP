@@ -17,24 +17,19 @@ task runCommandCompileCalcModel(type:Exec) {
 	dependsOn 'generateCalcModel'
 }
 
-task runCommandGenerateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'CalcModel.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateCalcModel() {
+task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'CalcModel'
 	description 'description generate C++ code of CalcModel.uml model CalcModel' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'CalcModel.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateCalcModel'
-	}
-	else
-	{
-		dependsOn 'model:generateCalcModelModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForCalcModel(type:Exec) {

@@ -7,8 +7,9 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'simpleUML'
+rootProject.name = 'fUMLStrategiesExample'
 
 include ':model'
 include ':src_gen'
+include ':application'
 

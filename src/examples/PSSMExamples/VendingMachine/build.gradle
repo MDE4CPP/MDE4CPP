@@ -17,24 +17,19 @@ task runCommandCompileVendingMachine(type:Exec) {
 	dependsOn 'generateVendingMachine'
 }
 
-task runCommandGenerateVendingMachine(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'VendingMachine.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateVendingMachine() {
+task generateVendingMachine(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'VendingMachine'
 	description 'description generate C++ code of VendingMachine.uml model VendingMachine' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'VendingMachine.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'PSSM', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateVendingMachine'
-	}
-	else
-	{
-		dependsOn 'model:generateVendingMachineModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForVendingMachine(type:Exec) {

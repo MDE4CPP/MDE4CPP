@@ -4,44 +4,40 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: RemovingInstanceFromPort'
 
 task runCommandCompileRemovingInstanceFromPort(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileRemovingInstanceFromPortSrc'
-	mustRunAfter =  [
-		"generateRemovingInstanceFromPort" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileRemovingInstanceFromPortSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileRemovingInstanceFromPortSrc'
+	}
+	dependsOn 'generateRemovingInstanceFromPort'
 }
 
-task runCommandGenerateRemovingInstanceFromPort(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'RemovingInstanceFromPort.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateRemovingInstanceFromPort() {
+task generateRemovingInstanceFromPort(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'RemovingInstanceFromPort'
 	description 'description generate C++ code of RemovingInstanceFromPort.uml model RemovingInstanceFromPort' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'RemovingInstanceFromPort.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateRemovingInstanceFromPort'
-	}
-	else
-	{
-		dependsOn 'model:generateRemovingInstanceFromPortModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForRemovingInstanceFromPort(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForRemovingInstanceFromPortSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForRemovingInstanceFromPortSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForRemovingInstanceFromPortSrc'
+	}
 	dependsOn 'compileRemovingInstanceFromPort'
 }
 
@@ -49,27 +45,32 @@ task compileRemovingInstanceFromPort {
 	group 'RemovingInstanceFromPort'
 	description 'compile RemovingInstanceFromPort'
 
+	mustRunAfter = ["generateRemovingInstanceFromPort"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateRemovingInstanceFromPort'
-		mustRunAfter = ["generateRemovingInstanceFromPort"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileRemovingInstanceFromPortSrc'
+	} else {
 		dependsOn 'runCommandCompileRemovingInstanceFromPort'
 	}
-	else
-	{
-		mustRunAfter = ["generateRemovingInstanceFromPort"]
-		dependsOn 'src_gen:compileRemovingInstanceFromPortSrc'
-	}
-	mustRunAfter =  [
-		"generateRemovingInstanceFromPort" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateRemovingInstanceFromPort"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForRemovingInstanceFromPort{
