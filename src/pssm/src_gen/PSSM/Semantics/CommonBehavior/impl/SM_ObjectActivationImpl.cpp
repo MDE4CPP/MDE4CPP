@@ -30,7 +30,7 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence

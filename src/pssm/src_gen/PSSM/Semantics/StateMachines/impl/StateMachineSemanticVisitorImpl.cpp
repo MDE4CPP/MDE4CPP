@@ -31,7 +31,7 @@
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
 #include "PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
 #include "uml/CallEvent.hpp"
 #include "PSSM/Semantics/StateMachines/ExitPointPseudostateActivation.hpp"

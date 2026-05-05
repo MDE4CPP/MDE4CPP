@@ -30,7 +30,7 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "PSSM/Semantics/CommonBehavior/SM_ObjectActivation.hpp"
 //Forward declaration includes

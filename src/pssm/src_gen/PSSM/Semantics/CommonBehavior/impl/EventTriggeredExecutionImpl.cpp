@@ -30,7 +30,7 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
 #include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"

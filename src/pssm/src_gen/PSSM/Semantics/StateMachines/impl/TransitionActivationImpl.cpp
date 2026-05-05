@@ -41,7 +41,7 @@
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "uml/OpaqueExpression.hpp"
 #include "PSSM/Semantics/Values/SM_OpaqueExpressionEvaluation.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "PSSM/Semantics/StateMachines/TransitionMetadata.hpp"
 #include "uml/OpaqueBehavior.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"

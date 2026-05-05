@@ -32,7 +32,7 @@
 //Includes from codegen annotation
 #include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "uml/ParameterDirectionKind.hpp"
 #include "uml/Parameter.hpp"
 //Forward declaration includes

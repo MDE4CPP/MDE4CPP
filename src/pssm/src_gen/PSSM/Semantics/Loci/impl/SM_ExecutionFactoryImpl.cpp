@@ -30,7 +30,7 @@
 #include "ecore/ecorePackage.hpp"
 #include "ecore/ecoreFactory.hpp"
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "uml/StateMachine.hpp"
 #include "uml/Pseudostate.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
@@ -45,8 +45,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
 #include "uml/Element.hpp"
@@ -59,8 +59,8 @@
 #include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "PSSM/Semantics/Loci/LociPackage.hpp"
-#include "PSSM/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSSM/Semantics/Loci/LociPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
