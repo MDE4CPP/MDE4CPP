@@ -17,24 +17,20 @@ task runCommandCompileUML4CPPProfile(type:Exec) {
 	dependsOn 'generateUML4CPPProfile'
 }
 
-task runCommandGenerateUML4CPPProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'UML4CPPProfile.uml')
-	modelFilePath = modelPath.absolutePath
-}
 
-
-task generateUML4CPPProfile() {
+task generateUML4CPPProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'UML4CPPProfile'	
 	description 'generate C++ code of UML4CPPProfile.uml model UML4CPPProfile' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'UML4CPPProfile.uml')
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+		
+	def dependencyTask = getRootProject().getTasksByName('deliverUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateUML4CPPProfile'
-	}
-	else
-	{
-		dependsOn 'model:generateUML4CPPProfileModel'
+		dependsOn dependencyTask
 	}
 }
 

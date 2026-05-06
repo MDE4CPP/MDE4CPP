@@ -17,24 +17,20 @@ task runCommandCompileStandardProfile(type:Exec) {
 	dependsOn 'generateStandardProfile'
 }
 
-task runCommandGenerateStandardProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'StandardProfile.uml')
-	modelFilePath = modelPath.absolutePath
-}
 
-
-task generateStandardProfile() {
+task generateStandardProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'StandardProfile'	
 	description 'generate C++ code of StandardProfile.uml model StandardProfile' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'StandardProfile.uml')
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+		
+	def dependencyTask = getRootProject().getTasksByName('deliverUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateStandardProfile'
-	}
-	else
-	{
-		dependsOn 'model:generateStandardProfileModel'
+		dependsOn dependencyTask
 	}
 }
 

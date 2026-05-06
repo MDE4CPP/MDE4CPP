@@ -257,13 +257,13 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) [comment In case of model build file was deleted /]
 	{
-		dependsOn getRootProject().getTasksByName('model:generate[packageName.toUpperFirst()/]Model', true)
-		mustRunAfter = ['['/]getRootProject().getTasksByName('model:generate[packageName.toUpperFirst()/]Model', true)[']'/]
+		dependsOn getRootProject().getTasksByName('model:generate[packageName.toUpperFirst()/]', true)
+		mustRunAfter = ['['/]getRootProject().getTasksByName('model:generate[packageName.toUpperFirst()/]', true)[']'/]
 	}
 	else
 	{
-		[comment wenn dies einkommentiert wird, wird bei jeder Quellcodänderung compiliert!   dependsOn getRootProject().getTasksByName('generate[packageName.toUpperFirst()/?Model', true)  /]
-		mustRunAfter = ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]Model', true)[']'/]
+		[comment wenn dies einkommentiert wird, wird bei jeder Quellcodänderung compiliert!   dependsOn getRootProject().getTasksByName('generate[packageName.toUpperFirst()/?', true)  /]
+		mustRunAfter = ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]', true)[']'/]
 	}	
 	[comment 
 		Dependency to basic interface HEADERS

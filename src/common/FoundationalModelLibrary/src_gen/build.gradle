@@ -56,12 +56,12 @@ task compileFoundationalModelLibrarySrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
-		dependsOn getRootProject().getTasksByName('runCommandGenerateFoundationalModelLibrary', true)
-		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateFoundationalModelLibrary', true)]
+		dependsOn getRootProject().getTasksByName('generateFoundationalModelLibrary', true)
+		mustRunAfter = [getRootProject().getTasksByName('generateFoundationalModelLibrary', true)]
 	}
 	else
 	{
-		mustRunAfter = [getRootProject().getTasksByName('generateFoundationalModelLibraryModel', true)]
+		mustRunAfter = [getRootProject().getTasksByName('generateFoundationalModelLibrary', true)]
 	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)

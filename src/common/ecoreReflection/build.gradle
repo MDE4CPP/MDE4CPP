@@ -17,24 +17,20 @@ task runCommandCompileEcoreReflection(type:Exec) {
 	dependsOn 'generateEcoreReflection'
 }
 
-task runCommandGenerateEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'ecoreReflection.uml')
-	modelFilePath = modelPath.absolutePath
-}
 
-
-task generateEcoreReflection() {
+task generateEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'ecoreReflection'	
 	description 'generate C++ code of ecoreReflection.uml model ecoreReflection' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'ecoreReflection.uml')
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml']
+		
+	def dependencyTask = getRootProject().getTasksByName('deliverUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateEcoreReflection'
-	}
-	else
-	{
-		dependsOn 'model:generateEcoreReflectionModel'
+		dependsOn dependencyTask
 	}
 }
 

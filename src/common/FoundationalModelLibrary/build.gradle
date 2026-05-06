@@ -17,24 +17,19 @@ task runCommandCompileFoundationalModelLibrary(type:Exec) {
 	dependsOn 'generateFoundationalModelLibrary'
 }
 
-task runCommandGenerateFoundationalModelLibrary(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'FoundationalModelLibrary.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateFoundationalModelLibrary() {
+task generateFoundationalModelLibrary(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'FoundationalModelLibrary'
 	description 'description generate C++ code of FoundationalModelLibrary.uml model FoundationalModelLibrary' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'FoundationalModelLibrary.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateFoundationalModelLibrary'
-	}
-	else
-	{
-		dependsOn 'model:generateFoundationalModelLibraryModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 

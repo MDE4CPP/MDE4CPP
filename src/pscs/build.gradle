@@ -17,24 +17,22 @@ if (OperatingSystem.current().isWindows()) {
 	}
 }
 
-task runCommandGeneratePSCS(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'PSCS.ecore')
-	modelFilePath = modelPath.absolutePath
-}
 
 
-task generatePSCS() {
+task generatePSCS(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'PSCS'	
 	description 'generate C++ code of PSCS.ecore model PSCS' 
- 
-	def buildFile = file('model'+ File.separator +'build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'PSCS.ecore')
+	relatedModels = ['ecore', 'fUML', 'types', 'uml']	
+	outputs.files(fileTree('./src_gen/PSCS') {
+        exclude '.cmake/**'
+    })
+	
+	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGeneratePSCS'
-	}
-	else
-	{
-		dependsOn 'model:generatePSCSModel'
+		dependsOn dependencyTask
 	}
 }
 

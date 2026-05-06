@@ -17,24 +17,22 @@ if (OperatingSystem.current().isWindows()) {
 	}
 }
 
-task runCommandGenerateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'ecore.ecore')
-	modelFilePath = modelPath.absolutePath
-}
 
 
-task generateEcore() {
+task generateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'ecore'	
 	description 'generate C++ code of ecore.ecore model ecore' 
- 
-	def buildFile = file('model'+ File.separator +'build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'ecore.ecore')
+	relatedModels = []	
+	outputs.files(fileTree('./src_gen/ecore') {
+        exclude '.cmake/**'
+    })
+	
+	def dependencyTask = getRootProject().getTasksByName('deliverEcore4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateEcore'
-	}
-	else
-	{
-		dependsOn 'model:generateEcoreModel'
+		dependsOn dependencyTask
 	}
 }
 

@@ -43,12 +43,12 @@ task compileOclSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
 	if(!buildFile.exists()) 
 	{
-		dependsOn getRootProject().getTasksByName('runCommandGenerateOcl', true)
-		mustRunAfter = [getRootProject().getTasksByName('runCommandGenerateOcl', true)]
+		dependsOn getRootProject().getTasksByName('generateOcl', true)
+		mustRunAfter = [getRootProject().getTasksByName('generateOcl', true)]
 	}
 	else
 	{
-		mustRunAfter = [getRootProject().getTasksByName('generateOclModel', true)]
+		mustRunAfter = [getRootProject().getTasksByName('generateOcl', true)]
 	}	
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
