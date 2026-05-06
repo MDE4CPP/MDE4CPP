@@ -44,7 +44,7 @@ def allPSCSModelExamples =
 [
 //	[{Model project directory}, {Model name}, {taskName}]
 	 ['./Ampelsteuerung_Example/', 'Ampelsteuerung_Example', 'Ampelsteuerung_Example']
-	,['./LoadBalance/', 'LoadBalance', 'LoadBalance']	
+	,['./LoadBalance/', 'loadbalance', 'LoadBalance']	
 	,['./PingModel/', 'PingModel', 'PingModel']
 //	 ['./PSCSModelExample/', 'PSCSModelExample', 'PSCSModelExample']
 ]
@@ -66,7 +66,7 @@ def allPSCSTestSuiteModels =
 	['./TestSuite/02_Comm_04_MultDelSameCon_P_P_Op/', 'MultDelSameCon_P_P_Op', 'MultDelSameCon_P_P_Op'],
 	['./TestSuite/02_Comm_05_MultDelSameCon_P_PWP_Op/', 'MultDelSameCon_P_PWP_Op', 'MultDelSameCon_P_PWP_Op'],
 	['./TestSuite/02_Comm_06_MultDelMultCon_P_P_Op/', 'MultDelMultCon_P_P_Op', 'MultDelMultCon_p_p_Op'],
-	['./TestSuite/02_Comm_07_MultDelMultCon_p_pWP_Op/', 'MultDelMultCon_p_pWP_Op', 'MultDelMultCon_p_pWP_Op'],
+	['./TestSuite/02_Comm_07_MultDelMultCon_P_PWP_Op/', 'MultDelMultCon_P_PWP_Op', 'MultDelMultCon_p_pWP_Op'],
 	['./TestSuite/03_onPort_01_Op_ProvInterface/', 'Op_ProvInterface', 'Op_ProvInterface'],
 	['./TestSuite/03_onPort_02_Op_ReqInterface/', 'Op_ReqInterface', 'Op_ReqInterface'],
 	['./TestSuite/03_onPort_03_Op_Prov_Req_Interface/', 'Op_Prov_Req_Interface', 'Op_Prov_Req_Interface'],
