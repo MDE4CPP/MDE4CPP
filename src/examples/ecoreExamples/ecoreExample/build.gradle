@@ -41,13 +41,19 @@ task compileEcoreExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 		outputs.upToDateWhen { false }
 	}
 	if(OperatingSystem.current().isWindows()){
-		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExample.exe')
-		if (project.DEBUG){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0'))
+		{
+			outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExample.exe')
+		}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0')) {		
 		    outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExampled.exe')
 		}
-	} else {
-		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExample')
-		if (project.DEBUG){
+	}
+	else if(OperatingSystem.current().isLinux() || OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){
+			outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExample')
+		}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {
 			outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExampled')
 		}
 	}
