@@ -31,42 +31,52 @@ import org.gradle.internal.os.OperatingSystem;
 
 description 'MDE4CPP root project'
 
-
 task generateAll() {
 	group 'MDE4CPP'
 	description 'Generate all models without compilation of generated source code'
 
 	dependsOn 'generator:createAllGenerators'
-	dependsOn 'src:generateEcoreModels'
+	dependsOn 'src:generateEcoreModels' // includes OCL model & Parser
 	dependsOn 'src:generateReflectionModels'
 	dependsOn 'src:generateUMLProfiles'
 	dependsOn 'src:common:FoundationalModelLibrary:generateFoundationalModelLibrary'
 }
 
-task compileAll() {
+task compileCommonTools()
+{
+	group 'MDE4CPP'
+	description 'Compile all used external tools'
+
+	dependsOn 'src:deliverBasicInterfaces'
+	dependsOn 'src:common:pluginFramework:compilePluginFramework'
+	dependsOn 'src:common:persistence:compilePersistence'
+}	
+
+task compileAll() 
+{
 	group 'MDE4CPP'
 	description 'Compile all generated source code of models without generating the models'
 
-	dependsOn 'src:deliverBasicInterfaces'
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:compileUMLProfiles'
 	dependsOn 'src:compileOCLAll'
-	dependsOn 'src:common:FoundationalModelLibrary:compileFoundationalModelLibrary'
-	
-	dependsOn 'src:common:pluginFramework:compilePluginFramework'
-	dependsOn 'src:common:persistence:compilePersistence'
+
+	dependsOn 'src:common:FoundationalModelLibrary:compileFoundationalModelLibrary'	
 }
 
-task buildAll() {
+task buildAll() 
+{
 	group 'MDE4CPP'
 	description 'build generators and all models'
-
+	dependsOn 'compileCommonTools'
 	dependsOn 'generateAll'
 	dependsOn 'compileAll'
 	dependsOn 'src:buildOCLAll'
-		
-	tasks.getByPath('compileAll').mustRunAfter tasks.getByPath('generateAll')
+
+	tasks.getByPath('compileCommonTools').mustRunAfter tasks.getByPath('generateAll')	
+	tasks.getByPath('compileAll').mustRunAfter tasks.getByPath('compileCommonTools')
+	tasks.getByPath('src:buildOCLAll').mustRunAfter tasks.getByPath('generateAll')
 }
 
 
@@ -324,12 +334,12 @@ task checkEnvironment(){
 		def version = System.getenv('COMPILER_VERSION');
 
 		println ''
-		checkAndPrintPath(home + "/include")
-		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++")
-		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++/backward")
-		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++/" + delivery)
-		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include-fixed")
-		checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include")
+		checkAndPrintPath(home + "include")
+		checkAndPrintPath(home + "lib/gcc/" + delivery + "/" + version + "/include/c++")
+		checkAndPrintPath(home + "lib/gcc/" + delivery + "/" + version + "/include/c++/backward")
+		checkAndPrintPath(home + "lib/gcc/" + delivery + "/" + version + "/include/c++/" + delivery)
+		checkAndPrintPath(home + "lib/gcc/" + delivery + "/" + version + "/include-fixed")
+		checkAndPrintPath(home + "lib/gcc/" + delivery + "/" + version + "/include")
 	}
 
 	ext.checkMyVariablePath = { variable_name, should_fail ->
@@ -390,6 +400,96 @@ task checkEnvironment(){
 
 		checkCompilerIncludes();
 	}
+}
+
+task runInstallScripts()
+{		
+//private 	group 'MDE4CPP'
+	description 'Run the installation scripts for MDE4CPP. This will set the environment variables and check them. It is recommended to run this task only once, then set the environment variables permanently in your system settings.'
+
+	def installScripts = [
+//	[{script name},[{environment Variable}, {value}]]
+		['installJava',
+			['MDE4CPP_JAVA_VERSION', '21']
+		],
+		['installCompiler',
+			['MDE4CPP_COMPILER_VERSION', '13.3.0']
+		],
+//		['installCMake',		['MDE4CPP_CMAKE_VERSION', '4.3'], 		['MDE4CPP_CMAKE_BUILD_VERSION', '1']		],
+		['installEclipse',
+			['MDE4CPP_ECLIPSE_VERSION',	'2025-12'],
+			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', '3.7.0']
+		]	
+	]
+
+	def tool = ''
+	def command = ''
+	def extension = ''
+	def scriptPath = ''
+	def envSetCommand = ''	
+
+	// workingDir System.getenv('MDE4CPP_HOME')
+	if (OperatingSystem.current().isWindows()) 
+	{
+		// MS Windows
+		tool = 'cmd'
+		command = '/C'
+		extension = '.bat'
+		scriptPath = 'Windows'
+		envSetCommand = 'set'
+	} 
+	else if (OperatingSystem.current().isLinux()) 
+	{
+		// GNU/Linux
+		tool = '/bin/sh'
+		command = '-c'
+		extension = '.sh'
+		scriptPath = 'Linux'
+		envSetCommand = 'export'
+	}
+	else if (OperatingSystem.current().isMacOsX())
+	{
+		// Apple macOS
+		tool = 'bash'
+		command = '-c'
+		extension = '.sh'
+		scriptPath = 'MacOS'
+		envSetCommand = 'export'
+	}
+	else 
+	{
+		// OS not supported yet
+		throw new GradleException('OS ' + System.getProperty('os.name') + ' is not supported yet')
+	}
+	doLast {
+		println 'Running installation scripts...'
+		println 'This may take a while, please be patient.'
+		
+		installScripts.each {scripts ->
+			exec
+			{
+				scripts[1].each {envVar ->					
+					environment(envVar[0], envVar[1])	
+				}					 
+				println 'Running script: ' + scripts + extension
+				commandLine = [tool, command, '.'+File.separator + 'scripts' + File.separator + scriptPath + File.separator + scripts[0] + extension]
+			}
+			println 'Finished running script: ' + scripts + extension
+		}
+	}	
+}	
+
+task install{
+	group 'MDE4CPP'
+	description 'Install MDE4CPP by setting the environment variables and checking them'
+
+	dependsOn 'runInstallScripts'
+//	dependsOn 'checkEnvironment'
+	
+// install Plugins
+// install tools (xerces, antlr , crow, boost ...)
+
+//	tasks.getByPath('checkEnvironment').mustRunAfter tasks.getByPath('runInstallScripts')	
 }
 
 //EOF

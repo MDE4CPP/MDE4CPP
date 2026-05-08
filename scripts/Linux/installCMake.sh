@@ -1,10 +1,13 @@
-sudo apt remove --purge --auto-remove cmake
+echo $MDE4CPP_CMAKE_VERSION
+echo $MDE4CPP_CMAKE_BUILD_VERSION
 
-sudo apt update
-sudo apt install build-essential libtool autoconf unzip wget
+sudo -S apt remove --purge --auto-remove cmake
 
-version=4.3
-build=1
+sudo -S apt update
+sudo -S apt install build-essential libtool autoconf unzip wget 
+
+version=$MDE4CPP_CMAKE_VERSION
+build=$MDE4CPP_CMAKE_BUILD_VERSION
 ## don't modify from here
 mkdir ~/temp
 cd ~/temp
@@ -14,6 +17,6 @@ cd cmake-$version.$build/
 
 ./bootstrap
 make -j$(nproc)
-sudo make install
+sudo -S make install
 
-sudo ln -s /usr/local/bin/cmake /usr/bin/cmake
+sudo -S ln -s /usr/local/bin/cmake /usr/bin/cmake
