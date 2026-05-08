@@ -413,20 +413,27 @@ task runInstallScripts()
 			['MDE4CPP_JAVA_VERSION', '21']
 		],
 		['installCompiler',
-			['MDE4CPP_COMPILER_VERSION', '13.3.0']
+			['MDE4CPP_COMPILER_VERSION', '13.2.0']
 		],
-//		['installCMake',		['MDE4CPP_CMAKE_VERSION', '4.3'], 		['MDE4CPP_CMAKE_BUILD_VERSION', '1']		],
 		['installEclipse',
 			['MDE4CPP_ECLIPSE_VERSION',	'2025-12'],
-			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', '3.7.0']
-		]	
+			['MDE4CPP_ECLIPSE_MILESTONE', 'M3'],
+			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', '3.7'],
+			['MDE4CPP_ECLIPSE_SIRIUS_VERSION', '7.4.13']
+		],
+		['installCMake',
+			['MDE4CPP_CMAKE_VERSION', '4.3'],
+			['MDE4CPP_CMAKE_BUILD_VERSION', '1']
+		],
 	]
 
 	def tool = ''
 	def command = ''
 	def extension = ''
 	def scriptPath = ''
-	def envSetCommand = ''	
+	def envSetCommand = ''
+	def envValuePrefix = ''
+	def envValueSuffix = ''
 
 	// workingDir System.getenv('MDE4CPP_HOME')
 	if (OperatingSystem.current().isWindows()) 
@@ -446,6 +453,8 @@ task runInstallScripts()
 		extension = '.sh'
 		scriptPath = 'Linux'
 		envSetCommand = 'export'
+		envValuePrefix = '"'
+		envValueSuffix = '"'
 	}
 	else if (OperatingSystem.current().isMacOsX())
 	{
@@ -455,6 +464,8 @@ task runInstallScripts()
 		extension = '.sh'
 		scriptPath = 'MacOS'
 		envSetCommand = 'export'
+		envValuePrefix = '"'
+		envValueSuffix = '"'
 	}
 	else 
 	{
@@ -468,13 +479,17 @@ task runInstallScripts()
 		installScripts.each {scripts ->
 			exec
 			{
-				scripts[1].each {envVar ->					
-					environment(envVar[0], envVar[1])	
-				}					 
-				println 'Running script: ' + scripts + extension
-				commandLine = [tool, command, '.'+File.separator + 'scripts' + File.separator + scriptPath + File.separator + scripts[0] + extension]
+				def envAssignments = scripts[1..-1].collect { envVar ->
+					environment(envVar[0], envVar[1])
+					def envValue = "${envValuePrefix}${envVar[1]}${envValueSuffix}"
+					return "${envSetCommand} ${envVar[0]}=${envValue}"
+				}
+				def scriptCommand = '.' + File.separator + 'scripts' + File.separator + scriptPath + File.separator + scripts[0] + extension
+				def fullCommand = envAssignments.join(' && ') + ' && ' + scriptCommand
+				println 'Running: ' + scripts[0] 
+				commandLine = [tool, command, fullCommand]
 			}
-			println 'Finished running script: ' + scripts + extension
+			//println 'Finished:' + scripts [0]
 		}
 	}	
 }	
