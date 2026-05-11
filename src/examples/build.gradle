@@ -30,51 +30,36 @@ description 'Example collection'
 
 import org.gradle.internal.os.OperatingSystem;
 
-
-// use MDE4CPP Generator Task as generateModel
-task generateModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	description 'generate C++ code of ecore.ecore model ecore'		
-}
-
-//########################   general   ########################
-
+// Wrapper task for all included build subprojects
 task generateAllExamples() {
 	group 'Examples'
-	description 'generate All model examples'
-	
-	dependsOn getRootProject().getTasksByName('generateEcoreModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generateUMLModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generatefUMLModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generatePSCSModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generatePSSMModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generateOCLModelExamples', true)
-	dependsOn getRootProject().getTasksByName('generateStrategiesModelExamples', true)
-	// ToDo ...
+	description 'Generate all model examples from included builds'
+
+	dependsOn gradle.includedBuild('ecoreExamples').task(':generateEcoreModelExamples')
+	dependsOn gradle.includedBuild('UMLExamples').task(':generateUMLModelExamples')
+	dependsOn gradle.includedBuild('fUMLExamples').task(':generatefUMLModelExamples')
+	dependsOn gradle.includedBuild('PSCSExamples').task(':generatePSCSModelExamples')
+	dependsOn gradle.includedBuild('PSSMExamples').task(':generatePSSMModelExamples')
+	dependsOn gradle.includedBuild('oclExamples').task(':generateOCLModelExamples')
+	dependsOn gradle.includedBuild('strategiesExamples').task(':generateStrategiesExamplesModelExamples')
 }
 
 task compileAllExamples() {
 	group 'Examples'
-	description 'compile applications for all examples without generating the models'
-	
-	dependsOn getRootProject().getTasksByName('compileCommonExamples', true)
+	description 'compile applications for all examples from included builds'
 
-	dependsOn getRootProject().getTasksByName('compileEcoreExamples', true)
-	dependsOn getRootProject().getTasksByName('compileEcoreModelExamples', true)
-
-	dependsOn getRootProject().getTasksByName('compileUMLExamples', true)
-	dependsOn getRootProject().getTasksByName('compileUMLModelExamples', true)
-	
-	dependsOn getRootProject().getTasksByName('compilefUMLModelExamples', true)
-	
-	dependsOn getRootProject().getTasksByName('compilePSCSModelExamples', true)
-
-	dependsOn getRootProject().getTasksByName('compilePSSMModelExamples', true)
-	
-	dependsOn getRootProject().getTasksByName('compileOCLExamples', true)
-	dependsOn getRootProject().getTasksByName('compileOCLModelExamples', true)
-
-	dependsOn getRootProject().getTasksByName('compileStrategiesModelExamples', true)
-}
+	dependsOn gradle.includedBuild('commonExamples').task(':compileCommonExamples')
+	dependsOn gradle.includedBuild('ecoreExamples').task(':compileEcoreExamples')
+	dependsOn gradle.includedBuild('ecoreExamples').task(':compileEcoreModelExamples')
+	dependsOn gradle.includedBuild('UMLExamples').task(':compileUMLExamples')
+	dependsOn gradle.includedBuild('UMLExamples').task(':compileUMLModelExamples')
+	dependsOn gradle.includedBuild('fUMLExamples').task(':compilefUMLModelExamples')
+	dependsOn gradle.includedBuild('PSCSExamples').task(':compilePSCSModelExamples')
+	dependsOn gradle.includedBuild('PSSMExamples').task(':compilePSSMModelExamples')
+	dependsOn gradle.includedBuild('oclExamples').task(':compileOCLExamples')
+	dependsOn gradle.includedBuild('oclExamples').task(':compileOCLModelExamples')
+	dependsOn gradle.includedBuild('strategiesExamples').task(':compileStrategiesExamplesModelExamples')
+}																
 
 task buildAllExamples(){
 	group 'Examples'
@@ -107,38 +92,39 @@ task cleanAllExamples(type: Exec){
 
 task generateAllTests() {
 	group 'Tests'
-	description 'generate all test suites (currently only fUML test suite can be generated automatically)'
-	
-	dependsOn getRootProject().getTasksByName('generateEcoreTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generateUMLTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generatefUMLTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generatePSSMTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generateOCLTestSuite', true)
-	dependsOn getRootProject().getTasksByName('generateStrategiesTestSuite', true)
+	description 'generate all test suites from included builds'
+
+	dependsOn gradle.includedBuild('ecoreExamples').task(':generateEcoreTestSuite')
+	dependsOn gradle.includedBuild('UMLExamples').task(':generateUMLTestSuite')
+	dependsOn gradle.includedBuild('fUMLExamples').task(':generatefUMLTestSuite')
+	dependsOn gradle.includedBuild('PSCSExamples').task(':generatePSCSTestSuite')
+	dependsOn gradle.includedBuild('PSSMExamples').task(':generatePSSMTestSuite')
+	dependsOn gradle.includedBuild('oclExamples').task(':generateOCLTestSuite')
+	dependsOn gradle.includedBuild('strategiesExamples').task(':generateStrategiesExamplesTestSuite')
 }
 
 task compileAllTests() {
 	group 'Tests'
-	description 'compile applications for all test suites (currently only fUML test suite can be compiled automatically)'
-	
-	dependsOn getRootProject().getTasksByName('compileEcoreTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compileUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compilefUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compilePSCSTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compilePSSMTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compileOCLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('compileStrategiesTestSuite', true)
+	description 'compile all test suites from included builds'
+
+	dependsOn gradle.includedBuild('ecoreExamples').task(':compileEcoreTestSuite')
+	dependsOn gradle.includedBuild('UMLExamples').task(':compileUMLTestSuite')
+	dependsOn gradle.includedBuild('fUMLExamples').task(':compilefUMLTestSuite')
+	dependsOn gradle.includedBuild('PSCSExamples').task(':compilePSCSTestSuite')
+	dependsOn gradle.includedBuild('PSSMExamples').task(':compilePSSMTestSuite')
+	dependsOn gradle.includedBuild('oclExamples').task(':compileOCLTestSuite')
+	dependsOn gradle.includedBuild('strategiesExamples').task(':compileStrategiesExamplesTestSuite')
 }
 
 task buildAllTests() {
 	group 'Tests'
-	description 'generate and compile applictions for all test suites (currently only fUML test suite can be built automatically)'
-	dependsOn getRootProject().getTasksByName('buildEcoreTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildfUMLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildPSCSTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildPSSMTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildOCLTestSuite',true)
-	dependsOn getRootProject().getTasksByName('buildStrategiesTestSuite',true)
+	description 'generate and compile applications for all test suites from included builds'
+
+	dependsOn gradle.includedBuild('ecoreExamples').task(':buildEcoreTestSuite')
+	dependsOn gradle.includedBuild('UMLExamples').task(':buildUMLTestSuite')
+	dependsOn gradle.includedBuild('fUMLExamples').task(':buildfUMLTestSuite')
+	dependsOn gradle.includedBuild('PSCSExamples').task(':buildPSCSTestSuite')
+	dependsOn gradle.includedBuild('PSSMExamples').task(':buildPSSMTestSuite')
+	dependsOn gradle.includedBuild('oclExamples').task(':buildOCLTestSuite')
+	dependsOn gradle.includedBuild('strategiesExamples').task(':buildStrategiesExamplesTestSuite')
 }
