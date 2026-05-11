@@ -34,7 +34,7 @@ for %%I in ("%MDE4CPP_HOME%\..") do set "MDE4CPP_PARENT=%%~fI"
 set "TARGET_DIR=%MDE4CPP_PARENT%\eclipse"
 set "TMP_DIR=%TEMP%\mde4cpp-eclipse-%RANDOM%%RANDOM%"
 set "ARCHIVE_PATH=%TMP_DIR%\eclipse-modeling.zip"
-set "ECLIPSE_ARCHIVE_URL=https://archive.eclipse.org/technology/epp/downloads/release/%MDE4CPP_ECLIPSE_VERSION: =%/%MDE4CPP_ECLIPSE_MILESTONE: =%/eclipse-modeling-%MDE4CPP_ECLIPSE_VERSION: =%-%MDE4CPP_ECLIPSE_MILESTONE: =%-win32-x86_64.zip"
+set "ECLIPSE_ARCHIVE_URL=https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/%MDE4CPP_ECLIPSE_VERSION: =%/%MDE4CPP_ECLIPSE_MILESTONE: =%/eclipse-modeling-%MDE4CPP_ECLIPSE_VERSION: =%-%MDE4CPP_ECLIPSE_MILESTONE: =%-win32-x86_64.zip"
 set "ACCELEO_REPOSITORY_URL=https://download.eclipse.org/acceleo/updates/releases/%MDE4CPP_ECLIPSE_ACCELEO_VERSION: =%"
 set "SIRIUS_REPOSITORY_URL=https://download.eclipse.org/sirius/updates/releases/%MDE4CPP_ECLIPSE_SIRIUS_VERSION: =%"
 set "CDT_REPOSITORY_URL=https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%"
@@ -42,6 +42,7 @@ set "CDT_REPOSITORY_URL=https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_V
 REM Step 4: Download and extract Eclipse Modeling package.
 echo [installEclipse] MDE4CPP_HOME=%MDE4CPP_HOME%
 echo [installEclipse] Install location=%TARGET_DIR%
+echo [installEclipse] Temp Installation Dir=%TMP_DIR%
 echo [installEclipse] Using Eclipse version=%MDE4CPP_ECLIPSE_VERSION%, milestone=%MDE4CPP_ECLIPSE_MILESTONE%, Acceleo=%MDE4CPP_ECLIPSE_ACCELEO_VERSION%, Sirius=%MDE4CPP_ECLIPSE_SIRIUS_VERSION%
 echo [installEclipse] Downloading %ECLIPSE_ARCHIVE_URL%
 
@@ -59,6 +60,8 @@ if errorlevel 1 (
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
+
+echo [installEclipse] Dowload finished, extracting archive.
 
 if exist "%TARGET_DIR%" rmdir /s /q "%TARGET_DIR%"
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^

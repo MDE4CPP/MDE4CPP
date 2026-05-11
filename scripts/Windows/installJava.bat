@@ -8,7 +8,22 @@ if "%MDE4CPP_JAVA_VERSION%"=="" (
     exit /b 1
 )
 
-REM Step 2: Skip installation when requested version is already installed.
+REM Step 2: Ensure the script runs with administrator rights.
+if /I not "%~1"=="--elevated" (
+    net session >nul 2>&1
+    if errorlevel 1 (
+        echo [installJava] Administrator rights are required. Requesting elevation...
+        powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+          "Start-Process -FilePath 'cmd.exe' -Verb RunAs -ArgumentList '/c set ""MDE4CPP_JAVA_VERSION=%MDE4CPP_JAVA_VERSION%"" ^&^& call ""%~f0"" --elevated'"
+        if errorlevel 1 (
+            echo [installJava] ERROR: Elevation was cancelled or failed.
+            exit /b 1
+        )
+        exit /b 0
+    )
+)
+
+REM Step 3: Skip installation when requested version is already installed.
 set "INSTALLED_MAJOR="
 for /f "delims=" %%V in ('powershell -NoProfile -ExecutionPolicy Bypass -Command "$v = java -version 2>&1 | Select-String 'version' | Select-Object -First 1; if ($v -match '\"(\\d+)') { $matches[1] }"') do (
     set "INSTALLED_MAJOR=%%V"
@@ -24,22 +39,6 @@ if defined INSTALLED_MAJOR (
     )
 ) else (
     echo [installJava] Java is not installed. Installing Java %MDE4CPP_JAVA_VERSION%.
-)
-
-
-REM Step 3: Ensure the script runs with administrator rights.
-if /I not "%~1"=="--elevated" (
-    net session >nul 2>&1
-    if errorlevel 1 (
-        echo [installJava] Administrator rights are required. Requesting elevation...
-        powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-          "Start-Process -FilePath 'cmd.exe' -Verb RunAs -ArgumentList '/c set ""MDE4CPP_JAVA_VERSION=%MDE4CPP_JAVA_VERSION%"" ^&^& call ""%~f0"" --elevated'"
-        if errorlevel 1 (
-            echo [installJava] ERROR: Elevation was cancelled or failed.
-            exit /b 1
-        )
-        exit /b 0
-    )
 )
 
 REM Step 4: Install requested Microsoft OpenJDK using winget.
