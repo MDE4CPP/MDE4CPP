@@ -6,8 +6,7 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'Examples_PSCSExamples'
-
+rootProject.name = 'PSCSExamples'
 
 fileTree('.') {
 	include '**/build.gradle'

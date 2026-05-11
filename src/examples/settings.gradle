@@ -1,6 +1,13 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
 rootProject.name = 'MDE4CPPExamples'
 
-includeBuild '../../'			//Necessary for dependecy to task 'createAllGenerators'
 includeBuild 'benchmarks'
 includeBuild 'commonExamples'
 includeBuild 'ecoreExamples'

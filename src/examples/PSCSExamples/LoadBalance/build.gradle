@@ -4,44 +4,40 @@ plugins{
 	id "tui.sse.mde4cpp.MDE4CPPGenerate" version "0.6"	
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Build tasks for project: LoadBalance'
 
 task runCommandCompileLoadBalance(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew src_gen:compileLoadBalanceSrc'
-	mustRunAfter =  [
-		"generateLoadBalance" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+	if (OperatingSystem.current().isWindows()) {		
+		commandLine 'cmd', '/c', 'gradlew src_gen:compileLoadBalanceSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew src_gen:compileLoadBalanceSrc'
+	}
+	dependsOn 'generateLoadBalance'
 }
 
-task runCommandGenerateLoadBalance(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	def modelPath = file('.' + File.separator + 'model' + File.separator + 'LoadBalance.uml')
-	modelFilePath = modelPath.absolutePath
-}
-
-task generateLoadBalance() {
+task generateLoadBalance(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'LoadBalance'
 	description 'description generate C++ code of LoadBalance.uml model LoadBalance' 
- 
-	def buildFile = file('model/build.gradle')
-	if(!buildFile.exists())
+
+	modelFilePath = file('.' + File.separator + 'model' + File.separator + 'LoadBalance.uml')
+	structureOnly = false
+
+	relatedModels = ['fUML', 'ecoreReflection', 'uml', 'PSCS', 'primitivetypesReflection', 'ecore', 'umlReflection']	
+	def dependencyTask = getRootProject().getTasksByName('deliverfUML4CPP',true)
+	if (dependencyTask)
 	{
-		dependsOn 'runCommandGenerateLoadBalance'
-	}
-	else
-	{
-		dependsOn 'model:generateLoadBalanceModel'
-	}
+		dependsOn dependencyTask
+	} 
 }
 
 task runCommandCompileApplicationForLoadBalance(type:Exec) {
-	commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLoadBalanceSrc'
+	if (OperatingSystem.current().isWindows()) {
+		commandLine 'cmd', '/c', 'gradlew application:compileApplicationForLoadBalanceSrc'
+	} else {
+		commandLine '/bin/sh', '-c', 'gradlew application:compileApplicationForLoadBalanceSrc'
+	}
 	dependsOn 'compileLoadBalance'
 }
 
@@ -49,27 +45,32 @@ task compileLoadBalance {
 	group 'LoadBalance'
 	description 'compile LoadBalance'
 
+	mustRunAfter = ["generateLoadBalance"]
+	
 	def buildFile = file('src_gen/build.gradle')
-	if(!buildFile.exists()){ 
-		dependsOn 'generateLoadBalance'
-		mustRunAfter = ["generateLoadBalance"]
+	
+	if(buildFile.exists()) {
+		dependsOn 'src_gen:compileLoadBalanceSrc'
+	} else {
 		dependsOn 'runCommandCompileLoadBalance'
 	}
-	else
-	{
-		mustRunAfter = ["generateLoadBalance"]
-		dependsOn 'src_gen:compileLoadBalanceSrc'
-	}
-	mustRunAfter =  [
-		"generateLoadBalance" 
-		, getRootProject().getTasksByName('compileFUML', true)
-		, getRootProject().getTasksByName('compileEcoreReflection', true)
-		, getRootProject().getTasksByName('compileUml', true)
-		, getRootProject().getTasksByName('compilePSCS', true)
-		, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-		, getRootProject().getTasksByName('compileEcore', true)
-		, getRootProject().getTasksByName('compileUmlReflection', true)
-	]
+		mustRunAfter = [
+			"generateLoadBalance"
+			, getRootProject().getTasksByName('compileFUML', true)
+			, getRootProject().getTasksByName('buildFUML', true)
+			, getRootProject().getTasksByName('compileEcoreReflection', true)
+			, getRootProject().getTasksByName('buildEcoreReflection', true)
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
+			, getRootProject().getTasksByName('compilePSCS', true)
+			, getRootProject().getTasksByName('buildPSCS', true)
+			, getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+			, getRootProject().getTasksByName('compileEcore', true)
+			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileUmlReflection', true)
+			, getRootProject().getTasksByName('buildUmlReflection', true)
+		]
 }
 
 task compileApplicationForLoadBalance{

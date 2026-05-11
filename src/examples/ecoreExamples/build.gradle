@@ -31,11 +31,6 @@ description 'Example collection'
 import org.gradle.internal.os.OperatingSystem;
 
 
-// use MDE4CPP Generator Task as generateModel
-task generateModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	description 'generate C++ code of ecore.ecore model ecore'		
-}
-
 def allEcoreExamples = 
 [
 //	[{project directory}, {task name}]
@@ -45,7 +40,7 @@ def allEcoreExamples =
 def allEcoreModelExamples = 
 [
 //	[{Model project directory}, {Model name}, {taskName}]
-	['./ecoreModelExample/', 'libraryModel_ecore', 'LibraryModel_ecore'],
+	['/ecoreModelExample/', 'libraryModel_ecore', 'LibraryModel_ecore'],
 	['./ecoreAnnotationsExample/', 'ecoreAnnotationsExample', 'EcoreAnnotationsExample']
 ]
 
@@ -93,22 +88,16 @@ task generateEcoreModelExamples() {
 		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
 		if(!(buildModelFile.exists() && buildSrcFile.exists()))
 		{
-			def generateTask = getRootProject().tasks.findByPath(':generateModel')
-			if (generateTask) 
-			{	
-				dependsOn generateTask.configure
-				{
-					modelFilePath = file("${model[0]}/model/${model[1]}.ecore")
-				}
-				dependsOn generateTask
-			}	
-			else
-			{
-				println "No generateModel task found in example project for model: " + model[1]
+			def modelPath = file(System.getenv('MDE4CPP_HOME') + "/src/examples/ecoreExamples" + model[0] + "model/" + model[1] + ".ecore")
+			println "Configuring generate task for model: " + modelPath
+			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) {
+				modelFilePath = modelPath
 			}
+			dependsOn generateTask
 		}
-		else
-		{		
+		else		
+		{	
+			println "?????????????????????????????????????????????????????"	
 			def projectPath = model[0].replace('./', '').replaceAll('/$', '')
 			def targetProject = findProject(projectPath)			
 			if (targetProject != null) 
@@ -176,19 +165,12 @@ task generateEcoreTestSuite() {
 		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
 		if(!(buildModelFile.exists() && buildSrcFile.exists()))
 		{
-			def generateTask = getRootProject().tasks.findByPath(':generateModel')
-			if (generateTask) 
-			{	
-				dependsOn generateTask.configure
-				{
-					modelFilePath = file("${model[0]}/model/${model[1]}.ecore")
-				}
-				dependsOn generateTask
-			}	
-			else
-			{
-				println "No generateModel task found in example project for model: " + model[1]
+			def modelPath = file("${model[0]}/model/${model[1]}.ecore")
+			println "Configuring generate task for test model: " + modelPath
+			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) {
+				modelFilePath = modelPath
 			}
+			dependsOn generateTask
 		}
 		else
 		{		

@@ -30,12 +30,6 @@ description 'Example collection'
 
 import org.gradle.internal.os.OperatingSystem;
 
-
-// use MDE4CPP Generator Task as generateModel
-task generateModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	description 'generate C++ code of ecore.ecore model ecore'		
-}
-
 def allPSSMModelExamples = 
 [
 //	[{Model project directory}, {Model name}, {taskName}]	 
@@ -65,19 +59,11 @@ task generatePSSMModelExamples() {
 		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
 		if(!(buildModelFile.exists() && buildSrcFile.exists()))
 		{
-			def generateTask = getRootProject().tasks.findByPath(':generateModel')
-			if (generateTask) 
-			{	
-				dependsOn generateTask.configure
-				{
-					modelFilePath = file("${model[0]}/model/${model[1]}.uml")
-				}
-				dependsOn generateTask
-			}	
-			else
+			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) 
 			{
-				println "No generateModel task found in example project for model: " + model[1]
+				modelFilePath = file("${model[0]}/model/${model[1]}.uml")
 			}
+			dependsOn generateTask
 		}
 		else
 		{	
@@ -149,19 +135,11 @@ task generatePSSMTestSuite() {
 		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
 		if(!(buildModelFile.exists() && buildSrcFile.exists()))
 		{
-			def generateTask = getRootProject().tasks.findByPath(':generateModel')
-			if (generateTask) 
-			{	
-				dependsOn generateTask.configure
-				{
-					modelFilePath = file("${model[0]}/model/${model[1]}.uml")
-				}
-				dependsOn generateTask
-			}	
-			else
+			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) 
 			{
-				println "No generateModel task found in example project for model: " + model[1]
+				modelFilePath = file("${model[0]}/model/${model[1]}.uml")
 			}
+			dependsOn generateTask
 		}
 		else
 		{	
