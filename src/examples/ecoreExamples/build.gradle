@@ -88,10 +88,9 @@ task generateEcoreModelExamples() {
 		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
 		if(!(buildModelFile.exists() && buildSrcFile.exists()))
 		{
-			def modelPath = file(System.getenv('MDE4CPP_HOME') + "/src/examples/ecoreExamples" + model[0] + "model/" + model[1] + ".ecore")
-			println "Configuring generate task for model: " + modelPath
-			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) {
-				modelFilePath = modelPath
+			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) 
+			{
+				modelFilePath = file("${model[0]}/model/${model[1]}.ecore")
 			}
 			dependsOn generateTask
 		}
@@ -165,10 +164,9 @@ task generateEcoreTestSuite() {
 		def buildSrcFile = file("${model[0]}/src_gen/build.gradle")
 		if(!(buildModelFile.exists() && buildSrcFile.exists()))
 		{
-			def modelPath = file("${model[0]}/model/${model[1]}.ecore")
-			println "Configuring generate task for test model: " + modelPath
-			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) {
-				modelFilePath = modelPath
+			def generateTask = tasks.create("generate${model[2]}", tui.sse.mde4cpp.MDE4CPPGenerate) 
+			{
+				modelFilePath = file("${model[0]}/model/${model[1]}.ecore")
 			}
 			dependsOn generateTask
 		}

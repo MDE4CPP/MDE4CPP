@@ -48,7 +48,7 @@ def allUMLTestSuiteModels =
 [
 //	[{Model project directory}, {Model name}, {taskName}]
 	 ['./TestSuite/copyTestUML/', 'copyTestUML', 'CopyTestUML']
-	,['./TestSuite/subsetUnion/', 'simpleUML', 'SimpleUML']	
+	,['./TestSuite/simpleUML/', 'simpleUML', 'SimpleUML']	
 ]
 
 task compileUMLExamples() {
