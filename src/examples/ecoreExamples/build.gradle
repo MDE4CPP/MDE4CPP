@@ -40,7 +40,7 @@ def allEcoreExamples =
 def allEcoreModelExamples = 
 [
 //	[{Model project directory}, {Model name}, {taskName}]
-	['/ecoreModelExample/', 'libraryModel_ecore', 'LibraryModel_ecore'],
+	['./ecoreModelExample/', 'libraryModel_ecore', 'LibraryModel_ecore'],
 	['./ecoreAnnotationsExample/', 'ecoreAnnotationsExample', 'EcoreAnnotationsExample']
 ]
 
