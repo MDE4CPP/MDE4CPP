@@ -61,10 +61,10 @@ task compileEcoreAnnotationsExample() {
 	
 		mustRunAfter = [
 			'generateEcoreAnnotationsExample'
-			, getRootProject().getTasksByName('compileTypes', true)
-			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileEcore', true)
 			, getRootProject().getTasksByName('buildEcore', true)
+			, getRootProject().getTasksByName('compileTypes', true)
+			, getRootProject().getTasksByName('buildTypes', true)
 		]
 }
 
@@ -85,6 +85,6 @@ task buildEcoreAnnotationsExample() {
 	dependsOn 'compileEcoreAnnotationsExample'
 	dependsOn 'compileApplicationForEcoreAnnotationsExample'
 
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }

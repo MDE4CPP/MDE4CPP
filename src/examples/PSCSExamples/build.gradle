@@ -36,7 +36,7 @@ def allPSCSModelExamples =
 [
 //	[{Model project directory}, {Model name}, {taskName}]
 	 ['./Ampelsteuerung_Example/', 'Ampelsteuerung_Example', 'Ampelsteuerung_Example']
-	,['./LoadBalance/', 'loadbalance', 'LoadBalance']	
+	,['./LoadBalance/', 'LoadBalance', 'LoadBalance']	
 	,['./PingModel/', 'PingModel', 'PingModel']
 //	 ['./PSCSModelExample/', 'PSCSModelExample', 'PSCSModelExample']
 ]

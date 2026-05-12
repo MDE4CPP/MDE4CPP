@@ -51,7 +51,7 @@ def allfUMLTestSuiteModels =
 	 ,['./TestSuite/MultiplePins', 'fUMLMultiplePins', 'FUMLMultiplePins']
 //	 ,['./TestSuite/RegionTest', 'RegionTest'] handle Expension region in name 
 	 ,['./TestSuite/SignalExample', 'SignalExample', 'SignalExample']
-	 ,['./TestSuite/SimpleBehaviorTest', 'SimpleBehaviorTest', 'SimpleBehaviorTest']
+	 ,['./TestSuite/SimpleBehaviorTest', 'simpleBehaviorTest', 'SimpleBehaviorTest']
 // 	 ,['./TestSuite/TargetPinTest', 'TargetPinTest']
 //	 ,['./TestSuite/TestModelImport', 'TestModelImport']
 //	 ,['./TestSuite/TestModelMain', 'TestModelMain']
