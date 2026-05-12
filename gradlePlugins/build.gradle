@@ -16,7 +16,7 @@ task createMDE4CPPGeneratePlugin() {
 task publishMDE4CPPPluginsToMavenLocal() {
 	group 'base'
 	description 'publish MDE4CPP gradle Plugins to mavenLocal (see <user>/.m2)'
-	
+
 	dependsOn 'createMDE4CPPGeneratePlugin'
 	dependsOn 'createMDE4CPPCompilePlugin'
 	dependsOn 'MDE4CPPCompilePlugin:publishToMavenLocal'

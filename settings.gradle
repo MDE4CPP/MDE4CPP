@@ -24,6 +24,5 @@ fileTree('.') {
 }
 
 includeBuild 'gradlePlugins'
-includeBuild 'src/examples/'
+//includeBuild 'src/examples/'
 //includeBuild 'generator'
-//includeBuild './src_gen'

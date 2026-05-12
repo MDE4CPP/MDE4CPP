@@ -408,7 +408,7 @@ task runInstallScripts()
 	description 'Run the installation scripts for MDE4CPP. This will set the environment variables and check them. It is recommended to run this task only once, then set the environment variables permanently in your system settings.'
 
 	def installScripts = [
-//	[{script name},[{environment Variable}, {value}]]
+		//	[{script name},[{environment Variable}, {value}]]
 		['installJava',
 			['MDE4CPP_JAVA_VERSION', '21']
 		],
@@ -417,7 +417,7 @@ task runInstallScripts()
 		],
 		['installEclipse',
 			['MDE4CPP_ECLIPSE_VERSION',	'2025-12'],
-			['MDE4CPP_ECLIPSE_MILESTONE', 'M3'],
+			['MDE4CPP_ECLIPSE_MILESTONE', 'R'],
 			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', '3.7'],
 			['MDE4CPP_ECLIPSE_SIRIUS_VERSION', '7.4.13']
 		],
@@ -494,11 +494,20 @@ task runInstallScripts()
 	}	
 }	
 
+// Root wrapper for the included gradlePlugins composite build task.
+task publishMDE4CPPPluginsToMavenLocal {
+	group 'base'
+	description 'Publish MDE4CPP gradle plugins from the gradlePlugins composite build to mavenLocal'
+	dependsOn gradle.includedBuild('gradlePlugins').task(':publishMDE4CPPPluginsToMavenLocal')
+}
+
 task install{
 	group 'MDE4CPP'
 	description 'Install MDE4CPP by setting the environment variables and checking them'
 
-	dependsOn 'runInstallScripts'
+//	dependsOn 'runInstallScripts'
+ 	dependsOn 'publishMDE4CPPPluginsToMavenLocal'
+
 //	dependsOn 'checkEnvironment'
 	
 // install Plugins

@@ -32,7 +32,7 @@ if "%MDE4CPP_ECLIPSE_SIRIUS_VERSION%"=="" (
 REM Step 3: Resolve install locations and download URLs.
 for %%I in ("%MDE4CPP_HOME%\..") do set "MDE4CPP_PARENT=%%~fI"
 set "TARGET_DIR=%MDE4CPP_PARENT%\eclipse"
-set "TMP_DIR=%TEMP%\mde4cpp-eclipse-%RANDOM%%RANDOM%"
+set "TMP_DIR=%TEMP%\mde4cpp-eclipse-install"
 set "ARCHIVE_PATH=%TMP_DIR%\eclipse-modeling.zip"
 set "ECLIPSE_ARCHIVE_URL=https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/%MDE4CPP_ECLIPSE_VERSION: =%/%MDE4CPP_ECLIPSE_MILESTONE: =%/eclipse-modeling-%MDE4CPP_ECLIPSE_VERSION: =%-%MDE4CPP_ECLIPSE_MILESTONE: =%-win32-x86_64.zip"
 set "ACCELEO_REPOSITORY_URL=https://download.eclipse.org/acceleo/updates/releases/%MDE4CPP_ECLIPSE_ACCELEO_VERSION: =%"
@@ -53,8 +53,10 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM powershell -NoProfile -ExecutionPolicy Bypass -Command ^ "Invoke-WebRequest -Uri '%ECLIPSE_ARCHIVE_URL%' -OutFile '%ARCHIVE_PATH%'"
+
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-  "Invoke-WebRequest -Uri '%ECLIPSE_ARCHIVE_URL%' -OutFile '%ARCHIVE_PATH%'"
+    "curl.exe --output '%ARCHIVE_PATH%' '%ECLIPSE_ARCHIVE_URL%'"
 if errorlevel 1 (
     echo [installEclipse] ERROR: Download failed.
     rmdir /s /q "%TMP_DIR%"
@@ -73,9 +75,9 @@ if errorlevel 1 (
 )
 
 REM Step 5: Install Acceleo into Eclipse.
+REM -nosplash ^
 echo [installEclipse] Installing Acceleo from %ACCELEO_REPOSITORY_URL%
 "%TARGET_DIR%\eclipse.exe" ^
-REM  -nosplash ^
   -application org.eclipse.equinox.p2.director ^
   -repository "%ACCELEO_REPOSITORY_URL%" ^
   -installIU org.eclipse.acceleo.feature.group ^
@@ -90,9 +92,9 @@ if errorlevel 1 (
 )
 
 REM Step 6: Install Sirius into Eclipse.
+REM  -nosplash ^
 echo [installEclipse] Installing Sirius from %SIRIUS_REPOSITORY_URL%
 "%TARGET_DIR%\eclipse.exe" ^
-REM  -nosplash ^
   -application org.eclipse.equinox.p2.director ^
   -repository "%SIRIUS_REPOSITORY_URL%" ^
   -installIU org.eclipse.sirius.feature.group ^
@@ -106,10 +108,10 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM  -nosplash ^
 REM Step 7: Install CDT into Eclipse.
 echo [installEclipse] Installing CDT from %CDT_REPOSITORY_URL%
 "%TARGET_DIR%\eclipse.exe" ^
-REM  -nosplash ^
   -application org.eclipse.equinox.p2.director ^
   -repository "%CDT_REPOSITORY_URL%" ^
   -installIU org.eclipse.cdt.feature.group ^

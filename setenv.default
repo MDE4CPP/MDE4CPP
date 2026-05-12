@@ -85,8 +85,3 @@ export CPP_IDE_EXECUTABLE=$MDE4CPP_ECLIPSE_HOME
 # compiler version, only necessary for include path generation for Eclipse Project file
 #export COMPILER_VERSION=
 
-cd ./gradlePlugins
-gradlew publishMDE4CPPPluginsToMavenLocal
-
-cd $MDE4CPP_HOME
-# bash

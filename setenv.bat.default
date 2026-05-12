@@ -80,9 +80,3 @@ SET COMPILER_VERSION=8.1.0
 REM Optional: path to your C++ IDE executable
 REM by setting this you may use the startCPPIDE gradle task
 SET CPP_IDE_EXECUTABLE=C:\MyEclipseCPP\eclipse.exe
-
-echo build and publish MDE4CPP gradle plugins
-cd ./gradlePlugins
-start cmd /c "gradlew publishMDE4CPPPluginsToMavenLocal"
-
-cd %MDE4CPP_HOME%
