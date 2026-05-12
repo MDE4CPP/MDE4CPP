@@ -34,6 +34,7 @@ description 'Grammar Parser (ANTLR)'
 
 def antlr4Version = "4.13.2"
 
+
 task downloadAntlr4(type: Download) {
 	description 'download antlr4'
 	group 'Grammar Parser (ANTLR)'
@@ -63,7 +64,6 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			folder.mkdirs()
 		}
 	}
-	
 	doLast {
 		// Check if cross-compilation to Windows is enabled
 		def crossCompileWindows = false
@@ -112,9 +112,9 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 		exec {
 			workingDir "antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
 			if (isWindows) {
-				commandLine 'cmd', '/c', cmakeCmd
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
 			} else {
-				commandLine '/bin/sh', '-c', cmakeCmd
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
 			}
 			// Pass environment variables for cross-compilation
 			if (isCrossCompiling) {
@@ -177,11 +177,11 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			}
 		} else if (isWindows) {
 			// Native Windows: look for .dll files
-			copy {
-				from "antlr4/bin/bin"
-				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+		copy {
+			from "antlr4/bin/bin"
+			into System.getenv('MDE4CPP_HOME')+"/application/bin"
 				include "*.dll"
-			}
+		}
 			// Also copy static libraries
 			copy {
 				from "antlr4/bin/lib"
@@ -196,13 +196,13 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 				include "**/*.so", "**/*.dylib"
 			}
 			// Also copy static libraries
-			copy {
-				from "antlr4/bin/lib"
-				into System.getenv('MDE4CPP_HOME')+"/application/lib"
-				include "**/*.a"
-			}
+		copy {
+			from "antlr4/bin/lib"
+			into System.getenv('MDE4CPP_HOME')+"/application/lib"
+			include "**/*.a"
 		}
 	}
+}
 
 	inputs.files(fileTree(".${File.separator}antlr4${File.separator}antlr4-cpp-runtime-${antlr4Version}-source") {
         exclude '.cmake/**'
@@ -241,7 +241,7 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','lib','libantlr4-runtime' + 'd' + '.a'].join(File.separator))}
 		} else {
 			// Native Windows: expect DLL in bin/
-			if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libantlr4-runtime' + '.dll'].join(File.separator))}
+			if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libantlr4-runtime' +       '.dll'].join(File.separator))}
 			if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.dll'].join(File.separator))}
 		}
 	}
