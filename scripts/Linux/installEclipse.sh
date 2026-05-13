@@ -30,6 +30,11 @@ if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_VERSION:-}" ]]; then
   exit 1
 fi
 
+if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION:-}" ]]; then
+  echo "MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION is not set."
+  exit 1
+fi
+
 # Step 3: Resolve installation paths and download URLs.
 MDE4CPP_PARENT="$(cd "${MDE4CPP_HOME}/.." && pwd)"
 TARGET_DIR="${MDE4CPP_PARENT}/eclipse"
@@ -38,7 +43,7 @@ ARCHIVE_PATH="${TMP_DIR}/eclipse-modeling.tar.gz"
 
 ECLIPSE_ARCHIVE_URL="https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}/${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}/eclipse-modeling-${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}-${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}-linux-gtk-x86_64.tar.gz"
 ACCELEO_REPOSITORY_URL="https://download.eclipse.org/acceleo/updates/releases/${MDE4CPP_ECLIPSE_ACCELEO_VERSION//[[:space:]]/}"
-SIRIUS_REPOSITORY_URL="https://download.eclipse.org/sirius/updates/releases/${MDE4CPP_ECLIPSE_SIRIUS_VERSION//[[:space:]]/}"
+SIRIUS_REPOSITORY_URL="https://download.eclipse.org/sirius/updates/releases/${MDE4CPP_ECLIPSE_SIRIUS_VERSION//[[:space:]]/}/${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION//[[:space:]]/}"
 CDT_REPOSITORY_URL="https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}"
 
 # Step 4: Register cleanup for temporary files.
@@ -71,12 +76,18 @@ echo "Installing Acceleo from ${ACCELEO_REPOSITORY_URL}"
 "${TARGET_DIR}/eclipse" \
   -nosplash \
   -application org.eclipse.equinox.p2.director \
-  -repository "${ACCELEO_REPOSITORY_URL}" \
+  -repository "https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/},${ACCELEO_REPOSITORY_URL}" \
   -installIU org.eclipse.acceleo.feature.group \
+  -installIU org.eclipse.acceleo.ui.interpreter.ocl.feature.group \
+  -installIU org.eclipse.acceleo.ui.interpreter.completeocl.feature.group \
+  -installIU org.eclipse.emf.sdk.feature.group \
+  -installIU org.eclipse.uml2.sdk.feature.group \
+  -installIU org.eclipse.ocl.all.sdk.feature.group \
+  -installIU org.eclipse.acceleo.query.feature.group \
+  -installIU org.eclipse.acceleo.query.source.feature.group \
+  -installIU org.antlr.runtime \
   -destination "${TARGET_DIR}" \
-  -profile SDKProfile \
-  -profileProperties org.eclipse.update.install.features=true \
-  -roaming
+  -profileProperties org.eclipse.update.install.features=true
 
 # Step 7: Install Sirius into the Eclipse installation.
 echo "Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
@@ -84,13 +95,35 @@ echo "Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
   -nosplash \
   -application org.eclipse.equinox.p2.director \
   -repository "${SIRIUS_REPOSITORY_URL}" \
-  -installIU org.eclipse.sirius.feature.group \
+  -installIU org.eclipse.sirius.common.acceleo.aql \
+  -installIU org.eclipse.sirius.ui.properties \
+  -installIU org.eclipse.sirius.aql.feature.group \
+  -installIU org.eclipse.sirius.common.acceleo.aql \
+  -installIU org.eclipse.sirius.runtime.aql.feature.group \
+  -installIU org.eclipse.sirius.properties.feature.feature.group \
+  -installIU org.eclipse.sirius.aql.source.feature.group \
+  -installIU org.eclipse.sirius.aql.feature.group \
+  -installIU org.eclipse.sirius.interpreter.feature.feature.group \
+  -installIU org.eclipse.sirius.interpreter.feature.source.feature.group \
+  -installIU org.eclipse.sirius.model.feature.source.feature.group \
+  -installIU org.eclipse.sirius.properties.feature.source.feature.group \
+  -installIU org.eclipse.sirius.runtime.aql.source.feature.group \
+  -installIU org.eclipse.sirius.runtime.ide.ui.feature.group \
+  -installIU org.eclipse.sirius.specifier.feature.group \
+  -installIU org.eclipse.sirius.specifier.ide.ui.aql.feature.group \
+  -installIU org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group \
+  -installIU org.eclipse.sirius.specifier.ide.ui.feature.group \
+  -installIU org.eclipse.sirius.specifier.ide.ui.source.feature.group \
+  -installIU org.eclipse.sirius.specifier.properties.feature.feature.group \
+  -installIU org.eclipse.sirius.specifier.properties.feature.source.feature.group \
+  -installIU org.eclipse.sirius.specifier.source.feature.group \
+  -installIU org.eclipse.eef.ext.widgets.reference.feature.feature.group \
+  -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group \
+  -installIU org.eclipse.eef.sdk.feature.feature.group \
+  -installIU org.eclipse.eef.sdk.feature.source.feature.group \
   -destination "${TARGET_DIR}" \
-  -profile SDKProfile \
-  -profileProperties org.eclipse.update.install.features=true \
-  -roaming
+  -profileProperties org.eclipse.update.install.features=true
 
-# Step 8: Report completion.
 # Step 8: Install CDT into the Eclipse installation.
 echo "Installing CDT from ${CDT_REPOSITORY_URL}"
 "${TARGET_DIR}/eclipse" \
@@ -99,9 +132,6 @@ echo "Installing CDT from ${CDT_REPOSITORY_URL}"
   -repository "${CDT_REPOSITORY_URL}" \
   -installIU org.eclipse.cdt.feature.group \
   -destination "${TARGET_DIR}" \
-  -profile SDKProfile \
-  -profileProperties org.eclipse.update.install.features=true \
-  -roaming
+  -profileProperties org.eclipse.update.install.features=true
 
-# Step 9: Report completion.
 echo "Eclipse installation finished: ${TARGET_DIR}"
