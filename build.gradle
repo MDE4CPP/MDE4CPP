@@ -416,10 +416,11 @@ task runInstallScripts()
 			['MDE4CPP_COMPILER_VERSION', '13.2.0']
 		],
 		['installEclipse',
-			['MDE4CPP_ECLIPSE_VERSION',	'2025-12'],
+			['MDE4CPP_ECLIPSE_VERSION',	'2025-09'],
 			['MDE4CPP_ECLIPSE_MILESTONE', 'R'],
 			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', '3.7'],
-			['MDE4CPP_ECLIPSE_SIRIUS_VERSION', '7.4.13']
+			['MDE4CPP_ECLIPSE_SIRIUS_VERSION', '7.4.11'],
+			['MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION', '2023-03']
 		],
 		['installCMake',
 			['MDE4CPP_CMAKE_VERSION', '4.3'],
@@ -505,7 +506,7 @@ task install{
 	group 'MDE4CPP'
 	description 'Install MDE4CPP by setting the environment variables and checking them'
 
-//	dependsOn 'runInstallScripts'
+	dependsOn 'runInstallScripts'
  	dependsOn 'publishMDE4CPPPluginsToMavenLocal'
 
 //	dependsOn 'checkEnvironment'
