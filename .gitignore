@@ -39,6 +39,8 @@ gradle.properties
 # Third-party libraries (downloaded during build)
 src/common/parser/antlr4/
 src/common/persistence/xerces/
+src/util/xerces/
+src/util/antlr4/
 src/util/boost/
 !src/util/boost/build.gradle
 

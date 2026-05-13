@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Step 1: Ensure elevated privileges for system installation.
-if [[ "${1:-}" != "--elevated" ]] && [[ "${EUID}" -ne 0 ]]; then
-  echo "[installCMake] Root privileges are required. Requesting sudo elevation..."
-  exec sudo -E bash "$0" --elevated
-fi
-
-# Step 2: Validate required input variables.
+# Step 1: Validate required input variables.
 echo "[installCMake] MDE4CPP_CMAKE_VERSION=${MDE4CPP_CMAKE_VERSION:-}"
 echo "[installCMake] MDE4CPP_CMAKE_BUILD_VERSION=${MDE4CPP_CMAKE_BUILD_VERSION:-}"
 
@@ -20,14 +14,14 @@ if [[ -z "${MDE4CPP_CMAKE_BUILD_VERSION:-}" ]]; then
   exit 1
 fi
 
-# Step 3: Resolve target paths and download source.
+# Step 2: Resolve target paths and download source.
 CMAKE_FULL_VERSION="${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD_VERSION}"
 TARGET_DIR="/opt/cmake-${CMAKE_FULL_VERSION}"
 TMP_DIR="$(mktemp -d)"
 ARCHIVE_PATH="${TMP_DIR}/cmake.tar.gz"
 DOWNLOAD_URL="https://github.com/Kitware/CMake/releases/download/v${CMAKE_FULL_VERSION}/cmake-${CMAKE_FULL_VERSION}-linux-x86_64.tar.gz"
 
-# Step 4: Skip when requested version is already installed.
+# Step 3: Skip when requested version is already installed.
 if command -v cmake >/dev/null 2>&1; then
   INSTALLED_VERSION="$(cmake --version | awk 'NR==1 {print $3}')"
   if [[ "${INSTALLED_VERSION}" == "${CMAKE_FULL_VERSION}" ]]; then
@@ -37,6 +31,12 @@ if command -v cmake >/dev/null 2>&1; then
   echo "[installCMake] Found installed CMake ${INSTALLED_VERSION}. Installing ${CMAKE_FULL_VERSION}."
 else
   echo "[installCMake] CMake is not installed. Installing ${CMAKE_FULL_VERSION}."
+fi
+
+# Step 4: Ensure elevated privileges only if installation is required.
+if [[ "${1:-}" != "--elevated" ]] && [[ "${EUID}" -ne 0 ]]; then
+  echo "[installCMake] Root privileges are required for installation. Requesting sudo elevation..."
+  exec sudo -E bash "$0" --elevated
 fi
 
 # Step 5: Register cleanup for temporary files.

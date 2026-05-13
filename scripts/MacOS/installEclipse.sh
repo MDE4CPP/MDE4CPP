@@ -52,18 +52,42 @@ cleanup() {
 }
 trap cleanup EXIT
 
-if command -v curl >/dev/null 2>&1; then
-  curl -fL "${ECLIPSE_ARCHIVE_URL}" -o "${ARCHIVE_PATH}"
-elif command -v wget >/dev/null 2>&1; then
-  wget -O "${ARCHIVE_PATH}" "${ECLIPSE_ARCHIVE_URL}"
-else
-  echo "[installEclipse] ERROR: Neither curl nor wget is available."
-  exit 1
+SKIP_DOWNLOAD=0
+if [[ -x "${TARGET_DIR}/Eclipse.app/Contents/MacOS/eclipse" ]]; then
+  echo "[installEclipse] Existing Eclipse installation found at ${TARGET_DIR}."
+  mkdir -p "${TMP_DIR}"
+  "${TARGET_DIR}/Eclipse.app/Contents/MacOS/eclipse" -nosplash -application org.eclipse.equinox.p2.director -listInstalledIU > "${TMP_DIR}/installed.txt" 2>&1 || true
+  echo "[installEclipse] Installed IU output:"
+  grep -E '^org\.eclipse\.(acceleo|sirius)\.' "${TMP_DIR}/installed.txt" || true
+  acceleo_version=$(grep -E '^org\.eclipse\.acceleo\.feature\.group[[:space:]]+' "${TMP_DIR}/installed.txt" | awk '{print $NF}' | head -n1 || true)
+  sirius_version=$(grep -E '^org\.eclipse\.sirius\.feature\.group[[:space:]]+' "${TMP_DIR}/installed.txt" | awk '{print $NF}' | head -n1 || true)
+  echo "[installEclipse] Found Acceleo: ${acceleo_version}"
+  echo "[installEclipse] Found Sirius: ${sirius_version}"
+  if [[ "${acceleo_version}" == "${MDE4CPP_ECLIPSE_ACCELEO_VERSION//[[:space:]]/}"* && "${sirius_version}" == "${MDE4CPP_ECLIPSE_SIRIUS_VERSION//[[:space:]]/}"* ]]; then
+    echo "[installEclipse] Requested Eclipse plugins already installed, skipping installation."
+    exit 0
+  else
+    echo "[installEclipse] Eclipse plugin versions differ or are missing; updating installation."
+    SKIP_DOWNLOAD=1
+  fi
 fi
 
-rm -rf "${TARGET_DIR}"
-mkdir -p "${MDE4CPP_PARENT}"
-tar -xzf "${ARCHIVE_PATH}" -C "${MDE4CPP_PARENT}"
+if [[ "$SKIP_DOWNLOAD" == "0" ]]; then
+  if command -v curl >/dev/null 2>&1; then
+    curl -fL "${ECLIPSE_ARCHIVE_URL}" -o "${ARCHIVE_PATH}"
+  elif command -v wget >/dev/null 2>&1; then
+    wget -O "${ARCHIVE_PATH}" "${ECLIPSE_ARCHIVE_URL}"
+  else
+    echo "[installEclipse] ERROR: Neither curl nor wget is available."
+    exit 1
+  fi
+
+  rm -rf "${TARGET_DIR}"
+  mkdir -p "${MDE4CPP_PARENT}"
+  tar -xzf "${ARCHIVE_PATH}" -C "${MDE4CPP_PARENT}"
+else
+  echo "[installEclipse] Skipping Eclipse download/extract because existing installation is being updated."
+fi
 
 if [[ ! -x "${TARGET_DIR}/Eclipse.app/Contents/MacOS/eclipse" ]]; then
   echo "[installEclipse] ERROR: Eclipse binary not found at ${TARGET_DIR}/Eclipse.app/Contents/MacOS/eclipse"

@@ -14,28 +14,13 @@ if "%MDE4CPP_CMAKE_BUILD_VERSION%"=="" (
     exit /b 1
 )
 
-REM Step 2: Ensure the script runs with administrator rights.
-if /I not "%~1"=="--elevated" (
-    net session >nul 2>&1
-    if errorlevel 1 (
-        echo [installCMake] Administrator rights are required. Requesting elevation...
-        powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-          "Start-Process -FilePath 'cmd.exe' -Verb RunAs -ArgumentList '/c set ""MDE4CPP_CMAKE_VERSION=%MDE4CPP_CMAKE_VERSION%"" ^&^& set ""MDE4CPP_CMAKE_BUILD_VERSION=%MDE4CPP_CMAKE_BUILD_VERSION%"" ^&^& call ""%~f0"" --elevated'"
-        if errorlevel 1 (
-            echo [installCMake] ERROR: Elevation was cancelled or failed.
-            exit /b 1
-        )
-        exit /b 0
-    )
-)
-
-REM Step 3: Resolve versions and download paths.
+REM Step 2: Resolve versions and download paths.
 set "CMAKE_FULL_VERSION=%MDE4CPP_CMAKE_VERSION%.%MDE4CPP_CMAKE_BUILD_VERSION%"
 set "TMP_DIR=%TEMP%\mde4cpp-cmake-%RANDOM%%RANDOM%"
 set "INSTALLER_PATH=%TMP_DIR%\cmake.msi"
 set "DOWNLOAD_URL=https://github.com/Kitware/CMake/releases/download/v%CMAKE_FULL_VERSION%/cmake-%CMAKE_FULL_VERSION%-windows-x86_64.msi"
 
-REM Step 4: Skip when the requested CMake version is already installed.
+REM Step 3: Skip when the requested CMake version is already installed.
 set "INSTALLED_VERSION="
 for /f "tokens=3" %%V in ('cmake --version 2^>nul ^| findstr /b "cmake version"') do set "INSTALLED_VERSION=%%V"
 if not "%INSTALLED_VERSION%"=="" (
@@ -48,6 +33,25 @@ if not "%INSTALLED_VERSION%"=="" (
 ) else (
     echo [installCMake] CMake is not installed. Installing %CMAKE_FULL_VERSION%.
 )
+
+REM Step 4: Ensure the script runs with administrator rights only if installation is required.
+if /I not "%~1"=="--elevated" (
+    if "%INSTALLED_VERSION%"=="%CMAKE_FULL_VERSION%" (
+        goto :skipElevation
+    )
+    net session >nul 2>&1
+    if errorlevel 1 (
+        echo [installCMake] Administrator rights are required. Requesting elevation...
+        powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+          "Start-Process -FilePath 'cmd.exe' -Verb RunAs -ArgumentList '/c set ""MDE4CPP_CMAKE_VERSION=%MDE4CPP_CMAKE_VERSION%"" ^&^& set ""MDE4CPP_CMAKE_BUILD_VERSION=%MDE4CPP_CMAKE_BUILD_VERSION%"" ^&^& call ""%~f0"" --elevated'"
+        if errorlevel 1 (
+            echo [installCMake] ERROR: Elevation was cancelled or failed.
+            exit /b 1
+        )
+        exit /b 0
+    )
+)
+:skipElevation
 
 REM Step 5: Prepare workspace and download the MSI installer.
 echo [installCMake] Install mode=system application

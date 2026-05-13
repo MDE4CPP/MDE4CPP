@@ -29,6 +29,23 @@ plugins {
 
 import org.gradle.internal.os.OperatingSystem;
 
+// Version definitions for install scripts and utilities
+ext {
+    versions = [
+        java: '21',
+        compiler: '13.2.0',
+        eclipse: '2025-09',
+        eclipseMilestone: 'R',
+        eclipseAcceleo: '3.7',
+        eclipseSirius: '7.4.11',
+        eclipseSiriusEclipse: '2023-03',
+        cmake: '4.3',
+        cmakeBuild: '1',
+        xerces: '3.3.0',
+        antlr: '4.13.2'
+    ]
+}
+
 description 'MDE4CPP root project'
 
 task generateAll() {
@@ -407,27 +424,6 @@ task runInstallScripts()
 //private 	group 'MDE4CPP'
 	description 'Run the installation scripts for MDE4CPP. This will set the environment variables and check them. It is recommended to run this task only once, then set the environment variables permanently in your system settings.'
 
-	def installScripts = [
-		//	[{script name},[{environment Variable}, {value}]]
-		['installJava',
-			['MDE4CPP_JAVA_VERSION', '21']
-		],
-		['installCompiler',
-			['MDE4CPP_COMPILER_VERSION', '13.2.0']
-		],
-		['installEclipse',
-			['MDE4CPP_ECLIPSE_VERSION',	'2025-09'],
-			['MDE4CPP_ECLIPSE_MILESTONE', 'R'],
-			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', '3.7'],
-			['MDE4CPP_ECLIPSE_SIRIUS_VERSION', '7.4.11'],
-			['MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION', '2023-03']
-		],
-		['installCMake',
-			['MDE4CPP_CMAKE_VERSION', '4.3'],
-			['MDE4CPP_CMAKE_BUILD_VERSION', '1']
-		],
-	]
-
 	def tool = ''
 	def command = ''
 	def extension = ''
@@ -435,6 +431,26 @@ task runInstallScripts()
 	def envSetCommand = ''
 	def envValuePrefix = ''
 	def envValueSuffix = ''
+	def installScripts = [
+		//	[{script name},[{environment Variable}, {value}]]
+		['installJava',
+			['MDE4CPP_JAVA_VERSION', versions.java]
+		],
+		['installCompiler',
+			['MDE4CPP_COMPILER_VERSION', versions.compiler]
+		],
+		['installEclipse',
+			['MDE4CPP_ECLIPSE_VERSION',	versions.eclipse],
+			['MDE4CPP_ECLIPSE_MILESTONE', versions.eclipseMilestone],
+			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', versions.eclipseAcceleo],
+			['MDE4CPP_ECLIPSE_SIRIUS_VERSION', versions.eclipseSirius],
+			['MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION', versions.eclipseSiriusEclipse]
+		],
+		['installCMake',
+			['MDE4CPP_CMAKE_VERSION', versions.cmake],
+			['MDE4CPP_CMAKE_BUILD_VERSION', versions.cmakeBuild]
+		],
+	]
 
 	// workingDir System.getenv('MDE4CPP_HOME')
 	if (OperatingSystem.current().isWindows()) 
@@ -508,6 +524,8 @@ task install{
 
 	dependsOn 'runInstallScripts'
  	dependsOn 'publishMDE4CPPPluginsToMavenLocal'
+ 	dependsOn 'src:util:xerces:installXerces'
+ 	dependsOn 'src:util:antlr:installAntlr'
 
 //	dependsOn 'checkEnvironment'
 	

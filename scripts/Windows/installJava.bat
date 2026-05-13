@@ -10,10 +10,14 @@ if "%MDE4CPP_JAVA_VERSION%"=="" (
 
 REM Step 2: Skip installation when requested version is already installed.
 set "INSTALLED_MAJOR="
-for /f "delims=" %%V in ('powershell -NoProfile -ExecutionPolicy Bypass -Command "$v = java -version 2>&1 | Select-String 'version' | Select-Object -First 1; if ($v -match '\"(\\d+)') { $matches[1] }"') do (
+set "JAVA_VERSION_SCRIPT=%TEMP%\get_java_major_version.ps1"
+echo $v = java -version 2^>^&1 ^| Select-String version ^| Select-Object -First 1 > "%JAVA_VERSION_SCRIPT%"
+echo [regex]::Match($v.ToString(), '\d+').Value >> "%JAVA_VERSION_SCRIPT%"
+for /f "delims=" %%V in ('powershell -NoProfile -ExecutionPolicy Bypass -File "%JAVA_VERSION_SCRIPT%"') do (
     set "INSTALLED_MAJOR=%%V"
     goto :haveJavaVersion
 )
+del "%JAVA_VERSION_SCRIPT%" >nul 2>&1
 :haveJavaVersion
 if defined INSTALLED_MAJOR (
     if "%INSTALLED_MAJOR%"=="%MDE4CPP_JAVA_VERSION%" (
@@ -31,8 +35,7 @@ if /I not "%~1"=="--elevated" (
     net session >nul 2>&1
     if errorlevel 1 (
         echo [installJava] Administrator rights are required. Requesting elevation...
-        powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-          "Start-Process -FilePath 'cmd.exe' -Verb RunAs -ArgumentList '/c set ""MDE4CPP_JAVA_VERSION=%MDE4CPP_JAVA_VERSION%"" ^&^& call ""%~f0"" --elevated'"
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process cmd.exe -Verb RunAs -ArgumentList '/c', 'set ""MDE4CPP_JAVA_VERSION=%MDE4CPP_JAVA_VERSION%"" && call ""%~f0"" --elevated'"
         if errorlevel 1 (
             echo [installJava] ERROR: Elevation was cancelled or failed.
             exit /b 1

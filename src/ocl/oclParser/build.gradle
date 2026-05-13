@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    antlr 'org.antlr:antlr4:4.13.2' // use ANTLR version 4
+    antlr "org.antlr:antlr4:${rootProject.ext.versions.antlr}"
 }
 
 ext.ocl = [
@@ -129,6 +129,7 @@ task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 //	dependsOn rootProject.tasks.getByPath(':generator:ecore4CPP:ecore4CPP.generator:deliverEcore4CPP')
 	
 	// dependency to 'antlr4'
+	dependsOn ':src:util:antlr:installAntlr'
 	def antlr4 = getRootProject().getTasksByName('compileAntlr4', true)
 	dependsOn antlr4
 	inputs.files(antlr4.outputs)
