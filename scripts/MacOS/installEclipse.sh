@@ -83,8 +83,8 @@ if [[ "$SKIP_DOWNLOAD" == "0" ]]; then
   fi
 
   rm -rf "${TARGET_DIR}"
-  mkdir -p "${MDE4CPP_PARENT}"
-  tar -xzf "${ARCHIVE_PATH}" -C "${MDE4CPP_PARENT}"
+  mkdir -p "${TARGET_DIR}"
+  tar -xzf "${ARCHIVE_PATH}" -C "${TARGET_DIR}"
 else
   echo "[installEclipse] Skipping Eclipse download/extract because existing installation is being updated."
 fi
@@ -122,7 +122,7 @@ echo "[installEclipse] Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
 "${ECLIPSE_BIN}" \
   -nosplash \
   -application org.eclipse.equinox.p2.director \
-  -repository "${SIRIUS_REPOSITORY_URL}" \
+  -repository "https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/},${SIRIUS_REPOSITORY_URL}" \
   -installIU org.eclipse.sirius.common.acceleo.aql \
   -installIU org.eclipse.sirius.ui.properties \
   -installIU org.eclipse.sirius.aql.feature.group \
