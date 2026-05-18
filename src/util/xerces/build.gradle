@@ -1,0 +1,249 @@
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+plugins {
+	id "de.undercouch.download" version "4.1.2"
+}
+
+import org.gradle.internal.os.OperatingSystem;
+
+description '3rdparty: xerces-c'
+
+def xercesVersion = rootProject.ext.versions.xerces
+
+task downloadFile(type: Download) {
+	description 'download xerces'
+    src "https://dlcdn.apache.org//xerces/c/3/sources/xerces-c-${xercesVersion}.zip"
+    dest new File(file("./xerces/xerces-c-${xercesVersion}.zip").absolutePath)
+    onlyIfModified true
+    quiet true
+}
+
+task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
+	description 'download and unzip xerces'
+	from zipTree("xerces/xerces-c-${xercesVersion}.zip")
+	into 'xerces'
+}
+
+task installXerces(dependsOn: downloadAndUnzipFile) {
+	description 'download, unzip, compile and install xerces'
+
+	doFirst {
+		def folder = new File(file("./xerces/xerces-c-${xercesVersion}/.cmake").absolutePath)
+	
+		if( !folder.exists()) {
+			folder.mkdirs()
+		}
+	}
+
+	doLast {
+		// Check if cross-compilation to Windows is enabled
+		def crossCompileWindows = false
+		def mde4CppRoot = System.getenv("MDE4CPP_HOME")
+		if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
+			def props = new Properties()
+			try {
+				def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+				if (configFile.exists()) {
+					configFile.withInputStream { stream ->
+						props.load(stream)
+					}
+					def value = props.getProperty("CROSS_COMPILE_WINDOWS")
+					if (value != null) {
+						crossCompileWindows = "true".equalsIgnoreCase(value.trim())
+					}
+				}
+			} catch (Exception e) {
+				// Silently fail
+			}
+		}
+		
+		def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
+		def isCrossCompiling = !isWindows && crossCompileWindows
+		
+		// Build CMake command
+		def cmakeCmd = 'cmake -G "'
+		if (isWindows) {
+			cmakeCmd += 'MinGW Makefiles'
+		} else {
+			cmakeCmd += 'Unix Makefiles'
+		}
+		cmakeCmd += '" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin").absolutePath
+		
+		// Add cross-compilation flag if needed
+		if (isCrossCompiling) {
+			cmakeCmd += ' -DCMAKE_SYSTEM_NAME=Windows'
+		}
+		
+		cmakeCmd += ' ' + file("./xerces/xerces-c-${xercesVersion}").absolutePath
+		
+		exec {
+			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
+			if (isWindows) {
+				commandLine 'cmd', '/c', cmakeCmd
+			} else {
+				commandLine '/bin/sh', '-c', cmakeCmd
+			}
+			// Pass environment variables for cross-compilation
+			if (isCrossCompiling) {
+				environment('CC', System.getenv('CC') ?: 'x86_64-w64-mingw32-gcc')
+				environment('CXX', System.getenv('CXX') ?: 'x86_64-w64-mingw32-g++')
+			}
+		}
+		
+		// Determine make tool
+		def makeTool = 'make'
+		if (isWindows) {
+			makeTool = 'mingw32-make'
+		} else if (isCrossCompiling) {
+			makeTool = System.getenv('MAKE') ?: 'make'
+		}
+		
+		exec {
+			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
+			def count = findProperty('WORKER') ?: 1
+			if (isWindows) {
+				commandLine 'cmd', '/c', "${makeTool} install -j${count}"
+			} else {
+				commandLine '/bin/sh', '-c', "${makeTool} install -j${count}"
+			}
+		}
+		
+		// Copy headers and static libraries
+		copy {
+			from "xerces/bin"
+			into System.getenv('MDE4CPP_HOME')+"/application"
+			include "**/*.hpp", "**/*.a", "**/*.c"
+			exclude "cmake"
+			exclude "lib/cmake"
+			exclude "lib/pkgconfig"
+			exclude "share"
+		}
+	
+		// Copy shared libraries - check for both .dll (Windows/cross-compiled) and .so/.dylib (Linux/Mac)
+		if (isWindows || isCrossCompiling) {
+			// Windows or cross-compiled: look for .dll files
+			// Try bin/bin first (common MinGW structure) - flatten structure
+			copy {
+				from "xerces/bin/bin"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
+				includeEmptyDirs = false
+			}
+			// Also try bin/lib - flatten structure
+			copy {
+				from "xerces/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
+				includeEmptyDirs = false
+			}
+			// Also try directly in bin (if DLLs are at root level) - flatten structure
+			copy {
+				from "xerces/bin"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
+				exclude "cmake"
+				exclude "lib"
+				exclude "bin"
+				includeEmptyDirs = false
+			}
+		} else {
+			// Linux/Mac: look for .so/.dylib files
+			copy {
+				from "xerces/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "**/*.so", "**/*.dylib"
+				exclude "cmake"
+				exclude "pkgconfig"
+			}
+		}
+	}
+
+	inputs.files(fileTree(".${File.separator}xerces${File.separator}xerces-c-${xercesVersion}") {
+        exclude '.cmake/**'
+    })
+    
+	//if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
+	//	outputs.upToDateWhen { false }
+	//}
+	
+	// Check cross-compilation setting for outputs
+	def crossCompileWindows = false
+	def mde4CppRoot = System.getenv("MDE4CPP_HOME")
+	if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
+		def props = new Properties()
+		try {
+			def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+			if (configFile.exists()) {
+				configFile.withInputStream { stream ->
+					props.load(stream)
+				}
+				def value = props.getProperty("CROSS_COMPILE_WINDOWS")
+				if (value != null) {
+					crossCompileWindows = "true".equalsIgnoreCase(value.trim())
+				}
+			}
+		} catch (Exception e) {
+			// Silently fail
+		}
+	}
+	
+	if(OperatingSystem.current().isWindows() || (!OperatingSystem.current().isWindows() && crossCompileWindows)){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libxerces-c' + '.dll'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isLinux()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libxerces-c' + '.so'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libxerces-c' + '.dylib'].join(File.separator))}
+	}
+	else {
+	    //not supported os
+	}
+	
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'xercesc')
+}
+
+task clean {
+	// Extension of gradle built-in task:clean
+	doLast {
+		if (project.hasProperty('all')) {
+			def xerces_dir = file('xerces')
+			if(xerces_dir.exists()){
+				delete xerces_dir.absolutePath
+				println "deleting: " + xerces_dir.absolutePath
+			}
+			
+			installXerces.outputs.files.each{
+				if(it.exists()){
+					delete it.absolutePath
+					println "deleting: " + it
+				}
+			}
+		}
+	}
+}
+
+//EOF
