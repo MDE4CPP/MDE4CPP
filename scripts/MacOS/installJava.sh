@@ -7,6 +7,7 @@ if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
   exit 1
 fi
 
+# Step 1: Check if the required Java version is already installed (before requesting elevation).
 if command -v java >/dev/null 2>&1; then
   INSTALLED_MAJOR="$(java -version 2>&1 | awk -F[\".] '/version/ {print $2; exit}')"
   if [[ "${INSTALLED_MAJOR}" == "${MDE4CPP_JAVA_VERSION}" ]]; then

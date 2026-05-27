@@ -8,17 +8,21 @@ if "%MDE4CPP_JAVA_VERSION%"=="" (
     exit /b 1
 )
 
-REM Step 2: Skip installation when requested version is already installed.
+REM Step 2: Check if the required Java version is already installed.
 set "INSTALLED_MAJOR="
-set "JAVA_VERSION_SCRIPT=%TEMP%\get_java_major_version.ps1"
-echo $v = java -version 2^>^&1 ^| Select-String version ^| Select-Object -First 1 > "%JAVA_VERSION_SCRIPT%"
-echo [regex]::Match($v.ToString(), '\d+').Value >> "%JAVA_VERSION_SCRIPT%"
-for /f "delims=" %%V in ('powershell -NoProfile -ExecutionPolicy Bypass -File "%JAVA_VERSION_SCRIPT%"') do (
-    set "INSTALLED_MAJOR=%%V"
-    goto :haveJavaVersion
+where java >nul 2>&1
+if not errorlevel 1 (
+    for /f "tokens=*" %%A in ('java -version 2^>^&1 ^| findstr version') do (
+        for /f "tokens=1,2 delims=.^" %%B in ('%%A') do (
+            if "%%C"=="" (
+                set "INSTALLED_MAJOR=%%B"
+            ) else (
+                set "INSTALLED_MAJOR=%%B"
+            )
+        )
+    )
 )
-del "%JAVA_VERSION_SCRIPT%" >nul 2>&1
-:haveJavaVersion
+
 if defined INSTALLED_MAJOR (
     if "%INSTALLED_MAJOR%"=="%MDE4CPP_JAVA_VERSION%" (
         echo [installJava] Java %MDE4CPP_JAVA_VERSION% is already installed. Skipping.
@@ -30,7 +34,7 @@ if defined INSTALLED_MAJOR (
     echo [installJava] Java is not installed. Installing Java %MDE4CPP_JAVA_VERSION%.
 )
 
-REM Step 3: Ensure the script runs with administrator rights if installation is required.
+REM Step 3: Request administrator rights only if installation is necessary.
 if /I not "%~1"=="--elevated" (
     net session >nul 2>&1
     if errorlevel 1 (

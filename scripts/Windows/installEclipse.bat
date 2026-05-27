@@ -48,29 +48,15 @@ echo [installEclipse] Install location=%TARGET_DIR%
 echo [installEclipse] Temp Installation Dir=%TMP_DIR%
 echo [installEclipse] Using Eclipse version=%MDE4CPP_ECLIPSE_VERSION%, milestone=%MDE4CPP_ECLIPSE_MILESTONE%, Acceleo=%MDE4CPP_ECLIPSE_ACCELEO_VERSION%, Sirius=%MDE4CPP_ECLIPSE_SIRIUS_VERSION%
 
-set "SKIP_DOWNLOAD=0"
+REM Step 4: Download and extract Eclipse if not already installed.
 echo [installEclipse] Checking existing Eclipse installation...
 if exist "%TARGET_DIR%\eclipse.exe" (
-    echo [installEclipse] Existing Eclipse installation found at %TARGET_DIR%.
+    echo [installEclipse] Existing Eclipse installation found at %TARGET_DIR%, skipping download and extraction.
     if exist "%TMP_DIR%" rmdir /s /q "%TMP_DIR%"
     mkdir "%TMP_DIR%" >nul 2>&1
-    "%TARGET_DIR%\eclipse.exe" -nosplash -application org.eclipse.equinox.p2.director -listInstalledIU > "%TMP_DIR%\installed.txt" 2>&1
-    powershell -NoProfile -Command ^
-      "$text = Get-Content '%TMP_DIR%\installed.txt' ; $acceleo = $text | Select-String '^org\.eclipse\.acceleo\.feature\.group\s+([0-9.]+)' ; $sirius = $text | Select-String '^org\.eclipse\.sirius\.feature\.group\s+([0-9.]+)' ; if (($acceleo -and $acceleo.Matches[0].Groups[1].Value -eq '%MDE4CPP_ECLIPSE_ACCELEO_VERSION%') -and ($sirius -and $sirius.Matches[0].Groups[1].Value -eq '%MDE4CPP_ECLIPSE_SIRIUS_VERSION%')) { exit 0 } else { exit 1 }"
-    if not errorlevel 1 (
-        echo [installEclipse] Requested Eclipse plugins already installed, skipping installation.
-        rmdir /s /q "%TMP_DIR%"
-        endlocal
-        exit /b 0
-    ) else (
-        echo [installEclipse] Eclipse plugin versions differ or are missing; updating installation.
-        set "SKIP_DOWNLOAD=1"
-    )
-)
-
-echo [installEclipse] Downloading %ECLIPSE_ARCHIVE_URL%
-
-if "%SKIP_DOWNLOAD%"=="0" (
+) else (
+    echo [installEclipse] Downloading %ECLIPSE_ARCHIVE_URL%
+    
     if exist "%TMP_DIR%" rmdir /s /q "%TMP_DIR%"
     mkdir "%TMP_DIR%" >nul 2>&1
     if errorlevel 1 (
@@ -78,8 +64,14 @@ if "%SKIP_DOWNLOAD%"=="0" (
         exit /b 1
     )
 
-    powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-      "curl.exe --output '%ARCHIVE_PATH%' '%ECLIPSE_ARCHIVE_URL%'"
+    where curl >nul 2>&1
+    if errorlevel 1 (
+        echo [installEclipse] ERROR: curl.exe is required to download files.
+        rmdir /s /q "%TMP_DIR%"
+        exit /b 1
+    )
+    
+    curl.exe --output "%ARCHIVE_PATH%" "%ECLIPSE_ARCHIVE_URL%"
     if errorlevel 1 (
         echo [installEclipse] ERROR: Download failed.
         rmdir /s /q "%TMP_DIR%"
@@ -89,15 +81,28 @@ if "%SKIP_DOWNLOAD%"=="0" (
     echo [installEclipse] Download finished, extracting archive.
 
     if exist "%TARGET_DIR%" rmdir /s /q "%TARGET_DIR%"
-    powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-        "Expand-Archive -Path '%ARCHIVE_PATH%' -DestinationPath '%MDE4CPP_PARENT%' -Force"
-    if errorlevel 1 (
-        echo [installEclipse] ERROR: Extraction failed.
-        rmdir /s /q "%TMP_DIR%"
-        exit /b 1
+    
+    where tar >nul 2>&1
+    if not errorlevel 1 (
+        tar -xzf "%ARCHIVE_PATH%" -C "%MDE4CPP_PARENT%"
+        if errorlevel 1 (
+            powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+                "Expand-Archive -Path '%ARCHIVE_PATH%' -DestinationPath '%MDE4CPP_PARENT%' -Force"
+            if errorlevel 1 (
+                echo [installEclipse] ERROR: Extraction failed.
+                rmdir /s /q "%TMP_DIR%"
+                exit /b 1
+            )
+        )
+    ) else (
+        powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+            "Expand-Archive -Path '%ARCHIVE_PATH%' -DestinationPath '%MDE4CPP_PARENT%' -Force"
+        if errorlevel 1 (
+            echo [installEclipse] ERROR: Extraction failed.
+            rmdir /s /q "%TMP_DIR%"
+            exit /b 1
+        )
     )
-) else (
-    echo [installEclipse] Skipping Eclipse download/extract because existing installation is being updated.
 )
 
 REM Step 5: Install Acceleo into Eclipse.

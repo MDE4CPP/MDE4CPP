@@ -65,8 +65,15 @@ if errorlevel 1 (
     exit /b 1
 )
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-  "Invoke-WebRequest -Uri '%DOWNLOAD_URL%' -OutFile '%INSTALLER_PATH%'"
+where curl >nul 2>&1
+if errorlevel 1 (
+    echo [installCMake] ERROR: curl.exe is required to download files.
+    echo [installCMake] Please install curl or use a Windows version that includes curl.
+    rmdir /s /q "%TMP_DIR%"
+    exit /b 1
+)
+
+curl.exe -L -o "%INSTALLER_PATH%" "%DOWNLOAD_URL%"
 if errorlevel 1 (
     echo [installCMake] ERROR: Download failed.
     rmdir /s /q "%TMP_DIR%"
