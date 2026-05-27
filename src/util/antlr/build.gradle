@@ -23,6 +23,13 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+import org.gradle.internal.os.OperatingSystem;
+import java.util.Properties;
+
+plugins {
+	id "de.undercouch.download" version "4.1.1"
+}
+
 repositories {
     mavenCentral()
 }
@@ -35,6 +42,235 @@ dependencies {
     antlrTool "org.antlr:antlr4:${rootProject.ext.versions.antlr}"
 }
 
+def antlr4Version = "4.13.2"
+
+task downloadAntlr4(type: Download) {
+	description 'download antlr4 C++ runtime source'
+	group 'Installation'
+	
+    src "https://www.antlr.org/download/antlr4-cpp-runtime-${antlr4Version}-source.zip"
+    dest new File(file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source.zip").absolutePath)
+    quiet true
+    onlyIfModified true
+}
+
+task unzipAntlr4(dependsOn: downloadAntlr4, type: Copy) {
+	description 'unzip antlr4 C++ runtime source'
+	group 'Installation'
+	
+	from zipTree("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source.zip")
+	into file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+}
+
+task compileAntlr4(dependsOn: unzipAntlr4) {
+	description 'download, unzip and compile antlr4 C++ runtime'
+	group 'Installation'
+	
+	doFirst{
+		def folder = new File(file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake").absolutePath)
+		if( !folder.exists()) {
+			folder.mkdirs()
+		}
+	}
+	doLast {
+		// Check if cross-compilation to Windows is enabled
+		def crossCompileWindows = false
+		def mde4CppRoot = System.getenv("MDE4CPP_HOME")
+		if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
+			def props = new Properties()
+			try {
+				def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+				if (configFile.exists()) {
+					configFile.withInputStream { stream ->
+						props.load(stream)
+					}
+					def value = props.getProperty("CROSS_COMPILE_WINDOWS")
+					if (value != null) {
+						crossCompileWindows = "true".equalsIgnoreCase(value.trim())
+					}
+				}
+			} catch (Exception e) {
+				// Silently fail
+			}
+		}
+		
+		def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
+		def isCrossCompiling = !isWindows && crossCompileWindows
+		
+		// Build CMake command
+		def cmakeCmd = 'cmake -G "'
+		if (isWindows) {
+			cmakeCmd += 'MinGW Makefiles'
+		} else {
+			cmakeCmd += 'Unix Makefiles'
+		}
+		cmakeCmd += '" -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=4.0 -DBUILD_GMOCK:BOOL=OFF -DANTLR_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=' + file("../common/parser/antlr4/bin").absolutePath
+		
+		// Add cross-compilation flags if needed
+		if (isCrossCompiling) {
+			cmakeCmd += ' -DCMAKE_SYSTEM_NAME=Windows'
+			// Build as static library to avoid DLL import/export issues
+			cmakeCmd += ' -DANTLR_BUILD_SHARED=OFF -DANTLR_BUILD_STATIC=ON'
+			// Disable tests when cross-compiling (they fail due to test framework issues)
+			cmakeCmd += ' -DANTLR_BUILD_TESTS=OFF'
+		}
+		
+		cmakeCmd += ' ' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+		
+		exec {
+			workingDir "../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
+			if (isWindows) {
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("../common/parser/antlr4/bin") + ' ' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+			} else {
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("../common/parser/antlr4/bin") + ' ' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+			}
+			// Pass environment variables for cross-compilation
+			if (isCrossCompiling) {
+				environment('CC', System.getenv('CC') ?: 'x86_64-w64-mingw32-gcc')
+				environment('CXX', System.getenv('CXX') ?: 'x86_64-w64-mingw32-g++')
+			}
+		}
+		
+		// Determine make tool
+		def makeTool = 'make'
+		if (isWindows) {
+			makeTool = 'mingw32-make'
+		} else if (isCrossCompiling) {
+			makeTool = System.getenv('MAKE') ?: 'make'
+		}
+		
+		exec {
+			workingDir "../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
+			def count = findProperty('WORKER') ?: 1
+			if (isCrossCompiling) {
+				// When cross-compiling, build only the static library (skip tests and install)
+				commandLine '/bin/sh', '-c', "${makeTool} antlr4_static -j${count}"
+			} else if (isWindows) {
+				commandLine 'cmd', '/c', "${makeTool} install -j${count}"
+			} else {
+				commandLine '/bin/sh', '-c', "${makeTool} install -j${count}"
+			}
+		}
+		
+		// For cross-compilation, manually copy the built library
+		if (isCrossCompiling) {
+			copy {
+				from "../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake/runtime"
+				into "../common/parser/antlr4/bin/lib"
+				include "libantlr4-runtime-static.a"
+				rename "libantlr4-runtime-static.a", "libantlr4-runtime.a"
+			}
+			// Copy headers manually
+			copy {
+				from "../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source/runtime/src"
+				into "../common/parser/antlr4/bin/include/antlr4-runtime"
+				include "**/*.h"
+			}
+		}
+		
+		// Copy headers
+		copy {
+			from "../common/parser/antlr4/bin/include"
+			into System.getenv('MDE4CPP_HOME')+"/application/include"
+			include "**/*.hpp", "**/*.h", "**/*.c"
+		}
+		
+		// Copy libraries based on build type
+		if (isCrossCompiling) {
+			// Cross-compiling: only copy static library (.a)
+			copy {
+				from "../common/parser/antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/lib"
+				include "*.a"
+			}
+		} else if (isWindows) {
+			// Native Windows: look for .dll files
+			copy {
+				from "../common/parser/antlr4/bin/bin"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "*.dll"
+			}
+			// Also copy static libraries
+			copy {
+				from "../common/parser/antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/lib"
+				include "*.a"
+			}
+		} else {
+			// Linux/Mac: look for .so/.dylib files
+			copy {
+				from "../common/parser/antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/bin"
+				include "**/*.so", "**/*.dylib"
+			}
+			// Also copy static libraries
+			copy {
+				from "../common/parser/antlr4/bin/lib"
+				into System.getenv('MDE4CPP_HOME')+"/application/lib"
+				include "**/*.a"
+			}
+		}
+	}
+
+	inputs.files(fileTree("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source") {
+        exclude '.cmake/**'
+    })
+	
+	// Define the outputs
+	outputs.dir([rootDir,'application','include','antlr4-runtime'].join(File.separator))
+	
+	// Check cross-compilation setting for outputs
+	def isWindows = OperatingSystem.current().isWindows()
+	def crossCompileWindows = false
+	def mde4CppRoot = System.getenv("MDE4CPP_HOME")
+	if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
+		def props = new Properties()
+		try {
+			def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+			if (configFile.exists()) {
+				configFile.withInputStream { stream ->
+					props.load(stream)
+				}
+				def value = props.getProperty("CROSS_COMPILE_WINDOWS")
+				if (value != null) {
+					crossCompileWindows = "true".equalsIgnoreCase(value.trim())
+				}
+			}
+		} catch (Exception e) {
+			// Silently fail
+		}
+	}
+	
+	if(isWindows || (!isWindows && crossCompileWindows)){
+		if (crossCompileWindows && !isWindows) {
+			// Cross-compiling: expect static library in lib/
+			if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','lib','libantlr4-runtime' + '.a'].join(File.separator))}
+			if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','lib','libantlr4-runtime' + 'd' + '.a'].join(File.separator))}
+		} else {
+			// Native Windows: expect DLL in bin/
+			if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libantlr4-runtime' +       '.dll'].join(File.separator))}
+			if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.dll'].join(File.separator))}
+		}
+	}
+	else if(OperatingSystem.current().isLinux()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libantlr4-runtime' +       '.so'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.so'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){
+			outputs.file file([rootDir,'application','bin','libantlr4-runtime' + '.dylib'].join(File.separator))
+			outputs.file file([rootDir,'application','bin',"libantlr4-runtime.$antlr4Version" + '.dylib'].join(File.separator))
+		}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0')){
+			outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.dylib'].join(File.separator))
+			outputs.file file([rootDir,'application','bin',"libantlr4-runtime' + 'd.$antlr4Version" + '.dylib'].join(File.separator))
+		}
+	}
+	else {
+	    //not supported os
+	}
+}
+
 task installAntlr {
     group 'Installation'
     description 'Resolve the ANTLR dependency for OCL parser generation'
@@ -44,3 +280,26 @@ task installAntlr {
         configurations.antlrTool.resolve()
     }
 }
+
+task clean {
+	// Extension of gradle built-in task:clean
+	doLast {
+		if (project.hasProperty('all')) {
+			def antlr4_dir = file('../common/parser/antlr4')
+			if(antlr4_dir.exists()){
+				delete antlr4_dir.absolutePath
+				println "deleting: " + antlr4_dir.absolutePath
+			}
+			
+			compileAntlr4.outputs.files.each{
+				if(it.exists()){
+					delete it.absolutePath
+					println "deleting: " + it
+				}
+			}
+		}
+	}
+}
+
+//EOF
+

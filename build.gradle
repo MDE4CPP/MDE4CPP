@@ -525,8 +525,8 @@ task install{
 	dependsOn 'runInstallScripts'
  	dependsOn 'publishMDE4CPPPluginsToMavenLocal'
  	dependsOn 'src:util:xerces:installXerces'
- 	dependsOn 'src:util:antlr:installAntlr'
-
+	dependsOn 'src:util:antlr:installAntlr'
+	dependsOn 'src:util:antlr:compileAntlr4'
 //	dependsOn 'checkEnvironment'
 	
 // install Plugins

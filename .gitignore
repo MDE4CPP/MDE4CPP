@@ -37,12 +37,13 @@ gradle.properties
 **/META-INF/MANIFEST.MF
 
 # Third-party libraries (downloaded during build)
-src/common/parser/antlr4/
-src/common/persistence/xerces/
-src/util/xerces/
 src/util/antlr4/
+src/util/persistence/xerces/
+src/util/xerces/
 src/util/boost/
+!src/util/antlr4/build.gradle
 !src/util/boost/build.gradle
+!src/util/xerces/build.gradle
 
 # Temporary files
 *.bak
