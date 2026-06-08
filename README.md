@@ -125,6 +125,13 @@ All binaries and header files are delivered to:
 ${MDE4CPP_HOME}/application
 ```
 
+## Mac Setup
+
+1. Copy and paste setenv.default then rename the copy to setenv.sh
+2. Update MDE4CPP_ECLIPSE_HOME in setenv.sh to /Applications/Eclipse.app/Contents/Eclipse
+3. Source the setenv.sh using command: source setenv.sh
+4. Run the gradle command: gradlew install
+
 # Docker based build
 
 ## Prerequisites
