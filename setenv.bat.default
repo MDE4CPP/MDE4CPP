@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableExtensions EnableDelayedExpansion
 
 REM ########################################
 REM # Environment configuration of MDE4CPP #
@@ -6,6 +7,27 @@ REM ########################################
 
 REM path to MDE4CPP home folder
 SET MDE4CPP_HOME=%cd%
+
+REM ########################################
+REM # Read tool versions from versions.properties
+REM ########################################
+REM This allows consistent versioning across all platform-specific scripts
+
+SET VERSIONS_FILE=%MDE4CPP_HOME%\versions.properties
+
+if exist "%VERSIONS_FILE%" (
+    echo [setenv] Reading tool versions from versions.properties
+    for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_JAVA_VERSION"') do set "JAVA_VERSION_FROM_FILE=%%B"
+    for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_COMPILER_VERSION"') do set "COMPILER_VERSION_FROM_FILE=%%B"
+    for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_CMAKE_VERSION"') do set "CMAKE_VERSION_FROM_FILE=%%B"
+    for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_ECLIPSE_VERSION"') do set "ECLIPSE_VERSION_FROM_FILE=%%B"
+    
+    if defined JAVA_VERSION_FROM_FILE (
+        for /f "tokens=* delims= " %%X in ("!JAVA_VERSION_FROM_FILE!") do set "JAVA_VERSION=%%X"
+    )
+) else (
+    echo [setenv] versions.properties not found, using default values
+)
 
 REM path to eclipse home folder including Acceleo plugins
 REM required for creating the generators

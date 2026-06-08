@@ -1,37 +1,61 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Step 1: Print requested Eclipse component versions.
-echo "Installing Eclipse ${MDE4CPP_ECLIPSE_VERSION} with Acceleo ${MDE4CPP_ECLIPSE_ACCELEO_VERSION} and Sirius ${MDE4CPP_ECLIPSE_SIRIUS_VERSION}"
+# Step 1: Find repo root and read Eclipse versions from versions.properties
+echo "[installEclipse] Reading configuration from versions.properties..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+VERSIONS_FILE="${REPO_ROOT}/versions.properties"
 
-# Step 2: Validate required input variables.
-if [[ -z "${MDE4CPP_HOME:-}" ]]; then
-  echo "MDE4CPP_HOME is not set."
+if [[ ! -f "${VERSIONS_FILE}" ]]; then
+    echo "[installEclipse] ERROR: versions.properties not found at ${VERSIONS_FILE}"
+    exit 1
+fi
+
+# Helper function to read property from file
+read_property() {
+    grep -i "^$1=" "${VERSIONS_FILE}" | cut -d'=' -f2 | tr -d ' ' | tr -d '\r'
+}
+
+# Read all Eclipse versions from properties file
+MDE4CPP_HOME="${REPO_ROOT}"
+MDE4CPP_ECLIPSE_VERSION=$(read_property "MDE4CPP_ECLIPSE_VERSION")
+MDE4CPP_ECLIPSE_MILESTONE=$(read_property "MDE4CPP_ECLIPSE_MILESTONE")
+MDE4CPP_ECLIPSE_ACCELEO_VERSION=$(read_property "MDE4CPP_ECLIPSE_ACCELEO_VERSION")
+MDE4CPP_ECLIPSE_SIRIUS_VERSION=$(read_property "MDE4CPP_ECLIPSE_SIRIUS_VERSION")
+MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION=$(read_property "MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION")
+
+# Print requested Eclipse component versions.
+echo "[installEclipse] Installing Eclipse ${MDE4CPP_ECLIPSE_VERSION} with Acceleo ${MDE4CPP_ECLIPSE_ACCELEO_VERSION} and Sirius ${MDE4CPP_ECLIPSE_SIRIUS_VERSION}"
+
+# Validate required versions.
+if [[ -z "${MDE4CPP_HOME}" ]]; then
+  echo "[installEclipse] ERROR: Could not determine MDE4CPP_HOME"
   exit 1
 fi
 
-if [[ -z "${MDE4CPP_ECLIPSE_VERSION:-}" ]]; then
-  echo "MDE4CPP_ECLIPSE_VERSION is not set."
+if [[ -z "${MDE4CPP_ECLIPSE_VERSION}" ]]; then
+  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_VERSION not found in ${VERSIONS_FILE}"
   exit 1
 fi
 
-if [[ -z "${MDE4CPP_ECLIPSE_MILESTONE:-}" ]]; then
-  echo "MDE4CPP_ECLIPSE_MILESTONE is not set."
+if [[ -z "${MDE4CPP_ECLIPSE_MILESTONE}" ]]; then
+  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_MILESTONE not found in ${VERSIONS_FILE}"
   exit 1
 fi
 
-if [[ -z "${MDE4CPP_ECLIPSE_ACCELEO_VERSION:-}" ]]; then
-  echo "MDE4CPP_ECLIPSE_ACCELEO_VERSION is not set."
+if [[ -z "${MDE4CPP_ECLIPSE_ACCELEO_VERSION}" ]]; then
+  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_ACCELEO_VERSION not found in ${VERSIONS_FILE}"
   exit 1
 fi
 
-if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_VERSION:-}" ]]; then
-  echo "MDE4CPP_ECLIPSE_SIRIUS_VERSION is not set."
+if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_VERSION}" ]]; then
+  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_SIRIUS_VERSION not found in ${VERSIONS_FILE}"
   exit 1
 fi
 
-if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION:-}" ]]; then
-  echo "MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION is not set."
+if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION}" ]]; then
+  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION not found in ${VERSIONS_FILE}"
   exit 1
 fi
 

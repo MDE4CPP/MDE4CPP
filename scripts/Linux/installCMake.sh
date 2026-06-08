@@ -1,17 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Step 1: Validate required input variables.
-echo "[installCMake] MDE4CPP_CMAKE_VERSION=${MDE4CPP_CMAKE_VERSION:-}"
-echo "[installCMake] MDE4CPP_CMAKE_BUILD_VERSION=${MDE4CPP_CMAKE_BUILD_VERSION:-}"
+# Step 1: Find repo root and read CMake versions from versions.properties
+echo "[installCMake] Reading configuration from versions.properties..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+VERSIONS_FILE="${REPO_ROOT}/versions.properties"
 
-if [[ -z "${MDE4CPP_CMAKE_VERSION:-}" ]]; then
-  echo "[installCMake] ERROR: MDE4CPP_CMAKE_VERSION is not set."
-  exit 1
+if [[ ! -f "${VERSIONS_FILE}" ]]; then
+    echo "[installCMake] ERROR: versions.properties not found at ${VERSIONS_FILE}"
+    exit 1
 fi
-if [[ -z "${MDE4CPP_CMAKE_BUILD_VERSION:-}" ]]; then
-  echo "[installCMake] ERROR: MDE4CPP_CMAKE_BUILD_VERSION is not set."
-  exit 1
+
+# Read CMake versions from properties file
+MDE4CPP_CMAKE_VERSION=""
+MDE4CPP_CMAKE_BUILD_VERSION=""
+if [[ -f "${VERSIONS_FILE}" ]]; then
+    MDE4CPP_CMAKE_VERSION=$(grep -i "^MDE4CPP_CMAKE_VERSION=" "${VERSIONS_FILE}" | cut -d'=' -f2 | tr -d ' ' | tr -d '\r')
+    MDE4CPP_CMAKE_BUILD_VERSION=$(grep -i "^MDE4CPP_CMAKE_BUILD=" "${VERSIONS_FILE}" | cut -d'=' -f2 | tr -d ' ' | tr -d '\r')
+fi
+
+echo "[installCMake] MDE4CPP_CMAKE_VERSION=${MDE4CPP_CMAKE_VERSION}"
+echo "[installCMake] MDE4CPP_CMAKE_BUILD_VERSION=${MDE4CPP_CMAKE_BUILD_VERSION}"
+if [[ -z "${MDE4CPP_CMAKE_VERSION}" ]]; then
+    echo "[installCMake] ERROR: MDE4CPP_CMAKE_VERSION not found in ${VERSIONS_FILE}"
+    exit 1
+fi
+if [[ -z "${MDE4CPP_CMAKE_BUILD_VERSION}" ]]; then
+    echo "[installCMake] ERROR: MDE4CPP_CMAKE_BUILD not found in ${VERSIONS_FILE}"
+    exit 1
 fi
 
 # Step 2: Resolve target paths and download source.

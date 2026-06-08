@@ -1,16 +1,41 @@
 @echo off
-setlocal EnableExtensions
+setlocal EnableExtensions EnableDelayedExpansion
 
-REM Step 1: Validate required input variables.
-echo [installCMake] MDE4CPP_CMAKE_VERSION=%MDE4CPP_CMAKE_VERSION%
-echo [installCMake] MDE4CPP_CMAKE_BUILD_VERSION=%MDE4CPP_CMAKE_BUILD_VERSION%
+REM Step 1: Find repo root and read CMake versions from versions.properties
+echo [installCMake] Reading configuration from versions.properties...
+set "SCRIPT_DIR=%~dp0"
+for %%I in ("%SCRIPT_DIR%..\..\..") do set "REPO_ROOT=%%~fI"
+set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
 
-if "%MDE4CPP_CMAKE_VERSION%"=="" (
-    echo [installCMake] ERROR: MDE4CPP_CMAKE_VERSION is not set.
+if not exist "%VERSIONS_FILE%" (
+    echo [installCMake] ERROR: versions.properties not found at %VERSIONS_FILE%
     exit /b 1
 )
-if "%MDE4CPP_CMAKE_BUILD_VERSION%"=="" (
-    echo [installCMake] ERROR: MDE4CPP_CMAKE_BUILD_VERSION is not set.
+
+REM Read MDE4CPP_CMAKE_VERSION from properties file
+for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_CMAKE_VERSION"') do (
+    set "TEMP_VAL=%%B"
+    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_CMAKE_VERSION=%%X"
+)
+
+REM Read MDE4CPP_CMAKE_BUILD from properties file
+for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_CMAKE_BUILD"') do (
+    set "TEMP_VAL=%%B"
+    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_CMAKE_BUILD=%%X"
+)
+
+REM Use CMAKE_BUILD as CMAKE_BUILD_VERSION for compatibility
+set "MDE4CPP_CMAKE_BUILD_VERSION=!MDE4CPP_CMAKE_BUILD!"
+
+echo [installCMake] MDE4CPP_CMAKE_VERSION=!MDE4CPP_CMAKE_VERSION!
+echo [installCMake] MDE4CPP_CMAKE_BUILD_VERSION=!MDE4CPP_CMAKE_BUILD_VERSION!
+
+if "!MDE4CPP_CMAKE_VERSION!"=="" (
+    echo [installCMake] ERROR: MDE4CPP_CMAKE_VERSION not found in %VERSIONS_FILE%
+    exit /b 1
+)
+if "!MDE4CPP_CMAKE_BUILD_VERSION!"=="" (
+    echo [installCMake] ERROR: MDE4CPP_CMAKE_BUILD not found in %VERSIONS_FILE%
     exit /b 1
 )
 

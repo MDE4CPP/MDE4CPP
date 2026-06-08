@@ -1,11 +1,26 @@
 @echo off
-setlocal EnableExtensions
+setlocal EnableExtensions EnableDelayedExpansion
 
-REM Step 1: Validate required compiler version input.
-echo [installCompiler] MDE4CPP_COMPILER_VERSION=%MDE4CPP_COMPILER_VERSION%
+REM Step 1: Find repo root and read compiler version from versions.properties
+echo [installCompiler] Reading configuration from versions.properties...
+set "SCRIPT_DIR=%~dp0"
+for %%I in ("%SCRIPT_DIR%..\..\..") do set "REPO_ROOT=%%~fI"
+set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
 
-if "%MDE4CPP_COMPILER_VERSION%"=="" (
-    echo [installCompiler] ERROR: MDE4CPP_COMPILER_VERSION is not set.
+if not exist "%VERSIONS_FILE%" (
+    echo [installCompiler] ERROR: versions.properties not found at %VERSIONS_FILE%
+    exit /b 1
+)
+
+REM Read MDE4CPP_COMPILER_VERSION from properties file
+for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_COMPILER_VERSION"') do (
+    set "TEMP_VAL=%%B"
+    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_COMPILER_VERSION=%%X"
+)
+
+echo [installCompiler] MDE4CPP_COMPILER_VERSION=!MDE4CPP_COMPILER_VERSION!
+if "!MDE4CPP_COMPILER_VERSION!"=="" (
+    echo [installCompiler] ERROR: MDE4CPP_COMPILER_VERSION not found in %VERSIONS_FILE%
     exit /b 1
 )
 
@@ -60,9 +75,9 @@ if errorlevel 1 (
 
 REM Step 5: Resolve download URL and prepare temporary workspace.
 set "TMP_DIR=%TEMP%\mde4cpp-mingw-%RANDOM%%RANDOM%"
-set "ARCHIVE_PATH=%TMP_DIR%\mingw.7z"
+set "ARCHIVE_PATH=%TMP_DIR%\mingw.zip"
 set "MINGW_RELEASE_TAG=%MDE4CPP_COMPILER_VERSION%-rt_v11-rev1"
-set "DOWNLOAD_URL=https://github.com/niXman/mingw-builds-binaries/releases/download/%MINGW_RELEASE_TAG%/x86_64-%MDE4CPP_COMPILER_VERSION%-release-posix-seh-msvcrt-rt_v11-rev1.7z"
+set "DOWNLOAD_URL=https://github.com/niXman/mingw-builds-binaries/releases/download/%MINGW_RELEASE_TAG%/x86_64-%MDE4CPP_COMPILER_VERSION%-release-posix-seh-msvcrt-rt_v11-rev1.zip"
 
 REM Step 5: Download MinGW archive and verify extraction tool.
 echo [installCompiler] Install location=%INSTALL_DIR%
@@ -89,32 +104,6 @@ if errorlevel 1 (
     exit /b 1
 )
 
-where 7z >nul 2>&1
-if errorlevel 1 (
-    echo [installCompiler] 7z not found. Attempting to install 7-Zip via winget...
-    where winget >nul 2>&1
-    if errorlevel 1 (
-        echo [installCompiler] ERROR: winget is not available to install 7-Zip automatically.
-        echo [installCompiler] Please install 7-Zip manually from https://www.7-zip.org/ and re-run this script.
-        rmdir /s /q "%TMP_DIR%"
-        exit /b 1
-    ) else (
-        echo [installCompiler] Running: winget install --id 7zip.7zip -e --silent --accept-source-agreements --accept-package-agreements
-        winget install --id 7zip.7zip -e --silent --accept-source-agreements --accept-package-agreements
-        if errorlevel 1 (
-            echo [installCompiler] ERROR: winget failed to install 7-Zip.
-            rmdir /s /q "%TMP_DIR%"
-            exit /b 1
-        )
-        where 7z >nul 2>&1
-        if errorlevel 1 (
-            echo [installCompiler] ERROR: 7z still not found after winget install.
-            rmdir /s /q "%TMP_DIR%"
-            exit /b 1
-        )
-    )
-)
-
 REM Step 6: Extract and copy MinGW into target install directory.
 if exist "%INSTALL_DIR%" rmdir /s /q "%INSTALL_DIR%"
 mkdir "%INSTALL_DIR%" >nul 2>&1
@@ -124,9 +113,9 @@ if errorlevel 1 (
     exit /b 1
 )
 
-7z x "%ARCHIVE_PATH%" -o"%TMP_DIR%\extracted" -y >nul
+powershell -NoProfile -ExecutionPolicy Bypass -Command "if (Test-Path -Path '%ARCHIVE_PATH%') { Expand-Archive -Path '%ARCHIVE_PATH%' -DestinationPath '%TMP_DIR%\\extracted' -Force } else { exit 1 }"
 if errorlevel 1 (
-    echo [installCompiler] ERROR: Extraction failed.
+    echo [installCompiler] ERROR: Extraction failed (Expand-Archive).
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )

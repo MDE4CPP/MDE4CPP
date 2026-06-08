@@ -1,10 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "[installJava] MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION:-}"
-if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
-  echo "[installJava] ERROR: MDE4CPP_JAVA_VERSION is not set."
-  exit 1
+# Step 1: Find repo root and read Java version from versions.properties
+echo "[installJava] Reading configuration from versions.properties..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+VERSIONS_FILE="${REPO_ROOT}/versions.properties"
+
+if [[ ! -f "${VERSIONS_FILE}" ]]; then
+    echo "[installJava] ERROR: versions.properties not found at ${VERSIONS_FILE}"
+    exit 1
+fi
+
+# Read MDE4CPP_JAVA_VERSION from properties file
+MDE4CPP_JAVA_VERSION=""
+if [[ -f "${VERSIONS_FILE}" ]]; then
+    MDE4CPP_JAVA_VERSION=$(grep -i "^MDE4CPP_JAVA_VERSION=" "${VERSIONS_FILE}" | cut -d'=' -f2 | tr -d ' ' | tr -d '\r')
+fi
+
+echo "[installJava] MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION}"
+if [[ -z "${MDE4CPP_JAVA_VERSION}" ]]; then
+    echo "[installJava] ERROR: MDE4CPP_JAVA_VERSION not found in ${VERSIONS_FILE}"
+    exit 1
 fi
 
 # Step 1: Check if the required Java version is already installed (before requesting elevation).

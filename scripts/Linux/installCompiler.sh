@@ -1,10 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "[installCompiler] MDE4CPP_COMPILER_VERSION=${MDE4CPP_COMPILER_VERSION:-}"
-if [[ -z "${MDE4CPP_COMPILER_VERSION:-}" ]]; then
-  echo "[installCompiler] ERROR: MDE4CPP_COMPILER_VERSION is not set."
-  exit 1
+# Step 1: Find repo root and read compiler version from versions.properties
+echo "[installCompiler] Reading configuration from versions.properties..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+VERSIONS_FILE="${REPO_ROOT}/versions.properties"
+
+if [[ ! -f "${VERSIONS_FILE}" ]]; then
+    echo "[installCompiler] ERROR: versions.properties not found at ${VERSIONS_FILE}"
+    exit 1
+fi
+
+# Read MDE4CPP_COMPILER_VERSION from properties file
+MDE4CPP_COMPILER_VERSION=""
+if [[ -f "${VERSIONS_FILE}" ]]; then
+    MDE4CPP_COMPILER_VERSION=$(grep -i "^MDE4CPP_COMPILER_VERSION=" "${VERSIONS_FILE}" | cut -d'=' -f2 | tr -d ' ' | tr -d '\r')
+fi
+
+echo "[installCompiler] MDE4CPP_COMPILER_VERSION=${MDE4CPP_COMPILER_VERSION}"
+if [[ -z "${MDE4CPP_COMPILER_VERSION}" ]]; then
+    echo "[installCompiler] ERROR: MDE4CPP_COMPILER_VERSION not found in ${VERSIONS_FILE}"
+    exit 1
 fi
 
 MAJOR="${MDE4CPP_COMPILER_VERSION%%.*}"

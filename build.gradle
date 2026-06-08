@@ -29,22 +29,9 @@ plugins {
 
 import org.gradle.internal.os.OperatingSystem;
 
-// Version definitions for install scripts and utilities
-ext {
-    versions = [
-        java: '21',
-        compiler: '13.2.0',
-        eclipse: '2025-09',
-        eclipseMilestone: 'R',
-        eclipseAcceleo: '3.7',
-        eclipseSirius: '7.4.11',
-        eclipseSiriusEclipse: '2023-03',
-        cmake: '4.3',
-        cmakeBuild: '1',
-        xerces: '3.3.0',
-        antlr: '4.13.2'
-    ]
-}
+// NOTE: Tool versioning is now centralized in `versions.properties` and
+// install scripts read that file directly. Versions have been removed
+// from `build.gradle` to avoid bootstrapping order issues.
 
 description 'MDE4CPP root project'
 
@@ -422,45 +409,25 @@ task checkEnvironment(){
 task runInstallScripts()
 {		
 //private 	group 'MDE4CPP'
-	description 'Run the installation scripts for MDE4CPP. This will set the environment variables and check them. It is recommended to run this task only once, then set the environment variables permanently in your system settings.'
-
-	def tool = ''
-	def command = ''
+	description 'Run the installation scripts for MDE4CPP. This will call the platform-specific install scripts directly. It is recommended to run this task only once, then set the environment variables permanently in your system settings.'
 	def extension = ''
 	def scriptPath = ''
-	def envSetCommand = ''
-	def envValuePrefix = ''
-	def envValueSuffix = ''
+    
 	def installScripts = [
-		//	[{script name},[{environment Variable}, {value}]]
-		['installJava',
-			['MDE4CPP_JAVA_VERSION', versions.java]
-		],
-		['installCompiler',
-			['MDE4CPP_COMPILER_VERSION', versions.compiler]
-		],
-		['installEclipse',
-			['MDE4CPP_ECLIPSE_VERSION',	versions.eclipse],
-			['MDE4CPP_ECLIPSE_MILESTONE', versions.eclipseMilestone],
-			['MDE4CPP_ECLIPSE_ACCELEO_VERSION', versions.eclipseAcceleo],
-			['MDE4CPP_ECLIPSE_SIRIUS_VERSION', versions.eclipseSirius],
-			['MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION', versions.eclipseSiriusEclipse]
-		],
-		['installCMake',
-			['MDE4CPP_CMAKE_VERSION', versions.cmake],
-			['MDE4CPP_CMAKE_BUILD_VERSION', versions.cmakeBuild]
-		],
+		'installJava',
+		'installCompiler',
+		'installEclipse',
+		'installCMake'
 	]
 
 	// workingDir System.getenv('MDE4CPP_HOME')
-	if (OperatingSystem.current().isWindows()) 
+		if (OperatingSystem.current().isWindows()) 
 	{
 		// MS Windows
 		tool = 'cmd'
 		command = '/C'
 		extension = '.bat'
 		scriptPath = 'Windows'
-		envSetCommand = 'set'
 	} 
 	else if (OperatingSystem.current().isLinux()) 
 	{
@@ -469,9 +436,6 @@ task runInstallScripts()
 		command = '-c'
 		extension = '.sh'
 		scriptPath = 'Linux'
-		envSetCommand = 'export'
-		envValuePrefix = '"'
-		envValueSuffix = '"'
 	}
 	else if (OperatingSystem.current().isMacOsX())
 	{
@@ -480,9 +444,6 @@ task runInstallScripts()
 		command = '-c'
 		extension = '.sh'
 		scriptPath = 'MacOS'
-		envSetCommand = 'export'
-		envValuePrefix = '"'
-		envValueSuffix = '"'
 	}
 	else 
 	{
@@ -493,20 +454,12 @@ task runInstallScripts()
 		println 'Running installation scripts...'
 		println 'This may take a while, please be patient.'
 		
-		installScripts.each {scripts ->
-			exec
-			{
-				def envAssignments = scripts[1..-1].collect { envVar ->
-					environment(envVar[0], envVar[1])
-					def envValue = "${envValuePrefix}${envVar[1]}${envValueSuffix}"
-					return "${envSetCommand} ${envVar[0]}=${envValue}"
-				}
-				def scriptCommand = '.' + File.separator + 'scripts' + File.separator + scriptPath + File.separator + scripts[0] + extension
-				def fullCommand = envAssignments.join(' && ') + ' && ' + scriptCommand
-				println 'Running: ' + scripts[0] 
-				commandLine = [tool, command, fullCommand]
+		installScripts.each { scriptName ->
+			exec {
+				def scriptCommand = '.' + File.separator + 'scripts' + File.separator + scriptPath + File.separator + scriptName + extension
+				println 'Running: ' + scriptName
+				commandLine = [tool, command, scriptCommand]
 			}
-			//println 'Finished:' + scripts [0]
 		}
 	}	
 }	
