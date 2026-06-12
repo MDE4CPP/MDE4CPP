@@ -16,7 +16,7 @@ if [[ -z "${MDE4CPP_CMAKE_BUILD:-}" ]]; then
 fi
 
 CMAKE_FULL_VERSION="${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD}"
-echo "${C_PURPLE}[installCMake]${C_INFO} MDE4CPP_CMAKE_VERSION=${CMAKE_FULL_VERSION}${C_RESET}"
+echo "${C_PURPLE}[installCMake]${C_ORANGE} MDE4CPP_CMAKE_VERSION=${CMAKE_FULL_VERSION}${C_RESET}"
 
 if [ "$(uname -s)" = "Darwin" ]; then
     if command -v cmake >/dev/null 2>&1; then

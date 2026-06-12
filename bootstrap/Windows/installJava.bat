@@ -6,7 +6,7 @@ if errorlevel 1 exit /b 1
 
 call "%~dp0common.bat" print_header "installJava" "Running Java installation..."
 
-echo %C_PURPLE%[installJava]%C_INFO% MDE4CPP_JAVA_VERSION=!MDE4CPP_JAVA_VERSION!%C_RESET%
+echo %C_PURPLE%[installJava]%C_ORANGE% MDE4CPP_JAVA_VERSION=!MDE4CPP_JAVA_VERSION!%C_RESET%
 if "!MDE4CPP_JAVA_VERSION!"=="" (
     echo %C_PURPLE%[installJava]%C_ERROR% ERROR: MDE4CPP_JAVA_VERSION not found in %VERSIONS_FILE%%C_RESET%
     exit /b 1

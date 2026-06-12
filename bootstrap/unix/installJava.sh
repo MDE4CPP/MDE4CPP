@@ -6,7 +6,7 @@ source "${SCRIPT_DIR}/common.sh"
 
 print_header "installJava" "Running Java installation..."
 
-echo "${C_PURPLE}[installJava]${C_INFO} MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION:-}${C_RESET}"
+echo "${C_PURPLE}[installJava]${C_ORANGE} MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION:-}${C_RESET}"
 if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
     echo "${C_PURPLE}[installJava]${C_ERROR} ERROR: MDE4CPP_JAVA_VERSION is not set.${C_RESET}"
     exit 1
