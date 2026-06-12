@@ -122,9 +122,9 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 		exec {
 			workingDir "../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
 			if (isWindows) {
-				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("../common/parser/antlr4/bin") + ' ' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="' + file("../common/parser/antlr4/bin").absolutePath + '" "' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath + '"'
 			} else {
-				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("../common/parser/antlr4/bin") + ' ' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="' + file("../common/parser/antlr4/bin").absolutePath + '" "' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath + '"'
 			}
 			// Pass environment variables for cross-compilation
 			if (isCrossCompiling) {
