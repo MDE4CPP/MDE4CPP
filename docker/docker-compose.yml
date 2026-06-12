@@ -61,6 +61,7 @@ services:
   # Full build service - Run this only when CROSS_COMPILE_WINDOWS changes in MDE4CPP_Generator.properties
   # Usage: docker compose up build-full
   build-full:
+    profiles: ["setup"]
     <<: *base-service
     container_name: mde4cpp-build-full
     stdin_open: true
@@ -69,6 +70,7 @@ services:
   # Install Eclipse and plugins (if not already installed)
   # Usage: docker compose up install-eclipse
   install-eclipse:
+    profiles: ["setup"]
     <<: *base-service
     container_name: mde4cpp-install-eclipse
     command: /bin/bash -c "./docker/scripts/install-eclipse.sh && echo '✓ Eclipse installation complete!'"
@@ -76,30 +78,35 @@ services:
   # Preserves application/lib and application/bin directories
   # Usage: docker compose up clean
   clean:
+    profiles: ["setup"]
     <<: *base-service
     container_name: mde4cpp-clean
     command: /bin/bash -c "./docker/scripts/clean-cmake.sh && echo '✓ Cleanup complete!'"
   # Publish Gradle plugins to Maven local
   # Usage: docker compose up publish-plugins
   publish-plugins:
+    profiles: ["setup"]
     <<: *base-service
     container_name: mde4cpp-publish-plugins
     command: ./application/tools/gradlew gradlePlugins:publishMDE4CPPPluginsToMavenLocal --no-daemon
   # Generate all models
   # Usage: docker compose up generate
   generate:
+    profiles: ["setup"]
     <<: *base-service
     container_name: mde4cpp-generate
     command: ./application/tools/gradlew generateAll --no-daemon
   # Compile all generated code
   # Usage: docker compose up compile
   compile:
+    profiles: ["setup"]
     <<: *base-service
     container_name: mde4cpp-compile
     command: ./application/tools/gradlew compileAll --no-daemon
   # Build OCL components
   # Usage: docker compose up build-ocl
   build-ocl:
+    profiles: ["setup"]
     <<: *base-service
     container_name: mde4cpp-build-ocl
     command: ./application/tools/gradlew src:buildOCLAll --no-daemon
@@ -120,48 +127,56 @@ services:
   # Build all infrastructure components (deliver all interfaces + compile plugin framework and persistence)
   # Usage: docker compose up build-infrastructure
   build-infrastructure:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-build-infrastructure
     command: /bin/bash -c "./application/tools/gradlew src:common:abstractDataTypes:deliverAbstractDataTypes --no-daemon && ./application/tools/gradlew src:util:deliverUtil --no-daemon && ./application/tools/gradlew src:common:pluginFramework:deliverPluginFrameworkInterface --no-daemon && ./application/tools/gradlew src:common:persistence:deliverPersistenceInterface --no-daemon && ./application/tools/gradlew src:deliverBasicInterfaces --no-daemon && ./application/tools/gradlew src:common:pluginFramework:compilePluginFramework --no-daemon && ./application/tools/gradlew src:common:persistence:compilePersistence --no-daemon"
   # Deliver abstract data types interface
   # Usage: docker compose up deliver-abstract-data-types
   deliver-abstract-data-types:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-deliver-abstract-data-types
     command: ./application/tools/gradlew src:common:abstractDataTypes:deliverAbstractDataTypes --no-daemon
   # Deliver util interface
   # Usage: docker compose up deliver-util
   deliver-util:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-deliver-util
     command: ./application/tools/gradlew src:util:deliverUtil --no-daemon
   # Deliver plugin framework interface
   # Usage: docker compose up deliver-plugin-framework-interface
   deliver-plugin-framework-interface:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-deliver-plugin-framework-interface
     command: ./application/tools/gradlew src:common:pluginFramework:deliverPluginFrameworkInterface --no-daemon
   # Deliver persistence interface
   # Usage: docker compose up deliver-persistence-interface
   deliver-persistence-interface:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-deliver-persistence-interface
     command: ./application/tools/gradlew src:common:persistence:deliverPersistenceInterface --no-daemon
   # Deliver basic interfaces (depends on all above)
   # Usage: docker compose up deliver-basic-interfaces
   deliver-basic-interfaces:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-deliver-basic-interfaces
     command: ./application/tools/gradlew src:deliverBasicInterfaces --no-daemon
   # Compile plugin framework
   # Usage: docker compose up compile-plugin-framework
   compile-plugin-framework:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-compile-plugin-framework
     command: ./application/tools/gradlew src:common:pluginFramework:compilePluginFramework --no-daemon
   # Compile persistence
   # Usage: docker compose up compile-persistence
   compile-persistence:
+    profiles: ["infrastructure"]
     <<: *base-service
     container_name: mde4cpp-compile-persistence
     command: ./application/tools/gradlew src:common:persistence:compilePersistence --no-daemon
@@ -172,24 +187,28 @@ services:
   # Build all generators (ecore4CPP, UML4CPP, fUML4CPP)
   # Usage: docker compose up build-generators
   build-generators:
+    profiles: ["generators"]
     <<: *base-service
     container_name: mde4cpp-build-generators
     command: /bin/bash -c "./application/tools/gradlew generator:ecore4CPP:buildGenerator_ecore4CPP --no-daemon && ./application/tools/gradlew generator:UML4CPP:buildGenerator_UML4CPP --no-daemon && ./application/tools/gradlew generator:fUML4CPP:buildGenerator_fUML4CPP --no-daemon"
   # Generate ecore4CPP generator
   # Usage: docker compose up generate-ecore4cpp-generator
   generate-ecore4cpp-generator:
+    profiles: ["generators"]
     <<: *base-service
     container_name: mde4cpp-generate-ecore4cpp-generator
     command: ./application/tools/gradlew generator:ecore4CPP:buildGenerator_ecore4CPP --no-daemon
   # Generate UML4CPP generator
   # Usage: docker compose up generate-uml4cpp-generator
   generate-uml4cpp-generator:
+    profiles: ["generators"]
     <<: *base-service
     container_name: mde4cpp-generate-uml4cpp-generator
     command: ./application/tools/gradlew generator:UML4CPP:buildGenerator_UML4CPP --no-daemon
   # Generate fUML4CPP generator
   # Usage: docker compose up generate-fuml4cpp-generator
   generate-fuml4cpp-generator:
+    profiles: ["generators"]
     <<: *base-service
     container_name: mde4cpp-generate-fuml4cpp-generator
     command: ./application/tools/gradlew generator:fUML4CPP:buildGenerator_fUML4CPP --no-daemon
@@ -200,18 +219,21 @@ services:
   # Build ecore model (generate + compile)
   # Usage: docker compose up build-ecore
   build-ecore:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-build-ecore
     command: /bin/bash -c "./application/tools/gradlew src:ecore:generateEcore --no-daemon && ./application/tools/gradlew src:ecore:compileEcore --no-daemon"
   # Generate ecore model
   # Usage: docker compose up generate-ecore
   generate-ecore:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-generate-ecore
     command: ./application/tools/gradlew src:ecore:generateEcore --no-daemon
   # Compile ecore model
   # Usage: docker compose up compile-ecore
   compile-ecore:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-compile-ecore
     command: ./application/tools/gradlew src:ecore:compileEcore --no-daemon
@@ -222,18 +244,21 @@ services:
   # Build types model (generate + compile)
   # Usage: docker compose up build-types
   build-types:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-build-types
     command: /bin/bash -c "./application/tools/gradlew src:uml:types:generateTypes --no-daemon && ./application/tools/gradlew src:uml:types:compileTypes --no-daemon"
   # Generate types model
   # Usage: docker compose up generate-types
   generate-types:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-generate-types
     command: ./application/tools/gradlew src:uml:types:generateTypes --no-daemon
   # Compile types model
   # Usage: docker compose up compile-types
   compile-types:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-compile-types
     command: ./application/tools/gradlew src:uml:types:compileTypes --no-daemon
@@ -244,18 +269,21 @@ services:
   # Build uml model (generate + compile)
   # Usage: docker compose up build-uml
   build-uml:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-build-uml
     command: /bin/bash -c "./application/tools/gradlew src:uml:uml:generateUml --no-daemon && ./application/tools/gradlew src:uml:uml:compileUml --no-daemon"
   # Generate uml model
   # Usage: docker compose up generate-uml
   generate-uml:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-generate-uml
     command: ./application/tools/gradlew src:uml:uml:generateUml --no-daemon
   # Compile uml model
   # Usage: docker compose up compile-uml
   compile-uml:
+    profiles: ["core"]
     <<: *base-service
     container_name: mde4cpp-compile-uml
     command: ./application/tools/gradlew src:uml:uml:compileUml --no-daemon
@@ -266,18 +294,21 @@ services:
   # Build fuml model (generate + compile)
   # Usage: docker compose up build-fuml
   build-fuml:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-build-fuml
     command: /bin/bash -c "./application/tools/gradlew src:fuml:generateFUML --no-daemon && ./application/tools/gradlew src:fuml:compileFUML --no-daemon"
   # Generate fuml model
   # Usage: docker compose up generate-fuml
   generate-fuml:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-generate-fuml
     command: ./application/tools/gradlew src:fuml:generateFUML --no-daemon
   # Compile fuml model
   # Usage: docker compose up compile-fuml
   compile-fuml:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-compile-fuml
     command: ./application/tools/gradlew src:fuml:compileFUML --no-daemon
@@ -288,18 +319,21 @@ services:
   # Build pscs model (generate + compile)
   # Usage: docker compose up build-pscs
   build-pscs:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-build-pscs
     command: /bin/bash -c "./application/tools/gradlew src:pscs:generatePSCS --no-daemon && ./application/tools/gradlew src:pscs:compilePSCS --no-daemon"
   # Generate pscs model
   # Usage: docker compose up generate-pscs
   generate-pscs:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-generate-pscs
     command: ./application/tools/gradlew src:pscs:generatePSCS --no-daemon
   # Compile pscs model
   # Usage: docker compose up compile-pscs
   compile-pscs:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-compile-pscs
     command: ./application/tools/gradlew src:pscs:compilePSCS --no-daemon
@@ -310,18 +344,21 @@ services:
   # Build pssm model (generate + compile)
   # Usage: docker compose up build-pssm
   build-pssm:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-build-pssm
     command: /bin/bash -c "./application/tools/gradlew src:pssm:generatePSSM --no-daemon && ./application/tools/gradlew src:pssm:compilePSSM --no-daemon"
   # Generate pssm model
   # Usage: docker compose up generate-pssm
   generate-pssm:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-generate-pssm
     command: ./application/tools/gradlew src:pssm:generatePSSM --no-daemon
   # Compile pssm model
   # Usage: docker compose up compile-pssm
   compile-pssm:
+    profiles: ["fuml"]
     <<: *base-service
     container_name: mde4cpp-compile-pssm
     command: ./application/tools/gradlew src:pssm:compilePSSM --no-daemon
@@ -332,36 +369,42 @@ services:
   # Build ocl model (generate + compile)
   # Usage: docker compose up build-ocl-model
   build-ocl-model:
+    profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-build-ocl-model
     command: /bin/bash -c "./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon && ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon"
   # Generate ocl model
   # Usage: docker compose up generate-ocl
   generate-ocl:
+    profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-generate-ocl
     command: ./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon
   # Compile ocl model
   # Usage: docker compose up compile-ocl
   compile-ocl:
+    profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-compile-ocl
     command: ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon
   # Build ocl parser (generate + compile)
   # Usage: docker compose up build-ocl-parser
   build-ocl-parser:
+    profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-build-ocl-parser
     command: /bin/bash -c "./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon && ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon"
   # Generate ocl parser
   # Usage: docker compose up generate-ocl-parser
   generate-ocl-parser:
+    profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-generate-ocl-parser
     command: ./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon
   # Compile ocl parser
   # Usage: docker compose up compile-ocl-parser
   compile-ocl-parser:
+    profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-compile-ocl-parser
     command: ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon
@@ -372,18 +415,21 @@ services:
   # Build ecore reflection model (generate + compile)
   # Usage: docker compose up build-ecore-reflection
   build-ecore-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-build-ecore-reflection
     command: /bin/bash -c "./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon && ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon"
   # Generate ecore reflection model
   # Usage: docker compose up generate-ecore-reflection
   generate-ecore-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-generate-ecore-reflection
     command: ./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon
   # Compile ecore reflection model
   # Usage: docker compose up compile-ecore-reflection
   compile-ecore-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-compile-ecore-reflection
     command: ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon
@@ -394,18 +440,21 @@ services:
   # Build primitivetypes reflection model (generate + compile)
   # Usage: docker compose up build-primitivetypes-reflection
   build-primitivetypes-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-build-primitivetypes-reflection
     command: /bin/bash -c "./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon && ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon"
   # Generate primitivetypes reflection model
   # Usage: docker compose up generate-primitivetypes-reflection
   generate-primitivetypes-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-generate-primitivetypes-reflection
     command: ./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon
   # Compile primitivetypes reflection model
   # Usage: docker compose up compile-primitivetypes-reflection
   compile-primitivetypes-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-compile-primitivetypes-reflection
     command: ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon
@@ -416,18 +465,21 @@ services:
   # Build uml reflection model (generate + compile)
   # Usage: docker compose up build-uml-reflection
   build-uml-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-build-uml-reflection
     command: /bin/bash -c "./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon && ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon"
   # Generate uml reflection model
   # Usage: docker compose up generate-uml-reflection
   generate-uml-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-generate-uml-reflection
     command: ./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon
   # Compile uml reflection model
   # Usage: docker compose up compile-uml-reflection
   compile-uml-reflection:
+    profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-compile-uml-reflection
     command: ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon
@@ -438,18 +490,21 @@ services:
   # Build standard profile model (generate + compile)
   # Usage: docker compose up build-standard-profile
   build-standard-profile:
+    profiles: ["uml-profiles"]
     <<: *base-service
     container_name: mde4cpp-build-standard-profile
     command: /bin/bash -c "./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon && ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon"
   # Generate standard profile model
   # Usage: docker compose up generate-standard-profile
   generate-standard-profile:
+    profiles: ["uml-profiles"]
     <<: *base-service
     container_name: mde4cpp-generate-standard-profile
     command: ./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon
   # Compile standard profile model
   # Usage: docker compose up compile-standard-profile
   compile-standard-profile:
+    profiles: ["uml-profiles"]
     <<: *base-service
     container_name: mde4cpp-compile-standard-profile
     command: ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon
@@ -460,18 +515,21 @@ services:
   # Build UML4CPP profile model (generate + compile)
   # Usage: docker compose up build-uml4cpp-profile
   build-uml4cpp-profile:
+    profiles: ["uml-profiles"]
     <<: *base-service
     container_name: mde4cpp-build-uml4cpp-profile
     command: /bin/bash -c "./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon && ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon"
   # Generate UML4CPP profile model
   # Usage: docker compose up generate-uml4cpp-profile
   generate-uml4cpp-profile:
+    profiles: ["uml-profiles"]
     <<: *base-service
     container_name: mde4cpp-generate-uml4cpp-profile
     command: ./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon
   # Compile UML4CPP profile model
   # Usage: docker compose up compile-uml4cpp-profile
   compile-uml4cpp-profile:
+    profiles: ["uml-profiles"]
     <<: *base-service
     container_name: mde4cpp-compile-uml4cpp-profile
     command: ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon
@@ -482,17 +540,20 @@ services:
   # Build foundational model library (generate + compile)
   # Usage: docker compose up build-foundational-model-library
   build-foundational-model-library:
+    profiles: ["application"]
     <<: *base-service
     container_name: mde4cpp-build-foundational-model-library
     command: /bin/bash -c "./application/tools/gradlew src:common:FoundationalModelLibrary:generateFoundationalModelLibrary --no-daemon && ./application/tools/gradlew src:common:FoundationalModelLibrary:compileFoundationalModelLibrary --no-daemon"
   # Generate foundational model library
   # Usage: docker compose up generate-foundational-model-library
   generate-foundational-model-library:
+    profiles: ["application"]
     <<: *base-service
     container_name: mde4cpp-generate-foundational-model-library
     command: ./application/tools/gradlew src:common:FoundationalModelLibrary:generateFoundationalModelLibrary --no-daemon
   # Compile foundational model library
   # Usage: docker compose up compile-foundational-model-library
   compile-foundational-model-library:
+    profiles: ["application"]
     <<: *base-service
     container_name: mde4cpp-compile-foundational-model-library
