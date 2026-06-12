@@ -18,35 +18,11 @@ if [[ -z "${MDE4CPP_ECLIPSE_VERSION:-}" ]]; then
   echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_VERSION is not set."
   exit 1
 fi
-if [[ -z "${MDE4CPP_ECLIPSE_MILESTONE:-}" ]]; then
-  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_MILESTONE is not set."
-  exit 1
-fi
-if [[ -z "${MDE4CPP_ECLIPSE_ACCELEO_VERSION:-}" ]]; then
-  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_ACCELEO_VERSION is not set."
-  exit 1
-fi
-if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_VERSION:-}" ]]; then
-  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_SIRIUS_VERSION is not set."
-  exit 1
-fi
-if [[ -z "${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION:-}" ]]; then
-  echo "[installEclipse] ERROR: MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION not found."
-  exit 1
-fi
 
 MDE4CPP_PARENT="$(cd "${MDE4CPP_HOME}/.." && pwd)"
 TARGET_DIR="${MDE4CPP_PARENT}/eclipse"
 TMP_DIR="$(mktemp -d)"
-ARCHIVE_PATH="${TMP_DIR}/eclipse-modeling.tar.gz"
 
-ECLIPSE_ARCH=$(get_arch)
-if [[ "${ECLIPSE_ARCH}" == "unknown" ]]; then
-  echo "[installEclipse] ERROR: Unsupported architecture: $(uname -m)"
-  exit 1
-fi
-
-ECLIPSE_ARCHIVE_URL="https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}/${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}/eclipse-modeling-${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}-${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}-linux-gtk-${ECLIPSE_ARCH}.tar.gz"
 ACCELEO_REPOSITORY_URL="https://download.eclipse.org/acceleo/updates/releases/${MDE4CPP_ECLIPSE_ACCELEO_VERSION//[[:space:]]/}"
 SIRIUS_REPOSITORY_URL="https://download.eclipse.org/sirius/updates/releases/${MDE4CPP_ECLIPSE_SIRIUS_VERSION//[[:space:]]/}/${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION//[[:space:]]/}"
 CDT_REPOSITORY_URL="https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}"
@@ -58,13 +34,28 @@ trap cleanup EXIT
 
 echo "MDE4CPP_HOME=${MDE4CPP_HOME}"
 echo "Install location=${TARGET_DIR}"
-echo "Using Eclipse version=${MDE4CPP_ECLIPSE_VERSION}, milestone=${MDE4CPP_ECLIPSE_MILESTONE}, Acceleo=${MDE4CPP_ECLIPSE_ACCELEO_VERSION}, Sirius=${MDE4CPP_ECLIPSE_SIRIUS_VERSION}"
 
 SKIP_DOWNLOAD=0
-if [[ -x "${TARGET_DIR}/eclipse" ]]; then
+ECLIPSE_BIN=""
+
+if [ "$(uname -s)" = "Darwin" ]; then
+    ARCH_SUFFIX=$(get_arch)
+    ECLIPSE_ARCHIVE_URL="https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}/${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}/eclipse-modeling-${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}-${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}-macosx-cocoa-${ARCH_SUFFIX}.tar.gz"
+    ARCHIVE_PATH="${TMP_DIR}/eclipse-modeling.tar.gz"
+    ECLIPSE_BIN="${TARGET_DIR}/Eclipse.app/Contents/MacOS/eclipse"
+    P2_DESTINATION="${TARGET_DIR}/Eclipse.app/Contents/Eclipse"
+else
+    # Linux
+    ECLIPSE_ARCH=$(get_arch)
+    ECLIPSE_ARCHIVE_URL="https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}/${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}/eclipse-modeling-${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}-${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}-linux-gtk-${ECLIPSE_ARCH}.tar.gz"
+    ARCHIVE_PATH="${TMP_DIR}/eclipse-modeling.tar.gz"
+    ECLIPSE_BIN="${TARGET_DIR}/eclipse"
+    P2_DESTINATION="${TARGET_DIR}"
+fi
+
+if [[ -x "${ECLIPSE_BIN}" ]]; then
   echo "[installEclipse] Existing Eclipse installation found at ${TARGET_DIR}."
-  mkdir -p "${TMP_DIR}"
-  "${TARGET_DIR}/eclipse" -nosplash -application org.eclipse.equinox.p2.director -listInstalledIU > "${TMP_DIR}/installed.txt" 2>&1 || true
+  "${ECLIPSE_BIN}" -nosplash -application org.eclipse.equinox.p2.director -listInstalledIU > "${TMP_DIR}/installed.txt" 2>&1 || true
   
   acceleo_version=$(grep -E '^org\.eclipse\.acceleo\.feature\.group[[:space:]]+' "${TMP_DIR}/installed.txt" | awk '{print $NF}' | head -n1 || true)
   sirius_version=$(grep -E '^org\.eclipse\.sirius\.feature\.group[[:space:]]+' "${TMP_DIR}/installed.txt" | awk '{print $NF}' | head -n1 || true)
@@ -82,17 +73,26 @@ if [[ -x "${TARGET_DIR}/eclipse" ]]; then
 fi
 
 if [[ "${SKIP_DOWNLOAD}" -eq 0 ]]; then
-  mkdir -p "${TMP_DIR}"
   echo "Downloading ${ECLIPSE_ARCHIVE_URL}"
   download_file "${ECLIPSE_ARCHIVE_URL}" "${ARCHIVE_PATH}"
 
   rm -rf "${TARGET_DIR}"
-  mkdir -p "${MDE4CPP_PARENT}"
-  tar -xzf "${ARCHIVE_PATH}" -C "${MDE4CPP_PARENT}"
+  if [ "$(uname -s)" = "Darwin" ]; then
+      mkdir -p "${TARGET_DIR}"
+      tar -xzf "${ARCHIVE_PATH}" -C "${TARGET_DIR}"
+  else
+      mkdir -p "${MDE4CPP_PARENT}"
+      tar -xzf "${ARCHIVE_PATH}" -C "${MDE4CPP_PARENT}"
+  fi
+fi
+
+if [[ ! -x "${ECLIPSE_BIN}" ]]; then
+  echo "[installEclipse] ERROR: Eclipse binary not found at ${ECLIPSE_BIN}"
+  exit 1
 fi
 
 echo "Installing Acceleo from ${ACCELEO_REPOSITORY_URL}"
-"${TARGET_DIR}/eclipse" \
+"${ECLIPSE_BIN}" \
   -nosplash \
   -application org.eclipse.equinox.p2.director \
   -repository "https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/},${ACCELEO_REPOSITORY_URL}" \
@@ -105,11 +105,11 @@ echo "Installing Acceleo from ${ACCELEO_REPOSITORY_URL}"
   -installIU org.eclipse.acceleo.query.feature.group \
   -installIU org.eclipse.acceleo.query.source.feature.group \
   -installIU org.antlr.runtime \
-  -destination "${TARGET_DIR}" \
+  -destination "${P2_DESTINATION}" \
   -profileProperties org.eclipse.update.install.features=true
 
 echo "Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
-"${TARGET_DIR}/eclipse" \
+"${ECLIPSE_BIN}" \
   -nosplash \
   -application org.eclipse.equinox.p2.director \
   -repository "${SIRIUS_REPOSITORY_URL}" \
@@ -139,16 +139,16 @@ echo "Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
   -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group \
   -installIU org.eclipse.eef.sdk.feature.feature.group \
   -installIU org.eclipse.eef.sdk.feature.source.feature.group \
-  -destination "${TARGET_DIR}" \
+  -destination "${P2_DESTINATION}" \
   -profileProperties org.eclipse.update.install.features=true
 
 echo "Installing CDT from ${CDT_REPOSITORY_URL}"
-"${TARGET_DIR}/eclipse" \
+"${ECLIPSE_BIN}" \
   -nosplash \
   -application org.eclipse.equinox.p2.director \
   -repository "${CDT_REPOSITORY_URL}" \
   -installIU org.eclipse.cdt.feature.group \
-  -destination "${TARGET_DIR}" \
+  -destination "${P2_DESTINATION}" \
   -profileProperties org.eclipse.update.install.features=true
 
 echo "Eclipse installation finished: ${TARGET_DIR}"

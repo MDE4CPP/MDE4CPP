@@ -53,12 +53,12 @@ if [ "$OS_DIR" = "MacOS" ]; then
     fi
 fi
 
-bash "$DIR/bootstrap/$OS_DIR/installJava.sh"
-bash "$DIR/bootstrap/$OS_DIR/installCompiler.sh"
-bash "$DIR/bootstrap/$OS_DIR/installCMake.sh"
+bash "$DIR/bootstrap/unix/installJava.sh"
+bash "$DIR/bootstrap/unix/installCompiler.sh"
+bash "$DIR/bootstrap/unix/installCMake.sh"
 
 export MDE4CPP_HOME="$PROJECT_DIR"
-bash "$DIR/bootstrap/$OS_DIR/installEclipse.sh"
+bash "$DIR/bootstrap/unix/installEclipse.sh"
 
 echo "==========================================================="
 echo "Generating setenv.sh..."
