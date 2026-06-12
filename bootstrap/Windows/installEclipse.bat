@@ -112,15 +112,28 @@ if exist "!TARGET_DIR!\eclipse.exe" (
     )
 )
 
-REM Install Eclipse plugins (Acceleo, Sirius, CDT)
+set "ECLIPSE_PLUGINS=org.eclipse.acceleo.feature.group org.eclipse.acceleo.ui.interpreter.ocl.feature.group org.eclipse.acceleo.ui.interpreter.completeocl.feature.group org.eclipse.emf.sdk.feature.group org.eclipse.uml2.sdk.feature.group org.eclipse.ocl.all.sdk.feature.group org.eclipse.acceleo.query.feature.group org.eclipse.acceleo.query.source.feature.group org.antlr.runtime org.eclipse.sirius.common.acceleo.aql org.eclipse.sirius.ui.properties org.eclipse.sirius.aql.feature.group org.eclipse.sirius.runtime.aql.feature.group org.eclipse.sirius.properties.feature.feature.group org.eclipse.sirius.aql.source.feature.group org.eclipse.sirius.interpreter.feature.feature.group org.eclipse.sirius.interpreter.feature.source.feature.group org.eclipse.sirius.model.feature.source.feature.group org.eclipse.sirius.properties.feature.source.feature.group org.eclipse.sirius.runtime.aql.source.feature.group org.eclipse.sirius.runtime.ide.ui.feature.group org.eclipse.sirius.specifier.feature.group org.eclipse.sirius.specifier.ide.ui.aql.feature.group org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group org.eclipse.sirius.specifier.ide.ui.feature.group org.eclipse.sirius.specifier.ide.ui.source.feature.group org.eclipse.sirius.specifier.properties.feature.feature.group org.eclipse.sirius.specifier.properties.feature.source.feature.group org.eclipse.sirius.specifier.source.feature.group org.eclipse.eef.ext.widgets.reference.feature.feature.group org.eclipse.eef.ext.widgets.reference.feature.source.feature.group org.eclipse.eef.sdk.feature.feature.group org.eclipse.eef.sdk.feature.source.feature.group org.eclipse.cdt.feature.group"
 
 set "NEEDS_INSTALL=0"
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.acceleo_*" >nul 2>&1
-if errorlevel 1 set "NEEDS_INSTALL=1"
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.sirius.aql_*" >nul 2>&1
-if errorlevel 1 set "NEEDS_INSTALL=1"
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.cdt_*" >nul 2>&1
-if errorlevel 1 set "NEEDS_INSTALL=1"
+if exist "%TARGET_DIR%\eclipsec.exe" (
+    "%TARGET_DIR%\eclipsec.exe" -nosplash -application org.eclipse.equinox.p2.director -listInstalledRoots > "%TMP_DIR%\installed.txt" 2>&1
+    
+    echo %C_PURPLE%[installEclipse]%C_SUCCESS% Found existing Eclipse plugins:%C_RESET%
+    for %%P in (%ECLIPSE_PLUGINS%) do (
+        set "FOUND_VER="
+        for /f "tokens=1,2 delims=/" %%A in ('findstr /b /c:"%%P/" "%TMP_DIR%\installed.txt"') do (
+            set "FOUND_VER=%%B"
+        )
+        if defined FOUND_VER (
+            echo %C_PURPLE%[installEclipse]%C_INFO% %%P: !FOUND_VER!%C_RESET%
+        ) else (
+            echo %C_PURPLE%[installEclipse]%C_INFO% %%P: %C_ERROR%NOT FOUND%C_RESET%
+            set "NEEDS_INSTALL=1"
+        )
+    )
+) else (
+    set "NEEDS_INSTALL=1"
+)
 
 if "!NEEDS_INSTALL!"=="0" (
     echo %C_PURPLE%[installEclipse]%C_SUCCESS% Requested Eclipse plugins are already installed. Skipping.%C_RESET%
@@ -130,40 +143,9 @@ if "!NEEDS_INSTALL!"=="0" (
 echo %C_PURPLE%[installEclipse]%C_INFO% Installing Eclipse plugins ^(Acceleo, Sirius, CDT^)...%C_RESET%
 
 set "PLUGINS="
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.ui.interpreter.ocl.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.ui.interpreter.completeocl.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.emf.sdk.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.uml2.sdk.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.ocl.all.sdk.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.query.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.query.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.antlr.runtime"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.common.acceleo.aql"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.ui.properties"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.aql.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.runtime.aql.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.properties.feature.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.aql.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.interpreter.feature.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.interpreter.feature.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.model.feature.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.properties.feature.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.runtime.aql.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.runtime.ide.ui.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.aql.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.properties.feature.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.properties.feature.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.ext.widgets.reference.feature.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.sdk.feature.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.sdk.feature.source.feature.group"
-set "PLUGINS=!PLUGINS! -installIU org.eclipse.cdt.feature.group"
+for %%P in (%ECLIPSE_PLUGINS%) do (
+    set "PLUGINS=!PLUGINS! -installIU %%P"
+)
 
 "%TARGET_DIR%\eclipsec.exe" ^
      -nosplash -consoleLog ^
@@ -172,9 +154,10 @@ set "PLUGINS=!PLUGINS! -installIU org.eclipse.cdt.feature.group"
      !PLUGINS! ^
      -destination "%TARGET_DIR%" ^
      -profileProperties org.eclipse.update.install.features=true ^
-     -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
+     -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT > "%TMP_DIR%\p2_install.log" 2>&1
 if errorlevel 1 (
-    echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: Eclipse plugin installation failed.%C_RESET%
+    echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: Eclipse plugin installation failed. See log below:%C_RESET%
+    type "%TMP_DIR%\p2_install.log"
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
