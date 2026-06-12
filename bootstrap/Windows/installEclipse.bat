@@ -112,19 +112,26 @@ if exist "!TARGET_DIR!\eclipse.exe" (
     )
 )
 
-REM Step 5: Install Acceleo into Eclipse.
+REM Step 5: Install Eclipse plugins (Acceleo, Sirius, CDT)
 
+set "NEEDS_INSTALL=0"
 dir /b /ad "%TARGET_DIR%\features\org.eclipse.acceleo_*" >nul 2>&1
-if not errorlevel 1 (
-    echo [installEclipse] Acceleo is already installed. Skipping.
-    goto :skipAcceleo
+if errorlevel 1 set "NEEDS_INSTALL=1"
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.sirius.aql_*" >nul 2>&1
+if errorlevel 1 set "NEEDS_INSTALL=1"
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.cdt_*" >nul 2>&1
+if errorlevel 1 set "NEEDS_INSTALL=1"
+
+if "!NEEDS_INSTALL!"=="0" (
+    echo [installEclipse] Requested Eclipse plugins are already installed. Skipping.
+    goto :skipInstall
 )
 
-echo [installEclipse] Installing EMF, UML-SDK,OCL and Acceleo from %ACCELEO_REPOSITORY_URL% and https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION%/
+echo [installEclipse] Installing Eclipse plugins ^(Acceleo, Sirius, CDT^)...
 "%TARGET_DIR%\eclipsec.exe" ^
      -nosplash -consoleLog ^
      -application org.eclipse.equinox.p2.director ^
-     -repository "https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%" ^
+     -repository "https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%,%SIRIUS_REPOSITORY_URL%,%CDT_REPOSITORY_URL%" ^
      -installIU org.eclipse.acceleo.feature.group ^
      -installIU org.eclipse.acceleo.ui.interpreter.ocl.feature.group ^
      -installIU org.eclipse.acceleo.ui.interpreter.completeocl.feature.group ^
@@ -134,94 +141,41 @@ echo [installEclipse] Installing EMF, UML-SDK,OCL and Acceleo from %ACCELEO_REPO
      -installIU org.eclipse.acceleo.query.feature.group ^
      -installIU org.eclipse.acceleo.query.source.feature.group ^
      -installIU org.antlr.runtime ^
+     -installIU org.eclipse.sirius.common.acceleo.aql ^
+     -installIU org.eclipse.sirius.ui.properties ^
+     -installIU org.eclipse.sirius.aql.feature.group ^
+     -installIU org.eclipse.sirius.runtime.aql.feature.group ^
+     -installIU org.eclipse.sirius.properties.feature.feature.group ^
+     -installIU org.eclipse.sirius.aql.source.feature.group ^
+     -installIU org.eclipse.sirius.interpreter.feature.feature.group ^
+     -installIU org.eclipse.sirius.interpreter.feature.source.feature.group ^
+     -installIU org.eclipse.sirius.model.feature.source.feature.group ^
+     -installIU org.eclipse.sirius.properties.feature.source.feature.group ^
+     -installIU org.eclipse.sirius.runtime.aql.source.feature.group ^
+     -installIU org.eclipse.sirius.runtime.ide.ui.feature.group ^
+     -installIU org.eclipse.sirius.specifier.feature.group ^
+     -installIU org.eclipse.sirius.specifier.ide.ui.aql.feature.group ^
+     -installIU org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group ^
+     -installIU org.eclipse.sirius.specifier.ide.ui.feature.group ^
+     -installIU org.eclipse.sirius.specifier.ide.ui.source.feature.group ^
+     -installIU org.eclipse.sirius.specifier.properties.feature.feature.group ^
+     -installIU org.eclipse.sirius.specifier.properties.feature.source.feature.group ^
+     -installIU org.eclipse.sirius.specifier.source.feature.group ^
+     -installIU org.eclipse.eef.ext.widgets.reference.feature.feature.group ^
+     -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group ^
+     -installIU org.eclipse.eef.sdk.feature.feature.group ^
+     -installIU org.eclipse.eef.sdk.feature.source.feature.group ^
+     -installIU org.eclipse.cdt.feature.group ^
      -destination "%TARGET_DIR%" ^
      -profileProperties org.eclipse.update.install.features=true ^
      -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
- if errorlevel 1 (
-     echo [installEclipse] ERROR: Acceleo installation failed.
-     rmdir /s /q "%TMP_DIR%"
-     exit /b 1
- )
-:skipAcceleo
-
-REM to debug use -help to list all options, -list to list all available IUs in the given repositories, -purgeHistory to reduce footprint by purging download history.
-
-REM Step 6: Install Sirius into Eclipse.
-
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.sirius.aql_*" >nul 2>&1
-if not errorlevel 1 (
-    echo [installEclipse] Sirius is already installed. Skipping.
-    goto :skipSirius
-)
-
-echo [installEclipse] Installing Sirius from %SIRIUS_REPOSITORY_URL% 
-"%TARGET_DIR%\eclipsec.exe" ^
-    -nosplash -consoleLog ^
-    -application org.eclipse.equinox.p2.director ^
-    -repository "%SIRIUS_REPOSITORY_URL%" ^
-    -installIU org.eclipse.sirius.common.acceleo.aql ^
-    -installIU org.eclipse.sirius.ui.properties ^
-    -installIU org.eclipse.sirius.aql.feature.group ^
-    -installIU org.eclipse.sirius.common.acceleo.aql ^
-    -installIU org.eclipse.sirius.runtime.aql.feature.group ^
-    -installIU org.eclipse.sirius.properties.feature.feature.group ^
-    -installIU org.eclipse.sirius.aql.source.feature.group ^
-    -installIU org.eclipse.sirius.aql.feature.group ^
-    -installIU org.eclipse.sirius.interpreter.feature.feature.group ^
-    -installIU org.eclipse.sirius.interpreter.feature.source.feature.group ^
-    -installIU org.eclipse.sirius.model.feature.source.feature.group ^
-    -installIU org.eclipse.sirius.properties.feature.source.feature.group ^
-    -installIU org.eclipse.sirius.runtime.aql.source.feature.group ^
-    -installIU org.eclipse.sirius.runtime.ide.ui.feature.group ^
-    -installIU org.eclipse.sirius.specifier.feature.group ^
-    -installIU org.eclipse.sirius.specifier.ide.ui.aql.feature.group ^
-    -installIU org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group ^
-    -installIU org.eclipse.sirius.specifier.ide.ui.feature.group ^
-    -installIU org.eclipse.sirius.specifier.ide.ui.source.feature.group ^
-    -installIU org.eclipse.sirius.specifier.properties.feature.feature.group ^
-    -installIU org.eclipse.sirius.specifier.properties.feature.source.feature.group ^
-    -installIU org.eclipse.sirius.specifier.source.feature.group ^
-    -installIU org.eclipse.eef.ext.widgets.reference.feature.feature.group ^
-    -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group ^
-    -installIU org.eclipse.eef.sdk.feature.feature.group ^
-    -installIU org.eclipse.eef.sdk.feature.source.feature.group ^
-    -destination "%TARGET_DIR%" ^
-    -profileProperties org.eclipse.update.install.features=true ^
-    -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
 if errorlevel 1 (
-    echo [installEclipse] ERROR: Sirius installation failed.
+    echo [installEclipse] ERROR: Eclipse plugin installation failed.
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
-:skipSirius
 
-REM -purgeHistory - Purges the profile download history to reduce footprint
-REM -roaming: Sets the profile as roaming, allowing the installation to be moved.
-REM -list: Lists all available IUs in the given repositories.
-
-REM Step 7: Install CDT into Eclipse.
-
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.cdt_*" >nul 2>&1
-if not errorlevel 1 (
-    echo [installEclipse] CDT is already installed. Skipping.
-    goto :skipCdt
-)
-
-echo [installEclipse] Installing CDT from %CDT_REPOSITORY_URL%
-"%TARGET_DIR%\eclipsec.exe" ^
-  -nosplash -consoleLog ^
-  -application org.eclipse.equinox.p2.director ^
-  -repository "%CDT_REPOSITORY_URL%" ^
-  -installIU org.eclipse.cdt.feature.group ^
-  -destination "%TARGET_DIR%" ^
-  -profileProperties org.eclipse.update.install.features=true ^
-  -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
-if errorlevel 1 (
-    echo [installEclipse] ERROR: CDT installation failed.
-    rmdir /s /q "%TMP_DIR%"
-    exit /b 1
-)
-:skipCdt
+:skipInstall
 
 REM Step 8: Cleanup and report completion.
 rmdir /s /q "%TMP_DIR%"

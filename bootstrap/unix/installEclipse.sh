@@ -91,11 +91,11 @@ if [[ ! -x "${ECLIPSE_BIN}" ]]; then
   exit 1
 fi
 
-echo "Installing Acceleo from ${ACCELEO_REPOSITORY_URL}"
+echo "Installing Eclipse plugins (Acceleo, Sirius, CDT)..."
 "${ECLIPSE_BIN}" \
   -nosplash \
   -application org.eclipse.equinox.p2.director \
-  -repository "https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/},${ACCELEO_REPOSITORY_URL}" \
+  -repository "https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/},${ACCELEO_REPOSITORY_URL},${SIRIUS_REPOSITORY_URL},${CDT_REPOSITORY_URL}" \
   -installIU org.eclipse.acceleo.feature.group \
   -installIU org.eclipse.acceleo.ui.interpreter.ocl.feature.group \
   -installIU org.eclipse.acceleo.ui.interpreter.completeocl.feature.group \
@@ -105,22 +105,12 @@ echo "Installing Acceleo from ${ACCELEO_REPOSITORY_URL}"
   -installIU org.eclipse.acceleo.query.feature.group \
   -installIU org.eclipse.acceleo.query.source.feature.group \
   -installIU org.antlr.runtime \
-  -destination "${P2_DESTINATION}" \
-  -profileProperties org.eclipse.update.install.features=true
-
-echo "Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
-"${ECLIPSE_BIN}" \
-  -nosplash \
-  -application org.eclipse.equinox.p2.director \
-  -repository "${SIRIUS_REPOSITORY_URL}" \
   -installIU org.eclipse.sirius.common.acceleo.aql \
   -installIU org.eclipse.sirius.ui.properties \
   -installIU org.eclipse.sirius.aql.feature.group \
-  -installIU org.eclipse.sirius.common.acceleo.aql \
   -installIU org.eclipse.sirius.runtime.aql.feature.group \
   -installIU org.eclipse.sirius.properties.feature.feature.group \
   -installIU org.eclipse.sirius.aql.source.feature.group \
-  -installIU org.eclipse.sirius.aql.feature.group \
   -installIU org.eclipse.sirius.interpreter.feature.feature.group \
   -installIU org.eclipse.sirius.interpreter.feature.source.feature.group \
   -installIU org.eclipse.sirius.model.feature.source.feature.group \
@@ -139,14 +129,6 @@ echo "Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
   -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group \
   -installIU org.eclipse.eef.sdk.feature.feature.group \
   -installIU org.eclipse.eef.sdk.feature.source.feature.group \
-  -destination "${P2_DESTINATION}" \
-  -profileProperties org.eclipse.update.install.features=true
-
-echo "Installing CDT from ${CDT_REPOSITORY_URL}"
-"${ECLIPSE_BIN}" \
-  -nosplash \
-  -application org.eclipse.equinox.p2.director \
-  -repository "${CDT_REPOSITORY_URL}" \
   -installIU org.eclipse.cdt.feature.group \
   -destination "${P2_DESTINATION}" \
   -profileProperties org.eclipse.update.install.features=true
