@@ -28,7 +28,7 @@ echo Generating %SETENV_FILE%...
     echo set "MDE4CPP_ECLIPSE_HOME=%ECLIPSE_DIR%"
     echo.
     echo REM Set compiler home directory
-    echo set "COMPILER_HOME=C:\tools\MinGW"
+    echo set COMPILER_HOME=C:\tools\MinGW
     echo.
     echo REM Set Java Home manually if needed, otherwise winget installs openjdk in path
     echo REM set "JAVA_HOME=C:\Program Files\Microsoft\jdk-21"
@@ -57,25 +57,25 @@ echo ===========================================================
 echo Installing system tools...
 echo ===========================================================
 
-call "%DIR%..\scripts\Windows\installJava.bat"
+call "%PROJECT_DIR%\scripts\Windows\installJava.bat"
 if errorlevel 1 (
     echo ERROR: installJava.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!
 )
 
-call "%DIR%..\scripts\Windows\installCompiler.bat"
+call "%PROJECT_DIR%\scripts\Windows\installCompiler.bat"
 if errorlevel 1 (
     echo ERROR: installCompiler.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!
 )
 
-call "%DIR%..\scripts\Windows\installCMake.bat"
+call "%PROJECT_DIR%\scripts\Windows\installCMake.bat"
 if errorlevel 1 (
     echo ERROR: installCMake.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!
 )
 
-call "%DIR%..\scripts\Windows\installEclipse.bat"
+call "%PROJECT_DIR%\scripts\Windows\installEclipse.bat"
 if errorlevel 1 (
     echo ERROR: installEclipse.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!

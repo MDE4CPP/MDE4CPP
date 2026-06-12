@@ -68,7 +68,7 @@ if /I not "%~1"=="--elevated" (
     if errorlevel 1 (
         echo [installCMake] Administrator rights are required. Requesting elevation...
         powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-          "Start-Process -FilePath 'cmd.exe' -Verb RunAs -ArgumentList '/c set ""MDE4CPP_CMAKE_VERSION=%MDE4CPP_CMAKE_VERSION%"" ^&^& set ""MDE4CPP_CMAKE_BUILD_VERSION=%MDE4CPP_CMAKE_BUILD_VERSION%"" ^&^& call ""%~f0"" --elevated'"
+          "Start-Process -FilePath 'cmd.exe' -Wait -Verb RunAs -ArgumentList '/c set ""MDE4CPP_CMAKE_VERSION=%MDE4CPP_CMAKE_VERSION%"" ^&^& set ""MDE4CPP_CMAKE_BUILD_VERSION=%MDE4CPP_CMAKE_BUILD_VERSION%"" ^&^& call ""%~f0"" --elevated'"
         if errorlevel 1 (
             echo [installCMake] ERROR: Elevation was cancelled or failed.
             exit /b 1

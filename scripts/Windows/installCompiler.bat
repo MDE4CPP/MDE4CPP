@@ -66,11 +66,18 @@ if exist "%INSTALL_DIR%\bin\gcc.exe" (
 )
 
 REM Step 4: Ensure the script runs with administrator rights if installation is required.
-net session >nul 2>&1
-if errorlevel 1 (
-    echo [installCompiler] ERROR: Administrator rights are required.
-    echo [installCompiler] Please rerun this script in an elevated command prompt.
-    exit /b 1
+if /I not "%~1"=="--elevated" (
+    net session >nul 2>&1
+    if errorlevel 1 (
+        echo [installCompiler] Administrator rights are required. Requesting elevation...
+        powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+          "Start-Process -FilePath 'cmd.exe' -Wait -Verb RunAs -ArgumentList '/c set ""MDE4CPP_COMPILER_VERSION=%MDE4CPP_COMPILER_VERSION%"" ^&^& set ""INSTALL_DIR=%INSTALL_DIR%"" ^&^& call ""%~f0"" --elevated'"
+        if errorlevel 1 (
+            echo [installCompiler] ERROR: Elevation was cancelled or failed.
+            exit /b 1
+        )
+        exit /b 0
+    )
 )
 
 REM Step 5: Resolve download URL and prepare temporary workspace.

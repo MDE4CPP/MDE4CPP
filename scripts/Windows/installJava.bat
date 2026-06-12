@@ -55,7 +55,7 @@ if /I not "%~1"=="--elevated" (
     net session >nul 2>&1
     if errorlevel 1 (
         echo [installJava] Administrator rights are required. Requesting elevation...
-        powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process cmd.exe -Verb RunAs -ArgumentList '/c', 'set ""MDE4CPP_JAVA_VERSION=%MDE4CPP_JAVA_VERSION%"" && call ""%~f0"" --elevated'"
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process cmd.exe -Wait -Verb RunAs -ArgumentList '/c', 'set ""MDE4CPP_JAVA_VERSION=%MDE4CPP_JAVA_VERSION%"" && call ""%~f0"" --elevated'"
         if errorlevel 1 (
             echo [installJava] ERROR: Elevation was cancelled or failed.
             exit /b 1
