@@ -22,7 +22,7 @@ if [[ -z "${MDE4CPP_ECLIPSE_VERSION:-}" ]]; then
 fi
 
 MDE4CPP_PARENT="$(cd "${MDE4CPP_HOME}/.." && pwd)"
-TARGET_DIR="${MDE4CPP_PARENT}/eclipse"
+TARGET_DIR="${MDE4CPP_ECLIPSE_TARGET_DIR:-${MDE4CPP_PARENT}/eclipse}"
 TMP_DIR="$(mktemp -d)"
 
 ACCELEO_REPOSITORY_URL="https://download.eclipse.org/acceleo/updates/releases/${MDE4CPP_ECLIPSE_ACCELEO_VERSION//[[:space:]]/}"
