@@ -92,14 +92,14 @@ task installXerces(dependsOn: downloadAndUnzipFile) {
 		} else {
 			cmakeCmd += 'Unix Makefiles'
 		}
-		cmakeCmd += '" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin").absolutePath
+		cmakeCmd += '" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="' + file("./xerces/bin").absolutePath + '"'
 		
 		// Add cross-compilation flag if needed
 		if (isCrossCompiling) {
 			cmakeCmd += ' -DCMAKE_SYSTEM_NAME=Windows'
 		}
 		
-		cmakeCmd += ' ' + file("./xerces/xerces-c-${xercesVersion}").absolutePath
+		cmakeCmd += ' "' + file("./xerces/xerces-c-${xercesVersion}").absolutePath + '"'
 		
 		exec {
 			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
