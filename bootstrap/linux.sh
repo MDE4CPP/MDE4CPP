@@ -10,7 +10,7 @@ source "$DIR/common.sh"
 PROPS_FILE="$PROJECT_DIR/versions.properties"
 load_properties "$PROPS_FILE"
 
-ECLIPSE_DIR="$PROJECT_DIR/eclipse"
+ECLIPSE_DIR="$( cd "$PROJECT_DIR/.." && pwd )/eclipse"
 SETENV_FILE="$PROJECT_DIR/setenv.sh"
 
 echo "==========================================================="
