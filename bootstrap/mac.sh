@@ -100,6 +100,7 @@ echo "Running Gradle install to download third-party dependencies..."
 echo "==========================================================="
 source "$SETENV_FILE"
 
+cd "$PROJECT_DIR"
 GRADLE_WRAPPER="$PROJECT_DIR/application/tools/gradlew"
 if [ -x "$GRADLE_WRAPPER" ]; then
     set +e
