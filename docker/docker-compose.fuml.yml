@@ -1,0 +1,87 @@
+x-base-service: &base-service
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  image: mde4cpp:latest
+  user: mde4cpp
+  working_dir: /home/mde4cpp
+  volumes:
+    - ../:/home/mde4cpp
+  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
+
+services:
+  # Core Models: fUML
+  # ============================================================================
+
+  # Build fuml model (generate + compile)
+  # Usage: docker compose up build-fuml
+  build-fuml:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-build-fuml
+    command: /bin/bash -c "./application/tools/gradlew src:fuml:generateFUML --no-daemon && ./application/tools/gradlew src:fuml:compileFUML --no-daemon"
+  # Generate fuml model
+  # Usage: docker compose up generate-fuml
+  generate-fuml:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-generate-fuml
+    command: ./application/tools/gradlew src:fuml:generateFUML --no-daemon
+  # Compile fuml model
+  # Usage: docker compose up compile-fuml
+  compile-fuml:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-compile-fuml
+    command: ./application/tools/gradlew src:fuml:compileFUML --no-daemon
+  # ============================================================================
+  # Core Models: PSCS
+  # ============================================================================
+
+  # Build pscs model (generate + compile)
+  # Usage: docker compose up build-pscs
+  build-pscs:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-build-pscs
+    command: /bin/bash -c "./application/tools/gradlew src:pscs:generatePSCS --no-daemon && ./application/tools/gradlew src:pscs:compilePSCS --no-daemon"
+  # Generate pscs model
+  # Usage: docker compose up generate-pscs
+  generate-pscs:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-generate-pscs
+    command: ./application/tools/gradlew src:pscs:generatePSCS --no-daemon
+  # Compile pscs model
+  # Usage: docker compose up compile-pscs
+  compile-pscs:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-compile-pscs
+    command: ./application/tools/gradlew src:pscs:compilePSCS --no-daemon
+  # ============================================================================
+  # Core Models: PSSM
+  # ============================================================================
+
+  # Build pssm model (generate + compile)
+  # Usage: docker compose up build-pssm
+  build-pssm:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-build-pssm
+    command: /bin/bash -c "./application/tools/gradlew src:pssm:generatePSSM --no-daemon && ./application/tools/gradlew src:pssm:compilePSSM --no-daemon"
+  # Generate pssm model
+  # Usage: docker compose up generate-pssm
+  generate-pssm:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-generate-pssm
+    command: ./application/tools/gradlew src:pssm:generatePSSM --no-daemon
+  # Compile pssm model
+  # Usage: docker compose up compile-pssm
+  compile-pssm:
+    profiles: ["fuml"]
+    <<: *base-service
+    container_name: mde4cpp-compile-pssm
+    command: ./application/tools/gradlew src:pssm:compilePSSM --no-daemon
+  # ============================================================================
