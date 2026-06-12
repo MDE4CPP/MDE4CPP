@@ -62,6 +62,12 @@ First, build the Docker image (this only needs to be done once or when Dockerfil
 docker compose build shell
 ```
 
+### Docker Compose Modular Configuration
+The Docker setup has been highly modularized to keep it clean and maintainable.
+- The master `docker-compose.yml` file imports services from domain-specific files.
+- You can find all the individual component definitions in the `compose/` directory (e.g., `compose/docker-compose.core.yml`, `compose/docker-compose.fuml.yml`).
+- A shared `x-base-service` anchor eliminates repetition across the configuration files.
+
 ### 5. Build the Project
 
 #### Full Build (Complete Project)
@@ -83,9 +89,33 @@ docker compose up build-<component-name>
 docker compose up build-ecore
 ```
 
-### 6. Available Build Services
+### 6. Available Build Profiles & Services
 
-**Important**: The services listed below are organized by their **dependency hierarchy**. If you want to build components individually or build a component in between (like `uml` separately) and don't know which components to build after that which are dependent on it, follow this list in order. Components listed earlier must be built before components listed later.
+To make building easier, services are logically grouped using **Docker Compose Profiles**. You can view services associated with a profile or run them together (note: concurrent execution of a profile without explicit dependencies may cause race conditions; sequential builds are recommended via the provided scripts).
+
+**Available Profiles:**
+- `setup`: General utilities (`build-full`, `clean`, `install-eclipse`, `shell`).
+- `infrastructure`: Plugin framework and basic interfaces.
+- `generators`: Ecore4CPP, UML4CPP, and fUML4CPP generators.
+- `core`: Ecore, Types, and UML models.
+- `fuml`: fUML, PSCS, and PSSM models.
+- `ocl`: OCL models and parsers.
+- `reflection`: EcoreReflection, PrimitiveTypesReflection, and UmlReflection models.
+- `uml-profiles`: StandardProfile and UML4CPPProfile.
+- `application`: Foundational Model Library.
+
+**Example Usage:**
+```bash
+# View configuration for the 'core' profile
+docker compose --profile core config
+
+# Run all generator builds
+docker compose --profile generators up
+```
+
+#### Detailed Dependency Hierarchy
+
+**Important**: If you build components individually, they must be built in their dependency order:
 
 #### Infrastructure Services (No Dependencies)
 - `install-eclipse` - Install Eclipse Modeling Tools and plugins
