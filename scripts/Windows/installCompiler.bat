@@ -4,7 +4,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 REM Step 1: Find repo root and read compiler version from versions.properties
 echo [installCompiler] Reading configuration from versions.properties...
 set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..\..\..") do set "REPO_ROOT=%%~fI"
+for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
 set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
 
 if not exist "%VERSIONS_FILE%" (

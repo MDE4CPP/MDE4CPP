@@ -4,7 +4,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 REM Step 1: Find repo root and read Eclipse versions from versions.properties
 echo [installEclipse] Reading configuration from versions.properties...
 set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..\..\..") do set "REPO_ROOT=%%~fI"
+for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
 set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
 
 if not exist "%VERSIONS_FILE%" (
@@ -39,7 +39,7 @@ for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"M
 )
 
 REM Determine MDE4CPP_HOME from script location
-for %%I in ("%SCRIPT_DIR%..\..\..") do set "MDE4CPP_HOME=%%~fI"
+for %%I in ("%SCRIPT_DIR%..\..") do set "MDE4CPP_HOME=%%~fI"
 
 REM Print requested Eclipse component versions.
 echo [installEclipse] MDE4CPP_ECLIPSE_VERSION=!MDE4CPP_ECLIPSE_VERSION!-!MDE4CPP_ECLIPSE_MILESTONE!
