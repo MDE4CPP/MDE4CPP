@@ -3,6 +3,9 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/common.sh"
+load_properties "$SCRIPT_DIR/../../versions.properties"
+
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 echo "==========================================================="
@@ -19,10 +22,10 @@ if [[ -x "$GRADLE_WRAPPER" ]]; then
     GRADLE_EXIT=$?
     set -e
     if [[ $GRADLE_EXIT -ne 0 ]]; then
-        echo "ERROR: Gradle install task failed (exit $GRADLE_EXIT)"
+        echo "${C_ERROR}ERROR: Gradle install task failed (exit $GRADLE_EXIT)${C_RESET}"
         exit $GRADLE_EXIT
     fi
-    echo "Gradle install completed successfully."
+    echo "${C_SUCCESS}Gradle install completed successfully.${C_RESET}"
 else
     echo "WARNING: Gradle wrapper not found or not executable at $GRADLE_WRAPPER, skipping Gradle install."
 fi

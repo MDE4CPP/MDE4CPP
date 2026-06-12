@@ -4,19 +4,19 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
-echo "[installCompiler] MDE4CPP_COMPILER_VERSION=${MDE4CPP_COMPILER_VERSION:-}"
+echo "${C_INFO}[installCompiler]${C_RESET} MDE4CPP_COMPILER_VERSION=${MDE4CPP_COMPILER_VERSION:-}"
 if [[ -z "${MDE4CPP_COMPILER_VERSION:-}" ]]; then
-    echo "[installCompiler] ERROR: MDE4CPP_COMPILER_VERSION is not set."
+    echo "${C_ERROR}[installCompiler] ERROR: MDE4CPP_COMPILER_VERSION is not set.${C_RESET}"
     exit 1
 fi
 
 if [ "$(uname -s)" = "Darwin" ]; then
     GCC_MAJOR="${MDE4CPP_COMPILER_VERSION%%.*}"
     if command -v "g++-$GCC_MAJOR" >/dev/null 2>&1; then
-        echo "[installCompiler] g++-$GCC_MAJOR is already installed."
+        echo "${C_INFO}[installCompiler]${C_RESET} g++-$GCC_MAJOR is already installed."
         exit 0
     fi
-    echo "[installCompiler] Installing gcc@$GCC_MAJOR via Homebrew..."
+    echo "${C_INFO}[installCompiler]${C_RESET} Installing gcc@$GCC_MAJOR via Homebrew..."
     brew install "gcc@$GCC_MAJOR"
 else
     # Linux logic
@@ -26,12 +26,12 @@ else
     if command -v g++ >/dev/null 2>&1; then
       INSTALLED_GCC="$(g++ -dumpfullversion 2>&1)"
       if [[ "${INSTALLED_GCC}" == "${MDE4CPP_COMPILER_VERSION}"* ]]; then
-        echo "[installCompiler] GCC ${INSTALLED_GCC} is already installed. Skipping."
+        echo "${C_INFO}[installCompiler]${C_RESET} GCC ${INSTALLED_GCC} is already installed. Skipping."
         exit 0
       fi
-      echo "[installCompiler] Found GCC ${INSTALLED_GCC}. Installing GCC ${MDE4CPP_COMPILER_VERSION}."
+      echo "${C_INFO}[installCompiler]${C_RESET} Found GCC ${INSTALLED_GCC}. Installing GCC ${MDE4CPP_COMPILER_VERSION}."
     else
-      echo "[installCompiler] GCC is not installed. Installing GCC ${MDE4CPP_COMPILER_VERSION}."
+      echo "${C_INFO}[installCompiler]${C_RESET} GCC is not installed. Installing GCC ${MDE4CPP_COMPILER_VERSION}."
     fi
 
     require_sudo "$@"
@@ -67,11 +67,11 @@ else
       install_cmd="pacman -S --noconfirm"
       install_pkgs="gcc make"
     else
-      echo "[installCompiler] ERROR: No supported package manager found."
+      echo "${C_ERROR}[installCompiler] ERROR: No supported package manager found.${C_RESET}"
       exit 1
     fi
 
-    echo "[installCompiler] Using package manager: ${pkg_mgr}"
+    echo "${C_INFO}[installCompiler]${C_RESET} Using package manager: ${pkg_mgr}"
     ${update_cmd}
     ${install_cmd} ${install_pkgs}
 
@@ -83,10 +83,10 @@ else
     fi
 
     if [[ -n "${GPP_PATH}" && -n "${CPP_PATH}" ]]; then
-      echo "[installCompiler] Installed compiler versions:"
+      echo "${C_INFO}[installCompiler]${C_RESET} Installed compiler versions:"
       "${GPP_PATH}" --version | head -n1
       "${CPP_PATH}" --version | head -n1
     else
-      echo "[installCompiler] WARNING: Could not detect g++ or cpp path after installation."
+      echo "${C_INFO}[installCompiler]${C_RESET} WARNING: Could not detect g++ or cpp path after installation."
     fi
 fi

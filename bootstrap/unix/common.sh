@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 # Common functions for MDE4CPP bootstrap scripts
 
+setup_colors() {
+    export C_RESET=$'\033[0m'
+    export C_INFO=$'\033[1;36m'
+    export C_SUCCESS=$'\033[1;32m'
+    export C_WARN=$'\033[1;33m'
+    export C_ERROR=$'\033[1;31m'
+}
+
 # Function to read properties file and export variables
 load_properties() {
+    setup_colors
     local prop_file="$1"
     if [ -f "$prop_file" ]; then
         echo "Loading properties from $prop_file..."

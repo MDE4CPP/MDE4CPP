@@ -6,6 +6,8 @@ REM # Windows Bootstrap script for MDE4CPP #
 REM ########################################
 
 set "DIR=%~dp0"
+call "%DIR%bootstrap\Windows\common.bat" setup_colors
+
 set "PROJECT_DIR=%~dp0"
 REM Remove trailing slash for PROJECT_DIR
 if "%PROJECT_DIR:~-1%"=="\" set "PROJECT_DIR=%PROJECT_DIR:~0,-1%"
@@ -15,7 +17,7 @@ set "ECLIPSE_DIR=%PARENT_DIR%\eclipse"
 set "SETENV_FILE=%PROJECT_DIR%\setenv.bat"
 
 echo ===========================================================
-echo MDE4CPP Bootstrap Script for Windows
+echo %C_INFO%[bootstrap]%C_RESET% MDE4CPP Bootstrap Script for Windows
 echo ===========================================================
 
 echo ===========================================================
@@ -24,25 +26,25 @@ echo ===========================================================
 
 call "%DIR%bootstrap\Windows\installJava.bat"
 if errorlevel 1 (
-    echo ERROR: installJava.bat failed ^(exit !errorlevel!^)
+    echo %C_ERROR%ERROR: installJava.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
 call "%DIR%bootstrap\Windows\installCompiler.bat"
 if errorlevel 1 (
-    echo ERROR: installCompiler.bat failed ^(exit !errorlevel!^)
+    echo %C_ERROR%ERROR: installCompiler.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
 call "%DIR%bootstrap\Windows\installCMake.bat"
 if errorlevel 1 (
-    echo ERROR: installCMake.bat failed ^(exit !errorlevel!^)
+    echo %C_ERROR%ERROR: installCMake.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
 call "%DIR%bootstrap\Windows\installEclipse.bat"
 if errorlevel 1 (
-    echo ERROR: installEclipse.bat failed ^(exit !errorlevel!^)
+    echo %C_ERROR%ERROR: installEclipse.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
@@ -60,7 +62,7 @@ if "!JAVA_HOME!"=="" (
     for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2^>nul ^| findstr /I "JAVA_HOME"') do (
         if exist "%%B\bin\java.exe" (
             set "JAVA_HOME=%%B"
-            echo [bootstrap] Loaded JAVA_HOME from system registry: !JAVA_HOME!
+            echo %C_INFO%[bootstrap]%C_RESET% Loaded JAVA_HOME from system registry: !JAVA_HOME!
         )
     )
 )
@@ -83,20 +85,20 @@ if "!JAVA_HOME!"=="" (
 )
 
 if not "!JAVA_HOME!"=="" (
-    echo [bootstrap] Using JAVA_HOME=!JAVA_HOME!
+    echo %C_INFO%[bootstrap]%C_RESET% Using JAVA_HOME=!JAVA_HOME!
 ) else (
-    echo [bootstrap] ERROR: Could not find Java 21.
+    echo %C_ERROR%[bootstrap] ERROR: Could not find Java 21.%C_RESET%
     echo [bootstrap] --- Diagnostics ---
-    echo [bootstrap] ProgramFiles=%ProgramFiles%
-    echo [bootstrap] Registry JAVA_HOME:
+    echo %C_INFO%[bootstrap]%C_RESET% ProgramFiles=%ProgramFiles%
+    echo %C_INFO%[bootstrap]%C_RESET% Registry JAVA_HOME:
     reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2>nul
     if errorlevel 1 echo [bootstrap]   ^(not set^)
-    echo [bootstrap] Contents of "%ProgramFiles%\Microsoft":
+    echo %C_INFO%[bootstrap]%C_RESET% Contents of "%ProgramFiles%\Microsoft":
     if exist "%ProgramFiles%\Microsoft" (
         dir /b /ad "%ProgramFiles%\Microsoft" 2>nul | findstr /I "jdk"
         if errorlevel 1 echo [bootstrap]   ^(no jdk directories^)
     ) else (
-        echo [bootstrap]   ^(directory does not exist^)
+        echo %C_INFO%[bootstrap]%C_RESET% ^(directory does not exist^)
     )
     echo [bootstrap] --- End diagnostics ---
     exit /b 1
@@ -109,7 +111,7 @@ call "%DIR%bootstrap\Windows\run_gradle_install.bat"
 if errorlevel 1 exit /b 1
 
 echo ===========================================================
-echo Bootstrap completed successfully!
+echo %C_SUCCESS%Bootstrap completed successfully!%C_RESET%
 echo To activate the environment, please run:
 echo   call setenv.bat
 echo ===========================================================

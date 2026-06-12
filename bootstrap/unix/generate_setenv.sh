@@ -3,9 +3,9 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../common.sh"
+source "$SCRIPT_DIR/common.sh"
 
-load_properties
+load_properties "$SCRIPT_DIR/../../versions.properties"
 
 echo "==========================================================="
 echo "Generating setenv.sh..."
@@ -15,7 +15,7 @@ echo "==========================================================="
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 PROJECT_DIR="${PROJECT_DIR:-$REPO_ROOT}"
 SETENV_FILE="${SETENV_FILE:-$REPO_ROOT/setenv.sh}"
-ECLIPSE_DIR="${ECLIPSE_DIR:-$REPO_ROOT/eclipse}"
+ECLIPSE_DIR="${ECLIPSE_DIR:-$REPO_ROOT/../eclipse}"
 JAVA_MAJOR="${MDE4CPP_JAVA_VERSION%%.*}"
 GCC_MAJOR="${MDE4CPP_COMPILER_VERSION%%.*}"
 

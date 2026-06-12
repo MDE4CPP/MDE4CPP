@@ -3,9 +3,9 @@ setlocal EnableExtensions EnableDelayedExpansion
 
 call "%~dp0common.bat" load_properties
 if errorlevel 1 exit /b 1
-echo [installJava] MDE4CPP_JAVA_VERSION=!MDE4CPP_JAVA_VERSION!
+echo %C_INFO%[installJava]%C_RESET% MDE4CPP_JAVA_VERSION=!MDE4CPP_JAVA_VERSION!
 if "!MDE4CPP_JAVA_VERSION!"=="" (
-    echo [installJava] ERROR: MDE4CPP_JAVA_VERSION not found in %VERSIONS_FILE%
+    echo %C_ERROR%[installJava] ERROR: MDE4CPP_JAVA_VERSION not found in %VERSIONS_FILE%%C_RESET%
     exit /b 1
 )
 
@@ -16,7 +16,7 @@ REM Read JAVA_HOME from system registry
 for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2^>nul ^| findstr /I "JAVA_HOME"') do (
     if exist "%%B\bin\java.exe" (
         set "JAVA_EXE=%%B\bin\java.exe"
-        echo [installJava] Found Java via registry: %%B
+        echo %C_INFO%[installJava]%C_RESET% Found Java via registry: %%B
     )
 )
 
@@ -27,7 +27,7 @@ if not defined JAVA_EXE (
             for /d %%I in ("%ProgramFiles%\%%~V\jdk-!MDE4CPP_JAVA_VERSION!*") do (
                 if exist "%%~fI\bin\java.exe" (
                     set "JAVA_EXE=%%~fI\bin\java.exe"
-                    echo [installJava] Found Java at: %%~fI
+                    echo %C_INFO%[installJava]%C_RESET% Found Java at: %%~fI
                 )
             )
         )
@@ -54,12 +54,12 @@ if defined JAVA_EXE (
 
 if defined INSTALLED_MAJOR (
     if "!INSTALLED_MAJOR!"=="!MDE4CPP_JAVA_VERSION!" (
-        echo [installJava] Java !MDE4CPP_JAVA_VERSION! is already installed. Skipping.
+        echo %C_INFO%[installJava]%C_RESET% Java !MDE4CPP_JAVA_VERSION! is already installed. Skipping.
         exit /b 0
     )
-    echo [installJava] Found Java !INSTALLED_MAJOR! but need !MDE4CPP_JAVA_VERSION!.
+    echo %C_INFO%[installJava]%C_RESET% Found Java !INSTALLED_MAJOR! but need !MDE4CPP_JAVA_VERSION!.
 ) else (
-    echo [installJava] Java !MDE4CPP_JAVA_VERSION! not detected. Installing.
+    echo %C_INFO%[installJava]%C_RESET% Java !MDE4CPP_JAVA_VERSION! not detected. Installing.
 )
 
 REM Install with elevation.
@@ -68,14 +68,14 @@ REM the install commands to a temp script on the local drive instead of calling 
 REM to this script via %~f0.
 net session >nul 2>&1
 if errorlevel 1 (
-    echo [installJava] Administrator rights are required. Requesting elevation...
+    echo %C_INFO%[installJava]%C_RESET% Administrator rights are required. Requesting elevation...
     set "ELEVATE_BAT=%TEMP%\mde4cpp-install-java.bat"
     (
         echo @echo off
         echo echo [installJava] Installing Microsoft.OpenJDK.!MDE4CPP_JAVA_VERSION! via winget...
         echo winget install --id "Microsoft.OpenJDK.!MDE4CPP_JAVA_VERSION!" --exact --accept-source-agreements --accept-package-agreements --silent
         echo if errorlevel 1 ^(
-        echo     echo [installJava] ERROR: winget install failed.
+        echo %C_ERROR%    echo [installJava] ERROR: winget install failed.%C_RESET%
         echo     exit /b 1
         echo ^)
         echo echo [installJava] Installation completed.
@@ -86,7 +86,7 @@ if errorlevel 1 (
     del "!ELEVATE_BAT!" >nul 2>&1
 
     if not "!ELEV_ERR!"=="0" (
-        echo [installJava] ERROR: Elevation was cancelled or failed.
+        echo %C_ERROR%[installJava] ERROR: Elevation was cancelled or failed.%C_RESET%
         exit /b 1
     )
     goto :verify
@@ -96,7 +96,7 @@ REM Already running elevated — run winget directly
 echo [installJava] Running winget install...
 winget install --id "Microsoft.OpenJDK.!MDE4CPP_JAVA_VERSION!" --exact --accept-source-agreements --accept-package-agreements --silent
 if errorlevel 1 (
-    echo [installJava] ERROR: winget install failed.
+    echo %C_ERROR%[installJava] ERROR: winget install failed.%C_RESET%
     exit /b 1
 )
 
@@ -112,20 +112,20 @@ if not defined VERIFY_JAVA (
     )
 )
 if defined VERIFY_JAVA (
-    echo [installJava] Verified: Java installed at !VERIFY_JAVA!
+    echo %C_SUCCESS%[installJava] Verified: Java installed at !VERIFY_JAVA!%C_RESET%
     "!VERIFY_JAVA!\bin\java.exe" -version 2>&1
     exit /b 0
 )
 
-echo [installJava] ERROR: Java installation could not be verified.
+echo %C_ERROR%[installJava] ERROR: Java installation could not be verified.%C_RESET%
 echo [installJava] --- Diagnostics ---
-echo [installJava] ProgramFiles=%ProgramFiles%
+echo %C_INFO%[installJava]%C_RESET% ProgramFiles=%ProgramFiles%
 if exist "%ProgramFiles%\Microsoft" (
-    echo [installJava] Contents of "%ProgramFiles%\Microsoft":
+    echo %C_INFO%[installJava]%C_RESET% Contents of "%ProgramFiles%\Microsoft":
     dir /b /ad "%ProgramFiles%\Microsoft" 2>nul | findstr /I "jdk"
     if errorlevel 1 echo [installJava]   ^(no jdk directories^)
 ) else (
-    echo [installJava]   "%ProgramFiles%\Microsoft" does not exist
+    echo %C_INFO%[installJava]%C_RESET% "%ProgramFiles%\Microsoft" does not exist
 )
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2>nul
 if errorlevel 1 echo [installJava]   JAVA_HOME not in system registry

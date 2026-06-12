@@ -18,10 +18,10 @@ set "GRADLE_WRAPPER=%PROJECT_DIR%\application\tools\gradlew.bat"
 if exist "%GRADLE_WRAPPER%" (
     call "%GRADLE_WRAPPER%" install --no-daemon
     if errorlevel 1 (
-        echo ERROR: Gradle install task failed ^(exit !errorlevel!^)
+        echo %C_ERROR%ERROR: Gradle install task failed ^(exit !errorlevel!^)%C_RESET%
         exit /b !errorlevel!
     )
 ) else (
-    echo ERROR: Gradle wrapper not found at %GRADLE_WRAPPER%
+    echo %C_ERROR%ERROR: Gradle wrapper not found at %GRADLE_WRAPPER%%C_RESET%
     exit /b 1
 )

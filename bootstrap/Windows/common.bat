@@ -2,6 +2,7 @@
 REM Common functions for MDE4CPP Windows bootstrap scripts
 
 if "%~1"=="load_properties" goto :load_properties
+if "%~1"=="setup_colors" goto :setup_colors
 exit /b 0
 
 :load_properties

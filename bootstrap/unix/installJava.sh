@@ -4,45 +4,45 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
-echo "[installJava] MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION:-}"
+echo "${C_INFO}[installJava]${C_RESET} MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION:-}"
 if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
-    echo "[installJava] ERROR: MDE4CPP_JAVA_VERSION is not set."
+    echo "${C_ERROR}[installJava] ERROR: MDE4CPP_JAVA_VERSION is not set.${C_RESET}"
     exit 1
 fi
 
 JAVA_MAJOR="${MDE4CPP_JAVA_VERSION%%.*}"
 
 if [ "$(uname -s)" = "Darwin" ]; then
-    echo "[installJava] Checking for Java $JAVA_MAJOR on MacOS..."
+    echo "${C_INFO}[installJava]${C_RESET} Checking for Java $JAVA_MAJOR on MacOS..."
     if /usr/libexec/java_home -F -v "$JAVA_MAJOR" &>/dev/null; then
-        echo "[installJava] Java $JAVA_MAJOR is already installed."
+        echo "${C_INFO}[installJava]${C_RESET} Java $JAVA_MAJOR is already installed."
         JAVA_HOME=$(/usr/libexec/java_home -v "$JAVA_MAJOR")
     else
-        echo "[installJava] Java $JAVA_MAJOR is not installed."
+        echo "${C_INFO}[installJava]${C_RESET} Java $JAVA_MAJOR is not installed."
         if ! command -v brew >/dev/null 2>&1; then
-          echo "[installJava] ERROR: Homebrew is required on macOS. Install it from https://brew.sh/"
+          echo "${C_ERROR}[installJava] ERROR: Homebrew is required on macOS. Install it from https://brew.sh/${C_RESET}"
           exit 1
         fi
-        echo "[installJava] Installing openjdk@$JAVA_MAJOR via Homebrew..."
+        echo "${C_INFO}[installJava]${C_RESET} Installing openjdk@$JAVA_MAJOR via Homebrew..."
         brew update
         brew install "openjdk@$JAVA_MAJOR"
-        echo "[installJava] Creating symlink to /Library/Java/JavaVirtualMachines/ (requires sudo)"
+        echo "${C_INFO}[installJava]${C_RESET} Creating symlink to /Library/Java/JavaVirtualMachines/ (requires sudo)"
         sudo ln -sfn "/opt/homebrew/opt/openjdk@$JAVA_MAJOR/libexec/openjdk.jdk" "/Library/Java/JavaVirtualMachines/openjdk-$JAVA_MAJOR.jdk" || true
         JAVA_HOME=$(/usr/libexec/java_home -v "$JAVA_MAJOR")
     fi
-    echo "[installJava] Installed Java home: ${JAVA_HOME}"
+    echo "${C_INFO}[installJava]${C_RESET} Installed Java home: ${JAVA_HOME}"
     "${JAVA_HOME}/bin/java" -version
 else
     # Linux logic
     if command -v java >/dev/null 2>&1; then
       INSTALLED_MAJOR="$(java -version 2>&1 | awk -F[\".] '/version/ {print $2; exit}')"
       if [[ "${INSTALLED_MAJOR}" == "${MDE4CPP_JAVA_VERSION}" ]]; then
-        echo "[installJava] Java ${MDE4CPP_JAVA_VERSION} is already installed. Skipping."
+        echo "${C_INFO}[installJava]${C_RESET} Java ${MDE4CPP_JAVA_VERSION} is already installed. Skipping."
         exit 0
       fi
-      echo "[installJava] Found Java ${INSTALLED_MAJOR}. Installing Java ${MDE4CPP_JAVA_VERSION}."
+      echo "${C_INFO}[installJava]${C_RESET} Found Java ${INSTALLED_MAJOR}. Installing Java ${MDE4CPP_JAVA_VERSION}."
     else
-      echo "[installJava] Java is not installed. Installing Java ${MDE4CPP_JAVA_VERSION}."
+      echo "${C_INFO}[installJava]${C_RESET} Java is not installed. Installing Java ${MDE4CPP_JAVA_VERSION}."
     fi
 
     require_sudo "$@"
@@ -78,11 +78,11 @@ else
       install_cmd="pacman -S --noconfirm"
       install_pkg="jdk-openjdk"
     else
-      echo "[installJava] ERROR: No supported package manager found (apt, dnf, yum, zypper, pacman)."
+      echo "${C_ERROR}[installJava] ERROR: No supported package manager found (apt, dnf, yum, zypper, pacman).${C_RESET}"
       exit 1
     fi
 
-    echo "[installJava] Using package manager: ${pkg_mgr}"
+    echo "${C_INFO}[installJava]${C_RESET} Using package manager: ${pkg_mgr}"
     ${update_cmd}
     ${install_cmd} ${install_pkg}
 
@@ -99,12 +99,12 @@ else
     fi
 
     if [[ -z "${JAVA_HOME}" ]]; then
-      echo "[installJava] ERROR: Cannot determine JAVA_HOME."
+      echo "${C_ERROR}[installJava] ERROR: Cannot determine JAVA_HOME.${C_RESET}"
       exit 1
     fi
 
     if [[ ! -x "${JAVA_HOME}/bin/java" ]]; then
-      echo "[installJava] ERROR: Cannot locate installed java binary."
+      echo "${C_ERROR}[installJava] ERROR: Cannot locate installed java binary.${C_RESET}"
       exit 1
     fi
 
