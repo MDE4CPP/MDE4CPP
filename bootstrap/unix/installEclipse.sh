@@ -38,42 +38,6 @@ echo "Install location=${TARGET_DIR}"
 SKIP_DOWNLOAD=0
 ECLIPSE_BIN=""
 
-ECLIPSE_PLUGINS=(
-  "org.eclipse.acceleo.feature.group"
-  "org.eclipse.acceleo.ui.interpreter.ocl.feature.group"
-  "org.eclipse.acceleo.ui.interpreter.completeocl.feature.group"
-  "org.eclipse.emf.sdk.feature.group"
-  "org.eclipse.uml2.sdk.feature.group"
-  "org.eclipse.ocl.all.sdk.feature.group"
-  "org.eclipse.acceleo.query.feature.group"
-  "org.eclipse.acceleo.query.source.feature.group"
-  "org.antlr.runtime"
-  "org.eclipse.sirius.common.acceleo.aql"
-  "org.eclipse.sirius.ui.properties"
-  "org.eclipse.sirius.aql.feature.group"
-  "org.eclipse.sirius.runtime.aql.feature.group"
-  "org.eclipse.sirius.properties.feature.feature.group"
-  "org.eclipse.sirius.aql.source.feature.group"
-  "org.eclipse.sirius.interpreter.feature.feature.group"
-  "org.eclipse.sirius.interpreter.feature.source.feature.group"
-  "org.eclipse.sirius.model.feature.source.feature.group"
-  "org.eclipse.sirius.properties.feature.source.feature.group"
-  "org.eclipse.sirius.runtime.aql.source.feature.group"
-  "org.eclipse.sirius.runtime.ide.ui.feature.group"
-  "org.eclipse.sirius.specifier.feature.group"
-  "org.eclipse.sirius.specifier.ide.ui.aql.feature.group"
-  "org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group"
-  "org.eclipse.sirius.specifier.ide.ui.feature.group"
-  "org.eclipse.sirius.specifier.ide.ui.source.feature.group"
-  "org.eclipse.sirius.specifier.properties.feature.feature.group"
-  "org.eclipse.sirius.specifier.properties.feature.source.feature.group"
-  "org.eclipse.sirius.specifier.source.feature.group"
-  "org.eclipse.eef.ext.widgets.reference.feature.feature.group"
-  "org.eclipse.eef.ext.widgets.reference.feature.source.feature.group"
-  "org.eclipse.eef.sdk.feature.feature.group"
-  "org.eclipse.eef.sdk.feature.source.feature.group"
-  "org.eclipse.cdt.feature.group"
-)
 
 if [ "$(uname -s)" = "Darwin" ]; then
     ARCH_SUFFIX=$(get_arch)
@@ -99,7 +63,7 @@ if [[ -x "${ECLIPSE_BIN}" ]]; then
   cdt_version=$(grep '^org\.eclipse\.cdt\.feature\.group/' "${TMP_DIR}/installed.txt" | awk -F'/' '{print $2}' | head -n1 || true)
   
   echo "${C_PURPLE}[installEclipse]${C_SUCCESS} Found existing Eclipse plugins:${C_RESET}"
-  for plugin in "${ECLIPSE_PLUGINS[@]}"; do
+  for plugin in $(cat "${SCRIPT_DIR}/../eclipse_plugins.txt"); do
       version=$(grep "^${plugin}/" "${TMP_DIR}/installed.txt" | awk -F'/' '{print $2}' | head -n1 || true)
       if [ -n "$version" ]; then
           echo "${C_PURPLE}[installEclipse]${C_INFO} ${plugin}: ${version}${C_RESET}"
@@ -139,7 +103,7 @@ fi
 
 
 IU_ARGS=()
-for plugin in "${ECLIPSE_PLUGINS[@]}"; do
+for plugin in $(cat "${SCRIPT_DIR}/../eclipse_plugins.txt"); do
   IU_ARGS+=("-installIU" "${plugin}")
 done
 
