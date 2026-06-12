@@ -44,14 +44,14 @@
 
 
 include:
-  - docker-compose.infrastructure.yml
-  - docker-compose.generators.yml
-  - docker-compose.core.yml
-  - docker-compose.fuml.yml
-  - docker-compose.ocl.yml
-  - docker-compose.reflection.yml
-  - docker-compose.profiles.yml
-  - docker-compose.application.yml
+  - compose/docker-compose.infrastructure.yml
+  - compose/docker-compose.generators.yml
+  - compose/docker-compose.core.yml
+  - compose/docker-compose.fuml.yml
+  - compose/docker-compose.ocl.yml
+  - compose/docker-compose.reflection.yml
+  - compose/docker-compose.profiles.yml
+  - compose/docker-compose.application.yml
 
 x-base-service: &base-service
   build:
