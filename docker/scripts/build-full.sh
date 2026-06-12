@@ -27,7 +27,7 @@ fi
 # Do this after GRADLEW is defined so we can use it
 if [ -d "gradlePlugins" ]; then
     echo "Publishing MDE4CPP Gradle plugins..."
-    (./application/tools/gradlew publishMDE4CPPPluginsToMavenLocal >/dev/null 2>&1 || true)
+    (./application/tools/gradlew gradlePlugins:publishMDE4CPPPluginsToMavenLocal --no-daemon >/dev/null 2>&1 || true)
 fi
 
 echo "=========================================="
@@ -41,7 +41,7 @@ echo ""
 # Step 1: Generate all models
 echo "Step 1/3: Running generateAll..."
 echo "----------------------------------------"
-if ! "$GRADLEW" generateAll; then
+if ! "$GRADLEW" generateAll --no-daemon; then
     echo ""
     echo "ERROR: generateAll failed!"
     exit 1
@@ -52,7 +52,7 @@ echo ""
 # Step 2: Compile all generated code
 echo "Step 2/3: Running compileAll..."
 echo "----------------------------------------"
-if ! "$GRADLEW" compileAll; then
+if ! "$GRADLEW" compileAll --no-daemon; then
     echo ""
     echo "ERROR: compileAll failed!"
     exit 1
@@ -63,7 +63,7 @@ echo ""
 # Step 3: Build OCL components
 echo "Step 3/3: Running src:buildOCLAll..."
 echo "----------------------------------------"
-if ! "$GRADLEW" src:buildOCLAll; then
+if ! "$GRADLEW" src:buildOCLAll --no-daemon; then
     echo ""
     echo "ERROR: src:buildOCLAll failed!"
     exit 1
