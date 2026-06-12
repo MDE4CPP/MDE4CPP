@@ -5,46 +5,46 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
 if [[ -z "${MDE4CPP_CMAKE_VERSION:-}" ]]; then
-    echo "${C_ERROR}[installCMake] ERROR: MDE4CPP_CMAKE_VERSION is not set.${C_RESET}"
+    echo "${C_PURPLE}[installCMake]${C_ERROR} ERROR: MDE4CPP_CMAKE_VERSION is not set.${C_RESET}"
     exit 1
 fi
 if [[ -z "${MDE4CPP_CMAKE_BUILD:-}" ]]; then
-    echo "${C_ERROR}[installCMake] ERROR: MDE4CPP_CMAKE_BUILD is not set.${C_RESET}"
+    echo "${C_PURPLE}[installCMake]${C_ERROR} ERROR: MDE4CPP_CMAKE_BUILD is not set.${C_RESET}"
     exit 1
 fi
 
 CMAKE_FULL_VERSION="${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD}"
-echo "${C_INFO}[installCMake]${C_RESET} MDE4CPP_CMAKE_VERSION=${CMAKE_FULL_VERSION}"
+echo "${C_PURPLE}[installCMake]${C_INFO} MDE4CPP_CMAKE_VERSION=${CMAKE_FULL_VERSION}${C_RESET}"
 
 if [ "$(uname -s)" = "Darwin" ]; then
     if command -v cmake >/dev/null 2>&1; then
         INSTALLED_VERSION="$(cmake --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n1)"
         if [[ "${INSTALLED_VERSION}" == "${CMAKE_FULL_VERSION}" ]]; then
-            echo "${C_INFO}[installCMake]${C_RESET} CMake ${CMAKE_FULL_VERSION} is already installed."
+            echo "${C_PURPLE}[installCMake]${C_SUCCESS} CMake ${CMAKE_FULL_VERSION} is already installed.${C_RESET}"
             exit 0
         fi
-        echo "${C_INFO}[installCMake]${C_RESET} Found CMake ${INSTALLED_VERSION}, but need ${CMAKE_FULL_VERSION}."
+        echo "${C_PURPLE}[installCMake]${C_INFO} Found CMake ${INSTALLED_VERSION}, but need ${CMAKE_FULL_VERSION}.${C_RESET}"
     fi
-    echo "${C_INFO}[installCMake]${C_RESET} Installing cmake via Homebrew..."
+    echo "${C_PURPLE}[installCMake]${C_INFO} Installing cmake via Homebrew...${C_RESET}"
     brew install cmake
 else
     # Linux
     if command -v cmake >/dev/null 2>&1; then
       INSTALLED_VERSION="$(cmake --version | awk 'NR==1 {print $3}')"
       if [[ "${INSTALLED_VERSION}" == "${CMAKE_FULL_VERSION}" ]]; then
-        echo "${C_INFO}[installCMake]${C_RESET} CMake ${CMAKE_FULL_VERSION} is already installed. Skipping."
+        echo "${C_PURPLE}[installCMake]${C_SUCCESS} CMake ${CMAKE_FULL_VERSION} is already installed. Skipping.${C_RESET}"
         exit 0
       fi
-      echo "${C_INFO}[installCMake]${C_RESET} Found CMake ${INSTALLED_VERSION}. Installing CMake ${CMAKE_FULL_VERSION}."
+      echo "${C_PURPLE}[installCMake]${C_INFO} Found CMake ${INSTALLED_VERSION}. Installing CMake ${CMAKE_FULL_VERSION}.${C_RESET}"
     else
-      echo "${C_INFO}[installCMake]${C_RESET} CMake is not installed. Installing CMake ${CMAKE_FULL_VERSION}."
+      echo "${C_PURPLE}[installCMake]${C_INFO} CMake is not installed. Installing CMake ${CMAKE_FULL_VERSION}.${C_RESET}"
     fi
 
     require_sudo "$@"
 
     ARCH=$(get_arch)
     if [[ "${ARCH}" == "unknown" ]]; then
-      echo "${C_ERROR}[installCMake] ERROR: Unsupported architecture: $(uname -m)${C_RESET}"
+      echo "${C_PURPLE}[installCMake]${C_ERROR} ERROR: Unsupported architecture: $(uname -m)${C_RESET}"
       exit 1
     fi
 
@@ -57,17 +57,17 @@ else
     }
     trap cleanup EXIT
 
-    echo "${C_INFO}[installCMake]${C_RESET} Downloading ${DOWNLOAD_URL}"
+    echo "${C_PURPLE}[installCMake]${C_INFO} Downloading ${DOWNLOAD_URL}${C_RESET}"
     download_file "${DOWNLOAD_URL}" "${TMP_DIR}/${ARCHIVE_NAME}"
 
-    echo "${C_INFO}[installCMake]${C_RESET} Extracting CMake to /usr/local"
+    echo "${C_PURPLE}[installCMake]${C_INFO} Extracting CMake to /usr/local${C_RESET}"
     tar -xzf "${TMP_DIR}/${ARCHIVE_NAME}" -C /usr/local --strip-components=1
 
     if ! command -v cmake >/dev/null 2>&1; then
-      echo "${C_ERROR}[installCMake] ERROR: CMake installation failed (executable not found).${C_RESET}"
+      echo "${C_PURPLE}[installCMake]${C_ERROR} ERROR: CMake installation failed (executable not found).${C_RESET}"
       exit 1
     fi
 
-    echo "${C_INFO}[installCMake]${C_RESET} Verified installation:"
+    echo "${C_PURPLE}[installCMake]${C_INFO} Verified installation:${C_RESET}"
     cmake --version
 fi

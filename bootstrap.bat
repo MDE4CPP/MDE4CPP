@@ -17,7 +17,7 @@ set "ECLIPSE_DIR=%PARENT_DIR%\eclipse"
 set "SETENV_FILE=%PROJECT_DIR%\setenv.bat"
 
 echo ===========================================================
-echo %C_INFO%[bootstrap]%C_RESET% MDE4CPP Bootstrap Script for Windows
+echo %C_PURPLE%[bootstrap]%C_INFO% MDE4CPP Bootstrap Script for Windows%C_RESET%
 echo ===========================================================
 
 echo ===========================================================
@@ -62,7 +62,7 @@ if "!JAVA_HOME!"=="" (
     for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2^>nul ^| findstr /I "JAVA_HOME"') do (
         if exist "%%B\bin\java.exe" (
             set "JAVA_HOME=%%B"
-            echo %C_INFO%[bootstrap]%C_RESET% Loaded JAVA_HOME from system registry: !JAVA_HOME!
+            echo %C_PURPLE%[bootstrap]%C_INFO% Loaded JAVA_HOME from system registry: !JAVA_HOME!%C_RESET%
         )
     )
 )
@@ -85,20 +85,20 @@ if "!JAVA_HOME!"=="" (
 )
 
 if not "!JAVA_HOME!"=="" (
-    echo %C_INFO%[bootstrap]%C_RESET% Using JAVA_HOME=!JAVA_HOME!
+    echo %C_PURPLE%[bootstrap]%C_INFO% Using JAVA_HOME=!JAVA_HOME!%C_RESET%
 ) else (
-    echo %C_ERROR%[bootstrap] ERROR: Could not find Java 21.%C_RESET%
+    echo %C_PURPLE%[bootstrap]%C_ERROR% ERROR: Could not find Java 21.%C_RESET%
     echo [bootstrap] --- Diagnostics ---
-    echo %C_INFO%[bootstrap]%C_RESET% ProgramFiles=%ProgramFiles%
-    echo %C_INFO%[bootstrap]%C_RESET% Registry JAVA_HOME:
+    echo %C_PURPLE%[bootstrap]%C_INFO% ProgramFiles=%ProgramFiles%%C_RESET%
+    echo %C_PURPLE%[bootstrap]%C_INFO% Registry JAVA_HOME:%C_RESET%
     reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2>nul
     if errorlevel 1 echo [bootstrap]   ^(not set^)
-    echo %C_INFO%[bootstrap]%C_RESET% Contents of "%ProgramFiles%\Microsoft":
+    echo %C_PURPLE%[bootstrap]%C_INFO% Contents of "%ProgramFiles%\Microsoft":%C_RESET%
     if exist "%ProgramFiles%\Microsoft" (
         dir /b /ad "%ProgramFiles%\Microsoft" 2>nul | findstr /I "jdk"
         if errorlevel 1 echo [bootstrap]   ^(no jdk directories^)
     ) else (
-        echo %C_INFO%[bootstrap]%C_RESET% ^(directory does not exist^)
+        echo %C_PURPLE%[bootstrap]%C_INFO% ^(directory does not exist^)%C_RESET%
     )
     echo [bootstrap] --- End diagnostics ---
     exit /b 1

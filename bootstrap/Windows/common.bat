@@ -27,3 +27,13 @@ for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /V /B /C
     )
 )
 exit /b 0
+
+:setup_colors
+for /F %%a in ('echo prompt $E ^| cmd') do set "ESC=%%a"
+set "C_RESET=%ESC%[0m"
+set "C_INFO=%ESC%[1;36m"
+set "C_SUCCESS=%ESC%[1;32m"
+set "C_WARN=%ESC%[1;33m"
+set "C_ERROR=%ESC%[1;31m"
+set "C_PURPLE=%ESC%[1;35m"
+exit /b 0

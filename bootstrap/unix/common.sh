@@ -7,6 +7,7 @@ setup_colors() {
     export C_SUCCESS=$'\033[1;32m'
     export C_WARN=$'\033[1;33m'
     export C_ERROR=$'\033[1;31m'
+    export C_PURPLE=$'\033[1;35m'
 }
 
 # Function to read properties file and export variables

@@ -21,6 +21,7 @@ if exist "%GRADLE_WRAPPER%" (
         echo %C_ERROR%ERROR: Gradle install task failed ^(exit !errorlevel!^)%C_RESET%
         exit /b !errorlevel!
     )
+    echo %C_SUCCESS%Gradle install completed successfully.%C_RESET%
 ) else (
     echo %C_ERROR%ERROR: Gradle wrapper not found at %GRADLE_WRAPPER%%C_RESET%
     exit /b 1

@@ -11,15 +11,15 @@ if errorlevel 1 exit /b 1
 REM Use CMAKE_BUILD as CMAKE_BUILD_VERSION for compatibility
 set "MDE4CPP_CMAKE_BUILD_VERSION=!MDE4CPP_CMAKE_BUILD!"
 
-echo %C_INFO%[installCMake]%C_RESET% MDE4CPP_CMAKE_VERSION=!MDE4CPP_CMAKE_VERSION!
-echo %C_INFO%[installCMake]%C_RESET% MDE4CPP_CMAKE_BUILD_VERSION=!MDE4CPP_CMAKE_BUILD_VERSION!
+echo %C_PURPLE%[installCMake]%C_INFO% MDE4CPP_CMAKE_VERSION=!MDE4CPP_CMAKE_VERSION!%C_RESET%
+echo %C_PURPLE%[installCMake]%C_INFO% MDE4CPP_CMAKE_BUILD_VERSION=!MDE4CPP_CMAKE_BUILD_VERSION!%C_RESET%
 
 if "!MDE4CPP_CMAKE_VERSION!"=="" (
-    echo %C_ERROR%[installCMake] ERROR: MDE4CPP_CMAKE_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[installCMake]%C_ERROR% ERROR: MDE4CPP_CMAKE_VERSION not found in %VERSIONS_FILE%%C_RESET%
     exit /b 1
 )
 if "!MDE4CPP_CMAKE_BUILD_VERSION!"=="" (
-    echo %C_ERROR%[installCMake] ERROR: MDE4CPP_CMAKE_BUILD not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[installCMake]%C_ERROR% ERROR: MDE4CPP_CMAKE_BUILD not found in %VERSIONS_FILE%%C_RESET%
     exit /b 1
 )
 
@@ -31,13 +31,13 @@ set "INSTALLED_VERSION="
 for /f "tokens=3" %%V in ('cmake --version 2^>nul ^| findstr /b "cmake version"') do set "INSTALLED_VERSION=%%V"
 if not "%INSTALLED_VERSION%"=="" (
     if "%INSTALLED_VERSION%"=="%CMAKE_FULL_VERSION%" (
-        echo %C_INFO%[installCMake]%C_RESET% CMake %CMAKE_FULL_VERSION% is already installed. Skipping.
+        echo %C_PURPLE%[installCMake]%C_SUCCESS% CMake %CMAKE_FULL_VERSION% is already installed. Skipping.%C_RESET%
         exit /b 0
     ) else (
-        echo %C_INFO%[installCMake]%C_RESET% Found installed CMake %INSTALLED_VERSION%. Installing %CMAKE_FULL_VERSION%.
+        echo %C_PURPLE%[installCMake]%C_INFO% Found installed CMake %INSTALLED_VERSION%. Installing %CMAKE_FULL_VERSION%.%C_RESET%
     )
 ) else (
-    echo %C_INFO%[installCMake]%C_RESET% CMake is not installed. Installing %CMAKE_FULL_VERSION%.
+    echo %C_PURPLE%[installCMake]%C_INFO% CMake is not installed. Installing %CMAKE_FULL_VERSION%.%C_RESET%
 )
 
 REM Ensure the script runs with administrator rights only if installation is required.
@@ -45,7 +45,7 @@ REM Elevated processes cannot access mapped network drives (e.g. Z:), so we copy
 REM this script to %TEMP% (local C: drive) and run the copy elevated.
 net session >nul 2>&1
 if errorlevel 1 (
-    echo %C_INFO%[installCMake]%C_RESET% Administrator rights are required. Requesting elevation...
+    echo %C_PURPLE%[installCMake]%C_INFO% Administrator rights are required. Requesting elevation...%C_RESET%
     set "LOCAL_COPY=%TEMP%\mde4cpp-installCMake.bat"
     set "ELEVATE_BAT=%TEMP%\mde4cpp-elevate-cmake.bat"
     copy "%~f0" "!LOCAL_COPY!" >nul
@@ -63,7 +63,7 @@ if errorlevel 1 (
     del "!LOCAL_COPY!" >nul 2>&1
 
     if not "!ELEV_ERR!"=="0" (
-        echo %C_ERROR%[installCMake] ERROR: Elevation was cancelled or failed.%C_RESET%
+        echo %C_PURPLE%[installCMake]%C_ERROR% ERROR: Elevation was cancelled or failed.%C_RESET%
         exit /b 1
     )
 
@@ -73,10 +73,10 @@ if errorlevel 1 (
     set "PATH=!SYS_PATH!;%PATH%"
     for /f "tokens=3" %%V in ('cmake --version 2^>nul ^| findstr /b "cmake version"') do set "VERIFY_CMAKE=%%V"
     if defined VERIFY_CMAKE (
-        echo %C_SUCCESS%[installCMake] Verified: CMake !VERIFY_CMAKE! installed.%C_RESET%
+        echo %C_PURPLE%[installCMake]%C_SUCCESS% Verified: CMake !VERIFY_CMAKE! installed.%C_RESET%
         exit /b 0
     ) else (
-        echo %C_INFO%[installCMake]%C_RESET% WARNING: Could not verify CMake after elevation. It may require a new shell.
+        echo %C_PURPLE%[installCMake]%C_INFO% WARNING: Could not verify CMake after elevation. It may require a new shell.%C_RESET%
         exit /b 0
     )
 )
@@ -89,28 +89,28 @@ set "TMP_DIR=%TEMP%\mde4cpp-cmake-%RANDOM%%RANDOM%"
 set "INSTALLER_PATH=%TMP_DIR%\cmake.msi"
 set "DOWNLOAD_URL=https://github.com/Kitware/CMake/releases/download/v%CMAKE_FULL_VERSION%/cmake-%CMAKE_FULL_VERSION%-windows-x86_64.msi"
 
-echo %C_INFO%[installCMake]%C_RESET% Install mode=system application
-echo %C_INFO%[installCMake]%C_RESET% Using CMake version=%CMAKE_FULL_VERSION%
-echo %C_INFO%[installCMake]%C_RESET% Downloading %DOWNLOAD_URL%
+echo %C_PURPLE%[installCMake]%C_INFO% Install mode=system application%C_RESET%
+echo %C_PURPLE%[installCMake]%C_INFO% Using CMake version=%CMAKE_FULL_VERSION%%C_RESET%
+echo %C_PURPLE%[installCMake]%C_INFO% Downloading %DOWNLOAD_URL%%C_RESET%
 
 if exist "%TMP_DIR%" rmdir /s /q "%TMP_DIR%"
 mkdir "%TMP_DIR%" >nul 2>&1
 if errorlevel 1 (
-    echo %C_ERROR%[installCMake] ERROR: Failed to create temp dir %TMP_DIR%.%C_RESET%
+    echo %C_PURPLE%[installCMake]%C_ERROR% ERROR: Failed to create temp dir %TMP_DIR%.%C_RESET%
     exit /b 1
 )
 
 where curl >nul 2>&1
 if errorlevel 1 (
-    echo %C_ERROR%[installCMake] ERROR: curl.exe is required to download files.%C_RESET%
-    echo %C_INFO%[installCMake]%C_RESET% Please install curl or use a Windows version that includes curl.
+    echo %C_PURPLE%[installCMake]%C_ERROR% ERROR: curl.exe is required to download files.%C_RESET%
+    echo %C_PURPLE%[installCMake]%C_INFO% Please install curl or use a Windows version that includes curl.%C_RESET%
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
 
 curl.exe -L -o "%INSTALLER_PATH%" "%DOWNLOAD_URL%"
 if errorlevel 1 (
-    echo %C_ERROR%[installCMake] ERROR: Download failed.%C_RESET%
+    echo %C_PURPLE%[installCMake]%C_ERROR% ERROR: Download failed.%C_RESET%
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
@@ -118,20 +118,20 @@ if errorlevel 1 (
 REM Install CMake system-wide.
 msiexec /i "%INSTALLER_PATH%" /qn ADD_CMAKE_TO_PATH=System
 if errorlevel 1 (
-    echo %C_ERROR%[installCMake] ERROR: MSI installation failed. Try running as Administrator.%C_RESET%
+    echo %C_PURPLE%[installCMake]%C_ERROR% ERROR: MSI installation failed. Try running as Administrator.%C_RESET%
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
 
 REM Cleanup and report installed binary location.
 rmdir /s /q "%TMP_DIR%"
-echo %C_INFO%[installCMake]%C_RESET% Installed system CMake %CMAKE_FULL_VERSION%
+echo %C_PURPLE%[installCMake]%C_INFO% Installed system CMake %CMAKE_FULL_VERSION%%C_RESET%
 where cmake >nul 2>&1
 if errorlevel 1 (
-    echo %C_INFO%[installCMake]%C_RESET% WARNING: cmake is not on PATH yet. Open a new shell.
+    echo %C_PURPLE%[installCMake]%C_INFO% WARNING: cmake is not on PATH yet. Open a new shell.%C_RESET%
 ) else (
     for /f "delims=" %%P in ('where cmake') do (
-        echo %C_INFO%[installCMake]%C_RESET% Binary: %%P
+        echo %C_PURPLE%[installCMake]%C_INFO% Binary: %%P%C_RESET%
         goto :done
     )
 )

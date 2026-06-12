@@ -43,34 +43,34 @@ echo "Installing system tools for $OS_DIR..."
 echo "==========================================================="
 
 if [ "$OS_DIR" = "MacOS" ]; then
-    echo "${C_INFO}[bootstrap]${C_RESET} Checking Homebrew..."
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Checking Homebrew...${C_RESET}"
     if ! command -v brew &> /dev/null; then
-        echo "${C_INFO}[bootstrap]${C_RESET} Homebrew not found. Installing Homebrew..."
+        echo "${C_PURPLE}[bootstrap]${C_INFO} Homebrew not found. Installing Homebrew...${C_RESET}"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv 2>/dev/null)"
     else
-        echo "${C_SUCCESS}[bootstrap] Homebrew is installed.${C_RESET}"
+        echo "${C_PURPLE}[bootstrap]${C_SUCCESS} Homebrew is installed.${C_RESET}"
     fi
 fi
 
 bash "$DIR/bootstrap/unix/installJava.sh"
-if [ $? -ne 0 ]; then echo "${C_ERROR}[bootstrap] ERROR: installJava.sh failed${C_RESET}"; exit 1; fi
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installJava.sh failed${C_RESET}"; exit 1; fi
 
 bash "$DIR/bootstrap/unix/installCompiler.sh"
-if [ $? -ne 0 ]; then echo "${C_ERROR}[bootstrap] ERROR: installCompiler.sh failed${C_RESET}"; exit 1; fi
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installCompiler.sh failed${C_RESET}"; exit 1; fi
 
 bash "$DIR/bootstrap/unix/installCMake.sh"
-if [ $? -ne 0 ]; then echo "${C_ERROR}[bootstrap] ERROR: installCMake.sh failed${C_RESET}"; exit 1; fi
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installCMake.sh failed${C_RESET}"; exit 1; fi
 
 export MDE4CPP_HOME="$PROJECT_DIR"
 bash "$DIR/bootstrap/unix/installEclipse.sh"
-if [ $? -ne 0 ]; then echo "${C_ERROR}[bootstrap] ERROR: installEclipse.sh failed${C_RESET}"; exit 1; fi
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installEclipse.sh failed${C_RESET}"; exit 1; fi
 
 bash "$DIR/bootstrap/unix/generate_setenv.sh"
-if [ $? -ne 0 ]; then echo "${C_ERROR}[bootstrap] ERROR: generate_setenv.sh failed${C_RESET}"; exit 1; fi
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: generate_setenv.sh failed${C_RESET}"; exit 1; fi
 
 bash "$DIR/bootstrap/unix/run_gradle_install.sh"
-if [ $? -ne 0 ]; then echo "${C_ERROR}[bootstrap] ERROR: run_gradle_install.sh failed${C_RESET}"; exit 1; fi
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: run_gradle_install.sh failed${C_RESET}"; exit 1; fi
 
 echo "==========================================================="
 echo "${C_SUCCESS}Bootstrap completed successfully!${C_RESET}"

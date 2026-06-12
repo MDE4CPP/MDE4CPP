@@ -4,18 +4,18 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
-echo "${C_INFO}[installEclipse]${C_RESET} MDE4CPP_ECLIPSE_VERSION=${MDE4CPP_ECLIPSE_VERSION:-}"
-echo "${C_INFO}[installEclipse]${C_RESET} MDE4CPP_ECLIPSE_MILESTONE=${MDE4CPP_ECLIPSE_MILESTONE:-}"
-echo "${C_INFO}[installEclipse]${C_RESET} MDE4CPP_ECLIPSE_ACCELEO_VERSION=${MDE4CPP_ECLIPSE_ACCELEO_VERSION:-}"
-echo "${C_INFO}[installEclipse]${C_RESET} MDE4CPP_ECLIPSE_SIRIUS_VERSION=${MDE4CPP_ECLIPSE_SIRIUS_VERSION:-}"
-echo "${C_INFO}[installEclipse]${C_RESET} MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION=${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION:-}"
+echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_VERSION=${MDE4CPP_ECLIPSE_VERSION:-}${C_RESET}"
+echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_MILESTONE=${MDE4CPP_ECLIPSE_MILESTONE:-}${C_RESET}"
+echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_ACCELEO_VERSION=${MDE4CPP_ECLIPSE_ACCELEO_VERSION:-}${C_RESET}"
+echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_SIRIUS_VERSION=${MDE4CPP_ECLIPSE_SIRIUS_VERSION:-}${C_RESET}"
+echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION=${MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION:-}${C_RESET}"
 
 if [[ -z "${MDE4CPP_HOME:-}" ]]; then
-  echo "${C_ERROR}[installEclipse] ERROR: MDE4CPP_HOME is not set.${C_RESET}"
+  echo "${C_PURPLE}[installEclipse]${C_ERROR} ERROR: MDE4CPP_HOME is not set.${C_RESET}"
   exit 1
 fi
 if [[ -z "${MDE4CPP_ECLIPSE_VERSION:-}" ]]; then
-  echo "${C_ERROR}[installEclipse] ERROR: MDE4CPP_ECLIPSE_VERSION is not set.${C_RESET}"
+  echo "${C_PURPLE}[installEclipse]${C_ERROR} ERROR: MDE4CPP_ECLIPSE_VERSION is not set.${C_RESET}"
   exit 1
 fi
 
@@ -54,20 +54,20 @@ else
 fi
 
 if [[ -x "${ECLIPSE_BIN}" ]]; then
-  echo "${C_INFO}[installEclipse]${C_RESET} Existing Eclipse installation found at ${TARGET_DIR}."
+  echo "${C_PURPLE}[installEclipse]${C_SUCCESS} Existing Eclipse installation found at ${TARGET_DIR}.${C_RESET}"
   "${ECLIPSE_BIN}" -nosplash -application org.eclipse.equinox.p2.director -listInstalledIU > "${TMP_DIR}/installed.txt" 2>&1 || true
   
   acceleo_version=$(grep -E '^org\.eclipse\.acceleo\.feature\.group[[:space:]]+' "${TMP_DIR}/installed.txt" | awk '{print $NF}' | head -n1 || true)
   sirius_version=$(grep -E '^org\.eclipse\.sirius\.feature\.group[[:space:]]+' "${TMP_DIR}/installed.txt" | awk '{print $NF}' | head -n1 || true)
   
-  echo "${C_INFO}[installEclipse]${C_RESET} Found Acceleo: ${acceleo_version}"
-  echo "${C_INFO}[installEclipse]${C_RESET} Found Sirius: ${sirius_version}"
+  echo "${C_PURPLE}[installEclipse]${C_SUCCESS} Found Acceleo: ${acceleo_version}${C_RESET}"
+  echo "${C_PURPLE}[installEclipse]${C_SUCCESS} Found Sirius: ${sirius_version}${C_RESET}"
   
   if [[ "${acceleo_version}" == "${MDE4CPP_ECLIPSE_ACCELEO_VERSION//[[:space:]]/}"* && "${sirius_version}" == "${MDE4CPP_ECLIPSE_SIRIUS_VERSION//[[:space:]]/}"* ]]; then
-    echo "${C_INFO}[installEclipse]${C_RESET} Requested Eclipse plugins already installed, skipping installation."
+    echo "${C_PURPLE}[installEclipse]${C_SUCCESS} Requested Eclipse plugins already installed, skipping installation.${C_RESET}"
     exit 0
   else
-    echo "${C_INFO}[installEclipse]${C_RESET} Eclipse plugin versions differ or are missing; updating installation."
+    echo "${C_PURPLE}[installEclipse]${C_INFO} Eclipse plugin versions differ or are missing; updating installation.${C_RESET}"
     SKIP_DOWNLOAD=1
   fi
 fi
@@ -87,7 +87,7 @@ if [[ "${SKIP_DOWNLOAD}" -eq 0 ]]; then
 fi
 
 if [[ ! -x "${ECLIPSE_BIN}" ]]; then
-  echo "${C_ERROR}[installEclipse] ERROR: Eclipse binary not found at ${ECLIPSE_BIN}${C_RESET}"
+  echo "${C_PURPLE}[installEclipse]${C_ERROR} ERROR: Eclipse binary not found at ${ECLIPSE_BIN}${C_RESET}"
   exit 1
 fi
 
