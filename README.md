@@ -6,38 +6,39 @@
 Further information can be found on the [project site](https://www.tu-ilmenau.de/sse/software/mde4cpp).
 
 ## Installation Instructions  
-(Find detailed instructions [here](https://www.tu-ilmenau.de/fileadmin/Bereiche/IA/sse/Software/MDE4CPP/Tutorials/MDE4CPP_Setup_Installation_Guide.pdf))
 
-### 1. Install the following software
-- **Java Development Kit (JDK)** version 21  
-- **Eclipse Modeling Tools**  
-  - Install *Eclipse Modeling Tools 2025-06*  
-  - Add plugin [Acceleo 3.7.15](https://www.eclipse.org/acceleo/)  
-  - Add plugin [Sirius 7.4](https://www.eclipse.org/sirius/)  
-  - Add plugin [Papyrus 7.0.0](https://download.eclipse.org/modeling/mdt/papyrus/papyrus-desktop/updates/releases/2025-06/)  
-- **MinGW-w64**  
-  - [MinGW-w64 v13.0.0](https://mingw-w64.org), select architecture = `x86_64` during installation  
-- **CMake**  
-  - [CMake 4.1.1](https://cmake.org/download)  
-
-There are no recommendations for a specific software version. The specified versions were used for testing MDE4CPP. 
+### 1. Prerequisites
+- **Windows**: `git` and an internet connection.
+- **Linux / macOS**: `git`, `tar`, and `unzip`. Ensure you have a C++ compiler installed (e.g., `build-essential` on Ubuntu or Xcode Command Line Tools on macOS).
 
 ### 2. Clone the Repository
-Clone the [MDE4CPP Git repository](https://github.com/MDE4CPP/MDE4CPP).
+Clone the [MDE4CPP Git repository](https://github.com/MDE4CPP/MDE4CPP) and navigate into the folder:
+```bash
+git clone https://github.com/MDE4CPP/MDE4CPP.git
+cd MDE4CPP
+```
 
-### 3. Configure the Environment
-- Copy the prepared environment settings file and remove the `.default` extension:  
-  - Windows: `setenv.bat.default`  
-  - Unix: `setenv.default`  
-- Open this file and configure the variables:  
-  - `MDE4CPP_HOME` … path to the MDE4CPP home folder  
-  - Compiler and Gradle task configuration variables  
-  - Tool path configuration  
-- **Note for Unix users:**  
-  You must call the script with `. ./setenv` so that the variables are applied to your shell.
+### 3. Run the Bootstrap Script
+MDE4CPP provides an automated bootstrap script that downloads and configures the required toolchain (Java, CMake, Eclipse with plugins, and MinGW on Windows), sets up your environment variables, and installs third-party dependencies. Tool versions are managed centrally in the `versions.properties` file.
+
+- **Windows**:
+  Run the script in your command prompt:
+  ```cmd
+  bootstrap.bat
+  ```
+- **Linux / macOS**:
+  Run the script in your terminal:
+  ```bash
+  ./bootstrap.sh
+  ```
 
 ### 4. Build with Gradle
-MDE4CPP uses Gradle for builds. Some basic commands:  
+MDE4CPP uses Gradle for builds. To generate and compile the entire project, run:
+```bash
+gradlew buildAll
+```
+
+Some other basic commands:  
 - `gradlew tasks` … list available tasks  
 - `gradlew projects` … show package overview  
 - `gradlew help` … Gradle help  
@@ -125,12 +126,7 @@ All binaries and header files are delivered to:
 ${MDE4CPP_HOME}/application
 ```
 
-## Mac Setup
 
-1. Copy and paste setenv.default then rename the copy to setenv.sh
-2. Update MDE4CPP_ECLIPSE_HOME in setenv.sh to /Applications/Eclipse.app/Contents/Eclipse
-3. Source the setenv.sh using command: source setenv.sh
-4. Run the gradle command: gradlew install
 
 # Docker based build
 

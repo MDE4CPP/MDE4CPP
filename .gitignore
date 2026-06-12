@@ -17,6 +17,7 @@ application/generator/
 # User-specific configuration
 setenv
 setenv.bat
+setenv.sh
 gradle.properties
 
 # IDE files

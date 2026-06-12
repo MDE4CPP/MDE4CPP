@@ -90,67 +90,7 @@ task buildAll()
 }
 
 
-task installationInstruction() {
-	group 'MDE4CPP'
 
-	description	'installation instruction'
-
-	def instructionMessage = '' +
-	'##############################################################################\n' +
-	'#                    Installation instruction for MDE4CPP                    #\n' +
-	'##############################################################################\n' +
-	'\n' +
-	'Welcome to MDE4CPP framework!\n' +
-	'To start the work with MDE4CPP, you have to configure the environment settings.\n' +
-	'A pattern is prepared for it:\n' +
-	'- for Windows systems: setenv.bat.default\n' +
-	'- for Unix systems: setenv.default.\n' +
-	'Copy the file and remove the extension \'default\' first.\n' +
-	'Open this file and configure the variables afterwards.\n' +
-	'Run the file in a console. Note, that the environment is set inside the console\n' +
-	'and has to be redone at each season start\n' +
-	'More information see https://github.com/MDE4CPP/MDE4CPP\n' +
-	'\n'
-
-	/*def files = file('$projectDir').listFiles(new FileFilter() {
-	public boolean accept(File pathname) {
-	def extension = '.sh'
-	if (System.properties['os.name'].toLowerCase().contains('windows')) {
-	extension = '.bat'
-	}
-
-	return pathname.getName().endsWith(extension);
-	}
-	})*/
-
-	/*if (files.length == 0) {
-	println instructionMessage
-	} else {*/
-	doFirst {
-		println instructionMessage
-	}
-//}
-}
-
-task setEnvironment(type:Exec){
-	workingDir System.getenv('MDE4CPP_HOME')
-	if (OperatingSystem.current().isWindows()) {
-			// MS Windows
-			commandLine 'cmd', '/c', 'setenv.bat'
-		} else if (OperatingSystem.current().isLinux()) {
-			// GNU/Linux
-			commandLine 'sh', '-c', '. ./setenv'
-		} else if (OperatingSystem.current().isMacOsX()){
-			// Apple macOS
-			commandLine "bash", "-c", "source setenv"
-		} else {
-			// OS not supported yet
-			throw new GradleException('OS ' + System.getProperty('os.name') + ' is not supported yet')
-		}
-	doLast {
-		println 'Environment variable have been set.'
-	}
-}
 
 task startModelingEclipse(type:Exec){
 	group 'Utilities'
@@ -264,7 +204,6 @@ task startCPPEclipse(type:Exec){
 }
 
 task checkEnvironment(){
-	dependsOn 'setEnvironment'
 	group 'Utilities'
 	description 'Check that all required variables defined in the setenv file are set and can be found'
 
@@ -412,64 +351,6 @@ task checkEnvironment(){
 	}
 }
 
-task runInstallScripts()
-{		
-//private 	group 'MDE4CPP'
-	description 'Run the installation scripts for MDE4CPP. This will call the platform-specific install scripts directly. It is recommended to run this task only once, then set the environment variables permanently in your system settings.'
-	def extension = ''
-	def scriptPath = ''
-	def tool = ''
-	def command = ''
-    
-	def installScripts = [
-		'installJava',
-		'installCompiler',
-		'installEclipse',
-		'installCMake'
-	]
-	// workingDir System.getenv('MDE4CPP_HOME')
-	if (OperatingSystem.current().isWindows()) 
-	{
-		// MS Windows
-		tool = 'cmd'
-		command = '/C'
-		extension = '.bat'
-		scriptPath = 'Windows'
-	} 
-	else if (OperatingSystem.current().isLinux()) 
-	{
-		// GNU/Linux
-		tool = '/bin/sh'
-		command = '-c'
-		extension = '.sh'
-		scriptPath = 'Linux'
-	}
-	else if (OperatingSystem.current().isMacOsX())
-	{
-		// Apple macOS
-		tool = 'bash'
-		command = '-c'
-		extension = '.sh'
-		scriptPath = 'MacOS'
-	}
-	else 
-	{
-		// OS not supported yet
-		throw new GradleException('OS ' + System.getProperty('os.name') + ' is not supported yet')
-	}
-	doLast {
-		println 'Running installation scripts...'
-		println 'This may take a while, please be patient.'
-		
-		installScripts.each { scriptName ->
-			exec {
-				def scriptCommand = '.' + File.separator + 'scripts' + File.separator + scriptPath + File.separator + scriptName + extension
-				println 'Running: ' + scriptName
-				commandLine = [tool, command, scriptCommand]
-			}
-		}
-	}	
-}	
 
 // Root wrapper for the included gradlePlugins composite build task.
 task publishMDE4CPPPluginsToMavenLocal {
@@ -482,7 +363,6 @@ task install{
 	group 'MDE4CPP'
 	description 'Install MDE4CPP by setting the environment variables and checking them'
 
-	dependsOn 'runInstallScripts'
  	dependsOn 'publishMDE4CPPPluginsToMavenLocal'
  	dependsOn 'src:util:xerces:installXerces'
 	dependsOn 'src:util:antlr:installAntlr'
@@ -492,7 +372,6 @@ task install{
 // install Plugins
 // install tools (xerces, antlr , crow, boost ...)
 
-//	tasks.getByPath('checkEnvironment').mustRunAfter tasks.getByPath('runInstallScripts')	
 }
 
 //EOF

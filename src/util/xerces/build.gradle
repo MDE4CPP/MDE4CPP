@@ -31,7 +31,9 @@ import org.gradle.internal.os.OperatingSystem;
 
 description '3rdparty: xerces-c'
 
-def xercesVersion = rootProject.ext.versions.xerces
+def versionProps = new Properties()
+file("${rootDir}/versions.properties").withInputStream { versionProps.load(it) }
+def xercesVersion = versionProps.getProperty('MDE4CPP_XERCES_VERSION')
 
 task downloadFile(type: Download) {
 	description 'download xerces'
@@ -90,14 +92,14 @@ task installXerces(dependsOn: downloadAndUnzipFile) {
 		} else {
 			cmakeCmd += 'Unix Makefiles'
 		}
-		cmakeCmd += '" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin").absolutePath
+		cmakeCmd += '" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="' + file("./xerces/bin").absolutePath + '"'
 		
 		// Add cross-compilation flag if needed
 		if (isCrossCompiling) {
 			cmakeCmd += ' -DCMAKE_SYSTEM_NAME=Windows'
 		}
 		
-		cmakeCmd += ' ' + file("./xerces/xerces-c-${xercesVersion}").absolutePath
+		cmakeCmd += ' "' + file("./xerces/xerces-c-${xercesVersion}").absolutePath + '"'
 		
 		exec {
 			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"

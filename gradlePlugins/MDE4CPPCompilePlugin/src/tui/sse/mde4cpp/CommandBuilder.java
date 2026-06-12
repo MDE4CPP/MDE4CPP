@@ -86,7 +86,7 @@ class CommandBuilder
 			cmakeCmd += " -DCMAKE_SYSTEM_NAME=Windows";
 		}
 		
-		cmakeCmd += " " + projectFolder.getAbsolutePath();
+		cmakeCmd += " \"" + projectFolder.getAbsolutePath() + "\"";
 		commandList.add(cmakeCmd);
 		return commandList;
 	}

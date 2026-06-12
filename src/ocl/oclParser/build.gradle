@@ -35,8 +35,13 @@ repositories {
     mavenCentral()
 }
 
+
+def versionProps = new Properties()
+file("${rootDir}/versions.properties").withInputStream { versionProps.load(it) }
+def antlrVersion = versionProps.getProperty('MDE4CPP_ANTLR_VERSION')
+
 dependencies {
-    antlr "org.antlr:antlr4:${rootProject.ext.versions.antlr}"
+    antlr "org.antlr:antlr4:${antlrVersion}"
 }
 
 ext.ocl = [

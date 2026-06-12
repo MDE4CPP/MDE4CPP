@@ -38,10 +38,12 @@ configurations {
     antlrTool
 }
 
-def antlr4Version = "${rootProject.ext.versions.antlr}"
+def versionProps = new Properties()
+file("${rootDir}/versions.properties").withInputStream { versionProps.load(it) }
+def antlrVersion = versionProps.getProperty('MDE4CPP_ANTLR_VERSION')
 
 dependencies {
-    antlrTool "org.antlr:antlr4:${antlr4Version}"
+    antlrTool "org.antlr:antlr4:${antlrVersion}"
 }
 
 task downloadAntlr4(type: Download) {
@@ -120,9 +122,9 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 		exec {
 			workingDir "../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
 			if (isWindows) {
-				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("../common/parser/antlr4/bin") + ' ' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="' + file("../common/parser/antlr4/bin").absolutePath + '" "' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath + '"'
 			} else {
-				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("../common/parser/antlr4/bin") + ' ' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DANTLR_BUILD_CPP_TESTS=OFF -DCMAKE_CXX_STANDARD:STRING=23 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="' + file("../common/parser/antlr4/bin").absolutePath + '" "' + file("../common/parser/antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath + '"'
 			}
 			// Pass environment variables for cross-compilation
 			if (isCrossCompiling) {
@@ -276,7 +278,7 @@ task installAntlr {
     description 'Resolve the ANTLR dependency for OCL parser generation'
 
     doLast {
-        println "Installing ANTLR ${rootProject.ext.versions.antlr}"
+        println "Installing ANTLR ${antlrVersion}"
         configurations.antlrTool.resolve()
     }
 }
