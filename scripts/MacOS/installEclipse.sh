@@ -110,7 +110,7 @@ echo "[installEclipse] Installing Acceleo from ${ACCELEO_REPOSITORY_URL}"
   -installIU org.eclipse.acceleo.query.feature.group \
   -installIU org.eclipse.acceleo.query.source.feature.group \
   -installIU org.antlr.runtime \
-  -destination "${TARGET_DIR}" \
+  -destination "${TARGET_DIR}/Eclipse.app/Contents/Eclipse" \
   -profileProperties org.eclipse.update.install.features=true
 
 if [[ $? -ne 0 ]]; then
@@ -149,7 +149,7 @@ echo "[installEclipse] Installing Sirius from ${SIRIUS_REPOSITORY_URL}"
   -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group \
   -installIU org.eclipse.eef.sdk.feature.feature.group \
   -installIU org.eclipse.eef.sdk.feature.source.feature.group \
-  -destination "${TARGET_DIR}" \
+  -destination "${TARGET_DIR}/Eclipse.app/Contents/Eclipse" \
   -profileProperties org.eclipse.update.install.features=true
 
 if [[ $? -ne 0 ]]; then
@@ -163,7 +163,7 @@ echo "[installEclipse] Installing CDT from ${CDT_REPOSITORY_URL}"
   -application org.eclipse.equinox.p2.director \
   -repository "${CDT_REPOSITORY_URL}" \
   -installIU org.eclipse.cdt.feature.group \
-  -destination "${TARGET_DIR}" \
+  -destination "${TARGET_DIR}/Eclipse.app/Contents/Eclipse" \
   -profileProperties org.eclipse.update.install.features=true
 
 if [[ $? -ne 0 ]]; then
