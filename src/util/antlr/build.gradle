@@ -278,7 +278,7 @@ task installAntlr {
     description 'Resolve the ANTLR dependency for OCL parser generation'
 
     doLast {
-        println "Installing ANTLR ${rootProject.ext.versions.antlr}"
+        println "Installing ANTLR ${antlrVersion}"
         configurations.antlrTool.resolve()
     }
 }
