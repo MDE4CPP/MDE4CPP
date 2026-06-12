@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../common.sh"
+
 echo "[installCMake] MDE4CPP_CMAKE_VERSION=${MDE4CPP_CMAKE_VERSION:-}"
 echo "[installCMake] MDE4CPP_CMAKE_BUILD=${MDE4CPP_CMAKE_BUILD:-}"
 

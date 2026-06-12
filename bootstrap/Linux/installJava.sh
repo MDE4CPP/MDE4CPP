@@ -1,26 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Step 1: Find repo root and read Java version from versions.properties
-echo "[installJava] Reading configuration from versions.properties..."
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-VERSIONS_FILE="${REPO_ROOT}/versions.properties"
+source "${SCRIPT_DIR}/../common.sh"
 
-if [[ ! -f "${VERSIONS_FILE}" ]]; then
-    echo "[installJava] ERROR: versions.properties not found at ${VERSIONS_FILE}"
-    exit 1
-fi
-
-# Read MDE4CPP_JAVA_VERSION from properties file
-MDE4CPP_JAVA_VERSION=""
-if [[ -f "${VERSIONS_FILE}" ]]; then
-    MDE4CPP_JAVA_VERSION=$(grep -i "^MDE4CPP_JAVA_VERSION=" "${VERSIONS_FILE}" | cut -d'=' -f2 | tr -d ' ' | tr -d '\r')
-fi
-
-echo "[installJava] MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION}"
-if [[ -z "${MDE4CPP_JAVA_VERSION}" ]]; then
-    echo "[installJava] ERROR: MDE4CPP_JAVA_VERSION not found in ${VERSIONS_FILE}"
+echo "[installJava] MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION:-}"
+if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
+    echo "[installJava] ERROR: MDE4CPP_JAVA_VERSION is not set."
     exit 1
 fi
 
@@ -37,10 +23,7 @@ else
 fi
 
 # Step 2: Request root privileges only when installation is actually required.
-if [[ "${1:-}" != "--elevated" ]] && [[ "${EUID}" -ne 0 ]]; then
-  echo "[installJava] Root privileges are required for installation. Requesting sudo elevation..."
-  exec sudo -E bash "$0" --elevated
-fi
+require_sudo "$@"
 
 pkg_mgr=""
 install_cmd=""

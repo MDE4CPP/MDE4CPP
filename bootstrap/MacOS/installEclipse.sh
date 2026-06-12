@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../common.sh"
+
 echo "[installEclipse] MDE4CPP_ECLIPSE_VERSION=${MDE4CPP_ECLIPSE_VERSION:-}"
 echo "[installEclipse] MDE4CPP_ECLIPSE_MILESTONE=${MDE4CPP_ECLIPSE_MILESTONE:-}"
 echo "[installEclipse] MDE4CPP_ECLIPSE_ACCELEO_VERSION=${MDE4CPP_ECLIPSE_ACCELEO_VERSION:-}"
@@ -37,10 +40,7 @@ TARGET_DIR="${MDE4CPP_PARENT}/eclipse"
 TMP_DIR="$(mktemp -d)"
 ARCHIVE_PATH="${TMP_DIR}/eclipse-modeling.tar.gz"
 
-ARCH_SUFFIX="x86_64"
-if [[ "$(uname -m)" == "arm64" ]]; then
-  ARCH_SUFFIX="aarch64"
-fi
+ARCH_SUFFIX=$(get_arch)
 
 ECLIPSE_ARCHIVE_URL="https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}/${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}/eclipse-modeling-${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/}-${MDE4CPP_ECLIPSE_MILESTONE//[[:space:]]/}-macosx-cocoa-${ARCH_SUFFIX}.tar.gz"
 ACCELEO_REPOSITORY_URL="https://download.eclipse.org/acceleo/updates/releases/${MDE4CPP_ECLIPSE_ACCELEO_VERSION//[[:space:]]/}"
@@ -73,14 +73,7 @@ if [[ -x "${TARGET_DIR}/Eclipse.app/Contents/MacOS/eclipse" ]]; then
 fi
 
 if [[ "$SKIP_DOWNLOAD" == "0" ]]; then
-  if command -v curl >/dev/null 2>&1; then
-    curl -fL "${ECLIPSE_ARCHIVE_URL}" -o "${ARCHIVE_PATH}"
-  elif command -v wget >/dev/null 2>&1; then
-    wget -O "${ARCHIVE_PATH}" "${ECLIPSE_ARCHIVE_URL}"
-  else
-    echo "[installEclipse] ERROR: Neither curl nor wget is available."
-    exit 1
-  fi
+  download_file "${ECLIPSE_ARCHIVE_URL}" "${ARCHIVE_PATH}"
 
   rm -rf "${TARGET_DIR}"
   mkdir -p "${TARGET_DIR}"
