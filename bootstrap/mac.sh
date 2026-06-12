@@ -54,6 +54,8 @@ export MDE4CPP_HOME="$PROJECT_DIR"
 # On macOS, Eclipse plugins are located inside Eclipse.app/Contents/Eclipse
 export MDE4CPP_ECLIPSE_HOME="$ECLIPSE_DIR/Eclipse.app/Contents/Eclipse"
 
+export PATH="\$MDE4CPP_HOME/application/bin:\$MDE4CPP_HOME/application/tools:\$PATH"
+
 # ##################################################
 # # configure Gradle tasks and compiling processes #
 # ##################################################
