@@ -4,8 +4,8 @@
 set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_DIR="$( cd "$DIR/.." && pwd )"
-source "$DIR/common.sh"
+PROJECT_DIR="$( cd "$DIR/../.." && pwd )"
+source "$DIR/../common.sh"
 
 PROPS_FILE="$PROJECT_DIR/versions.properties"
 load_properties "$PROPS_FILE"
@@ -55,10 +55,10 @@ echo "==========================================================="
 echo "Installing system tools..."
 echo "==========================================================="
 
-"$PROJECT_DIR/scripts/Linux/installJava.sh"
-"$PROJECT_DIR/scripts/Linux/installCompiler.sh"
-"$PROJECT_DIR/scripts/Linux/installCMake.sh"
-"$PROJECT_DIR/scripts/Linux/installEclipse.sh"
+"$DIR/installJava.sh"
+"$DIR/installCompiler.sh"
+"$DIR/installCMake.sh"
+"$DIR/installEclipse.sh"
 
 echo "==========================================================="
 echo "Running Gradle install to download third-party dependencies..."

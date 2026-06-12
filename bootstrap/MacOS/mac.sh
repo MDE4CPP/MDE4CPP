@@ -4,9 +4,9 @@
 set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$DIR/common.sh"
+source "$DIR/../common.sh"
 
-PROPS_FILE="$DIR/../versions.properties"
+PROPS_FILE="$DIR/../../versions.properties"
 load_properties "$PROPS_FILE"
 
 echo "Checking Homebrew..."
@@ -18,22 +18,23 @@ else
     echo "Homebrew is installed."
 fi
 
-bash "$DIR/../scripts/MacOS/installJava.sh"
+bash "$DIR/installJava.sh"
 
 GCC_MAJOR="${MDE4CPP_COMPILER_VERSION%%.*}"
-bash "$DIR/../scripts/MacOS/installCompiler.sh"
+bash "$DIR/installCompiler.sh"
 
-bash "$DIR/../scripts/MacOS/installCMake.sh"
+bash "$DIR/installCMake.sh"
 
-export MDE4CPP_HOME="$(cd "$DIR/.." && pwd)"
-bash "$DIR/../scripts/MacOS/installEclipse.sh"
+export MDE4CPP_HOME="$(cd "$DIR/../.." && pwd)"
+bash "$DIR/installEclipse.sh"
 
-PROJECT_DIR="$(cd "$DIR/.." && pwd)"
+PROJECT_DIR="$(cd "$DIR/../.." && pwd)"
 SETENV_FILE="$PROJECT_DIR/setenv.sh"
 echo "Generating $SETENV_FILE..."
 
+JAVA_MAJOR="${MDE4CPP_JAVA_VERSION%%.*}"
 JAVA_HOME_PATH=$(/usr/libexec/java_home -v "$JAVA_MAJOR" 2>/dev/null || echo "/opt/homebrew/opt/openjdk@$JAVA_MAJOR")
-ECLIPSE_DIR="$(cd "$DIR/../.." && pwd)/eclipse"
+ECLIPSE_DIR="$(cd "$PROJECT_DIR/.." && pwd)/eclipse"
 
 # Create new setenv file
 cat << EOF > "$SETENV_FILE"

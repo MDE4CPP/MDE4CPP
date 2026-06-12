@@ -6,7 +6,7 @@ REM # Windows Bootstrap script for MDE4CPP #
 REM ########################################
 
 set "DIR=%~dp0"
-for %%I in ("%DIR%..") do set "PROJECT_DIR=%%~fI"
+for %%I in ("%DIR%..\..") do set "PROJECT_DIR=%%~fI"
 
 for %%I in ("%PROJECT_DIR%\..") do set "PARENT_DIR=%%~fI"
 set "ECLIPSE_DIR=%PARENT_DIR%\eclipse"
@@ -58,25 +58,25 @@ echo ===========================================================
 echo Installing system tools...
 echo ===========================================================
 
-call "%PROJECT_DIR%\scripts\Windows\installJava.bat"
+call "%DIR%installJava.bat"
 if errorlevel 1 (
     echo ERROR: installJava.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!
 )
 
-call "%PROJECT_DIR%\scripts\Windows\installCompiler.bat"
+call "%DIR%installCompiler.bat"
 if errorlevel 1 (
     echo ERROR: installCompiler.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!
 )
 
-call "%PROJECT_DIR%\scripts\Windows\installCMake.bat"
+call "%DIR%installCMake.bat"
 if errorlevel 1 (
     echo ERROR: installCMake.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!
 )
 
-call "%PROJECT_DIR%\scripts\Windows\installEclipse.bat"
+call "%DIR%installEclipse.bat"
 if errorlevel 1 (
     echo ERROR: installEclipse.bat failed ^(exit !errorlevel!^)
     exit /b !errorlevel!
