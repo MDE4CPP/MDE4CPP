@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/../common.sh"
+source "${SCRIPT_DIR}/common.sh"
 
 echo "[installCompiler] MDE4CPP_COMPILER_VERSION=${MDE4CPP_COMPILER_VERSION:-}"
 if [[ -z "${MDE4CPP_COMPILER_VERSION:-}" ]]; then

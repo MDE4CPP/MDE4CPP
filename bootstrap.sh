@@ -6,7 +6,7 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_DIR="$DIR"
 
-source "$DIR/bootstrap/common.sh"
+source "$DIR/bootstrap/unix/common.sh"
 PROPS_FILE="$DIR/versions.properties"
 load_properties "$PROPS_FILE"
 
