@@ -38,10 +38,14 @@ exit /b 0
 
 :setup_colors
 for /F %%a in ('echo prompt $E ^| cmd') do set "ESC=%%a"
-set "C_RESET=%ESC%[0m"
-set "C_INFO=%ESC%[1;36m"
-set "C_SUCCESS=%ESC%[1;32m"
-set "C_WARN=%ESC%[1;33m"
-set "C_ERROR=%ESC%[1;31m"
-set "C_PURPLE=%ESC%[1;35m"
+set "SCRIPT_DIR=%~dp0"
+for /f "tokens=1,2 delims==" %%A in ('type "%SCRIPT_DIR%..\colors.properties" 2^>nul ^| findstr /V /B /C:"#"') do (
+    set "KEY=%%A"
+    set "VAL=%%B"
+    if not "!KEY!"=="" if not "!VAL!"=="" (
+        for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
+        for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
+        set "!KEY!=!ESC![!VAL!"
+    )
+)
 exit /b 0

@@ -2,12 +2,17 @@
 # Common functions for MDE4CPP bootstrap scripts
 
 setup_colors() {
-    export C_RESET=$'\033[0m'
-    export C_INFO=$'\033[1;36m'
-    export C_SUCCESS=$'\033[1;32m'
-    export C_WARN=$'\033[1;33m'
-    export C_ERROR=$'\033[1;31m'
-    export C_PURPLE=$'\033[1;35m'
+    local prop_file="${SCRIPT_DIR}/../colors.properties"
+    if [ -f "$prop_file" ]; then
+        while IFS='=' read -r key value; do
+            if [[ "$key" =~ ^#.* ]] || [[ -z "$key" ]]; then
+                continue
+            fi
+            key=$(echo "$key" | xargs)
+            value=$(echo "$value" | tr -d '\r' | xargs)
+            export "$key"=$'\033['"$value"
+        done < "$prop_file"
+    fi
 }
 
 # Function to read properties file and export variables
