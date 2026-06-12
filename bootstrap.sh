@@ -60,16 +60,17 @@ bash "$DIR/bootstrap/unix/installCMake.sh"
 export MDE4CPP_HOME="$PROJECT_DIR"
 bash "$DIR/bootstrap/unix/installEclipse.sh"
 
-echo "==========================================================="
-echo "Generating setenv.sh..."
-echo "==========================================================="
+generate_setenv_file() {
+    echo "==========================================================="
+    echo "Generating setenv.sh..."
+    echo "==========================================================="
 
-SETENV_FILE="$DIR/setenv.sh"
-ECLIPSE_DIR="$(cd "$DIR/.." && pwd)/eclipse"
-JAVA_MAJOR="${MDE4CPP_JAVA_VERSION%%.*}"
-GCC_MAJOR="${MDE4CPP_COMPILER_VERSION%%.*}"
+    SETENV_FILE="$DIR/setenv.sh"
+    ECLIPSE_DIR="$(cd "$DIR/.." && pwd)/eclipse"
+    JAVA_MAJOR="${MDE4CPP_JAVA_VERSION%%.*}"
+    GCC_MAJOR="${MDE4CPP_COMPILER_VERSION%%.*}"
 
-cat << EOF > "$SETENV_FILE"
+    cat << EOF > "$SETENV_FILE"
 #!/usr/bin/env bash
 
 # ########################################
@@ -81,9 +82,9 @@ export MDE4CPP_HOME="$PROJECT_DIR"
 
 EOF
 
-if [ "$OS_DIR" = "MacOS" ]; then
-    JAVA_HOME_PATH=$(/usr/libexec/java_home -v "$JAVA_MAJOR" 2>/dev/null || echo "/opt/homebrew/opt/openjdk@$JAVA_MAJOR")
-    cat << EOF >> "$SETENV_FILE"
+    if [ "$OS_DIR" = "MacOS" ]; then
+        JAVA_HOME_PATH=$(/usr/libexec/java_home -v "$JAVA_MAJOR" 2>/dev/null || echo "/opt/homebrew/opt/openjdk@$JAVA_MAJOR")
+        cat << EOF >> "$SETENV_FILE"
 export JAVA_HOME="$JAVA_HOME_PATH"
 export CC="gcc-$GCC_MAJOR"
 export CXX="g++-$GCC_MAJOR"
@@ -93,8 +94,8 @@ export MDE4CPP_ECLIPSE_HOME="$ECLIPSE_DIR/Eclipse.app/Contents/Eclipse"
 export PATH="\$MDE4CPP_ECLIPSE_HOME/../../../MacOS:\$PATH"
 export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:\$MDE4CPP_HOME/application/bin"
 EOF
-else
-    cat << EOF >> "$SETENV_FILE"
+    else
+        cat << EOF >> "$SETENV_FILE"
 # resolve JAVA_HOME if javac is available
 if command -v javac >/dev/null 2>&1; then
     export JAVA_HOME="\$(dirname "\$(dirname "\$(readlink -f "\$(command -v javac)")")")"
@@ -102,9 +103,9 @@ fi
 
 export MDE4CPP_ECLIPSE_HOME="$ECLIPSE_DIR"
 EOF
-fi
+    fi
 
-cat << EOF >> "$SETENV_FILE"
+    cat << EOF >> "$SETENV_FILE"
 export PATH="\$MDE4CPP_HOME/application/bin:\$MDE4CPP_HOME/application/tools:\$PATH"
 
 # ##################################################
@@ -130,29 +131,35 @@ export CLASSPATH="\$MDE4CPP_ECLIPSE_HOME/plugins"
 export CPP_IDE_EXECUTABLE="\$MDE4CPP_ECLIPSE_HOME"
 EOF
 
-chmod +x "$SETENV_FILE"
+    chmod +x "$SETENV_FILE"
+}
 
-echo "==========================================================="
-echo "Running Gradle install to download third-party dependencies..."
-echo "==========================================================="
+run_gradle_install() {
+    echo "==========================================================="
+    echo "Running Gradle install to download third-party dependencies..."
+    echo "==========================================================="
 
-source "$SETENV_FILE"
-cd "$PROJECT_DIR"
+    source "$SETENV_FILE"
+    cd "$PROJECT_DIR"
 
-GRADLE_WRAPPER="$PROJECT_DIR/application/tools/gradlew"
-if [[ -x "$GRADLE_WRAPPER" ]]; then
-    set +e
-    "$GRADLE_WRAPPER" install --no-daemon
-    GRADLE_EXIT=$?
-    set -e
-    if [[ $GRADLE_EXIT -ne 0 ]]; then
-        echo "ERROR: Gradle install task failed (exit $GRADLE_EXIT)"
-        exit $GRADLE_EXIT
+    GRADLE_WRAPPER="$PROJECT_DIR/application/tools/gradlew"
+    if [[ -x "$GRADLE_WRAPPER" ]]; then
+        set +e
+        "$GRADLE_WRAPPER" install --no-daemon
+        GRADLE_EXIT=$?
+        set -e
+        if [[ $GRADLE_EXIT -ne 0 ]]; then
+            echo "ERROR: Gradle install task failed (exit $GRADLE_EXIT)"
+            exit $GRADLE_EXIT
+        fi
+        echo "Gradle install completed successfully."
+    else
+        echo "WARNING: Gradle wrapper not found or not executable at $GRADLE_WRAPPER, skipping Gradle install."
     fi
-    echo "Gradle install completed successfully."
-else
-    echo "WARNING: Gradle wrapper not found or not executable at $GRADLE_WRAPPER, skipping Gradle install."
-fi
+}
+
+generate_setenv_file
+run_gradle_install
 
 echo "==========================================================="
 echo "Bootstrap completed successfully!"

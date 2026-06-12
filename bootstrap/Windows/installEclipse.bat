@@ -128,44 +128,48 @@ if "!NEEDS_INSTALL!"=="0" (
 )
 
 echo [installEclipse] Installing Eclipse plugins ^(Acceleo, Sirius, CDT^)...
+
+set "PLUGINS="
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.ui.interpreter.ocl.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.ui.interpreter.completeocl.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.emf.sdk.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.uml2.sdk.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.ocl.all.sdk.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.query.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.acceleo.query.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.antlr.runtime"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.common.acceleo.aql"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.ui.properties"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.aql.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.runtime.aql.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.properties.feature.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.aql.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.interpreter.feature.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.interpreter.feature.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.model.feature.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.properties.feature.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.runtime.aql.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.runtime.ide.ui.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.aql.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.ide.ui.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.properties.feature.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.properties.feature.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.sirius.specifier.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.ext.widgets.reference.feature.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.sdk.feature.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.eef.sdk.feature.source.feature.group"
+set "PLUGINS=!PLUGINS! -installIU org.eclipse.cdt.feature.group"
+
 "%TARGET_DIR%\eclipsec.exe" ^
      -nosplash -consoleLog ^
      -application org.eclipse.equinox.p2.director ^
      -repository "https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%,%SIRIUS_REPOSITORY_URL%,%CDT_REPOSITORY_URL%" ^
-     -installIU org.eclipse.acceleo.feature.group ^
-     -installIU org.eclipse.acceleo.ui.interpreter.ocl.feature.group ^
-     -installIU org.eclipse.acceleo.ui.interpreter.completeocl.feature.group ^
-     -installIU org.eclipse.emf.sdk.feature.group ^
-     -installIU org.eclipse.uml2.sdk.feature.group ^
-     -installIU org.eclipse.ocl.all.sdk.feature.group ^
-     -installIU org.eclipse.acceleo.query.feature.group ^
-     -installIU org.eclipse.acceleo.query.source.feature.group ^
-     -installIU org.antlr.runtime ^
-     -installIU org.eclipse.sirius.common.acceleo.aql ^
-     -installIU org.eclipse.sirius.ui.properties ^
-     -installIU org.eclipse.sirius.aql.feature.group ^
-     -installIU org.eclipse.sirius.runtime.aql.feature.group ^
-     -installIU org.eclipse.sirius.properties.feature.feature.group ^
-     -installIU org.eclipse.sirius.aql.source.feature.group ^
-     -installIU org.eclipse.sirius.interpreter.feature.feature.group ^
-     -installIU org.eclipse.sirius.interpreter.feature.source.feature.group ^
-     -installIU org.eclipse.sirius.model.feature.source.feature.group ^
-     -installIU org.eclipse.sirius.properties.feature.source.feature.group ^
-     -installIU org.eclipse.sirius.runtime.aql.source.feature.group ^
-     -installIU org.eclipse.sirius.runtime.ide.ui.feature.group ^
-     -installIU org.eclipse.sirius.specifier.feature.group ^
-     -installIU org.eclipse.sirius.specifier.ide.ui.aql.feature.group ^
-     -installIU org.eclipse.sirius.specifier.ide.ui.aql.source.feature.group ^
-     -installIU org.eclipse.sirius.specifier.ide.ui.feature.group ^
-     -installIU org.eclipse.sirius.specifier.ide.ui.source.feature.group ^
-     -installIU org.eclipse.sirius.specifier.properties.feature.feature.group ^
-     -installIU org.eclipse.sirius.specifier.properties.feature.source.feature.group ^
-     -installIU org.eclipse.sirius.specifier.source.feature.group ^
-     -installIU org.eclipse.eef.ext.widgets.reference.feature.feature.group ^
-     -installIU org.eclipse.eef.ext.widgets.reference.feature.source.feature.group ^
-     -installIU org.eclipse.eef.sdk.feature.feature.group ^
-     -installIU org.eclipse.eef.sdk.feature.source.feature.group ^
-     -installIU org.eclipse.cdt.feature.group ^
+     !PLUGINS! ^
      -destination "%TARGET_DIR%" ^
      -profileProperties org.eclipse.update.install.features=true ^
      -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT

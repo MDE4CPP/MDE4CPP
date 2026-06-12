@@ -14,24 +14,10 @@ if "!MDE4CPP_COMPILER_VERSION!"=="" (
     exit /b 1
 )
 
-REM Step 2: Resolve the install directory from setenv or prompt the user.
-set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%\..\..") do set "REPO_ROOT=%%~fI"
-set "SETENV_FILE=%REPO_ROOT%\setenv.bat"
-if not exist "%SETENV_FILE%" set "SETENV_FILE=%REPO_ROOT%\setenv.bat.default"
-
-set "INSTALL_DIR="
-if exist "%SETENV_FILE%" (
-    for /f "tokens=1,* delims==" %%A in ('findstr /R /I /C:"^[ ]*SET[ ]*COMPILER_HOME=" "%SETENV_FILE%"') do (
-        set "INSTALL_DIR=%%B"
-        goto :pathFound
-    )
-)
-
-:pathFound
-if defined INSTALL_DIR (
-    set "INSTALL_DIR=%INSTALL_DIR:"=%"
-    for /f "tokens=* delims= " %%P in ("%INSTALL_DIR%") do set "INSTALL_DIR=%%P"
+REM Step 2: Resolve the install directory.
+set "INSTALL_DIR=%COMPILER_HOME%"
+if not defined INSTALL_DIR (
+    set /P INSTALL_DIR=[installCompiler] Enter MinGW installation directory:
 )
 
 if not defined INSTALL_DIR (

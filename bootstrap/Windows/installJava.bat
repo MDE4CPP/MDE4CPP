@@ -22,26 +22,14 @@ for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Ses
 
 REM Strategy 2: Scan common installation directories
 if not defined JAVA_EXE (
-    for /d %%I in ("%ProgramFiles%\Microsoft\jdk-!MDE4CPP_JAVA_VERSION!*") do (
-        if exist "%%~fI\bin\java.exe" (
-            set "JAVA_EXE=%%~fI\bin\java.exe"
-            echo [installJava] Found Java at: %%~fI
-        )
-    )
-)
-if not defined JAVA_EXE (
-    for /d %%I in ("%ProgramFiles%\Eclipse Adoptium\jdk-!MDE4CPP_JAVA_VERSION!*") do (
-        if exist "%%~fI\bin\java.exe" (
-            set "JAVA_EXE=%%~fI\bin\java.exe"
-            echo [installJava] Found Java at: %%~fI
-        )
-    )
-)
-if not defined JAVA_EXE (
-    for /d %%I in ("%ProgramFiles%\Java\jdk-!MDE4CPP_JAVA_VERSION!*") do (
-        if exist "%%~fI\bin\java.exe" (
-            set "JAVA_EXE=%%~fI\bin\java.exe"
-            echo [installJava] Found Java at: %%~fI
+    for %%V in ("Microsoft" "Eclipse Adoptium" "Java") do (
+        if not defined JAVA_EXE (
+            for /d %%I in ("%ProgramFiles%\%%~V\jdk-!MDE4CPP_JAVA_VERSION!*") do (
+                if exist "%%~fI\bin\java.exe" (
+                    set "JAVA_EXE=%%~fI\bin\java.exe"
+                    echo [installJava] Found Java at: %%~fI
+                )
+            )
         )
     )
 )
