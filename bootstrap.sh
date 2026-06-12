@@ -7,17 +7,17 @@ OS="$(uname -s)"
 case "$OS" in
     Linux*)     
         echo "Detected OS: Linux"
-        "$DIR/bootstrap.sh"
+        "$DIR/bootstrap/Linux/bootstrap.sh"
         ;;
     Darwin*)    
         echo "Detected OS: Mac OS"
-        "$DIR/bootstrap.sh"
+        "$DIR/bootstrap/MacOS/bootstrap.sh"
         ;;
     CYGWIN*|MINGW*|MSYS*) 
         echo "Detected OS: Windows"
         # Call bat file or windows specific script
-        if [ -f "$DIR/bootstrap.bat" ]; then
-            cmd.exe /c "$(cygpath -w "$DIR/bootstrap.bat")"
+        if [ -f "$DIR/bootstrap/Windows/bootstrap.bat" ]; then
+            cmd.exe /c "$(cygpath -w "$DIR/bootstrap/Windows/bootstrap.bat")"
         else
             echo "Windows script not found."
             exit 1
