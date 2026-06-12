@@ -147,7 +147,7 @@ if exist "!TARGET_DIR!\eclipse.exe" (
 
 REM Step 5: Install Acceleo into Eclipse.
 
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.acceleo.feature*" >nul 2>&1
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.acceleo_*" >nul 2>&1
 if not errorlevel 1 (
     echo [installEclipse] Acceleo is already installed. Skipping.
     goto :skipAcceleo
@@ -181,7 +181,7 @@ REM to debug use -help to list all options, -list to list all available IUs in t
 
 REM Step 6: Install Sirius into Eclipse.
 
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.sirius.aql.feature*" >nul 2>&1
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.sirius.aql_*" >nul 2>&1
 if not errorlevel 1 (
     echo [installEclipse] Sirius is already installed. Skipping.
     goto :skipSirius
@@ -234,7 +234,7 @@ REM -list: Lists all available IUs in the given repositories.
 
 REM Step 7: Install CDT into Eclipse.
 
-dir /b /ad "%TARGET_DIR%\features\org.eclipse.cdt.feature*" >nul 2>&1
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.cdt_*" >nul 2>&1
 if not errorlevel 1 (
     echo [installEclipse] CDT is already installed. Skipping.
     goto :skipCdt
