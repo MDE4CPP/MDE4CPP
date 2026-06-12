@@ -151,14 +151,7 @@ for /f "usebackq tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
     set "PLUGINS=!PLUGINS! -installIU %%P"
 )
 
-"%TARGET_DIR%\eclipsec.exe" ^
-     -nosplash ^
-     -application org.eclipse.equinox.p2.director ^
-     -repository "https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%,%SIRIUS_REPOSITORY_URL%,%CDT_REPOSITORY_URL%" ^
-     !PLUGINS! ^
-     -destination "%TARGET_DIR%" ^
-     -profileProperties org.eclipse.update.install.features=true ^
-     -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT 2> "%TMP_DIR%\p2_stderr.log"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& \"%TARGET_DIR%\eclipsec.exe\" -nosplash -application org.eclipse.equinox.p2.director -repository \"https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%,%SIRIUS_REPOSITORY_URL%,%CDT_REPOSITORY_URL%\" !PLUGINS! -destination \"%TARGET_DIR%\" -profileProperties org.eclipse.update.install.features=true -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT 2> \"%TMP_DIR%\p2_stderr.log\" | ForEach-Object { [Console]::Out.WriteLine(\"$env:C_PURPLE[installEclipse]$env:C_INFO $_$env:C_RESET\") }; exit $LASTEXITCODE"
 if errorlevel 1 (
     echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: Eclipse plugin installation failed.%C_RESET%
     type "%TMP_DIR%\p2_stderr.log"
