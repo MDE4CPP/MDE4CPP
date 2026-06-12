@@ -154,11 +154,9 @@ for /f "usebackq tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
      !PLUGINS! ^
      -destination "%TARGET_DIR%" ^
      -profileProperties org.eclipse.update.install.features=true ^
-     -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT > "%TMP_DIR%\p2_install.log" 2>&1
+     -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
 if errorlevel 1 (
-    echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: Eclipse plugin installation failed. See log below:%C_RESET%
-    type "%TMP_DIR%\p2_install.log"
-    rmdir /s /q "%TMP_DIR%"
+    echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: Eclipse plugin installation failed.%C_RESET%
     exit /b 1
 )
 

@@ -114,11 +114,10 @@ echo "${C_PURPLE}[installEclipse]${C_INFO} Installing Eclipse plugins (Acceleo, 
   -repository "https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/},${ACCELEO_REPOSITORY_URL},${SIRIUS_REPOSITORY_URL},${CDT_REPOSITORY_URL}" \
   "${IU_ARGS[@]}" \
   -destination "${P2_DESTINATION}" \
-  -profileProperties org.eclipse.update.install.features=true > "${TMP_DIR}/p2_install.log" 2>&1
+  -profileProperties org.eclipse.update.install.features=true
 
 if [ $? -ne 0 ]; then
-  echo "${C_PURPLE}[installEclipse]${C_ERROR} ERROR: Eclipse plugin installation failed. See log below:${C_RESET}"
-  cat "${TMP_DIR}/p2_install.log"
+  echo "${C_PURPLE}[installEclipse]${C_ERROR} ERROR: Eclipse plugin installation failed.${C_RESET}"
   exit 1
 fi
 

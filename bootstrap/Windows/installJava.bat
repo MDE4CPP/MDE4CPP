@@ -44,7 +44,9 @@ if not defined JAVA_EXE (
 
 REM Parse the major version from the discovered Java executable
 set "INSTALLED_MAJOR="
+set "EXPORT_JAVA_HOME="
 if defined JAVA_EXE (
+    for %%J in ("!JAVA_EXE!\..\..") do set "EXPORT_JAVA_HOME=%%~fJ"
     for /f "tokens=3" %%A in ('""!JAVA_EXE!" -version 2^>^&1 ^| findstr /I "version""') do (
         for /f "tokens=1 delims=." %%B in ("%%~A") do (
             if not defined INSTALLED_MAJOR set "INSTALLED_MAJOR=%%B"
@@ -55,7 +57,7 @@ if defined JAVA_EXE (
 if defined INSTALLED_MAJOR (
     if "!INSTALLED_MAJOR!"=="!MDE4CPP_JAVA_VERSION!" (
         echo %C_PURPLE%[installJava]%C_SUCCESS% Java !MDE4CPP_JAVA_VERSION! is already installed. Skipping.%C_RESET%
-        exit /b 0
+        endlocal & set "JAVA_HOME=%EXPORT_JAVA_HOME%" & exit /b 0
     )
     echo %C_PURPLE%[installJava]%C_SUCCESS% Found Java !INSTALLED_MAJOR! but need !MDE4CPP_JAVA_VERSION!.%C_RESET%
 ) else (
@@ -114,7 +116,7 @@ if not defined VERIFY_JAVA (
 if defined VERIFY_JAVA (
     echo %C_PURPLE%[installJava]%C_SUCCESS% Verified: Java installed at !VERIFY_JAVA!%C_RESET%
     "!VERIFY_JAVA!\bin\java.exe" -version 2>&1
-    exit /b 0
+    endlocal & set "JAVA_HOME=%VERIFY_JAVA%" & exit /b 0
 )
 
 echo %C_PURPLE%[installJava]%C_ERROR% ERROR: Java installation could not be verified.%C_RESET%
