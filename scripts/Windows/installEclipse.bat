@@ -147,6 +147,12 @@ if exist "!TARGET_DIR!\eclipse.exe" (
 
 REM Step 5: Install Acceleo into Eclipse.
 
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.acceleo.feature*" >nul 2>&1
+if not errorlevel 1 (
+    echo [installEclipse] Acceleo is already installed. Skipping.
+    goto :skipAcceleo
+)
+
 echo [installEclipse] Installing EMF, UML-SDK,OCL and Acceleo from %ACCELEO_REPOSITORY_URL% and https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION%/
 "%TARGET_DIR%\eclipsec.exe" ^
      -nosplash -consoleLog ^
@@ -169,10 +175,18 @@ echo [installEclipse] Installing EMF, UML-SDK,OCL and Acceleo from %ACCELEO_REPO
      rmdir /s /q "%TMP_DIR%"
      exit /b 1
  )
+:skipAcceleo
 
 REM to debug use -help to list all options, -list to list all available IUs in the given repositories, -purgeHistory to reduce footprint by purging download history.
 
 REM Step 6: Install Sirius into Eclipse.
+
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.sirius.aql.feature*" >nul 2>&1
+if not errorlevel 1 (
+    echo [installEclipse] Sirius is already installed. Skipping.
+    goto :skipSirius
+)
+
 echo [installEclipse] Installing Sirius from %SIRIUS_REPOSITORY_URL% 
 "%TARGET_DIR%\eclipsec.exe" ^
     -nosplash -consoleLog ^
@@ -212,12 +226,20 @@ if errorlevel 1 (
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
+:skipSirius
 
 REM -purgeHistory - Purges the profile download history to reduce footprint
 REM -roaming: Sets the profile as roaming, allowing the installation to be moved.
 REM -list: Lists all available IUs in the given repositories.
 
 REM Step 7: Install CDT into Eclipse.
+
+dir /b /ad "%TARGET_DIR%\features\org.eclipse.cdt.feature*" >nul 2>&1
+if not errorlevel 1 (
+    echo [installEclipse] CDT is already installed. Skipping.
+    goto :skipCdt
+)
+
 echo [installEclipse] Installing CDT from %CDT_REPOSITORY_URL%
 "%TARGET_DIR%\eclipsec.exe" ^
   -nosplash -consoleLog ^
@@ -232,6 +254,7 @@ if errorlevel 1 (
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
 )
+:skipCdt
 
 REM Step 8: Cleanup and report completion.
 rmdir /s /q "%TMP_DIR%"

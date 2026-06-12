@@ -84,6 +84,60 @@ if errorlevel 1 (
 echo ===========================================================
 echo Running Gradle install to download third-party dependencies...
 echo ===========================================================
+
+REM Reload PATH from system registry since installers modify it in a separate elevated process
+for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path 2^>nul ^| findstr /I "Path"') do set "SYS_PATH=%%B"
+for /f "tokens=2*" %%A in ('reg query "HKCU\Environment" /v Path 2^>nul ^| findstr /I "Path"') do set "USR_PATH=%%B"
+if defined SYS_PATH set "PATH=!SYS_PATH!;!USR_PATH!;%PATH%"
+
+REM Read JAVA_HOME from system registry (winget sets this here)
+if "!JAVA_HOME!"=="" (
+    for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2^>nul ^| findstr /I "JAVA_HOME"') do (
+        if exist "%%B\bin\java.exe" (
+            set "JAVA_HOME=%%B"
+            echo [bootstrap] Loaded JAVA_HOME from system registry: !JAVA_HOME!
+        )
+    )
+)
+
+REM Fallback: Scan common JDK 21 installation directories
+if "!JAVA_HOME!"=="" (
+    for /d %%I in ("%ProgramFiles%\Microsoft\jdk-21*") do (
+        if exist "%%~fI\bin\java.exe" set "JAVA_HOME=%%~fI"
+    )
+)
+if "!JAVA_HOME!"=="" (
+    for /d %%I in ("%ProgramFiles%\Eclipse Adoptium\jdk-21*") do (
+        if exist "%%~fI\bin\java.exe" set "JAVA_HOME=%%~fI"
+    )
+)
+if "!JAVA_HOME!"=="" (
+    for /d %%I in ("%ProgramFiles%\Java\jdk-21*") do (
+        if exist "%%~fI\bin\java.exe" set "JAVA_HOME=%%~fI"
+    )
+)
+
+if not "!JAVA_HOME!"=="" (
+    echo [bootstrap] Using JAVA_HOME=!JAVA_HOME!
+    set "PATH=!JAVA_HOME!\bin;!PATH!"
+) else (
+    echo [bootstrap] ERROR: Could not find Java 21.
+    echo [bootstrap] --- Diagnostics ---
+    echo [bootstrap] ProgramFiles=%ProgramFiles%
+    echo [bootstrap] Registry JAVA_HOME:
+    reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2>nul
+    if errorlevel 1 echo [bootstrap]   ^(not set^)
+    echo [bootstrap] Contents of "%ProgramFiles%\Microsoft":
+    if exist "%ProgramFiles%\Microsoft" (
+        dir /b /ad "%ProgramFiles%\Microsoft" 2>nul | findstr /I "jdk"
+        if errorlevel 1 echo [bootstrap]   ^(no jdk directories^)
+    ) else (
+        echo [bootstrap]   ^(directory does not exist^)
+    )
+    echo [bootstrap] --- End diagnostics ---
+    exit /b 1
+)
+
 call "%SETENV_FILE%"
 
 cd /D "%PROJECT_DIR%"
