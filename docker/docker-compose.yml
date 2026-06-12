@@ -44,9 +44,13 @@
 
 x-base-service: &base-service
   build:
-    <<: *base-service
+    context: ..
+    dockerfile: docker/Dockerfile
+  image: mde4cpp:latest
+  user: mde4cpp
+  working_dir: /home/mde4cpp
   volumes:
-    <<: *base-service
+    - ../:/home/mde4cpp
   entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
 
 services:
