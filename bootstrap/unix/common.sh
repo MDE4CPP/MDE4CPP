@@ -12,7 +12,6 @@ setup_colors() {
 
 # Function to read properties file and export variables
 load_properties() {
-    setup_colors
     local prop_file="$1"
     if [ -f "$prop_file" ]; then
         echo "Loading properties from $prop_file..."
@@ -69,8 +68,10 @@ get_arch() {
 if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
     # Find versions.properties relative to this common.sh file
     COMMON_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    VERSIONS_FILE="$(cd "${COMMON_SCRIPT_DIR}/.." && pwd)/versions.properties"
+    VERSIONS_FILE="$(cd "${COMMON_SCRIPT_DIR}/../.." && pwd)/versions.properties"
     if [[ -f "$VERSIONS_FILE" ]]; then
         load_properties "$VERSIONS_FILE"
     fi
 fi
+
+setup_colors
