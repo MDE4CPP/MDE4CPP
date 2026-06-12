@@ -148,8 +148,8 @@ if exist "!TARGET_DIR!\eclipse.exe" (
 REM Step 5: Install Acceleo into Eclipse.
 
 echo [installEclipse] Installing EMF, UML-SDK,OCL and Acceleo from %ACCELEO_REPOSITORY_URL% and https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION%/
-"%TARGET_DIR%\eclipse.exe" ^
-     -nosplash ^
+"%TARGET_DIR%\eclipsec.exe" ^
+     -nosplash -consoleLog ^
      -application org.eclipse.equinox.p2.director ^
      -repository "https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%" ^
      -installIU org.eclipse.acceleo.feature.group ^
@@ -173,8 +173,8 @@ REM to debug use -help to list all options, -list to list all available IUs in t
 
 REM Step 6: Install Sirius into Eclipse.
 echo [installEclipse] Installing Sirius from %SIRIUS_REPOSITORY_URL% 
-"%TARGET_DIR%\eclipse.exe" ^
-    -nosplash ^
+"%TARGET_DIR%\eclipsec.exe" ^
+    -nosplash -consoleLog ^
     -application org.eclipse.equinox.p2.director ^
     -repository "%SIRIUS_REPOSITORY_URL%" ^
     -installIU org.eclipse.sirius.common.acceleo.aql ^
@@ -217,8 +217,8 @@ REM -list: Lists all available IUs in the given repositories.
 
 REM Step 7: Install CDT into Eclipse.
 echo [installEclipse] Installing CDT from %CDT_REPOSITORY_URL%
-"%TARGET_DIR%\eclipse.exe" ^
-  -nosplash ^
+"%TARGET_DIR%\eclipsec.exe" ^
+  -nosplash -consoleLog ^
   -application org.eclipse.equinox.p2.director ^
   -repository "%CDT_REPOSITORY_URL%" ^
   -installIU org.eclipse.cdt.feature.group ^
