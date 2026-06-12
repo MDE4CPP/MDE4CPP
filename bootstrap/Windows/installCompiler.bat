@@ -8,6 +8,8 @@ if /I "%~1"=="--elevated" goto :doInstall
 call "%~dp0common.bat"
 if errorlevel 1 exit /b 1
 
+call "%~dp0common.bat" print_header "installCompiler" "Running Compiler installation..."
+
 echo %C_PURPLE%[installCompiler]%C_INFO% MDE4CPP_COMPILER_VERSION=!MDE4CPP_COMPILER_VERSION!%C_RESET%
 if "!MDE4CPP_COMPILER_VERSION!"=="" (
     echo %C_PURPLE%[installCompiler]%C_ERROR% ERROR: MDE4CPP_COMPILER_VERSION not found in %VERSIONS_FILE%%C_RESET%

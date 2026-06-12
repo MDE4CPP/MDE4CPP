@@ -3,6 +3,7 @@ REM Common functions for MDE4CPP Windows bootstrap scripts
 
 if "%~1"=="load_properties" goto :load_properties
 if "%~1"=="setup_colors" goto :setup_colors
+if "%~1"=="print_header" goto :print_header
 if "%~1"=="" goto :auto_load
 exit /b 0
 
@@ -48,4 +49,10 @@ for /f "tokens=1,2 delims==" %%A in ('type "%SCRIPT_DIR%..\colors.properties" 2^
         set "!KEY!=!ESC![!VAL!"
     )
 )
+exit /b 0
+
+:print_header
+echo %C_WARN%===========================================================%C_RESET%
+echo %C_PURPLE%[%~2]%C_WARN% %~3%C_RESET%
+echo %C_WARN%===========================================================%C_RESET%
 exit /b 0

@@ -4,6 +4,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
+print_header "installCMake" "Running CMake installation..."
+
 if [[ -z "${MDE4CPP_CMAKE_VERSION:-}" ]]; then
     echo "${C_PURPLE}[installCMake]${C_ERROR} ERROR: MDE4CPP_CMAKE_VERSION is not set.${C_RESET}"
     exit 1

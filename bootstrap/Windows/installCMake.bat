@@ -8,6 +8,8 @@ if /I "%~1"=="--elevated" goto :doInstall
 call "%~dp0common.bat"
 if errorlevel 1 exit /b 1
 
+call "%~dp0common.bat" print_header "installCMake" "Running CMake installation..."
+
 REM Use CMAKE_BUILD as CMAKE_BUILD_VERSION for compatibility
 set "MDE4CPP_CMAKE_BUILD_VERSION=!MDE4CPP_CMAKE_BUILD!"
 

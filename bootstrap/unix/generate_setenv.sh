@@ -5,7 +5,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/common.sh"
 
-echo "${C_PURPLE}[generate_setenv]${C_INFO} Generating setenv.sh...${C_RESET}"
+print_header "generate_setenv" "Running Setenv Generator..."
+
+echo "${C_PURPLE}[generate_setenv]${C_WARN} Generating setenv.sh...${C_RESET}"
 
 # DIR is the repository root when calling from bootstrap, so let's deduce it here
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"

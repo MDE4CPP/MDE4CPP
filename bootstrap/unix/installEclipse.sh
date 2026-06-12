@@ -4,6 +4,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
+print_header "installEclipse" "Running Eclipse installation..."
+
 echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_VERSION=${MDE4CPP_ECLIPSE_VERSION:-}${C_RESET}"
 echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_MILESTONE=${MDE4CPP_ECLIPSE_MILESTONE:-}${C_RESET}"
 echo "${C_PURPLE}[installEclipse]${C_INFO} MDE4CPP_ECLIPSE_ACCELEO_VERSION=${MDE4CPP_ECLIPSE_ACCELEO_VERSION:-}${C_RESET}"

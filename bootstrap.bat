@@ -16,13 +16,9 @@ for %%I in ("%PROJECT_DIR%\..") do set "PARENT_DIR=%%~fI"
 set "ECLIPSE_DIR=%PARENT_DIR%\eclipse"
 set "SETENV_FILE=%PROJECT_DIR%\setenv.bat"
 
-echo ===========================================================
-echo %C_PURPLE%[bootstrap]%C_INFO% MDE4CPP Bootstrap Script for Windows%C_RESET%
-echo ===========================================================
+call "%DIR%bootstrap\Windows\common.bat" print_header "bootstrap" "MDE4CPP Bootstrap Script for Windows"
 
-echo ===========================================================
-echo Installing system tools...
-echo ===========================================================
+call "%DIR%bootstrap\Windows\common.bat" print_header "bootstrap" "Installing system tools..."
 
 call "%DIR%bootstrap\Windows\installJava.bat"
 if errorlevel 1 (
@@ -55,11 +51,11 @@ if errorlevel 1 exit /b 1
 call "%DIR%bootstrap\Windows\run_gradle_install.bat"
 if errorlevel 1 exit /b 1
 
-echo ===========================================================
+echo %C_WARN%===========================================================%C_RESET%
 echo %C_SUCCESS%Bootstrap completed successfully!%C_RESET%
 echo To activate the environment, please run:
 echo   call setenv.bat
-echo ===========================================================
+echo %C_WARN%===========================================================%C_RESET%
 
 endlocal
 exit /b 0

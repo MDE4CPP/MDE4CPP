@@ -4,6 +4,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
+print_header "installCompiler" "Running Compiler installation..."
+
 echo "${C_PURPLE}[installCompiler]${C_INFO} MDE4CPP_COMPILER_VERSION=${MDE4CPP_COMPILER_VERSION:-}${C_RESET}"
 if [[ -z "${MDE4CPP_COMPILER_VERSION:-}" ]]; then
     echo "${C_PURPLE}[installCompiler]${C_ERROR} ERROR: MDE4CPP_COMPILER_VERSION is not set.${C_RESET}"

@@ -7,9 +7,9 @@ for %%I in ("%SCRIPT_DIR%\..\..") do set "REPO_ROOT=%%~fI"
 if not defined PROJECT_DIR set "PROJECT_DIR=%REPO_ROOT%"
 if not defined SETENV_FILE set "SETENV_FILE=%REPO_ROOT%\setenv.bat"
 
-echo ===========================================================
-echo Running Gradle install to download third-party dependencies...
-echo ===========================================================
+call "%~dp0common.bat"
+
+call "%~dp0common.bat" print_header "run_gradle_install" "Running Gradle install to download third-party dependencies..."
 
 call "%SETENV_FILE%"
 

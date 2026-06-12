@@ -36,9 +36,7 @@ case "$OS" in
         ;;
 esac
 
-echo "==========================================================="
-echo "Installing system tools for $OS_DIR..."
-echo "==========================================================="
+print_header "bootstrap" "Installing system tools for $OS_DIR..."
 
 if [ "$OS_DIR" = "MacOS" ]; then
     echo "${C_PURPLE}[bootstrap]${C_INFO} Checking Homebrew...${C_RESET}"
@@ -70,8 +68,8 @@ if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: generate_set
 bash "$DIR/bootstrap/unix/run_gradle_install.sh"
 if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: run_gradle_install.sh failed${C_RESET}"; exit 1; fi
 
-echo "==========================================================="
+echo "${C_WARN}===========================================================${C_RESET}"
 echo "${C_SUCCESS}Bootstrap completed successfully!${C_RESET}"
 echo "To activate the environment, please run:"
 echo "  source setenv.sh"
-echo "==========================================================="
+echo "${C_WARN}===========================================================${C_RESET}"

@@ -7,9 +7,7 @@ source "$SCRIPT_DIR/common.sh"
 
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-echo "==========================================================="
-echo "Running Gradle install to download third-party dependencies..."
-echo "==========================================================="
+print_header "run_gradle_install" "Running Gradle install to download third-party dependencies..."
 
 source "$REPO_ROOT/setenv.sh"
 cd "$REPO_ROOT"

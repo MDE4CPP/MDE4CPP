@@ -15,6 +15,14 @@ setup_colors() {
     fi
 }
 
+print_header() {
+    local prefix="$1"
+    local message="$2"
+    echo "${C_WARN}===========================================================${C_RESET}"
+    echo "${C_PURPLE}[${prefix}]${C_WARN} ${message}${C_RESET}"
+    echo "${C_WARN}===========================================================${C_RESET}"
+}
+
 # Function to read properties file and export variables
 load_properties() {
     local prop_file="$1"

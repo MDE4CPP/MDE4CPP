@@ -4,6 +4,8 @@ setlocal EnableExtensions EnableDelayedExpansion
 call "%~dp0common.bat"
 if errorlevel 1 exit /b 1
 
+call "%~dp0common.bat" print_header "installEclipse" "Running Eclipse installation..."
+
 REM Determine MDE4CPP_HOME from script location
 set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "MDE4CPP_HOME=%%~fI"
