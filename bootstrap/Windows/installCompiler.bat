@@ -41,6 +41,14 @@ if exist "%INSTALL_DIR%\bin\gcc.exe" (
     ) else (
         echo %C_PURPLE%[installCompiler]%C_SUCCESS% Detected existing gcc.exe. Skipping.%C_RESET%
     )
+
+    REM Always remove bundled CMake from MinGW to prevent overriding the system CMake
+    if exist "%INSTALL_DIR%\bin\cmake.exe" del /q "%INSTALL_DIR%\bin\cmake.exe"
+    if exist "%INSTALL_DIR%\bin\cmake-gui.exe" del /q "%INSTALL_DIR%\bin\cmake-gui.exe"
+    if exist "%INSTALL_DIR%\bin\ccmake.exe" del /q "%INSTALL_DIR%\bin\ccmake.exe"
+    if exist "%INSTALL_DIR%\bin\cpack.exe" del /q "%INSTALL_DIR%\bin\cpack.exe"
+    if exist "%INSTALL_DIR%\bin\ctest.exe" del /q "%INSTALL_DIR%\bin\ctest.exe"
+
     exit /b 0
 )
 
