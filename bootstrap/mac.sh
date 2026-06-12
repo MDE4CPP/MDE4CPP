@@ -25,6 +25,7 @@ bash "$DIR/../scripts/MacOS/installCompiler.sh"
 
 bash "$DIR/../scripts/MacOS/installCMake.sh"
 
+export MDE4CPP_HOME="$(cd "$DIR/.." && pwd)"
 bash "$DIR/../scripts/MacOS/installEclipse.sh"
 
 PROJECT_DIR="$(cd "$DIR/.." && pwd)"

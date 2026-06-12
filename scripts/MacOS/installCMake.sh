@@ -2,20 +2,20 @@
 set -euo pipefail
 
 echo "[installCMake] MDE4CPP_CMAKE_VERSION=${MDE4CPP_CMAKE_VERSION:-}"
-echo "[installCMake] MDE4CPP_CMAKE_BUILD_VERSION=${MDE4CPP_CMAKE_BUILD_VERSION:-}"
+echo "[installCMake] MDE4CPP_CMAKE_BUILD=${MDE4CPP_CMAKE_BUILD:-}"
 
 if [[ -z "${MDE4CPP_CMAKE_VERSION:-}" ]]; then
   echo "[installCMake] ERROR: MDE4CPP_CMAKE_VERSION is not set."
   exit 1
 fi
-if [[ -z "${MDE4CPP_CMAKE_BUILD_VERSION:-}" ]]; then
-  echo "[installCMake] ERROR: MDE4CPP_CMAKE_BUILD_VERSION is not set."
+if [[ -z "${MDE4CPP_CMAKE_BUILD:-}" ]]; then
+  echo "[installCMake] ERROR: MDE4CPP_CMAKE_BUILD is not set."
   exit 1
 fi
 
 if command -v cmake >/dev/null 2>&1; then
   INSTALLED_VERSION="$(cmake --version | awk 'NR==1 {print $3}')"
-  REQUESTED_VERSION="${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD_VERSION}"
+  REQUESTED_VERSION="${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD}"
   
   # Compare versions (macOS compatible, avoiding GNU sort -V)
   IS_SATISFIED=$(awk -v req="$REQUESTED_VERSION" -v inst="$INSTALLED_VERSION" '
@@ -35,7 +35,7 @@ if command -v cmake >/dev/null 2>&1; then
   fi
   echo "[installCMake] Found installed CMake ${INSTALLED_VERSION}, but ${REQUESTED_VERSION} or newer is required. Installing via Homebrew."
 else
-  echo "[installCMake] CMake is not installed. Installing ${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD_VERSION}."
+  echo "[installCMake] CMake is not installed. Installing ${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD}."
 fi
 
 if ! command -v brew >/dev/null 2>&1; then
