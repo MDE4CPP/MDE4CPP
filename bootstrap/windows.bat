@@ -8,7 +8,8 @@ REM ########################################
 set "DIR=%~dp0"
 for %%I in ("%DIR%..") do set "PROJECT_DIR=%%~fI"
 
-set "ECLIPSE_DIR=%PROJECT_DIR%\eclipse"
+for %%I in ("%PROJECT_DIR%\..") do set "PARENT_DIR=%%~fI"
+set "ECLIPSE_DIR=%PARENT_DIR%\eclipse"
 set "SETENV_FILE=%PROJECT_DIR%\setenv.bat"
 
 echo ===========================================================
