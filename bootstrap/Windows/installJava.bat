@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
-call "%~dp0common.bat" load_properties
+call "%~dp0common.bat"
 if errorlevel 1 exit /b 1
 echo %C_PURPLE%[installJava]%C_INFO% MDE4CPP_JAVA_VERSION=!MDE4CPP_JAVA_VERSION!%C_RESET%
 if "!MDE4CPP_JAVA_VERSION!"=="" (

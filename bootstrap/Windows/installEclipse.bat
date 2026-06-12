@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
-call "%~dp0common.bat" load_properties
+call "%~dp0common.bat"
 if errorlevel 1 exit /b 1
 
 REM Determine MDE4CPP_HOME from script location

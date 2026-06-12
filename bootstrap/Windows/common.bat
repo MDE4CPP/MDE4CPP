@@ -3,6 +3,14 @@ REM Common functions for MDE4CPP Windows bootstrap scripts
 
 if "%~1"=="load_properties" goto :load_properties
 if "%~1"=="setup_colors" goto :setup_colors
+if "%~1"=="" goto :auto_load
+exit /b 0
+
+:auto_load
+call :setup_colors
+if not defined MDE4CPP_JAVA_VERSION (
+    call :load_properties
+)
 exit /b 0
 
 :load_properties

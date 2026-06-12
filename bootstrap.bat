@@ -6,7 +6,7 @@ REM # Windows Bootstrap script for MDE4CPP #
 REM ########################################
 
 set "DIR=%~dp0"
-call "%DIR%bootstrap\Windows\common.bat" setup_colors
+call "%DIR%bootstrap\Windows\common.bat"
 
 set "PROJECT_DIR=%~dp0"
 REM Remove trailing slash for PROJECT_DIR

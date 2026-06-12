@@ -2,7 +2,7 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 set "SCRIPT_DIR=%~dp0"
-call "%SCRIPT_DIR%..\common.bat" load_properties
+call "%SCRIPT_DIR%..\common.bat"
 
 for %%I in ("%SCRIPT_DIR%\..\..") do set "REPO_ROOT=%%~fI"
 

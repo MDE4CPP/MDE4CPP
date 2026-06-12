@@ -5,7 +5,7 @@ REM When running elevated from a temp copy, skip config reading (variables are
 REM already set by the wrapper) and jump directly to the install steps.
 if /I "%~1"=="--elevated" goto :doInstall
 
-call "%~dp0common.bat" load_properties
+call "%~dp0common.bat"
 if errorlevel 1 exit /b 1
 
 echo %C_PURPLE%[installCompiler]%C_INFO% MDE4CPP_COMPILER_VERSION=!MDE4CPP_COMPILER_VERSION!%C_RESET%
