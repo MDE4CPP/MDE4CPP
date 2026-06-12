@@ -55,8 +55,8 @@ include:
 
 x-base-service: &base-service
   build:
-    context: ..
-    dockerfile: docker/Dockerfile
+    context: .
+    dockerfile: Dockerfile
   image: mde4cpp:latest
   user: mde4cpp
   working_dir: /home/mde4cpp
