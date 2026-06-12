@@ -9,10 +9,10 @@ if "!MDE4CPP_JAVA_VERSION!"=="" (
     exit /b 1
 )
 
-REM Step 2: Detect existing Java installation using multiple strategies.
+REM Detect existing Java installation using multiple strategies.
 set "JAVA_EXE="
 
-REM Strategy 1: Read JAVA_HOME from system registry
+REM Read JAVA_HOME from system registry
 for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2^>nul ^| findstr /I "JAVA_HOME"') do (
     if exist "%%B\bin\java.exe" (
         set "JAVA_EXE=%%B\bin\java.exe"
@@ -20,7 +20,7 @@ for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Ses
     )
 )
 
-REM Strategy 2: Scan common installation directories
+REM Scan common installation directories
 if not defined JAVA_EXE (
     for %%V in ("Microsoft" "Eclipse Adoptium" "Java") do (
         if not defined JAVA_EXE (
@@ -34,7 +34,7 @@ if not defined JAVA_EXE (
     )
 )
 
-REM Strategy 3: Check current PATH
+REM Check current PATH
 if not defined JAVA_EXE (
     where java >nul 2>&1
     if not errorlevel 1 (
@@ -62,7 +62,7 @@ if defined INSTALLED_MAJOR (
     echo [installJava] Java !MDE4CPP_JAVA_VERSION! not detected. Installing.
 )
 
-REM Step 3: Install with elevation.
+REM Install with elevation.
 REM Elevated processes cannot access mapped network drives (e.g. Z:), so we write
 REM the install commands to a temp script on the local drive instead of calling back
 REM to this script via %~f0.
@@ -101,7 +101,7 @@ if errorlevel 1 (
 )
 
 :verify
-REM Step 4: Verify installation succeeded.
+REM Verify installation succeeded.
 set "VERIFY_JAVA="
 for /f "tokens=2*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v JAVA_HOME 2^>nul ^| findstr /I "JAVA_HOME"') do (
     if exist "%%B\bin\java.exe" set "VERIFY_JAVA=%%B"

@@ -23,10 +23,10 @@ if "!MDE4CPP_CMAKE_BUILD_VERSION!"=="" (
     exit /b 1
 )
 
-REM Step 2: Resolve versions and download paths.
+REM Resolve versions and download paths.
 set "CMAKE_FULL_VERSION=%MDE4CPP_CMAKE_VERSION%.%MDE4CPP_CMAKE_BUILD_VERSION%"
 
-REM Step 3: Skip when the requested CMake version is already installed.
+REM Skip when the requested CMake version is already installed.
 set "INSTALLED_VERSION="
 for /f "tokens=3" %%V in ('cmake --version 2^>nul ^| findstr /b "cmake version"') do set "INSTALLED_VERSION=%%V"
 if not "%INSTALLED_VERSION%"=="" (
@@ -40,7 +40,7 @@ if not "%INSTALLED_VERSION%"=="" (
     echo [installCMake] CMake is not installed. Installing %CMAKE_FULL_VERSION%.
 )
 
-REM Step 4: Ensure the script runs with administrator rights only if installation is required.
+REM Ensure the script runs with administrator rights only if installation is required.
 REM Elevated processes cannot access mapped network drives (e.g. Z:), so we copy
 REM this script to %TEMP% (local C: drive) and run the copy elevated.
 net session >nul 2>&1
@@ -82,7 +82,7 @@ if errorlevel 1 (
 )
 
 :doInstall
-REM Step 5: Prepare workspace and download the MSI installer.
+REM Prepare workspace and download the MSI installer.
 REM When reaching here via --elevated, CMAKE_FULL_VERSION and related variables
 REM are already set by the wrapper script.
 set "TMP_DIR=%TEMP%\mde4cpp-cmake-%RANDOM%%RANDOM%"
@@ -115,7 +115,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-REM Step 6: Install CMake system-wide.
+REM Install CMake system-wide.
 msiexec /i "%INSTALLER_PATH%" /qn ADD_CMAKE_TO_PATH=System
 if errorlevel 1 (
     echo [installCMake] ERROR: MSI installation failed. Try running as Administrator.
@@ -123,7 +123,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-REM Step 7: Cleanup and report installed binary location.
+REM Cleanup and report installed binary location.
 rmdir /s /q "%TMP_DIR%"
 echo [installCMake] Installed system CMake %CMAKE_FULL_VERSION%
 where cmake >nul 2>&1

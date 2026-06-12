@@ -14,7 +14,7 @@ if "!MDE4CPP_COMPILER_VERSION!"=="" (
     exit /b 1
 )
 
-REM Step 2: Resolve the install directory.
+REM Resolve the install directory.
 if not defined COMPILER_HOME set "COMPILER_HOME=C:\tools\MinGW"
 set "INSTALL_DIR=%COMPILER_HOME%"
 if not defined INSTALL_DIR (
@@ -30,7 +30,7 @@ if not defined INSTALL_DIR (
     exit /b 1
 )
 
-REM Step 3: Skip installation when MinGW already exists in target directory.
+REM Skip installation when MinGW already exists in target directory.
 if exist "%INSTALL_DIR%\bin\gcc.exe" (
     for /f "tokens=1" %%V in ('"%INSTALL_DIR%\bin\gcc.exe" -dumpfullversion 2^>nul') do set "INSTALLED_GCC=%%V"
     echo [installCompiler] MinGW is already installed at %INSTALL_DIR%.
@@ -42,7 +42,7 @@ if exist "%INSTALL_DIR%\bin\gcc.exe" (
     exit /b 0
 )
 
-REM Step 4: Ensure the script runs with administrator rights if installation is required.
+REM Ensure the script runs with administrator rights if installation is required.
 REM Elevated processes cannot access mapped network drives (e.g. Z:), so we copy
 REM this script to %TEMP% (local C: drive) and run the copy elevated.
 net session >nul 2>&1
@@ -89,7 +89,7 @@ if errorlevel 1 (
 )
 
 :doInstall
-REM Step 5: Resolve download URL and prepare temporary workspace.
+REM Resolve download URL and prepare temporary workspace.
 REM When reaching here via --elevated, MDE4CPP_COMPILER_VERSION and INSTALL_DIR
 REM are already set by the wrapper script.
 set "TMP_DIR=%TEMP%\mde4cpp-mingw-%RANDOM%%RANDOM%"
@@ -120,7 +120,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-REM Step 6: Extract and copy MinGW into target install directory.
+REM Extract and copy MinGW into target install directory.
 if exist "%INSTALL_DIR%" rmdir /s /q "%INSTALL_DIR%"
 mkdir "%INSTALL_DIR%" >nul 2>&1
 if errorlevel 1 (
@@ -145,7 +145,7 @@ if exist "%TMP_DIR%\extracted\mingw64" (
     exit /b 1
 )
 
-REM Step 7: Cleanup and verify gcc installation.
+REM Cleanup and verify gcc installation.
 rmdir /s /q "%TMP_DIR%"
 
 if exist "%INSTALL_DIR%\bin\gcc.exe" (

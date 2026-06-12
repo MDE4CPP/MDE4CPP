@@ -39,7 +39,7 @@ if "!MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION!"=="" (
     exit /b 1
 )
 
-REM Step 3: Resolve install locations and download URLs.
+REM Resolve install locations and download URLs.
 for %%I in ("!MDE4CPP_HOME!\..") do set "MDE4CPP_PARENT=%%~fI"
 set "TARGET_DIR=!MDE4CPP_PARENT!\eclipse"
 set "TMP_DIR=%TEMP%\mde4cpp-eclipse-install"
@@ -49,13 +49,13 @@ set "ACCELEO_REPOSITORY_URL=https://download.eclipse.org/acceleo/updates/release
 set "SIRIUS_REPOSITORY_URL=https://download.eclipse.org/sirius/updates/releases/!MDE4CPP_ECLIPSE_SIRIUS_VERSION: =!/!MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION: =!"
 set "CDT_REPOSITORY_URL=https://download.eclipse.org/releases/!MDE4CPP_ECLIPSE_VERSION: =!"
 
-REM Step 4: Download and extract Eclipse Modeling package.
+REM Download and extract Eclipse Modeling package.
 echo [installEclipse] MDE4CPP_HOME=!MDE4CPP_HOME!
 echo [installEclipse] Install location=!TARGET_DIR!
 echo [installEclipse] Temp Installation Dir=!TMP_DIR!
 echo [installEclipse] Using Eclipse version=!MDE4CPP_ECLIPSE_VERSION!, milestone=!MDE4CPP_ECLIPSE_MILESTONE!, Acceleo=!MDE4CPP_ECLIPSE_ACCELEO_VERSION!, Sirius=!MDE4CPP_ECLIPSE_SIRIUS_VERSION!
 
-REM Step 4: Download and extract Eclipse if not already installed.
+REM Download and extract Eclipse if not already installed.
 echo [installEclipse] Checking existing Eclipse installation...
 if exist "!TARGET_DIR!\eclipse.exe" (
     echo [installEclipse] Existing Eclipse installation found at !TARGET_DIR!, skipping download and extraction.
@@ -112,7 +112,7 @@ if exist "!TARGET_DIR!\eclipse.exe" (
     )
 )
 
-REM Step 5: Install Eclipse plugins (Acceleo, Sirius, CDT)
+REM Install Eclipse plugins (Acceleo, Sirius, CDT)
 
 set "NEEDS_INSTALL=0"
 dir /b /ad "%TARGET_DIR%\features\org.eclipse.acceleo_*" >nul 2>&1
@@ -181,7 +181,7 @@ if errorlevel 1 (
 
 :skipInstall
 
-REM Step 8: Cleanup and report completion.
+REM Cleanup and report completion.
 rmdir /s /q "%TMP_DIR%"
 echo [installEclipse] Eclipse installation finished: %TARGET_DIR%
 endlocal
