@@ -15,6 +15,7 @@ if "!MDE4CPP_COMPILER_VERSION!"=="" (
 )
 
 REM Step 2: Resolve the install directory.
+if not defined COMPILER_HOME set "COMPILER_HOME=C:\tools\MinGW"
 set "INSTALL_DIR=%COMPILER_HOME%"
 if not defined INSTALL_DIR (
     set /P INSTALL_DIR=[installCompiler] Enter MinGW installation directory:

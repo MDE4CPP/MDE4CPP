@@ -29,7 +29,8 @@ echo ===========================================================
     echo set "JAVA_HOME=%JAVA_HOME%"
     echo.
     echo REM Set compiler home directory
-    echo set COMPILER_HOME=C:\tools\MinGW
+    if not defined COMPILER_HOME set "COMPILER_HOME=C:\tools\MinGW"
+    echo set "COMPILER_HOME=!COMPILER_HOME!"
     echo.
     echo REM Update PATH variable locally
     echo set "PATH=%%JAVA_HOME%%\bin;%%COMPILER_HOME%%\bin;%%MDE4CPP_HOME%%\application\bin;%%MDE4CPP_HOME%%\application\tools;%%PATH%%"
