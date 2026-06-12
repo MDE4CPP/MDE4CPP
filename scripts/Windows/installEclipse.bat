@@ -162,7 +162,8 @@ echo [installEclipse] Installing EMF, UML-SDK,OCL and Acceleo from %ACCELEO_REPO
      -installIU org.eclipse.acceleo.query.source.feature.group ^
      -installIU org.antlr.runtime ^
      -destination "%TARGET_DIR%" ^
-     -profileProperties org.eclipse.update.install.features=true
+     -profileProperties org.eclipse.update.install.features=true ^
+     -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
  if errorlevel 1 (
      echo [installEclipse] ERROR: Acceleo installation failed.
      rmdir /s /q "%TMP_DIR%"
@@ -204,7 +205,8 @@ echo [installEclipse] Installing Sirius from %SIRIUS_REPOSITORY_URL%
     -installIU org.eclipse.eef.sdk.feature.feature.group ^
     -installIU org.eclipse.eef.sdk.feature.source.feature.group ^
     -destination "%TARGET_DIR%" ^
-    -profileProperties org.eclipse.update.install.features=true 
+    -profileProperties org.eclipse.update.install.features=true ^
+    -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
 if errorlevel 1 (
     echo [installEclipse] ERROR: Sirius installation failed.
     rmdir /s /q "%TMP_DIR%"
@@ -223,7 +225,8 @@ echo [installEclipse] Installing CDT from %CDT_REPOSITORY_URL%
   -repository "%CDT_REPOSITORY_URL%" ^
   -installIU org.eclipse.cdt.feature.group ^
   -destination "%TARGET_DIR%" ^
-  -profileProperties org.eclipse.update.install.features=true
+  -profileProperties org.eclipse.update.install.features=true ^
+  -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
 if errorlevel 1 (
     echo [installEclipse] ERROR: CDT installation failed.
     rmdir /s /q "%TMP_DIR%"
