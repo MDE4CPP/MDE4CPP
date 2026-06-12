@@ -62,6 +62,7 @@ x-base-service: &base-service
   working_dir: /home/mde4cpp
   volumes:
     - ../:/home/mde4cpp
+    - eclipse_data:/home/eclipse
   entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
 
 services:
@@ -131,3 +132,5 @@ services:
     command: /bin/bash -c "tail -f /dev/null"
     # Keep container running indefinitely for exec access
 
+volumes:
+  eclipse_data:

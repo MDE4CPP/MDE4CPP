@@ -18,7 +18,7 @@ export GRADLE_PARALLEL=true
 
 # Path configurations for Docker
 export PROJECT_DIR="/home/mde4cpp"
-export ECLIPSE_DIR="/home/mde4cpp/eclipse"
+export ECLIPSE_DIR="/home/eclipse"
 export SETENV_FILE="/home/mde4cpp/setenv"
 
 echo "Delegating setenv generation to bootstrap/unix/generate_setenv.sh..."
