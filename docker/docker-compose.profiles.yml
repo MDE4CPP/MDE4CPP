@@ -1,0 +1,62 @@
+x-base-service: &base-service
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  image: mde4cpp:latest
+  user: mde4cpp
+  working_dir: /home/mde4cpp
+  volumes:
+    - ../:/home/mde4cpp
+  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
+
+services:
+  # Profile Models: StandardProfile
+  # ============================================================================
+
+  # Build standard profile model (generate + compile)
+  # Usage: docker compose up build-standard-profile
+  build-standard-profile:
+    profiles: ["uml-profiles"]
+    <<: *base-service
+    container_name: mde4cpp-build-standard-profile
+    command: /bin/bash -c "./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon && ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon"
+  # Generate standard profile model
+  # Usage: docker compose up generate-standard-profile
+  generate-standard-profile:
+    profiles: ["uml-profiles"]
+    <<: *base-service
+    container_name: mde4cpp-generate-standard-profile
+    command: ./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon
+  # Compile standard profile model
+  # Usage: docker compose up compile-standard-profile
+  compile-standard-profile:
+    profiles: ["uml-profiles"]
+    <<: *base-service
+    container_name: mde4cpp-compile-standard-profile
+    command: ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon
+  # ============================================================================
+  # Profile Models: UML4CPPProfile
+  # ============================================================================
+
+  # Build UML4CPP profile model (generate + compile)
+  # Usage: docker compose up build-uml4cpp-profile
+  build-uml4cpp-profile:
+    profiles: ["uml-profiles"]
+    <<: *base-service
+    container_name: mde4cpp-build-uml4cpp-profile
+    command: /bin/bash -c "./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon && ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon"
+  # Generate UML4CPP profile model
+  # Usage: docker compose up generate-uml4cpp-profile
+  generate-uml4cpp-profile:
+    profiles: ["uml-profiles"]
+    <<: *base-service
+    container_name: mde4cpp-generate-uml4cpp-profile
+    command: ./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon
+  # Compile UML4CPP profile model
+  # Usage: docker compose up compile-uml4cpp-profile
+  compile-uml4cpp-profile:
+    profiles: ["uml-profiles"]
+    <<: *base-service
+    container_name: mde4cpp-compile-uml4cpp-profile
+    command: ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon
+  # ============================================================================

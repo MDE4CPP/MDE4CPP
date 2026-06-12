@@ -1,0 +1,72 @@
+x-base-service: &base-service
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  image: mde4cpp:latest
+  user: mde4cpp
+  working_dir: /home/mde4cpp
+  volumes:
+    - ../:/home/mde4cpp
+  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
+
+services:
+  # Infrastructure: Deliver Interfaces
+  # ============================================================================
+
+  # Build all infrastructure components (deliver all interfaces + compile plugin framework and persistence)
+  # Usage: docker compose up build-infrastructure
+  build-infrastructure:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-build-infrastructure
+    command: /bin/bash -c "./application/tools/gradlew src:common:abstractDataTypes:deliverAbstractDataTypes --no-daemon && ./application/tools/gradlew src:util:deliverUtil --no-daemon && ./application/tools/gradlew src:common:pluginFramework:deliverPluginFrameworkInterface --no-daemon && ./application/tools/gradlew src:common:persistence:deliverPersistenceInterface --no-daemon && ./application/tools/gradlew src:deliverBasicInterfaces --no-daemon && ./application/tools/gradlew src:common:pluginFramework:compilePluginFramework --no-daemon && ./application/tools/gradlew src:common:persistence:compilePersistence --no-daemon"
+  # Deliver abstract data types interface
+  # Usage: docker compose up deliver-abstract-data-types
+  deliver-abstract-data-types:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-deliver-abstract-data-types
+    command: ./application/tools/gradlew src:common:abstractDataTypes:deliverAbstractDataTypes --no-daemon
+  # Deliver util interface
+  # Usage: docker compose up deliver-util
+  deliver-util:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-deliver-util
+    command: ./application/tools/gradlew src:util:deliverUtil --no-daemon
+  # Deliver plugin framework interface
+  # Usage: docker compose up deliver-plugin-framework-interface
+  deliver-plugin-framework-interface:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-deliver-plugin-framework-interface
+    command: ./application/tools/gradlew src:common:pluginFramework:deliverPluginFrameworkInterface --no-daemon
+  # Deliver persistence interface
+  # Usage: docker compose up deliver-persistence-interface
+  deliver-persistence-interface:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-deliver-persistence-interface
+    command: ./application/tools/gradlew src:common:persistence:deliverPersistenceInterface --no-daemon
+  # Deliver basic interfaces (depends on all above)
+  # Usage: docker compose up deliver-basic-interfaces
+  deliver-basic-interfaces:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-deliver-basic-interfaces
+    command: ./application/tools/gradlew src:deliverBasicInterfaces --no-daemon
+  # Compile plugin framework
+  # Usage: docker compose up compile-plugin-framework
+  compile-plugin-framework:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-compile-plugin-framework
+    command: ./application/tools/gradlew src:common:pluginFramework:compilePluginFramework --no-daemon
+  # Compile persistence
+  # Usage: docker compose up compile-persistence
+  compile-persistence:
+    profiles: ["infrastructure"]
+    <<: *base-service
+    container_name: mde4cpp-compile-persistence
+    command: ./application/tools/gradlew src:common:persistence:compilePersistence --no-daemon
+  # ============================================================================

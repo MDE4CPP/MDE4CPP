@@ -1,0 +1,35 @@
+x-base-service: &base-service
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  image: mde4cpp:latest
+  user: mde4cpp
+  working_dir: /home/mde4cpp
+  volumes:
+    - ../:/home/mde4cpp
+  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
+
+services:
+  # Application Models: FoundationalModelLibrary
+  # ============================================================================
+
+  # Build foundational model library (generate + compile)
+  # Usage: docker compose up build-foundational-model-library
+  build-foundational-model-library:
+    profiles: ["application"]
+    <<: *base-service
+    container_name: mde4cpp-build-foundational-model-library
+    command: /bin/bash -c "./application/tools/gradlew src:common:FoundationalModelLibrary:generateFoundationalModelLibrary --no-daemon && ./application/tools/gradlew src:common:FoundationalModelLibrary:compileFoundationalModelLibrary --no-daemon"
+  # Generate foundational model library
+  # Usage: docker compose up generate-foundational-model-library
+  generate-foundational-model-library:
+    profiles: ["application"]
+    <<: *base-service
+    container_name: mde4cpp-generate-foundational-model-library
+    command: ./application/tools/gradlew src:common:FoundationalModelLibrary:generateFoundationalModelLibrary --no-daemon
+  # Compile foundational model library
+  # Usage: docker compose up compile-foundational-model-library
+  compile-foundational-model-library:
+    profiles: ["application"]
+    <<: *base-service
+    container_name: mde4cpp-compile-foundational-model-library
