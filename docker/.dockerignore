@@ -130,3 +130,8 @@
 **/*.swo
 **/*.swn
 **/*.swm
+
+# Local generated environment
+eclipse/
+**/eclipse/
+setenv
