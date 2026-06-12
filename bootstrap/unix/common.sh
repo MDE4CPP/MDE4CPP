@@ -2,7 +2,8 @@
 # Common functions for MDE4CPP bootstrap scripts
 
 setup_colors() {
-    local prop_file="${SCRIPT_DIR}/../colors.properties"
+    local common_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    local prop_file="${common_dir}/../colors.properties"
     if [ -f "$prop_file" ]; then
         while IFS='=' read -r key value; do
             if [[ "$key" =~ ^#.* ]] || [[ -z "$key" ]]; then
