@@ -1,0 +1,27 @@
+@echo off
+setlocal EnableExtensions EnableDelayedExpansion
+
+set "SCRIPT_DIR=%~dp0"
+for %%I in ("%SCRIPT_DIR%\..\..") do set "REPO_ROOT=%%~fI"
+
+if not defined PROJECT_DIR set "PROJECT_DIR=%REPO_ROOT%"
+if not defined SETENV_FILE set "SETENV_FILE=%REPO_ROOT%\setenv.bat"
+
+echo ===========================================================
+echo Running Gradle install to download third-party dependencies...
+echo ===========================================================
+
+call "%SETENV_FILE%"
+
+cd /D "%PROJECT_DIR%"
+set "GRADLE_WRAPPER=%PROJECT_DIR%\application\tools\gradlew.bat"
+if exist "%GRADLE_WRAPPER%" (
+    call "%GRADLE_WRAPPER%" install --no-daemon
+    if errorlevel 1 (
+        echo ERROR: Gradle install task failed ^(exit !errorlevel!^)
+        exit /b !errorlevel!
+    )
+) else (
+    echo ERROR: Gradle wrapper not found at %GRADLE_WRAPPER%
+    exit /b 1
+)
