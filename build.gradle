@@ -29,9 +29,15 @@ plugins {
 
 import org.gradle.internal.os.OperatingSystem;
 
-// NOTE: Tool versioning is now centralized in `versions.properties` and
-// install scripts read that file directly. Versions have been removed
-// from `build.gradle` to avoid bootstrapping order issues.
+// NOTE: Tool versioning is now centralized in `versions.properties`. 
+// todo: Versions have been removed
+
+ext {
+    versions = [
+        xerces: '3.3.0',
+        antlr: '4.13.2'
+    ]
+}
 
 description 'MDE4CPP root project'
 
@@ -412,6 +418,8 @@ task runInstallScripts()
 	description 'Run the installation scripts for MDE4CPP. This will call the platform-specific install scripts directly. It is recommended to run this task only once, then set the environment variables permanently in your system settings.'
 	def extension = ''
 	def scriptPath = ''
+	def tool = ''
+	def command = ''
     
 	def installScripts = [
 		'installJava',
@@ -419,9 +427,8 @@ task runInstallScripts()
 		'installEclipse',
 		'installCMake'
 	]
-
 	// workingDir System.getenv('MDE4CPP_HOME')
-		if (OperatingSystem.current().isWindows()) 
+	if (OperatingSystem.current().isWindows()) 
 	{
 		// MS Windows
 		tool = 'cmd'

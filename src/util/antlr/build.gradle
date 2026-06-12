@@ -38,11 +38,11 @@ configurations {
     antlrTool
 }
 
-dependencies {
-    antlrTool "org.antlr:antlr4:${rootProject.ext.versions.antlr}"
-}
+def antlr4Version = "${rootProject.ext.versions.antlr}"
 
-def antlr4Version = "4.13.2"
+dependencies {
+    antlrTool "org.antlr:antlr4:${antlr4Version}"
+}
 
 task downloadAntlr4(type: Download) {
 	description 'download antlr4 C++ runtime source'
