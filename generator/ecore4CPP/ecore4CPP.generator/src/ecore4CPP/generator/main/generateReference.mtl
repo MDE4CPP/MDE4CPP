@@ -167,8 +167,8 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 	return [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if];
 			[else]
 	//Cast conversion from redefined container reference [redefinedContainer.eContainingClass.name/]::[redefinedContainer.name/] 
-	std::shared_ptr<Bag<[anEReference.eGenericType.generateCppType(false)/]>> [anEReference.name/](new Bag<[anEReference.eGenericType.generateCppType(false)/]>());
-
+	[anEReference.generateReferenceType()/] [anEReference.name/](new [anEReference.generateReferenceType(false)/]());
+	
 	Bag<[redefinedContainer.eGenericType.generateCppType(false)/]>::iterator iter = [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]->begin();
 	Bag<[redefinedContainer.eGenericType.generateCppType(false)/]>::iterator end = [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]->end();
 	

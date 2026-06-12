@@ -48,14 +48,14 @@ std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() 
 [if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 		[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-	if(auto wp = m_[multipleRef.name/].lock())
+	if(auto wp = m_[multipleRef.name/][if(multipleRef.isBackReference())].lock()[/if])
 	{
 		return wp;
 	}
 		[/for]
 	[/if]
 	[else]
-	if(auto wp = m_[aReference.name/].lock())
+	if(auto wp = m_[aReference.name/][if(aReference.isBackReference())].lock()[/if])
 	{
 		return wp;
 	}
