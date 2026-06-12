@@ -1,44 +1,11 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
-REM Step 1: Find repo root and read Eclipse versions from versions.properties
-echo [installEclipse] Reading configuration from versions.properties...
-set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
-set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
-
-if not exist "%VERSIONS_FILE%" (
-    echo [installEclipse] ERROR: versions.properties not found at %VERSIONS_FILE%
-    exit /b 1
-)
-
-REM Read all Eclipse versions from properties file
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_ECLIPSE_VERSION"') do (
-    set "TEMP_VAL=%%B"
-    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_ECLIPSE_VERSION=%%X"
-)
-
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_ECLIPSE_MILESTONE"') do (
-    set "TEMP_VAL=%%B"
-    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_ECLIPSE_MILESTONE=%%X"
-)
-
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_ECLIPSE_ACCELEO_VERSION"') do (
-    set "TEMP_VAL=%%B"
-    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_ECLIPSE_ACCELEO_VERSION=%%X"
-)
-
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_ECLIPSE_SIRIUS_VERSION"') do (
-    set "TEMP_VAL=%%B"
-    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_ECLIPSE_SIRIUS_VERSION=%%X"
-)
-
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION"') do (
-    set "TEMP_VAL=%%B"
-    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION=%%X"
-)
+call "%~dp0common.bat" load_properties
+if errorlevel 1 exit /b 1
 
 REM Determine MDE4CPP_HOME from script location
+set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "MDE4CPP_HOME=%%~fI"
 
 REM Print requested Eclipse component versions.

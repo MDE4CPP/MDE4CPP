@@ -1,23 +1,8 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
-REM Step 1: Find repo root and read Java version from versions.properties
-echo [installJava] Reading configuration from versions.properties...
-set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
-set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
-
-if not exist "%VERSIONS_FILE%" (
-    echo [installJava] ERROR: versions.properties not found at %VERSIONS_FILE%
-    exit /b 1
-)
-
-REM Read MDE4CPP_JAVA_VERSION from properties file
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /B /C:"MDE4CPP_JAVA_VERSION"') do (
-    set "TEMP_VAL=%%B"
-    for /f "tokens=* delims= " %%X in ("!TEMP_VAL!") do set "MDE4CPP_JAVA_VERSION=%%X"
-)
-
+call "%~dp0common.bat" load_properties
+if errorlevel 1 exit /b 1
 echo [installJava] MDE4CPP_JAVA_VERSION=!MDE4CPP_JAVA_VERSION!
 if "!MDE4CPP_JAVA_VERSION!"=="" (
     echo [installJava] ERROR: MDE4CPP_JAVA_VERSION not found in %VERSIONS_FILE%
