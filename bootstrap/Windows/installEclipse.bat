@@ -57,11 +57,13 @@ echo %C_PURPLE%[installEclipse]%C_INFO% Using Eclipse version=!MDE4CPP_ECLIPSE_V
 
 REM Download and extract Eclipse if not already installed.
 echo %C_PURPLE%[installEclipse]%C_INFO% Checking existing Eclipse installation...%C_RESET%
+set "FRESH_INSTALL=0"
 if exist "!TARGET_DIR!\eclipse.exe" (
     echo %C_PURPLE%[installEclipse]%C_SUCCESS% Existing Eclipse installation found at !TARGET_DIR!, skipping download and extraction.%C_RESET%
     if exist "!TMP_DIR!" rmdir /s /q "!TMP_DIR!"
     mkdir "!TMP_DIR!" >nul 2>&1
 ) else (
+    set "FRESH_INSTALL=1"
     echo %C_PURPLE%[installEclipse]%C_INFO% Downloading !ECLIPSE_ARCHIVE_URL!%C_RESET%
     
     if exist "!TMP_DIR!" rmdir /s /q "!TMP_DIR!"
@@ -115,7 +117,9 @@ if exist "!TARGET_DIR!\eclipse.exe" (
 
 
 set "NEEDS_INSTALL=0"
-if exist "%TARGET_DIR%\eclipsec.exe" (
+if "!FRESH_INSTALL!"=="1" (
+    set "NEEDS_INSTALL=1"
+) else if exist "%TARGET_DIR%\eclipsec.exe" (
     "%TARGET_DIR%\eclipsec.exe" -nosplash -application org.eclipse.equinox.p2.director -listInstalledRoots > "%TMP_DIR%\installed.txt" 2>&1
     
     echo %C_PURPLE%[installEclipse]%C_SUCCESS% Found existing Eclipse plugins:%C_RESET%
@@ -148,7 +152,7 @@ for /f "usebackq tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
 )
 
 "%TARGET_DIR%\eclipsec.exe" ^
-     -nosplash -consoleLog ^
+     -nosplash ^
      -application org.eclipse.equinox.p2.director ^
      -repository "https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%,%SIRIUS_REPOSITORY_URL%,%CDT_REPOSITORY_URL%" ^
      !PLUGINS! ^
