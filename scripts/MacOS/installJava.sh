@@ -1,46 +1,37 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "[installJava] MDE4CPP_JAVA_VERSION=${MDE4CPP_JAVA_VERSION:-}"
 if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
   echo "[installJava] ERROR: MDE4CPP_JAVA_VERSION is not set."
   exit 1
 fi
 
-# Step 1: Check if the required Java version is already installed (before requesting elevation).
-if command -v java >/dev/null 2>&1; then
-  INSTALLED_MAJOR="$(java -version 2>&1 | awk -F[\".] '/version/ {print $2; exit}')"
-  if [[ "${INSTALLED_MAJOR}" == "${MDE4CPP_JAVA_VERSION}" ]]; then
-    echo "[installJava] Java ${MDE4CPP_JAVA_VERSION} is already installed. Skipping."
-    exit 0
-  fi
-  echo "[installJava] Found Java ${INSTALLED_MAJOR}. Installing Java ${MDE4CPP_JAVA_VERSION}."
+JAVA_MAJOR="${MDE4CPP_JAVA_VERSION%%.*}"
+echo "[installJava] Checking for Java $JAVA_MAJOR..."
+
+# 1. Use macOS native tool to check for the required major version
+if /usr/libexec/java_home -F -v "$JAVA_MAJOR" &>/dev/null; then
+    echo "[installJava] Java $JAVA_MAJOR is already installed."
+    # Get the exact path of the installed version
+    JAVA_HOME=$(/usr/libexec/java_home -v "$JAVA_MAJOR")
 else
-  echo "[installJava] Java is not installed. Installing Java ${MDE4CPP_JAVA_VERSION}."
-fi
+    echo "[installJava] Java $JAVA_MAJOR is not installed."
+    
+    if ! command -v brew >/dev/null 2>&1; then
+      echo "[installJava] ERROR: Homebrew is required on macOS. Install it from https://brew.sh/"
+      exit 1
+    fi
 
-if ! command -v brew >/dev/null 2>&1; then
-  echo "[installJava] ERROR: Homebrew is required on macOS. Install it from https://brew.sh/"
-  exit 1
-fi
+    echo "[installJava] Installing openjdk@$JAVA_MAJOR via Homebrew..."
+    brew update
+    brew install "openjdk@$JAVA_MAJOR"
+    
+    # 2. Crucial Step: Symlink it so the macOS system java wrapper and /usr/libexec/java_home can find it
+    echo "[installJava] Creating symlink to /Library/Java/JavaVirtualMachines/ (requires sudo)"
+    sudo ln -sfn "/opt/homebrew/opt/openjdk@$JAVA_MAJOR/libexec/openjdk.jdk" "/Library/Java/JavaVirtualMachines/openjdk-$JAVA_MAJOR.jdk" || true
 
-JAVA_FORMULA="openjdk@${MDE4CPP_JAVA_VERSION}"
-echo "[installJava] Installing ${JAVA_FORMULA} via Homebrew"
-brew update
-brew install "${JAVA_FORMULA}"
-
-JAVA_PREFIX="$(brew --prefix "${JAVA_FORMULA}" 2>/dev/null || true)"
-if [[ -n "${JAVA_PREFIX}" && -d "${JAVA_PREFIX}/libexec/openjdk.jdk/Contents/Home" ]]; then
-  JAVA_HOME="${JAVA_PREFIX}/libexec/openjdk.jdk/Contents/Home"
-elif [[ -d "/Library/Java/JavaVirtualMachines/openjdk-${MDE4CPP_JAVA_VERSION}.jdk/Contents/Home" ]]; then
-  JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-${MDE4CPP_JAVA_VERSION}.jdk/Contents/Home"
-elif command -v javac >/dev/null 2>&1; then
-  JAVA_HOME="$(cd "$(dirname "$(dirname "$(command -v javac)")")" && pwd)"
-fi
-
-if [[ -z "${JAVA_HOME:-}" || ! -x "${JAVA_HOME}/bin/java" ]]; then
-  echo "[installJava] ERROR: Cannot locate installed java binary."
-  exit 1
+    # Get the newly installed path
+    JAVA_HOME=$(/usr/libexec/java_home -v "$JAVA_MAJOR")
 fi
 
 echo "[installJava] Installed Java home: ${JAVA_HOME}"
