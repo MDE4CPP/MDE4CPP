@@ -29,7 +29,7 @@ else
         echo "${C_PURPLE}[installCompiler]${C_SUCCESS} GCC ${INSTALLED_GCC} is already installed. Skipping.${C_RESET}"
         exit 0
       fi
-      echo "${C_PURPLE}[installCompiler]${C_INFO} Found GCC ${INSTALLED_GCC}. Installing GCC ${MDE4CPP_COMPILER_VERSION}.${C_RESET}"
+      echo "${C_PURPLE}[installCompiler]${C_SUCCESS} Found GCC ${INSTALLED_GCC}. Installing GCC ${MDE4CPP_COMPILER_VERSION}.${C_RESET}"
     else
       echo "${C_PURPLE}[installCompiler]${C_INFO} GCC is not installed. Installing GCC ${MDE4CPP_COMPILER_VERSION}.${C_RESET}"
     fi

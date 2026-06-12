@@ -34,7 +34,7 @@ if not "%INSTALLED_VERSION%"=="" (
         echo %C_PURPLE%[installCMake]%C_SUCCESS% CMake %CMAKE_FULL_VERSION% is already installed. Skipping.%C_RESET%
         exit /b 0
     ) else (
-        echo %C_PURPLE%[installCMake]%C_INFO% Found installed CMake %INSTALLED_VERSION%. Installing %CMAKE_FULL_VERSION%.%C_RESET%
+        echo %C_PURPLE%[installCMake]%C_SUCCESS% Found installed CMake %INSTALLED_VERSION%. Installing %CMAKE_FULL_VERSION%.%C_RESET%
     )
 ) else (
     echo %C_PURPLE%[installCMake]%C_INFO% CMake is not installed. Installing %CMAKE_FULL_VERSION%.%C_RESET%

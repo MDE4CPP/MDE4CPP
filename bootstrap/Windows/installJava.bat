@@ -57,7 +57,7 @@ if defined INSTALLED_MAJOR (
         echo %C_PURPLE%[installJava]%C_SUCCESS% Java !MDE4CPP_JAVA_VERSION! is already installed. Skipping.%C_RESET%
         exit /b 0
     )
-    echo %C_PURPLE%[installJava]%C_INFO% Found Java !INSTALLED_MAJOR! but need !MDE4CPP_JAVA_VERSION!.%C_RESET%
+    echo %C_PURPLE%[installJava]%C_SUCCESS% Found Java !INSTALLED_MAJOR! but need !MDE4CPP_JAVA_VERSION!.%C_RESET%
 ) else (
     echo %C_PURPLE%[installJava]%C_INFO% Java !MDE4CPP_JAVA_VERSION! not detected. Installing.%C_RESET%
 )

@@ -23,7 +23,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
             echo "${C_PURPLE}[installCMake]${C_SUCCESS} CMake ${CMAKE_FULL_VERSION} is already installed.${C_RESET}"
             exit 0
         fi
-        echo "${C_PURPLE}[installCMake]${C_INFO} Found CMake ${INSTALLED_VERSION}, but need ${CMAKE_FULL_VERSION}.${C_RESET}"
+        echo "${C_PURPLE}[installCMake]${C_SUCCESS} Found CMake ${INSTALLED_VERSION}, but need ${CMAKE_FULL_VERSION}.${C_RESET}"
     fi
     echo "${C_PURPLE}[installCMake]${C_INFO} Installing cmake via Homebrew...${C_RESET}"
     brew install cmake
@@ -35,7 +35,7 @@ else
         echo "${C_PURPLE}[installCMake]${C_SUCCESS} CMake ${CMAKE_FULL_VERSION} is already installed. Skipping.${C_RESET}"
         exit 0
       fi
-      echo "${C_PURPLE}[installCMake]${C_INFO} Found CMake ${INSTALLED_VERSION}. Installing CMake ${CMAKE_FULL_VERSION}.${C_RESET}"
+      echo "${C_PURPLE}[installCMake]${C_SUCCESS} Found CMake ${INSTALLED_VERSION}. Installing CMake ${CMAKE_FULL_VERSION}.${C_RESET}"
     else
       echo "${C_PURPLE}[installCMake]${C_INFO} CMake is not installed. Installing CMake ${CMAKE_FULL_VERSION}.${C_RESET}"
     fi

@@ -40,7 +40,7 @@ else
         echo "${C_PURPLE}[installJava]${C_SUCCESS} Java ${MDE4CPP_JAVA_VERSION} is already installed. Skipping.${C_RESET}"
         exit 0
       fi
-      echo "${C_PURPLE}[installJava]${C_INFO} Found Java ${INSTALLED_MAJOR}. Installing Java ${MDE4CPP_JAVA_VERSION}.${C_RESET}"
+      echo "${C_PURPLE}[installJava]${C_SUCCESS} Found Java ${INSTALLED_MAJOR}. Installing Java ${MDE4CPP_JAVA_VERSION}.${C_RESET}"
     else
       echo "${C_PURPLE}[installJava]${C_INFO} Java is not installed. Installing Java ${MDE4CPP_JAVA_VERSION}.${C_RESET}"
     fi

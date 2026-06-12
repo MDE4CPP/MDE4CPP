@@ -133,13 +133,15 @@ for plugin in "${ECLIPSE_PLUGINS[@]}"; do
   IU_ARGS+=("-installIU" "${plugin}")
 done
 
-echo "Installing Eclipse plugins (Acceleo, Sirius, CDT)..."
+echo "${C_PURPLE}[installEclipse]${C_INFO} Installing Eclipse plugins (Acceleo, Sirius, CDT)...${C_RESET}"
 "${ECLIPSE_BIN}" \
   -nosplash \
   -application org.eclipse.equinox.p2.director \
   -repository "https://download.eclipse.org/releases/${MDE4CPP_ECLIPSE_VERSION//[[:space:]]/},${ACCELEO_REPOSITORY_URL},${SIRIUS_REPOSITORY_URL},${CDT_REPOSITORY_URL}" \
   "${IU_ARGS[@]}" \
   -destination "${P2_DESTINATION}" \
-  -profileProperties org.eclipse.update.install.features=true
+  -profileProperties org.eclipse.update.install.features=true 2>&1 | while IFS= read -r line; do
+    echo "${C_PURPLE}[installEclipse]${C_INFO} ${line}${C_RESET}"
+done
 
-echo "${C_SUCCESS}Eclipse installation finished: ${TARGET_DIR}${C_RESET}"
+echo "${C_PURPLE}[installEclipse]${C_SUCCESS} Eclipse installation finished: ${TARGET_DIR}${C_RESET}"
