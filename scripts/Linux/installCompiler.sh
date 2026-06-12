@@ -4,7 +4,7 @@ set -euo pipefail
 # Step 1: Find repo root and read compiler version from versions.properties
 echo "[installCompiler] Reading configuration from versions.properties..."
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 VERSIONS_FILE="${REPO_ROOT}/versions.properties"
 
 if [[ ! -f "${VERSIONS_FILE}" ]]; then

@@ -4,7 +4,7 @@ set -euo pipefail
 # Step 1: Find repo root and read CMake versions from versions.properties
 echo "[installCMake] Reading configuration from versions.properties..."
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 VERSIONS_FILE="${REPO_ROOT}/versions.properties"
 
 if [[ ! -f "${VERSIONS_FILE}" ]]; then
@@ -32,15 +32,25 @@ if [[ -z "${MDE4CPP_CMAKE_BUILD_VERSION}" ]]; then
 fi
 
 # Step 2: Resolve target paths and download source.
+ARCH=$(uname -m)
+if [[ "${ARCH}" == "x86_64" ]]; then
+  CMAKE_ARCH="x86_64"
+elif [[ "${ARCH}" == "aarch64" || "${ARCH}" == "arm64" ]]; then
+  CMAKE_ARCH="aarch64"
+else
+  echo "[installCMake] ERROR: Unsupported architecture: ${ARCH}"
+  exit 1
+fi
+
 CMAKE_FULL_VERSION="${MDE4CPP_CMAKE_VERSION}.${MDE4CPP_CMAKE_BUILD_VERSION}"
 TARGET_DIR="/opt/cmake-${CMAKE_FULL_VERSION}"
 TMP_DIR="$(mktemp -d)"
 ARCHIVE_PATH="${TMP_DIR}/cmake.tar.gz"
-DOWNLOAD_URL="https://github.com/Kitware/CMake/releases/download/v${CMAKE_FULL_VERSION}/cmake-${CMAKE_FULL_VERSION}-linux-x86_64.tar.gz"
+DOWNLOAD_URL="https://github.com/Kitware/CMake/releases/download/v${CMAKE_FULL_VERSION}/cmake-${CMAKE_FULL_VERSION}-linux-${CMAKE_ARCH}.tar.gz"
 
 # Step 3: Skip when requested version is already installed.
 if command -v cmake >/dev/null 2>&1; then
-  INSTALLED_VERSION="$(cmake --version | awk 'NR==1 {print $3}')"
+  INSTALLED_VERSION="$(cmake --version 2>/dev/null | awk 'NR==1 {print $3}' || true)"
   if [[ "${INSTALLED_VERSION}" == "${CMAKE_FULL_VERSION}" ]]; then
     echo "[installCMake] CMake ${CMAKE_FULL_VERSION} is already installed. Skipping."
     exit 0
@@ -79,7 +89,7 @@ fi
 # Step 7: Install CMake and update the system symlink.
 rm -rf "${TARGET_DIR}"
 tar -xzf "${ARCHIVE_PATH}" -C "${TMP_DIR}"
-mv "${TMP_DIR}/cmake-${CMAKE_FULL_VERSION}-linux-x86_64" "${TARGET_DIR}"
+mv "${TMP_DIR}/cmake-${CMAKE_FULL_VERSION}-linux-${CMAKE_ARCH}" "${TARGET_DIR}"
 ln -sfn "${TARGET_DIR}/bin/cmake" /usr/local/bin/cmake
 
 # Step 8: Report installed system location.
