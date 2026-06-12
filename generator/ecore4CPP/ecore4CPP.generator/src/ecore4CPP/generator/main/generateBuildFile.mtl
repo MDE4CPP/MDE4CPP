@@ -326,17 +326,11 @@ task compile[packageName.toUpperFirst()/]Src(type: tui.sse.mde4cpp.MDE4CPPCompil
 	outputs.files(fileTree(['['/]rootDir,'application','include','[packageName/]'[']'/].join(File.separator)))
 	outputs.dir(['['/]rootDir,'application','include','[packageName/]'[']'/].join(File.separator))
 
-	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
-	if(!buildFile.exists()) [comment In case of model build file was deleted /]
-	{
-		dependsOn getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]', true)
+	[comment Compiletask soll!! unabhängig vom Generate Task sein! KEINE Dependency zum generate task ausgehend vom compiletask!
+		nur mustRunAfter !   
+	/]
 		mustRunAfter = ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]', true)[']'/]
-	}
-	else
-	{
-		[comment wenn dies einkommentiert wird, wird bei jeder Quellcodänderung compiliert! dependsOn  getRootProject().getTasksByName('generate[packageName.toUpperFirst()/? ', true) /]
-		mustRunAfter = ['['/]getRootProject().getTasksByName('generate[packageName.toUpperFirst()/]', true)[']'/]
-	}	
+
 	[comment
 	// dependency to 'persistence'
 	//def persistence = getRootProject().getTasksByName('compilePersistence', true)
