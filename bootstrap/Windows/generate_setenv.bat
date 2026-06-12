@@ -10,9 +10,7 @@ if not defined PROJECT_DIR set "PROJECT_DIR=%REPO_ROOT%"
 if not defined SETENV_FILE set "SETENV_FILE=%REPO_ROOT%\setenv.bat"
 if not defined ECLIPSE_DIR set "ECLIPSE_DIR=%REPO_ROOT%\eclipse"
 
-echo ===========================================================
-echo Generating %SETENV_FILE%...
-echo ===========================================================
+echo %C_PURPLE%[generate_setenv]%C_INFO% Generating %SETENV_FILE%...%C_RESET%
 
 (
     echo @echo off
@@ -54,5 +52,5 @@ echo ===========================================================
     echo set "CPP_IDE_EXECUTABLE=%%MDE4CPP_ECLIPSE_HOME%%"
 ) > "%SETENV_FILE%"
 
-echo [bootstrap] setenv.bat generated successfully.
+echo %C_PURPLE%[generate_setenv]%C_SUCCESS% setenv.bat generated successfully.%C_RESET%
 exit /b 0
