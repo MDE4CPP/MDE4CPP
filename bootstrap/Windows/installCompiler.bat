@@ -141,6 +141,13 @@ if errorlevel 1 (
 
 if exist "%TMP_DIR%\extracted\mingw64" (
     robocopy "%TMP_DIR%\extracted\mingw64" "%INSTALL_DIR%" /E >nul
+    
+    REM Remove bundled CMake from MinGW to prevent overriding the system CMake
+    if exist "%INSTALL_DIR%\bin\cmake.exe" del /q "%INSTALL_DIR%\bin\cmake.exe"
+    if exist "%INSTALL_DIR%\bin\cmake-gui.exe" del /q "%INSTALL_DIR%\bin\cmake-gui.exe"
+    if exist "%INSTALL_DIR%\bin\ccmake.exe" del /q "%INSTALL_DIR%\bin\ccmake.exe"
+    if exist "%INSTALL_DIR%\bin\cpack.exe" del /q "%INSTALL_DIR%\bin\cpack.exe"
+    if exist "%INSTALL_DIR%\bin\ctest.exe" del /q "%INSTALL_DIR%\bin\ctest.exe"
 ) else (
     echo %C_PURPLE%[installCompiler]%C_ERROR% ERROR: Extracted MinGW folder not found.%C_RESET%
     rmdir /s /q "%TMP_DIR%"
