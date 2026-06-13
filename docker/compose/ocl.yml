@@ -3,56 +3,46 @@ x-base-service: &base-service
     context: ..
     dockerfile: Dockerfile
   image: mde4cpp:latest
+  init: true
   user: mde4cpp
   working_dir: /home/mde4cpp
   volumes:
     - ../:/home/mde4cpp
+    - gradle_cache:/home/mde4cpp/.gradle
+    - eclipse_data:/home/eclipse
   entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
 
 services:
+  # ==========
   # OCL Models
-  # ============================================================================
-
-  # Build ocl model (generate + compile)
-  # Usage: docker compose up build-ocl-model
+  # ==========
   build-ocl-model:
     profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-build-ocl-model
     command: /bin/bash -c "./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon && ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon"
-  # Generate ocl model
-  # Usage: docker compose up generate-ocl
   generate-ocl:
     profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-generate-ocl
     command: ./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon
-  # Compile ocl model
-  # Usage: docker compose up compile-ocl
   compile-ocl:
     profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-compile-ocl
     command: ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon
-  # Build ocl parser (generate + compile)
-  # Usage: docker compose up build-ocl-parser
   build-ocl-parser:
     profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-build-ocl-parser
     command: /bin/bash -c "./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon && ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon"
-  # Generate ocl parser
-  # Usage: docker compose up generate-ocl-parser
   generate-ocl-parser:
     profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-generate-ocl-parser
     command: ./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon
-  # Compile ocl parser
-  # Usage: docker compose up compile-ocl-parser
   compile-ocl-parser:
     profiles: ["ocl"]
     <<: *base-service
     container_name: mde4cpp-compile-ocl-parser
     command: ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon
-  # ============================================================================
