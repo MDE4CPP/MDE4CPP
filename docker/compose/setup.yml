@@ -1,59 +1,74 @@
-x-base-service: &base-service
-  build:
-    context: ..
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
 services:
   # ==============
   # Setup Services
   # ==============
   build-full:
     profiles: ["setup"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-full
     stdin_open: true
     tty: true
-    command: /bin/bash -c "./docker/scripts/install-eclipse.sh && ./docker/scripts/build-full.sh && echo '✓ Build complete!'"
+    command: >-
+      /bin/bash -c "
+      ./docker/scripts/install-eclipse.sh &&
+      ./docker/scripts/build-full.sh &&
+      echo '✓ Build complete!'
+      "
   install-eclipse:
     profiles: ["setup"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-install-eclipse
-    command: /bin/bash -c "./docker/scripts/install-eclipse.sh && echo '✓ Eclipse installation complete!'"
+    command: >-
+      /bin/bash -c "
+      ./docker/scripts/install-eclipse.sh &&
+      echo '✓ Eclipse installation complete!'
+      "
   clean:
     profiles: ["setup"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-clean
-    command: /bin/bash -c "./docker/scripts/clean-cmake.sh && echo '✓ Cleanup complete!'"
+    command: >-
+      /bin/bash -c "
+      ./docker/scripts/clean-cmake.sh &&
+      echo '✓ Cleanup complete!'
+      "
   publish-plugins:
     profiles: ["setup"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-publish-plugins
     command: ./application/tools/gradlew gradlePlugins:publishMDE4CPPPluginsToMavenLocal --no-daemon
   generate:
     profiles: ["setup"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate
     command: ./application/tools/gradlew generateAll --no-daemon
   compile:
     profiles: ["setup"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile
     command: ./application/tools/gradlew compileAll --no-daemon
   build-ocl:
     profiles: ["setup"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-ocl
     command: ./application/tools/gradlew src:buildOCLAll --no-daemon
   shell:
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-shell
     command: /bin/bash -c "tail -f /dev/null"

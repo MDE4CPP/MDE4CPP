@@ -1,34 +1,30 @@
-x-base-service: &base-service
-  build:
-    context: ..
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
 services:
   # ===============================
   # Profile Models: StandardProfile
   # ===============================
   build-standard-profile:
     profiles: ["uml-profiles"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-standard-profile
-    command: /bin/bash -c "./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon && ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon &&
+      ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon
+      "
   generate-standard-profile:
     profiles: ["uml-profiles"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-standard-profile
     command: ./application/tools/gradlew src:common:standardProfile:generateStandardProfile --no-daemon
   compile-standard-profile:
     profiles: ["uml-profiles"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-standard-profile
     command: ./application/tools/gradlew src:common:standardProfile:compileStandardProfile --no-daemon
   # ==============================
@@ -36,16 +32,26 @@ services:
   # ==============================
   build-uml4cpp-profile:
     profiles: ["uml-profiles"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-uml4cpp-profile
-    command: /bin/bash -c "./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon && ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon &&
+      ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon
+      "
   generate-uml4cpp-profile:
     profiles: ["uml-profiles"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-uml4cpp-profile
     command: ./application/tools/gradlew src:common:UML4CPPProfile:generateUML4CPPProfile --no-daemon
   compile-uml4cpp-profile:
     profiles: ["uml-profiles"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-uml4cpp-profile
     command: ./application/tools/gradlew src:common:UML4CPPProfile:compileUML4CPPProfile --no-daemon

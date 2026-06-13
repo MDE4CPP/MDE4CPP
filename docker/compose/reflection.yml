@@ -1,34 +1,30 @@
-x-base-service: &base-service
-  build:
-    context: ..
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
 services:
   # ==================================
   # Reflection Models: EcoreReflection
   # ==================================
   build-ecore-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-ecore-reflection
-    command: /bin/bash -c "./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon && ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon &&
+      ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon
+      "
   generate-ecore-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-ecore-reflection
     command: ./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon
   compile-ecore-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-ecore-reflection
     command: ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon
   # ===========================================
@@ -36,17 +32,27 @@ services:
   # ===========================================
   build-primitivetypes-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-primitivetypes-reflection
-    command: /bin/bash -c "./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon && ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon &&
+      ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon
+      "
   generate-primitivetypes-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-primitivetypes-reflection
     command: ./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon
   compile-primitivetypes-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-primitivetypes-reflection
     command: ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon
   # ================================
@@ -54,16 +60,26 @@ services:
   # ================================
   build-uml-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-uml-reflection
-    command: /bin/bash -c "./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon && ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon &&
+      ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon
+      "
   generate-uml-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-uml-reflection
     command: ./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon
   compile-uml-reflection:
     profiles: ["reflection"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-uml-reflection
     command: ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon

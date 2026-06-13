@@ -1,32 +1,30 @@
-x-base-service: &base-service
-  build:
-    context: ..
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
 services:
+  # ==================
   # Core Models: Ecore
+  # ==================
   build-ecore:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-ecore
-    command: /bin/bash -c "./application/tools/gradlew src:ecore:generateEcore --no-daemon && ./application/tools/gradlew src:ecore:compileEcore --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:ecore:generateEcore --no-daemon &&
+      ./application/tools/gradlew src:ecore:compileEcore --no-daemon
+      "
   generate-ecore:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-ecore
     command: ./application/tools/gradlew src:ecore:generateEcore --no-daemon
   compile-ecore:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-ecore
     command: ./application/tools/gradlew src:ecore:compileEcore --no-daemon
   # ==================
@@ -34,17 +32,27 @@ services:
   # ==================
   build-types:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-types
-    command: /bin/bash -c "./application/tools/gradlew src:uml:types:generateTypes --no-daemon && ./application/tools/gradlew src:uml:types:compileTypes --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:uml:types:generateTypes --no-daemon &&
+      ./application/tools/gradlew src:uml:types:compileTypes --no-daemon
+      "
   generate-types:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-types
     command: ./application/tools/gradlew src:uml:types:generateTypes --no-daemon
   compile-types:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-types
     command: ./application/tools/gradlew src:uml:types:compileTypes --no-daemon
   # ================
@@ -52,16 +60,26 @@ services:
   # ================
   build-uml:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-uml
-    command: /bin/bash -c "./application/tools/gradlew src:uml:uml:generateUml --no-daemon && ./application/tools/gradlew src:uml:uml:compileUml --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:uml:uml:generateUml --no-daemon &&
+      ./application/tools/gradlew src:uml:uml:compileUml --no-daemon
+      "
   generate-uml:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-uml
     command: ./application/tools/gradlew src:uml:uml:generateUml --no-daemon
   compile-uml:
     profiles: ["core"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-uml
     command: ./application/tools/gradlew src:uml:uml:compileUml --no-daemon

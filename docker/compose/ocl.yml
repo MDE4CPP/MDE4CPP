@@ -1,48 +1,54 @@
-x-base-service: &base-service
-  build:
-    context: ..
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
 services:
   # ==========
   # OCL Models
   # ==========
   build-ocl-model:
     profiles: ["ocl"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-ocl-model
-    command: /bin/bash -c "./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon && ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon &&
+      ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon
+      "
   generate-ocl:
     profiles: ["ocl"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-ocl
     command: ./application/tools/gradlew src:ocl:oclModel:generateOcl --no-daemon
   compile-ocl:
     profiles: ["ocl"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-ocl
     command: ./application/tools/gradlew src:ocl:oclModel:compileOcl --no-daemon
   build-ocl-parser:
     profiles: ["ocl"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-ocl-parser
-    command: /bin/bash -c "./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon && ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon &&
+      ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon
+      "
   generate-ocl-parser:
     profiles: ["ocl"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-ocl-parser
     command: ./application/tools/gradlew src:ocl:oclParser:generateOclParser --no-daemon
   compile-ocl-parser:
     profiles: ["ocl"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-ocl-parser
     command: ./application/tools/gradlew src:ocl:oclParser:compileOclParser --no-daemon

@@ -1,34 +1,30 @@
-x-base-service: &base-service
-  build:
-    context: ..
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
 services:
   # ==================
   # Core Models: fUML
   # ==================
   build-fuml:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-fuml
-    command: /bin/bash -c "./application/tools/gradlew src:fuml:generateFUML --no-daemon && ./application/tools/gradlew src:fuml:compileFUML --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:fuml:generateFUML --no-daemon &&
+      ./application/tools/gradlew src:fuml:compileFUML --no-daemon
+      "
   generate-fuml:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-fuml
     command: ./application/tools/gradlew src:fuml:generateFUML --no-daemon
   compile-fuml:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-fuml
     command: ./application/tools/gradlew src:fuml:compileFUML --no-daemon
   # ==================
@@ -36,17 +32,27 @@ services:
   # ==================
   build-pscs:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-pscs
-    command: /bin/bash -c "./application/tools/gradlew src:pscs:generatePSCS --no-daemon && ./application/tools/gradlew src:pscs:compilePSCS --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:pscs:generatePSCS --no-daemon &&
+      ./application/tools/gradlew src:pscs:compilePSCS --no-daemon
+      "
   generate-pscs:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-pscs
     command: ./application/tools/gradlew src:pscs:generatePSCS --no-daemon
   compile-pscs:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-pscs
     command: ./application/tools/gradlew src:pscs:compilePSCS --no-daemon
   # =================
@@ -54,16 +60,26 @@ services:
   # =================
   build-pssm:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-pssm
-    command: /bin/bash -c "./application/tools/gradlew src:pssm:generatePSSM --no-daemon && ./application/tools/gradlew src:pssm:compilePSSM --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew src:pssm:generatePSSM --no-daemon &&
+      ./application/tools/gradlew src:pssm:compilePSSM --no-daemon
+      "
   generate-pssm:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-pssm
     command: ./application/tools/gradlew src:pssm:generatePSSM --no-daemon
   compile-pssm:
     profiles: ["fuml"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-compile-pssm
     command: ./application/tools/gradlew src:pssm:compilePSSM --no-daemon
