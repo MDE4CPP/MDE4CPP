@@ -6,8 +6,16 @@
 # ============================================================================
 FROM eclipse-temurin:21-jdk-jammy
 
+LABEL org.opencontainers.image.title="MDE4CPP" \
+      org.opencontainers.image.description="Docker environment for MDE4CPP" \
+      org.opencontainers.image.authors="MDE4CPP Team"
+
 # Use bash and enable pipefail for safer pipe operations
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Enable apt caching for BuildKit (fixes default Ubuntu behavior of cleaning cache)
+RUN rm -f /etc/apt/apt.conf.d/docker-clean \
+    && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 
 # Install system build dependencies (these go to /usr/bin, not affected by bind mounts)
 # We do this in a single layer to minimize image size
@@ -36,11 +44,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     tar \
     unzip \
     uuid-dev \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
-
-# Configure MinGW-w64 alternatives
-RUN update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix 2>/dev/null || true \
+    && update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix 2>/dev/null || true \
     && update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix 2>/dev/null || true
 
 # Set JAVA_HOME for JDK 21 (needed for Gradle and build tools)
