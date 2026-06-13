@@ -1,10 +1,17 @@
 # Optimized for runtime builds via docker-compose
 # System packages installed at build time, Eclipse at runtime
 
+# Define arguments before FROM to allow overriding the base image tag
+ARG JAVA_VERSION=21
+ARG OS_VERSION=jammy
+
 # ============================================================================
 # Base Image with JDK
 # ============================================================================
-FROM eclipse-temurin:21-jdk-jammy
+FROM eclipse-temurin:${JAVA_VERSION}-jdk-${OS_VERSION}
+
+# Redeclare OS_VERSION so it can be used inside this build stage
+ARG OS_VERSION
 
 LABEL org.opencontainers.image.title="MDE4CPP" \
       org.opencontainers.image.description="Docker environment for MDE4CPP" \
@@ -28,7 +35,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     gnupg \
     wget \
     && wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc | gpg --dearmor -o /usr/share/keyrings/kitware-archive-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ jammy main" > /etc/apt/sources.list.d/kitware.list \
+    && echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ ${OS_VERSION} main" > /etc/apt/sources.list.d/kitware.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     bash \
