@@ -58,10 +58,12 @@ x-base-service: &base-service
     context: .
     dockerfile: Dockerfile
   image: mde4cpp:latest
+  init: true
   user: mde4cpp
   working_dir: /home/mde4cpp
   volumes:
     - ../:/home/mde4cpp
+    - gradle_cache:/home/mde4cpp/.gradle
     - eclipse_data:/home/eclipse
   entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
 
@@ -134,3 +136,4 @@ services:
 
 volumes:
   eclipse_data:
+  gradle_cache:
