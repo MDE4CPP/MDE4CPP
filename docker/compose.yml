@@ -44,6 +44,7 @@
 
 
 include:
+  - compose/setup.yml
   - compose/infrastructure.yml
   - compose/generators.yml
   - compose/core.yml
@@ -53,86 +54,6 @@ include:
   - compose/profiles.yml
   - compose/application.yml
 
-x-base-service: &base-service
-  build:
-    context: .
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
-services:
-  # ============================================================================
-  # Infrastructure Services
-  # ============================================================================
-
-  # Full build service - Run this only when CROSS_COMPILE_WINDOWS changes in MDE4CPP_Generator.properties
-  # Usage: docker compose up build-full
-  build-full:
-    profiles: ["setup"]
-    <<: *base-service
-    container_name: mde4cpp-build-full
-    stdin_open: true
-    tty: true
-    command: /bin/bash -c "./docker/scripts/install-eclipse.sh && ./docker/scripts/build-full.sh && echo '✓ Build complete!'"
-  # Install Eclipse and plugins (if not already installed)
-  # Usage: docker compose up install-eclipse
-  install-eclipse:
-    profiles: ["setup"]
-    <<: *base-service
-    container_name: mde4cpp-install-eclipse
-    command: /bin/bash -c "./docker/scripts/install-eclipse.sh && echo '✓ Eclipse installation complete!'"
-  # Clean CMake cache files and build artifacts
-  # Preserves application/lib and application/bin directories
-  # Usage: docker compose up clean
-  clean:
-    profiles: ["setup"]
-    <<: *base-service
-    container_name: mde4cpp-clean
-    command: /bin/bash -c "./docker/scripts/clean-cmake.sh && echo '✓ Cleanup complete!'"
-  # Publish Gradle plugins to Maven local
-  # Usage: docker compose up publish-plugins
-  publish-plugins:
-    profiles: ["setup"]
-    <<: *base-service
-    container_name: mde4cpp-publish-plugins
-    command: ./application/tools/gradlew gradlePlugins:publishMDE4CPPPluginsToMavenLocal --no-daemon
-  # Generate all models
-  # Usage: docker compose up generate
-  generate:
-    profiles: ["setup"]
-    <<: *base-service
-    container_name: mde4cpp-generate
-    command: ./application/tools/gradlew generateAll --no-daemon
-  # Compile all generated code
-  # Usage: docker compose up compile
-  compile:
-    profiles: ["setup"]
-    <<: *base-service
-    container_name: mde4cpp-compile
-    command: ./application/tools/gradlew compileAll --no-daemon
-  # Build OCL components
-  # Usage: docker compose up build-ocl
-  build-ocl:
-    profiles: ["setup"]
-    <<: *base-service
-    container_name: mde4cpp-build-ocl
-    command: ./application/tools/gradlew src:buildOCLAll --no-daemon
-  # Interactive shell service - runs in detached mode
-  # Usage: 
-  #   1. docker compose up -d shell
-  #   2. docker compose exec shell bash
-  shell:
-    <<: *base-service
-    container_name: mde4cpp-shell
-    command: /bin/bash -c "tail -f /dev/null"
-    # Keep container running indefinitely for exec access
 
 volumes:
   eclipse_data:
