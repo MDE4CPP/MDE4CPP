@@ -92,8 +92,12 @@ if [[ "${SKIP_DOWNLOAD}" -eq 0 ]]; then
       mkdir -p "${TARGET_DIR}"
       tar -xzf "${ARCHIVE_PATH}" -C "${TARGET_DIR}"
   else
-      mkdir -p "${MDE4CPP_PARENT}"
-      tar -xzf "${ARCHIVE_PATH}" -C "${MDE4CPP_PARENT}"
+      TARGET_PARENT="$(dirname "${TARGET_DIR}")"
+      mkdir -p "${TARGET_PARENT}"
+      tar -xzf "${ARCHIVE_PATH}" -C "${TARGET_PARENT}"
+      if [ "$(basename "${TARGET_DIR}")" != "eclipse" ]; then
+          mv "${TARGET_PARENT}/eclipse" "${TARGET_DIR}"
+      fi
   fi
 fi
 

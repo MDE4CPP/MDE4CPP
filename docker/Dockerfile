@@ -43,8 +43,8 @@ ENV JAVA_HOME=/opt/java/openjdk
 
 # Create user and project directory structure
 RUN useradd -u 1000 -m -d /home/mde4cpp mde4cpp \
-    && mkdir -p /home/mde4cpp \
-    && chown -R mde4cpp:mde4cpp /home/mde4cpp
+    && mkdir -p /home/mde4cpp /home/eclipse \
+    && chown -R mde4cpp:mde4cpp /home/mde4cpp /home/eclipse
 
 # Set working directory
 WORKDIR /home/mde4cpp
