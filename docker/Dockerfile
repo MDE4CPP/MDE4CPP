@@ -24,8 +24,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update && apt-get install -y --no-install-recommends ca-certificates gnupg wget \
-    && wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc | gpg --dearmor -o /usr/share/keyrings/kitware-archive-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ ${OS_VERSION} main" > /etc/apt/sources.list.d/kitware.list \
+    && mkdir -p /etc/apt/keyrings \
+    && wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc | gpg --dearmor -o /etc/apt/keyrings/kitware-archive-keyring.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ ${OS_VERSION} main" > /etc/apt/sources.list.d/kitware.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     bash \
@@ -37,6 +38,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     gcc-mingw-w64-x86-64 \
     git \
     mingw-w64 \
+    ninja-build \
     sudo \
     tar \
     unzip \
