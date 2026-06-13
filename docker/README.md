@@ -68,6 +68,11 @@ The Docker setup has been highly modularized to keep it clean and maintainable.
 - You can find all the individual component definitions in the `compose/` directory (e.g., `compose/docker-compose.core.yml`, `compose/docker-compose.fuml.yml`).
 - A shared `x-base-service` anchor eliminates repetition across the configuration files.
 
+**Architecture Notes:**
+- **Shared Image**: All services share the exact same `mde4cpp:latest` image to avoid redundant rebuilds. System packages (`cmake`, `gcc`, etc.) are baked directly into the image at build time.
+- **Dependency Management**: When running in CI, the GitHub Actions runner executes services in strict dependency order using host bind mounts to pass artifacts between steps.
+- **Component Independence**: Each component service (e.g., `build-ecore`) only builds its own target. It does not automatically trigger upstream or downstream dependencies.
+
 ### 5. Build the Project
 
 #### Full Build (Complete Project)
