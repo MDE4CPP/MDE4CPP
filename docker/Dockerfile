@@ -47,8 +47,12 @@ RUN --mount=type=cache,target=/var/cache/apt \
     && update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix 2>/dev/null || true \
     && update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix 2>/dev/null || true
 
-# Set JAVA_HOME for JDK 21 (needed for Gradle and build tools)
-ENV JAVA_HOME=/opt/java/openjdk
+# Set essential environment variables (Java, Workspace, and UTF-8 Locale)
+ENV JAVA_HOME=/opt/java/openjdk \
+    MDE4CPP_HOME=/home/mde4cpp \
+    LANG=C.UTF-8 \
+    LANGUAGE=C.UTF-8 \
+    LC_ALL=C.UTF-8
 
 # Define configurable user/group IDs for better host volume permission matching
 ARG USER_UID=1000
@@ -71,3 +75,6 @@ WORKDIR /home/mde4cpp
 
 # Default to non-root user
 USER mde4cpp
+
+# Default command when running the container standalone
+CMD ["/bin/bash"]
