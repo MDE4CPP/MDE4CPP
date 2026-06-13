@@ -11,9 +11,15 @@ LABEL org.opencontainers.image.title="MDE4CPP" \
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+ENV JAVA_HOME=/opt/java/openjdk \
+    MDE4CPP_HOME=/home/mde4cpp \
+    LANG=C.UTF-8 \
+    LANGUAGE=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
 # Configure apt caching, add Kitware repo, and install dependencies
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     rm -f /etc/apt/apt.conf.d/docker-clean \
     && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -37,12 +43,6 @@ RUN --mount=type=cache,target=/var/cache/apt \
     uuid-dev \
     && update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix 2>/dev/null || true \
     && update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix 2>/dev/null || true
-
-ENV JAVA_HOME=/opt/java/openjdk \
-    MDE4CPP_HOME=/home/mde4cpp \
-    LANG=C.UTF-8 \
-    LANGUAGE=C.UTF-8 \
-    LC_ALL=C.UTF-8
 
 ARG USER_UID=1000
 ARG USER_GID=1000
