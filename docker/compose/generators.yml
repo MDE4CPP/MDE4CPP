@@ -1,38 +1,37 @@
-x-base-service: &base-service
-  build:
-    context: ..
-    dockerfile: Dockerfile
-  image: mde4cpp:latest
-  init: true
-  user: mde4cpp
-  working_dir: /home/mde4cpp
-  volumes:
-    - ../:/home/mde4cpp
-    - gradle_cache:/home/mde4cpp/.gradle
-    - eclipse_data:/home/eclipse
-  entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
-
 services:
   # ==========
   # Generators
   # ==========
   build-generators:
     profiles: ["generators"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-build-generators
-    command: /bin/bash -c "./application/tools/gradlew generator:ecore4CPP:buildGenerator_ecore4CPP --no-daemon && ./application/tools/gradlew generator:UML4CPP:buildGenerator_UML4CPP --no-daemon && ./application/tools/gradlew generator:fUML4CPP:buildGenerator_fUML4CPP --no-daemon"
+    command: >-
+      /bin/bash -c "
+      ./application/tools/gradlew generator:ecore4CPP:buildGenerator_ecore4CPP --no-daemon &&
+      ./application/tools/gradlew generator:UML4CPP:buildGenerator_UML4CPP --no-daemon &&
+      ./application/tools/gradlew generator:fUML4CPP:buildGenerator_fUML4CPP --no-daemon
+      "
   generate-ecore4cpp-generator:
     profiles: ["generators"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-ecore4cpp-generator
     command: ./application/tools/gradlew generator:ecore4CPP:buildGenerator_ecore4CPP --no-daemon
   generate-uml4cpp-generator:
     profiles: ["generators"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-uml4cpp-generator
     command: ./application/tools/gradlew generator:UML4CPP:buildGenerator_UML4CPP --no-daemon
   generate-fuml4cpp-generator:
     profiles: ["generators"]
-    <<: *base-service
+    extends:
+      file: base.yml
+      service: base-service
     container_name: mde4cpp-generate-fuml4cpp-generator
     command: ./application/tools/gradlew generator:fUML4CPP:buildGenerator_fUML4CPP --no-daemon
