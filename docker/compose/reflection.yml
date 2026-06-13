@@ -3,85 +3,67 @@ x-base-service: &base-service
     context: ..
     dockerfile: Dockerfile
   image: mde4cpp:latest
+  init: true
   user: mde4cpp
   working_dir: /home/mde4cpp
   volumes:
     - ../:/home/mde4cpp
+    - gradle_cache:/home/mde4cpp/.gradle
+    - eclipse_data:/home/eclipse
   entrypoint: ["/bin/bash", "/home/mde4cpp/docker/scripts/entrypoint.sh"]
 
 services:
+  # ==================================
   # Reflection Models: EcoreReflection
-  # ============================================================================
-
-  # Build ecore reflection model (generate + compile)
-  # Usage: docker compose up build-ecore-reflection
+  # ==================================
   build-ecore-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-build-ecore-reflection
     command: /bin/bash -c "./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon && ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon"
-  # Generate ecore reflection model
-  # Usage: docker compose up generate-ecore-reflection
   generate-ecore-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-generate-ecore-reflection
     command: ./application/tools/gradlew src:common:ecoreReflection:generateEcoreReflection --no-daemon
-  # Compile ecore reflection model
-  # Usage: docker compose up compile-ecore-reflection
   compile-ecore-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-compile-ecore-reflection
     command: ./application/tools/gradlew src:common:ecoreReflection:compileEcoreReflection --no-daemon
-  # ============================================================================
+  # ===========================================
   # Reflection Models: PrimitivetypesReflection
-  # ============================================================================
-
-  # Build primitivetypes reflection model (generate + compile)
-  # Usage: docker compose up build-primitivetypes-reflection
+  # ===========================================
   build-primitivetypes-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-build-primitivetypes-reflection
     command: /bin/bash -c "./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon && ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon"
-  # Generate primitivetypes reflection model
-  # Usage: docker compose up generate-primitivetypes-reflection
   generate-primitivetypes-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-generate-primitivetypes-reflection
     command: ./application/tools/gradlew src:common:primitivetypesReflection:generatePrimitivetypesReflection --no-daemon
-  # Compile primitivetypes reflection model
-  # Usage: docker compose up compile-primitivetypes-reflection
   compile-primitivetypes-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-compile-primitivetypes-reflection
     command: ./application/tools/gradlew src:common:primitivetypesReflection:compilePrimitivetypesReflection --no-daemon
-  # ============================================================================
+  # ================================
   # Reflection Models: UmlReflection
-  # ============================================================================
-
-  # Build uml reflection model (generate + compile)
-  # Usage: docker compose up build-uml-reflection
+  # ================================
   build-uml-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-build-uml-reflection
     command: /bin/bash -c "./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon && ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon"
-  # Generate uml reflection model
-  # Usage: docker compose up generate-uml-reflection
   generate-uml-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-generate-uml-reflection
     command: ./application/tools/gradlew src:common:umlReflection:generateUmlReflection --no-daemon
-  # Compile uml reflection model
-  # Usage: docker compose up compile-uml-reflection
   compile-uml-reflection:
     profiles: ["reflection"]
     <<: *base-service
     container_name: mde4cpp-compile-uml-reflection
     command: ./application/tools/gradlew src:common:umlReflection:compileUmlReflection --no-daemon
-  # ============================================================================
