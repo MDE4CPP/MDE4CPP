@@ -189,8 +189,8 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 		}
 		[if (aReference.name = 'type' and aReference.eType.name = 'Type')]
 		else
-		{
-			std::shared_ptr<uml::Type> type = std::dynamic_pointer_cast<uml::Type>(loadHandler->checkNodeType([aClass.generateGetThisPtrPropertyGetterName()/]()));
+		{			
+			[aReference.generateReferenceType()/] type = [aReference.generateReferenceType()/](loadHandler->checkNodeType([aClass.generateGetThisPtrPropertyGetterName()/]()));
 			if (type)
 			{
 				setType(type);
