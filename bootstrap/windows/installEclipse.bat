@@ -141,7 +141,7 @@ if "!FRESH_INSTALL!"=="1" (
     "%TARGET_DIR%\eclipsec.exe" -nosplash -application org.eclipse.equinox.p2.director -listInstalledRoots > "%TMP_DIR%\installed.txt" 2>&1
     
     echo %C_PURPLE%[installEclipse]%C_SUCCESS% Found existing Eclipse plugins:%C_RESET%
-    for /f "usebackq tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
+    for /f "usebackq eol=# tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
         set "FOUND_VER="
         for /f "tokens=1,2 delims=/" %%A in ('findstr /b /c:"%%P/" "%TMP_DIR%\installed.txt"') do (
             set "FOUND_VER=%%B"
@@ -165,7 +165,7 @@ if "!NEEDS_INSTALL!"=="0" (
 echo %C_PURPLE%[installEclipse]%C_INFO% Installing Eclipse plugins ^(Acceleo, Sirius, CDT, Papyrus^)...%C_RESET%
 
 set "PLUGINS="
-for /f "usebackq tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
+for /f "usebackq eol=# tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
     set "PLUGINS=!PLUGINS! -installIU %%P"
 )
 

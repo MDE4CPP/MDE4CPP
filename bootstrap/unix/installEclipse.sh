@@ -82,7 +82,7 @@ if [[ -x "${ECLIPSE_BIN}" ]]; then
   papyrus_version=$(grep '^org\.eclipse\.papyrus\.sdk\.feature\.feature\.group/' "${TMP_DIR}/installed.txt" | awk -F'/' '{print $2}' | head -n1 || true)
   
   echo "${C_PURPLE}[installEclipse]${C_SUCCESS} Found existing Eclipse plugins:${C_RESET}"
-  for plugin in $(cat "${SCRIPT_DIR}/../eclipse_plugins.txt"); do
+  for plugin in $(grep -v '^[[:space:]]*#' "${SCRIPT_DIR}/../eclipse_plugins.txt" | grep -v '^[[:space:]]*$'); do
       version=$(grep "^${plugin}/" "${TMP_DIR}/installed.txt" | awk -F'/' '{print $2}' | head -n1 || true)
       if [ -n "$version" ]; then
           echo "${C_PURPLE}[installEclipse]${C_INFO} ${plugin}: ${version}${C_RESET}"
@@ -126,7 +126,7 @@ fi
 
 
 IU_ARGS=()
-for plugin in $(cat "${SCRIPT_DIR}/../eclipse_plugins.txt"); do
+for plugin in $(grep -v '^[[:space:]]*#' "${SCRIPT_DIR}/../eclipse_plugins.txt" | grep -v '^[[:space:]]*$'); do
   IU_ARGS+=("-installIU" "${plugin}")
 done
 
