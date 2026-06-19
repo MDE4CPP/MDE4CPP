@@ -55,7 +55,9 @@ RUN groupadd --gid ${USER_GID} mde4cpp || true \
     && echo "mde4cpp ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/mde4cpp \
     && chmod 0440 /etc/sudoers.d/mde4cpp \
     && mkdir -p /home/eclipse \
-    && chown mde4cpp:mde4cpp /home/eclipse
+    && chown mde4cpp:mde4cpp /home/eclipse \
+    && mkdir -p /home/mde4cpp/.gradle \
+    && chown mde4cpp:mde4cpp /home/mde4cpp/.gradle
 
 WORKDIR /home/mde4cpp
 USER mde4cpp
