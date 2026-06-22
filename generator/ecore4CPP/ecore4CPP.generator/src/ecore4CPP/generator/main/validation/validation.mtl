@@ -46,7 +46,17 @@
 [comment Validate contained instances of EReference /]
 [for (containedEReference : EReference | anEClass.eReferences->reject(doNotGenerateEStructuralFeature()))]
 	[containedEReference.validateEReference()/]
+[comment validate that isDerivedUnion property (annotation union) is set for the union property if a subset attribut is use it./]
+	[if(containedEReference.eAnnotations->notEmpty())]
+		[for (subsettedEReference : EReference | containedEReference.Subset())]
+			[if(not subsettedEReference.isUnion())]
+				[printWarning('Subset ' + anEClass.generateNamespaceDefinition() + '::' + anEClass.name + ':' + containedEReference.name + 
+					' does not reference a union: ' +  subsettedEReference.eContainingClass.generateNamespaceDefinition() + '::' + subsettedEReference.eContainingClass.name + ':' + subsettedEReference.name,'main::validation::validateEClassContents') /]
+			[/if]
+		[/for]
+	[/if]			
 [/for]
+
 [comment Validate contained instances of EOperation /]
 [for (containedEOperation : EOperation | anEClass.eOperations->reject(doNotGenerateEOperation()))]
 	[containedEOperation.validateEOperation()/]

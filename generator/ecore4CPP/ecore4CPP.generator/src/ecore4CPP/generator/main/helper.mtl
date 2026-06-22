@@ -158,7 +158,7 @@
 [query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameSubset())->notEmpty()  /]
 [query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameUnion())->notEmpty()  /]
 [query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset() and (isUnion() or subsetIsUnion())/]
-[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = sourceNameSubset())->asOrderedSet()->first().references /]
+[query public Subset(aModelElement : EModelElement) : Set(EObject) = let subsetsAnotations: EAnnotation = eAnnotations->select(a|a.source = sourceNameSubset())->first() in if (subsetsAnotations.oclIsUndefined()) then Set{} else subsetsAnotations.references  endif/]
 
 [query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source=sourceNameSubset()).references->includes(self) /]
 
