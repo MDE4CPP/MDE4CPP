@@ -189,12 +189,13 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 		}
 		[if (aReference.name = 'type' and aReference.eType.name = 'Type')]
 		else
-		{			
-			[aReference.generateReferenceType()/] type = [aReference.generateReferenceType()/](loadHandler->checkNodeType([aClass.generateGetThisPtrPropertyGetterName()/]()));
+		{	[comment ] ToDo set Tye (even for KerML)
+			std::shared_ptr<[aReference.eGenericType.generateCppType(false)/]> type = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType(false)/]>(loadHandler->checkNodeType([aClass.generateGetThisPtrPropertyGetterName()/]()));
 			if (type)
 			{
-				setType(type);
+				this->m_type=type;
 			}
+			[/comment]
 		}
 		[/if]
 	[/for]
