@@ -156,9 +156,12 @@
  * Subset Union helper queries
 */]
 [query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameSubset())->notEmpty()  /]
-[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameUnion())->notEmpty()  /]
+
+[query public isUnion(aModelElement: EModelElement) : Boolean = eAnnotations->select(source = sourceNameUnion())->notEmpty()  /]
+[comment if a subset specifies uses a union which is dot a isDerivedUnion then it is generated as union anyway/]
+[query public isUnion(aReference: EReference) : Boolean = aReference.oclAsType(EObject)->closure(a|a.eContainer())->select(e|e.eContainer()->isEmpty()).eAllContents(ecore::EReference)->exists(r|r.eAnnotations->exists(a|a.source='subsets' and a.references->includes(aReference))) /]
 [query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset() and (isUnion() or subsetIsUnion())/]
-[query public Subset(aModelElement : EModelElement) : Set(EObject) = let subsetsAnotations: EAnnotation = eAnnotations->select(a|a.source = sourceNameSubset())->first() in if (subsetsAnotations.oclIsUndefined()) then Set{} else subsetsAnotations.references  endif/]
+[query public Subset(aModelElement: EModelElement) : Set(EObject) = let subsetsAnotations: EAnnotation = eAnnotations->select(a|a.source = sourceNameSubset())->first() in if (subsetsAnotations.oclIsUndefined()) then Set{} else subsetsAnotations.references  endif/]
 
 [query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source=sourceNameSubset()).references->includes(self) /]
 
@@ -270,11 +273,12 @@
 	else false 
 	endif/]
 
-
 [query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameIgnore())->notEmpty()  /]
 [comment/]
 [query public getUnionsReference(aClass : EClass) : Set(EReference) = aClass.eReferences->select(isUnion())->sortedBy(name) /]
 [comment/]
+
+
 
 [**
 Why is this: "aClass.getSubsetedUnionsReference()" done? Shouldn't Union Getters only be generated in classes where the union property is defined?

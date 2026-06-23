@@ -161,28 +161,42 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 	//end of body
 [else]
 	[if (anEReference.isRedefiningContainer())]
+[comment]
+		[if (anEReference.eType = anEReference->exists(r|r.eAnnotations->exists(a|a.source='redefines' and a.references.oclAsType(ecore::EReference)->includes(self))) )]
+
+aql:self->closure(a|a.eContainer())->select(e|e.eContainer()->isEmpty()).eAllContents(ecore::EReference)->exists(r|r.eAnnotations->exists(a|a.source='subsets' and a.references->includes(self)))
+[/comment]
 		[let redefinedContainer : EReference = anEReference.getDirectlyRedefinedElements()->first().oclAsType(EReference)]
 			[if (anEReference.eType = redefinedContainer.eType)]
 	//Getter call of redefined container reference [redefinedContainer.eContainingClass.name/]::[redefinedContainer.name/] 
 	return [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if];
 			[else]
+				[if (anEReference.isUnion())]
 	//Cast conversion from redefined container reference [redefinedContainer.eContainingClass.name/]::[redefinedContainer.name/] 
-	[anEReference.generateReferenceType()/] [anEReference.name/](new [anEReference.generateReferenceType(false)/]());
+	// [anEReference.generateReferenceType()/] [anEReference.name/](new [anEReference.generateReferenceType(false)/]());
+	if(m_[anEReference.name/] == nullptr)
+	{
+		[anEReference.generateReferenceInit()/]
+		[anEReference.InitReferences()/]
+	}
 	
-	Bag<[redefinedContainer.eGenericType.generateCppType(false)/]>::iterator iter = [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]->begin();
-	Bag<[redefinedContainer.eGenericType.generateCppType(false)/]>::iterator end = [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]->end();
-	
-	while(iter != end)
+	for(Bag<[redefinedContainer.eGenericType.generateCppType(false)/]>::iterator iter : get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if])
 	{
 		[anEReference.eGenericType.generateCppType(true)/] _[anEReference.eGenericType.eClassifier.name.toLowerFirst()/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(*iter);
 		if(_[anEReference.eGenericType.eClassifier.name.toLowerFirst()/])
 		{
 			[anEReference.name/]->add(_[anEReference.eGenericType.eClassifier.name.toLowerFirst()/]);
 		}
-
-		iter++;
 	}	
 	return [anEReference.name/];
+	[printError('Untested Model case' + anEReference.eContainingClass.name.toUpperFirst() + '::' + anEReference.name + ':' + anEReference.eGenericType.generateCppType(false) + 
+					' is a redefined Container which is a Union ','main::generateReference::_generateReferenceGetterImplementation') /]
+				[else]
+	[printError('Unrealized Model case' + anEReference.eContainingClass.name.toUpperFirst() + '::' + anEReference.name + ':' + anEReference.eGenericType.generateCppType(false) + 
+					' is a redefined Container which is not a Union ','main::generateReference::_generateReferenceGetterImplementation') /]
+	return nullptr; 
+//	return dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]);
+				[/if]
 			[/if]
 		[/let]
 	[else]

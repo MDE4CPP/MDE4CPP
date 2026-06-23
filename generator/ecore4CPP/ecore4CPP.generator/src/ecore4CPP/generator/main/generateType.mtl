@@ -165,7 +165,7 @@
 [if(subsettedEReference.isUnion())][subsettedEReference.eGenericType.generateCppType(false)/][else]
 [subsettedEReference.eGenericType.generateCppType(false)/] /*Subset does not reference a union*/[comment][m.oclAsType(EReference).eReferenceType.eReferences->at(0).eGenericType.generateCppType(true)/][/comment][/if][/for][/let]
 [/template]
-
+ 
 [template public generateSubsetElements(eReference : EReference)]
 [let subsets : OrderedSet(EReference) = eReference.Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(eGenericType.eClassifier.name)]
 [for (subsettedEReference : EReference | subsets) separator(', ')]

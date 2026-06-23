@@ -205,7 +205,17 @@ namespace [anEClass.generateNamespaceDefinition()/]
 			//*********************************
 			[for (anEReference : EReference | anEClass.eReferences->reject(isRedefiningContainer())->sortedBy(name)) before(printInfo('Generating protected members for EReferences', 3))]
 			[anEReference.generateReferenceProtectedMember()/]
-			[/for]	
+			[/for]
+			[let redefinedUnionReferences: Set(EReference) = anEClass.eReferences->select(r|r.isRedefiningContainer() and r.isUnion())->sortedBy(name)]
+				[if redefinedUnionReferences->size()>0]
+			//*********************************
+			// Reference of redefined union Members 
+			//*********************************
+					[for (anEReference : EReference | anEClass.eReferences->select(r|r.isRedefiningContainer() and r.isUnion())->sortedBy(name)) before(printInfo('Generating protected redefined members for EReferences', 3))]
+			[anEReference.generateReferenceProtectedMember()/]
+					[/for]
+				[/if]
+			[/let]	
 	};
 }
 [if (anEClass.name ='EObject')] [comment simple use of Any for EObject & Bag<EObject>/]
