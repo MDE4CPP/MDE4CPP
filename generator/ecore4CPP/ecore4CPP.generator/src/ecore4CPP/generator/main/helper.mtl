@@ -36,6 +36,12 @@
 [query public hasCreateApiFlag(ePackage : EPackage) : Boolean = ePackage.getProperty(keyGenerateRestApi()).toBoolean() /]
 
 [**
+ * get Message Level Property
+*/]
+[query public getInfoLevel(ePackage : EPackage) : Integer = ePackage.getProperty(keyInfoLevel()).toInteger() /]
+[query public getWarningLevel(ePackage : EPackage) : Integer = ePackage.getProperty(keyWarningLevel()).toInteger() /]
+
+[**
  * namespace generation
 */]
 [query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if anEPackage.oclIsUndefined() then '' else if (ignoreRoot) then '' else anEPackage.name endif endif/]

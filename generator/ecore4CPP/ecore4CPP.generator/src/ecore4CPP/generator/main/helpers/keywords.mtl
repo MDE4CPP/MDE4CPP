@@ -83,3 +83,9 @@
 
 [query public keyGenerateRestApi(any : OclAny) : String = 'GenerateRestApi'/] [** indicates that a RestAPI shpuld be generated/]
 [query public keyRootTargetFolder (any : OclAny) : String ='rootTargetFolder' /] [** defines the root folder of all generated files/]
+
+[**
+ * get Message Level Property
+*/]
+[query public keyInfoLevel(any : OclAny) : String = 'InfoLevel'/] [** define the info message level: InfoLevel 2: - disables all infos with level >= 2; InfoLevel 0: disable*All/]
+[query public keyWarningLevel(any : OclAny) : String = 'WarningLevel'/] [** define the message level: Message Level 2: - disables all Messages with level >= 2; Warning Level 0: disable*All/]

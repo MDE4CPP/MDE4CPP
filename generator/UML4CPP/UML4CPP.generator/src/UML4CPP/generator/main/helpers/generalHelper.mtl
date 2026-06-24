@@ -179,6 +179,12 @@ template<class T> class Union;[/if]
 #endif
 [/template]
 
+[**
+ * get Message Level Property
+*/]
+[query public getInfoLevel(aPackage : Package) : Integer = aPackage.getProperty(keyInfoLevel()).toInteger() /]
+[query public getWarningLevel(aPackage : Package) : Integer = aPackage.getProperty(keyWarningLevel()).toInteger() /]
+
 [** 
  * generate the instanciation of a model element by using model factory create function 
 */]

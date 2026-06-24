@@ -57,9 +57,9 @@
  * 	disableWarnigs(1) - disables all warnings with level >= 1
  * Providing a level of 0 to these calls is equivalent to a call to disable*All()
 [/comment]
-[disableInfos(2)/]
+[disableInfos(getInfoLevel())/]
+[disableWarnings(getWarningLevel())/]
 [comment][disableWarnings(1)/] It is not recommended to disable warning messages![/comment]
-
 
 [if (not anEPackage.doNotGenerateEPackage())]
 [comment Package generation /]
