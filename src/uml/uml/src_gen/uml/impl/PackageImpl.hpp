@@ -216,7 +216,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>>& getNestedPackage() const ;
+			virtual const std::shared_ptr<Subset<uml::Package, uml::PackageableElement>>& getNestedPackage() const ;
 			/*!
 			References the Package that owns this Package.
 			<p>From package UML::Packages.</p>
@@ -234,25 +234,20 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>>& getOwnedStereotype() const ;
+			virtual const std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement>>& getOwnedStereotype() const ;
 			/*!
 			References the packaged elements that are Types.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>>& getOwnedType() const ;
+			virtual const std::shared_ptr<Subset<uml::Type, uml::PackageableElement>>& getOwnedType() const ;
 			/*!
 			References the PackageMerges that are owned by this Package.
 			<p>From package UML::Packages.</p>
 			*/
 			
 			virtual const std::shared_ptr<Subset<uml::PackageMerge, uml::Element>>& getPackageMerge() const ;
-			/*!
-			Specifies the packageable elements that are owned by this Package.
-			<p>From package UML::Packages.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>>& getPackagedElement() const ;
 			/*!
 			References the ProfileApplications that indicate which profiles have been applied to the Package.
 			<p>From package UML::Packages.</p>
@@ -263,6 +258,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			/*!
+			Specifies the packageable elements that are owned by this Package.
+			<p>From package UML::Packages.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> getPackagedElement() const ;
 			
 			//*********************************
 			// Container Getter

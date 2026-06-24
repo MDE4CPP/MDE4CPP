@@ -113,7 +113,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> getOwnedPort() const = 0;
+			virtual std::shared_ptr<Subset<uml::Port, uml::Property>> getOwnedPort() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -144,7 +144,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> m_ownedPort;
+			mutable std::shared_ptr<Subset<uml::Port, uml::Property>> m_ownedPort;
 	};
 }
 #endif /* end of include guard: UML_ENCAPSULATEDCLASSIFIER_HPP */

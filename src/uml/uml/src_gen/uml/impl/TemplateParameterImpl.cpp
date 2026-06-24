@@ -150,10 +150,7 @@ std::shared_ptr<ecore::EObject> TemplateParameterImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference default */
-const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getDefault() const
-{
-    return m_default;
-}
+
 void TemplateParameterImpl::setDefault(const std::shared_ptr<uml::ParameterableElement>& _default)
 {
     m_default = _default;
@@ -183,10 +180,7 @@ void TemplateParameterImpl::setOwnedParameteredElement(const std::shared_ptr<uml
 }
 
 /* Getter & Setter for reference parameteredElement */
-const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getParameteredElement() const
-{
-    return m_parameteredElement;
-}
+
 void TemplateParameterImpl::setParameteredElement(const std::shared_ptr<uml::ParameterableElement>& _parameteredElement)
 {
     m_parameteredElement = _parameteredElement;
@@ -207,6 +201,15 @@ void TemplateParameterImpl::setSignature(std::weak_ptr<uml::TemplateSignature> _
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() const
+{
+	return m_default;
+}
+
+std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParameteredElement() const
+{
+	return m_parameteredElement;
+}
 
 //*********************************
 // Container Getter

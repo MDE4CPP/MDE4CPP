@@ -73,4 +73,3 @@ std::shared_ptr<ecore::EObject> PSSMFactoryImpl::create(std::string _className, 
     return nullptr;
 }
 
-

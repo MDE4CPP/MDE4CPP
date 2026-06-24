@@ -130,16 +130,17 @@ namespace uml
 			*/
 			
 			virtual const std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>>& getInterfaceRealization() const = 0;
+			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			/*!
 			Behaviors owned by a BehavioredClassifier.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& getOwnedBehavior() const = 0;
-
-			//*********************************
-			// Union Reference Getters
-			//*********************************
+			virtual std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> getOwnedBehavior() const = 0;
 
 			//*********************************
 			// Container Getter

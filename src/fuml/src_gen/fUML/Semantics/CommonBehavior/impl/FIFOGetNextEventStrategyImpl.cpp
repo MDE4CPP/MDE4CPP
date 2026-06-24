@@ -37,8 +37,8 @@
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 

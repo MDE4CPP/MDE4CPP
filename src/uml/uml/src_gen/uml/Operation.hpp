@@ -257,13 +257,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPostcondition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& getPostcondition() const = 0;
 			/*!
 			An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPrecondition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& getPrecondition() const = 0;
 			/*!
 			The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p>
@@ -360,13 +360,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_postcondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint>> m_postcondition;
 			/*!
 			An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_precondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint>> m_precondition;
 			/*!
 			The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p>

@@ -119,33 +119,6 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	//copy references with no containment (soft copy)
 	m_member  = obj.getMember();
 	//Clone references with containment (deep copy)
-	//clone reference 'elementImport'
-	const std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>>& elementImportList = obj.getElementImport();
-	if(elementImportList)
-	{
-		/*SubsetUnion*/
-		m_elementImport.reset(new SubsetUnion<uml::ElementImport, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getElementImport()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::ElementImport>& elementImportindexElem: *elementImportList) 
-		{
-			const std::shared_ptr<uml::ElementImport>& temp = std::dynamic_pointer_cast<uml::ElementImport>((elementImportindexElem)->copy());
-			m_elementImport->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for elementImport.")
-	}
-
 	//clone reference 'importedMember'
 	const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& importedMemberList = obj.getImportedMember();
 	if(importedMemberList)
@@ -172,78 +145,6 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	{
 		DEBUG_WARNING("container is nullptr for importedMember.")
 	}
-
-	//clone reference 'ownedRule'
-	const std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>>& ownedRuleList = obj.getOwnedRule();
-	if(ownedRuleList)
-	{
-		/*SubsetUnion*/
-		m_ownedRule.reset(new SubsetUnion<uml::Constraint, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedRule()->initSubsetUnion(getOwnedMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::Constraint>& ownedRuleindexElem: *ownedRuleList) 
-		{
-			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((ownedRuleindexElem)->copy());
-			m_ownedRule->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for ownedRule.")
-	}
-
-	//clone reference 'packageImport'
-	const std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>>& packageImportList = obj.getPackageImport();
-	if(packageImportList)
-	{
-		/*SubsetUnion*/
-		m_packageImport.reset(new SubsetUnion<uml::PackageImport, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getPackageImport()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::PackageImport>& packageImportindexElem: *packageImportList) 
-		{
-			const std::shared_ptr<uml::PackageImport>& temp = std::dynamic_pointer_cast<uml::PackageImport>((packageImportindexElem)->copy());
-			m_packageImport->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for packageImport.")
-	}
-	/*SubsetUnion*/
-	getElementImport()->initSubsetUnion(getOwnedElement());
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
-	#endif
-	
-	/*SubsetUnion*/
-	getOwnedRule()->initSubsetUnion(getOwnedMember());
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
-	#endif
-	
-	/*SubsetUnion*/
-	getPackageImport()->initSubsetUnion(getOwnedElement());
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
-	#endif
-	
 	return *this;
 }
 
@@ -308,25 +209,6 @@ bool NamespaceImpl::membersAreDistinguishable()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference elementImport */
-const std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>>& NamespaceImpl::getElementImport() const
-{
-	if(m_elementImport == nullptr)
-	{
-		/*SubsetUnion*/
-		m_elementImport.reset(new SubsetUnion<uml::ElementImport, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getElementImport()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-    return m_elementImport;
-}
 
 /* Getter & Setter for reference importedMember */
 const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& NamespaceImpl::getImportedMember() const
@@ -354,50 +236,32 @@ const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& Names
 /* Getter & Setter for reference ownedMember */
 
 /* Getter & Setter for reference ownedRule */
-const std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>>& NamespaceImpl::getOwnedRule() const
-{
-	if(m_ownedRule == nullptr)
-	{
-		/*SubsetUnion*/
-		m_ownedRule.reset(new SubsetUnion<uml::Constraint, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedRule()->initSubsetUnion(getOwnedMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
-		#endif
-		
-	}
-    return m_ownedRule;
-}
 
 /* Getter & Setter for reference packageImport */
-const std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>>& NamespaceImpl::getPackageImport() const
-{
-	if(m_packageImport == nullptr)
-	{
-		/*SubsetUnion*/
-		m_packageImport.reset(new SubsetUnion<uml::PackageImport, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getPackageImport()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-    return m_packageImport;
-}
 
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> NamespaceImpl::getElementImport() const
+{
+	if(m_elementImport == nullptr)
+	{
+		/*SubsetUnion*/
+		m_elementImport.reset(new SubsetUnion<uml::ElementImport, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		getElementImport()->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
+	return m_elementImport;
+}
+
 std::shared_ptr<Union<uml::NamedElement>> NamespaceImpl::getMember() const
 {
 	if(m_member == nullptr)
@@ -431,6 +295,46 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>>
 		
 	}
 	return m_ownedMember;
+}
+
+std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> NamespaceImpl::getOwnedRule() const
+{
+	if(m_ownedRule == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedRule.reset(new SubsetUnion<uml::Constraint, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		getOwnedRule()->initSubsetUnion(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
+	return m_ownedRule;
+}
+
+std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> NamespaceImpl::getPackageImport() const
+{
+	if(m_packageImport == nullptr)
+	{
+		/*SubsetUnion*/
+		m_packageImport.reset(new SubsetUnion<uml::PackageImport, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		getPackageImport()->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
+	return m_packageImport;
 }
 
 //*********************************

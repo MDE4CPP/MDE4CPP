@@ -78,4 +78,3 @@ std::shared_ptr<ecore::EObject> MDE4CPP_ExtensionsFactoryImpl::create(std::strin
     return nullptr;
 }
 
-

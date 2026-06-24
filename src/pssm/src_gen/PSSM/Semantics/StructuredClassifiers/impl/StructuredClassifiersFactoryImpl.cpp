@@ -88,4 +88,3 @@ std::shared_ptr<PSSM::Semantics::StructuredClassifiers::SM_RedefinitionBasedDisp
 	element->setThisSM_RedefinitionBasedDispatchStrategyPtr(element);
 	return element;
 }
-

@@ -90,28 +90,30 @@ namespace uml
 			*/
 			
 			virtual const std::shared_ptr<Subset<uml::Type, uml::Element>>& getEndType() const ;
-			/*!
-			Each end represents participation of instances of the Classifier connected to the end in links of the Association.
-			<p>From package UML::StructuredClassifiers.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& getMemberEnd() const ;
 			/*!
 			The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& getNavigableOwnedEnd() const ;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::Property>>& getNavigableOwnedEnd() const ;
+			
+			
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			Each end represents participation of instances of the Classifier connected to the end in links of the Association.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> getMemberEnd() const ;
 			/*!
 			The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>>& getOwnedEnd() const ;
-			
-			//*********************************
-			// Union Reference Getters
-			//*********************************
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property>> getOwnedEnd() const ;
 			
 			//*********************************
 			// Container Getter

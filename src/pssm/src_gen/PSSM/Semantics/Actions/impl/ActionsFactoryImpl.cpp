@@ -88,4 +88,3 @@ std::shared_ptr<PSSM::Semantics::Actions::SM_ReadSelfActionActivation> ActionsFa
 	element->setThisSM_ReadSelfActionActivationPtr(element);
 	return element;
 }
-

@@ -73,4 +73,3 @@ std::shared_ptr<ecore::EObject> fUMLFactoryImpl::create(std::string _className, 
     return nullptr;
 }
 
-

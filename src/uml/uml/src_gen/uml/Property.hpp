@@ -14,7 +14,7 @@
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
+template<class T> class Union;
 
 //*********************************
 // generated Includes
@@ -269,12 +269,6 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual const std::shared_ptr<uml::Association>& getAssociation() const = 0;
-			/*!
-			The Association of which this Property is a member, if any.
-			<p>From package UML::Classification.</p>
-			*/
-			
 			virtual void setAssociation(const std::shared_ptr<uml::Association>&) = 0;
 			/*!
 			Designates the optional association end that owns a qualifier attribute.
@@ -366,12 +360,7 @@ namespace uml
 			*/
 			
 			virtual const std::shared_ptr<Subset<uml::Property, uml::Element>>& getQualifier() const = 0;
-			/*!
-			The properties that are redefined by this property, if any.
-			<p>From package UML::Classification.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& getRedefinedProperty() const = 0;
 			/*!
 			The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p>
@@ -382,6 +371,18 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			/*!
+			The Association of which this Property is a member, if any.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<uml::Association> getAssociation() const = 0;
+			/*!
+			The properties that are redefined by this property, if any.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> getRedefinedProperty() const = 0;
 
 			//*********************************
 			// Container Getter

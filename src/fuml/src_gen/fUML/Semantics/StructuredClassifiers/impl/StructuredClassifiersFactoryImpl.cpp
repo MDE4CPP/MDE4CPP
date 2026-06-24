@@ -103,4 +103,3 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatc
 	element->setThisRedefinitionBasedDispatchStrategyPtr(element);
 	return element;
 }
-

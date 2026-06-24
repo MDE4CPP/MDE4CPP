@@ -251,12 +251,7 @@ namespace uml
 			// Reference Getters & Setters
 			//*********************************
 			
-			/*!
-			The CollaborationUses owned by the Classifier.
-			<p>From package UML::Classification.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>>& getCollaborationUse() const ;
 			
 			/*!
 			The generalizing Classifiers for this Classifier.
@@ -288,12 +283,7 @@ namespace uml
 			*/
 			
 			virtual const std::shared_ptr<Bag<uml::GeneralizationSet>>& getPowertypeExtent() const ;
-			/*!
-			The Classifiers redefined by this Classifier.
-			<p>From package UML::Classification.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& getRedefinedClassifier() const ;
 			/*!
 			A CollaborationUse which indicates the Collaboration that represents this Classifier.
 			<p>From package UML::Classification.</p>
@@ -329,11 +319,23 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> getAttribute() const ;
 			/*!
+			The CollaborationUses owned by the Classifier.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> getCollaborationUse() const ;
+			/*!
 			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const ;
+			/*!
+			The Classifiers redefined by this Classifier.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> getRedefinedClassifier() const ;
 			
 			//*********************************
 			// Container Getter

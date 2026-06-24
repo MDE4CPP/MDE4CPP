@@ -195,19 +195,19 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 	}
 
 	//clone reference 'postcondition'
-	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& postconditionList = obj.getPostcondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& postconditionList = obj.getPostcondition();
 	if(postconditionList)
 	{
 		/*Subset*/
-		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPostcondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Constraint>& postconditionindexElem: *postconditionList) 
@@ -222,19 +222,19 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 	}
 
 	//clone reference 'precondition'
-	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& preconditionList = obj.getPrecondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& preconditionList = obj.getPrecondition();
 	if(preconditionList)
 	{
 		/*Subset*/
-		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPrecondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Constraint>& preconditionindexElem: *preconditionList) 
@@ -498,20 +498,20 @@ std::shared_ptr<Bag<uml::Parameter>> OperationImpl::getProperty_OwnedParameter()
 }
 
 /* Getter & Setter for reference postcondition */
-const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& OperationImpl::getPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& OperationImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
 	{
 		/*Subset*/
-		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPostcondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 	}
@@ -519,20 +519,20 @@ const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not 
 }
 
 /* Getter & Setter for reference precondition */
-const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& OperationImpl::getPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& OperationImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
 	{
 		/*Subset*/
-		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPrecondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 	}
@@ -781,7 +781,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
-			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _postcondition = getPostcondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& _postcondition = getPostcondition();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -795,7 +795,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
-			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _precondition = getPrecondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& _precondition = getPrecondition();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);

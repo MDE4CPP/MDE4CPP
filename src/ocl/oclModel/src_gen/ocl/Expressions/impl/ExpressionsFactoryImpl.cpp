@@ -5204,16 +5204,15 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -5223,23 +5222,20 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5249,10 +5245,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5262,10 +5256,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5275,10 +5267,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -5288,10 +5278,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -5301,10 +5289,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -5314,10 +5300,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -5327,10 +5311,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -5340,10 +5322,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -5353,10 +5333,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5366,23 +5344,20 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -5392,10 +5367,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5405,10 +5378,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -5418,10 +5389,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5431,10 +5400,8 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -5445,16 +5412,15 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -5464,23 +5430,20 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5490,10 +5453,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5503,10 +5464,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5516,10 +5475,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -5529,10 +5486,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -5542,10 +5497,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -5555,10 +5508,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -5568,10 +5519,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -5581,10 +5530,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -5594,10 +5541,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5607,23 +5552,20 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -5633,10 +5575,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5646,10 +5586,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -5659,10 +5597,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5672,10 +5608,8 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp(const int metaElementID/*=-1*/) const
 {
@@ -5686,16 +5620,15 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::ClassifierContextDeclExpImpl> element(new ocl::Expressions::ClassifierContextDeclExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -5705,23 +5638,20 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::ClassifierContextDeclExpImpl> element(new ocl::Expressions::ClassifierContextDeclExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5731,10 +5661,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5744,10 +5672,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5757,10 +5683,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -5770,10 +5694,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -5783,10 +5705,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -5796,10 +5716,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -5809,10 +5727,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -5822,10 +5738,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -5835,10 +5749,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5848,23 +5760,20 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::ClassifierContextDeclExpImpl> element(new ocl::Expressions::ClassifierContextDeclExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -5874,10 +5783,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5887,10 +5794,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -5900,10 +5805,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryImpl::createClassifierContextDeclExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -5913,10 +5816,8 @@ std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> ExpressionsFactoryIm
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisClassifierContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::createCollectionItem(const int metaElementID/*=-1*/) const
 {
@@ -5933,10 +5834,8 @@ std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionItemPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::createCollectionItem_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5946,10 +5845,8 @@ std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionItemPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::createCollectionItem_as_part_in_CollectionLiteralExp(std::shared_ptr<ocl::Expressions::CollectionLiteralExp> par_CollectionLiteralExp, const int metaElementID) const
 {
@@ -5959,10 +5856,8 @@ std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::create
 	{
 		par_CollectionLiteralExp->getPart()->push_back(element);
 	}
-	
 	element->setThisCollectionItemPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::createCollectionItem_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -5972,10 +5867,8 @@ std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::create
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionItemPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::createCollectionItem_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -5985,10 +5878,8 @@ std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionItemPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -5999,16 +5890,15 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6018,23 +5908,20 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6044,10 +5931,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6057,10 +5942,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6070,10 +5953,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -6083,10 +5964,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -6096,10 +5975,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -6109,10 +5986,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -6122,10 +5997,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6135,10 +6008,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -6148,10 +6019,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6161,23 +6030,20 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -6187,10 +6053,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6200,10 +6064,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -6213,10 +6075,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6226,10 +6086,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl::createCollectionLiteralParts(const int metaElementID/*=-1*/) const
 {
@@ -6246,10 +6104,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionLiteralPartsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl::createCollectionLiteralParts_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6259,10 +6115,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionLiteralPartsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl::createCollectionLiteralParts_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -6272,10 +6126,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionLiteralPartsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl::createCollectionLiteralParts_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6285,10 +6137,8 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralParts> ExpressionsFactoryImpl
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionLiteralPartsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::createCollectionRange(const int metaElementID/*=-1*/) const
 {
@@ -6305,10 +6155,8 @@ std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionRangePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::createCollectionRange_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6318,10 +6166,8 @@ std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionRangePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::createCollectionRange_as_part_in_CollectionLiteralExp(std::shared_ptr<ocl::Expressions::CollectionLiteralExp> par_CollectionLiteralExp, const int metaElementID) const
 {
@@ -6331,10 +6177,8 @@ std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::creat
 	{
 		par_CollectionLiteralExp->getPart()->push_back(element);
 	}
-	
 	element->setThisCollectionRangePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::createCollectionRange_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -6344,10 +6188,8 @@ std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::creat
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionRangePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::createCollectionRange_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6357,10 +6199,8 @@ std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionRangePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp(const int metaElementID/*=-1*/) const
 {
@@ -6371,16 +6211,15 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::CollectionTypeExpImpl> element(new ocl::Expressions::CollectionTypeExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6390,23 +6229,20 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::CollectionTypeExpImpl> element(new ocl::Expressions::CollectionTypeExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6416,10 +6252,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6429,10 +6263,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6442,10 +6274,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -6455,10 +6285,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -6468,10 +6296,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -6481,10 +6307,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -6494,10 +6318,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6507,10 +6329,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -6520,10 +6340,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6533,23 +6351,20 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::CollectionTypeExpImpl> element(new ocl::Expressions::CollectionTypeExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -6559,10 +6374,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6572,10 +6385,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -6585,10 +6396,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::createCollectionTypeExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6598,10 +6407,8 @@ std::shared_ptr<ocl::Expressions::CollectionTypeExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisCollectionTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp(const int metaElementID/*=-1*/) const
 {
@@ -6612,16 +6419,15 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp(c
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::DefExpImpl> element(new ocl::Expressions::DefExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6631,23 +6437,20 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::DefExpImpl> element(new ocl::Expressions::DefExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6657,10 +6460,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6670,10 +6471,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6683,10 +6482,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -6696,10 +6493,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -6709,10 +6504,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -6722,10 +6515,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -6735,10 +6526,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6748,10 +6537,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -6761,10 +6548,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6774,23 +6559,20 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::DefExpImpl> element(new ocl::Expressions::DefExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -6800,10 +6582,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6813,10 +6593,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -6826,10 +6604,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6839,10 +6615,8 @@ std::shared_ptr<ocl::Expressions::DefExp> ExpressionsFactoryImpl::createDefExp_a
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -6853,16 +6627,15 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6872,23 +6645,20 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6898,10 +6668,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -6911,10 +6679,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -6924,10 +6690,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -6937,10 +6701,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -6950,10 +6712,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -6963,10 +6723,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -6976,10 +6734,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -6989,10 +6745,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -7002,10 +6756,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7015,23 +6767,20 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -7041,10 +6790,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7054,10 +6801,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -7067,10 +6812,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7080,10 +6823,8 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::createExpressionInOcl(const int metaElementID/*=-1*/) const
 {
@@ -7100,10 +6841,8 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisExpressionInOclPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::createExpressionInOcl_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7113,10 +6852,8 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisExpressionInOclPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::createExpressionInOcl_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -7126,10 +6863,8 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::creat
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisExpressionInOclPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::createExpressionInOcl_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7139,10 +6874,8 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisExpressionInOclPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp(const int metaElementID/*=-1*/) const
 {
@@ -7153,16 +6886,15 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp(con
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -7172,23 +6904,20 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7198,10 +6927,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7211,10 +6938,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7224,10 +6949,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -7237,10 +6960,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -7250,10 +6971,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -7263,10 +6982,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -7276,10 +6993,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -7289,10 +7004,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -7302,10 +7015,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7315,23 +7026,20 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -7341,10 +7049,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7354,10 +7060,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -7367,10 +7071,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7380,10 +7082,8 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisIfExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp(const int metaElementID/*=-1*/) const
 {
@@ -7394,16 +7094,15 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -7413,23 +7112,20 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7439,10 +7135,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7452,10 +7146,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7465,10 +7157,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -7478,10 +7168,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -7491,10 +7179,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -7504,10 +7190,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -7517,10 +7201,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -7530,10 +7212,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -7543,10 +7223,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7556,23 +7234,20 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -7582,10 +7257,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7595,10 +7268,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -7608,10 +7279,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7621,10 +7290,8 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisInfixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::createInitOrDerValueExp(const int metaElementID/*=-1*/) const
 {
@@ -7641,10 +7308,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisInitOrDerValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::createInitOrDerValueExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7654,10 +7319,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisInitOrDerValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::createInitOrDerValueExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -7667,10 +7330,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisInitOrDerValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::createInitOrDerValueExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7680,10 +7341,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisInitOrDerValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp(const int metaElementID/*=-1*/) const
 {
@@ -7694,16 +7353,15 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InitOrDerValueListExpImpl> element(new ocl::Expressions::InitOrDerValueListExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -7713,23 +7371,20 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InitOrDerValueListExpImpl> element(new ocl::Expressions::InitOrDerValueListExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7739,10 +7394,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7752,10 +7405,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7765,10 +7416,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -7778,10 +7427,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -7791,10 +7438,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -7804,10 +7449,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -7817,10 +7460,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -7830,10 +7471,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -7843,10 +7482,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7856,23 +7493,20 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InitOrDerValueListExpImpl> element(new ocl::Expressions::InitOrDerValueListExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -7882,10 +7516,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7895,10 +7527,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -7908,10 +7538,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl::createInitOrDerValueListExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7921,10 +7549,8 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> ExpressionsFactoryImpl:
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisInitOrDerValueListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -7935,16 +7561,15 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -7954,23 +7579,20 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -7980,10 +7602,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -7993,10 +7613,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8006,10 +7624,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8019,10 +7635,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -8032,10 +7646,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -8045,10 +7657,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -8058,10 +7668,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8071,10 +7679,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8084,10 +7690,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8097,23 +7701,20 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -8123,10 +7724,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8136,10 +7735,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -8149,10 +7746,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8162,10 +7757,8 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInvOrDefExp(const int metaElementID/*=-1*/) const
 {
@@ -8182,10 +7775,8 @@ std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInv
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisInvOrDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInvOrDefExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8195,10 +7786,8 @@ std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInv
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisInvOrDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInvOrDefExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -8208,10 +7797,8 @@ std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInv
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisInvOrDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInvOrDefExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8221,10 +7808,8 @@ std::shared_ptr<ocl::Expressions::InvOrDefExp> ExpressionsFactoryImpl::createInv
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisInvOrDefExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -8235,16 +7820,15 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8254,23 +7838,20 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8280,10 +7861,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8293,10 +7872,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8306,10 +7883,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8319,10 +7894,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -8332,10 +7905,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -8345,10 +7916,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -8358,10 +7927,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8371,10 +7938,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8384,10 +7949,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8397,23 +7960,20 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -8423,10 +7983,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8436,10 +7994,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -8449,10 +8005,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8462,10 +8016,8 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp(const int metaElementID/*=-1*/) const
 {
@@ -8476,16 +8028,15 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8495,23 +8046,20 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8521,10 +8069,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8534,10 +8080,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8547,10 +8091,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8560,10 +8102,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -8573,10 +8113,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -8586,10 +8124,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -8599,10 +8135,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8612,10 +8146,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8625,10 +8157,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8638,23 +8168,20 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -8664,10 +8191,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8677,10 +8202,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -8690,10 +8213,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8703,10 +8224,8 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisIterateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp(const int metaElementID/*=-1*/) const
 {
@@ -8717,16 +8236,15 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8736,23 +8254,20 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8762,10 +8277,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8775,10 +8288,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8788,10 +8299,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8801,10 +8310,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -8814,10 +8321,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -8827,10 +8332,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -8840,10 +8343,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8853,10 +8354,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -8866,10 +8365,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8879,23 +8376,20 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -8905,10 +8399,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -8918,10 +8410,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -8931,10 +8421,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -8944,10 +8432,8 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisIteratorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp(const int metaElementID/*=-1*/) const
 {
@@ -8958,16 +8444,15 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp(c
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -8977,23 +8462,20 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9003,10 +8485,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9016,10 +8496,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9029,10 +8507,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9042,10 +8518,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -9055,10 +8529,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -9068,10 +8540,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -9081,10 +8551,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -9094,10 +8562,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9107,10 +8573,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9120,23 +8584,20 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -9146,10 +8607,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9159,10 +8618,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -9172,10 +8629,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9185,10 +8640,8 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisLetExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::createMessageArguments(const int metaElementID/*=-1*/) const
 {
@@ -9205,10 +8658,8 @@ std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisMessageArgumentsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::createMessageArguments_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9218,10 +8669,8 @@ std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisMessageArgumentsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::createMessageArguments_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -9231,10 +8680,8 @@ std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::crea
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisMessageArgumentsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::createMessageArguments_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9244,10 +8691,8 @@ std::shared_ptr<ocl::Expressions::MessageArguments> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisMessageArgumentsPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp(const int metaElementID/*=-1*/) const
 {
@@ -9258,16 +8703,15 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -9277,23 +8721,20 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9303,10 +8744,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9316,10 +8755,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9329,10 +8766,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9342,10 +8777,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -9355,10 +8788,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -9368,10 +8799,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -9381,10 +8810,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -9394,10 +8821,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9407,10 +8832,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9420,23 +8843,20 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -9446,10 +8866,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9459,10 +8877,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -9472,10 +8888,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9485,10 +8899,8 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisMessageExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -9499,16 +8911,15 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -9518,23 +8929,20 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9544,10 +8952,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9557,10 +8963,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9570,10 +8974,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9583,10 +8985,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -9596,10 +8996,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -9609,10 +9007,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -9622,10 +9018,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -9635,10 +9029,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9648,10 +9040,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9661,23 +9051,20 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -9687,10 +9074,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9700,10 +9085,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -9713,10 +9096,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9726,10 +9107,8 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisNullLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp(const int metaElementID/*=-1*/) const
 {
@@ -9740,16 +9119,15 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -9759,23 +9137,20 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9785,10 +9160,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9798,10 +9171,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9811,10 +9182,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9824,10 +9193,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -9837,10 +9204,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -9850,10 +9215,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -9863,10 +9226,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -9876,10 +9237,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -9889,10 +9248,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9902,23 +9259,20 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -9928,10 +9282,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -9941,10 +9293,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -9954,10 +9304,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -9967,10 +9315,8 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisOperationCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp(const int metaElementID/*=-1*/) const
 {
@@ -9981,16 +9327,15 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationContextDeclExpImpl> element(new ocl::Expressions::OperationContextDeclExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10000,23 +9345,20 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationContextDeclExpImpl> element(new ocl::Expressions::OperationContextDeclExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10026,10 +9368,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10039,10 +9379,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10052,10 +9390,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10065,10 +9401,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -10078,10 +9412,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -10091,10 +9423,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -10104,10 +9434,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10117,10 +9445,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10130,10 +9456,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10143,23 +9467,20 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationContextDeclExpImpl> element(new ocl::Expressions::OperationContextDeclExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -10169,10 +9490,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10182,10 +9501,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -10195,10 +9512,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImpl::createOperationContextDeclExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10208,10 +9523,8 @@ std::shared_ptr<ocl::Expressions::OperationContextDeclExp> ExpressionsFactoryImp
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisOperationContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp(const int metaElementID/*=-1*/) const
 {
@@ -10222,16 +9535,15 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationContextExpImpl> element(new ocl::Expressions::OperationContextExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10241,23 +9553,20 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationContextExpImpl> element(new ocl::Expressions::OperationContextExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10267,10 +9576,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10280,10 +9587,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10293,10 +9598,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10306,10 +9609,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -10319,10 +9620,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -10332,10 +9631,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -10345,10 +9642,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10358,10 +9653,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10371,10 +9664,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10384,23 +9675,20 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperationContextExpImpl> element(new ocl::Expressions::OperationContextExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -10410,10 +9698,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10423,10 +9709,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -10436,10 +9720,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::createOperationContextExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10449,10 +9731,8 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> ExpressionsFactoryImpl::c
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisOperationContextExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp(const int metaElementID/*=-1*/) const
 {
@@ -10463,16 +9743,15 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperatorExpImpl> element(new ocl::Expressions::OperatorExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10482,23 +9761,20 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperatorExpImpl> element(new ocl::Expressions::OperatorExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10508,10 +9784,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10521,10 +9795,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10534,10 +9806,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10547,10 +9817,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -10560,10 +9828,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -10573,10 +9839,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -10586,10 +9850,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10599,10 +9861,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10612,10 +9872,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10625,23 +9883,20 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::OperatorExpImpl> element(new ocl::Expressions::OperatorExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -10651,10 +9906,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10664,10 +9917,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -10677,10 +9928,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOperatorExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10690,10 +9939,8 @@ std::shared_ptr<ocl::Expressions::OperatorExp> ExpressionsFactoryImpl::createOpe
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisOperatorExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp(const int metaElementID/*=-1*/) const
 {
@@ -10704,16 +9951,15 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PackageDeclarationExpImpl> element(new ocl::Expressions::PackageDeclarationExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10723,23 +9969,20 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PackageDeclarationExpImpl> element(new ocl::Expressions::PackageDeclarationExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10749,10 +9992,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10762,10 +10003,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10775,10 +10014,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10788,10 +10025,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -10801,10 +10036,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -10814,10 +10047,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -10827,10 +10058,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10840,10 +10069,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -10853,10 +10080,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10866,23 +10091,20 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PackageDeclarationExpImpl> element(new ocl::Expressions::PackageDeclarationExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -10892,10 +10114,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -10905,10 +10125,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -10918,10 +10136,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl::createPackageDeclarationExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10931,10 +10147,8 @@ std::shared_ptr<ocl::Expressions::PackageDeclarationExp> ExpressionsFactoryImpl:
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisPackageDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp(const int metaElementID/*=-1*/) const
 {
@@ -10945,16 +10159,15 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::ParentedExpImpl> element(new ocl::Expressions::ParentedExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -10964,23 +10177,20 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::ParentedExpImpl> element(new ocl::Expressions::ParentedExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -10990,10 +10200,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11003,10 +10211,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11016,10 +10222,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11029,10 +10233,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -11042,10 +10244,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -11055,10 +10255,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -11068,10 +10266,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11081,10 +10277,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11094,10 +10288,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11107,23 +10299,20 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::ParentedExpImpl> element(new ocl::Expressions::ParentedExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -11133,10 +10322,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11146,10 +10333,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -11159,10 +10344,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createParentedExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11172,10 +10355,8 @@ std::shared_ptr<ocl::Expressions::ParentedExp> ExpressionsFactoryImpl::createPar
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisParentedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::createPrePostBodyExp(const int metaElementID/*=-1*/) const
 {
@@ -11192,10 +10373,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPrePostBodyExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::createPrePostBodyExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11205,10 +10384,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPrePostBodyExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::createPrePostBodyExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -11218,10 +10395,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::create
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPrePostBodyExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::createPrePostBodyExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11231,10 +10406,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPrePostBodyExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp(const int metaElementID/*=-1*/) const
 {
@@ -11245,16 +10418,15 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PrePostBodyListExpImpl> element(new ocl::Expressions::PrePostBodyListExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11264,23 +10436,20 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PrePostBodyListExpImpl> element(new ocl::Expressions::PrePostBodyListExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11290,10 +10459,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11303,10 +10470,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11316,10 +10481,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11329,10 +10492,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -11342,10 +10503,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -11355,10 +10514,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -11368,10 +10525,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11381,10 +10536,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11394,10 +10547,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11407,23 +10558,20 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PrePostBodyListExpImpl> element(new ocl::Expressions::PrePostBodyListExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -11433,10 +10581,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11446,10 +10592,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -11459,10 +10603,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::createPrePostBodyListExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11472,10 +10614,8 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ExpressionsFactoryImpl::cr
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisPrePostBodyListExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp(const int metaElementID/*=-1*/) const
 {
@@ -11486,16 +10626,15 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PrefixedExpImpl> element(new ocl::Expressions::PrefixedExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11505,23 +10644,20 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PrefixedExpImpl> element(new ocl::Expressions::PrefixedExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11531,10 +10667,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11544,10 +10678,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11557,10 +10689,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11570,10 +10700,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -11583,10 +10711,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -11596,10 +10722,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -11609,10 +10733,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11622,10 +10744,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11635,10 +10755,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11648,23 +10766,20 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PrefixedExpImpl> element(new ocl::Expressions::PrefixedExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -11674,10 +10789,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11687,10 +10800,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -11700,10 +10811,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPrefixedExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11713,10 +10822,8 @@ std::shared_ptr<ocl::Expressions::PrefixedExp> ExpressionsFactoryImpl::createPre
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisPrefixedExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp(const int metaElementID/*=-1*/) const
 {
@@ -11727,16 +10834,15 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11746,23 +10852,20 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11772,10 +10875,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11785,10 +10886,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11798,10 +10897,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11811,10 +10908,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -11824,10 +10919,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -11837,10 +10930,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -11850,10 +10941,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11863,10 +10952,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -11876,10 +10963,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11889,23 +10974,20 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -11915,10 +10997,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -11928,10 +11008,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -11941,10 +11019,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -11954,10 +11030,8 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisPropertyCallExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp(const int metaElementID/*=-1*/) const
 {
@@ -11968,16 +11042,15 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PropertyContextDeclExpImpl> element(new ocl::Expressions::PropertyContextDeclExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -11987,23 +11060,20 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PropertyContextDeclExpImpl> element(new ocl::Expressions::PropertyContextDeclExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12013,10 +11083,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12026,10 +11094,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12039,10 +11105,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12052,10 +11116,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -12065,10 +11127,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -12078,10 +11138,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -12091,10 +11149,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12104,10 +11160,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12117,10 +11171,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12130,23 +11182,20 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::PropertyContextDeclExpImpl> element(new ocl::Expressions::PropertyContextDeclExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -12156,10 +11205,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12169,10 +11216,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -12182,10 +11227,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl::createPropertyContextDeclExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12195,10 +11238,8 @@ std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> ExpressionsFactoryImpl
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisPropertyContextDeclExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -12209,16 +11250,15 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12228,23 +11268,20 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12254,10 +11291,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12267,10 +11302,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12280,10 +11313,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12293,10 +11324,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -12306,10 +11335,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -12319,10 +11346,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -12332,10 +11357,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12345,10 +11368,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12358,10 +11379,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12371,23 +11390,20 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -12397,10 +11413,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12410,10 +11424,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -12423,10 +11435,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12436,10 +11446,8 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisRealLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp(const int metaElementID/*=-1*/) const
 {
@@ -12450,16 +11458,15 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12469,23 +11476,20 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12495,10 +11499,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12508,10 +11510,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12521,10 +11521,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12534,10 +11532,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -12547,10 +11543,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -12560,10 +11554,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -12573,10 +11565,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12586,10 +11576,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12599,10 +11587,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12612,23 +11598,20 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -12638,10 +11621,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12651,10 +11632,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -12664,10 +11643,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12677,10 +11654,8 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisStateExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -12691,16 +11666,15 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12710,23 +11684,20 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12736,10 +11707,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12749,10 +11718,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12762,10 +11729,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12775,10 +11740,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -12788,10 +11751,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -12801,10 +11762,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -12814,10 +11773,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12827,10 +11784,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -12840,10 +11795,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12853,23 +11806,20 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -12879,10 +11829,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12892,10 +11840,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -12905,10 +11851,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12918,10 +11862,8 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisStringLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp(const int metaElementID/*=-1*/) const
 {
@@ -12932,16 +11874,15 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -12951,23 +11892,20 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -12977,10 +11915,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -12990,10 +11926,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13003,10 +11937,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13016,10 +11948,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -13029,10 +11959,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -13042,10 +11970,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -13055,10 +11981,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13068,10 +11992,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13081,10 +12003,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13094,23 +12014,20 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -13120,10 +12037,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13133,10 +12048,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -13146,10 +12059,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13159,10 +12070,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::createTupleLiteralPart(const int metaElementID/*=-1*/) const
 {
@@ -13179,10 +12088,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisTupleLiteralPartPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::createTupleLiteralPart_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13192,10 +12099,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisTupleLiteralPartPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::createTupleLiteralPart_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -13205,10 +12110,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::crea
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisTupleLiteralPartPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::createTupleLiteralPart_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13218,10 +12121,8 @@ std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisTupleLiteralPartPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp(const int metaElementID/*=-1*/) const
 {
@@ -13232,16 +12133,15 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TupleTypeExpImpl> element(new ocl::Expressions::TupleTypeExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13251,23 +12151,20 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TupleTypeExpImpl> element(new ocl::Expressions::TupleTypeExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13277,10 +12174,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13290,10 +12185,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13303,10 +12196,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13316,10 +12207,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -13329,10 +12218,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -13342,10 +12229,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -13355,10 +12240,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13368,10 +12251,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13381,10 +12262,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13394,23 +12273,20 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TupleTypeExpImpl> element(new ocl::Expressions::TupleTypeExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -13420,10 +12296,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13433,10 +12307,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -13446,10 +12318,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTupleTypeExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13459,10 +12329,8 @@ std::shared_ptr<ocl::Expressions::TupleTypeExp> ExpressionsFactoryImpl::createTu
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisTupleTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp(const int metaElementID/*=-1*/) const
 {
@@ -13473,16 +12341,15 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13492,23 +12359,20 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13518,10 +12382,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13531,10 +12393,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13544,10 +12404,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13557,10 +12415,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -13570,10 +12426,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -13583,10 +12437,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -13596,10 +12448,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13609,10 +12459,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13622,10 +12470,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13635,23 +12481,20 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -13661,10 +12504,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13674,10 +12515,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -13687,10 +12526,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13700,10 +12537,8 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisTypeExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp(const int metaElementID/*=-1*/) const
 {
@@ -13714,16 +12549,15 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13733,23 +12567,20 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13759,10 +12590,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13772,10 +12601,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13785,10 +12612,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13798,10 +12623,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -13811,10 +12634,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -13824,10 +12645,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -13837,10 +12656,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13850,10 +12667,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -13863,10 +12678,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13876,23 +12689,20 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -13902,10 +12712,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -13915,10 +12723,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -13928,10 +12734,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -13941,10 +12745,8 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp(const int metaElementID/*=-1*/) const
 {
@@ -13955,16 +12757,15 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -13974,23 +12775,20 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14000,10 +12798,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14013,10 +12809,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14026,10 +12820,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -14039,10 +12831,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -14052,10 +12842,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -14065,10 +12853,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -14078,10 +12864,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -14091,10 +12875,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -14104,10 +12886,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14117,23 +12897,20 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -14143,10 +12920,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14156,10 +12931,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -14169,10 +12942,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14182,10 +12953,8 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp(const int metaElementID/*=-1*/) const
 {
@@ -14196,16 +12965,15 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::VarDeclarationExpImpl> element(new ocl::Expressions::VarDeclarationExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -14215,23 +12983,20 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::VarDeclarationExpImpl> element(new ocl::Expressions::VarDeclarationExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14241,10 +13006,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14254,10 +13017,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14267,10 +13028,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -14280,10 +13039,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -14293,10 +13050,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -14306,23 +13061,20 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_initializedElement_in_OclExpression(std::weak_ptr<ocl::Expressions::OclExpression> par_OclExpression, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VarDeclarationExpImpl> element(new ocl::Expressions::VarDeclarationExpImpl(par_OclExpression));
+	
+				std::shared_ptr<ocl::Expressions::VarDeclarationExpImpl> element(new ocl::Expressions::VarDeclarationExpImpl(/*par_OclExpression.lock(), ocl::Expressions::ExpressionsPackage::VARDECLARATIONEXP_ATTRIBUTE_INITEXPRESSION */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OclExpression.lock())
 	{
 		wp->getInitializedElement()->push_back(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -14332,10 +13084,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -14345,10 +13095,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -14358,10 +13106,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14371,10 +13117,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_part_in_TupleLiteralExp(std::shared_ptr<ocl::Expressions::TupleLiteralExp> par_TupleLiteralExp, const int metaElementID) const
 {
@@ -14384,23 +13128,20 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_TupleLiteralExp->getPart()->push_back(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::VarDeclarationExpImpl> element(new ocl::Expressions::VarDeclarationExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -14410,10 +13151,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14423,10 +13162,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -14436,10 +13173,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14449,10 +13184,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_variables_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -14462,10 +13195,8 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 	{
 		par_LetExp->getVariables()->push_back(element);
 	}
-	
 	element->setThisVarDeclarationExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable(const int metaElementID/*=-1*/) const
 {
@@ -14482,10 +13213,8 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisVariablePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14495,10 +13224,8 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisVariablePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -14508,10 +13235,8 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisVariablePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14521,10 +13246,8 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisVariablePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp(const int metaElementID/*=-1*/) const
 {
@@ -14535,16 +13258,15 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OperationCallExp.lock())
 	{
 		wp->getArgument()->push_back(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -14554,23 +13276,20 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		wp->setBody(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
 		wp->setBodyExpression(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14580,10 +13299,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		wp->setCondition(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14593,10 +13310,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14606,10 +13321,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		wp->setElseExpression(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -14619,10 +13332,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		wp->setFirst(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
@@ -14632,10 +13343,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_LetExp->setIn(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_initExpression_in_Variable(std::shared_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
@@ -14645,10 +13354,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_Variable->setInitExpression(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
@@ -14658,10 +13365,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_CollectionItem->setItem(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
@@ -14671,10 +13376,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		wp->getIterator()->push_back(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
@@ -14684,10 +13387,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		wp->setLast(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14697,23 +13398,20 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
+	
 	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_NavigationCallExp.lock())
 	{
 		wp->getQualifier()->push_back(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -14723,10 +13421,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -14736,10 +13432,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_source_in_CallExp(std::shared_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
 {
@@ -14749,10 +13443,8 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		par_CallExp->setSource(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
@@ -14762,9 +13454,6 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	{
 		wp->setThenExpression(element);
 	}
-	
 	element->setThisVariableExpPtr(element);
 	return element;
-	
 }
-

@@ -170,19 +170,19 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedPort'
-	const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& ownedPortList = obj.getOwnedPort();
+	const std::shared_ptr<Subset<uml::Port, uml::Property>>& ownedPortList = obj.getOwnedPort();
 	if(ownedPortList)
 	{
 		/*Subset*/
-		m_ownedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >());
+		m_ownedPort.reset(new Subset<uml::Port, uml::Property >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getOwnedPort()->initSubset(getOwnedAttribute());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property >(getOwnedAttribute())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Port>& ownedPortindexElem: *ownedPortList) 
@@ -198,7 +198,7 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 	/*Subset*/
 	getOwnedPort()->initSubset(getOwnedAttribute());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property >(getOwnedAttribute())" << std::endl;
 	#endif
 	
 	return *this;
@@ -223,7 +223,7 @@ std::shared_ptr<Bag<uml::Port>> EncapsulatedClassifierImpl::getOwnedPorts()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedPort */
-std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> EncapsulatedClassifierImpl::getOwnedPort() const
+std::shared_ptr<Subset<uml::Port, uml::Property>> EncapsulatedClassifierImpl::getOwnedPort() const
 {
 	//generated from getterBody annotation
 const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& ownedAttributes = this->getOwnedAttribute();

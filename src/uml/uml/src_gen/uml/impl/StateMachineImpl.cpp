@@ -320,23 +320,9 @@ const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& StateMachine
 /* Getter & Setter for reference extendedStateMachine */
 std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachine() const
 {
-	//Cast conversion from redefined container reference Behavior::redefinedBehavior 
-	std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachine(new Bag<uml::StateMachine>());
-
-	Bag<uml::Behavior>::iterator iter = uml::BehaviorImpl::getRedefinedBehavior()->begin();
-	Bag<uml::Behavior>::iterator end = uml::BehaviorImpl::getRedefinedBehavior()->end();
 	
-	while(iter != end)
-	{
-		std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(*iter);
-		if(_stateMachine)
-		{
-			extendedStateMachine->add(_stateMachine);
-		}
-
-		iter++;
-	}	
-	return extendedStateMachine;
+	return nullptr; 
+//	return dynamic_pointer_cast<uml::StateMachine>(getRedefinedBehavior());
 }
 
 /* Getter & Setter for reference region */

@@ -146,26 +146,21 @@ namespace uml
 			
 			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>>& getEdge() const = 0;
 			
-			/*!
-			ActivityNodes coordinated by the Activity.
-			<p>From package UML::Activities.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>>& getNode() const = 0;
-			virtual const std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>>& getOwnedGroup() const = 0;
-			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>>& getOwnedNode() const = 0;
+			
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& getOwnedNode() const = 0;
 			/*!
 			Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& getPartition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup>>& getPartition() const = 0;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>>& getStructuredNode() const = 0;
+			virtual const std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode>>& getStructuredNode() const = 0;
 			/*!
 			Top-level Variables defined by the Activity.
 			<p>From package UML::Activities.</p>
@@ -182,6 +177,13 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> getGroup() const = 0;
+			/*!
+			ActivityNodes coordinated by the Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> getNode() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> getOwnedGroup() const = 0;
 
 			//*********************************
 			// Container Getter
@@ -234,19 +236,19 @@ namespace uml
 			
 			mutable std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> m_node;
 			mutable std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> m_ownedGroup;
-			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> m_ownedNode;
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> m_ownedNode;
 			/*!
 			Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> m_partition;
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup>> m_partition;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> m_structuredNode;
+			mutable std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode>> m_structuredNode;
 			/*!
 			Top-level Variables defined by the Activity.
 			<p>From package UML::Activities.</p>

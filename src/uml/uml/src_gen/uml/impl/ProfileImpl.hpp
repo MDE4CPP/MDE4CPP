@@ -109,13 +109,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& getMetaclassReference() const ;
+			virtual const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport>>& getMetaclassReference() const ;
 			/*!
 			References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& getMetamodelReference() const ;
+			virtual const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport>>& getMetamodelReference() const ;
 			
 			//*********************************
 			// Union Reference Getters

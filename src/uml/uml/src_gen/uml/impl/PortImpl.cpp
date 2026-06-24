@@ -200,19 +200,19 @@ PortImpl& PortImpl::operator=(const PortImpl & obj)
 	m_required  = obj.getRequired();
 	//Clone references with containment (deep copy)
 	//clone reference 'redefinedPort'
-	const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& redefinedPortList = obj.getRedefinedPort();
+	const std::shared_ptr<Subset<uml::Port, uml::Property>>& redefinedPortList = obj.getRedefinedPort();
 	if(redefinedPortList)
 	{
 		/*Subset*/
-		m_redefinedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >());
+		m_redefinedPort.reset(new Subset<uml::Port, uml::Property >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getRedefinedPort()->initSubset(getRedefinedProperty());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getRedefinedProperty())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property >(getRedefinedProperty())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Port>& redefinedPortindexElem: *redefinedPortList) 
@@ -354,20 +354,20 @@ const std::shared_ptr<Bag<uml::Interface>>& PortImpl::getProvided() const
 }
 
 /* Getter & Setter for reference redefinedPort */
-const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& PortImpl::getRedefinedPort() const
+const std::shared_ptr<Subset<uml::Port, uml::Property>>& PortImpl::getRedefinedPort() const
 {
 	if(m_redefinedPort == nullptr)
 	{
 		/*Subset*/
-		m_redefinedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >());
+		m_redefinedPort.reset(new Subset<uml::Port, uml::Property >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getRedefinedPort()->initSubset(getRedefinedProperty());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getRedefinedProperty())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property >(getRedefinedProperty())" << std::endl;
 		#endif
 		
 	}
@@ -540,7 +540,7 @@ void PortImpl::resolveReferences(const int featureID, std::vector<std::shared_pt
 
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
-			const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& _redefinedPort = getRedefinedPort();
+			const std::shared_ptr<Subset<uml::Port, uml::Property>>& _redefinedPort = getRedefinedPort();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Port>  _r = std::dynamic_pointer_cast<uml::Port>(ref);

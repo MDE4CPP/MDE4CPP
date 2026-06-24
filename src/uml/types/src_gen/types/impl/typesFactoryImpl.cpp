@@ -73,4 +73,3 @@ std::shared_ptr<ecore::EObject> typesFactoryImpl::create(std::string _className,
     return nullptr;
 }
 
-

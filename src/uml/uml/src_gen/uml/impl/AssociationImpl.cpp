@@ -196,47 +196,20 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 		DEBUG_WARNING("container is nullptr for endType.")
 	}
 
-	//clone reference 'memberEnd'
-	const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& memberEndList = obj.getMemberEnd();
-	if(memberEndList)
-	{
-		/*SubsetUnion*/
-		m_memberEnd.reset(new SubsetUnion<uml::Property, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_memberEnd - SubsetUnion<uml::Property, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getMemberEnd()->initSubsetUnion(getMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_memberEnd - SubsetUnion<uml::Property, uml::NamedElement >(getMember())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::Property>& memberEndindexElem: *memberEndList) 
-		{
-			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((memberEndindexElem)->copy());
-			m_memberEnd->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for memberEnd.")
-	}
-
 	//clone reference 'navigableOwnedEnd'
-	const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& navigableOwnedEndList = obj.getNavigableOwnedEnd();
+	const std::shared_ptr<Subset<uml::Property, uml::Property>>& navigableOwnedEndList = obj.getNavigableOwnedEnd();
 	if(navigableOwnedEndList)
 	{
 		/*Subset*/
-		m_navigableOwnedEnd.reset(new Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >());
+		m_navigableOwnedEnd.reset(new Subset<uml::Property, uml::Property >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getNavigableOwnedEnd()->initSubset(getOwnedEnd());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >(getOwnedEnd())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property >(getOwnedEnd())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Property>& navigableOwnedEndindexElem: *navigableOwnedEndList) 
@@ -249,39 +222,6 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	{
 		DEBUG_WARNING("container is nullptr for navigableOwnedEnd.")
 	}
-
-	//clone reference 'ownedEnd'
-	const std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>>& ownedEndList = obj.getOwnedEnd();
-	if(ownedEndList)
-	{
-		/*SubsetUnion*/
-		m_ownedEnd.reset(new SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedEnd()->initSubsetUnion(getFeature(), getOwnedMember(), getMemberEnd());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >(getFeature(), getOwnedMember(), getMemberEnd())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::Property>& ownedEndindexElem: *ownedEndList) 
-		{
-			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((ownedEndindexElem)->copy());
-			m_ownedEnd->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for ownedEnd.")
-	}
-	/*SubsetUnion*/
-	getOwnedEnd()->initSubsetUnion(getFeature(), getOwnedMember(), getMemberEnd());
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >(getFeature(), getOwnedMember(), getMemberEnd())" << std::endl;
-	#endif
-	
 	return *this;
 }
 
@@ -345,7 +285,34 @@ const std::shared_ptr<Subset<uml::Type, uml::Element>>& AssociationImpl::getEndT
 }
 
 /* Getter & Setter for reference memberEnd */
-const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& AssociationImpl::getMemberEnd() const
+
+/* Getter & Setter for reference navigableOwnedEnd */
+const std::shared_ptr<Subset<uml::Property, uml::Property>>& AssociationImpl::getNavigableOwnedEnd() const
+{
+	if(m_navigableOwnedEnd == nullptr)
+	{
+		/*Subset*/
+		m_navigableOwnedEnd.reset(new Subset<uml::Property, uml::Property >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		getNavigableOwnedEnd()->initSubset(getOwnedEnd());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property >(getOwnedEnd())" << std::endl;
+		#endif
+		
+	}
+    return m_navigableOwnedEnd;
+}
+
+/* Getter & Setter for reference ownedEnd */
+
+//*********************************
+// Union Getter
+//*********************************
+std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::getMemberEnd() const
 {
 	if(m_memberEnd == nullptr)
 	{
@@ -362,54 +329,28 @@ const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& Associatio
 		#endif
 		
 	}
-    return m_memberEnd;
+	return m_memberEnd;
 }
 
-/* Getter & Setter for reference navigableOwnedEnd */
-const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& AssociationImpl::getNavigableOwnedEnd() const
-{
-	if(m_navigableOwnedEnd == nullptr)
-	{
-		/*Subset*/
-		m_navigableOwnedEnd.reset(new Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-		
-		/*Subset*/
-		getNavigableOwnedEnd()->initSubset(getOwnedEnd());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >(getOwnedEnd())" << std::endl;
-		#endif
-		
-	}
-    return m_navigableOwnedEnd;
-}
-
-/* Getter & Setter for reference ownedEnd */
-const std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>>& AssociationImpl::getOwnedEnd() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property>> AssociationImpl::getOwnedEnd() const
 {
 	if(m_ownedEnd == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedEnd.reset(new SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >());
+		m_ownedEnd.reset(new SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
 		getOwnedEnd()->initSubsetUnion(getFeature(), getOwnedMember(), getMemberEnd());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >(getFeature(), getOwnedMember(), getMemberEnd())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property >(getFeature(), getOwnedMember(), getMemberEnd())" << std::endl;
 		#endif
 		
 	}
-    return m_ownedEnd;
+	return m_ownedEnd;
 }
-
-//*********************************
-// Union Getter
-//*********************************
 
 //*********************************
 // Container Getter
@@ -567,7 +508,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& _navigableOwnedEnd = getNavigableOwnedEnd();
+			const std::shared_ptr<Subset<uml::Property, uml::Property>>& _navigableOwnedEnd = getNavigableOwnedEnd();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);

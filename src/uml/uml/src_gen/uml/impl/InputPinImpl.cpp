@@ -275,10 +275,6 @@ std::shared_ptr<ecore::EObject> InputPinImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference action */
-std::weak_ptr<uml::Action> InputPinImpl::getAction() const
-{
-    return m_action;
-}
 
 /* Getter & Setter for reference addStructuralFeatureValueAction */
 std::weak_ptr<uml::AddStructuralFeatureValueAction> InputPinImpl::getAddStructuralFeatureValueAction() const
@@ -360,6 +356,10 @@ void InputPinImpl::setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStruc
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Action> InputPinImpl::getAction() const
+{
+	return m_action;
+}
 
 //*********************************
 // Container Getter

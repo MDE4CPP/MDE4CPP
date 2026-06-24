@@ -73,4 +73,3 @@ std::shared_ptr<ecore::EObject> SemanticsFactoryImpl::create(std::string _classN
     return nullptr;
 }
 
-

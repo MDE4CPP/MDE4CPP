@@ -147,12 +147,6 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 		m_effect = std::dynamic_pointer_cast<uml::Behavior>(obj.getEffect()->copy());
 	}
 
-	//clone reference 'guard'
-	if(obj.getGuard()!=nullptr)
-	{
-		m_guard = std::dynamic_pointer_cast<uml::Constraint>(obj.getGuard()->copy());
-	}
-
 	//clone reference 'redefinedTransition'
 	if(obj.getRedefinedTransition()!=nullptr)
 	{
@@ -256,10 +250,7 @@ void TransitionImpl::setEffect(const std::shared_ptr<uml::Behavior>& _effect)
 }
 
 /* Getter & Setter for reference guard */
-const std::shared_ptr<uml::Constraint>& TransitionImpl::getGuard() const
-{
-    return m_guard;
-}
+
 void TransitionImpl::setGuard(const std::shared_ptr<uml::Constraint>& _guard)
 {
     m_guard = _guard;
@@ -323,6 +314,10 @@ const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& TransitionImpl::getTr
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<uml::Constraint> TransitionImpl::getGuard() const
+{
+	return m_guard;
+}
 
 //*********************************
 // Container Getter

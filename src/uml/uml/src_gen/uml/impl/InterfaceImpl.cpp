@@ -285,19 +285,19 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 	}
 
 	//clone reference 'redefinedInterface'
-	const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& redefinedInterfaceList = obj.getRedefinedInterface();
+	const std::shared_ptr<Subset<uml::Interface, uml::Classifier>>& redefinedInterfaceList = obj.getRedefinedInterface();
 	if(redefinedInterfaceList)
 	{
 		/*Subset*/
-		m_redefinedInterface.reset(new Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >());
+		m_redefinedInterface.reset(new Subset<uml::Interface, uml::Classifier >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getRedefinedInterface()->initSubset(getRedefinedClassifier());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Interface>& redefinedInterfaceindexElem: *redefinedInterfaceList) 
@@ -462,20 +462,20 @@ void InterfaceImpl::setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>
 }
 
 /* Getter & Setter for reference redefinedInterface */
-const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& InterfaceImpl::getRedefinedInterface() const
+const std::shared_ptr<Subset<uml::Interface, uml::Classifier>>& InterfaceImpl::getRedefinedInterface() const
 {
 	if(m_redefinedInterface == nullptr)
 	{
 		/*Subset*/
-		m_redefinedInterface.reset(new Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >());
+		m_redefinedInterface.reset(new Subset<uml::Interface, uml::Classifier >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getRedefinedInterface()->initSubset(getRedefinedClassifier());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
 	}
@@ -705,7 +705,7 @@ void InterfaceImpl::resolveReferences(const int featureID, std::vector<std::shar
 	{
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
-			const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& _redefinedInterface = getRedefinedInterface();
+			const std::shared_ptr<Subset<uml::Interface, uml::Classifier>>& _redefinedInterface = getRedefinedInterface();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Interface>  _r = std::dynamic_pointer_cast<uml::Interface>(ref);

@@ -133,19 +133,19 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPostcondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& getPostcondition() const ;
 			/*!
 			An optional set of Constraints specifying what must be fulfilled before the Behavior is invoked.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPrecondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& getPrecondition() const ;
 			/*!
 			References the Behavior that this Behavior redefines. A subtype of Behavior may redefine any other subtype of Behavior. If the Behavior implements a BehavioralFeature, it replaces the redefined Behavior. If the Behavior is a classifierBehavior, it extends the redefined Behavior.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& getRedefinedBehavior() const ;
+			virtual const std::shared_ptr<Subset<uml::Behavior, uml::Classifier>>& getRedefinedBehavior() const ;
 			/*!
 			Designates a BehavioralFeature that the Behavior implements. The BehavioralFeature must be owned by the BehavioredClassifier that owns the Behavior or be inherited by it. The Parameters of the BehavioralFeature and the implementing Behavior must match. A Behavior does not need to have a specification, in which case it either is the classifierBehavior of a BehavioredClassifier or it can only be invoked by another Behavior of the Classifier.
 			<p>From package UML::CommonBehavior.</p>

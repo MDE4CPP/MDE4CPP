@@ -180,19 +180,19 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 	}
 
 	//clone reference 'deployedArtifact'
-	const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& deployedArtifactList = obj.getDeployedArtifact();
+	const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement>>& deployedArtifactList = obj.getDeployedArtifact();
 	if(deployedArtifactList)
 	{
 		/*Subset*/
-		m_deployedArtifact.reset(new Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >());
+		m_deployedArtifact.reset(new Subset<uml::DeployedArtifact, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getDeployedArtifact()->initSubset(getSupplier());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >(getSupplier())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement >(getSupplier())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::DeployedArtifact>& deployedArtifactindexElem: *deployedArtifactList) 
@@ -255,20 +255,20 @@ const std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>>& Deplo
 }
 
 /* Getter & Setter for reference deployedArtifact */
-const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& DeploymentImpl::getDeployedArtifact() const
+const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement>>& DeploymentImpl::getDeployedArtifact() const
 {
 	if(m_deployedArtifact == nullptr)
 	{
 		/*Subset*/
-		m_deployedArtifact.reset(new Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >());
+		m_deployedArtifact.reset(new Subset<uml::DeployedArtifact, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getDeployedArtifact()->initSubset(getSupplier());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >(getSupplier())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement >(getSupplier())" << std::endl;
 		#endif
 		
 	}
@@ -414,7 +414,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& _deployedArtifact = getDeployedArtifact();
+			const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement>>& _deployedArtifact = getDeployedArtifact();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::DeployedArtifact>  _r = std::dynamic_pointer_cast<uml::DeployedArtifact>(ref);

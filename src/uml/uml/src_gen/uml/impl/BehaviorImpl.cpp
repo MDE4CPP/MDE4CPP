@@ -253,19 +253,19 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'postcondition'
-	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& postconditionList = obj.getPostcondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& postconditionList = obj.getPostcondition();
 	if(postconditionList)
 	{
 		/*Subset*/
-		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPostcondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Constraint>& postconditionindexElem: *postconditionList) 
@@ -280,19 +280,19 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'precondition'
-	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& preconditionList = obj.getPrecondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& preconditionList = obj.getPrecondition();
 	if(preconditionList)
 	{
 		/*Subset*/
-		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPrecondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Constraint>& preconditionindexElem: *preconditionList) 
@@ -307,19 +307,19 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'redefinedBehavior'
-	const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& redefinedBehaviorList = obj.getRedefinedBehavior();
+	const std::shared_ptr<Subset<uml::Behavior, uml::Classifier>>& redefinedBehaviorList = obj.getRedefinedBehavior();
 	if(redefinedBehaviorList)
 	{
 		/*Subset*/
-		m_redefinedBehavior.reset(new Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >());
+		m_redefinedBehavior.reset(new Subset<uml::Behavior, uml::Classifier >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getRedefinedBehavior()->initSubset(getRedefinedClassifier());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::Behavior>& redefinedBehaviorindexElem: *redefinedBehaviorList) 
@@ -449,20 +449,20 @@ const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& BehaviorImp
 }
 
 /* Getter & Setter for reference postcondition */
-const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& BehaviorImpl::getPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& BehaviorImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
 	{
 		/*Subset*/
-		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPostcondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 	}
@@ -470,20 +470,20 @@ const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not 
 }
 
 /* Getter & Setter for reference precondition */
-const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& BehaviorImpl::getPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& BehaviorImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
 	{
 		/*Subset*/
-		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getPrecondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint >(getOwnedRule())" << std::endl;
 		#endif
 		
 	}
@@ -491,20 +491,20 @@ const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not 
 }
 
 /* Getter & Setter for reference redefinedBehavior */
-const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& BehaviorImpl::getRedefinedBehavior() const
+const std::shared_ptr<Subset<uml::Behavior, uml::Classifier>>& BehaviorImpl::getRedefinedBehavior() const
 {
 	if(m_redefinedBehavior == nullptr)
 	{
 		/*Subset*/
-		m_redefinedBehavior.reset(new Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >());
+		m_redefinedBehavior.reset(new Subset<uml::Behavior, uml::Classifier >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getRedefinedBehavior()->initSubset(getRedefinedClassifier());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
 	}
@@ -741,7 +741,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
-			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _postcondition = getPostcondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& _postcondition = getPostcondition();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -755,7 +755,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
-			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _precondition = getPrecondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& _precondition = getPrecondition();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -769,7 +769,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
-			const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& _redefinedBehavior = getRedefinedBehavior();
+			const std::shared_ptr<Subset<uml::Behavior, uml::Classifier>>& _redefinedBehavior = getRedefinedBehavior();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);

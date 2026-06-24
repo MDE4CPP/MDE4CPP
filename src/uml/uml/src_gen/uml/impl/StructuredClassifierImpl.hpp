@@ -78,12 +78,7 @@ namespace uml
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			/*!
-			The Properties owned by the StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& getOwnedAttribute() const ;
 			/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -101,6 +96,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			/*!
+			The Properties owned by the StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getOwnedAttribute() const ;
 			/*!
 			The roles that instances may play in this StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>

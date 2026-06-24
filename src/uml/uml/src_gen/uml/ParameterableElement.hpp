@@ -12,7 +12,7 @@
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
-
+template<class T> class Union;
 
 //*********************************
 // generated Includes
@@ -117,17 +117,17 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual const std::shared_ptr<uml::TemplateParameter>& getTemplateParameter() const = 0;
-			/*!
-			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
 			virtual void setTemplateParameter(const std::shared_ptr<uml::TemplateParameter>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			/*!
+			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<uml::TemplateParameter> getTemplateParameter() const = 0;
 
 			//*********************************
 			// Container Getter

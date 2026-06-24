@@ -74,7 +74,7 @@ namespace uml
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::weak_ptr<uml::Action> getAction() const ;
+			
 			virtual std::weak_ptr<uml::CallAction> getCallAction() const ;
 			virtual void setCallAction(std::weak_ptr<uml::CallAction>) ;
 			virtual std::weak_ptr<uml::ClearStructuralFeatureAction> getClearStructuralFeatureAction() const ;
@@ -93,6 +93,7 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			virtual std::weak_ptr<uml::Action> getAction() const ;
 			
 			//*********************************
 			// Container Getter

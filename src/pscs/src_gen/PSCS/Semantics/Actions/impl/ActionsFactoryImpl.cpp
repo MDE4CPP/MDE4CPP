@@ -245,16 +245,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> Action
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> ActionsFactoryImpl::createCS_AcceptEventActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivationImpl> element(new PSCS::Semantics::Actions::CS_AcceptEventActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_AcceptEventActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> ActionsFactoryImpl::createCS_AddStructuralFeatureValueActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -265,16 +264,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActi
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> ActionsFactoryImpl::createCS_AddStructuralFeatureValueActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivationImpl> element(new PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> ActionsFactoryImpl::createCS_CallOperationActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -285,16 +283,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> Acti
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> ActionsFactoryImpl::createCS_CallOperationActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivationImpl> element(new PSCS::Semantics::Actions::CS_CallOperationActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_CallOperationActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> ActionsFactoryImpl::createCS_ClearStructuralFeatureActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -305,16 +302,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivat
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> ActionsFactoryImpl::createCS_ClearStructuralFeatureActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_ClearStructuralFeatureActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> ActionsFactoryImpl::createCS_CreateLinkActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -325,16 +321,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> Actions
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> ActionsFactoryImpl::createCS_CreateLinkActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivationImpl> element(new PSCS::Semantics::Actions::CS_CreateLinkActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_CreateLinkActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> ActionsFactoryImpl::createCS_CreateObjectActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -345,16 +340,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> Actio
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> ActionsFactoryImpl::createCS_CreateObjectActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivationImpl> element(new PSCS::Semantics::Actions::CS_CreateObjectActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_CreateObjectActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> ActionsFactoryImpl::createCS_ReadExtentActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -365,16 +359,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> Actions
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> ActionsFactoryImpl::createCS_ReadExtentActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ReadExtentActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_ReadExtentActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> ActionsFactoryImpl::createCS_ReadSelfActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -385,16 +378,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> ActionsFa
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> ActionsFactoryImpl::createCS_ReadSelfActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ReadSelfActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_ReadSelfActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> ActionsFactoryImpl::createCS_RemoveStructuralFeatureValueActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -405,16 +397,15 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionA
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> ActionsFactoryImpl::createCS_RemoveStructuralFeatureValueActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivationImpl> element(new PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> ActionsFactoryImpl::createCS_SendSignalActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -425,15 +416,13 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> Actions
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> ActionsFactoryImpl::createCS_SendSignalActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivationImpl> element(new PSCS::Semantics::Actions::CS_SendSignalActionActivationImpl(par_ActivityNodeActivationGroup));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
 	}
-	
 	element->setThisCS_SendSignalActionActivationPtr(element);
 	return element;
-	
 }
-

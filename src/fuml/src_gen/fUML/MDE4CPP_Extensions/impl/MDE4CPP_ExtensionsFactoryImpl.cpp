@@ -126,10 +126,8 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Link> MDE4CPP_ExtensionsFactoryIm
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
 	}
-	
 	element->setThisFUML_LinkPtr(element);
 	return element;
-	
 }
 std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> MDE4CPP_ExtensionsFactoryImpl::createFUML_LinkEnd(const int metaElementID/*=-1*/) const
 {
@@ -146,9 +144,6 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_LinkEnd> MDE4CPP_ExtensionsFactor
 	{
 		par_FUML_Link->getLinkEnds()->push_back(element);
 	}
-	
 	element->setThisFUML_LinkEndPtr(element);
 	return element;
-	
 }
-

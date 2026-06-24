@@ -1645,10 +1645,8 @@ std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactor
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisAssociationClassCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactoryImpl::createAssociationClassCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1658,10 +1656,8 @@ std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactor
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisAssociationClassCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactoryImpl::createAssociationClassCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -1671,10 +1667,8 @@ std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactor
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisAssociationClassCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactoryImpl::createAssociationClassCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1684,10 +1678,8 @@ std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactor
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisAssociationClassCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryImpl::createAssociationEndCallExpEval(const int metaElementID/*=-1*/) const
 {
@@ -1704,10 +1696,8 @@ std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryI
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisAssociationEndCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryImpl::createAssociationEndCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1717,10 +1707,8 @@ std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryI
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisAssociationEndCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryImpl::createAssociationEndCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -1730,10 +1718,8 @@ std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryI
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisAssociationEndCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryImpl::createAssociationEndCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1743,10 +1729,8 @@ std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryI
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisAssociationEndCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::createAttributeCallExpEval(const int metaElementID/*=-1*/) const
 {
@@ -1763,10 +1747,8 @@ std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisAttributeCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::createAttributeCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1776,10 +1758,8 @@ std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisAttributeCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::createAttributeCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -1789,10 +1769,8 @@ std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisAttributeCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::createAttributeCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1802,10 +1780,8 @@ std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisAttributeCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl::createBooleanLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -1822,10 +1798,8 @@ std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisBooleanLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl::createBooleanLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1835,10 +1809,8 @@ std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisBooleanLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl::createBooleanLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -1848,10 +1820,8 @@ std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisBooleanLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl::createBooleanLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1861,10 +1831,8 @@ std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisBooleanLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::createCollectionItemEval(const int metaElementID/*=-1*/) const
 {
@@ -1881,10 +1849,8 @@ std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionItemEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::createCollectionItemEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1894,10 +1860,8 @@ std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionItemEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::createCollectionItemEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -1907,10 +1871,8 @@ std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::cr
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionItemEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::createCollectionItemEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1920,10 +1882,8 @@ std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionItemEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryImpl::createCollectionLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -1940,10 +1900,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryIm
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryImpl::createCollectionLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1953,10 +1911,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryIm
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryImpl::createCollectionLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -1966,10 +1922,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryIm
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryImpl::createCollectionLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -1979,10 +1933,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryIm
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryImpl::createCollectionLiteralPartEval(const int metaElementID/*=-1*/) const
 {
@@ -1999,10 +1951,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryI
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionLiteralPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryImpl::createCollectionLiteralPartEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2012,10 +1962,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryI
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionLiteralPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryImpl::createCollectionLiteralPartEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2025,10 +1973,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryI
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionLiteralPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryImpl::createCollectionLiteralPartEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2038,10 +1984,8 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryI
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionLiteralPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::createCollectionRangeEval(const int metaElementID/*=-1*/) const
 {
@@ -2058,10 +2002,8 @@ std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisCollectionRangeEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::createCollectionRangeEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2071,10 +2013,8 @@ std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisCollectionRangeEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::createCollectionRangeEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2084,10 +2024,8 @@ std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::c
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisCollectionRangeEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::createCollectionRangeEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2097,10 +2035,8 @@ std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisCollectionRangeEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::createEnumLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2117,10 +2053,8 @@ std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisEnumLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::createEnumLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2130,10 +2064,8 @@ std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisEnumLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::createEnumLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2143,10 +2075,8 @@ std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisEnumLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::createEnumLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2156,10 +2086,8 @@ std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisEnumLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::createEvalEnvironment(const int metaElementID/*=-1*/) const
 {
@@ -2176,10 +2104,8 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisEvalEnvironmentPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::createEvalEnvironment_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2189,10 +2115,8 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisEvalEnvironmentPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::createEvalEnvironment_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2202,10 +2126,8 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::creat
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisEvalEnvironmentPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::createEvalEnvironment_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2215,10 +2137,8 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisEvalEnvironmentPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createEvalNameSpace(const int metaElementID/*=-1*/) const
 {
@@ -2235,10 +2155,8 @@ std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createE
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisEvalNameSpacePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createEvalNameSpace_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2248,10 +2166,8 @@ std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createE
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisEvalNameSpacePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createEvalNameSpace_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2261,10 +2177,8 @@ std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createE
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisEvalNameSpacePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createEvalNameSpace_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2274,10 +2188,8 @@ std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createE
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisEvalNameSpacePtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::createExpressionInOclEval(const int metaElementID/*=-1*/) const
 {
@@ -2294,10 +2206,8 @@ std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisExpressionInOclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::createExpressionInOclEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2307,10 +2217,8 @@ std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisExpressionInOclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::createExpressionInOclEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2320,10 +2228,8 @@ std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::c
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisExpressionInOclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::createExpressionInOclEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2333,10 +2239,8 @@ std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisExpressionInOclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2353,10 +2257,8 @@ std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExp
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIfExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2366,10 +2268,8 @@ std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExp
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIfExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2379,10 +2279,8 @@ std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExp
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIfExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2392,10 +2290,8 @@ std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExp
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIfExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl::createIntegerLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2412,10 +2308,8 @@ std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIntegerLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl::createIntegerLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2425,10 +2319,8 @@ std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIntegerLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl::createIntegerLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2438,10 +2330,8 @@ std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIntegerLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl::createIntegerLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2451,10 +2341,8 @@ std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIntegerLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::createIterateExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2471,10 +2359,8 @@ std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIterateExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::createIterateExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2484,10 +2370,8 @@ std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::create
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIterateExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::createIterateExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2497,10 +2381,8 @@ std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::create
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIterateExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::createIterateExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2510,10 +2392,8 @@ std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIterateExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::createIteratorExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2530,10 +2410,8 @@ std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisIteratorExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::createIteratorExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2543,10 +2421,8 @@ std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisIteratorExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::createIteratorExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2556,10 +2432,8 @@ std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisIteratorExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::createIteratorExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2569,10 +2443,8 @@ std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisIteratorExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2589,10 +2461,8 @@ std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetE
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisLetExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2602,10 +2472,8 @@ std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetE
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisLetExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2615,10 +2483,8 @@ std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetE
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisLetExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2628,10 +2494,8 @@ std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetE
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisLetExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::createLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2648,10 +2512,8 @@ std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::createLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2661,10 +2523,8 @@ std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::create
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::createLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2674,10 +2534,8 @@ std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::create
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::createLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2687,10 +2545,8 @@ std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::create
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoopExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2707,10 +2563,8 @@ std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoo
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisLoopExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoopExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2720,10 +2574,8 @@ std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoo
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisLoopExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoopExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2733,10 +2585,8 @@ std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoo
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisLoopExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoopExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2746,10 +2596,8 @@ std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoo
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisLoopExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryImpl::createModelPropertyCallExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2766,10 +2614,8 @@ std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryIm
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisModelPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryImpl::createModelPropertyCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2779,10 +2625,8 @@ std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryIm
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisModelPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryImpl::createModelPropertyCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2792,10 +2636,8 @@ std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryIm
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisModelPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryImpl::createModelPropertyCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2805,10 +2647,8 @@ std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryIm
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisModelPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::createNameValueBinding(const int metaElementID/*=-1*/) const
 {
@@ -2825,10 +2665,8 @@ std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisNameValueBindingPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::createNameValueBinding_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2838,10 +2676,8 @@ std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisNameValueBindingPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::createNameValueBinding_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2851,10 +2687,8 @@ std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::crea
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisNameValueBindingPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::createNameValueBinding_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2864,10 +2698,8 @@ std::shared_ptr<ocl::Evaluations::NameValueBinding> EvaluationsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisNameValueBindingPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl::createNavigationCallExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2884,10 +2716,8 @@ std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisNavigationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl::createNavigationCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2897,10 +2727,8 @@ std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisNavigationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl::createNavigationCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2910,10 +2738,8 @@ std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl:
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisNavigationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl::createNavigationCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2923,10 +2749,8 @@ std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisNavigationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl::createNumericLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -2943,10 +2767,8 @@ std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisNumericLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl::createNumericLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2956,10 +2778,8 @@ std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisNumericLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl::createNumericLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -2969,10 +2789,8 @@ std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisNumericLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl::createNumericLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -2982,10 +2800,8 @@ std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl:
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisNumericLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3002,10 +2818,8 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclE
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOclExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3015,10 +2829,8 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclE
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOclExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3028,10 +2840,8 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclE
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOclExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3041,10 +2851,8 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclE
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOclExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::createOclMessageArgEval(const int metaElementID/*=-1*/) const
 {
@@ -3061,10 +2869,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOclMessageArgEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::createOclMessageArgEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3074,10 +2880,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOclMessageArgEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::createOclMessageArgEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3087,10 +2891,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOclMessageArgEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::createOclMessageArgEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3100,10 +2902,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOclMessageArgEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::createOclMessageExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3120,10 +2920,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOclMessageExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::createOclMessageExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3133,10 +2931,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOclMessageExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::createOclMessageExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3146,10 +2942,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::cre
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOclMessageExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::createOclMessageExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3159,10 +2953,8 @@ std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::cre
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOclMessageExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::createOperationCallExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3179,10 +2971,8 @@ std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisOperationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::createOperationCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3192,10 +2982,8 @@ std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisOperationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::createOperationCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3205,10 +2993,8 @@ std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisOperationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::createOperationCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3218,10 +3004,8 @@ std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisOperationCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImpl::createPrimitiveLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3238,10 +3022,8 @@ std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPrimitiveLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImpl::createPrimitiveLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3251,10 +3033,8 @@ std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPrimitiveLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImpl::createPrimitiveLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3264,10 +3044,8 @@ std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImp
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPrimitiveLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImpl::createPrimitiveLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3277,10 +3055,8 @@ std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPrimitiveLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::createPropertyCallExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3297,10 +3073,8 @@ std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::createPropertyCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3310,10 +3084,8 @@ std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::createPropertyCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3323,10 +3095,8 @@ std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::c
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::createPropertyCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3336,10 +3106,8 @@ std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisPropertyCallExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::createRealLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3356,10 +3124,8 @@ std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisRealLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::createRealLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3369,10 +3135,8 @@ std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisRealLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::createRealLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3382,10 +3146,8 @@ std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisRealLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::createRealLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3395,10 +3157,8 @@ std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::cr
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisRealLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::createStringLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3415,10 +3175,8 @@ std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisStringLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::createStringLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3428,10 +3186,8 @@ std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisStringLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::createStringLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3441,10 +3197,8 @@ std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisStringLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::createStringLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3454,10 +3208,8 @@ std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisStringLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::createTupleLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3474,10 +3226,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisTupleLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::createTupleLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3487,10 +3237,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisTupleLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::createTupleLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3500,10 +3248,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::c
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisTupleLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::createTupleLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3513,10 +3259,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::c
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisTupleLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImpl::createTupleLiteralExpPartEval(const int metaElementID/*=-1*/) const
 {
@@ -3533,10 +3277,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisTupleLiteralExpPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImpl::createTupleLiteralExpPartEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3546,10 +3288,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisTupleLiteralExpPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImpl::createTupleLiteralExpPartEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3559,10 +3299,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImp
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisTupleLiteralExpPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImpl::createTupleLiteralExpPartEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3572,10 +3310,8 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisTupleLiteralExpPartEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFactoryImpl::createUnlimitedNaturalLiteralExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3592,10 +3328,8 @@ std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFac
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisUnlimitedNaturalLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFactoryImpl::createUnlimitedNaturalLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3605,10 +3339,8 @@ std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFac
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisUnlimitedNaturalLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFactoryImpl::createUnlimitedNaturalLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3618,10 +3350,8 @@ std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFac
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisUnlimitedNaturalLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFactoryImpl::createUnlimitedNaturalLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3631,10 +3361,8 @@ std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFac
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisUnlimitedNaturalLiteralExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImpl::createUnspecifiedValueExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3651,10 +3379,8 @@ std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisUnspecifiedValueExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImpl::createUnspecifiedValueExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3664,10 +3390,8 @@ std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisUnspecifiedValueExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImpl::createUnspecifiedValueExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3677,10 +3401,8 @@ std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImp
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisUnspecifiedValueExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImpl::createUnspecifiedValueExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3690,10 +3412,8 @@ std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImp
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisUnspecifiedValueExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::createVariableDeclEval(const int metaElementID/*=-1*/) const
 {
@@ -3710,10 +3430,8 @@ std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisVariableDeclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::createVariableDeclEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3723,10 +3441,8 @@ std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisVariableDeclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::createVariableDeclEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3736,10 +3452,8 @@ std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::crea
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisVariableDeclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::createVariableDeclEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3749,10 +3463,8 @@ std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::crea
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisVariableDeclEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::createVariableExpEval(const int metaElementID/*=-1*/) const
 {
@@ -3769,10 +3481,8 @@ std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setContextVariable(element);
 	}
-	
 	element->setThisVariableExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::createVariableExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3782,10 +3492,8 @@ std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->getParameterVariable()->push_back(element);
 	}
-	
 	element->setThisVariableExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::createVariableExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
@@ -3795,10 +3503,8 @@ std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_IterateExp->setResult(element);
 	}
-	
 	element->setThisVariableExpEvalPtr(element);
 	return element;
-	
 }
 std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::createVariableExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
@@ -3808,9 +3514,6 @@ std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::creat
 	{
 		par_ExpressionInOcl->setResultVariable(element);
 	}
-	
 	element->setThisVariableExpEvalPtr(element);
 	return element;
-	
 }
-

@@ -177,10 +177,8 @@ std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Link> MDE4CPP_ExtensionsFactoryIm
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
 	}
-	
 	element->setThisPSCS_LinkPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> MDE4CPP_ExtensionsFactoryImpl::createPSCS_LinkEnd(const int metaElementID/*=-1*/) const
 {
@@ -197,10 +195,8 @@ std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_LinkEnd> MDE4CPP_ExtensionsFactor
 	{
 		par_FUML_Link->getLinkEnds()->push_back(element);
 	}
-	
 	element->setThisPSCS_LinkEndPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> MDE4CPP_ExtensionsFactoryImpl::createPSCS_Object(const int metaElementID/*=-1*/) const
 {
@@ -217,10 +213,8 @@ std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> MDE4CPP_ExtensionsFactory
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
 	}
-	
 	element->setThisPSCS_ObjectPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> MDE4CPP_ExtensionsFactoryImpl::createPSCS_Object_as_source_in_DirectedRelationship(std::shared_ptr<uml::DirectedRelationship> par_DirectedRelationship, const int metaElementID) const
 {
@@ -230,10 +224,8 @@ std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> MDE4CPP_ExtensionsFactory
 	{
 		par_DirectedRelationship->getSource()->push_back(element);
 	}
-	
 	element->setThisPSCS_ObjectPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> MDE4CPP_ExtensionsFactoryImpl::createPSCS_Object_as_target_in_DirectedRelationship(std::shared_ptr<uml::DirectedRelationship> par_DirectedRelationship, const int metaElementID) const
 {
@@ -243,9 +235,6 @@ std::shared_ptr<PSCS::MDE4CPP_Extensions::PSCS_Object> MDE4CPP_ExtensionsFactory
 	{
 		par_DirectedRelationship->getTarget()->push_back(element);
 	}
-	
 	element->setThisPSCS_ObjectPtr(element);
 	return element;
-	
 }
-

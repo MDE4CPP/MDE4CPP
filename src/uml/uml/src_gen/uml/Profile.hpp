@@ -156,13 +156,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& getMetaclassReference() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport>>& getMetaclassReference() const = 0;
 			/*!
 			References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& getMetamodelReference() const = 0;
+			virtual const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport>>& getMetamodelReference() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -193,13 +193,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> m_metaclassReference;
+			mutable std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport>> m_metaclassReference;
 			/*!
 			References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> m_metamodelReference;
+			mutable std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport>> m_metamodelReference;
 	};
 }
 #endif /* end of include guard: UML_PROFILE_HPP */

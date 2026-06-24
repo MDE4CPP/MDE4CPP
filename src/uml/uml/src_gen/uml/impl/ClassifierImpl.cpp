@@ -184,33 +184,6 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	m_powertypeExtent  = obj.getPowertypeExtent();
 	m_useCase  = obj.getUseCase();
 	//Clone references with containment (deep copy)
-	//clone reference 'collaborationUse'
-	const std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>>& collaborationUseList = obj.getCollaborationUse();
-	if(collaborationUseList)
-	{
-		/*SubsetUnion*/
-		m_collaborationUse.reset(new SubsetUnion<uml::CollaborationUse, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getCollaborationUse()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::CollaborationUse>& collaborationUseindexElem: *collaborationUseList) 
-		{
-			const std::shared_ptr<uml::CollaborationUse>& temp = std::dynamic_pointer_cast<uml::CollaborationUse>((collaborationUseindexElem)->copy());
-			m_collaborationUse->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for collaborationUse.")
-	}
-
 	//clone reference 'generalization'
 	const std::shared_ptr<Subset<uml::Generalization, uml::Element>>& generalizationList = obj.getGeneralization();
 	if(generalizationList)
@@ -292,33 +265,6 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 		DEBUG_WARNING("container is nullptr for ownedUseCase.")
 	}
 
-	//clone reference 'redefinedClassifier'
-	const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& redefinedClassifierList = obj.getRedefinedClassifier();
-	if(redefinedClassifierList)
-	{
-		/*SubsetUnion*/
-		m_redefinedClassifier.reset(new SubsetUnion<uml::Classifier, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRedefinedClassifier()->initSubsetUnion(getRedefinedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::Classifier>& redefinedClassifierindexElem: *redefinedClassifierList) 
-		{
-			const std::shared_ptr<uml::Classifier>& temp = std::dynamic_pointer_cast<uml::Classifier>((redefinedClassifierindexElem)->copy());
-			m_redefinedClassifier->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for redefinedClassifier.")
-	}
-
 	//clone reference 'representation'
 	if(obj.getRepresentation()!=nullptr)
 	{
@@ -351,12 +297,6 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	{
 		DEBUG_WARNING("container is nullptr for substitution.")
 	}
-	/*SubsetUnion*/
-	getCollaborationUse()->initSubsetUnion(getOwnedElement());
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
-	#endif
-	
 	/*Subset*/
 	getGeneralization()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -685,25 +625,6 @@ void ClassifierImpl::setIsFinalSpecialization(bool _isFinalSpecialization)
 /* Getter & Setter for reference attribute */
 
 /* Getter & Setter for reference collaborationUse */
-const std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>>& ClassifierImpl::getCollaborationUse() const
-{
-	if(m_collaborationUse == nullptr)
-	{
-		/*SubsetUnion*/
-		m_collaborationUse.reset(new SubsetUnion<uml::CollaborationUse, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getCollaborationUse()->initSubsetUnion(getOwnedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
-		#endif
-		
-	}
-    return m_collaborationUse;
-}
 
 /* Getter & Setter for reference feature */
 
@@ -795,25 +716,6 @@ const std::shared_ptr<Bag<uml::GeneralizationSet>>& ClassifierImpl::getPowertype
 }
 
 /* Getter & Setter for reference redefinedClassifier */
-const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& ClassifierImpl::getRedefinedClassifier() const
-{
-	if(m_redefinedClassifier == nullptr)
-	{
-		/*SubsetUnion*/
-		m_redefinedClassifier.reset(new SubsetUnion<uml::Classifier, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRedefinedClassifier()->initSubsetUnion(getRedefinedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
-		#endif
-		
-	}
-    return m_redefinedClassifier;
-}
 
 /* Getter & Setter for reference representation */
 const std::shared_ptr<uml::CollaborationUse>& ClassifierImpl::getRepresentation() const
@@ -882,6 +784,26 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ClassifierImpl::getAtt
 	return m_attribute;
 }
 
+std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> ClassifierImpl::getCollaborationUse() const
+{
+	if(m_collaborationUse == nullptr)
+	{
+		/*SubsetUnion*/
+		m_collaborationUse.reset(new SubsetUnion<uml::CollaborationUse, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		getCollaborationUse()->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
+	return m_collaborationUse;
+}
+
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ClassifierImpl::getFeature() const
 {
 	if(m_feature == nullptr)
@@ -900,6 +822,26 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ClassifierImpl::ge
 		
 	}
 	return m_feature;
+}
+
+std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> ClassifierImpl::getRedefinedClassifier() const
+{
+	if(m_redefinedClassifier == nullptr)
+	{
+		/*SubsetUnion*/
+		m_redefinedClassifier.reset(new SubsetUnion<uml::Classifier, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		getRedefinedClassifier()->initSubsetUnion(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
+	return m_redefinedClassifier;
 }
 
 //*********************************

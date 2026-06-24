@@ -144,10 +144,7 @@ std::shared_ptr<ecore::EObject> TemplateParameterSubstitutionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference actual */
-const std::shared_ptr<uml::ParameterableElement>& TemplateParameterSubstitutionImpl::getActual() const
-{
-    return m_actual;
-}
+
 void TemplateParameterSubstitutionImpl::setActual(const std::shared_ptr<uml::ParameterableElement>& _actual)
 {
     m_actual = _actual;
@@ -190,6 +187,10 @@ void TemplateParameterSubstitutionImpl::setTemplateBinding(std::weak_ptr<uml::Te
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getActual() const
+{
+	return m_actual;
+}
 
 //*********************************
 // Container Getter

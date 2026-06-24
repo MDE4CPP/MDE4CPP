@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& getDeployedArtifact() const ;
+			virtual const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement>>& getDeployedArtifact() const ;
 			/*!
 			The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p>

@@ -12,7 +12,7 @@
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
-
+template<class T> class Union;
 
 //*********************************
 // generated Includes
@@ -92,12 +92,6 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual const std::shared_ptr<uml::ParameterableElement>& getDefault() const = 0;
-			/*!
-			The ParameterableElement that is the default for this formal TemplateParameter.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
 			virtual void setDefault(const std::shared_ptr<uml::ParameterableElement>&) = 0;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
@@ -128,12 +122,6 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual const std::shared_ptr<uml::ParameterableElement>& getParameteredElement() const = 0;
-			/*!
-			The ParameterableElement exposed by this TemplateParameter.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
 			virtual void setParameteredElement(const std::shared_ptr<uml::ParameterableElement>&) = 0;
 			/*!
 			The TemplateSignature that owns this TemplateParameter.
@@ -151,6 +139,18 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			/*!
+			The ParameterableElement that is the default for this formal TemplateParameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<uml::ParameterableElement> getDefault() const = 0;
+			/*!
+			The ParameterableElement exposed by this TemplateParameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<uml::ParameterableElement> getParameteredElement() const = 0;
 
 			//*********************************
 			// Container Getter

@@ -193,13 +193,7 @@ void TypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("type")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 		else
-		{
-			std::shared_ptr<uml::Type> type = std::dynamic_pointer_cast<uml::Type>(loadHandler->checkNodeType(getThisTypedElementPtr()));
-			if (type)
-			{
-				setType(type);
-			}
-		}
+		{			}
 	}
 	catch (std::exception& e)
 	{

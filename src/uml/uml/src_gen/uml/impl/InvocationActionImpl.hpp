@@ -58,12 +58,7 @@ namespace uml
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			/*!
-			The InputPins that provide the argument values passed in the invocation request.
-			<p>From package UML::Actions.</p>
-			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>>& getArgument() const ;
 			/*!
 			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p>
@@ -80,6 +75,12 @@ namespace uml
 			//*********************************
 			// Union Reference Getters
 			//*********************************
+			/*!
+			The InputPins that provide the argument values passed in the invocation request.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> getArgument() const ;
 			
 			//*********************************
 			// Container Getter

@@ -200,43 +200,10 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 	{
 		DEBUG_WARNING("container is nullptr for interfaceRealization.")
 	}
-
-	//clone reference 'ownedBehavior'
-	const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& ownedBehaviorList = obj.getOwnedBehavior();
-	if(ownedBehaviorList)
-	{
-		/*SubsetUnion*/
-		m_ownedBehavior.reset(new SubsetUnion<uml::Behavior, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedBehavior - SubsetUnion<uml::Behavior, uml::NamedElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getOwnedBehavior()->initSubsetUnion(getOwnedMember());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedBehavior - SubsetUnion<uml::Behavior, uml::NamedElement >(getOwnedMember())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::Behavior>& ownedBehaviorindexElem: *ownedBehaviorList) 
-		{
-			const std::shared_ptr<uml::Behavior>& temp = std::dynamic_pointer_cast<uml::Behavior>((ownedBehaviorindexElem)->copy());
-			m_ownedBehavior->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for ownedBehavior.")
-	}
 	/*Subset*/
 	getInterfaceRealization()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_interfaceRealization - Subset<uml::InterfaceRealization, uml::Element >(getOwnedElement())" << std::endl;
-	#endif
-	
-	/*SubsetUnion*/
-	getOwnedBehavior()->initSubsetUnion(getOwnedMember());
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value SubsetUnion: " << "m_ownedBehavior - SubsetUnion<uml::Behavior, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	return *this;
@@ -295,7 +262,11 @@ const std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>>& Behavior
 }
 
 /* Getter & Setter for reference ownedBehavior */
-const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& BehavioredClassifierImpl::getOwnedBehavior() const
+
+//*********************************
+// Union Getter
+//*********************************
+std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassifierImpl::getOwnedBehavior() const
 {
 	if(m_ownedBehavior == nullptr)
 	{
@@ -312,12 +283,8 @@ const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& Behaviored
 		#endif
 		
 	}
-    return m_ownedBehavior;
+	return m_ownedBehavior;
 }
-
-//*********************************
-// Union Getter
-//*********************************
 
 //*********************************
 // Container Getter

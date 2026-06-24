@@ -106,9 +106,6 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CommonBehav
 	{
 		par_ObjectActivation->getEventPool()->push_back(element);
 	}
-	
 	element->setThisCS_EventOccurrencePtr(element);
 	return element;
-	
 }
-

@@ -73,4 +73,3 @@ std::shared_ptr<ecore::EObject> oclFactoryImpl::create(std::string _className, s
     return nullptr;
 }
 
-

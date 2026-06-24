@@ -169,19 +169,19 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'metaclassReference'
-	const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& metaclassReferenceList = obj.getMetaclassReference();
+	const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport>>& metaclassReferenceList = obj.getMetaclassReference();
 	if(metaclassReferenceList)
 	{
 		/*Subset*/
-		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >());
+		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getMetaclassReference()->initSubset(getElementImport());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(getElementImport())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport >(getElementImport())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::ElementImport>& metaclassReferenceindexElem: *metaclassReferenceList) 
@@ -196,19 +196,19 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 	}
 
 	//clone reference 'metamodelReference'
-	const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& metamodelReferenceList = obj.getMetamodelReference();
+	const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport>>& metamodelReferenceList = obj.getMetamodelReference();
 	if(metamodelReferenceList)
 	{
 		/*Subset*/
-		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >());
+		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getMetamodelReference()->initSubset(getPackageImport());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(getPackageImport())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport >(getPackageImport())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::PackageImport>& metamodelReferenceindexElem: *metamodelReferenceList) 
@@ -288,20 +288,20 @@ bool ProfileImpl::isDefined()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference metaclassReference */
-const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& ProfileImpl::getMetaclassReference() const
+const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport>>& ProfileImpl::getMetaclassReference() const
 {
 	if(m_metaclassReference == nullptr)
 	{
 		/*Subset*/
-		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >());
+		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getMetaclassReference()->initSubset(getElementImport());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(getElementImport())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport >(getElementImport())" << std::endl;
 		#endif
 		
 	}
@@ -309,20 +309,20 @@ const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset doe
 }
 
 /* Getter & Setter for reference metamodelReference */
-const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& ProfileImpl::getMetamodelReference() const
+const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport>>& ProfileImpl::getMetamodelReference() const
 {
 	if(m_metamodelReference == nullptr)
 	{
 		/*Subset*/
-		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >());
+		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport >()" << std::endl;
 		#endif
 		
 		/*Subset*/
 		getMetamodelReference()->initSubset(getPackageImport());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(getPackageImport())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport >(getPackageImport())" << std::endl;
 		#endif
 		
 	}
@@ -429,7 +429,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
-			const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& _metaclassReference = getMetaclassReference();
+			const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport>>& _metaclassReference = getMetaclassReference();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ElementImport>  _r = std::dynamic_pointer_cast<uml::ElementImport>(ref);
@@ -443,7 +443,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared
 
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
-			const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& _metamodelReference = getMetamodelReference();
+			const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport>>& _metamodelReference = getMetamodelReference();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::PackageImport>  _r = std::dynamic_pointer_cast<uml::PackageImport>(ref);

@@ -158,10 +158,8 @@ std::shared_ptr<PSSM::Semantics::CommonBehavior::CallEventExecution> CommonBehav
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
 	}
-	
 	element->setThisCallEventExecutionPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::CommonBehavior::CallEventOccurrence> CommonBehaviorFactoryImpl::createCallEventOccurrence(const int metaElementID/*=-1*/) const
 {
@@ -178,10 +176,8 @@ std::shared_ptr<PSSM::Semantics::CommonBehavior::CallEventOccurrence> CommonBeha
 	{
 		par_ObjectActivation->getEventPool()->push_back(element);
 	}
-	
 	element->setThisCallEventOccurrencePtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::CommonBehavior::EventTriggeredExecution> CommonBehaviorFactoryImpl::createEventTriggeredExecution(const int metaElementID/*=-1*/) const
 {
@@ -198,10 +194,8 @@ std::shared_ptr<PSSM::Semantics::CommonBehavior::EventTriggeredExecution> Common
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
 	}
-	
 	element->setThisEventTriggeredExecutionPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::CommonBehavior::SM_ObjectActivation> CommonBehaviorFactoryImpl::createSM_ObjectActivation(const int metaElementID/*=-1*/) const
 {
@@ -218,9 +212,6 @@ std::shared_ptr<PSSM::Semantics::CommonBehavior::SM_ObjectActivation> CommonBeha
 	{
 		par_FUML_Object->setObjectActivation(element);
 	}
-	
 	element->setThisSM_ObjectActivationPtr(element);
 	return element;
-	
 }
-

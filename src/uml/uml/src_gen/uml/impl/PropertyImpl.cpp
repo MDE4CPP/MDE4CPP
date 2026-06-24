@@ -244,33 +244,6 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 	{
 		DEBUG_WARNING("container is nullptr for qualifier.")
 	}
-
-	//clone reference 'redefinedProperty'
-	const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& redefinedPropertyList = obj.getRedefinedProperty();
-	if(redefinedPropertyList)
-	{
-		/*SubsetUnion*/
-		m_redefinedProperty.reset(new SubsetUnion<uml::Property, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRedefinedProperty()->initSubsetUnion(getRedefinedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::Property>& redefinedPropertyindexElem: *redefinedPropertyList) 
-		{
-			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((redefinedPropertyindexElem)->copy());
-			m_redefinedProperty->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for redefinedProperty.")
-	}
 	
 	/*Subset*/
 	getQualifier()->initSubset(getOwnedElement());
@@ -440,10 +413,7 @@ void PropertyImpl::setIsID(bool _isID)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference association */
-const std::shared_ptr<uml::Association>& PropertyImpl::getAssociation() const
-{
-    return m_association;
-}
+
 void PropertyImpl::setAssociation(const std::shared_ptr<uml::Association>& _association)
 {
     m_association = _association;
@@ -549,25 +519,6 @@ const std::shared_ptr<Subset<uml::Property, uml::Element>>& PropertyImpl::getQua
 }
 
 /* Getter & Setter for reference redefinedProperty */
-const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& PropertyImpl::getRedefinedProperty() const
-{
-	if(m_redefinedProperty == nullptr)
-	{
-		/*SubsetUnion*/
-		m_redefinedProperty.reset(new SubsetUnion<uml::Property, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getRedefinedProperty()->initSubsetUnion(getRedefinedElement());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
-		#endif
-		
-	}
-    return m_redefinedProperty;
-}
 
 /* Getter & Setter for reference subsettedProperty */
 const std::shared_ptr<Bag<uml::Property>>& PropertyImpl::getSubsettedProperty() const
@@ -584,6 +535,30 @@ const std::shared_ptr<Bag<uml::Property>>& PropertyImpl::getSubsettedProperty() 
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<uml::Association> PropertyImpl::getAssociation() const
+{
+	return m_association;
+}
+
+std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImpl::getRedefinedProperty() const
+{
+	if(m_redefinedProperty == nullptr)
+	{
+		/*SubsetUnion*/
+		m_redefinedProperty.reset(new SubsetUnion<uml::Property, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		getRedefinedProperty()->initSubsetUnion(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
+	return m_redefinedProperty;
+}
 
 //*********************************
 // Container Getter

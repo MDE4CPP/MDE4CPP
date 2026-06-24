@@ -133,16 +133,15 @@ std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> LociFactoryImpl::create
 }
 std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> LociFactoryImpl::createExecutionFactory_as_factory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID) const
 {
+	
 	std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryImpl> element(new fUML::Semantics::Loci::ExecutionFactoryImpl(par_Locus));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Locus.lock())
 	{
 		wp->setFactory(element);
 	}
-	
 	element->setThisExecutionFactoryPtr(element);
 	return element;
-	
 }
 std::shared_ptr<fUML::Semantics::Loci::Executor> LociFactoryImpl::createExecutor(const int metaElementID/*=-1*/) const
 {
@@ -153,16 +152,15 @@ std::shared_ptr<fUML::Semantics::Loci::Executor> LociFactoryImpl::createExecutor
 }
 std::shared_ptr<fUML::Semantics::Loci::Executor> LociFactoryImpl::createExecutor_as_executor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID) const
 {
+	
 	std::shared_ptr<fUML::Semantics::Loci::ExecutorImpl> element(new fUML::Semantics::Loci::ExecutorImpl(par_Locus));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Locus.lock())
 	{
 		wp->setExecutor(element);
 	}
-	
 	element->setThisExecutorPtr(element);
 	return element;
-	
 }
 std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> LociFactoryImpl::createFirstChoiceStrategy(const int metaElementID/*=-1*/) const
 {
@@ -178,4 +176,3 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> LociFactoryImpl::createLocus(const
 	element->setThisLocusPtr(element);
 	return element;
 }
-

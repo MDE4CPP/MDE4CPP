@@ -110,7 +110,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& getRedefinedInterface() const ;
+			virtual const std::shared_ptr<Subset<uml::Interface, uml::Classifier>>& getRedefinedInterface() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -487,10 +487,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::CompletionEventOccurrence> State
 	{
 		par_ObjectActivation->getEventPool()->push_back(element);
 	}
-	
 	element->setThisCompletionEventOccurrencePtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::DeepHistoryPseudostateActivation> StateMachinesFactoryImpl::createDeepHistoryPseudostateActivation(const int metaElementID/*=-1*/) const
 {
@@ -507,10 +505,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::DeepHistoryPseudostateActivation
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisDeepHistoryPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::DeferredEventOccurrence> StateMachinesFactoryImpl::createDeferredEventOccurrence(const int metaElementID/*=-1*/) const
 {
@@ -527,10 +523,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::DeferredEventOccurrence> StateMa
 	{
 		par_ObjectActivation->getEventPool()->push_back(element);
 	}
-	
 	element->setThisDeferredEventOccurrencePtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityContextObject> StateMachinesFactoryImpl::createDoActivityContextObject(const int metaElementID/*=-1*/) const
 {
@@ -554,10 +548,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityContextObjectActivatio
 	{
 		par_FUML_Object->setObjectActivation(element);
 	}
-	
 	element->setThisDoActivityContextObjectActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter> StateMachinesFactoryImpl::createDoActivityExecutionEventAccepter(const int metaElementID/*=-1*/) const
 {
@@ -574,10 +566,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::DoActivityExecutionEventAccepter
 	{
 		par_DoActivityExecutionEventAccepter->setEncapsulatedAccepter(element);
 	}
-	
 	element->setThisDoActivityExecutionEventAccepterPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation> StateMachinesFactoryImpl::createEntryPointPseudostateActivation(const int metaElementID/*=-1*/) const
 {
@@ -594,10 +584,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation>
 	{
 		par_StateActivation->getConnectionPointActivations()->push_back(element);
 	}
-	
 	element->setThisEntryPointPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation> StateMachinesFactoryImpl::createEntryPointPseudostateActivation_as_vertexActivations_in_RegionActivation(std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> par_RegionActivation, const int metaElementID) const
 {
@@ -607,10 +595,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation>
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisEntryPointPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::ExitPointPseudostateActivation> StateMachinesFactoryImpl::createExitPointPseudostateActivation(const int metaElementID/*=-1*/) const
 {
@@ -627,10 +613,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::ExitPointPseudostateActivation> 
 	{
 		par_StateActivation->getConnectionPointActivations()->push_back(element);
 	}
-	
 	element->setThisExitPointPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::ExitPointPseudostateActivation> StateMachinesFactoryImpl::createExitPointPseudostateActivation_as_vertexActivations_in_RegionActivation(std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> par_RegionActivation, const int metaElementID) const
 {
@@ -640,10 +624,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::ExitPointPseudostateActivation> 
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisExitPointPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::ExternalTransitionActivation> StateMachinesFactoryImpl::createExternalTransitionActivation(const int metaElementID/*=-1*/) const
 {
@@ -660,10 +642,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::ExternalTransitionActivation> St
 	{
 		par_RegionActivation->getTransitionActivations()->push_back(element);
 	}
-	
 	element->setThisExternalTransitionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::FinalStateActivation> StateMachinesFactoryImpl::createFinalStateActivation(const int metaElementID/*=-1*/) const
 {
@@ -680,10 +660,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::FinalStateActivation> StateMachi
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisFinalStateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::ForkPseudostateActivation> StateMachinesFactoryImpl::createForkPseudostateActivation(const int metaElementID/*=-1*/) const
 {
@@ -700,10 +678,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::ForkPseudostateActivation> State
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisForkPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::InitialPseudostateActivation> StateMachinesFactoryImpl::createInitialPseudostateActivation(const int metaElementID/*=-1*/) const
 {
@@ -720,10 +696,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::InitialPseudostateActivation> St
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisInitialPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::InternalTransitionActivation> StateMachinesFactoryImpl::createInternalTransitionActivation(const int metaElementID/*=-1*/) const
 {
@@ -740,10 +714,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::InternalTransitionActivation> St
 	{
 		par_RegionActivation->getTransitionActivations()->push_back(element);
 	}
-	
 	element->setThisInternalTransitionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::JoinPseudostateActivation> StateMachinesFactoryImpl::createJoinPseudostateActivation(const int metaElementID/*=-1*/) const
 {
@@ -760,10 +732,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::JoinPseudostateActivation> State
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisJoinPseudostateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::LocalTransitionActivation> StateMachinesFactoryImpl::createLocalTransitionActivation(const int metaElementID/*=-1*/) const
 {
@@ -780,10 +750,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::LocalTransitionActivation> State
 	{
 		par_RegionActivation->getTransitionActivations()->push_back(element);
 	}
-	
 	element->setThisLocalTransitionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> StateMachinesFactoryImpl::createRegionActivation(const int metaElementID/*=-1*/) const
 {
@@ -800,10 +768,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> StateMachinesF
 	{
 		par_StateActivation->getRegionActivations()->push_back(element);
 	}
-	
 	element->setThisRegionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> StateMachinesFactoryImpl::createRegionActivation_as_regionActivations_in_StateMachineExecution(std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> par_StateMachineExecution, const int metaElementID) const
 {
@@ -813,10 +779,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> StateMachinesF
 	{
 		par_StateMachineExecution->getRegionActivations()->push_back(element);
 	}
-	
 	element->setThisRegionActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation> StateMachinesFactoryImpl::createStateActivation(const int metaElementID/*=-1*/) const
 {
@@ -833,10 +797,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::StateActivation> StateMachinesFa
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisStateActivationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::StateConfiguration> StateMachinesFactoryImpl::createStateConfiguration(const int metaElementID/*=-1*/) const
 {
@@ -853,10 +815,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::StateConfiguration> StateMachine
 	{
 		par_StateConfiguration->getChildren()->push_back(element);
 	}
-	
 	element->setThisStateConfigurationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration> StateMachinesFactoryImpl::createStateMachineConfiguration(const int metaElementID/*=-1*/) const
 {
@@ -867,16 +827,15 @@ std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration> State
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration> StateMachinesFactoryImpl::createStateMachineConfiguration_as_configuration_in_StateMachineExecution(std::weak_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> par_StateMachineExecution, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfigurationImpl> element(new PSSM::Semantics::StateMachines::StateMachineConfigurationImpl(par_StateMachineExecution));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_StateMachineExecution.lock())
 	{
 		wp->setConfiguration(element);
 	}
-	
 	element->setThisStateMachineConfigurationPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineEventAccepter> StateMachinesFactoryImpl::createStateMachineEventAccepter(const int metaElementID/*=-1*/) const
 {
@@ -893,10 +852,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineEventAccepter> State
 	{
 		par_DoActivityExecutionEventAccepter->setEncapsulatedAccepter(element);
 	}
-	
 	element->setThisStateMachineEventAccepterPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> StateMachinesFactoryImpl::createStateMachineExecution(const int metaElementID/*=-1*/) const
 {
@@ -913,10 +870,8 @@ std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> StateMach
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
 	}
-	
 	element->setThisStateMachineExecutionPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivation> StateMachinesFactoryImpl::createTerminatePseudostateActivation(const int metaElementID/*=-1*/) const
 {
@@ -933,9 +888,6 @@ std::shared_ptr<PSSM::Semantics::StateMachines::TerminatePseudostateActivation> 
 	{
 		par_RegionActivation->getVertexActivations()->push_back(element);
 	}
-	
 	element->setThisTerminatePseudostateActivationPtr(element);
 	return element;
-	
 }
-

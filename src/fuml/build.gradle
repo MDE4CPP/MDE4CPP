@@ -52,12 +52,12 @@ task compileFUML() {
 	
 		mustRunAfter = [
 			'generateFUML'
+			, getRootProject().getTasksByName('compileUml', true)
+			, getRootProject().getTasksByName('buildUml', true)
 			, getRootProject().getTasksByName('compileTypes', true)
 			, getRootProject().getTasksByName('buildTypes', true)
 			, getRootProject().getTasksByName('compileEcore', true)
 			, getRootProject().getTasksByName('buildEcore', true)
-			, getRootProject().getTasksByName('compileUml', true)
-			, getRootProject().getTasksByName('buildUml', true)
 		]
 }
 
@@ -69,7 +69,7 @@ task buildFUML() {
 	dependsOn 'generateFUML'
 	dependsOn 'compileFUML'
 
+	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

@@ -89,4 +89,3 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropaga
 	element->setThisCS_DefaultRequestPropagationStrategyPtr(element);
 	return element;
 }
-

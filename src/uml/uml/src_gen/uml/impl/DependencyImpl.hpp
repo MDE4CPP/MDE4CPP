@@ -59,22 +59,24 @@ namespace uml
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			
+			
+			
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			/*!
 			The Element(s) dependent on the supplier Element(s). In some cases (such as a trace Abstraction) the assignment of direction (that is, the designation of the client Element) is at the discretion of the modeler and is a stipulation.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& getClient() const ;
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> getClient() const ;
 			/*!
 			The Element(s) on which the client Element(s) depend in some respect. The modeler may stipulate a sense of Dependency direction suitable for their domain.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& getSupplier() const ;
-			
-			//*********************************
-			// Union Reference Getters
-			//*********************************
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> getSupplier() const ;
 			
 			//*********************************
 			// Container Getter

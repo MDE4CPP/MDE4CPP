@@ -108,16 +108,15 @@ std::shared_ptr<PSSM::Semantics::Loci::SM_ExecutionFactory> LociFactoryImpl::cre
 }
 std::shared_ptr<PSSM::Semantics::Loci::SM_ExecutionFactory> LociFactoryImpl::createSM_ExecutionFactory_as_factory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID) const
 {
+	
 	std::shared_ptr<PSSM::Semantics::Loci::SM_ExecutionFactoryImpl> element(new PSSM::Semantics::Loci::SM_ExecutionFactoryImpl(par_Locus));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Locus.lock())
 	{
 		wp->setFactory(element);
 	}
-	
 	element->setThisSM_ExecutionFactoryPtr(element);
 	return element;
-	
 }
 std::shared_ptr<PSSM::Semantics::Loci::SM_Locus> LociFactoryImpl::createSM_Locus(const int metaElementID/*=-1*/) const
 {
@@ -126,4 +125,3 @@ std::shared_ptr<PSSM::Semantics::Loci::SM_Locus> LociFactoryImpl::createSM_Locus
 	element->setThisSM_LocusPtr(element);
 	return element;
 }
-

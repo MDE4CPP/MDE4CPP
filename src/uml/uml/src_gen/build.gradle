@@ -40,16 +40,8 @@ task compileUmlSrc(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.files(fileTree([rootDir,'application','include','uml'].join(File.separator)))
 	outputs.dir([rootDir,'application','include','uml'].join(File.separator))
 
-	def buildFile = file('..'+File.separator+'model'+File.separator+'build.gradle')
-	if(!buildFile.exists()) 
-	{
-		dependsOn getRootProject().getTasksByName('generateUml', true)
 		mustRunAfter = [getRootProject().getTasksByName('generateUml', true)]
-	}
-	else
-	{
-		mustRunAfter = [getRootProject().getTasksByName('generateUml', true)]
-	}	
+
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 

@@ -201,13 +201,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPostcondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& getPostcondition() const ;
 			/*!
 			An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPrecondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint>>& getPrecondition() const ;
 			/*!
 			The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p>

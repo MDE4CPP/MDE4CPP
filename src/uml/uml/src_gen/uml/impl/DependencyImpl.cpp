@@ -140,59 +140,6 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	//clone reference 'client'
-	const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& clientList = obj.getClient();
-	if(clientList)
-	{
-		/*SubsetUnion*/
-		m_client.reset(new SubsetUnion<uml::NamedElement, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getClient()->initSubsetUnion(getSource());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >(getSource())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::NamedElement>& clientindexElem: *clientList) 
-		{
-			const std::shared_ptr<uml::NamedElement>& temp = std::dynamic_pointer_cast<uml::NamedElement>((clientindexElem)->copy());
-			m_client->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for client.")
-	}
-
-	//clone reference 'supplier'
-	const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& supplierList = obj.getSupplier();
-	if(supplierList)
-	{
-		/*SubsetUnion*/
-		m_supplier.reset(new SubsetUnion<uml::NamedElement, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >()" << std::endl;
-		#endif
-		
-		/*SubsetUnion*/
-		getSupplier()->initSubsetUnion(getTarget());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
-		#endif
-		
-		for(const std::shared_ptr<uml::NamedElement>& supplierindexElem: *supplierList) 
-		{
-			const std::shared_ptr<uml::NamedElement>& temp = std::dynamic_pointer_cast<uml::NamedElement>((supplierindexElem)->copy());
-			m_supplier->push_back(temp);
-		}
-	}
-	else
-	{
-		DEBUG_WARNING("container is nullptr for supplier.")
-	}
 	return *this;
 }
 
@@ -216,7 +163,13 @@ std::shared_ptr<ecore::EObject> DependencyImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference client */
-const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyImpl::getClient() const
+
+/* Getter & Setter for reference supplier */
+
+//*********************************
+// Union Getter
+//*********************************
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getClient() const
 {
 	if(m_client == nullptr)
 	{
@@ -233,11 +186,10 @@ const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyI
 		#endif
 		
 	}
-    return m_client;
+	return m_client;
 }
 
-/* Getter & Setter for reference supplier */
-const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyImpl::getSupplier() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getSupplier() const
 {
 	if(m_supplier == nullptr)
 	{
@@ -254,12 +206,8 @@ const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyI
 		#endif
 		
 	}
-    return m_supplier;
+	return m_supplier;
 }
-
-//*********************************
-// Union Getter
-//*********************************
 
 //*********************************
 // Container Getter

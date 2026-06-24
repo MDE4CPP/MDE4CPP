@@ -189,7 +189,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& getRedefinedPort() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Port, uml::Property>>& getRedefinedPort() const = 0;
 			/*!
 			The Interfaces specifying the set of Operations and Receptions that the EncapsulatedCassifier expects its environment to handle via this port. This association is derived according to the value of isConjugated. If isConjugated is false, required is derived as the union of the sets of Interfaces used by the type of the Port and its supertypes. If isConjugated is true, it is derived as the union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly from the type of the Port if the Port is typed by an Interface.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -256,7 +256,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> m_redefinedPort;
+			mutable std::shared_ptr<Subset<uml::Port, uml::Property>> m_redefinedPort;
 			/*!
 			The Interfaces specifying the set of Operations and Receptions that the EncapsulatedCassifier expects its environment to handle via this port. This association is derived according to the value of isConjugated. If isConjugated is false, required is derived as the union of the sets of Interfaces used by the type of the Port and its supertypes. If isConjugated is true, it is derived as the union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly from the type of the Port if the Port is typed by an Interface.
 			<p>From package UML::StructuredClassifiers.</p>
