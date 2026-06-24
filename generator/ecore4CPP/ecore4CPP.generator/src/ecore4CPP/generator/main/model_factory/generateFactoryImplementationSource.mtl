@@ -218,33 +218,26 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 	std::shared_ptr<[aClass.generateTypeClass()/]Impl> element(new [aClass.generateTypeClass()/]Impl());
 	element->setMetaElementID(metaElementID);
 	element->[generateGetThisPtrPropertySetterName()/](element);
-[if (generateObjectMonitoring())]
+	[if (generateObjectMonitoring())]
 	m_createdElements->push_back(element);
-[/if]
+	[/if]
 	return element;
 }
-[let allCompositionsToClass : OrderedSet(EReference) = aClass.getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature())]
-[for(currentCompositionOrSubsetToClass : EReference | allCompositionsToClass->sortedBy(name))]
-[if not (currentCompositionOrSubsetToClass.oclIsUndefined() or currentCompositionOrSubsetToClass.eContainingClass.oclIsUndefined() or currentCompositionOrSubsetToClass.container)]
-	[if (currentCompositionOrSubsetToClass.eOpposite->isEmpty())]
+	[let allCompositionsToClass : OrderedSet(EReference) = aClass.getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature())]
+		[for(currentCompositionOrSubsetToClass : EReference | allCompositionsToClass->sortedBy(name))]
+			[if not (currentCompositionOrSubsetToClass.oclIsUndefined() or currentCompositionOrSubsetToClass.eContainingClass.oclIsUndefined() or currentCompositionOrSubsetToClass.container)]
+				[if (currentCompositionOrSubsetToClass.eOpposite->isEmpty())]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[currentCompositionOrSubsetToClass.name/]_in_[currentCompositionOrSubsetToClass.eContainingClass.name.toUpperFirst()/](std::shared_ptr<[currentCompositionOrSubsetToClass.eContainingClass.generateTypeClass()/]> par_[currentCompositionOrSubsetToClass.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
-	[else]
+				[else]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[currentCompositionOrSubsetToClass.name/]_in_[currentCompositionOrSubsetToClass.eContainingClass.name.toUpperFirst()/]([currentCompositionOrSubsetToClass.eOpposite.pointertype()/]<[currentCompositionOrSubsetToClass.eOpposite.eGenericType.generateCppType(false)/]> par_[currentCompositionOrSubsetToClass.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
-	[/if]
+				[/if]
 {
 	[generateCreateFunctionContent(aClass, currentCompositionOrSubsetToClass, anEPackage)/]
 }
-[/if]
+			[/if]
+		[/for]
+	[/let]
 [/for]
-[/let]
-[/for]
-
-[comment] kein Paket in Fectory notwendig... ???
-std::shared_ptr<[anEPackage.name.concat('Package')/]> [className/]::get[anEPackage.name.concat('Package')/]() const
-{
-	return [anEPackage.name.concat('Package')/]::eInstance();
-}
-[/comment]
 [/file]
 [/template]
 
@@ -257,8 +250,17 @@ std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.gener
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[currentCompositionOrSubsetToClass.eContainingClass.name/], [packageContainingOppositeReference.generateNamespaceDefinition()/]::[packageContainingOppositeReference.name/]Package::[currentCompositionOrSubsetToClass.eOpposite.getStaticAttributeIDName()/]));
 		[/let]
 	[else]
- 		[if (currentCompositionOrSubsetToClass.eOpposite.isBackReference())]
+
+ 		[if (currentCompositionOrSubsetToClass.eOpposite.isBackReference())]        
+		[if (anEClass.eReferences->select(r:EReference|r.eType.name = currentCompositionOrSubsetToClass.eContainingClass.name)->size() >1 ) ]
+				[let packageContainingOppositeReference : EPackage = currentCompositionOrSubsetToClass.eOpposite.ancestors(EPackage)->first()]
+	[printError('Untested Model case' + anEClass.name.toUpperFirst() + '::' + currentCompositionOrSubsetToClass.name + ':' +  currentCompositionOrSubsetToClass.eGenericType.generateCppType(false) + 
+					' is a redefined Container which is a Union ','main::model_factory::generateFactoryImplementationSource::generateCreateFunctionContent') /]
+			std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(/*par_[currentCompositionOrSubsetToClass.eContainingClass.name/].lock(), [packageContainingOppositeReference.generateNamespaceDefinition()/]::[packageContainingOppositeReference.name/]Package::[currentCompositionOrSubsetToClass.eOpposite.getStaticAttributeIDName()/] */));
+				[/let]
+			[else]
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[currentCompositionOrSubsetToClass.eContainingClass.name/]));
+			[/if]
 		[else]
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl());
 		[/if]
@@ -282,25 +284,19 @@ if(auto wp = par_[currentCompositionOrSubsetToClass.eContainingClass.name/].lock
 if(nullptr != par_[currentCompositionOrSubsetToClass.eContainingClass.name/])
 {
 		[/if]
-[comment] wir haben bereits die richtige komposition
-	[let r : EReference = findLowerSubset(currentCompositionOrSubsetToClass.eType.oclAsType(EClass), anEClass, currentCompositionOrSubsetToClass.eOpposite)]
-[/comment]
 		[if(currentCompositionOrSubsetToClass.upperBound <> 1)]
 	[if(currentCompositionOrSubsetToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionOrSubsetToClass.eContainingClass.name/][/if]->[currentCompositionOrSubsetToClass.GetterName()/]()->push_back(element);
 		[else]
 	[if(currentCompositionOrSubsetToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionOrSubsetToClass.eContainingClass.name/][/if]->[currentCompositionOrSubsetToClass.SetterName()/](element);
 		[/if]
 	[/if]
-[comment 	[/let/]
 }
 [/if]
-
 element->[generateGetThisPtrPropertySetterName()/](element);
 [if (generateObjectMonitoring())]
 m_createdElements->push_back(element);
 [/if]
 return element;
-
 [/template]
 
 [template public generateFactoryImports(anEPackage : EPackage)]
