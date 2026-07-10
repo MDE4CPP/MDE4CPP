@@ -147,8 +147,9 @@ public class GenerateFUML extends AbstractAcceleoGenerator {
             {
                 URI modelURI = URI.createFileURI(args[0]);
                 File folder = new File(args[1]);
-
+                GenerateFUML.modelPath = folder.getAbsolutePath().replace("\\", "/").replaceAll("(.*\\/)(.*).uml" , "$1");                
                 System.out.println("Generate c++ code for: " + modelURI.devicePath());
+                System.out.println("          from folder: " + GenerateFUML.modelPath );                
                 System.out.println("          into folder: " + folder.getAbsolutePath());
                 
                 /*
@@ -337,9 +338,27 @@ public class GenerateFUML extends AbstractAcceleoGenerator {
          *
          * To learn more about Properties Files, have a look at the Acceleo documentation (Help -> Help Contents).
          */
+
+      	String modelPropertyPath=modelPath+model.eResource().getURI().toString().replace(".uml" , ".properties");
+    	addToPropertiesFile(modelPropertyPath); // add mmodel file properties 
+    	addToPropertiesFile("./fuml.properties"); // add generator properties (MDE4CPP/generator/ecore4CPP/ecore4CPP.generator)
+    	addToPropertiesFile(System.getenv("MDE4CPP_HOME")+"/MDE4CPP_Generator.properties"); // // add general generator properties 
+    	
         return propertiesFiles;
     }
 
+    /** Check if a given .proterty file is existing. If it true then store it into propertiesFiles. 
+     */
+    protected void addToPropertiesFile(String prpertyPath)
+    {
+    	File testFile = new File(prpertyPath);        
+        if(testFile.exists())
+        {
+        	System.out.println("property file found: " + prpertyPath);
+        	propertiesFiles.add(prpertyPath);
+        }
+    }    
+        
     /**
      * Adds a properties file in the list of properties files.
      *
@@ -515,4 +534,20 @@ public class GenerateFUML extends AbstractAcceleoGenerator {
 	 		 resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap( ).put("emtl", new FUML4CPPEMtlResourceFactory());
          }
     }
+
+    /**
+     * store the model path.
+     *
+     *@generated NOT
+     */
+    public static String modelPath = "";   
+    
+    /**
+     * Returns ModelPath
+     * @return the path of the given model 
+     */
+    public String getModelPath()
+    {
+        return GenerateFUML.modelPath;
+    }        
 }
