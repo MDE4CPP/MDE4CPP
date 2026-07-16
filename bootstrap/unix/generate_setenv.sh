@@ -47,6 +47,11 @@ export JAVA_HOME="$JAVA_HOME_PATH"
 export CC="gcc-$GCC_MAJOR"
 export CXX="g++-$GCC_MAJOR"
 
+# Fix for gcc on newer macOS versions where it incorrectly infers an unsupported deployment target
+MAC_VERSION=\$(sw_vers -productVersion | cut -d. -f1)
+if [ "\$MAC_VERSION" -gt 14 ]; then MAC_VERSION=14; fi
+export MACOSX_DEPLOYMENT_TARGET="\$MAC_VERSION.0"
+
 # On macOS, Eclipse plugins are located inside Eclipse.app/Contents/Eclipse
 export MDE4CPP_ECLIPSE_HOME="$ECLIPSE_DIR/Eclipse.app/Contents/Eclipse"
 export PATH="\$MDE4CPP_ECLIPSE_HOME/../../../MacOS:\$PATH"
