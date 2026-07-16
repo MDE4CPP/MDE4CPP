@@ -56,11 +56,6 @@ Some other basic commands:
 - `gradlew help` … Gradle help  
 - `gradlew <taskName>` … run task `<taskName>`  
 
-**Note for Unix users:**  
-First, give the script execution permissions:  
-```bash
-chmod +x application/tools/gradlew
-```
 
 #### 5.1 Top-Level Tasks (Group: MDE4CPP)
 - `buildAll` … generate and compile all metamodels (Ecore, UML, fUML, …)  
