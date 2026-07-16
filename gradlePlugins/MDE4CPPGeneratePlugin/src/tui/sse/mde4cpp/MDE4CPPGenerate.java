@@ -160,22 +160,31 @@ public class MDE4CPPGenerate extends DefaultTask
 		String mde4CppRoot=System.getenv("MDE4CPP_HOME");
 		Properties prop = new Properties();          
 		try {
-			String configFilePath=mde4CppRoot + File.separator + "MDE4CPP.properties";
-			File configFile = new File(configFilePath);
-			
-			if(configFile.exists())
+			String defaultPath=mde4CppRoot + File.separator + "MDE4CPP_default.properties";
+			File defaultFile = new File(defaultPath);
+			if(defaultFile.exists())
 			{
-				FileInputStream stream = new FileInputStream(configFile);
-	
+				FileInputStream stream = new FileInputStream(defaultFile);
 				prop.load(stream); 
-				if(0 == prop.getProperty("useRootTargetFolder").compareToIgnoreCase("true"))
-				{
-					returnTargetFolder  = System.getenv("MDE4CPP_HOME") + File.separator + prop.getProperty("rootTargetFolder");
-				}
+				stream.close();
 			}
 			else
 			{
-				System.out.println("Properties file MDE4CPP.properties not found. Use standard values.");
+				System.out.println("Properties file MDE4CPP_default.properties not found. Use standard values.");
+			}
+
+			String customPath=mde4CppRoot + File.separator + "MDE4CPP_custom.properties";
+			File customFile = new File(customPath);
+			if(customFile.exists())
+			{
+				FileInputStream stream = new FileInputStream(customFile);
+				prop.load(stream); 
+				stream.close();
+			}
+
+			if(prop.getProperty("useRootTargetFolder") != null && 0 == prop.getProperty("useRootTargetFolder").compareToIgnoreCase("true"))
+			{
+				returnTargetFolder  = System.getenv("MDE4CPP_HOME") + File.separator + prop.getProperty("rootTargetFolder");
 			}
 		} catch (IOException e) 
 		{

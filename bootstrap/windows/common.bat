@@ -17,22 +17,34 @@ exit /b 0
 :load_properties
 set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
-set "VERSIONS_FILE=%REPO_ROOT%\MDE4CPP.properties"
+set "TEMPLATE_FILE=%REPO_ROOT%\MDE4CPP_default.properties"
+set "CUSTOM_FILE=%REPO_ROOT%\MDE4CPP_custom.properties"
 
-if not exist "%VERSIONS_FILE%" (
-    echo ERROR: MDE4CPP.properties not found at %VERSIONS_FILE%
-    exit /b 1
+if exist "%TEMPLATE_FILE%" (
+    for /f "tokens=1,2 delims==" %%A in ('type "%TEMPLATE_FILE%" ^| findstr /V /B /C:"#"') do (
+        set "KEY=%%A"
+        set "VAL=%%B"
+        
+        REM Set the variable cleanly if both KEY and VAL are present
+        if not "!KEY!"=="" if not "!VAL!"=="" (
+            for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
+            for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
+            set "!KEY!=!VAL!"
+        )
+    )
 )
 
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /V /B /C:"#"') do (
-    set "KEY=%%A"
-    set "VAL=%%B"
-    
-    REM Set the variable cleanly if both KEY and VAL are present
-    if not "!KEY!"=="" if not "!VAL!"=="" (
-        for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
-        for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
-        set "!KEY!=!VAL!"
+if exist "%CUSTOM_FILE%" (
+    for /f "tokens=1,2 delims==" %%A in ('type "%CUSTOM_FILE%" ^| findstr /V /B /C:"#"') do (
+        set "KEY=%%A"
+        set "VAL=%%B"
+        
+        REM Set the variable cleanly if both KEY and VAL are present
+        if not "!KEY!"=="" if not "!VAL!"=="" (
+            for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
+            for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
+            set "!KEY!=!VAL!"
+        )
     )
 )
 exit /b 0

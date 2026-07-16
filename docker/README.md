@@ -44,7 +44,7 @@ cd MDE4CPP/docker
 ```
 
 ### 3. Configure Cross-Compilation (Optional)
-If you're building on Linux and want Linux binaries (`.so`, ELF files), edit `MDE4CPP.properties` in the project root:
+If you're building on Linux and want Linux binaries (`.so`, ELF files), edit `MDE4CPP_custom.properties` in the project root:
 ```properties
 # Set to 'false' for Linux binaries (.so, ELF)
 # Set to 'true' for Windows binaries (.dll, .exe) - default
@@ -81,7 +81,7 @@ To build the entire project:
 docker compose up build-full
 ```
 
-**Note**: Run `build-full` only when `CROSS_COMPILE_WINDOWS` changes in `MDE4CPP.properties`, as it performs a complete rebuild including dependency installation.
+**Note**: Run `build-full` only when `CROSS_COMPILE_WINDOWS` changes in `MDE4CPP_custom.properties`, as it performs a complete rebuild including dependency installation.
 
 #### Build Specific Components
 To build individual components, use:
