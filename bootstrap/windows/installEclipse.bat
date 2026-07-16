@@ -13,6 +13,8 @@ for %%I in ("%SCRIPT_DIR%..\..") do set "MDE4CPP_HOME=%%~fI"
 REM Print requested Eclipse component versions.
 echo %C_PURPLE%[installEclipse]%C_ORANGE% MDE4CPP_ECLIPSE_VERSION=!MDE4CPP_ECLIPSE_VERSION!-!MDE4CPP_ECLIPSE_MILESTONE!%C_RESET%
 echo %C_PURPLE%[installEclipse]%C_ORANGE% MDE4CPP_ECLIPSE_ACCELEO_VERSION=!MDE4CPP_ECLIPSE_ACCELEO_VERSION!%C_RESET%
+echo %C_PURPLE%[installEclipse]%C_ORANGE% MDE4CPP_ECLIPSE_PAPYRUS_VERSION=!MDE4CPP_ECLIPSE_PAPYRUS_VERSION!%C_RESET%
+echo %C_PURPLE%[installEclipse]%C_ORANGE% MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION=!MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION!%C_RESET%
 echo %C_PURPLE%[installEclipse]%C_ORANGE% MDE4CPP_ECLIPSE_SIRIUS_VERSION=!MDE4CPP_ECLIPSE_SIRIUS_VERSION!-!MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION!%C_RESET%
 
 REM Validate required versions.
@@ -36,6 +38,14 @@ if "!MDE4CPP_ECLIPSE_SIRIUS_VERSION!"=="" (
     echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_SIRIUS_VERSION not found in %VERSIONS_FILE%%C_RESET%
     exit /b 1
 )
+if "!MDE4CPP_ECLIPSE_PAPYRUS_VERSION!"=="" (
+    echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_PAPYRUS_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    exit /b 1
+)
+if "!MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION!"=="" (
+    echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    exit /b 1
+)
 if "!MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION!"=="" (
     echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION not found in %VERSIONS_FILE%%C_RESET%
     exit /b 1
@@ -49,13 +59,15 @@ set "ARCHIVE_PATH=!TMP_DIR!\eclipse-modeling.zip"
 set "ECLIPSE_ARCHIVE_URL=https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/!MDE4CPP_ECLIPSE_VERSION: =!/!MDE4CPP_ECLIPSE_MILESTONE: =!/eclipse-modeling-!MDE4CPP_ECLIPSE_VERSION: =!-!MDE4CPP_ECLIPSE_MILESTONE: =!-win32-x86_64.zip"
 set "ACCELEO_REPOSITORY_URL=https://download.eclipse.org/acceleo/updates/releases/!MDE4CPP_ECLIPSE_ACCELEO_VERSION: =!"
 set "SIRIUS_REPOSITORY_URL=https://download.eclipse.org/sirius/updates/releases/!MDE4CPP_ECLIPSE_SIRIUS_VERSION: =!/!MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION: =!"
+set "PAPYRUS_REPOSITORY_URL=https://download.eclipse.org/modeling/mdt/papyrus/updates/releases/!MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION: =!"
+set "PAPYRUS_DEPENDENCIES_URL=https://download.eclipse.org/releases/!MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION: =!"
 set "CDT_REPOSITORY_URL=https://download.eclipse.org/releases/!MDE4CPP_ECLIPSE_VERSION: =!"
 
 REM Download and extract Eclipse Modeling package.
 echo %C_PURPLE%[installEclipse]%C_ORANGE% MDE4CPP_HOME=!MDE4CPP_HOME!%C_RESET%
 echo %C_PURPLE%[installEclipse]%C_INFO% Install location=!TARGET_DIR!%C_RESET%
 echo %C_PURPLE%[installEclipse]%C_INFO% Temp Installation Dir=!TMP_DIR!%C_RESET%
-echo %C_PURPLE%[installEclipse]%C_ORANGE% Using Eclipse version=!MDE4CPP_ECLIPSE_VERSION!, milestone=!MDE4CPP_ECLIPSE_MILESTONE!, Acceleo=!MDE4CPP_ECLIPSE_ACCELEO_VERSION!, Sirius=!MDE4CPP_ECLIPSE_SIRIUS_VERSION!%C_RESET%
+echo %C_PURPLE%[installEclipse]%C_ORANGE% Using Eclipse version=!MDE4CPP_ECLIPSE_VERSION!, milestone=!MDE4CPP_ECLIPSE_MILESTONE!, Acceleo=!MDE4CPP_ECLIPSE_ACCELEO_VERSION!, Sirius=!MDE4CPP_ECLIPSE_SIRIUS_VERSION!, Papyrus=!MDE4CPP_ECLIPSE_PAPYRUS_VERSION!%C_RESET%
 
 REM Download and extract Eclipse if not already installed.
 echo %C_PURPLE%[installEclipse]%C_INFO% Checking existing Eclipse installation...%C_RESET%
@@ -146,14 +158,14 @@ if "!NEEDS_INSTALL!"=="0" (
     goto :skipInstall
 )
 
-echo %C_PURPLE%[installEclipse]%C_INFO% Installing Eclipse plugins ^(Acceleo, Sirius, CDT^)...%C_RESET%
+echo %C_PURPLE%[installEclipse]%C_INFO% Installing Eclipse plugins ^(Acceleo, Sirius, CDT, Papyrus^)...%C_RESET%
 
 set "PLUGINS="
 for /f "usebackq tokens=*" %%P in ("%SCRIPT_DIR%..\eclipse_plugins.txt") do (
     set "PLUGINS=!PLUGINS! -installIU %%P"
 )
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "& \"%TARGET_DIR%\eclipsec.exe\" -nosplash -application org.eclipse.equinox.p2.director -repository \"https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%,%SIRIUS_REPOSITORY_URL%,%CDT_REPOSITORY_URL%\" !PLUGINS! -destination \"%TARGET_DIR%\" -profileProperties org.eclipse.update.install.features=true -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT 2> \"%TMP_DIR%\p2_stderr.log\" | ForEach-Object { [Console]::Out.WriteLine(\"$env:C_PURPLE[installEclipse]$env:C_INFO $_$env:C_RESET\") }; exit $LASTEXITCODE"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& \"%TARGET_DIR%\eclipsec.exe\" -nosplash -application org.eclipse.equinox.p2.director -repository \"https://download.eclipse.org/releases/%MDE4CPP_ECLIPSE_VERSION: =%/,%ACCELEO_REPOSITORY_URL%,%SIRIUS_REPOSITORY_URL%,%PAPYRUS_REPOSITORY_URL%,%PAPYRUS_DEPENDENCIES_URL%,%CDT_REPOSITORY_URL%\" !PLUGINS! -destination \"%TARGET_DIR%\" -profileProperties org.eclipse.update.install.features=true -vmargs -Declipse.p2.mirrors=false -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT 2> \"%TMP_DIR%\p2_stderr.log\" | ForEach-Object { [Console]::Out.WriteLine(\"$env:C_PURPLE[installEclipse]$env:C_INFO $_$env:C_RESET\") }; exit $LASTEXITCODE"
 if errorlevel 1 (
     echo %C_PURPLE%[installEclipse]%C_ERROR% ERROR: Eclipse plugin installation failed.%C_RESET%
     type "%TMP_DIR%\p2_stderr.log"

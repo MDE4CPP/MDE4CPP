@@ -32,3 +32,4 @@ org.eclipse.eef.ext.widgets.reference.feature.source.feature.group
 org.eclipse.eef.sdk.feature.feature.group
 org.eclipse.eef.sdk.feature.source.feature.group
 org.eclipse.cdt.feature.group
+org.eclipse.papyrus.sdk.feature.feature.group
