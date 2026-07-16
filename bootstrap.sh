@@ -49,18 +49,18 @@ if [ "$OS_DIR" = "MacOS" ]; then
     fi
 fi
 
-bash "$DIR/bootstrap/unix/installJava.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installJava.sh failed${C_RESET}"; exit 1; fi
+bash "$DIR/bootstrap/unix/install_java.sh"
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_java.sh failed${C_RESET}"; exit 1; fi
 
-bash "$DIR/bootstrap/unix/installCompiler.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installCompiler.sh failed${C_RESET}"; exit 1; fi
+bash "$DIR/bootstrap/unix/install_compiler.sh"
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_compiler.sh failed${C_RESET}"; exit 1; fi
 
-bash "$DIR/bootstrap/unix/installCMake.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installCMake.sh failed${C_RESET}"; exit 1; fi
+bash "$DIR/bootstrap/unix/install_cmake.sh"
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_cmake.sh failed${C_RESET}"; exit 1; fi
 
 export MDE4CPP_HOME="$PROJECT_DIR"
-bash "$DIR/bootstrap/unix/installEclipse.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: installEclipse.sh failed${C_RESET}"; exit 1; fi
+bash "$DIR/bootstrap/unix/install_eclipse.sh"
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_eclipse.sh failed${C_RESET}"; exit 1; fi
 
 bash "$DIR/bootstrap/unix/generate_setenv.sh"
 if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: generate_setenv.sh failed${C_RESET}"; exit 1; fi

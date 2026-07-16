@@ -20,27 +20,27 @@ call "%DIR%bootstrap\windows\common.bat" print_header "bootstrap" "MDE4CPP Boots
 
 call "%DIR%bootstrap\windows\common.bat" print_header "bootstrap" "Installing system tools..."
 
-call "%DIR%bootstrap\windows\installJava.bat"
+call "%DIR%bootstrap\windows\install_java.bat"
 if errorlevel 1 (
-    echo %C_ERROR%ERROR: installJava.bat failed ^(exit !errorlevel!^)%C_RESET%
+    echo %C_ERROR%ERROR: install_java.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
-call "%DIR%bootstrap\windows\installCompiler.bat"
+call "%DIR%bootstrap\windows\install_compiler.bat"
 if errorlevel 1 (
-    echo %C_ERROR%ERROR: installCompiler.bat failed ^(exit !errorlevel!^)%C_RESET%
+    echo %C_ERROR%ERROR: install_compiler.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
-call "%DIR%bootstrap\windows\installCMake.bat"
+call "%DIR%bootstrap\windows\install_cmake.bat"
 if errorlevel 1 (
-    echo %C_ERROR%ERROR: installCMake.bat failed ^(exit !errorlevel!^)%C_RESET%
+    echo %C_ERROR%ERROR: install_cmake.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
-call "%DIR%bootstrap\windows\installEclipse.bat"
+call "%DIR%bootstrap\windows\install_eclipse.bat"
 if errorlevel 1 (
-    echo %C_ERROR%ERROR: installEclipse.bat failed ^(exit !errorlevel!^)%C_RESET%
+    echo %C_ERROR%ERROR: install_eclipse.bat failed ^(exit !errorlevel!^)%C_RESET%
     exit /b !errorlevel!
 )
 
