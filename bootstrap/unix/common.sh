@@ -78,19 +78,23 @@ get_arch() {
     fi
 }
 
+# Function to automatically load the default and custom properties files
+load_mde4cpp_properties_files() {
+    local base_dir="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+    local template_file="${base_dir}/MDE4CPP_default.properties"
+    local custom_file="${base_dir}/MDE4CPP_custom.properties"
+
+    if [[ -f "$template_file" ]]; then
+        load_properties "$template_file"
+    fi
+    if [[ -f "$custom_file" ]]; then
+        load_properties "$custom_file"
+    fi
+}
+
 # Auto-load properties if not already set
 if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
-    # Find MDE4CPP_default.properties and MDE4CPP_custom.properties relative to this common.sh file
-    COMMON_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    TEMPLATE_FILE="$(cd "${COMMON_SCRIPT_DIR}/../.." && pwd)/MDE4CPP_default.properties"
-    CUSTOM_FILE="$(cd "${COMMON_SCRIPT_DIR}/../.." && pwd)/MDE4CPP_custom.properties"
-    
-    if [[ -f "$TEMPLATE_FILE" ]]; then
-        load_properties "$TEMPLATE_FILE"
-    fi
-    if [[ -f "$CUSTOM_FILE" ]]; then
-        load_properties "$CUSTOM_FILE"
-    fi
+    load_mde4cpp_properties_files "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 fi
 
 setup_colors

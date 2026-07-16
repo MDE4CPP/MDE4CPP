@@ -20,31 +20,20 @@ for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
 set "TEMPLATE_FILE=%REPO_ROOT%\MDE4CPP_default.properties"
 set "CUSTOM_FILE=%REPO_ROOT%\MDE4CPP_custom.properties"
 
-if exist "%TEMPLATE_FILE%" (
-    for /f "tokens=1,2 delims==" %%A in ('type "%TEMPLATE_FILE%" ^| findstr /V /B /C:"#"') do (
-        set "KEY=%%A"
-        set "VAL=%%B"
-        
-        REM Set the variable cleanly if both KEY and VAL are present
-        if not "!KEY!"=="" if not "!VAL!"=="" (
-            for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
-            for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
-            set "!KEY!=!VAL!"
-        )
-    )
-)
+if exist "%TEMPLATE_FILE%" call :parse_properties_file "%TEMPLATE_FILE%"
+if exist "%CUSTOM_FILE%" call :parse_properties_file "%CUSTOM_FILE%"
+exit /b 0
 
-if exist "%CUSTOM_FILE%" (
-    for /f "tokens=1,2 delims==" %%A in ('type "%CUSTOM_FILE%" ^| findstr /V /B /C:"#"') do (
-        set "KEY=%%A"
-        set "VAL=%%B"
-        
-        REM Set the variable cleanly if both KEY and VAL are present
-        if not "!KEY!"=="" if not "!VAL!"=="" (
-            for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
-            for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
-            set "!KEY!=!VAL!"
-        )
+:parse_properties_file
+for /f "tokens=1,2 delims==" %%A in ('type "%~1" ^| findstr /V /B /C:"#"') do (
+    set "KEY=%%A"
+    set "VAL=%%B"
+    
+    REM Set the variable cleanly if both KEY and VAL are present
+    if not "!KEY!"=="" if not "!VAL!"=="" (
+        for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
+        for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
+        set "!KEY!=!VAL!"
     )
 )
 exit /b 0
