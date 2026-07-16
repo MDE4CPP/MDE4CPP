@@ -49,24 +49,48 @@ if [ "$OS_DIR" = "MacOS" ]; then
     fi
 fi
 
-bash "$DIR/bootstrap/unix/install_java.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_java.sh failed${C_RESET}"; exit 1; fi
+if [ "${MDE4CPP_SKIP_JAVA_INSTALL:-false}" != "true" ]; then
+    bash "$DIR/bootstrap/unix/install_java.sh"
+    if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_java.sh failed${C_RESET}"; exit 1; fi
+else
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Skipping Java installation as per MDE4CPP_SKIP_JAVA_INSTALL${C_RESET}"
+fi
 
-bash "$DIR/bootstrap/unix/install_compiler.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_compiler.sh failed${C_RESET}"; exit 1; fi
+if [ "${MDE4CPP_SKIP_COMPILER_INSTALL:-false}" != "true" ]; then
+    bash "$DIR/bootstrap/unix/install_compiler.sh"
+    if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_compiler.sh failed${C_RESET}"; exit 1; fi
+else
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Skipping Compiler installation as per MDE4CPP_SKIP_COMPILER_INSTALL${C_RESET}"
+fi
 
-bash "$DIR/bootstrap/unix/install_cmake.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_cmake.sh failed${C_RESET}"; exit 1; fi
+if [ "${MDE4CPP_SKIP_CMAKE_INSTALL:-false}" != "true" ]; then
+    bash "$DIR/bootstrap/unix/install_cmake.sh"
+    if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_cmake.sh failed${C_RESET}"; exit 1; fi
+else
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Skipping CMake installation as per MDE4CPP_SKIP_CMAKE_INSTALL${C_RESET}"
+fi
 
 export MDE4CPP_HOME="$PROJECT_DIR"
-bash "$DIR/bootstrap/unix/install_eclipse.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_eclipse.sh failed${C_RESET}"; exit 1; fi
+if [ "${MDE4CPP_SKIP_ECLIPSE_INSTALL:-false}" != "true" ]; then
+    bash "$DIR/bootstrap/unix/install_eclipse.sh"
+    if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_eclipse.sh failed${C_RESET}"; exit 1; fi
+else
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Skipping Eclipse installation as per MDE4CPP_SKIP_ECLIPSE_INSTALL${C_RESET}"
+fi
 
-bash "$DIR/bootstrap/unix/install_eclipse_plugins.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_eclipse_plugins.sh failed${C_RESET}"; exit 1; fi
+if [ "${MDE4CPP_SKIP_ECLIPSE_PLUGINS_INSTALL:-false}" != "true" ]; then
+    bash "$DIR/bootstrap/unix/install_eclipse_plugins.sh"
+    if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_eclipse_plugins.sh failed${C_RESET}"; exit 1; fi
+else
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Skipping Eclipse plugins installation as per MDE4CPP_SKIP_ECLIPSE_PLUGINS_INSTALL${C_RESET}"
+fi
 
-bash "$DIR/bootstrap/unix/generate_setenv.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: generate_setenv.sh failed${C_RESET}"; exit 1; fi
+if [ "${MDE4CPP_SKIP_GENERATE_SETENV:-false}" != "true" ]; then
+    bash "$DIR/bootstrap/unix/generate_setenv.sh"
+    if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: generate_setenv.sh failed${C_RESET}"; exit 1; fi
+else
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Skipping generate_setenv.sh as per MDE4CPP_SKIP_GENERATE_SETENV${C_RESET}"
+fi
 
 if [ "${MDE4CPP_SKIP_GRADLE_INSTALL:-false}" != "true" ]; then
     bash "$DIR/bootstrap/unix/run_gradle_install.sh"
