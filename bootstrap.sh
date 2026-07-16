@@ -68,8 +68,12 @@ if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_ecli
 bash "$DIR/bootstrap/unix/generate_setenv.sh"
 if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: generate_setenv.sh failed${C_RESET}"; exit 1; fi
 
-bash "$DIR/bootstrap/unix/run_gradle_install.sh"
-if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: run_gradle_install.sh failed${C_RESET}"; exit 1; fi
+if [ "${MDE4CPP_SKIP_GRADLE_INSTALL:-false}" != "true" ]; then
+    bash "$DIR/bootstrap/unix/run_gradle_install.sh"
+    if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: run_gradle_install.sh failed${C_RESET}"; exit 1; fi
+else
+    echo "${C_PURPLE}[bootstrap]${C_INFO} Skipping Gradle installation as per MDE4CPP_SKIP_GRADLE_INSTALL${C_RESET}"
+fi
 
 echo "${C_WARN}===========================================================${C_RESET}"
 echo "${C_SUCCESS}Bootstrap completed successfully!${C_RESET}"

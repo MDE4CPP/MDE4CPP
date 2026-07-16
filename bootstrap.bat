@@ -54,8 +54,12 @@ if errorlevel 1 (
 call "%DIR%bootstrap\windows\generate_setenv.bat"
 if errorlevel 1 exit /b 1
 
-call "%DIR%bootstrap\windows\run_gradle_install.bat"
-if errorlevel 1 exit /b 1
+if not "!MDE4CPP_SKIP_GRADLE_INSTALL!"=="true" (
+    call "%DIR%bootstrap\windows\run_gradle_install.bat"
+    if errorlevel 1 exit /b 1
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping Gradle installation as per MDE4CPP_SKIP_GRADLE_INSTALL%C_RESET%
+)
 
 echo %C_WARN%===========================================================%C_RESET%
 echo %C_SUCCESS%Bootstrap completed successfully!%C_RESET%
