@@ -19,11 +19,11 @@ if "!MDE4CPP_HOME!"=="" (
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_VERSION!"=="" (
-    echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_VERSION is not set.%C_RESET%
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_MILESTONE!"=="" (
-    echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_MILESTONE not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_MILESTONE is not set.%C_RESET%
     exit /b 1
 )
 
@@ -58,16 +58,8 @@ if errorlevel 1 (
     exit /b 1
 )
 
-where curl >nul 2>&1
+call "%~dp0common.bat" download_file "!ECLIPSE_ARCHIVE_URL!" "!ARCHIVE_PATH!"
 if errorlevel 1 (
-    echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: curl.exe is required to download files.%C_RESET%
-    rmdir /s /q "!TMP_DIR!"
-    exit /b 1
-)
-
-curl.exe --output "!ARCHIVE_PATH!" "!ECLIPSE_ARCHIVE_URL!"
-if errorlevel 1 (
-    echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: Download failed.%C_RESET%
     rmdir /s /q "!TMP_DIR!"
     exit /b 1
 )

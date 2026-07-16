@@ -19,27 +19,27 @@ if "!MDE4CPP_HOME!"=="" (
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_VERSION!"=="" (
-    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_VERSION is not set.%C_RESET%
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_ACCELEO_VERSION!"=="" (
-    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_ACCELEO_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_ACCELEO_VERSION is not set.%C_RESET%
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_SIRIUS_VERSION!"=="" (
-    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_SIRIUS_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_SIRIUS_VERSION is not set.%C_RESET%
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_PAPYRUS_VERSION!"=="" (
-    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_PAPYRUS_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_PAPYRUS_VERSION is not set.%C_RESET%
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION!"=="" (
-    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION is not set.%C_RESET%
     exit /b 1
 )
 if "!MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION!"=="" (
-    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION not found in %VERSIONS_FILE%%C_RESET%
+    echo %C_PURPLE%[install_eclipse_plugins]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION is not set.%C_RESET%
     exit /b 1
 )
 

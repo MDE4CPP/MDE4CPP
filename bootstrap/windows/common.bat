@@ -4,6 +4,7 @@ REM Common functions for MDE4CPP Windows bootstrap scripts
 if "%~1"=="load_properties" goto :load_properties
 if "%~1"=="setup_colors" goto :setup_colors
 if "%~1"=="print_header" goto :print_header
+if "%~1"=="download_file" goto :download_file
 if "%~1"=="" goto :auto_load
 exit /b 0
 
@@ -56,4 +57,20 @@ exit /b 0
 echo %C_WARN%===========================================================%C_RESET%
 echo %C_PURPLE%[%~2]%C_WARN% %~3%C_RESET%
 echo %C_WARN%===========================================================%C_RESET%
+exit /b 0
+
+:download_file
+REM Usage: call "%~dp0common.bat" download_file "URL" "DESTINATION"
+set "URL=%~2"
+set "DEST=%~3"
+where curl >nul 2>&1
+if errorlevel 1 (
+    echo %C_ERROR%ERROR: curl.exe is required to download files.%C_RESET%
+    exit /b 1
+)
+curl.exe -fL --output "%DEST%" "%URL%"
+if errorlevel 1 (
+    echo %C_ERROR%ERROR: Download failed for %URL%%C_RESET%
+    exit /b 1
+)
 exit /b 0
