@@ -39,7 +39,7 @@ configurations {
 }
 
 def versionProps = new Properties()
-file("${rootDir}/versions.properties").withInputStream { versionProps.load(it) }
+file("${rootDir}/MDE4CPP.properties").withInputStream { versionProps.load(it) }
 def antlrVersion = versionProps.getProperty('MDE4CPP_ANTLR_VERSION')
 
 dependencies {
@@ -81,7 +81,7 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 		if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
 			def props = new Properties()
 			try {
-				def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+				def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP.properties")
 				if (configFile.exists()) {
 					configFile.withInputStream { stream ->
 						props.load(stream)
@@ -228,7 +228,7 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 	if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
 		def props = new Properties()
 		try {
-			def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+			def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP.properties")
 			if (configFile.exists()) {
 				configFile.withInputStream { stream ->
 					props.load(stream)

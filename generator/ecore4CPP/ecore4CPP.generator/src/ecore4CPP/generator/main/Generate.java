@@ -332,7 +332,7 @@ public class Generate extends AbstractAcceleoGenerator {
     	String modelPropertyPath=modelPath+model.eResource().getURI().toString().replace(".ecore" , ".properties");
     	addToPropertiesFile(modelPropertyPath); // add mmodel file properties 
     	addToPropertiesFile("./ecore.properties"); // add generator properties (MDE4CPP/generator/ecore4CPP/ecore4CPP.generator)
-    	addToPropertiesFile(System.getenv("MDE4CPP_HOME")+"/MDE4CPP_Generator.properties"); // // add general generator properties 
+    	addToPropertiesFile(System.getenv("MDE4CPP_HOME")+"/MDE4CPP.properties"); // // add general generator properties 
     	
         return propertiesFiles;
     }

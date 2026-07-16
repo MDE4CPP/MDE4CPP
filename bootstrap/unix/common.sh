@@ -80,9 +80,9 @@ get_arch() {
 
 # Auto-load properties if not already set
 if [[ -z "${MDE4CPP_JAVA_VERSION:-}" ]]; then
-    # Find versions.properties relative to this common.sh file
+    # Find MDE4CPP.properties relative to this common.sh file
     COMMON_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    VERSIONS_FILE="$(cd "${COMMON_SCRIPT_DIR}/../.." && pwd)/versions.properties"
+    VERSIONS_FILE="$(cd "${COMMON_SCRIPT_DIR}/../.." && pwd)/MDE4CPP.properties"
     if [[ -f "$VERSIONS_FILE" ]]; then
         load_properties "$VERSIONS_FILE"
     fi

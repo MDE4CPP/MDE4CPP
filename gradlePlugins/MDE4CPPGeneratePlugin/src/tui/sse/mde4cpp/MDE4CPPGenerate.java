@@ -150,7 +150,7 @@ public class MDE4CPPGenerate extends DefaultTask
 	}
 	
 	/**
-	 * create the default target Folder out of the MDE4CPP_Generator.properties file. If no properties file existing; standsrd Value are used. 
+	 * create the default target Folder out of the MDE4CPP.properties file. If no properties file existing; standsrd Value are used. 
 	 * @return
 	 * /
 	 */
@@ -160,7 +160,7 @@ public class MDE4CPPGenerate extends DefaultTask
 		String mde4CppRoot=System.getenv("MDE4CPP_HOME");
 		Properties prop = new Properties();          
 		try {
-			String configFilePath=mde4CppRoot + File.separator + "MDE4CPP_Generator.properties";
+			String configFilePath=mde4CppRoot + File.separator + "MDE4CPP.properties";
 			File configFile = new File(configFilePath);
 			
 			if(configFile.exists())
@@ -175,7 +175,7 @@ public class MDE4CPPGenerate extends DefaultTask
 			}
 			else
 			{
-				System.out.println("Properties file MDE4CPP_Generator.properties not found. Use standard values.");
+				System.out.println("Properties file MDE4CPP.properties not found. Use standard values.");
 			}
 		} catch (IOException e) 
 		{

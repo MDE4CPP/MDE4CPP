@@ -10,9 +10,9 @@ echo 'Setting up environment for Eclipse installation...'
 export MDE4CPP_HOME="/home/mde4cpp"
 export MDE4CPP_ECLIPSE_TARGET_DIR="/home/eclipse/ide"
 
-# Read versions from versions.properties and export them
+# Read versions from MDE4CPP.properties and export them
 set -a
-source "${MDE4CPP_HOME}/versions.properties"
+source "${MDE4CPP_HOME}/MDE4CPP.properties"
 set +a
 
 # Execute the native bootstrap script

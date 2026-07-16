@@ -241,14 +241,14 @@ class GradlePropertyAnalyser
 			return result;
 		}
 		
-		// Fall back to reading MDE4CPP_Generator.properties file
+		// Fall back to reading MDE4CPP.properties file
 		String mde4CppRoot = System.getenv("MDE4CPP_HOME");
 		if (mde4CppRoot != null && !mde4CppRoot.isEmpty())
 		{
 			Properties prop = new Properties();
 			try
 			{
-				String configFilePath = mde4CppRoot + File.separator + "MDE4CPP_Generator.properties";
+				String configFilePath = mde4CppRoot + File.separator + "MDE4CPP.properties";
 				File configFile = new File(configFilePath);
 				if (configFile.exists())
 				{
@@ -259,7 +259,7 @@ class GradlePropertyAnalyser
 					if (value != null)
 					{
 						boolean result = "true".equalsIgnoreCase(value.trim());
-						logger.info("CROSS_COMPILE_WINDOWS from MDE4CPP_Generator.properties: {} (value: '{}')", result, value);
+						logger.info("CROSS_COMPILE_WINDOWS from MDE4CPP.properties: {} (value: '{}')", result, value);
 						if (result && !isWindows) {
 							logger.warn("Cross-compilation to Windows requested in {}, but running on {}. Make sure MinGW-w64 is installed for cross-compilation.", configFilePath, osName);
 						}
@@ -267,22 +267,22 @@ class GradlePropertyAnalyser
 					}
 					else
 					{
-						logger.info("CROSS_COMPILE_WINDOWS not set in MDE4CPP_Generator.properties, defaulting to false");
+						logger.info("CROSS_COMPILE_WINDOWS not set in MDE4CPP.properties, defaulting to false");
 					}
 				}
 				else
 				{
-					logger.info("MDE4CPP_Generator.properties not found at {}, using default", configFilePath);
+					logger.info("MDE4CPP.properties not found at {}, using default", configFilePath);
 				}
 			}
 			catch (IOException e)
 			{
-				logger.warn("Failed to read MDE4CPP_Generator.properties: {}", e.getMessage());
+				logger.warn("Failed to read MDE4CPP.properties: {}", e.getMessage());
 			}
 		}
 		else
 		{
-			logger.info("MDE4CPP_HOME environment variable not set, cannot read MDE4CPP_Generator.properties");
+			logger.info("MDE4CPP_HOME environment variable not set, cannot read MDE4CPP.properties");
 		}
 		
 		logger.info("CROSS_COMPILE_WINDOWS not configured, defaulting to false");

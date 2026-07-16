@@ -19,7 +19,7 @@ cd MDE4CPP
 ```
 
 ### 3. Run the Bootstrap Script
-MDE4CPP provides an automated bootstrap script that downloads and configures the required toolchain (Java, CMake, Eclipse with plugins, and MinGW on Windows), sets up your environment variables, and installs third-party dependencies. Tool versions are managed centrally in the `versions.properties` file.
+MDE4CPP provides an automated bootstrap script that downloads and configures the required toolchain (Java, CMake, Eclipse with plugins, and MinGW on Windows), sets up your environment variables, and installs third-party dependencies. Tool versions are managed centrally in the `MDE4CPP.properties` file.
 
 - **Windows**:
   Run the script in your command prompt:
@@ -71,7 +71,7 @@ chmod +x application/tools/gradlew
 - `ecore4CPP` is used for `.ecore` models.  
 - `fUML4CPP` is used for `.uml` models.  
 - To use UML4CPP (structural part only, no fUML-specific executions), add `-PStructureOnly` or `-PSO`.  
-- (experimental) To generate a REST API for the model, enable it in MDE4CPP_Generator.properties.
+- (experimental) To generate a REST API for the model, enable it in `MDE4CPP.properties`.
 
 #### 4.2 Task Dependencies
 There are dependencies between tasks, projects, and models which are currently not built automatically:
@@ -290,7 +290,7 @@ taskkill /F /IM "pluginAPI.exe" /T
 ### Build Issues
 - **Eclipse not found**: Run `docker compose up install-eclipse` first
 - **Component build fails**: Check dependencies - some components require others to be built first
-- **Cross-compilation issues**: Verify `CROSS_COMPILE_WINDOWS` setting in `MDE4CPP_Generator.properties`
+- **Cross-compilation issues**: Verify `CROSS_COMPILE_WINDOWS` setting in `MDE4CPP.properties`
 - **Build crashes on systems with 8GB RAM**: If Docker builds crash due to memory issues (especially on Windows), edit `docker/scripts/setup-setenv.sh` and modify the following configuration values:
   ```bash
   # For 8GB RAM systems, change these values:

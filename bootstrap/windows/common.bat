@@ -17,10 +17,10 @@ exit /b 0
 :load_properties
 set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
-set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
+set "VERSIONS_FILE=%REPO_ROOT%\MDE4CPP.properties"
 
 if not exist "%VERSIONS_FILE%" (
-    echo ERROR: versions.properties not found at %VERSIONS_FILE%
+    echo ERROR: MDE4CPP.properties not found at %VERSIONS_FILE%
     exit /b 1
 )
 
