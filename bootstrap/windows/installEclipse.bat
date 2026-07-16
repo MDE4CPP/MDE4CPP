@@ -53,7 +53,11 @@ if "!MDE4CPP_ECLIPSE_SIRIUS_ECLIPSE_VERSION!"=="" (
 
 REM Resolve install locations and download URLs.
 for %%I in ("!MDE4CPP_HOME!\..") do set "MDE4CPP_PARENT=%%~fI"
-set "TARGET_DIR=!MDE4CPP_PARENT!\eclipse"
+if not "!MDE4CPP_ECLIPSE_LOCATION!"=="" (
+    set "TARGET_DIR=!MDE4CPP_ECLIPSE_LOCATION!"
+) else (
+    set "TARGET_DIR=!MDE4CPP_PARENT!\eclipse"
+)
 set "TMP_DIR=%TEMP%\mde4cpp-eclipse-install"
 set "ARCHIVE_PATH=!TMP_DIR!\eclipse-modeling.zip"
 set "ECLIPSE_ARCHIVE_URL=https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/!MDE4CPP_ECLIPSE_VERSION: =!/!MDE4CPP_ECLIPSE_MILESTONE: =!/eclipse-modeling-!MDE4CPP_ECLIPSE_VERSION: =!-!MDE4CPP_ECLIPSE_MILESTONE: =!-win32-x86_64.zip"

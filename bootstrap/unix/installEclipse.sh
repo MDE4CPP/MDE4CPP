@@ -32,7 +32,11 @@ if [[ -z "${MDE4CPP_ECLIPSE_PAPYRUS_UPDATE_VERSION:-}" ]]; then
 fi
 
 MDE4CPP_PARENT="$(cd "${MDE4CPP_HOME}/.." && pwd)"
-TARGET_DIR="${MDE4CPP_ECLIPSE_TARGET_DIR:-${MDE4CPP_PARENT}/eclipse}"
+if [[ -n "${MDE4CPP_ECLIPSE_LOCATION:-}" ]]; then
+  TARGET_DIR="${MDE4CPP_ECLIPSE_LOCATION}"
+else
+  TARGET_DIR="${MDE4CPP_ECLIPSE_TARGET_DIR:-${MDE4CPP_PARENT}/eclipse}"
+fi
 TMP_DIR="$(mktemp -d)"
 
 ACCELEO_REPOSITORY_URL="https://download.eclipse.org/acceleo/updates/releases/${MDE4CPP_ECLIPSE_ACCELEO_VERSION//[[:space:]]/}"
