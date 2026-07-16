@@ -32,7 +32,11 @@ import org.gradle.internal.os.OperatingSystem;
 description '3rdparty: xerces-c'
 
 def versionProps = new Properties()
-file("${rootDir}/MDE4CPP.properties").withInputStream { versionProps.load(it) }
+file("${rootDir}/MDE4CPP_default.properties").withInputStream { versionProps.load(it) }
+def customPropsFile = file("${rootDir}/MDE4CPP_custom.properties")
+if (customPropsFile.exists()) {
+    customPropsFile.withInputStream { versionProps.load(it) }
+}
 def xercesVersion = versionProps.getProperty('MDE4CPP_XERCES_VERSION')
 
 task downloadFile(type: Download) {

@@ -97,7 +97,6 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 					if (value != null) {
 						crossCompileWindows = "true".equalsIgnoreCase(value.trim())
 					}
-				}
 			} catch (Exception e) {
 				// Silently fail
 			}
@@ -243,10 +242,9 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			if (customConfigFile.exists()) {
 				customConfigFile.withInputStream { stream -> props.load(stream) }
 			}
-				def value = props.getProperty("CROSS_COMPILE_WINDOWS")
-				if (value != null) {
-					crossCompileWindows = "true".equalsIgnoreCase(value.trim())
-				}
+			def value = props.getProperty("CROSS_COMPILE_WINDOWS")
+			if (value != null) {
+				crossCompileWindows = "true".equalsIgnoreCase(value.trim())
 			}
 		} catch (Exception e) {
 			// Silently fail
