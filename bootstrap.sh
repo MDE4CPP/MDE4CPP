@@ -62,6 +62,9 @@ export MDE4CPP_HOME="$PROJECT_DIR"
 bash "$DIR/bootstrap/unix/install_eclipse.sh"
 if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_eclipse.sh failed${C_RESET}"; exit 1; fi
 
+bash "$DIR/bootstrap/unix/install_eclipse_plugins.sh"
+if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: install_eclipse_plugins.sh failed${C_RESET}"; exit 1; fi
+
 bash "$DIR/bootstrap/unix/generate_setenv.sh"
 if [ $? -ne 0 ]; then echo "${C_PURPLE}[bootstrap]${C_ERROR} ERROR: generate_setenv.sh failed${C_RESET}"; exit 1; fi
 

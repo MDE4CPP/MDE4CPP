@@ -12,5 +12,6 @@ export MDE4CPP_ECLIPSE_TARGET_DIR="/home/eclipse/ide"
 
 # Execute the native bootstrap script
 bash "${MDE4CPP_HOME}/bootstrap/unix/install_eclipse.sh"
+bash "${MDE4CPP_HOME}/bootstrap/unix/install_eclipse_plugins.sh"
 
 echo '✓ Eclipse installation complete'

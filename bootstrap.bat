@@ -44,6 +44,12 @@ if errorlevel 1 (
     exit /b !errorlevel!
 )
 
+call "%DIR%bootstrap\windows\install_eclipse_plugins.bat"
+if errorlevel 1 (
+    echo %C_ERROR%ERROR: install_eclipse_plugins.bat failed ^(exit !errorlevel!^)%C_RESET%
+    exit /b !errorlevel!
+)
+
 
 call "%DIR%bootstrap\windows\generate_setenv.bat"
 if errorlevel 1 exit /b 1
