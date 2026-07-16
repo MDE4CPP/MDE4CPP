@@ -10,7 +10,12 @@ call "%~dp0common.bat" print_header "generate_setenv" "Running Setenv Generator.
 
 if not defined PROJECT_DIR set "PROJECT_DIR=%REPO_ROOT%"
 if not defined SETENV_FILE set "SETENV_FILE=%REPO_ROOT%\setenv.bat"
-if not defined ECLIPSE_DIR set "ECLIPSE_DIR=%REPO_ROOT%\eclipse"
+
+if not "!MDE4CPP_ECLIPSE_LOCATION!"=="" (
+    set "ECLIPSE_DIR=!MDE4CPP_ECLIPSE_LOCATION!"
+) else if not defined ECLIPSE_DIR (
+    set "ECLIPSE_DIR=%REPO_ROOT%\..\eclipse"
+)
 
 echo %C_PURPLE%[generate_setenv]%C_WARN% Generating %SETENV_FILE%...%C_RESET%
 

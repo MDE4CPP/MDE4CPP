@@ -13,7 +13,11 @@ echo "${C_PURPLE}[generate_setenv]${C_WARN} Generating setenv.sh...${C_RESET}"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 PROJECT_DIR="${PROJECT_DIR:-$REPO_ROOT}"
 SETENV_FILE="${SETENV_FILE:-$REPO_ROOT/setenv.sh}"
-ECLIPSE_DIR="${ECLIPSE_DIR:-$REPO_ROOT/../eclipse}"
+if [[ -n "${MDE4CPP_ECLIPSE_LOCATION:-}" ]]; then
+  ECLIPSE_DIR="${MDE4CPP_ECLIPSE_LOCATION}"
+else
+  ECLIPSE_DIR="${ECLIPSE_DIR:-$REPO_ROOT/../eclipse}"
+fi
 JAVA_MAJOR="${MDE4CPP_JAVA_VERSION%%.*}"
 GCC_MAJOR="${MDE4CPP_COMPILER_VERSION%%.*}"
 
