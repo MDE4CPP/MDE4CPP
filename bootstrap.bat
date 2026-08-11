@@ -20,36 +20,70 @@ call "%DIR%bootstrap\windows\common.bat" print_header "bootstrap" "MDE4CPP Boots
 
 call "%DIR%bootstrap\windows\common.bat" print_header "bootstrap" "Installing system tools..."
 
-call "%DIR%bootstrap\windows\installJava.bat"
-if errorlevel 1 (
-    echo %C_ERROR%ERROR: installJava.bat failed ^(exit !errorlevel!^)%C_RESET%
-    exit /b !errorlevel!
+if not "!BOOTSTRAP_SKIP_JAVA_INSTALL!"=="true" (
+    call "%DIR%bootstrap\windows\install_java.bat"
+    if errorlevel 1 (
+        echo %C_ERROR%ERROR: install_java.bat failed ^(exit !errorlevel!^)%C_RESET%
+        exit /b !errorlevel!
+    )
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping Java installation as per BOOTSTRAP_SKIP_JAVA_INSTALL%C_RESET%
 )
 
-call "%DIR%bootstrap\windows\installCompiler.bat"
-if errorlevel 1 (
-    echo %C_ERROR%ERROR: installCompiler.bat failed ^(exit !errorlevel!^)%C_RESET%
-    exit /b !errorlevel!
+if not "!BOOTSTRAP_SKIP_COMPILER_INSTALL!"=="true" (
+    call "%DIR%bootstrap\windows\install_compiler.bat"
+    if errorlevel 1 (
+        echo %C_ERROR%ERROR: install_compiler.bat failed ^(exit !errorlevel!^)%C_RESET%
+        exit /b !errorlevel!
+    )
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping Compiler installation as per BOOTSTRAP_SKIP_COMPILER_INSTALL%C_RESET%
 )
 
-call "%DIR%bootstrap\windows\installCMake.bat"
-if errorlevel 1 (
-    echo %C_ERROR%ERROR: installCMake.bat failed ^(exit !errorlevel!^)%C_RESET%
-    exit /b !errorlevel!
+if not "!BOOTSTRAP_SKIP_CMAKE_INSTALL!"=="true" (
+    call "%DIR%bootstrap\windows\install_cmake.bat"
+    if errorlevel 1 (
+        echo %C_ERROR%ERROR: install_cmake.bat failed ^(exit !errorlevel!^)%C_RESET%
+        exit /b !errorlevel!
+    )
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping CMake installation as per BOOTSTRAP_SKIP_CMAKE_INSTALL%C_RESET%
 )
 
-call "%DIR%bootstrap\windows\installEclipse.bat"
-if errorlevel 1 (
-    echo %C_ERROR%ERROR: installEclipse.bat failed ^(exit !errorlevel!^)%C_RESET%
-    exit /b !errorlevel!
+if not "!BOOTSTRAP_SKIP_ECLIPSE_INSTALL!"=="true" (
+    call "%DIR%bootstrap\windows\install_eclipse.bat"
+    if errorlevel 1 (
+        echo %C_ERROR%ERROR: install_eclipse.bat failed ^(exit !errorlevel!^)%C_RESET%
+        exit /b !errorlevel!
+    )
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping Eclipse installation as per BOOTSTRAP_SKIP_ECLIPSE_INSTALL%C_RESET%
+)
+
+if not "!BOOTSTRAP_SKIP_ECLIPSE_PLUGINS_INSTALL!"=="true" (
+    call "%DIR%bootstrap\windows\install_eclipse_plugins.bat"
+    if errorlevel 1 (
+        echo %C_ERROR%ERROR: install_eclipse_plugins.bat failed ^(exit !errorlevel!^)%C_RESET%
+        exit /b !errorlevel!
+    )
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping Eclipse plugins installation as per BOOTSTRAP_SKIP_ECLIPSE_PLUGINS_INSTALL%C_RESET%
 )
 
 
-call "%DIR%bootstrap\windows\generate_setenv.bat"
-if errorlevel 1 exit /b 1
+if not "!BOOTSTRAP_SKIP_GENERATE_SETENV!"=="true" (
+    call "%DIR%bootstrap\windows\generate_setenv.bat"
+    if errorlevel 1 exit /b 1
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping generate_setenv.bat as per BOOTSTRAP_SKIP_GENERATE_SETENV%C_RESET%
+)
 
-call "%DIR%bootstrap\windows\run_gradle_install.bat"
-if errorlevel 1 exit /b 1
+if not "!BOOTSTRAP_SKIP_GRADLE_INSTALL!"=="true" (
+    call "%DIR%bootstrap\windows\run_gradle_install.bat"
+    if errorlevel 1 exit /b 1
+) else (
+    echo %C_PURPLE%[bootstrap]%C_INFO% Skipping Gradle installation as per BOOTSTRAP_SKIP_GRADLE_INSTALL%C_RESET%
+)
 
 echo %C_WARN%===========================================================%C_RESET%
 echo %C_SUCCESS%Bootstrap completed successfully!%C_RESET%

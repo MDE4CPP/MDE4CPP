@@ -4,6 +4,7 @@ REM Common functions for MDE4CPP Windows bootstrap scripts
 if "%~1"=="load_properties" goto :load_properties
 if "%~1"=="setup_colors" goto :setup_colors
 if "%~1"=="print_header" goto :print_header
+if "%~1"=="download_file" goto :download_file
 if "%~1"=="" goto :auto_load
 exit /b 0
 
@@ -17,14 +18,15 @@ exit /b 0
 :load_properties
 set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "REPO_ROOT=%%~fI"
-set "VERSIONS_FILE=%REPO_ROOT%\versions.properties"
+set "TEMPLATE_FILE=%REPO_ROOT%\MDE4CPP_default.properties"
+set "CUSTOM_FILE=%REPO_ROOT%\MDE4CPP_custom.properties"
 
-if not exist "%VERSIONS_FILE%" (
-    echo ERROR: versions.properties not found at %VERSIONS_FILE%
-    exit /b 1
-)
+if exist "%TEMPLATE_FILE%" call :parse_properties_file "%TEMPLATE_FILE%"
+if exist "%CUSTOM_FILE%" call :parse_properties_file "%CUSTOM_FILE%"
+exit /b 0
 
-for /f "tokens=1,2 delims==" %%A in ('type "%VERSIONS_FILE%" ^| findstr /V /B /C:"#"') do (
+:parse_properties_file
+for /f "tokens=1,2 delims==" %%A in ('type "%~1" ^| findstr /V /B /C:"#"') do (
     set "KEY=%%A"
     set "VAL=%%B"
     
@@ -55,4 +57,20 @@ exit /b 0
 echo %C_WARN%===========================================================%C_RESET%
 echo %C_PURPLE%[%~2]%C_WARN% %~3%C_RESET%
 echo %C_WARN%===========================================================%C_RESET%
+exit /b 0
+
+:download_file
+REM Usage: call "%~dp0common.bat" download_file "URL" "DESTINATION"
+set "URL=%~2"
+set "DEST=%~3"
+where curl >nul 2>&1
+if errorlevel 1 (
+    echo %C_ERROR%ERROR: curl.exe is required to download files.%C_RESET%
+    exit /b 1
+)
+curl.exe -fL --output "%DEST%" "%URL%"
+if errorlevel 1 (
+    echo %C_ERROR%ERROR: Download failed for %URL%%C_RESET%
+    exit /b 1
+)
 exit /b 0

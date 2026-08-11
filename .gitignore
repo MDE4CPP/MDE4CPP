@@ -19,6 +19,7 @@ setenv
 setenv.bat
 setenv.sh
 gradle.properties
+MDE4CPP_custom.properties
 
 # IDE files
 **/.idea/

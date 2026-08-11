@@ -10,12 +10,8 @@ echo 'Setting up environment for Eclipse installation...'
 export MDE4CPP_HOME="/home/mde4cpp"
 export MDE4CPP_ECLIPSE_TARGET_DIR="/home/eclipse/ide"
 
-# Read versions from versions.properties and export them
-set -a
-source "${MDE4CPP_HOME}/versions.properties"
-set +a
-
 # Execute the native bootstrap script
-bash "${MDE4CPP_HOME}/bootstrap/unix/installEclipse.sh"
+bash "${MDE4CPP_HOME}/bootstrap/unix/install_eclipse.sh"
+bash "${MDE4CPP_HOME}/bootstrap/unix/install_eclipse_plugins.sh"
 
 echo '✓ Eclipse installation complete'

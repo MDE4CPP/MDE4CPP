@@ -241,48 +241,48 @@ class GradlePropertyAnalyser
 			return result;
 		}
 		
-		// Fall back to reading MDE4CPP_Generator.properties file
+		// Fall back to reading MDE4CPP properties files
 		String mde4CppRoot = System.getenv("MDE4CPP_HOME");
 		if (mde4CppRoot != null && !mde4CppRoot.isEmpty())
 		{
 			Properties prop = new Properties();
 			try
 			{
-				String configFilePath = mde4CppRoot + File.separator + "MDE4CPP_Generator.properties";
-				File configFile = new File(configFilePath);
-				if (configFile.exists())
-				{
-					FileInputStream stream = new FileInputStream(configFile);
-					prop.load(stream);
-					stream.close();
-					String value = prop.getProperty("CROSS_COMPILE_WINDOWS");
-					if (value != null)
-					{
-						boolean result = "true".equalsIgnoreCase(value.trim());
-						logger.info("CROSS_COMPILE_WINDOWS from MDE4CPP_Generator.properties: {} (value: '{}')", result, value);
-						if (result && !isWindows) {
-							logger.warn("Cross-compilation to Windows requested in {}, but running on {}. Make sure MinGW-w64 is installed for cross-compilation.", configFilePath, osName);
-						}
-						return result;
-					}
-					else
-					{
-						logger.info("CROSS_COMPILE_WINDOWS not set in MDE4CPP_Generator.properties, defaulting to false");
+				String defaultPath = mde4CppRoot + File.separator + "MDE4CPP_default.properties";
+				File defaultFile = new File(defaultPath);
+				if (defaultFile.exists()) {
+					try (FileInputStream stream = new FileInputStream(defaultFile)) {
+						prop.load(stream);
 					}
 				}
-				else
+				
+				String customPath = mde4CppRoot + File.separator + "MDE4CPP_custom.properties";
+				File customFile = new File(customPath);
+				if (customFile.exists()) {
+					try (FileInputStream stream = new FileInputStream(customFile)) {
+						prop.load(stream);
+					}
+				}
+				
+				String value = prop.getProperty("CROSS_COMPILE_WINDOWS");
+				if (value != null)
 				{
-					logger.info("MDE4CPP_Generator.properties not found at {}, using default", configFilePath);
+					boolean result = "true".equalsIgnoreCase(value.trim());
+					logger.info("CROSS_COMPILE_WINDOWS from properties: {} (value: '{}')", result, value);
+					if (result && !isWindows) {
+						logger.warn("Cross-compilation to Windows requested, but running on {}. Make sure MinGW-w64 is installed.", osName);
+					}
+					return result;
 				}
 			}
 			catch (IOException e)
 			{
-				logger.warn("Failed to read MDE4CPP_Generator.properties: {}", e.getMessage());
+				logger.warn("Failed to read properties: {}", e.getMessage());
 			}
 		}
 		else
 		{
-			logger.info("MDE4CPP_HOME environment variable not set, cannot read MDE4CPP_Generator.properties");
+			logger.info("MDE4CPP_HOME environment variable not set, cannot read MDE4CPP.properties");
 		}
 		
 		logger.info("CROSS_COMPILE_WINDOWS not configured, defaulting to false");

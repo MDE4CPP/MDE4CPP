@@ -13,7 +13,8 @@ source "$REPO_ROOT/setenv.sh"
 cd "$REPO_ROOT"
 
 GRADLE_WRAPPER="$REPO_ROOT/application/tools/gradlew"
-if [[ -x "$GRADLE_WRAPPER" ]]; then
+if [[ -f "$GRADLE_WRAPPER" ]]; then
+    chmod +x "$GRADLE_WRAPPER"
     set +e
     "$GRADLE_WRAPPER" install --no-daemon
     GRADLE_EXIT=$?
@@ -24,5 +25,5 @@ if [[ -x "$GRADLE_WRAPPER" ]]; then
     fi
     echo "${C_SUCCESS}Gradle install completed successfully.${C_RESET}"
 else
-    echo "WARNING: Gradle wrapper not found or not executable at $GRADLE_WRAPPER, skipping Gradle install."
+    echo "WARNING: Gradle wrapper not found at $GRADLE_WRAPPER, skipping Gradle install."
 fi

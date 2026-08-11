@@ -37,7 +37,11 @@ repositories {
 
 
 def versionProps = new Properties()
-file("${rootDir}/versions.properties").withInputStream { versionProps.load(it) }
+file("${rootDir}/MDE4CPP_default.properties").withInputStream { versionProps.load(it) }
+def customPropsFile = file("${rootDir}/MDE4CPP_custom.properties")
+if (customPropsFile.exists()) {
+    customPropsFile.withInputStream { versionProps.load(it) }
+}
 def antlrVersion = versionProps.getProperty('MDE4CPP_ANTLR_VERSION')
 
 dependencies {

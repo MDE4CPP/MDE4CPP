@@ -18,8 +18,20 @@ git clone https://github.com/MDE4CPP/MDE4CPP.git
 cd MDE4CPP
 ```
 
-### 3. Run the Bootstrap Script
-MDE4CPP provides an automated bootstrap script that downloads and configures the required toolchain (Java, CMake, Eclipse with plugins, and MinGW on Windows), sets up your environment variables, and installs third-party dependencies. Tool versions are managed centrally in the `versions.properties` file.
+### 3. Configuration and Customization
+Tool versions and build configurations are managed centrally in `MDE4CPP_default.properties`.
+**Do not modify this file directly to avoid git conflicts.** Instead, create an **`MDE4CPP_custom.properties`** file in the root directory. Any variable defined here overrides the defaults.
+
+Example `MDE4CPP_custom.properties` to use a custom Eclipse path and skip the Gradle setup:
+```ini
+MDE4CPP_ECLIPSE_LOCATION=C:/tools/eclipse
+BOOTSTRAP_SKIP_GRADLE_INSTALL=true
+```
+
+You can skip any part of the bootstrap process (Java, CMake, Eclipse, MinGW, etc.) by setting the corresponding `BOOTSTRAP_SKIP_*=true` flag. Check `MDE4CPP_default.properties` for a full list of available settings.
+
+### 4. Run the Bootstrap Script
+MDE4CPP provides an automated bootstrap script that downloads and configures the required toolchain (Java, CMake, Eclipse with plugins, and MinGW on Windows), sets up your environment variables, and installs third-party dependencies according to your properties.
 
 - **Windows**:
   Run the script in your command prompt:
@@ -32,7 +44,7 @@ MDE4CPP provides an automated bootstrap script that downloads and configures the
   ./bootstrap.sh
   ```
 
-### 4. Build with Gradle
+### 5. Build with Gradle
 MDE4CPP uses Gradle for builds. To generate and compile the entire project, run:
 ```bash
 gradlew buildAll
@@ -44,13 +56,8 @@ Some other basic commands:
 - `gradlew help` … Gradle help  
 - `gradlew <taskName>` … run task `<taskName>`  
 
-**Note for Unix users:**  
-First, give the script execution permissions:  
-```bash
-chmod +x application/tools/gradlew
-```
 
-#### 4.1 Top-Level Tasks (Group: MDE4CPP)
+#### 5.1 Top-Level Tasks (Group: MDE4CPP)
 - `buildAll` … generate and compile all metamodels (Ecore, UML, fUML, …)  
 - Use `gradlew tasks` to see all top-level commands under *MDE4CPP tasks*  
 - Generator tasks:  
@@ -71,9 +78,9 @@ chmod +x application/tools/gradlew
 - `ecore4CPP` is used for `.ecore` models.  
 - `fUML4CPP` is used for `.uml` models.  
 - To use UML4CPP (structural part only, no fUML-specific executions), add `-PStructureOnly` or `-PSO`.  
-- (experimental) To generate a REST API for the model, enable it in MDE4CPP_Generator.properties.
+- (experimental) To generate a REST API for the model, enable it in `MDE4CPP_custom.properties`.
 
-#### 4.2 Task Dependencies
+#### 5.2 Task Dependencies
 There are dependencies between tasks, projects, and models which are currently not built automatically:
 
 **In general:**  
@@ -81,7 +88,7 @@ There are dependencies between tasks, projects, and models which are currently n
 - Metamodels must be built before models can be built.
 - Dependent models must be built before depending model can be built.
 
-#### 4.3 Model Task Naming Convention
+#### 5.3 Model Task Naming Convention
 Schema:  
 ```text
 <command><ModelName> <buildMode>
@@ -290,7 +297,7 @@ taskkill /F /IM "pluginAPI.exe" /T
 ### Build Issues
 - **Eclipse not found**: Run `docker compose up install-eclipse` first
 - **Component build fails**: Check dependencies - some components require others to be built first
-- **Cross-compilation issues**: Verify `CROSS_COMPILE_WINDOWS` setting in `MDE4CPP_Generator.properties`
+- **Cross-compilation issues**: Verify `CROSS_COMPILE_WINDOWS` setting in `MDE4CPP_custom.properties`
 - **Build crashes on systems with 8GB RAM**: If Docker builds crash due to memory issues (especially on Windows), edit `docker/scripts/setup-setenv.sh` and modify the following configuration values:
   ```bash
   # For 8GB RAM systems, change these values:

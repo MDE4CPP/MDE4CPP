@@ -29,7 +29,7 @@ plugins {
 
 import org.gradle.internal.os.OperatingSystem;
 
-// NOTE: Tool versioning is now centralized in `versions.properties`. 
+// NOTE: Tool versioning is now centralized in `MDE4CPP_default.properties` and `MDE4CPP_custom.properties`.
 // todo: Versions have been removed
 
 ext {

@@ -32,7 +32,11 @@ import org.gradle.internal.os.OperatingSystem;
 description '3rdparty: xerces-c'
 
 def versionProps = new Properties()
-file("${rootDir}/versions.properties").withInputStream { versionProps.load(it) }
+file("${rootDir}/MDE4CPP_default.properties").withInputStream { versionProps.load(it) }
+def customPropsFile = file("${rootDir}/MDE4CPP_custom.properties")
+if (customPropsFile.exists()) {
+    customPropsFile.withInputStream { versionProps.load(it) }
+}
 def xercesVersion = versionProps.getProperty('MDE4CPP_XERCES_VERSION')
 
 task downloadFile(type: Download) {
@@ -67,7 +71,7 @@ task installXerces(dependsOn: downloadAndUnzipFile) {
 		if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
 			def props = new Properties()
 			try {
-				def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+				def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP.properties")
 				if (configFile.exists()) {
 					configFile.withInputStream { stream ->
 						props.load(stream)
@@ -197,7 +201,7 @@ task installXerces(dependsOn: downloadAndUnzipFile) {
 	if (mde4CppRoot != null && !mde4CppRoot.isEmpty()) {
 		def props = new Properties()
 		try {
-			def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP_Generator.properties")
+			def configFile = new File(mde4CppRoot + File.separator + "MDE4CPP.properties")
 			if (configFile.exists()) {
 				configFile.withInputStream { stream ->
 					props.load(stream)

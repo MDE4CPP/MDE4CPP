@@ -1,22 +1,44 @@
-org.eclipse.acceleo.feature.group
-org.eclipse.acceleo.ui.interpreter.ocl.feature.group
-org.eclipse.acceleo.ui.interpreter.completeocl.feature.group
+# ANTLR (Lexer/Parser)
+org.antlr.runtime
+
+# CDT (C/C++ Development Tooling)
+org.eclipse.cdt.feature.group
+
+# EMF (Eclipse Modeling Framework)
 org.eclipse.emf.sdk.feature.group
-org.eclipse.uml2.sdk.feature.group
+
+# OCL (Object Constraint Language)
 org.eclipse.ocl.all.sdk.feature.group
+
+# Papyrus (UML modeling environment)
+org.eclipse.papyrus.sdk.feature.feature.group
+
+# UML2 (UML metamodel implementation)
+org.eclipse.uml2.sdk.feature.group
+
+# EEF (Extended Editing Framework)
+org.eclipse.eef.ext.widgets.reference.feature.feature.group
+org.eclipse.eef.ext.widgets.reference.feature.source.feature.group
+org.eclipse.eef.sdk.feature.feature.group
+org.eclipse.eef.sdk.feature.source.feature.group
+
+# Acceleo (Model-to-Text Generator)
+org.eclipse.acceleo.feature.group
 org.eclipse.acceleo.query.feature.group
 org.eclipse.acceleo.query.source.feature.group
-org.antlr.runtime
-org.eclipse.sirius.common.acceleo.aql
-org.eclipse.sirius.ui.properties
+org.eclipse.acceleo.ui.interpreter.completeocl.feature.group
+org.eclipse.acceleo.ui.interpreter.ocl.feature.group
+
+# Sirius (Custom graphical modeling workbench)
 org.eclipse.sirius.aql.feature.group
-org.eclipse.sirius.runtime.aql.feature.group
-org.eclipse.sirius.properties.feature.feature.group
 org.eclipse.sirius.aql.source.feature.group
+org.eclipse.sirius.common.acceleo.aql
 org.eclipse.sirius.interpreter.feature.feature.group
 org.eclipse.sirius.interpreter.feature.source.feature.group
 org.eclipse.sirius.model.feature.source.feature.group
+org.eclipse.sirius.properties.feature.feature.group
 org.eclipse.sirius.properties.feature.source.feature.group
+org.eclipse.sirius.runtime.aql.feature.group
 org.eclipse.sirius.runtime.aql.source.feature.group
 org.eclipse.sirius.runtime.ide.ui.feature.group
 org.eclipse.sirius.specifier.feature.group
@@ -27,8 +49,4 @@ org.eclipse.sirius.specifier.ide.ui.source.feature.group
 org.eclipse.sirius.specifier.properties.feature.feature.group
 org.eclipse.sirius.specifier.properties.feature.source.feature.group
 org.eclipse.sirius.specifier.source.feature.group
-org.eclipse.eef.ext.widgets.reference.feature.feature.group
-org.eclipse.eef.ext.widgets.reference.feature.source.feature.group
-org.eclipse.eef.sdk.feature.feature.group
-org.eclipse.eef.sdk.feature.source.feature.group
-org.eclipse.cdt.feature.group
+org.eclipse.sirius.ui.properties
