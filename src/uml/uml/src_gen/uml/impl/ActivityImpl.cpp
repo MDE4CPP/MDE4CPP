@@ -262,9 +262,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getGroup(), getOwnedGroup());
+		getPartition()->initSubset(getOwnedGroup(), getGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup >(getGroup(), getOwnedGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
 		#endif
 		
 		for(const std::shared_ptr<uml::ActivityPartition>& partitionindexElem: *partitionList) 
@@ -458,9 +458,9 @@ const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::Ac
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getGroup(), getOwnedGroup());
+		getPartition()->initSubset(getOwnedGroup(), getGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup >(getGroup(), getOwnedGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
 		#endif
 		
 	}

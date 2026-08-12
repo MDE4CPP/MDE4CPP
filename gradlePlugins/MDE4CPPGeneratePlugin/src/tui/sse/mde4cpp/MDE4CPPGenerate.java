@@ -374,6 +374,7 @@ public class MDE4CPPGenerate extends DefaultTask
 		List<String> command = new LinkedList<String>();
 		command.add("java");
 		command.add("-jar");
+		command.add("-Dline.separator=\n"); // always use \n for generated files to avoid Linux/Windows related changes
 		command.add(m_generator.getPath());
 		command.add(m_modelFileName);
 		command.add(m_targetFolder);

@@ -28322,6 +28322,7 @@ std::shared_ptr<uml::ActivityPartition> umlFactoryImpl::createActivityPartition_
 std::shared_ptr<uml::ActivityPartition> umlFactoryImpl::createActivityPartition_as_subpartition_in_ActivityPartition(std::weak_ptr<uml::ActivityPartition> par_ActivityPartition, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::ActivityPartitionImpl> element(new uml::ActivityPartitionImpl(/*par_ActivityPartition.lock(), uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ActivityPartition.lock())
@@ -40450,6 +40451,7 @@ std::shared_ptr<uml::ExceptionHandler> umlFactoryImpl::createExceptionHandler(co
 std::shared_ptr<uml::ExceptionHandler> umlFactoryImpl::createExceptionHandler_as_handler_in_ExecutableNode(std::weak_ptr<uml::ExecutableNode> par_ExecutableNode, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::ExceptionHandlerImpl> element(new uml::ExceptionHandlerImpl(/*par_ExecutableNode.lock(), uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExecutableNode.lock())
@@ -41850,6 +41852,7 @@ std::shared_ptr<uml::Extend> umlFactoryImpl::createExtend_as_client_in_Dependenc
 std::shared_ptr<uml::Extend> umlFactoryImpl::createExtend_as_extend_in_UseCase(std::weak_ptr<uml::UseCase> par_UseCase, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::ExtendImpl> element(new uml::ExtendImpl(/*par_UseCase.lock(), uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_UseCase.lock())
@@ -43862,6 +43865,7 @@ std::shared_ptr<uml::Generalization> umlFactoryImpl::createGeneralization(const 
 std::shared_ptr<uml::Generalization> umlFactoryImpl::createGeneralization_as_generalization_in_Classifier(std::weak_ptr<uml::Classifier> par_Classifier, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::GeneralizationImpl> element(new uml::GeneralizationImpl(/*par_Classifier.lock(), uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Classifier.lock())
@@ -44176,6 +44180,7 @@ std::shared_ptr<uml::Include> umlFactoryImpl::createInclude_as_client_in_Depende
 std::shared_ptr<uml::Include> umlFactoryImpl::createInclude_as_include_in_UseCase(std::weak_ptr<uml::UseCase> par_UseCase, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::IncludeImpl> element(new uml::IncludeImpl(/*par_UseCase.lock(), uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_UseCase.lock())
@@ -55745,6 +55750,7 @@ std::shared_ptr<uml::PackageMerge> umlFactoryImpl::createPackageMerge_as_ownedEl
 std::shared_ptr<uml::PackageMerge> umlFactoryImpl::createPackageMerge_as_packageMerge_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::PackageMergeImpl> element(new uml::PackageMergeImpl(/*par_Package.lock(), uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Package.lock())
@@ -56394,6 +56400,7 @@ std::shared_ptr<uml::Port> umlFactoryImpl::createPort_as_ownedAttribute_in_DataT
 std::shared_ptr<uml::Port> umlFactoryImpl::createPort_as_ownedAttribute_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::PortImpl> element(new uml::PortImpl(/*par_Interface.lock(), uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Interface.lock())
@@ -57377,6 +57384,7 @@ std::shared_ptr<uml::Property> umlFactoryImpl::createProperty_as_ownedElement_in
 std::shared_ptr<uml::Property> umlFactoryImpl::createProperty_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::PropertyImpl> element(new uml::PropertyImpl(/*par_Association.lock(), uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Association.lock())
@@ -57413,6 +57421,7 @@ std::shared_ptr<uml::Property> umlFactoryImpl::createProperty_as_ownedParametere
 std::shared_ptr<uml::Property> umlFactoryImpl::createProperty_as_qualifier_in_Property(std::weak_ptr<uml::Property> par_Property, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::PropertyImpl> element(new uml::PropertyImpl(/*par_Property.lock(), uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Property.lock())
@@ -57487,6 +57496,7 @@ std::shared_ptr<uml::ProtocolConformance> umlFactoryImpl::createProtocolConforma
 std::shared_ptr<uml::ProtocolConformance> umlFactoryImpl::createProtocolConformance_as_conformance_in_ProtocolStateMachine(std::weak_ptr<uml::ProtocolStateMachine> par_ProtocolStateMachine, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::ProtocolConformanceImpl> element(new uml::ProtocolConformanceImpl(/*par_ProtocolStateMachine.lock(), uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ProtocolStateMachine.lock())
@@ -64832,6 +64842,7 @@ std::shared_ptr<uml::StringExpression> umlFactoryImpl::createStringExpression_as
 std::shared_ptr<uml::StringExpression> umlFactoryImpl::createStringExpression_as_subExpression_in_StringExpression(std::weak_ptr<uml::StringExpression> par_StringExpression, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::StringExpressionImpl> element(new uml::StringExpressionImpl(/*par_StringExpression.lock(), uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_StringExpression.lock())
@@ -65376,6 +65387,7 @@ std::shared_ptr<uml::Substitution> umlFactoryImpl::createSubstitution_as_source_
 std::shared_ptr<uml::Substitution> umlFactoryImpl::createSubstitution_as_substitution_in_Classifier(std::weak_ptr<uml::Classifier> par_Classifier, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<uml::SubstitutionImpl> element(new uml::SubstitutionImpl(/*par_Classifier.lock(), uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Classifier.lock())

@@ -14,8 +14,8 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
 	class EAnnotation;
+	class EStringToStringMapEntry;
 	class EDataType;
 }
 

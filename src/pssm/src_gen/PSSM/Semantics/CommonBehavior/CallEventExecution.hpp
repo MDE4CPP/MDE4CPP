@@ -32,14 +32,14 @@ namespace PSSM
 }
 
 //Forward Declaration for used types 
+namespace PSSM::Semantics::CommonBehavior 
+{
+	class CallEventOccurrence;
+}
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ObjectActivation;
 	class ParameterValue;
-}
-namespace PSSM::Semantics::CommonBehavior 
-{
-	class CallEventOccurrence;
 }
 namespace fUML::Semantics::Loci 
 {

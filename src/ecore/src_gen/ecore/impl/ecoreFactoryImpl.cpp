@@ -712,6 +712,7 @@ std::shared_ptr<ecore::EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eAnno
 std::shared_ptr<ecore::EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<ecore::EAnnotationImpl> element(new ecore::EAnnotationImpl(/*par_EObject.lock(), ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
@@ -1077,6 +1078,7 @@ std::shared_ptr<ecore::EObject> ecoreFactoryImpl::createEObject_as_contents_in_E
 std::shared_ptr<ecore::EObject> ecoreFactoryImpl::createEObject_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<ecore::EObjectImpl> element(new ecore::EObjectImpl(/*par_EObject.lock(), ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
@@ -1221,6 +1223,7 @@ std::shared_ptr<ecore::EPackage> ecoreFactoryImpl::createEPackage_as_eContentUni
 std::shared_ptr<ecore::EPackage> ecoreFactoryImpl::createEPackage_as_eSubpackages_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<ecore::EPackageImpl> element(new ecore::EPackageImpl(/*par_EPackage.lock(), ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EPackage.lock())

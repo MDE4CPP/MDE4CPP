@@ -24,9 +24,6 @@ IF("$ENV{DEBUG_MESSAGE_ACTIVITY_DEBUGGER}" EQUAL "1")
 ENDIF()
 
 SET(CMAKE_CXX_FLAGS "-Wall -Wno-narrowing -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
-IF(APPLE)
-  string(APPEND CMAKE_CXX_FLAGS " -Qunused-arguments")
-ENDIF(APPLE)
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb ${ENABLED_DEBUG_MESSAGE}")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 

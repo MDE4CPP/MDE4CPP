@@ -49,12 +49,12 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Loci;

@@ -13067,6 +13067,7 @@ std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::cre
 std::shared_ptr<ocl::Expressions::VarDeclarationExp> ExpressionsFactoryImpl::createVarDeclarationExp_as_initializedElement_in_OclExpression(std::weak_ptr<ocl::Expressions::OclExpression> par_OclExpression, const int metaElementID) const
 {
 	
+		
 				std::shared_ptr<ocl::Expressions::VarDeclarationExpImpl> element(new ocl::Expressions::VarDeclarationExpImpl(/*par_OclExpression.lock(), ocl::Expressions::ExpressionsPackage::VARDECLARATIONEXP_ATTRIBUTE_INITEXPRESSION */));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_OclExpression.lock())
