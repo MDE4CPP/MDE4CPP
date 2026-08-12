@@ -15,19 +15,18 @@
 # Explicit normalized and converted file types to native line endings on checkout
 *.bat text eol=crlf
 
-*.gradle text=auto
+*.gradle text=lf
 
-*.java text=auto
-*.mtl text=auto
-
-*.c text=auto
-*.cpp text=auto
-*.h text=auto
-*.hpp text=auto
-*.properties text eol=auto
-*.gradle text eol=auto
-setenv text eol=auto
-setenv.* text eol=auto
+*.java text=lf
+*.mtl text=lf
+*.c text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.h   text eol=lf
+*.properties text eol=lf
+*.gradle text eol=lf
+setenv text eol=lf
+setenv.* text eol=lf
 
 # Ensure all text files use LF
 * text=auto eol=auto
