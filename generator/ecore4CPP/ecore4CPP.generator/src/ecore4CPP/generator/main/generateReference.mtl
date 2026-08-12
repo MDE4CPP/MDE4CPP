@@ -189,11 +189,11 @@ aql:self->closure(a|a.eContainer())->select(e|e.eContainer()->isEmpty()).eAllCon
 		}
 	}	
 	return [anEReference.name/];
-	[printError('Untested Model case' + anEReference.eContainingClass.name.toUpperFirst() + '::' + anEReference.name + ':' + anEReference.eGenericType.generateCppType(false) + 
-					' is a redefined Container which is a Union ','main::generateReference::_generateReferenceGetterImplementation') /]
+	[printWarning('Untested Model case' + anEReference.eContainingClass.name.toUpperFirst() + '::' + anEReference.name + ':' + anEReference.eGenericType.generateCppType(false) + 
+					' is a redefined Container which is a Union ','main::generateReference::_generateReferenceGetterImplementation',1) /]
 				[else]
-	[printError('Unrealized Model case' + anEReference.eContainingClass.name.toUpperFirst() + '::' + anEReference.name + ':' + anEReference.eGenericType.generateCppType(false) + 
-					' is a redefined Container which is not a Union ','main::generateReference::_generateReferenceGetterImplementation') /]
+	[printWarning('Unrealized Model case' + anEReference.eContainingClass.name.toUpperFirst() + '::' + anEReference.name + ':' + anEReference.eGenericType.generateCppType(false) + 
+					' is a redefined Container which is not a Union ','main::generateReference::_generateReferenceGetterImplementation',1) /]
 	return nullptr; 
 //	return dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]);
 				[/if]

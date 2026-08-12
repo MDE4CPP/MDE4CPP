@@ -254,8 +254,8 @@ std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.gener
  		[if (currentCompositionOrSubsetToClass.eOpposite.isBackReference())]        
 		[if (anEClass.eReferences->select(r:EReference|r.eType.name = currentCompositionOrSubsetToClass.eContainingClass.name)->size() >1 ) ]
 				[let packageContainingOppositeReference : EPackage = currentCompositionOrSubsetToClass.eOpposite.ancestors(EPackage)->first()]
-	[printError('Untested Model case' + anEClass.name.toUpperFirst() + '::' + currentCompositionOrSubsetToClass.name + ':' +  currentCompositionOrSubsetToClass.eGenericType.generateCppType(false) + 
-					' is a redefined Container which is a Union ','main::model_factory::generateFactoryImplementationSource::generateCreateFunctionContent') /]
+	[printWarning('Untested Model case ' + anEClass.name.toUpperFirst() + '::' + currentCompositionOrSubsetToClass.name + ':' +  currentCompositionOrSubsetToClass.eGenericType.generateCppType(false) + 
+					' is a redefined Container which is a Union ','main::model_factory::generateFactoryImplementationSource::generateCreateFunctionContent',1) /]
 			std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(/*par_[currentCompositionOrSubsetToClass.eContainingClass.name/].lock(), [packageContainingOppositeReference.generateNamespaceDefinition()/]::[packageContainingOppositeReference.name/]Package::[currentCompositionOrSubsetToClass.eOpposite.getStaticAttributeIDName()/] */));
 				[/let]
 			[else]
