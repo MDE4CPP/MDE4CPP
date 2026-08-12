@@ -42,11 +42,11 @@ echo %C_PURPLE%[generate_setenv]%C_WARN% Generating %SETENV_FILE%...%C_RESET%
     echo.
     echo REM configure Gradle tasks and compiling processes
     if not defined GRADLE_PARALLEL set "GRADLE_PARALLEL=true"
-    echo set "GRADLE_OPTS=-Dorg.gradle.parallel=%GRADLE_PARALLEL%"
-    if not defined WORKER_COUNT set "WORKER_COUNT=1"
-    echo set "ORG_GRADLE_PROJECT_WORKER=%WORKER_COUNT%"
+    echo set "GRADLE_OPTS=-Dorg.gradle.parallel=!GRADLE_PARALLEL!"
+    if not defined WORKER_COUNT set "WORKER_COUNT=4"
+    echo set "ORG_GRADLE_PROJECT_WORKER=!WORKER_COUNT!"
     echo set "ORG_GRADLE_PROJECT_RELEASE=1"
-    echo set "ORG_GRADLE_PROJECT_DEBUG=1"
+    echo set "ORG_GRADLE_PROJECT_DEBUG=0"
     echo set "ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML=0"
     echo.
     echo REM Configure JAVA CLASSPATH
