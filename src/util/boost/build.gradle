@@ -34,10 +34,11 @@ plugins {
 description '3rdparty: boost'
 
 def boostVersion = "1_83_0"
+def replacedVersion = boostVersion.replace('_', '.')
 
 task downloadFile(type: Download) {
 	description 'download boost'
-    src "https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_${boostVersion}.zip"
+    src "https://archives.boost.io/release/${replacedVersion}/source/boost_${boostVersion}.zip"
     dest new File(file("./boost_${boostVersion}.zip").absolutePath)
     onlyIfModified true
     quiet true
