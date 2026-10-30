@@ -68,3 +68,4 @@ application/tools/**/boost_*.zip
 
 /.github
 /src/util/common/parser/antlr4
+userProjects
