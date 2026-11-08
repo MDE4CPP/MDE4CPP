@@ -37,7 +37,7 @@ if not "!MDE4CPP_ECLIPSE_LOCATION!"=="" (
 REM Download and extract Eclipse Modeling package.
 set "TMP_DIR=%TEMP%\mde4cpp-eclipse-install"
 set "ARCHIVE_PATH=!TMP_DIR!\eclipse-modeling.zip"
-set "ECLIPSE_ARCHIVE_URL=https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/!MDE4CPP_ECLIPSE_VERSION: =!/!MDE4CPP_ECLIPSE_MILESTONE: =!/eclipse-modeling-!MDE4CPP_ECLIPSE_VERSION: =!-!MDE4CPP_ECLIPSE_MILESTONE: =!-win32-x86_64.zip"
+set "ECLIPSE_ARCHIVE_URL=https://archive.eclipse.org/technology/epp/downloads/release/!MDE4CPP_ECLIPSE_VERSION: =!/!MDE4CPP_ECLIPSE_MILESTONE: =!/eclipse-modeling-!MDE4CPP_ECLIPSE_VERSION: =!-!MDE4CPP_ECLIPSE_MILESTONE: =!-win32-x86_64.zip"
 
 echo %C_PURPLE%[install_eclipse]%C_ORANGE% MDE4CPP_HOME=!MDE4CPP_HOME!%C_RESET%
 echo %C_PURPLE%[install_eclipse]%C_INFO% Install location=!TARGET_DIR!%C_RESET%
