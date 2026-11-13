@@ -123,8 +123,12 @@ rmdir /s /q "%TMP_DIR%"
 
 if exist "%INSTALL_DIR%\bin\gcc.exe" (
     for /f "tokens=1" %%V in ('"%INSTALL_DIR%\bin\gcc.exe" -dumpfullversion 2^>nul') do set "INSTALLED_GCC=%%V"
+    if not defined INSTALLED_GCC (
+        for /f "tokens=3" %%V in ('"%INSTALL_DIR%\bin\gcc.exe" --version 2^>nul ^| findstr /R /C:"^gcc"') do set "INSTALLED_GCC=%%V"
+    )
     echo %C_PURPLE%[install_compiler]%C_SUCCESS% Installed MinGW at %INSTALL_DIR%%C_RESET%
     echo %C_PURPLE%[install_compiler]%C_INFO% Detected GCC version=%INSTALLED_GCC%%C_RESET%
+    exit /b 0
 ) else (
     echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: gcc.exe not found after installation.%C_RESET%
     exit /b 1
