@@ -76,9 +76,9 @@ else
     sudo ${install_cmd} ${install_pkgs}
 
     if [[ "${pkg_mgr}" == "apt" ]] && command -v update-alternatives >/dev/null 2>&1; then
-      sudo update-alternatives --install /usr/bin/gcc gcc "/usr/bin/gcc-${MDE4CPP_COMPILER_VERSION%%.*}" 100 \
-        --slave /usr/bin/g++ g++ "/usr/bin/g++-${MDE4CPP_COMPILER_VERSION%%.*}" \
-        --slave /usr/bin/cpp cpp "/usr/bin/cpp-${MDE4CPP_COMPILER_VERSION%%.*}"
+      sudo update-alternatives --install /usr/bin/gcc gcc "/usr/bin/gcc-${MDE4CPP_COMPILER_VERSION%%.*}" 100
+      sudo update-alternatives --install /usr/bin/g++ g++ "/usr/bin/g++-${MDE4CPP_COMPILER_VERSION%%.*}" 100
+      sudo update-alternatives --install /usr/bin/cpp cpp "/usr/bin/cpp-${MDE4CPP_COMPILER_VERSION%%.*}" 100
     fi
 
     if [[ -z "${GPP_PATH}" ]]; then
