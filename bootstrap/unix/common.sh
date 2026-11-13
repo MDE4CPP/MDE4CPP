@@ -46,13 +46,6 @@ load_properties() {
     fi
 }
 
-require_sudo() {
-    if [[ "${1:-}" != "--elevated" ]] && [[ "${EUID}" -ne 0 ]]; then
-        echo "Root privileges are required for installation. Requesting sudo elevation..."
-        exec sudo -E bash "$0" --elevated
-    fi
-}
-
 download_file() {
     local url="$1"
     local output="$2"

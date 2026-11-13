@@ -42,8 +42,6 @@ else
       echo "${C_PURPLE}[install_cmake]${C_INFO} CMake is not installed. Installing CMake ${CMAKE_FULL_VERSION}.${C_RESET}"
     fi
 
-    require_sudo "$@"
-
     ARCH=$(get_arch)
     if [[ "${ARCH}" == "unknown" ]]; then
       echo "${C_PURPLE}[install_cmake]${C_ERROR} ERROR: Unsupported architecture: $(uname -m)${C_RESET}"
