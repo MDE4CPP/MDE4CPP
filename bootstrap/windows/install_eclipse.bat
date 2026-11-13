@@ -11,7 +11,8 @@ set "SCRIPT_DIR=%~dp0"
 for %%I in ("%SCRIPT_DIR%..\..") do set "MDE4CPP_HOME=%%~fI"
 
 REM Print requested Eclipse component versions.
-echo %C_PURPLE%[install_eclipse]%C_ORANGE% MDE4CPP_ECLIPSE_VERSION=!MDE4CPP_ECLIPSE_VERSION!-!MDE4CPP_ECLIPSE_MILESTONE!%C_RESET%
+set "ECLIPSE_MILESTONE=R"
+echo %C_PURPLE%[install_eclipse]%C_ORANGE% MDE4CPP_ECLIPSE_VERSION=!MDE4CPP_ECLIPSE_VERSION!-!ECLIPSE_MILESTONE!%C_RESET%
 
 REM Validate required versions.
 if "!MDE4CPP_HOME!"=="" (
@@ -22,11 +23,6 @@ if "!MDE4CPP_ECLIPSE_VERSION!"=="" (
     echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_VERSION is not set.%C_RESET%
     exit /b 1
 )
-if "!MDE4CPP_ECLIPSE_MILESTONE!"=="" (
-    echo %C_PURPLE%[install_eclipse]%C_ERROR% ERROR: MDE4CPP_ECLIPSE_MILESTONE is not set.%C_RESET%
-    exit /b 1
-)
-
 REM Resolve install locations and download URLs.
 for %%I in ("!MDE4CPP_HOME!\..") do set "MDE4CPP_PARENT=%%~fI"
 if not "!MDE4CPP_ECLIPSE_LOCATION!"=="" (
@@ -37,19 +33,20 @@ if not "!MDE4CPP_ECLIPSE_LOCATION!"=="" (
 REM Download and extract Eclipse Modeling package.
 set "TMP_DIR=%TEMP%\mde4cpp-eclipse-install"
 set "ARCHIVE_PATH=!TMP_DIR!\eclipse-modeling.zip"
-set "ECLIPSE_ARCHIVE_URL=https://ftp.halifax.rwth-aachen.de/eclipse/technology/epp/downloads/release/!MDE4CPP_ECLIPSE_VERSION: =!/!MDE4CPP_ECLIPSE_MILESTONE: =!/eclipse-modeling-!MDE4CPP_ECLIPSE_VERSION: =!-!MDE4CPP_ECLIPSE_MILESTONE: =!-win32-x86_64.zip"
+set "ECLIPSE_ARCHIVE_URL_PRIMARY=https://download.eclipse.org/technology/epp/downloads/release/!MDE4CPP_ECLIPSE_VERSION: =!/!ECLIPSE_MILESTONE: =!/eclipse-modeling-!MDE4CPP_ECLIPSE_VERSION: =!-!ECLIPSE_MILESTONE: =!-win32-x86_64.zip"
+set "ECLIPSE_ARCHIVE_URL_FALLBACK=https://archive.eclipse.org/technology/epp/downloads/release/!MDE4CPP_ECLIPSE_VERSION: =!/!ECLIPSE_MILESTONE: =!/eclipse-modeling-!MDE4CPP_ECLIPSE_VERSION: =!-!ECLIPSE_MILESTONE: =!-win32-x86_64.zip"
 
 echo %C_PURPLE%[install_eclipse]%C_ORANGE% MDE4CPP_HOME=!MDE4CPP_HOME!%C_RESET%
 echo %C_PURPLE%[install_eclipse]%C_INFO% Install location=!TARGET_DIR!%C_RESET%
 echo %C_PURPLE%[install_eclipse]%C_INFO% Temp Installation Dir=!TMP_DIR!%C_RESET%
-echo %C_PURPLE%[install_eclipse]%C_ORANGE% Using Eclipse version=!MDE4CPP_ECLIPSE_VERSION!, milestone=!MDE4CPP_ECLIPSE_MILESTONE!%C_RESET%
+echo %C_PURPLE%[install_eclipse]%C_ORANGE% Using Eclipse version=!MDE4CPP_ECLIPSE_VERSION!, milestone=!ECLIPSE_MILESTONE!%C_RESET%
 
 if exist "!TARGET_DIR!\eclipse.exe" (
     echo %C_PURPLE%[install_eclipse]%C_SUCCESS% Existing Eclipse installation found at !TARGET_DIR!.%C_RESET%
     exit /b 0
 )
 
-echo %C_PURPLE%[install_eclipse]%C_INFO% Downloading !ECLIPSE_ARCHIVE_URL!%C_RESET%
+echo %C_PURPLE%[install_eclipse]%C_INFO% Downloading !ECLIPSE_ARCHIVE_URL_PRIMARY!%C_RESET%
 
 if exist "!TMP_DIR!" rmdir /s /q "!TMP_DIR!"
 mkdir "!TMP_DIR!" >nul 2>&1
@@ -58,10 +55,14 @@ if errorlevel 1 (
     exit /b 1
 )
 
-call "%~dp0common.bat" download_file "!ECLIPSE_ARCHIVE_URL!" "!ARCHIVE_PATH!"
+call "%~dp0common.bat" download_file "!ECLIPSE_ARCHIVE_URL_PRIMARY!" "!ARCHIVE_PATH!"
 if errorlevel 1 (
-    rmdir /s /q "!TMP_DIR!"
-    exit /b 1
+    echo %C_PURPLE%[install_eclipse]%C_WARN% Primary Eclipse mirror failed. Trying archive.eclipse.org...%C_RESET%
+    call "%~dp0common.bat" download_file "!ECLIPSE_ARCHIVE_URL_FALLBACK!" "!ARCHIVE_PATH!"
+    if errorlevel 1 (
+        rmdir /s /q "!TMP_DIR!"
+        exit /b 1
+    )
 )
 
 echo %C_PURPLE%[install_eclipse]%C_SUCCESS% Download finished, extracting archive.%C_RESET%

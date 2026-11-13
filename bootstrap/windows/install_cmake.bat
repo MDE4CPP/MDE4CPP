@@ -48,6 +48,7 @@ REM this script to %TEMP% (local C: drive) and run the copy elevated.
 net session >nul 2>&1
 if errorlevel 1 (
     echo %C_PURPLE%[install_cmake]%C_INFO% Administrator rights are required. Requesting elevation...%C_RESET%
+    set "COMMON_BAT=%~dp0common.bat"
     set "LOCAL_COPY=%TEMP%\mde4cpp-installCMake.bat"
     set "ELEVATE_BAT=%TEMP%\mde4cpp-elevate-cmake.bat"
     copy "%~f0" "!LOCAL_COPY!" >nul
@@ -56,6 +57,7 @@ if errorlevel 1 (
         echo set "MDE4CPP_CMAKE_VERSION=!MDE4CPP_CMAKE_VERSION!"
         echo set "MDE4CPP_CMAKE_BUILD_VERSION=!MDE4CPP_CMAKE_BUILD_VERSION!"
         echo set "CMAKE_FULL_VERSION=!CMAKE_FULL_VERSION!"
+        echo set "MDE4CPP_COMMON_BAT=!COMMON_BAT!"
         echo call "!LOCAL_COPY!" --elevated
     ) > "!ELEVATE_BAT!"
 
@@ -87,6 +89,15 @@ if errorlevel 1 (
 REM Prepare workspace and download the MSI installer.
 REM When reaching here via --elevated, CMAKE_FULL_VERSION and related variables
 REM are already set by the wrapper script.
+if defined MDE4CPP_COMMON_BAT (
+    set "COMMON_BAT=%MDE4CPP_COMMON_BAT%"
+) else (
+    set "COMMON_BAT=%~dp0common.bat"
+)
+if not exist "%COMMON_BAT%" (
+    echo %C_PURPLE%[install_cmake]%C_ERROR% ERROR: common.bat not found at %COMMON_BAT%%C_RESET%
+    exit /b 1
+)
 set "TMP_DIR=%TEMP%\mde4cpp-cmake-%RANDOM%%RANDOM%"
 set "INSTALLER_PATH=%TMP_DIR%\cmake.msi"
 set "DOWNLOAD_URL=https://github.com/Kitware/CMake/releases/download/v%CMAKE_FULL_VERSION%/cmake-%CMAKE_FULL_VERSION%-windows-x86_64.msi"
@@ -102,7 +113,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-call "%~dp0common.bat" download_file "%DOWNLOAD_URL%" "%INSTALLER_PATH%"
+call "%COMMON_BAT%" download_file "%DOWNLOAD_URL%" "%INSTALLER_PATH%"
 if errorlevel 1 (
     rmdir /s /q "%TMP_DIR%"
     exit /b 1

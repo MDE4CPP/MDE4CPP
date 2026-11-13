@@ -22,34 +22,38 @@ set "CUSTOM_FILE=%PROJECT_DIR%\MDE4CPP_custom.properties"
 
 if exist "%TEMPLATE_FILE%" call :parse_properties_file "%TEMPLATE_FILE%"
 if exist "%CUSTOM_FILE%" call :parse_properties_file "%CUSTOM_FILE%"
-
-echo %BOOTSTRAP_SKIP_COMPILER_INSTALL%
 exit /b 0
 
 :parse_properties_file
-for /f "tokens=1,2 delims==" %%A in ('type "%~1" ^| findstr /V /B /C:"#"') do (
-    set "KEY=%%A"
-    set "VAL=%%B"
-    REM Set the variable cleanly if both KEY and VAL are present
-    if not "!KEY!"=="" if not "!VAL!"=="" (
-        for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
-        for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
-        set "!KEY!=!VAL!"
-    )
+for /f "usebackq eol=# tokens=1* delims==" %%A in ("%~1") do (
+    call :trim_ws "%%~A" KEY
+    call :trim_ws "%%~B" VAL
+    if defined KEY if defined VAL call set "%%KEY%%=%%VAL%%"
 )
 exit /b 0
 
 :setup_colors
 for /F %%a in ('echo prompt $E ^| cmd') do set "ESC=%%a"
-for /f "tokens=1,2 delims==" %%A in ('type "%PROJECT_DIR%\bootstrap\colors.properties" 2^>nul ^| findstr /V /B /C:"#"') do (
-    set "KEY=%%A"
-    set "VAL=%%B"
-    if not "!KEY!"=="" if not "!VAL!"=="" (
-        for /f "tokens=* delims= " %%K in ("!KEY!") do set "KEY=%%K"
-        for /f "tokens=* delims= " %%V in ("!VAL!") do set "VAL=%%V"
-        set "!KEY!=!ESC![!VAL!"
-    )
+if not exist "%PROJECT_DIR%\bootstrap\colors.properties" exit /b 0
+for /f "usebackq eol=# tokens=1* delims==" %%A in ("%PROJECT_DIR%\bootstrap\colors.properties") do (
+    call :trim_ws "%%~A" KEY
+    call :trim_ws "%%~B" VAL
+    if defined KEY if defined VAL call set "%%KEY%%=%%ESC%%[%%VAL%%"
 )
+exit /b 0
+
+:trim_ws
+setlocal EnableExtensions DisableDelayedExpansion
+set "STR=%~1"
+for /f "tokens=* delims= " %%T in ("%STR%") do set "STR=%%T"
+:trim_ws_right
+if not defined STR goto trim_ws_done
+if "%STR:~-1%"==" " (
+    set "STR=%STR:~0,-1%"
+    goto trim_ws_right
+)
+:trim_ws_done
+endlocal & set "%~2=%STR%"
 exit /b 0
 
 :print_header

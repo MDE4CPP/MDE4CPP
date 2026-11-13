@@ -42,13 +42,6 @@ if exist "%INSTALL_DIR%\bin\gcc.exe" (
         echo %C_PURPLE%[install_compiler]%C_SUCCESS% Detected existing gcc.exe. Skipping.%C_RESET%
     )
 
-    REM Always remove bundled CMake from MinGW to prevent overriding the system CMake
-    if exist "%INSTALL_DIR%\bin\cmake.exe" del /q "%INSTALL_DIR%\bin\cmake.exe"
-    if exist "%INSTALL_DIR%\bin\cmake-gui.exe" del /q "%INSTALL_DIR%\bin\cmake-gui.exe"
-    if exist "%INSTALL_DIR%\bin\ccmake.exe" del /q "%INSTALL_DIR%\bin\ccmake.exe"
-    if exist "%INSTALL_DIR%\bin\cpack.exe" del /q "%INSTALL_DIR%\bin\cpack.exe"
-    if exist "%INSTALL_DIR%\bin\ctest.exe" del /q "%INSTALL_DIR%\bin\ctest.exe"
-
     exit /b 0
 )
 
@@ -58,6 +51,7 @@ REM this script to %TEMP% (local C: drive) and run the copy elevated.
 net session >nul 2>&1
 if errorlevel 1 (
     echo %C_PURPLE%[install_compiler]%C_INFO% Administrator rights are required. Requesting elevation...%C_RESET%
+    set "COMMON_BAT=%~dp0common.bat"
     set "LOCAL_COPY=%TEMP%\mde4cpp-installCompiler.bat"
     set "ELEVATE_BAT=%TEMP%\mde4cpp-elevate-compiler.bat"
     set "INSTALL_LOG=%TEMP%\mde4cpp-compiler-install.log"
@@ -66,6 +60,7 @@ if errorlevel 1 (
         echo @echo off
         echo set "MDE4CPP_COMPILER_VERSION=!MDE4CPP_COMPILER_VERSION!"
         echo set "INSTALL_DIR=!INSTALL_DIR!"
+        echo set "MDE4CPP_COMMON_BAT=!COMMON_BAT!"
         echo call "!LOCAL_COPY!" --elevated ^> "!INSTALL_LOG!" 2^>^&1
     ) > "!ELEVATE_BAT!"
 
@@ -102,9 +97,25 @@ if errorlevel 1 (
 REM Resolve download URL and prepare temporary workspace.
 REM When reaching here via --elevated, MDE4CPP_COMPILER_VERSION and INSTALL_DIR
 REM are already set by the wrapper script.
+if defined MDE4CPP_COMMON_BAT (
+    set "COMMON_BAT=%MDE4CPP_COMMON_BAT%"
+) else (
+    set "COMMON_BAT=%~dp0common.bat"
+)
+if not exist "%COMMON_BAT%" (
+    echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: common.bat not found at %COMMON_BAT%%C_RESET%
+    exit /b 1
+)
 set "TMP_DIR=%TEMP%\mde4cpp-mingw-%RANDOM%%RANDOM%"
 set "ARCHIVE_PATH=%TMP_DIR%\mingw.zip"
-set "DOWNLOAD_URL=https://github.com/brechtsanders/winlibs_mingw/releases/download/13.2.0-16.0.6-11.0.1-msvcrt-r1/winlibs-x86_64-posix-seh-gcc-13.2.0-mingw-w64msvcrt-11.0.1-r1.zip"
+
+set "DOWNLOAD_URL="
+for /f "usebackq delims=" %%U in (`powershell -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $ver='!MDE4CPP_COMPILER_VERSION!'; $api='https://api.github.com/repos/brechtsanders/winlibs_mingw/releases?per_page=100'; $headers=@{ 'User-Agent'='mde4cpp-bootstrap' }; $releases=Invoke-RestMethod -Uri $api -Headers $headers; $asset=$null; foreach($rel in $releases){ $asset = $rel.assets ^| Where-Object { $_.name -match ('^winlibs-x86_64-posix-seh-gcc-' + [regex]::Escape($ver) + '-.*\\.zip$') -and $_.name -notmatch 'llvm|ucrt' } ^| Select-Object -First 1; if($asset){ break } }; if(-not $asset){ throw 'No matching WinLibs asset found for GCC version ' + $ver }; $asset.browser_download_url"`) do set "DOWNLOAD_URL=%%U"
+
+if not defined DOWNLOAD_URL (
+    echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: Could not resolve a WinLibs archive URL for GCC %MDE4CPP_COMPILER_VERSION%.%C_RESET%
+    exit /b 1
+)
 
 echo %C_PURPLE%[install_compiler]%C_INFO% Install location=%INSTALL_DIR%%C_RESET%
 echo %C_PURPLE%[install_compiler]%C_INFO% Downloading %DOWNLOAD_URL%%C_RESET%
@@ -115,7 +126,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-call "%~dp0common.bat" download_file "%DOWNLOAD_URL%" "%ARCHIVE_PATH%"
+call "%COMMON_BAT%" download_file "%DOWNLOAD_URL%" "%ARCHIVE_PATH%"
 if errorlevel 1 (
     rmdir /s /q "%TMP_DIR%"
     exit /b 1
@@ -140,13 +151,6 @@ if errorlevel 1 (
 
 if exist "%TMP_DIR%\extracted\mingw64" (
     robocopy "%TMP_DIR%\extracted\mingw64" "%INSTALL_DIR%" /E >nul
-    
-    REM Remove bundled CMake from MinGW to prevent overriding the system CMake
-    if exist "%INSTALL_DIR%\bin\cmake.exe" del /q "%INSTALL_DIR%\bin\cmake.exe"
-    if exist "%INSTALL_DIR%\bin\cmake-gui.exe" del /q "%INSTALL_DIR%\bin\cmake-gui.exe"
-    if exist "%INSTALL_DIR%\bin\ccmake.exe" del /q "%INSTALL_DIR%\bin\ccmake.exe"
-    if exist "%INSTALL_DIR%\bin\cpack.exe" del /q "%INSTALL_DIR%\bin\cpack.exe"
-    if exist "%INSTALL_DIR%\bin\ctest.exe" del /q "%INSTALL_DIR%\bin\ctest.exe"
 ) else (
     echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: Extracted MinGW folder not found.%C_RESET%
     rmdir /s /q "%TMP_DIR%"
