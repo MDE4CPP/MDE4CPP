@@ -141,4 +141,4 @@ if errorlevel 1 (
 )
 :done
 
-endlocal
+endlocal & exit /b 0
