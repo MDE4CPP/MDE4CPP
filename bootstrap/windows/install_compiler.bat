@@ -15,6 +15,12 @@ if "!MDE4CPP_COMPILER_VERSION!"=="" (
     echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: MDE4CPP_COMPILER_VERSION is not set.%C_RESET%
     exit /b 1
 )
+echo %C_PURPLE%[install_compiler]%C_ORANGE% MDE4CPP_COMPILER_DOWNLOAD_URL=!MDE4CPP_COMPILER_DOWNLOAD_URL!%C_RESET%
+if "!MDE4CPP_COMPILER_DOWNLOAD_URL!"=="" (
+    echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: MDE4CPP_COMPILER_DOWNLOAD_URL is not set.%C_RESET%
+    echo %C_PURPLE%[install_compiler]%C_ERROR% Configure it in MDE4CPP_custom.properties.%C_RESET%
+    exit /b 1
+)
 
 REM Resolve the install directory.
 if not defined COMPILER_HOME set "COMPILER_HOME=C:\tools\MinGW"
@@ -46,51 +52,11 @@ if exist "%INSTALL_DIR%\bin\gcc.exe" (
 )
 
 REM Ensure the script runs with administrator rights if installation is required.
-REM Elevated processes cannot access mapped network drives (e.g. Z:), so we copy
-REM this script to %TEMP% (local C: drive) and run the copy elevated.
 net session >nul 2>&1
 if errorlevel 1 (
-    echo %C_PURPLE%[install_compiler]%C_INFO% Administrator rights are required. Requesting elevation...%C_RESET%
-    set "COMMON_BAT=%~dp0common.bat"
-    set "LOCAL_COPY=%TEMP%\mde4cpp-installCompiler.bat"
-    set "ELEVATE_BAT=%TEMP%\mde4cpp-elevate-compiler.bat"
-    set "INSTALL_LOG=%TEMP%\mde4cpp-compiler-install.log"
-    copy "%~f0" "!LOCAL_COPY!" >nul
-    (
-        echo @echo off
-        echo set "MDE4CPP_COMPILER_VERSION=!MDE4CPP_COMPILER_VERSION!"
-        echo set "INSTALL_DIR=!INSTALL_DIR!"
-        echo set "MDE4CPP_COMMON_BAT=!COMMON_BAT!"
-        echo call "!LOCAL_COPY!" --elevated ^> "!INSTALL_LOG!" 2^>^&1
-    ) > "!ELEVATE_BAT!"
-
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process '!ELEVATE_BAT!' -Wait -Verb RunAs"
-    set "ELEV_ERR=!errorlevel!"
-    del "!ELEVATE_BAT!" >nul 2>&1
-    del "!LOCAL_COPY!" >nul 2>&1
-
-    REM Show log from elevated process
-    if exist "!INSTALL_LOG!" (
-        echo [install_compiler] --- Elevated process log ---
-        type "!INSTALL_LOG!"
-        echo [install_compiler] --- End log ---
-        del "!INSTALL_LOG!" >nul 2>&1
-    )
-
-    if not "!ELEV_ERR!"=="0" (
-        echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: Elevation was cancelled or failed.%C_RESET%
-        exit /b 1
-    )
-
-    REM Verify installation
-    if exist "!INSTALL_DIR!\bin\gcc.exe" (
-        for /f "tokens=1" %%V in ('"!INSTALL_DIR!\bin\gcc.exe" -dumpfullversion 2^>nul') do set "INSTALLED_GCC=%%V"
-        echo %C_PURPLE%[install_compiler]%C_SUCCESS% Verified: MinGW installed at !INSTALL_DIR! ^(GCC !INSTALLED_GCC!^)%C_RESET%
-        exit /b 0
-    ) else (
-        echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: Installation could not be verified. gcc.exe not found at !INSTALL_DIR!%C_RESET%
-        exit /b 1
-    )
+    echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: Administrator rights are required.%C_RESET%
+    echo %C_PURPLE%[install_compiler]%C_INFO% Please run this script in an elevated cmd.exe.%C_RESET%
+    exit /b 1
 )
 
 :doInstall
@@ -109,22 +75,17 @@ if not exist "%COMMON_BAT%" (
 set "TMP_DIR=%TEMP%\mde4cpp-mingw-%RANDOM%%RANDOM%"
 set "ARCHIVE_PATH=%TMP_DIR%\mingw.zip"
 
-set "DOWNLOAD_URL="
-for /f "usebackq delims=" %%U in (`powershell -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $ver='!MDE4CPP_COMPILER_VERSION!'; $api='https://api.github.com/repos/brechtsanders/winlibs_mingw/releases?per_page=100'; $headers=@{ 'User-Agent'='mde4cpp-bootstrap' }; $releases=Invoke-RestMethod -Uri $api -Headers $headers; $asset=$null; foreach($rel in $releases){ $asset = $rel.assets ^| Where-Object { $_.name -match ('^winlibs-x86_64-posix-seh-gcc-' + [regex]::Escape($ver) + '-.*\\.zip$') -and $_.name -notmatch 'llvm|ucrt' } ^| Select-Object -First 1; if($asset){ break } }; if(-not $asset){ throw 'No matching WinLibs asset found for GCC version ' + $ver }; $asset.browser_download_url"`) do set "DOWNLOAD_URL=%%U"
-
-if not defined DOWNLOAD_URL (
-    echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: Could not resolve a WinLibs archive URL for GCC %MDE4CPP_COMPILER_VERSION%.%C_RESET%
-    exit /b 1
-)
-
-echo %C_PURPLE%[install_compiler]%C_INFO% Install location=%INSTALL_DIR%%C_RESET%
-echo %C_PURPLE%[install_compiler]%C_INFO% Downloading %DOWNLOAD_URL%%C_RESET%
 if exist "%TMP_DIR%" rmdir /s /q "%TMP_DIR%"
 mkdir "%TMP_DIR%" >nul 2>&1
 if errorlevel 1 (
     echo %C_PURPLE%[install_compiler]%C_ERROR% ERROR: Failed to create temp dir %TMP_DIR%.%C_RESET%
     exit /b 1
 )
+
+set "DOWNLOAD_URL=%MDE4CPP_COMPILER_DOWNLOAD_URL%"
+
+echo %C_PURPLE%[install_compiler]%C_INFO% Install location=%INSTALL_DIR%%C_RESET%
+echo %C_PURPLE%[install_compiler]%C_INFO% Downloading %DOWNLOAD_URL%%C_RESET%
 
 call "%COMMON_BAT%" download_file "%DOWNLOAD_URL%" "%ARCHIVE_PATH%"
 if errorlevel 1 (

@@ -66,14 +66,21 @@ exit /b 0
 REM Usage: call "%~dp0common.bat" download_file "URL" "DESTINATION"
 set "URL=%~2"
 set "DEST=%~3"
-where curl >nul 2>&1
-if errorlevel 1 (
-    echo %C_ERROR%ERROR: curl.exe is required to download files.%C_RESET%
-    exit /b 1
+if exist "%DEST%" del /q "%DEST%" >nul 2>&1
+
+where certutil >nul 2>&1
+if not errorlevel 1 (
+    certutil -urlcache -split -f "%URL%" "%DEST%" >nul 2>&1
+    if not errorlevel 1 if exist "%DEST%" exit /b 0
 )
-curl.exe -fL --output "%DEST%" "%URL%"
-if errorlevel 1 (
-    echo %C_ERROR%ERROR: Download failed for %URL%%C_RESET%
-    exit /b 1
+
+where bitsadmin >nul 2>&1
+if not errorlevel 1 (
+    bitsadmin /transfer mde4cpp_download /download /priority normal "%URL%" "%DEST%" >nul 2>&1
+    if not errorlevel 1 if exist "%DEST%" exit /b 0
 )
+
+echo %C_ERROR%ERROR: Download failed for %URL%%C_RESET%
+echo %C_ERROR%ERROR: Required downloader not available ^(certutil/bitsadmin^).%C_RESET%
+exit /b 1
 exit /b 0
