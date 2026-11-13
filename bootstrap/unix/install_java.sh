@@ -47,8 +47,6 @@ else
       echo "${C_PURPLE}[install_java]${C_INFO} Java is not installed. Installing Java ${MDE4CPP_JAVA_VERSION}.${C_RESET}"
     fi
 
-    require_sudo "$@"
-
     pkg_mgr=""
     install_cmd=""
     update_cmd=""
@@ -85,8 +83,8 @@ else
     fi
 
     echo "${C_PURPLE}[install_java]${C_INFO} Using package manager: ${pkg_mgr}${C_RESET}"
-    ${update_cmd}
-    ${install_cmd} ${install_pkg}
+	sudo ${update_cmd}
+	sudo ${install_cmd} ${install_pkg}
 
     JAVA_HOME=""
     for candidate in "/usr/lib/jvm/java-${MDE4CPP_JAVA_VERSION}-openjdk-amd64" "/usr/lib/jvm/java-${MDE4CPP_JAVA_VERSION}-openjdk" "/usr/lib/jvm/java-${MDE4CPP_JAVA_VERSION}-oracle"; do
@@ -115,9 +113,9 @@ else
       alt_path="${JAVA_HOME}/bin/${tool}"
       if [[ -x "${alt_path}" ]]; then
         if ! update-alternatives --list "${tool}" 2>/dev/null | grep -Fxq "${alt_path}"; then
-          update-alternatives --install "/usr/bin/${tool}" "${tool}" "${alt_path}" "${JAVA_PRIORITY}"
+          sudo update-alternatives --install "/usr/bin/${tool}" "${tool}" "${alt_path}" "${JAVA_PRIORITY}"
         fi
-        update-alternatives --set "${tool}" "${alt_path}"
+        sudo update-alternatives --set "${tool}" "${alt_path}"
       fi
     done
 

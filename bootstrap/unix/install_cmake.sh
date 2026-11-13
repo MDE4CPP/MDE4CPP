@@ -63,7 +63,7 @@ else
     download_file "${DOWNLOAD_URL}" "${TMP_DIR}/${ARCHIVE_NAME}"
 
     echo "${C_PURPLE}[install_cmake]${C_INFO} Extracting CMake to /usr/local${C_RESET}"
-    tar -xzf "${TMP_DIR}/${ARCHIVE_NAME}" -C /usr/local --strip-components=1
+    sudo tar -xzf "${TMP_DIR}/${ARCHIVE_NAME}" -C /usr/local --strip-components=1
 
     if ! command -v cmake >/dev/null 2>&1; then
       echo "${C_PURPLE}[install_cmake]${C_ERROR} ERROR: CMake installation failed (executable not found).${C_RESET}"

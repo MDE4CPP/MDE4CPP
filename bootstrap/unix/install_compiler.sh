@@ -36,8 +36,6 @@ else
       echo "${C_PURPLE}[install_compiler]${C_INFO} GCC is not installed. Installing GCC ${MDE4CPP_COMPILER_VERSION}.${C_RESET}"
     fi
 
-    require_sudo "$@"
-
     pkg_mgr=""
     install_cmd=""
     update_cmd=""
@@ -74,8 +72,8 @@ else
     fi
 
     echo "${C_PURPLE}[install_compiler]${C_INFO} Using package manager: ${pkg_mgr}${C_RESET}"
-    ${update_cmd}
-    ${install_cmd} ${install_pkgs}
+	sudo ${update_cmd}
+	sudo ${install_cmd} ${install_pkgs}
 
     if [[ -z "${GPP_PATH}" ]]; then
       GPP_PATH="$(command -v g++)"
