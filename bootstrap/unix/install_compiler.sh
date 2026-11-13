@@ -44,7 +44,7 @@ else
     if command -v apt-get >/dev/null 2>&1; then
       pkg_mgr="apt"
       update_cmd="apt-get update"
-      install_cmd="DEBIAN_FRONTEND=noninteractive apt-get install -y"
+      install_cmd="apt-get install -y"
       install_pkgs="g++-${MDE4CPP_COMPILER_VERSION%%.*} gcc-${MDE4CPP_COMPILER_VERSION%%.*} make"
     elif command -v dnf >/dev/null 2>&1; then
       pkg_mgr="dnf"
@@ -73,7 +73,7 @@ else
 
     echo "${C_PURPLE}[install_compiler]${C_INFO} Using package manager: ${pkg_mgr}${C_RESET}"
     sudo ${update_cmd}
-    sudo env ${install_cmd} ${install_pkgs}
+    sudo ${install_cmd} ${install_pkgs}
 
     if [[ "${pkg_mgr}" == "apt" ]] && command -v update-alternatives >/dev/null 2>&1; then
       sudo update-alternatives --install /usr/bin/gcc gcc "/usr/bin/gcc-${MDE4CPP_COMPILER_VERSION%%.*}" 100 \
